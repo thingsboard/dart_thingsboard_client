@@ -131,6 +131,9 @@ class ThingsboardClient {
         } else {
           return ThingsboardError(message: error.error.toString(), errorCode: thingsboardErrorCodes['general']);
         }
+      } else if (error.response != null && error.response!.statusCode != null) {
+        var message = (error.response!.statusCode!.toString() + ': ' + (error.response!.statusMessage != null ? error.response!.statusMessage! : 'Unknown'));
+        return ThingsboardError(message: message, errorCode: thingsboardErrorCodes['general']);
       }
     } else if (error is ThingsboardError) {
       return error;
