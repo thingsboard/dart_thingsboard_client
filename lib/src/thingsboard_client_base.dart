@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -13,9 +14,14 @@ typedef UserLoadedCallback = void Function(
     bool isAuthenticated,
 );
 
+typedef TbComputeCallback<Q, R> = FutureOr<R> Function(Q message);
+typedef TbCompute = Future<R> Function<Q, R>(TbComputeCallback<Q, R> callback, Q message);
+
 typedef LoadStartedCallback = void Function();
 typedef LoadFinishedCallback = void Function();
 typedef ErrorCallback = void Function(ThingsboardError error);
+
+TbCompute syncCompute = <Q,R>(TbComputeCallback<Q, R> callback, Q message) => Future.value(callback(message));
 
 class ThingsboardClient {
   final Dio _dio;
@@ -24,6 +30,7 @@ class ThingsboardClient {
   final ErrorCallback? _errorCallback;
   final LoadStartedCallback? _loadStartedCallback;
   final LoadFinishedCallback? _loadFinishedCallback;
+  final TbCompute? _computeFunc;
   bool _refreshTokenPending = false;
   String? _token;
   String? _refreshToken;
@@ -32,16 +39,16 @@ class ThingsboardClient {
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
-                                                 LoadFinishedCallback? onLoadFinished}) {
+                                                 LoadFinishedCallback? onLoadFinished, TbCompute? computeFunc}) {
     var dio = Dio();
     dio.options.baseUrl = apiEndpoint;
-    final tbClient = ThingsboardClient._internal(dio, storage, onUserLoaded, onError, onLoadStarted, onLoadFinished);
+    final tbClient = ThingsboardClient._internal(dio, storage, onUserLoaded, onError, onLoadStarted, onLoadFinished, computeFunc ?? syncCompute);
     dio.interceptors.clear();
     dio.interceptors.add(HttpInterceptor(dio, tbClient, tbClient._loadStarted, tbClient._loadFinished, tbClient._onError));
     return tbClient;
   }
 
-  ThingsboardClient._internal(this._dio, this._storage, this._userLoadedCallback, this._errorCallback, this._loadStartedCallback, this._loadFinishedCallback);
+  ThingsboardClient._internal(this._dio, this._storage, this._userLoadedCallback, this._errorCallback, this._loadStartedCallback, this._loadFinishedCallback, this._computeFunc);
 
   Future<void> _clearJwtToken() async {
     await _setUserFromJwtToken(null, null, true);
@@ -188,6 +195,10 @@ class ThingsboardClient {
     } catch (e) {
       throw toThingsboardError(e);
     }
+  }
+
+  Future<R> compute<Q, R>(TbComputeCallback<Q, R> callback, Q message) {
+    return _computeFunc!(callback, message);
   }
 
   Future<LoginResponse> login(LoginRequest loginRequest, {RequestConfig? requestConfig}) async {

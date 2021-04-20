@@ -35,5 +35,3 @@ class DeviceInfo extends Device {
         deviceProfileName = json['deviceProfileName'],
         super.fromJson(json);
 }
-
-fromJsonFunction<DeviceInfo> deviceInfoFromJson = (json) => DeviceInfo.fromJson(json);
