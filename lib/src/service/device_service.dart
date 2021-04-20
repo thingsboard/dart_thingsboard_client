@@ -2,6 +2,10 @@ import '../thingsboard_client_base.dart';
 import '../http/http_utils.dart';
 import '../model/model.dart';
 
+PageData<DeviceInfo> parseDeviceInfoPageData(Map<String, dynamic> json) {
+  return PageData.fromJson(json, (json) => DeviceInfo.fromJson(json));
+}
+
 class DeviceService {
   final ThingsboardClient _tbClient;
 
@@ -16,11 +20,6 @@ class DeviceService {
      queryParams['type'] = type;
      var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/deviceInfos', queryParameters: queryParams,
          options: defaultHttpOptionsFromConfig(requestConfig));
-     return _tbClient.compute(_parseDeviceInfoPageData, response.data!);
+     return _tbClient.compute(parseDeviceInfoPageData, response.data!);
   }
-
-  PageData<DeviceInfo> _parseDeviceInfoPageData(Map<String, dynamic> json) {
-    return PageData.fromJson(json, (json) => DeviceInfo.fromJson(json));
-  }
-
 }
