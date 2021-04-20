@@ -1,5 +1,4 @@
 import 'authority_enum.dart';
-import 'utils.dart';
 
 class AuthUser {
   late String sub;
@@ -23,7 +22,7 @@ class AuthUser {
     tenantId = json['tenantId'];
     customerId = json['customerId'];
     isPublic = json['isPublic'];
-    authority = scopes.isNotEmpty ? enumFromString(scopes[0], Authority) : Authority.ANONYMOUS;
+    authority = scopes.isNotEmpty ? authorityFromString(scopes[0]) : Authority.ANONYMOUS;
   }
 
   @override

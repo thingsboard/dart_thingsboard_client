@@ -5,3 +5,7 @@ enum Authority {
   REFRESH_TOKEN,
   ANONYMOUS
 }
+
+Authority authorityFromString(String value) {
+  return Authority.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}

@@ -8,3 +8,7 @@ enum EntityType {
   DEVICE,
   DEVICE_PROFILE
 }
+
+EntityType entityTypeFromString(String value) {
+  return EntityType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}

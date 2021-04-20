@@ -16,7 +16,7 @@ class DeviceService {
      queryParams['type'] = type;
      var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/deviceInfos', queryParameters: queryParams,
          options: defaultHttpOptionsFromConfig(requestConfig));
-     return PageData.fromJson(response.data!, DeviceInfo);
+     return PageData.fromJson(response.data!, deviceInfoFromJson);
   }
 
 }

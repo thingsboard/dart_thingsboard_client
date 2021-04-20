@@ -48,7 +48,7 @@ Future<void> onUserLoaded(ThingsboardClient tbClient, bool isAuthenticated) asyn
     } else {
       if (!loginExecuted) {
         loginExecuted = true;
-        var loginResponse = await tbClient.login(
+        await tbClient.login(
             LoginRequest(username, password));
       }
     }

@@ -1,4 +1,3 @@
-import '../utils.dart';
 import 'customer_id.dart';
 import 'device_id.dart';
 import 'tenant_id.dart';
@@ -15,7 +14,7 @@ abstract class EntityId extends HasUuid {
 
 T? entityIdFromJson<T extends EntityId>(Map<String, dynamic> json) {
   if (json.containsKey('entityType') && json.containsKey('id')) {
-    EntityType entityType = enumFromString(json['entityType'], EntityType);
+    var entityType = entityTypeFromString(json['entityType']);
     String uuid = json['id'];
     return getByTypeAndUuid(entityType, uuid);
   } else {
