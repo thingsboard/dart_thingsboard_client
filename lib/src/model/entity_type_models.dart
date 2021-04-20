@@ -1,0 +1,10 @@
+enum EntityType {
+  TENANT,
+  TENANT_PROFILE,
+  CUSTOMER,
+  USER,
+  DASHBOARD,
+  ASSET,
+  DEVICE,
+  DEVICE_PROFILE
+}

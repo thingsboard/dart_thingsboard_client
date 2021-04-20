@@ -1,0 +1,7 @@
+enum Authority {
+  SYS_ADMIN,
+  TENANT_ADMIN,
+  CUSTOMER_USER,
+  REFRESH_TOKEN,
+  ANONYMOUS
+}
