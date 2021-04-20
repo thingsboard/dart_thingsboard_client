@@ -86,7 +86,7 @@ class HttpInterceptor extends Interceptor {
   @override
   Future onError(DioError error, ErrorInterceptorHandler handler) async {
     var config = _getInterceptorConfig(error.requestOptions);
-    var notify = false;
+    var notify = true;
     var ignoreErrors = config.ignoreErrors;
     var resendRequest = config.resendRequest;
     var tbError = _tbClient.toThingsboardError(error);
@@ -95,8 +95,8 @@ class HttpInterceptor extends Interceptor {
     if (tbError.refreshTokenPending == true || error.response?.statusCode == 401) {
       if (tbError.refreshTokenPending == true || errorCode == thingsboardErrorCodes['jwtTokenExpired']) {
         refreshToken = true;
-      } else if (errorCode != thingsboardErrorCodes['credentialsExpired']) {
-        notify = true;
+      } else if (errorCode == thingsboardErrorCodes['credentialsExpired']) {
+        notify = false;
       }
     }
     if (refreshToken) {
@@ -110,10 +110,8 @@ class HttpInterceptor extends Interceptor {
       if (resendRequest) {
         return _retryRequestWithTimeout(error, handler);
       }
-    } else if (error.response?.statusCode == 403) {
-      notify = true;
-    } else if (!error.requestOptions.path.startsWith('/api/plugins/rpc')) {
-      notify = true;
+    } else if (error.requestOptions.path.startsWith('/api/plugins/rpc')) {
+      notify = false;
     }
     return _handleError(tbError, error.requestOptions, handler, notify && !ignoreErrors);
   }
