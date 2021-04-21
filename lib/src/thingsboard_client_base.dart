@@ -9,14 +9,10 @@ import 'interceptor/http_interceptor.dart';
 import 'model/model.dart';
 import 'service/service.dart';
 
-typedef UserLoadedCallback = void Function(
-    ThingsboardClient tbClient,
-    bool isAuthenticated,
-);
-
 typedef TbComputeCallback<Q, R> = FutureOr<R> Function(Q message);
 typedef TbCompute = Future<R> Function<Q, R>(TbComputeCallback<Q, R> callback, Q message);
 
+typedef UserLoadedCallback = void Function();
 typedef LoadStartedCallback = void Function();
 typedef LoadFinishedCallback = void Function();
 typedef ErrorCallback = void Function(ThingsboardError error);
@@ -92,7 +88,7 @@ class ThingsboardClient {
 
   void _userLoaded() {
     if (_userLoadedCallback != null) {
-      Future(() => _userLoadedCallback!(this, isAuthenticated()));
+      Future(() => _userLoadedCallback!());
     }
   }
 
@@ -210,6 +206,24 @@ class ThingsboardClient {
           cancelToken: cancelToken,
           onSendProgress: onSendProgress,
           onReceiveProgress: onReceiveProgress);
+    } catch (e) {
+      throw toThingsboardError(e);
+    }
+  }
+
+  Future<Response<T>> delete<T>(
+      String path, {
+        data,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+      }) async {
+    try {
+      return await _dio.delete(path,
+          data: data,
+          queryParameters: queryParameters,
+          options: options,
+          cancelToken: cancelToken);
     } catch (e) {
       throw toThingsboardError(e);
     }

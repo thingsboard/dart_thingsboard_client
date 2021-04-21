@@ -9,3 +9,9 @@ enum Authority {
 Authority authorityFromString(String value) {
   return Authority.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
 }
+
+extension AuthorityToString on Authority {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}

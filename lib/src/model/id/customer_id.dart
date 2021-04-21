@@ -1,18 +1,17 @@
 import '../entity_type_models.dart';
 import 'entity_id.dart';
 
-class CustomerId implements EntityId {
+class CustomerId extends EntityId {
+
+  CustomerId(String id) : super(EntityType.CUSTOMER, id);
 
   @override
-  EntityType? entityType = EntityType.CUSTOMER;
-
-  @override
-  String? id;
-
-  CustomerId(this.id);
+  factory CustomerId.fromJson(Map<String, dynamic> json) {
+    return EntityId.fromJson(json) as CustomerId;
+  }
 
   @override
   String toString() {
-    return 'CustomerId{id: $id}';
+    return 'CustomerId {id: $id}';
   }
 }

@@ -14,6 +14,15 @@ class PageData<T> {
         totalElements = json['totalElements'],
         hasNext = json['hasNext'];
 
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data.map((dynamic e) => e.toJson()).toList(),
+      'totalPages': totalPages,
+      'totalElements': totalElements,
+      'hasNext': hasNext
+    };
+  }
+
   @override
   String toString() {
     return 'PageData{data: $data, totalPages: $totalPages, totalElements: $totalElements, hasNext: $hasNext}';

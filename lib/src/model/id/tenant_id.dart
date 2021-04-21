@@ -1,18 +1,17 @@
 import '../entity_type_models.dart';
 import 'entity_id.dart';
 
-class TenantId implements EntityId {
+class TenantId extends EntityId {
+
+  TenantId(String id) : super(EntityType.TENANT, id);
 
   @override
-  EntityType? entityType = EntityType.TENANT;
-
-  @override
-  String? id;
-
-  TenantId(this.id);
+  factory TenantId.fromJson(Map<String, dynamic> json) {
+    return EntityId.fromJson(json) as TenantId;
+  }
 
   @override
   String toString() {
-    return 'TenantId{id: $id}';
+    return 'TenantId {id: $id}';
   }
 }

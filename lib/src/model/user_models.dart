@@ -27,6 +27,7 @@ class AuthUser {
 
   @override
   String toString() {
-    return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, lastName: $lastName, enabled: $enabled, tenantId: $tenantId, customerId: $customerId, isPublic: $isPublic, authority: $authority}';
+    return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, lastName: $lastName, enabled: $enabled, '
+        'tenantId: $tenantId, customerId: $customerId, isPublic: $isPublic, authority: ${authority.toShortString()}';
   }
 }

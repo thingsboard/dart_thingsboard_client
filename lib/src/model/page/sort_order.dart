@@ -3,7 +3,7 @@ enum Direction {
   DESC
 }
 
-extension ParseToString on Direction {
+extension DirectionToString on Direction {
   String toShortString() {
     return toString().split('.').last;
   }

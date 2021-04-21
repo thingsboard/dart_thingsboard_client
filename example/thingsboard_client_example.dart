@@ -5,19 +5,22 @@ const localStorageFileName =  'tb_client_storage.json';
 const username = 'tenant@thingsboard.org';
 const password = 'tenant';
 
+late ThingsboardClient tbClient;
+
 void main() async {
   try {
-    var storage = LocalFileStorage(localStorageFileName);
-    var tbClient = ThingsboardClient(thingsBoardApiEndpoint, storage: storage, onUserLoaded: onUserLoaded, onError: onError,
-        onLoadStarted: onLoadStarted, onLoadFinished: onLoadFinished);
+    tbClient = ThingsboardClient(thingsBoardApiEndpoint,
+                                 storage: LocalFileStorage(localStorageFileName),
+                                 onUserLoaded: onUserLoaded,
+                                 onError: onError,
+                                 onLoadStarted: onLoadStarted,
+                                 onLoadFinished: onLoadFinished);
     await tbClient.init();
   } catch (e, s) {
     print('Error: $e');
     print('Stack: $s');
   }
 }
-
-bool loginExecuted = false;
 
 void onError(ThingsboardError error) {
   print('onError: error=$error');
@@ -31,19 +34,15 @@ void onLoadFinished() {
   print('ON LOAD FINISHED!');
 }
 
-Future<void> onUserLoaded(ThingsboardClient tbClient, bool isAuthenticated) async {
+bool loginExecuted = false;
+
+Future<void> onUserLoaded() async {
   try {
-    print('onUserLoaded: isAuthenticated=$isAuthenticated');
-    if (isAuthenticated) {
+    print('onUserLoaded: isAuthenticated=${tbClient.isAuthenticated()}');
+    if (tbClient.isAuthenticated()) {
       print('authUser: ${tbClient.getAuthUser()}');
-      var pageLink = PageLink(2);
-      var devices;
-      do {
-        devices = await tbClient.getDeviceService().getTenantDeviceInfos(pageLink);
-        print('devices: $devices');
-        // await Future.delayed(Duration(seconds: 20), () => true);
-        pageLink = pageLink.nextPageLink();
-      } while(devices.hasNext);
+      await deviceApiExample();
+      await fetchDevicesExample();
       await tbClient.logout(requestConfig: RequestConfig(ignoreLoading: true, ignoreErrors: true));
     } else {
       if (!loginExecuted) {
@@ -57,4 +56,33 @@ Future<void> onUserLoaded(ThingsboardClient tbClient, bool isAuthenticated) asyn
     print('Error: $e');
     print('Stack: $s');
   }
+}
+
+Future<void> deviceApiExample() async {
+  var device = Device('My test device', 'default');
+  device.additionalInfo = {'description': 'My test device!'};
+  var savedDevice = await tbClient.getDeviceService().saveDevice(device);
+  print('savedDevice: $savedDevice');
+  var foundDevice = await tbClient.getDeviceService().getDeviceInfo(savedDevice.id!.id!);
+  print('foundDevice: $foundDevice');
+  await tbClient.getDeviceService().deleteDevice(savedDevice.id!.id!);
+  try {
+    await tbClient.getDeviceService().getDeviceInfo(savedDevice.id!.id!, requestConfig: RequestConfig(ignoreErrors: true));
+  } on ThingsboardError catch (e) {
+    if (e.errorCode == ThingsBoardErrorCode.itemNotFound) {
+      print('Success! Device not found!');
+    } else {
+      print('Failure!');
+    }
+  }
+}
+
+Future<void> fetchDevicesExample() async {
+  var pageLink = PageLink(2);
+  PageData<DeviceInfo> devices;
+  do {
+    devices = await tbClient.getDeviceService().getTenantDeviceInfos(pageLink);
+    print('devices: $devices');
+    pageLink = pageLink.nextPageLink();
+  } while(devices.hasNext);
 }

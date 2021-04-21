@@ -12,3 +12,9 @@ enum EntityType {
 EntityType entityTypeFromString(String value) {
   return EntityType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
 }
+
+extension EntityTypeToString on EntityType {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
