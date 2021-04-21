@@ -93,25 +93,20 @@ class HttpInterceptor extends Interceptor {
     var errorCode = tbError.errorCode;
     var refreshToken = false;
     if (tbError.refreshTokenPending == true || error.response?.statusCode == 401) {
-      if (tbError.refreshTokenPending == true || errorCode == thingsboardErrorCodes['jwtTokenExpired']) {
+      if (tbError.refreshTokenPending == true || errorCode == ThingsBoardErrorCode.jwtTokenExpired) {
         refreshToken = true;
-      } else if (errorCode == thingsboardErrorCodes['credentialsExpired']) {
+      } else if (errorCode == ThingsBoardErrorCode.credentialsExpired) {
         notify = false;
       }
     }
     if (refreshToken) {
       return _refreshTokenAndRetry(error, handler, config);
-    } else {
-      if (error.requestOptions.path.startsWith('/api/')) {
-        _updateLoadingState(config, false);
-      }
     }
-    if (error.response?.statusCode == 429) {
-      if (resendRequest) {
-        return _retryRequestWithTimeout(error, handler);
-      }
-    } else if (error.requestOptions.path.startsWith('/api/plugins/rpc')) {
-      notify = false;
+    if (error.response?.statusCode == 429 && resendRequest) {
+      return _retryRequestWithTimeout(error, handler);
+    }
+    if (error.requestOptions.path.startsWith('/api/')) {
+      _updateLoadingState(config, false);
     }
     return _handleError(tbError, error.requestOptions, handler, notify && !ignoreErrors);
   }
@@ -130,7 +125,7 @@ class HttpInterceptor extends Interceptor {
       _dio.interceptors.requestLock.unlock();
       _dio.interceptors.responseLock.unlock();
     }
-    return _retryRequest(error, handler, refreshTokenRetry: true);
+    return _retryRequest(error, handler);
   }
 
   Future _retryRequestWithTimeout(DioError error, ErrorInterceptorHandler handler) async {
@@ -139,15 +134,13 @@ class HttpInterceptor extends Interceptor {
     return _retryRequest(error, handler, timeout: timeout);
   }
 
-  Future _retryRequest(DioError error, ErrorInterceptorHandler handler, {int? timeout, bool? refreshTokenRetry}) async {
+  Future _retryRequest(DioError error, ErrorInterceptorHandler handler, {int? timeout}) async {
     if (timeout != null) {
-      return Future.delayed(Duration(microseconds: timeout), () => _retryRequest(error, handler));
+      return Future.delayed(Duration(milliseconds: timeout), () => _retryRequest(error, handler));
     } else {
       var options = error.requestOptions;
       var extra = options.extra;
-      if (refreshTokenRetry == true) {
-        extra['isRetry'] = true;
-      }
+      extra['isRetry'] = true;
       var response = await _dio.request(options.path,
           data: options.data,
           queryParameters: options.queryParameters,
