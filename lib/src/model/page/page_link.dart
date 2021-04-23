@@ -18,7 +18,7 @@ class PageLink {
       'page': page
     };
     if (textSearch != null && textSearch!.isNotEmpty) {
-      queryParameters['textSearch'] = Uri.encodeComponent(textSearch!);
+      queryParameters['textSearch'] = textSearch!;
     }
     if (sortOrder != null) {
       queryParameters['sortProperty'] = sortOrder!.property;
