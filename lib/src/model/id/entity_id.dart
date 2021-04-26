@@ -1,3 +1,18 @@
+import 'alarm_id.dart';
+import 'api_usage_state_id.dart';
+import 'asset_id.dart';
+import 'dashboard_id.dart';
+import 'device_profile_id.dart';
+import 'edge_id.dart';
+import 'entity_view_id.dart';
+import 'firmware_id.dart';
+import 'rule_chain_id.dart';
+import 'rule_node_id.dart';
+import 'tb_resource_id.dart';
+import 'tenant_profile_id.dart';
+import 'user_id.dart';
+import 'widget_type_id.dart';
+import 'widgets_bundle_id.dart';
 import 'customer_id.dart';
 import 'device_id.dart';
 import 'tenant_id.dart';
@@ -26,26 +41,40 @@ abstract class EntityId extends HasUuid {
       case EntityType.TENANT:
         return TenantId(uuid);
       case EntityType.TENANT_PROFILE:
-      // TODO: Handle this case.
-        break;
+        return TenantProfileId(uuid);
       case EntityType.CUSTOMER:
         return CustomerId(uuid);
       case EntityType.USER:
-      // TODO: Handle this case.
-        break;
+        return UserId(uuid);
       case EntityType.DASHBOARD:
-      // TODO: Handle this case.
-        break;
+        return DashboardId(uuid);
       case EntityType.ASSET:
-      // TODO: Handle this case.
-        break;
+        return AssetId(uuid);
       case EntityType.DEVICE:
         return DeviceId(uuid);
       case EntityType.DEVICE_PROFILE:
-      // TODO: Handle this case.
-        break;
+        return DeviceProfileId(uuid);
+      case EntityType.ALARM:
+        return AlarmId(uuid);
+      case EntityType.RULE_CHAIN:
+        return RuleChainId(uuid);
+      case EntityType.RULE_NODE:
+        return RuleNodeId(uuid);
+      case EntityType.EDGE:
+        return EdgeId(uuid);
+      case EntityType.ENTITY_VIEW:
+        return EntityViewId(uuid);
+      case EntityType.WIDGETS_BUNDLE:
+        return WidgetsBundleId(uuid);
+      case EntityType.WIDGET_TYPE:
+        return WidgetTypeId(uuid);
+      case EntityType.API_USAGE_STATE:
+        return ApiUsageStateId(uuid);
+      case EntityType.TB_RESOURCE:
+        return TbResourceId(uuid);
+      case EntityType.FIRMWARE:
+        return FirmwareId(uuid);
     }
-    throw UnimplementedError('Not implemented!');
   }
 
   @override

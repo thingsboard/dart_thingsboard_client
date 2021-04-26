@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:thingsboard_client/src/interceptor/interceptor_config.dart';
+import '../interceptor/interceptor_config.dart';
 
 class RequestConfig {
   bool ignoreLoading;

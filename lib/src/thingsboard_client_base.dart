@@ -31,7 +31,13 @@ class ThingsboardClient {
   String? _token;
   String? _refreshToken;
   AuthUser? _authUser;
+
+  AssetService? _assetService;
+  CustomerService? _customerService;
+  DashboardService? _dashboardService;
   DeviceService? _deviceService;
+  TenantService? _tenantService;
+  UserService? _userService;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
@@ -297,9 +303,46 @@ class ThingsboardClient {
     return _authUser != null;
   }
 
+  bool isSystemAdmin() {
+    return _authUser != null && _authUser!.isSystemAdmin();
+  }
+
+  bool isTenantAdmin() {
+    return _authUser != null && _authUser!.isTenantAdmin();
+  }
+
+  bool isCustomerUser() {
+    return _authUser != null && _authUser!.isCustomerUser();
+  }
+
+  AssetService getAssetService() {
+    _assetService ??= AssetService(this);
+    return _assetService!;
+  }
+
+  CustomerService getCustomerService() {
+    _customerService ??= CustomerService(this);
+    return _customerService!;
+  }
+
+  DashboardService getDashboardService() {
+    _dashboardService ??= DashboardService(this);
+    return _dashboardService!;
+  }
+
   DeviceService getDeviceService() {
     _deviceService ??= DeviceService(this);
     return _deviceService!;
+  }
+
+  TenantService getTenantService() {
+    _tenantService ??= TenantService(this);
+    return _tenantService!;
+  }
+
+  UserService getUserService() {
+    _userService ??= UserService(this);
+    return _userService!;
   }
 
 }

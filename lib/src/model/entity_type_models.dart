@@ -6,7 +6,17 @@ enum EntityType {
   DASHBOARD,
   ASSET,
   DEVICE,
-  DEVICE_PROFILE
+  DEVICE_PROFILE,
+  ALARM,
+  RULE_CHAIN,
+  RULE_NODE,
+  EDGE,
+  ENTITY_VIEW,
+  WIDGETS_BUNDLE,
+  WIDGET_TYPE,
+  API_USAGE_STATE,
+  TB_RESOURCE,
+  FIRMWARE
 }
 
 EntityType entityTypeFromString(String value) {

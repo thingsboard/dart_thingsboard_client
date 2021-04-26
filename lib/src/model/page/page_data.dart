@@ -25,7 +25,7 @@ class PageData<T> {
 
   @override
   String toString() {
-    return 'PageData{data: $data, totalPages: $totalPages, totalElements: $totalElements, hasNext: $hasNext}';
+    return 'PageData{data: ${dataToString(data)}, totalPages: $totalPages, totalElements: $totalElements, hasNext: $hasNext}';
   }
 }
 
@@ -33,4 +33,11 @@ PageData<T> emptyPageData<T>() => PageData<T>([], 0, 0, false);
 
 List<T> dataFromJson<T>(List<dynamic> jsonData, fromJsonFunction<T> fromJson) {
   return jsonData.map((e) => fromJson(e)).toList();
+}
+
+String dataToString<T>(List<T> data) {
+  var res = data.isNotEmpty ? '\n' : '';
+  res += data.map((e) => e.toString()).join('\n');
+  res += data.isNotEmpty ? '\n' : '';
+  return res;
 }
