@@ -295,6 +295,10 @@ class ThingsboardClient {
     return _token;
   }
 
+  String? getRefreshToken() {
+    return _refreshToken;
+  }
+
   AuthUser? getAuthUser() {
     return _authUser;
   }
