@@ -11,7 +11,7 @@ import 'id/user_id.dart';
 class AuthUser {
   late String sub;
   late List<String> scopes;
-  late String userId;
+  late String? userId;
   late String? firstName;
   late String? lastName;
   late bool enabled;
