@@ -41,7 +41,13 @@ Future<void> onUserLoaded() async {
     print('onUserLoaded: isAuthenticated=${tbClient.isAuthenticated()}');
     if (tbClient.isAuthenticated()) {
       print('authUser: ${tbClient.getAuthUser()}');
-      var currentUser = await tbClient.getUserService().getUser(tbClient.getAuthUser()!.userId);
+      User? currentUser;
+      try {
+        currentUser = await tbClient.getUserService().getUser(
+            tbClient.getAuthUser()!.userId!);
+      } catch(e) {
+        await tbClient.logout();
+      }
       print('currentUser: $currentUser');
       if (tbClient.isSystemAdmin()) {
         await fetchTenantsExample();

@@ -107,6 +107,12 @@ class DashboardService {
     return response.data != null ? HomeDashboard.fromJson(response.data!) : null;
   }
 
+  Future<HomeDashboardInfo?> getHomeDashboardInfo({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/dashboard/home/info',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return response.data != null ? HomeDashboardInfo.fromJson(response.data!) : null;
+  }
+
   Future<HomeDashboardInfo> getTenantHomeDashboardInfo({RequestConfig? requestConfig}) async {
     var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/dashboard/home/info',
         options: defaultHttpOptionsFromConfig(requestConfig));
