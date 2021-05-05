@@ -2,6 +2,7 @@ export 'id/ids.dart';
 export 'page/page_data.dart';
 export 'page/sort_order.dart';
 export 'page/page_link.dart';
+export 'authority_enum.dart';
 export 'constants.dart';
 export 'storage.dart';
 export 'local_file_storage.dart';
