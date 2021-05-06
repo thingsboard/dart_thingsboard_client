@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'customer_models.dart';
 import 'base_data.dart';
 import 'id/tenant_id.dart';
@@ -9,6 +11,7 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
 
   TenantId? tenantId;
   String title;
+  String? image;
   Set<ShortCustomerInfo> assignedCustomers;
 
   DashboardInfo(this.title): assignedCustomers = {};
@@ -16,6 +19,7 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
   DashboardInfo.fromJson(Map<String, dynamic> json):
         tenantId = TenantId.fromJson(json['tenantId']),
         title = json['title'],
+        image = json['image'],
         assignedCustomers = json['assignedCustomers'] != null ?
                  (json['assignedCustomers'] as List<dynamic>).map((e) => ShortCustomerInfo.fromJson(e)).toSet() : {},
         super.fromJson(json);
@@ -27,6 +31,9 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
       json['tenantId'] = tenantId!.toJson();
     }
     json['title'] = title;
+    if (image != null) {
+      json['image'] = image;
+    }
     json['assignedCustomers'] = assignedCustomers.map((e) => e.toJson()).toList();
     return json;
   }
@@ -47,7 +54,7 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
   }
 
   String dashboardInfoString([String? toStringBody]) {
-    return '${baseDataString('tenantId: $tenantId, title: $title, assignedCustomers: $assignedCustomers${toStringBody != null ? ', ' + toStringBody : ''}')}';
+    return '${baseDataString('tenantId: $tenantId, title: $title, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, assignedCustomers: $assignedCustomers${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 }
 

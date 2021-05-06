@@ -35,9 +35,11 @@ class ThingsboardClient {
   AssetService? _assetService;
   CustomerService? _customerService;
   DashboardService? _dashboardService;
+  DeviceProfileService? _deviceProfileService;
   DeviceService? _deviceService;
   TenantService? _tenantService;
   UserService? _userService;
+  AlarmService? _alarmService;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
@@ -334,6 +336,11 @@ class ThingsboardClient {
     return _dashboardService!;
   }
 
+  DeviceProfileService getDeviceProfileService() {
+    _deviceProfileService ??= DeviceProfileService(this);
+    return _deviceProfileService!;
+  }
+
   DeviceService getDeviceService() {
     _deviceService ??= DeviceService(this);
     return _deviceService!;
@@ -347,6 +354,11 @@ class ThingsboardClient {
   UserService getUserService() {
     _userService ??= UserService(this);
     return _userService!;
+  }
+
+  AlarmService getAlarmService() {
+    _alarmService ??= AlarmService(this);
+    return _alarmService!;
   }
 
 }

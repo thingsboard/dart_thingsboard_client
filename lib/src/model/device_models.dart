@@ -1,11 +1,19 @@
+import 'dart:math';
+
+import 'package:thingsboard_client/src/model/entity_models.dart';
+import 'package:thingsboard_client/src/model/id/entity_id.dart';
+
+import 'has_firmware.dart';
 import 'id/device_profile_id.dart';
 import 'id/firmware_id.dart';
 import 'additional_info_based.dart';
+import 'base_data.dart';
 import 'has_name.dart';
 import 'has_customer_id.dart';
 import 'has_tenant_id.dart';
 import 'id/customer_id.dart';
 import 'id/device_id.dart';
+import 'id/rule_chain_id.dart';
 import 'id/tenant_id.dart';
 
 enum DeviceProfileType {
@@ -26,7 +34,8 @@ enum DeviceTransportType {
   DEFAULT,
   MQTT,
   COAP,
-  LWM2M
+  LWM2M,
+  SNMP
 }
 
 DeviceTransportType deviceTransportTypeFromString(String value) {
@@ -36,6 +45,463 @@ DeviceTransportType deviceTransportTypeFromString(String value) {
 extension DeviceTransportTypeToString on DeviceTransportType {
   String toShortString() {
     return toString().split('.').last;
+  }
+}
+
+enum TransportPayloadType {
+  JSON,
+  PROTOBUF
+}
+
+TransportPayloadType transportPayloadTypeFromString(String value) {
+  return TransportPayloadType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}
+
+extension TransportPayloadTypeToString on TransportPayloadType {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
+
+enum CoapTransportDeviceType {
+  DEFAULT,
+  EFENTO
+}
+
+CoapTransportDeviceType coapTransportDeviceTypeFromString(String value) {
+  return CoapTransportDeviceType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}
+
+extension CoapTransportDeviceTypeToString on CoapTransportDeviceType {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
+
+enum DeviceProfileProvisionType {
+  DISABLED,
+  ALLOW_CREATE_NEW_DEVICES,
+  CHECK_PRE_PROVISIONED_DEVICES
+}
+
+DeviceProfileProvisionType deviceProfileProvisionTypeFromString(String value) {
+  return DeviceProfileProvisionType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}
+
+extension DeviceProfileProvisionTypeToString on DeviceProfileProvisionType {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
+
+abstract class DeviceProfileConfiguration {
+
+  DeviceProfileConfiguration();
+
+  DeviceProfileType getType();
+
+  factory DeviceProfileConfiguration.fromJson(Map<String, dynamic> json) {
+    if (json.containsKey('type')) {
+      var deviceProfileType = deviceProfileTypeFromString(json['type']);
+      switch(deviceProfileType) {
+        case DeviceProfileType.DEFAULT:
+          return DefaultDeviceProfileConfiguration.fromJson(json);
+      }
+    } else {
+      throw FormatException('Missing type!');
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{};
+    json['type'] = getType().toShortString();
+    return json;
+  }
+
+}
+
+class DefaultDeviceProfileConfiguration extends DeviceProfileConfiguration {
+
+  DefaultDeviceProfileConfiguration();
+
+  @override
+  DeviceProfileType getType() {
+    return DeviceProfileType.DEFAULT;
+  }
+
+  DefaultDeviceProfileConfiguration.fromJson(Map<String, dynamic> json);
+
+  @override
+  Map<String, dynamic> toJson() => super.toJson();
+
+  @override
+  String toString() {
+    return 'DefaultDeviceProfileConfiguration{}';
+  }
+}
+
+abstract class DeviceProfileTransportConfiguration {
+
+  DeviceProfileTransportConfiguration();
+
+  DeviceTransportType getType();
+
+  factory DeviceProfileTransportConfiguration.fromJson(Map<String, dynamic> json) {
+    if (json.containsKey('type')) {
+      var deviceProfileType = deviceTransportTypeFromString(json['type']);
+      switch(deviceProfileType) {
+        case DeviceTransportType.DEFAULT:
+          return DefaultDeviceProfileTransportConfiguration.fromJson(json);
+        case DeviceTransportType.MQTT:
+          return MqttDeviceProfileTransportConfiguration.fromJson(json);
+        case DeviceTransportType.COAP:
+          return CoapDeviceProfileTransportConfiguration.fromJson(json);
+        case DeviceTransportType.LWM2M:
+          return Lwm2mDeviceProfileTransportConfiguration.fromJson(json);
+        case DeviceTransportType.SNMP:
+          return SnmpDeviceProfileTransportConfiguration.fromJson(json);
+      }
+    } else {
+      throw FormatException('Missing type!');
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{};
+    json['type'] = getType().toShortString();
+    return json;
+  }
+
+}
+
+class DefaultDeviceProfileTransportConfiguration extends DeviceProfileTransportConfiguration {
+
+  DefaultDeviceProfileTransportConfiguration();
+
+  @override
+  DeviceTransportType getType() {
+    return DeviceTransportType.DEFAULT;
+  }
+
+  DefaultDeviceProfileTransportConfiguration.fromJson(Map<String, dynamic> json);
+
+  @override
+  Map<String, dynamic> toJson() => super.toJson();
+
+  @override
+  String toString() {
+    return 'DefaultDeviceProfileTransportConfiguration{}';
+  }
+}
+
+class MqttDeviceProfileTransportConfiguration extends DeviceProfileTransportConfiguration {
+
+  Map<String, dynamic> properties;
+
+  MqttDeviceProfileTransportConfiguration(): properties = {};
+
+  @override
+  DeviceTransportType getType() {
+    return DeviceTransportType.MQTT;
+  }
+
+  MqttDeviceProfileTransportConfiguration.fromJson(Map<String, dynamic> json):
+        properties = json;
+
+  @override
+  Map<String, dynamic> toJson() => {
+    ...super.toJson(),
+    ...properties,
+  };
+
+  @override
+  String toString() {
+    return 'MqttDeviceProfileTransportConfiguration{properties: $properties}';
+  }
+}
+
+class CoapDeviceProfileTransportConfiguration extends DeviceProfileTransportConfiguration {
+
+  Map<String, dynamic> properties;
+
+  CoapDeviceProfileTransportConfiguration(): properties = {};
+
+  @override
+  DeviceTransportType getType() {
+    return DeviceTransportType.MQTT;
+  }
+
+  CoapDeviceProfileTransportConfiguration.fromJson(Map<String, dynamic> json):
+        properties = json;
+
+  @override
+  Map<String, dynamic> toJson() => {
+    ...super.toJson(),
+    ...properties,
+  };
+
+  @override
+  String toString() {
+    return 'CoapDeviceProfileTransportConfiguration{properties: $properties}';
+  }
+}
+
+class Lwm2mDeviceProfileTransportConfiguration extends DeviceProfileTransportConfiguration {
+
+  Map<String, dynamic> properties;
+
+  Lwm2mDeviceProfileTransportConfiguration(): properties = {};
+
+  @override
+  DeviceTransportType getType() {
+    return DeviceTransportType.MQTT;
+  }
+
+  Lwm2mDeviceProfileTransportConfiguration.fromJson(Map<String, dynamic> json):
+        properties = json;
+
+  @override
+  Map<String, dynamic> toJson() => {
+    ...super.toJson(),
+    ...properties,
+  };
+
+  @override
+  String toString() {
+    return 'Lwm2mDeviceProfileTransportConfiguration{properties: $properties}';
+  }
+}
+
+class SnmpDeviceProfileTransportConfiguration extends DeviceProfileTransportConfiguration {
+
+  Map<String, dynamic> properties;
+
+  SnmpDeviceProfileTransportConfiguration(): properties = {};
+
+  @override
+  DeviceTransportType getType() {
+    return DeviceTransportType.MQTT;
+  }
+
+  SnmpDeviceProfileTransportConfiguration.fromJson(Map<String, dynamic> json):
+        properties = json;
+
+  @override
+  Map<String, dynamic> toJson() => {
+    ...super.toJson(),
+    ...properties,
+  };
+
+  @override
+  String toString() {
+    return 'SnmpDeviceProfileTransportConfiguration{properties: $properties}';
+  }
+}
+
+class DeviceProvisionConfiguration {
+
+  DeviceProfileProvisionType type;
+  String? provisionDeviceSecret;
+
+  DeviceProvisionConfiguration(this.type);
+
+  DeviceProvisionConfiguration.fromJson(Map<String, dynamic> json):
+      type = deviceProfileProvisionTypeFromString(json['type']),
+      provisionDeviceSecret = json['provisionDeviceSecret'];
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{};
+    json['type'] = type.toShortString();
+    if (provisionDeviceSecret != null) {
+      json['provisionDeviceSecret'] = provisionDeviceSecret;
+    }
+    return json;
+  }
+
+  @override
+  String toString() {
+    return 'DeviceProvisionConfiguration{type: $type, provisionDeviceSecret: $provisionDeviceSecret}';
+  }
+}
+
+class DeviceProfileAlarm {
+
+  Map<String, dynamic> properties;
+
+  DeviceProfileAlarm(): properties = {};
+
+  DeviceProfileAlarm.fromJson(Map<String, dynamic> json):
+        properties = json;
+
+  Map<String, dynamic> toJson() => properties;
+
+  @override
+  String toString() {
+    return 'DeviceProfileAlarm{properties: $properties}';
+  }
+}
+
+class DeviceProfileData {
+
+  DeviceProfileConfiguration configuration;
+  DeviceProfileTransportConfiguration transportConfiguration;
+  List<DeviceProfileAlarm>? alarms;
+  DeviceProvisionConfiguration? provisionConfiguration;
+
+  DeviceProfileData():
+        configuration = DefaultDeviceProfileConfiguration(),
+        transportConfiguration = DefaultDeviceProfileTransportConfiguration();
+
+  DeviceProfileData.fromJson(Map<String, dynamic> json):
+        configuration = DeviceProfileConfiguration.fromJson(json['configuration']),
+        transportConfiguration = DeviceProfileTransportConfiguration.fromJson(json['transportConfiguration']),
+        alarms = json['alarms'] != null ? (json['alarms'] as List).map((e) => DeviceProfileAlarm.fromJson(e)).toList() : null,
+        provisionConfiguration = json['provisionConfiguration'] != null ? DeviceProvisionConfiguration.fromJson(json['provisionConfiguration']) : null;
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{};
+    json['configuration'] = configuration.toJson();
+    json['transportConfiguration'] = transportConfiguration.toJson();
+    if (alarms != null) {
+      json['alarms'] = alarms!.map((e) => e.toJson()).toList();
+    }
+    if (provisionConfiguration != null) {
+      json['provisionConfiguration'] = provisionConfiguration!.toJson();
+    }
+    return json;
+  }
+
+  @override
+  String toString() {
+    return 'DeviceProfileData{configuration: $configuration, transportConfiguration: $transportConfiguration, alarms: $alarms, provisionConfiguration: $provisionConfiguration}';
+  }
+}
+
+class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId, HasFirmware {
+
+  TenantId? tenantId;
+  String name;
+  String? description;
+  bool? isDefault;
+  DeviceProfileType type;
+  String? image;
+  DeviceTransportType transportType;
+  DeviceProfileProvisionType provisionType;
+  String? provisionDeviceKey;
+  RuleChainId? defaultRuleChainId;
+  String? defaultQueueName;
+  FirmwareId? firmwareId;
+  FirmwareId? softwareId;
+  DeviceProfileData profileData;
+
+  DeviceProfile(this.name):
+        type = DeviceProfileType.DEFAULT,
+        transportType = DeviceTransportType.DEFAULT,
+        provisionType = DeviceProfileProvisionType.DISABLED,
+        profileData = DeviceProfileData();
+
+  DeviceProfile.fromJson(Map<String, dynamic> json):
+        tenantId = TenantId.fromJson(json['tenantId']),
+        name = json['name'],
+        description = json['description'],
+        isDefault = json['default'],
+        type = deviceProfileTypeFromString(json['type']),
+        image = json['image'],
+        transportType = deviceTransportTypeFromString(json['transportType']),
+        provisionType = deviceProfileProvisionTypeFromString(json['provisionType']),
+        provisionDeviceKey = json['provisionDeviceKey'],
+        defaultRuleChainId = json['defaultRuleChainId'] != null ? RuleChainId.fromJson(json['defaultRuleChainId']) : null,
+        defaultQueueName = json['defaultQueueName'],
+        firmwareId = json['firmwareId'] != null ? FirmwareId.fromJson(json['firmwareId']) : null,
+        softwareId = json['softwareId'] != null ? FirmwareId.fromJson(json['softwareId']) : null,
+        profileData = DeviceProfileData.fromJson(json['profileData']),
+        super.fromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    if (tenantId != null) {
+      json['tenantId'] = tenantId!.toJson();
+    }
+    json['name'] = name;
+    if (description != null) {
+      json['description'] = description;
+    }
+    if (isDefault != null) {
+      json['default'] = isDefault;
+    }
+    json['type'] = type.toShortString();
+    if (image != null) {
+      json['image'] = image;
+    }
+    json['transportType'] = transportType.toShortString();
+    json['provisionType'] = provisionType.toShortString();
+    if (provisionDeviceKey != null) {
+      json['provisionDeviceKey'] = provisionDeviceKey;
+    }
+    if (defaultRuleChainId != null) {
+      json['defaultRuleChainId'] = defaultRuleChainId!.toJson();
+    }
+    if (defaultQueueName != null) {
+      json['defaultQueueName'] = defaultQueueName;
+    }
+    if (firmwareId != null) {
+      json['firmwareId'] = firmwareId!.toJson();
+    }
+    if (softwareId != null) {
+      json['softwareId'] = softwareId!.toJson();
+    }
+    json['profileData'] = profileData.toJson();
+    return json;
+  }
+
+  @override
+  String getName() {
+    return name;
+  }
+
+  @override
+  TenantId? getTenantId() {
+    return tenantId;
+  }
+
+  @override
+  FirmwareId? getFirmwareId() {
+    return firmwareId;
+  }
+
+  @override
+  FirmwareId? getSoftwareId() {
+    return softwareId;
+  }
+
+  @override
+  String toString() {
+    return 'DeviceProfile{${baseDataString('tenantId: $tenantId, name: $name, description: $description, '
+        'isDefault: $isDefault, type: $type, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, transportType: $transportType, provisionType: $provisionType, '
+        'provisionDeviceKey: $provisionDeviceKey, defaultRuleChainId: $defaultRuleChainId, defaultQueueName: $defaultQueueName, '
+        'firmwareId: $firmwareId, softwareId: $softwareId, profileData: $profileData')}}';
+  }
+
+}
+
+class DeviceProfileInfo extends EntityInfo {
+
+  DeviceProfileType type;
+  DeviceTransportType transportType;
+  String? image;
+
+  DeviceProfileInfo(EntityId id, String name, this.type, this.transportType) : super(id, name);
+
+  DeviceProfileInfo.fromJson(Map<String, dynamic> json):
+        type = deviceProfileTypeFromString(json['type']),
+        transportType = deviceTransportTypeFromString(json['transportType']),
+        image = json['image'],
+        super.fromJson(json);
+
+  @override
+  String toString() {
+    return 'DeviceProfileInfo{${entityInfoString('type: $type, transportType: $transportType, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}')}}';
   }
 }
 
@@ -103,6 +569,8 @@ abstract class DeviceTransportConfiguration {
           return CoapDeviceTransportConfiguration.fromJson(json);
         case DeviceTransportType.LWM2M:
           return Lwm2mDeviceTransportConfiguration.fromJson(json);
+        case DeviceTransportType.SNMP:
+          return SnmpDeviceTransportConfiguration.fromJson(json);
       }
     } else {
       throw FormatException('Missing type!');
@@ -216,6 +684,32 @@ class Lwm2mDeviceTransportConfiguration extends DeviceTransportConfiguration {
   }
 }
 
+class SnmpDeviceTransportConfiguration extends DeviceTransportConfiguration {
+
+  Map<String, dynamic> properties;
+
+  SnmpDeviceTransportConfiguration(): properties = {};
+
+  @override
+  DeviceTransportType getType() {
+    return DeviceTransportType.SNMP;
+  }
+
+  SnmpDeviceTransportConfiguration.fromJson(Map<String, dynamic> json):
+        properties = json;
+
+  @override
+  Map<String, dynamic> toJson() => {
+    ...super.toJson(),
+    ...properties,
+  };
+
+  @override
+  String toString() {
+    return 'SnmpDeviceTransportConfiguration{properties: $properties}';
+  }
+}
+
 class DeviceData {
 
   DeviceConfiguration configuration;
@@ -241,7 +735,7 @@ class DeviceData {
   }
 }
 
-class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, HasCustomerId {
+class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, HasCustomerId, HasFirmware {
 
   TenantId? tenantId;
   CustomerId? customerId;
@@ -250,6 +744,7 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
   String? label;
   DeviceProfileId? deviceProfileId;
   FirmwareId? firmwareId;
+  FirmwareId? softwareId;
   DeviceData deviceData;
 
   Device(this.name, this.type): deviceData = DeviceData();
@@ -262,6 +757,7 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
         label = json['label'],
         deviceProfileId = DeviceProfileId.fromJson(json['deviceProfileId']),
         firmwareId = json['firmwareId'] != null ? FirmwareId.fromJson(json['firmwareId']) : null,
+        softwareId = json['softwareId'] != null ? FirmwareId.fromJson(json['softwareId']) : null,
         deviceData = DeviceData.fromJson(json['deviceData']),
         super.fromJson(json);
 
@@ -285,6 +781,9 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
     if (firmwareId != null) {
       json['firmwareId'] = firmwareId!.toJson();
     }
+    if (softwareId != null) {
+      json['softwareId'] = softwareId!.toJson();
+    }
     json['deviceData'] = deviceData.toJson();
     return json;
   }
@@ -305,11 +804,20 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
   }
 
   @override
-  String toString() {
-    return 'Device{${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
-        'label: $label, deviceProfileId: $deviceProfileId, firmwareId: $firmwareId, deviceData: $deviceData')}}';
+  FirmwareId? getFirmwareId() {
+    return firmwareId;
   }
 
+  @override
+  FirmwareId? getSoftwareId() {
+    return softwareId;
+  }
+
+  @override
+  String toString() {
+    return 'Device{${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
+        'label: $label, deviceProfileId: $deviceProfileId, firmwareId: $firmwareId, softwareId: $softwareId, deviceData: $deviceData')}}';
+  }
 }
 
 class DeviceInfo extends Device {

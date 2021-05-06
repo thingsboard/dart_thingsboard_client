@@ -53,16 +53,21 @@ Future<void> onUserLoaded() async {
         await fetchTenantsExample();
       } else if (tbClient.isTenantAdmin()) {
         await fetchUsersExample();
+        await fetchDeviceProfilesExample();
+        await fetchDeviceProfileInfosExample();
         await fetchTenantAssetsExample();
         await fetchTenantDevicesExample();
         await fetchCustomersExample();
         await fetchTenantDashboardsExample();
+        await fetchAlarmsExample();
         // await deviceApiExample();
       } else if (tbClient.isCustomerUser()) {
         await fetchUsersExample();
+        await fetchDeviceProfileInfosExample();
         await fetchCustomerAssetsExample();
         await fetchCustomerDevicesExample();
         await fetchCustomerDashboardsExample();
+        await fetchAlarmsExample();
       }
       await tbClient.logout(requestConfig: RequestConfig(ignoreLoading: true, ignoreErrors: true));
     } else {
@@ -139,6 +144,26 @@ Future<void> fetchTenantDevicesExample() async {
   } while(devices.hasNext);
 }
 
+Future<void> fetchDeviceProfilesExample() async {
+  var pageLink = PageLink(10);
+  PageData<DeviceProfile> deviceProfiles;
+  do {
+    deviceProfiles = await tbClient.getDeviceProfileService().getDeviceProfiles(pageLink);
+    print('deviceProfiles: $deviceProfiles');
+    pageLink = pageLink.nextPageLink();
+  } while(deviceProfiles.hasNext);
+}
+
+Future<void> fetchDeviceProfileInfosExample() async {
+  var pageLink = PageLink(10);
+  PageData<DeviceProfileInfo> deviceProfileInfos;
+  do {
+    deviceProfileInfos = await tbClient.getDeviceProfileService().getDeviceProfileInfos(pageLink);
+    print('deviceProfileInfos: $deviceProfileInfos');
+    pageLink = pageLink.nextPageLink();
+  } while(deviceProfileInfos.hasNext);
+}
+
 Future<void> fetchCustomersExample() async {
   var pageLink = PageLink(10);
   PageData<Customer> customers;
@@ -157,6 +182,18 @@ Future<void> fetchTenantDashboardsExample() async {
     print('dashboards: $dashboards');
     pageLink = pageLink.nextPageLink();
   } while(dashboards.hasNext);
+}
+
+Future<void> fetchAlarmsExample() async {
+  var alarmQuery = AlarmQuery(TimePageLink(10, 0, null, SortOrder('createdTime', Direction.DESC)), fetchOriginator: true);
+  PageData<AlarmInfo> alarms;
+  var total = 0;
+  do {
+    alarms = await tbClient.getAlarmService().getAllAlarms(alarmQuery);
+    total += alarms.data.length;
+    print('alarms: $alarms');
+    alarmQuery.pageLink = alarmQuery.pageLink.nextPageLink();
+  } while(alarms.hasNext && total <= 50);
 }
 
 Future<void> fetchCustomerAssetsExample() async {
