@@ -25,3 +25,5 @@ export 'device_models.dart';
 export 'tenant_models.dart';
 export 'user_models.dart';
 export 'alarm_models.dart';
+export 'relation_models.dart';
+export 'query/query_models.dart';

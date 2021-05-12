@@ -40,6 +40,7 @@ class ThingsboardClient {
   TenantService? _tenantService;
   UserService? _userService;
   AlarmService? _alarmService;
+  EntityQueryService? _entityQueryService;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
@@ -359,6 +360,11 @@ class ThingsboardClient {
   AlarmService getAlarmService() {
     _alarmService ??= AlarmService(this);
     return _alarmService!;
+  }
+
+  EntityQueryService getEntityQueryService() {
+    _entityQueryService ??= EntityQueryService(this);
+    return _entityQueryService!;
   }
 
 }

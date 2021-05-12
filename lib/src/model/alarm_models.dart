@@ -136,7 +136,11 @@ class AlarmInfo extends Alarm {
 
   @override
   String toString() {
-    return 'AlarmInfo{${alarmString('originatorName: $originatorName')}}';
+    return 'AlarmInfo{${alarmInfoString()}}';
+  }
+
+  String alarmInfoString([String? toStringBody]) {
+    return '${alarmString('originatorName: $originatorName${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 }
 
