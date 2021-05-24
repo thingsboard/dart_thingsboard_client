@@ -39,12 +39,12 @@ class AlarmService {
   }
 
   Future<void> ackAlarm(String alarmId, {RequestConfig? requestConfig}) async {
-    await _tbClient.post<Map<String, dynamic>>('/api/alarm/$alarmId/ack',
+    await _tbClient.post('/api/alarm/$alarmId/ack',
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
   Future<void> clearAlarm(String alarmId, {RequestConfig? requestConfig}) async {
-    await _tbClient.post<Map<String, dynamic>>('/api/alarm/$alarmId/clear',
+    await _tbClient.post('/api/alarm/$alarmId/clear',
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
