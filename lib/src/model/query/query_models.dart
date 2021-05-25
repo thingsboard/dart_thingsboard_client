@@ -1193,6 +1193,25 @@ class EntityData {
                         .toList()))
             : {};
 
+  String? field(String name) {
+    return _latest(name, EntityKeyType.ENTITY_FIELD);
+  }
+
+  String? attribute(String name) {
+    return _latest(name, EntityKeyType.ATTRIBUTE);
+  }
+
+  String? _latest(String name, EntityKeyType keyType) {
+    var fields = latest[keyType];
+    if (fields != null) {
+      var tsValue = fields[name];
+      if (tsValue != null) {
+        return tsValue.value;
+      }
+    }
+    return null;
+  }
+
   @override
   String toString() {
     return 'EntityData{entityId: $entityId, latest: $latest, timeseries: $timeseries}';
