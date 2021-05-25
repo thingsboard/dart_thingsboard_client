@@ -52,14 +52,14 @@ Future<void> onUserLoaded() async {
       if (tbClient.isSystemAdmin()) {
         await fetchTenantsExample();
       } else if (tbClient.isTenantAdmin()) {
-        await fetchUsersExample();
+        /* await fetchUsersExample();
         await fetchDeviceProfilesExample();
         await fetchDeviceProfileInfosExample();
         await fetchTenantAssetsExample();
         await fetchTenantDevicesExample();
         await fetchCustomersExample();
         await fetchTenantDashboardsExample();
-        await fetchAlarmsExample();
+        await fetchAlarmsExample();*/
         await countEntitiesExample();
         await queryEntitiesExample();
         // await deviceApiExample();
@@ -303,14 +303,25 @@ Future<void> queryEntitiesExample() async {
           value: FilterPredicateValue(false)));
   var deviceFields = <EntityKey>[
     EntityKey(type: EntityKeyType.ENTITY_FIELD, key: 'name'),
-    EntityKey(type: EntityKeyType.ENTITY_FIELD, key: 'type')
+    EntityKey(type: EntityKeyType.ENTITY_FIELD, key: 'type'),
+    EntityKey(type: EntityKeyType.ENTITY_FIELD, key: 'createdTime')
   ];
+  var deviceAttributes = <EntityKey>[
+    EntityKey(type: EntityKeyType.ATTRIBUTE, key: 'active')
+  ];
+
   var devicesQuery = EntityDataQuery(entityFilter: entityFilter, keyFilters: [inactiveDeviceKeyFilter],
-      entityFields: deviceFields, pageLink: EntityDataPageLink(pageSize: 10));
+      entityFields: deviceFields, latestValues: deviceAttributes, pageLink: EntityDataPageLink(pageSize: 10,
+          sortOrder: EntityDataSortOrder(key: EntityKey(type: EntityKeyType.ENTITY_FIELD, key: 'createdTime'),
+              direction: EntityDataSortOrderDirection.DESC)));
   PageData<EntityData> devices;
   do {
     devices = await tbClient.getEntityQueryService().findEntityDataByQuery(devicesQuery);
-    print('Inactive devices entities data: $devices');
+    // print('Inactive devices entities data: $devices');
+    print('Inactive devices entities data:');
+    devices.data.forEach((device) {
+      print('id: ${device.entityId.id}, createdTime: ${device.createdTime}, name: ${device.field('name')!}, type: ${device.field('type')!}, active: ${device.attribute('active')}');
+    });
     devicesQuery = devicesQuery.next();
   } while (devices.hasNext);
   print('**********************************************************************');

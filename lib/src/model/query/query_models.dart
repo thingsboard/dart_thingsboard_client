@@ -1201,6 +1201,26 @@ class EntityData {
     return _latest(name, EntityKeyType.ATTRIBUTE);
   }
 
+  String? serverAttribute(String name) {
+    return _latest(name, EntityKeyType.SERVER_ATTRIBUTE);
+  }
+
+  String? sharedAttribute(String name) {
+    return _latest(name, EntityKeyType.SHARED_ATTRIBUTE);
+  }
+
+  String? clientAttribute(String name) {
+    return _latest(name, EntityKeyType.CLIENT_ATTRIBUTE);
+  }
+
+  int? get createdTime {
+    var strTime = field('createdTime');
+    if (strTime != null) {
+      return int.parse(strTime);
+    }
+    return null;
+  }
+
   String? _latest(String name, EntityKeyType keyType) {
     var fields = latest[keyType];
     if (fields != null) {
