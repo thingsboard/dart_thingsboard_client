@@ -52,14 +52,14 @@ Future<void> onUserLoaded() async {
       if (tbClient.isSystemAdmin()) {
         await fetchTenantsExample();
       } else if (tbClient.isTenantAdmin()) {
-        /* await fetchUsersExample();
+        await fetchUsersExample();
         await fetchDeviceProfilesExample();
         await fetchDeviceProfileInfosExample();
         await fetchTenantAssetsExample();
         await fetchTenantDevicesExample();
         await fetchCustomersExample();
         await fetchTenantDashboardsExample();
-        await fetchAlarmsExample();*/
+        await fetchAlarmsExample();
         await countEntitiesExample();
         await queryEntitiesExample();
         // await deviceApiExample();
