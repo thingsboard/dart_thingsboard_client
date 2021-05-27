@@ -4,6 +4,7 @@ import 'package:thingsboard_client/src/model/entity_models.dart';
 import 'package:thingsboard_client/src/model/id/entity_id.dart';
 
 import 'has_firmware.dart';
+import 'id/dashboard_id.dart';
 import 'id/device_profile_id.dart';
 import 'id/firmware_id.dart';
 import 'additional_info_based.dart';
@@ -389,6 +390,7 @@ class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId,
   DeviceProfileProvisionType provisionType;
   String? provisionDeviceKey;
   RuleChainId? defaultRuleChainId;
+  DashboardId? defaultDashboardId;
   String? defaultQueueName;
   FirmwareId? firmwareId;
   FirmwareId? softwareId;
@@ -411,6 +413,7 @@ class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId,
         provisionType = deviceProfileProvisionTypeFromString(json['provisionType']),
         provisionDeviceKey = json['provisionDeviceKey'],
         defaultRuleChainId = json['defaultRuleChainId'] != null ? RuleChainId.fromJson(json['defaultRuleChainId']) : null,
+        defaultDashboardId = json['defaultDashboardId'] != null ? DashboardId.fromJson(json['defaultDashboardId']) : null,
         defaultQueueName = json['defaultQueueName'],
         firmwareId = json['firmwareId'] != null ? FirmwareId.fromJson(json['firmwareId']) : null,
         softwareId = json['softwareId'] != null ? FirmwareId.fromJson(json['softwareId']) : null,
@@ -441,6 +444,9 @@ class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId,
     }
     if (defaultRuleChainId != null) {
       json['defaultRuleChainId'] = defaultRuleChainId!.toJson();
+    }
+    if (defaultDashboardId != null) {
+      json['defaultDashboardId'] = defaultDashboardId!.toJson();
     }
     if (defaultQueueName != null) {
       json['defaultQueueName'] = defaultQueueName;
@@ -479,7 +485,7 @@ class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId,
   String toString() {
     return 'DeviceProfile{${baseDataString('tenantId: $tenantId, name: $name, description: $description, '
         'isDefault: $isDefault, type: $type, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, transportType: $transportType, provisionType: $provisionType, '
-        'provisionDeviceKey: $provisionDeviceKey, defaultRuleChainId: $defaultRuleChainId, defaultQueueName: $defaultQueueName, '
+        'provisionDeviceKey: $provisionDeviceKey, defaultRuleChainId: $defaultRuleChainId, defaultDashboardId: $defaultDashboardId, defaultQueueName: $defaultQueueName, '
         'firmwareId: $firmwareId, softwareId: $softwareId, profileData: $profileData')}}';
   }
 
@@ -489,19 +495,22 @@ class DeviceProfileInfo extends EntityInfo {
 
   DeviceProfileType type;
   DeviceTransportType transportType;
+  DashboardId? defaultDashboardId;
   String? image;
 
-  DeviceProfileInfo(EntityId id, String name, this.type, this.transportType) : super(id, name);
+  DeviceProfileInfo(EntityId id, String name, this.image, this.defaultDashboardId, this.type, this.transportType) : super(id, name);
 
   DeviceProfileInfo.fromJson(Map<String, dynamic> json):
         type = deviceProfileTypeFromString(json['type']),
         transportType = deviceTransportTypeFromString(json['transportType']),
+        defaultDashboardId = json['defaultDashboardId'] != null ? DashboardId.fromJson(json['defaultDashboardId']) : null,
         image = json['image'],
         super.fromJson(json);
 
   @override
   String toString() {
-    return 'DeviceProfileInfo{${entityInfoString('type: $type, transportType: $transportType, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}')}}';
+    return 'DeviceProfileInfo{${entityInfoString('type: $type, transportType: $transportType, defaultDashboardId: $defaultDashboardId, '
+        'image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}')}}';
   }
 }
 
