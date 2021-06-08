@@ -250,6 +250,10 @@ class ThingsboardClient {
     return loginResponse;
   }
 
+  Future<void> setUserFromJwtToken(String? jwtToken, String? refreshToken, bool? notify) async {
+    await _setUserFromJwtToken(jwtToken, refreshToken, notify);
+  }
+
   Future<void> logout({RequestConfig? requestConfig}) async {
     try {
       await post('/api/auth/logout', options: defaultHttpOptionsFromConfig(requestConfig));
