@@ -41,6 +41,7 @@ class ThingsboardClient {
   UserService? _userService;
   AlarmService? _alarmService;
   EntityQueryService? _entityQueryService;
+  OAuth2Service? _oauth2service;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
@@ -367,4 +368,8 @@ class ThingsboardClient {
     return _entityQueryService!;
   }
 
+  OAuth2Service getOAuth2Service() {
+    _oauth2service ??= OAuth2Service(this);
+    return _oauth2service!;
+  }
 }
