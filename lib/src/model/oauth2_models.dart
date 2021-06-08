@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class OAuth2ClientInfo {
 
   final String name;
@@ -9,4 +11,8 @@ class OAuth2ClientInfo {
         icon =  json['icon'],
         url =  json['url'];
 
+  @override
+  String toString() {
+    return 'OAuth2ClientInfo{name: $name, icon: $icon, url: $url}';
+  }
 }

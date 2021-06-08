@@ -11,7 +11,7 @@ class OAuth2Service {
   OAuth2Service._internal(this._tbClient);
 
   Future<List<OAuth2ClientInfo>> getOAuth2Clients({RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<List<Map<String, dynamic>>>('/api/noauth/oauth2Clients',
+    var response = await _tbClient.post<List<dynamic>>('/api/noauth/oauth2Clients',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data!.map((e) => OAuth2ClientInfo.fromJson(e)).toList();
   }

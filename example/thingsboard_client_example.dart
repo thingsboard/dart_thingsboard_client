@@ -88,6 +88,16 @@ Future<void> onUserLoaded() async {
   }
 }
 
+Future<void> getOAuth2ClientsExample() async {
+  print('**********************************************************************');
+  print('*               OAUTH2 CLIENTS INFO EXAMPLE                          *');
+  print('**********************************************************************');
+
+  var clients = await tbClient.getOAuth2Service().getOAuth2Clients();
+  print('OAuth2 clients: $clients');
+
+}
+
 Future<void> deviceApiExample() async {
   print('**********************************************************************');
   print('*                        DEVICE API EXAMPLE                          *');
