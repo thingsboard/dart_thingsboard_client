@@ -16,3 +16,19 @@ class OAuth2ClientInfo {
     return 'OAuth2ClientInfo{name: $name, icon: $icon, url: $url}';
   }
 }
+
+enum PlatformType {
+  WEB,
+  ANDROID,
+  IOS
+}
+
+PlatformType platformTypeFromString(String value) {
+  return PlatformType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}
+
+extension PlatformTypeToString on PlatformType {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
