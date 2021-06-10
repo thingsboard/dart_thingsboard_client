@@ -10,8 +10,13 @@ class OAuth2Service {
 
   OAuth2Service._internal(this._tbClient);
 
-  Future<List<OAuth2ClientInfo>> getOAuth2Clients({RequestConfig? requestConfig}) async {
+  Future<List<OAuth2ClientInfo>> getOAuth2Clients({String? pkgName, RequestConfig? requestConfig}) async {
+    var queryParams = <String, dynamic>{};
+    if (pkgName != null) {
+      queryParams['pkg'] = pkgName;
+    }
     var response = await _tbClient.post<List<dynamic>>('/api/noauth/oauth2Clients',
+        queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data!.map((e) => OAuth2ClientInfo.fromJson(e)).toList();
   }
