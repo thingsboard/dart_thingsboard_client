@@ -1,3 +1,5 @@
+import 'package:thingsboard_client/src/model/id/ota_package_id.dart';
+
 import 'alarm_id.dart';
 import 'api_usage_state_id.dart';
 import 'asset_id.dart';
@@ -5,7 +7,6 @@ import 'dashboard_id.dart';
 import 'device_profile_id.dart';
 import 'edge_id.dart';
 import 'entity_view_id.dart';
-import 'firmware_id.dart';
 import 'rule_chain_id.dart';
 import 'rule_node_id.dart';
 import 'tb_resource_id.dart';
@@ -72,8 +73,8 @@ abstract class EntityId extends HasUuid {
         return ApiUsageStateId(uuid);
       case EntityType.TB_RESOURCE:
         return TbResourceId(uuid);
-      case EntityType.FIRMWARE:
-        return FirmwareId(uuid);
+      case EntityType.OTA_PACKAGE:
+        return OtaPackageId(uuid);
     }
   }
 

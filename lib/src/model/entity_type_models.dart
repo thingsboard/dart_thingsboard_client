@@ -16,7 +16,7 @@ enum EntityType {
   WIDGET_TYPE,
   API_USAGE_STATE,
   TB_RESOURCE,
-  FIRMWARE
+  OTA_PACKAGE
 }
 
 EntityType entityTypeFromString(String value) {

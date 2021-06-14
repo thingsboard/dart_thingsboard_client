@@ -11,7 +11,7 @@ export 'edge_id.dart';
 export 'entity_id.dart';
 export 'entity_view_id.dart';
 export 'event_id.dart';
-export 'firmware_id.dart';
+export 'ota_package_id.dart';
 export 'has_uuid.dart';
 export 'rule_chain_id.dart';
 export 'rule_node_id.dart';

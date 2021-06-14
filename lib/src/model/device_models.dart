@@ -1,12 +1,11 @@
 import 'dart:math';
 
-import 'package:thingsboard_client/src/model/entity_models.dart';
-import 'package:thingsboard_client/src/model/id/entity_id.dart';
-
-import 'has_firmware.dart';
+import 'entity_models.dart';
+import 'id/entity_id.dart';
+import 'has_ota_package.dart';
 import 'id/dashboard_id.dart';
 import 'id/device_profile_id.dart';
-import 'id/firmware_id.dart';
+import 'id/ota_package_id.dart';
 import 'additional_info_based.dart';
 import 'base_data.dart';
 import 'has_name.dart';
@@ -378,7 +377,7 @@ class DeviceProfileData {
   }
 }
 
-class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId, HasFirmware {
+class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId, HasOtaPackage {
 
   TenantId? tenantId;
   String name;
@@ -392,8 +391,8 @@ class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId,
   RuleChainId? defaultRuleChainId;
   DashboardId? defaultDashboardId;
   String? defaultQueueName;
-  FirmwareId? firmwareId;
-  FirmwareId? softwareId;
+  OtaPackageId? firmwareId;
+  OtaPackageId? softwareId;
   DeviceProfileData profileData;
 
   DeviceProfile(this.name):
@@ -415,8 +414,8 @@ class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId,
         defaultRuleChainId = json['defaultRuleChainId'] != null ? RuleChainId.fromJson(json['defaultRuleChainId']) : null,
         defaultDashboardId = json['defaultDashboardId'] != null ? DashboardId.fromJson(json['defaultDashboardId']) : null,
         defaultQueueName = json['defaultQueueName'],
-        firmwareId = json['firmwareId'] != null ? FirmwareId.fromJson(json['firmwareId']) : null,
-        softwareId = json['softwareId'] != null ? FirmwareId.fromJson(json['softwareId']) : null,
+        firmwareId = json['firmwareId'] != null ? OtaPackageId.fromJson(json['firmwareId']) : null,
+        softwareId = json['softwareId'] != null ? OtaPackageId.fromJson(json['softwareId']) : null,
         profileData = DeviceProfileData.fromJson(json['profileData']),
         super.fromJson(json);
 
@@ -472,12 +471,12 @@ class DeviceProfile extends BaseData<DeviceProfileId> with HasName, HasTenantId,
   }
 
   @override
-  FirmwareId? getFirmwareId() {
+  OtaPackageId? getFirmwareId() {
     return firmwareId;
   }
 
   @override
-  FirmwareId? getSoftwareId() {
+  OtaPackageId? getSoftwareId() {
     return softwareId;
   }
 
@@ -744,7 +743,7 @@ class DeviceData {
   }
 }
 
-class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, HasCustomerId, HasFirmware {
+class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, HasCustomerId, HasOtaPackage {
 
   TenantId? tenantId;
   CustomerId? customerId;
@@ -752,8 +751,8 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
   String type;
   String? label;
   DeviceProfileId? deviceProfileId;
-  FirmwareId? firmwareId;
-  FirmwareId? softwareId;
+  OtaPackageId? firmwareId;
+  OtaPackageId? softwareId;
   DeviceData deviceData;
 
   Device(this.name, this.type): deviceData = DeviceData();
@@ -765,8 +764,8 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
         type = json['type'],
         label = json['label'],
         deviceProfileId = DeviceProfileId.fromJson(json['deviceProfileId']),
-        firmwareId = json['firmwareId'] != null ? FirmwareId.fromJson(json['firmwareId']) : null,
-        softwareId = json['softwareId'] != null ? FirmwareId.fromJson(json['softwareId']) : null,
+        firmwareId = json['firmwareId'] != null ? OtaPackageId.fromJson(json['firmwareId']) : null,
+        softwareId = json['softwareId'] != null ? OtaPackageId.fromJson(json['softwareId']) : null,
         deviceData = DeviceData.fromJson(json['deviceData']),
         super.fromJson(json);
 
@@ -813,12 +812,12 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
   }
 
   @override
-  FirmwareId? getFirmwareId() {
+  OtaPackageId? getFirmwareId() {
     return firmwareId;
   }
 
   @override
-  FirmwareId? getSoftwareId() {
+  OtaPackageId? getSoftwareId() {
     return softwareId;
   }
 

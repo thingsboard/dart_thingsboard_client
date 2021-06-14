@@ -62,6 +62,7 @@ Future<void> onUserLoaded() async {
         await fetchAlarmsExample();
         await countEntitiesExample();
         await queryEntitiesExample();
+        await fetchAuditLogsExample();
         // await deviceApiExample();
       } else if (tbClient.isCustomerUser()) {
         await fetchUsersExample();
@@ -334,6 +335,23 @@ Future<void> queryEntitiesExample() async {
     });
     devicesQuery = devicesQuery.next();
   } while (devices.hasNext);
+  print('**********************************************************************');
+}
+
+Future<void> fetchAuditLogsExample() async {
+  print('**********************************************************************');
+  print('*                    FETCH AUDIT LOGS EXAMPLE                        *');
+  print('**********************************************************************');
+
+  var pageLink = TimePageLink(10, 0, null, SortOrder('createdTime', Direction.DESC));
+  PageData<AuditLog> auditLogs;
+  var total = 0;
+  do {
+    auditLogs = await tbClient.getAuditLogService().getAuditLogs(pageLink);
+    total += auditLogs.data.length;
+    print('auditLogs: $auditLogs');
+    pageLink = pageLink.nextPageLink();
+  } while(auditLogs.hasNext && total <= 50);
   print('**********************************************************************');
 }
 

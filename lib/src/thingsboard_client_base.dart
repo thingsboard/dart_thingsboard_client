@@ -42,6 +42,7 @@ class ThingsboardClient {
   AlarmService? _alarmService;
   EntityQueryService? _entityQueryService;
   OAuth2Service? _oauth2service;
+  AuditLogService? _auditLogService;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
@@ -263,6 +264,20 @@ class ThingsboardClient {
     }
   }
 
+  Future<void> sendResetPasswordLink(String email, {RequestConfig? requestConfig}) async {
+    await post('/api/noauth/resetPasswordByEmail', data: email, options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<void> changePassword(String currentPassword, String newPassword, {RequestConfig? requestConfig}) async {
+    var changePasswordRequest = {
+      'currentPassword': currentPassword,
+      'newPassword': newPassword
+    };
+    var response = await post('/api/auth/changePassword', data: jsonEncode(changePasswordRequest), options: defaultHttpOptionsFromConfig(requestConfig));
+    var loginResponse = LoginResponse.fromJson(response.data);
+    await _setUserFromJwtToken(loginResponse.token, loginResponse.refreshToken, false);
+  }
+
   Future<void> refreshJwtToken({String? refreshToken, bool? notify, Dio? internalDio, bool interceptRefreshToken = false}) async {
     _refreshTokenPending = true;
     try {
@@ -375,5 +390,10 @@ class ThingsboardClient {
   OAuth2Service getOAuth2Service() {
     _oauth2service ??= OAuth2Service(this);
     return _oauth2service!;
+  }
+
+  AuditLogService getAuditLogService() {
+    _auditLogService ??= AuditLogService(this);
+    return _auditLogService!;
   }
 }

@@ -8,3 +8,4 @@ export 'tenant_service.dart';
 export 'user_service.dart';
 export 'alarm_service.dart';
 export 'entity_query_service.dart';
+export 'audit_log_service.dart';
