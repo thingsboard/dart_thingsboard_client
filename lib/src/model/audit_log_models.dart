@@ -68,7 +68,7 @@ class AuditLog extends BaseData<AuditLogId> {
   TenantId tenantId;
   CustomerId? customerId;
   EntityId entityId;
-  String entityName;
+  String? entityName;
   UserId userId;
   String userName;
   ActionType actionType;
