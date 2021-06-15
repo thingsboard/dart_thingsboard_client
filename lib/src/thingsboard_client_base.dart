@@ -265,7 +265,7 @@ class ThingsboardClient {
   }
 
   Future<void> sendResetPasswordLink(String email, {RequestConfig? requestConfig}) async {
-    await post('/api/noauth/resetPasswordByEmail', data: email, options: defaultHttpOptionsFromConfig(requestConfig));
+    await post('/api/noauth/resetPasswordByEmail', data: {'email': email}, options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
   Future<void> changePassword(String currentPassword, String newPassword, {RequestConfig? requestConfig}) async {
