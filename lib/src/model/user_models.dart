@@ -19,18 +19,21 @@ class AuthUser {
   late String customerId;
   late bool isPublic;
   late Authority authority;
+  late Map<String, dynamic> additionalData;
 
   AuthUser.fromJson(Map<String, dynamic> json) {
-    sub = json['sub'];
-    scopes = (json['scopes'] as List<dynamic>).cast<String>();
-    userId = json['userId'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
-    enabled = json['enabled'];
-    tenantId = json['tenantId'];
-    customerId = json['customerId'];
-    isPublic = json['isPublic'];
+    var claims = Map.of(json);
+    sub = claims.remove('sub');
+    scopes = (claims.remove('scopes') as List<dynamic>).cast<String>();
+    userId = claims.remove('userId');
+    firstName = claims.remove('firstName');
+    lastName = claims.remove('lastName');
+    enabled = claims.remove('enabled');
+    tenantId = claims.remove('tenantId');
+    customerId = claims.remove('customerId');
+    isPublic = claims.remove('isPublic');
     authority = scopes.isNotEmpty ? authorityFromString(scopes[0]) : Authority.ANONYMOUS;
+    additionalData = claims;
   }
 
   bool isSystemAdmin() {
@@ -48,7 +51,7 @@ class AuthUser {
   @override
   String toString() {
     return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, lastName: $lastName, enabled: $enabled, '
-        'tenantId: $tenantId, customerId: $customerId, isPublic: $isPublic, authority: ${authority.toShortString()}';
+        'tenantId: $tenantId, customerId: $customerId, isPublic: $isPublic, authority: ${authority.toShortString()}, additionalData: $additionalData';
   }
 }
 
