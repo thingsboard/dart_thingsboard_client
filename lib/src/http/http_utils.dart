@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import '../error/thingsboard_error.dart';
 import '../interceptor/interceptor_config.dart';
 
 class RequestConfig {
@@ -24,4 +25,16 @@ Options defaultHttpOptions({bool ignoreLoading = false,
     extra: interceptorConfig.toExtra()
   );
   return options;
+}
+
+Future<T?> nullIfNotFound<T>(Future<T?> Function(RequestConfig requestConfig) fetchFunction, {RequestConfig? requestConfig}) async {
+  try {
+    return await fetchFunction(requestConfig ?? RequestConfig(ignoreErrors: true));
+  } catch (e) {
+    if (e is ThingsboardError && e.errorCode == ThingsBoardErrorCode.itemNotFound) {
+      return null;
+    } else {
+      rethrow;
+    }
+  }
 }

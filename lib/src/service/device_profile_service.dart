@@ -30,10 +30,15 @@ class DeviceProfileService {
     return _tbClient.compute(parseDeviceProfilePageData, response.data!);
   }
 
-  Future<DeviceProfile> getDeviceProfile(String deviceProfileId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/deviceProfile/$deviceProfileId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return DeviceProfile.fromJson(response.data!);
+  Future<DeviceProfile?> getDeviceProfile(String deviceProfileId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/deviceProfile/$deviceProfileId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? DeviceProfile.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
   Future<DeviceProfile> saveDeviceProfile(DeviceProfile deviceProfile, {RequestConfig? requestConfig}) async {
@@ -59,10 +64,15 @@ class DeviceProfileService {
     return DeviceProfileInfo.fromJson(response.data!);
   }
 
-  Future<DeviceProfileInfo> getDeviceProfileInfo(String deviceProfileId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/deviceProfileInfo/$deviceProfileId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return DeviceProfileInfo.fromJson(response.data!);
+  Future<DeviceProfileInfo?> getDeviceProfileInfo(String deviceProfileId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/deviceProfileInfo/$deviceProfileId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? DeviceProfileInfo.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
   Future<PageData<DeviceProfileInfo>> getDeviceProfileInfos(PageLink pageLink,  {DeviceTransportType? transportType, RequestConfig? requestConfig}) async {

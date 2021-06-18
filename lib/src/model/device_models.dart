@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'relation_models.dart';
+import 'id/device_credentials_id.dart';
 import 'entity_models.dart';
 import 'id/entity_id.dart';
 import 'has_ota_package.dart';
@@ -823,8 +825,12 @@ class Device extends AdditionalInfoBased<DeviceId> with HasName, HasTenantId, Ha
 
   @override
   String toString() {
-    return 'Device{${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
-        'label: $label, deviceProfileId: $deviceProfileId, firmwareId: $firmwareId, softwareId: $softwareId, deviceData: $deviceData')}}';
+    return 'Device{${deviceString()}}';
+  }
+
+  String deviceString([String? toStringBody]) {
+    return '${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
+        'label: $label, deviceProfileId: $deviceProfileId, firmwareId: $firmwareId, softwareId: $softwareId, deviceData: $deviceData${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 }
 
@@ -838,4 +844,136 @@ class DeviceInfo extends Device {
         customerIsPublic = json['customerIsPublic'],
         deviceProfileName = json['deviceProfileName'],
         super.fromJson(json);
+
+
+  @override
+  String toString() {
+    return 'DeviceInfo{${deviceString('deviceProfileName: $deviceProfileName, customerTitle: $customerTitle, customerIsPublic: $customerIsPublic')}}';
+  }
+}
+
+class DeviceSearchQuery extends EntitySearchQuery {
+
+  List<String> deviceTypes;
+
+  DeviceSearchQuery({
+    required RelationsSearchParameters parameters,
+    required this.deviceTypes,
+    String? relationType
+  }): super(parameters: parameters, relationType: relationType);
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    json['deviceTypes'] = deviceTypes;
+    return json;
+  }
+
+  @override
+  String toString() {
+    return 'DeviceSearchQuery{${entitySearchQueryString('deviceTypes: $deviceTypes')}}';
+  }
+}
+
+class ClaimRequest {
+
+  String secretKey;
+
+  ClaimRequest({
+    required this.secretKey
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'secretKey': secretKey
+    };
+  }
+
+  @override
+  String toString() {
+    return 'ClaimRequest{secretKey: $secretKey}';
+  }
+
+}
+
+enum ClaimResponse {
+  SUCCESS,
+  FAILURE,
+  CLAIMED
+}
+
+ClaimResponse claimResponseFromString(String value) {
+  return ClaimResponse.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}
+
+extension ClaimResponseToString on ClaimResponse {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
+
+class ClaimResult {
+
+  Device device;
+  ClaimResponse response;
+
+  ClaimResult.fromJson(Map<String, dynamic> json):
+        device = Device.fromJson(json['device']),
+        response = claimResponseFromString(json['response']);
+
+  @override
+  String toString() {
+    return 'ClaimResult{device: $device, response: $response}';
+  }
+
+}
+
+enum DeviceCredentialsType {
+  ACCESS_TOKEN,
+  X509_CERTIFICATE,
+  MQTT_BASIC,
+  LWM2M_CREDENTIALS
+}
+
+DeviceCredentialsType deviceCredentialsTypeFromString(String value) {
+  return DeviceCredentialsType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+}
+
+extension DeviceCredentialsTypeToString on DeviceCredentialsType {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
+
+class DeviceCredentials extends BaseData<DeviceCredentialsId> {
+
+  DeviceId deviceId;
+  DeviceCredentialsType credentialsType;
+  String credentialsId;
+  String? credentialsValue;
+
+  DeviceCredentials.fromJson(Map<String, dynamic> json):
+        deviceId = DeviceId.fromJson(json['deviceId']),
+        credentialsType = deviceCredentialsTypeFromString(json['credentialsType']),
+        credentialsId = json['credentialsId'],
+        credentialsValue = json['credentialsValue'],
+        super.fromJson(json, (id) => DeviceCredentialsId(id));
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    json['deviceId'] = deviceId.toJson();
+    json['credentialsType'] = credentialsType.toShortString();
+    json['credentialsId'] = credentialsId;
+    if (credentialsValue != null) {
+      json['credentialsValue'] = credentialsValue;
+    }
+    return json;
+  }
+
+  @override
+  String toString() {
+    return 'DeviceCredentials{${baseDataString('deviceId: $deviceId, credentialsType: ${credentialsType.toShortString()}, '
+        'credentialsId: $credentialsId, credentialsValue: $credentialsValue')}}';
+  }
 }

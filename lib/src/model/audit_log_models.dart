@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:thingsboard_client/src/model/id/audit_log_id.dart';
 import 'package:thingsboard_client/src/model/id/customer_id.dart';
 import 'package:thingsboard_client/src/model/id/entity_id.dart';
@@ -93,6 +96,24 @@ class AuditLog extends BaseData<AuditLogId> {
   String toString() {
     return 'AuditLog{${baseDataString('tenantId: $tenantId, customerId: $customerId, entityId: $entityId, '
         'entityName: $entityName, userId: $userId, userName: $userName, actionType: $actionType, '
-        'actionData: $actionData, actionStatus: $actionStatus, actionFailureDetails: $actionFailureDetails')}}';
+        'actionData: ${actionDataToString()}, actionStatus: $actionStatus, actionFailureDetails: ${actionFailureDetailsToString()}')}}';
+  }
+
+  String actionDataToString() {
+    var actionDataStr = jsonEncode(actionData);
+    if (actionDataStr.length > 50) {
+      actionDataStr = actionDataStr.substring(0, min(50, actionDataStr.length)) + '...';
+    }
+    return actionDataStr;
+  }
+
+  String actionFailureDetailsToString() {
+    if (actionFailureDetails == null) {
+      return 'null';
+    }
+    if (actionFailureDetails!.length > 50) {
+      return actionFailureDetails!.substring(0, min(50, actionFailureDetails!.length)) + '...';
+    }
+    return actionFailureDetails!;
   }
 }

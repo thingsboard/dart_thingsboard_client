@@ -43,6 +43,10 @@ class ThingsboardClient {
   EntityQueryService? _entityQueryService;
   OAuth2Service? _oauth2service;
   AuditLogService? _auditLogService;
+  AdminService? _adminService;
+  ComponentDescriptorService? _componentDescriptorService;
+  EntityRelationService? _entityRelationService;
+  EntityViewService? _entityViewService;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
@@ -396,4 +400,25 @@ class ThingsboardClient {
     _auditLogService ??= AuditLogService(this);
     return _auditLogService!;
   }
+
+  AdminService getAdminService() {
+    _adminService ??= AdminService(this);
+    return _adminService!;
+  }
+
+  ComponentDescriptorService getComponentDescriptorService() {
+    _componentDescriptorService ??= ComponentDescriptorService(this);
+    return _componentDescriptorService!;
+  }
+
+  EntityRelationService getEntityRelationService() {
+    _entityRelationService ??= EntityRelationService(this);
+    return _entityRelationService!;
+  }
+
+  EntityViewService getEntityViewService() {
+    _entityViewService ??= EntityViewService(this);
+    return _entityViewService!;
+  }
+
 }

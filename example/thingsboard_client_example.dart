@@ -27,11 +27,11 @@ void onError(ThingsboardError error) {
 }
 
 void onLoadStarted() {
-  print('ON LOAD STARTED!');
+  // print('ON LOAD STARTED!');
 }
 
 void onLoadFinished() {
-  print('ON LOAD FINISHED!');
+  // print('ON LOAD FINISHED!');
 }
 
 bool loginExecuted = false;
@@ -43,13 +43,13 @@ Future<void> onUserLoaded() async {
       print('authUser: ${tbClient.getAuthUser()}');
       User? currentUser;
       try {
-        currentUser = await tbClient.getUserService().getUser(
-            tbClient.getAuthUser()!.userId!);
+        currentUser = await tbClient.getUserService().getUser();
       } catch(e) {
         await tbClient.logout();
       }
       print('currentUser: $currentUser');
       if (tbClient.isSystemAdmin()) {
+        await fetchSettingsExample();
         await fetchTenantsExample();
       } else if (tbClient.isTenantAdmin()) {
         await fetchUsersExample();
@@ -58,6 +58,7 @@ Future<void> onUserLoaded() async {
         await fetchTenantAssetsExample();
         await fetchTenantDevicesExample();
         await fetchCustomersExample();
+        await fetchDashboardParametersExample();
         await fetchTenantDashboardsExample();
         await fetchAlarmsExample();
         await countEntitiesExample();
@@ -123,6 +124,30 @@ Future<void> deviceApiExample() async {
   print('**********************************************************************');
 }
 
+Future<void> fetchSettingsExample() async {
+
+  print('**********************************************************************');
+  print('*                      FETCH SETTINGS EXAMPLE                         *');
+  print('**********************************************************************');
+
+  var settings = await tbClient.getAdminService().getAdminSettings('general');
+  print('General settings: ${settings?.generalSettings}');
+
+  settings = await tbClient.getAdminService().getAdminSettings('mail');
+  print('Email settings: ${settings?.mailServerSettings}');
+
+  settings = await tbClient.getAdminService().getAdminSettings('sms');
+  print('SMS settings: ${settings?.smsProviderConfiguration}');
+
+  var securitySettings = await tbClient.getAdminService().getSecuritySettings();
+  print('Security settings: $securitySettings');
+  
+  var updateMessage = await tbClient.getAdminService().checkUpdates();
+  print('Updates: $updateMessage');
+
+  print('**********************************************************************');
+}
+
 Future<void> fetchTenantsExample() async {
 
   print('**********************************************************************');
@@ -137,6 +162,20 @@ Future<void> fetchTenantsExample() async {
     print('tenants: $tenants');
     pageLink = pageLink.nextPageLink();
   } while(tenants.hasNext);
+  print('**********************************************************************');
+}
+
+Future<void> fetchDashboardParametersExample() async {
+
+  print('**********************************************************************');
+  print('*        FETCH DASHBOARD PARAMETERS EXAMPLE                           *');
+  print('**********************************************************************');
+
+  var serverTime = await tbClient.getDashboardService().getServerTime();
+  print('serverTime: $serverTime');
+  var maxDatapointsLimit = await tbClient.getDashboardService().getMaxDatapointsLimit();
+  print('maxDatapointsLimit: $maxDatapointsLimit');
+
   print('**********************************************************************');
 }
 

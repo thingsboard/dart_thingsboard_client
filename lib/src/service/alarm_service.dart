@@ -20,16 +20,26 @@ class AlarmService {
 
   AlarmService._internal(this._tbClient);
 
-  Future<Alarm> getAlarm(String alarmId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/alarm/$alarmId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Alarm.fromJson(response.data!);
+  Future<Alarm?> getAlarm(String alarmId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/alarm/$alarmId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+            return response.data != null ? Alarm.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<AlarmInfo> getAlarmInfo(String alarmId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/alarm/info/$alarmId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return AlarmInfo.fromJson(response.data!);
+  Future<AlarmInfo?> getAlarmInfo(String alarmId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/alarm/info/$alarmId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+            return response.data != null ? AlarmInfo.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
   Future<Alarm> saveAlarm(Alarm alarm, {RequestConfig? requestConfig}) async {

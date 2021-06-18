@@ -21,3 +21,5 @@ export 'tenant_profile_id.dart';
 export 'user_id.dart';
 export 'widget_type_id.dart';
 export 'widgets_bundle_id.dart';
+export 'admin_settings_id.dart';
+export 'component_descriptor_id.dart';

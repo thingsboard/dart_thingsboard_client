@@ -17,6 +17,18 @@ class DashboardService {
 
   DashboardService._internal(this._tbClient);
 
+  Future<int> getServerTime({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<int>('/api/dashboard/serverTime',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return response.data!;
+  }
+
+  Future<int> getMaxDatapointsLimit({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<int>('/api/dashboard/maxDatapointsLimit',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return response.data!;
+  }
+
   Future<PageData<DashboardInfo>> getTenantDashboards(PageLink pageLink,  {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();
     var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/dashboards', queryParameters: queryParams,
@@ -38,16 +50,26 @@ class DashboardService {
     return _tbClient.compute(parseDashboardInfoPageData, response.data!);
   }
 
-  Future<Dashboard> getDashboard(String dashboardId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/dashboard/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Dashboard.fromJson(response.data!);
+  Future<Dashboard?> getDashboard(String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/dashboard/$dashboardId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<DashboardInfo> getDashboardInfo(String dashboardId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/dashboard/info/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return DashboardInfo.fromJson(response.data!);
+  Future<DashboardInfo?> getDashboardInfo(String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/dashboard/info/$dashboardId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? DashboardInfo.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
   Future<Dashboard> saveDashboard(Dashboard dashboard, {RequestConfig? requestConfig}) async {
@@ -61,44 +83,81 @@ class DashboardService {
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
-  Future<Dashboard> assignDashboardToCustomer(String customerId, String dashboardId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/customer/$customerId/dashboard/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Dashboard.fromJson(response.data!);
+  Future<Dashboard?> assignDashboardToCustomer(String customerId, String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.post<Map<String, dynamic>>('/api/customer/$customerId/dashboard/$dashboardId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<void> unassignDashboardFromCustomer(String customerId, String dashboardId, {RequestConfig? requestConfig}) async {
-    await _tbClient.delete('/api/customer/$customerId/dashboard/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
+  Future<Dashboard?> unassignDashboardFromCustomer(String customerId, String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.delete<Map<String, dynamic>>('/api/customer/$customerId/dashboard/$dashboardId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+            return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<Dashboard> makeDashboardPublic(String dashboardId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/customer/public/dashboard/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Dashboard.fromJson(response.data!);
+  Future<Dashboard?> makeDashboardPublic(String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.post<Map<String, dynamic>>('/api/customer/public/dashboard/$dashboardId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<void> makeDashboardPrivate(String dashboardId, {RequestConfig? requestConfig}) async {
-    await _tbClient.delete('/api/customer/public/dashboard/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
+  Future<Dashboard?> makeDashboardPrivate(String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.delete<Map<String, dynamic>>('/api/customer/public/dashboard/$dashboardId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<Dashboard> updateDashboardCustomers(String dashboardId, Set<String> customerIds, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/dashboard/$dashboardId/customers', data: jsonEncode(customerIds),
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Dashboard.fromJson(response.data!);
+  Future<Dashboard?> updateDashboardCustomers(String dashboardId, Set<String> customerIds, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.post<Map<String, dynamic>>('/api/dashboard/$dashboardId/customers', data: jsonEncode(customerIds),
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<Dashboard> addDashboardCustomers(String dashboardId, Set<String> customerIds, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/dashboard/$dashboardId/customers/add', data: jsonEncode(customerIds),
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Dashboard.fromJson(response.data!);
+  Future<Dashboard?> addDashboardCustomers(String dashboardId, Set<String> customerIds, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.post<Map<String, dynamic>>('/api/dashboard/$dashboardId/customers/add', data: jsonEncode(customerIds),
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
-  Future<Dashboard> removeDashboardCustomers(String dashboardId, Set<String> customerIds, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/dashboard/$dashboardId/customers/remove', data: jsonEncode(customerIds),
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Dashboard.fromJson(response.data!);
+  Future<Dashboard?> removeDashboardCustomers(String dashboardId, Set<String> customerIds, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.post<Map<String, dynamic>>('/api/dashboard/$dashboardId/customers/remove', data: jsonEncode(customerIds),
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
   }
 
   Future<HomeDashboard?> getHomeDashboard({RequestConfig? requestConfig}) async {

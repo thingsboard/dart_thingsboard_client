@@ -10,6 +10,8 @@ PageData<User> parseUserPageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => User.fromJson(json));
 }
 
+const ACTIVATE_TOKEN_REGEX = '/api/noauth/activate?activateToken=';
+
 class UserService {
   final ThingsboardClient _tbClient;
 
@@ -40,7 +42,24 @@ class UserService {
     return _tbClient.compute(parseUserPageData, response.data!);
   }
 
-  Future<User> getUser(String userId, {RequestConfig? requestConfig}) async {
+  Future<User> getUser({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/auth/user',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return User.fromJson(response.data!);
+  }
+
+  Future<UserPasswordPolicy?> getUserPasswordPolicy({RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/noauth/userPasswordPolicy',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+            return response.data != null ? UserPasswordPolicy.fromJson(response.data!) : null;
+          },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<User> getUserById(String userId, {RequestConfig? requestConfig}) async {
     var response = await _tbClient.get<Map<String, dynamic>>('/api/user/$userId',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return User.fromJson(response.data!);
@@ -60,7 +79,7 @@ class UserService {
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
-  Future<String> getActivationLink(String userId,  {RequestConfig? requestConfig}) async {
+  Future<String> getActivationLink(String userId, {RequestConfig? requestConfig}) async {
     var options = defaultHttpOptionsFromConfig(requestConfig);
     options.responseType = ResponseType.plain;
     var response = await _tbClient.get<String>('/api/user/$userId/activationLink',
@@ -68,11 +87,22 @@ class UserService {
     return response.data!;
   }
 
+  Future<String> getActivateToken(String userId, {RequestConfig? requestConfig}) async {
+    var activationLink = await getActivationLink(userId, requestConfig: requestConfig);
+    return activationLink.substring(activationLink.lastIndexOf(ACTIVATE_TOKEN_REGEX) + ACTIVATE_TOKEN_REGEX.length);
+  }
+
+  Future<String> checkActivateToken(String userId, {RequestConfig? requestConfig}) async {
+    var activateToken = await getActivateToken(userId, requestConfig: requestConfig);
+    var options = defaultHttpOptionsFromConfig(requestConfig);
+    options.responseType = ResponseType.plain;
+    var response = await _tbClient.get<String>('/api/noauth/activate', queryParameters: {'activateToken': activateToken},
+        options: options);
+    return response.data!;
+  }
+
   Future<void> sendActivationEmail(String email, {RequestConfig? requestConfig}) async {
-    var queryParams = <String, dynamic>{
-      'email': email
-    };
-    await _tbClient.post('/api/user/sendActivationMail', queryParameters: queryParams,
+    await _tbClient.post('/api/user/sendActivationMail', queryParameters: {'email': email},
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
@@ -83,6 +113,22 @@ class UserService {
     }
     await _tbClient.post('/api/user/$userId/userCredentialsEnabled', queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<LoginResponse?> activateUser(String userId, String password, {bool sendActivationMail = true, RequestConfig? requestConfig}) async {
+    var activateToken = await getActivateToken(userId, requestConfig: requestConfig);
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.post<Map<String, dynamic>>('/api/noauth/activate', queryParameters: {'sendActivationMail': sendActivationMail},
+                data: jsonEncode({
+                  'activateToken': activateToken,
+                  'password': password
+                }),
+                options: defaultHttpOptionsFromConfig(requestConfig));
+            return response.data != null ? LoginResponse.fromJson(response.data!) : null;
+          },
+      requestConfig: requestConfig,
+    );
   }
 
 }

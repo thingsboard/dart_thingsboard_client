@@ -1,5 +1,5 @@
-import 'package:thingsboard_client/src/model/audit_log_models.dart';
-import 'package:thingsboard_client/src/model/page/page_data.dart';
+import '../model/audit_log_models.dart';
+import '../model/page/page_data.dart';
 
 import '../../thingsboard_client.dart';
 

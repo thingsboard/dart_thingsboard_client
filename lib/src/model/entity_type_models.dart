@@ -1,3 +1,5 @@
+import 'id/tenant_id.dart';
+
 enum EntityType {
   TENANT,
   TENANT_PROFILE,
@@ -26,5 +28,22 @@ EntityType entityTypeFromString(String value) {
 extension EntityTypeToString on EntityType {
   String toShortString() {
     return toString().split('.').last;
+  }
+}
+
+class EntitySubtype {
+
+  TenantId tenantId;
+  EntityType entityType;
+  String type;
+
+  EntitySubtype.fromJson(Map<String, dynamic> json):
+        tenantId = TenantId.fromJson(json['tenantId']),
+        entityType = entityTypeFromString(json['entityType']),
+        type = json['type'];
+
+  @override
+  String toString() {
+    return 'EntitySubtype{tenantId: $tenantId, entityType: $entityType, type: $type}';
   }
 }

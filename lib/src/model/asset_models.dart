@@ -1,3 +1,4 @@
+import 'relation_models.dart';
 import 'additional_info_based.dart';
 import 'has_customer_id.dart';
 import 'has_name.dart';
@@ -58,8 +59,12 @@ class Asset extends AdditionalInfoBased<AssetId> with HasName, HasTenantId, HasC
 
   @override
   String toString() {
-    return 'Asset{${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
-        'label: $label')}}';
+    return 'Asset{${assetString()}}';
+  }
+
+  String assetString([String? toStringBody]) {
+    return '${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
+        'label: $label${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 
 }
@@ -72,4 +77,33 @@ class AssetInfo extends Asset {
         customerTitle = json['customerTitle'],
         customerIsPublic = json['customerIsPublic'],
         super.fromJson(json);
+
+  @override
+  String toString() {
+    return 'AssetInfo{${assetString('customerTitle: $customerTitle, customerIsPublic: $customerIsPublic')}}';
+  }
+
+}
+
+class AssetSearchQuery extends EntitySearchQuery {
+
+  List<String> assetTypes;
+
+  AssetSearchQuery({
+    required RelationsSearchParameters parameters,
+    required this.assetTypes,
+    String? relationType
+  }): super(parameters: parameters, relationType: relationType);
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    json['assetTypes'] = assetTypes;
+    return json;
+  }
+
+  @override
+  String toString() {
+    return 'AssetSearchQuery{${entitySearchQueryString('assetTypes: $assetTypes')}}';
+  }
 }
