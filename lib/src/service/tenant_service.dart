@@ -21,6 +21,39 @@ class TenantService {
 
   TenantService._internal(this._tbClient);
 
+  Future<Tenant?> getTenant(String tenantId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/$tenantId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Tenant.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<TenantInfo?> getTenantInfo(String tenantId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/info/$tenantId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? TenantInfo.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<Tenant> saveTenant(Tenant tenant, {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post<Map<String, dynamic>>('/api/tenant', data: jsonEncode(tenant),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return Tenant.fromJson(response.data!);
+  }
+
+  Future<void> deleteTenant(String tenantId, {RequestConfig? requestConfig}) async {
+    await _tbClient.delete('/api/tenant/$tenantId',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
   Future<PageData<Tenant>> getTenants(PageLink pageLink,  {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();
     var response = await _tbClient.get<Map<String, dynamic>>('/api/tenants', queryParameters: queryParams,
@@ -33,29 +66,6 @@ class TenantService {
     var response = await _tbClient.get<Map<String, dynamic>>('/api/tenantInfos', queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseTenantInfoPageData, response.data!);
-  }
-
-  Future<Tenant> getTenant(String tenantId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/$tenantId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Tenant.fromJson(response.data!);
-  }
-
-  Future<TenantInfo> getTenantInfo(String tenantId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/info/$tenantId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return TenantInfo.fromJson(response.data!);
-  }
-
-  Future<Tenant> saveTenant(Tenant tenant, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/tenant', data: jsonEncode(tenant),
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Tenant.fromJson(response.data!);
-  }
-
-  Future<void> deleteTenant(String tenantId, {RequestConfig? requestConfig}) async {
-    await _tbClient.delete('/api/tenant/$tenantId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
 }

@@ -47,6 +47,10 @@ class ThingsboardClient {
   ComponentDescriptorService? _componentDescriptorService;
   EntityRelationService? _entityRelationService;
   EntityViewService? _entityViewService;
+  RuleChainService? _ruleChainService;
+  AttributeService? _attributeService;
+  TenantProfileService? _tenantProfileService;
+  WidgetService? _widgetService;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
@@ -419,6 +423,26 @@ class ThingsboardClient {
   EntityViewService getEntityViewService() {
     _entityViewService ??= EntityViewService(this);
     return _entityViewService!;
+  }
+
+  RuleChainService getRuleChainService() {
+    _ruleChainService ??= RuleChainService(this);
+    return _ruleChainService!;
+  }
+
+  AttributeService getAttributeService() {
+    _attributeService ??= AttributeService(this);
+    return _attributeService!;
+  }
+
+  TenantProfileService getTenantProfileService() {
+    _tenantProfileService ??= TenantProfileService(this);
+    return _tenantProfileService!;
+  }
+
+  WidgetService getWidgetService() {
+    _widgetService ??= WidgetService(this);
+    return _widgetService!;
   }
 
 }

@@ -13,3 +13,7 @@ export 'admin_service.dart';
 export 'component_descriptor_service.dart';
 export 'entity_relation_service.dart';
 export 'entity_view_service.dart';
+export 'rule_chain_service.dart';
+export 'attribute_service.dart';
+export 'tenant_profile_service.dart';
+export 'widget_service.dart';

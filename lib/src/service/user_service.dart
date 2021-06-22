@@ -21,9 +21,63 @@ class UserService {
 
   UserService._internal(this._tbClient);
 
+  Future<User?> getUserById(String userId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+            var response = await _tbClient.get<Map<String, dynamic>>('/api/user/$userId',
+                options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? User.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<bool> isUserTokenAccessEnabled({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<bool>('/api/user/tokenAccessEnabled',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return response.data!;
+  }
+
+  Future<LoginResponse?> getUserToken(String userId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>('/api/user/$userId/token',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? LoginResponse.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<User> saveUser(User user, {bool sendActivationMail = false, RequestConfig? requestConfig}) async {
+    var queryParams = <String, dynamic>{
+      'sendActivationMail': sendActivationMail
+    };
+    var response = await _tbClient.post<Map<String, dynamic>>('/api/user', queryParameters: queryParams, data: jsonEncode(user),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return User.fromJson(response.data!);
+  }
+
+  Future<void> sendActivationEmail(String email, {RequestConfig? requestConfig}) async {
+    await _tbClient.post('/api/user/sendActivationMail', queryParameters: {'email': email},
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<String> getActivationLink(String userId, {RequestConfig? requestConfig}) async {
+    var options = defaultHttpOptionsFromConfig(requestConfig);
+    options.responseType = ResponseType.plain;
+    var response = await _tbClient.get<String>('/api/user/$userId/activationLink',
+        options: options);
+    return response.data!;
+  }
+
+  Future<void> deleteUser(String userId, {RequestConfig? requestConfig}) async {
+    await _tbClient.delete('/api/user/$userId',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
   Future<PageData<User>> getUsers(PageLink pageLink,  {RequestConfig? requestConfig}) async {
-    var queryParams = pageLink.toQueryParameters();
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/users', queryParameters: queryParams,
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/users', queryParameters: pageLink.toQueryParameters(),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseUserPageData, response.data!);
   }
@@ -40,6 +94,15 @@ class UserService {
     var response = await _tbClient.get<Map<String, dynamic>>('/api/customer/$customerId/users', queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseUserPageData, response.data!);
+  }
+
+  Future<void> setUserCredentialsEnabled(String userId, {bool? userCredentialsEnabled, RequestConfig? requestConfig}) async {
+    var queryParams = <String, dynamic>{};
+    if (userCredentialsEnabled != null) {
+      queryParams['userCredentialsEnabled'] = userCredentialsEnabled;
+    }
+    await _tbClient.post('/api/user/$userId/userCredentialsEnabled', queryParameters: queryParams,
+        options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
   Future<User> getUser({RequestConfig? requestConfig}) async {
@@ -59,34 +122,6 @@ class UserService {
     );
   }
 
-  Future<User> getUserById(String userId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/user/$userId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return User.fromJson(response.data!);
-  }
-
-  Future<User> saveUser(User user, {bool sendActivationMail = false, RequestConfig? requestConfig}) async {
-    var queryParams = <String, dynamic>{
-      'sendActivationMail': sendActivationMail
-    };
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/user', queryParameters: queryParams, data: jsonEncode(user),
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return User.fromJson(response.data!);
-  }
-
-  Future<void> deleteUser(String userId, {RequestConfig? requestConfig}) async {
-    await _tbClient.delete('/api/user/$userId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-  }
-
-  Future<String> getActivationLink(String userId, {RequestConfig? requestConfig}) async {
-    var options = defaultHttpOptionsFromConfig(requestConfig);
-    options.responseType = ResponseType.plain;
-    var response = await _tbClient.get<String>('/api/user/$userId/activationLink',
-        options: options);
-    return response.data!;
-  }
-
   Future<String> getActivateToken(String userId, {RequestConfig? requestConfig}) async {
     var activationLink = await getActivationLink(userId, requestConfig: requestConfig);
     return activationLink.substring(activationLink.lastIndexOf(ACTIVATE_TOKEN_REGEX) + ACTIVATE_TOKEN_REGEX.length);
@@ -99,20 +134,6 @@ class UserService {
     var response = await _tbClient.get<String>('/api/noauth/activate', queryParameters: {'activateToken': activateToken},
         options: options);
     return response.data!;
-  }
-
-  Future<void> sendActivationEmail(String email, {RequestConfig? requestConfig}) async {
-    await _tbClient.post('/api/user/sendActivationMail', queryParameters: {'email': email},
-        options: defaultHttpOptionsFromConfig(requestConfig));
-  }
-
-  Future<void> setUserCredentialsEnabled(String userId, {bool? userCredentialsEnabled, RequestConfig? requestConfig}) async {
-    var queryParams = <String, dynamic>{};
-    if (userCredentialsEnabled != null) {
-      queryParams['userCredentialsEnabled'] = userCredentialsEnabled;
-    }
-    await _tbClient.post('/api/user/$userId/userCredentialsEnabled', queryParameters: queryParams,
-        options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
   Future<LoginResponse?> activateUser(String userId, String password, {bool sendActivationMail = true, RequestConfig? requestConfig}) async {

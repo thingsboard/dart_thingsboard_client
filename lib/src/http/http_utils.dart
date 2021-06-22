@@ -38,3 +38,16 @@ Future<T?> nullIfNotFound<T>(Future<T?> Function(RequestConfig requestConfig) fe
     }
   }
 }
+
+Future<bool> isSuccessful(Future<Response<dynamic>> Function(RequestConfig requestConfig) requestFunction, {RequestConfig? requestConfig}) async {
+  try {
+    var response = await requestFunction(requestConfig ?? RequestConfig(ignoreErrors: true));
+    if (response.statusCode != null) {
+      var seriesCode = response.statusCode! ~/ 100;
+      return seriesCode == 2;
+    }
+    return false;
+  } catch (e) {
+    return false;
+  }
+}

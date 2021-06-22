@@ -53,6 +53,8 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
   int maxUsers;
   int maxDashboards;
   int maxRuleChains;
+  int maxResourcesInBytes;
+  int maxOtaPackagesInBytes;
 
   String? transportTenantMsgRateLimit;
   String? transportTenantTelemetryMsgRateLimit;
@@ -69,8 +71,10 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
   int maxRuleNodeExecutionsPerMessage;
   int maxEmails;
   int maxSms;
+  int maxCreatedAlarms;
 
   int defaultStorageTtlDays;
+  int alarmsTtlDays;
 
   DefaultTenantProfileConfiguration():
         maxDevices = 0,
@@ -79,6 +83,8 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxUsers = 0,
         maxDashboards = 0,
         maxRuleChains = 0,
+        maxResourcesInBytes = 0,
+        maxOtaPackagesInBytes = 0,
         maxTransportMessages = 0,
         maxTransportDataPoints = 0,
         maxREExecutions = 0,
@@ -87,7 +93,9 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxRuleNodeExecutionsPerMessage = 0,
         maxEmails = 0,
         maxSms = 0,
-        defaultStorageTtlDays = 0;
+        maxCreatedAlarms = 0,
+        defaultStorageTtlDays = 0,
+        alarmsTtlDays = 0;
 
   @override
   TenantProfileType getType() {
@@ -101,6 +109,8 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxUsers = json['maxUsers'],
         maxDashboards = json['maxDashboards'],
         maxRuleChains = json['maxRuleChains'],
+        maxResourcesInBytes = json['maxResourcesInBytes'],
+        maxOtaPackagesInBytes = json['maxOtaPackagesInBytes'],
 
         transportTenantMsgRateLimit = json['transportTenantMsgRateLimit'],
         transportTenantTelemetryMsgRateLimit = json['transportTenantTelemetryMsgRateLimit'],
@@ -117,7 +127,9 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxRuleNodeExecutionsPerMessage = json['maxRuleNodeExecutionsPerMessage'],
         maxEmails = json['maxEmails'],
         maxSms = json['maxSms'],
-        defaultStorageTtlDays = json['defaultStorageTtlDays'];
+        maxCreatedAlarms = json['maxCreatedAlarms'],
+        defaultStorageTtlDays = json['defaultStorageTtlDays'],
+        alarmsTtlDays = json['alarmsTtlDays'];
 
   @override
   Map<String, dynamic> toJson() {
@@ -128,6 +140,8 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
     json['maxUsers'] = maxUsers;
     json['maxDashboards'] = maxDashboards;
     json['maxRuleChains'] = maxRuleChains;
+    json['maxResourcesInBytes'] = maxResourcesInBytes;
+    json['maxOtaPackagesInBytes'] = maxOtaPackagesInBytes;
     if (transportTenantMsgRateLimit != null) {
       json['transportTenantMsgRateLimit'] = transportTenantMsgRateLimit;
     }
@@ -155,13 +169,22 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
     json['maxRuleNodeExecutionsPerMessage'] = maxRuleNodeExecutionsPerMessage;
     json['maxEmails'] = maxEmails;
     json['maxSms'] = maxSms;
+    json['maxCreatedAlarms'] = maxCreatedAlarms;
     json['defaultStorageTtlDays'] = defaultStorageTtlDays;
+    json['alarmsTtlDays'] = alarmsTtlDays;
     return json;
   }
 
   @override
   String toString() {
-    return 'DefaultTenantProfileConfiguration{maxDevices: $maxDevices, maxAssets: $maxAssets, maxCustomers: $maxCustomers, maxUsers: $maxUsers, maxDashboards: $maxDashboards, maxRuleChains: $maxRuleChains, transportTenantMsgRateLimit: $transportTenantMsgRateLimit, transportTenantTelemetryMsgRateLimit: $transportTenantTelemetryMsgRateLimit, transportTenantTelemetryDataPointsRateLimit: $transportTenantTelemetryDataPointsRateLimit, transportDeviceMsgRateLimit: $transportDeviceMsgRateLimit, transportDeviceTelemetryMsgRateLimit: $transportDeviceTelemetryMsgRateLimit, transportDeviceTelemetryDataPointsRateLimit: $transportDeviceTelemetryDataPointsRateLimit, maxTransportMessages: $maxTransportMessages, maxTransportDataPoints: $maxTransportDataPoints, maxREExecutions: $maxREExecutions, maxJSExecutions: $maxJSExecutions, maxDPStorageDays: $maxDPStorageDays, maxRuleNodeExecutionsPerMessage: $maxRuleNodeExecutionsPerMessage, maxEmails: $maxEmails, maxSms: $maxSms, defaultStorageTtlDays: $defaultStorageTtlDays}';
+    return 'DefaultTenantProfileConfiguration{maxDevices: $maxDevices, maxAssets: $maxAssets, maxCustomers: $maxCustomers, maxUsers: $maxUsers, '
+        'maxDashboards: $maxDashboards, maxRuleChains: $maxRuleChains, maxResourcesInBytes: $maxResourcesInBytes, maxOtaPackagesInBytes: $maxOtaPackagesInBytes, '
+        'transportTenantMsgRateLimit: $transportTenantMsgRateLimit, transportTenantTelemetryMsgRateLimit: $transportTenantTelemetryMsgRateLimit, '
+        'transportTenantTelemetryDataPointsRateLimit: $transportTenantTelemetryDataPointsRateLimit, transportDeviceMsgRateLimit: $transportDeviceMsgRateLimit, '
+        'transportDeviceTelemetryMsgRateLimit: $transportDeviceTelemetryMsgRateLimit, transportDeviceTelemetryDataPointsRateLimit: $transportDeviceTelemetryDataPointsRateLimit, '
+        'maxTransportMessages: $maxTransportMessages, maxTransportDataPoints: $maxTransportDataPoints, maxREExecutions: $maxREExecutions, '
+        'maxJSExecutions: $maxJSExecutions, maxDPStorageDays: $maxDPStorageDays, maxRuleNodeExecutionsPerMessage: $maxRuleNodeExecutionsPerMessage, '
+        'maxEmails: $maxEmails, maxSms: $maxSms, maxCreatedAlarms: $maxCreatedAlarms, defaultStorageTtlDays: $defaultStorageTtlDays, alarmsTtlDays: $alarmsTtlDays}';
   }
 }
 

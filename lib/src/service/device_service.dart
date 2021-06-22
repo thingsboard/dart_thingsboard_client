@@ -197,4 +197,15 @@ class DeviceService {
     return DeviceCredentials.fromJson(response.data!);
   }
 
+  Future<void> handleOneWayDeviceRPCRequest(String deviceId, dynamic requestBody, {RequestConfig? requestConfig}) async {
+    await _tbClient.post('/api/plugins/rpc/oneway/$deviceId', data: jsonEncode(requestBody),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<dynamic> handleTwoWayDeviceRPCRequest(String deviceId, dynamic requestBody, {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post('/api/plugins/rpc/twoway/$deviceId', data: jsonEncode(requestBody),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return response.data;
+  }
+
 }

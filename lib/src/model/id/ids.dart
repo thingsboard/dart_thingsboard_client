@@ -23,3 +23,4 @@ export 'widget_type_id.dart';
 export 'widgets_bundle_id.dart';
 export 'admin_settings_id.dart';
 export 'component_descriptor_id.dart';
+export 'oauth2_client_registration_template_id.dart';
