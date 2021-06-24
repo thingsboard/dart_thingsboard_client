@@ -8,6 +8,7 @@ import 'http/http_utils.dart';
 import 'interceptor/http_interceptor.dart';
 import 'model/model.dart';
 import 'service/service.dart';
+import 'storage/storage.dart';
 
 typedef TbComputeCallback<Q, R> = FutureOr<R> Function(Q message);
 typedef TbCompute = Future<R> Function<Q, R>(TbComputeCallback<Q, R> callback, Q message);
@@ -20,6 +21,7 @@ typedef ErrorCallback = void Function(ThingsboardError error);
 TbCompute syncCompute = <Q,R>(TbComputeCallback<Q, R> callback, Q message) => Future.value(callback(message));
 
 class ThingsboardClient {
+  final String _apiEndpoint;
   final Dio _dio;
   final TbStorage? _storage;
   final UserLoadedCallback? _userLoadedCallback;
@@ -51,19 +53,23 @@ class ThingsboardClient {
   AttributeService? _attributeService;
   TenantProfileService? _tenantProfileService;
   WidgetService? _widgetService;
+  EdgeService? _edgeService;
+  ResourceService? _resourceService;
+  OtaPackageService? _otaPackageService;
+  TelemetryWebsocketService? _telemetryWebsocketService;
 
   factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
                                                  ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
                                                  LoadFinishedCallback? onLoadFinished, TbCompute? computeFunc}) {
     var dio = Dio();
     dio.options.baseUrl = apiEndpoint;
-    final tbClient = ThingsboardClient._internal(dio, storage, onUserLoaded, onError, onLoadStarted, onLoadFinished, computeFunc ?? syncCompute);
+    final tbClient = ThingsboardClient._internal(apiEndpoint, dio, storage, onUserLoaded, onError, onLoadStarted, onLoadFinished, computeFunc ?? syncCompute);
     dio.interceptors.clear();
     dio.interceptors.add(HttpInterceptor(dio, tbClient, tbClient._loadStarted, tbClient._loadFinished, tbClient._onError));
     return tbClient;
   }
 
-  ThingsboardClient._internal(this._dio, this._storage, this._userLoadedCallback, this._errorCallback, this._loadStartedCallback, this._loadFinishedCallback, this._computeFunc);
+  ThingsboardClient._internal(this._apiEndpoint, this._dio, this._storage, this._userLoadedCallback, this._errorCallback, this._loadStartedCallback, this._loadFinishedCallback, this._computeFunc);
 
   Future<void> _clearJwtToken() async {
     await _setUserFromJwtToken(null, null, true);
@@ -106,6 +112,9 @@ class ThingsboardClient {
   }
 
   void _userLoaded() {
+    if (_telemetryWebsocketService != null) {
+      _telemetryWebsocketService!.reset(true);
+    }
     if (_userLoadedCallback != null) {
       Future(() => _userLoadedCallback!());
     }
@@ -443,6 +452,26 @@ class ThingsboardClient {
   WidgetService getWidgetService() {
     _widgetService ??= WidgetService(this);
     return _widgetService!;
+  }
+
+  EdgeService getEdgeService() {
+    _edgeService ??= EdgeService(this);
+    return _edgeService!;
+  }
+
+  ResourceService getResourceService() {
+    _resourceService ??= ResourceService(this);
+    return _resourceService!;
+  }
+
+  OtaPackageService getOtaPackageService() {
+    _otaPackageService ??= OtaPackageService(this);
+    return _otaPackageService!;
+  }
+
+  TelemetryService getTelemetryService() {
+    _telemetryWebsocketService ??= TelemetryWebsocketService(this, _apiEndpoint);
+    return _telemetryWebsocketService!;
   }
 
 }

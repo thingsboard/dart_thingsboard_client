@@ -143,4 +143,34 @@ class EntityViewService {
     return response.data!.map((e) => EntitySubtype.fromJson(e)).toList();
   }
 
+  Future<EntityView?> assignEntityViewToEdge(String edgeId, String entityViewId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.post<Map<String, dynamic>>('/api/edge/$edgeId/entityView/$entityViewId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? EntityView.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<EntityView?> unassignEntityViewFromEdge(String edgeId, String entityViewId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.delete<Map<String, dynamic>>('/api/edge/$edgeId/entityView/$entityViewId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? EntityView.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<PageData<EntityView>> getEdgeEntityViews(String edgeId, PageLink pageLink,  {String type = '', RequestConfig? requestConfig}) async {
+    var queryParams = pageLink.toQueryParameters();
+    queryParams['type'] = type;
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/edge/$edgeId/entityViews', queryParameters: queryParams,
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseEntityViewPageData, response.data!);
+  }
+
 }

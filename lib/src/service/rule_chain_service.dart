@@ -9,6 +9,10 @@ PageData<RuleChain> parseRuleChainPageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => RuleChain.fromJson(json));
 }
 
+List<RuleChain> parseRuleChainsList(List<dynamic> json) {
+  return json.map((e) => RuleChain.fromJson(e)).toList();
+}
+
 class RuleChainService {
   final ThingsboardClient _tbClient;
 
@@ -113,6 +117,73 @@ class RuleChainService {
   Future<void> importRuleChains(RuleChainData ruleChainData, bool overwrite, {RequestConfig? requestConfig}) async {
     await _tbClient.post('/api/ruleChains/import', queryParameters: { 'overwrite': overwrite }, data: jsonEncode(ruleChainData),
         options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<RuleChain?> assignRuleChainToEdge(String edgeId, String ruleChainId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.post<Map<String, dynamic>>('/api/edge/$edgeId/ruleChain/$ruleChainId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? RuleChain.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<RuleChain?> unassignRuleChainFromEdge(String edgeId, String ruleChainId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.delete<Map<String, dynamic>>('/api/edge/$edgeId/ruleChain/$ruleChainId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? RuleChain.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<PageData<RuleChain>> getEdgeRuleChains(String edgeId, PageLink pageLink,  {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/edge/$edgeId/ruleChains', queryParameters: pageLink.toQueryParameters(),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseRuleChainPageData, response.data!);
+  }
+
+  Future<RuleChain?> setEdgeTemplateRootRuleChain(String ruleChainId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.post<Map<String, dynamic>>('/api/ruleChain/$ruleChainId/edgeTemplateRoot',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? RuleChain.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<RuleChain?> setAutoAssignToEdgeRuleChain(String ruleChainId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.post<Map<String, dynamic>>('/api/ruleChain/$ruleChainId/autoAssignToEdge',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? RuleChain.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<RuleChain?> unsetAutoAssignToEdgeRuleChain(String ruleChainId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.delete<Map<String, dynamic>>('/api/ruleChain/$ruleChainId/autoAssignToEdge',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? RuleChain.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<List<RuleChain>> getAutoAssignToEdgeRuleChains({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<dynamic>>('/api/ruleChain/autoAssignToEdgeRuleChains',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseRuleChainsList, response.data!);
   }
 
 }

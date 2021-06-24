@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:dio/dio.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 
 const thingsBoardApiEndpoint = 'http://localhost:8080';
-const localStorageFileName =  'tb_client_storage.json';
 const username = 'tenant@thingsboard.org';
 const password = 'tenant';
 
@@ -10,7 +13,7 @@ late ThingsboardClient tbClient;
 void main() async {
   try {
     tbClient = ThingsboardClient(thingsBoardApiEndpoint,
-                                 storage: LocalFileStorage(localStorageFileName),
+                                 storage: InMemoryStorage(),
                                  onUserLoaded: onUserLoaded,
                                  onError: onError,
                                  onLoadStarted: onLoadStarted,
@@ -64,7 +67,8 @@ Future<void> onUserLoaded() async {
         await countEntitiesExample();
         await queryEntitiesExample();
         await fetchAuditLogsExample();
-        // await deviceApiExample();
+        await fetchResourcesExample();
+        await fetchOtaPackagesExample();
       } else if (tbClient.isCustomerUser()) {
         await fetchUsersExample();
         await fetchDeviceProfileInfosExample();
@@ -98,30 +102,6 @@ Future<void> getOAuth2ClientsExample() async {
   var clients = await tbClient.getOAuth2Service().getOAuth2Clients();
   print('OAuth2 clients: $clients');
 
-}
-
-Future<void> deviceApiExample() async {
-  print('**********************************************************************');
-  print('*                        DEVICE API EXAMPLE                          *');
-  print('**********************************************************************');
-
-  var device = Device('My test device', 'default');
-  device.additionalInfo = {'description': 'My test device!'};
-  var savedDevice = await tbClient.getDeviceService().saveDevice(device);
-  print('savedDevice: $savedDevice');
-  var foundDevice = await tbClient.getDeviceService().getDeviceInfo(savedDevice.id!.id!);
-  print('foundDevice: $foundDevice');
-  await tbClient.getDeviceService().deleteDevice(savedDevice.id!.id!);
-  try {
-    await tbClient.getDeviceService().getDeviceInfo(savedDevice.id!.id!, requestConfig: RequestConfig(ignoreErrors: true));
-  } on ThingsboardError catch (e) {
-    if (e.errorCode == ThingsBoardErrorCode.itemNotFound) {
-      print('Success! Device not found!');
-    } else {
-      print('Failure!');
-    }
-  }
-  print('**********************************************************************');
 }
 
 Future<void> fetchSettingsExample() async {
@@ -391,6 +371,78 @@ Future<void> fetchAuditLogsExample() async {
     print('auditLogs: $auditLogs');
     pageLink = pageLink.nextPageLink();
   } while(auditLogs.hasNext && total <= 50);
+  print('**********************************************************************');
+}
+
+Future<void> fetchResourcesExample() async {
+  print('**********************************************************************');
+  print('*               FETCH RESOURCES EXAMPLE                              *');
+  print('**********************************************************************');
+
+  var pageLink = PageLink(10);
+  PageData<TbResourceInfo> resources;
+  do {
+    resources = await tbClient.getResourceService().getResources(pageLink);
+    print('resources: $resources');
+    pageLink = pageLink.nextPageLink();
+  } while(resources.hasNext);
+
+  if (resources.data.isNotEmpty) {
+    var resource = resources.data[0];
+    print('download resource with id: ${resource.id!.id}');
+    var responseBody = await tbClient.getResourceService().downloadResource(resource.id!.id!);
+    if (responseBody != null) {
+      var headers = Headers.fromMap(responseBody.headers);
+      var contentLength = headers[Headers.contentLengthHeader]?.first ?? '-1';
+      var contentType = headers[Headers.contentTypeHeader]?.first ?? '';
+      var contentDisposition = headers['content-disposition']?.first ?? '';
+      print('download resource contentLength: $contentLength');
+      print('download resource contentType: $contentType');
+      print('download resource contentDisposition: $contentDisposition');
+      var bytes = await responseBody.stream.toList();
+      bytes.forEach((bytes) {
+        var base64str = base64Encode(bytes);
+        print('download resource chunk length: ${bytes.length}');
+        print('download resource chunk bytes: [${base64str.substring(0, min(30, base64str.length))}...]');
+      });
+    }
+  }
+  print('**********************************************************************');
+}
+
+Future<void> fetchOtaPackagesExample() async {
+  print('**********************************************************************');
+  print('*               FETCH OTA PACKAGES EXAMPLE                           *');
+  print('**********************************************************************');
+
+  var pageLink = PageLink(10);
+  PageData<OtaPackageInfo> otaPackages;
+  do {
+    otaPackages = await tbClient.getOtaPackageService().getOtaPackages(pageLink);
+    print('otaPackages: $otaPackages');
+    pageLink = pageLink.nextPageLink();
+  } while(otaPackages.hasNext);
+
+  if (otaPackages.data.isNotEmpty) {
+    var otaPackage = otaPackages.data[0];
+    print('download ota package with id: ${otaPackage.id!.id}');
+    var responseBody = await tbClient.getOtaPackageService().downloadOtaPackage(otaPackage.id!.id!);
+    if (responseBody != null) {
+      var headers = Headers.fromMap(responseBody.headers);
+      var contentLength = headers[Headers.contentLengthHeader]?.first ?? '-1';
+      var contentType = headers[Headers.contentTypeHeader]?.first ?? '';
+      var contentDisposition = headers['content-disposition']?.first ?? '';
+      print('download ota package contentLength: $contentLength');
+      print('download ota package contentType: $contentType');
+      print('download ota package contentDisposition: $contentDisposition');
+      var bytes = await responseBody.stream.toList();
+      bytes.forEach((bytes) {
+        var base64str = base64Encode(bytes);
+        print('download ota package chunk length: ${bytes.length}');
+        print('download ota package chunk bytes: [${base64str.substring(0, min(30, base64str.length))}...]');
+      });
+    }
+  }
   print('**********************************************************************');
 }
 

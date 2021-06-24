@@ -4,6 +4,7 @@ import '../id/customer_id.dart';
 import '../entity_type_models.dart';
 import '../id/entity_id.dart';
 import '../relation_models.dart';
+import '../telemetry_models.dart';
 
 enum EntityFilterType {
   SINGLE_ENTITY,
@@ -1148,22 +1149,6 @@ class AlarmDataQuery extends AbstractDataQuery<AlarmDataPageLink> {
   @override
   String toString() {
     return 'AlarmDataQuery{${dataQueryString('alarmFields: $alarmFields')}}';
-  }
-}
-
-class TsValue {
-  final int ts;
-  final String value;
-
-  TsValue({required this.ts, required this.value});
-
-  TsValue.fromJson(Map<String, dynamic> json):
-        ts = json['ts'],
-        value =  json['value'];
-
-  @override
-  String toString() {
-    return 'TsValue{ts: $ts, value: $value}';
   }
 }
 

@@ -149,4 +149,34 @@ class AssetService {
     return response.data!.map((e) => EntitySubtype.fromJson(e)).toList();
   }
 
+  Future<Asset?> assignAssetToEdge(String edgeId, String assetId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.post<Map<String, dynamic>>('/api/edge/$edgeId/asset/$assetId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Asset.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<Asset?> unassignAssetFromEdge(String edgeId, String assetId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.delete<Map<String, dynamic>>('/api/edge/$edgeId/asset/$assetId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Asset.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<PageData<Asset>> getEdgeAssets(String edgeId, PageLink pageLink,  {String type = '', RequestConfig? requestConfig}) async {
+    var queryParams = pageLink.toQueryParameters();
+    queryParams['type'] = type;
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/edge/$edgeId/assets', queryParameters: queryParams,
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseAssetPageData, response.data!);
+  }
+
 }

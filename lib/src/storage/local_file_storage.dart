@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'model.dart';
+import 'storage.dart';
 
 class LocalFileStorage implements TbStorage {
 

@@ -183,23 +183,32 @@ class DashboardService {
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
-  Future<PageData<DashboardInfo>> getEdgeDashboards(String edgeId, PageLink pageLink,  {String type = '', RequestConfig? requestConfig}) async {
-    var queryParams = pageLink.toQueryParameters();
-    queryParams['type'] = type;
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/edge/$edgeId/dashboards', queryParameters: queryParams,
+  Future<Dashboard?> assignDashboadToEdge(String edgeId, String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.post<Map<String, dynamic>>('/api/edge/$edgeId/dashboard/$dashboardId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<Dashboard?> unassignDashboardFromEdge(String edgeId, String dashboardId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.delete<Map<String, dynamic>>('/api/edge/$edgeId/dashboard/$dashboardId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Dashboard.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<PageData<DashboardInfo>> getEdgeDashboards(String edgeId, PageLink pageLink,  {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/edge/$edgeId/dashboards', queryParameters: pageLink.toQueryParameters(),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseDashboardInfoPageData, response.data!);
-  }
-
-  Future<Dashboard> assignDashboardToEdge(String edgeId, String dashboardId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/edge/$edgeId/dashboard/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
-    return Dashboard.fromJson(response.data!);
-  }
-
-  Future<void> unassignDashboardFromEdge(String edgeId, String dashboardId, {RequestConfig? requestConfig}) async {
-    await _tbClient.delete('/api/edge/$edgeId/dashboard/$dashboardId',
-        options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
 }

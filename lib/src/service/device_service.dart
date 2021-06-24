@@ -208,4 +208,34 @@ class DeviceService {
     return response.data;
   }
 
+  Future<Device?> assignDeviceToEdge(String edgeId, String deviceId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.post<Map<String, dynamic>>('/api/edge/$edgeId/device/$deviceId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Device.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<Device?> unassignDeviceFromEdge(String edgeId, String deviceId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.delete<Map<String, dynamic>>('/api/edge/$edgeId/device/$deviceId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Device.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<PageData<Device>> getEdgeDevices(String edgeId, PageLink pageLink,  {String type = '', RequestConfig? requestConfig}) async {
+    var queryParams = pageLink.toQueryParameters();
+    queryParams['type'] = type;
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/edge/$edgeId/devices', queryParameters: queryParams,
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseDevicePageData, response.data!);
+  }
+
 }

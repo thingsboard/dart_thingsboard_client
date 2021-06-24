@@ -17,3 +17,7 @@ export 'rule_chain_service.dart';
 export 'attribute_service.dart';
 export 'tenant_profile_service.dart';
 export 'widget_service.dart';
+export 'edge_service.dart';
+export 'resource_service.dart';
+export 'ota_package_service.dart';
+export 'telemetry_websocket_service.dart';
