@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:thingsboard_client/thingsboard_client.dart';
+import 'example_utils.dart';
 
 const thingsBoardApiEndpoint = 'http://localhost:8080';
 const username = 'tenant@thingsboard.org';
@@ -10,58 +11,18 @@ late ThingsboardClient tbClient;
 
 void main() async {
   try {
-    tbClient = ThingsboardClient(thingsBoardApiEndpoint,
-        storage: InMemoryStorage(),
-        onUserLoaded: onUserLoaded,
-        onError: onError,
-        onLoadStarted: onLoadStarted,
-        onLoadFinished: onLoadFinished);
-    await tbClient.init();
+
+    tbClient = ThingsboardClient(thingsBoardApiEndpoint);
+
+    await tbClient.login(LoginRequest(username, password));
+
+    await simpleAttributesSubscriptionExample();
+    await entityDataQuerySubscriptionExample();
+    await entityDataQueryWithTimeseriesSubscriptionExample();
+
+    await tbClient.logout(requestConfig: RequestConfig(ignoreLoading: true, ignoreErrors: true));
+
   } catch (e, s) {
-    print('Error: $e');
-    print('Stack: $s');
-  }
-}
-
-void onError(ThingsboardError error) {
-  print('onError: error=$error');
-}
-
-void onLoadStarted() {
-  // print('ON LOAD STARTED!');
-}
-
-void onLoadFinished() {
-  // print('ON LOAD FINISHED!');
-}
-
-bool loginExecuted = false;
-
-Future<void> onUserLoaded() async {
-  try {
-    print('onUserLoaded: isAuthenticated=${tbClient.isAuthenticated()}');
-    if (tbClient.isAuthenticated()) {
-      print('authUser: ${tbClient.getAuthUser()}');
-      User? currentUser;
-      try {
-        currentUser = await tbClient.getUserService().getUser();
-      } catch(e) {
-        await tbClient.logout();
-      }
-      print('currentUser: $currentUser');
-      await simpleAttributesSubscriptionExample();
-      await entityDataQuerySubscriptionExample();
-      await entityDataQueryWithTimeseriesSubscriptionExample();
-      await tbClient.logout(requestConfig: RequestConfig(ignoreLoading: true, ignoreErrors: true));
-    } else {
-      if (!loginExecuted) {
-        loginExecuted = true;
-        await tbClient.login(
-            LoginRequest(username, password));
-      }
-    }
-  }
-  catch (e, s) {
     print('Error: $e');
     print('Stack: $s');
   }
@@ -235,9 +196,3 @@ Future<void> entityDataQueryWithTimeseriesSubscriptionExample() async {
   await tbClient.getDeviceService().deleteDevice(savedDevice.id!.id!);
   print('**********************************************************************');
 }
-
-const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-Random _rnd = Random();
-
-String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));

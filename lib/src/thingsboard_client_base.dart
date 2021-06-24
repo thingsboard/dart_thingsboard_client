@@ -23,7 +23,7 @@ TbCompute syncCompute = <Q,R>(TbComputeCallback<Q, R> callback, Q message) => Fu
 class ThingsboardClient {
   final String _apiEndpoint;
   final Dio _dio;
-  final TbStorage? _storage;
+  final TbStorage _storage;
   final UserLoadedCallback? _userLoadedCallback;
   final ErrorCallback? _errorCallback;
   final LoadStartedCallback? _loadStartedCallback;
@@ -69,7 +69,8 @@ class ThingsboardClient {
     return tbClient;
   }
 
-  ThingsboardClient._internal(this._apiEndpoint, this._dio, this._storage, this._userLoadedCallback, this._errorCallback, this._loadStartedCallback, this._loadFinishedCallback, this._computeFunc);
+  ThingsboardClient._internal(this._apiEndpoint, this._dio, TbStorage? storage, this._userLoadedCallback, this._errorCallback, this._loadStartedCallback, this._loadFinishedCallback, this._computeFunc):
+      _storage = storage ?? InMemoryStorage();
 
   Future<void> _clearJwtToken() async {
     await _setUserFromJwtToken(null, null, true);
@@ -80,19 +81,15 @@ class ThingsboardClient {
       _token = null;
       _refreshToken = null;
       _authUser = null;
-      if (_storage != null) {
-        await _storage!.deleteItem('jwt_token');
-        await _storage!.deleteItem('refresh_token');
-      }
+      await _storage.deleteItem('jwt_token');
+      await _storage.deleteItem('refresh_token');
     } else {
       _token = jwtToken;
       _refreshToken = refreshToken;
       var decodedToken = JwtDecoder.decode(jwtToken);
       _authUser = AuthUser.fromJson(decodedToken);
-      if (_storage != null) {
-        await _storage!.setItem('jwt_token', jwtToken);
-        await _storage!.setItem('refresh_token', refreshToken!);
-      }
+      await _storage.setItem('jwt_token', jwtToken);
+      await _storage.setItem('refresh_token', refreshToken!);
     }
     if (notify == true) {
       _userLoaded();
@@ -182,16 +179,12 @@ class ThingsboardClient {
 
   Future<void> init() async {
     try {
-      if (_storage != null) {
-        var jwtToken = await _storage!.getItem('jwt_token');
-        var refreshToken = await _storage!.getItem('refresh_token');
-        if (!_isTokenValid(jwtToken)) {
-          await refreshJwtToken(refreshToken: refreshToken, notify: true);
-        } else {
-          await _setUserFromJwtToken(jwtToken, refreshToken, true);
-        }
+      var jwtToken = await _storage.getItem('jwt_token');
+      var refreshToken = await _storage.getItem('refresh_token');
+      if (!_isTokenValid(jwtToken)) {
+        await refreshJwtToken(refreshToken: refreshToken, notify: true);
       } else {
-        await _clearJwtToken();
+        await _setUserFromJwtToken(jwtToken, refreshToken, true);
       }
     }
     catch (e) {

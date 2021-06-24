@@ -4,8 +4,7 @@ const thingsBoardApiEndpoint = 'http://localhost:8080';
 
 void main() async {
   try {
-    var tbClient = ThingsboardClient(
-        thingsBoardApiEndpoint, storage: InMemoryStorage());
+    var tbClient = ThingsboardClient(thingsBoardApiEndpoint);
     await tbClient.init();
     await tbClient.login(LoginRequest('tenant@thingsboard.org', 'tenant'));
 
