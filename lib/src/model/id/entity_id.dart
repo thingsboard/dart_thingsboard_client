@@ -1,5 +1,4 @@
-import 'package:thingsboard_client/src/model/id/ota_package_id.dart';
-
+import 'ota_package_id.dart';
 import 'alarm_id.dart';
 import 'api_usage_state_id.dart';
 import 'asset_id.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:thingsboard_client/src/http/http_utils.dart';
-import 'package:thingsboard_client/src/model/model.dart';
+import '../http/http_utils.dart';
+import '../model/model.dart';
 
 import '../thingsboard_client_base.dart';
 
