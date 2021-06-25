@@ -1,4 +1,4 @@
-import 'package:thingsboard_client/src/model/id/entity_id.dart';
+import 'id/entity_id.dart';
 
 import 'base_data.dart';
 import 'id/event_id.dart';

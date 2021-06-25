@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:thingsboard_client/src/model/id/audit_log_id.dart';
-import 'package:thingsboard_client/src/model/id/customer_id.dart';
-import 'package:thingsboard_client/src/model/id/entity_id.dart';
+import 'id/audit_log_id.dart';
+import 'id/customer_id.dart';
+import 'id/entity_id.dart';
 
 import 'base_data.dart';
 import 'id/tenant_id.dart';
