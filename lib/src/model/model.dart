@@ -39,3 +39,4 @@ export 'widgets_bundle_model.dart';
 export 'widget_models.dart';
 export 'edge_models.dart';
 export 'resource_models.dart';
+export 'rpc_models.dart';

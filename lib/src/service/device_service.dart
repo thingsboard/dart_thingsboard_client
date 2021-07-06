@@ -12,6 +12,10 @@ PageData<Device> parseDevicePageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => Device.fromJson(json));
 }
 
+PageData<Rpc> parseRpcPageData(Map<String, dynamic> json) {
+  return PageData.fromJson(json, (json) => Rpc.fromJson(json));
+}
+
 class DeviceService {
   final ThingsboardClient _tbClient;
 
@@ -206,6 +210,30 @@ class DeviceService {
     var response = await _tbClient.post('/api/plugins/rpc/twoway/$deviceId', data: jsonEncode(requestBody),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data;
+  }
+
+  Future<Rpc?> getPersistedRpc(String rpcId, {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>('/api/plugins/rpc/persisted/$rpcId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Rpc.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<PageData<Rpc>> getPersistedRpcByDevice(String deviceId, RpcStatus rpcStatus, PageLink pageLink, {RequestConfig? requestConfig}) async {
+    var queryParams = pageLink.toQueryParameters();
+    queryParams['rpcStatus'] = rpcStatus.toShortString();
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/plugins/rpc/persisted/$deviceId', queryParameters: queryParams,
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseRpcPageData, response.data!);
+  }
+
+  Future<void> deletePersistedRpc(String rpcId, {RequestConfig? requestConfig}) async {
+    await _tbClient.delete('/api/plugins/rpc/persisted/$rpcId',
+        options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
   Future<Device?> assignDeviceToEdge(String edgeId, String deviceId, {RequestConfig? requestConfig}) async {
