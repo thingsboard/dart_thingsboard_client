@@ -144,6 +144,10 @@ class ThingsboardClient {
           tbError = data;
         } else if (data is Map<String, dynamic>) {
           tbError = ThingsboardError.fromJson(data);
+        } else if (data is String) {
+          try {
+            tbError = ThingsboardError.fromJson(jsonDecode(data));
+          } catch (_) {}
         }
       } else if (error.error != null) {
         if (error.error is ThingsboardError) {
