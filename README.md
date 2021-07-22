@@ -1,4 +1,4 @@
-ThingsBoard API client library for Dart developers.
+ThingsBoard API client library for Dart developers. It's compatible with TB 3.3.0.
 
 ## Usage
 
