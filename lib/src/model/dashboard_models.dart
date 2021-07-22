@@ -13,6 +13,8 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
   String title;
   String? image;
   Set<ShortCustomerInfo> assignedCustomers;
+  bool? mobileHide;
+  int? mobileOrder;
 
   DashboardInfo(this.title): assignedCustomers = {};
 
@@ -22,6 +24,8 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
         image = json['image'],
         assignedCustomers = json['assignedCustomers'] != null ?
                  (json['assignedCustomers'] as List<dynamic>).map((e) => ShortCustomerInfo.fromJson(e)).toSet() : {},
+        mobileHide = json['mobileHide'],
+        mobileOrder = json['mobileOrder'],
         super.fromJson(json);
 
   @override
@@ -35,6 +39,12 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
       json['image'] = image;
     }
     json['assignedCustomers'] = assignedCustomers.map((e) => e.toJson()).toList();
+    if (mobileHide != null) {
+      json['mobileHide'] = mobileHide;
+    }
+    if (mobileOrder != null) {
+      json['mobileOrder'] = mobileOrder;
+    }
     return json;
   }
 
@@ -54,7 +64,8 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
   }
 
   String dashboardInfoString([String? toStringBody]) {
-    return '${baseDataString('tenantId: $tenantId, title: $title, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, assignedCustomers: $assignedCustomers${toStringBody != null ? ', ' + toStringBody : ''}')}';
+    return '${baseDataString('tenantId: $tenantId, title: $title, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, '
+        'mobileHide: $mobileHide, mobileOrder: $mobileOrder, assignedCustomers: $assignedCustomers${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 }
 
