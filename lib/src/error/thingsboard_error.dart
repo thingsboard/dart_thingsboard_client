@@ -15,7 +15,7 @@ abstract class ThingsBoardErrorCode {
 }
 
 int httpStatusToThingsboardErrorCode(int status) {
-  switch(status) {
+  switch (status) {
     case HttpStatus.unauthorized:
       return ThingsBoardErrorCode.authentication;
     case HttpStatus.forbidden:
@@ -38,12 +38,17 @@ class ThingsboardError implements Exception {
   String? message;
   int? errorCode;
   int? status;
-  dynamic? error;
+  dynamic error;
 
-  ThingsboardError({this.message, this.errorCode, this.status, this.refreshTokenPending, this.error});
+  ThingsboardError(
+      {this.message,
+      this.errorCode,
+      this.status,
+      this.refreshTokenPending,
+      this.error});
 
-  ThingsboardError.fromJson(Map<String, dynamic> json):
-        message = json['message'],
+  ThingsboardError.fromJson(Map<String, dynamic> json)
+      : message = json['message'],
         errorCode = json['errorCode'],
         status = json['status'];
 
@@ -55,7 +60,8 @@ class ThingsboardError implements Exception {
 
   @override
   String toString() {
-    var msg = 'ThingsboardError: message: [$message], errorCode: $errorCode, status: $status';
+    var msg =
+        'ThingsboardError: message: [$message], errorCode: $errorCode, status: $status';
     if (_stackTrace != null) {
       msg += '\n$_stackTrace';
     }

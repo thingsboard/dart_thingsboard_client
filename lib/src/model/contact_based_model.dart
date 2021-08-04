@@ -2,8 +2,8 @@ import 'additional_info_based.dart';
 import 'has_name.dart';
 import 'id/has_uuid.dart';
 
-abstract class ContactBased<T extends HasUuid> extends AdditionalInfoBased<T> with HasName {
-
+abstract class ContactBased<T extends HasUuid> extends AdditionalInfoBased<T>
+    with HasName {
   String? country;
   String? state;
   String? city;
@@ -15,8 +15,8 @@ abstract class ContactBased<T extends HasUuid> extends AdditionalInfoBased<T> wi
 
   ContactBased();
 
-  ContactBased.fromJson(Map<String, dynamic> json):
-        country = json['country'],
+  ContactBased.fromJson(Map<String, dynamic> json)
+      : country = json['country'],
         state = json['state'],
         city = json['city'],
         address = json['address'],

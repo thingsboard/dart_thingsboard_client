@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class DashboardId extends EntityId {
-
   DashboardId(String id) : super(EntityType.DASHBOARD, id);
 
   @override

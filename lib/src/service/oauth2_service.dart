@@ -5,7 +5,8 @@ import 'package:dio/dio.dart';
 import '../model/oauth2_models.dart';
 import '../../thingsboard_client.dart';
 
-List<OAuth2ClientRegistrationTemplate> parseOauth2ClientRegistrationTemplates(List<dynamic> json) {
+List<OAuth2ClientRegistrationTemplate> parseOauth2ClientRegistrationTemplates(
+    List<dynamic> json) {
   return json.map((e) => OAuth2ClientRegistrationTemplate.fromJson(e)).toList();
 }
 
@@ -18,7 +19,10 @@ class OAuth2Service {
 
   OAuth2Service._internal(this._tbClient);
 
-  Future<List<OAuth2ClientInfo>> getOAuth2Clients({String? pkgName, PlatformType? platform, RequestConfig? requestConfig}) async {
+  Future<List<OAuth2ClientInfo>> getOAuth2Clients(
+      {String? pkgName,
+      PlatformType? platform,
+      RequestConfig? requestConfig}) async {
     var queryParams = <String, dynamic>{};
     if (pkgName != null) {
       queryParams['pkgName'] = pkgName;
@@ -26,37 +30,53 @@ class OAuth2Service {
     if (platform != null) {
       queryParams['platform'] = platform.toShortString();
     }
-    var response = await _tbClient.post<List<dynamic>>('/api/noauth/oauth2Clients',
+    var response = await _tbClient.post<List<dynamic>>(
+        '/api/noauth/oauth2Clients',
         queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data!.map((e) => OAuth2ClientInfo.fromJson(e)).toList();
   }
 
-  Future<OAuth2ClientRegistrationTemplate> saveClientRegistrationTemplate(OAuth2ClientRegistrationTemplate clientRegistrationTemplate, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/oauth2/config/template', data: jsonEncode(clientRegistrationTemplate),
+  Future<OAuth2ClientRegistrationTemplate> saveClientRegistrationTemplate(
+      OAuth2ClientRegistrationTemplate clientRegistrationTemplate,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post<Map<String, dynamic>>(
+        '/api/oauth2/config/template',
+        data: jsonEncode(clientRegistrationTemplate),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return OAuth2ClientRegistrationTemplate.fromJson(response.data!);
   }
 
-  Future<void> deleteClientRegistrationTemplate(String oAuth2ClientRegistrationTemplateId, {RequestConfig? requestConfig}) async {
-    await _tbClient.delete('/api/oauth2/config/template/$oAuth2ClientRegistrationTemplateId',
+  Future<void> deleteClientRegistrationTemplate(
+      String oAuth2ClientRegistrationTemplateId,
+      {RequestConfig? requestConfig}) async {
+    await _tbClient.delete(
+        '/api/oauth2/config/template/$oAuth2ClientRegistrationTemplateId',
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
-  Future<List<OAuth2ClientRegistrationTemplate>> getClientRegistrationTemplates({RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<List<dynamic>>('/api/oauth2/config/template',
+  Future<List<OAuth2ClientRegistrationTemplate>> getClientRegistrationTemplates(
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<dynamic>>(
+        '/api/oauth2/config/template',
         options: defaultHttpOptionsFromConfig(requestConfig));
-    return _tbClient.compute(parseOauth2ClientRegistrationTemplates, response.data!);
+    return _tbClient.compute(
+        parseOauth2ClientRegistrationTemplates, response.data!);
   }
 
-  Future<OAuth2Info> getCurrentOAuth2Info({RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/oauth2/config',
+  Future<OAuth2Info> getCurrentOAuth2Info(
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/oauth2/config',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return OAuth2Info.fromJson(response.data!);
   }
 
-  Future<OAuth2Info> saveOAuth2Info(OAuth2Info oAuth2Info, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/oauth2/config', data: jsonEncode(oAuth2Info),
+  Future<OAuth2Info> saveOAuth2Info(OAuth2Info oAuth2Info,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post<Map<String, dynamic>>(
+        '/api/oauth2/config',
+        data: jsonEncode(oAuth2Info),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return OAuth2Info.fromJson(response.data!);
   }
@@ -68,6 +88,4 @@ class OAuth2Service {
         options: options);
     return response.data!;
   }
-
-
 }

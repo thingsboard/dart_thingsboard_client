@@ -15,7 +15,6 @@ void main() async {
     print('currentUserDetails: $currentUserDetails');
 
     await tbClient.logout();
-
   } catch (e, s) {
     print('Error: $e');
     print('Stack: $s');

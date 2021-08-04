@@ -3,15 +3,14 @@ import 'id/oauth2_client_registration_template_id.dart';
 import 'additional_info_based.dart';
 
 class OAuth2ClientInfo {
-
   final String name;
   final String? icon;
   final String url;
 
-  OAuth2ClientInfo.fromJson(Map<String, dynamic> json):
-        name = json['name'],
-        icon =  json['icon'],
-        url =  json['url'];
+  OAuth2ClientInfo.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        icon = json['icon'],
+        url = json['url'];
 
   @override
   String toString() {
@@ -19,14 +18,11 @@ class OAuth2ClientInfo {
   }
 }
 
-enum PlatformType {
-  WEB,
-  ANDROID,
-  IOS
-}
+enum PlatformType { WEB, ANDROID, IOS }
 
 PlatformType platformTypeFromString(String value) {
-  return PlatformType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return PlatformType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension PlatformTypeToString on PlatformType {
@@ -35,15 +31,11 @@ extension PlatformTypeToString on PlatformType {
   }
 }
 
-enum MapperType {
-  BASIC,
-  CUSTOM,
-  GITHUB,
-  APPLE
-}
+enum MapperType { BASIC, CUSTOM, GITHUB, APPLE }
 
 MapperType mapperTypeFromString(String value) {
-  return MapperType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return MapperType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension MapperTypeToString on MapperType {
@@ -52,14 +44,11 @@ extension MapperTypeToString on MapperType {
   }
 }
 
-enum TenantNameStrategyType {
-  DOMAIN,
-  EMAIL,
-  CUSTOM
-}
+enum TenantNameStrategyType { DOMAIN, EMAIL, CUSTOM }
 
 TenantNameStrategyType tenantNameStrategyTypeFromString(String value) {
-  return TenantNameStrategyType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return TenantNameStrategyType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension TenantNameStrategyTypeToString on TenantNameStrategyType {
@@ -69,7 +58,6 @@ extension TenantNameStrategyTypeToString on TenantNameStrategyType {
 }
 
 class OAuth2BasicMapperConfig {
-
   String emailAttributeKey;
   String? firstNameAttributeKey;
   String? lastNameAttributeKey;
@@ -79,22 +67,22 @@ class OAuth2BasicMapperConfig {
   String? defaultDashboardName;
   bool? alwaysFullScreen;
 
-  OAuth2BasicMapperConfig({
-    required this.emailAttributeKey,
-    required this.tenantNameStrategy,
-    this.firstNameAttributeKey,
-    this.lastNameAttributeKey,
-    this.tenantNamePattern,
-    this.customerNamePattern,
-    this.defaultDashboardName,
-    this.alwaysFullScreen
-  });
+  OAuth2BasicMapperConfig(
+      {required this.emailAttributeKey,
+      required this.tenantNameStrategy,
+      this.firstNameAttributeKey,
+      this.lastNameAttributeKey,
+      this.tenantNamePattern,
+      this.customerNamePattern,
+      this.defaultDashboardName,
+      this.alwaysFullScreen});
 
-  OAuth2BasicMapperConfig.fromJson(Map<String, dynamic> json):
-        emailAttributeKey = json['emailAttributeKey'],
+  OAuth2BasicMapperConfig.fromJson(Map<String, dynamic> json)
+      : emailAttributeKey = json['emailAttributeKey'],
         firstNameAttributeKey = json['firstNameAttributeKey'],
         lastNameAttributeKey = json['lastNameAttributeKey'],
-        tenantNameStrategy = tenantNameStrategyTypeFromString(json['tenantNameStrategy']),
+        tenantNameStrategy =
+            tenantNameStrategyTypeFromString(json['tenantNameStrategy']),
         tenantNamePattern = json['tenantNamePattern'],
         customerNamePattern = json['customerNamePattern'],
         defaultDashboardName = json['defaultDashboardName'],
@@ -133,29 +121,22 @@ class OAuth2BasicMapperConfig {
 }
 
 class OAuth2CustomMapperConfig {
-
   String url;
   String? username;
   String? password;
   bool? sendToken;
 
-  OAuth2CustomMapperConfig({
-    required this.url,
-    this.username,
-    this.password,
-    this.sendToken
-  });
+  OAuth2CustomMapperConfig(
+      {required this.url, this.username, this.password, this.sendToken});
 
-  OAuth2CustomMapperConfig.fromJson(Map<String, dynamic> json):
-        url = json['url'],
+  OAuth2CustomMapperConfig.fromJson(Map<String, dynamic> json)
+      : url = json['url'],
         username = json['username'],
         password = json['password'],
         sendToken = json['sendToken'];
 
   Map<String, dynamic> toJson() {
-    var json = <String, dynamic>{
-      'url': url
-    };
+    var json = <String, dynamic>{'url': url};
     if (username != null) {
       json['username'] = username;
     }
@@ -175,25 +156,29 @@ class OAuth2CustomMapperConfig {
 }
 
 class OAuth2MapperConfig {
-
   bool allowUserCreation;
   bool activateUser;
   MapperType type;
   OAuth2BasicMapperConfig? basic;
   OAuth2CustomMapperConfig? custom;
 
-  OAuth2MapperConfig({required this.allowUserCreation,
-                      required this.activateUser,
-                      required this.type,
-                      this.basic,
-                      this.custom});
+  OAuth2MapperConfig(
+      {required this.allowUserCreation,
+      required this.activateUser,
+      required this.type,
+      this.basic,
+      this.custom});
 
-  OAuth2MapperConfig.fromJson(Map<String, dynamic> json):
-        allowUserCreation = json['allowUserCreation'],
+  OAuth2MapperConfig.fromJson(Map<String, dynamic> json)
+      : allowUserCreation = json['allowUserCreation'],
         activateUser = json['activateUser'],
         type = mapperTypeFromString(json['type']),
-        basic = json['basic'] != null ? OAuth2BasicMapperConfig.fromJson(json['basic']) : null,
-        custom = json['custom'] != null ? OAuth2CustomMapperConfig.fromJson(json['custom']) : null;
+        basic = json['basic'] != null
+            ? OAuth2BasicMapperConfig.fromJson(json['basic'])
+            : null,
+        custom = json['custom'] != null
+            ? OAuth2CustomMapperConfig.fromJson(json['custom'])
+            : null;
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
@@ -209,11 +194,11 @@ class OAuth2MapperConfig {
     }
     return json;
   }
-
 }
 
-class OAuth2ClientRegistrationTemplate extends AdditionalInfoBased<OAuth2ClientRegistrationTemplateId> with HasName {
-
+class OAuth2ClientRegistrationTemplate
+    extends AdditionalInfoBased<OAuth2ClientRegistrationTemplateId>
+    with HasName {
   String providerId;
   OAuth2MapperConfig mapperConfig;
   String authorizationUri;
@@ -228,24 +213,23 @@ class OAuth2ClientRegistrationTemplate extends AdditionalInfoBased<OAuth2ClientR
   String? loginButtonLabel;
   String? helpLink;
 
-  OAuth2ClientRegistrationTemplate({
-    required this.providerId,
-    required this.mapperConfig,
-    required this.authorizationUri,
-    required this.accessTokenUri,
-    required this.scope,
-    required this.userNameAttributeName,
-    required this.clientAuthenticationMethod,
-    this.userInfoUri,
-    this.jwkSetUri,
-    this.comment,
-    this.loginButtonIcon,
-    this.loginButtonLabel,
-    this.helpLink
-  });
+  OAuth2ClientRegistrationTemplate(
+      {required this.providerId,
+      required this.mapperConfig,
+      required this.authorizationUri,
+      required this.accessTokenUri,
+      required this.scope,
+      required this.userNameAttributeName,
+      required this.clientAuthenticationMethod,
+      this.userInfoUri,
+      this.jwkSetUri,
+      this.comment,
+      this.loginButtonIcon,
+      this.loginButtonLabel,
+      this.helpLink});
 
-  OAuth2ClientRegistrationTemplate.fromJson(Map<String, dynamic> json):
-        providerId = json['providerId'],
+  OAuth2ClientRegistrationTemplate.fromJson(Map<String, dynamic> json)
+      : providerId = json['providerId'],
         mapperConfig = OAuth2MapperConfig.fromJson(json['mapperConfig']),
         authorizationUri = json['authorizationUri'],
         accessTokenUri = json['accessTokenUri'],
@@ -305,14 +289,11 @@ class OAuth2ClientRegistrationTemplate extends AdditionalInfoBased<OAuth2ClientR
   }
 }
 
-enum SchemeType {
-  HTTP,
-  HTTPS,
-  MIXED
-}
+enum SchemeType { HTTP, HTTPS, MIXED }
 
 SchemeType schemeTypeFromString(String value) {
-  return SchemeType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return SchemeType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension SchemeTypeToString on SchemeType {
@@ -322,24 +303,17 @@ extension SchemeTypeToString on SchemeType {
 }
 
 class OAuth2DomainInfo {
-
   SchemeType scheme;
   String name;
 
-  OAuth2DomainInfo({
-    required this.scheme,
-    required this.name
-  });
+  OAuth2DomainInfo({required this.scheme, required this.name});
 
-  OAuth2DomainInfo.fromJson(Map<String, dynamic> json):
-        scheme = schemeTypeFromString(json['scheme']),
+  OAuth2DomainInfo.fromJson(Map<String, dynamic> json)
+      : scheme = schemeTypeFromString(json['scheme']),
         name = json['name'];
 
   Map<String, dynamic> toJson() {
-    return {
-      'scheme': scheme.toShortString(),
-      'name': name
-    };
+    return {'scheme': scheme.toShortString(), 'name': name};
   }
 
   @override
@@ -349,24 +323,17 @@ class OAuth2DomainInfo {
 }
 
 class OAuth2MobileInfo {
-
   String pkgName;
   String appSecret;
 
-  OAuth2MobileInfo({
-    required this.pkgName,
-    required this.appSecret
-  });
+  OAuth2MobileInfo({required this.pkgName, required this.appSecret});
 
-  OAuth2MobileInfo.fromJson(Map<String, dynamic> json):
-        pkgName = json['pkgName'],
+  OAuth2MobileInfo.fromJson(Map<String, dynamic> json)
+      : pkgName = json['pkgName'],
         appSecret = json['appSecret'];
 
   Map<String, dynamic> toJson() {
-    return {
-      'pkgName': pkgName,
-      'appSecret': appSecret
-    };
+    return {'pkgName': pkgName, 'appSecret': appSecret};
   }
 
   @override
@@ -376,7 +343,6 @@ class OAuth2MobileInfo {
 }
 
 class OAuth2RegistrationInfo {
-
   OAuth2MapperConfig mapperConfig;
   String clientId;
   String clientSecret;
@@ -392,25 +358,24 @@ class OAuth2RegistrationInfo {
   List<PlatformType> platforms;
   Map<String, dynamic>? additionalInfo;
 
-  OAuth2RegistrationInfo({
-    required this.mapperConfig,
-    required this.clientId,
-    required this.clientSecret,
-    required this.authorizationUri,
-    required this.accessTokenUri,
-    required this.scope,
-    required this.userNameAttributeName,
-    required this.clientAuthenticationMethod,
-    this.platforms = const [],
-    this.userInfoUri,
-    this.jwkSetUri,
-    this.loginButtonLabel,
-    this.loginButtonIcon,
-    this.additionalInfo
-  });
+  OAuth2RegistrationInfo(
+      {required this.mapperConfig,
+      required this.clientId,
+      required this.clientSecret,
+      required this.authorizationUri,
+      required this.accessTokenUri,
+      required this.scope,
+      required this.userNameAttributeName,
+      required this.clientAuthenticationMethod,
+      this.platforms = const [],
+      this.userInfoUri,
+      this.jwkSetUri,
+      this.loginButtonLabel,
+      this.loginButtonIcon,
+      this.additionalInfo});
 
-  OAuth2RegistrationInfo.fromJson(Map<String, dynamic> json):
-        mapperConfig = OAuth2MapperConfig.fromJson(json['mapperConfig']),
+  OAuth2RegistrationInfo.fromJson(Map<String, dynamic> json)
+      : mapperConfig = OAuth2MapperConfig.fromJson(json['mapperConfig']),
         clientId = json['clientId'],
         clientSecret = json['clientSecret'],
         authorizationUri = json['authorizationUri'],
@@ -422,7 +387,11 @@ class OAuth2RegistrationInfo {
         clientAuthenticationMethod = json['clientAuthenticationMethod'],
         loginButtonLabel = json['loginButtonLabel'],
         loginButtonIcon = json['loginButtonIcon'],
-        platforms = json['platforms'] != null ? (json['platforms'] as List<dynamic>).map((e) => platformTypeFromString(e)).toList() : [],
+        platforms = json['platforms'] != null
+            ? (json['platforms'] as List<dynamic>)
+                .map((e) => platformTypeFromString(e))
+                .toList()
+            : [],
         additionalInfo = json['additionalInfo'];
 
   Map<String, dynamic> toJson() {
@@ -465,21 +434,25 @@ class OAuth2RegistrationInfo {
 }
 
 class OAuth2ParamsInfo {
-
   List<OAuth2DomainInfo> domainInfos;
   List<OAuth2MobileInfo> mobileInfos;
   List<OAuth2RegistrationInfo> clientRegistrations;
 
-  OAuth2ParamsInfo({
-    required this.domainInfos,
-    required this.clientRegistrations,
-    this.mobileInfos = const []
-  });
+  OAuth2ParamsInfo(
+      {required this.domainInfos,
+      required this.clientRegistrations,
+      this.mobileInfos = const []});
 
-  OAuth2ParamsInfo.fromJson(Map<String, dynamic> json):
-      domainInfos = (json['domainInfos'] as List<dynamic>).map((e) => OAuth2DomainInfo.fromJson(e)).toList(),
-      mobileInfos = (json['mobileInfos'] as List<dynamic>).map((e) => OAuth2MobileInfo.fromJson(e)).toList(),
-      clientRegistrations = (json['clientRegistrations'] as List<dynamic>).map((e) => OAuth2RegistrationInfo.fromJson(e)).toList();
+  OAuth2ParamsInfo.fromJson(Map<String, dynamic> json)
+      : domainInfos = (json['domainInfos'] as List<dynamic>)
+            .map((e) => OAuth2DomainInfo.fromJson(e))
+            .toList(),
+        mobileInfos = (json['mobileInfos'] as List<dynamic>)
+            .map((e) => OAuth2MobileInfo.fromJson(e))
+            .toList(),
+        clientRegistrations = (json['clientRegistrations'] as List<dynamic>)
+            .map((e) => OAuth2RegistrationInfo.fromJson(e))
+            .toList();
 
   Map<String, dynamic> toJson() {
     return {
@@ -496,18 +469,16 @@ class OAuth2ParamsInfo {
 }
 
 class OAuth2Info {
-
   bool enabled;
   List<OAuth2ParamsInfo> oauth2ParamsInfos;
 
-  OAuth2Info({
-    required this.enabled,
-    required this.oauth2ParamsInfos
-  });
+  OAuth2Info({required this.enabled, required this.oauth2ParamsInfos});
 
-  OAuth2Info.fromJson(Map<String, dynamic> json):
-      enabled = json['enabled'],
-      oauth2ParamsInfos = (json['oauth2ParamsInfos'] as List<dynamic>).map((e) => OAuth2ParamsInfo.fromJson(e)).toList();
+  OAuth2Info.fromJson(Map<String, dynamic> json)
+      : enabled = json['enabled'],
+        oauth2ParamsInfos = (json['oauth2ParamsInfos'] as List<dynamic>)
+            .map((e) => OAuth2ParamsInfo.fromJson(e))
+            .toList();
 
   Map<String, dynamic> toJson() {
     return {

@@ -4,23 +4,23 @@ import 'id/rule_node_id.dart';
 import 'additional_info_based.dart';
 
 class RuleNode extends AdditionalInfoBased<RuleNodeId> with HasName {
-
   RuleChainId? ruleChainId;
   String type;
   String name;
   bool debugMode;
   Map<String, dynamic>? configuration;
 
-  RuleNode({
-    required this.type,
-    required this.name,
-    this.debugMode = false,
-    this.ruleChainId,
-    this.configuration
-  });
+  RuleNode(
+      {required this.type,
+      required this.name,
+      this.debugMode = false,
+      this.ruleChainId,
+      this.configuration});
 
-  RuleNode.fromJson(Map<String, dynamic> json):
-        ruleChainId = json['ruleChainId'] != null ? RuleChainId.fromJson(json['ruleChainId']) : null,
+  RuleNode.fromJson(Map<String, dynamic> json)
+      : ruleChainId = json['ruleChainId'] != null
+            ? RuleChainId.fromJson(json['ruleChainId'])
+            : null,
         type = json['type'],
         name = json['name'],
         debugMode = json['debugMode'],

@@ -1,7 +1,6 @@
 import '../../thingsboard_client.dart';
 
 class InMemoryStorage implements TbStorage {
-
   final storageMap = <String, String>{};
 
   @override
@@ -18,5 +17,4 @@ class InMemoryStorage implements TbStorage {
   Future<void> setItem(String key, String value) async {
     storageMap[key] = value;
   }
-
 }

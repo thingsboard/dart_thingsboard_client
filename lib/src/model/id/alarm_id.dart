@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class AlarmId extends EntityId {
-
   AlarmId(String id) : super(EntityType.ALARM, id);
 
   @override

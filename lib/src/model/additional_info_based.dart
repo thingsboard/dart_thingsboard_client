@@ -3,14 +3,15 @@ import 'has_additional_info.dart';
 import 'base_data.dart';
 import 'id/has_uuid.dart';
 
-abstract class AdditionalInfoBased<T extends HasUuid> extends BaseData<T> with HasAdditionalInfo {
-
+abstract class AdditionalInfoBased<T extends HasUuid> extends BaseData<T>
+    with HasAdditionalInfo {
   Map<String, dynamic>? additionalInfo;
 
   AdditionalInfoBased();
 
-  AdditionalInfoBased.fromJson(Map<String, dynamic> json, [fromIdFunction<T>? fromId]):
-        additionalInfo = json['additionalInfo'],
+  AdditionalInfoBased.fromJson(Map<String, dynamic> json,
+      [fromIdFunction<T>? fromId])
+      : additionalInfo = json['additionalInfo'],
         super.fromJson(json, fromId);
 
   @override
@@ -22,7 +23,7 @@ abstract class AdditionalInfoBased<T extends HasUuid> extends BaseData<T> with H
     return json;
   }
 
- @override
+  @override
   Map<String, dynamic>? getAdditionalInfo() {
     return additionalInfo;
   }

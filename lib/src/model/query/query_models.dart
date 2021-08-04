@@ -887,7 +887,8 @@ class EntityCountQuery {
 
 enum EntityDataSortOrderDirection { ASC, DESC }
 
-EntityDataSortOrderDirection entityDataSortOrderDirectionFromString(String value) {
+EntityDataSortOrderDirection entityDataSortOrderDirectionFromString(
+    String value) {
   return EntityDataSortOrderDirection.values.firstWhere(
       (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
@@ -1153,12 +1154,12 @@ class AlarmDataQuery extends AbstractDataQuery<AlarmDataPageLink> {
 }
 
 class EntityData {
-
   final EntityId entityId;
   final Map<EntityKeyType, Map<String, TsValue>> latest;
   final Map<String, List<TsValue>> timeseries;
 
-  EntityData({required this.entityId, required this.latest, required this.timeseries});
+  EntityData(
+      {required this.entityId, required this.latest, required this.timeseries});
 
   EntityData.fromJson(Map<String, dynamic> json)
       : entityId = EntityId.fromJson(json['entityId']),
@@ -1224,18 +1225,17 @@ class EntityData {
 }
 
 class AlarmData extends AlarmInfo {
-
   final EntityId entityId;
   final Map<EntityKeyType, Map<String, TsValue>> latest;
 
-  AlarmData.fromJson(Map<String, dynamic> json):
-        entityId = EntityId.fromJson(json['entityId']),
+  AlarmData.fromJson(Map<String, dynamic> json)
+      : entityId = EntityId.fromJson(json['entityId']),
         latest = json['latest'] != null
             ? (json['latest'] as Map<String, dynamic>).map((key, value) =>
-            MapEntry(
-                entityKeyTypeFromString(key),
-                (value as Map<String, dynamic>).map((key, value) =>
-                    MapEntry(key, TsValue.fromJson(value)))))
+                MapEntry(
+                    entityKeyTypeFromString(key),
+                    (value as Map<String, dynamic>).map((key, value) =>
+                        MapEntry(key, TsValue.fromJson(value)))))
             : {},
         super.fromJson(json);
 

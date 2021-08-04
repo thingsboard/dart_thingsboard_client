@@ -11,14 +11,16 @@ import 'service/service.dart';
 import 'storage/storage.dart';
 
 typedef TbComputeCallback<Q, R> = FutureOr<R> Function(Q message);
-typedef TbCompute = Future<R> Function<Q, R>(TbComputeCallback<Q, R> callback, Q message);
+typedef TbCompute = Future<R> Function<Q, R>(
+    TbComputeCallback<Q, R> callback, Q message);
 
 typedef UserLoadedCallback = void Function();
 typedef LoadStartedCallback = void Function();
 typedef LoadFinishedCallback = void Function();
 typedef ErrorCallback = void Function(ThingsboardError error);
 
-TbCompute syncCompute = <Q,R>(TbComputeCallback<Q, R> callback, Q message) => Future.value(callback(message));
+TbCompute syncCompute = <Q, R>(TbComputeCallback<Q, R> callback, Q message) =>
+    Future.value(callback(message));
 
 class ThingsboardClient {
   final String _apiEndpoint;
@@ -58,25 +60,47 @@ class ThingsboardClient {
   OtaPackageService? _otaPackageService;
   TelemetryWebsocketService? _telemetryWebsocketService;
 
-  factory ThingsboardClient(String apiEndpoint, {TbStorage? storage, UserLoadedCallback? onUserLoaded,
-                                                 ErrorCallback? onError, LoadStartedCallback? onLoadStarted,
-                                                 LoadFinishedCallback? onLoadFinished, TbCompute? computeFunc}) {
+  factory ThingsboardClient(String apiEndpoint,
+      {TbStorage? storage,
+      UserLoadedCallback? onUserLoaded,
+      ErrorCallback? onError,
+      LoadStartedCallback? onLoadStarted,
+      LoadFinishedCallback? onLoadFinished,
+      TbCompute? computeFunc}) {
     var dio = Dio();
     dio.options.baseUrl = apiEndpoint;
-    final tbClient = ThingsboardClient._internal(apiEndpoint, dio, storage, onUserLoaded, onError, onLoadStarted, onLoadFinished, computeFunc ?? syncCompute);
+    final tbClient = ThingsboardClient._internal(
+        apiEndpoint,
+        dio,
+        storage,
+        onUserLoaded,
+        onError,
+        onLoadStarted,
+        onLoadFinished,
+        computeFunc ?? syncCompute);
     dio.interceptors.clear();
-    dio.interceptors.add(HttpInterceptor(dio, tbClient, tbClient._loadStarted, tbClient._loadFinished, tbClient._onError));
+    dio.interceptors.add(HttpInterceptor(dio, tbClient, tbClient._loadStarted,
+        tbClient._loadFinished, tbClient._onError));
     return tbClient;
   }
 
-  ThingsboardClient._internal(this._apiEndpoint, this._dio, TbStorage? storage, this._userLoadedCallback, this._errorCallback, this._loadStartedCallback, this._loadFinishedCallback, this._computeFunc):
-      _storage = storage ?? InMemoryStorage();
+  ThingsboardClient._internal(
+      this._apiEndpoint,
+      this._dio,
+      TbStorage? storage,
+      this._userLoadedCallback,
+      this._errorCallback,
+      this._loadStartedCallback,
+      this._loadFinishedCallback,
+      this._computeFunc)
+      : _storage = storage ?? InMemoryStorage();
 
   Future<void> _clearJwtToken() async {
     await _setUserFromJwtToken(null, null, true);
   }
 
-  Future<void> _setUserFromJwtToken(String? jwtToken, String? refreshToken, bool? notify) async {
+  Future<void> _setUserFromJwtToken(
+      String? jwtToken, String? refreshToken, bool? notify) async {
     if (jwtToken == null) {
       _token = null;
       _refreshToken = null;
@@ -100,7 +124,7 @@ class ThingsboardClient {
     if (jwtToken != null) {
       try {
         return !JwtDecoder.isExpired(jwtToken);
-      } catch(e) {
+      } catch (e) {
         return false;
       }
     } else {
@@ -153,20 +177,39 @@ class ThingsboardClient {
         if (error.error is ThingsboardError) {
           tbError = error.error;
         } else if (error.error is SocketException) {
-          tbError = ThingsboardError(error: error, message: 'Unable to connect', errorCode: ThingsBoardErrorCode.general);
+          tbError = ThingsboardError(
+              error: error,
+              message: 'Unable to connect',
+              errorCode: ThingsBoardErrorCode.general);
         } else {
-          tbError = ThingsboardError(error: error, message: error.error.toString(), errorCode: ThingsBoardErrorCode.general);
+          tbError = ThingsboardError(
+              error: error,
+              message: error.error.toString(),
+              errorCode: ThingsBoardErrorCode.general);
         }
       }
-      if (tbError == null && error.response != null && error.response!.statusCode != null) {
+      if (tbError == null &&
+          error.response != null &&
+          error.response!.statusCode != null) {
         var httpStatus = error.response!.statusCode!;
-        var message = (httpStatus.toString() + ': ' + (error.response!.statusMessage != null ? error.response!.statusMessage! : 'Unknown'));
-        tbError = ThingsboardError(error: error, message: message, errorCode: httpStatusToThingsboardErrorCode(httpStatus), status: httpStatus);
+        var message = (httpStatus.toString() +
+            ': ' +
+            (error.response!.statusMessage != null
+                ? error.response!.statusMessage!
+                : 'Unknown'));
+        tbError = ThingsboardError(
+            error: error,
+            message: message,
+            errorCode: httpStatusToThingsboardErrorCode(httpStatus),
+            status: httpStatus);
       }
     } else if (error is ThingsboardError) {
       tbError = error;
     }
-    tbError ??= ThingsboardError(error: error, message: error.toString(), errorCode: ThingsBoardErrorCode.general);
+    tbError ??= ThingsboardError(
+        error: error,
+        message: error.toString(),
+        errorCode: ThingsBoardErrorCode.general);
 
     var errorStackTrace;
     if (tbError.error is Error) {
@@ -190,19 +233,18 @@ class ThingsboardClient {
       } else {
         await _setUserFromJwtToken(jwtToken, refreshToken, true);
       }
-    }
-    catch (e) {
+    } catch (e) {
       throw toThingsboardError(e);
     }
   }
 
   Future<Response<T>> get<T>(
-      String path, {
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-        ProgressCallback? onReceiveProgress,
-      }) async {
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       return await _dio.get(path,
           queryParameters: queryParameters,
@@ -215,14 +257,14 @@ class ThingsboardClient {
   }
 
   Future<Response<T>> post<T>(
-      String path, {
-        data,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-        ProgressCallback? onSendProgress,
-        ProgressCallback? onReceiveProgress,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     try {
       return await _dio.post(path,
           data: data,
@@ -237,12 +279,12 @@ class ThingsboardClient {
   }
 
   Future<Response<T>> delete<T>(
-      String path, {
-        data,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        CancelToken? cancelToken,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+  }) async {
     try {
       return await _dio.delete(path,
           data: data,
@@ -258,41 +300,58 @@ class ThingsboardClient {
     return _computeFunc!(callback, message);
   }
 
-  Future<LoginResponse> login(LoginRequest loginRequest, {RequestConfig? requestConfig}) async {
-    var response = await post('/api/auth/login', data: jsonEncode(loginRequest), options: defaultHttpOptionsFromConfig(requestConfig));
+  Future<LoginResponse> login(LoginRequest loginRequest,
+      {RequestConfig? requestConfig}) async {
+    var response = await post('/api/auth/login',
+        data: jsonEncode(loginRequest),
+        options: defaultHttpOptionsFromConfig(requestConfig));
     var loginResponse = LoginResponse.fromJson(response.data);
-    await _setUserFromJwtToken(loginResponse.token, loginResponse.refreshToken, true);
+    await _setUserFromJwtToken(
+        loginResponse.token, loginResponse.refreshToken, true);
     return loginResponse;
   }
 
-  Future<void> setUserFromJwtToken(String? jwtToken, String? refreshToken, bool? notify) async {
+  Future<void> setUserFromJwtToken(
+      String? jwtToken, String? refreshToken, bool? notify) async {
     await _setUserFromJwtToken(jwtToken, refreshToken, notify);
   }
 
   Future<void> logout({RequestConfig? requestConfig}) async {
     try {
-      await post('/api/auth/logout', options: defaultHttpOptionsFromConfig(requestConfig));
+      await post('/api/auth/logout',
+          options: defaultHttpOptionsFromConfig(requestConfig));
       await _clearJwtToken();
     } catch (e) {
       await _clearJwtToken();
     }
   }
 
-  Future<void> sendResetPasswordLink(String email, {RequestConfig? requestConfig}) async {
-    await post('/api/noauth/resetPasswordByEmail', data: {'email': email}, options: defaultHttpOptionsFromConfig(requestConfig));
+  Future<void> sendResetPasswordLink(String email,
+      {RequestConfig? requestConfig}) async {
+    await post('/api/noauth/resetPasswordByEmail',
+        data: {'email': email},
+        options: defaultHttpOptionsFromConfig(requestConfig));
   }
 
-  Future<void> changePassword(String currentPassword, String newPassword, {RequestConfig? requestConfig}) async {
+  Future<void> changePassword(String currentPassword, String newPassword,
+      {RequestConfig? requestConfig}) async {
     var changePasswordRequest = {
       'currentPassword': currentPassword,
       'newPassword': newPassword
     };
-    var response = await post('/api/auth/changePassword', data: jsonEncode(changePasswordRequest), options: defaultHttpOptionsFromConfig(requestConfig));
+    var response = await post('/api/auth/changePassword',
+        data: jsonEncode(changePasswordRequest),
+        options: defaultHttpOptionsFromConfig(requestConfig));
     var loginResponse = LoginResponse.fromJson(response.data);
-    await _setUserFromJwtToken(loginResponse.token, loginResponse.refreshToken, false);
+    await _setUserFromJwtToken(
+        loginResponse.token, loginResponse.refreshToken, false);
   }
 
-  Future<void> refreshJwtToken({String? refreshToken, bool? notify, Dio? internalDio, bool interceptRefreshToken = false}) async {
+  Future<void> refreshJwtToken(
+      {String? refreshToken,
+      bool? notify,
+      Dio? internalDio,
+      bool interceptRefreshToken = false}) async {
     _refreshTokenPending = true;
     try {
       refreshToken ??= _refreshToken;
@@ -300,8 +359,8 @@ class ThingsboardClient {
         var refreshTokenRequest = RefreshTokenRequest(refreshToken!);
         try {
           var targetDio = internalDio ?? _dio;
-          var response = await targetDio.post(
-              '/api/auth/token', data: jsonEncode(refreshTokenRequest));
+          var response = await targetDio.post('/api/auth/token',
+              data: jsonEncode(refreshTokenRequest));
           var loginResponse = LoginResponse.fromJson(response.data);
           await _setUserFromJwtToken(
               loginResponse.token, loginResponse.refreshToken, notify);
@@ -467,8 +526,8 @@ class ThingsboardClient {
   }
 
   TelemetryService getTelemetryService() {
-    _telemetryWebsocketService ??= TelemetryWebsocketService(this, _apiEndpoint);
+    _telemetryWebsocketService ??=
+        TelemetryWebsocketService(this, _apiEndpoint);
     return _telemetryWebsocketService!;
   }
-
 }

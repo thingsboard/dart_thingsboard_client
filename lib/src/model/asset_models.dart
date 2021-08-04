@@ -7,8 +7,8 @@ import 'id/asset_id.dart';
 import 'id/customer_id.dart';
 import 'id/tenant_id.dart';
 
-class Asset extends AdditionalInfoBased<AssetId> with HasName, HasTenantId, HasCustomerId {
-
+class Asset extends AdditionalInfoBased<AssetId>
+    with HasName, HasTenantId, HasCustomerId {
   TenantId? tenantId;
   CustomerId? customerId;
   String name;
@@ -17,9 +17,11 @@ class Asset extends AdditionalInfoBased<AssetId> with HasName, HasTenantId, HasC
 
   Asset(this.name, this.type);
 
-  Asset.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
-        customerId = json['customerId'] != null ? CustomerId.fromJson(json['customerId']) : null,
+  Asset.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
+        customerId = json['customerId'] != null
+            ? CustomerId.fromJson(json['customerId'])
+            : null,
         name = json['name'],
         type = json['type'],
         label = json['label'],
@@ -66,15 +68,14 @@ class Asset extends AdditionalInfoBased<AssetId> with HasName, HasTenantId, HasC
     return '${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
         'label: $label${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
-
 }
 
 class AssetInfo extends Asset {
   String? customerTitle;
   bool? customerIsPublic;
 
-  AssetInfo.fromJson(Map<String, dynamic> json):
-        customerTitle = json['customerTitle'],
+  AssetInfo.fromJson(Map<String, dynamic> json)
+      : customerTitle = json['customerTitle'],
         customerIsPublic = json['customerIsPublic'],
         super.fromJson(json);
 
@@ -82,18 +83,16 @@ class AssetInfo extends Asset {
   String toString() {
     return 'AssetInfo{${assetString('customerTitle: $customerTitle, customerIsPublic: $customerIsPublic')}}';
   }
-
 }
 
 class AssetSearchQuery extends EntitySearchQuery {
-
   List<String> assetTypes;
 
-  AssetSearchQuery({
-    required RelationsSearchParameters parameters,
-    required this.assetTypes,
-    String? relationType
-  }): super(parameters: parameters, relationType: relationType);
+  AssetSearchQuery(
+      {required RelationsSearchParameters parameters,
+      required this.assetTypes,
+      String? relationType})
+      : super(parameters: parameters, relationType: relationType);
 
   @override
   Map<String, dynamic> toJson() {

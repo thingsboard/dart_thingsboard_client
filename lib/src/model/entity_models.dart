@@ -6,9 +6,9 @@ class EntityInfo {
 
   EntityInfo(this.id, this.name);
 
-  EntityInfo.fromJson(Map<String, dynamic> json):
-      id = EntityId.fromJson(json['id']),
-      name =  json['name'];
+  EntityInfo.fromJson(Map<String, dynamic> json)
+      : id = EntityId.fromJson(json['id']),
+        name = json['name'];
 
   @override
   String toString() {

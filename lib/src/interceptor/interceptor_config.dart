@@ -4,7 +4,11 @@ class InterceptorConfig {
   bool resendRequest = false;
   bool isRetry = false;
 
-  InterceptorConfig({this.ignoreLoading = false, this.ignoreErrors = false, this.resendRequest = false, this.isRetry = false});
+  InterceptorConfig(
+      {this.ignoreLoading = false,
+      this.ignoreErrors = false,
+      this.resendRequest = false,
+      this.isRetry = false});
 
   InterceptorConfig.fromExtra(Map<String, dynamic>? extra) {
     if (extra != null) {

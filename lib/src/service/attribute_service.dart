@@ -13,44 +13,55 @@ class AttributeService {
 
   AttributeService._internal(this._tbClient);
 
-  Future<List<String>> getAttributeKeys(EntityId entityId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<List<String>>('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/keys/attributes',
+  Future<List<String>> getAttributeKeys(EntityId entityId,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<String>>(
+        '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/keys/attributes',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data!;
   }
 
-  Future<List<String>> getAttributeKeysByScope(EntityId entityId, String scope, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<List<String>>('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/keys/attributes/$scope',
+  Future<List<String>> getAttributeKeysByScope(EntityId entityId, String scope,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<String>>(
+        '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/keys/attributes/$scope',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data!;
   }
 
-  Future<List<AttributeKvEntry>> getAttributeKvEntries(EntityId entityId, List<String> keys, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<List<dynamic>>('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/attributes',
-        queryParameters: {
-          'keys': keys.join(',')
-        },
+  Future<List<AttributeKvEntry>> getAttributeKvEntries(
+      EntityId entityId, List<String> keys,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<dynamic>>(
+        '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/attributes',
+        queryParameters: {'keys': keys.join(',')},
         options: defaultHttpOptionsFromConfig(requestConfig));
     return RestJsonConverter.toAttributes(response.data);
   }
 
-  Future<List<AttributeKvEntry>> getAttributesByScope(EntityId entityId, String scope, List<String> keys, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<List<dynamic>>('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/attributes/$scope',
-        queryParameters: {
-          'keys': keys.join(',')
-        },
+  Future<List<AttributeKvEntry>> getAttributesByScope(
+      EntityId entityId, String scope, List<String> keys,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<dynamic>>(
+        '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/attributes/$scope',
+        queryParameters: {'keys': keys.join(',')},
         options: defaultHttpOptionsFromConfig(requestConfig));
     return RestJsonConverter.toAttributes(response.data);
   }
 
-  Future<List<String>> getTimeseriesKeys(EntityId entityId, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<List<String>>('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/keys/timeseries',
+  Future<List<String>> getTimeseriesKeys(EntityId entityId,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<String>>(
+        '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/keys/timeseries',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data!;
   }
 
-  Future<List<TsKvEntry>> getLatestTimeseries(EntityId entityId, List<String> keys, {bool useStrictDataTypes = true, RequestConfig? requestConfig}) async {
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/timeseries',
+  Future<List<TsKvEntry>> getLatestTimeseries(
+      EntityId entityId, List<String> keys,
+      {bool useStrictDataTypes = true, RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/timeseries',
         queryParameters: {
           'keys': keys.join(','),
           'useStrictDataTypes': useStrictDataTypes
@@ -61,21 +72,20 @@ class AttributeService {
 
   Future<List<TsKvEntry>> getTimeseries(EntityId entityId, List<String> keys,
       {int? interval,
-       Aggregation? agg,
-       Direction? sortOrder,
-       int? startTime,
-       int? endTime,
-       int? limit,
-       bool useStrictDataTypes = true,
-       RequestConfig? requestConfig}) async {
-
+      Aggregation? agg,
+      Direction? sortOrder,
+      int? startTime,
+      int? endTime,
+      int? limit,
+      bool useStrictDataTypes = true,
+      RequestConfig? requestConfig}) async {
     var queryParameters = <String, dynamic>{
-        'keys': keys.join(','),
-        'interval': interval == null ? '0' : interval.toString(),
-        'agg': agg == null ? 'NONE' : agg.toShortString(),
-        'limit': limit != null ? limit.toString() : '100',
-        'orderBy': sortOrder != null ? sortOrder.toShortString() : 'DESC',
-        'useStrictDataTypes': useStrictDataTypes
+      'keys': keys.join(','),
+      'interval': interval == null ? '0' : interval.toString(),
+      'agg': agg == null ? 'NONE' : agg.toShortString(),
+      'limit': limit != null ? limit.toString() : '100',
+      'orderBy': sortOrder != null ? sortOrder.toShortString() : 'DESC',
+      'useStrictDataTypes': useStrictDataTypes
     };
 
     if (startTime != null) {
@@ -86,15 +96,18 @@ class AttributeService {
       queryParameters['endTs'] = endTime.toString();
     }
 
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/timeseries',
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/values/timeseries',
         queryParameters: queryParameters,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return RestJsonConverter.toTimeseries(response.data);
   }
 
-  Future<bool> saveDeviceAttributes(String deviceId, String scope, dynamic request, {RequestConfig? requestConfig}) async {
+  Future<bool> saveDeviceAttributes(
+      String deviceId, String scope, dynamic request,
+      {RequestConfig? requestConfig}) async {
     return isSuccessful(
-          (RequestConfig requestConfig) async {
+      (RequestConfig requestConfig) async {
         return _tbClient.post('/api/plugins/telemetry/$deviceId/$scope',
             data: jsonEncode(request),
             options: defaultHttpOptionsFromConfig(requestConfig));
@@ -103,10 +116,13 @@ class AttributeService {
     );
   }
 
-  Future<bool> saveEntityAttributesV1(EntityId entityId, String scope, dynamic request, {RequestConfig? requestConfig}) async {
+  Future<bool> saveEntityAttributesV1(
+      EntityId entityId, String scope, dynamic request,
+      {RequestConfig? requestConfig}) async {
     return isSuccessful(
-          (RequestConfig requestConfig) async {
-        return _tbClient.post('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/$scope',
+      (RequestConfig requestConfig) async {
+        return _tbClient.post(
+            '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/$scope',
             data: jsonEncode(request),
             options: defaultHttpOptionsFromConfig(requestConfig));
       },
@@ -114,10 +130,13 @@ class AttributeService {
     );
   }
 
-  Future<bool> saveEntityAttributesV2(EntityId entityId, String scope, dynamic request, {RequestConfig? requestConfig}) async {
+  Future<bool> saveEntityAttributesV2(
+      EntityId entityId, String scope, dynamic request,
+      {RequestConfig? requestConfig}) async {
     return isSuccessful(
-          (RequestConfig requestConfig) async {
-        return _tbClient.post('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/attributes/$scope',
+      (RequestConfig requestConfig) async {
+        return _tbClient.post(
+            '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/attributes/$scope',
             data: jsonEncode(request),
             options: defaultHttpOptionsFromConfig(requestConfig));
       },
@@ -125,10 +144,13 @@ class AttributeService {
     );
   }
 
-  Future<bool> saveEntityTelemetry(EntityId entityId, String scope, dynamic request, {RequestConfig? requestConfig}) async {
+  Future<bool> saveEntityTelemetry(
+      EntityId entityId, String scope, dynamic request,
+      {RequestConfig? requestConfig}) async {
     return isSuccessful(
-          (RequestConfig requestConfig) async {
-        return _tbClient.post('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/timeseries/$scope',
+      (RequestConfig requestConfig) async {
+        return _tbClient.post(
+            '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/timeseries/$scope',
             data: jsonEncode(request),
             options: defaultHttpOptionsFromConfig(requestConfig));
       },
@@ -136,10 +158,13 @@ class AttributeService {
     );
   }
 
-  Future<bool> saveEntityTelemetryWithTTL(EntityId entityId, String scope, int ttl, dynamic request, {RequestConfig? requestConfig}) async {
+  Future<bool> saveEntityTelemetryWithTTL(
+      EntityId entityId, String scope, int ttl, dynamic request,
+      {RequestConfig? requestConfig}) async {
     return isSuccessful(
-          (RequestConfig requestConfig) async {
-        return _tbClient.post('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/timeseries/$scope/$ttl',
+      (RequestConfig requestConfig) async {
+        return _tbClient.post(
+            '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/timeseries/$scope/$ttl',
             data: jsonEncode(request),
             options: defaultHttpOptionsFromConfig(requestConfig));
       },
@@ -148,12 +173,11 @@ class AttributeService {
   }
 
   Future<bool> deleteEntityTimeseries(EntityId entityId, List<String> keys,
-      { required bool deleteAllDataForKeys,
-        required int startTs,
-        required int endTs,
-        required bool rewriteLatestIfDeleted,
-        RequestConfig? requestConfig}) async {
-
+      {required bool deleteAllDataForKeys,
+      required int startTs,
+      required int endTs,
+      required bool rewriteLatestIfDeleted,
+      RequestConfig? requestConfig}) async {
     var queryParameters = <String, dynamic>{
       'keys': keys.join(','),
       'deleteAllDataForKeys': deleteAllDataForKeys.toString(),
@@ -163,8 +187,9 @@ class AttributeService {
     };
 
     return isSuccessful(
-          (RequestConfig requestConfig) async {
-        return _tbClient.delete('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/timeseries/delete',
+      (RequestConfig requestConfig) async {
+        return _tbClient.delete(
+            '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/timeseries/delete',
             queryParameters: queryParameters,
             options: defaultHttpOptionsFromConfig(requestConfig));
       },
@@ -172,26 +197,27 @@ class AttributeService {
     );
   }
 
-  Future<bool> deleteDeviceAttributes(String deviceId, String scope, List<String> keys, {RequestConfig? requestConfig}) async {
+  Future<bool> deleteDeviceAttributes(
+      String deviceId, String scope, List<String> keys,
+      {RequestConfig? requestConfig}) async {
     return isSuccessful(
-          (RequestConfig requestConfig) async {
+      (RequestConfig requestConfig) async {
         return _tbClient.delete('/api/plugins/telemetry/$deviceId/$scope',
-            queryParameters: {
-              'keys': keys.join(',')
-            },
+            queryParameters: {'keys': keys.join(',')},
             options: defaultHttpOptionsFromConfig(requestConfig));
       },
       requestConfig: requestConfig,
     );
   }
 
-  Future<bool> deleteEntityAttributes(EntityId entityId, String scope, List<String> keys, {RequestConfig? requestConfig}) async {
+  Future<bool> deleteEntityAttributes(
+      EntityId entityId, String scope, List<String> keys,
+      {RequestConfig? requestConfig}) async {
     return isSuccessful(
-          (RequestConfig requestConfig) async {
-        return _tbClient.delete('/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/$scope',
-            queryParameters: {
-              'keys': keys.join(',')
-            },
+      (RequestConfig requestConfig) async {
+        return _tbClient.delete(
+            '/api/plugins/telemetry/${entityId.entityType.toShortString()}/${entityId.id}/$scope',
+            queryParameters: {'keys': keys.join(',')},
             options: defaultHttpOptionsFromConfig(requestConfig));
       },
       requestConfig: requestConfig,

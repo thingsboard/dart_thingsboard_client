@@ -6,16 +6,11 @@ import 'has_name.dart';
 import 'has_tenant_id.dart';
 import 'id/alarm_id.dart';
 
-enum AlarmSeverity {
-  CRITICAL,
-  MAJOR,
-  MINOR,
-  WARNING,
-  INDETERMINATE
-}
+enum AlarmSeverity { CRITICAL, MAJOR, MINOR, WARNING, INDETERMINATE }
 
 AlarmSeverity alarmSeverityFromString(String value) {
-  return AlarmSeverity.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return AlarmSeverity.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension AlarmSeverityToString on AlarmSeverity {
@@ -24,15 +19,11 @@ extension AlarmSeverityToString on AlarmSeverity {
   }
 }
 
-enum AlarmStatus {
-  ACTIVE_UNACK,
-  ACTIVE_ACK,
-  CLEARED_UNACK,
-  CLEARED_ACK
-}
+enum AlarmStatus { ACTIVE_UNACK, ACTIVE_ACK, CLEARED_UNACK, CLEARED_ACK }
 
 AlarmStatus alarmStatusFromString(String value) {
-  return AlarmStatus.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return AlarmStatus.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension AlarmStatusToString on AlarmStatus {
@@ -41,16 +32,11 @@ extension AlarmStatusToString on AlarmStatus {
   }
 }
 
-enum AlarmSearchStatus {
-  ANY,
-  ACTIVE,
-  CLEARED,
-  ACK,
-  UNACK
-}
+enum AlarmSearchStatus { ANY, ACTIVE, CLEARED, ACK, UNACK }
 
 AlarmSearchStatus alarmSearchStatusFromString(String value) {
-  return AlarmSearchStatus.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return AlarmSearchStatus.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension AlarmSearchStatusToString on AlarmSearchStatus {
@@ -60,7 +46,6 @@ extension AlarmSearchStatusToString on AlarmSearchStatus {
 }
 
 class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
-
   TenantId tenantId;
   String type;
   EntityId originator;
@@ -73,8 +58,8 @@ class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
   bool propagate;
   Map<String, dynamic>? details;
 
-  Alarm.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
+  Alarm.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
         type = json['type'],
         originator = EntityId.fromJson(json['originator']),
         severity = alarmSeverityFromString(json['severity']),
@@ -130,8 +115,8 @@ class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
 class AlarmInfo extends Alarm {
   String? originatorName;
 
-  AlarmInfo.fromJson(Map<String, dynamic> json):
-        originatorName = json['originatorName'],
+  AlarmInfo.fromJson(Map<String, dynamic> json)
+      : originatorName = json['originatorName'],
         super.fromJson(json);
 
   @override
@@ -145,14 +130,17 @@ class AlarmInfo extends Alarm {
 }
 
 class AlarmQuery {
-
   EntityId? affectedEntityId;
   TimePageLink pageLink;
   AlarmSearchStatus? searchStatus;
   AlarmStatus? status;
   bool? fetchOriginator;
 
-  AlarmQuery(this.pageLink, {this.affectedEntityId, this.searchStatus, this.status, this.fetchOriginator});
+  AlarmQuery(this.pageLink,
+      {this.affectedEntityId,
+      this.searchStatus,
+      this.status,
+      this.fetchOriginator});
 
   Map<String, dynamic> toQueryParameters() {
     var queryParameters = pageLink.toQueryParameters();
@@ -166,5 +154,4 @@ class AlarmQuery {
     }
     return queryParameters;
   }
-
 }

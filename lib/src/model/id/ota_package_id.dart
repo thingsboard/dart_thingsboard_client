@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class OtaPackageId extends EntityId {
-
   OtaPackageId(String id) : super(EntityType.OTA_PACKAGE, id);
 
   @override

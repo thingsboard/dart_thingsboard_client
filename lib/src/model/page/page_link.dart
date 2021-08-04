@@ -9,14 +9,11 @@ class PageLink {
   PageLink(this.pageSize, [this.page = 0, this.textSearch, this.sortOrder]);
 
   PageLink nextPageLink() {
-    return PageLink(pageSize, page+1, textSearch, sortOrder);
+    return PageLink(pageSize, page + 1, textSearch, sortOrder);
   }
 
   Map<String, dynamic> toQueryParameters() {
-    var queryParameters = <String, dynamic>{
-      'pageSize': pageSize,
-      'page': page
-    };
+    var queryParameters = <String, dynamic>{'pageSize': pageSize, 'page': page};
     if (textSearch != null && textSearch!.isNotEmpty) {
       queryParameters['textSearch'] = textSearch!;
     }
@@ -32,12 +29,18 @@ class TimePageLink extends PageLink {
   int? startTime;
   int? endTime;
 
-  TimePageLink(int pageSize, [int page = 0, String? textSearch, SortOrder? sortOrder, this.startTime, this.endTime]):
-        super(pageSize, page, textSearch, sortOrder);
+  TimePageLink(int pageSize,
+      [int page = 0,
+      String? textSearch,
+      SortOrder? sortOrder,
+      this.startTime,
+      this.endTime])
+      : super(pageSize, page, textSearch, sortOrder);
 
   @override
   TimePageLink nextPageLink() {
-    return TimePageLink(pageSize, page + 1, textSearch, sortOrder, startTime, endTime);
+    return TimePageLink(
+        pageSize, page + 1, textSearch, sortOrder, startTime, endTime);
   }
 
   @override

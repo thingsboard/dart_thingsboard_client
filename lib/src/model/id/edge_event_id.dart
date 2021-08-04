@@ -1,7 +1,6 @@
 import 'has_uuid.dart';
 
 class EdgeEventId extends HasUuid {
-
   EdgeEventId(String? id) : super(id);
 
   @override
@@ -13,5 +12,4 @@ class EdgeEventId extends HasUuid {
   String toString() {
     return 'EdgeEventId {id: $id}';
   }
-
 }

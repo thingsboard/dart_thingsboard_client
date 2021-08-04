@@ -1,7 +1,4 @@
-enum Direction {
-  ASC,
-  DESC
-}
+enum Direction { ASC, DESC }
 
 extension DirectionToString on Direction {
   String toShortString() {

@@ -23,7 +23,8 @@ enum EntityType {
 }
 
 EntityType entityTypeFromString(String value) {
-  return EntityType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return EntityType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension EntityTypeToString on EntityType {
@@ -33,13 +34,12 @@ extension EntityTypeToString on EntityType {
 }
 
 class EntitySubtype {
-
   TenantId tenantId;
   EntityType entityType;
   String type;
 
-  EntitySubtype.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
+  EntitySubtype.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
         entityType = entityTypeFromString(json['entityType']),
         type = json['type'];
 

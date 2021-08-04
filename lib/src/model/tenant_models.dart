@@ -5,12 +5,11 @@ import 'id/tenant_id.dart';
 import 'contact_based_model.dart';
 import 'id/tenant_profile_id.dart';
 
-enum TenantProfileType {
-  DEFAULT
-}
+enum TenantProfileType { DEFAULT }
 
 TenantProfileType tenantProfileTypeFromString(String value) {
-  return TenantProfileType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return TenantProfileType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension TenantProfileTypeToString on TenantProfileType {
@@ -20,7 +19,6 @@ extension TenantProfileTypeToString on TenantProfileType {
 }
 
 abstract class TenantProfileConfiguration {
-
   TenantProfileConfiguration();
 
   TenantProfileType getType();
@@ -28,7 +26,7 @@ abstract class TenantProfileConfiguration {
   factory TenantProfileConfiguration.fromJson(Map<String, dynamic> json) {
     if (json.containsKey('type')) {
       var deviceProfileType = tenantProfileTypeFromString(json['type']);
-      switch(deviceProfileType) {
+      switch (deviceProfileType) {
         case TenantProfileType.DEFAULT:
           return DefaultTenantProfileConfiguration.fromJson(json);
       }
@@ -42,11 +40,9 @@ abstract class TenantProfileConfiguration {
     json['type'] = getType().toShortString();
     return json;
   }
-
 }
 
 class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
-
   int maxDevices;
   int maxAssets;
   int maxCustomers;
@@ -76,8 +72,8 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
   int defaultStorageTtlDays;
   int alarmsTtlDays;
 
-  DefaultTenantProfileConfiguration():
-        maxDevices = 0,
+  DefaultTenantProfileConfiguration()
+      : maxDevices = 0,
         maxAssets = 0,
         maxCustomers = 0,
         maxUsers = 0,
@@ -102,8 +98,8 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
     return TenantProfileType.DEFAULT;
   }
 
-  DefaultTenantProfileConfiguration.fromJson(Map<String, dynamic> json):
-        maxDevices = json['maxDevices'],
+  DefaultTenantProfileConfiguration.fromJson(Map<String, dynamic> json)
+      : maxDevices = json['maxDevices'],
         maxAssets = json['maxAssets'],
         maxCustomers = json['maxCustomers'],
         maxUsers = json['maxUsers'],
@@ -111,20 +107,23 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxRuleChains = json['maxRuleChains'],
         maxResourcesInBytes = json['maxResourcesInBytes'],
         maxOtaPackagesInBytes = json['maxOtaPackagesInBytes'],
-
         transportTenantMsgRateLimit = json['transportTenantMsgRateLimit'],
-        transportTenantTelemetryMsgRateLimit = json['transportTenantTelemetryMsgRateLimit'],
-        transportTenantTelemetryDataPointsRateLimit = json['transportTenantTelemetryDataPointsRateLimit'],
+        transportTenantTelemetryMsgRateLimit =
+            json['transportTenantTelemetryMsgRateLimit'],
+        transportTenantTelemetryDataPointsRateLimit =
+            json['transportTenantTelemetryDataPointsRateLimit'],
         transportDeviceMsgRateLimit = json['transportDeviceMsgRateLimit'],
-        transportDeviceTelemetryMsgRateLimit = json['transportDeviceTelemetryMsgRateLimit'],
-        transportDeviceTelemetryDataPointsRateLimit = json['transportDeviceTelemetryDataPointsRateLimit'],
-
+        transportDeviceTelemetryMsgRateLimit =
+            json['transportDeviceTelemetryMsgRateLimit'],
+        transportDeviceTelemetryDataPointsRateLimit =
+            json['transportDeviceTelemetryDataPointsRateLimit'],
         maxTransportMessages = json['maxTransportMessages'],
         maxTransportDataPoints = json['maxTransportDataPoints'],
         maxREExecutions = json['maxREExecutions'],
         maxJSExecutions = json['maxJSExecutions'],
         maxDPStorageDays = json['maxDPStorageDays'],
-        maxRuleNodeExecutionsPerMessage = json['maxRuleNodeExecutionsPerMessage'],
+        maxRuleNodeExecutionsPerMessage =
+            json['maxRuleNodeExecutionsPerMessage'],
         maxEmails = json['maxEmails'],
         maxSms = json['maxSms'],
         maxCreatedAlarms = json['maxCreatedAlarms'],
@@ -146,19 +145,23 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
       json['transportTenantMsgRateLimit'] = transportTenantMsgRateLimit;
     }
     if (transportTenantTelemetryMsgRateLimit != null) {
-      json['transportTenantTelemetryMsgRateLimit'] = transportTenantTelemetryMsgRateLimit;
+      json['transportTenantTelemetryMsgRateLimit'] =
+          transportTenantTelemetryMsgRateLimit;
     }
     if (transportTenantTelemetryDataPointsRateLimit != null) {
-      json['transportTenantTelemetryDataPointsRateLimit'] = transportTenantTelemetryDataPointsRateLimit;
+      json['transportTenantTelemetryDataPointsRateLimit'] =
+          transportTenantTelemetryDataPointsRateLimit;
     }
     if (transportDeviceMsgRateLimit != null) {
       json['transportDeviceMsgRateLimit'] = transportDeviceMsgRateLimit;
     }
     if (transportDeviceTelemetryMsgRateLimit != null) {
-      json['transportDeviceTelemetryMsgRateLimit'] = transportDeviceTelemetryMsgRateLimit;
+      json['transportDeviceTelemetryMsgRateLimit'] =
+          transportDeviceTelemetryMsgRateLimit;
     }
     if (transportDeviceTelemetryDataPointsRateLimit != null) {
-      json['transportDeviceTelemetryDataPointsRateLimit'] = transportDeviceTelemetryDataPointsRateLimit;
+      json['transportDeviceTelemetryDataPointsRateLimit'] =
+          transportDeviceTelemetryDataPointsRateLimit;
     }
 
     json['maxTransportMessages'] = maxTransportMessages;
@@ -189,13 +192,13 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
 }
 
 class TenantProfileData {
-
   TenantProfileConfiguration configuration;
 
-  TenantProfileData(): configuration = DefaultTenantProfileConfiguration();
+  TenantProfileData() : configuration = DefaultTenantProfileConfiguration();
 
-  TenantProfileData.fromJson(Map<String, dynamic> json):
-        configuration = TenantProfileConfiguration.fromJson(json['configuration']);
+  TenantProfileData.fromJson(Map<String, dynamic> json)
+      : configuration =
+            TenantProfileConfiguration.fromJson(json['configuration']);
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
@@ -210,7 +213,6 @@ class TenantProfileData {
 }
 
 class TenantProfile extends BaseData<TenantProfileId> with HasName {
-
   String name;
   String? description;
   bool? isDefault;
@@ -218,10 +220,10 @@ class TenantProfile extends BaseData<TenantProfileId> with HasName {
   bool? isolatedTbRuleEngine;
   TenantProfileData profileData;
 
-  TenantProfile(this.name): profileData = TenantProfileData();
+  TenantProfile(this.name) : profileData = TenantProfileData();
 
-  TenantProfile.fromJson(Map<String, dynamic> json):
-        name = json['name'],
+  TenantProfile.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
         description = json['description'],
         isDefault = json['default'],
         isolatedTbCore = json['isolatedTbCore'],
@@ -258,17 +260,18 @@ class TenantProfile extends BaseData<TenantProfileId> with HasName {
 }
 
 class Tenant extends ContactBased<TenantId> with HasTenantId {
-
   String title;
   String? region;
   TenantProfileId? tenantProfileId;
 
   Tenant(this.title);
 
-  Tenant.fromJson(Map<String, dynamic> json):
-        title = json['title'],
+  Tenant.fromJson(Map<String, dynamic> json)
+      : title = json['title'],
         region = json['region'],
-        tenantProfileId = json['tenantProfileId'] != null ? TenantProfileId.fromJson(json['tenantProfileId']) : null,
+        tenantProfileId = json['tenantProfileId'] != null
+            ? TenantProfileId.fromJson(json['tenantProfileId'])
+            : null,
         super.fromJson(json);
 
   @override
@@ -299,13 +302,12 @@ class Tenant extends ContactBased<TenantId> with HasTenantId {
     return 'Tenant{${contactBasedString('title: $title, region: $region, '
         'tenantProfileId: $tenantProfileId')}}';
   }
-
 }
 
 class TenantInfo extends Tenant {
   String? tenantProfileName;
 
-  TenantInfo.fromJson(Map<String, dynamic> json):
-        tenantProfileName = json['tenantProfileName'],
+  TenantInfo.fromJson(Map<String, dynamic> json)
+      : tenantProfileName = json['tenantProfileName'],
         super.fromJson(json);
 }

@@ -1,16 +1,11 @@
 import 'base_data.dart';
 import 'id/component_descriptor_id.dart';
 
-enum ComponentType {
-  ENRICHMENT,
-  FILTER,
-  TRANSFORMATION,
-  ACTION,
-  EXTERNAL
-}
+enum ComponentType { ENRICHMENT, FILTER, TRANSFORMATION, ACTION, EXTERNAL }
 
 ComponentType componentTypeFromString(String value) {
-  return ComponentType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return ComponentType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ComponentTypeToString on ComponentType {
@@ -19,13 +14,11 @@ extension ComponentTypeToString on ComponentType {
   }
 }
 
-enum ComponentScope {
-  SYSTEM,
-  TENANT
-}
+enum ComponentScope { SYSTEM, TENANT }
 
 ComponentScope componentScopeFromString(String value) {
-  return ComponentScope.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return ComponentScope.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ComponentScopeToString on ComponentScope {
@@ -35,7 +28,6 @@ extension ComponentScopeToString on ComponentScope {
 }
 
 class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
-
   ComponentType type;
   ComponentScope scope;
   String name;
@@ -43,8 +35,8 @@ class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
   Map<String, dynamic>? configurationDescriptor;
   String? actions;
 
-  ComponentDescriptor.fromJson(Map<String, dynamic> json):
-        type = componentTypeFromString(json['type']),
+  ComponentDescriptor.fromJson(Map<String, dynamic> json)
+      : type = componentTypeFromString(json['type']),
         scope = componentScopeFromString(json['scope']),
         name = json['name'],
         clazz = json['clazz'],

@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class TenantProfileId extends EntityId {
-
   TenantProfileId(String id) : super(EntityType.TENANT_PROFILE, id);
 
   @override

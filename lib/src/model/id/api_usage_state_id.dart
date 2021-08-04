@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class ApiUsageStateId extends EntityId {
-
   ApiUsageStateId(String id) : super(EntityType.API_USAGE_STATE, id);
 
   @override

@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class WidgetTypeId extends EntityId {
-
   WidgetTypeId(String id) : super(EntityType.WIDGET_TYPE, id);
 
   @override

@@ -16,32 +16,45 @@ class AuditLogService {
 
   AuditLogService._internal(this._tbClient);
 
-  Future<PageData<AuditLog>> getAuditLogs(TimePageLink pageLink, {RequestConfig? requestConfig}) async {
+  Future<PageData<AuditLog>> getAuditLogs(TimePageLink pageLink,
+      {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/audit/logs', queryParameters: queryParams,
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/audit/logs',
+        queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseAuditLogPageData, response.data!);
   }
 
-  Future<PageData<AuditLog>> getAuditLogsByCustomerId(String customerId, TimePageLink pageLink, {RequestConfig? requestConfig}) async {
+  Future<PageData<AuditLog>> getAuditLogsByCustomerId(
+      String customerId, TimePageLink pageLink,
+      {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/audit/logs/customer/$customerId', queryParameters: queryParams,
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/audit/logs/customer/$customerId',
+        queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseAuditLogPageData, response.data!);
   }
 
-  Future<PageData<AuditLog>> getAuditLogsByUserId(String userId, TimePageLink pageLink, {RequestConfig? requestConfig}) async {
+  Future<PageData<AuditLog>> getAuditLogsByUserId(
+      String userId, TimePageLink pageLink,
+      {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/audit/logs/user/$userId', queryParameters: queryParams,
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/audit/logs/user/$userId',
+        queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseAuditLogPageData, response.data!);
   }
 
-  Future<PageData<AuditLog>> getAuditLogsByEntityId(EntityId entityId, TimePageLink pageLink, {RequestConfig? requestConfig}) async {
+  Future<PageData<AuditLog>> getAuditLogsByEntityId(
+      EntityId entityId, TimePageLink pageLink,
+      {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/audit/logs/entity/${entityId.entityType.toShortString()}/${entityId.id}', queryParameters: queryParams,
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/audit/logs/entity/${entityId.entityType.toShortString()}/${entityId.id}',
+        queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseAuditLogPageData, response.data!);
   }
-
 }

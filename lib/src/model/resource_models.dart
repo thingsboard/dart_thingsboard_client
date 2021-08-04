@@ -6,14 +6,11 @@ import 'id/tb_resource_id.dart';
 import 'base_data.dart';
 import 'id/tenant_id.dart';
 
-enum ResourceType {
-  LWM2M_MODEL,
-  JKS,
-  PKCS_12
-}
+enum ResourceType { LWM2M_MODEL, JKS, PKCS_12 }
 
 ResourceType resourceTypeFromString(String value) {
-  return ResourceType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return ResourceType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ResourceTypeToString on ResourceType {
@@ -23,7 +20,6 @@ extension ResourceTypeToString on ResourceType {
 }
 
 class TbResourceInfo extends BaseData<TbResourceId> with HasName, HasTenantId {
-
   TenantId? tenantId;
   String title;
   ResourceType resourceType;
@@ -31,8 +27,10 @@ class TbResourceInfo extends BaseData<TbResourceId> with HasName, HasTenantId {
 
   TbResourceInfo(this.title, this.resourceType, this.resourceKey);
 
-  TbResourceInfo.fromJson(Map<String, dynamic> json):
-        tenantId = json['tenantId'] != null ? TenantId.fromJson(json['tenantId']) : null,
+  TbResourceInfo.fromJson(Map<String, dynamic> json)
+      : tenantId = json['tenantId'] != null
+            ? TenantId.fromJson(json['tenantId'])
+            : null,
         title = json['title'],
         resourceType = resourceTypeFromString(json['resourceType']),
         resourceKey = json['resourceKey'],
@@ -68,19 +66,18 @@ class TbResourceInfo extends BaseData<TbResourceId> with HasName, HasTenantId {
   String resourceInfoString([String? toStringBody]) {
     return '${baseDataString('tenantId: $tenantId, title: $title, resourceType: ${resourceType.toShortString()}, resourceKey: $resourceKey${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
-
 }
 
 class TbResource extends TbResourceInfo {
-
   String fileName;
   String data;
 
-  TbResource(String title, ResourceType resourceType, String resourceKey, this.fileName, this.data):
-        super(title, resourceType, resourceKey);
+  TbResource(String title, ResourceType resourceType, String resourceKey,
+      this.fileName, this.data)
+      : super(title, resourceType, resourceKey);
 
-  TbResource.fromJson(Map<String, dynamic> json):
-        fileName = json['fileName'],
+  TbResource.fromJson(Map<String, dynamic> json)
+      : fileName = json['fileName'],
         data = json['data'],
         super.fromJson(json);
 
@@ -96,5 +93,4 @@ class TbResource extends TbResourceInfo {
   String toString() {
     return 'TbResource{${resourceInfoString('fileName: $fileName, data: [${data.substring(0, min(30, data.length))}...]')}}';
   }
-
 }

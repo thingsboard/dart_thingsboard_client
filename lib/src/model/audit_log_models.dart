@@ -42,7 +42,8 @@ enum ActionType {
 }
 
 ActionType actionTypeFromString(String value) {
-  return ActionType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return ActionType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ActionTypeToString on ActionType {
@@ -51,13 +52,11 @@ extension ActionTypeToString on ActionType {
   }
 }
 
-enum ActionStatus {
-  SUCCESS,
-  FAILURE
-}
+enum ActionStatus { SUCCESS, FAILURE }
 
 ActionStatus actionStatusFromString(String value) {
-  return ActionStatus.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return ActionStatus.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ActionStatusToString on ActionStatus {
@@ -67,7 +66,6 @@ extension ActionStatusToString on ActionStatus {
 }
 
 class AuditLog extends BaseData<AuditLogId> {
-
   TenantId tenantId;
   CustomerId? customerId;
   EntityId entityId;
@@ -79,9 +77,11 @@ class AuditLog extends BaseData<AuditLogId> {
   ActionStatus actionStatus;
   String? actionFailureDetails;
 
-  AuditLog.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
-        customerId = json['customerId'] != null ? CustomerId.fromJson(json['customerId']) : null,
+  AuditLog.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
+        customerId = json['customerId'] != null
+            ? CustomerId.fromJson(json['customerId'])
+            : null,
         entityId = EntityId.fromJson(json['entityId']),
         entityName = json['entityName'],
         userId = UserId.fromJson(json['userId']),
@@ -102,7 +102,8 @@ class AuditLog extends BaseData<AuditLogId> {
   String actionDataToString() {
     var actionDataStr = jsonEncode(actionData);
     if (actionDataStr.length > 50) {
-      actionDataStr = actionDataStr.substring(0, min(50, actionDataStr.length)) + '...';
+      actionDataStr =
+          actionDataStr.substring(0, min(50, actionDataStr.length)) + '...';
     }
     return actionDataStr;
   }
@@ -112,7 +113,9 @@ class AuditLog extends BaseData<AuditLogId> {
       return 'null';
     }
     if (actionFailureDetails!.length > 50) {
-      return actionFailureDetails!.substring(0, min(50, actionFailureDetails!.length)) + '...';
+      return actionFailureDetails!
+              .substring(0, min(50, actionFailureDetails!.length)) +
+          '...';
     }
     return actionFailureDetails!;
   }

@@ -19,53 +19,21 @@ class CustomerService {
 
   CustomerService._internal(this._tbClient);
 
-  Future<PageData<Customer>> getCustomers(PageLink pageLink,  {RequestConfig? requestConfig}) async {
+  Future<PageData<Customer>> getCustomers(PageLink pageLink,
+      {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();
-    var response = await _tbClient.get<Map<String, dynamic>>('/api/customers', queryParameters: queryParams,
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/customers',
+        queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseCustomerPageData, response.data!);
   }
 
-  Future<Customer?> getCustomer(String customerId, {RequestConfig? requestConfig}) async {
+  Future<Customer?> getCustomer(String customerId,
+      {RequestConfig? requestConfig}) async {
     return nullIfNotFound(
-          (RequestConfig requestConfig) async {
-            var response = await _tbClient.get<Map<String, dynamic>>('/api/customer/$customerId',
-                options: defaultHttpOptionsFromConfig(requestConfig));
-            return response.data != null ? Customer.fromJson(response.data!) : null;
-      },
-      requestConfig: requestConfig,
-    );
-  }
-
-  Future<ShortCustomerInfo?> getShortCustomerInfo(String customerId, {RequestConfig? requestConfig}) async {
-    return nullIfNotFound(
-          (RequestConfig requestConfig) async {
-        var response = await _tbClient.get<Map<String, dynamic>>('/api/customer/$customerId/shortInfo',
-            options: defaultHttpOptionsFromConfig(requestConfig));
-        return response.data != null ? ShortCustomerInfo.fromJson(response.data!) : null;
-      },
-      requestConfig: requestConfig,
-    );
-  }
-
-  Future<String?> getCustomerTitle(String customerId, {RequestConfig? requestConfig}) async {
-    return nullIfNotFound(
-          (RequestConfig requestConfig) async {
-        var options = defaultHttpOptionsFromConfig(requestConfig);
-        options.responseType = ResponseType.plain;
-        var response = await _tbClient.get<String>('/api/customer/$customerId/title',
-            options: options);
-        return response.data;
-      },
-      requestConfig: requestConfig,
-    );
-  }
-
-  Future<Customer?> getTenantCustomer(String customerTitle, {RequestConfig? requestConfig}) async {
-    return nullIfNotFound(
-          (RequestConfig requestConfig) async {
-        var response = await _tbClient.get<Map<String, dynamic>>('/api/tenant/customers',
-            queryParameters: { 'customerTitle': customerTitle },
+      (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>(
+            '/api/customer/$customerId',
             options: defaultHttpOptionsFromConfig(requestConfig));
         return response.data != null ? Customer.fromJson(response.data!) : null;
       },
@@ -73,15 +41,60 @@ class CustomerService {
     );
   }
 
-  Future<Customer> saveCustomer(Customer customer, {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/customer', data: jsonEncode(customer),
+  Future<ShortCustomerInfo?> getShortCustomerInfo(String customerId,
+      {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+      (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>(
+            '/api/customer/$customerId/shortInfo',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null
+            ? ShortCustomerInfo.fromJson(response.data!)
+            : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<String?> getCustomerTitle(String customerId,
+      {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+      (RequestConfig requestConfig) async {
+        var options = defaultHttpOptionsFromConfig(requestConfig);
+        options.responseType = ResponseType.plain;
+        var response = await _tbClient
+            .get<String>('/api/customer/$customerId/title', options: options);
+        return response.data;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<Customer?> getTenantCustomer(String customerTitle,
+      {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+      (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>(
+            '/api/tenant/customers',
+            queryParameters: {'customerTitle': customerTitle},
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null ? Customer.fromJson(response.data!) : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<Customer> saveCustomer(Customer customer,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post<Map<String, dynamic>>('/api/customer',
+        data: jsonEncode(customer),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return Customer.fromJson(response.data!);
   }
 
-  Future<void> deleteCustomer(String customerId, {RequestConfig? requestConfig}) async {
+  Future<void> deleteCustomer(String customerId,
+      {RequestConfig? requestConfig}) async {
     await _tbClient.delete('/api/customer/$customerId',
         options: defaultHttpOptionsFromConfig(requestConfig));
   }
-
 }

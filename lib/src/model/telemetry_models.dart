@@ -7,16 +7,11 @@ import 'query/query_models.dart';
 import '../error/thingsboard_error.dart';
 import 'entity_type_models.dart';
 
-enum DataType {
-  STRING,
-  LONG,
-  BOOLEAN,
-  DOUBLE,
-  JSON
-}
+enum DataType { STRING, LONG, BOOLEAN, DOUBLE, JSON }
 
 DataType dataTypeFromString(String value) {
-  return DataType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return DataType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension DataTypeToString on DataType {
@@ -26,7 +21,6 @@ extension DataTypeToString on DataType {
 }
 
 abstract class KvEntry {
-
   String getKey();
 
   DataType getDataType();
@@ -44,25 +38,19 @@ abstract class KvEntry {
   String getValueAsString();
 
   dynamic getValue();
-
 }
 
 abstract class AttributeKvEntry extends KvEntry {
-
   int getLastUpdateTs();
-
 }
 
 abstract class TsKvEntry extends KvEntry {
-
   int getTs();
 
   int getDataPoints();
-
 }
 
 class BaseAttributeKvEntry implements AttributeKvEntry {
-
   final int lastUpdateTs;
   final KvEntry kv;
 
@@ -92,7 +80,6 @@ class BaseAttributeKvEntry implements AttributeKvEntry {
   @override
   String? getJsonValue() => kv.getJsonValue();
 
-
   @override
   String getValueAsString() => kv.getValueAsString();
 
@@ -106,7 +93,6 @@ class BaseAttributeKvEntry implements AttributeKvEntry {
 }
 
 class BasicTsKvEntry implements TsKvEntry {
-
   static final int MAX_CHARS_PER_DATA_POINT = 512;
 
   final int ts;
@@ -138,7 +124,6 @@ class BasicTsKvEntry implements TsKvEntry {
   @override
   String? getJsonValue() => kv.getJsonValue();
 
-
   @override
   String getValueAsString() => kv.getValueAsString();
 
@@ -158,7 +143,9 @@ class BasicTsKvEntry implements TsKvEntry {
       default:
         return 1;
     }
-    return max(1, (length + MAX_CHARS_PER_DATA_POINT - 1) / MAX_CHARS_PER_DATA_POINT).toInt();
+    return max(1,
+            (length + MAX_CHARS_PER_DATA_POINT - 1) / MAX_CHARS_PER_DATA_POINT)
+        .toInt();
   }
 
   @override
@@ -168,7 +155,6 @@ class BasicTsKvEntry implements TsKvEntry {
 }
 
 abstract class BasicKvEntry implements KvEntry {
-
   final String key;
 
   BasicKvEntry(this.key);
@@ -198,10 +184,9 @@ abstract class BasicKvEntry implements KvEntry {
 }
 
 class BooleanDataEntry extends BasicKvEntry {
-
   final bool value;
 
-  BooleanDataEntry(String key, this.value): super(key);
+  BooleanDataEntry(String key, this.value) : super(key);
 
   @override
   DataType getDataType() => DataType.BOOLEAN;
@@ -222,10 +207,9 @@ class BooleanDataEntry extends BasicKvEntry {
 }
 
 class StringDataEntry extends BasicKvEntry {
-
   final String value;
 
-  StringDataEntry(String key, this.value): super(key);
+  StringDataEntry(String key, this.value) : super(key);
 
   @override
   DataType getDataType() => DataType.STRING;
@@ -246,10 +230,9 @@ class StringDataEntry extends BasicKvEntry {
 }
 
 class LongDataEntry extends BasicKvEntry {
-
   final int value;
 
-  LongDataEntry(String key, this.value): super(key);
+  LongDataEntry(String key, this.value) : super(key);
 
   @override
   DataType getDataType() => DataType.LONG;
@@ -270,10 +253,9 @@ class LongDataEntry extends BasicKvEntry {
 }
 
 class DoubleDataEntry extends BasicKvEntry {
-
   final double value;
 
-  DoubleDataEntry(String key, this.value): super(key);
+  DoubleDataEntry(String key, this.value) : super(key);
 
   @override
   DataType getDataType() => DataType.DOUBLE;
@@ -294,10 +276,9 @@ class DoubleDataEntry extends BasicKvEntry {
 }
 
 class JsonDataEntry extends BasicKvEntry {
-
   final String value;
 
-  JsonDataEntry(String key, this.value): super(key);
+  JsonDataEntry(String key, this.value) : super(key);
 
   @override
   DataType getDataType() => DataType.JSON;
@@ -317,17 +298,11 @@ class JsonDataEntry extends BasicKvEntry {
   }
 }
 
-enum Aggregation {
-  MIN,
-  MAX,
-  AVG,
-  SUM,
-  COUNT,
-  NONE
-}
+enum Aggregation { MIN, MAX, AVG, SUM, COUNT, NONE }
 
 Aggregation aggregationFromString(String value) {
-  return Aggregation.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return Aggregation.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension AggregationToString on Aggregation {
@@ -337,7 +312,6 @@ extension AggregationToString on Aggregation {
 }
 
 abstract class RestJsonConverter {
-
   static final String KEY = 'key';
   static final String VALUE = 'value';
   static final String LAST_UPDATE_TS = 'lastUpdateTs';
@@ -381,7 +355,9 @@ abstract class RestJsonConverter {
       } else if (value is String) {
         return StringDataEntry(key, value);
       } else {
-        throw ThingsboardError(message: CAN_T_PARSE_VALUE + value, errorCode: ThingsBoardErrorCode.invalidArguments);
+        throw ThingsboardError(
+            message: CAN_T_PARSE_VALUE + value,
+            errorCode: ThingsBoardErrorCode.invalidArguments);
       }
     } else {
       return JsonDataEntry(key, value.toString());
@@ -395,12 +371,9 @@ abstract class RestJsonConverter {
       return DoubleDataEntry(key, value.toDouble());
     }
   }
-
 }
 
-enum LatestTelemetry {
-  LATEST_TELEMETRY
-}
+enum LatestTelemetry { LATEST_TELEMETRY }
 
 extension LatestTelemetryToString on LatestTelemetry {
   String toShortString() {
@@ -408,11 +381,7 @@ extension LatestTelemetryToString on LatestTelemetry {
   }
 }
 
-enum AttributeScope {
-  CLIENT_SCOPE,
-  SERVER_SCOPE,
-  SHARED_SCOPE
-}
+enum AttributeScope { CLIENT_SCOPE, SERVER_SCOPE, SHARED_SCOPE }
 
 extension AttributeScopeToString on AttributeScope {
   String toShortString() {
@@ -421,7 +390,8 @@ extension AttributeScopeToString on AttributeScope {
 }
 
 AttributeScope attributeScopeFromString(String value) {
-  return AttributeScope.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return AttributeScope.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 class AttributeData {
@@ -437,26 +407,20 @@ class AttributeData {
   }
 }
 
-enum TelemetryFeature {
-  ATTRIBUTES,
-  TIMESERIES
-}
+enum TelemetryFeature { ATTRIBUTES, TIMESERIES }
 
 abstract class WebsocketCmd {
-
   int? cmdId;
 
   WebsocketCmd({this.cmdId});
 
-  Map<String, dynamic> toJson() => { 'cmdId': cmdId };
-
+  Map<String, dynamic> toJson() => {'cmdId': cmdId};
 }
 
 abstract class TelemetryPluginCmd extends WebsocketCmd {
-
   final String? keys;
 
-  TelemetryPluginCmd({int? cmdId, this.keys}): super(cmdId: cmdId);
+  TelemetryPluginCmd({int? cmdId, this.keys}) : super(cmdId: cmdId);
 
   @override
   Map<String, dynamic> toJson() {
@@ -466,27 +430,22 @@ abstract class TelemetryPluginCmd extends WebsocketCmd {
     }
     return json;
   }
-
 }
 
 abstract class SubscriptionCmd extends TelemetryPluginCmd {
-
   final EntityType entityType;
   final String entityId;
   final AttributeScope? scope;
   bool unsubscribe;
 
-  SubscriptionCmd({
-    int? cmdId,
-    String? keys,
-    required this.entityType,
-    required this.entityId,
-    this.scope,
-    this.unsubscribe = false
-  }): super(
-    cmdId: cmdId,
-    keys: keys
-  );
+  SubscriptionCmd(
+      {int? cmdId,
+      String? keys,
+      required this.entityType,
+      required this.entityId,
+      this.scope,
+      this.unsubscribe = false})
+      : super(cmdId: cmdId, keys: keys);
 
   @override
   Map<String, dynamic> toJson() {
@@ -504,56 +463,51 @@ abstract class SubscriptionCmd extends TelemetryPluginCmd {
 }
 
 class AttributesSubscriptionCmd extends SubscriptionCmd {
-
-  AttributesSubscriptionCmd({
-    int? cmdId,
-    String? keys,
-    required EntityType entityType,
-    required String entityId,
-    AttributeScope? scope,
-    bool unsubscribe = false
-  }): super(
-      cmdId: cmdId,
-      keys: keys,
-      entityType: entityType,
-      entityId: entityId,
-      scope: scope,
-      unsubscribe: unsubscribe
-  );
+  AttributesSubscriptionCmd(
+      {int? cmdId,
+      String? keys,
+      required EntityType entityType,
+      required String entityId,
+      AttributeScope? scope,
+      bool unsubscribe = false})
+      : super(
+            cmdId: cmdId,
+            keys: keys,
+            entityType: entityType,
+            entityId: entityId,
+            scope: scope,
+            unsubscribe: unsubscribe);
 
   @override
   TelemetryFeature getType() => TelemetryFeature.ATTRIBUTES;
-
 }
 
 class TimeseriesSubscriptionCmd extends SubscriptionCmd {
-
   final int? startTs;
   final int? timeWindow;
   final int? interval;
   final int? limit;
   final Aggregation agg;
 
-  TimeseriesSubscriptionCmd({
-    int? cmdId,
-    String? keys,
-    required EntityType entityType,
-    required String entityId,
-    this.startTs,
-    this.timeWindow,
-    this.interval = 1000,
-    this.limit,
-    this.agg = Aggregation.NONE,
-    AttributeScope? scope,
-    bool unsubscribe = false
-  }): super(
-      cmdId: cmdId,
-      keys: keys,
-      entityType: entityType,
-      entityId: entityId,
-      scope: scope,
-      unsubscribe: unsubscribe
-  );
+  TimeseriesSubscriptionCmd(
+      {int? cmdId,
+      String? keys,
+      required EntityType entityType,
+      required String entityId,
+      this.startTs,
+      this.timeWindow,
+      this.interval = 1000,
+      this.limit,
+      this.agg = Aggregation.NONE,
+      AttributeScope? scope,
+      bool unsubscribe = false})
+      : super(
+            cmdId: cmdId,
+            keys: keys,
+            entityType: entityType,
+            entityId: entityId,
+            scope: scope,
+            unsubscribe: unsubscribe);
 
   @override
   Map<String, dynamic> toJson() {
@@ -576,11 +530,9 @@ class TimeseriesSubscriptionCmd extends SubscriptionCmd {
 
   @override
   TelemetryFeature getType() => TelemetryFeature.TIMESERIES;
-
 }
 
 class GetHistoryCmd extends TelemetryPluginCmd {
-
   final EntityType entityType;
   final String entityId;
   final int startTs;
@@ -589,20 +541,17 @@ class GetHistoryCmd extends TelemetryPluginCmd {
   final int? limit;
   final Aggregation agg;
 
-  GetHistoryCmd({
-    int? cmdId,
-    String? keys,
-    required this.entityType,
-    required this.entityId,
-    required this.startTs,
-    required this.endTs,
-    this.interval = 1000,
-    this.limit,
-    this.agg = Aggregation.NONE
-  }): super(
-      cmdId: cmdId,
-      keys: keys
-  );
+  GetHistoryCmd(
+      {int? cmdId,
+      String? keys,
+      required this.entityType,
+      required this.entityId,
+      required this.startTs,
+      required this.endTs,
+      this.interval = 1000,
+      this.limit,
+      this.agg = Aggregation.NONE})
+      : super(cmdId: cmdId, keys: keys);
 
   @override
   Map<String, dynamic> toJson() {
@@ -618,7 +567,6 @@ class GetHistoryCmd extends TelemetryPluginCmd {
     json['agg'] = agg.toShortString();
     return json;
   }
-
 }
 
 class EntityHistoryCmd {
@@ -630,15 +578,14 @@ class EntityHistoryCmd {
   final Aggregation agg;
   final bool? fetchLatestPreviousPoint;
 
-  EntityHistoryCmd({
-    required this.keys,
-    required this.startTs,
-    required this.endTs,
-    this.interval = 1000,
-    this.limit,
-    this.agg = Aggregation.NONE,
-    this.fetchLatestPreviousPoint
-  });
+  EntityHistoryCmd(
+      {required this.keys,
+      required this.startTs,
+      required this.endTs,
+      this.interval = 1000,
+      this.limit,
+      this.agg = Aggregation.NONE,
+      this.fetchLatestPreviousPoint});
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
@@ -659,15 +606,12 @@ class EntityHistoryCmd {
 }
 
 class LatestValueCmd {
-  
   final List<EntityKey> keys;
 
   LatestValueCmd({required this.keys});
 
-  Map<String, dynamic> toJson() => {
-    'keys': keys.map((e) => e.toJson()).toList()
-  };
-
+  Map<String, dynamic> toJson() =>
+      {'keys': keys.map((e) => e.toJson()).toList()};
 }
 
 class TimeSeriesCmd {
@@ -679,15 +623,14 @@ class TimeSeriesCmd {
   final Aggregation agg;
   final bool? fetchLatestPreviousPoint;
 
-  TimeSeriesCmd({
-    required this.keys,
-    required this.startTs,
-    required this.timeWindow,
-    this.interval = 1000,
-    this.limit,
-    this.agg = Aggregation.NONE,
-    this.fetchLatestPreviousPoint
-  });
+  TimeSeriesCmd(
+      {required this.keys,
+      required this.startTs,
+      required this.timeWindow,
+      this.interval = 1000,
+      this.limit,
+      this.agg = Aggregation.NONE,
+      this.fetchLatestPreviousPoint});
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
@@ -708,13 +651,14 @@ class TimeSeriesCmd {
 }
 
 class EntityDataCmd extends WebsocketCmd {
-
   final EntityDataQuery? query;
   final EntityHistoryCmd? historyCmd;
   final LatestValueCmd? latestCmd;
   final TimeSeriesCmd? tsCmd;
 
-  EntityDataCmd({int? cmdId, this.query, this.historyCmd, this.latestCmd, this.tsCmd}): super(cmdId: cmdId);
+  EntityDataCmd(
+      {int? cmdId, this.query, this.historyCmd, this.latestCmd, this.tsCmd})
+      : super(cmdId: cmdId);
 
   @override
   Map<String, dynamic> toJson() {
@@ -734,15 +678,14 @@ class EntityDataCmd extends WebsocketCmd {
     return json;
   }
 
-  bool isEmpty() => query == null && historyCmd == null && latestCmd == null && tsCmd == null;
-
+  bool isEmpty() =>
+      query == null && historyCmd == null && latestCmd == null && tsCmd == null;
 }
 
 class EntityCountCmd extends WebsocketCmd {
-
   final EntityCountQuery? query;
 
-  EntityCountCmd({int? cmdId, this.query}): super(cmdId: cmdId);
+  EntityCountCmd({int? cmdId, this.query}) : super(cmdId: cmdId);
 
   @override
   Map<String, dynamic> toJson() {
@@ -754,14 +697,12 @@ class EntityCountCmd extends WebsocketCmd {
   }
 
   bool isEmpty() => query == null;
-
 }
 
 class AlarmDataCmd extends WebsocketCmd {
-
   final AlarmDataQuery? query;
 
-  AlarmDataCmd({int? cmdId, this.query}): super(cmdId: cmdId);
+  AlarmDataCmd({int? cmdId, this.query}) : super(cmdId: cmdId);
 
   @override
   Map<String, dynamic> toJson() {
@@ -773,29 +714,21 @@ class AlarmDataCmd extends WebsocketCmd {
   }
 
   bool isEmpty() => query == null;
-
 }
 
 class EntityDataUnsubscribeCmd extends WebsocketCmd {
-
-  EntityDataUnsubscribeCmd({int? cmdId}): super(cmdId: cmdId);
-
+  EntityDataUnsubscribeCmd({int? cmdId}) : super(cmdId: cmdId);
 }
 
 class EntityCountUnsubscribeCmd extends WebsocketCmd {
-
-  EntityCountUnsubscribeCmd({int? cmdId}): super(cmdId: cmdId);
-
+  EntityCountUnsubscribeCmd({int? cmdId}) : super(cmdId: cmdId);
 }
 
 class AlarmDataUnsubscribeCmd extends WebsocketCmd {
-
-  AlarmDataUnsubscribeCmd({int? cmdId}): super(cmdId: cmdId);
-
+  AlarmDataUnsubscribeCmd({int? cmdId}) : super(cmdId: cmdId);
 }
 
 class TelemetryPluginCmdsWrapper {
-
   List<AttributesSubscriptionCmd> attrSubCmds;
   List<TimeseriesSubscriptionCmd> tsSubCmds;
   List<GetHistoryCmd> historyCmds;
@@ -806,8 +739,8 @@ class TelemetryPluginCmdsWrapper {
   List<EntityCountCmd> entityCountCmds;
   List<EntityCountUnsubscribeCmd> entityCountUnsubscribeCmds;
 
-  TelemetryPluginCmdsWrapper():
-        attrSubCmds = [],
+  TelemetryPluginCmdsWrapper()
+      : attrSubCmds = [],
         tsSubCmds = [],
         historyCmds = [],
         entityDataCmds = [],
@@ -817,9 +750,15 @@ class TelemetryPluginCmdsWrapper {
         entityCountCmds = [],
         entityCountUnsubscribeCmds = [];
 
-  bool hasCommands() => tsSubCmds.isNotEmpty || historyCmds.isNotEmpty ||
-      attrSubCmds.isNotEmpty || entityDataCmds.isNotEmpty || entityDataUnsubscribeCmds.isNotEmpty ||
-      alarmDataCmds.isNotEmpty || alarmDataUnsubscribeCmds.isNotEmpty || entityCountCmds.isNotEmpty ||
+  bool hasCommands() =>
+      tsSubCmds.isNotEmpty ||
+      historyCmds.isNotEmpty ||
+      attrSubCmds.isNotEmpty ||
+      entityDataCmds.isNotEmpty ||
+      entityDataUnsubscribeCmds.isNotEmpty ||
+      alarmDataCmds.isNotEmpty ||
+      alarmDataUnsubscribeCmds.isNotEmpty ||
+      entityCountCmds.isNotEmpty ||
       entityCountUnsubscribeCmds.isNotEmpty;
 
   void clear() {
@@ -845,29 +784,35 @@ class TelemetryPluginCmdsWrapper {
     leftCount -= preparedWrapper.attrSubCmds.length;
     preparedWrapper.entityDataCmds = _popCmds(entityDataCmds, leftCount);
     leftCount -= preparedWrapper.entityDataCmds.length;
-    preparedWrapper.entityDataUnsubscribeCmds = _popCmds(entityDataUnsubscribeCmds, leftCount);
+    preparedWrapper.entityDataUnsubscribeCmds =
+        _popCmds(entityDataUnsubscribeCmds, leftCount);
     leftCount -= preparedWrapper.entityDataUnsubscribeCmds.length;
     preparedWrapper.alarmDataCmds = _popCmds(alarmDataCmds, leftCount);
     leftCount -= preparedWrapper.alarmDataCmds.length;
-    preparedWrapper.alarmDataUnsubscribeCmds = _popCmds(alarmDataUnsubscribeCmds, leftCount);
+    preparedWrapper.alarmDataUnsubscribeCmds =
+        _popCmds(alarmDataUnsubscribeCmds, leftCount);
     leftCount -= preparedWrapper.alarmDataUnsubscribeCmds.length;
     preparedWrapper.entityCountCmds = _popCmds(entityCountCmds, leftCount);
     leftCount -= preparedWrapper.entityCountCmds.length;
-    preparedWrapper.entityCountUnsubscribeCmds = _popCmds(entityCountUnsubscribeCmds, leftCount);
+    preparedWrapper.entityCountUnsubscribeCmds =
+        _popCmds(entityCountUnsubscribeCmds, leftCount);
     return preparedWrapper;
   }
 
   Map<String, dynamic> toJson() => {
-    'attrSubCmds': attrSubCmds.map((e) => e.toJson()).toList(),
-    'tsSubCmds': tsSubCmds.map((e) => e.toJson()).toList(),
-    'historyCmds': historyCmds.map((e) => e.toJson()).toList(),
-    'entityDataCmds': entityDataCmds.map((e) => e.toJson()).toList(),
-    'entityDataUnsubscribeCmds': entityDataUnsubscribeCmds.map((e) => e.toJson()).toList(),
-    'alarmDataCmds': alarmDataCmds.map((e) => e.toJson()).toList(),
-    'alarmDataUnsubscribeCmds': alarmDataUnsubscribeCmds.map((e) => e.toJson()).toList(),
-    'entityCountCmds': entityCountCmds.map((e) => e.toJson()).toList(),
-    'entityCountUnsubscribeCmds': entityCountUnsubscribeCmds.map((e) => e.toJson()).toList()
-  };
+        'attrSubCmds': attrSubCmds.map((e) => e.toJson()).toList(),
+        'tsSubCmds': tsSubCmds.map((e) => e.toJson()).toList(),
+        'historyCmds': historyCmds.map((e) => e.toJson()).toList(),
+        'entityDataCmds': entityDataCmds.map((e) => e.toJson()).toList(),
+        'entityDataUnsubscribeCmds':
+            entityDataUnsubscribeCmds.map((e) => e.toJson()).toList(),
+        'alarmDataCmds': alarmDataCmds.map((e) => e.toJson()).toList(),
+        'alarmDataUnsubscribeCmds':
+            alarmDataUnsubscribeCmds.map((e) => e.toJson()).toList(),
+        'entityCountCmds': entityCountCmds.map((e) => e.toJson()).toList(),
+        'entityCountUnsubscribeCmds':
+            entityCountUnsubscribeCmds.map((e) => e.toJson()).toList()
+      };
 
   List<T> _popCmds<T>(List<T> cmds, int leftCount) {
     var toPublish = min(cmds.length, leftCount);
@@ -879,7 +824,6 @@ class TelemetryPluginCmdsWrapper {
       return [];
     }
   }
-
 }
 
 class TsValue {
@@ -888,13 +832,13 @@ class TsValue {
 
   TsValue({required this.ts, this.value});
 
-  TsValue.fromJson(Map<String, dynamic> json):
-        ts = json['ts'],
-        value =  json['value'];
+  TsValue.fromJson(Map<String, dynamic> json)
+      : ts = json['ts'],
+        value = json['value'];
 
-  TsValue.fromJsonList(List<dynamic> json):
-        ts = json[0],
-        value =  json[1];
+  TsValue.fromJsonList(List<dynamic> json)
+      : ts = json[0],
+        value = json[1];
 
   @override
   String toString() {
@@ -903,7 +847,6 @@ class TsValue {
 }
 
 abstract class WebsocketDataMsg {
-
   WebsocketDataMsg();
 
   factory WebsocketDataMsg.fromJson(Map<String, dynamic> json) {
@@ -926,19 +869,18 @@ abstract class WebsocketDataMsg {
     }
     throw ArgumentError('Unexpected type of websocket data');
   }
-
 }
 
 class SubscriptionDataHolder extends WebsocketDataMsg {
-
   final Map<String, List<TsValue>> data;
 
-  SubscriptionDataHolder.fromJson(Map<String, dynamic> json):
-    data = (json['data'] as Map<String, dynamic>).map((key, value) {
-      var tsList = value as List<dynamic>;
-      var tsValuesList = tsList.map((e) => TsValue.fromJsonList(e)).toList();
-      return MapEntry(key, tsValuesList);
-    });
+  SubscriptionDataHolder.fromJson(Map<String, dynamic> json)
+      : data = (json['data'] as Map<String, dynamic>).map((key, value) {
+          var tsList = value as List<dynamic>;
+          var tsValuesList =
+              tsList.map((e) => TsValue.fromJsonList(e)).toList();
+          return MapEntry(key, tsValuesList);
+        });
 
   @override
   String toString() {
@@ -947,13 +889,12 @@ class SubscriptionDataHolder extends WebsocketDataMsg {
 }
 
 class SubscriptionUpdate extends SubscriptionDataHolder {
-
   final int subscriptionId;
   final int? errorCode;
   final String? errorMsg;
 
-  SubscriptionUpdate.fromJson(Map<String, dynamic> json):
-        subscriptionId = json['subscriptionId'],
+  SubscriptionUpdate.fromJson(Map<String, dynamic> json)
+      : subscriptionId = json['subscriptionId'],
         errorCode = json['errorCode'],
         errorMsg = json['errorMsg'],
         super.fromJson(json);
@@ -977,9 +918,8 @@ class SubscriptionUpdate extends SubscriptionDataHolder {
           existingData.lastUpdateTs = keyData[0].ts;
           existingData.value = keyData[0].value;
         } else {
-          origData.add(AttributeData(key: key,
-              lastUpdateTs: keyData[0].ts,
-              value: keyData[0].value));
+          origData.add(AttributeData(
+              key: key, lastUpdateTs: keyData[0].ts, value: keyData[0].value));
         }
       }
     });
@@ -992,38 +932,39 @@ class SubscriptionUpdate extends SubscriptionDataHolder {
   }
 }
 
-enum CmdUpdateType {
-  ENTITY_DATA,
-  ALARM_DATA,
-  COUNT_DATA
-}
+enum CmdUpdateType { ENTITY_DATA, ALARM_DATA, COUNT_DATA }
 
 CmdUpdateType cmdUpdateTypeFromString(String value) {
-  return CmdUpdateType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return CmdUpdateType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 abstract class CmdUpdate extends WebsocketDataMsg {
-
   final int cmdId;
   final int? errorCode;
   final String? errorMsg;
 
-  CmdUpdate.fromJson(Map<String, dynamic> json):
-        cmdId = json['cmdId'],
+  CmdUpdate.fromJson(Map<String, dynamic> json)
+      : cmdId = json['cmdId'],
         errorCode = json['errorCode'],
         errorMsg = json['errorMsg'];
-
 }
 
 abstract class DataUpdate<T> extends CmdUpdate {
-
   final PageData<T>? data;
   final List<T>? update;
 
-  DataUpdate.fromJson(Map<String, dynamic> json, T Function(Map<String, dynamic> json) dataFromJson):
-      data = json['data'] != null ? PageData.fromJson(json['data'], (json) => dataFromJson(json)) : null,
-      update = json['update'] != null ? (json['update'] as List<dynamic>).map((e) => dataFromJson(e)).toList() : null,
-      super.fromJson(json);
+  DataUpdate.fromJson(Map<String, dynamic> json,
+      T Function(Map<String, dynamic> json) dataFromJson)
+      : data = json['data'] != null
+            ? PageData.fromJson(json['data'], (json) => dataFromJson(json))
+            : null,
+        update = json['update'] != null
+            ? (json['update'] as List<dynamic>)
+                .map((e) => dataFromJson(e))
+                .toList()
+            : null,
+        super.fromJson(json);
 
   @override
   String toString() {
@@ -1032,9 +973,8 @@ abstract class DataUpdate<T> extends CmdUpdate {
 }
 
 class EntityDataUpdate extends DataUpdate<EntityData> {
-
-  EntityDataUpdate.fromJson(Map<String, dynamic> json):
-      super.fromJson(json, (json) => EntityData.fromJson(json));
+  EntityDataUpdate.fromJson(Map<String, dynamic> json)
+      : super.fromJson(json, (json) => EntityData.fromJson(json));
 
   void prepareData(int tsOffset) {
     if (data != null) {
@@ -1065,12 +1005,11 @@ class EntityDataUpdate extends DataUpdate<EntityData> {
 }
 
 class AlarmDataUpdate extends DataUpdate<AlarmData> {
-
   final int? allowedEntities;
   final int? totalEntities;
 
-  AlarmDataUpdate.fromJson(Map<String, dynamic> json):
-        allowedEntities = json['allowedEntities'],
+  AlarmDataUpdate.fromJson(Map<String, dynamic> json)
+      : allowedEntities = json['allowedEntities'],
         totalEntities = json['totalEntities'],
         super.fromJson(json, (json) => AlarmData.fromJson(json));
 
@@ -1085,30 +1024,30 @@ class AlarmDataUpdate extends DataUpdate<AlarmData> {
 
   void _processAlarmData(List<AlarmData> data, int tsOffset) {
     data.forEach((alarmData) {
-       alarmData.createdTime = alarmData.createdTime! + tsOffset;
-       alarmData.ackTs += tsOffset;
-       alarmData.clearTs += tsOffset;
-       alarmData.endTs += tsOffset;
-       alarmData.latest.forEach((key, keyTypeValues) {
-         keyTypeValues.forEach((key, tsValue) {
-           tsValue.ts += tsOffset;
-           if (['createdTime', 'startTime', 'endTime', 'ackTime', 'clearTime'].contains(key) && tsValue.value != null) {
-             tsValue.value = (int.parse(tsValue.value!) + tsOffset).toString();
-           }
-         });
-       });
+      alarmData.createdTime = alarmData.createdTime! + tsOffset;
+      alarmData.ackTs += tsOffset;
+      alarmData.clearTs += tsOffset;
+      alarmData.endTs += tsOffset;
+      alarmData.latest.forEach((key, keyTypeValues) {
+        keyTypeValues.forEach((key, tsValue) {
+          tsValue.ts += tsOffset;
+          if (['createdTime', 'startTime', 'endTime', 'ackTime', 'clearTime']
+                  .contains(key) &&
+              tsValue.value != null) {
+            tsValue.value = (int.parse(tsValue.value!) + tsOffset).toString();
+          }
+        });
+      });
     });
   }
-
 }
 
 class EntityCountUpdate extends CmdUpdate {
-
   final int count;
 
-  EntityCountUpdate.fromJson(Map<String, dynamic> json):
-      count = json['count'],
-      super.fromJson(json);
+  EntityCountUpdate.fromJson(Map<String, dynamic> json)
+      : count = json['count'],
+        super.fromJson(json);
 
   @override
   String toString() {
@@ -1117,15 +1056,12 @@ class EntityCountUpdate extends CmdUpdate {
 }
 
 abstract class TelemetryService {
-
   void subscribe(TelemetrySubscriber subscriber);
   void update(TelemetrySubscriber subscriber);
   void unsubscribe(TelemetrySubscriber subscriber);
-
 }
 
 class TelemetrySubscriber {
-
   final TelemetryService _telemetryService;
 
   final List<WebsocketCmd> _subscriptionCommands;
@@ -1137,37 +1073,35 @@ class TelemetrySubscriber {
 
   int? _tsOffset;
 
-  TelemetrySubscriber(TelemetryService telemetryService, List<WebsocketCmd> subscriptionCommands):
-      _telemetryService = telemetryService,
-      _subscriptionCommands = subscriptionCommands,
-      _dataStreamController = StreamController.broadcast(),
-      _entityDataStreamController = StreamController.broadcast(),
-      _alarmDataStreamController = StreamController.broadcast(),
-      _entityCountStreamController = StreamController.broadcast(),
-      _reconnectStreamController = StreamController.broadcast();
+  TelemetrySubscriber(TelemetryService telemetryService,
+      List<WebsocketCmd> subscriptionCommands)
+      : _telemetryService = telemetryService,
+        _subscriptionCommands = subscriptionCommands,
+        _dataStreamController = StreamController.broadcast(),
+        _entityDataStreamController = StreamController.broadcast(),
+        _alarmDataStreamController = StreamController.broadcast(),
+        _entityCountStreamController = StreamController.broadcast(),
+        _reconnectStreamController = StreamController.broadcast();
 
-  static TelemetrySubscriber createEntityAttributesSubscription({
-    required TelemetryService telemetryService,
-    required EntityId entityId,
-    required String attributeScope,
-    List<String>? keys
-  }) {
+  static TelemetrySubscriber createEntityAttributesSubscription(
+      {required TelemetryService telemetryService,
+      required EntityId entityId,
+      required String attributeScope,
+      List<String>? keys}) {
     SubscriptionCmd subscriptionCommand;
     var subscriptionKeys = keys != null ? keys.join(',') : null;
     if (attributeScope == LatestTelemetry.LATEST_TELEMETRY.toShortString()) {
       subscriptionCommand = TimeseriesSubscriptionCmd(
-        entityId: entityId.id!,
-        entityType: entityId.entityType,
-        keys: subscriptionKeys
-      );
+          entityId: entityId.id!,
+          entityType: entityId.entityType,
+          keys: subscriptionKeys);
     } else {
       var scope = attributeScopeFromString(attributeScope);
       subscriptionCommand = AttributesSubscriptionCmd(
           entityId: entityId.id!,
           entityType: entityId.entityType,
           keys: subscriptionKeys,
-          scope: scope
-      );
+          scope: scope);
     }
     return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
   }
@@ -1206,11 +1140,13 @@ class TelemetrySubscriber {
   void onData(SubscriptionUpdate message) {
     var cmdId = message.subscriptionId;
     List<String>? keys;
-    var foundCmd = _subscriptionCommands.where((command) => command.cmdId == cmdId);
+    var foundCmd =
+        _subscriptionCommands.where((command) => command.cmdId == cmdId);
     if (foundCmd.isNotEmpty) {
       var cmd = foundCmd.first;
       var telemetryPluginCmd = cmd as TelemetryPluginCmd;
-      if (telemetryPluginCmd.keys != null && telemetryPluginCmd.keys!.isNotEmpty) {
+      if (telemetryPluginCmd.keys != null &&
+          telemetryPluginCmd.keys!.isNotEmpty) {
         keys = telemetryPluginCmd.keys!.split(',');
       }
     }
@@ -1254,17 +1190,20 @@ class TelemetrySubscriber {
 
   Stream<SubscriptionUpdate> get dataStream => _dataStreamController.stream;
 
-  Stream<EntityDataUpdate> get entityDataStream => _entityDataStreamController.stream;
+  Stream<EntityDataUpdate> get entityDataStream =>
+      _entityDataStreamController.stream;
 
-  Stream<AlarmDataUpdate> get alarmDataStream => _alarmDataStreamController.stream;
+  Stream<AlarmDataUpdate> get alarmDataStream =>
+      _alarmDataStreamController.stream;
 
-  Stream<EntityCountUpdate> get entityCountStream => _entityCountStreamController.stream;
+  Stream<EntityCountUpdate> get entityCountStream =>
+      _entityCountStreamController.stream;
 
   Stream<void> get reconnectStream => _reconnectStreamController.stream;
 
   Stream<List<AttributeData>> get attributeDataStream {
     final attributeData = <AttributeData>[];
-    return dataStream.map((message) => message.updateAttributeData(attributeData));
+    return dataStream
+        .map((message) => message.updateAttributeData(attributeData));
   }
-
 }

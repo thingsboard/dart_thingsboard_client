@@ -4,16 +4,11 @@ import 'id/device_id.dart';
 import 'id/rpc_id.dart';
 import 'id/tenant_id.dart';
 
-enum RpcStatus {
-  QUEUED,
-  DELIVERED,
-  SUCCESSFUL,
-  TIMEOUT,
-  FAILED
-}
+enum RpcStatus { QUEUED, DELIVERED, SUCCESSFUL, TIMEOUT, FAILED }
 
 RpcStatus rpcStatusFromString(String value) {
-  return RpcStatus.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return RpcStatus.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension RpcStatusToString on RpcStatus {
@@ -23,7 +18,6 @@ extension RpcStatusToString on RpcStatus {
 }
 
 class Rpc extends BaseData<RpcId> with HasTenantId {
-
   TenantId tenantId;
   DeviceId deviceId;
   int expirationTime;
@@ -31,8 +25,8 @@ class Rpc extends BaseData<RpcId> with HasTenantId {
   dynamic response;
   RpcStatus status;
 
-  Rpc.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
+  Rpc.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
         deviceId = DeviceId.fromJson(json['deviceId']),
         expirationTime = json['expirationTime'],
         request = json['request'],

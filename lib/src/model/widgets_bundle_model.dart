@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'base_data.dart';
@@ -7,7 +6,6 @@ import 'id/tenant_id.dart';
 import 'id/widgets_bundle_id.dart';
 
 class WidgetsBundle extends BaseData<WidgetsBundleId> with HasTenantId {
-
   TenantId? tenantId;
   String? alias;
   String title;
@@ -16,8 +14,10 @@ class WidgetsBundle extends BaseData<WidgetsBundleId> with HasTenantId {
 
   WidgetsBundle(this.title);
 
-  WidgetsBundle.fromJson(Map<String, dynamic> json):
-        tenantId = json['tenantId'] != null ? TenantId.fromJson(json['tenantId']) : null,
+  WidgetsBundle.fromJson(Map<String, dynamic> json)
+      : tenantId = json['tenantId'] != null
+            ? TenantId.fromJson(json['tenantId'])
+            : null,
         alias = json['alias'],
         title = json['title'],
         image = json['image'],
@@ -50,6 +50,6 @@ class WidgetsBundle extends BaseData<WidgetsBundleId> with HasTenantId {
 
   @override
   String toString() {
-    return 'WidgetsBundle{${baseDataString('tenantId: $tenantId, alias: $alias, title: $title, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, description: $description')}}';
+    return 'WidgetsBundle{${baseDataString('tenantId: $tenantId, alias: $alias, title: $title, image: ${image != null ? '[' + image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, description: $description')}}';
   }
 }

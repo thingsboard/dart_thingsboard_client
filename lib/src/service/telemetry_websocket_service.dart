@@ -17,7 +17,6 @@ WebsocketDataMsg parseWebsocketDataMessage(dynamic raw) {
 }
 
 class TelemetryWebsocketService implements TelemetryService {
-
   bool _isActive = false;
   bool _isOpening = false;
   bool _isOpened = false;
@@ -38,14 +37,16 @@ class TelemetryWebsocketService implements TelemetryService {
 
   late WebSocketSink _sink;
 
-  factory TelemetryWebsocketService(ThingsboardClient tbClient, String apiEndpoint) {
+  factory TelemetryWebsocketService(
+      ThingsboardClient tbClient, String apiEndpoint) {
     return TelemetryWebsocketService._internal(tbClient, apiEndpoint);
   }
 
   TelemetryWebsocketService._internal(this._tbClient, String apiEndpoint) {
     var apiEndpointUri = Uri.parse(apiEndpoint);
     var scheme = apiEndpointUri.scheme == 'https' ? 'wss' : 'ws';
-    _telemetryUri = apiEndpointUri.replace(scheme: scheme, path: '/api/ws/plugins/telemetry');
+    _telemetryUri = apiEndpointUri.replace(
+        scheme: scheme, path: '/api/ws/plugins/telemetry');
   }
 
   @override
@@ -59,7 +60,8 @@ class TelemetryWebsocketService implements TelemetryService {
         if (subscriptionCommand is TimeseriesSubscriptionCmd) {
           _cmdsWrapper.tsSubCmds.add(subscriptionCommand);
         } else {
-          _cmdsWrapper.attrSubCmds.add(subscriptionCommand as AttributesSubscriptionCmd);
+          _cmdsWrapper.attrSubCmds
+              .add(subscriptionCommand as AttributesSubscriptionCmd);
         }
       } else if (subscriptionCommand is GetHistoryCmd) {
         _cmdsWrapper.historyCmds.add(subscriptionCommand);
@@ -79,7 +81,8 @@ class TelemetryWebsocketService implements TelemetryService {
   void update(TelemetrySubscriber subscriber) {
     if (!_isReconnect) {
       subscriber.subscriptionCommands.forEach((subscriptionCommand) {
-        if (subscriptionCommand.cmdId != null && subscriptionCommand is EntityDataCmd) {
+        if (subscriptionCommand.cmdId != null &&
+            subscriptionCommand is EntityDataCmd) {
           _cmdsWrapper.entityDataCmds.add(subscriptionCommand);
         }
       });
@@ -96,17 +99,22 @@ class TelemetryWebsocketService implements TelemetryService {
           if (subscriptionCommand is TimeseriesSubscriptionCmd) {
             _cmdsWrapper.tsSubCmds.add(subscriptionCommand);
           } else {
-            _cmdsWrapper.attrSubCmds.add(subscriptionCommand as AttributesSubscriptionCmd);
+            _cmdsWrapper.attrSubCmds
+                .add(subscriptionCommand as AttributesSubscriptionCmd);
           }
         } else if (subscriptionCommand is EntityDataCmd) {
-          var entityDataUnsubscribeCmd = EntityDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          var entityDataUnsubscribeCmd =
+              EntityDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
           _cmdsWrapper.entityDataUnsubscribeCmds.add(entityDataUnsubscribeCmd);
         } else if (subscriptionCommand is AlarmDataCmd) {
-          var alarmDataUnsubscribeCmd = AlarmDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          var alarmDataUnsubscribeCmd =
+              AlarmDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
           _cmdsWrapper.alarmDataUnsubscribeCmds.add(alarmDataUnsubscribeCmd);
         } else if (subscriptionCommand is EntityCountCmd) {
-          var entityCountUnsubscribeCmd = EntityCountUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
-          _cmdsWrapper.entityCountUnsubscribeCmds.add(entityCountUnsubscribeCmd);
+          var entityCountUnsubscribeCmd =
+              EntityCountUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          _cmdsWrapper.entityCountUnsubscribeCmds
+              .add(entityCountUnsubscribeCmd);
         }
         var cmdId = subscriptionCommand.cmdId;
         if (cmdId != null) {
@@ -125,11 +133,11 @@ class TelemetryWebsocketService implements TelemetryService {
   }
 
   void _publishCommands() {
-
-    while(_isOpened && _cmdsWrapper.hasCommands()) {
+    while (_isOpened && _cmdsWrapper.hasCommands()) {
       String? message;
       try {
-        message = jsonEncode(_cmdsWrapper.preparePublishCommands(MAX_PUBLISH_COMMANDS));
+        message = jsonEncode(
+            _cmdsWrapper.preparePublishCommands(MAX_PUBLISH_COMMANDS));
       } catch (e) {
         print('Failed to prepare publish commands: $e');
       }
@@ -143,10 +151,8 @@ class TelemetryWebsocketService implements TelemetryService {
 
   void _checkToClose() {
     if (_subscribersCount == 0 && _isOpened) {
-      _socketCloseTimer ??= Timer(
-          Duration(milliseconds: WS_IDLE_TIMEOUT),
-            () => _closeSocket()
-      );
+      _socketCloseTimer ??=
+          Timer(Duration(milliseconds: WS_IDLE_TIMEOUT), () => _closeSocket());
     }
   }
 
@@ -179,13 +185,11 @@ class TelemetryWebsocketService implements TelemetryService {
           _openSocket(_tbClient.getJwtToken()!);
         } else {
           _tbClient.refreshJwtToken().then((value) {
-              _openSocket(_tbClient.getJwtToken()!);
-            },
-            onError: (e) {
-              _isOpening = false;
-              _tbClient.logout();
-            }
-          );
+            _openSocket(_tbClient.getJwtToken()!);
+          }, onError: (e) {
+            _isOpening = false;
+            _tbClient.logout();
+          });
         }
       }
       if (_socketCloseTimer != null) {
@@ -202,11 +206,9 @@ class TelemetryWebsocketService implements TelemetryService {
       _sink = channel.sink;
       channel.stream.listen((event) {
         _onMessage(event);
-      },
-      onDone: () {
+      }, onDone: () {
         _onClose(channel);
-      },
-      onError: (e) {
+      }, onError: (e) {
         _onError(e);
       });
       _onOpen();
@@ -236,7 +238,8 @@ class TelemetryWebsocketService implements TelemetryService {
 
   void _onMessage(dynamic rawMessage) async {
     try {
-      var message = await _tbClient.compute(parseWebsocketDataMessage, rawMessage);
+      var message =
+          await _tbClient.compute(parseWebsocketDataMessage, rawMessage);
       if (message is SubscriptionUpdate) {
         if (message.errorCode != null && message.errorCode! != 0) {
           _onWsError(message.errorCode!, message.errorMsg);
@@ -266,33 +269,33 @@ class TelemetryWebsocketService implements TelemetryService {
   }
 
   void _onClose([IOWebSocketChannel? channel]) {
-      if (channel != null && channel.closeCode != null && channel.closeCode! > 1001 && channel.closeCode! != 1006) {
-        _onWsError(channel.closeCode!, channel.closeReason);
+    if (channel != null &&
+        channel.closeCode != null &&
+        channel.closeCode! > 1001 &&
+        channel.closeCode! != 1006) {
+      _onWsError(channel.closeCode!, channel.closeReason);
+    }
+    _isOpening = false;
+    _isOpened = false;
+    if (_isActive) {
+      if (!_isReconnect) {
+        _reconnectSubscribers.clear();
+        _subscribersMap.forEach((key, subscriber) {
+          _reconnectSubscribers.add(subscriber);
+        });
+        reset(false);
+        _isReconnect = true;
       }
-      _isOpening = false;
-      _isOpened = false;
-      if (_isActive) {
-        if (!_isReconnect) {
-          _reconnectSubscribers.clear();
-          _subscribersMap.forEach((key, subscriber) {
-            _reconnectSubscribers.add(subscriber);
-          });
-          reset(false);
-          _isReconnect = true;
-        }
-        if (_reconnectTimer != null) {
-          _reconnectTimer!.cancel();
-        }
-        _reconnectTimer = Timer(
-          Duration(milliseconds: RECONNECT_INTERVAL),
-          () => _tryOpenSocket()
-        );
+      if (_reconnectTimer != null) {
+        _reconnectTimer!.cancel();
       }
+      _reconnectTimer = Timer(
+          Duration(milliseconds: RECONNECT_INTERVAL), () => _tryOpenSocket());
+    }
   }
 
   void _onWsError(int errorCode, String? errorMsg) {
     var message = errorMsg ?? 'WebSocket Error: error code - $errorCode.';
     print(message);
   }
-
 }

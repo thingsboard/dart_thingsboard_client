@@ -5,15 +5,14 @@ import 'id/event_id.dart';
 import 'id/tenant_id.dart';
 
 class Event extends BaseData<EventId> {
-
   TenantId tenantId;
   EntityId entityId;
   String type;
   String uid;
   EventBody body;
 
-  Event.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
+  Event.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
         entityId = EntityId.fromJson(json['entityId']),
         type = json['type'],
         uid = json['uid'],
@@ -36,7 +35,6 @@ enum EventType {
 }
 
 abstract class EventBody {
-
   static const ERROR = 'ERROR';
   static const LC_EVENT = 'LC_EVENT';
   static const STATS = 'STATS';
@@ -48,7 +46,7 @@ abstract class EventBody {
   EventType getEventType();
 
   factory EventBody.fromJson(String type, Map<String, dynamic> json) {
-    switch(type) {
+    switch (type) {
       case ERROR:
         return ErrorEventBody.fromJson(json);
       case LC_EVENT:
@@ -63,18 +61,15 @@ abstract class EventBody {
         return RawEventBody.fromJson(json);
     }
   }
-
 }
 
 class RawEventBody extends EventBody {
-
   Map<String, dynamic> rawBody;
 
   @override
   EventType getEventType() => EventType.RAW;
 
-  RawEventBody.fromJson(Map<String, dynamic> json):
-      rawBody = json;
+  RawEventBody.fromJson(Map<String, dynamic> json) : rawBody = json;
 
   @override
   String toString() {
@@ -83,11 +78,9 @@ class RawEventBody extends EventBody {
 }
 
 abstract class BaseEventBody extends EventBody {
-
   String server;
 
-  BaseEventBody.fromJson(Map<String, dynamic> json):
-      server = json['server'];
+  BaseEventBody.fromJson(Map<String, dynamic> json) : server = json['server'];
 
   String baseEventBodyString([String? toStringBody]) {
     return 'server: $server${toStringBody != null ? ', ' + toStringBody : ''}';
@@ -95,15 +88,14 @@ abstract class BaseEventBody extends EventBody {
 }
 
 class ErrorEventBody extends BaseEventBody {
-
   String method;
   String error;
 
   @override
   EventType getEventType() => EventType.ERROR;
 
-  ErrorEventBody.fromJson(Map<String, dynamic> json):
-        method = json['method'],
+  ErrorEventBody.fromJson(Map<String, dynamic> json)
+      : method = json['method'],
         error = json['error'],
         super.fromJson(json);
 
@@ -114,7 +106,6 @@ class ErrorEventBody extends BaseEventBody {
 }
 
 class LcEventEventBody extends BaseEventBody {
-
   String event;
   bool success;
   String? error;
@@ -122,8 +113,8 @@ class LcEventEventBody extends BaseEventBody {
   @override
   EventType getEventType() => EventType.LC_EVENT;
 
-  LcEventEventBody.fromJson(Map<String, dynamic> json):
-        event = json['event'],
+  LcEventEventBody.fromJson(Map<String, dynamic> json)
+      : event = json['event'],
         success = json['success'],
         error = json['error'],
         super.fromJson(json);
@@ -135,15 +126,14 @@ class LcEventEventBody extends BaseEventBody {
 }
 
 class StatsEventBody extends BaseEventBody {
-
   int messagesProcessed;
   int errorsOccurred;
 
   @override
   EventType getEventType() => EventType.STATS;
 
-  StatsEventBody.fromJson(Map<String, dynamic> json):
-        messagesProcessed = json['messagesProcessed'],
+  StatsEventBody.fromJson(Map<String, dynamic> json)
+      : messagesProcessed = json['messagesProcessed'],
         errorsOccurred = json['errorsOccurred'],
         super.fromJson(json);
 
@@ -154,7 +144,6 @@ class StatsEventBody extends BaseEventBody {
 }
 
 class DebugRuleNodeEventBody extends BaseEventBody {
-
   String type;
   String entityId;
   String entityName;
@@ -169,8 +158,8 @@ class DebugRuleNodeEventBody extends BaseEventBody {
   @override
   EventType getEventType() => EventType.DEBUG_RULE_NODE;
 
-  DebugRuleNodeEventBody.fromJson(Map<String, dynamic> json):
-        type = json['type'],
+  DebugRuleNodeEventBody.fromJson(Map<String, dynamic> json)
+      : type = json['type'],
         entityId = json['entityId'],
         entityName = json['entityName'],
         msgId = json['msgId'],
@@ -190,15 +179,14 @@ class DebugRuleNodeEventBody extends BaseEventBody {
 }
 
 class DebugRuleChainEventBody extends BaseEventBody {
-
   String message;
   String? error;
 
   @override
   EventType getEventType() => EventType.DEBUG_RULE_CHAIN;
 
-  DebugRuleChainEventBody.fromJson(Map<String, dynamic> json):
-        message = json['message'],
+  DebugRuleChainEventBody.fromJson(Map<String, dynamic> json)
+      : message = json['message'],
         error = json['error'],
         super.fromJson(json);
 
@@ -208,14 +196,11 @@ class DebugRuleChainEventBody extends BaseEventBody {
   }
 }
 
-enum ContentType {
-  JSON,
-  TEXT,
-  BINARY
-}
+enum ContentType { JSON, TEXT, BINARY }
 
 ContentType contentTypeFromString(String value) {
-  return ContentType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return ContentType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ContentTypeToString on ContentType {

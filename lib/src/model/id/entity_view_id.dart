@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class EntityViewId extends EntityId {
-
   EntityViewId(String id) : super(EntityType.ENTITY_VIEW, id);
 
   @override

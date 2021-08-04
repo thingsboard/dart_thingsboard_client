@@ -1,7 +1,6 @@
 import 'has_uuid.dart';
 
 class AuditLogId extends HasUuid {
-
   AuditLogId(String? id) : super(id);
 
   @override
@@ -13,5 +12,4 @@ class AuditLogId extends HasUuid {
   String toString() {
     return 'AuditLogId {id: $id}';
   }
-
 }

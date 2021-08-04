@@ -8,8 +8,8 @@ abstract class BaseData<T extends HasUuid> extends IdBased<T> {
 
   BaseData();
 
-  BaseData.fromJson(Map<String, dynamic> json, [fromIdFunction<T>? fromId]):
-        createdTime = json['createdTime'],
+  BaseData.fromJson(Map<String, dynamic> json, [fromIdFunction<T>? fromId])
+      : createdTime = json['createdTime'],
         super.fromJson(json, fromId);
 
   @override

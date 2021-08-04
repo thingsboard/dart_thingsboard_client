@@ -10,8 +10,8 @@ import 'additional_info_based.dart';
 import 'id/rule_chain_id.dart';
 import 'id/tenant_id.dart';
 
-class Edge extends AdditionalInfoBased<EdgeId> with HasName, HasTenantId, HasCustomerId {
-
+class Edge extends AdditionalInfoBased<EdgeId>
+    with HasName, HasTenantId, HasCustomerId {
   TenantId? tenantId;
   CustomerId? customerId;
   RuleChainId? rootRuleChainId;
@@ -23,11 +23,14 @@ class Edge extends AdditionalInfoBased<EdgeId> with HasName, HasTenantId, HasCus
   String edgeLicenseKey;
   String cloudEndpoint;
 
-  Edge(this.name, this.type, this.routingKey, this.secret, this.edgeLicenseKey, this.cloudEndpoint);
+  Edge(this.name, this.type, this.routingKey, this.secret, this.edgeLicenseKey,
+      this.cloudEndpoint);
 
-  Edge.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
-        customerId = json['customerId'] != null ? CustomerId.fromJson(json['customerId']) : null,
+  Edge.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
+        customerId = json['customerId'] != null
+            ? CustomerId.fromJson(json['customerId'])
+            : null,
         name = json['name'],
         type = json['type'],
         label = json['label'],
@@ -83,15 +86,14 @@ class Edge extends AdditionalInfoBased<EdgeId> with HasName, HasTenantId, HasCus
         'label: $label, routingKey: $routingKey, secret: $secret, edgeLicenseKey: $edgeLicenseKey, '
         'cloudEndpoint: $cloudEndpoint${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
-
 }
 
 class EdgeInfo extends Edge {
   String? customerTitle;
   bool? customerIsPublic;
 
-  EdgeInfo.fromJson(Map<String, dynamic> json):
-        customerTitle = json['customerTitle'],
+  EdgeInfo.fromJson(Map<String, dynamic> json)
+      : customerTitle = json['customerTitle'],
         customerIsPublic = json['customerIsPublic'],
         super.fromJson(json);
 
@@ -99,18 +101,16 @@ class EdgeInfo extends Edge {
   String toString() {
     return 'EdgeInfo{${edgeString('customerTitle: $customerTitle, customerIsPublic: $customerIsPublic')}}';
   }
-
 }
 
 class EdgeSearchQuery extends EntitySearchQuery {
-
   List<String> edgeTypes;
 
-  EdgeSearchQuery({
-    required RelationsSearchParameters parameters,
-    required this.edgeTypes,
-    String? relationType
-  }): super(parameters: parameters, relationType: relationType);
+  EdgeSearchQuery(
+      {required RelationsSearchParameters parameters,
+      required this.edgeTypes,
+      String? relationType})
+      : super(parameters: parameters, relationType: relationType);
 
   @override
   Map<String, dynamic> toJson() {
@@ -148,7 +148,8 @@ enum EdgeEventActionType {
 }
 
 EdgeEventActionType edgeEventActionTypeFromString(String value) {
-  return EdgeEventActionType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return EdgeEventActionType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension EdgeEventActionTypeToString on EdgeEventActionType {
@@ -177,7 +178,8 @@ enum EdgeEventType {
 }
 
 EdgeEventType edgeEventTypeFromString(String value) {
-  return EdgeEventType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return EdgeEventType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension EdgeEventTypeToString on EdgeEventType {
@@ -187,7 +189,6 @@ extension EdgeEventTypeToString on EdgeEventType {
 }
 
 class EdgeEvent extends BaseData<EdgeEventId> {
-
   TenantId tenantId;
   EdgeId edgeId;
   EdgeEventActionType action;
@@ -196,8 +197,8 @@ class EdgeEvent extends BaseData<EdgeEventId> {
   EdgeEventType type;
   Map<String, dynamic>? body;
 
-  EdgeEvent.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
+  EdgeEvent.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
         edgeId = EdgeId.fromJson(json['edgeId']),
         action = edgeEventActionTypeFromString(json['action']),
         entityId = json['entityId'],

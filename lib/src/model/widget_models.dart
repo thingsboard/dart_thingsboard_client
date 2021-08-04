@@ -6,7 +6,6 @@ import 'id/tenant_id.dart';
 import 'id/widget_type_id.dart';
 
 class BaseWidgetType extends BaseData<WidgetTypeId> with HasTenantId {
-
   TenantId? tenantId;
   String name;
   String bundleAlias;
@@ -14,8 +13,10 @@ class BaseWidgetType extends BaseData<WidgetTypeId> with HasTenantId {
 
   BaseWidgetType(this.name, this.bundleAlias);
 
-  BaseWidgetType.fromJson(Map<String, dynamic> json):
-        tenantId = json['tenantId'] != null ? TenantId.fromJson(json['tenantId']) : null,
+  BaseWidgetType.fromJson(Map<String, dynamic> json)
+      : tenantId = json['tenantId'] != null
+            ? TenantId.fromJson(json['tenantId'])
+            : null,
         name = json['name'],
         bundleAlias = json['bundleAlias'],
         alias = json['alias'],
@@ -51,33 +52,33 @@ class BaseWidgetType extends BaseData<WidgetTypeId> with HasTenantId {
 }
 
 class WidgetTypeInfo extends BaseWidgetType {
-
   String? image;
   String? description;
   String widgetType;
 
-  WidgetTypeInfo(String name, String bundleAlias, this.widgetType): super(name, bundleAlias);
+  WidgetTypeInfo(String name, String bundleAlias, this.widgetType)
+      : super(name, bundleAlias);
 
-  WidgetTypeInfo.fromJson(Map<String, dynamic> json):
-        image = json['image'],
+  WidgetTypeInfo.fromJson(Map<String, dynamic> json)
+      : image = json['image'],
         description = json['description'],
         widgetType = json['widgetType'],
         super.fromJson(json);
 
   @override
   String toString() {
-    return 'WidgetTypeInfo{${baseWidgetTypeString('widgetType: $widgetType, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, description: $description')}}';
+    return 'WidgetTypeInfo{${baseWidgetTypeString('widgetType: $widgetType, image: ${image != null ? '[' + image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, description: $description')}}';
   }
 }
 
 class WidgetType extends BaseWidgetType {
-
   Map<String, dynamic> descriptor;
 
-  WidgetType(String name, String bundleAlias, this.descriptor): super(name, bundleAlias);
+  WidgetType(String name, String bundleAlias, this.descriptor)
+      : super(name, bundleAlias);
 
-  WidgetType.fromJson(Map<String, dynamic> json):
-        descriptor = json['descriptor'],
+  WidgetType.fromJson(Map<String, dynamic> json)
+      : descriptor = json['descriptor'],
         super.fromJson(json);
 
   @override
@@ -98,14 +99,15 @@ class WidgetType extends BaseWidgetType {
 }
 
 class WidgetTypeDetails extends WidgetType {
-
   String? image;
   String? description;
 
-  WidgetTypeDetails(String name, String bundleAlias, Map<String, dynamic> descriptor): super(name, bundleAlias, descriptor);
+  WidgetTypeDetails(
+      String name, String bundleAlias, Map<String, dynamic> descriptor)
+      : super(name, bundleAlias, descriptor);
 
-  WidgetTypeDetails.fromJson(Map<String, dynamic> json):
-        image = json['image'],
+  WidgetTypeDetails.fromJson(Map<String, dynamic> json)
+      : image = json['image'],
         description = json['description'],
         super.fromJson(json);
 
@@ -123,6 +125,6 @@ class WidgetTypeDetails extends WidgetType {
 
   @override
   String toString() {
-    return 'WidgetTypeDetails{${widgetTypeString('image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, description: $description')}}';
+    return 'WidgetTypeDetails{${widgetTypeString('image: ${image != null ? '[' + image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, description: $description')}}';
   }
 }

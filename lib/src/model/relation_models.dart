@@ -4,16 +4,11 @@ import 'id/entity_id.dart';
 const CONTAINS_TYPE = 'Contains';
 const MANAGES_TYPE = 'Manages';
 
-enum RelationTypeGroup {
-  COMMON,
-  ALARM,
-  DASHBOARD,
-  RULE_CHAIN,
-  RULE_NODE
-}
+enum RelationTypeGroup { COMMON, ALARM, DASHBOARD, RULE_CHAIN, RULE_NODE }
 
 RelationTypeGroup relationTypeGroupFromString(String value) {
-  return RelationTypeGroup.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return RelationTypeGroup.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension RelationTypeGroupToString on RelationTypeGroup {
@@ -22,13 +17,11 @@ extension RelationTypeGroupToString on RelationTypeGroup {
   }
 }
 
-enum EntitySearchDirection {
-  FROM,
-  TO
-}
+enum EntitySearchDirection { FROM, TO }
 
 EntitySearchDirection entitySearchDirectionFromString(String value) {
-  return EntitySearchDirection.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return EntitySearchDirection.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension EntitySearchDirectionToString on EntitySearchDirection {
@@ -38,7 +31,6 @@ extension EntitySearchDirectionToString on EntitySearchDirection {
 }
 
 class RelationEntityTypeFilter {
-
   String relationType;
   List<EntityType> entityTypes;
 
@@ -65,14 +57,13 @@ class RelationsSearchParameters {
   int maxLevel;
   bool fetchLastLevelOnly;
 
-  RelationsSearchParameters({
-    required this.rootId,
-    required this.rootType,
-    this.direction = EntitySearchDirection.FROM,
-    this.relationTypeGroup,
-    this.maxLevel = 1,
-    this.fetchLastLevelOnly = false
-  });
+  RelationsSearchParameters(
+      {required this.rootId,
+      required this.rootType,
+      this.direction = EntitySearchDirection.FROM,
+      this.relationTypeGroup,
+      this.maxLevel = 1,
+      this.fetchLastLevelOnly = false});
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
@@ -94,14 +85,10 @@ class RelationsSearchParameters {
 }
 
 class EntityRelationsQuery {
-
   RelationsSearchParameters parameters;
   List<RelationEntityTypeFilter>? filters;
 
-  EntityRelationsQuery({
-    required this.parameters,
-    this.filters
-  });
+  EntityRelationsQuery({required this.parameters, this.filters});
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
@@ -119,14 +106,10 @@ class EntityRelationsQuery {
 }
 
 class EntitySearchQuery {
-
   RelationsSearchParameters parameters;
   String? relationType;
 
-  EntitySearchQuery({
-    required this.parameters,
-    this.relationType
-  });
+  EntitySearchQuery({required this.parameters, this.relationType});
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
@@ -148,23 +131,21 @@ class EntitySearchQuery {
 }
 
 class EntityRelation {
-
   EntityId from;
   EntityId to;
   String type;
   RelationTypeGroup typeGroup;
   Map<String, dynamic>? additionalInfo;
 
-  EntityRelation({
-    required this.from,
-    required this.to,
-    this.type = CONTAINS_TYPE,
-    this.typeGroup = RelationTypeGroup.COMMON,
-    this.additionalInfo
-  });
+  EntityRelation(
+      {required this.from,
+      required this.to,
+      this.type = CONTAINS_TYPE,
+      this.typeGroup = RelationTypeGroup.COMMON,
+      this.additionalInfo});
 
-  EntityRelation.fromJson(Map<String, dynamic> json):
-        from = EntityId.fromJson(json['from']),
+  EntityRelation.fromJson(Map<String, dynamic> json)
+      : from = EntityId.fromJson(json['from']),
         to = EntityId.fromJson(json['to']),
         type = json['type'],
         typeGroup = relationTypeGroupFromString(json['typeGroup']),
@@ -193,14 +174,13 @@ class EntityRelation {
 }
 
 class EntityRelationInfo extends EntityRelation {
-
   String fromName;
   String? fromEntityTypeName;
   String toName;
   String? toEntityTypeName;
 
-  EntityRelationInfo.fromJson(Map<String, dynamic> json):
-        fromName = json['fromName'],
+  EntityRelationInfo.fromJson(Map<String, dynamic> json)
+      : fromName = json['fromName'],
         fromEntityTypeName = json['fromEntityTypeName'],
         toName = json['fromName'],
         toEntityTypeName = json['fromEntityTypeName'],

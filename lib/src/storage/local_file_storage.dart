@@ -5,7 +5,6 @@ import 'dart:typed_data';
 import 'storage.dart';
 
 class LocalFileStorage implements TbStorage {
-
   late Future<bool> ready;
 
   LocalFileStorage(this.fileName, [this.path]) {
@@ -77,7 +76,6 @@ class LocalFileStorage implements TbStorage {
     _data = json.decode(contentText) as Map<String, dynamic>;
   }
 
-
   Future<RandomAccessFile> _getFile() async {
     if (_file != null) {
       return _file!;
@@ -103,5 +101,4 @@ class LocalFileStorage implements TbStorage {
       rethrow;
     }
   }
-
 }

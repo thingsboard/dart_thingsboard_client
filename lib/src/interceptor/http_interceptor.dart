@@ -9,7 +9,6 @@ import '../model/constants.dart';
 import '../thingsboard_client_base.dart';
 
 class HttpInterceptor extends Interceptor {
-
   static const String _authScheme = 'Bearer ';
   static const _authHeaderName = 'X-Authorization';
 
@@ -20,21 +19,24 @@ class HttpInterceptor extends Interceptor {
   final void Function() _loadFinish;
   final void Function(ThingsboardError error) _onError;
 
-  final _internalUrlPrefixes = [
-    '/api/auth/token',
-    '/api/plugins/rpc'
-  ];
+  final _internalUrlPrefixes = ['/api/auth/token', '/api/plugins/rpc'];
 
   int _activeRequests = 0;
 
-  HttpInterceptor(this._dio, this._tbClient, void Function() onLoadStart, void Function() onLoadFinish, void Function(ThingsboardError error) onError):
-        _internalDio = Dio(BaseOptions(baseUrl: _dio.options.baseUrl)),
+  HttpInterceptor(
+      this._dio,
+      this._tbClient,
+      void Function() onLoadStart,
+      void Function() onLoadFinish,
+      void Function(ThingsboardError error) onError)
+      : _internalDio = Dio(BaseOptions(baseUrl: _dio.options.baseUrl)),
         _loadStart = onLoadStart,
         _loadFinish = onLoadFinish,
         _onError = onError;
 
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     if (options.path.startsWith('/api/')) {
       var config = _getInterceptorConfig(options);
       var isLoading = !_isInternalUrlPrefix(options.path);
@@ -42,10 +44,13 @@ class HttpInterceptor extends Interceptor {
         _updateLoadingState(config, isLoading);
       }
       if (_isTokenBasedAuthEntryPoint(options.path)) {
-        if (_tbClient.getJwtToken() == null && !_tbClient.refreshTokenPending()) {
-          return _handleRequestError(options, handler, ThingsboardError(message: 'Unauthorized!'));
+        if (_tbClient.getJwtToken() == null &&
+            !_tbClient.refreshTokenPending()) {
+          return _handleRequestError(
+              options, handler, ThingsboardError(message: 'Unauthorized!'));
         } else if (!_tbClient.isJwtTokenValid()) {
-          return _handleRequestError(options, handler, ThingsboardError(refreshTokenPending: true));
+          return _handleRequestError(
+              options, handler, ThingsboardError(refreshTokenPending: true));
         } else {
           return _jwtIntercept(options, handler);
         }
@@ -57,25 +62,32 @@ class HttpInterceptor extends Interceptor {
     }
   }
 
-  Future _jwtIntercept(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future _jwtIntercept(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     if (_updateAuthorizationHeader(options)) {
       return _handleRequest(options, handler);
     } else {
-      return _handleRequestError(options, handler, ThingsboardError(message: 'Could not get JWT token from store.'));
+      return _handleRequestError(options, handler,
+          ThingsboardError(message: 'Could not get JWT token from store.'));
     }
   }
 
-  Future _handleRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future _handleRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     return handler.next(options);
   }
 
-  Future _handleRequestError(RequestOptions options, RequestInterceptorHandler handler, ThingsboardError error) async {
-    var response = Response<ThingsboardError>(requestOptions: options, data: error);
-    return handler.reject(DioError(response: response, requestOptions: options), true);
+  Future _handleRequestError(RequestOptions options,
+      RequestInterceptorHandler handler, ThingsboardError error) async {
+    var response =
+        Response<ThingsboardError>(requestOptions: options, data: error);
+    return handler.reject(
+        DioError(response: response, requestOptions: options), true);
   }
 
   @override
-  Future onResponse(Response response, ResponseInterceptorHandler handler) async {
+  Future onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
     var config = _getInterceptorConfig(response.requestOptions);
     if (response.requestOptions.path.startsWith('/api/')) {
       _updateLoadingState(config, false);
@@ -92,8 +104,10 @@ class HttpInterceptor extends Interceptor {
     var tbError = _tbClient.toThingsboardError(error);
     var errorCode = tbError.errorCode;
     var refreshToken = false;
-    if (tbError.refreshTokenPending == true || error.response?.statusCode == 401) {
-      if (tbError.refreshTokenPending == true || errorCode == ThingsBoardErrorCode.jwtTokenExpired) {
+    if (tbError.refreshTokenPending == true ||
+        error.response?.statusCode == 401) {
+      if (tbError.refreshTokenPending == true ||
+          errorCode == ThingsBoardErrorCode.jwtTokenExpired) {
         refreshToken = true;
       } else if (errorCode == ThingsBoardErrorCode.credentialsExpired) {
         notify = false;
@@ -108,15 +122,18 @@ class HttpInterceptor extends Interceptor {
     if (error.requestOptions.path.startsWith('/api/')) {
       _updateLoadingState(config, false);
     }
-    return _handleError(tbError, error.requestOptions, handler, notify && !ignoreErrors);
+    return _handleError(
+        tbError, error.requestOptions, handler, notify && !ignoreErrors);
   }
 
-  Future _refreshTokenAndRetry(DioError error, ErrorInterceptorHandler handler, InterceptorConfig config) async {
+  Future _refreshTokenAndRetry(DioError error, ErrorInterceptorHandler handler,
+      InterceptorConfig config) async {
     _dio.interceptors.requestLock.lock();
     _dio.interceptors.responseLock.lock();
     try {
-      await _tbClient.refreshJwtToken(internalDio: _internalDio, interceptRefreshToken: true);
-    } catch(e) {
+      await _tbClient.refreshJwtToken(
+          internalDio: _internalDio, interceptRefreshToken: true);
+    } catch (e) {
       if (error.requestOptions.path.startsWith('/api/')) {
         _updateLoadingState(config, false);
       }
@@ -128,15 +145,18 @@ class HttpInterceptor extends Interceptor {
     return _retryRequest(error, handler);
   }
 
-  Future _retryRequestWithTimeout(DioError error, ErrorInterceptorHandler handler) async {
+  Future _retryRequestWithTimeout(
+      DioError error, ErrorInterceptorHandler handler) async {
     var rng = Random();
-    var timeout =  1000 + rng.nextInt(3000);
+    var timeout = 1000 + rng.nextInt(3000);
     return _retryRequest(error, handler, timeout: timeout);
   }
 
-  Future _retryRequest(DioError error, ErrorInterceptorHandler handler, {int? timeout}) async {
+  Future _retryRequest(DioError error, ErrorInterceptorHandler handler,
+      {int? timeout}) async {
     if (timeout != null) {
-      return Future.delayed(Duration(milliseconds: timeout), () => _retryRequest(error, handler));
+      return Future.delayed(
+          Duration(milliseconds: timeout), () => _retryRequest(error, handler));
     } else {
       var options = error.requestOptions;
       var extra = options.extra;
@@ -162,17 +182,19 @@ class HttpInterceptor extends Interceptor {
             requestEncoder: options.requestEncoder,
             responseDecoder: options.responseDecoder,
             listFormat: options.listFormat,
-      ));
+          ));
       return handler.resolve(response);
     }
   }
 
-  Future _handleError(error, RequestOptions requestOptions, ErrorInterceptorHandler handler, bool notify) async {
+  Future _handleError(error, RequestOptions requestOptions,
+      ErrorInterceptorHandler handler, bool notify) async {
     var tbError = _tbClient.toThingsboardError(error);
     if (notify) {
       _onError(tbError);
     }
-    return handler.next(DioError(requestOptions: requestOptions, error: tbError));
+    return handler
+        .next(DioError(requestOptions: requestOptions, error: tbError));
   }
 
   InterceptorConfig _getInterceptorConfig(RequestOptions options) {
@@ -182,14 +204,12 @@ class HttpInterceptor extends Interceptor {
   bool _updateAuthorizationHeader(RequestOptions options) {
     var jwtToken = _tbClient.getJwtToken();
     if (jwtToken != null) {
-      options.headers[_authHeaderName] =
-          _authScheme + jwtToken;
+      options.headers[_authHeaderName] = _authScheme + jwtToken;
       return true;
     } else {
       return false;
     }
   }
-
 
   bool _isInternalUrlPrefix(String url) {
     for (var prefix in _internalUrlPrefixes) {
@@ -201,7 +221,7 @@ class HttpInterceptor extends Interceptor {
   }
 
   bool _isTokenBasedAuthEntryPoint(String url) {
-    return  url.startsWith('/api/') &&
+    return url.startsWith('/api/') &&
         !url.startsWith(Constants.entryPoints['login']!) &&
         !url.startsWith(Constants.entryPoints['tokenRefresh']!) &&
         !url.startsWith(Constants.entryPoints['nonTokenBased']!);
@@ -222,4 +242,3 @@ class HttpInterceptor extends Interceptor {
     }
   }
 }
-

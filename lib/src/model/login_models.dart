@@ -19,9 +19,8 @@ class LoginResponse {
   LoginResponse(this.token, this.refreshToken);
 
   LoginResponse.fromJson(Map<String, dynamic> json)
-    : token = json['token'],
-      refreshToken = json['refreshToken'];
-
+      : token = json['token'],
+        refreshToken = json['refreshToken'];
 }
 
 class RefreshTokenRequest {
@@ -30,8 +29,6 @@ class RefreshTokenRequest {
   RefreshTokenRequest(this.refreshToken);
 
   Map<String, dynamic> toJson() {
-    return {
-      'refreshToken': refreshToken
-    };
+    return {'refreshToken': refreshToken};
   }
 }

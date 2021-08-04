@@ -8,7 +8,6 @@ import 'has_tenant_id.dart';
 import 'id/dashboard_id.dart';
 
 class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
-
   TenantId? tenantId;
   String title;
   String? image;
@@ -16,14 +15,17 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
   bool? mobileHide;
   int? mobileOrder;
 
-  DashboardInfo(this.title): assignedCustomers = {};
+  DashboardInfo(this.title) : assignedCustomers = {};
 
-  DashboardInfo.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
+  DashboardInfo.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
         title = json['title'],
         image = json['image'],
-        assignedCustomers = json['assignedCustomers'] != null ?
-                 (json['assignedCustomers'] as List<dynamic>).map((e) => ShortCustomerInfo.fromJson(e)).toSet() : {},
+        assignedCustomers = json['assignedCustomers'] != null
+            ? (json['assignedCustomers'] as List<dynamic>)
+                .map((e) => ShortCustomerInfo.fromJson(e))
+                .toSet()
+            : {},
         mobileHide = json['mobileHide'],
         mobileOrder = json['mobileOrder'],
         super.fromJson(json);
@@ -38,7 +40,8 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
     if (image != null) {
       json['image'] = image;
     }
-    json['assignedCustomers'] = assignedCustomers.map((e) => e.toJson()).toList();
+    json['assignedCustomers'] =
+        assignedCustomers.map((e) => e.toJson()).toList();
     if (mobileHide != null) {
       json['mobileHide'] = mobileHide;
     }
@@ -64,21 +67,20 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
   }
 
   String dashboardInfoString([String? toStringBody]) {
-    return '${baseDataString('tenantId: $tenantId, title: $title, image: ${image != null ? '['+image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, '
+    return '${baseDataString('tenantId: $tenantId, title: $title, image: ${image != null ? '[' + image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, '
         'mobileHide: $mobileHide, mobileOrder: $mobileOrder, assignedCustomers: $assignedCustomers${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 }
 
 class Dashboard extends DashboardInfo {
-
   Map<String, dynamic> configuration;
 
-  Dashboard(String title):
-        configuration = {},
+  Dashboard(String title)
+      : configuration = {},
         super(title);
 
-  Dashboard.fromJson(Map<String, dynamic> json):
-        configuration = json['configuration'],
+  Dashboard.fromJson(Map<String, dynamic> json)
+      : configuration = json['configuration'],
         super.fromJson(json);
 
   @override
@@ -95,14 +97,12 @@ class Dashboard extends DashboardInfo {
 }
 
 class HomeDashboard extends Dashboard {
-
   bool hideDashboardToolbar;
 
-  HomeDashboard(String title, this.hideDashboardToolbar):
-        super(title);
+  HomeDashboard(String title, this.hideDashboardToolbar) : super(title);
 
-  HomeDashboard.fromJson(Map<String, dynamic> json):
-        hideDashboardToolbar = json['hideDashboardToolbar'],
+  HomeDashboard.fromJson(Map<String, dynamic> json)
+      : hideDashboardToolbar = json['hideDashboardToolbar'],
         super.fromJson(json);
 
   @override
@@ -119,17 +119,17 @@ class HomeDashboard extends Dashboard {
 }
 
 class HomeDashboardInfo {
-
   DashboardId? dashboardId;
   bool hideDashboardToolbar;
 
   HomeDashboardInfo(this.hideDashboardToolbar);
 
-  HomeDashboardInfo.fromJson(Map<String, dynamic> json):
-        dashboardId = json['dashboardId'] != null ? DashboardId.fromJson(json['dashboardId']) : null,
+  HomeDashboardInfo.fromJson(Map<String, dynamic> json)
+      : dashboardId = json['dashboardId'] != null
+            ? DashboardId.fromJson(json['dashboardId'])
+            : null,
         hideDashboardToolbar = json['hideDashboardToolbar'];
 
-  @override
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
     if (dashboardId != null) {

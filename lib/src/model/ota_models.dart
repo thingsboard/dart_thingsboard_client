@@ -7,13 +7,11 @@ import 'id/device_profile_id.dart';
 import 'id/ota_package_id.dart';
 import 'id/tenant_id.dart';
 
-enum OtaPackageType {
-  FIRMWARE,
-  SOFTWARE
-}
+enum OtaPackageType { FIRMWARE, SOFTWARE }
 
 OtaPackageType otaPackageTypeFromString(String value) {
-  return OtaPackageType.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return OtaPackageType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension OtaPackageTypeToString on OtaPackageType {
@@ -33,7 +31,8 @@ enum ChecksumAlgorithm {
 }
 
 ChecksumAlgorithm checksumAlgorithmFromString(String value) {
-  return ChecksumAlgorithm.values.firstWhere((e)=>e.toString().split('.')[1].toUpperCase()==value.toUpperCase());
+  return ChecksumAlgorithm.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ChecksumAlgorithmToString on ChecksumAlgorithm {
@@ -42,8 +41,8 @@ extension ChecksumAlgorithmToString on ChecksumAlgorithm {
   }
 }
 
-class OtaPackageInfo extends AdditionalInfoBased<OtaPackageId> with HasName, HasTenantId {
-
+class OtaPackageInfo extends AdditionalInfoBased<OtaPackageId>
+    with HasName, HasTenantId {
   TenantId? tenantId;
   DeviceProfileId deviceProfileId;
   OtaPackageType type;
@@ -59,8 +58,10 @@ class OtaPackageInfo extends AdditionalInfoBased<OtaPackageId> with HasName, Has
 
   OtaPackageInfo(this.deviceProfileId, this.type, this.title, this.version);
 
-  OtaPackageInfo.fromJson(Map<String, dynamic> json):
-        tenantId = json['tenantId'] != null ? TenantId.fromJson(json['tenantId']) : null,
+  OtaPackageInfo.fromJson(Map<String, dynamic> json)
+      : tenantId = json['tenantId'] != null
+            ? TenantId.fromJson(json['tenantId'])
+            : null,
         deviceProfileId = DeviceProfileId.fromJson(json['deviceProfileId']),
         type = otaPackageTypeFromString(json['type']),
         title = json['title'],
@@ -69,7 +70,9 @@ class OtaPackageInfo extends AdditionalInfoBased<OtaPackageId> with HasName, Has
         hasData = json['hasData'],
         fileName = json['fileName'],
         contentType = json['contentType'],
-        checksumAlgorithm = json['checksumAlgorithm'] != null ? checksumAlgorithmFromString(json['checksumAlgorithm']) : null,
+        checksumAlgorithm = json['checksumAlgorithm'] != null
+            ? checksumAlgorithmFromString(json['checksumAlgorithm'])
+            : null,
         checksum = json['checksum'],
         dataSize = json['dataSize'],
         super.fromJson(json);
@@ -128,18 +131,17 @@ class OtaPackageInfo extends AdditionalInfoBased<OtaPackageId> with HasName, Has
         'url: $url, hasData: $hasData, fileName: $fileName, contentType: $contentType, checksumAlgorithm: ${checksumAlgorithm?.toShortString()}, '
         'checksum: $checksum, dataSize: $dataSize${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
-
 }
 
 class OtaPackage extends OtaPackageInfo {
-
   String data;
 
-  OtaPackage(DeviceProfileId deviceProfileId, OtaPackageType type, String title, String version, this.data):
-        super(deviceProfileId, type, title, version);
+  OtaPackage(DeviceProfileId deviceProfileId, OtaPackageType type, String title,
+      String version, this.data)
+      : super(deviceProfileId, type, title, version);
 
-  OtaPackage.fromJson(Map<String, dynamic> json):
-        data = json['data'],
+  OtaPackage.fromJson(Map<String, dynamic> json)
+      : data = json['data'],
         super.fromJson(json);
 
   @override
@@ -153,5 +155,4 @@ class OtaPackage extends OtaPackageInfo {
   String toString() {
     return 'OtaPackage{${otaPackageInfoString('data: [${data.substring(0, min(30, data.length))}...]')}}';
   }
-
 }

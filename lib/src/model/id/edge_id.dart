@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class EdgeId extends EntityId {
-
   EdgeId(String id) : super(EntityType.EDGE, id);
 
   @override

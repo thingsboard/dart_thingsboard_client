@@ -42,13 +42,14 @@ Future<void> onUserLoaded() async {
       print('authUser: ${tbClient.getAuthUser()}');
       var currentUserDetails = await tbClient.getUserService().getUser();
       print('currentUserDetails: $currentUserDetails');
-      await tbClient.logout(requestConfig: RequestConfig(ignoreLoading: true, ignoreErrors: true));
+      await tbClient.logout(
+          requestConfig:
+              RequestConfig(ignoreLoading: true, ignoreErrors: true));
       exit(0);
     } else {
       await tbClient.login(LoginRequest('tenant@thingsboard.org', 'tenant'));
     }
-  }
-  catch (e, s) {
+  } catch (e, s) {
     print('Error: $e');
     print('Stack: $s');
   }

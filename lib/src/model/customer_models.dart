@@ -4,15 +4,15 @@ import 'id/customer_id.dart';
 import 'id/tenant_id.dart';
 import 'contact_based_model.dart';
 
-class Customer extends ContactBased<CustomerId> with HasTenantId, HasCustomerId {
-
+class Customer extends ContactBased<CustomerId>
+    with HasTenantId, HasCustomerId {
   TenantId? tenantId;
   String title;
 
   Customer(this.title);
 
-  Customer.fromJson(Map<String, dynamic> json):
-        tenantId = TenantId.fromJson(json['tenantId']),
+  Customer.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
         title = json['title'],
         super.fromJson(json);
 
@@ -45,7 +45,6 @@ class Customer extends ContactBased<CustomerId> with HasTenantId, HasCustomerId 
   String toString() {
     return 'Customer{${contactBasedString('tenantId: $tenantId, title: $title')}}';
   }
-
 }
 
 class ShortCustomerInfo {
@@ -53,8 +52,8 @@ class ShortCustomerInfo {
   String title;
   bool isPublic;
 
-  ShortCustomerInfo.fromJson(Map<String, dynamic> json):
-        customerId = CustomerId.fromJson(json['customerId']),
+  ShortCustomerInfo.fromJson(Map<String, dynamic> json)
+      : customerId = CustomerId.fromJson(json['customerId']),
         title = json['title'],
         isPublic = json['isPublic'] ?? false;
 

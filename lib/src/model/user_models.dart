@@ -32,7 +32,9 @@ class AuthUser {
     tenantId = claims.remove('tenantId');
     customerId = claims.remove('customerId');
     isPublic = claims.remove('isPublic');
-    authority = scopes.isNotEmpty ? authorityFromString(scopes[0]) : Authority.ANONYMOUS;
+    authority = scopes.isNotEmpty
+        ? authorityFromString(scopes[0])
+        : Authority.ANONYMOUS;
     additionalData = claims;
   }
 
@@ -55,8 +57,8 @@ class AuthUser {
   }
 }
 
-class User extends AdditionalInfoBased<UserId> with HasName, HasTenantId, HasCustomerId {
-
+class User extends AdditionalInfoBased<UserId>
+    with HasName, HasTenantId, HasCustomerId {
   TenantId? tenantId;
   CustomerId? customerId;
   String email;
@@ -66,9 +68,13 @@ class User extends AdditionalInfoBased<UserId> with HasName, HasTenantId, HasCus
 
   User(this.email, this.authority);
 
-  User.fromJson(Map<String, dynamic> json):
-        tenantId = json['tenantId'] != null ? TenantId.fromJson(json['tenantId']) : null,
-        customerId = json['customerId'] != null ? CustomerId.fromJson(json['customerId']) : null,
+  User.fromJson(Map<String, dynamic> json)
+      : tenantId = json['tenantId'] != null
+            ? TenantId.fromJson(json['tenantId'])
+            : null,
+        customerId = json['customerId'] != null
+            ? CustomerId.fromJson(json['customerId'])
+            : null,
         email = json['email'],
         authority = authorityFromString(json['authority']),
         firstName = json['firstName'],
@@ -109,7 +115,6 @@ class User extends AdditionalInfoBased<UserId> with HasName, HasTenantId, HasCus
   CustomerId? getCustomerId() {
     return customerId;
   }
-
 
   bool isSystemAdmin() {
     return authority == Authority.SYS_ADMIN;

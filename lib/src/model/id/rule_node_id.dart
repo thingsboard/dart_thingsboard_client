@@ -2,7 +2,6 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class RuleNodeId extends EntityId {
-
   RuleNodeId(String id) : super(EntityType.RULE_NODE, id);
 
   @override
