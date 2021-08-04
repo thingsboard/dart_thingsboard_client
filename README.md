@@ -1,4 +1,5 @@
-ThingsBoard API client library for Dart developers. It's compatible with TB 3.3.0.
+ThingsBoard API client library for Dart developers. Provides model objects and services to communicate with ThingsBoard platform using RESTful APIs and WebSocket protocol.
+Current client version is compatible with ThingsBoard version 3.3+.
 
 ## Usage
 
