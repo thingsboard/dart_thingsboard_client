@@ -1,3 +1,7 @@
+## 1.0.2
+
+- Add support for web platform
+
 ## 1.0.1
 
 - Improve description
