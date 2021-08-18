@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
@@ -202,7 +201,7 @@ class TelemetryWebsocketService implements TelemetryService {
   void _openSocket(String token) {
     var uri = _telemetryUri.replace(queryParameters: {'token': token});
     try {
-      var channel = IOWebSocketChannel.connect(uri);
+      var channel = WebSocketChannel.connect(uri);
       _sink = channel.sink;
       channel.stream.listen((event) {
         _onMessage(event);
@@ -268,7 +267,7 @@ class TelemetryWebsocketService implements TelemetryService {
     _isOpening = false;
   }
 
-  void _onClose([IOWebSocketChannel? channel]) {
+  void _onClose([WebSocketChannel? channel]) {
     if (channel != null &&
         channel.closeCode != null &&
         channel.closeCode! > 1001 &&

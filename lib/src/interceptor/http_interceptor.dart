@@ -101,7 +101,7 @@ class HttpInterceptor extends Interceptor {
     var notify = true;
     var ignoreErrors = config.ignoreErrors;
     var resendRequest = config.resendRequest;
-    var tbError = _tbClient.toThingsboardError(error);
+    var tbError = toThingsboardError(error);
     var errorCode = tbError.errorCode;
     var refreshToken = false;
     if (tbError.refreshTokenPending == true ||
@@ -189,7 +189,7 @@ class HttpInterceptor extends Interceptor {
 
   Future _handleError(error, RequestOptions requestOptions,
       ErrorInterceptorHandler handler, bool notify) async {
-    var tbError = _tbClient.toThingsboardError(error);
+    var tbError = toThingsboardError(error);
     if (notify) {
       _onError(tbError);
     }

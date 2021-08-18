@@ -1,4 +1,6 @@
-import 'dart:io';
+export '_thingsboard_error_handler.dart'
+    if (dart.library.io) '_thingsboard_error_handler_io.dart'
+    if (dart.library.html) '_thingsboard_error_handler_html.dart';
 
 abstract class ThingsBoardErrorCode {
   static const int general = 2;
@@ -12,25 +14,6 @@ abstract class ThingsBoardErrorCode {
   static const int itemNotFound = 32;
   static const int tooManyRequests = 33;
   static const int tooManyUpdates = 34;
-}
-
-int httpStatusToThingsboardErrorCode(int status) {
-  switch (status) {
-    case HttpStatus.unauthorized:
-      return ThingsBoardErrorCode.authentication;
-    case HttpStatus.forbidden:
-      return ThingsBoardErrorCode.permissionDenied;
-    case HttpStatus.badRequest:
-      return ThingsBoardErrorCode.badRequestParams;
-    case HttpStatus.notFound:
-      return ThingsBoardErrorCode.itemNotFound;
-    case HttpStatus.tooManyRequests:
-      return ThingsBoardErrorCode.tooManyRequests;
-    case HttpStatus.internalServerError:
-      return ThingsBoardErrorCode.general;
-    default:
-      return ThingsBoardErrorCode.general;
-  }
 }
 
 class ThingsboardError implements Exception {

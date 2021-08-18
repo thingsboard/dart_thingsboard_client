@@ -1,4 +1,4 @@
-import '../../thingsboard_client.dart';
+import 'tb_storage.dart';
 
 class InMemoryStorage implements TbStorage {
   final storageMap = <String, String>{};
