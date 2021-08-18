@@ -4,7 +4,8 @@ import 'dart:typed_data';
 
 import 'tb_storage.dart';
 
-TbStorage createLocalFileStorage(String fileName, [String? path]) => LocalFileStorage(fileName, path);
+TbStorage createLocalFileStorage(String fileName, [String? path]) =>
+    LocalFileStorage(fileName, path);
 
 class LocalFileStorage implements TbStorage {
   late Future<bool> ready;

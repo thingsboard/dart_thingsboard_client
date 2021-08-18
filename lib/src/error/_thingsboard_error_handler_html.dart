@@ -45,7 +45,8 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
             error: error,
             message: 'Unable to connect',
             errorCode: ThingsBoardErrorCode.general);
-      }*/ else {
+      }*/
+      else {
         tbError = ThingsboardError(
             error: error,
             message: error.error.toString(),
