@@ -13,12 +13,11 @@ class EntityRelationService {
 
   EntityRelationService._internal(this._tbClient);
 
-  Future<EntityRelation> saveRelation(EntityRelation relation,
+  Future<void> saveRelation(EntityRelation relation,
       {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/relation',
+    await _tbClient.post('/api/relation',
         data: jsonEncode(relation),
         options: defaultHttpOptionsFromConfig(requestConfig));
-    return EntityRelation.fromJson(response.data!);
   }
 
   Future<void> deleteRelation(EntityId fromId, String relationType,
