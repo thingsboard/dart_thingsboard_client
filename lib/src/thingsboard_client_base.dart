@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:thingsboard_client/src/interceptor/http_log_interceptor.dart';
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
 import 'interceptor/http_interceptor.dart';
@@ -65,7 +66,8 @@ class ThingsboardClient {
       ErrorCallback? onError,
       LoadStartedCallback? onLoadStarted,
       LoadFinishedCallback? onLoadFinished,
-      TbCompute? computeFunc}) {
+      TbCompute? computeFunc,
+      bool debugMode = false}) {
     var dio = Dio();
     dio.options.baseUrl = apiEndpoint;
     final tbClient = ThingsboardClient._internal(
@@ -80,6 +82,9 @@ class ThingsboardClient {
     dio.interceptors.clear();
     dio.interceptors.add(HttpInterceptor(dio, tbClient, tbClient._loadStarted,
         tbClient._loadFinished, tbClient._onError));
+    if (debugMode) {
+      dio.interceptors.add(HttpLogInterceptor());
+    }
     return tbClient;
   }
 
