@@ -174,9 +174,9 @@ class EntityRelation {
 }
 
 class EntityRelationInfo extends EntityRelation {
-  String fromName;
+  String? fromName;
   String? fromEntityTypeName;
-  String toName;
+  String? toName;
   String? toEntityTypeName;
 
   EntityRelationInfo.fromJson(Map<String, dynamic> json)
