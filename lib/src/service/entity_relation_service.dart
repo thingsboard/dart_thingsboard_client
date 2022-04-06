@@ -15,7 +15,7 @@ class EntityRelationService {
 
   Future<dynamic> saveRelation(EntityRelation relation,
       {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>('/api/relation',
+    var response = await _tbClient.post<dynamic>('/api/relation',
         data: jsonEncode(relation),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return response.data;
