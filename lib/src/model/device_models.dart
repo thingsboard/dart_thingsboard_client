@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:thingsboard_client/thingsboard_client.dart';
+
 import 'relation_models.dart';
 import 'id/device_credentials_id.dart';
 import 'entity_models.dart';
@@ -750,6 +752,7 @@ class Device extends AdditionalInfoBased<DeviceId>
   OtaPackageId? firmwareId;
   OtaPackageId? softwareId;
   DeviceData deviceData;
+  List<AttributeKvEntry>? attributeList;
 
   Device(this.name, this.type) : deviceData = DeviceData();
 
@@ -769,6 +772,9 @@ class Device extends AdditionalInfoBased<DeviceId>
             ? OtaPackageId.fromJson(json['softwareId'])
             : null,
         deviceData = DeviceData.fromJson(json['deviceData']),
+        attributeList = json['attributeList'] != null
+            ? RestJsonConverter.toAttributes(json['attributeList'])
+            : null,
         super.fromJson(json);
 
   @override
