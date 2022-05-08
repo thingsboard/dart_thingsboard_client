@@ -754,6 +754,11 @@ class Device extends AdditionalInfoBased<DeviceId>
   DeviceData deviceData;
   List<AttributeKvEntry>? attributeList;
 
+  bool get online =>
+      attributeList?.any((element) =>
+          element.getKey() == "active" && element.getBooleanValue() == true) ==
+      true;
+
   Device(this.name, this.type) : deviceData = DeviceData();
 
   Device.fromJson(Map<String, dynamic> json)
