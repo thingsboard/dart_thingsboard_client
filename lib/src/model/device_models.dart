@@ -754,10 +754,18 @@ class Device extends AdditionalInfoBased<DeviceId>
   DeviceData deviceData;
   List<AttributeKvEntry>? attributeList;
 
-  bool get online =>
-      attributeList?.any((element) =>
-          element.getKey() == "active" && element.getBooleanValue() == true) ==
-      true;
+  bool get online {
+    if (attributeList?.any((element) =>
+        element.getKey() == 'active' && element.getBooleanValue() == true) == true) {
+      return true;
+    }
+    var lastConnectTime = attributeList?.firstWhere((element) => element.getKey() == 'lastConnectTime').getLongValue();
+    var lastDisconnectTime = attributeList?.firstWhere((element) => element.getKey() == 'lastDisconnectTime').getLongValue();
+    if (lastConnectTime != null && lastDisconnectTime != null && lastConnectTime > lastDisconnectTime) {
+      return true;
+    }
+    return false;
+  }
 
   Device(this.name, this.type) : deviceData = DeviceData();
 
