@@ -759,10 +759,17 @@ class Device extends AdditionalInfoBased<DeviceId>
         element.getKey() == 'active' && element.getBooleanValue() == true) == true) {
       return true;
     }
-    var lastConnectTime = attributeList?.firstWhere((element) => element.getKey() == 'lastConnectTime').getLongValue();
-    var lastDisconnectTime = attributeList?.firstWhere((element) => element.getKey() == 'lastDisconnectTime').getLongValue();
-    if (lastConnectTime != null && lastDisconnectTime != null && lastConnectTime > lastDisconnectTime) {
-      return true;
+    try {
+      var lastConnectTime = attributeList?.firstWhere((element) =>
+      element.getKey() == 'lastConnectTime').getLongValue();
+      var lastDisconnectTime = attributeList?.firstWhere((element) =>
+      element.getKey() == 'lastDisconnectTime').getLongValue();
+      if (lastConnectTime != null && lastDisconnectTime != null &&
+          lastConnectTime > lastDisconnectTime) {
+        return true;
+      }
+    } catch (e) {
+      return false;
     }
     return false;
   }
