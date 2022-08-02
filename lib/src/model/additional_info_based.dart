@@ -10,7 +10,7 @@ abstract class AdditionalInfoBased<T extends HasUuid> extends BaseData<T>
   AdditionalInfoBased();
 
   AdditionalInfoBased.fromJson(Map<String, dynamic> json,
-      [fromIdFunction<T>? fromId])
+      [FromIdFunction<T>? fromId])
       : additionalInfo = json['additionalInfo'],
         super.fromJson(json, fromId);
 

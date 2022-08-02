@@ -1,3 +1,4 @@
+import 'exportable_entity.dart';
 import 'relation_models.dart';
 import 'additional_info_based.dart';
 import 'has_customer_id.dart';
@@ -8,12 +9,13 @@ import 'id/customer_id.dart';
 import 'id/tenant_id.dart';
 
 class Asset extends AdditionalInfoBased<AssetId>
-    with HasName, HasTenantId, HasCustomerId {
+    with HasName, HasTenantId, HasCustomerId, ExportableEntity<AssetId> {
   TenantId? tenantId;
   CustomerId? customerId;
   String name;
   String type;
   String? label;
+  AssetId? externalId;
 
   Asset(this.name, this.type);
 
@@ -25,6 +27,9 @@ class Asset extends AdditionalInfoBased<AssetId>
         name = json['name'],
         type = json['type'],
         label = json['label'],
+        externalId = json['externalId'] != null
+            ? AssetId.fromJson(json['externalId'])
+            : null,
         super.fromJson(json);
 
   @override
@@ -41,6 +46,9 @@ class Asset extends AdditionalInfoBased<AssetId>
     if (label != null) {
       json['label'] = label;
     }
+    if (externalId != null) {
+      json['externalId'] = externalId!.toJson();
+    }
     return json;
   }
 
@@ -55,8 +63,23 @@ class Asset extends AdditionalInfoBased<AssetId>
   }
 
   @override
+  void setTenantId(TenantId? tenantId) {
+    this.tenantId = tenantId;
+  }
+
+  @override
   CustomerId? getCustomerId() {
     return customerId;
+  }
+
+  @override
+  AssetId? getExternalId() {
+    return externalId;
+  }
+
+  @override
+  void setExternalId(AssetId? externalId) {
+    this.externalId = externalId;
   }
 
   @override
@@ -66,7 +89,7 @@ class Asset extends AdditionalInfoBased<AssetId>
 
   String assetString([String? toStringBody]) {
     return '${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, name: $name, type: $type, '
-        'label: $label${toStringBody != null ? ', ' + toStringBody : ''}')}';
+        'label: $label, externalId: $externalId${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 }
 

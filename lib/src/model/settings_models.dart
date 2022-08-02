@@ -1,3 +1,8 @@
+import 'dart:collection';
+import 'dart:math';
+
+import 'entity_type_models.dart';
+import 'vc_models.dart';
 import 'id/admin_settings_id.dart';
 import 'base_data.dart';
 
@@ -393,5 +398,118 @@ class UpdateMessage {
   @override
   String toString() {
     return 'UpdateMessage{message: $message, updateAvailable: $updateAvailable}';
+  }
+}
+
+enum RepositoryAuthMethod { USERNAME_PASSWORD, PRIVATE_KEY }
+
+RepositoryAuthMethod repositoryAuthMethodFromString(String value) {
+  return RepositoryAuthMethod.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+}
+
+extension RepositoryAuthMethodToString on RepositoryAuthMethod {
+  String toShortString() {
+    return toString().split('.').last.toLowerCase();
+  }
+}
+
+class RepositorySettings {
+  String repositoryUri;
+  RepositoryAuthMethod authMethod;
+  String? username;
+  String? password;
+  String? privateKeyFileName;
+  String? privateKey;
+  String? privateKeyPassword;
+  String? defaultBranch;
+
+  RepositorySettings(
+      {required this.repositoryUri,
+      this.authMethod = RepositoryAuthMethod.USERNAME_PASSWORD,
+      this.username,
+      this.password,
+      this.privateKeyFileName,
+      this.privateKey,
+      this.privateKeyPassword,
+      this.defaultBranch});
+
+  RepositorySettings.fromJson(Map<String, dynamic> json)
+      : repositoryUri = json['repositoryUri'],
+        authMethod = repositoryAuthMethodFromString(json['authMethod']),
+        username = json['username'],
+        password = json['password'],
+        privateKeyFileName = json['privateKeyFileName'],
+        privateKey = json['privateKey'],
+        privateKeyPassword = json['privateKeyPassword'],
+        defaultBranch = json['defaultBranch'];
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{};
+    json['repositoryUri'] = repositoryUri;
+    json['authMethod'] = authMethod.toShortString();
+    json['username'] = username;
+    json['password'] = password;
+    json['privateKeyFileName'] = privateKeyFileName;
+    json['privateKey'] = privateKey;
+    json['privateKeyPassword'] = privateKeyPassword;
+    json['defaultBranch'] = defaultBranch;
+    return json;
+  }
+
+  @override
+  String toString() {
+    return 'RepositorySettings{repositoryUri: $repositoryUri, authMethod: $authMethod, username: $username, $password: password, '
+        '$privateKeyFileName: privateKeyFileName, privateKey: ${privateKey != null ? '[' + privateKey!.substring(0, min(30, privateKey!.length)) + '...]' : 'null'}, '
+        'privateKeyPassword: $privateKeyPassword, defaultBranch: $defaultBranch}';
+  }
+}
+
+class AutoVersionCreateConfig extends VersionCreateConfig {
+  String? branch;
+
+  AutoVersionCreateConfig.fromJson(Map<String, dynamic> json)
+      : branch = json['branch'],
+        super.fromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    if (branch != null) {
+      json['branch'] = branch;
+    }
+    return json;
+  }
+
+  @override
+  String toString() {
+    return 'AutoVersionCreateConfig{${versionCreateConfigString('branch: $branch')}}';
+  }
+}
+
+class AutoCommitSettings {
+  Map<EntityType, AutoVersionCreateConfig> settings;
+
+  AutoCommitSettings()
+      : settings = HashMap<EntityType, AutoVersionCreateConfig>();
+
+  AutoCommitSettings.fromJson(Map<String, dynamic> json)
+      : settings = json.map((key, value) => MapEntry(entityTypeFromString(key),
+            AutoVersionCreateConfig.fromJson(value)));
+
+  Map<String, dynamic> toJson() {
+    var json = settings
+        .map((key, value) => MapEntry(key.toShortString(), value.toJson()));
+    return json;
+  }
+
+  @override
+  String toString() {
+    var str = 'AutoCommitSettings{';
+    settings.forEach((key, value) {
+      str += '\n$key: $value';
+    });
+    str += '}';
+    return str;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 
@@ -53,8 +54,12 @@ Future<void> onUserLoaded() async {
       print('currentUser: $currentUser');
       if (tbClient.isSystemAdmin()) {
         await fetchSettingsExample();
+        await fetchPlatformTwoFactorAuthSettingsExample();
         await fetchTenantsExample();
+        await fetchQueuesExample();
       } else if (tbClient.isTenantAdmin()) {
+        await fetchAccountTwoFactorAuthSettingsExample();
+        await fetchTenantSettingsExample();
         await fetchUsersExample();
         await fetchDeviceProfilesExample();
         await fetchDeviceProfileInfosExample();
@@ -69,7 +74,10 @@ Future<void> onUserLoaded() async {
         await fetchAuditLogsExample();
         await fetchResourcesExample();
         await fetchOtaPackagesExample();
+        await fetchQueuesExample();
+        await vcExample();
       } else if (tbClient.isCustomerUser()) {
+        await fetchAccountTwoFactorAuthSettingsExample();
         await fetchUsersExample();
         await fetchDeviceProfileInfosExample();
         await fetchCustomerAssetsExample();
@@ -128,6 +136,54 @@ Future<void> fetchSettingsExample() async {
 
   var updateMessage = await tbClient.getAdminService().checkUpdates();
   print('Updates: $updateMessage');
+
+  print(
+      '**********************************************************************');
+}
+
+Future<void> fetchPlatformTwoFactorAuthSettingsExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*        FETCH PLATFORM TWO FACTOR AUTH SETTINGS EXAMPLE             *');
+  print(
+      '**********************************************************************');
+
+  var settings =
+      await tbClient.getTwoFactorAuthService().getPlatformTwoFaSettings();
+
+  print('Platform Two Factor Authentication settings: $settings');
+}
+
+Future<void> fetchAccountTwoFactorAuthSettingsExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*        FETCH ACCOUNT TWO FACTOR AUTH SETTINGS EXAMPLE             *');
+  print(
+      '**********************************************************************');
+
+  var settings =
+      await tbClient.getTwoFactorAuthService().getAccountTwoFaSettings();
+
+  print('Account Two Factor Authentication settings: $settings');
+}
+
+Future<void> fetchTenantSettingsExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*                      FETCH TENANT SETTINGS EXAMPLE                 *');
+  print(
+      '**********************************************************************');
+
+  var repositorySettings =
+      await tbClient.getAdminService().getRepositorySettings();
+  print('Repository settings: $repositorySettings');
+
+  var autoCommitSettings =
+      await tbClient.getAdminService().getAutoCommitSettings();
+  print('Auto-commit settings: $autoCommitSettings');
 
   print(
       '**********************************************************************');
@@ -543,7 +599,7 @@ Future<void> fetchCustomerAssetsExample() async {
   do {
     assets = await tbClient
         .getAssetService()
-        .getCustomerAssetInfos(tbClient.getAuthUser()!.customerId, pageLink);
+        .getCustomerAssetInfos(tbClient.getAuthUser()!.customerId!, pageLink);
     print('assets: $assets');
     pageLink = pageLink.nextPageLink();
   } while (assets.hasNext);
@@ -564,7 +620,7 @@ Future<void> fetchCustomerDevicesExample() async {
   do {
     devices = await tbClient
         .getDeviceService()
-        .getCustomerDeviceInfos(tbClient.getAuthUser()!.customerId, pageLink);
+        .getCustomerDeviceInfos(tbClient.getAuthUser()!.customerId!, pageLink);
     print('devices: $devices');
     pageLink = pageLink.nextPageLink();
   } while (devices.hasNext);
@@ -584,10 +640,70 @@ Future<void> fetchCustomerDashboardsExample() async {
   do {
     dashboards = await tbClient
         .getDashboardService()
-        .getCustomerDashboards(tbClient.getAuthUser()!.customerId, pageLink);
+        .getCustomerDashboards(tbClient.getAuthUser()!.customerId!, pageLink);
     print('dashboards: $dashboards');
     pageLink = pageLink.nextPageLink();
   } while (dashboards.hasNext);
+  print(
+      '**********************************************************************');
+}
+
+Future<void> fetchQueuesExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*                  FETCH QUEUES EXAMPLE                              *');
+  print(
+      '**********************************************************************');
+
+  for (ServiceType serviceType in ServiceType.values) {
+    print('Fetching queues for ${serviceType.toShortString()} service type:');
+    var pageLink = PageLink(10);
+    PageData<Queue> queues;
+    do {
+      queues = await tbClient
+          .getQueueService()
+          .getTenantQueuesByServiceType(pageLink, serviceType);
+      print('queues: $queues');
+      pageLink = pageLink.nextPageLink();
+    } while (queues.hasNext);
+  }
+  print(
+      '**********************************************************************');
+}
+
+Future<void> vcExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*                      VERSION CONTROL EXAMPLE                       *');
+  print(
+      '**********************************************************************');
+
+  var repositorySettingsExists =
+      await tbClient.getAdminService().repositorySettingsExists();
+  print('Repository settings exists: $repositorySettingsExists');
+
+  if (repositorySettingsExists) {
+    var branches =
+        await tbClient.getEntitiesVersionControlService().listBranches();
+    print('branches: $branches');
+
+    var defaultBranch = branches.firstWhereOrNull((branch) => branch.isDefault);
+    print('defaultBranch: $defaultBranch');
+    if (defaultBranch != null) {
+      var pageLink = PageLink(10);
+      PageData<EntityVersion> versions;
+      do {
+        versions = await tbClient
+            .getEntitiesVersionControlService()
+            .listVersions(pageLink, defaultBranch.name);
+        print('versions: $versions');
+        pageLink = pageLink.nextPageLink();
+      } while (versions.hasNext);
+    }
+  }
+
   print(
       '**********************************************************************');
 }

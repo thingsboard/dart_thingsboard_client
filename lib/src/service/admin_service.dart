@@ -69,7 +69,7 @@ class AdminService {
       {RequestConfig? requestConfig}) async {
     var response = await _tbClient.post<Map<String, dynamic>>(
         '/api/admin/securitySettings',
-        data: jsonEncode(SecuritySettings),
+        data: jsonEncode(securitySettings),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return SecuritySettings.fromJson(response.data!);
   }
@@ -86,5 +86,87 @@ class AdminService {
       },
       requestConfig: requestConfig,
     );
+  }
+
+  Future<RepositorySettings?> getRepositorySettings(
+      {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+      (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>(
+            '/api/admin/repositorySettings',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null
+            ? RepositorySettings.fromJson(response.data!)
+            : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<bool> repositorySettingsExists({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<bool>(
+        '/api/admin/repositorySettings/exists',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return response.data!;
+  }
+
+  Future<RepositorySettings> saveRepositorySettings(
+      RepositorySettings repositorySettings,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post<Map<String, dynamic>>(
+        '/api/admin/repositorySettings',
+        data: jsonEncode(repositorySettings),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return RepositorySettings.fromJson(response.data!);
+  }
+
+  Future<void> deleteRepositorySettings({RequestConfig? requestConfig}) async {
+    await _tbClient.delete('/api/admin/repositorySettings',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<void> checkRepositoryAccess(RepositorySettings repositorySettings,
+      {RequestConfig? requestConfig}) async {
+    await _tbClient.post<Map<String, dynamic>>(
+        '/api/admin/repositorySettings/checkAccess',
+        data: jsonEncode(repositorySettings),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<AutoCommitSettings?> getAutoCommitSettings(
+      {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+      (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>(
+            '/api/admin/autoCommitSettings',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null
+            ? AutoCommitSettings.fromJson(response.data!)
+            : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<bool> autoCommitSettingsExists({RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<bool>(
+        '/api/admin/autoCommitSettings/exists',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return response.data!;
+  }
+
+  Future<AutoCommitSettings> saveAutoCommitSettings(
+      AutoCommitSettings autoCommitSettings,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post<Map<String, dynamic>>(
+        '/api/admin/autoCommitSettings',
+        data: jsonEncode(autoCommitSettings),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return AutoCommitSettings.fromJson(response.data!);
+  }
+
+  Future<void> deleteAutoCommitSettings({RequestConfig? requestConfig}) async {
+    await _tbClient.delete('/api/admin/autoCommitSettings',
+        options: defaultHttpOptionsFromConfig(requestConfig));
   }
 }

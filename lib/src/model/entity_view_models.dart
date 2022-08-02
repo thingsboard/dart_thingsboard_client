@@ -1,3 +1,4 @@
+import 'exportable_entity.dart';
 import 'relation_models.dart';
 import 'has_customer_id.dart';
 import 'has_name.dart';
@@ -53,7 +54,7 @@ class TelemetryEntityView {
 }
 
 class EntityView extends AdditionalInfoBased<EntityViewId>
-    with HasName, HasTenantId, HasCustomerId {
+    with HasName, HasTenantId, HasCustomerId, ExportableEntity<EntityViewId> {
   TenantId? tenantId;
   CustomerId? customerId;
   EntityId entityId;
@@ -62,6 +63,7 @@ class EntityView extends AdditionalInfoBased<EntityViewId>
   TelemetryEntityView keys;
   int? startTimeMs;
   int? endTimeMs;
+  EntityViewId? externalId;
 
   EntityView(
       {required this.entityId,
@@ -82,6 +84,9 @@ class EntityView extends AdditionalInfoBased<EntityViewId>
         keys = TelemetryEntityView.fromJson(json['keys']),
         startTimeMs = json['startTimeMs'],
         endTimeMs = json['endTimeMs'],
+        externalId = json['externalId'] != null
+            ? EntityViewId.fromJson(json['externalId'])
+            : null,
         super.fromJson(json);
 
   @override
@@ -103,6 +108,9 @@ class EntityView extends AdditionalInfoBased<EntityViewId>
     if (endTimeMs != null) {
       json['endTimeMs'] = endTimeMs;
     }
+    if (externalId != null) {
+      json['externalId'] = externalId!.toJson();
+    }
     return json;
   }
 
@@ -117,8 +125,23 @@ class EntityView extends AdditionalInfoBased<EntityViewId>
   }
 
   @override
+  void setTenantId(TenantId? tenantId) {
+    this.tenantId = tenantId;
+  }
+
+  @override
   CustomerId? getCustomerId() {
     return customerId;
+  }
+
+  @override
+  EntityViewId? getExternalId() {
+    return externalId;
+  }
+
+  @override
+  void setExternalId(EntityViewId? externalId) {
+    this.externalId = externalId;
   }
 
   @override
@@ -128,7 +151,7 @@ class EntityView extends AdditionalInfoBased<EntityViewId>
 
   String entityViewString([String? toStringBody]) {
     return '${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, entityId: $entityId, name: $name, type: $type, '
-        'keys: $keys, startTimeMs: $startTimeMs, endTimeMs: $endTimeMs${toStringBody != null ? ', ' + toStringBody : ''}')}';
+        'keys: $keys, startTimeMs: $startTimeMs, endTimeMs: $endTimeMs, externalId: $externalId${toStringBody != null ? ', ' + toStringBody : ''}')}';
   }
 }
 

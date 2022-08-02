@@ -182,8 +182,8 @@ class EntityRelationInfo extends EntityRelation {
   EntityRelationInfo.fromJson(Map<String, dynamic> json)
       : fromName = json['fromName'],
         fromEntityTypeName = json['fromEntityTypeName'],
-        toName = json['fromName'],
-        toEntityTypeName = json['fromEntityTypeName'],
+        toName = json['toName'],
+        toEntityTypeName = json['toEntityTypeName'],
         super.fromJson(json);
 
   @override

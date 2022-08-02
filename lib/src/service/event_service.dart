@@ -1,6 +1,6 @@
-import '../model/page/page_data.dart';
-
-import '../../thingsboard_client.dart';
+import '../thingsboard_client_base.dart';
+import '../http/http_utils.dart';
+import '../model/model.dart';
 
 PageData<Event> parseEventPageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => Event.fromJson(json));

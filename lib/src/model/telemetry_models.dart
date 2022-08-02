@@ -93,7 +93,7 @@ class BaseAttributeKvEntry implements AttributeKvEntry {
 }
 
 class BasicTsKvEntry implements TsKvEntry {
-  static final int MAX_CHARS_PER_DATA_POINT = 512;
+  static const int MAX_CHARS_PER_DATA_POINT = 512;
 
   final int ts;
   final KvEntry kv;
@@ -312,12 +312,12 @@ extension AggregationToString on Aggregation {
 }
 
 abstract class RestJsonConverter {
-  static final String KEY = 'key';
-  static final String VALUE = 'value';
-  static final String LAST_UPDATE_TS = 'lastUpdateTs';
-  static final String TS = 'ts';
+  static const String KEY = 'key';
+  static const String VALUE = 'value';
+  static const String LAST_UPDATE_TS = 'lastUpdateTs';
+  static const String TS = 'ts';
 
-  static final String CAN_T_PARSE_VALUE = 'Can\'t parse value: ';
+  static const String CAN_T_PARSE_VALUE = 'Can\'t parse value: ';
 
   static List<AttributeKvEntry> toAttributes(List<dynamic>? attributes) {
     if (attributes != null && attributes.isNotEmpty) {

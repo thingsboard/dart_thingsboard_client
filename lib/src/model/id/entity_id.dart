@@ -1,3 +1,5 @@
+import 'package:thingsboard_client/src/model/id/queue_id.dart';
+
 import 'ota_package_id.dart';
 import 'alarm_id.dart';
 import 'api_usage_state_id.dart';
@@ -76,6 +78,8 @@ abstract class EntityId extends HasUuid {
         return OtaPackageId(uuid);
       case EntityType.RPC:
         return RpcId(uuid);
+      case EntityType.QUEUE:
+        return QueueId(uuid);
     }
   }
 

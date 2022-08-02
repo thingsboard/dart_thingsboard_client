@@ -1,3 +1,4 @@
+import 'exportable_entity.dart';
 import 'has_name.dart';
 import 'has_tenant_id.dart';
 import 'id/rule_chain_id.dart';
@@ -20,7 +21,7 @@ extension RuleChainTypeToString on RuleChainType {
 }
 
 class RuleChain extends AdditionalInfoBased<RuleChainId>
-    with HasName, HasTenantId {
+    with HasName, HasTenantId, ExportableEntity<RuleChainId> {
   TenantId? tenantId;
   String name;
   RuleChainType type;
@@ -28,6 +29,7 @@ class RuleChain extends AdditionalInfoBased<RuleChainId>
   bool root;
   bool debugMode;
   Map<String, dynamic>? configuration;
+  RuleChainId? externalId;
 
   RuleChain(
       {required this.name,
@@ -46,6 +48,9 @@ class RuleChain extends AdditionalInfoBased<RuleChainId>
         root = json['root'],
         debugMode = json['debugMode'],
         configuration = json['configuration'],
+        externalId = json['externalId'] != null
+            ? RuleChainId.fromJson(json['externalId'])
+            : null,
         super.fromJson(json);
 
   @override
@@ -62,6 +67,9 @@ class RuleChain extends AdditionalInfoBased<RuleChainId>
     if (configuration != null) {
       json['configuration'] = configuration;
     }
+    if (externalId != null) {
+      json['externalId'] = externalId!.toJson();
+    }
     return json;
   }
 
@@ -76,8 +84,24 @@ class RuleChain extends AdditionalInfoBased<RuleChainId>
   }
 
   @override
+  void setTenantId(TenantId? tenantId) {
+    this.tenantId = tenantId;
+  }
+
+  @override
+  RuleChainId? getExternalId() {
+    return externalId;
+  }
+
+  @override
+  void setExternalId(RuleChainId? externalId) {
+    this.externalId = externalId;
+  }
+
+  @override
   String toString() {
-    return 'RuleChain{${additionalInfoBasedString('tenantId: $tenantId, name: $name, type: $type, firstRuleNodeId: $firstRuleNodeId, root: $root, debugMode: $debugMode, configuration: $configuration')}}';
+    return 'RuleChain{${additionalInfoBasedString('tenantId: $tenantId, name: $name, type: $type, firstRuleNodeId: $firstRuleNodeId, root: $root, debugMode: $debugMode, configuration: $configuration, '
+        'externalId: $externalId')}}';
   }
 }
 

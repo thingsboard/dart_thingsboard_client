@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'customer_models.dart';
 import 'base_data.dart';
+import 'exportable_entity.dart';
 import 'id/tenant_id.dart';
 import 'has_name.dart';
 import 'has_tenant_id.dart';
@@ -72,8 +73,9 @@ class DashboardInfo extends BaseData<DashboardId> with HasName, HasTenantId {
   }
 }
 
-class Dashboard extends DashboardInfo {
+class Dashboard extends DashboardInfo with ExportableEntity<DashboardId> {
   Map<String, dynamic> configuration;
+  DashboardId? externalId;
 
   Dashboard(String title)
       : configuration = {},
@@ -81,18 +83,39 @@ class Dashboard extends DashboardInfo {
 
   Dashboard.fromJson(Map<String, dynamic> json)
       : configuration = json['configuration'],
+        externalId = json['externalId'] != null
+            ? DashboardId.fromJson(json['externalId'])
+            : null,
         super.fromJson(json);
 
   @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     json['configuration'] = configuration;
+    if (externalId != null) {
+      json['externalId'] = externalId!.toJson();
+    }
     return json;
   }
 
   @override
+  void setTenantId(TenantId? tenantId) {
+    this.tenantId = tenantId;
+  }
+
+  @override
+  DashboardId? getExternalId() {
+    return externalId;
+  }
+
+  @override
+  void setExternalId(DashboardId? externalId) {
+    this.externalId = externalId;
+  }
+
+  @override
   String toString() {
-    return 'Dashboard{${dashboardInfoString('configuration: $configuration')}}';
+    return 'Dashboard{${dashboardInfoString('configuration: $configuration, externalId: $externalId')}}';
   }
 }
 

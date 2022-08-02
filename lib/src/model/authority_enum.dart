@@ -3,7 +3,8 @@ enum Authority {
   TENANT_ADMIN,
   CUSTOMER_USER,
   REFRESH_TOKEN,
-  ANONYMOUS
+  ANONYMOUS,
+  PRE_VERIFICATION_TOKEN
 }
 
 Authority authorityFromString(String value) {

@@ -16,6 +16,7 @@ typedef TbCompute = Future<R> Function<Q, R>(
 typedef UserLoadedCallback = void Function();
 typedef LoadStartedCallback = void Function();
 typedef LoadFinishedCallback = void Function();
+typedef MfaAuthCallback = void Function();
 typedef ErrorCallback = void Function(ThingsboardError error);
 
 TbCompute syncCompute = <Q, R>(TbComputeCallback<Q, R> callback, Q message) =>
@@ -26,6 +27,7 @@ class ThingsboardClient {
   final Dio _dio;
   final TbStorage _storage;
   final UserLoadedCallback? _userLoadedCallback;
+  final MfaAuthCallback? _mfaAuthCallback;
   final ErrorCallback? _errorCallback;
   final LoadStartedCallback? _loadStartedCallback;
   final LoadFinishedCallback? _loadFinishedCallback;
@@ -58,10 +60,14 @@ class ThingsboardClient {
   ResourceService? _resourceService;
   OtaPackageService? _otaPackageService;
   TelemetryWebsocketService? _telemetryWebsocketService;
+  QueueService? _queueService;
+  EntitiesVersionControlService? _entitiesVersionControlService;
+  TwoFactorAuthService? _twoFactorAuthService;
 
   factory ThingsboardClient(String apiEndpoint,
       {TbStorage? storage,
       UserLoadedCallback? onUserLoaded,
+      MfaAuthCallback? onMfaAuth,
       ErrorCallback? onError,
       LoadStartedCallback? onLoadStarted,
       LoadFinishedCallback? onLoadFinished,
@@ -73,6 +79,7 @@ class ThingsboardClient {
         dio,
         storage,
         onUserLoaded,
+        onMfaAuth,
         onError,
         onLoadStarted,
         onLoadFinished,
@@ -88,6 +95,7 @@ class ThingsboardClient {
       this._dio,
       TbStorage? storage,
       this._userLoadedCallback,
+      this._mfaAuthCallback,
       this._errorCallback,
       this._loadStartedCallback,
       this._loadFinishedCallback,
@@ -112,7 +120,11 @@ class ThingsboardClient {
       var decodedToken = JwtDecoder.decode(jwtToken);
       _authUser = AuthUser.fromJson(decodedToken);
       await _storage.setItem('jwt_token', jwtToken);
-      await _storage.setItem('refresh_token', refreshToken!);
+      if (refreshToken != null) {
+        await _storage.setItem('refresh_token', refreshToken);
+      } else {
+        await _storage.deleteItem('refresh_token');
+      }
     }
     if (notify == true) {
       _userLoaded();
@@ -137,6 +149,12 @@ class ThingsboardClient {
     }
     if (_userLoadedCallback != null) {
       Future(() => _userLoadedCallback!());
+    }
+  }
+
+  void _mfaAuth() {
+    if (_mfaAuthCallback != null) {
+      Future(() => _mfaAuthCallback!());
     }
   }
 
@@ -238,6 +256,24 @@ class ThingsboardClient {
       {RequestConfig? requestConfig}) async {
     var response = await post('/api/auth/login',
         data: jsonEncode(loginRequest),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    var loginResponse = LoginResponse.fromJson(response.data);
+    await _setUserFromJwtToken(
+        loginResponse.token, loginResponse.refreshToken, true);
+    if (Authority.PRE_VERIFICATION_TOKEN == loginResponse.scope) {
+      _mfaAuth();
+    }
+    return loginResponse;
+  }
+
+  Future<LoginResponse> checkTwoFaVerificationCode(
+      TwoFaProviderType providerType, String verificationCode,
+      {RequestConfig? requestConfig}) async {
+    var response = await post('/api/auth/2fa/verification/check',
+        queryParameters: {
+          'providerType': providerType.toShortString(),
+          'verificationCode': verificationCode
+        },
         options: defaultHttpOptionsFromConfig(requestConfig));
     var loginResponse = LoginResponse.fromJson(response.data);
     await _setUserFromJwtToken(
@@ -463,5 +499,20 @@ class ThingsboardClient {
     _telemetryWebsocketService ??=
         TelemetryWebsocketService(this, _apiEndpoint);
     return _telemetryWebsocketService!;
+  }
+
+  QueueService getQueueService() {
+    _queueService ??= QueueService(this);
+    return _queueService!;
+  }
+
+  EntitiesVersionControlService getEntitiesVersionControlService() {
+    _entitiesVersionControlService ??= EntitiesVersionControlService(this);
+    return _entitiesVersionControlService!;
+  }
+
+  TwoFactorAuthService getTwoFactorAuthService() {
+    _twoFactorAuthService ??= TwoFactorAuthService(this);
+    return _twoFactorAuthService!;
   }
 }

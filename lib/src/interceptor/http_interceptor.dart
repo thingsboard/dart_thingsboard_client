@@ -128,7 +128,9 @@ class HttpInterceptor extends Interceptor {
 
   Future _refreshTokenAndRetry(DioError error, ErrorInterceptorHandler handler,
       InterceptorConfig config) async {
+    // ignore: deprecated_member_use
     _dio.interceptors.requestLock.lock();
+    // ignore: deprecated_member_use
     _dio.interceptors.responseLock.lock();
     try {
       await _tbClient.refreshJwtToken(
@@ -139,7 +141,9 @@ class HttpInterceptor extends Interceptor {
       }
       return _handleError(e, error.requestOptions, handler, true);
     } finally {
+      // ignore: deprecated_member_use
       _dio.interceptors.requestLock.unlock();
+      // ignore: deprecated_member_use
       _dio.interceptors.responseLock.unlock();
     }
     return _retryRequest(error, handler);
@@ -161,28 +165,33 @@ class HttpInterceptor extends Interceptor {
       var options = error.requestOptions;
       var extra = options.extra;
       extra['isRetry'] = true;
-      var response = await _dio.request(options.path,
-          data: options.data,
-          queryParameters: options.queryParameters,
-          cancelToken: options.cancelToken,
-          onReceiveProgress: options.onReceiveProgress,
-          onSendProgress: options.onSendProgress,
-          options: Options(
-            method: options.method,
-            sendTimeout: options.sendTimeout,
-            receiveTimeout: options.receiveTimeout,
-            extra: extra,
-            headers: options.headers,
-            responseType: options.responseType,
-            contentType: options.contentType,
-            validateStatus: options.validateStatus,
-            receiveDataWhenStatusError: options.receiveDataWhenStatusError,
-            followRedirects: options.followRedirects,
-            maxRedirects: options.maxRedirects,
-            requestEncoder: options.requestEncoder,
-            responseDecoder: options.responseDecoder,
-            listFormat: options.listFormat,
-          ));
+      Response response;
+      try {
+        response = await _dio.request(options.path,
+            data: options.data,
+            queryParameters: options.queryParameters,
+            cancelToken: options.cancelToken,
+            onReceiveProgress: options.onReceiveProgress,
+            onSendProgress: options.onSendProgress,
+            options: Options(
+              method: options.method,
+              sendTimeout: options.sendTimeout,
+              receiveTimeout: options.receiveTimeout,
+              extra: extra,
+              headers: options.headers,
+              responseType: options.responseType,
+              contentType: options.contentType,
+              validateStatus: options.validateStatus,
+              receiveDataWhenStatusError: options.receiveDataWhenStatusError,
+              followRedirects: options.followRedirects,
+              maxRedirects: options.maxRedirects,
+              requestEncoder: options.requestEncoder,
+              responseDecoder: options.responseDecoder,
+              listFormat: options.listFormat,
+            ));
+      } catch (e) {
+        return _handleError(e, options, handler, false);
+      }
       return handler.resolve(response);
     }
   }

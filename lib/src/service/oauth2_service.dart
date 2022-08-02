@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../model/oauth2_models.dart';
-import '../../thingsboard_client.dart';
+import '../thingsboard_client_base.dart';
+import '../http/http_utils.dart';
+import '../model/model.dart';
 
 List<OAuth2ClientRegistrationTemplate> parseOauth2ClientRegistrationTemplates(
     List<dynamic> json) {

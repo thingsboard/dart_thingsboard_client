@@ -1,3 +1,4 @@
+import 'exportable_entity.dart';
 import 'has_customer_id.dart';
 import 'has_tenant_id.dart';
 import 'id/customer_id.dart';
@@ -5,15 +6,19 @@ import 'id/tenant_id.dart';
 import 'contact_based_model.dart';
 
 class Customer extends ContactBased<CustomerId>
-    with HasTenantId, HasCustomerId {
+    with HasTenantId, HasCustomerId, ExportableEntity<CustomerId> {
   TenantId? tenantId;
   String title;
+  CustomerId? externalId;
 
   Customer(this.title);
 
   Customer.fromJson(Map<String, dynamic> json)
       : tenantId = TenantId.fromJson(json['tenantId']),
         title = json['title'],
+        externalId = json['externalId'] != null
+            ? CustomerId.fromJson(json['externalId'])
+            : null,
         super.fromJson(json);
 
   @override
@@ -23,6 +28,9 @@ class Customer extends ContactBased<CustomerId>
       json['tenantId'] = tenantId!.toJson();
     }
     json['title'] = title;
+    if (externalId != null) {
+      json['externalId'] = externalId!.toJson();
+    }
     return json;
   }
 
@@ -37,13 +45,28 @@ class Customer extends ContactBased<CustomerId>
   }
 
   @override
+  void setTenantId(TenantId? tenantId) {
+    this.tenantId = tenantId;
+  }
+
+  @override
   CustomerId? getCustomerId() {
     return id;
   }
 
   @override
+  CustomerId? getExternalId() {
+    return externalId;
+  }
+
+  @override
+  void setExternalId(CustomerId? externalId) {
+    this.externalId = externalId;
+  }
+
+  @override
   String toString() {
-    return 'Customer{${contactBasedString('tenantId: $tenantId, title: $title')}}';
+    return 'Customer{${contactBasedString('tenantId: $tenantId, title: $title, externalId: $externalId')}}';
   }
 }
 

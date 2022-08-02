@@ -76,7 +76,7 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
       message: error.toString(),
       errorCode: ThingsBoardErrorCode.general);
 
-  var errorStackTrace;
+  StackTrace? errorStackTrace;
   if (tbError.error is Error) {
     errorStackTrace = tbError.error.stackTrace;
   }

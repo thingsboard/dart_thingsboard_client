@@ -14,10 +14,10 @@ class AuthUser {
   late String? userId;
   late String? firstName;
   late String? lastName;
-  late bool enabled;
+  late bool? enabled;
   late String tenantId;
-  late String customerId;
-  late bool isPublic;
+  late String? customerId;
+  late bool? isPublic;
   late Authority authority;
   late Map<String, dynamic> additionalData;
 

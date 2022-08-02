@@ -21,3 +21,6 @@ export 'edge_service.dart';
 export 'resource_service.dart';
 export 'ota_package_service.dart';
 export 'telemetry_websocket_service.dart';
+export 'queue_service.dart';
+export 'entities_version_control_service.dart';
+export 'two_factor_auth_service.dart';

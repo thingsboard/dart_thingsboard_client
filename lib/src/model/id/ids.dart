@@ -26,3 +26,4 @@ export 'component_descriptor_id.dart';
 export 'oauth2_client_registration_template_id.dart';
 export 'edge_event_id.dart';
 export 'rpc_id.dart';
+export 'queue_id.dart';

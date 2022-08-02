@@ -8,7 +8,7 @@ abstract class HasUuid {
   HasUuid(this.id);
 
   factory HasUuid.fromJson(Map<String, dynamic> json,
-      [fromIdFunction<HasUuid>? fromId]) {
+      [FromIdFunction<HasUuid>? fromId]) {
     if (json.containsKey('id')) {
       if (json.containsKey('entityType')) {
         return EntityId.fromJson(json);
@@ -26,4 +26,4 @@ abstract class HasUuid {
   }
 }
 
-typedef fromIdFunction<T> = T Function(String id);
+typedef FromIdFunction<T> = T Function(String id);
