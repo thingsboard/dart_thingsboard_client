@@ -1,5 +1,3 @@
-import 'package:thingsboard_client/src/model/id/queue_id.dart';
-
 import 'ota_package_id.dart';
 import 'alarm_id.dart';
 import 'api_usage_state_id.dart';
@@ -19,6 +17,7 @@ import 'customer_id.dart';
 import 'device_id.dart';
 import 'tenant_id.dart';
 import 'rpc_id.dart';
+import 'queue_id.dart';
 
 import '../entity_type_models.dart';
 import './has_uuid.dart';
