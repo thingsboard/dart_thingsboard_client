@@ -7,7 +7,7 @@ abstract class IdBased<I extends HasUuid> extends HasId<I> {
   IdBased();
 
   IdBased.fromJson(Map<String, dynamic> json, [FromIdFunction<I>? fromId])
-      : id = HasUuid.fromJson(json['id'], fromId) as I;
+      : id = json['id'] != null ? HasUuid.fromJson(json['id'], fromId) as I : null;
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
