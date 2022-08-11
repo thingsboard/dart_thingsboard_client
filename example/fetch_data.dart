@@ -44,6 +44,7 @@ Future<void> onUserLoaded() async {
   try {
     print('onUserLoaded: isAuthenticated=${tbClient.isAuthenticated()}');
     if (tbClient.isAuthenticated()) {
+      print('ThingsBoard Platform Version: ${tbClient.getPlatformVersion()}');
       print('authUser: ${tbClient.getAuthUser()}');
       User? currentUser;
       try {

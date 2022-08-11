@@ -16,8 +16,7 @@ class TwoFactorAuthService {
       {RequestConfig? requestConfig}) async {
     return nullIfNotFound(
       (RequestConfig requestConfig) async {
-        var response = await _tbClient.get<dynamic>(
-            '/api/2fa/settings',
+        var response = await _tbClient.get<dynamic>('/api/2fa/settings',
             options: defaultHttpOptionsFromConfig(requestConfig));
         return response.data != null && response.data != ""
             ? PlatformTwoFaSettings.fromJson(response.data!)
@@ -65,8 +64,7 @@ class TwoFactorAuthService {
       {RequestConfig? requestConfig}) async {
     return nullIfNotFound(
       (RequestConfig requestConfig) async {
-        var response = await _tbClient.get<dynamic>(
-            '/api/2fa/account/settings',
+        var response = await _tbClient.get<dynamic>('/api/2fa/account/settings',
             options: defaultHttpOptionsFromConfig(requestConfig));
         return response.data != null && response.data != ""
             ? AccountTwoFaSettings.fromJson(response.data!)

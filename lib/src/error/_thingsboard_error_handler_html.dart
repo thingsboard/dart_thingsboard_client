@@ -71,6 +71,9 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
   } else if (error is ThingsboardError) {
     tbError = error;
   }
+  if (tbError != null && tbError.errorCode == null && tbError.status != null) {
+    tbError.errorCode = httpStatusToThingsboardErrorCode(tbError.status!);
+  }
   tbError ??= ThingsboardError(
       error: error,
       message: error.toString(),

@@ -44,3 +44,4 @@ export 'rpc_models.dart';
 export 'queue_models.dart';
 export 'vc_models.dart';
 export 'two_factor_auth_models.dart';
+export 'version.dart';

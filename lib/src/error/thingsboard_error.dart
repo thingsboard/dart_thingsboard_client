@@ -31,9 +31,25 @@ class ThingsboardError implements Exception {
       this.error});
 
   ThingsboardError.fromJson(Map<String, dynamic> json)
-      : message = json['message'],
-        errorCode = json['errorCode'],
-        status = json['status'];
+      : message = ThingsboardError.parseMessage(json),
+        status = json['status'],
+        errorCode = json['errorCode'];
+
+  static String parseMessage(Map<String, dynamic> json) {
+    String? message = json['message'];
+    if (message == null) {
+      if (json['error'] != null) {
+        if (json['path'] != null) {
+          message = "Path '" + json['path'] + "': " + json["error"];
+        } else {
+          message = json['error'];
+        }
+      } else {
+        message = "Unknown error";
+      }
+    }
+    return message!;
+  }
 
   StackTrace? _stackTrace;
 

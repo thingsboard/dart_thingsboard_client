@@ -36,6 +36,7 @@ class ThingsboardClient {
   String? _token;
   String? _refreshToken;
   AuthUser? _authUser;
+  PlatformVersion? _platformVersion;
 
   AssetService? _assetService;
   CustomerService? _customerService;
@@ -127,7 +128,30 @@ class ThingsboardClient {
       }
     }
     if (notify == true) {
-      _userLoaded();
+      await _userLoaded();
+    }
+  }
+
+  Future<void> _checkPlatformVersion() async {
+    var version = 'unknown';
+    var response = await get<Map<String, dynamic>>('/api/system/info',
+        options:
+            defaultHttpOptionsFromConfig(RequestConfig(ignoreLoading: true)));
+    if (response.data != null) {
+      version = response.data!['version'];
+    }
+    bool supported = false;
+    try {
+      _platformVersion = PlatformVersion.fromString(version);
+      supported =
+          PlatformVersionMatcher.isSupportedPlatformVersion(_platformVersion!);
+    } catch (e) {
+      supported = false;
+    }
+    if (!supported) {
+      throw ThingsboardError(
+          message: 'Unsupported ThingsBoard platform version: $version',
+          errorCode: ThingsBoardErrorCode.general);
     }
   }
 
@@ -143,9 +167,12 @@ class ThingsboardClient {
     }
   }
 
-  void _userLoaded() {
+  Future<void> _userLoaded() async {
     if (_telemetryWebsocketService != null) {
       _telemetryWebsocketService!.reset(true);
+    }
+    if (this.isJwtTokenValid()) {
+      await _checkPlatformVersion();
     }
     if (_userLoadedCallback != null) {
       Future(() => _userLoadedCallback!());
@@ -341,7 +368,9 @@ class ThingsboardClient {
       } else {
         await _clearJwtToken();
         if (interceptRefreshToken) {
-          throw ThingsboardError(message: 'Session expired!', errorCode: 11);
+          throw ThingsboardError(
+              message: 'Session expired!',
+              errorCode: ThingsBoardErrorCode.jwtTokenExpired);
         }
       }
     } finally {
@@ -367,6 +396,10 @@ class ThingsboardClient {
 
   AuthUser? getAuthUser() {
     return _authUser;
+  }
+
+  PlatformVersion? getPlatformVersion() {
+    return _platformVersion;
   }
 
   bool isAuthenticated() {
