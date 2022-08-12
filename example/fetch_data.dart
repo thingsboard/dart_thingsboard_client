@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:collection/collection.dart';
@@ -16,6 +17,7 @@ void main() async {
     tbClient = ThingsboardClient(thingsBoardApiEndpoint,
         storage: InMemoryStorage(),
         onUserLoaded: onUserLoaded,
+        onMfaAuth: onMfa,
         onError: onError,
         onLoadStarted: onLoadStarted,
         onLoadFinished: onLoadFinished);
@@ -38,12 +40,36 @@ void onLoadFinished() {
   // print('ON LOAD FINISHED!');
 }
 
+void onMfa() async {
+  print('ON MULTI-FACTOR AUTHENTICATION!');
+  List<TwoFaProviderInfo> providers = await tbClient
+      .getTwoFactorAuthService()
+      .getAvailableLoginTwoFaProviders();
+  print('Available providers: $providers');
+  var defaultProvider =
+  providers.firstWhereOrNull((provider) => provider.isDefault);
+  if (defaultProvider != null) {
+    print('Default provider: $defaultProvider');
+    await tbClient
+        .getTwoFactorAuthService()
+        .requestTwoFaVerificationCode(defaultProvider.type);
+    print('Verification code sent!');
+    print('Enter MFA code:');
+    var code = stdin.readLineSync(encoding: utf8);
+    var mfaCode = code?.trim();
+    print('Code entered: $mfaCode');
+    await tbClient.checkTwoFaVerificationCode(defaultProvider.type, mfaCode!);
+  } else {
+    await tbClient.logout();
+  }
+}
+
 bool loginExecuted = false;
 
 Future<void> onUserLoaded() async {
   try {
     print('onUserLoaded: isAuthenticated=${tbClient.isAuthenticated()}');
-    if (tbClient.isAuthenticated()) {
+    if (tbClient.isAuthenticated() && !tbClient.isPreVerificationToken()) {
       print('ThingsBoard Platform Version: ${tbClient.getPlatformVersion()}');
       print('authUser: ${tbClient.getAuthUser()}');
       User? currentUser;

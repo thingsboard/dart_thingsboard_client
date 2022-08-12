@@ -50,6 +50,10 @@ class AuthUser {
     return authority == Authority.CUSTOMER_USER;
   }
 
+  bool isPreVerificationToken() {
+    return authority == Authority.PRE_VERIFICATION_TOKEN;
+  }
+
   @override
   String toString() {
     return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, lastName: $lastName, enabled: $enabled, '

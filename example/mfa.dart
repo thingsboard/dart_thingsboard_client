@@ -18,7 +18,7 @@ void main() async {
     print('authUser: ${tbClient.getAuthUser()}');
 
     if (tbClient.isAuthenticated() &&
-        tbClient.getAuthUser()!.authority != Authority.PRE_VERIFICATION_TOKEN) {
+        !tbClient.isPreVerificationToken()) {
       var currentUserDetails = await tbClient.getUserService().getUser();
       print('currentUserDetails: $currentUserDetails');
       await tbClient.logout();
