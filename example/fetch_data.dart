@@ -47,7 +47,7 @@ void onMfa() async {
       .getAvailableLoginTwoFaProviders();
   print('Available providers: $providers');
   var defaultProvider =
-  providers.firstWhereOrNull((provider) => provider.isDefault);
+      providers.firstWhereOrNull((provider) => provider.isDefault);
   if (defaultProvider != null) {
     print('Default provider: $defaultProvider');
     await tbClient
