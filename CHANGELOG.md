@@ -1,3 +1,9 @@
+## 1.0.3
+
+- Update API and models according to ThingsBoard platform version 3.4.0
+- Added MFA support
+- Fix dart analysis issues 
+
 ## 1.0.2
 
 - Add support for web platform
