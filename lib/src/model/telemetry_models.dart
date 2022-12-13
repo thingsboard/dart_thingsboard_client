@@ -650,14 +650,93 @@ class TimeSeriesCmd {
   }
 }
 
+class AggKey {
+  final int id;
+  final String key;
+  final Aggregation agg;
+  final int? previousStartTs;
+  final int? previousEndTs;
+  final bool? previousValueOnly;
+
+  AggKey(
+      {required this.id,
+      required this.key,
+      required this.agg,
+      this.previousStartTs,
+      this.previousEndTs,
+      this.previousValueOnly});
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{
+      'id': id,
+      'key': key,
+      'agg': agg.toShortString()
+    };
+    if (previousStartTs != null) {
+      json['previousStartTs'] = previousStartTs;
+    }
+    if (previousEndTs != null) {
+      json['previousEndTs'] = previousEndTs;
+    }
+    if (previousValueOnly != null) {
+      json['previousValueOnly'] = previousValueOnly;
+    }
+    return json;
+  }
+}
+
+class AggHistoryCmd {
+  final List<AggKey> keys;
+  final int startTs;
+  final int endTs;
+
+  AggHistoryCmd(
+      {required this.keys, required this.startTs, required this.endTs});
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{
+      'keys': keys.map((k) => k.toJson()).toList(),
+      'startTs': startTs,
+      'endTs': endTs
+    };
+    return json;
+  }
+}
+
+class AggTimeSeriesCmd {
+  final List<AggKey> keys;
+  final int startTs;
+  final int timeWindow;
+
+  AggTimeSeriesCmd(
+      {required this.keys, required this.startTs, required this.timeWindow});
+
+  Map<String, dynamic> toJson() {
+    var json = <String, dynamic>{
+      'keys': keys.map((k) => k.toJson()).toList(),
+      'startTs': startTs,
+      'timeWindow': timeWindow
+    };
+    return json;
+  }
+}
+
 class EntityDataCmd extends WebsocketCmd {
   final EntityDataQuery? query;
   final EntityHistoryCmd? historyCmd;
   final LatestValueCmd? latestCmd;
   final TimeSeriesCmd? tsCmd;
+  final AggHistoryCmd? aggHistoryCmd;
+  final AggTimeSeriesCmd? aggTsCmd;
 
   EntityDataCmd(
-      {int? cmdId, this.query, this.historyCmd, this.latestCmd, this.tsCmd})
+      {int? cmdId,
+      this.query,
+      this.historyCmd,
+      this.latestCmd,
+      this.tsCmd,
+      this.aggHistoryCmd,
+      this.aggTsCmd})
       : super(cmdId: cmdId);
 
   @override
@@ -675,11 +754,22 @@ class EntityDataCmd extends WebsocketCmd {
     if (tsCmd != null) {
       json['tsCmd'] = tsCmd!.toJson();
     }
+    if (aggHistoryCmd != null) {
+      json['aggHistoryCmd'] = aggHistoryCmd!.toJson();
+    }
+    if (aggTsCmd != null) {
+      json['aggTsCmd'] = aggTsCmd!.toJson();
+    }
     return json;
   }
 
   bool isEmpty() =>
-      query == null && historyCmd == null && latestCmd == null && tsCmd == null;
+      query == null &&
+      historyCmd == null &&
+      latestCmd == null &&
+      tsCmd == null &&
+      aggHistoryCmd == null &&
+      aggTsCmd == null;
 }
 
 class EntityCountCmd extends WebsocketCmd {
@@ -843,6 +933,24 @@ class TsValue {
   @override
   String toString() {
     return 'TsValue{ts: $ts, value: $value}';
+  }
+}
+
+class ComparisonTsValue {
+  final TsValue current;
+  final TsValue? previous;
+
+  ComparisonTsValue({required this.current, this.previous});
+
+  ComparisonTsValue.fromJson(Map<String, dynamic> json)
+      : current = TsValue.fromJson(json['current']),
+        previous = json['previous'] != null
+            ? TsValue.fromJson(json['previous'])
+            : null;
+
+  @override
+  String toString() {
+    return 'ComparisonTsValue{current: $current, previous: $previous}';
   }
 }
 

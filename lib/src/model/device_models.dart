@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'exportable_entity.dart';
+import 'has_rule_engine_profile.dart';
 import 'relation_models.dart';
 import 'id/device_credentials_id.dart';
 import 'entity_models.dart';
@@ -372,6 +373,7 @@ class DeviceProfile extends BaseData<DeviceProfileId>
         HasName,
         HasTenantId,
         HasOtaPackage,
+        HasRuleEngineProfile,
         ExportableEntity<DeviceProfileId> {
   TenantId? tenantId;
   String name;
@@ -493,6 +495,16 @@ class DeviceProfile extends BaseData<DeviceProfileId>
   @override
   OtaPackageId? getSoftwareId() {
     return softwareId;
+  }
+
+  @override
+  String? getDefaultQueueName() {
+    return defaultQueueName;
+  }
+
+  @override
+  RuleChainId? getDefaultRuleChainId() {
+    return defaultRuleChainId;
   }
 
   @override

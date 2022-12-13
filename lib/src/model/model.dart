@@ -9,6 +9,7 @@ export 'has_name.dart';
 export 'has_tenant_id.dart';
 export 'has_customer_id.dart';
 export 'has_ota_package.dart';
+export 'has_rule_engine_profile.dart';
 export 'has_name.dart';
 export 'has_additional_info.dart';
 export 'exportable_entity.dart';

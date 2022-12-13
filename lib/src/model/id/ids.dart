@@ -7,6 +7,7 @@ export 'dashboard_id.dart';
 export 'device_credentials_id.dart';
 export 'device_id.dart';
 export 'device_profile_id.dart';
+export 'asset_profile_id.dart';
 export 'edge_id.dart';
 export 'entity_id.dart';
 export 'entity_view_id.dart';

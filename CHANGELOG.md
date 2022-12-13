@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Update API and models according to ThingsBoard platform version 3.4.2
+
 ## 1.0.3
 
 - Update API and models according to ThingsBoard platform version 3.4.0

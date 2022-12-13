@@ -9,6 +9,7 @@ enum EntityType {
   ASSET,
   DEVICE,
   DEVICE_PROFILE,
+  ASSET_PROFILE,
   ALARM,
   RULE_CHAIN,
   RULE_NODE,

@@ -4,6 +4,7 @@ import 'api_usage_state_id.dart';
 import 'asset_id.dart';
 import 'dashboard_id.dart';
 import 'device_profile_id.dart';
+import 'asset_profile_id.dart';
 import 'edge_id.dart';
 import 'entity_view_id.dart';
 import 'rule_chain_id.dart';
@@ -55,6 +56,8 @@ abstract class EntityId extends HasUuid {
         return DeviceId(uuid);
       case EntityType.DEVICE_PROFILE:
         return DeviceProfileId(uuid);
+      case EntityType.ASSET_PROFILE:
+        return AssetProfileId(uuid);
       case EntityType.ALARM:
         return AlarmId(uuid);
       case EntityType.RULE_CHAIN:

@@ -1,4 +1,5 @@
 export 'asset_service.dart';
+export 'asset_profile_service.dart';
 export 'customer_service.dart';
 export 'dashboard_service.dart';
 export 'device_profile_service.dart';

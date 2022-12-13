@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
 import 'interceptor/http_interceptor.dart';
@@ -39,6 +41,7 @@ class ThingsboardClient {
   PlatformVersion? _platformVersion;
 
   AssetService? _assetService;
+  AssetProfileService? _assetProfileService;
   CustomerService? _customerService;
   DashboardService? _dashboardService;
   DeviceProfileService? _deviceProfileService;
@@ -425,6 +428,11 @@ class ThingsboardClient {
   AssetService getAssetService() {
     _assetService ??= AssetService(this);
     return _assetService!;
+  }
+
+  AssetProfileService getAssetProfileService() {
+    _assetProfileService ??= AssetProfileService(this);
+    return _assetProfileService!;
   }
 
   CustomerService getCustomerService() {
