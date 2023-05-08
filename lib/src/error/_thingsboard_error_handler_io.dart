@@ -39,7 +39,7 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
       }
     } else if (error.error != null) {
       if (error.error is ThingsboardError) {
-        tbError = error.error;
+        tbError = error.error as ThingsboardError;
       } else if (error.error is SocketException) {
         tbError = ThingsboardError(
             error: error,
