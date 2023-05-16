@@ -75,10 +75,14 @@ extension CoapTransportDeviceTypeToString on CoapTransportDeviceType {
 enum DeviceProfileProvisionType {
   DISABLED,
   ALLOW_CREATE_NEW_DEVICES,
-  CHECK_PRE_PROVISIONED_DEVICES
+  CHECK_PRE_PROVISIONED_DEVICES,
+  X509_CERTIFICATE_CHAIN
 }
 
-DeviceProfileProvisionType deviceProfileProvisionTypeFromString(String value) {
+DeviceProfileProvisionType deviceProfileProvisionTypeFromString(String? value) {
+  if (value == null) {
+    return DeviceProfileProvisionType.DISABLED;
+  }
   return DeviceProfileProvisionType.values.firstWhere(
       (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
