@@ -27,9 +27,23 @@ extension ComponentScopeToString on ComponentScope {
   }
 }
 
+enum ComponentClusteringMode { USER_PREFERENCE, ENABLED, SINGLETON }
+
+ComponentClusteringMode componentClusteringModeFromString(String value) {
+  return ComponentClusteringMode.values.firstWhere(
+          (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+}
+
+extension ComponentClusteringModeToString on ComponentClusteringMode {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
+
 class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
   ComponentType type;
   ComponentScope scope;
+  final ComponentClusteringMode clusteringMode;
   String name;
   String clazz;
   Map<String, dynamic>? configurationDescriptor;
@@ -38,6 +52,7 @@ class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
   ComponentDescriptor.fromJson(Map<String, dynamic> json)
       : type = componentTypeFromString(json['type']),
         scope = componentScopeFromString(json['scope']),
+        clusteringMode = componentClusteringModeFromString(json['clusteringMode']),
         name = json['name'],
         clazz = json['clazz'],
         configurationDescriptor = json['configurationDescriptor'],
@@ -46,6 +61,7 @@ class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
 
   @override
   String toString() {
-    return 'ComponentDescriptor{${baseDataString('type: $type, scope: $scope, name: $name, clazz: $clazz, configurationDescriptor: $configurationDescriptor, actions: $actions')}}';
+    return 'ComponentDescriptor{${baseDataString('type: $type, scope: $scope, name: $name, clusteringMode: $clusteringMode, '
+        'clazz: $clazz, configurationDescriptor: $configurationDescriptor, actions: $actions')}}';
   }
 }

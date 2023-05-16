@@ -24,6 +24,8 @@ abstract class ExportableEntity<I extends EntityId> {
         return Dashboard.fromJson(json) as ExportableEntity<I>;
       case EntityType.ASSET:
         return Asset.fromJson(json) as ExportableEntity<I>;
+      case EntityType.ASSET_PROFILE:
+        return AssetProfile.fromJson(json) as ExportableEntity<I>;
       case EntityType.DEVICE:
         return Device.fromJson(json) as ExportableEntity<I>;
       case EntityType.DEVICE_PROFILE:

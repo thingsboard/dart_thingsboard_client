@@ -59,6 +59,11 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
   String? transportDeviceTelemetryMsgRateLimit;
   String? transportDeviceTelemetryDataPointsRateLimit;
 
+  String? tenantEntityExportRateLimit;
+  String? tenantEntityImportRateLimit;
+  String? tenantNotificationRequestsRateLimit;
+  String? tenantNotificationRequestsPerRuleRateLimit;
+
   int maxTransportMessages;
   int maxTransportDataPoints;
   int maxREExecutions;
@@ -69,8 +74,23 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
   int maxSms;
   int maxCreatedAlarms;
 
+  String? tenantServerRestLimitsConfiguration;
+  String? customerServerRestLimitsConfiguration;
+
+  int maxWsSessionsPerTenant;
+  int maxWsSessionsPerCustomer;
+  int maxWsSessionsPerRegularUser;
+  int maxWsSessionsPerPublicUser;
+  int wsMsgQueueLimitPerSession;
+  int maxWsSubscriptionsPerTenant;
+  int maxWsSubscriptionsPerCustomer;
+  int maxWsSubscriptionsPerRegularUser;
+  int maxWsSubscriptionsPerPublicUser;
+  String? wsUpdatesPerSessionRateLimit;
+
   int defaultStorageTtlDays;
   int alarmsTtlDays;
+  int rpcTtlDays;
 
   DefaultTenantProfileConfiguration()
       : maxDevices = 0,
@@ -90,8 +110,18 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxEmails = 0,
         maxSms = 0,
         maxCreatedAlarms = 0,
+        maxWsSessionsPerTenant = 0,
+        maxWsSessionsPerCustomer = 0,
+        maxWsSessionsPerRegularUser = 0,
+        maxWsSessionsPerPublicUser = 0,
+        wsMsgQueueLimitPerSession = 0,
+        maxWsSubscriptionsPerTenant = 0,
+        maxWsSubscriptionsPerCustomer = 0,
+        maxWsSubscriptionsPerRegularUser = 0,
+        maxWsSubscriptionsPerPublicUser = 0,
         defaultStorageTtlDays = 0,
-        alarmsTtlDays = 0;
+        alarmsTtlDays = 0,
+        rpcTtlDays = 0;
 
   @override
   TenantProfileType getType() {
@@ -107,6 +137,7 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxRuleChains = json['maxRuleChains'],
         maxResourcesInBytes = json['maxResourcesInBytes'],
         maxOtaPackagesInBytes = json['maxOtaPackagesInBytes'],
+
         transportTenantMsgRateLimit = json['transportTenantMsgRateLimit'],
         transportTenantTelemetryMsgRateLimit =
             json['transportTenantTelemetryMsgRateLimit'],
@@ -117,6 +148,12 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
             json['transportDeviceTelemetryMsgRateLimit'],
         transportDeviceTelemetryDataPointsRateLimit =
             json['transportDeviceTelemetryDataPointsRateLimit'],
+
+        tenantEntityExportRateLimit = json['tenantEntityExportRateLimit'],
+        tenantEntityImportRateLimit = json['tenantEntityImportRateLimit'],
+        tenantNotificationRequestsRateLimit = json['tenantNotificationRequestsRateLimit'],
+        tenantNotificationRequestsPerRuleRateLimit = json['tenantNotificationRequestsPerRuleRateLimit'],
+
         maxTransportMessages = json['maxTransportMessages'],
         maxTransportDataPoints = json['maxTransportDataPoints'],
         maxREExecutions = json['maxREExecutions'],
@@ -127,8 +164,24 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxEmails = json['maxEmails'],
         maxSms = json['maxSms'],
         maxCreatedAlarms = json['maxCreatedAlarms'],
+
+        tenantServerRestLimitsConfiguration = json['tenantServerRestLimitsConfiguration'],
+        customerServerRestLimitsConfiguration = json['customerServerRestLimitsConfiguration'],
+
+        maxWsSessionsPerTenant = json['maxWsSessionsPerTenant'],
+        maxWsSessionsPerCustomer = json['maxWsSessionsPerCustomer'],
+        maxWsSessionsPerRegularUser = json['maxWsSessionsPerRegularUser'],
+        maxWsSessionsPerPublicUser = json['maxWsSessionsPerPublicUser'],
+        wsMsgQueueLimitPerSession = json['wsMsgQueueLimitPerSession'],
+        maxWsSubscriptionsPerTenant = json['maxWsSubscriptionsPerTenant'],
+        maxWsSubscriptionsPerCustomer = json['maxWsSubscriptionsPerCustomer'],
+        maxWsSubscriptionsPerRegularUser = json['maxWsSubscriptionsPerRegularUser'],
+        maxWsSubscriptionsPerPublicUser = json['maxWsSubscriptionsPerPublicUser'],
+        wsUpdatesPerSessionRateLimit = json['wsUpdatesPerSessionRateLimit'],
+
         defaultStorageTtlDays = json['defaultStorageTtlDays'],
-        alarmsTtlDays = json['alarmsTtlDays'];
+        alarmsTtlDays = json['alarmsTtlDays'],
+        rpcTtlDays = json['rpcTtlDays'];
 
   @override
   Map<String, dynamic> toJson() {
@@ -141,6 +194,7 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
     json['maxRuleChains'] = maxRuleChains;
     json['maxResourcesInBytes'] = maxResourcesInBytes;
     json['maxOtaPackagesInBytes'] = maxOtaPackagesInBytes;
+
     if (transportTenantMsgRateLimit != null) {
       json['transportTenantMsgRateLimit'] = transportTenantMsgRateLimit;
     }
@@ -164,6 +218,19 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
           transportDeviceTelemetryDataPointsRateLimit;
     }
 
+    if (tenantEntityExportRateLimit != null) {
+      json['tenantEntityExportRateLimit'] = tenantEntityExportRateLimit;
+    }
+    if (tenantEntityImportRateLimit != null) {
+      json['tenantEntityImportRateLimit'] = tenantEntityImportRateLimit;
+    }
+    if (tenantNotificationRequestsRateLimit != null) {
+      json['tenantNotificationRequestsRateLimit'] = tenantNotificationRequestsRateLimit;
+    }
+    if (tenantNotificationRequestsPerRuleRateLimit != null) {
+      json['tenantNotificationRequestsPerRuleRateLimit'] = tenantNotificationRequestsPerRuleRateLimit;
+    }
+
     json['maxTransportMessages'] = maxTransportMessages;
     json['maxTransportDataPoints'] = maxTransportDataPoints;
     json['maxREExecutions'] = maxREExecutions;
@@ -173,8 +240,23 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
     json['maxEmails'] = maxEmails;
     json['maxSms'] = maxSms;
     json['maxCreatedAlarms'] = maxCreatedAlarms;
+
+    json['maxWsSessionsPerTenant'] = maxWsSessionsPerTenant;
+    json['maxWsSessionsPerCustomer'] = maxWsSessionsPerCustomer;
+    json['maxWsSessionsPerRegularUser'] = maxWsSessionsPerRegularUser;
+    json['maxWsSessionsPerPublicUser'] = maxWsSessionsPerPublicUser;
+    json['wsMsgQueueLimitPerSession'] = wsMsgQueueLimitPerSession;
+    json['maxWsSubscriptionsPerTenant'] = maxWsSubscriptionsPerTenant;
+    json['maxWsSubscriptionsPerCustomer'] = maxWsSubscriptionsPerCustomer;
+    json['maxWsSubscriptionsPerRegularUser'] = maxWsSubscriptionsPerRegularUser;
+    json['maxWsSubscriptionsPerPublicUser'] = maxWsSubscriptionsPerPublicUser;
+    if (wsUpdatesPerSessionRateLimit != null) {
+      json['wsUpdatesPerSessionRateLimit'] = wsUpdatesPerSessionRateLimit;
+    }
+
     json['defaultStorageTtlDays'] = defaultStorageTtlDays;
     json['alarmsTtlDays'] = alarmsTtlDays;
+    json['rpcTtlDays'] = rpcTtlDays;
     return json;
   }
 
@@ -185,9 +267,17 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         'transportTenantMsgRateLimit: $transportTenantMsgRateLimit, transportTenantTelemetryMsgRateLimit: $transportTenantTelemetryMsgRateLimit, '
         'transportTenantTelemetryDataPointsRateLimit: $transportTenantTelemetryDataPointsRateLimit, transportDeviceMsgRateLimit: $transportDeviceMsgRateLimit, '
         'transportDeviceTelemetryMsgRateLimit: $transportDeviceTelemetryMsgRateLimit, transportDeviceTelemetryDataPointsRateLimit: $transportDeviceTelemetryDataPointsRateLimit, '
+        'tenantEntityExportRateLimit: $tenantEntityExportRateLimit, tenantEntityImportRateLimit: $tenantEntityImportRateLimit, '
+        'tenantNotificationRequestsRateLimit: $tenantNotificationRequestsRateLimit, tenantNotificationRequestsPerRuleRateLimit: $tenantNotificationRequestsPerRuleRateLimit, '
         'maxTransportMessages: $maxTransportMessages, maxTransportDataPoints: $maxTransportDataPoints, maxREExecutions: $maxREExecutions, '
         'maxJSExecutions: $maxJSExecutions, maxDPStorageDays: $maxDPStorageDays, maxRuleNodeExecutionsPerMessage: $maxRuleNodeExecutionsPerMessage, '
-        'maxEmails: $maxEmails, maxSms: $maxSms, maxCreatedAlarms: $maxCreatedAlarms, defaultStorageTtlDays: $defaultStorageTtlDays, alarmsTtlDays: $alarmsTtlDays}';
+        'maxEmails: $maxEmails, maxSms: $maxSms, maxCreatedAlarms: $maxCreatedAlarms, tenantServerRestLimitsConfiguration: $tenantServerRestLimitsConfiguration, '
+        'customerServerRestLimitsConfiguration: $customerServerRestLimitsConfiguration, maxWsSessionsPerTenant: $maxWsSessionsPerTenant, '
+        'maxWsSessionsPerCustomer: $maxWsSessionsPerCustomer, maxWsSessionsPerRegularUser: $maxWsSessionsPerRegularUser, maxWsSessionsPerPublicUser: $maxWsSessionsPerPublicUser, '
+        'wsMsgQueueLimitPerSession: $wsMsgQueueLimitPerSession, maxWsSubscriptionsPerTenant: $maxWsSubscriptionsPerTenant, '
+        'maxWsSubscriptionsPerCustomer: $maxWsSubscriptionsPerCustomer, maxWsSubscriptionsPerRegularUser: $maxWsSubscriptionsPerRegularUser, '
+        'maxWsSubscriptionsPerPublicUser: $maxWsSubscriptionsPerPublicUser, wsUpdatesPerSessionRateLimit: $wsUpdatesPerSessionRateLimit, '
+        'defaultStorageTtlDays: $defaultStorageTtlDays, alarmsTtlDays: $alarmsTtlDays, rpcTtlDays: $rpcTtlDays}';
   }
 }
 

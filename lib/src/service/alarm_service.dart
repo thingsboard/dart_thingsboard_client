@@ -55,21 +55,37 @@ class AlarmService {
     return Alarm.fromJson(response.data!);
   }
 
-  Future<void> ackAlarm(String alarmId, {RequestConfig? requestConfig}) async {
-    await _tbClient.post('/api/alarm/$alarmId/ack',
+  Future<AlarmInfo> ackAlarm(String alarmId, {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post('/api/alarm/$alarmId/ack',
         options: defaultHttpOptionsFromConfig(requestConfig));
+    return AlarmInfo.fromJson(response.data!);
   }
 
-  Future<void> clearAlarm(String alarmId,
+  Future<AlarmInfo> clearAlarm(String alarmId,
       {RequestConfig? requestConfig}) async {
-    await _tbClient.post('/api/alarm/$alarmId/clear',
+    var response = await _tbClient.post('/api/alarm/$alarmId/clear',
         options: defaultHttpOptionsFromConfig(requestConfig));
+    return AlarmInfo.fromJson(response.data!);
   }
 
   Future<void> deleteAlarm(String alarmId,
       {RequestConfig? requestConfig}) async {
     await _tbClient.delete('/api/alarm/$alarmId',
         options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<AlarmInfo> assignAlarm(String alarmId, String assigneeId,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post('/api/alarm/$alarmId/assign/$assigneeId',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return AlarmInfo.fromJson(response.data!);
+  }
+
+  Future<AlarmInfo> unassignAlarm(String alarmId,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.post('/api/alarm/$alarmId/assign',
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return AlarmInfo.fromJson(response.data!);
   }
 
   Future<PageData<AlarmInfo>> getAlarms(AlarmQuery query,
@@ -86,6 +102,25 @@ class AlarmService {
       {RequestConfig? requestConfig}) async {
     var queryParams = query.toQueryParameters();
     var response = await _tbClient.get<Map<String, dynamic>>('/api/alarms',
+        queryParameters: queryParams,
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseAlarmInfoPageData, response.data!);
+  }
+
+  Future<PageData<AlarmInfo>> getAlarmsV2(AlarmQueryV2 query,
+      {RequestConfig? requestConfig}) async {
+    var queryParams = query.toQueryParameters();
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/v2/alarm/${query.affectedEntityId!.entityType.toShortString()}/${query.affectedEntityId!.id}',
+        queryParameters: queryParams,
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseAlarmInfoPageData, response.data!);
+  }
+
+  Future<PageData<AlarmInfo>> getAllAlarmsV2(AlarmQueryV2 query,
+      {RequestConfig? requestConfig}) async {
+    var queryParams = query.toQueryParameters();
+    var response = await _tbClient.get<Map<String, dynamic>>('/api/v2/alarms',
         queryParameters: queryParams,
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseAlarmInfoPageData, response.data!);
