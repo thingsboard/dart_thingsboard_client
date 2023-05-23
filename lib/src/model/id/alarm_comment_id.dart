@@ -5,8 +5,7 @@ class AlarmCommentId extends HasUuid {
 
   @override
   factory AlarmCommentId.fromJson(Map<String, dynamic> json) {
-    return HasUuid.fromJson(json, (id) => AlarmCommentId(id))
-    as AlarmCommentId;
+    return HasUuid.fromJson(json, (id) => AlarmCommentId(id)) as AlarmCommentId;
   }
 
   @override

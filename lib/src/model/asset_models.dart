@@ -116,7 +116,6 @@ class AssetProfile extends BaseData<AssetProfileId>
     return defaultRuleChainId;
   }
 
-  @override
   RuleChainId? getDefaultEdgeRuleChainId() {
     return defaultEdgeRuleChainId;
   }
@@ -145,8 +144,8 @@ class AssetProfileInfo extends EntityInfo {
   String? image;
   TenantId? tenantId;
 
-  AssetProfileInfo(
-      EntityId id, String name, this.image, this.defaultDashboardId, this.tenantId)
+  AssetProfileInfo(EntityId id, String name, this.image,
+      this.defaultDashboardId, this.tenantId)
       : super(id, name);
 
   AssetProfileInfo.fromJson(Map<String, dynamic> json)

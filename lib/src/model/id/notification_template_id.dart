@@ -2,7 +2,8 @@ import '../entity_type_models.dart';
 import 'entity_id.dart';
 
 class NotificationTemplateId extends EntityId {
-  NotificationTemplateId(String id) : super(EntityType.NOTIFICATION_TEMPLATE, id);
+  NotificationTemplateId(String id)
+      : super(EntityType.NOTIFICATION_TEMPLATE, id);
 
   @override
   factory NotificationTemplateId.fromJson(Map<String, dynamic> json) {

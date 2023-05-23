@@ -137,7 +137,6 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxRuleChains = json['maxRuleChains'],
         maxResourcesInBytes = json['maxResourcesInBytes'],
         maxOtaPackagesInBytes = json['maxOtaPackagesInBytes'],
-
         transportTenantMsgRateLimit = json['transportTenantMsgRateLimit'],
         transportTenantTelemetryMsgRateLimit =
             json['transportTenantTelemetryMsgRateLimit'],
@@ -148,12 +147,12 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
             json['transportDeviceTelemetryMsgRateLimit'],
         transportDeviceTelemetryDataPointsRateLimit =
             json['transportDeviceTelemetryDataPointsRateLimit'],
-
         tenantEntityExportRateLimit = json['tenantEntityExportRateLimit'],
         tenantEntityImportRateLimit = json['tenantEntityImportRateLimit'],
-        tenantNotificationRequestsRateLimit = json['tenantNotificationRequestsRateLimit'],
-        tenantNotificationRequestsPerRuleRateLimit = json['tenantNotificationRequestsPerRuleRateLimit'],
-
+        tenantNotificationRequestsRateLimit =
+            json['tenantNotificationRequestsRateLimit'],
+        tenantNotificationRequestsPerRuleRateLimit =
+            json['tenantNotificationRequestsPerRuleRateLimit'],
         maxTransportMessages = json['maxTransportMessages'],
         maxTransportDataPoints = json['maxTransportDataPoints'],
         maxREExecutions = json['maxREExecutions'],
@@ -164,10 +163,10 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxEmails = json['maxEmails'],
         maxSms = json['maxSms'],
         maxCreatedAlarms = json['maxCreatedAlarms'],
-
-        tenantServerRestLimitsConfiguration = json['tenantServerRestLimitsConfiguration'],
-        customerServerRestLimitsConfiguration = json['customerServerRestLimitsConfiguration'],
-
+        tenantServerRestLimitsConfiguration =
+            json['tenantServerRestLimitsConfiguration'],
+        customerServerRestLimitsConfiguration =
+            json['customerServerRestLimitsConfiguration'],
         maxWsSessionsPerTenant = json['maxWsSessionsPerTenant'],
         maxWsSessionsPerCustomer = json['maxWsSessionsPerCustomer'],
         maxWsSessionsPerRegularUser = json['maxWsSessionsPerRegularUser'],
@@ -175,10 +174,11 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         wsMsgQueueLimitPerSession = json['wsMsgQueueLimitPerSession'],
         maxWsSubscriptionsPerTenant = json['maxWsSubscriptionsPerTenant'],
         maxWsSubscriptionsPerCustomer = json['maxWsSubscriptionsPerCustomer'],
-        maxWsSubscriptionsPerRegularUser = json['maxWsSubscriptionsPerRegularUser'],
-        maxWsSubscriptionsPerPublicUser = json['maxWsSubscriptionsPerPublicUser'],
+        maxWsSubscriptionsPerRegularUser =
+            json['maxWsSubscriptionsPerRegularUser'],
+        maxWsSubscriptionsPerPublicUser =
+            json['maxWsSubscriptionsPerPublicUser'],
         wsUpdatesPerSessionRateLimit = json['wsUpdatesPerSessionRateLimit'],
-
         defaultStorageTtlDays = json['defaultStorageTtlDays'],
         alarmsTtlDays = json['alarmsTtlDays'],
         rpcTtlDays = json['rpcTtlDays'];
@@ -225,10 +225,12 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
       json['tenantEntityImportRateLimit'] = tenantEntityImportRateLimit;
     }
     if (tenantNotificationRequestsRateLimit != null) {
-      json['tenantNotificationRequestsRateLimit'] = tenantNotificationRequestsRateLimit;
+      json['tenantNotificationRequestsRateLimit'] =
+          tenantNotificationRequestsRateLimit;
     }
     if (tenantNotificationRequestsPerRuleRateLimit != null) {
-      json['tenantNotificationRequestsPerRuleRateLimit'] = tenantNotificationRequestsPerRuleRateLimit;
+      json['tenantNotificationRequestsPerRuleRateLimit'] =
+          tenantNotificationRequestsPerRuleRateLimit;
     }
 
     json['maxTransportMessages'] = maxTransportMessages;

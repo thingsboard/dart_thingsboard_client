@@ -31,7 +31,7 @@ enum ComponentClusteringMode { USER_PREFERENCE, ENABLED, SINGLETON }
 
 ComponentClusteringMode componentClusteringModeFromString(String value) {
   return ComponentClusteringMode.values.firstWhere(
-          (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
 extension ComponentClusteringModeToString on ComponentClusteringMode {
@@ -52,7 +52,8 @@ class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
   ComponentDescriptor.fromJson(Map<String, dynamic> json)
       : type = componentTypeFromString(json['type']),
         scope = componentScopeFromString(json['scope']),
-        clusteringMode = componentClusteringModeFromString(json['clusteringMode']),
+        clusteringMode =
+            componentClusteringModeFromString(json['clusteringMode']),
         name = json['name'],
         clazz = json['clazz'],
         configurationDescriptor = json['configurationDescriptor'],

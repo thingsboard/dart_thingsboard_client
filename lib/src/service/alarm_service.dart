@@ -55,7 +55,8 @@ class AlarmService {
     return Alarm.fromJson(response.data!);
   }
 
-  Future<AlarmInfo> ackAlarm(String alarmId, {RequestConfig? requestConfig}) async {
+  Future<AlarmInfo> ackAlarm(String alarmId,
+      {RequestConfig? requestConfig}) async {
     var response = await _tbClient.post('/api/alarm/$alarmId/ack',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return AlarmInfo.fromJson(response.data!);
@@ -76,7 +77,8 @@ class AlarmService {
 
   Future<AlarmInfo> assignAlarm(String alarmId, String assigneeId,
       {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post('/api/alarm/$alarmId/assign/$assigneeId',
+    var response = await _tbClient.post(
+        '/api/alarm/$alarmId/assign/$assigneeId',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return AlarmInfo.fromJson(response.data!);
   }

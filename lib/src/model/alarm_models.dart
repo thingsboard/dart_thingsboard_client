@@ -76,7 +76,9 @@ class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
         status = alarmStatusFromString(json['status']),
         acknowledged = json['acknowledged'],
         cleared = json['cleared'],
-        assigneeId = json['assigneeId'] != null ? UserId.fromJson(json['assigneeId']) : null,
+        assigneeId = json['assigneeId'] != null
+            ? UserId.fromJson(json['assigneeId'])
+            : null,
         startTs = json['startTs'],
         endTs = json['endTs'],
         ackTs = json['ackTs'],
@@ -145,7 +147,9 @@ class AlarmInfo extends Alarm {
   AlarmInfo.fromJson(Map<String, dynamic> json)
       : originatorName = json['originatorName'],
         originatorLabel = json['originatorLabel'],
-        assignee = json['assignee'] != null ? AlarmAssignee.fromJson(json['assignee']) : null,
+        assignee = json['assignee'] != null
+            ? AlarmAssignee.fromJson(json['assignee'])
+            : null,
         super.fromJson(json);
 
   @override
@@ -187,7 +191,6 @@ class AlarmQuery {
   AlarmSearchStatus? searchStatus;
   AlarmStatus? status;
   UserId? assigneeId;
-  @Deprecated('')
   bool? fetchOriginator;
 
   AlarmQuery(this.pageLink,
@@ -224,10 +227,10 @@ class AlarmQueryV2 {
 
   AlarmQueryV2(this.pageLink,
       {this.affectedEntityId,
-        this.typeList,
-        this.statusList,
-        this.severityList,
-        this.assigneeId});
+      this.typeList,
+      this.statusList,
+      this.severityList,
+      this.assigneeId});
 
   Map<String, dynamic> toQueryParameters() {
     var queryParameters = pageLink.toQueryParameters();
@@ -235,10 +238,12 @@ class AlarmQueryV2 {
       queryParameters['typeList'] = typeList!.join(',');
     }
     if (statusList != null) {
-      queryParameters['statusList'] = statusList!.map((e) => e.toShortString()).join(',');
+      queryParameters['statusList'] =
+          statusList!.map((e) => e.toShortString()).join(',');
     }
     if (severityList != null) {
-      queryParameters['severityList'] = severityList!.map((e) => e.toShortString()).join(',');
+      queryParameters['severityList'] =
+          severityList!.map((e) => e.toShortString()).join(',');
     }
     if (assigneeId != null) {
       queryParameters['assigneeId'] = assigneeId!.id;
