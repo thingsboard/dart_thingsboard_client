@@ -19,6 +19,11 @@ import 'device_id.dart';
 import 'tenant_id.dart';
 import 'rpc_id.dart';
 import 'queue_id.dart';
+import 'notification_id.dart';
+import 'notification_request_id.dart';
+import 'notification_rule_id.dart';
+import 'notification_target_id.dart';
+import 'notification_template_id.dart';
 
 import '../entity_type_models.dart';
 import './has_uuid.dart';
@@ -82,6 +87,16 @@ abstract class EntityId extends HasUuid {
         return RpcId(uuid);
       case EntityType.QUEUE:
         return QueueId(uuid);
+      case EntityType.NOTIFICATION_TARGET:
+        return NotificationTargetId(uuid);
+      case EntityType.NOTIFICATION_TEMPLATE:
+        return NotificationTemplateId(uuid);
+      case EntityType.NOTIFICATION_REQUEST:
+        return NotificationRequestId(uuid);
+      case EntityType.NOTIFICATION:
+        return NotificationId(uuid);
+      case EntityType.NOTIFICATION_RULE:
+        return NotificationRuleId(uuid);
     }
   }
 

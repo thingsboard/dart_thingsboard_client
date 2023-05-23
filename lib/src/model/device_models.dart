@@ -75,10 +75,14 @@ extension CoapTransportDeviceTypeToString on CoapTransportDeviceType {
 enum DeviceProfileProvisionType {
   DISABLED,
   ALLOW_CREATE_NEW_DEVICES,
-  CHECK_PRE_PROVISIONED_DEVICES
+  CHECK_PRE_PROVISIONED_DEVICES,
+  X509_CERTIFICATE_CHAIN
 }
 
-DeviceProfileProvisionType deviceProfileProvisionTypeFromString(String value) {
+DeviceProfileProvisionType deviceProfileProvisionTypeFromString(String? value) {
+  if (value == null) {
+    return DeviceProfileProvisionType.DISABLED;
+  }
   return DeviceProfileProvisionType.values.firstWhere(
       (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
@@ -390,6 +394,7 @@ class DeviceProfile extends BaseData<DeviceProfileId>
   OtaPackageId? firmwareId;
   OtaPackageId? softwareId;
   DeviceProfileData profileData;
+  DashboardId? defaultEdgeRuleChainId;
   DeviceProfileId? externalId;
 
   DeviceProfile(this.name)
@@ -423,6 +428,9 @@ class DeviceProfile extends BaseData<DeviceProfileId>
             ? OtaPackageId.fromJson(json['softwareId'])
             : null,
         profileData = DeviceProfileData.fromJson(json['profileData']),
+        defaultEdgeRuleChainId = json['defaultEdgeRuleChainId'] != null
+            ? DashboardId.fromJson(json['defaultEdgeRuleChainId'])
+            : null,
         externalId = json['externalId'] != null
             ? DeviceProfileId.fromJson(json['externalId'])
             : null,
@@ -466,6 +474,9 @@ class DeviceProfile extends BaseData<DeviceProfileId>
       json['softwareId'] = softwareId!.toJson();
     }
     json['profileData'] = profileData.toJson();
+    if (defaultEdgeRuleChainId != null) {
+      json['defaultEdgeRuleChainId'] = defaultEdgeRuleChainId!.toJson();
+    }
     if (externalId != null) {
       json['externalId'] = externalId!.toJson();
     }
@@ -520,9 +531,11 @@ class DeviceProfile extends BaseData<DeviceProfileId>
   @override
   String toString() {
     return 'DeviceProfile{${baseDataString('tenantId: $tenantId, name: $name, description: $description, '
-        'isDefault: $isDefault, type: $type, image: ${image != null ? '[' + image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, transportType: $transportType, provisionType: $provisionType, '
-        'provisionDeviceKey: $provisionDeviceKey, defaultRuleChainId: $defaultRuleChainId, defaultDashboardId: $defaultDashboardId, defaultQueueName: $defaultQueueName, '
-        'firmwareId: $firmwareId, softwareId: $softwareId, profileData: $profileData, externalId: $externalId')}}';
+        'isDefault: $isDefault, type: $type, image: ${image != null ? '[' + image!.substring(0, min(30, image!.length)) + '...]' : 'null'}, '
+        'transportType: $transportType, provisionType: $provisionType, provisionDeviceKey: $provisionDeviceKey, '
+        'defaultRuleChainId: $defaultRuleChainId, defaultDashboardId: $defaultDashboardId, defaultQueueName: $defaultQueueName, '
+        'firmwareId: $firmwareId, softwareId: $softwareId, profileData: $profileData, defaultEdgeRuleChainId: $defaultEdgeRuleChainId, '
+        'externalId: $externalId')}}';
   }
 }
 
@@ -531,9 +544,10 @@ class DeviceProfileInfo extends EntityInfo {
   DeviceTransportType transportType;
   DashboardId? defaultDashboardId;
   String? image;
+  TenantId tenantId;
 
   DeviceProfileInfo(EntityId id, String name, this.image,
-      this.defaultDashboardId, this.type, this.transportType)
+      this.defaultDashboardId, this.type, this.transportType, this.tenantId)
       : super(id, name);
 
   DeviceProfileInfo.fromJson(Map<String, dynamic> json)
@@ -543,11 +557,13 @@ class DeviceProfileInfo extends EntityInfo {
             ? DashboardId.fromJson(json['defaultDashboardId'])
             : null,
         image = json['image'],
+        tenantId = TenantId.fromJson(json['tenantId']),
         super.fromJson(json);
 
   @override
   String toString() {
-    return 'DeviceProfileInfo{${entityInfoString('type: $type, transportType: $transportType, defaultDashboardId: $defaultDashboardId, '
+    return 'DeviceProfileInfo{${entityInfoString('type: $type, transportType: $transportType, '
+        'defaultDashboardId: $defaultDashboardId, tenantId: $tenantId '
         'image: ${image != null ? '[' + image!.substring(0, min(30, image!.length)) + '...]' : 'null'}')}}';
   }
 }
@@ -892,16 +908,19 @@ class DeviceInfo extends Device {
   String? customerTitle;
   bool? customerIsPublic;
   String? deviceProfileName;
+  bool? active;
 
   DeviceInfo.fromJson(Map<String, dynamic> json)
       : customerTitle = json['customerTitle'],
         customerIsPublic = json['customerIsPublic'],
         deviceProfileName = json['deviceProfileName'],
+        active = json['active'],
         super.fromJson(json);
 
   @override
   String toString() {
-    return 'DeviceInfo{${deviceString('deviceProfileName: $deviceProfileName, customerTitle: $customerTitle, customerIsPublic: $customerIsPublic')}}';
+    return 'DeviceInfo{${deviceString('deviceProfileName: $deviceProfileName, customerTitle: $customerTitle, '
+        'customerIsPublic: $customerIsPublic, active: $active')}}';
   }
 }
 
