@@ -49,7 +49,7 @@ extension AlarmSearchStatusToString on AlarmSearchStatus {
 
 class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
   TenantId tenantId;
-  CustomerId customerId;
+  CustomerId? customerId;
   String type;
   EntityId originator;
   AlarmSeverity severity;
@@ -69,7 +69,9 @@ class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
 
   Alarm.fromJson(Map<String, dynamic> json)
       : tenantId = TenantId.fromJson(json['tenantId']),
-        customerId = CustomerId.fromJson(json['customerId']),
+        customerId = json['customerId'] != null
+            ? CustomerId.fromJson(json['customerId'])
+            : null,
         type = json['type'],
         originator = EntityId.fromJson(json['originator']),
         severity = alarmSeverityFromString(json['severity']),
@@ -94,7 +96,7 @@ class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     json['tenantId'] = tenantId.toJson();
-    json['customerId'] = customerId.toJson();
+    json['customerId'] = customerId?.toJson();
     json['type'] = type;
     json['originator'] = originator.toJson();
     json['severity'] = severity.toShortString();
