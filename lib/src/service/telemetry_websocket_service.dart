@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '../model/model.dart';
 import '../thingsboard_client_base.dart';
@@ -210,6 +210,7 @@ class TelemetryWebsocketService implements TelemetryService {
       }, onError: (e) {
         _onError(e);
       });
+      channel.ready.onError((error, stackTrace) => _onError(error));
       _onOpen();
     } catch (e) {
       _onClose();
