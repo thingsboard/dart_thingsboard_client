@@ -6,7 +6,7 @@ import 'id/tb_resource_id.dart';
 import 'base_data.dart';
 import 'id/tenant_id.dart';
 
-enum ResourceType { LWM2M_MODEL, JKS, PKCS_12 }
+enum ResourceType { LWM2M_MODEL, JKS, PKCS_12, JS_MODULE }
 
 ResourceType resourceTypeFromString(String value) {
   return ResourceType.values.firstWhere(

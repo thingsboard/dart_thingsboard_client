@@ -9,6 +9,7 @@ class RuleNode extends AdditionalInfoBased<RuleNodeId> with HasName {
   String name;
   bool debugMode;
   bool? singletonMode;
+  int? configurationVersion;
   Map<String, dynamic>? configuration;
 
   RuleNode(
@@ -17,6 +18,7 @@ class RuleNode extends AdditionalInfoBased<RuleNodeId> with HasName {
       this.debugMode = false,
       this.ruleChainId,
       this.singletonMode,
+      this.configurationVersion,
       this.configuration});
 
   RuleNode.fromJson(Map<String, dynamic> json)
@@ -27,6 +29,7 @@ class RuleNode extends AdditionalInfoBased<RuleNodeId> with HasName {
         name = json['name'],
         debugMode = json['debugMode'],
         singletonMode = json['singletonMode'],
+        configurationVersion = json['configurationVersion'],
         configuration = json['configuration'],
         super.fromJson(json);
 
@@ -40,6 +43,7 @@ class RuleNode extends AdditionalInfoBased<RuleNodeId> with HasName {
     json['name'] = name;
     json['debugMode'] = debugMode;
     json['singletonMode'] = singletonMode;
+    json['configurationVersion'] = configurationVersion;
     if (configuration != null) {
       json['configuration'] = configuration;
     }
@@ -54,6 +58,7 @@ class RuleNode extends AdditionalInfoBased<RuleNodeId> with HasName {
   @override
   String toString() {
     return 'RuleNode{${additionalInfoBasedString('ruleChainId: $ruleChainId, type: $type, name: $name, '
-        'debugMode: $debugMode, singletonMode: $singletonMode, configuration: $configuration')}}';
+        'debugMode: $debugMode, singletonMode: $singletonMode, '
+        'configurationVersion: $configurationVersion, configuration: $configuration')}}';
   }
 }

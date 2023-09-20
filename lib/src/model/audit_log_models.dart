@@ -44,7 +44,8 @@ enum ActionType {
   UNASSIGNED_FROM_EDGE,
   ADDED_COMMENT,
   UPDATED_COMMENT,
-  DELETED_COMMENT
+  DELETED_COMMENT,
+  SMS_SENT
 }
 
 ActionType actionTypeFromString(String value) {

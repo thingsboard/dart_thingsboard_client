@@ -11,6 +11,10 @@ PageData<WidgetsBundle> parseWidgetsBundlePageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => WidgetsBundle.fromJson(json));
 }
 
+PageData<WidgetTypeInfo> parseWidgetTypeInfoPageData(Map<String, dynamic> json) {
+  return PageData.fromJson(json, (json) => WidgetTypeInfo.fromJson(json));
+}
+
 List<WidgetsBundle> parseWidgetsBundleList(List<dynamic> json) {
   return json.map((e) => WidgetsBundle.fromJson(e)).toList();
 }
@@ -60,6 +64,24 @@ class WidgetService {
     return WidgetsBundle.fromJson(response.data!);
   }
 
+  Future<void> updateWidgetsBundleWidgetTypes(
+      String widgetsBundleId,
+      List<String> widgetTypeIds,
+      {RequestConfig? requestConfig}) async {
+    await _tbClient.post(
+        '/api/widgetsBundle/$widgetsBundleId/widgetTypes',
+        data: jsonEncode(widgetTypeIds),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
+  Future<void> updateWidgetsBundleWidgetFqns(String widgetsBundleId,
+      List<String> widgetTypeFqns, {RequestConfig? requestConfig}) async {
+    await _tbClient.post(
+        '/api/widgetsBundle/$widgetsBundleId/widgetTypeFqns',
+        data: jsonEncode(widgetTypeFqns),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+  }
+
   Future<void> deleteWidgetsBundle(String widgetsBundleId,
       {RequestConfig? requestConfig}) async {
     await _tbClient.delete('/api/widgetsBundle/$widgetsBundleId',
@@ -97,6 +119,38 @@ class WidgetService {
     );
   }
 
+  Future<WidgetTypeInfo?> getWidgetTypeInfoById(
+      String widgetTypeId,
+      {RequestConfig? requestConfig}) async {
+    return nullIfNotFound(
+          (RequestConfig requestConfig) async {
+        var response = await _tbClient.get<Map<String, dynamic>>(
+            '/api/widgetTypeInfo/$widgetTypeId',
+            options: defaultHttpOptionsFromConfig(requestConfig));
+        return response.data != null
+            ? WidgetTypeInfo.fromJson(response.data!)
+            : null;
+      },
+      requestConfig: requestConfig,
+    );
+  }
+
+  Future<PageData<WidgetTypeInfo>> getWidgetTypes(
+      PageLink pageLink,
+      { bool tenantOnly = false,
+        bool fullSearch = false,
+        RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/widgetTypes',
+        queryParameters: {
+          ...pageLink.toQueryParameters(),
+          'tenantOnly': tenantOnly,
+          'fullSearch': fullSearch
+        },
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return _tbClient.compute(parseWidgetTypeInfoPageData, response.data!);
+  }
+
   Future<WidgetTypeDetails> saveWidgetType(WidgetTypeDetails widgetTypeDetails,
       {RequestConfig? requestConfig}) async {
     var response = await _tbClient.post<Map<String, dynamic>>('/api/widgetType',
@@ -112,52 +166,58 @@ class WidgetService {
   }
 
   Future<List<WidgetType>> getBundleWidgetTypes(
-      bool isSystem, String bundleAlias,
+      String widgetsBundleId,
       {RequestConfig? requestConfig}) async {
     var response = await _tbClient.get<List<dynamic>>('/api/widgetTypes',
         queryParameters: {
-          'isSystem': isSystem.toString(),
-          'bundleAlias': bundleAlias
+          'widgetsBundleId': widgetsBundleId
         },
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseWidgetTypeList, response.data!);
   }
 
   Future<List<WidgetTypeDetails>> getBundleWidgetTypesDetails(
-      bool isSystem, String bundleAlias,
+      String widgetsBundleId,
       {RequestConfig? requestConfig}) async {
     var response = await _tbClient.get<List<dynamic>>('/api/widgetTypesDetails',
         queryParameters: {
-          'isSystem': isSystem.toString(),
-          'bundleAlias': bundleAlias
+          'widgetsBundleId': widgetsBundleId
         },
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseWidgetTypeDetailsList, response.data!);
   }
 
+  Future<List<String>> getBundleWidgetTypeFqns(
+      String widgetsBundleId,
+      {RequestConfig? requestConfig}) async {
+    var response = await _tbClient.get<List<dynamic>>('/api/widgetTypeFqns',
+        queryParameters: {
+          'widgetsBundleId': widgetsBundleId
+        },
+        options: defaultHttpOptionsFromConfig(requestConfig));
+    return List<String>.from(response.data!);
+  }
+
   Future<List<WidgetTypeInfo>> getBundleWidgetTypesInfos(
-      bool isSystem, String bundleAlias,
+      String widgetsBundleId,
       {RequestConfig? requestConfig}) async {
     var response = await _tbClient.get<List<dynamic>>('/api/widgetTypesInfos',
         queryParameters: {
-          'isSystem': isSystem.toString(),
-          'bundleAlias': bundleAlias
+          'widgetsBundleId': widgetsBundleId
         },
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseWidgetTypeInfosList, response.data!);
   }
 
   Future<WidgetType?> getWidgetType(
-      bool isSystem, String bundleAlias, String alias,
+      String fullFqn,
       {RequestConfig? requestConfig}) async {
     return nullIfNotFound(
       (RequestConfig requestConfig) async {
         var response = await _tbClient.get<Map<String, dynamic>>(
             '/api/widgetType',
             queryParameters: {
-              'isSystem': isSystem.toString(),
-              'bundleAlias': bundleAlias,
-              'alias': alias
+              'fullFqn': fullFqn
             },
             options: defaultHttpOptionsFromConfig(requestConfig));
         return response.data != null

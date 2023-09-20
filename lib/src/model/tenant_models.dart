@@ -71,6 +71,7 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
   int maxDPStorageDays;
   int maxRuleNodeExecutionsPerMessage;
   int maxEmails;
+  bool? smsEnabled;
   int maxSms;
   int maxCreatedAlarms;
 
@@ -161,6 +162,7 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         maxRuleNodeExecutionsPerMessage =
             json['maxRuleNodeExecutionsPerMessage'],
         maxEmails = json['maxEmails'],
+        smsEnabled = json['smsEnabled'],
         maxSms = json['maxSms'],
         maxCreatedAlarms = json['maxCreatedAlarms'],
         tenantServerRestLimitsConfiguration =
@@ -240,6 +242,7 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
     json['maxDPStorageDays'] = maxDPStorageDays;
     json['maxRuleNodeExecutionsPerMessage'] = maxRuleNodeExecutionsPerMessage;
     json['maxEmails'] = maxEmails;
+    json['smsEnabled'] = smsEnabled;
     json['maxSms'] = maxSms;
     json['maxCreatedAlarms'] = maxCreatedAlarms;
 
@@ -273,7 +276,7 @@ class DefaultTenantProfileConfiguration extends TenantProfileConfiguration {
         'tenantNotificationRequestsRateLimit: $tenantNotificationRequestsRateLimit, tenantNotificationRequestsPerRuleRateLimit: $tenantNotificationRequestsPerRuleRateLimit, '
         'maxTransportMessages: $maxTransportMessages, maxTransportDataPoints: $maxTransportDataPoints, maxREExecutions: $maxREExecutions, '
         'maxJSExecutions: $maxJSExecutions, maxDPStorageDays: $maxDPStorageDays, maxRuleNodeExecutionsPerMessage: $maxRuleNodeExecutionsPerMessage, '
-        'maxEmails: $maxEmails, maxSms: $maxSms, maxCreatedAlarms: $maxCreatedAlarms, tenantServerRestLimitsConfiguration: $tenantServerRestLimitsConfiguration, '
+        'maxEmails: $maxEmails, smsEnabled: $smsEnabled, maxSms: $maxSms, maxCreatedAlarms: $maxCreatedAlarms, tenantServerRestLimitsConfiguration: $tenantServerRestLimitsConfiguration, '
         'customerServerRestLimitsConfiguration: $customerServerRestLimitsConfiguration, maxWsSessionsPerTenant: $maxWsSessionsPerTenant, '
         'maxWsSessionsPerCustomer: $maxWsSessionsPerCustomer, maxWsSessionsPerRegularUser: $maxWsSessionsPerRegularUser, maxWsSessionsPerPublicUser: $maxWsSessionsPerPublicUser, '
         'wsMsgQueueLimitPerSession: $wsMsgQueueLimitPerSession, maxWsSubscriptionsPerTenant: $maxWsSubscriptionsPerTenant, '
@@ -308,7 +311,6 @@ class TenantProfile extends BaseData<TenantProfileId> with HasName {
   String name;
   String? description;
   bool? isDefault;
-  bool? isolatedTbCore;
   bool? isolatedTbRuleEngine;
   TenantProfileData profileData;
 
@@ -318,7 +320,6 @@ class TenantProfile extends BaseData<TenantProfileId> with HasName {
       : name = json['name'],
         description = json['description'],
         isDefault = json['default'],
-        isolatedTbCore = json['isolatedTbCore'],
         isolatedTbRuleEngine = json['isolatedTbRuleEngine'],
         profileData = TenantProfileData.fromJson(json['profileData']),
         super.fromJson(json);
@@ -329,9 +330,6 @@ class TenantProfile extends BaseData<TenantProfileId> with HasName {
     json['name'] = name;
     if (isDefault != null) {
       json['default'] = isDefault;
-    }
-    if (isolatedTbCore != null) {
-      json['isolatedTbCore'] = isolatedTbCore;
     }
     if (isolatedTbRuleEngine != null) {
       json['isolatedTbRuleEngine'] = isolatedTbRuleEngine;
@@ -347,7 +345,8 @@ class TenantProfile extends BaseData<TenantProfileId> with HasName {
 
   @override
   String toString() {
-    return 'TenantProfile{${baseDataString('name: $name, description: $description, isDefault: $isDefault, isolatedTbCore: $isolatedTbCore, isolatedTbRuleEngine: $isolatedTbRuleEngine, profileData: $profileData')}}';
+    return 'TenantProfile{${baseDataString('name: $name, description: $description, isDefault: $isDefault, '
+        'isolatedTbRuleEngine: $isolatedTbRuleEngine, profileData: $profileData')}}';
   }
 }
 

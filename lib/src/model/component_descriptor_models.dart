@@ -47,6 +47,7 @@ class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
   String name;
   String clazz;
   Map<String, dynamic>? configurationDescriptor;
+  final int configurationVersion;
   String? actions;
 
   ComponentDescriptor.fromJson(Map<String, dynamic> json)
@@ -57,12 +58,14 @@ class ComponentDescriptor extends BaseData<ComponentDescriptorId> {
         name = json['name'],
         clazz = json['clazz'],
         configurationDescriptor = json['configurationDescriptor'],
+        configurationVersion = json['configurationVersion'],
         actions = json['actions'],
         super.fromJson(json, (id) => ComponentDescriptorId(id));
 
   @override
   String toString() {
     return 'ComponentDescriptor{${baseDataString('type: $type, scope: $scope, name: $name, clusteringMode: $clusteringMode, '
-        'clazz: $clazz, configurationDescriptor: $configurationDescriptor, actions: $actions')}}';
+        'clazz: $clazz, configurationDescriptor: $configurationDescriptor, '
+        'configurationVersion: $configurationVersion, actions: $actions')}}';
   }
 }
