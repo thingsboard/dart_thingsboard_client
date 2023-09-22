@@ -43,12 +43,13 @@ Future<void> deviceApiExample() async {
   var res = await tbClient.getAttributeService().saveEntityAttributesV2(
       foundDevice!.id!,
       AttributeScope.SHARED_SCOPE.toShortString(),
-      {'targetTemperature': 22.4, 'targetHumidity': 57.8});
+      {'targetTemperature': 22.4, 'targetHumidity': 57.8,
+        'array': [1, 2], 'json': {'test': 'work!'}});
   print('Save attributes result: $res');
   var attributes = await tbClient.getAttributeService().getAttributesByScope(
       foundDevice.id!,
       AttributeScope.SHARED_SCOPE.toShortString(),
-      ['targetTemperature', 'targetHumidity']);
+      ['targetTemperature', 'targetHumidity', 'array', 'json']);
   print('Found device attributes: $attributes');
 
   await tbClient.getDeviceService().deleteDevice(savedDevice.id!.id!);
