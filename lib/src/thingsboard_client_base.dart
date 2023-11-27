@@ -178,31 +178,31 @@ class ThingsboardClient {
       await _checkPlatformVersion();
     }
     if (_userLoadedCallback != null) {
-      Future(() => _userLoadedCallback!());
+      Future(() => _userLoadedCallback());
     }
   }
 
   void _mfaAuth() {
     if (_mfaAuthCallback != null) {
-      Future(() => _mfaAuthCallback!());
+      Future(() => _mfaAuthCallback());
     }
   }
 
   void _onError(ThingsboardError error) {
     if (_errorCallback != null) {
-      Future(() => _errorCallback!(error));
+      Future(() => _errorCallback(error));
     }
   }
 
   void _loadStarted() {
     if (_loadStartedCallback != null) {
-      Future(() => _loadStartedCallback!());
+      Future(() => _loadStartedCallback());
     }
   }
 
   void _loadFinished() {
     if (_loadFinishedCallback != null) {
-      Future(() => _loadFinishedCallback!());
+      Future(() => _loadFinishedCallback());
     }
   }
 

@@ -8,7 +8,7 @@ import '../model/constants.dart';
 
 import '../thingsboard_client_base.dart';
 
-class HttpInterceptor extends Interceptor {
+class HttpInterceptor extends QueuedInterceptor {
   static const String _authScheme = 'Bearer ';
   static const _authHeaderName = 'X-Authorization';
 
@@ -82,7 +82,7 @@ class HttpInterceptor extends Interceptor {
     var response =
         Response<ThingsboardError>(requestOptions: options, data: error);
     return handler.reject(
-        DioError(response: response, requestOptions: options), true);
+        DioException(response: response, requestOptions: options), true);
   }
 
   @override
@@ -96,7 +96,7 @@ class HttpInterceptor extends Interceptor {
   }
 
   @override
-  Future onError(DioError error, ErrorInterceptorHandler handler) async {
+  Future onError(DioException error, ErrorInterceptorHandler handler) async {
     var config = _getInterceptorConfig(error.requestOptions);
     var notify = true;
     var ignoreErrors = config.ignoreErrors;
@@ -126,12 +126,8 @@ class HttpInterceptor extends Interceptor {
         tbError, error.requestOptions, handler, notify && !ignoreErrors);
   }
 
-  Future _refreshTokenAndRetry(DioError error, ErrorInterceptorHandler handler,
+  Future _refreshTokenAndRetry(DioException error, ErrorInterceptorHandler handler,
       InterceptorConfig config) async {
-    // ignore: deprecated_member_use
-    _dio.interceptors.requestLock.lock();
-    // ignore: deprecated_member_use
-    _dio.interceptors.responseLock.lock();
     try {
       await _tbClient.refreshJwtToken(
           internalDio: _internalDio, interceptRefreshToken: true);
@@ -140,23 +136,18 @@ class HttpInterceptor extends Interceptor {
         _updateLoadingState(config, false);
       }
       return _handleError(e, error.requestOptions, handler, true);
-    } finally {
-      // ignore: deprecated_member_use
-      _dio.interceptors.requestLock.unlock();
-      // ignore: deprecated_member_use
-      _dio.interceptors.responseLock.unlock();
     }
     return _retryRequest(error, handler);
   }
 
   Future _retryRequestWithTimeout(
-      DioError error, ErrorInterceptorHandler handler) async {
+      DioException error, ErrorInterceptorHandler handler) async {
     var rng = Random();
     var timeout = 1000 + rng.nextInt(3000);
     return _retryRequest(error, handler, timeout: timeout);
   }
 
-  Future _retryRequest(DioError error, ErrorInterceptorHandler handler,
+  Future _retryRequest(DioException error, ErrorInterceptorHandler handler,
       {int? timeout}) async {
     if (timeout != null) {
       return Future.delayed(
@@ -203,7 +194,7 @@ class HttpInterceptor extends Interceptor {
       _onError(tbError);
     }
     return handler
-        .next(DioError(requestOptions: requestOptions, error: tbError));
+        .next(DioException(requestOptions: requestOptions, error: tbError));
   }
 
   InterceptorConfig _getInterceptorConfig(RequestOptions options) {

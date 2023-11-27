@@ -1,6 +1,6 @@
 import 'id/ota_package_id.dart';
 
-abstract class HasOtaPackage {
+abstract mixin class HasOtaPackage {
   OtaPackageId? getFirmwareId();
 
   OtaPackageId? getSoftwareId();

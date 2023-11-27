@@ -1,6 +1,6 @@
 import 'id/rule_chain_id.dart';
 
-abstract class HasRuleEngineProfile {
+abstract mixin class HasRuleEngineProfile {
   RuleChainId? getDefaultRuleChainId();
 
   String? getDefaultQueueName();

@@ -1,5 +1,5 @@
 import 'id/tenant_id.dart';
 
-abstract class HasTenantId {
+abstract mixin class HasTenantId {
   TenantId? getTenantId();
 }
