@@ -36,6 +36,7 @@ export 'ota_models.dart';
 export 'entity_view_models.dart';
 export 'event_models.dart';
 export 'telemetry_models.dart';
+export 'notification_models.dart';
 export 'widgets_bundle_model.dart';
 export 'widget_models.dart';
 export 'edge_models.dart';
