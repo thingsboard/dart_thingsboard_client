@@ -64,6 +64,7 @@ class ThingsboardClient {
   ResourceService? _resourceService;
   OtaPackageService? _otaPackageService;
   TelemetryWebsocketService? _telemetryWebsocketService;
+  NotificationWebsocketService? _notificationWebsocketService;
   QueueService? _queueService;
   EntitiesVersionControlService? _entitiesVersionControlService;
   TwoFactorAuthService? _twoFactorAuthService;
@@ -173,6 +174,9 @@ class ThingsboardClient {
   Future<void> _userLoaded() async {
     if (_telemetryWebsocketService != null) {
       _telemetryWebsocketService!.reset(true);
+    }
+    if (_notificationWebsocketService != null) {
+      _notificationWebsocketService!.reset(true);
     }
     if (this.isJwtTokenValid() && !this.isPreVerificationToken()) {
       await _checkPlatformVersion();
@@ -544,6 +548,12 @@ class ThingsboardClient {
     _telemetryWebsocketService ??=
         TelemetryWebsocketService(this, _apiEndpoint);
     return _telemetryWebsocketService!;
+  }
+
+  NotificationWebsocketService getNotificationWebsocketService() {
+    _notificationWebsocketService ??=
+        NotificationWebsocketService(this, _apiEndpoint);
+    return _notificationWebsocketService!;
   }
 
   QueueService getQueueService() {
