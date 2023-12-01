@@ -1,6 +1,7 @@
 ## 1.0.7
 
 - Update API and models according to ThingsBoard platform version 3.6.0
+- Fixed issue [#17](https://github.com/thingsboard/dart_thingsboard_client/issues/17): get json attributes when value is array
 
 ## 1.0.6
 
