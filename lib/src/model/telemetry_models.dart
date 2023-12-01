@@ -347,7 +347,7 @@ abstract class RestJsonConverter {
   }
 
   static KvEntry _parseValue(String key, dynamic value) {
-    if (!(value is Map)) {
+    if (!(value is Map || value is List)) {
       if (value is bool) {
         return BooleanDataEntry(key, value);
       } else if (value is num) {
