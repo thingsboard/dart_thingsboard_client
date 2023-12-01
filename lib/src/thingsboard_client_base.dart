@@ -64,6 +64,7 @@ class ThingsboardClient {
   ResourceService? _resourceService;
   OtaPackageService? _otaPackageService;
   TelemetryWebsocketService? _telemetryWebsocketService;
+  NotificationWebsocketService? _notificationWebsocketService;
   QueueService? _queueService;
   EntitiesVersionControlService? _entitiesVersionControlService;
   TwoFactorAuthService? _twoFactorAuthService;
@@ -174,35 +175,38 @@ class ThingsboardClient {
     if (_telemetryWebsocketService != null) {
       _telemetryWebsocketService!.reset(true);
     }
+    if (_notificationWebsocketService != null) {
+      _notificationWebsocketService!.reset(true);
+    }
     if (this.isJwtTokenValid() && !this.isPreVerificationToken()) {
       await _checkPlatformVersion();
     }
     if (_userLoadedCallback != null) {
-      Future(() => _userLoadedCallback!());
+      Future(() => _userLoadedCallback());
     }
   }
 
   void _mfaAuth() {
     if (_mfaAuthCallback != null) {
-      Future(() => _mfaAuthCallback!());
+      Future(() => _mfaAuthCallback());
     }
   }
 
   void _onError(ThingsboardError error) {
     if (_errorCallback != null) {
-      Future(() => _errorCallback!(error));
+      Future(() => _errorCallback(error));
     }
   }
 
   void _loadStarted() {
     if (_loadStartedCallback != null) {
-      Future(() => _loadStartedCallback!());
+      Future(() => _loadStartedCallback());
     }
   }
 
   void _loadFinished() {
     if (_loadFinishedCallback != null) {
-      Future(() => _loadFinishedCallback!());
+      Future(() => _loadFinishedCallback());
     }
   }
 
@@ -544,6 +548,12 @@ class ThingsboardClient {
     _telemetryWebsocketService ??=
         TelemetryWebsocketService(this, _apiEndpoint);
     return _telemetryWebsocketService!;
+  }
+
+  NotificationWebsocketService getNotificationWebsocketService() {
+    _notificationWebsocketService ??=
+        NotificationWebsocketService(this, _apiEndpoint);
+    return _notificationWebsocketService!;
   }
 
   QueueService getQueueService() {

@@ -1,3 +1,3 @@
-abstract class HasAdditionalInfo {
+abstract mixin class HasAdditionalInfo {
   Map<String, dynamic>? getAdditionalInfo();
 }

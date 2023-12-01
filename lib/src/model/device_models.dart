@@ -394,7 +394,7 @@ class DeviceProfile extends BaseData<DeviceProfileId>
   OtaPackageId? firmwareId;
   OtaPackageId? softwareId;
   DeviceProfileData profileData;
-  DashboardId? defaultEdgeRuleChainId;
+  RuleChainId? defaultEdgeRuleChainId;
   DeviceProfileId? externalId;
 
   DeviceProfile(this.name)
@@ -429,7 +429,7 @@ class DeviceProfile extends BaseData<DeviceProfileId>
             : null,
         profileData = DeviceProfileData.fromJson(json['profileData']),
         defaultEdgeRuleChainId = json['defaultEdgeRuleChainId'] != null
-            ? DashboardId.fromJson(json['defaultEdgeRuleChainId'])
+            ? RuleChainId.fromJson(json['defaultEdgeRuleChainId'])
             : null,
         externalId = json['externalId'] != null
             ? DeviceProfileId.fromJson(json['externalId'])

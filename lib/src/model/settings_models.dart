@@ -74,6 +74,16 @@ class MailServerSettings {
   String? proxyPort;
   String? proxyUser;
   String? proxyPassword;
+  bool? enableOauth2;
+  String? providerId;
+  String? clientId;
+  String? clientSecret;
+  String? providerTenantId;
+  String? authUri;
+  String? tokenUri;
+  List<String>? scope;
+  String? redirectUri;
+  bool? tokenGenerated;
 
   MailServerSettings(
       {this.mailFrom = 'ThingsBoard <sysadmin@localhost.localdomain>',
@@ -89,7 +99,18 @@ class MailServerSettings {
       this.proxyHost,
       this.proxyPort,
       this.proxyUser,
-      this.proxyPassword});
+      this.proxyPassword,
+      this.enableOauth2,
+      this.providerId,
+      this.clientId,
+      this.clientSecret,
+      this.providerTenantId,
+      this.authUri,
+      this.tokenUri,
+      this.scope,
+      this.redirectUri,
+      this.tokenGenerated,
+      });
 
   MailServerSettings.fromJson(Map<String, dynamic> json)
       : mailFrom = json['mailFrom'],
@@ -105,7 +126,17 @@ class MailServerSettings {
         proxyHost = json['proxyHost'],
         proxyPort = json['proxyPort'],
         proxyUser = json['proxyUser'],
-        proxyPassword = json['proxyPassword'];
+        proxyPassword = json['proxyPassword'],
+        enableOauth2 = json['enableOauth2'],
+        providerId = json['providerId'],
+        clientId = json['clientId'],
+        clientSecret = json['clientSecret'],
+        providerTenantId = json['providerTenantId'],
+        authUri = json['authUri'],
+        tokenUri = json['tokenUri'],
+        scope = List.from(json['scope']),
+        redirectUri = json['redirectUri'],
+        tokenGenerated = json['tokenGenerated'];
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
@@ -141,12 +172,48 @@ class MailServerSettings {
     if (proxyPassword != null) {
       json['proxyPassword'] = proxyPassword;
     }
+    if (enableOauth2 != null) {
+      json['enableOauth2'] = enableOauth2;
+    }
+    if (providerId != null) {
+      json['providerId'] = providerId;
+    }
+    if (clientId != null) {
+      json['clientId'] = clientId;
+    }
+    if (clientSecret != null) {
+      json['clientSecret'] = clientSecret;
+    }
+    if (providerTenantId != null) {
+      json['providerTenantId'] = providerTenantId;
+    }
+    if (authUri != null) {
+      json['authUri'] = authUri;
+    }
+    if (tokenUri != null) {
+      json['tokenUri'] = tokenUri;
+    }
+    if (scope != null) {
+      json['scope'] = scope;
+    }
+    if (redirectUri != null) {
+      json['redirectUri'] = redirectUri;
+    }
+    if (tokenGenerated != null) {
+      json['tokenGenerated'] = tokenGenerated;
+    }
     return json;
   }
 
   @override
   String toString() {
-    return 'MailServerSettings{mailFrom: $mailFrom, smtpProtocol: ${smtpProtocol.toShortString()}, smtpHost: $smtpHost, smtpPort: $smtpPort, timeout: $timeout, enableTls: $enableTls, tlsVersion: $tlsVersion, username: $username, password: $password, enableProxy: $enableProxy, proxyHost: $proxyHost, proxyPort: $proxyPort, proxyUser: $proxyUser, proxyPassword: $proxyPassword}';
+    return 'MailServerSettings{mailFrom: $mailFrom, smtpProtocol: ${smtpProtocol.toShortString()}, '
+        'smtpHost: $smtpHost, smtpPort: $smtpPort, timeout: $timeout, enableTls: $enableTls, '
+        'tlsVersion: $tlsVersion, username: $username, password: $password, enableProxy: $enableProxy, '
+        'proxyHost: $proxyHost, proxyPort: $proxyPort, proxyUser: $proxyUser, proxyPassword: $proxyPassword, '
+        'enableOauth2: $enableOauth2, providerId: $providerId, clientId: $clientId, clientSecret: $clientSecret, '
+        'providerTenantId: $providerTenantId, authUri: $authUri, tokenUri: $tokenUri, scope: $scope, '
+        'redirectUri: $redirectUri, tokenGenerated: $tokenGenerated}';
   }
 }
 

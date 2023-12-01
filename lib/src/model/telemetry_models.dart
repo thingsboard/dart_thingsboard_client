@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'id/entity_id.dart';
-import 'page/page_data.dart';
-import 'query/query_models.dart';
 import '../error/thingsboard_error.dart';
 import 'entity_type_models.dart';
+import 'id/entity_id.dart';
+import 'notification_models.dart';
+import 'page/page_data.dart';
+import 'query/query_models.dart';
 
 enum DataType { STRING, LONG, BOOLEAN, DOUBLE, JSON }
 
@@ -973,6 +974,10 @@ abstract class WebsocketDataMsg {
           return AlarmDataUpdate.fromJson(json);
         case CmdUpdateType.COUNT_DATA:
           return EntityCountUpdate.fromJson(json);
+        case CmdUpdateType.NOTIFICATIONS_COUNT:
+          return NotificationCountUpdate.fromJson(json);
+        case CmdUpdateType.NOTIFICATIONS:
+          return NotificationsUpdate.fromJson(json);
       }
     }
     throw ArgumentError('Unexpected type of websocket data');
@@ -1040,7 +1045,7 @@ class SubscriptionUpdate extends SubscriptionDataHolder {
   }
 }
 
-enum CmdUpdateType { ENTITY_DATA, ALARM_DATA, COUNT_DATA }
+enum CmdUpdateType { ENTITY_DATA, ALARM_DATA, COUNT_DATA, NOTIFICATIONS_COUNT, NOTIFICATIONS }
 
 CmdUpdateType cmdUpdateTypeFromString(String value) {
   return CmdUpdateType.values.firstWhere(

@@ -25,7 +25,7 @@ int httpStatusToThingsboardErrorCode(int status) {
 
 ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
   ThingsboardError? tbError;
-  if (error is DioError) {
+  if (error is DioException) {
     if (error.response != null && error.response!.data != null) {
       var data = error.response!.data;
       if (data is ThingsboardError) {
@@ -39,7 +39,7 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
       }
     } else if (error.error != null) {
       if (error.error is ThingsboardError) {
-        tbError = error.error;
+        tbError = error.error as ThingsboardError;
       } /* else if (error.error is SocketException) {
         tbError = ThingsboardError(
             error: error,
