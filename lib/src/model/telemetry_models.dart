@@ -1045,7 +1045,13 @@ class SubscriptionUpdate extends SubscriptionDataHolder {
   }
 }
 
-enum CmdUpdateType { ENTITY_DATA, ALARM_DATA, COUNT_DATA, NOTIFICATIONS_COUNT, NOTIFICATIONS }
+enum CmdUpdateType {
+  ENTITY_DATA,
+  ALARM_DATA,
+  COUNT_DATA,
+  NOTIFICATIONS_COUNT,
+  NOTIFICATIONS
+}
 
 CmdUpdateType cmdUpdateTypeFromString(String value) {
   return CmdUpdateType.values.firstWhere(

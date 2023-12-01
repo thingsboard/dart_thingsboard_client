@@ -126,8 +126,8 @@ class HttpInterceptor extends QueuedInterceptor {
         tbError, error.requestOptions, handler, notify && !ignoreErrors);
   }
 
-  Future _refreshTokenAndRetry(DioException error, ErrorInterceptorHandler handler,
-      InterceptorConfig config) async {
+  Future _refreshTokenAndRetry(DioException error,
+      ErrorInterceptorHandler handler, InterceptorConfig config) async {
     try {
       await _tbClient.refreshJwtToken(
           internalDio: _internalDio, interceptRefreshToken: true);

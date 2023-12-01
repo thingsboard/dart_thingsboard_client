@@ -56,8 +56,7 @@ class WidgetTypeInfo extends BaseWidgetType {
   String? description;
   String widgetType;
 
-  WidgetTypeInfo(String name, String fqn, this.widgetType)
-      : super(name, fqn);
+  WidgetTypeInfo(String name, String fqn, this.widgetType) : super(name, fqn);
 
   WidgetTypeInfo.fromJson(Map<String, dynamic> json)
       : image = json['image'],
@@ -74,8 +73,7 @@ class WidgetTypeInfo extends BaseWidgetType {
 class WidgetType extends BaseWidgetType {
   Map<String, dynamic> descriptor;
 
-  WidgetType(String name, String fqn, this.descriptor)
-      : super(name, fqn);
+  WidgetType(String name, String fqn, this.descriptor) : super(name, fqn);
 
   WidgetType.fromJson(Map<String, dynamic> json)
       : descriptor = json['descriptor'],
@@ -103,8 +101,7 @@ class WidgetTypeDetails extends WidgetType {
   String? description;
   WidgetTypeId? externalId;
 
-  WidgetTypeDetails(
-      String name, String fqn, Map<String, dynamic> descriptor)
+  WidgetTypeDetails(String name, String fqn, Map<String, dynamic> descriptor)
       : super(name, fqn, descriptor);
 
   WidgetTypeDetails.fromJson(Map<String, dynamic> json)
