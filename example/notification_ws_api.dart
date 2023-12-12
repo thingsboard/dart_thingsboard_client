@@ -33,7 +33,7 @@ Future<void> simpleNotificationCountSubscriptionExample() async {
 
   var notificationService = tbClient.getNotificationWebsocketService();
   var subscription = NotificationSubscriber.createNotificationCountSubscription(
-      notificationService: notificationService);
+      telemetryService: notificationService);
 
   subscription.notificationCountStream.listen((count) {
     print('[WebSocket Data]: Received notification: $count');
@@ -57,7 +57,7 @@ Future<void> simpleNotificationsSubscriptionExample() async {
 
   var notificationService = tbClient.getNotificationWebsocketService();
   var subscription = NotificationSubscriber.createNotificationsSubscription(
-      notificationService: notificationService, limit: 1);
+      telemetryService: notificationService, limit: 1);
 
   subscription.notificationStream.listen((notification) {
     print('[WebSocket Data]: Received notification: $notification');

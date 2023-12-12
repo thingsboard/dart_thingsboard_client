@@ -408,20 +408,55 @@ class AttributeData {
   }
 }
 
-enum TelemetryFeature { ATTRIBUTES, TIMESERIES }
+enum WsCmdType {
+  AUTH,
+
+  ATTRIBUTES,
+  TIMESERIES,
+  TIMESERIES_HISTORY,
+  ENTITY_DATA,
+  ENTITY_COUNT,
+  ALARM_DATA,
+  ALARM_COUNT,
+
+  NOTIFICATIONS,
+  NOTIFICATIONS_COUNT,
+  MARK_NOTIFICATIONS_AS_READ,
+  MARK_ALL_NOTIFICATIONS_AS_READ,
+
+  ALARM_DATA_UNSUBSCRIBE,
+  ALARM_COUNT_UNSUBSCRIBE,
+  ENTITY_DATA_UNSUBSCRIBE,
+  ENTITY_COUNT_UNSUBSCRIBE,
+  NOTIFICATIONS_UNSUBSCRIBE
+}
+
+WsCmdType wsCmdTypeTypeFromString(String value) {
+  return WsCmdType.values.firstWhere(
+      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+}
+
+extension WsCmdTypeTypeToString on WsCmdType {
+  String toShortString() {
+    return toString().split('.').last;
+  }
+}
 
 abstract class WebsocketCmd {
   int? cmdId;
+  WsCmdType type;
 
-  WebsocketCmd({this.cmdId});
+  WebsocketCmd({this.cmdId, required this.type});
 
-  Map<String, dynamic> toJson() => {'cmdId': cmdId};
+  Map<String, dynamic> toJson() =>
+      {'cmdId': cmdId, 'type': type.toShortString()};
 }
 
 abstract class TelemetryPluginCmd extends WebsocketCmd {
   final String? keys;
 
-  TelemetryPluginCmd({int? cmdId, this.keys}) : super(cmdId: cmdId);
+  TelemetryPluginCmd({int? cmdId, this.keys, required WsCmdType type})
+      : super(cmdId: cmdId, type: type);
 
   @override
   Map<String, dynamic> toJson() {
@@ -445,8 +480,9 @@ abstract class SubscriptionCmd extends TelemetryPluginCmd {
       required this.entityType,
       required this.entityId,
       this.scope,
-      this.unsubscribe = false})
-      : super(cmdId: cmdId, keys: keys);
+      this.unsubscribe = false,
+      required WsCmdType type})
+      : super(cmdId: cmdId, keys: keys, type: type);
 
   @override
   Map<String, dynamic> toJson() {
@@ -459,8 +495,6 @@ abstract class SubscriptionCmd extends TelemetryPluginCmd {
     json['unsubscribe'] = unsubscribe;
     return json;
   }
-
-  TelemetryFeature getType();
 }
 
 class AttributesSubscriptionCmd extends SubscriptionCmd {
@@ -477,10 +511,8 @@ class AttributesSubscriptionCmd extends SubscriptionCmd {
             entityType: entityType,
             entityId: entityId,
             scope: scope,
-            unsubscribe: unsubscribe);
-
-  @override
-  TelemetryFeature getType() => TelemetryFeature.ATTRIBUTES;
+            unsubscribe: unsubscribe,
+            type: WsCmdType.ATTRIBUTES);
 }
 
 class TimeseriesSubscriptionCmd extends SubscriptionCmd {
@@ -508,7 +540,8 @@ class TimeseriesSubscriptionCmd extends SubscriptionCmd {
             entityType: entityType,
             entityId: entityId,
             scope: scope,
-            unsubscribe: unsubscribe);
+            unsubscribe: unsubscribe,
+            type: WsCmdType.TIMESERIES);
 
   @override
   Map<String, dynamic> toJson() {
@@ -528,9 +561,6 @@ class TimeseriesSubscriptionCmd extends SubscriptionCmd {
     json['agg'] = agg.toShortString();
     return json;
   }
-
-  @override
-  TelemetryFeature getType() => TelemetryFeature.TIMESERIES;
 }
 
 class GetHistoryCmd extends TelemetryPluginCmd {
@@ -552,7 +582,7 @@ class GetHistoryCmd extends TelemetryPluginCmd {
       this.interval = 1000,
       this.limit,
       this.agg = Aggregation.NONE})
-      : super(cmdId: cmdId, keys: keys);
+      : super(cmdId: cmdId, keys: keys, type: WsCmdType.TIMESERIES_HISTORY);
 
   @override
   Map<String, dynamic> toJson() {
@@ -738,7 +768,7 @@ class EntityDataCmd extends WebsocketCmd {
       this.tsCmd,
       this.aggHistoryCmd,
       this.aggTsCmd})
-      : super(cmdId: cmdId);
+      : super(cmdId: cmdId, type: WsCmdType.ENTITY_DATA);
 
   @override
   Map<String, dynamic> toJson() {
@@ -776,7 +806,8 @@ class EntityDataCmd extends WebsocketCmd {
 class EntityCountCmd extends WebsocketCmd {
   final EntityCountQuery? query;
 
-  EntityCountCmd({int? cmdId, this.query}) : super(cmdId: cmdId);
+  EntityCountCmd({int? cmdId, this.query})
+      : super(cmdId: cmdId, type: WsCmdType.ENTITY_COUNT);
 
   @override
   Map<String, dynamic> toJson() {
@@ -793,7 +824,8 @@ class EntityCountCmd extends WebsocketCmd {
 class AlarmDataCmd extends WebsocketCmd {
   final AlarmDataQuery? query;
 
-  AlarmDataCmd({int? cmdId, this.query}) : super(cmdId: cmdId);
+  AlarmDataCmd({int? cmdId, this.query})
+      : super(cmdId: cmdId, type: WsCmdType.ALARM_DATA);
 
   @override
   Map<String, dynamic> toJson() {
@@ -807,103 +839,114 @@ class AlarmDataCmd extends WebsocketCmd {
   bool isEmpty() => query == null;
 }
 
+class UnreadCountSubCmd extends WebsocketCmd {
+  UnreadCountSubCmd({int? cmdId})
+      : super(cmdId: cmdId, type: WsCmdType.NOTIFICATIONS_COUNT);
+}
+
+class UnreadSubCmd extends WebsocketCmd {
+  final int limit;
+
+  UnreadSubCmd({int? cmdId, required this.limit})
+      : super(cmdId: cmdId, type: WsCmdType.NOTIFICATIONS);
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    json['limit'] = limit;
+    return json;
+  }
+}
+
+class MarkAsReadCmd extends WebsocketCmd {
+  final List<String> notifications;
+
+  MarkAsReadCmd({int? cmdId, required this.notifications})
+      : super(cmdId: cmdId, type: WsCmdType.MARK_NOTIFICATIONS_AS_READ);
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    json['notifications'] = notifications;
+    return json;
+  }
+}
+
+class MarkAllAsReadCmd extends WebsocketCmd {
+  MarkAllAsReadCmd({int? cmdId})
+      : super(cmdId: cmdId, type: WsCmdType.MARK_ALL_NOTIFICATIONS_AS_READ);
+}
+
 class EntityDataUnsubscribeCmd extends WebsocketCmd {
-  EntityDataUnsubscribeCmd({int? cmdId}) : super(cmdId: cmdId);
+  EntityDataUnsubscribeCmd({int? cmdId})
+      : super(cmdId: cmdId, type: WsCmdType.ENTITY_DATA_UNSUBSCRIBE);
 }
 
 class EntityCountUnsubscribeCmd extends WebsocketCmd {
-  EntityCountUnsubscribeCmd({int? cmdId}) : super(cmdId: cmdId);
+  EntityCountUnsubscribeCmd({int? cmdId})
+      : super(cmdId: cmdId, type: WsCmdType.ENTITY_COUNT_UNSUBSCRIBE);
 }
 
 class AlarmDataUnsubscribeCmd extends WebsocketCmd {
-  AlarmDataUnsubscribeCmd({int? cmdId}) : super(cmdId: cmdId);
+  AlarmDataUnsubscribeCmd({int? cmdId})
+      : super(cmdId: cmdId, type: WsCmdType.ALARM_DATA_UNSUBSCRIBE);
+}
+
+class UnsubscribeCmd extends WebsocketCmd {
+  UnsubscribeCmd({int? cmdId})
+      : super(cmdId: cmdId, type: WsCmdType.NOTIFICATIONS_UNSUBSCRIBE);
+}
+
+class AuthCmd extends WebsocketCmd {
+  String? token;
+
+  AuthCmd({int? cmdId, this.token}) : super(cmdId: cmdId, type: WsCmdType.AUTH);
+
+  @override
+  Map<String, dynamic> toJson() {
+    var json = super.toJson();
+    if (token != null) {
+      json['token'] = token;
+    }
+    return json;
+  }
 }
 
 class TelemetryPluginCmdsWrapper {
-  List<AttributesSubscriptionCmd> attrSubCmds;
-  List<TimeseriesSubscriptionCmd> tsSubCmds;
-  List<GetHistoryCmd> historyCmds;
-  List<EntityDataCmd> entityDataCmds;
-  List<EntityDataUnsubscribeCmd> entityDataUnsubscribeCmds;
-  List<AlarmDataCmd> alarmDataCmds;
-  List<AlarmDataUnsubscribeCmd> alarmDataUnsubscribeCmds;
-  List<EntityCountCmd> entityCountCmds;
-  List<EntityCountUnsubscribeCmd> entityCountUnsubscribeCmds;
+  List<WebsocketCmd> cmds;
+  AuthCmd? authCmd;
 
-  TelemetryPluginCmdsWrapper()
-      : attrSubCmds = [],
-        tsSubCmds = [],
-        historyCmds = [],
-        entityDataCmds = [],
-        entityDataUnsubscribeCmds = [],
-        alarmDataCmds = [],
-        alarmDataUnsubscribeCmds = [],
-        entityCountCmds = [],
-        entityCountUnsubscribeCmds = [];
+  TelemetryPluginCmdsWrapper() : cmds = [];
 
-  bool hasCommands() =>
-      tsSubCmds.isNotEmpty ||
-      historyCmds.isNotEmpty ||
-      attrSubCmds.isNotEmpty ||
-      entityDataCmds.isNotEmpty ||
-      entityDataUnsubscribeCmds.isNotEmpty ||
-      alarmDataCmds.isNotEmpty ||
-      alarmDataUnsubscribeCmds.isNotEmpty ||
-      entityCountCmds.isNotEmpty ||
-      entityCountUnsubscribeCmds.isNotEmpty;
+  bool hasCommands() => cmds.isNotEmpty;
 
   void clear() {
-    attrSubCmds.clear();
-    tsSubCmds.clear();
-    historyCmds.clear();
-    entityDataCmds.clear();
-    entityDataUnsubscribeCmds.clear();
-    alarmDataCmds.clear();
-    alarmDataUnsubscribeCmds.clear();
-    entityCountCmds.clear();
-    entityCountUnsubscribeCmds.clear();
+    cmds.clear();
+  }
+
+  void setAuth(String token) {
+    authCmd = new AuthCmd(cmdId: 0, token: token);
   }
 
   TelemetryPluginCmdsWrapper preparePublishCommands(int maxCommands) {
     var preparedWrapper = TelemetryPluginCmdsWrapper();
-    var leftCount = maxCommands;
-    preparedWrapper.tsSubCmds = _popCmds(tsSubCmds, leftCount);
-    leftCount -= preparedWrapper.tsSubCmds.length;
-    preparedWrapper.historyCmds = _popCmds(historyCmds, leftCount);
-    leftCount -= preparedWrapper.historyCmds.length;
-    preparedWrapper.attrSubCmds = _popCmds(attrSubCmds, leftCount);
-    leftCount -= preparedWrapper.attrSubCmds.length;
-    preparedWrapper.entityDataCmds = _popCmds(entityDataCmds, leftCount);
-    leftCount -= preparedWrapper.entityDataCmds.length;
-    preparedWrapper.entityDataUnsubscribeCmds =
-        _popCmds(entityDataUnsubscribeCmds, leftCount);
-    leftCount -= preparedWrapper.entityDataUnsubscribeCmds.length;
-    preparedWrapper.alarmDataCmds = _popCmds(alarmDataCmds, leftCount);
-    leftCount -= preparedWrapper.alarmDataCmds.length;
-    preparedWrapper.alarmDataUnsubscribeCmds =
-        _popCmds(alarmDataUnsubscribeCmds, leftCount);
-    leftCount -= preparedWrapper.alarmDataUnsubscribeCmds.length;
-    preparedWrapper.entityCountCmds = _popCmds(entityCountCmds, leftCount);
-    leftCount -= preparedWrapper.entityCountCmds.length;
-    preparedWrapper.entityCountUnsubscribeCmds =
-        _popCmds(entityCountUnsubscribeCmds, leftCount);
+    if (authCmd != null) {
+      preparedWrapper.authCmd = authCmd;
+      authCmd = null;
+    }
+    preparedWrapper.cmds = _popCmds(cmds, maxCommands);
     return preparedWrapper;
   }
 
-  Map<String, dynamic> toJson() => {
-        'attrSubCmds': attrSubCmds.map((e) => e.toJson()).toList(),
-        'tsSubCmds': tsSubCmds.map((e) => e.toJson()).toList(),
-        'historyCmds': historyCmds.map((e) => e.toJson()).toList(),
-        'entityDataCmds': entityDataCmds.map((e) => e.toJson()).toList(),
-        'entityDataUnsubscribeCmds':
-            entityDataUnsubscribeCmds.map((e) => e.toJson()).toList(),
-        'alarmDataCmds': alarmDataCmds.map((e) => e.toJson()).toList(),
-        'alarmDataUnsubscribeCmds':
-            alarmDataUnsubscribeCmds.map((e) => e.toJson()).toList(),
-        'entityCountCmds': entityCountCmds.map((e) => e.toJson()).toList(),
-        'entityCountUnsubscribeCmds':
-            entityCountUnsubscribeCmds.map((e) => e.toJson()).toList()
-      };
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {
+      'cmds': cmds.map((e) => e.toJson()).toList(),
+    };
+    if (authCmd != null) {
+      json['authCmd'] = authCmd!.toJson();
+    }
+    return json;
+  }
 
   List<T> _popCmds<T>(List<T> cmds, int leftCount) {
     var toPublish = min(cmds.length, leftCount);
@@ -1174,10 +1217,46 @@ class EntityCountUpdate extends CmdUpdate {
   }
 }
 
+class NotificationCountUpdate extends CmdUpdate {
+  final int totalUnreadCount;
+
+  NotificationCountUpdate.fromJson(Map<String, dynamic> json)
+      : totalUnreadCount = json['totalUnreadCount'],
+        super.fromJson(json);
+
+  @override
+  String toString() {
+    return 'NotificationCountUpdate{totalUnreadCount: $totalUnreadCount}';
+  }
+}
+
+class NotificationsUpdate extends NotificationCountUpdate {
+  final Notification? update;
+  final List<Notification>? notifications;
+
+  NotificationsUpdate.fromJson(Map<String, dynamic> json)
+      : update = json['update'] != null
+            ? Notification.fromJson(json['update'])
+            : null,
+        notifications = json['notifications'] != null
+            ? (json['notifications'] as List<dynamic>)
+                .map((e) => Notification.fromJson(e))
+                .toList()
+            : null,
+        super.fromJson(json);
+
+  @override
+  String toString() {
+    return 'NotificationsUpdate{totalUnreadCount: $totalUnreadCount, update: $update, '
+        'notifications: $notifications}';
+  }
+}
+
 abstract class TelemetryService {
   void subscribe(TelemetrySubscriber subscriber);
   void update(TelemetrySubscriber subscriber);
   void unsubscribe(TelemetrySubscriber subscriber);
+  void reset(bool close);
 }
 
 class TelemetrySubscriber {
@@ -1324,5 +1403,115 @@ class TelemetrySubscriber {
     final attributeData = <AttributeData>[];
     return dataStream
         .map((message) => message.updateAttributeData(attributeData));
+  }
+}
+
+class NotificationSubscriber {
+  final TelemetryService _telemetryService;
+
+  final List<WebsocketCmd> _subscriptionCommands;
+  final StreamController<NotificationCountUpdate>
+      _notificationCountStreamController;
+  final StreamController<NotificationsUpdate>
+      _notificationUpdateStreamController;
+  final StreamController<void> _reconnectStreamController;
+
+  NotificationsUpdate? lastUpdatedNotification;
+
+  NotificationSubscriber(TelemetryService telemetryService,
+      List<WebsocketCmd> subscriptionCommands)
+      : _telemetryService = telemetryService,
+        _subscriptionCommands = subscriptionCommands,
+        _notificationCountStreamController = StreamController.broadcast(),
+        _notificationUpdateStreamController = StreamController.broadcast(),
+        _reconnectStreamController = StreamController.broadcast();
+
+  void subscribe() {
+    _telemetryService.subscribe(this as TelemetrySubscriber);
+  }
+
+  void update() {
+    _telemetryService.update(this as TelemetrySubscriber);
+  }
+
+  void unsubscribe() {
+    _telemetryService.unsubscribe(this as TelemetrySubscriber);
+    _close();
+  }
+
+  void _close() {
+    _notificationCountStreamController.close();
+    _notificationUpdateStreamController.close();
+    _reconnectStreamController.close();
+  }
+
+  void onReconnected() {
+    _reconnectStreamController.add(null);
+  }
+
+  List<WebsocketCmd> get subscriptionCommands => _subscriptionCommands;
+
+  Stream<NotificationCountUpdate> get notificationCountStream =>
+      _notificationCountStreamController.stream;
+
+  Stream<NotificationsUpdate> get notificationStream =>
+      _notificationUpdateStreamController.stream;
+
+  Stream<void> get reconnectStream => _reconnectStreamController.stream;
+
+  static NotificationSubscriber createNotificationCountSubscription(
+      {required TelemetryService telemetryService}) {
+    UnreadCountSubCmd subscriptionCommand = UnreadCountSubCmd();
+    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
+  }
+
+  static NotificationSubscriber createNotificationsSubscription(
+      {required TelemetryService telemetryService, int limit = 10}) {
+    UnreadSubCmd subscriptionCommand = UnreadSubCmd(limit: limit);
+    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
+  }
+
+  static NotificationSubscriber createMarkAsReadCommand(
+      {required TelemetryService telemetryService,
+      required List<String> notifications}) {
+    MarkAsReadCmd subscriptionCommand =
+        MarkAsReadCmd(notifications: notifications);
+    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
+  }
+
+  static NotificationSubscriber createMarkAllAsReadCommand(
+      {required TelemetryService telemetryService}) {
+    MarkAllAsReadCmd subscriptionCommand = MarkAllAsReadCmd();
+    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
+  }
+
+  void onCmdUpdate(CmdUpdate message) {
+    if (message is NotificationsUpdate) {
+      _onNotificationData(message);
+    } else if (message is NotificationCountUpdate) {
+      _onNotificationCount(message);
+    }
+  }
+
+  void _onNotificationCount(NotificationCountUpdate message) {
+    _notificationCountStreamController.add(message);
+  }
+
+  Future<void> _onNotificationData(NotificationsUpdate message) async {
+    NotificationsUpdate processMessage = message;
+    if (lastUpdatedNotification != null && message.update != null) {
+      lastUpdatedNotification!.notifications?.insert(0, message.update!);
+      var foundCmd = _subscriptionCommands
+          .where((command) => command.cmdId == message.cmdId);
+      if (foundCmd.isNotEmpty &&
+          lastUpdatedNotification!.notifications!.length >
+              (foundCmd as Iterable<UnreadSubCmd>).first.limit) {
+        lastUpdatedNotification!.notifications?.removeLast();
+      }
+      processMessage = lastUpdatedNotification!;
+    }
+    _notificationUpdateStreamController.add(processMessage);
+    _notificationCountStreamController.add(processMessage);
+    lastUpdatedNotification = processMessage;
   }
 }
