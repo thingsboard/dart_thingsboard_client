@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
+
 import '../error/thingsboard_error.dart';
 import 'entity_type_models.dart';
 import 'id/entity_id.dart';
@@ -1267,7 +1269,13 @@ class TelemetrySubscriber {
   final StreamController<EntityDataUpdate> _entityDataStreamController;
   final StreamController<AlarmDataUpdate> _alarmDataStreamController;
   final StreamController<EntityCountUpdate> _entityCountStreamController;
+  final StreamController<NotificationCountUpdate>
+      _notificationCountStreamController;
+  final StreamController<NotificationsUpdate>
+      _notificationUpdateStreamController;
   final StreamController<void> _reconnectStreamController;
+
+  NotificationsUpdate? lastUpdatedNotification;
 
   int? _tsOffset;
 
@@ -1279,6 +1287,8 @@ class TelemetrySubscriber {
         _entityDataStreamController = StreamController.broadcast(),
         _alarmDataStreamController = StreamController.broadcast(),
         _entityCountStreamController = StreamController.broadcast(),
+        _notificationCountStreamController = StreamController.broadcast(),
+        _notificationUpdateStreamController = StreamController.broadcast(),
         _reconnectStreamController = StreamController.broadcast();
 
   static TelemetrySubscriber createEntityAttributesSubscription(
@@ -1304,6 +1314,32 @@ class TelemetrySubscriber {
     return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
   }
 
+  static TelemetrySubscriber createNotificationCountSubscription(
+      {required TelemetryService telemetryService}) {
+    UnreadCountSubCmd subscriptionCommand = UnreadCountSubCmd();
+    return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
+  }
+
+  static TelemetrySubscriber createNotificationsSubscription(
+      {required TelemetryService telemetryService, int limit = 10}) {
+    UnreadSubCmd subscriptionCommand = UnreadSubCmd(limit: limit);
+    return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
+  }
+
+  static TelemetrySubscriber createMarkAsReadCommand(
+      {required TelemetryService telemetryService,
+      required List<String> notifications}) {
+    MarkAsReadCmd subscriptionCommand =
+        MarkAsReadCmd(notifications: notifications);
+    return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
+  }
+
+  static TelemetrySubscriber createMarkAllAsReadCommand(
+      {required TelemetryService telemetryService}) {
+    MarkAllAsReadCmd subscriptionCommand = MarkAllAsReadCmd();
+    return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
+  }
+
   void subscribe() {
     _telemetryService.subscribe(this);
   }
@@ -1322,6 +1358,8 @@ class TelemetrySubscriber {
     _entityDataStreamController.close();
     _alarmDataStreamController.close();
     _entityCountStreamController.close();
+    _notificationCountStreamController.close();
+    _notificationUpdateStreamController.close();
     _reconnectStreamController.close();
   }
 
@@ -1359,6 +1397,10 @@ class TelemetrySubscriber {
       _onAlarmData(message);
     } else if (message is EntityCountUpdate) {
       _onEntityCount(message);
+    } else if (message is NotificationsUpdate) {
+      _onNotificationData(message);
+    } else if (message is NotificationCountUpdate) {
+      _onNotificationCount(message);
     }
   }
 
@@ -1384,6 +1426,28 @@ class TelemetrySubscriber {
     _entityCountStreamController.add(message);
   }
 
+  void _onNotificationCount(NotificationCountUpdate message) {
+    _notificationCountStreamController.add(message);
+  }
+
+  Future<void> _onNotificationData(NotificationsUpdate message) async {
+    NotificationsUpdate processMessage = message;
+    if (lastUpdatedNotification != null && message.update != null) {
+      lastUpdatedNotification!.notifications?.insert(0, message.update!);
+      WebsocketCmd? foundCmd = _subscriptionCommands
+          .firstWhereOrNull((command) => command.cmdId == message.cmdId);
+      if (foundCmd != null &&
+          lastUpdatedNotification!.notifications!.length >
+              (foundCmd as UnreadSubCmd).limit) {
+        lastUpdatedNotification!.notifications?.removeLast();
+      }
+      processMessage = lastUpdatedNotification!;
+    }
+    _notificationUpdateStreamController.add(processMessage);
+    _notificationCountStreamController.add(processMessage);
+    lastUpdatedNotification = processMessage;
+  }
+
   List<WebsocketCmd> get subscriptionCommands => _subscriptionCommands;
 
   Stream<SubscriptionUpdate> get dataStream => _dataStreamController.stream;
@@ -1397,60 +1461,6 @@ class TelemetrySubscriber {
   Stream<EntityCountUpdate> get entityCountStream =>
       _entityCountStreamController.stream;
 
-  Stream<void> get reconnectStream => _reconnectStreamController.stream;
-
-  Stream<List<AttributeData>> get attributeDataStream {
-    final attributeData = <AttributeData>[];
-    return dataStream
-        .map((message) => message.updateAttributeData(attributeData));
-  }
-}
-
-class NotificationSubscriber {
-  final TelemetryService _telemetryService;
-
-  final List<WebsocketCmd> _subscriptionCommands;
-  final StreamController<NotificationCountUpdate>
-      _notificationCountStreamController;
-  final StreamController<NotificationsUpdate>
-      _notificationUpdateStreamController;
-  final StreamController<void> _reconnectStreamController;
-
-  NotificationsUpdate? lastUpdatedNotification;
-
-  NotificationSubscriber(TelemetryService telemetryService,
-      List<WebsocketCmd> subscriptionCommands)
-      : _telemetryService = telemetryService,
-        _subscriptionCommands = subscriptionCommands,
-        _notificationCountStreamController = StreamController.broadcast(),
-        _notificationUpdateStreamController = StreamController.broadcast(),
-        _reconnectStreamController = StreamController.broadcast();
-
-  void subscribe() {
-    _telemetryService.subscribe(this as TelemetrySubscriber);
-  }
-
-  void update() {
-    _telemetryService.update(this as TelemetrySubscriber);
-  }
-
-  void unsubscribe() {
-    _telemetryService.unsubscribe(this as TelemetrySubscriber);
-    _close();
-  }
-
-  void _close() {
-    _notificationCountStreamController.close();
-    _notificationUpdateStreamController.close();
-    _reconnectStreamController.close();
-  }
-
-  void onReconnected() {
-    _reconnectStreamController.add(null);
-  }
-
-  List<WebsocketCmd> get subscriptionCommands => _subscriptionCommands;
-
   Stream<NotificationCountUpdate> get notificationCountStream =>
       _notificationCountStreamController.stream;
 
@@ -1459,59 +1469,9 @@ class NotificationSubscriber {
 
   Stream<void> get reconnectStream => _reconnectStreamController.stream;
 
-  static NotificationSubscriber createNotificationCountSubscription(
-      {required TelemetryService telemetryService}) {
-    UnreadCountSubCmd subscriptionCommand = UnreadCountSubCmd();
-    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
-  }
-
-  static NotificationSubscriber createNotificationsSubscription(
-      {required TelemetryService telemetryService, int limit = 10}) {
-    UnreadSubCmd subscriptionCommand = UnreadSubCmd(limit: limit);
-    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
-  }
-
-  static NotificationSubscriber createMarkAsReadCommand(
-      {required TelemetryService telemetryService,
-      required List<String> notifications}) {
-    MarkAsReadCmd subscriptionCommand =
-        MarkAsReadCmd(notifications: notifications);
-    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
-  }
-
-  static NotificationSubscriber createMarkAllAsReadCommand(
-      {required TelemetryService telemetryService}) {
-    MarkAllAsReadCmd subscriptionCommand = MarkAllAsReadCmd();
-    return NotificationSubscriber(telemetryService, [subscriptionCommand]);
-  }
-
-  void onCmdUpdate(CmdUpdate message) {
-    if (message is NotificationsUpdate) {
-      _onNotificationData(message);
-    } else if (message is NotificationCountUpdate) {
-      _onNotificationCount(message);
-    }
-  }
-
-  void _onNotificationCount(NotificationCountUpdate message) {
-    _notificationCountStreamController.add(message);
-  }
-
-  Future<void> _onNotificationData(NotificationsUpdate message) async {
-    NotificationsUpdate processMessage = message;
-    if (lastUpdatedNotification != null && message.update != null) {
-      lastUpdatedNotification!.notifications?.insert(0, message.update!);
-      var foundCmd = _subscriptionCommands
-          .where((command) => command.cmdId == message.cmdId);
-      if (foundCmd.isNotEmpty &&
-          lastUpdatedNotification!.notifications!.length >
-              (foundCmd as Iterable<UnreadSubCmd>).first.limit) {
-        lastUpdatedNotification!.notifications?.removeLast();
-      }
-      processMessage = lastUpdatedNotification!;
-    }
-    _notificationUpdateStreamController.add(processMessage);
-    _notificationCountStreamController.add(processMessage);
-    lastUpdatedNotification = processMessage;
+  Stream<List<AttributeData>> get attributeDataStream {
+    final attributeData = <AttributeData>[];
+    return dataStream
+        .map((message) => message.updateAttributeData(attributeData));
   }
 }
