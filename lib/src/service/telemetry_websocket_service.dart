@@ -44,8 +44,7 @@ class TelemetryWebsocketService implements TelemetryService {
   TelemetryWebsocketService._internal(this._tbClient, String apiEndpoint) {
     var apiEndpointUri = Uri.parse(apiEndpoint);
     var scheme = apiEndpointUri.scheme == 'https' ? 'wss' : 'ws';
-    _telemetryUri = apiEndpointUri.replace(
-        scheme: scheme, path: '/api/ws/plugins/telemetry');
+    _telemetryUri = apiEndpointUri.replace(scheme: scheme, path: '/api/ws');
   }
 
   @override
@@ -53,24 +52,12 @@ class TelemetryWebsocketService implements TelemetryService {
     _isActive = true;
     subscriber.subscriptionCommands.forEach((subscriptionCommand) {
       var cmdId = _nextCmdId();
-      _subscribersMap[cmdId] = subscriber;
-      subscriptionCommand.cmdId = cmdId;
-      if (subscriptionCommand is SubscriptionCmd) {
-        if (subscriptionCommand is TimeseriesSubscriptionCmd) {
-          _cmdsWrapper.tsSubCmds.add(subscriptionCommand);
-        } else {
-          _cmdsWrapper.attrSubCmds
-              .add(subscriptionCommand as AttributesSubscriptionCmd);
-        }
-      } else if (subscriptionCommand is GetHistoryCmd) {
-        _cmdsWrapper.historyCmds.add(subscriptionCommand);
-      } else if (subscriptionCommand is EntityDataCmd) {
-        _cmdsWrapper.entityDataCmds.add(subscriptionCommand);
-      } else if (subscriptionCommand is AlarmDataCmd) {
-        _cmdsWrapper.alarmDataCmds.add(subscriptionCommand);
-      } else if (subscriptionCommand is EntityCountCmd) {
-        _cmdsWrapper.entityCountCmds.add(subscriptionCommand);
+      if (!(subscriptionCommand is MarkAsReadCmd) &&
+          !(subscriptionCommand is MarkAllAsReadCmd)) {
+        _subscribersMap[cmdId] = subscriber;
       }
+      subscriptionCommand.cmdId = cmdId;
+      _cmdsWrapper.cmds.add(subscriptionCommand);
     });
     _subscribersCount++;
     _publishCommands();
@@ -81,8 +68,9 @@ class TelemetryWebsocketService implements TelemetryService {
     if (!_isReconnect) {
       subscriber.subscriptionCommands.forEach((subscriptionCommand) {
         if (subscriptionCommand.cmdId != null &&
-            subscriptionCommand is EntityDataCmd) {
-          _cmdsWrapper.entityDataCmds.add(subscriptionCommand);
+            (subscriptionCommand is EntityDataCmd ||
+                subscriptionCommand is UnreadSubCmd)) {
+          _cmdsWrapper.cmds.add(subscriptionCommand);
         }
       });
       _publishCommands();
@@ -95,25 +83,24 @@ class TelemetryWebsocketService implements TelemetryService {
       subscriber.subscriptionCommands.forEach((subscriptionCommand) {
         if (subscriptionCommand is SubscriptionCmd) {
           subscriptionCommand.unsubscribe = true;
-          if (subscriptionCommand is TimeseriesSubscriptionCmd) {
-            _cmdsWrapper.tsSubCmds.add(subscriptionCommand);
-          } else {
-            _cmdsWrapper.attrSubCmds
-                .add(subscriptionCommand as AttributesSubscriptionCmd);
-          }
+          _cmdsWrapper.cmds.add(subscriptionCommand);
         } else if (subscriptionCommand is EntityDataCmd) {
           var entityDataUnsubscribeCmd =
               EntityDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
-          _cmdsWrapper.entityDataUnsubscribeCmds.add(entityDataUnsubscribeCmd);
+          _cmdsWrapper.cmds.add(entityDataUnsubscribeCmd);
         } else if (subscriptionCommand is AlarmDataCmd) {
           var alarmDataUnsubscribeCmd =
               AlarmDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
-          _cmdsWrapper.alarmDataUnsubscribeCmds.add(alarmDataUnsubscribeCmd);
+          _cmdsWrapper.cmds.add(alarmDataUnsubscribeCmd);
         } else if (subscriptionCommand is EntityCountCmd) {
           var entityCountUnsubscribeCmd =
               EntityCountUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
-          _cmdsWrapper.entityCountUnsubscribeCmds
-              .add(entityCountUnsubscribeCmd);
+          _cmdsWrapper.cmds.add(entityCountUnsubscribeCmd);
+        } else if (subscriptionCommand is UnreadCountSubCmd ||
+            subscriptionCommand is UnreadSubCmd) {
+          var unreadCountUnsubscribeCmd =
+              UnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          _cmdsWrapper.cmds.add(unreadCountUnsubscribeCmd);
         }
         var cmdId = subscriptionCommand.cmdId;
         if (cmdId != null) {
@@ -199,9 +186,8 @@ class TelemetryWebsocketService implements TelemetryService {
   }
 
   void _openSocket(String token) {
-    var uri = _telemetryUri.replace(queryParameters: {'token': token});
     try {
-      var channel = WebSocketChannel.connect(uri);
+      var channel = WebSocketChannel.connect(_telemetryUri);
       _sink = channel.sink;
       channel.stream.listen((event) {
         _onMessage(event);
@@ -210,15 +196,16 @@ class TelemetryWebsocketService implements TelemetryService {
       }, onError: (e) {
         _onError(e);
       });
-      _onOpen();
+      _onOpen(token);
     } catch (e) {
       _onClose();
     }
   }
 
-  void _onOpen() {
+  void _onOpen(String token) {
     _isOpening = false;
     _isOpened = true;
+    _cmdsWrapper.setAuth(token);
     if (_reconnectTimer != null) {
       _reconnectTimer!.cancel();
       _reconnectTimer = null;

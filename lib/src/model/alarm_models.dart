@@ -48,24 +48,26 @@ extension AlarmSearchStatusToString on AlarmSearchStatus {
 }
 
 class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
-  TenantId tenantId;
+  TenantId? tenantId;
   CustomerId? customerId;
   String type;
   EntityId originator;
   AlarmSeverity severity;
-  final AlarmStatus status;
-  bool acknowledged;
-  bool cleared;
+  AlarmStatus? status;
+  bool? acknowledged;
+  bool? cleared;
   UserId? assigneeId;
-  int startTs;
-  int endTs;
-  int ackTs;
-  int clearTs;
-  int assignTs;
-  bool propagate;
-  bool propagateToOwner;
-  bool propagateToTenant;
+  int? startTs;
+  int? endTs;
+  int? ackTs;
+  int? clearTs;
+  int? assignTs;
+  bool? propagate;
+  bool? propagateToOwner;
+  bool? propagateToTenant;
   Map<String, dynamic>? details;
+
+  Alarm(this.originator, this.type, this.severity);
 
   Alarm.fromJson(Map<String, dynamic> json)
       : tenantId = TenantId.fromJson(json['tenantId']),
@@ -95,12 +97,12 @@ class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
   @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
-    json['tenantId'] = tenantId.toJson();
+    json['tenantId'] = tenantId?.toJson();
     json['customerId'] = customerId?.toJson();
     json['type'] = type;
     json['originator'] = originator.toJson();
     json['severity'] = severity.toShortString();
-    json['status'] = status.toShortString();
+    json['status'] = status?.toShortString();
     json['acknowledged'] = acknowledged;
     json['cleared'] = cleared;
     json['assigneeId'] = assigneeId?.toJson();

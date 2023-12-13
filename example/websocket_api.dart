@@ -20,6 +20,9 @@ void main() async {
     await entityDataQueryWithTimeseriesSubscriptionExample();
     await entityDataQueryWithAggHistory();
     await entityDataQueryWithAggTimeSeries();
+    await entityAlarmDataQueryExample();
+    await simpleNotificationCountSubscriptionExample();
+    await simpleNotificationsSubscriptionExample();
 
     await tbClient.logout(
         requestConfig: RequestConfig(ignoreLoading: true, ignoreErrors: true));
@@ -505,6 +508,119 @@ Future<void> entityDataQueryWithAggTimeSeries() async {
         .saveEntityTelemetry(savedDevice.id!, 'TELEMETRY', telemetryRequest);
     print('Save telemetry result: $res');
   }
+
+  await Future.delayed(Duration(seconds: 2));
+  subscription.unsubscribe();
+
+  await tbClient.getDeviceService().deleteDevice(savedDevice.id!.id!);
+  print(
+      '**********************************************************************');
+}
+
+Future<void> simpleNotificationCountSubscriptionExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*              SIMPLE NOTIFICATION COUNT SUBSCRIPTION EXAMPLE        *');
+  print(
+      '**********************************************************************');
+
+  var telemetryService = tbClient.getTelemetryService();
+  var subscription = TelemetrySubscriber.createNotificationCountSubscription(
+      telemetryService: telemetryService);
+
+  subscription.notificationCountStream.listen((count) {
+    print('[WebSocket Data]: Received notification: $count');
+  });
+
+  subscription.subscribe();
+
+  await Future.delayed(Duration(seconds: 2));
+  subscription.unsubscribe();
+  print(
+      '**********************************************************************');
+}
+
+Future<void> simpleNotificationsSubscriptionExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*                 SIMPLE NOTIFICATIONS SUBSCRIPTION EXAMPLE          *');
+  print(
+      '**********************************************************************');
+
+  var telemetryService = tbClient.getTelemetryService();
+  var subscription = TelemetrySubscriber.createNotificationsSubscription(
+      telemetryService: telemetryService, limit: 1);
+
+  subscription.notificationStream.listen((notification) {
+    print('[WebSocket Data]: Received notification: $notification');
+  });
+
+  subscription.subscribe();
+
+  await Future.delayed(Duration(seconds: 2));
+  subscription.unsubscribe();
+  print(
+      '**********************************************************************');
+}
+
+Future<void> entityAlarmDataQueryExample() async {
+  print(
+      '**********************************************************************');
+  print(
+      '*           ENTITY DATA QUERY WITH ALARM SUBSCRIPTION EXAMPLE        *');
+  print(
+      '**********************************************************************');
+
+  var deviceName = getRandomString(30);
+  var device = Device(deviceName, 'default');
+  device.additionalInfo = {'description': 'My test device!'};
+  var savedDevice = await tbClient.getDeviceService().saveDevice(device);
+  print('savedDevice: $savedDevice');
+
+  var entityFilter = EntityNameFilter(
+      entityType: EntityType.DEVICE, entityNameFilter: deviceName);
+  var alarmFields = <EntityKey>[
+    EntityKey(type: EntityKeyType.ALARM_FIELD, key: 'createdTime'),
+    EntityKey(type: EntityKeyType.ALARM_FIELD, key: 'originator'),
+    EntityKey(type: EntityKeyType.ALARM_FIELD, key: 'type'),
+    EntityKey(type: EntityKeyType.ALARM_FIELD, key: 'severity'),
+    EntityKey(type: EntityKeyType.ALARM_FIELD, key: 'status'),
+    EntityKey(type: EntityKeyType.ALARM_FIELD, key: 'assignee'),
+  ];
+
+  var alarmDataQuery = AlarmDataQuery(
+      entityFilter: entityFilter,
+      alarmFields: alarmFields,
+      pageLink: AlarmDataPageLink(
+          pageSize: 10,
+          timeWindow: Duration(minutes: 1).inMilliseconds,
+          sortOrder: EntityDataSortOrder(
+              key: EntityKey(
+                  type: EntityKeyType.ALARM_FIELD, key: 'createdTime'),
+              direction: EntityDataSortOrderDirection.DESC)));
+
+  var alarmCmd = AlarmDataCmd(query: alarmDataQuery);
+
+  var telemetryService = tbClient.getTelemetryService();
+
+  var subscription = TelemetrySubscriber(telemetryService, [alarmCmd]);
+
+  subscription.alarmDataStream.listen((entityDataUpdate) {
+    print('[WebSocket Data]: Received entity data update: $entityDataUpdate');
+  });
+
+  subscription.subscribe();
+
+  await Future.delayed(Duration(seconds: 1));
+
+  var alarm =
+      Alarm(savedDevice.id as EntityId, 'My test alarm', AlarmSeverity.WARNING);
+
+  print('Saved alarm request: $alarm');
+
+  await tbClient.getAlarmService().saveAlarm(alarm);
 
   await Future.delayed(Duration(seconds: 2));
   subscription.unsubscribe();
