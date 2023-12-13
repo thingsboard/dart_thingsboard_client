@@ -189,6 +189,10 @@ class TelemetryWebsocketService implements TelemetryService {
     try {
       var channel = WebSocketChannel.connect(_telemetryUri);
       _sink = channel.sink;
+      channel.ready.then((value) => _onOpen(token), onError: ((e, stackTrace) {
+        _onError(e);
+        _onClose(channel);
+      }));
       channel.stream.listen((event) {
         _onMessage(event);
       }, onDone: () {
@@ -196,8 +200,8 @@ class TelemetryWebsocketService implements TelemetryService {
       }, onError: (e) {
         _onError(e);
       });
-      _onOpen(token);
     } catch (e) {
+      _onError(e);
       _onClose();
     }
   }
