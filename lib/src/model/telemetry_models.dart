@@ -1189,9 +1189,9 @@ class AlarmDataUpdate extends DataUpdate<AlarmData> {
   void _processAlarmData(List<AlarmData> data, int tsOffset) {
     data.forEach((alarmData) {
       alarmData.createdTime = alarmData.createdTime! + tsOffset;
-      alarmData.ackTs += tsOffset;
-      alarmData.clearTs += tsOffset;
-      alarmData.endTs += tsOffset;
+      alarmData.ackTs = alarmData.ackTs! + tsOffset;
+      alarmData.clearTs = alarmData.clearTs! + tsOffset;
+      alarmData.endTs = alarmData.endTs! + tsOffset;
       alarmData.latest.forEach((key, keyTypeValues) {
         keyTypeValues.forEach((key, tsValue) {
           tsValue.ts += tsOffset;
