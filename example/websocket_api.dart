@@ -615,7 +615,8 @@ Future<void> entityAlarmDataQueryExample() async {
 
   await Future.delayed(Duration(seconds: 1));
 
-  var alarm = Alarm(savedDevice.id as EntityId, 'My test alarm', AlarmSeverity.WARNING);
+  var alarm =
+      Alarm(savedDevice.id as EntityId, 'My test alarm', AlarmSeverity.WARNING);
 
   print('Saved alarm request: $alarm');
 

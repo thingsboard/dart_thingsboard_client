@@ -1063,8 +1063,12 @@ class AbstractDataQuery<T extends EntityDataPageLink> extends EntityCountQuery {
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     json['pageLink'] = pageLink.toJson();
-    json['entityFields'] = entityFields != null ? entityFields!.map((e) => e.toJson()).toList() : [];
-    json['latestValues'] = latestValues != null ? latestValues!.map((e) => e.toJson()).toList() : [];
+    json['entityFields'] = entityFields != null
+        ? entityFields!.map((e) => e.toJson()).toList()
+        : [];
+    json['latestValues'] = latestValues != null
+        ? latestValues!.map((e) => e.toJson()).toList()
+        : [];
     return json;
   }
 
