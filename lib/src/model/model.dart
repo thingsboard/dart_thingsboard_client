@@ -17,6 +17,7 @@ export 'contact_based_model.dart';
 export 'base_data.dart';
 export 'entity_models.dart';
 export 'login_models.dart';
+export 'mobile_session_models.dart';
 export 'asset_models.dart';
 export 'customer_models.dart';
 export 'dashboard_models.dart';
