@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../thingsboard_client_base.dart';
 import '../http/http_utils.dart';
 import '../model/model.dart';
+import '../thingsboard_client_base.dart';
 
 PageData<User> parseUserPageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => User.fromJson(json));
@@ -191,11 +191,12 @@ class UserService {
 
   Future<MobileSessionInfo?> getMobileSession(String mobileToken,
       {RequestConfig? requestConfig}) async {
-    var options = defaultHttpOptionsFromConfig(requestConfig);
+    final options = defaultHttpOptionsFromConfig(requestConfig);
     options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
-    var response = await _tbClient.get<Map<String, dynamic>>(
-        '/api/user/mobile/session',
-        options: options);
+    final response = await _tbClient.get(
+      '/api/user/mobile/session',
+      options: options,
+    );
     return response.data != null
         ? MobileSessionInfo.fromJson(response.data!)
         : null;
@@ -204,16 +205,22 @@ class UserService {
   Future<void> saveMobileSession(
       String mobileToken, MobileSessionInfo sessionInfo,
       {RequestConfig? requestConfig}) async {
-    var options = defaultHttpOptionsFromConfig(requestConfig);
+    final options = defaultHttpOptionsFromConfig(requestConfig);
     options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
-    await _tbClient.post<void>('/api/user/mobile/session',
-        data: jsonEncode(sessionInfo), options: options);
+    await _tbClient.post<void>(
+      '/api/user/mobile/session',
+      data: jsonEncode(sessionInfo),
+      options: options,
+    );
   }
 
   Future<void> removeMobileSession(String mobileToken,
       {RequestConfig? requestConfig}) async {
-    var options = defaultHttpOptionsFromConfig(requestConfig);
+    final options = defaultHttpOptionsFromConfig(requestConfig);
     options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
-    await _tbClient.delete<void>('/api/user/mobile/session', options: options);
+    await _tbClient.delete<void>(
+      '/api/user/mobile/session',
+      options: options,
+    );
   }
 }
