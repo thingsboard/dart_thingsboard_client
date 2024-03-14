@@ -1,6 +1,6 @@
 name: thingsboard_client
 description: Dart implementation of ThingsBoard API client. Provides model objects and services to communicate with ThingsBoard platform using RESTful APIs and WebSocket protocol.
-version: 1.0.9
+version: 1.1.0
 homepage: https://thingsboard.io
 repository: https://github.com/thingsboard/dart_thingsboard_client.git
 issue_tracker: https://github.com/thingsboard/dart_thingsboard_client/issues
