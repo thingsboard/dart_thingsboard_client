@@ -197,9 +197,13 @@ class UserService {
       '/api/user/mobile/session',
       options: options,
     );
-    return response.data != null
-        ? MobileSessionInfo.fromJson(response.data!)
-        : null;
+    try {
+      return response.data != null
+          ? MobileSessionInfo.fromJson(response.data!)
+          : null;
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<void> saveMobileSession(
