@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../thingsboard_client_base.dart';
 import '../http/http_utils.dart';
 import '../model/model.dart';
+import '../thingsboard_client_base.dart';
 
 PageData<User> parseUserPageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => User.fromJson(json));
@@ -13,6 +13,7 @@ PageData<User> parseUserPageData(Map<String, dynamic> json) {
 const ACTIVATE_TOKEN_REGEX = '/api/noauth/activate?activateToken=';
 
 class UserService {
+  final String MOBILE_TOKEN_HEADER = "X-Mobile-Token";
   final ThingsboardClient _tbClient;
 
   factory UserService(ThingsboardClient tbClient) {
@@ -185,6 +186,45 @@ class UserService {
             : null;
       },
       requestConfig: requestConfig,
+    );
+  }
+
+  Future<MobileSessionInfo?> getMobileSession(String mobileToken,
+      {RequestConfig? requestConfig}) async {
+    final options = defaultHttpOptionsFromConfig(requestConfig);
+    options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
+    final response = await _tbClient.get(
+      '/api/user/mobile/session',
+      options: options,
+    );
+    try {
+      return response.data != null
+          ? MobileSessionInfo.fromJson(response.data!)
+          : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> saveMobileSession(
+      String mobileToken, MobileSessionInfo sessionInfo,
+      {RequestConfig? requestConfig}) async {
+    final options = defaultHttpOptionsFromConfig(requestConfig);
+    options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
+    await _tbClient.post<void>(
+      '/api/user/mobile/session',
+      data: jsonEncode(sessionInfo),
+      options: options,
+    );
+  }
+
+  Future<void> removeMobileSession(String mobileToken,
+      {RequestConfig? requestConfig}) async {
+    final options = defaultHttpOptionsFromConfig(requestConfig);
+    options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
+    await _tbClient.delete<void>(
+      '/api/user/mobile/session',
+      options: options,
     );
   }
 }
