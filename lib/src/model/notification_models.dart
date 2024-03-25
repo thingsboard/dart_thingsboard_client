@@ -1,9 +1,4 @@
-import 'alarm_models.dart';
-import 'base_data.dart';
-import 'id/entity_id.dart';
-import 'id/notification_id.dart';
-import 'id/notification_request_id.dart';
-import 'id/user_id.dart';
+import 'package:thingsboard_client/thingsboard_client.dart';
 
 enum NotificationType {
   GENERAL,
@@ -127,5 +122,25 @@ class NotificationInfo {
     return 'NotificationInfo{description: $description, type: $type, alarmSeverity: $alarmSeverity,'
         'alarmStatus: $alarmStatus, alarmType: $alarmType, stateEntityId: $stateEntityId,'
         'acknowledged: $acknowledged, cleared: $cleared}';
+  }
+}
+
+class NotificationQuery {
+  const NotificationQuery(
+    this.pageLink, {
+    this.unreadOnly = false,
+    this.deliveryMethod = 'MOBILE_APP',
+  });
+
+  final TimePageLink pageLink;
+  final bool unreadOnly;
+  final String deliveryMethod;
+
+  Map<String, dynamic> toQueryParameters() {
+    final queryParameters = pageLink.toQueryParameters();
+    queryParameters['unreadOnly'] = unreadOnly;
+    queryParameters['deliveryMethod'] = deliveryMethod;
+
+    return queryParameters;
   }
 }

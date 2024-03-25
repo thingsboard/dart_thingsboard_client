@@ -278,6 +278,26 @@ class ThingsboardClient {
     }
   }
 
+  Future<Response<T>> put<T>(
+    String path, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+  }) async {
+    try {
+      return _dio.put(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+      );
+    } catch (e) {
+      throw toThingsboardError(e);
+    }
+  }
+
   Future<R> compute<Q, R>(TbComputeCallback<Q, R> callback, Q message) {
     return _computeFunc!(callback, message);
   }
