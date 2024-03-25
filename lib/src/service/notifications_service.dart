@@ -4,11 +4,11 @@ PageData<Notification> parseNotificationPageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => Notification.fromJson(json));
 }
 
-class NotificationService {
-  const NotificationService._internal(this._tbClient);
+class NotificationsService {
+  const NotificationsService._internal(this._tbClient);
 
-  factory NotificationService(ThingsboardClient tbClient) {
-    return NotificationService._internal(tbClient);
+  factory NotificationsService(ThingsboardClient tbClient) {
+    return NotificationsService._internal(tbClient);
   }
 
   final ThingsboardClient _tbClient;

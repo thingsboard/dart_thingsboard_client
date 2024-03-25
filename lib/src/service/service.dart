@@ -14,7 +14,7 @@ export 'entities_version_control_service.dart';
 export 'entity_query_service.dart';
 export 'entity_relation_service.dart';
 export 'entity_view_service.dart';
-export 'notification_service.dart';
+export 'notifications_service.dart';
 export 'oauth2_service.dart';
 export 'ota_package_service.dart';
 export 'queue_service.dart';
