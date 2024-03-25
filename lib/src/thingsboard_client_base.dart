@@ -67,6 +67,7 @@ class ThingsboardClient {
   QueueService? _queueService;
   EntitiesVersionControlService? _entitiesVersionControlService;
   TwoFactorAuthService? _twoFactorAuthService;
+  NotificationService? _notificationService;
 
   factory ThingsboardClient(String apiEndpoint,
       {TbStorage? storage,
@@ -579,5 +580,10 @@ class ThingsboardClient {
   TwoFactorAuthService getTwoFactorAuthService() {
     _twoFactorAuthService ??= TwoFactorAuthService(this);
     return _twoFactorAuthService!;
+  }
+
+  NotificationService getNotificationService() {
+    _notificationService ??= NotificationService(this);
+    return _notificationService!;
   }
 }
