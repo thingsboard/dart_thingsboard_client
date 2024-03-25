@@ -126,14 +126,14 @@ class NotificationInfo {
 }
 
 class NotificationQuery {
-  const NotificationQuery(
+  NotificationQuery(
     this.pageLink, {
     this.unreadOnly = false,
     this.deliveryMethod = 'MOBILE_APP',
   });
 
   final TimePageLink pageLink;
-  final bool unreadOnly;
+  bool unreadOnly;
   final String deliveryMethod;
 
   Map<String, dynamic> toQueryParameters() {
