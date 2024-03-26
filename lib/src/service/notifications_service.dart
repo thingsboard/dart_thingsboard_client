@@ -1,7 +1,8 @@
 import 'package:thingsboard_client/thingsboard_client.dart';
 
-PageData<Notification> parseNotificationPageData(Map<String, dynamic> json) {
-  return PageData.fromJson(json, (json) => Notification.fromJson(json));
+PageData<PushNotification> parseNotificationPageData(
+    Map<String, dynamic> json) {
+  return PageData.fromJson(json, (json) => PushNotification.fromJson(json));
 }
 
 class NotificationsService {
@@ -13,8 +14,8 @@ class NotificationsService {
 
   final ThingsboardClient _tbClient;
 
-  Future<PageData<Notification>> getNotifications(
-    NotificationQuery query, {
+  Future<PageData<PushNotification>> getNotifications(
+    PushNotificationQuery query, {
     RequestConfig? requestConfig,
   }) async {
     final queryParams = query.toQueryParameters();
@@ -28,7 +29,7 @@ class NotificationsService {
   }
 
   Future<void> markAllNotificationsAsRead(
-    NotificationQuery query, {
+    PushNotificationQuery query, {
     RequestConfig? requestConfig,
   }) async {
     final queryParams = query.toQueryParameters();
@@ -41,7 +42,7 @@ class NotificationsService {
 
   Future<void> deleteNotification(
     String id,
-    NotificationQuery query, {
+    PushNotificationQuery query, {
     RequestConfig? requestConfig,
   }) async {
     final queryParams = query.toQueryParameters();
@@ -54,7 +55,7 @@ class NotificationsService {
 
   Future<void> markNotificationAsRead(
     String id,
-    NotificationQuery query, {
+    PushNotificationQuery query, {
     RequestConfig? requestConfig,
   }) async {
     final queryParams = query.toQueryParameters();

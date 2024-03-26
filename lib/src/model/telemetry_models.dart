@@ -6,8 +6,8 @@ import 'package:collection/collection.dart';
 import '../error/thingsboard_error.dart';
 import 'entity_type_models.dart';
 import 'id/entity_id.dart';
-import 'notification_models.dart';
 import 'page/page_data.dart';
+import 'push_notification_models.dart';
 import 'query/query_models.dart';
 
 enum DataType { STRING, LONG, BOOLEAN, DOUBLE, JSON }
@@ -1233,16 +1233,16 @@ class NotificationCountUpdate extends CmdUpdate {
 }
 
 class NotificationsUpdate extends NotificationCountUpdate {
-  final Notification? update;
-  final List<Notification>? notifications;
+  final PushNotification? update;
+  final List<PushNotification>? notifications;
 
   NotificationsUpdate.fromJson(Map<String, dynamic> json)
       : update = json['update'] != null
-            ? Notification.fromJson(json['update'])
+            ? PushNotification.fromJson(json['update'])
             : null,
         notifications = json['notifications'] != null
             ? (json['notifications'] as List<dynamic>)
-                .map((e) => Notification.fromJson(e))
+                .map((e) => PushNotification.fromJson(e))
                 .toList()
             : null,
         super.fromJson(json);
