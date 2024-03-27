@@ -64,7 +64,7 @@ class NotificationsService {
     RequestConfig? requestConfig,
   }) async {
     final response = await _tbClient.get<int>(
-      '/api/notification/unread/count',
+      '/api/notifications/unread/count',
       queryParameters: {'deliveryMethod': deliveryMethod},
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
