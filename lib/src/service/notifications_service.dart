@@ -71,4 +71,18 @@ class NotificationsService {
 
     return response.data!;
   }
+
+  Future<PushNotification> getNotificationById(
+    String id, {
+    required String deliveryMethod,
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.get<Map<String, dynamic>>(
+      'api/notification/request/$id',
+      queryParameters: {'deliveryMethod': deliveryMethod},
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return PushNotification.fromJson(response.data!);
+  }
 }
