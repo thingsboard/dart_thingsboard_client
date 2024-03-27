@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 
 PageData<PushNotification> parseNotificationPageData(
@@ -28,32 +29,32 @@ class NotificationsService {
     return _tbClient.compute(parseNotificationPageData, response.data!);
   }
 
-  Future<void> markAllNotificationsAsRead(
+  Future<Response> markAllNotificationsAsRead(
     String deliveryMethod, {
     RequestConfig? requestConfig,
   }) async {
-    _tbClient.put<Map<String, dynamic>>(
+    return _tbClient.put<Map<String, dynamic>>(
       '/api/notifications/read',
       queryParameters: {'deliveryMethod': deliveryMethod},
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
   }
 
-  Future<void> deleteNotification(
+  Future<Response> deleteNotification(
     String id, {
     RequestConfig? requestConfig,
   }) async {
-    _tbClient.delete(
+    return _tbClient.delete(
       '/api/notification/$id',
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
   }
 
-  Future<void> markNotificationAsRead(
+  Future<Response> markNotificationAsRead(
     String id, {
     RequestConfig? requestConfig,
   }) async {
-    _tbClient.put(
+    return _tbClient.put(
       '/api/notification/$id/read',
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
