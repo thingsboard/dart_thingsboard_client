@@ -29,39 +29,32 @@ class NotificationsService {
   }
 
   Future<void> markAllNotificationsAsRead(
-    PushNotificationQuery query, {
+    String deliveryMethod, {
     RequestConfig? requestConfig,
   }) async {
-    final queryParams = query.toQueryParameters();
     _tbClient.put<Map<String, dynamic>>(
       '/api/notifications/read',
-      queryParameters: queryParams,
+      queryParameters: {'deliveryMethod': deliveryMethod},
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
   }
 
   Future<void> deleteNotification(
-    String id,
-    PushNotificationQuery query, {
+    String id, {
     RequestConfig? requestConfig,
   }) async {
-    final queryParams = query.toQueryParameters();
     _tbClient.delete(
       '/api/notification/$id',
-      queryParameters: queryParams,
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
   }
 
   Future<void> markNotificationAsRead(
-    String id,
-    PushNotificationQuery query, {
+    String id, {
     RequestConfig? requestConfig,
   }) async {
-    final queryParams = query.toQueryParameters();
     _tbClient.put(
       '/api/notification/$id/read',
-      queryParameters: queryParams,
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
   }
