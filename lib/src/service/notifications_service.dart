@@ -58,4 +58,17 @@ class NotificationsService {
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
   }
+
+  Future<int> getUnreadNotificationsCount(
+    String deliveryMethod, {
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.get<int>(
+      '/api/notification/unread/count',
+      queryParameters: {'deliveryMethod': deliveryMethod},
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return response.data!;
+  }
 }
