@@ -1,11 +1,6 @@
-import 'alarm_models.dart';
-import 'base_data.dart';
-import 'id/entity_id.dart';
-import 'id/notification_id.dart';
-import 'id/notification_request_id.dart';
-import 'id/user_id.dart';
+import 'package:thingsboard_client/thingsboard_client.dart';
 
-enum NotificationType {
+enum PushNotificationType {
   GENERAL,
   ALARM,
   DEVICE_ACTIVITY,
@@ -20,44 +15,44 @@ enum NotificationType {
   RATE_LIMITS
 }
 
-NotificationType notificationTypeFromString(String value) {
-  return NotificationType.values.firstWhere(
+PushNotificationType notificationTypeFromString(String value) {
+  return PushNotificationType.values.firstWhere(
       (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
-extension NotificationTypeToString on NotificationType {
+extension NotificationTypeToString on PushNotificationType {
   String toShortString() {
     return toString().split('.').last;
   }
 }
 
-enum NotificationStatus { SENT, READ }
+enum PushNotificationStatus { SENT, READ }
 
-NotificationStatus notificationStatusFromString(String value) {
-  return NotificationStatus.values.firstWhere(
+PushNotificationStatus notificationStatusFromString(String value) {
+  return PushNotificationStatus.values.firstWhere(
       (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
 }
 
-extension NotificationStatusToString on NotificationStatus {
+extension NotificationStatusToString on PushNotificationStatus {
   String toShortString() {
     return toString().split('.').last;
   }
 }
 
-class Notification extends BaseData<NotificationId> {
+class PushNotification extends BaseData<NotificationId> {
   final NotificationRequestId requestId;
   final UserId recipientId;
   final String subject;
   final String text;
-  final NotificationType type;
-  final NotificationStatus status;
-  final NotificationInfo? info;
+  final PushNotificationType type;
+  final PushNotificationStatus status;
+  final PushNotificationInfo? info;
   Map<String, dynamic>? additionalConfig;
 
-  Notification(this.requestId, this.recipientId, this.subject, this.text,
+  PushNotification(this.requestId, this.recipientId, this.subject, this.text,
       this.type, this.status, this.info);
 
-  Notification.fromJson(Map<String, dynamic> json)
+  PushNotification.fromJson(Map<String, dynamic> json)
       : requestId = NotificationRequestId.fromJson(json['requestId']),
         recipientId = UserId.fromJson(json['recipientId']),
         subject = json['subject'],
@@ -65,7 +60,7 @@ class Notification extends BaseData<NotificationId> {
         type = notificationTypeFromString(json['type']),
         status = notificationStatusFromString(json['status']),
         info = json['info'] != null
-            ? NotificationInfo.fromJson(json['info'])
+            ? PushNotificationInfo.fromJson(json['info'])
             : null,
         additionalConfig = json['additionalConfig'],
         super.fromJson(json);
@@ -97,7 +92,7 @@ class Notification extends BaseData<NotificationId> {
   }
 }
 
-class NotificationInfo {
+class PushNotificationInfo {
   final String? description;
   final String? type;
   final AlarmSeverity? alarmSeverity;
@@ -107,7 +102,7 @@ class NotificationInfo {
   final bool? acknowledged;
   final bool? cleared;
 
-  NotificationInfo.fromJson(Map<String, dynamic> json)
+  PushNotificationInfo.fromJson(Map<String, dynamic> json)
       : description = json['description'],
         type = json['type'],
         alarmSeverity = json['alarmSeverity'] != null
@@ -127,5 +122,25 @@ class NotificationInfo {
     return 'NotificationInfo{description: $description, type: $type, alarmSeverity: $alarmSeverity,'
         'alarmStatus: $alarmStatus, alarmType: $alarmType, stateEntityId: $stateEntityId,'
         'acknowledged: $acknowledged, cleared: $cleared}';
+  }
+}
+
+class PushNotificationQuery {
+  PushNotificationQuery(
+    this.pageLink, {
+    this.unreadOnly = false,
+    this.deliveryMethod = 'MOBILE_APP',
+  });
+
+  final TimePageLink pageLink;
+  bool unreadOnly;
+  final String deliveryMethod;
+
+  Map<String, dynamic> toQueryParameters() {
+    final queryParameters = pageLink.toQueryParameters();
+    queryParameters['unreadOnly'] = unreadOnly;
+    queryParameters['deliveryMethod'] = deliveryMethod;
+
+    return queryParameters;
   }
 }
