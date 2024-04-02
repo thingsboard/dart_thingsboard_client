@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Introduced a NotificationService, which allows you to receive notification data.
+
 ## 1.1.0
 
 - Updated the API and models to align with the latest ThingsBoard platform, version 3.6.3
