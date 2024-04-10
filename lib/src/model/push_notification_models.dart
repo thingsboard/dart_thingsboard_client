@@ -12,7 +12,11 @@ enum PushNotificationType {
   ENTITIES_LIMIT,
   API_USAGE_LIMIT,
   RULE_NODE,
-  RATE_LIMITS
+  RATE_LIMITS,
+  INTEGRATION_LIFECYCLE_EVENT,
+  EDGE_CONNECTION,
+  EDGE_COMMUNICATION_FAILURE,
+  EXCEEDED_RATE_LIMITS
 }
 
 PushNotificationType notificationTypeFromString(String value) {
@@ -97,6 +101,7 @@ class PushNotificationInfo {
   final String? type;
   final AlarmSeverity? alarmSeverity;
   final AlarmStatus? alarmStatus;
+  final String? alarmId;
   final String? alarmType;
   final EntityId? stateEntityId;
   final bool? acknowledged;
@@ -111,6 +116,7 @@ class PushNotificationInfo {
         alarmStatus = json['alarmStatus'] != null
             ? alarmStatusFromString(json['alarmStatus'])
             : null,
+        alarmId = json['alarmId'],
         alarmType = json['alarmType'],
         stateEntityId = json['stateEntityId'] != null
             ? EntityId.fromJson(json['stateEntityId'])
