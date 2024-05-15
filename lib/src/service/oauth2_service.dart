@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 
-import '../thingsboard_client_base.dart';
 import '../http/http_utils.dart';
 import '../model/model.dart';
+import '../thingsboard_client_base.dart';
 
 List<OAuth2ClientRegistrationTemplate> parseOauth2ClientRegistrationTemplates(
     List<dynamic> json) {
@@ -31,10 +32,22 @@ class OAuth2Service {
     if (platform != null) {
       queryParams['platform'] = platform.toShortString();
     }
-    var response = await _tbClient.post<List<dynamic>>(
-        '/api/noauth/oauth2Clients',
-        queryParameters: queryParams,
-        options: defaultHttpOptionsFromConfig(requestConfig));
+
+    Response<List<dynamic>> response;
+    try {
+      response = await _tbClient.post<List<dynamic>>(
+          '/api/noauth/oauth2Clients',
+          queryParameters: queryParams,
+          options: defaultHttpOptionsFromConfig(requestConfig));
+    } on ThingsboardError catch (e) {
+      if (e.status == 302) {
+        final redirectUrl = e.error.response.headers['location'].first;
+        response = await _tbClient.post(redirectUrl);
+      } else {
+        rethrow;
+      }
+    }
+
     return response.data!.map((e) => OAuth2ClientInfo.fromJson(e)).toList();
   }
 
