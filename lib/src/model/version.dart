@@ -6,8 +6,8 @@ class PlatformVersionMatcher {
       if (platformVersion.versionInt() < minPlatformVersionInt) {
         return false;
       }
-      if (platformVersion.versionCode != null &&
-          platformVersion.versionCode!.isNotEmpty) {
+      if (platformVersion.versionCode == null ||
+          platformVersion.versionCode!.isEmpty) {
         return false;
       }
     } catch (e) {
