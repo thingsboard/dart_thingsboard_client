@@ -1,3 +1,10 @@
+## 1.2.0
+
+- Introduced the ability to configure access to custom applications using a login with a QR code feature. 
+- Update API and models according to ThingsBoard platform version 3.7.0
+- Fixed the issue with resolving supported platform versions. 
+- Implemented other minor fixes.
+
 ## 1.1.1
 
 - Introduced a NotificationService, which allows you to receive notification data.
