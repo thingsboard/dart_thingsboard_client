@@ -1,11 +1,10 @@
 import 'additional_info_based.dart';
-import 'id/customer_id.dart';
-import 'id/tenant_id.dart';
-
 import 'authority_enum.dart';
 import 'has_customer_id.dart';
 import 'has_name.dart';
 import 'has_tenant_id.dart';
+import 'id/customer_id.dart';
+import 'id/tenant_id.dart';
 import 'id/user_id.dart';
 
 class AuthUser {
@@ -142,4 +141,17 @@ class User extends AdditionalInfoBased<UserId>
     return 'User{${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, email: $email, '
         'authority: ${authority.toShortString()}, firstName: $firstName, lastName: $lastName, phone: $phone')}}';
   }
+}
+
+class UserInfo {
+  final UserId id;
+  String email;
+  String? firstName;
+  String? lastName;
+
+  UserInfo.fromJson(Map<String, dynamic> json)
+      : id = UserId.fromJson(json['id']),
+        email = json['email'],
+        firstName = json['firstName'],
+        lastName = json['lastName'];
 }
