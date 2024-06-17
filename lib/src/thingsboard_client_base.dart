@@ -369,6 +369,10 @@ class ThingsboardClient {
     }
   }
 
+  AuthUser getAuthUserFromJwt(final String jwtToken) {
+    return AuthUser.fromJson(JwtDecoder.decode(jwtToken));
+  }
+
   Future<void> sendResetPasswordLink(String email,
       {RequestConfig? requestConfig}) async {
     await post('/api/noauth/resetPasswordByEmail',
