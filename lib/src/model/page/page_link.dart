@@ -45,13 +45,14 @@ class TimePageLink extends PageLink {
 
   @override
   Map<String, dynamic> toQueryParameters() {
-    var queryParameters = super.toQueryParameters();
+    final queryParameters = super.toQueryParameters();
     if (startTime != null) {
       queryParameters['startTime'] = startTime;
     }
     if (endTime != null) {
       queryParameters['endTime'] = endTime;
     }
+
     return queryParameters;
   }
 }

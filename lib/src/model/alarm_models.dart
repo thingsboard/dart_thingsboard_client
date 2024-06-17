@@ -1,12 +1,4 @@
-import 'base_data.dart';
-import 'has_name.dart';
-import 'has_tenant_id.dart';
-import 'id/alarm_id.dart';
-import 'id/customer_id.dart';
-import 'id/entity_id.dart';
-import 'id/tenant_id.dart';
-import 'id/user_id.dart';
-import 'page/page_link.dart';
+import 'package:thingsboard_client/thingsboard_client.dart';
 
 enum AlarmSeverity { CRITICAL, MAJOR, MINOR, WARNING, INDETERMINATE }
 
@@ -253,5 +245,25 @@ class AlarmQueryV2 {
       queryParameters['assigneeId'] = assigneeId!.id;
     }
     return queryParameters;
+  }
+}
+
+class AlarmType with HasTenantId {
+  final TenantId tenantId;
+  final EntityType entityType;
+  final String type;
+
+  AlarmType.fromJson(Map<String, dynamic> json)
+      : tenantId = TenantId.fromJson(json['tenantId']),
+        entityType = entityTypeFromString(json['entityType']),
+        type = json['type'];
+
+  @override
+  TenantId? getTenantId() {
+    return tenantId;
+  }
+
+  EntityType getEntityType() {
+    return entityType;
   }
 }

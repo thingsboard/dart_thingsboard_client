@@ -10,6 +10,10 @@ PageData<User> parseUserPageData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => User.fromJson(json));
 }
 
+PageData<UserInfo> parseUsersInfoData(Map<String, dynamic> json) {
+  return PageData.fromJson(json, (json) => UserInfo.fromJson(json));
+}
+
 const ACTIVATE_TOKEN_REGEX = '/api/noauth/activate?activateToken=';
 
 class UserService {
@@ -95,6 +99,19 @@ class UserService {
         queryParameters: pageLink.toQueryParameters(),
         options: defaultHttpOptionsFromConfig(requestConfig));
     return _tbClient.compute(parseUserPageData, response.data!);
+  }
+
+  Future<PageData<UserInfo>> getUsersInfo(
+    PageLink pageLink, {
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.get<Map<String, dynamic>>(
+      '/api/users/info',
+      queryParameters: pageLink.toQueryParameters(),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return _tbClient.compute(parseUsersInfoData, response.data!);
   }
 
   Future<PageData<User>> getTenantAdmins(String tenantId, PageLink pageLink,
