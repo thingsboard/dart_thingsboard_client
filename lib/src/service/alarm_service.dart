@@ -85,7 +85,7 @@ class AlarmService {
 
   Future<AlarmInfo> unassignAlarm(String alarmId,
       {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post('/api/alarm/$alarmId/assign',
+    var response = await _tbClient.delete('/api/alarm/$alarmId/assign',
         options: defaultHttpOptionsFromConfig(requestConfig));
     return AlarmInfo.fromJson(response.data!);
   }
