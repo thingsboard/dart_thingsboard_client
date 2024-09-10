@@ -83,7 +83,8 @@ class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
         propagate = json['propagate'],
         propagateToOwner = json['propagateToOwner'],
         propagateToTenant = json['propagateToTenant'],
-        details = json['details'],
+        details =
+            json['details'] is String ? <String, dynamic>{} : json['details'],
         super.fromJson(json);
 
   @override
