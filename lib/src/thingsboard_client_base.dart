@@ -167,7 +167,7 @@ class ThingsboardClient {
             defaultHttpOptionsFromConfig(RequestConfig(ignoreLoading: true)));
     if (response.data != null) {
       version = response.data!['version'];
-      type = response.data!['type'];
+      type = response.data!['type'] ?? 'unknown';
     }
     bool supported = false;
     try {
