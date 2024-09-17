@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:collection/collection.dart';
@@ -363,7 +364,7 @@ abstract class RestJsonConverter {
             errorCode: ThingsBoardErrorCode.invalidArguments);
       }
     } else {
-      return JsonDataEntry(key, value.toString());
+      return JsonDataEntry(key, jsonEncode(value));
     }
   }
 
