@@ -1,3 +1,15 @@
+## 1.3.0
+
+- **New APIs:**
+    - `/api/alarm/types` - Fetches available alarm types.
+    - `/api/users/info` - Retrieves user information.
+
+- **Enhancements:**
+    - Added the ability to log request and response details for improved debugging.
+
+- **Bug Fixes:**
+    - Various minor bug fixes to improve stability and performance.
+
 ## 1.2.0
 
 - Introduced the ability to configure access to custom applications using a login with a QR code feature. 
