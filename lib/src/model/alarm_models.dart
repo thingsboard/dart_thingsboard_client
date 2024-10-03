@@ -28,6 +28,15 @@ extension AlarmStatusToString on AlarmStatus {
 
 enum AlarmSearchStatus { ANY, ACTIVE, CLEARED, ACK, UNACK }
 
+enum AlarmCommentType { SYSTEM, OTHER, NONE }
+
+AlarmCommentType alarmCommentTypeFromString(String value) {
+  return AlarmCommentType.values.firstWhere(
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+    orElse: () => AlarmCommentType.NONE,
+  );
+}
+
 AlarmSearchStatus alarmSearchStatusFromString(String value) {
   return AlarmSearchStatus.values.firstWhere(
       (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
@@ -266,5 +275,54 @@ class AlarmType with HasTenantId {
 
   EntityType getEntityType() {
     return entityType;
+  }
+}
+
+class AlarmCommentInfo extends BaseData<AlarmId> {
+  AlarmCommentInfo({
+    required this.userId,
+    required this.type,
+    required this.comment,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+  });
+
+  final UserId userId;
+  final AlarmCommentType type;
+  final AlarmComment comment;
+  final String? firstName;
+  final String? lastName;
+  final String email;
+
+  factory AlarmCommentInfo.fromJson(Map<String, dynamic> json) {
+    return AlarmCommentInfo(
+      userId: UserId.fromJson(json['userId']),
+      type: alarmCommentTypeFromString(json['type']),
+      comment: AlarmComment.fromJson(json['comment']),
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      email: json['email'],
+    );
+  }
+}
+
+class AlarmComment {
+  const AlarmComment({
+    required this.text,
+    required this.subtype,
+    required this.userId,
+  });
+
+  final String text;
+  final String subtype;
+  final UserId userId;
+
+  factory AlarmComment.fromJson(Map<String, dynamic> json) {
+    return AlarmComment(
+      text: json['text'],
+      subtype: json['subtype'],
+      userId: UserId.fromJson(json['userId']),
+    );
   }
 }
