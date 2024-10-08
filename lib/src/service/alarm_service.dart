@@ -10,6 +10,10 @@ PageData<AlarmType> parseAlarmTypeData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => AlarmType.fromJson(json));
 }
 
+PageData<AlarmCommentInfo> parseAlarmComments(Map<String, dynamic> json) {
+  return PageData.fromJson(json, (json) => AlarmCommentInfo.fromJson(json));
+}
+
 class AlarmService {
   final ThingsboardClient _tbClient;
 
@@ -156,5 +160,33 @@ class AlarmService {
         options: defaultHttpOptionsFromConfig(requestConfig));
 
     return _tbClient.compute(parseAlarmTypeData, response.data!);
+  }
+
+  Future<PageData<AlarmCommentInfo>> getAlarmComments(
+    AlarmCommentsQuery query, {
+    required AlarmId id,
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.get<Map<String, dynamic>>(
+        '/api/alarm/${id.id}/comment',
+        queryParameters: query.toQueryParameters(),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+
+    return _tbClient.compute(parseAlarmComments, response.data!);
+  }
+
+  Future<AlarmCommentInfo> postAlarmComment(
+    String comment, {
+    required AlarmId id,
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.post<Map<String, dynamic>>(
+        '/api/alarm/${id.id}/comment',
+        data: jsonEncode({
+          'comment': {'text': comment}
+        }),
+        options: defaultHttpOptionsFromConfig(requestConfig));
+
+    return AlarmCommentInfo.fromJson(response.data!);
   }
 }

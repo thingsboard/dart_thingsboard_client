@@ -280,6 +280,7 @@ class AlarmType with HasTenantId {
 
 class AlarmCommentInfo extends BaseData<AlarmId> {
   AlarmCommentInfo({
+    required this.createdTime,
     required this.userId,
     required this.type,
     required this.comment,
@@ -288,16 +289,18 @@ class AlarmCommentInfo extends BaseData<AlarmId> {
     required this.email,
   });
 
-  final UserId userId;
+  final int createdTime;
+  final UserId? userId;
   final AlarmCommentType type;
   final AlarmComment comment;
   final String? firstName;
   final String? lastName;
-  final String email;
+  final String? email;
 
   factory AlarmCommentInfo.fromJson(Map<String, dynamic> json) {
     return AlarmCommentInfo(
-      userId: UserId.fromJson(json['userId']),
+      createdTime: json['createdTime'],
+      userId: json['userId'] != null ? UserId.fromJson(json['userId']) : null,
       type: alarmCommentTypeFromString(json['type']),
       comment: AlarmComment.fromJson(json['comment']),
       firstName: json['firstName'],
@@ -316,13 +319,27 @@ class AlarmComment {
 
   final String text;
   final String? subtype;
-  final UserId userId;
+  final UserId? userId;
 
   factory AlarmComment.fromJson(Map<String, dynamic> json) {
     return AlarmComment(
       text: json['text'],
       subtype: json['subtype'],
-      userId: UserId.fromJson(json['userId']),
+      userId: json['userId'] != null ? UserId(json['userId']) : null,
     );
+  }
+}
+
+class AlarmCommentsQuery {
+  const AlarmCommentsQuery({
+    required this.pageLink,
+    required this.id,
+  });
+
+  final PageLink pageLink;
+  final AlarmId id;
+
+  Map<String, dynamic> toQueryParameters() {
+    return pageLink.toQueryParameters();
   }
 }
