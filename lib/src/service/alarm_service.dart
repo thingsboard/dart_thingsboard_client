@@ -164,29 +164,63 @@ class AlarmService {
 
   Future<PageData<AlarmCommentInfo>> getAlarmComments(
     AlarmCommentsQuery query, {
-    required AlarmId id,
     RequestConfig? requestConfig,
   }) async {
     final response = await _tbClient.get<Map<String, dynamic>>(
-        '/api/alarm/${id.id}/comment',
-        queryParameters: query.toQueryParameters(),
-        options: defaultHttpOptionsFromConfig(requestConfig));
+      '/api/alarm/${query.id.id}/comment',
+      queryParameters: query.toQueryParameters(),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
 
     return _tbClient.compute(parseAlarmComments, response.data!);
   }
 
   Future<AlarmCommentInfo> postAlarmComment(
     String comment, {
-    required AlarmId id,
+    required AlarmId alarmId,
     RequestConfig? requestConfig,
   }) async {
     final response = await _tbClient.post<Map<String, dynamic>>(
-        '/api/alarm/${id.id}/comment',
-        data: jsonEncode({
+      '/api/alarm/${alarmId.id}/comment',
+      data: jsonEncode(
+        {
           'comment': {'text': comment}
-        }),
-        options: defaultHttpOptionsFromConfig(requestConfig));
+        },
+      ),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
 
     return AlarmCommentInfo.fromJson(response.data!);
+  }
+
+  Future<AlarmCommentInfo> updatedAlarmComment(
+    String comment, {
+    required AlarmId alarmId,
+    required String commentId,
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.post<Map<String, dynamic>>(
+      '/api/alarm/${alarmId.id}/comment',
+      data: jsonEncode(
+        {
+          'id': {'id': commentId},
+          'comment': {'text': comment},
+        },
+      ),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return AlarmCommentInfo.fromJson(response.data!);
+  }
+
+  Future<void> deleteAlarmComment(
+    String id, {
+    required AlarmId alarmId,
+    RequestConfig? requestConfig,
+  }) async {
+    await _tbClient.delete(
+      '/api/alarm/${alarmId.id}/comment/$id',
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
   }
 }
