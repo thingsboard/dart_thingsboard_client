@@ -39,6 +39,15 @@ extension AlarmSearchStatusToString on AlarmSearchStatus {
   }
 }
 
+enum AlarmCommentType { SYSTEM, OTHER, NONE }
+
+AlarmCommentType alarmCommentTypeFromString(String value) {
+  return AlarmCommentType.values.firstWhere(
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+    orElse: () => AlarmCommentType.NONE,
+  );
+}
+
 class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
   TenantId? tenantId;
   CustomerId? customerId;
@@ -266,5 +275,104 @@ class AlarmType with HasTenantId {
 
   EntityType getEntityType() {
     return entityType;
+  }
+}
+
+class AlarmCommentInfo {
+  AlarmCommentInfo({
+    required this.id,
+    required this.createdTime,
+    required this.alarmId,
+    required this.userId,
+    required this.type,
+    required this.comment,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+  });
+
+  final String id;
+  final int createdTime;
+  final AlarmId alarmId;
+  final UserId? userId;
+  final AlarmCommentType type;
+  final AlarmComment comment;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+
+  factory AlarmCommentInfo.fromJson(Map<String, dynamic> json) {
+    return AlarmCommentInfo(
+      id: json['id']['id'],
+      createdTime: json['createdTime'],
+      alarmId: AlarmId.fromJson(json['alarmId']),
+      userId: json['userId'] != null ? UserId.fromJson(json['userId']) : null,
+      type: alarmCommentTypeFromString(json['type']),
+      comment: AlarmComment.fromJson(json['comment']),
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      email: json['email'],
+    );
+  }
+}
+
+class AlarmComment {
+  const AlarmComment({
+    required this.text,
+    required this.subtype,
+    required this.userId,
+    required this.edited,
+    required this.editedOn,
+    required this.assigneeId,
+  });
+
+  final String text;
+  final String? subtype;
+  final UserId? userId;
+  final bool edited;
+  final int? editedOn;
+  final String? assigneeId;
+
+  factory AlarmComment.fromJson(Map<String, dynamic> json) {
+    return AlarmComment(
+      text: json['text'],
+      subtype: json['subtype'],
+      userId: json['userId'] != null ? UserId(json['userId']) : null,
+      edited: json['edited'] != null,
+      editedOn: json['editedOn'],
+      assigneeId: json['assigneeId'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final json = <String, dynamic>{'text': text};
+    if (subtype != null) {
+      json['subtype'] = subtype;
+    }
+    if (userId != null) {
+      json['userId'] = userId!.toJson();
+    }
+    if (edited) {
+      json['edited'] = 'true';
+    }
+    if (editedOn != null) {
+      json['editedOn'] = editedOn;
+    }
+
+    return json;
+  }
+}
+
+class AlarmCommentsQuery {
+  const AlarmCommentsQuery({
+    required this.pageLink,
+    required this.id,
+  });
+
+  final PageLink pageLink;
+  final AlarmId id;
+
+  Map<String, dynamic> toQueryParameters() {
+    return pageLink.toQueryParameters();
   }
 }
