@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Increased the minimum supported ThingsBoard version to 3.8.0.
+
 ## 1.3.0
 
 - **New APIs:**
