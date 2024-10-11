@@ -1,7 +1,14 @@
 class PlatformVersionMatcher {
   static const int minPlatformVersionInt = 3800;
 
-  static bool isSupportedPlatformVersion(PlatformVersion platformVersion) {
+  static bool isSupportedPlatformVersion(
+    PlatformVersion platformVersion, {
+    required String type,
+  }) {
+    if (type != 'CE') {
+      return false;
+    }
+
     try {
       if (platformVersion.versionInt() < minPlatformVersionInt) {
         return false;
