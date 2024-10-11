@@ -114,6 +114,19 @@ class UserService {
     return _tbClient.compute(parseUsersInfoData, response.data!);
   }
 
+  Future<PageData<UserInfo>> getUsersAssign(
+    UsersAssignQuery usersAssignQuery, {
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.get<Map<String, dynamic>>(
+      '/api/users/assign/${usersAssignQuery.id.id}',
+      queryParameters: usersAssignQuery.toQueryParameters(),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return _tbClient.compute(parseUsersInfoData, response.data!);
+  }
+
   Future<PageData<User>> getTenantAdmins(String tenantId, PageLink pageLink,
       {RequestConfig? requestConfig}) async {
     var queryParams = pageLink.toQueryParameters();

@@ -28,15 +28,6 @@ extension AlarmStatusToString on AlarmStatus {
 
 enum AlarmSearchStatus { ANY, ACTIVE, CLEARED, ACK, UNACK }
 
-enum AlarmCommentType { SYSTEM, OTHER, NONE }
-
-AlarmCommentType alarmCommentTypeFromString(String value) {
-  return AlarmCommentType.values.firstWhere(
-    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
-    orElse: () => AlarmCommentType.NONE,
-  );
-}
-
 AlarmSearchStatus alarmSearchStatusFromString(String value) {
   return AlarmSearchStatus.values.firstWhere(
       (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
@@ -46,6 +37,15 @@ extension AlarmSearchStatusToString on AlarmSearchStatus {
   String toShortString() {
     return toString().split('.').last;
   }
+}
+
+enum AlarmCommentType { SYSTEM, OTHER, NONE }
+
+AlarmCommentType alarmCommentTypeFromString(String value) {
+  return AlarmCommentType.values.firstWhere(
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+    orElse: () => AlarmCommentType.NONE,
+  );
 }
 
 class Alarm extends BaseData<AlarmId> with HasName, HasTenantId {
@@ -278,8 +278,11 @@ class AlarmType with HasTenantId {
   }
 }
 
-class AlarmCommentInfo extends BaseData<AlarmId> {
+class AlarmCommentInfo {
   AlarmCommentInfo({
+    required this.id,
+    required this.createdTime,
+    required this.alarmId,
     required this.userId,
     required this.type,
     required this.comment,
@@ -288,16 +291,22 @@ class AlarmCommentInfo extends BaseData<AlarmId> {
     required this.email,
   });
 
-  final UserId userId;
+  final String id;
+  final int createdTime;
+  final AlarmId alarmId;
+  final UserId? userId;
   final AlarmCommentType type;
   final AlarmComment comment;
   final String? firstName;
   final String? lastName;
-  final String email;
+  final String? email;
 
   factory AlarmCommentInfo.fromJson(Map<String, dynamic> json) {
     return AlarmCommentInfo(
-      userId: UserId.fromJson(json['userId']),
+      id: json['id']['id'],
+      createdTime: json['createdTime'],
+      alarmId: AlarmId.fromJson(json['alarmId']),
+      userId: json['userId'] != null ? UserId.fromJson(json['userId']) : null,
       type: alarmCommentTypeFromString(json['type']),
       comment: AlarmComment.fromJson(json['comment']),
       firstName: json['firstName'],
@@ -312,17 +321,58 @@ class AlarmComment {
     required this.text,
     required this.subtype,
     required this.userId,
+    required this.edited,
+    required this.editedOn,
+    required this.assigneeId,
   });
 
   final String text;
-  final String subtype;
-  final UserId userId;
+  final String? subtype;
+  final UserId? userId;
+  final bool edited;
+  final int? editedOn;
+  final String? assigneeId;
 
   factory AlarmComment.fromJson(Map<String, dynamic> json) {
     return AlarmComment(
       text: json['text'],
       subtype: json['subtype'],
-      userId: UserId.fromJson(json['userId']),
+      userId: json['userId'] != null ? UserId(json['userId']) : null,
+      edited: json['edited'] != null,
+      editedOn: json['editedOn'],
+      assigneeId: json['assigneeId'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    final json = <String, dynamic>{'text': text};
+    if (subtype != null) {
+      json['subtype'] = subtype;
+    }
+    if (userId != null) {
+      json['userId'] = userId!.toJson();
+    }
+    if (edited) {
+      json['edited'] = 'true';
+    }
+    if (editedOn != null) {
+      json['editedOn'] = editedOn;
+    }
+
+    return json;
+  }
+}
+
+class AlarmCommentsQuery {
+  const AlarmCommentsQuery({
+    required this.pageLink,
+    required this.id,
+  });
+
+  final PageLink pageLink;
+  final AlarmId id;
+
+  Map<String, dynamic> toQueryParameters() {
+    return pageLink.toQueryParameters();
   }
 }
