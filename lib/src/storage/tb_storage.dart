@@ -1,7 +1,19 @@
-abstract class TbStorage {
-  Future<void> setItem(String key, String value);
+abstract class TbStorage<E> {
+  /// Saves the [key] - [value] pair.
+  Future<void> setItem(String key, E value);
 
+  /// Deletes the given [key] from the box.
+  ///
+  /// If it does not exist, nothing happens.
   Future<void> deleteItem(String key);
 
-  Future<String?> getItem(String key);
+  /// Returns the value associated with the given [key]. If the key does not
+  /// exist, `null` is returned.
+  ///
+  /// If [defaultValue] is specified, it is returned in case the key does not
+  /// exist.
+  E? getItem(String key, {E? defaultValue});
+
+  /// Checks whether the box contains the [key].
+  bool containsKey(String key);
 }
