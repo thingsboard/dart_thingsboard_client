@@ -339,7 +339,7 @@ abstract class RestJsonConverter {
       var result = <TsKvEntry>[];
       timeseries.forEach((key, value) {
         var values = value as List<dynamic>;
-        result.addAll(values.map((ts) {
+        result.addAll(values.where((ts) => ts[VALUE] != null).map((ts) {
           var entry = _parseValue(key, ts[VALUE]);
           return BasicTsKvEntry(ts[TS] as int, entry);
         }));
