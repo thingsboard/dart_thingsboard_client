@@ -2,7 +2,7 @@ abstract class TbStorage<E> {
   /// Saves the [key] - [value] pair.
   Future<void> setItem(String key, E value);
 
-  /// Deletes the given [key] from the box.
+  /// Deletes the given [key] from the storage.
   ///
   /// If it does not exist, nothing happens.
   Future<void> deleteItem(String key);
@@ -14,6 +14,6 @@ abstract class TbStorage<E> {
   /// exist.
   E? getItem(String key, {E? defaultValue});
 
-  /// Checks whether the box contains the [key].
+  /// Checks whether the storage contains the [key].
   bool containsKey(String key);
 }
