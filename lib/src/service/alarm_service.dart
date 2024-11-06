@@ -10,6 +10,10 @@ PageData<AlarmType> parseAlarmTypeData(Map<String, dynamic> json) {
   return PageData.fromJson(json, (json) => AlarmType.fromJson(json));
 }
 
+PageData<AlarmCommentInfo> parseAlarmComments(Map<String, dynamic> json) {
+  return PageData.fromJson(json, (json) => AlarmCommentInfo.fromJson(json));
+}
+
 class AlarmService {
   final ThingsboardClient _tbClient;
 
@@ -156,5 +160,67 @@ class AlarmService {
         options: defaultHttpOptionsFromConfig(requestConfig));
 
     return _tbClient.compute(parseAlarmTypeData, response.data!);
+  }
+
+  Future<PageData<AlarmCommentInfo>> getAlarmComments(
+    AlarmCommentsQuery query, {
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.get<Map<String, dynamic>>(
+      '/api/alarm/${query.id.id}/comment',
+      queryParameters: query.toQueryParameters(),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return _tbClient.compute(parseAlarmComments, response.data!);
+  }
+
+  Future<AlarmCommentInfo> postAlarmComment(
+    String comment, {
+    required AlarmId alarmId,
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.post<Map<String, dynamic>>(
+      '/api/alarm/${alarmId.id}/comment',
+      data: jsonEncode(
+        {
+          'comment': {'text': comment}
+        },
+      ),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return AlarmCommentInfo.fromJson(response.data!);
+  }
+
+  Future<AlarmCommentInfo> updatedAlarmComment(
+    String comment, {
+    required AlarmId alarmId,
+    required String commentId,
+    RequestConfig? requestConfig,
+  }) async {
+    final response = await _tbClient.post<Map<String, dynamic>>(
+      '/api/alarm/${alarmId.id}/comment',
+      data: jsonEncode(
+        {
+          'id': {'id': commentId},
+          'comment': {'text': comment},
+        },
+      ),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
+
+    return AlarmCommentInfo.fromJson(response.data!);
+  }
+
+  Future<void> deleteAlarmComment(
+    String id, {
+    required AlarmId alarmId,
+    RequestConfig? requestConfig,
+  }) async {
+    await _tbClient.delete(
+      '/api/alarm/${alarmId.id}/comment/$id',
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
   }
 }

@@ -45,13 +45,13 @@ class LocalFileStorage implements TbStorage {
   }
 
   @override
-  Future<String?> getItem(String key) async {
+  Future<dynamic> getItem(String key, {dynamic defaultValue}) async {
     await ready;
     return _data[key];
   }
 
   @override
-  Future<void> setItem(String key, String value) async {
+  Future<void> setItem(String key, dynamic value) async {
     await ready;
     _data[key] = value;
     return _flush();
@@ -103,5 +103,10 @@ class LocalFileStorage implements TbStorage {
     } catch (err) {
       rethrow;
     }
+  }
+
+  @override
+  bool containsKey(key) {
+    return _data.containsKey(key);
   }
 }

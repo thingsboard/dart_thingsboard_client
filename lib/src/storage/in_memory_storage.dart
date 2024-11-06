@@ -1,7 +1,12 @@
 import 'tb_storage.dart';
 
 class InMemoryStorage implements TbStorage {
-  final storageMap = <String, String>{};
+  final storageMap = <String, dynamic>{};
+
+  @override
+  bool containsKey(String key) {
+    return storageMap.containsKey(key);
+  }
 
   @override
   Future<void> deleteItem(String key) async {
@@ -9,12 +14,12 @@ class InMemoryStorage implements TbStorage {
   }
 
   @override
-  Future<String?> getItem(String key) async {
-    return storageMap[key];
+  getItem(String key, {defaultValue}) async {
+    return storageMap[key] ?? defaultValue;
   }
 
   @override
-  Future<void> setItem(String key, String value) async {
+  Future<void> setItem(String key, value) async {
     storageMap[key] = value;
   }
 }

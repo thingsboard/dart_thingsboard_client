@@ -160,18 +160,22 @@ class ThingsboardClient {
   }
 
   Future<void> _checkPlatformVersion() async {
-    var version = 'unknown';
+    String version = 'unknown';
+    String type = 'unknown';
     var response = await get<Map<String, dynamic>>('/api/system/info',
         options:
             defaultHttpOptionsFromConfig(RequestConfig(ignoreLoading: true)));
     if (response.data != null) {
       version = response.data!['version'];
+      type = response.data!['type'] ?? 'unknown';
     }
     bool supported = false;
     try {
       _platformVersion = PlatformVersion.fromString(version);
-      supported =
-          PlatformVersionMatcher.isSupportedPlatformVersion(_platformVersion!);
+      supported = PlatformVersionMatcher.isSupportedPlatformVersion(
+        _platformVersion!,
+        type: type,
+      );
     } catch (e) {
       supported = false;
     }
