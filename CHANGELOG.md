@@ -1,3 +1,8 @@
+## 2.0.0
+
+- Enhanced TbStorage interface for improved usability.
+- Introduced a new API for alarm activity management, including support for comments and additional functionalities.
+
 ## 1.3.1
 
 - Increased the minimum supported ThingsBoard version to 3.8.0.
