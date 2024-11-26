@@ -1,8 +1,6 @@
 export 'basic_mobile_info.dart';
 export 'login_mobile_info.dart';
 export 'mobile_info_query.dart';
-export 'mobile_self_registration_params.dart';
-export 'mobile_sign_up_models.dart';
 export 'mobile_version_info.dart';
 export 'pages_layout.dart';
 export 'recaptcha_model.dart';

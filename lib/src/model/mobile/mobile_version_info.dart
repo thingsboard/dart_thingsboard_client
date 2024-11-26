@@ -1,5 +1,4 @@
-import 'package:thingsboard_pe_client/src/model/model.dart'
-    show PlatformVersion;
+import 'package:thingsboard_client/src/model/model.dart' show PlatformVersion;
 
 class MobileVersionInfo {
   const MobileVersionInfo({
