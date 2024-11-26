@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:thingsboard_client/src/service/mobile_service.dart';
 
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
@@ -69,6 +70,7 @@ class ThingsboardClient {
   EntitiesVersionControlService? _entitiesVersionControlService;
   TwoFactorAuthService? _twoFactorAuthService;
   NotificationsService? _notificationService;
+  MobileService? _mobileService;
 
   factory ThingsboardClient(
     String apiEndpoint, {
@@ -630,5 +632,10 @@ class ThingsboardClient {
   NotificationsService getNotificationService() {
     _notificationService ??= NotificationsService(this);
     return _notificationService!;
+  }
+
+  MobileService getMobileService() {
+    _mobileService ??= MobileService(this);
+    return _mobileService!;
   }
 }

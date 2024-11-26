@@ -1,5 +1,5 @@
 class PlatformVersionMatcher {
-  static const int minPlatformVersionInt = 3800;
+  static const int minPlatformVersionInt = 3900;
 
   static bool isSupportedPlatformVersion(
     PlatformVersion platformVersion, {
