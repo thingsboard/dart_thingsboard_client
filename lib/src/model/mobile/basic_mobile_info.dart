@@ -13,7 +13,7 @@ class MobileBasicInfo {
     return MobileBasicInfo(
         user: json['user'] != null ? User.fromJson(json['user']) : null,
         homeDashboardInfo: json['homeDashboardInfo'] != null
-            ? HomeDashboardInfo.fromJson(json)
+            ? HomeDashboardInfo.fromJson(json['homeDashboardInfo'])
             : null,
         pages: json['pages'] != null
             ? json['pages']
