@@ -16,12 +16,17 @@ enum PushNotificationType {
   INTEGRATION_LIFECYCLE_EVENT,
   EDGE_CONNECTION,
   EDGE_COMMUNICATION_FAILURE,
-  EXCEEDED_RATE_LIMITS
+  EXCEEDED_RATE_LIMITS,
+  USER_ACTIVATED,
+  USER_REGISTERED,
+  UNKNOWN,
 }
 
 PushNotificationType notificationTypeFromString(String value) {
   return PushNotificationType.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+    orElse: () => PushNotificationType.UNKNOWN,
+  );
 }
 
 extension NotificationTypeToString on PushNotificationType {
