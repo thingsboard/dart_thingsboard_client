@@ -1,3 +1,8 @@
+## 3.0.0
+
+- Introduced a new API for dynamically configuring via mobile center.
+- The minimum supported TB version is 3.9.0 and higher.
+
 ## 2.0.0
 
 - Enhanced TbStorage interface for improved usability.
