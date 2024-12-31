@@ -24,6 +24,7 @@ export 'has_rule_engine_profile.dart';
 export 'has_tenant_id.dart';
 export 'id/ids.dart';
 export 'login_models.dart';
+export 'mobile/mobile_models.dart';
 export 'mobile_session_models.dart';
 export 'oauth2_models.dart';
 export 'ota_models.dart';
