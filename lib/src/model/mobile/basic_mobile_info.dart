@@ -11,21 +11,22 @@ class MobileBasicInfo {
 
   factory MobileBasicInfo.fromJson(Map<String, dynamic> json) {
     return MobileBasicInfo(
-        user: json['user'] != null ? User.fromJson(json['user']) : null,
-        homeDashboardInfo: json['homeDashboardInfo'] != null
-            ? HomeDashboardInfo.fromJson(json['homeDashboardInfo'])
-            : null,
-        pages: json['pages'] != null
-            ? json['pages']
-                .map<PageLayout>((e) => PageLayout.fromJson(e))
-                .toList()
-            : null,
-        storeInfo: json['storeInfo'] != null
-            ? StoreInfo.fromJson(json['storeInfo'])
-            : null,
-        versionInfo: json['versionInfo'] != null
-            ? VersionInfo.fromJson(json['versionInfo'])
-            : null);
+      user: json['user'] != null ? User.fromJson(json['user']) : null,
+      homeDashboardInfo: json['homeDashboardInfo'] != null
+          ? HomeDashboardInfo.fromJson(json['homeDashboardInfo'])
+          : null,
+      pages: json['pages'] != null
+          ? json['pages']
+              .map<PageLayout>((e) => PageLayout.fromJson(e))
+              .toList()
+          : null,
+      storeInfo: json['storeInfo'] != null
+          ? StoreInfo.fromJson(json['storeInfo'])
+          : null,
+      versionInfo: json['versionInfo'] != null
+          ? VersionInfo.fromJson(json['versionInfo'])
+          : null,
+    );
   }
 
   final User? user;
