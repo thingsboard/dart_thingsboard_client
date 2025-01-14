@@ -10,19 +10,20 @@ class VersionInfo {
 
   factory VersionInfo.fromJson(Map<String, dynamic> json) {
     return VersionInfo(
-      minVersion: json['minVersion'] != ''
+      minVersion: json['minVersion'] != null && json['minVersion'] != ''
           ? PlatformVersion.fromString(json['minVersion'])
           : null,
       minVersionReleaseNotes: json['minVersionReleaseNotes'],
-      latestVersion: json['latestVersion'] != ''
-          ? PlatformVersion.fromString(json['latestVersion'])
-          : null,
+      latestVersion:
+          json['latestVersion'] != null && json['latestVersion'] != ''
+              ? PlatformVersion.fromString(json['latestVersion'])
+              : null,
       latestVersionReleaseNotes: json['latestVersionReleaseNotes'],
     );
   }
 
   final PlatformVersion? minVersion;
-  final String minVersionReleaseNotes;
+  final String? minVersionReleaseNotes;
   final PlatformVersion? latestVersion;
-  final String latestVersionReleaseNotes;
+  final String? latestVersionReleaseNotes;
 }
