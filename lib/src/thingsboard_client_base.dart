@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:thingsboard_client/src/debug/enviroment_variables.dart';
 import 'package:thingsboard_client/src/service/mobile_service.dart';
 
 import 'error/thingsboard_error.dart';
@@ -85,6 +88,25 @@ class ThingsboardClient {
   }) {
     final dio = Dio();
     dio.options.baseUrl = apiEndpoint;
+    if (EnvironmentVariables.enableProxy) {
+      final proxy = Platform.isAndroid
+          ? '${EnvironmentVariables.localHostIp}:9090'
+          : 'localhost:9090';
+
+      dio.httpClientAdapter = IOHttpClientAdapter(
+        createHttpClient: () {
+          final client = HttpClient();
+          client.findProxy = (url) {
+            return 'PROXY $proxy';
+          };
+
+          client.badCertificateCallback = (_, __, ___) => true;
+          return client;
+        },
+        validateCertificate: (_, __, ___) => true,
+      );
+    }
+
     final tbClient = ThingsboardClient._internal(
         apiEndpoint,
         dio,
