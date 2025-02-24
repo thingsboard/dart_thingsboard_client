@@ -100,10 +100,8 @@ class ThingsboardClient {
             return 'PROXY $proxy';
           };
 
-          client.badCertificateCallback = (_, __, ___) => true;
           return client;
         },
-        validateCertificate: (_, __, ___) => true,
       );
     }
 
