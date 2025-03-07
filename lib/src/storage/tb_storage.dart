@@ -12,7 +12,7 @@ abstract class TbStorage<E> {
   ///
   /// If [defaultValue] is specified, it is returned in case the key does not
   /// exist.
-  E? getItem(String key, {E? defaultValue});
+  Future<E?> getItem(String key, {E? defaultValue});
 
   /// Checks whether the storage contains the [key].
   bool containsKey(String key);
