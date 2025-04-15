@@ -4,7 +4,7 @@ class InMemoryStorage implements TbStorage {
   final storageMap = <String, dynamic>{};
 
   @override
-  bool containsKey(String key) {
+  Future<bool> containsKey(String key) async {
     return storageMap.containsKey(key);
   }
 
