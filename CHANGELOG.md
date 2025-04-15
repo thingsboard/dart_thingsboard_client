@@ -1,3 +1,6 @@
+## 4.0.0
+- Changes in TbStorage interface
+
 ## 3.0.1
 
 - Adapted to backend changes for version information representation.

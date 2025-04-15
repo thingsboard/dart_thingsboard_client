@@ -106,7 +106,7 @@ class LocalFileStorage implements TbStorage {
   }
 
   @override
-  bool containsKey(key) {
+  Future<bool> containsKey(key) async {
     return _data.containsKey(key);
   }
 }
