@@ -380,8 +380,20 @@ class ThingsboardClient {
   Future<LoginResponse> getLoginDataBySecretKey({
     required String host,
     required String key,
+    bool logging = false,
   }) async {
     final dio = Dio();
+    if (logging) {
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+        ),
+      );
+    }
+
     try {
       final response = await dio.get('$host/api/noauth/qr/$key');
       return LoginResponse.fromJson(response.data);

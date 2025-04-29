@@ -15,5 +15,5 @@ abstract class TbStorage<E> {
   Future<E?> getItem(String key, {E? defaultValue});
 
   /// Checks whether the storage contains the [key].
-  bool containsKey(String key);
+  Future<bool> containsKey(String key);
 }
