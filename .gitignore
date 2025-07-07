@@ -18,3 +18,6 @@ doc/api/
 .idea
 
 tb_client_storage.json
+
+# FVM Version Cache
+.fvm/
