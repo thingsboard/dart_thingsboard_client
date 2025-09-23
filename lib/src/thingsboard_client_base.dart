@@ -204,7 +204,7 @@ class ThingsboardClient {
     if (_telemetryWebsocketService != null) {
       _telemetryWebsocketService!.reset(true);
     }
-    if (this.isJwtTokenValid() && !this.isPreVerificationToken()) {
+    if (this.isJwtTokenValid() && !this.isPreVerificationToken() && !this.isMfaConfigurationToken()) {
       await _checkPlatformVersion();
     }
     if (_userLoadedCallback != null) {
@@ -503,6 +503,9 @@ class ThingsboardClient {
 
   bool isPreVerificationToken() {
     return _authUser != null && _authUser!.isPreVerificationToken();
+  }
+  bool isMfaConfigurationToken() {
+    return _authUser != null && _authUser!.isMfaConfigurationToken();
   }
 
   AssetService getAssetService() {
