@@ -46,6 +46,10 @@ class AuthUser {
     return authority == Authority.PRE_VERIFICATION_TOKEN;
   }
 
+  bool isMfaConfigurationToken() {
+    return authority == Authority.MFA_CONFIGURATION_TOKEN;
+  }
+
   @override
   String toString() {
     return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, lastName: $lastName, enabled: $enabled, '

@@ -4,7 +4,8 @@ enum Authority {
   CUSTOMER_USER,
   REFRESH_TOKEN,
   ANONYMOUS,
-  PRE_VERIFICATION_TOKEN
+  PRE_VERIFICATION_TOKEN,
+  MFA_CONFIGURATION_TOKEN
 }
 
 Authority authorityFromString(String value) {
