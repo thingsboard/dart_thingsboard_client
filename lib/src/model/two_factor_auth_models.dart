@@ -348,7 +348,7 @@ class BackupCodeTwoFaAccountConfig extends TwoFaAccountConfig {
   }
 
   BackupCodeTwoFaAccountConfig.fromJson(Map<String, dynamic> json)
-      : codes =
+      : codes = json['codes'] == null ? {} : 
             (json['codes'] as List<dynamic>).map((e) => e as String).toSet(),
         super._fromJson(json);
 
