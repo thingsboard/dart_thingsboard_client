@@ -77,7 +77,7 @@ class TwoFactorAuthService {
   Future<AccountTwoFaSettings> updateTwoFaAccountConfig(
       TwoFaProviderType providerType, bool useByDefault,
       {RequestConfig? requestConfig}) async {
-    var response = await _tbClient.post<Map<String, dynamic>>(
+    var response = await _tbClient.put<Map<String, dynamic>>(
         '/api/2fa/account/config',
         queryParameters: {'providerType': providerType.toShortString()},
         data: jsonEncode({'useByDefault': useByDefault}),
