@@ -1,32 +1,13 @@
-import 'ota_package_id.dart';
-import 'alarm_id.dart';
-import 'api_usage_state_id.dart';
-import 'asset_id.dart';
-import 'dashboard_id.dart';
-import 'device_profile_id.dart';
-import 'asset_profile_id.dart';
-import 'edge_id.dart';
-import 'entity_view_id.dart';
-import 'rule_chain_id.dart';
-import 'rule_node_id.dart';
-import 'tb_resource_id.dart';
-import 'tenant_profile_id.dart';
-import 'user_id.dart';
-import 'widget_type_id.dart';
-import 'widgets_bundle_id.dart';
-import 'customer_id.dart';
-import 'device_id.dart';
-import 'tenant_id.dart';
-import 'rpc_id.dart';
-import 'queue_id.dart';
-import 'notification_id.dart';
-import 'notification_request_id.dart';
-import 'notification_rule_id.dart';
-import 'notification_target_id.dart';
-import 'notification_template_id.dart';
-
-import '../entity_type_models.dart';
-import './has_uuid.dart';
+import 'package:thingsboard_client/src/model/id/ai_model_id.dart';
+import 'package:thingsboard_client/src/model/id/api_key_id.dart';
+import 'package:thingsboard_client/src/model/id/calculated_field_id.dart';
+import 'package:thingsboard_client/src/model/id/oauth_2_client_id.dart';
+import 'package:thingsboard_client/src/model/id/queue_stats_id.dart';
+import 'package:thingsboard_client/thingsboard_client.dart';
+import 'package:thingsboard_client/src/model/id/domain_id.dart';
+import 'package:thingsboard_client/src/model/id/mobile_app_id.dart';
+import 'package:thingsboard_client/src/model/id/mobile_app_bundle_id.dart';
+import 'package:thingsboard_client/src/model/id/job_id.dart';
 
 abstract class EntityId extends HasUuid {
   EntityType entityType;
@@ -97,6 +78,28 @@ abstract class EntityId extends HasUuid {
         return NotificationId(uuid);
       case EntityType.NOTIFICATION_RULE:
         return NotificationRuleId(uuid);
+      case EntityType.CALCULATED_FIELD:
+        return CalculatedFieldId(uuid);
+
+      case EntityType.QUEUE_STATS:
+        return QueueStatsId(uuid);
+      case EntityType.OAUTH2_CLIENT:
+        return Oauth2ClientId(uuid);
+            case EntityType.ADMIN_SETTINGS:
+        return AdminSettingsId(uuid);
+      case EntityType.AI_MODEL:
+        return AiModelId(uuid);
+      case EntityType.API_KEY:
+        return ApiKeyId(uuid);
+      case EntityType.DOMAIN:
+        return DomainId(uuid);
+      case EntityType.MOBILE_APP:
+        return MobileAppId(uuid);
+      case EntityType.MOBILE_APP_BUNDLE:
+        return MobileAppBundleId(uuid);
+      case EntityType.JOB:
+        return JobId(uuid);
+
     }
   }
 

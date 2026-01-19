@@ -48,3 +48,5 @@ export 'vc_models.dart';
 export 'version.dart';
 export 'widget_models.dart';
 export 'widgets_bundle_model.dart';
+export 'entity_subtype/sub_types.dart';
+export 'api_key/api_key_models.dart';

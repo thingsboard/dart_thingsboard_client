@@ -282,7 +282,7 @@ class TotpTwoFaAccountConfig extends TwoFaAccountConfig {
 }
 
 class SmsTwoFaAccountConfig extends TwoFaAccountConfig {
-  String phoneNumber;
+  String? phoneNumber;
 
   SmsTwoFaAccountConfig({required bool useByDefault, required this.phoneNumber})
       : super(useByDefault: useByDefault);

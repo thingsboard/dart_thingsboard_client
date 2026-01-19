@@ -26,3 +26,4 @@ export 'tenant_service.dart';
 export 'two_factor_auth_service.dart';
 export 'user_service.dart';
 export 'widget_service.dart';
+export 'api_key_service.dart';

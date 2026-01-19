@@ -4,23 +4,16 @@ import 'package:dio/dio.dart';
 
 import 'thingsboard_error.dart';
 
-int httpStatusToThingsboardErrorCode(int status) {
-  switch (status) {
-    case HttpStatus.unauthorized:
-      return ThingsBoardErrorCode.authentication;
-    case HttpStatus.forbidden:
-      return ThingsBoardErrorCode.permissionDenied;
-    case HttpStatus.badRequest:
-      return ThingsBoardErrorCode.badRequestParams;
-    case HttpStatus.notFound:
-      return ThingsBoardErrorCode.itemNotFound;
-    case HttpStatus.tooManyRequests:
-      return ThingsBoardErrorCode.tooManyRequests;
-    case HttpStatus.internalServerError:
-      return ThingsBoardErrorCode.general;
-    default:
-      return ThingsBoardErrorCode.general;
-  }
+ThingsBoardErrorCode httpStatusToThingsboardErrorCode(int status) {
+ return  switch (status) {
+    HttpStatus.unauthorized => ThingsBoardErrorCode.authentication,
+    HttpStatus.forbidden => ThingsBoardErrorCode.permissionDenied,
+    HttpStatus.badRequest => ThingsBoardErrorCode.badRequestParams,
+    HttpStatus.notFound => ThingsBoardErrorCode.itemNotFound,
+    HttpStatus.tooManyRequests => ThingsBoardErrorCode.tooManyRequests,
+    HttpStatus.internalServerError => ThingsBoardErrorCode.general,
+    int() => ThingsBoardErrorCode.general,
+  };
 }
 
 ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {

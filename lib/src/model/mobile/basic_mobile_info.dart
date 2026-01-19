@@ -1,5 +1,5 @@
 import 'package:thingsboard_client/thingsboard_client.dart';
-
+/// Internal class
 class MobileBasicInfo {
   const MobileBasicInfo({
     required this.user,

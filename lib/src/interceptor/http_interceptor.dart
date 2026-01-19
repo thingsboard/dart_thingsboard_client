@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:thingsboard_client/src/interceptor/key_intercept_config.dart';
 import '../error/thingsboard_error.dart';
 import 'interceptor_config.dart';
 import '../model/constants.dart';
@@ -9,9 +10,6 @@ import '../model/constants.dart';
 import '../thingsboard_client_base.dart';
 
 class HttpInterceptor extends QueuedInterceptor {
-  static const String _authScheme = 'Bearer ';
-  static const _authHeaderName = 'X-Authorization';
-
   final Dio _dio;
   final Dio _internalDio;
   final ThingsboardClient _tbClient;
@@ -44,6 +42,10 @@ class HttpInterceptor extends QueuedInterceptor {
         _updateLoadingState(config, isLoading);
       }
       if (_isTokenBasedAuthEntryPoint(options.path)) {
+        if (_tbClient.isApiKeyAuth()) {
+          return _intercept(
+              options, handler, KeyInterceptConfig.apiKey(_tbClient.apiKey));
+        }
         if (_tbClient.getJwtToken() == null &&
             !_tbClient.refreshTokenPending()) {
           return _handleRequestError(
@@ -52,7 +54,7 @@ class HttpInterceptor extends QueuedInterceptor {
           return _handleRequestError(
               options, handler, ThingsboardError(refreshTokenPending: true));
         } else {
-          return _jwtIntercept(options, handler);
+          return _intercept(options, handler, KeyInterceptConfig.jwt(_tbClient.getJwtToken()));
         }
       } else {
         return _handleRequest(options, handler);
@@ -62,13 +64,13 @@ class HttpInterceptor extends QueuedInterceptor {
     }
   }
 
-  Future _jwtIntercept(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    if (_updateAuthorizationHeader(options)) {
+  Future _intercept(RequestOptions options, RequestInterceptorHandler handler,
+      KeyInterceptConfig config) async {
+    if (_updateAuthorizationHeader(options, config)) {
       return _handleRequest(options, handler);
     } else {
       return _handleRequestError(options, handler,
-          ThingsboardError(message: 'Could not get JWT token from store.'));
+          ThingsboardError(message: 'Could not get token from store.'));
     }
   }
 
@@ -201,10 +203,10 @@ class HttpInterceptor extends QueuedInterceptor {
     return InterceptorConfig.fromExtra(options.extra);
   }
 
-  bool _updateAuthorizationHeader(RequestOptions options) {
-    var jwtToken = _tbClient.getJwtToken();
-    if (jwtToken != null) {
-      options.headers[_authHeaderName] = _authScheme + jwtToken;
+  bool _updateAuthorizationHeader(
+      RequestOptions options, KeyInterceptConfig config) {
+    if (config.key != null) {
+      options.headers[config.header] = config.prefix + config.key!;
       return true;
     } else {
       return false;

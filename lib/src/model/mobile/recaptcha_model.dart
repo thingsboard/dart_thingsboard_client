@@ -1,3 +1,4 @@
+/// Internal class 
 class RecaptchaModel {
   const RecaptchaModel({
     required this.siteKey,

@@ -26,13 +26,14 @@ class AssetProfile extends BaseData<AssetProfileId>
   TenantId? tenantId;
   String name;
   String? description;
-  bool? isDefault;
   String? image;
+  bool? isDefault;
   RuleChainId? defaultRuleChainId;
   DashboardId? defaultDashboardId;
   String? defaultQueueName;
   RuleChainId? defaultEdgeRuleChainId;
   AssetProfileId? externalId;
+  double? version;
 
   AssetProfile(this.name);
 
@@ -40,6 +41,7 @@ class AssetProfile extends BaseData<AssetProfileId>
       : tenantId = TenantId.fromJson(json['tenantId']),
         name = json['name'],
         description = json['description'],
+        version = json['version'],
         isDefault = json['default'],
         image = json['image'],
         defaultRuleChainId = json['defaultRuleChainId'] != null
@@ -63,6 +65,7 @@ class AssetProfile extends BaseData<AssetProfileId>
     if (tenantId != null) {
       json['tenantId'] = tenantId!.toJson();
     }
+    json['version'] = version;
     json['name'] = name;
     if (description != null) {
       json['description'] = description;
@@ -184,7 +187,9 @@ class Asset extends AdditionalInfoBased<AssetId>
         name = json['name'],
         type = json['type'],
         label = json['label'],
-        assetProfileId = json['assetProfileId'] == null ? null :  AssetProfileId.fromJson(json['assetProfileId']),
+        assetProfileId = json['assetProfileId'] == null
+            ? null
+            : AssetProfileId.fromJson(json['assetProfileId']),
         externalId = json['externalId'] != null
             ? AssetId.fromJson(json['externalId'])
             : null,

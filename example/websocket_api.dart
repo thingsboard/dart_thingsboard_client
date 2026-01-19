@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:thingsboard_client/src/model/query/entity_filter/entity_name_filter.dart';
+import 'package:thingsboard_client/src/model/query/entity_filter/single_entity_filter.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 import 'example_utils.dart';
 

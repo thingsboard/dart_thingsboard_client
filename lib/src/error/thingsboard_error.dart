@@ -2,24 +2,32 @@ export '_thingsboard_error_handler.dart'
     if (dart.library.io) '_thingsboard_error_handler_io.dart'
     if (dart.library.html) '_thingsboard_error_handler_html.dart';
 
-abstract class ThingsBoardErrorCode {
-  static const int general = 2;
-  static const int authentication = 10;
-  static const int jwtTokenExpired = 11;
-  static const int tenantTrialExpired = 12;
-  static const int credentialsExpired = 15;
-  static const int permissionDenied = 20;
-  static const int invalidArguments = 30;
-  static const int badRequestParams = 31;
-  static const int itemNotFound = 32;
-  static const int tooManyRequests = 33;
-  static const int tooManyUpdates = 34;
+enum ThingsBoardErrorCode {
+  general(2),
+  authentication(10),
+  jwtTokenExpired(11),
+  tenantTrialExpired(12),
+  credentialsExpired(15),
+  permissionDenied(20),
+  invalidArguments(30),
+  badRequestParams(31),
+  itemNotFound(32),
+  tooManyRequests(33),
+  tooManyUpdates(34),
+  versionConflict(35),
+  subscriptionViolation(35),
+  passwordViolation(45),
+  database(46);
+
+  const ThingsBoardErrorCode(this.value);
+  final int value;
+  static ThingsBoardErrorCode fromInt(int value) => ThingsBoardErrorCode.values.firstWhere((e) => e.value == value, orElse: () => ThingsBoardErrorCode.general,);
 }
 
 class ThingsboardError implements Exception {
   bool? refreshTokenPending;
   String? message;
-  int? errorCode;
+  ThingsBoardErrorCode? errorCode;
   int? status;
   dynamic error;
 
@@ -33,7 +41,7 @@ class ThingsboardError implements Exception {
   ThingsboardError.fromJson(Map<String, dynamic> json)
       : message = ThingsboardError.parseMessage(json),
         status = json['status'],
-        errorCode = json['errorCode'];
+        errorCode = ThingsBoardErrorCode.fromInt(json['errorCode']);
 
   static String parseMessage(Map<String, dynamic> json) {
     String? message = json['message'];

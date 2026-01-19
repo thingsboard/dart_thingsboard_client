@@ -1,5 +1,5 @@
 import 'package:thingsboard_client/src/model/model.dart' show PlatformVersion;
-
+/// Internal class
 class MobileVersionInfo {
   const MobileVersionInfo({
     required this.minVersion,

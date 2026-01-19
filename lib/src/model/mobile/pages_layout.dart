@@ -1,3 +1,4 @@
+/// Internal classes
 enum Pages {
   home,
   alarms,

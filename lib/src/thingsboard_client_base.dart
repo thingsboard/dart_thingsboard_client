@@ -32,10 +32,12 @@ class ThingsboardClient {
   final TbStorage _storage;
   final UserLoadedCallback? _userLoadedCallback;
   final MfaAuthCallback? _mfaAuthCallback;
+  final MfaAuthCallback? _mfaForceCallback;
   final ErrorCallback? _errorCallback;
   final LoadStartedCallback? _loadStartedCallback;
   final LoadFinishedCallback? _loadFinishedCallback;
   final TbCompute? _computeFunc;
+  final bool debugMode;
   bool _refreshTokenPending = false;
   String? _token;
   String? _refreshToken;
@@ -71,30 +73,37 @@ class ThingsboardClient {
   TwoFactorAuthService? _twoFactorAuthService;
   NotificationsService? _notificationService;
   MobileService? _mobileService;
-
+  ApiKeyService? _apiKeyService;
+  String? apiKey;
   factory ThingsboardClient(
     String apiEndpoint, {
     TbStorage? storage,
+    String? apiKey,
     UserLoadedCallback? onUserLoaded,
     MfaAuthCallback? onMfaAuth,
+    MfaAuthCallback? onMfaForce,
     ErrorCallback? onError,
     LoadStartedCallback? onLoadStarted,
     LoadFinishedCallback? onLoadFinished,
     TbCompute? computeFunc,
     bool debugMode = false,
+    BaseOptions? dioOptions,
   }) {
-    final dio = Dio();
+    final dio = Dio(dioOptions);
     dio.options.baseUrl = apiEndpoint;
     final tbClient = ThingsboardClient._internal(
         apiEndpoint,
         dio,
         storage,
+        apiKey,
         onUserLoaded,
         onMfaAuth,
+        onMfaForce,
         onError,
         onLoadStarted,
         onLoadFinished,
-        computeFunc ?? syncCompute);
+        computeFunc ?? syncCompute,
+        debugMode);
     dio.interceptors.clear();
 
     if (debugMode) {
@@ -121,16 +130,44 @@ class ThingsboardClient {
   }
 
   ThingsboardClient._internal(
-      this._apiEndpoint,
-      this._dio,
-      TbStorage? storage,
-      this._userLoadedCallback,
-      this._mfaAuthCallback,
-      this._errorCallback,
-      this._loadStartedCallback,
-      this._loadFinishedCallback,
-      this._computeFunc)
-      : _storage = storage ?? InMemoryStorage();
+    this._apiEndpoint,
+    this._dio,
+    TbStorage? storage,
+    this.apiKey,
+    this._userLoadedCallback,
+    this._mfaAuthCallback,
+    this._mfaForceCallback,
+    this._errorCallback,
+    this._loadStartedCallback,
+    this._loadFinishedCallback,
+    this._computeFunc,
+    this.debugMode,
+  ) : _storage = storage ?? InMemoryStorage();
+  Future<void> reInit(String endpoint) async {
+    _dio.options.baseUrl = endpoint;
+    _dio.interceptors.clear();
+
+    if (debugMode) {
+      _dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+        ),
+      );
+    }
+    _dio.interceptors.add(
+      HttpInterceptor(
+        _dio,
+        this,
+        this._loadStarted,
+        this._loadFinished,
+        this._onError,
+      ),
+    );
+    await init();
+  }
 
   Future<void> _clearJwtToken({bool notifyUser = true}) async {
     await _setUserFromJwtToken(null, null, notifyUser);
@@ -159,6 +196,10 @@ class ThingsboardClient {
     if (notify == true) {
       await _userLoaded();
     }
+  }
+
+  bool isApiKeyAuth() {
+    return apiKey?.isNotEmpty ?? false;
   }
 
   Future<void> _checkPlatformVersion() async {
@@ -191,8 +232,10 @@ class ThingsboardClient {
   bool _isTokenValid(String? jwtToken) {
     if (jwtToken != null) {
       try {
-        return !JwtDecoder.isExpired(jwtToken);
+        final res = !JwtDecoder.isExpired(jwtToken);
+        return res;
       } catch (e) {
+        print(e);
         return false;
       }
     } else {
@@ -204,7 +247,9 @@ class ThingsboardClient {
     if (_telemetryWebsocketService != null) {
       _telemetryWebsocketService!.reset(true);
     }
-    if (this.isJwtTokenValid() && !this.isPreVerificationToken() && !this.isMfaConfigurationToken()) {
+    if (this.isJwtTokenValid() &&
+        !this.isPreVerificationToken() &&
+        !this.isMfaConfigurationToken()) {
       await _checkPlatformVersion();
     }
     if (_userLoadedCallback != null) {
@@ -215,6 +260,12 @@ class ThingsboardClient {
   void _mfaAuth() {
     if (_mfaAuthCallback != null) {
       Future(() => _mfaAuthCallback());
+    }
+  }
+
+  void _mfaForce() {
+    if (_mfaForceCallback != null) {
+      Future(() => _mfaForceCallback());
     }
   }
 
@@ -342,6 +393,9 @@ class ThingsboardClient {
         loginResponse.token, loginResponse.refreshToken, true);
     if (Authority.PRE_VERIFICATION_TOKEN == loginResponse.scope) {
       _mfaAuth();
+    }
+    if (Authority.MFA_CONFIGURATION_TOKEN == loginResponse.scope) {
+      _mfaForce();
     }
     return loginResponse;
   }
@@ -504,6 +558,7 @@ class ThingsboardClient {
   bool isPreVerificationToken() {
     return _authUser != null && _authUser!.isPreVerificationToken();
   }
+
   bool isMfaConfigurationToken() {
     return _authUser != null && _authUser!.isMfaConfigurationToken();
   }
@@ -652,5 +707,10 @@ class ThingsboardClient {
   MobileService getMobileService() {
     _mobileService ??= MobileService(this);
     return _mobileService!;
+  }
+
+  ApiKeyService getApiKeyService() {
+    _apiKeyService ??= ApiKeyService(this);
+    return _apiKeyService!;
   }
 }
