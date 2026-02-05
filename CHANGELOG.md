@@ -1,3 +1,8 @@
+## 4.1.0
+- Thingsboard 4.3.0+ support
+- Api key management
+- Api key auth support
+- 2Fa force support
 ## 4.0.0
 - Changes in TbStorage interface
 
