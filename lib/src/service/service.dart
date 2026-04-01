@@ -12,6 +12,7 @@ export 'device_service.dart';
 export 'edge_service.dart';
 export 'entities_version_control_service.dart';
 export 'entity_query_service.dart';
+export 'image_service.dart';
 export 'entity_relation_service.dart';
 export 'entity_view_service.dart';
 export 'notifications_service.dart';
