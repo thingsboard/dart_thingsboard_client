@@ -289,7 +289,7 @@ class AlarmComment {
   AlarmComment(this.id, this.createdTime, this.alarmId, this.userId, this.type,
       this.comment, this.name);
   AlarmComment.fromJson(Map<String, dynamic> json)
-      : comment = json['comment'],
+      : comment = _parseComment(json['comment']),
         id = json['id']['id'],
         createdTime = json['createdTime'],
         alarmId = AlarmId.fromJson(json['alarmId']),
@@ -304,9 +304,29 @@ class AlarmComment {
       "alarmId": alarmId.toJson(),
       "userId": userId?.toJson(),
       "type": type.toShortString(),
-      "comment": comment,
+      "comment": comment is AlarmCommentJsonNode
+          ? (comment as AlarmCommentJsonNode).toJson()
+          : comment,
       "name": name,
     };
+  }
+
+  static dynamic _parseComment(dynamic comment) {
+    if (comment is Map) {
+      return AlarmCommentJsonNode.fromJson(
+        Map<String, dynamic>.from(comment),
+      );
+    } else if (comment is String) {
+      return AlarmCommentJsonNode(
+        text: comment,
+        subtype: null,
+        userId: null,
+        edited: false,
+        editedOn: null,
+        assigneeId: null,
+      );
+    }
+    return comment;
   }
 }
 
