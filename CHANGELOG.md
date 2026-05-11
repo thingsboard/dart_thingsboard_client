@@ -1,3 +1,8 @@
+## 4.2.0
+- Added `ImageService` for managing image uploads
+- Fixed `AlarmComment.comment` deserialization into `AlarmCommentJsonNode`
+- Fixed analyzer warnings (unused imports, deprecation messages, identifier naming)
+
 ## 4.1.0
 - Thingsboard 4.3.0+ support
 - Api key management
