@@ -17,7 +17,7 @@ PageData<UserInfo> parseUsersInfoData(Map<String, dynamic> json) {
 const ACTIVATE_TOKEN_REGEX = '/api/noauth/activate?activateToken=';
 
 class UserService {
-  final String MOBILE_TOKEN_HEADER = "X-Mobile-Token";
+  final String _mobileTokenHeader = 'X-Mobile-Token';
   final ThingsboardClient _tbClient;
 
   factory UserService(ThingsboardClient tbClient) {
@@ -222,7 +222,7 @@ class UserService {
   Future<MobileSessionInfo?> getMobileSession(String mobileToken,
       {RequestConfig? requestConfig}) async {
     final options = defaultHttpOptionsFromConfig(requestConfig);
-    options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
+    options.headers?[_mobileTokenHeader] = mobileToken;
     final response = await _tbClient.get(
       '/api/user/mobile/session',
       options: options,
@@ -240,7 +240,7 @@ class UserService {
       String mobileToken, MobileSessionInfo sessionInfo,
       {RequestConfig? requestConfig}) async {
     final options = defaultHttpOptionsFromConfig(requestConfig);
-    options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
+    options.headers?[_mobileTokenHeader] = mobileToken;
     await _tbClient.post<void>(
       '/api/user/mobile/session',
       data: jsonEncode(sessionInfo),
@@ -251,7 +251,7 @@ class UserService {
   Future<void> removeMobileSession(String mobileToken,
       {RequestConfig? requestConfig}) async {
     final options = defaultHttpOptionsFromConfig(requestConfig);
-    options.headers?[MOBILE_TOKEN_HEADER] = mobileToken;
+    options.headers?[_mobileTokenHeader] = mobileToken;
     await _tbClient.delete<void>(
       '/api/user/mobile/session',
       options: options,

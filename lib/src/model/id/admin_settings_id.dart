@@ -1,7 +1,5 @@
 import 'package:thingsboard_client/thingsboard_client.dart';
 
-import 'has_uuid.dart';
-
 class AdminSettingsId extends EntityId {
   AdminSettingsId(String id) : super(EntityType.ADMIN_SETTINGS,id);
 
