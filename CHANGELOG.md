@@ -1,3 +1,6 @@
+## 4.2.1
+- Fixed `AlarmType.fromJson` cast error when filtering alarms by type
+
 ## 4.2.0
 - Added `ImageService` for managing image uploads
 - Fixed `AlarmComment.comment` deserialization into `AlarmCommentJsonNode`
