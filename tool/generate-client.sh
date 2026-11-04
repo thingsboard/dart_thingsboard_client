@@ -361,17 +361,6 @@ append_common_exports() {
   # Patch api.dart export to hide the generated client class (our facade takes precedence)
   perl -i -pe "s|export 'package:${pkg}/src/api.dart';|export 'package:${pkg}/src/api.dart' hide ${client_class};|" "$barrel"
 
-  # ThingsboardClient.login() takes the generated LoginRequest and returns the
-  # facade LoginResponse (the generated one lacks `scope` and requires
-  # `refreshToken`), so the main library exports the facade LoginResponse from
-  # login_models.dart instead of the generated login_response.dart.
-  local m=login_response
-  perl -i -ne "print unless m|^export 'package:${pkg}/src/model/${m}\.dart';|" "$barrel"
-  if grep -q "src/model/${m}\.dart" "$barrel"; then
-    echo "Error: could not remove the export of src/model/${m}.dart from $barrel"
-    exit 1
-  fi
-
   cat >> "$barrel" << EXPORTS
 
 // Handwritten runtime facade
@@ -387,7 +376,6 @@ export 'package:${pkg}/src/interceptor/key_intercept_config.dart';
 export 'package:${pkg}/src/model/constants.dart';
 export 'package:${pkg}/src/model/version_models.dart';
 export 'package:${pkg}/src/model/authority_enum.dart' hide Authority;
-export 'package:${pkg}/src/model/login_models.dart';
 export 'package:${pkg}/src/model/user_models.dart';
 export 'package:${pkg}/src/model/page/page_data.dart';
 export 'package:${pkg}/src/model/page/page_link.dart';
@@ -560,7 +548,7 @@ DART
 # new spec no longer produces (a removed controller or schema), so they would
 # stay in the package. .openapi-generator/FILES lists what the last run wrote;
 # its lib/src/api, lib/src/model and doc entries, and their .g.dart parts, are
-# removed before generating. Handwritten copies of common/ (lib/src/model/login_models.dart,
+# removed before generating. Handwritten copies of common/ (lib/src/model/user_models.dart,
 # lib/src/model/telemetry/telemetry_models.dart, ...) are not in FILES and stay.
 # ---------------------------------------------------------------------------
 

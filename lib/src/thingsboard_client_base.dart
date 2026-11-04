@@ -14,8 +14,8 @@ import 'api_serializers.dart';
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
 import 'interceptor/http_interceptor.dart';
-import 'model/login_models.dart';
 import 'model/login_request.dart';
+import 'model/login_response.dart';
 import 'model/refresh_token_request.dart';
 import 'model/version_models.dart';
 import 'model/user_models.dart';
@@ -277,7 +277,9 @@ class ThingsboardClientBase {
       ),
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
-    var loginResponse = LoginResponse.fromJson(response.data);
+    var loginResponse = apiSerializers(
+      registerLoginResponse,
+    ).deserializeWith(LoginResponse.serializer, response.data)!;
     await _setUserFromJwtToken(
       loginResponse.token,
       loginResponse.refreshToken,
@@ -356,7 +358,9 @@ class ThingsboardClientBase {
               receiveTimeout: _defaultRefreshCallTimeout,
             ),
           );
-          var loginResponse = LoginResponse.fromJson(response.data);
+          var loginResponse = apiSerializers(
+            registerLoginResponse,
+          ).deserializeWith(LoginResponse.serializer, response.data)!;
           await _setUserFromJwtToken(
             loginResponse.token,
             loginResponse.refreshToken,

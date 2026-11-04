@@ -641,6 +641,7 @@ export 'package:thingsboard_client/src/model/link_type.dart';
 export 'package:thingsboard_client/src/model/login401_response.dart';
 export 'package:thingsboard_client/src/model/login_mobile_info.dart';
 export 'package:thingsboard_client/src/model/login_request.dart';
+export 'package:thingsboard_client/src/model/login_response.dart';
 export 'package:thingsboard_client/src/model/login_white_labeling_params.dart';
 export 'package:thingsboard_client/src/model/lw_m2_m_bootstrap_server_credential.dart';
 export 'package:thingsboard_client/src/model/lw_m2_m_server_security_config_default.dart';
@@ -1184,7 +1185,6 @@ export 'package:thingsboard_client/src/model/constants.dart';
 export 'package:thingsboard_client/src/model/version_models.dart';
 export 'package:thingsboard_client/src/model/authority_enum.dart'
     hide Authority;
-export 'package:thingsboard_client/src/model/login_models.dart';
 export 'package:thingsboard_client/src/model/user_models.dart';
 export 'package:thingsboard_client/src/model/page/page_data.dart';
 export 'package:thingsboard_client/src/model/page/page_link.dart';

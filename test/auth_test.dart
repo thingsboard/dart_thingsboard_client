@@ -13,6 +13,7 @@ import 'package:test/test.dart';
 import 'package:thingsboard_client/src/thingsboard_client_base.dart';
 import 'package:thingsboard_client/src/thingsboard_client.dart';
 import 'package:thingsboard_client/src/model/login_request.dart';
+import 'package:thingsboard_client/src/model/login_response.dart';
 import 'package:thingsboard_client/src/model/authority_enum.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
@@ -300,6 +301,103 @@ void main() {
         await mfaCompleter.future.timeout(Duration(seconds: 2));
 
         expect(mfaForceCalled, isTrue);
+      },
+    );
+
+    Future<LoginResponse> loginWith(
+      Map<String, dynamic> body, {
+      void Function()? onMfaAuth,
+      void Function()? onMfaForce,
+    }) async {
+      client = ThingsboardClient(
+        'http://localhost:8080',
+        onMfaAuth: onMfaAuth,
+        onMfaForce: onMfaForce,
+      );
+      client.dio.httpClientAdapter = mockAdapter;
+      mockAdapter.onRoute('/api/auth/login', (req) {
+        return ResponseBody.fromString(
+          jsonEncode(body),
+          200,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        );
+      });
+      return client.login(
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
+      );
+    }
+
+    test(
+      'an MFA login response without refreshToken decodes and triggers onMfaAuth',
+      () async {
+        var called = false;
+        final token = createTestJwt(scope: 'PRE_VERIFICATION_TOKEN');
+        final response = await loginWith({
+          'token': token,
+          'scope': 'PRE_VERIFICATION_TOKEN',
+        }, onMfaAuth: () => called = true);
+        await Future<void>.delayed(Duration.zero);
+        expect(response.token, token);
+        expect(response.refreshToken, isNull);
+        expect(response.scope, Authority.PRE_VERIFICATION_TOKEN);
+        expect(called, isTrue);
+      },
+    );
+
+    test('MFA_CONFIGURATION_TOKEN scope triggers onMfaForce', () async {
+      var forced = false;
+      var authed = false;
+      final response = await loginWith(
+        {
+          'token': createTestJwt(scope: 'MFA_CONFIGURATION_TOKEN'),
+          'scope': 'MFA_CONFIGURATION_TOKEN',
+        },
+        onMfaForce: () => forced = true,
+        onMfaAuth: () => authed = true,
+      );
+      await Future<void>.delayed(Duration.zero);
+      expect(response.scope, Authority.MFA_CONFIGURATION_TOKEN);
+      expect(forced, isTrue);
+      expect(authed, isFalse);
+    });
+
+    test(
+      'a normal login response has token and refreshToken and no scope',
+      () async {
+        final token = createTestJwt();
+        final refresh = createTestJwt(scope: 'REFRESH_TOKEN');
+        final response = await loginWith({
+          'token': token,
+          'refreshToken': refresh,
+        });
+        expect(response.token, token);
+        expect(response.refreshToken, refresh);
+        expect(response.scope, isNull);
+      },
+    );
+
+    test(
+      'an unknown scope decodes to unknownDefaultOpenApi and does not trigger MFA callbacks',
+      () async {
+        var called = false;
+        final response = await loginWith(
+          {
+            'token': createTestJwt(),
+            'refreshToken': createTestJwt(scope: 'REFRESH_TOKEN'),
+            'scope': 'SOMETHING_NEW',
+          },
+          onMfaAuth: () => called = true,
+          onMfaForce: () => called = true,
+        );
+        await Future<void>.delayed(Duration.zero);
+        expect(response.scope, Authority.unknownDefaultOpenApi);
+        expect(called, isFalse);
       },
     );
   });

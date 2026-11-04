@@ -15,3 +15,4 @@ EntityKey
 EntityId
 LoginRequest
 RefreshTokenRequest
+LoginResponse

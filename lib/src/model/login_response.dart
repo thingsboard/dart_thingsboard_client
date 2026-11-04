@@ -8,6 +8,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:thingsboard_client/src/model/authority.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -17,7 +18,8 @@ part 'login_response.g.dart';
 ///
 /// Properties:
 /// * [token] - JWT token
-/// * [refreshToken] - Refresh token
+/// * [refreshToken] - Refresh token. Absent when the token is a two-factor authentication token (see scope)
+/// * [scope] - Set only when two-factor authentication is required: PRE_VERIFICATION_TOKEN when the user must verify a code, MFA_CONFIGURATION_TOKEN when the user must configure two-factor authentication first. The token then grants access only to the two-factor authentication API
 @BuiltValue()
 abstract class LoginResponse
     implements Built<LoginResponse, LoginResponseBuilder> {
@@ -25,9 +27,14 @@ abstract class LoginResponse
   @BuiltValueField(wireName: r'token')
   String get token;
 
-  /// Refresh token
+  /// Refresh token. Absent when the token is a two-factor authentication token (see scope)
   @BuiltValueField(wireName: r'refreshToken')
-  String get refreshToken;
+  String? get refreshToken;
+
+  /// Set only when two-factor authentication is required: PRE_VERIFICATION_TOKEN when the user must verify a code, MFA_CONFIGURATION_TOKEN when the user must configure two-factor authentication first. The token then grants access only to the two-factor authentication API
+  @BuiltValueField(wireName: r'scope')
+  Authority? get scope;
+  // enum scopeEnum {  SYS_ADMIN,  TENANT_ADMIN,  CUSTOMER_USER,  REFRESH_TOKEN,  PRE_VERIFICATION_TOKEN,  MFA_CONFIGURATION_TOKEN,  };
 
   LoginResponse._();
 
@@ -59,11 +66,20 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
       object.token,
       specifiedType: const FullType(String),
     );
-    yield r'refreshToken';
-    yield serializers.serialize(
-      object.refreshToken,
-      specifiedType: const FullType(String),
-    );
+    if (object.refreshToken != null) {
+      yield r'refreshToken';
+      yield serializers.serialize(
+        object.refreshToken,
+        specifiedType: const FullType(String),
+      );
+    }
+    if (object.scope != null) {
+      yield r'scope';
+      yield serializers.serialize(
+        object.scope,
+        specifiedType: const FullType(Authority),
+      );
+    }
   }
 
   @override
@@ -104,10 +120,21 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType.nullable(String),
                   )
-                  as String;
+                  as String?;
+          if (valueDes == null) continue;
           result.refreshToken = valueDes;
+          break;
+        case r'scope':
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Authority),
+                  )
+                  as Authority?;
+          if (valueDes == null) continue;
+          result.scope = valueDes;
           break;
         default:
           unhandled.add(key);

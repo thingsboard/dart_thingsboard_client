@@ -2086,6 +2086,10 @@ void registerLoginRequestAndLoginResponse(ApiSerializersRegistry r) {
   _loginResponse(r);
 }
 
+void registerLoginResponse(ApiSerializersRegistry r) {
+  _loginResponse(r);
+}
+
 void registerLoginResponseAndRefreshTokenRequest(ApiSerializersRegistry r) {
   _loginResponse(r);
   _refreshTokenRequest(r);
@@ -6741,6 +6745,7 @@ void _loginRequest(ApiSerializersRegistry r) {
 void _loginResponse(ApiSerializersRegistry r) {
   if (!r._visit(522)) return;
   r._builder.add(LoginResponse.serializer);
+  _authority(r);
 }
 
 void _loginWhiteLabelingParams(ApiSerializersRegistry r) {
