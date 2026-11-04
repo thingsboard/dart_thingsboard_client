@@ -29,7 +29,7 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 
 `spec/openapi.json` is not a plain fetch: it is the released lts-4.4 spec plus three unmerged ThingsBoard pull requests:
 
-- thingsboard/thingsboard#16510: the documented login response (`JwtPair`), including its `LoginResponse` fix (commit 9231afe93cb);
+- thingsboard/thingsboard#16510: fixes the schemas of `ThingsboardErrorCode` (integer values), `AliasEntityId` (`entityType` is a string holding an `EntityType` or `AliasEntityType` name, `id` optional), `ColumnSettings` (allOf `DataKeySettings`) and the `/api/auth/token` request body (`refreshToken` string); its later commit 9231afe93cb fixes `LoginResponse` (`scope`, optional `refreshToken`);
 - thingsboard/thingsboard#16555: device API responses (the device API is filtered out by `tool/fetch-spec.sh` anyway);
 - thingsboard/thingsboard#16557: the `NotificationInfo` subtypes.
 

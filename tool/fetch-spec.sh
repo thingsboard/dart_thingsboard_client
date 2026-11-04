@@ -8,8 +8,10 @@
 
 #
 # WARNING: do not run this against a server that lacks thingsboard/thingsboard
-# #16510 (login response, incl. its LoginResponse fix), #16555 (device API
-# responses) and #16557 (NotificationInfo subtypes). The committed
+# #16510 (schemas of ThingsboardErrorCode, AliasEntityId, ColumnSettings and
+# the /api/auth/token body; commit 9231afe93cb: LoginResponse scope and
+# optional refreshToken), #16555 (device API responses) and #16557
+# (NotificationInfo subtypes). The committed
 # spec/openapi.json is the released lts-4.4 spec plus these three unmerged
 # PRs; re-fetching without them breaks the build (LoginResponse.scope) and
 # drops the NotificationInfo subtypes. Once all are merged into lts-4.4,
