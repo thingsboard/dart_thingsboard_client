@@ -6,8 +6,7 @@
 # found in the LICENSE file.
 #
 
-#
-# Generates Dart REST clients from OpenAPI specs using openapi-generator-cli.
+# Generates the Dart REST client from the OpenAPI spec with openapi-generator-cli (dart-dio).
 #
 # Usage:
 #   tool/generate-client.sh [options] <edition>
@@ -17,78 +16,62 @@
 #
 # Options:
 #   --verbose  Show full generator output (per-file writes, operations, etc.)
-#   --dry-run  Run spec validation and generation steps, skip build_runner and
-#              git staging.
+#   --dry-run  Generate and patch only: skip build_runner and everything after
+#              it (common/ copy, formatting, git staging).
 #
 # Examples:
 #   tool/generate-client.sh onprem             # Generate thingsboard_client from spec/
-#   tool/generate-client.sh all                # Generate all editions
-#   tool/generate-client.sh --dry-run onprem   # Validate + generate only, no build_runner
-#   tool/generate-client.sh --verbose onprem   # Full generator output
+#   tool/generate-client.sh --dry-run onprem   # Generate + patch only
 #
 # What it does (per edition):
-#   1. Validates OpenAPI spec with openapi-generator-cli
-#   2. Checks for duplicate operationIds (suffixed by ThingsBoard spec generator)
-#   3. Generates Dart/Dio client (per-tag API classes + built_value models)
-#   4. Patches pubspec.yaml SDK constraint to >=3.10.0 <4.0.0 (PLAT-03)
-#   5. Rewrites analysis_options.yaml to exclude generated dirs from lint (GEN-09)
-#   6. Patches generated Dart source for known generator bugs (Step 6b) and
-#      generates per-operation serializer registries (Step 6c)
-#   7. Runs dart pub get + build_runner to compile .g.dart files (GEN-07)
-#   8. Sets the license header (license-header-template.txt) on all .dart files
-#   9. Stages generated output with git add (unless --dry-run)
+#   1. Validates the OpenAPI spec
+#   2. Checks for duplicate operationIds (suffixed by the ThingsBoard spec generator)
+#   3. Generates the Dart/Dio client (per-tag API classes + built_value models)
+#   4. Patches the pubspec.yaml SDK constraint and version
+#   5. Rewrites analysis_options.yaml to exclude generated code from lint
+#   6. Patches generated source for generator bugs, sets discriminator defaults
+#      and generates per-operation serializer registries
+#   7. Runs dart pub get + build_runner, copies common/, writes .pubignore, adds
+#      pubspec dependencies, generates the ThingsboardClient accessor class and
+#      barrel exports, removes unused imports, sets license headers, runs dart format
+#   8. Stages generated output with git add (unless --dry-run)
 #
 # Output log: tool/generate-client.log (overwritten on each run, git-ignored)
 #
 # Prerequisites: Java, Dart/Flutter SDK, Perl, Python3
 #
-# CRITICAL flags intentionally omitted (see RESEARCH.md for rationale):
+# Flags intentionally omitted:
 #   JsonNode=dynamic schema mapping         -- produces broken 'import dynamic'
 #   openapi-normalizer with tag collapse    -- collapses into monolithic class
 #
 
 set -euo pipefail
 
-# Glob expansion and sort order follow LC_COLLATE; pin it so the generated
-# accessor class lists the APIs in the same order on every machine.
+# Pin the sort order so the generated accessor class lists APIs the same on every machine.
 export LC_ALL=C
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-# ---------------------------------------------------------------------------
-# Editions
-#
-# An edition is one published package generated from one OpenAPI spec at
-# <edition_dir>/spec/openapi.json. The handwritten code in common/ is copied
-# into every edition.
-#
-#   onprem  ThingsBoard (self-hosted)  ->  repository root, thingsboard_client
-#
-# To add a cloud client: put its spec at cloud/spec/openapi.json, add "cloud"
-# to EDITIONS and a `cloud)` branch to each edition_* function below. It is
-# generated into cloud/ as a separate package (for example
-# thingsboard_cloud_client) next to the root one; the root .pubignore and
-# analysis_options.yaml already exclude cloud/.
-# ---------------------------------------------------------------------------
+# Editions: an edition is one package generated from <edition_dir>/spec/openapi.json;
+# common/ is copied into every edition. To add a cloud client: put its spec at
+# cloud/spec/openapi.json, add "cloud" to EDITIONS and a `cloud)` branch to each
+# edition_* function. It is generated into cloud/ as a separate package.
 
 EDITIONS=("onprem")
 
-# Directory the edition's package is generated into.
 edition_dir() {
   case "$1" in
     onprem) echo "$REPO_ROOT" ;;
   esac
 }
 
-# pub.dev package name; also the library name of lib/<package>.dart.
 edition_package() {
   case "$1" in
     onprem) echo "thingsboard_client" ;;
   esac
 }
 
-# Product name used in the pubspec description.
 edition_label() {
   case "$1" in
     onprem) echo "ThingsBoard" ;;
@@ -112,7 +95,6 @@ edition_version() {
   esac
 }
 
-# PascalCase of a snake_case name (thingsboard_client -> ThingsboardClient).
 pascal_case() {
   echo "$1" | perl -pe 's/(^|_)([a-z])/uc($2)/ge'
 }
@@ -137,12 +119,7 @@ fi
 EDITION="$1"
 LOG_FILE="$SCRIPT_DIR/generate-client.log"
 
-# Log everything to file and stdout
 exec > >(tee "$LOG_FILE") 2>&1
-
-# ---------------------------------------------------------------------------
-# openapi-generator-cli setup (version-pinned JAR from Maven Central)
-# ---------------------------------------------------------------------------
 
 OPENAPI_GENERATOR_VERSION="7.26.0"
 GENERATOR_CACHE_DIR="${OPENAPI_GENERATOR_CACHE_DIR:-${HOME}/.cache/openapi-generator}"
@@ -157,28 +134,9 @@ fi
 
 openapi-generator-cli() { java -jar "$GENERATOR_JAR" "$@"; }
 
-# ---------------------------------------------------------------------------
-# patch_generated_sources: fix known compiler errors in generated Dart source
-#
-# Applied BEFORE build_runner so the .g.dart output is clean.
-#
-# (A) is handled at generation time with --name-mappings (see Step 3).
-#
-# (B) Bare enum defaults: FAIL / RANDOM used as default values without class
-#     qualifier. Fix: qualify with NameConflictPolicy.FAIL, UniquifyStrategy.RANDOM.
-#
-# (C) Discriminator type mismatch: generated _defaults hooks assign
-#     b.discriminatorValue (String?) to enum-typed builder fields.
-#     Fix: replace the discriminatorValue assignment with a no-op (b;).
-#
-# (D) is fixed in the spec: ColumnSettings declares allOf DataKeySettings
-#     (thingsboard/thingsboard#16510).
-#
-# (E) Missing JsonObject import: Output.strategy is typed JsonObject (empty
-#     OutputStrategy schema upstream) but json_object.dart is not imported.
-#     Fix: insert the import in any model that references JsonObject without it.
-# ---------------------------------------------------------------------------
-
+# Fixes generator bugs in the generated Dart source before build_runner, so the
+# .g.dart output is clean. (A) is handled by --name-mappings (Step 3) and (D) in
+# the spec (thingsboard/thingsboard#16510); (B), (C) and (E) are patched below.
 patch_generated_sources() {
   local output_dir="$1"
   local model_dir="$output_dir/lib/src/model"
@@ -186,68 +144,27 @@ patch_generated_sources() {
 
   echo "Patching generated Dart source for known compiler errors..."
 
-  # -------------------------------------------------------------------------
-  # (B) API method default values: bare enum names FAIL and RANDOM are used
-  #     as default parameter values without their class qualifier.
-  #     Generated code:
-  #       NameConflictPolicy? nameConflictPolicy = FAIL,
-  #       UniquifyStrategy? uniquifyStrategy = RANDOM,
-  #     Fixed:
-  #       NameConflictPolicy? nameConflictPolicy = NameConflictPolicy.FAIL,
-  #       UniquifyStrategy? uniquifyStrategy = UniquifyStrategy.RANDOM,
-  # -------------------------------------------------------------------------
+  # (B) Bare enum defaults: the generator emits `= FAIL` / `= RANDOM` without the class.
   echo "  (B) Qualifying bare enum defaults (FAIL → NameConflictPolicy.FAIL, RANDOM → UniquifyStrategy.RANDOM)"
   if ls "$api_dir/"*.dart >/dev/null 2>&1; then
     perl -i -pe 's/(NameConflictPolicy\? \w+) = FAIL\b/$1 = NameConflictPolicy.FAIL/g' "$api_dir/"*.dart
     perl -i -pe 's/(UniquifyStrategy\? \w+) = RANDOM\b/$1 = UniquifyStrategy.RANDOM/g' "$api_dir/"*.dart
   fi
 
-  # -------------------------------------------------------------------------
-  # (C) Discriminator type mismatch: _defaults hooks assign b.discriminatorValue
-  #     (String?) to builder fields typed as enum (EntityType?, EventType?, etc.)
-  #     or to fields on builder types that don't even have discriminatorValue.
-  #
-  #     All these assignments are no-ops at runtime (the discriminator value is
-  #     set correctly during deserialization by the generated serializer).
-  #     Fix: replace "b..field=b.discriminatorValue" with "b" (no-op).
-  #
-  #     Pattern matched:
-  #       static void _defaults(SomeFooBuilder b) => b..field=b.discriminatorValue;
-  #     Replacement:
-  #       static void _defaults(SomeFooBuilder b) => b;
-  # -------------------------------------------------------------------------
+  # (C) _defaults hooks assign b.discriminatorValue (String?) to enum-typed builder
+  #     fields, or to builders that have no such field. The assignment is a no-op at
+  #     runtime (the serializer sets the value), so it is replaced with `b`.
   echo "  (C) Removing discriminatorValue assignments from _defaults hooks"
   if ls "$model_dir/"*.dart >/dev/null 2>&1; then
     perl -i -pe 's/(static void _defaults\(\w+Builder b\) => b)\.\.\w+=b\.discriminatorValue;/$1;/' "$model_dir/"*.dart
   fi
 
-  # -------------------------------------------------------------------------
-  # (E) Missing JsonObject import — "Type 'JsonObject' not found" at compile
-  #     time in attributes_output.dart / time_series_output.dart (CE, PE, PaaS).
-  #
-  #     Root cause: OutputStrategy.java upstream has no @Schema / @JsonTypeInfo /
-  #     @JsonSubTypes annotations and no serialisable getters, so springdoc emits
-  #     an empty schema ("OutputStrategy": {}), which dart-dio maps to the
-  #     free-form JsonObject. Output.strategy $refs that schema, so the
-  #     non-instantiable Output interface gets `JsonObject? get strategy`, and
-  #     AttributesOutput / TimeSeriesOutput (which implement Output) must match
-  #     that type even though their own schema declares *OutputStrategy. The
-  #     generator emits the import for the declared schema (*_output_strategy)
-  #     but not for the effective type (json_object).
-  #
-  #     The match below is generic, but the trigger is specifically an empty
-  #     parent schema forcing JsonObject onto an instantiable: false interface —
-  #     not a shape that can be anticipated in general. Retire this patch once
-  #     OutputStrategy.java is annotated upstream like its sibling interfaces in
-  #     common/data/.../cf/configuration/; that removes the only occurrence it
-  #     exists for.
-  #
-  #     Fix: insert the json_object.dart import (before the built_value.dart
-  #     import) in any model library that references JsonObject but lacks it.
-  #     Only library files are patched: the companion .g.dart files are
-  #     `part of` the library and inherit its imports — a `part` cannot declare
-  #     its own — so they are skipped.
-  # -------------------------------------------------------------------------
+  # (E) Missing JsonObject import. The upstream OutputStrategy has no annotations, so
+  #     the spec has an empty schema that dart-dio maps to JsonObject; Output.strategy
+  #     refs it, and AttributesOutput / TimeSeriesOutput inherit that type but the
+  #     generator emits no json_object.dart import. Retire once upstream annotates
+  #     OutputStrategy. Only library files are patched: .g.dart parts share the
+  #     library's imports.
   echo "  (E) Adding missing json_object.dart import where JsonObject is used"
   local json_object_import_re="^import 'package:built_value/json_object\\.dart';"
   local json_object_patched=0
@@ -274,25 +191,14 @@ patch_generated_sources() {
   echo "patch_generated_sources complete."
 }
 
-# ---------------------------------------------------------------------------
-# copy_common_code: copy handwritten common/ files into edition's lib/src/
-#
-# The common/ directory contains handwritten runtime facade files (error,
-# storage, model, interceptor, http, client base). These are edition-
-# independent and are copied verbatim so relative imports resolve correctly.
-#
-# The one exception is tbMinServerVersion in model/version_models.dart: it
-# must match the edition's target server version, so the copy is patched to
-# edition_server_version.
-# ---------------------------------------------------------------------------
-
+# Copies the handwritten common/ files into the edition's lib/src/. tbMinServerVersion
+# in model/version_models.dart is patched to edition_server_version.
 copy_common_code() {
   local edition=$1
   local output_dir
   output_dir=$(edition_dir "$edition")
   echo "Copying common code into ${edition}..."
   cp -r "$REPO_ROOT"/common/lib/src/* "${output_dir}/lib/src/"
-  # Top-level files of common/lib (none at present) go next to the barrel.
   local top_level_file
   for top_level_file in "$REPO_ROOT"/common/lib/*.dart; do
     if [[ -e "$top_level_file" ]]; then
@@ -312,17 +218,8 @@ copy_common_code() {
   echo "tbMinServerVersion set to ${min_version}."
 }
 
-# ---------------------------------------------------------------------------
-# copy_publishing_files: create .pubignore for the edition
-#
-# Creates a .pubignore that excludes spec/ and doc/ from the published
-# package; the package at the repository root also excludes the generator
-# inputs (common/, tool/) and the directory of a cloud edition. Called on every
-# regeneration to keep publishing files in sync. LICENSE, CHANGELOG.md, and
-# README.md are one-time artifacts and are NOT managed here — they must
-# persist across regeneration.
-# ---------------------------------------------------------------------------
-
+# Writes .pubignore on every run. LICENSE, CHANGELOG.md and README.md are not
+# managed here and persist across regeneration.
 copy_publishing_files() {
   local edition=$1
   local output_dir
@@ -339,13 +236,6 @@ copy_publishing_files() {
   echo "Created ${output_dir}/.pubignore"
 }
 
-# ---------------------------------------------------------------------------
-# append_common_exports: append common handwritten file exports to the barrel
-#
-# Appends export statements for the handwritten runtime facade files and the
-# edition-specific ThingsboardClient subclass to the barrel export file.
-# ---------------------------------------------------------------------------
-
 append_common_exports() {
   local edition=$1
   local pkg
@@ -353,12 +243,11 @@ append_common_exports() {
   local barrel
   barrel="$(edition_dir "$edition")/lib/${pkg}.dart"
 
-  # The generator names its client class after the package (thingsboard_client
-  # -> ThingsboardClient).
+  # The generated client class is named after the package.
   local client_class
   client_class=$(pascal_case "$pkg")
 
-  # Patch api.dart export to hide the generated client class (our facade takes precedence)
+  # The facade's ThingsboardClient takes precedence over the generated one.
   perl -i -pe "s|export 'package:${pkg}/src/api.dart';|export 'package:${pkg}/src/api.dart' hide ${client_class};|" "$barrel"
 
   cat >> "$barrel" << EXPORTS
@@ -388,18 +277,11 @@ EXPORTS
   echo "Common exports appended to $barrel"
 }
 
-# ---------------------------------------------------------------------------
-# patch_pubspec_dependencies: add runtime deps and fix version in pubspec.yaml
-#
-# Sets version to edition_version and adds jwt_decoder + pretty_dio_logger
-# if not already present.
-# ---------------------------------------------------------------------------
-
 patch_pubspec_dependencies() {
   local edition=$1
   local pubspec
   pubspec="$(edition_dir "$edition")/pubspec.yaml"
-  # Patch pubspec.yaml using Python to avoid BSD sed newline issues
+  # Python rather than sed: BSD sed handles newlines differently.
   python3 - "$pubspec" "$(edition_label "$edition")" "$(edition_version "$edition")" <<'PYEOF'
 import sys, re
 
@@ -412,29 +294,22 @@ with open(pubspec_path) as f:
 
 content = re.sub(r'^version: .*$', f'version: {version}', content, flags=re.MULTILINE)
 
-# Fix description
 new_desc = f"{edition_label} REST API client for Flutter. JWT auth, auto-refresh, WebSocket telemetry, typed error handling."
 content = re.sub(r'^description:.*$', f'description: {new_desc}', content, flags=re.MULTILINE)
 
-# Fix homepage
 content = re.sub(r'^homepage: homepage$', 'homepage: https://thingsboard.io', content, flags=re.MULTILINE)
 
-# Add repository if not present
 if 'repository:' not in content:
     content = re.sub(r'^(homepage: .*)$', r'\1\nrepository: https://github.com/thingsboard/dart_thingsboard_client', content, flags=re.MULTILINE)
 
-# Add issue_tracker if not present
 if 'issue_tracker:' not in content:
     content = re.sub(r'^(repository: .*)$', r'\1\nissue_tracker: https://github.com/thingsboard/dart_thingsboard_client/issues', content, flags=re.MULTILINE)
 
-# Add topics block if not present
 if '\ntopics:' not in content:
     content = re.sub(r'^(issue_tracker: .*)$', r'\1\ntopics:\n  - thingsboard\n  - iot\n  - rest-api\n  - flutter\n  - websocket', content, flags=re.MULTILINE)
 
-# Ensure blank line between topics and environment
 content = re.sub(r'(  - websocket)\n(environment:)', r'\1\n\n\2', content)
 
-# Add runtime dependencies after dio line if not present
 deps_to_add = [
     ('jwt_decoder', "  jwt_decoder: '^2.0.1'"),
     ('pretty_dio_logger', "  pretty_dio_logger: '^1.4.0'"),
@@ -445,24 +320,20 @@ for check, dep_line in deps_to_add:
     if check not in content:
         content = re.sub(r"(^  dio: '[^']*')$", r"\1\n" + dep_line, content, flags=re.MULTILINE)
 
-# Add stream_channel to dev_dependencies if not present
 if 'stream_channel:' not in content:
     content = re.sub(r"(^  test: '[^']*')$", r"\1\n  stream_channel: ^2.1.0", content, flags=re.MULTILINE)
 
-# Add fake_async to dev_dependencies if not present
 if 'fake_async:' not in content:
     content = re.sub(r"(^  stream_channel: .*)$", r"\1\n  fake_async: ^1.3.1", content, flags=re.MULTILINE)
 
-# Add lints (analysis_options.yaml includes package:lints) if not present
 if '  lints:' not in content:
     content = re.sub(r"(^  fake_async: .*)$", r"\1\n  lints: ^6.0.0", content, flags=re.MULTILINE)
 
-# The generator's dev dependency bounds (test ^1.16.0, build_runner any) let
-# `dart pub downgrade` resolve versions that do not compile on Dart 3.
+# The generator's bounds (test ^1.16.0, build_runner any) let `dart pub downgrade`
+# resolve versions that do not compile on Dart 3.
 content = re.sub(r"^  test: .*$", "  test: ^1.25.0", content, flags=re.MULTILINE)
 content = re.sub(r"^  build_runner: .*$", "  build_runner: ^2.4.0", content, flags=re.MULTILINE)
 
-# Ensure file ends with newline
 if not content.endswith('\n'):
     content += '\n'
 
@@ -471,16 +342,9 @@ with open(pubspec_path, 'w') as f:
 PYEOF
 }
 
-# ---------------------------------------------------------------------------
-# generate_service_accessors: create edition-specific ThingsboardClient subclass
-#
-# Reads the edition's api/ directory to discover all generated *ControllerApi
-# classes and generates a ThingsboardXxxClient subclass with lazy accessor
-# methods for each. The client extends ThingsboardClient. API classes are
-# created without serializers, so each operation uses its own registry from
-# api_serializers.dart (Step 6c) instead of the all-models standardSerializers.
-# ---------------------------------------------------------------------------
-
+# Generates the edition's ThingsboardClient subclass with a lazy accessor per
+# generated *ControllerApi. The API classes are created without serializers: each
+# operation uses its own registry from api_serializers.dart (Step 6c).
 generate_service_accessors() {
   local edition=$1
   local output_dir pkg
@@ -489,10 +353,8 @@ generate_service_accessors() {
   local api_dir="${output_dir}/lib/src/api"
   local output_file="${output_dir}/lib/src/thingsboard_client.dart"
 
-  # All editions use the same public class name (each is a separate package)
   local class_name="ThingsboardClient"
 
-  # Collect all *_controller_api.dart files and extract class names
   local imports=""
   local fields=""
   local accessors=""
@@ -500,7 +362,6 @@ generate_service_accessors() {
   for api_file in "$api_dir"/*.dart; do
     local filename
     filename=$(basename "$api_file" .dart)
-    # Convert snake_case filename to PascalCase class name
     local class
     class=$(pascal_case "$filename")
     local field_name="_$(echo "${class:0:1}" | tr '[:upper:]' '[:lower:]')${class:1}"
@@ -540,18 +401,9 @@ DART
   echo "Generated ${output_file}"
 }
 
-# ---------------------------------------------------------------------------
-# remove_previous_generated: delete the API, model and doc files of the last
-# generation
-#
-# The generator overwrites the files it writes but never deletes the ones a
-# new spec no longer produces (a removed controller or schema), so they would
-# stay in the package. .openapi-generator/FILES lists what the last run wrote;
-# its lib/src/api, lib/src/model and doc entries, and their .g.dart parts, are
-# removed before generating. Handwritten copies of common/ (lib/src/model/user_models.dart,
-# lib/src/model/telemetry/telemetry_models.dart, ...) are not in FILES and stay.
-# ---------------------------------------------------------------------------
-
+# The generator never deletes files a changed spec no longer produces, so remove
+# the api, model and doc files listed in .openapi-generator/FILES (and their
+# .g.dart parts) before generating. Handwritten copies of common/ are not listed.
 remove_previous_generated() {
   local output_dir=$1
   local files_list="$output_dir/.openapi-generator/FILES"
@@ -570,17 +422,8 @@ remove_previous_generated() {
   echo "Removed $count files of the previous generation."
 }
 
-# ---------------------------------------------------------------------------
-# apply_license_headers: set the license header of every .dart file
-#
-# The header is license-header-template.txt as a // comment block. A leading
-# "// Copyright" block already in a file is replaced, so a change of the
-# template reaches every file on the next run; files without one get it
-# prepended. A copyright line ending in " and contributors" is kept as it is.
-# Runs after all generation/patching steps so that every file —
-# generated, common, and handwritten — carries the header.
-# ---------------------------------------------------------------------------
-
+# Sets the license-header-template.txt header on every .dart file, replacing a
+# leading "// Copyright" block; a copyright line ending in " and contributors" is kept.
 apply_license_headers() {
   local template="$SCRIPT_DIR/license-header-template.txt"
   if [ ! -f "$template" ]; then
@@ -606,9 +449,6 @@ for root in roots:
                 text = f.read()
             body = text
             file_header = header
-            # A file that keeps code of outside contributors (see
-            # "Contributors" in README.md) marks it with "... and contributors"
-            # on its copyright line; that line is kept.
             first = text.split('\n', 1)[0]
             if first.startswith('// Copyright') and first.endswith(' and contributors'):
                 file_header = first + '\n' + header.split('\n', 1)[1]
@@ -629,10 +469,6 @@ print(f'License headers set in {changed} files of {", ".join(roots)}.')
 PYEOF
 }
 
-# ---------------------------------------------------------------------------
-# generate: run the full pipeline for one edition
-# ---------------------------------------------------------------------------
-
 generate() {
   local edition="$1"
   local output_dir pkg
@@ -645,9 +481,6 @@ generate() {
     exit 1
   fi
 
-  # -------------------------------------------------------------------------
-  # Step 1: Validate spec
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 1: Validating spec: $spec_file ==="
   local validate_output
@@ -661,10 +494,7 @@ generate() {
     echo "$validate_output" | grep -v "Unused model:" || true
   fi
 
-  # -------------------------------------------------------------------------
-  # Step 2: Duplicate operationId check (verbatim from Java client lines 139-147)
-  # ThingsBoard's spec generator appends _1, _2 suffixes to deduplicate.
-  # -------------------------------------------------------------------------
+  # The ThingsBoard spec generator appends _1, _2 suffixes to duplicate operationIds.
   echo ""
   echo "=== [$edition] Step 2: Checking for duplicate operationIds ==="
   local duplicates
@@ -677,12 +507,6 @@ generate() {
   fi
   echo "No duplicate operationIds found."
 
-  # -------------------------------------------------------------------------
-  # Step 3: Generate Dart/Dio client
-  #
-  # CRITICAL: Do NOT add JsonNode=dynamic schema mapping (produces broken 'import dynamic')
-  # or openapi-normalizer tag-collapse (collapses all operations into monolithic class)
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 3: Generating Dart client from spec ==="
 
@@ -691,8 +515,7 @@ generate() {
 
   remove_previous_generated "$output_dir"
 
-  # Back up human-authored files before generation (the generator overwrites
-  # README.md and .gitignore with its own templates)
+  # The generator overwrites README.md and .gitignore with its templates.
   local backup_dir
   backup_dir=$(mktemp -d)
   local f
@@ -719,7 +542,6 @@ generate() {
       -e "Skipped by.*options supplied by user" \
       -e "sun\.misc" || true; fi
 
-  # Restore human-authored files
   for f in README.md .gitignore; do
     if [ -f "$backup_dir/$f" ]; then
       cp "$backup_dir/$f" "$output_dir/$f"
@@ -727,31 +549,20 @@ generate() {
   done
   rm -rf "$backup_dir"
 
-  # -------------------------------------------------------------------------
-  # Step 4: Patch pubspec.yaml SDK constraint (PLAT-03)
-  # The generator's default lags behind; the client requires >=3.10.0 <4.0.0.
-  # The floor is deliberate: it moves applications onto a current, patched
-  # Dart/Flutter SDK.
-  # Only quoted constraints are matched, so `sdk: flutter` entries are untouched.
-  # -------------------------------------------------------------------------
+  # The floor is deliberate: it moves applications onto a current, patched SDK.
+  # Only quoted constraints match, so `sdk: flutter` entries are untouched.
   echo ""
   echo "=== [$edition] Step 4: Patching pubspec.yaml SDK constraint ==="
   perl -i -pe "s/^(\s*sdk: )(['\"])[^'\"]*\2/\$1'>=3.10.0 <4.0.0'/" "$output_dir/pubspec.yaml"
   echo "SDK constraint patched."
   grep "sdk:" "$output_dir/pubspec.yaml" | head -3
 
-  # Patch version to match ThingsBoard server version (not generator default 1.0.0)
   local version
   version=$(edition_version "$edition")
   perl -i -pe "s/^version: .*/version: ${version}/" "$output_dir/pubspec.yaml"
   echo "Version patched to ${version}."
 
-  # -------------------------------------------------------------------------
-  # Step 5: Overwrite analysis_options.yaml to exclude generated dirs (GEN-09)
-  # The generator produces a minimal version that only excludes test/*.dart.
-  # We OVERWRITE entirely to get proper excludes for lib/src/api/, lib/src/model/,
-  # and *.g.dart files — required for zero dart analyze errors.
-  # -------------------------------------------------------------------------
+  # Replaces the generator's minimal file entirely.
   echo ""
   echo "=== [$edition] Step 5: Writing analysis_options.yaml ==="
   {
@@ -776,8 +587,6 @@ analyzer:
     - lib/src/date_serializer.dart
     - lib/src/serializers.dart
 YAML
-    # common/ is a generator input whose files are copied into lib/src/;
-    # cloud/ is a separate package.
     if [ "$output_dir" = "$REPO_ROOT" ]; then
       echo "    - common/**"
       echo "    - cloud/**"
@@ -794,52 +603,20 @@ YAML
   } > "$output_dir/analysis_options.yaml"
   echo "analysis_options.yaml written."
 
-  # -------------------------------------------------------------------------
-  # Step 6b: Patch generated Dart source for known compiler errors
-  #
-  # Known categories of generator bugs that produce code that does not compile:
-  #
-  # (A) Reserved name clash: now --name-mappings update=updateFlag (Step 3).
-  #
-  # (B) Bare enum constant defaults: API methods use unqualified enum names
-  #     (FAIL, RANDOM) as default parameter values. Fix: qualify them with
-  #     their class names (NameConflictPolicy.FAIL, UniquifyStrategy.RANDOM).
-  #
-  # (C) Discriminator type mismatch: generated _defaults hooks assign
-  #     b.discriminatorValue (String?) to enum-typed builder fields.
-  #     Fix: remove the discriminatorValue initialization from _defaults;
-  #     the field is set correctly during deserialization.
-  #
-  # (D) Fixed in the spec (ColumnSettings allOf DataKeySettings, #16510).
-  #
-  # (E) Missing JsonObject import: Output.strategy is typed JsonObject
-  #     (empty OutputStrategy schema upstream), so its subtypes inherit that
-  #     type, but the json_object.dart import is not emitted.
-  #     Fix: insert the import in any model that references JsonObject
-  #     without it.
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 6b: Patching generated Dart source for compiler errors ==="
   patch_generated_sources "$output_dir"
 
-  # -------------------------------------------------------------------------
-  # Step 6b2: Default the discriminator field of generated subtypes
-  # Patch (C) above leaves `_defaults` empty, so callers would have to set
-  # `type` / `entityType` of every filter and entity id by hand. The parents
-  # record the value of each subtype in discriminatorMapping; the script
-  # writes it into the subtype's `_defaults`.
-  # -------------------------------------------------------------------------
+  # Patch (C) leaves `_defaults` empty; the script writes each subtype's discriminator
+  # value (from the parent's discriminatorMapping) into it, so callers need not set
+  # `type` / `entityType` by hand.
   echo ""
   echo "=== [$edition] Step 6b2: Setting discriminator defaults in subtypes ==="
   python3 "$SCRIPT_DIR/set_discriminator_defaults.py" "$output_dir/lib/src/model"
 
-  # -------------------------------------------------------------------------
-  # Step 6c: Generate per-operation serializer registries
-  # standardSerializers lists every model of the spec, so an API class that
-  # uses it keeps all of them in an AOT build. Each operation instead registers
-  # only the types it needs (see generate_api_serializers.py), and operations
-  # the application never calls are tree-shaken with their models.
-  # -------------------------------------------------------------------------
+  # standardSerializers lists every model, so an API class using it keeps them all in
+  # an AOT build. Each operation instead registers only the types it needs, so unused
+  # operations are tree-shaken with their models (see generate_api_serializers.py).
   echo ""
   echo "=== [$edition] Step 6c: Generating per-operation serializer registries ==="
   python3 "$SCRIPT_DIR/generate_api_serializers.py" "$output_dir" "$pkg" \
@@ -852,10 +629,6 @@ YAML
     return
   fi
 
-  # -------------------------------------------------------------------------
-  # Step 7: Run build_runner to compile .g.dart files (GEN-07)
-  # MANDATORY: the package does not compile without .g.dart files.
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7: Running dart pub get + build_runner ==="
   (
@@ -864,7 +637,6 @@ YAML
     dart run build_runner build --delete-conflicting-outputs
   )
 
-  # Verify .g.dart files were produced
   local g_dart_count
   g_dart_count=$(ls "$output_dir/lib/src/model/"*.g.dart 2>/dev/null | wc -l | tr -d ' ')
   if [ "$g_dart_count" -eq 0 ]; then
@@ -874,53 +646,31 @@ YAML
   fi
   echo "build_runner produced $g_dart_count .g.dart model files."
 
-  # -------------------------------------------------------------------------
-  # Step 7b: Copy common handwritten code into edition lib/src/
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7b: Copying common code ==="
   copy_common_code "$edition"
 
-  # -------------------------------------------------------------------------
-  # Step 7b2: Create publishing files (.pubignore) for the edition
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7b2: Creating publishing files ==="
   copy_publishing_files "$edition"
 
-  # -------------------------------------------------------------------------
-  # Step 7c: Patch pubspec.yaml with runtime dependencies
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7c: Patching pubspec.yaml dependencies ==="
   patch_pubspec_dependencies "$edition"
-  # Step 7 resolved before these dependencies existed; re-resolve so the
-  # package config (used by dart analyze) includes them.
+  # Re-resolve: Step 7 ran before these dependencies existed.
   (cd "$output_dir" && dart pub get)
 
-  # -------------------------------------------------------------------------
-  # Step 7d: Generate edition-specific ThingsboardClient subclass
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7d: Generating service accessor class ==="
   generate_service_accessors "$edition"
 
-  # -------------------------------------------------------------------------
-  # Step 7e: Append common exports to barrel export
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7e: Appending common exports to barrel ==="
   append_common_exports "$edition"
 
-  # -------------------------------------------------------------------------
-  # Step 7e2: Remove unused and duplicate imports from the generated code
-  #
-  # The dart-dio templates import json_object.dart twice and
-  # thingsboard_error_response.dart (and some models) without using them,
-  # which leaves ~200 analyzer warnings in lib/src/api and lib/src/model.
-  # dart fix applies only to analyzed files, so it runs with analysis options
-  # that exclude nothing; the generated ones are restored afterwards.
-  # -------------------------------------------------------------------------
+  # The dart-dio templates import json_object.dart twice and leave other imports
+  # unused (~200 analyzer warnings). dart fix only touches analyzed files, so it runs
+  # with options that exclude nothing; the generated ones are restored afterwards.
   echo ""
   echo "=== [$edition] Step 7e2: Removing unused and duplicate imports ==="
   (
@@ -931,16 +681,10 @@ YAML
     mv analysis_options.yaml.generated analysis_options.yaml
   )
 
-  # -------------------------------------------------------------------------
-  # Step 7f: Format license headers on all .dart files
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7f: Formatting license headers ==="
   apply_license_headers "$REPO_ROOT/common/lib" "$output_dir/lib" "$output_dir/test"
 
-  # -------------------------------------------------------------------------
-  # Step 7g: Format the Dart code (dart format, the language version's style)
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7g: Formatting Dart code ==="
   (
@@ -956,13 +700,9 @@ YAML
     dart format "${existing[@]}" | tail -1
   )
 
-  # -------------------------------------------------------------------------
-  # Step 8: Stage generated output with git
-  # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 8: Staging generated output ==="
-  # Only the generator's outputs: at the repository root, $output_dir is the
-  # whole repository.
+  # Stage only the generator's outputs: at the repository root $output_dir is the whole repo.
   (
     cd "$output_dir"
     git add -A lib test doc spec pubspec.yaml analysis_options.yaml .pubignore \
@@ -971,10 +711,6 @@ YAML
   git -C "$REPO_ROOT" add -A "$REPO_ROOT/common"
   echo "Staged generated output in $output_dir and common/"
 }
-
-# ---------------------------------------------------------------------------
-# Main: dispatch to generate() for one or all editions
-# ---------------------------------------------------------------------------
 
 if [ "$EDITION" = "all" ]; then
   for e in "${EDITIONS[@]}"; do

@@ -57,9 +57,8 @@ class ThingsboardError implements Exception {
 
   /// Whether the server rejected the request's credentials (HTTP 401).
   ///
-  /// Also true for the ThingsBoard error codes the server pairs with a 401,
-  /// so an error that lost its status on the way (or was constructed by the
-  /// client) is still recognised.
+  /// Also true for the error codes the server pairs with a 401, so an error
+  /// that lost its status is still recognised.
   bool get isUnauthorized =>
       status == 401 ||
       errorCode == ThingsBoardErrorCode.authentication ||

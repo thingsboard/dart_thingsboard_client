@@ -53,7 +53,6 @@ def write(path, text):
 
 
 def index_classes(model_dir):
-    """Maps every generated class name to its file name."""
     classes = {}
     for name in sorted(os.listdir(model_dir)):
         if name.endswith('.dart') and not name.endswith('.g.dart'):

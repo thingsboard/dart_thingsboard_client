@@ -24,16 +24,12 @@ const MAX_PUBLISH_COMMANDS = 10;
 
 typedef WebSocketChannelFactory = WebSocketChannel Function(Uri uri);
 
-/// Parses any update the server sends.
-///
-/// It reaches the parser of every update type; the service parses each update
-/// with the parser of the command it belongs to instead.
+/// Parses any update the server sends; the service itself uses the parser of
+/// the command each update belongs to.
 WebsocketDataMsg parseWebsocketDataMessage(dynamic raw) {
   return WebsocketDataMsg.fromJson(jsonDecode(raw));
 }
 
-/// A frame received from the server, with the update parser of every
-/// subscribed command by its cmdId.
 class _UpdateFrame {
   final dynamic raw;
   final Map<int, WebsocketUpdateParser> parsers;
@@ -41,7 +37,6 @@ class _UpdateFrame {
   _UpdateFrame(this.raw, this.parsers);
 }
 
-/// An error the server reported for a command no subscriber has.
 class _UnroutedError extends WebsocketDataMsg {
   final int errorCode;
   final String? errorMsg;
@@ -49,11 +44,9 @@ class _UnroutedError extends WebsocketDataMsg {
   _UnroutedError(this.errorCode, this.errorMsg);
 }
 
-/// [frame] parsed by the parser of the command it is an update for: null when
-/// no subscribed command has its id.
-///
+/// Parses [frame] with the parser of its command, or null if none matches.
 /// Attribute and timeseries updates carry the cmdId as `subscriptionId`, the
-/// other updates as `cmdId` along with a `cmdUpdateType`.
+/// others as `cmdId` along with a `cmdUpdateType`.
 WebsocketDataMsg? _parseUpdateFrame(_UpdateFrame frame) {
   final json = jsonDecode(frame.raw) as Map<String, dynamic>;
   final id = json['cmdUpdateType'] == null
@@ -273,7 +266,6 @@ class TelemetryWebsocketService implements TelemetryService {
           _reconnectAttempt++;
         }
         if (_tbClient.isApiKeyAuth()) {
-          // An API key does not expire, so there is nothing to refresh.
           _openSocket(apiKey: _tbClient.apiKey!);
         } else if (_tbClient.isJwtTokenValid()) {
           _openSocket(token: _tbClient.getJwtToken()!);
@@ -289,9 +281,8 @@ class TelemetryWebsocketService implements TelemetryService {
             },
             onError: (e) {
               _isOpening = false;
-              // A rejected refresh token has already cleared the session (which
-              // resets this service); otherwise the server was unreachable, so
-              // retry like any other failed connection attempt.
+              // A rejected refresh token already cleared the session; otherwise
+              // the server was unreachable, so retry.
               if (_tbClient.isAuthenticated()) {
                 _onClose();
               }
@@ -306,8 +297,6 @@ class TelemetryWebsocketService implements TelemetryService {
     }
   }
 
-  /// Opens the socket; the session authenticates with [token] (JWT) or
-  /// [apiKey], whichever is given.
   void _openSocket({String? token, String? apiKey}) {
     try {
       var channel = _channelFactory(_telemetryUri);
@@ -397,17 +386,10 @@ class TelemetryWebsocketService implements TelemetryService {
     _isOpening = false;
   }
 
-  // Exponential backoff for reconnect attempts, capped at
-  // MAX_RECONNECT_INTERVAL. The first reconnect after a drop or a failed
-  // connect still fires quickly (RECONNECT_INTERVAL); the delay only grows
-  // while attempts keep failing - e.g. a server still unreachable after a
-  // failed token refresh - so it no longer retries (and re-triggers a token
-  // refresh) every 2s indefinitely. Reset by _onOpen once a connection
-  // succeeds.
-  //
-  // Attempts are counted when they start (_tryOpenSocket), not when they end:
-  // a failed connect surfaces as both a `ready` error and a stream `done`, so
-  // counting in _onClose would advance the backoff two steps per attempt.
+  // Exponential backoff capped at MAX_RECONNECT_INTERVAL, reset by _onOpen.
+  // Attempts are counted when they start (_tryOpenSocket): a failed connect
+  // surfaces as both a `ready` error and a stream `done`, so counting in
+  // _onClose would advance the backoff twice per attempt.
   int _nextReconnectDelay() {
     final exponent = min(_reconnectAttempt, _maxBackoffExponent);
     return min(RECONNECT_INTERVAL << exponent, MAX_RECONNECT_INTERVAL);

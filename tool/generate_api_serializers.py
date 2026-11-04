@@ -2,7 +2,7 @@
 """Generate per-operation serializer registries for a dart-dio/built_value client.
 
 The generated `standardSerializers` lists every model of the spec, so any code
-that touches it keeps all ~950 models (and their serializers) in an AOT build.
+that touches it keeps all ~1000 models (and their serializers) in an AOT build.
 This script replaces that dependency in the API classes:
 
 * Every model file and every parameterised collection type (BuiltList<T>,

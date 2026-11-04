@@ -26,7 +26,6 @@ import 'service/telemetry_websocket_service.dart';
 import 'storage/in_memory_storage.dart';
 import 'storage/tb_storage.dart';
 
-// Callback typedefs
 typedef TbComputeCallback<Q, R> = FutureOr<R> Function(Q message);
 typedef TbCompute =
     Future<R> Function<Q, R>(TbComputeCallback<Q, R> callback, Q message);
@@ -50,18 +49,17 @@ class ThingsboardClientBase {
   final ErrorCallback? _errorCallback;
   final LoadStartedCallback? _loadStartedCallback;
   final LoadFinishedCallback? _loadFinishedCallback;
-  final TbCompute? _computeFunc;
+  final TbCompute _computeFunc;
   final bool debugMode;
 
-  // Bounds connection setup only, never response time, so it is a safe default
-  // for every request; without it an unreachable server stalls for minutes.
+  // Bounds connection setup only, never response time; without it an
+  // unreachable server stalls for minutes.
   static const _defaultConnectTimeout = Duration(seconds: 20);
 
-  // Applied to the token-refresh call only, so it never truncates other
-  // (legitimately long) requests.
+  // For the token-refresh call only, so it never truncates long requests.
   static const _defaultRefreshCallTimeout = Duration(seconds: 15);
 
-  // Completer gate for token refresh (AUTH-03: only one refresh call for concurrent requests)
+  // Single-flight gate: concurrent requests share one refresh call.
   Completer<void>? _tokenRefreshCompleter;
 
   String? _token;
@@ -117,10 +115,8 @@ class ThingsboardClientBase {
     this.debugMode,
   ) : _storage = storage ?? InMemoryStorage();
 
-  /// Generative constructor for subclasses (edition-specific clients).
-  ///
-  /// Performs the same Dio setup and interceptor registration as the factory
-  /// constructor so that subclass constructors can call [super.create(...)].
+  /// Generative constructor for subclasses (edition-specific clients); does the
+  /// same Dio and interceptor setup as the factory constructor.
   ThingsboardClientBase.create(
     String apiEndpoint, {
     TbStorage? storage,
@@ -167,8 +163,6 @@ class ThingsboardClientBase {
     );
   }
 
-  // ---- Public accessors ----
-
   Dio get dio => _dio;
 
   String get apiEndpoint => _apiEndpoint;
@@ -195,19 +189,16 @@ class ThingsboardClientBase {
 
   bool refreshTokenPending() => _tokenRefreshCompleter != null;
 
-  bool isSystemAdmin() => _authUser != null && _authUser!.isSystemAdmin();
+  bool isSystemAdmin() => _authUser?.isSystemAdmin() ?? false;
 
-  bool isTenantAdmin() => _authUser != null && _authUser!.isTenantAdmin();
+  bool isTenantAdmin() => _authUser?.isTenantAdmin() ?? false;
 
-  bool isCustomerUser() => _authUser != null && _authUser!.isCustomerUser();
+  bool isCustomerUser() => _authUser?.isCustomerUser() ?? false;
 
-  bool isPreVerificationToken() =>
-      _authUser != null && _authUser!.isPreVerificationToken();
+  bool isPreVerificationToken() => _authUser?.isPreVerificationToken() ?? false;
 
   bool isMfaConfigurationToken() =>
-      _authUser != null && _authUser!.isMfaConfigurationToken();
-
-  // ---- Auth lifecycle ----
+      _authUser?.isMfaConfigurationToken() ?? false;
 
   /// Restores the session persisted in storage, refreshing an expired access
   /// token first.
@@ -230,10 +221,7 @@ class ThingsboardClientBase {
     } catch (e) {
       throw toThingsboardError(e);
     }
-    // Version check: only if authenticated (SYS_ADMIN callers get enforcement;
-    // Tenant Admin / Customer User / unauthenticated get a silent skip). A
-    // session restored offline is skipped too: the server was just unreachable
-    // and the check is best-effort, so retrying would only stall startup.
+    // Skipped for a session restored offline: the server was just unreachable.
     if (isAuthenticated() && isJwtTokenValid()) {
       await _checkServerVersion();
     }
@@ -256,11 +244,10 @@ class ThingsboardClientBase {
         );
       }
     } on ThingsboardError {
-      rethrow; // version-too-old error must propagate
+      rethrow;
     } catch (_) {
-      // Silently ignore: 401 (not authenticated), 403 (not SYS_ADMIN),
-      // network errors, or unexpected response format.
-      // The version check is best-effort; it must not block non-admin users.
+      // Best-effort: 401/403 (only SYS_ADMIN may read /api/admin/updates),
+      // network errors and unexpected responses must not block startup.
     }
   }
 
@@ -298,9 +285,7 @@ class ThingsboardClientBase {
     RequestConfig? requestConfig,
     bool notifyUser = true,
   }) async {
-    if (_telemetryWebsocketService != null) {
-      _telemetryWebsocketService!.reset(true);
-    }
+    _telemetryWebsocketService?.reset(true);
     try {
       await post(
         '/api/auth/logout',
@@ -312,9 +297,8 @@ class ThingsboardClientBase {
     }
   }
 
-  /// Refreshes the JWT token using the Completer gate pattern (AUTH-03).
-  /// If a refresh is already in progress, waits for it to complete instead of
-  /// issuing a second HTTP call.
+  /// Refreshes the JWT token. If a refresh is already in progress, waits for it
+  /// instead of issuing a second HTTP call.
   ///
   /// Throws when the refresh fails. The session is cleared only when the
   /// server rejects the refresh token (HTTP 401); a transport failure keeps it
@@ -325,7 +309,6 @@ class ThingsboardClientBase {
     Dio? internalDio,
     bool interceptRefreshToken = false,
   }) async {
-    // Completer gate: if refresh already in progress, await it
     if (_tokenRefreshCompleter != null) {
       await _tokenRefreshCompleter!.future;
       return;
@@ -333,9 +316,8 @@ class ThingsboardClientBase {
 
     final completer = Completer<void>();
     _tokenRefreshCompleter = completer;
-    // Concurrent callers observe a failure through their own await; without a
-    // listener of its own a failed refresh would surface as an unhandled
-    // async error.
+    // Without a listener of its own a failed refresh would surface as an
+    // unhandled async error when no concurrent caller is awaiting it.
     completer.future.ignore();
     try {
       refreshToken ??= _refreshToken;
@@ -367,9 +349,8 @@ class ThingsboardClientBase {
             notify,
           );
         } catch (e) {
-          // A 403 is deliberately not treated as a rejected token: the refresh
-          // endpoint answers with 401, so a 403 is more likely an intermediary
-          // (proxy, WAF) than the auth server. See PROD-8704.
+          // A 403 is not a rejected token: the refresh endpoint answers 401, so
+          // 403 is more likely a proxy or WAF. See PROD-8704.
           if (toThingsboardError(e).isUnauthorized) {
             await _clearJwtToken();
           }
@@ -401,8 +382,6 @@ class ThingsboardClientBase {
     await _setUserFromJwtToken(jwtToken, refreshToken, notify);
   }
 
-  // ---- Private helpers ----
-
   Future<void> _refreshStoredSession(
     String? jwtToken,
     String? refreshToken,
@@ -413,8 +392,8 @@ class ThingsboardClientBase {
       if (toThingsboardError(e).isUnauthorized) {
         rethrow;
       }
-      // The server was unreachable: keep the stale session so the interceptor
-      // retries the refresh on the next request instead of logging out.
+      // Server unreachable: keep the stale session; the interceptor retries
+      // the refresh on the next request.
       await _setUserFromJwtToken(jwtToken, refreshToken, true);
     }
   }
@@ -463,28 +442,13 @@ class ThingsboardClientBase {
   }
 
   Future<void> _userLoaded() async {
-    final cb = _userLoadedCallback;
-    if (cb != null) {
-      Future(() => cb());
-    }
-    if (_telemetryWebsocketService != null) {
-      _telemetryWebsocketService!.reset(true);
-    }
+    _schedule(_userLoadedCallback);
+    _telemetryWebsocketService?.reset(true);
   }
 
-  void _mfaAuth() {
-    final cb = _mfaAuthCallback;
-    if (cb != null) {
-      Future(() => cb());
-    }
-  }
+  void _mfaAuth() => _schedule(_mfaAuthCallback);
 
-  void _mfaForce() {
-    final cb = _mfaForceCallback;
-    if (cb != null) {
-      Future(() => cb());
-    }
-  }
+  void _mfaForce() => _schedule(_mfaForceCallback);
 
   void _onError(ThingsboardError error) {
     final cb = _errorCallback;
@@ -493,21 +457,15 @@ class ThingsboardClientBase {
     }
   }
 
-  void _loadStarted() {
-    final cb = _loadStartedCallback;
-    if (cb != null) {
-      Future(() => cb());
+  void _loadStarted() => _schedule(_loadStartedCallback);
+
+  void _loadFinished() => _schedule(_loadFinishedCallback);
+
+  void _schedule(void Function()? callback) {
+    if (callback != null) {
+      Future(() => callback());
     }
   }
-
-  void _loadFinished() {
-    final cb = _loadFinishedCallback;
-    if (cb != null) {
-      Future(() => cb());
-    }
-  }
-
-  // ---- HTTP convenience methods ----
 
   Future<Response<T>> get<T>(
     String path, {
@@ -594,6 +552,6 @@ class ThingsboardClientBase {
   }
 
   Future<R> compute<Q, R>(TbComputeCallback<Q, R> callback, Q message) {
-    return _computeFunc!(callback, message);
+    return _computeFunc(callback, message);
   }
 }

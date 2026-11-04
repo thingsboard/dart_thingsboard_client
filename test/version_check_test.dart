@@ -14,7 +14,6 @@ import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/model/version_models.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 
-// Helper: create a test JWT token
 String createTestJwt({
   String sub = 'user-id',
   String scope = 'TENANT_ADMIN',
@@ -74,7 +73,6 @@ class MockHttpClientAdapter implements HttpClientAdapter {
   void close({bool force = false}) {}
 }
 
-// Set both main and internal Dio adapters to the mock adapter
 void setMockAdapter(ThingsboardClient client, MockHttpClientAdapter adapter) {
   client.dio.httpClientAdapter = adapter;
   for (final interceptor in client.dio.interceptors) {
@@ -128,8 +126,7 @@ void main() {
       mockAdapter = MockHttpClientAdapter();
     });
 
-    /// Helper: create a client, seed it with a valid JWT via setUserFromJwtToken,
-    /// then return the client and the adapter so the caller can add more mocks.
+    /// Creates a client seeded with a valid JWT; add more mocks on [mockAdapter].
     Future<ThingsboardClient> makeAuthenticatedClient({
       String scope = 'TENANT_ADMIN',
     }) async {
@@ -137,7 +134,6 @@ void main() {
       setMockAdapter(client, mockAdapter);
       final jwt = createTestJwt(scope: scope);
       final refresh = createTestJwt(scope: 'REFRESH_TOKEN');
-      // This stores tokens in InMemoryStorage
       await client.setUserFromJwtToken(jwt, refresh, false);
       return client;
     }
@@ -227,7 +223,6 @@ void main() {
       () async {
         final client = await makeAuthenticatedClient();
 
-        // Return a 500 to simulate server error — should be silently ignored
         mockAdapter.onRoute('/api/admin/updates', (req) {
           return ResponseBody.fromString(
             jsonEncode({'status': 500, 'message': 'Internal Server Error'}),

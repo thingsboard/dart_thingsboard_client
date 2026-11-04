@@ -63,10 +63,6 @@ fi
 
 EDITION="$1"
 
-# ---------------------------------------------------------------------------
-# publish_edition: validate or publish a single edition package
-# ---------------------------------------------------------------------------
-
 publish_edition() {
   local edition="$1"
   local edition_dir
@@ -78,7 +74,6 @@ publish_edition() {
     exit 1
   fi
 
-  # Extract package name and version from pubspec.yaml
   local pkg_name pkg_version
   pkg_name=$(grep '^name:' "$pubspec" | head -1 | sed 's/name: *//')
   pkg_version=$(grep '^version:' "$pubspec" | head -1 | sed 's/version: *//')
@@ -97,10 +92,6 @@ publish_edition() {
     fi
   )
 }
-
-# ---------------------------------------------------------------------------
-# Main: dispatch to publish_edition() for one or all editions
-# ---------------------------------------------------------------------------
 
 PROCESSED=()
 

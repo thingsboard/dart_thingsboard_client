@@ -16,8 +16,6 @@ import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-// ---- Test helpers ----
-
 String createTestJwt({
   String sub = 'user-id',
   String scope = 'TENANT_ADMIN',
@@ -340,8 +338,6 @@ Future<R> _isolateCompute<Q, R>(TbComputeCallback<Q, R> callback, Q message) {
   return Isolate.run(() => callback(message));
 }
 
-// ---- Tests ----
-
 void main() {
   late MockHttpClientAdapter mockAdapter;
   late ThingsboardClient client;
@@ -354,7 +350,6 @@ void main() {
     client.dio.httpClientAdapter = mockAdapter;
   });
 
-  // Helper to log in the client with a valid JWT
   Future<void> loginClient(ThingsboardClient c, {String? jwtToken}) async {
     final token = jwtToken ?? createTestJwt();
     final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
@@ -376,7 +371,6 @@ void main() {
     );
   }
 
-  // Helper to create a device EntityId for testing
   EntityId deviceId(String id) => DeviceId((b) => b..id = id);
 
   TelemetrySubscriber attributesSubscriber(
@@ -389,7 +383,7 @@ void main() {
   );
 
   group('TelemetryWebsocketService', () {
-    group('RT-01: stream routing', () {
+    group('stream routing', () {
       test('subscribe sends subscription command via WebSocket', () async {
         await loginClient(client);
 
@@ -410,13 +404,10 @@ void main() {
             );
         service.subscribe(subscriber);
 
-        // Allow event loop to run (ready.then fires)
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Verify at least one message was sent (authCmd + subscription)
         expect(fakeChannel.sentMessages.isNotEmpty, isTrue);
 
-        // Decode sent messages and look for subscription cmd
         bool foundSubscription = false;
         for (final msg in fakeChannel.sentMessages) {
           final decoded = jsonDecode(msg as String);
@@ -456,10 +447,8 @@ void main() {
               );
           service.subscribe(subscriber);
 
-          // Allow socket open
           await Future.delayed(Duration(milliseconds: 10));
 
-          // Find the cmdId assigned
           int? cmdId;
           for (final msg in fakeChannel.sentMessages) {
             final decoded = jsonDecode(msg as String);
@@ -474,11 +463,9 @@ void main() {
           }
           expect(cmdId, isNotNull, reason: 'Expected cmdId to be assigned');
 
-          // Capture data stream update
           final dataCompleter = Completer<SubscriptionUpdate>();
           subscriber.dataStream.first.then(dataCompleter.complete);
 
-          // Inject a server message
           final serverMsg = jsonEncode({
             'subscriptionId': cmdId,
             'data': {
@@ -498,7 +485,7 @@ void main() {
       );
     });
 
-    group('RT-02: reconnect', () {
+    group('reconnect', () {
       test(
         'subscriber stream not closed on disconnect and reconnects',
         () async {
@@ -523,30 +510,24 @@ void main() {
               );
           service.subscribe(subscriber);
 
-          // Wait for first channel to open
           await Future.delayed(Duration(milliseconds: 10));
           expect(channelFactory.connectCallCount, equals(1));
 
-          // Capture reconnect signal
           final reconnectCompleter = Completer<void>();
           subscriber.reconnectStream.first.then(
             (_) => reconnectCompleter.complete(),
           );
 
-          // Simulate disconnect
           firstChannel.simulateDisconnect();
 
-          // Wait for reconnect timer (2s) + some margin
           await Future.delayed(Duration(milliseconds: 2200));
 
-          // A second connection should have been opened
           expect(
             channelFactory.connectCallCount,
             equals(2),
             reason: 'Expected reconnect to open a new WebSocket connection',
           );
 
-          // Reconnect event should fire
           expect(
             reconnectCompleter.isCompleted,
             isTrue,
@@ -610,7 +591,7 @@ void main() {
       );
     });
 
-    group('RT-03: token handling', () {
+    group('token handling', () {
       test('authCmd is first message sent with valid JWT token', () async {
         await loginClient(client);
 
@@ -682,12 +663,10 @@ void main() {
       test(
         'expired token triggers refreshJwtToken before socket open',
         () async {
-          // Login with an expired token
           final expiredToken = createExpiredTestJwt();
           final validToken = createTestJwt();
           final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
 
-          // Set up login to give expired token
           mockAdapter.onRoute('/api/auth/login', (req) {
             return ResponseBody.fromString(
               jsonEncode({'token': expiredToken, 'refreshToken': refreshToken}),
@@ -697,7 +676,6 @@ void main() {
               },
             );
           });
-          // Set up token refresh to return valid token
           mockAdapter.onRoute('/api/auth/token', (req) {
             return ResponseBody.fromString(
               jsonEncode({'token': validToken, 'refreshToken': refreshToken}),
@@ -715,7 +693,6 @@ void main() {
                 ..password = 'p',
             ),
           );
-          // At this point, the token is expired
 
           final fakeChannel = FakeWebSocketChannel();
           channelFactory.enqueue(fakeChannel);
@@ -734,17 +711,14 @@ void main() {
               );
           service.subscribe(subscriber);
 
-          // Allow async refresh + socket open
           await Future.delayed(Duration(milliseconds: 50));
 
-          // Token refresh should have been called
           expect(
             mockAdapter.requestedPaths.contains('/api/auth/token'),
             isTrue,
             reason: 'Expected token refresh before socket open',
           );
 
-          // Auth cmd should use the refreshed token
           if (fakeChannel.sentMessages.isNotEmpty) {
             final firstMsg = jsonDecode(
               fakeChannel.sentMessages.first as String,
@@ -875,7 +849,7 @@ void main() {
       );
     });
 
-    group('RT-04: unsubscribe', () {
+    group('unsubscribe', () {
       test('unsubscribe sends correct unsubscribe command', () async {
         await loginClient(client);
 
@@ -901,14 +875,12 @@ void main() {
         service.unsubscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Should have more messages after unsubscribe
         expect(
           fakeChannel.sentMessages.length,
           greaterThan(msgCountBefore),
           reason: 'Expected unsubscribe command to be sent',
         );
 
-        // Find unsubscribe command
         bool foundUnsubscribe = false;
         for (final msg in fakeChannel.sentMessages.skip(msgCountBefore)) {
           final decoded = jsonDecode(msg as String);
@@ -949,7 +921,6 @@ void main() {
         service.subscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Get the cmdId
         int? cmdId;
         for (final msg in fakeChannel.sentMessages) {
           final decoded = jsonDecode(msg as String);
@@ -963,13 +934,10 @@ void main() {
           }
         }
 
-        // Unsubscribe
         service.unsubscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Track data stream events after unsubscribe
         int dataCount = 0;
-        // Stream may be closed after unsubscribe, so guard with try
         try {
           subscriber.dataStream.listen((_) => dataCount++);
         } catch (_) {}
@@ -989,7 +957,7 @@ void main() {
       });
     });
 
-    group('RT-05: idle timeout', () {
+    group('idle timeout', () {
       test('idle timer is set when subscriber count drops to 0', () async {
         await loginClient(client);
 
@@ -1011,11 +979,9 @@ void main() {
         service.subscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // After unsubscribe, socket should stay open (idle timer not fired yet)
         service.unsubscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Socket should still be open (idle timer fires after 90s, not instantly)
         expect(
           fakeChannel.closeCode,
           isNull,
@@ -1044,11 +1010,9 @@ void main() {
         service.subscribe(subscriber1);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Unsubscribe — this starts the idle timer
         service.unsubscribe(subscriber1);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Subscribe again before idle timer fires — should cancel the timer
         final subscriber2 =
             TelemetrySubscriber.createEntityAttributesSubscription(
               telemetryService: service,
@@ -1058,7 +1022,6 @@ void main() {
         service.subscribe(subscriber2);
         await Future.delayed(Duration(milliseconds: 10));
 
-        // Socket should still be open
         expect(
           fakeChannel.closeCode,
           isNull,
@@ -1112,11 +1075,10 @@ void main() {
       );
     });
 
-    group('RT-06: command queue', () {
+    group('command queue', () {
       test('commands queue before socket opens and drain on open', () async {
         await loginClient(client);
 
-        // Use a channel that delays its ready future
         final fakeChannel = _DelayedReadyChannel();
         WebSocketChannel delayedFactory(Uri uri) => fakeChannel;
 
@@ -1133,21 +1095,17 @@ void main() {
               attributeScope: 'LATEST_TELEMETRY',
             );
 
-        // Subscribe — this queues the command before socket is open
         service.subscribe(subscriber);
 
-        // Immediately: no messages should be sent yet (socket not open)
         expect(
           fakeChannel.sentMessages.isEmpty,
           isTrue,
           reason: 'No messages should be sent before socket is ready',
         );
 
-        // Now open the channel (simulate ready)
         fakeChannel.completeReady();
         await Future.delayed(Duration(milliseconds: 10));
 
-        // After opening, queued commands should drain
         expect(
           fakeChannel.sentMessages.isNotEmpty,
           isTrue,
@@ -1156,7 +1114,7 @@ void main() {
       });
     });
 
-    group('RT-07: reconnect backoff and reset (PROD-8863)', () {
+    group('reconnect backoff and reset', () {
       // Opens a socket for a device-1 subscriber and drops it, leaving the
       // service in its reconnect backoff; the next socket is reconnectChannel.
       Future<

@@ -6,9 +6,7 @@
 enum Direction { ASC, DESC }
 
 extension DirectionToString on Direction {
-  String toShortString() {
-    return toString().split('.').last;
-  }
+  String toShortString() => name;
 }
 
 class SortOrder {

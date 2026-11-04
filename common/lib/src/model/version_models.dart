@@ -4,25 +4,21 @@
 // found in the LICENSE file.
 
 /// Minimum ThingsBoard server version this client is compatible with.
-/// Matches the package version (ThingsBoard server release target).
 const String tbMinServerVersion = '4.4.0';
 
 /// Parses a version string like '4.4.0' into [major, minor, patch].
-/// Returns [0, 0, 0] on parse failure (lenient - server may return
-/// snapshot/RC version strings like '4.4.0-SNAPSHOT').
+///
+/// Lenient: a component that is not a number (the '0-SNAPSHOT' of
+/// '4.4.0-SNAPSHOT') counts as 0 and missing components are 0.
 List<int> parseVersion(String v) {
-  try {
-    final parts = v.split('.').map((s) => int.tryParse(s) ?? 0).toList();
-    while (parts.length < 3) {
-      parts.add(0);
-    }
-    return parts.sublist(0, 3);
-  } catch (_) {
-    return [0, 0, 0];
+  final parts = v.split('.').map((s) => int.tryParse(s) ?? 0).toList();
+  while (parts.length < 3) {
+    parts.add(0);
   }
+  return parts.sublist(0, 3);
 }
 
-/// Returns true if [actual] meets or exceeds [minimum] (semantic version comparison).
+/// Whether [actual] meets or exceeds [minimum].
 bool isVersionSufficient(String actual, String minimum) {
   final a = parseVersion(actual);
   final m = parseVersion(minimum);
@@ -30,5 +26,5 @@ bool isVersionSufficient(String actual, String minimum) {
     if (a[i] > m[i]) return true;
     if (a[i] < m[i]) return false;
   }
-  return true; // equal
+  return true;
 }

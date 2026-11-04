@@ -16,16 +16,16 @@ import 'key_intercept_config.dart';
 
 class HttpInterceptor extends QueuedInterceptor {
   final Dio _dio;
-  // Internal Dio used for token refresh to avoid interceptor recursion (HTTP-07)
-  // Exposed for testing purposes only (allows injecting a mock adapter)
+  // Token refresh uses this Dio so it bypasses the interceptor; public so
+  // tests can swap its adapter.
   final Dio internalDio;
   final ThingsboardClientBase _tbClient;
   final void Function() _loadStart;
   final void Function() _loadFinish;
   final void Function(ThingsboardError error) _onError;
 
-  // RPC calls legitimately wait on a device, so they never drive the load
-  // callbacks (nor does the background token refresh, see _isInternalUrl).
+  // RPC calls wait on a device, so (like token refresh) they never drive the
+  // load callbacks.
   static const _rpcUrlPrefix = '/api/plugins/rpc';
 
   int _activeRequests = 0;
@@ -37,9 +37,7 @@ class HttpInterceptor extends QueuedInterceptor {
     void Function() onLoadFinish,
     void Function(ThingsboardError error) onError,
   )
-    // internalDio bypasses this interceptor, so it mirrors the connection
-    // settings of the client Dio, which is fully configured before the
-    // interceptor is installed.
+    // Mirrors the connection settings of the client Dio.
     : internalDio = Dio(
         BaseOptions(
           baseUrl: _dio.options.baseUrl,
@@ -56,7 +54,7 @@ class HttpInterceptor extends QueuedInterceptor {
     RequestInterceptorHandler handler,
   ) async {
     if (options.path.startsWith('/api/')) {
-      var config = _getInterceptorConfig(options);
+      var config = InterceptorConfig.fromExtra(options.extra);
       if (!config.isRetry && _tracksLoading(options.path)) {
         _updateLoadingState(config, true);
       }
@@ -89,7 +87,7 @@ class HttpInterceptor extends QueuedInterceptor {
           );
         }
       } else {
-        return _handleRequest(options, handler);
+        return handler.next(options);
       }
     } else {
       return handler.next(options);
@@ -102,7 +100,7 @@ class HttpInterceptor extends QueuedInterceptor {
     KeyInterceptConfig config,
   ) async {
     if (_updateAuthorizationHeader(options, config)) {
-      return _handleRequest(options, handler);
+      return handler.next(options);
     } else {
       return _handleRequestError(
         options,
@@ -110,13 +108,6 @@ class HttpInterceptor extends QueuedInterceptor {
         ThingsboardError(message: 'Could not get token from store.'),
       );
     }
-  }
-
-  Future _handleRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
-    return handler.next(options);
   }
 
   Future _handleRequestError(
@@ -139,20 +130,19 @@ class HttpInterceptor extends QueuedInterceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
-    var config = _getInterceptorConfig(response.requestOptions);
+    var config = InterceptorConfig.fromExtra(response.requestOptions.extra);
     _finishLoading(response.requestOptions, config);
     return handler.next(response);
   }
 
   @override
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
-    var config = _getInterceptorConfig(err.requestOptions);
+    var config = InterceptorConfig.fromExtra(err.requestOptions.extra);
     var tbError = toThingsboardError(err);
     if (_isTokenRefreshRequest(err.requestOptions.path)) {
-      // The refresh call itself reaches this interceptor when refreshJwtToken()
-      // runs on the client Dio (e.g. from init()). Re-entering the refresh here
-      // would deadlock on its completer gate, and its caller already owns the
-      // failure, so it is neither retried nor reported a second time.
+      // refreshJwtToken() on the client Dio (e.g. from init()) lands here;
+      // re-entering the refresh would deadlock on its gate, and its caller
+      // already owns the failure.
       return _handleError(tbError, err.requestOptions, handler, false);
     }
     var notify = true;
@@ -276,10 +266,6 @@ class HttpInterceptor extends QueuedInterceptor {
     );
   }
 
-  InterceptorConfig _getInterceptorConfig(RequestOptions options) {
-    return InterceptorConfig.fromExtra(options.extra);
-  }
-
   bool _updateAuthorizationHeader(
     RequestOptions options,
     KeyInterceptConfig config,
@@ -296,12 +282,10 @@ class HttpInterceptor extends QueuedInterceptor {
     return url.startsWith(Constants.entryPoints['tokenRefresh']!);
   }
 
-  bool _isInternalUrl(String url) {
-    return _isTokenRefreshRequest(url) || url.startsWith(_rpcUrlPrefix);
-  }
-
   bool _tracksLoading(String url) {
-    return url.startsWith('/api/') && !_isInternalUrl(url);
+    return url.startsWith('/api/') &&
+        !_isTokenRefreshRequest(url) &&
+        !url.startsWith(_rpcUrlPrefix);
   }
 
   bool _isTokenBasedAuthEntryPoint(String url) {

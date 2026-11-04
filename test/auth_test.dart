@@ -19,7 +19,6 @@ import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/storage/in_memory_storage.dart';
 
-// Helper: create a test JWT token with given claims
 String createTestJwt({
   String sub = 'user-id',
   String scope = 'TENANT_ADMIN',
@@ -48,7 +47,6 @@ String createTestJwt({
   return '$header.$payload.fake-signature';
 }
 
-// A mock HTTP adapter that handles specific paths
 class MockHttpClientAdapter implements HttpClientAdapter {
   final Map<String, List<FutureOr<ResponseBody> Function(RequestOptions)>>
   _handlers = {};
@@ -86,7 +84,6 @@ class MockHttpClientAdapter implements HttpClientAdapter {
   void close({bool force = false}) {}
 }
 
-// Set both main and internal Dio adapters to the mock adapter
 void setMockAdapter(ThingsboardClient client, MockHttpClientAdapter adapter) {
   client.dio.httpClientAdapter = adapter;
   for (final interceptor in client.dio.interceptors) {
@@ -128,7 +125,6 @@ void main() {
         final jwtToken = createTestJwt();
         final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
         mockAdapter.onRoute('/api/auth/login', (req) {
-          // Verify request body contains username and password
           final body = req.data is String ? jsonDecode(req.data) : req.data;
           expect(body['username'], equals('user@test.com'));
           expect(body['password'], equals('pass'));
@@ -414,7 +410,6 @@ void main() {
           sub: 'refreshed',
         );
 
-        // First login
         mockAdapter.onRoute('/api/auth/login', (req) {
           return ResponseBody.fromString(
             jsonEncode({'token': initialJwt, 'refreshToken': initialRefresh}),
@@ -505,7 +500,6 @@ void main() {
         sub: 'refreshed',
       );
 
-      // First login
       mockAdapter.onRoute('/api/auth/login', (req) {
         return ResponseBody.fromString(
           jsonEncode({'token': initialJwt, 'refreshToken': initialRefresh}),
@@ -523,7 +517,6 @@ void main() {
         ),
       );
 
-      // Slow refresh handler to allow concurrency
       mockAdapter.onRoute('/api/auth/token', (req) async {
         refreshCallCount++;
         await Future.delayed(Duration(milliseconds: 50));
@@ -536,13 +529,11 @@ void main() {
         );
       });
 
-      // Fire two concurrent refreshes
       await Future.wait([
         client.refreshJwtToken(notify: false),
         client.refreshJwtToken(notify: false),
       ]);
 
-      // Only one HTTP call should have been made
       expect(refreshCallCount, equals(1));
       expect(client.getJwtToken(), equals(newJwt));
     });
@@ -598,7 +589,6 @@ void main() {
           },
         );
       });
-      // Logout returns 500 — tokens should still be cleared
       mockAdapter.onRoute('/api/auth/logout', (req) {
         return ResponseBody.fromString(
           '{"message":"error"}',
@@ -675,8 +665,6 @@ void main() {
       );
       client.dio.httpClientAdapter = mockAdapter;
 
-      // No handler for /api/devices — returns 404
-      // Need JWT first so the interceptor proceeds
       final jwtToken = createTestJwt();
       final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
       mockAdapter.onRoute('/api/auth/login', (req) {

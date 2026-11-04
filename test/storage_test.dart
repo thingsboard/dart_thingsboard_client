@@ -54,7 +54,6 @@ void main() {
     });
 
     test('deleteItem on non-existent key does nothing', () async {
-      // Should not throw
       await storage.deleteItem('nonexistent');
       expect(await storage.containsKey('nonexistent'), isFalse);
     });

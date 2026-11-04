@@ -7,18 +7,13 @@
 #
 
 #
-# WARNING: do not run this against a server that lacks thingsboard/thingsboard
-# #16510 (schemas of ThingsboardErrorCode, AliasEntityId, ColumnSettings and
-# the /api/auth/token body; commit 9231afe93cb: LoginResponse scope and
-# optional refreshToken), #16555 (device API responses) and #16557
-# (NotificationInfo subtypes). The committed
-# spec/openapi.json is the released lts-4.4 spec plus these three unmerged
-# PRs; re-fetching without them breaks the build (LoginResponse.scope) and
-# drops the NotificationInfo subtypes. Once all are merged into lts-4.4,
-# re-fetch and diff. See "The spec is composed" in CONTRIBUTING.md.
-#
 # Fetches the OpenAPI spec of a running ThingsBoard server into
 # <edition_dir>/spec/openapi.json, ready for tool/generate-client.sh.
+#
+# WARNING: the committed spec is the released lts-4.4 spec plus the unmerged
+# thingsboard/thingsboard PRs #16510, #16555 and #16557. Re-fetching from a server
+# without them breaks the build (LoginResponse.scope) and drops the NotificationInfo
+# subtypes. See "The spec is composed" in CONTRIBUTING.md.
 #
 # Usage:
 #   tool/fetch-spec.sh <server url> [edition]
@@ -27,21 +22,13 @@
 #   server url  Base URL of the server, e.g. http://localhost:8080
 #   edition     onprem (default); see "Editions" in generate-client.sh
 #
-# The spec is read from the springdoc group /v3/api-docs/thingsboard. The
-# ungrouped /v3/api-docs is a different document: it lacks the security
-# requirements, the error responses and the tag list, and includes internal
-# controllers, so the generated client would differ.
+# The spec is read from the springdoc group /v3/api-docs/thingsboard; the ungrouped
+# /v3/api-docs lacks the security requirements, error responses and tag list.
 #
-# The device API (/api/v1/**, the device-token based HTTP transport of
-# DeviceApiController) is removed, like in the specs the other ThingsBoard REST
-# clients are generated from: it is the device side of the platform, not part
-# of the user API this client wraps, and it is only in the spec when the
-# server runs with the HTTP transport. Its tag goes with it.
-#
-# The servers[].url of the spec is the address the server was reached at; the
-# generator writes it into the client as its default base path, so it is
-# replaced by http://localhost:8080 to keep the output independent of the
-# machine the spec was fetched on. Nothing else in the spec is changed.
+# Two changes are made: the device API (/api/v1/**, device-token transport; only present
+# when the server runs the HTTP transport) is removed with its tag, and servers[].url
+# (written into the client as its default base path) is set to http://localhost:8080 so
+# the output does not depend on where the spec was fetched.
 #
 
 set -euo pipefail

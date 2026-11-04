@@ -30,8 +30,6 @@ class LocalFileStorage implements TbStorage {
   RandomAccessFile? _file;
 
   Future<void> _init() async {
-    _data = {};
-
     final f = await _getFile();
     final length = await f.length();
 
@@ -89,7 +87,7 @@ class LocalFileStorage implements TbStorage {
       return _file!;
     }
 
-    final dirPath = path ?? _getDocumentDir().path;
+    final dirPath = path ?? Directory.current.path;
     final file = File('$dirPath/$fileName');
 
     if (await file.exists()) {
@@ -100,14 +98,6 @@ class LocalFileStorage implements TbStorage {
     }
 
     return _file!;
-  }
-
-  Directory _getDocumentDir() {
-    try {
-      return Directory.current;
-    } catch (err) {
-      rethrow;
-    }
   }
 
   @override

@@ -16,7 +16,6 @@ import 'package:thingsboard_client/src/http/http_utils.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 
-// Helper: create a test JWT token
 String createTestJwt({
   String sub = 'user-id',
   String scope = 'TENANT_ADMIN',
@@ -50,7 +49,6 @@ String createExpiredJwt({String scope = 'TENANT_ADMIN'}) {
       jsonEncode({
         'sub': 'user-id',
         'scopes': [scope],
-        // expired 1 hour ago
         'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 3600,
         'iss': 'test',
         'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 7200,
@@ -84,7 +82,6 @@ class MockHttpClientAdapter implements HttpClientAdapter {
     requestedHeaders.add(Map<String, dynamic>.from(options.headers));
     final handlers = _handlers[options.path];
     if (handlers != null && handlers.isNotEmpty) {
-      // Use first handler; remove it if there are multiple (sequential responses)
       final handler = handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
       return handler(options);
     }
@@ -101,10 +98,8 @@ class MockHttpClientAdapter implements HttpClientAdapter {
   void close({bool force = false}) {}
 }
 
-// Set both main and internal Dio adapters to the mock adapter
 void setMockAdapter(ThingsboardClient client, MockHttpClientAdapter adapter) {
   client.dio.httpClientAdapter = adapter;
-  // Also set the internal Dio's adapter in HttpInterceptor
   for (final interceptor in client.dio.interceptors) {
     if (interceptor is HttpInterceptor) {
       interceptor.internalDio.httpClientAdapter = adapter;
@@ -140,7 +135,6 @@ void main() {
           ..password = 'pass',
       ),
     );
-    // Clear recorded paths after login
     mockAdapter.requestedPaths.clear();
     mockAdapter.requestedHeaders.clear();
   }
@@ -193,7 +187,6 @@ void main() {
     });
 
     test('does NOT inject auth header for /api/auth/login', () async {
-      // Do NOT login first — interceptor should NOT add header on login path
       String? capturedAuthHeader;
       mockAdapter.onRoute('/api/auth/login', (req) {
         capturedAuthHeader = req.headers['X-Authorization'];
@@ -221,14 +214,12 @@ void main() {
     });
 
     test('does NOT inject auth header for /api/noauth/ paths', () async {
-      // Reset client without prior login
       String? capturedAuthHeader;
       mockAdapter.onRoute('/api/noauth/resetPasswordByEmail', (req) {
         capturedAuthHeader = req.headers['X-Authorization'];
         return ResponseBody.fromString('', 200);
       });
 
-      // Direct post to noauth path
       try {
         await client.post(
           '/api/noauth/resetPasswordByEmail',
@@ -249,7 +240,6 @@ void main() {
     test(
       '401 with jwtTokenExpired triggers refresh then retries original request',
       () async {
-        // Start with a valid token
         await loginClient();
 
         final newJwt = createTestJwt(sub: 'user-refreshed');
@@ -259,7 +249,6 @@ void main() {
         );
         var devicesCallCount = 0;
 
-        // /api/auth/token returns new JWT
         mockAdapter.onRoute('/api/auth/token', (req) {
           return ResponseBody.fromString(
             jsonEncode({'token': newJwt, 'refreshToken': newRefresh}),
@@ -270,7 +259,6 @@ void main() {
           );
         });
 
-        // First /api/devices call returns 401+jwtTokenExpired, second succeeds
         mockAdapter.onRoute('/api/devices', (req) {
           devicesCallCount++;
           return ResponseBody.fromString(
@@ -318,12 +306,10 @@ void main() {
       await loginClient();
       var callCount = 0;
 
-      // First call: 429
       mockAdapter.onRoute('/api/devices', (req) {
         callCount++;
         return ResponseBody.fromString('', 429);
       });
-      // Second call: 200
       mockAdapter.onRoute('/api/devices', (req) {
         callCount++;
         return ResponseBody.fromString(
@@ -359,7 +345,6 @@ void main() {
         );
         setMockAdapter(client, mockAdapter);
         await loginClient();
-        // Reset counts after login (login fires load callbacks too)
         await Future.delayed(Duration(milliseconds: 50));
         loadStartCount = 0;
         loadFinishCount = 0;
@@ -375,7 +360,6 @@ void main() {
         });
 
         await client.get('/api/devices');
-        // Allow Future callbacks to fire
         await Future.delayed(Duration(milliseconds: 50));
 
         expect(loadStartCount, greaterThanOrEqualTo(1));
@@ -385,63 +369,62 @@ void main() {
   });
 
   group('ignoreLoading', () {
-    test('request with ignoreLoading=true does NOT fire load callbacks', () async {
-      var loadStartCount = 0;
-      var loadFinishCount = 0;
+    test(
+      'request with ignoreLoading=true does NOT fire load callbacks',
+      () async {
+        var loadStartCount = 0;
+        var loadFinishCount = 0;
 
-      // Use default client (no callbacks) for login, then create client with callbacks
-      client = ThingsboardClient('http://localhost:8080');
-      setMockAdapter(client, mockAdapter);
+        client = ThingsboardClient('http://localhost:8080');
+        setMockAdapter(client, mockAdapter);
 
-      // Login without callbacks active
-      final jwtToken = createTestJwt();
-      final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
-      mockAdapter.onRoute('/api/auth/login', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
-          200,
-          headers: {
-            'content-type': ['application/json'],
-          },
+        final jwtToken = createTestJwt();
+        final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
+        mockAdapter.onRoute('/api/auth/login', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
+        await client.login(
+          LoginRequest(
+            (b) => b
+              ..username = 'user@test.com'
+              ..password = 'pass',
+          ),
         );
-      });
-      await client.login(
-        LoginRequest(
-          (b) => b
-            ..username = 'user@test.com'
-            ..password = 'pass',
-        ),
-      );
 
-      // Now swap to client with callbacks (share the same token state via mock)
-      // Actually: create client with callbacks, inject the JWT directly via setUserFromJwtToken
-      final callbackClient = ThingsboardClient(
-        'http://localhost:8080',
-        onLoadStarted: () => loadStartCount++,
-        onLoadFinished: () => loadFinishCount++,
-      );
-      setMockAdapter(callbackClient, mockAdapter);
-      await callbackClient.setUserFromJwtToken(jwtToken, refreshToken, false);
-
-      mockAdapter.onRoute('/api/devices', (req) {
-        return ResponseBody.fromString(
-          '[]',
-          200,
-          headers: {
-            'content-type': ['application/json'],
-          },
+        final callbackClient = ThingsboardClient(
+          'http://localhost:8080',
+          onLoadStarted: () => loadStartCount++,
+          onLoadFinished: () => loadFinishCount++,
         );
-      });
+        setMockAdapter(callbackClient, mockAdapter);
+        await callbackClient.setUserFromJwtToken(jwtToken, refreshToken, false);
 
-      await callbackClient.get(
-        '/api/devices',
-        options: defaultHttpOptions(ignoreLoading: true),
-      );
-      await Future.delayed(Duration(milliseconds: 50));
+        mockAdapter.onRoute('/api/devices', (req) {
+          return ResponseBody.fromString(
+            '[]',
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      expect(loadStartCount, equals(0));
-      expect(loadFinishCount, equals(0));
-    });
+        await callbackClient.get(
+          '/api/devices',
+          options: defaultHttpOptions(ignoreLoading: true),
+        );
+        await Future.delayed(Duration(milliseconds: 50));
+
+        expect(loadStartCount, equals(0));
+        expect(loadFinishCount, equals(0));
+      },
+    );
   });
 
   group('internal Dio', () {
@@ -503,8 +486,6 @@ void main() {
           options: defaultHttpOptions(resendRequest: true),
         );
 
-        // The internal Dio does not have auth headers set by HttpInterceptor
-        // (it bypasses the main interceptor chain)
         expect(tokenRequestAuthHeader, isNull);
       },
     );

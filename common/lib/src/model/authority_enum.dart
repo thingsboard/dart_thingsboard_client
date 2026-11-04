@@ -3,10 +3,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// The authority of a user is the generated [Authority] (the Authority schema of
-// the spec), the same type the REST models use, so a value from the facade
-// (AuthUser.authority, LoginResponse.scope) and one from the REST API compare
-// equal. This library adds string conversion on top of it.
+// String conversion for the generated [Authority], the type shared with the REST
+// models.
 import 'authority.dart';
 
 export 'authority.dart' show Authority;

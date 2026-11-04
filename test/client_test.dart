@@ -36,7 +36,6 @@ void main() {
     });
 
     test('default storage (InMemoryStorage) works for login', () async {
-      // Just verify the client can be created and isn't authenticated
       final client = ThingsboardClient('http://localhost:8080');
       expect(client.isAuthenticated(), isFalse);
     });
@@ -45,7 +44,6 @@ void main() {
   group('interceptor chain', () {
     test('has HttpInterceptor in interceptor list', () {
       final client = ThingsboardClient('http://localhost:8080');
-      // Check that there is at least one interceptor (HttpInterceptor)
       expect(client.dio.interceptors, isNotEmpty);
     });
 
@@ -55,7 +53,6 @@ void main() {
         debugMode: true,
       );
       final interceptors = client.dio.interceptors.toList();
-      // PrettyDioLogger should appear before HttpInterceptor
       final prettyIndex = interceptors.indexWhere((i) => i is PrettyDioLogger);
       final httpIndex = interceptors.indexWhere(
         (i) => i.runtimeType.toString().contains('HttpInterceptor'),

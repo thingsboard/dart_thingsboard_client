@@ -5,7 +5,7 @@
 
 // A palette left on "Default" in the web UI is stored as {type: null}, and the
 // server returns it as is when no white-labeling level sets a palette
-// (PROD-8931). The spec has these fields optional, as in
+//. The spec has these fields optional, as in
 // thingsboard/thingsboard#16373; a spec from a server without it fails here.
 import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';

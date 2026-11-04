@@ -3,8 +3,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// Verify builder factories registered for nested generic types
-// Covers GEN-08 — serializers.dart patched for issue #22196
+// builder factories for nested generic types are registered in serializers.dart (issue #22196).
 import 'package:test/test.dart';
 import 'dart:io';
 

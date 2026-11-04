@@ -30,16 +30,13 @@ import '../page_data_alarm_data.dart';
 import '../page_data_entity_data.dart';
 import '../ts_value.dart';
 
-/// The wire name of [value], a generated enum value with its [serializer].
-///
-/// An enum serializer only maps names, so it needs no registered serializers.
+/// The wire name of a generated enum [value]; needs no registered serializers.
 String _wireName<T extends Object>(Serializer<T> serializer, T value) =>
     (serializer as PrimitiveSerializer<T>).serialize(apiSerializers(), value)
         as String;
 
-// The queries below are sent with the defaults the facade always sent filled in
-// where they are unset: the server rejects an alarm subscription whose
-// latestValues is missing ("keys" is null) once it starts its live updates.
+// Unset query defaults are filled in: the server rejects an alarm subscription
+// whose latestValues is missing ("keys" is null) once live updates start.
 
 EntityDataQuery _entityDataQueryWithDefaults(EntityDataQuery query) =>
     query.rebuild((b) {
@@ -111,7 +108,6 @@ extension WsCmdTypeTypeToString on WsCmdType {
   }
 }
 
-/// Parses the decoded JSON of an update the server sends for a command.
 typedef WebsocketUpdateParser =
     WebsocketDataMsg Function(Map<String, dynamic> json);
 
@@ -121,14 +117,10 @@ abstract class WebsocketCmd {
 
   WebsocketCmd({this.cmdId, required this.type});
 
-  /// The parser of the updates this command subscribes to, or null when it
-  /// subscribes to none.
+  /// The parser of the updates this command subscribes to, or null for none.
   ///
-  /// A top-level function, so that it can run in another isolate. Each
-  /// command names only its own update type: an app that never creates a
-  /// command does not compile in the parser of its updates.
-  ///
-  /// A custom subclass must override this, otherwise its updates are ignored.
+  /// Must be a top-level function so it can run in another isolate. A custom
+  /// subclass must override this, otherwise its updates are ignored.
   WebsocketUpdateParser? get updateParser => null;
 
   Map<String, dynamic> toJson() => {
@@ -720,7 +712,6 @@ class SubscriptionDataHolder extends WebsocketDataMsg {
         ]),
       );
 
-  /// A `[ts, value]` pair of a subscription update.
   static TsValue _tsValueFromList(List<dynamic> json) {
     final value = json[1];
     return TsValue(
@@ -828,8 +819,6 @@ TsValue _shiftTsValue(TsValue tsValue, int tsOffset, bool isTime) {
   });
 }
 
-/// [latest] (entity key type to key to value) moved by [tsOffset], with the
-/// values of [timeKeys] shifted as timestamps.
 MapBuilder<String, BuiltMap<String, TsValue>> _shiftLatest(
   BuiltMap<String, BuiltMap<String, TsValue>> latest,
   int tsOffset,
@@ -925,8 +914,7 @@ class EntityDataUpdate extends CmdUpdate {
           : null,
       super.fromJson();
 
-  /// This update with every timestamp moved by [tsOffset] (the difference
-  /// between the server clock and the local one).
+  /// This update with every timestamp moved by [tsOffset] (server minus local clock).
   EntityDataUpdate withTsOffset(int tsOffset) {
     EntityData shift(EntityData e) => _shiftEntityData(e, tsOffset);
     return EntityDataUpdate(
@@ -983,8 +971,7 @@ class AlarmDataUpdate extends CmdUpdate {
       totalEntities = json['totalEntities'],
       super.fromJson();
 
-  /// This update with every timestamp moved by [tsOffset] (the difference
-  /// between the server clock and the local one).
+  /// This update with every timestamp moved by [tsOffset] (server minus local clock).
   AlarmDataUpdate withTsOffset(int tsOffset) {
     AlarmData shift(AlarmData a) => _shiftAlarmData(a, tsOffset);
     return AlarmDataUpdate(
