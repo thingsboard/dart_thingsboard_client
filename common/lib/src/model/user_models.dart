@@ -17,7 +17,9 @@ class AuthUser {
   late String tenantId;
   late String? customerId;
   late bool? isPublic;
-  late Authority authority;
+  /// The authority of the user, or `null` for an anonymous user (a token
+  /// without scopes) or an authority the client does not know.
+  late Authority? authority;
   late Map<String, dynamic> additionalData;
 
   AuthUser.fromJson(Map<String, dynamic> json) {
@@ -31,9 +33,7 @@ class AuthUser {
     tenantId = claims.remove('tenantId') ?? '';
     customerId = claims.remove('customerId');
     isPublic = claims.remove('isPublic');
-    authority = scopes.isNotEmpty
-        ? authorityFromString(scopes[0])
-        : Authority.ANONYMOUS;
+    authority = scopes.isNotEmpty ? authorityFromString(scopes[0]) : null;
     additionalData = Map<String, dynamic>.from(claims);
   }
 
@@ -52,7 +52,7 @@ class AuthUser {
   String toString() {
     return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, '
         'lastName: $lastName, enabled: $enabled, tenantId: $tenantId, customerId: $customerId, '
-        'isPublic: $isPublic, authority: ${authority.toShortString()}}';
+        'isPublic: $isPublic, authority: ${authority?.toShortString()}}';
   }
 }
 

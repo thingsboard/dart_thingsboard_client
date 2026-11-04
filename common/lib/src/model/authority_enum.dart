@@ -3,23 +3,27 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-enum Authority {
-  SYS_ADMIN,
-  TENANT_ADMIN,
-  CUSTOMER_USER,
-  REFRESH_TOKEN,
-  ANONYMOUS,
-  PRE_VERIFICATION_TOKEN,
-  MFA_CONFIGURATION_TOKEN
-}
+// The authority of a user is the generated [Authority] (the Authority schema of
+// the spec), the same type the REST models use, so a value from the facade
+// (AuthUser.authority, LoginResponse.scope) and one from the REST API compare
+// equal. This library adds string conversion on top of it.
+import 'authority.dart';
 
-Authority authorityFromString(String value) {
-  return Authority.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+export 'authority.dart' show Authority;
+
+/// The [Authority] named [value] (case-insensitive), or `null` if there is no
+/// such authority.
+Authority? authorityFromString(String value) {
+  final name = value.toUpperCase();
+  for (final authority in Authority.values) {
+    if (authority != Authority.unknownDefaultOpenApi &&
+        authority.name.toUpperCase() == name) {
+      return authority;
+    }
+  }
+  return null;
 }
 
 extension AuthorityToString on Authority {
-  String toShortString() {
-    return toString().split('.').last;
-  }
+  String toShortString() => name;
 }

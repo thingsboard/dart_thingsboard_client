@@ -26,10 +26,7 @@ dependencies:
 ## Quick start
 
 ```dart
-import 'package:thingsboard_client/thingsboard_client.dart'
-    hide LoginRequest;
-import 'package:thingsboard_client/src/model/login_models.dart'
-    show LoginRequest;
+import 'package:thingsboard_client/thingsboard_client.dart';
 
 void main() async {
   final tbClient = ThingsboardClient('https://your-tb-instance.com');
@@ -48,6 +45,24 @@ void main() async {
   await tbClient.logout();
 }
 ```
+
+## Telemetry WebSocket
+
+The WebSocket API (subscriptions, their commands and updates) is in a separate library, `package:thingsboard_client/telemetry.dart`. Several of its types share a name with a REST model of the main library (`EntityId`, `EntityType`, `EntityDataQuery`, ...), so import it with a prefix:
+
+```dart
+import 'package:thingsboard_client/telemetry.dart' as ws;
+
+final subscriber = ws.TelemetrySubscriber.createEntityAttributesSubscription(
+  telemetryService: tbClient.getTelemetryService(),
+  entityId: ws.DeviceId(deviceId),
+  attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
+);
+subscriber.attributeDataStream.listen((data) => print(data));
+subscriber.subscribe();
+```
+
+A client created with an API key (`ThingsboardClient(url, apiKey: key)`) authenticates both the REST requests and the WebSocket with it.
 
 See [example/main.dart](example/main.dart) for a complete example.
 

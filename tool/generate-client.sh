@@ -292,6 +292,8 @@ copy_common_code() {
   output_dir=$(edition_dir "$edition")
   echo "Copying common code into ${edition}..."
   cp -r "$REPO_ROOT"/common/lib/src/* "${output_dir}/lib/src/"
+  # Public libraries of the facade (telemetry.dart) next to the main library.
+  cp "$REPO_ROOT"/common/lib/*.dart "${output_dir}/lib/"
   echo "Common code copied to ${output_dir}/lib/src/"
 
   local version_models="${output_dir}/lib/src/model/version_models.dart"
@@ -354,6 +356,19 @@ append_common_exports() {
   # Patch api.dart export to hide the generated client class (our facade takes precedence)
   perl -i -pe "s|export 'package:${pkg}/src/api.dart';|export 'package:${pkg}/src/api.dart' hide ${client_class};|" "$barrel"
 
+  # The login models of the facade are the ones ThingsboardClient.login() takes
+  # and returns, so the main library exports them instead of the generated
+  # LoginRequest, LoginResponse and RefreshTokenRequest (used only by the raw
+  # LoginEndpointApi, which stores no tokens).
+  local m
+  for m in login_request login_response refresh_token_request; do
+    perl -i -ne "print unless m|^export 'package:${pkg}/src/model/${m}\.dart';|" "$barrel"
+    if grep -q "src/model/${m}\.dart" "$barrel"; then
+      echo "Error: could not remove the export of src/model/${m}.dart from $barrel"
+      exit 1
+    fi
+  done
+
   cat >> "$barrel" << EXPORTS
 
 // Handwritten runtime facade
@@ -369,7 +384,7 @@ export 'package:${pkg}/src/interceptor/key_intercept_config.dart';
 export 'package:${pkg}/src/model/constants.dart';
 export 'package:${pkg}/src/model/version_models.dart';
 export 'package:${pkg}/src/model/authority_enum.dart' hide Authority;
-export 'package:${pkg}/src/model/login_models.dart' hide LoginRequest, LoginResponse, RefreshTokenRequest;
+export 'package:${pkg}/src/model/login_models.dart';
 export 'package:${pkg}/src/model/user_models.dart';
 export 'package:${pkg}/src/model/page/page_data.dart';
 export 'package:${pkg}/src/model/page/page_link.dart';

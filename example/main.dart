@@ -1,8 +1,6 @@
 // ignore_for_file: avoid_print
-import 'package:thingsboard_client/thingsboard_client.dart'
-    hide LoginRequest;
-import 'package:thingsboard_client/src/model/login_models.dart'
-    show LoginRequest;
+import 'package:thingsboard_client/telemetry.dart' as ws;
+import 'package:thingsboard_client/thingsboard_client.dart';
 
 const thingsBoardApiEndpoint = 'http://localhost:8080';
 
@@ -32,17 +30,23 @@ void main() async {
       }
     }
 
-    // 4. Telemetry subscription (requires a real device and running ThingsBoard)
-    // Uncomment the following to subscribe to real-time telemetry:
-    //
-    // final telemetryService = tbClient.getTelemetryService();
-    // final subscriber = TelemetrySubscriber(telemetryService, [
-    //   // Add subscription commands here, e.g. TimeseriesSubscriptionCmd
-    // ]);
-    // subscriber.subscribe();
-    // subscriber.dataStream.listen((update) {
-    //   print('Telemetry update: $update');
-    // });
+    // 4. Latest telemetry of the first device over the WebSocket. The
+    //    WebSocket types come from package:thingsboard_client/telemetry.dart.
+    final devices = pageData?.data ?? <Device>[];
+    if (devices.isNotEmpty) {
+      final subscriber =
+          ws.TelemetrySubscriber.createEntityAttributesSubscription(
+        telemetryService: tbClient.getTelemetryService(),
+        entityId: ws.DeviceId(devices.first.id!.id),
+        attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
+      );
+      final update = subscriber.attributeDataStream.first;
+      subscriber.subscribe();
+      final data = await update.timeout(const Duration(seconds: 10));
+      print('Latest telemetry of ${devices.first.name}: '
+          '${data.map((e) => '${e.key}=${e.value}').join(', ')}');
+      subscriber.unsubscribe();
+    }
 
     // 5. Logout
     await tbClient.logout();
