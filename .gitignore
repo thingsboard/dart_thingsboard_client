@@ -22,3 +22,6 @@ WARP.md
 *.log
 # FVM Version Cache
 .fvm/
+# macOS, editors
+.DS_Store
+.vscode/

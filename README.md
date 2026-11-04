@@ -1,5 +1,9 @@
 # thingsboard_client
 
+[![pub package](https://img.shields.io/pub/v/thingsboard_client.svg)](https://pub.dev/packages/thingsboard_client)
+[![CI](https://github.com/thingsboard/dart_thingsboard_client/actions/workflows/ci.yml/badge.svg)](https://github.com/thingsboard/dart_thingsboard_client/actions/workflows/ci.yml)
+[![License: BSD-3-Clause](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](LICENSE)
+
 ThingsBoard REST API client for Dart and Flutter.
 
 Generated from the ThingsBoard OpenAPI spec, with a handwritten runtime facade for JWT authentication, automatic token refresh, WebSocket telemetry subscriptions and typed error handling.
@@ -74,33 +78,11 @@ See [example/main.dart](example/main.dart) for a complete example.
 
 ## Development
 
-The client is generated from [spec/openapi.json](spec/openapi.json). Prerequisites: Java, Dart SDK, Perl, Python 3.
-
-```bash
-tool/generate-client.sh onprem             # Regenerate the package from spec/
-tool/generate-client.sh --dry-run onprem   # Validate and generate only, no build_runner
-tool/publish.sh onprem                     # pub.dev dry run
-tool/publish.sh --publish onprem           # Publish to pub.dev
-```
-
-```
-dart_thingsboard_client/
-├── spec/openapi.json        # OpenAPI spec (input)
-├── common/lib/src/          # Handwritten facade, copied into lib/src/ on generation
-├── tool/                    # generate-client.sh, generate_api_serializers.py, publish.sh
-├── lib/                     # Generated sources + copy of common/
-├── doc/                     # Generated API docs
-├── example/
-└── test/
-```
-
-Edit handwritten code in `common/`, not in `lib/src/`: generation overwrites the copy. `lib/src/api/`, `lib/src/model/`, `lib/src/serializers.dart` and `lib/src/api_serializers.dart` are regenerated on every run. `README.md`, `CHANGELOG.md`, `LICENSE`, `example/` and `test/` are kept.
-
-An edition is one package generated from one spec. `onprem` is this package at the repository root. A cloud client can be added as a separate package in `cloud/` with its own `cloud/spec/openapi.json`; see "Editions" in `tool/generate-client.sh`.
+The REST API classes and models are generated from [spec/openapi.json](spec/openapi.json) by [tool/generate-client.sh](tool/generate-client.sh); the handwritten facade lives in [common/](common/). See [CONTRIBUTING.md](CONTRIBUTING.md) for how to regenerate the client and run the checks.
 
 ## Features and bugs
 
-Please file feature requests and bugs at the [issue tracker](https://github.com/thingsboard/dart_thingsboard_client/issues).
+Please file feature requests and bugs at the [issue tracker](https://github.com/thingsboard/dart_thingsboard_client/issues). Report security vulnerabilities privately, see [SECURITY.md](SECURITY.md).
 
 ## Contributors
 
