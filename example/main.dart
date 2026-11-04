@@ -33,7 +33,7 @@ void main() async {
       final subscriber =
           ws.TelemetrySubscriber.createEntityAttributesSubscription(
             telemetryService: tbClient.getTelemetryService(),
-            entityId: ws.DeviceId(devices.first.id!.id),
+            entityId: devices.first.id!,
             attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
           );
       final update = subscriber.attributeDataStream.first;

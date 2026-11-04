@@ -401,7 +401,7 @@ export 'package:${pkg}/src/model/telemetry/has_tenant_id.dart';
 export 'package:${pkg}/src/model/telemetry/alarm_models.dart' hide AlarmSeverity, AlarmStatus, AlarmSearchStatus, AlarmInfo, Alarm, AlarmCommentType, AlarmAssignee, AlarmComment, AlarmCommentInfo;
 export 'package:${pkg}/src/model/telemetry/query/query_models.dart' hide AlarmData, AlarmDataQuery, EntityCountQuery, EntityData, EntityDataQuery, ApiUsageStateFilter, AssetSearchQueryFilter, AssetTypeFilter, DeviceSearchQueryFilter, DeviceTypeFilter, EdgeSearchQueryFilter, EdgeTypeFilter, EntityFilter, EntityListFilter, EntityNameFilter, EntitySearchDirection, EntityTypeFilter, EntityViewSearchQueryFilter, EntityViewTypeFilter, RelationEntityTypeFilter, RelationsQueryFilter, SingleEntityFilter, EntityKey, EntityKeyType, EntityKeyValueType, BooleanOperation, BooleanFilterPredicate, ComplexOperation, ComplexFilterPredicate, DynamicValueSourceType, KeyFilter, KeyFilterPredicate, NumericOperation, NumericFilterPredicate, StringOperation, StringFilterPredicate, AlarmDataPageLink, EntityDataPageLink, EntityDataSortOrder;
 export 'package:${pkg}/src/model/telemetry/push_notification_models.dart';
-export 'package:${pkg}/src/model/telemetry/telemetry_models.dart' hide DataType, AttributeScope, AttributeData, TsKvEntry, Aggregation;
+export 'package:${pkg}/src/model/telemetry/telemetry_models.dart';
 export 'package:${pkg}/src/service/telemetry_websocket_service.dart';
 EXPORTS
 

@@ -1263,6 +1263,5 @@ export 'package:thingsboard_client/src/model/telemetry/query/query_models.dart'
         EntityDataPageLink,
         EntityDataSortOrder;
 export 'package:thingsboard_client/src/model/telemetry/push_notification_models.dart';
-export 'package:thingsboard_client/src/model/telemetry/telemetry_models.dart'
-    hide DataType, AttributeScope, AttributeData, TsKvEntry, Aggregation;
+export 'package:thingsboard_client/src/model/telemetry/telemetry_models.dart';
 export 'package:thingsboard_client/src/service/telemetry_websocket_service.dart';

@@ -58,12 +58,14 @@ void main() {
   });
 
   group('telemetry library', () {
-    test('creates a subscription with its own entity id types', () {
+    test('creates a subscription for a generated entity id', () {
       final client = ThingsboardClient('http://localhost:8080');
       final subscriber =
           ws.TelemetrySubscriber.createEntityAttributesSubscription(
             telemetryService: client.getTelemetryService(),
-            entityId: ws.DeviceId('03327560-8957-11ea-a27f-4b68cd5becb0'),
+            entityId: DeviceId(
+              (b) => b..id = '03327560-8957-11ea-a27f-4b68cd5becb0',
+            ),
             attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
           );
       expect(subscriber, isA<ws.TelemetrySubscriber>());

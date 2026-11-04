@@ -6,19 +6,15 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:stream_channel/stream_channel.dart';
 import 'package:test/test.dart';
+import 'package:thingsboard_client/thingsboard_client.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:thingsboard_client/src/thingsboard_client.dart';
-import 'package:thingsboard_client/src/service/telemetry_websocket_service.dart';
-import 'package:thingsboard_client/src/model/login_models.dart';
-import 'package:thingsboard_client/src/model/telemetry/telemetry_models.dart';
-import 'package:thingsboard_client/src/model/id/entity_id.dart';
-import 'package:thingsboard_client/src/model/id/entity_type_models.dart';
 
 // ---- Test helpers ----
 
@@ -316,6 +312,25 @@ class _DelayedWebSocketSink implements WebSocketSink {
   Future<void> get done => _closeCompleter.future;
 }
 
+/// A TelemetryService that does nothing, for driving a subscriber directly.
+class _NoopTelemetryService implements TelemetryService {
+  @override
+  void subscribe(TelemetrySubscriber subscriber) {}
+
+  @override
+  void update(TelemetrySubscriber subscriber) {}
+
+  @override
+  void unsubscribe(TelemetrySubscriber subscriber) {}
+
+  @override
+  void reset(bool close) {}
+}
+
+Map<String, dynamic> _fixtureJson(String name) =>
+    jsonDecode(File('test/fixtures/ws/$name').readAsStringSync())
+        as Map<String, dynamic>;
+
 // ---- Tests ----
 
 void main() {
@@ -347,8 +362,7 @@ void main() {
   }
 
   // Helper to create a device EntityId for testing
-  EntityId deviceId(String id) =>
-      EntityId.fromTypeAndUuid(EntityType.DEVICE, id);
+  EntityId deviceId(String id) => DeviceId((b) => b..id = id);
 
   TelemetrySubscriber attributesSubscriber(
     TelemetryService service,
@@ -1257,6 +1271,251 @@ void main() {
 
       test('apiEndpoint getter returns the endpoint', () {
         expect(client.apiEndpoint, equals('http://localhost:8080'));
+      });
+    });
+  });
+
+  group('WebSocket updates on generated models', () {
+    test('tsOffset is applied once per update', () async {
+      final subscriber = TelemetrySubscriber(_NoopTelemetryService(), [
+        EntityDataCmd(cmdId: 1),
+      ]);
+      subscriber.setTsOffset(1000);
+      final json = _fixtureJson('entity_data_update.json');
+      final entityJson = (json['update'] as List).single as Map;
+      (entityJson['latest']['ENTITY_FIELD'] as Map)['createdTime'] = {
+        'ts': 1793807289284,
+        'value': '1764077525869',
+      };
+      final message =
+          parseWebsocketDataMessage(jsonEncode(json)) as EntityDataUpdate;
+      final received = <EntityDataUpdate>[];
+      subscriber.entityDataStream.listen(received.add);
+
+      subscriber.onCmdUpdate(message);
+      subscriber.onCmdUpdate(message);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(received, hasLength(2));
+      for (final update in received) {
+        final entity = update.update!.single;
+        expect(entity.timeseries!['temperature']!.map((v) => v.ts), [
+          1767620190490,
+          1764927907792,
+          1764077526869,
+        ]);
+        expect(
+          entity.latest!['TIME_SERIES']!['temperature']!.ts,
+          1767620190490,
+        );
+        expect(entity.latest!['ATTRIBUTE']!['active']!.ts, 1767620791344);
+        final createdTime = entity.latest!['ENTITY_FIELD']!['createdTime']!;
+        expect(createdTime.ts, 1793807290284);
+        expect(createdTime.value, '1764077526869');
+        expect(entity.latest!['ENTITY_FIELD']!['name']!.value, 'Device A');
+      }
+      // The received message itself is left as it came from the server.
+      expect(
+        message.update!.single.timeseries!['temperature']!.first.ts,
+        1767620189490,
+      );
+    });
+
+    test('alarm tsOffset shifts the alarm times and time-valued fields', () {
+      final json = _fixtureJson('alarm_data_update.json');
+      final alarmJson = (json['data']['data'] as List).first as Map;
+      (alarmJson['latest']['ALARM_FIELD'] ??= {})['startTime'] = {
+        'ts': 1,
+        'value': '1764077525869',
+      };
+      final message =
+          parseWebsocketDataMessage(jsonEncode(json)) as AlarmDataUpdate;
+      final alarm = message.withTsOffset(1000).data!.data!.first;
+      expect(alarm.createdTime, 1764077527497);
+      expect(alarm.endTs, 1767620191121);
+      expect(alarm.ackTs, 1000);
+      expect(
+        alarm.latest!['ALARM_FIELD']!['startTime']!.value,
+        '1764077526869',
+      );
+      expect(alarm.latest!['ALARM_FIELD']!['startTime']!.ts, 1001);
+      expect(alarm.latest!['ENTITY_FIELD']!['name']!.value, 'Device A');
+      expect(message.data!.data!.first.createdTime, 1764077526497);
+    });
+
+    test('unknown enum values in updates decode to unknownDefaultOpenApi', () {
+      final entityJson = _fixtureJson('entity_data_update.json');
+      ((entityJson['update'] as List).single as Map)['entityId']['entityType'] =
+          'FUTURE_TYPE';
+      final entityUpdate =
+          parseWebsocketDataMessage(jsonEncode(entityJson)) as EntityDataUpdate;
+      final entityId = entityUpdate.update!.single.entityId!;
+      expect(entityId.entityType, EntityType.unknownDefaultOpenApi);
+      expect(entityId.id, '434deb10-c3cc-11f0-ba29-557ae2ab3d6a');
+
+      final alarmJson = _fixtureJson('alarm_data_update.json');
+      ((alarmJson['data']['data'] as List).first as Map)['severity'] = 'FUTURE';
+      final alarmUpdate =
+          parseWebsocketDataMessage(jsonEncode(alarmJson)) as AlarmDataUpdate;
+      expect(
+        alarmUpdate.data!.data!.first.severity,
+        AlarmSeverity.unknownDefaultOpenApi,
+      );
+    });
+
+    test('resubscribe after reconnect sends identical command JSON', () async {
+      await loginClient(client);
+      final firstChannel = FakeWebSocketChannel();
+      final secondChannel = FakeWebSocketChannel();
+      channelFactory.enqueue(firstChannel);
+      channelFactory.enqueue(secondChannel);
+      final service = TelemetryWebsocketService(
+        client,
+        'http://localhost:8080',
+        channelFactory: channelFactory.call,
+      );
+      final subscriber = TelemetrySubscriber(service, [
+        EntityDataCmd(
+          query: EntityDataQuery(
+            (b) => b
+              ..entityFilter = EntityTypeFilter(
+                (f) => f..entityType = EntityType.DEVICE,
+              )
+              ..pageLink.pageSize = 10
+              ..entityFields.add(
+                EntityKey(
+                  (k) => k
+                    ..type = EntityKeyType.ENTITY_FIELD
+                    ..key = 'name',
+                ),
+              ),
+          ),
+          latestCmd: LatestValueCmd(
+            keys: [
+              EntityKey(
+                (k) => k
+                  ..type = EntityKeyType.TIME_SERIES
+                  ..key = 'temperature',
+              ),
+            ],
+          ),
+        ),
+      ]);
+      service.subscribe(subscriber);
+      await Future.delayed(Duration(milliseconds: 10));
+      firstChannel.simulateDisconnect();
+      await Future.delayed(Duration(milliseconds: RECONNECT_INTERVAL + 200));
+
+      final before = sentCmds(firstChannel);
+      final after = sentCmds(secondChannel);
+      expect(before, hasLength(1));
+      expect(before.single['type'], 'ENTITY_DATA');
+      expect(jsonEncode(after), jsonEncode(before));
+      service.reset(true);
+    });
+
+    test('parseWebsocketDataMessage works in a fresh isolate', () async {
+      for (final name in [
+        'entity_data_update.json',
+        'alarm_data_update.json',
+        'notifications_update.json',
+        'subscription_update.json',
+      ]) {
+        final raw = File('test/fixtures/ws/$name').readAsStringSync();
+        final message = await Isolate.run(() => parseWebsocketDataMessage(raw));
+        expect(message, isA<WebsocketDataMsg>(), reason: name);
+        if (message is EntityDataUpdate) {
+          expect(
+            message.update!.single.entityId!.id,
+            '434deb10-c3cc-11f0-ba29-557ae2ab3d6a',
+          );
+        } else if (message is AlarmDataUpdate) {
+          expect(message.data!.data!.first.severity, AlarmSeverity.CRITICAL);
+        } else if (message is NotificationsUpdate) {
+          expect(message.notifications!.first.recipientId, isA<UserId>());
+        }
+      }
+    });
+
+    test(
+      'attributeDataStream accumulates updates without mutating previous lists',
+      () async {
+        final subscriber =
+            TelemetrySubscriber.createEntityAttributesSubscription(
+              telemetryService: _NoopTelemetryService(),
+              entityId: deviceId('device-1'),
+              attributeScope: 'SHARED_SCOPE',
+            );
+        expect(
+          subscriber.subscriptionCommands.single.toJson()['scope'],
+          'SHARED_SCOPE',
+        );
+        final lists = <List<AttributeData>>[];
+        subscriber.attributeDataStream.listen(lists.add);
+
+        subscriber.onData(
+          SubscriptionUpdate.fromJson({
+            'subscriptionId': 1,
+            'data': {
+              'a': [
+                [1000, '1'],
+              ],
+            },
+          }),
+        );
+        subscriber.onData(
+          SubscriptionUpdate.fromJson({
+            'subscriptionId': 1,
+            'data': {
+              'a': [
+                [2000, '2'],
+              ],
+              'b': [
+                [2000, 'x'],
+              ],
+            },
+          }),
+        );
+        await Future<void>.delayed(Duration.zero);
+
+        expect(lists, hasLength(2));
+        expect(lists[0], hasLength(1));
+        expect(lists[0].single.key, 'a');
+        expect(lists[0].single.lastUpdateTs, 1000);
+        expect(lists[0].single.value!.value, '1');
+        expect(lists[1].map((e) => e.key), ['a', 'b']);
+        expect(lists[1][0].lastUpdateTs, 2000);
+        expect(lists[1][0].value!.value, '2');
+        expect(lists[1][1].value!.value, 'x');
+      },
+    );
+
+    test('an unknown attribute scope is rejected', () {
+      expect(
+        () => TelemetrySubscriber.createEntityAttributesSubscription(
+          telemetryService: _NoopTelemetryService(),
+          entityId: deviceId('device-1'),
+          attributeScope: 'NO_SUCH_SCOPE',
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('EntityDataCmd with an alias entity id', () {
+      final cmd = EntityDataCmd(
+        cmdId: 1,
+        query: EntityDataQuery(
+          (b) => b
+            ..entityFilter = SingleEntityFilter(
+              (f) => f..singleEntity.entityType = 'CURRENT_USER',
+            )
+            ..pageLink.pageSize = 1,
+        ),
+      );
+      final json = jsonDecode(jsonEncode(cmd.toJson()));
+      expect(json['query']['entityFilter'], {
+        'type': 'singleEntity',
+        'singleEntity': {'entityType': 'CURRENT_USER'},
       });
     });
   });

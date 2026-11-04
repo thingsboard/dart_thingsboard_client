@@ -7,420 +7,72 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:built_collection/built_collection.dart';
+import 'package:built_value/json_object.dart';
+import 'package:built_value/serializer.dart';
 import 'package:collection/collection.dart';
 
-import '../../error/thingsboard_error.dart';
-import '../id/entity_id.dart';
-import '../id/entity_type_models.dart';
-import '../page/page_data.dart';
+import '../../api_serializers.dart';
+import '../aggregation.dart';
+import '../alarm_data.dart';
+import '../alarm_data_query.dart';
+import '../attribute_data.dart';
+import '../attribute_scope.dart';
+import '../entity_count_query.dart';
+import '../entity_data.dart';
+import '../entity_data_query.dart';
+import '../entity_id.dart';
+import '../entity_key.dart';
+import '../key_filter.dart';
+import '../entity_type.dart';
+import '../page_data_alarm_data.dart';
+import '../page_data_entity_data.dart';
+import '../ts_value.dart';
 import 'push_notification_models.dart';
-import 'query/query_models.dart';
-import 'ts_value.dart';
 
-enum DataType { STRING, LONG, BOOLEAN, DOUBLE, JSON }
-
-DataType dataTypeFromString(String value) {
-  return DataType.values.firstWhere(
-    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
-  );
-}
-
-extension DataTypeToString on DataType {
-  String toShortString() {
-    return toString().split('.').last;
-  }
-}
-
-abstract class KvEntry {
-  String getKey();
-
-  DataType getDataType();
-
-  String? getStrValue();
-
-  int? getLongValue();
-
-  bool? getBooleanValue();
-
-  double? getDoubleValue();
-
-  String? getJsonValue();
-
-  String getValueAsString();
-
-  dynamic getValue();
-}
-
-abstract class AttributeKvEntry extends KvEntry {
-  int getLastUpdateTs();
-}
-
-abstract class TsKvEntry extends KvEntry {
-  int getTs();
-
-  int getDataPoints();
-}
-
-class BaseAttributeKvEntry implements AttributeKvEntry {
-  final int lastUpdateTs;
-  final KvEntry kv;
-
-  BaseAttributeKvEntry(this.kv, this.lastUpdateTs);
-
-  @override
-  int getLastUpdateTs() => lastUpdateTs;
-
-  @override
-  String getKey() => kv.getKey();
-
-  @override
-  DataType getDataType() => kv.getDataType();
-
-  @override
-  String? getStrValue() => kv.getStrValue();
-
-  @override
-  int? getLongValue() => kv.getLongValue();
-
-  @override
-  bool? getBooleanValue() => kv.getBooleanValue();
-
-  @override
-  double? getDoubleValue() => kv.getDoubleValue();
-
-  @override
-  String? getJsonValue() => kv.getJsonValue();
-
-  @override
-  String getValueAsString() => kv.getValueAsString();
-
-  @override
-  dynamic getValue() => kv.getValue();
-
-  @override
-  String toString() {
-    return 'BaseAttributeKvEntry{lastUpdateTs: $lastUpdateTs, kv: $kv}';
-  }
-}
-
-class BasicTsKvEntry implements TsKvEntry {
-  static const int MAX_CHARS_PER_DATA_POINT = 512;
-
-  final int ts;
-  final KvEntry kv;
-
-  BasicTsKvEntry(this.ts, this.kv);
-
-  @override
-  int getTs() => ts;
-
-  @override
-  String getKey() => kv.getKey();
-
-  @override
-  DataType getDataType() => kv.getDataType();
-
-  @override
-  String? getStrValue() => kv.getStrValue();
-
-  @override
-  int? getLongValue() => kv.getLongValue();
-
-  @override
-  bool? getBooleanValue() => kv.getBooleanValue();
-
-  @override
-  double? getDoubleValue() => kv.getDoubleValue();
-
-  @override
-  String? getJsonValue() => kv.getJsonValue();
-
-  @override
-  String getValueAsString() => kv.getValueAsString();
-
-  @override
-  dynamic getValue() => kv.getValue();
-
-  @override
-  int getDataPoints() {
-    int length;
-    switch (getDataType()) {
-      case DataType.STRING:
-        length = getStrValue()!.length;
-        break;
-      case DataType.JSON:
-        length = getJsonValue()!.length;
-        break;
-      default:
-        return 1;
-    }
-    return max(
-      1,
-      (length + MAX_CHARS_PER_DATA_POINT - 1) / MAX_CHARS_PER_DATA_POINT,
-    ).toInt();
-  }
-
-  @override
-  String toString() {
-    return 'BasicTsKvEntry{ts: $ts, kv: $kv}';
-  }
-}
-
-abstract class BasicKvEntry implements KvEntry {
-  final String key;
-
-  BasicKvEntry(this.key);
-
-  @override
-  String getKey() => key;
-
-  @override
-  String? getStrValue() => null;
-
-  @override
-  int? getLongValue() => null;
-
-  @override
-  bool? getBooleanValue() => null;
-
-  @override
-  double? getDoubleValue() => null;
-
-  @override
-  String? getJsonValue() => null;
-
-  @override
-  String toString() {
-    return 'BasicKvEntry{key: $key}';
-  }
-}
-
-class BooleanDataEntry extends BasicKvEntry {
-  final bool value;
-
-  BooleanDataEntry(super.key, this.value);
-
-  @override
-  DataType getDataType() => DataType.BOOLEAN;
-
-  @override
-  bool? getBooleanValue() => value;
-
-  @override
-  dynamic getValue() => value;
-
-  @override
-  String getValueAsString() => value.toString();
-
-  @override
-  String toString() {
-    return 'BooleanDataEntry{value: $value} ${super.toString()}';
-  }
-}
-
-class StringDataEntry extends BasicKvEntry {
-  final String value;
-
-  StringDataEntry(super.key, this.value);
-
-  @override
-  DataType getDataType() => DataType.STRING;
-
-  @override
-  String? getStrValue() => value;
-
-  @override
-  dynamic getValue() => value;
-
-  @override
-  String getValueAsString() => value;
-
-  @override
-  String toString() {
-    return 'StringDataEntry{value: $value} ${super.toString()}';
-  }
-}
-
-class LongDataEntry extends BasicKvEntry {
-  final int value;
-
-  LongDataEntry(super.key, this.value);
-
-  @override
-  DataType getDataType() => DataType.LONG;
-
-  @override
-  int? getLongValue() => value;
-
-  @override
-  dynamic getValue() => value;
-
-  @override
-  String getValueAsString() => value.toString();
-
-  @override
-  String toString() {
-    return 'LongDataEntry{value: $value} ${super.toString()}';
-  }
-}
-
-class DoubleDataEntry extends BasicKvEntry {
-  final double value;
-
-  DoubleDataEntry(super.key, this.value);
-
-  @override
-  DataType getDataType() => DataType.DOUBLE;
-
-  @override
-  double? getDoubleValue() => value;
-
-  @override
-  dynamic getValue() => value;
-
-  @override
-  String getValueAsString() => value.toString();
-
-  @override
-  String toString() {
-    return 'DoubleDataEntry{value: $value} ${super.toString()}';
-  }
-}
-
-class JsonDataEntry extends BasicKvEntry {
-  final String value;
-
-  JsonDataEntry(super.key, this.value);
-
-  @override
-  DataType getDataType() => DataType.JSON;
-
-  @override
-  String? getJsonValue() => value;
-
-  @override
-  dynamic getValue() => value;
-
-  @override
-  String getValueAsString() => value;
-
-  @override
-  String toString() {
-    return 'JsonDataEntry{value: $value} ${super.toString()}';
-  }
-}
-
-enum Aggregation { MIN, MAX, AVG, SUM, COUNT, NONE }
-
-Aggregation aggregationFromString(String value) {
-  return Aggregation.values.firstWhere(
-    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
-  );
-}
-
-extension AggregationToString on Aggregation {
-  String toShortString() {
-    return toString().split('.').last;
-  }
-}
-
-abstract class RestJsonConverter {
-  static const String KEY = 'key';
-  static const String VALUE = 'value';
-  static const String LAST_UPDATE_TS = 'lastUpdateTs';
-  static const String TS = 'ts';
-
-  static const String CAN_T_PARSE_VALUE = 'Can\'t parse value: ';
-
-  static List<AttributeKvEntry> toAttributes(List<dynamic>? attributes) {
-    if (attributes != null && attributes.isNotEmpty) {
-      return attributes.map((attr) {
-        var entry = _parseValue(attr[KEY] as String, attr[VALUE]);
-        return BaseAttributeKvEntry(entry, attr[LAST_UPDATE_TS] as int);
-      }).toList();
-    } else {
-      return [];
-    }
-  }
-
-  static List<TsKvEntry> toTimeseries(Map<String, dynamic>? timeseries) {
-    if (timeseries != null && timeseries.isNotEmpty) {
-      var result = <TsKvEntry>[];
-      timeseries.forEach((key, value) {
-        var values = value as List<dynamic>;
-        result.addAll(
-          values.where((ts) => ts[VALUE] != null).map((ts) {
-            var entry = _parseValue(key, ts[VALUE]);
-            return BasicTsKvEntry(ts[TS] as int, entry);
-          }),
-        );
-      });
-      return result;
-    } else {
-      return [];
-    }
-  }
-
-  static KvEntry _parseValue(String key, dynamic value) {
-    if (!(value is Map || value is List)) {
-      if (value is bool) {
-        return BooleanDataEntry(key, value);
-      } else if (value is num) {
-        return _parseNumericValue(key, value);
-      } else if (value is String) {
-        return StringDataEntry(key, value);
-      } else {
-        throw ThingsboardError(
-          message: CAN_T_PARSE_VALUE + value,
-          errorCode: ThingsBoardErrorCode.invalidArguments,
-        );
+/// The wire name of [value], a generated enum value with its [serializer].
+///
+/// An enum serializer only maps names, so it needs no registered serializers.
+String _wireName<T extends Object>(Serializer<T> serializer, T value) =>
+    (serializer as PrimitiveSerializer<T>).serialize(apiSerializers(), value)
+        as String;
+
+// The queries below are sent with the defaults the facade always sent filled in
+// where they are unset: the server rejects an alarm subscription whose
+// latestValues is missing ("keys" is null) once it starts its live updates.
+
+EntityDataQuery _entityDataQueryWithDefaults(EntityDataQuery query) =>
+    query.rebuild((b) {
+      if (query.keyFilters == null) b.keyFilters = ListBuilder<KeyFilter>();
+      if (query.entityFields == null) b.entityFields = ListBuilder<EntityKey>();
+      if (query.latestValues == null) b.latestValues = ListBuilder<EntityKey>();
+      if (query.pageLink != null) {
+        b.pageLink.page ??= 0;
+        b.pageLink.dynamic_ ??= false;
       }
-    } else {
-      return JsonDataEntry(key, jsonEncode(value));
-    }
-  }
+    });
 
-  static KvEntry _parseNumericValue(String key, num value) {
-    if (value is int) {
-      return LongDataEntry(key, value);
-    } else {
-      return DoubleDataEntry(key, value.toDouble());
-    }
-  }
-}
+EntityCountQuery _entityCountQueryWithDefaults(EntityCountQuery query) =>
+    query.rebuild((b) {
+      if (query.keyFilters == null) b.keyFilters = ListBuilder<KeyFilter>();
+    });
+
+AlarmDataQuery _alarmDataQueryWithDefaults(AlarmDataQuery query) =>
+    query.rebuild((b) {
+      if (query.keyFilters == null) b.keyFilters = ListBuilder<KeyFilter>();
+      if (query.entityFields == null) b.entityFields = ListBuilder<EntityKey>();
+      if (query.latestValues == null) b.latestValues = ListBuilder<EntityKey>();
+      if (query.pageLink != null) {
+        b.pageLink.page ??= 0;
+        b.pageLink.dynamic_ ??= false;
+      }
+    });
 
 enum LatestTelemetry { LATEST_TELEMETRY }
 
 extension LatestTelemetryToString on LatestTelemetry {
   String toShortString() {
     return toString().split('.').last;
-  }
-}
-
-enum AttributeScope { CLIENT_SCOPE, SERVER_SCOPE, SHARED_SCOPE }
-
-extension AttributeScopeToString on AttributeScope {
-  String toShortString() {
-    return toString().split('.').last;
-  }
-}
-
-AttributeScope attributeScopeFromString(String value) {
-  return AttributeScope.values.firstWhere(
-    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
-  );
-}
-
-class AttributeData {
-  int? lastUpdateTs;
-  String key;
-  dynamic value;
-
-  AttributeData({this.lastUpdateTs, required this.key, this.value});
-
-  @override
-  String toString() {
-    return 'AttributeData{lastUpdateTs: $lastUpdateTs, key: $key, value: $value}';
   }
 }
 
@@ -505,10 +157,10 @@ abstract class SubscriptionCmd extends TelemetryPluginCmd {
   @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
-    json['entityType'] = entityType.toShortString();
+    json['entityType'] = _wireName(EntityType.serializer, entityType);
     json['entityId'] = entityId;
     if (scope != null) {
-      json['scope'] = scope!.toShortString();
+      json['scope'] = _wireName(AttributeScope.serializer, scope!);
     }
     json['unsubscribe'] = unsubscribe;
     return json;
@@ -531,7 +183,7 @@ class TimeseriesSubscriptionCmd extends SubscriptionCmd {
   final int? timeWindow;
   final int? interval;
   final int? limit;
-  final Aggregation agg;
+  final Aggregation? agg;
 
   TimeseriesSubscriptionCmd({
     super.cmdId,
@@ -562,7 +214,9 @@ class TimeseriesSubscriptionCmd extends SubscriptionCmd {
     if (limit != null) {
       json['limit'] = limit;
     }
-    json['agg'] = agg.toShortString();
+    if (agg != null) {
+      json['agg'] = _wireName(Aggregation.serializer, agg!);
+    }
     return json;
   }
 }
@@ -591,7 +245,7 @@ class GetHistoryCmd extends TelemetryPluginCmd {
   @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
-    json['entityType'] = entityType.toShortString();
+    json['entityType'] = _wireName(EntityType.serializer, entityType);
     json['entityId'] = entityId;
     json['startTs'] = startTs;
     json['endTs'] = endTs;
@@ -599,7 +253,7 @@ class GetHistoryCmd extends TelemetryPluginCmd {
     if (limit != null) {
       json['limit'] = limit;
     }
-    json['agg'] = agg.toShortString();
+    json['agg'] = _wireName(Aggregation.serializer, agg);
     return json;
   }
 }
@@ -629,7 +283,7 @@ class EntityHistoryCmd {
       'startTs': startTs,
       'endTs': endTs,
       'interval': interval,
-      'agg': agg.toShortString(),
+      'agg': _wireName(Aggregation.serializer, agg),
     };
     if (limit != null) {
       json['limit'] = limit;
@@ -647,7 +301,12 @@ class LatestValueCmd {
   LatestValueCmd({required this.keys});
 
   Map<String, dynamic> toJson() => {
-    'keys': keys.map((e) => e.toJson()).toList(),
+    'keys': [
+      for (final key in keys)
+        apiSerializers(
+          registerEntityKey,
+        ).serializeWith(EntityKey.serializer, key),
+    ],
   };
 }
 
@@ -676,7 +335,7 @@ class TimeSeriesCmd {
       'startTs': startTs,
       'timeWindow': timeWindow,
       'interval': interval,
-      'agg': agg.toShortString(),
+      'agg': _wireName(Aggregation.serializer, agg),
     };
     if (limit != null) {
       json['limit'] = limit;
@@ -709,7 +368,7 @@ class AggKey {
     var json = <String, dynamic>{
       'id': id,
       'key': key,
-      'agg': agg.toShortString(),
+      'agg': _wireName(Aggregation.serializer, agg),
     };
     if (previousStartTs != null) {
       json['previousStartTs'] = previousStartTs;
@@ -788,7 +447,10 @@ class EntityDataCmd extends WebsocketCmd {
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     if (query != null) {
-      json['query'] = query!.toJson();
+      json['query'] = apiSerializers(registerEntityDataQuery).serializeWith(
+        EntityDataQuery.serializer,
+        _entityDataQueryWithDefaults(query!),
+      );
     }
     if (historyCmd != null) {
       json['historyCmd'] = historyCmd!.toJson();
@@ -827,7 +489,10 @@ class EntityCountCmd extends WebsocketCmd {
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     if (query != null) {
-      json['query'] = query!.toJson();
+      json['query'] = apiSerializers(registerEntityCountQuery).serializeWith(
+        EntityCountQuery.serializer,
+        _entityCountQueryWithDefaults(query!),
+      );
     }
     return json;
   }
@@ -844,7 +509,10 @@ class AlarmDataCmd extends WebsocketCmd {
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     if (query != null) {
-      json['query'] = query!.toJson();
+      json['query'] = apiSerializers(registerAlarmDataQuery).serializeWith(
+        AlarmDataQuery.serializer,
+        _alarmDataQueryWithDefaults(query!),
+      );
     }
     return json;
   }
@@ -1013,11 +681,22 @@ class SubscriptionDataHolder extends WebsocketDataMsg {
   final Map<String, List<TsValue>> data;
 
   SubscriptionDataHolder.fromJson(Map<String, dynamic> json)
-    : data = (json['data'] as Map<String, dynamic>).map((key, value) {
-        var tsList = value as List<dynamic>;
-        var tsValuesList = tsList.map((e) => TsValue.fromJsonList(e)).toList();
-        return MapEntry(key, tsValuesList);
-      });
+    : data = ((json['data'] as Map<String, dynamic>?) ?? {}).map(
+        (key, value) => MapEntry(key, [
+          for (final tsValue in value as List<dynamic>)
+            _tsValueFromList(tsValue as List<dynamic>),
+        ]),
+      );
+
+  /// A `[ts, value]` pair of a subscription update.
+  static TsValue _tsValueFromList(List<dynamic> json) {
+    final value = json[1];
+    return TsValue(
+      (b) => b
+        ..ts = json[0] as int
+        ..value = value == null || value is String ? value : jsonEncode(value),
+    );
+  }
 
   @override
   String toString() {
@@ -1046,26 +725,28 @@ class SubscriptionUpdate extends SubscriptionDataHolder {
     }
   }
 
-  List<AttributeData> updateAttributeData(List<AttributeData> origData) {
+  /// [current] with the latest value of every key of this update applied, as a
+  /// new list; [current] is left unchanged.
+  List<AttributeData> updateAttributeData(List<AttributeData> current) {
+    final result = List.of(current);
     data.forEach((key, keyData) {
       if (keyData.isNotEmpty) {
-        final existing = origData.where((data) => data.key == key);
-        if (existing.isNotEmpty) {
-          var existingData = existing.first;
-          existingData.lastUpdateTs = keyData[0].ts;
-          existingData.value = keyData[0].value;
+        final latest = keyData[0];
+        final attribute = AttributeData(
+          (b) => b
+            ..key = key
+            ..lastUpdateTs = latest.ts
+            ..value = latest.value == null ? null : JsonObject(latest.value!),
+        );
+        final index = result.indexWhere((e) => e.key == key);
+        if (index >= 0) {
+          result[index] = attribute;
         } else {
-          origData.add(
-            AttributeData(
-              key: key,
-              lastUpdateTs: keyData[0].ts,
-              value: keyData[0].value,
-            ),
-          );
+          result.add(attribute);
         }
       }
     });
-    return origData;
+    return result;
   }
 
   @override
@@ -1093,107 +774,207 @@ abstract class CmdUpdate extends WebsocketDataMsg {
   final int? errorCode;
   final String? errorMsg;
 
+  CmdUpdate({required this.cmdId, this.errorCode, this.errorMsg});
+
   CmdUpdate.fromJson(Map<String, dynamic> json)
     : cmdId = json['cmdId'],
       errorCode = json['errorCode'],
       errorMsg = json['errorMsg'];
 }
 
-abstract class DataUpdate<T> extends CmdUpdate {
-  final PageData<T>? data;
-  final List<T>? update;
+/// [tsValue] moved by [tsOffset]; the value too when it is a timestamp
+/// ([isTime]), which the server sends as a string.
+TsValue _shiftTsValue(TsValue tsValue, int tsOffset, bool isTime) {
+  return tsValue.rebuild((b) {
+    if (b.ts != null) {
+      b.ts = b.ts! + tsOffset;
+    }
+    final time = isTime && b.value != null ? int.tryParse(b.value!) : null;
+    if (time != null) {
+      b.value = (time + tsOffset).toString();
+    }
+  });
+}
 
-  DataUpdate.fromJson(
-    super.json,
-    T Function(Map<String, dynamic> json) dataFromJson,
-  ) : data = json['data'] != null
-          ? PageData.fromJson(json['data'], (json) => dataFromJson(json))
+/// [latest] (entity key type to key to value) moved by [tsOffset], with the
+/// values of [timeKeys] shifted as timestamps.
+MapBuilder<String, BuiltMap<String, TsValue>> _shiftLatest(
+  BuiltMap<String, BuiltMap<String, TsValue>> latest,
+  int tsOffset,
+  Set<String> timeKeys,
+) {
+  return MapBuilder(
+    latest.map(
+      (keyType, values) => MapEntry(
+        keyType,
+        values.map(
+          (key, tsValue) => MapEntry(
+            key,
+            _shiftTsValue(tsValue, tsOffset, timeKeys.contains(key)),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+const _entityTimeKeys = {'createdTime'};
+
+EntityData _shiftEntityData(EntityData entityData, int tsOffset) {
+  return entityData.rebuild((b) {
+    final timeseries = entityData.timeseries;
+    if (timeseries != null) {
+      b.timeseries = MapBuilder(
+        timeseries.map(
+          (key, values) => MapEntry(
+            key,
+            BuiltList<TsValue>(
+              values.map((v) => _shiftTsValue(v, tsOffset, false)),
+            ),
+          ),
+        ),
+      );
+    }
+    final latest = entityData.latest;
+    if (latest != null) {
+      b.latest = _shiftLatest(latest, tsOffset, _entityTimeKeys);
+    }
+  });
+}
+
+const _alarmTimeKeys = {
+  'createdTime',
+  'startTime',
+  'endTime',
+  'ackTime',
+  'clearTime',
+};
+
+AlarmData _shiftAlarmData(AlarmData alarmData, int tsOffset) {
+  int? shift(int? ts) => ts == null ? null : ts + tsOffset;
+  return alarmData.rebuild((b) {
+    b
+      ..createdTime = shift(alarmData.createdTime)
+      ..ackTs = shift(alarmData.ackTs)
+      ..clearTs = shift(alarmData.clearTs)
+      ..endTs = shift(alarmData.endTs);
+    final latest = alarmData.latest;
+    if (latest != null) {
+      b.latest = _shiftLatest(latest, tsOffset, _alarmTimeKeys);
+    }
+  });
+}
+
+class EntityDataUpdate extends CmdUpdate {
+  final PageDataEntityData? data;
+  final BuiltList<EntityData>? update;
+
+  EntityDataUpdate({
+    required super.cmdId,
+    super.errorCode,
+    super.errorMsg,
+    this.data,
+    this.update,
+  });
+
+  EntityDataUpdate.fromJson(super.json)
+    : data = json['data'] != null
+          ? apiSerializers(
+              registerPageDataEntityData,
+            ).deserializeWith(PageDataEntityData.serializer, json['data'])
           : null,
       update = json['update'] != null
-          ? (json['update'] as List<dynamic>)
-                .map((e) => dataFromJson(e))
-                .toList()
+          ? BuiltList<EntityData>([
+              for (final e in json['update'] as List<dynamic>)
+                apiSerializers(
+                  registerEntityData,
+                ).deserializeWith(EntityData.serializer, e)!,
+            ])
           : null,
       super.fromJson();
 
+  /// This update with every timestamp moved by [tsOffset] (the difference
+  /// between the server clock and the local one).
+  EntityDataUpdate withTsOffset(int tsOffset) {
+    EntityData shift(EntityData e) => _shiftEntityData(e, tsOffset);
+    return EntityDataUpdate(
+      cmdId: cmdId,
+      errorCode: errorCode,
+      errorMsg: errorMsg,
+      data: data?.rebuild((b) {
+        final entities = data!.data;
+        if (entities != null) {
+          b.data = ListBuilder<EntityData>(entities.map(shift));
+        }
+      }),
+      update: update == null ? null : BuiltList(update!.map(shift)),
+    );
+  }
+
   @override
   String toString() {
-    return 'DataUpdate{data: $data, update: $update}';
+    return 'EntityDataUpdate{cmdId: $cmdId, data: $data, update: $update}';
   }
 }
 
-class EntityDataUpdate extends DataUpdate<EntityData> {
-  EntityDataUpdate.fromJson(Map<String, dynamic> json)
-    : super.fromJson(json, (json) => EntityData.fromJson(json));
-
-  void prepareData(int tsOffset) {
-    if (data != null) {
-      _processEntityData(data!.data, tsOffset);
-    }
-    if (update != null) {
-      _processEntityData(update!, tsOffset);
-    }
-  }
-
-  void _processEntityData(List<EntityData> data, int tsOffset) {
-    for (var entityData in data) {
-      entityData.timeseries.forEach((key, tsValues) {
-        for (var tsValue in tsValues) {
-          tsValue.ts += tsOffset;
-        }
-      });
-      entityData.latest.forEach((key, keyTypeValues) {
-        keyTypeValues.forEach((key, tsValue) {
-          tsValue.ts += tsOffset;
-          if (key == 'createdTime' && tsValue.value != null) {
-            tsValue.value = (int.parse(tsValue.value!) + tsOffset).toString();
-          }
-        });
-      });
-    }
-  }
-}
-
-class AlarmDataUpdate extends DataUpdate<AlarmData> {
+class AlarmDataUpdate extends CmdUpdate {
+  final PageDataAlarmData? data;
+  final BuiltList<AlarmData>? update;
   final int? allowedEntities;
   final int? totalEntities;
 
-  AlarmDataUpdate.fromJson(Map<String, dynamic> json)
-    : allowedEntities = json['allowedEntities'],
-      totalEntities = json['totalEntities'],
-      super.fromJson(json, (json) => AlarmData.fromJson(json));
+  AlarmDataUpdate({
+    required super.cmdId,
+    super.errorCode,
+    super.errorMsg,
+    this.data,
+    this.update,
+    this.allowedEntities,
+    this.totalEntities,
+  });
 
-  void prepareData(int tsOffset) {
-    if (data != null) {
-      _processAlarmData(data!.data, tsOffset);
-    }
-    if (update != null) {
-      _processAlarmData(update!, tsOffset);
-    }
+  AlarmDataUpdate.fromJson(super.json)
+    : data = json['data'] != null
+          ? apiSerializers(
+              registerPageDataAlarmData,
+            ).deserializeWith(PageDataAlarmData.serializer, json['data'])
+          : null,
+      update = json['update'] != null
+          ? BuiltList<AlarmData>([
+              for (final e in json['update'] as List<dynamic>)
+                apiSerializers(
+                  registerAlarmData,
+                ).deserializeWith(AlarmData.serializer, e)!,
+            ])
+          : null,
+      allowedEntities = json['allowedEntities'],
+      totalEntities = json['totalEntities'],
+      super.fromJson();
+
+  /// This update with every timestamp moved by [tsOffset] (the difference
+  /// between the server clock and the local one).
+  AlarmDataUpdate withTsOffset(int tsOffset) {
+    AlarmData shift(AlarmData a) => _shiftAlarmData(a, tsOffset);
+    return AlarmDataUpdate(
+      cmdId: cmdId,
+      errorCode: errorCode,
+      errorMsg: errorMsg,
+      data: data?.rebuild((b) {
+        final alarms = data!.data;
+        if (alarms != null) {
+          b.data = ListBuilder<AlarmData>(alarms.map(shift));
+        }
+      }),
+      update: update == null ? null : BuiltList(update!.map(shift)),
+      allowedEntities: allowedEntities,
+      totalEntities: totalEntities,
+    );
   }
 
-  void _processAlarmData(List<AlarmData> data, int tsOffset) {
-    for (var alarmData in data) {
-      alarmData.createdTime = alarmData.createdTime! + tsOffset;
-      alarmData.ackTs = alarmData.ackTs! + tsOffset;
-      alarmData.clearTs = alarmData.clearTs! + tsOffset;
-      alarmData.endTs = alarmData.endTs! + tsOffset;
-      alarmData.latest.forEach((key, keyTypeValues) {
-        keyTypeValues.forEach((key, tsValue) {
-          tsValue.ts += tsOffset;
-          if ([
-                'createdTime',
-                'startTime',
-                'endTime',
-                'ackTime',
-                'clearTime',
-              ].contains(key) &&
-              tsValue.value != null) {
-            tsValue.value = (int.parse(tsValue.value!) + tsOffset).toString();
-          }
-        });
-      });
-    }
+  @override
+  String toString() {
+    return 'AlarmDataUpdate{cmdId: $cmdId, data: $data, update: $update, '
+        'allowedEntities: $allowedEntities, totalEntities: $totalEntities}';
   }
 }
 
@@ -1293,14 +1074,26 @@ class TelemetrySubscriber {
     var subscriptionKeys = keys?.join(',');
     if (attributeScope == LatestTelemetry.LATEST_TELEMETRY.toShortString()) {
       subscriptionCommand = TimeseriesSubscriptionCmd(
-        entityId: entityId.id!,
+        entityId: entityId.id,
         entityType: entityId.entityType,
         keys: subscriptionKeys,
       );
     } else {
-      var scope = attributeScopeFromString(attributeScope);
+      var scope = AttributeScope.values.firstWhereOrNull(
+        (e) =>
+            e != AttributeScope.unknownDefaultOpenApi &&
+            _wireName(AttributeScope.serializer, e) ==
+                attributeScope.toUpperCase(),
+      );
+      if (scope == null) {
+        throw ArgumentError.value(
+          attributeScope,
+          'attributeScope',
+          'Not LATEST_TELEMETRY or an attribute scope',
+        );
+      }
       subscriptionCommand = AttributesSubscriptionCmd(
-        entityId: entityId.id!,
+        entityId: entityId.id,
         entityType: entityId.entityType,
         keys: subscriptionKeys,
         scope: scope,
@@ -1411,17 +1204,17 @@ class TelemetrySubscriber {
   }
 
   void _onEntityData(EntityDataUpdate message) {
-    if (_tsOffset != null) {
-      message.prepareData(_tsOffset!);
-    }
-    _entityDataStreamController.add(message);
+    final tsOffset = _tsOffset;
+    _entityDataStreamController.add(
+      tsOffset != null ? message.withTsOffset(tsOffset) : message,
+    );
   }
 
   void _onAlarmData(AlarmDataUpdate message) {
-    if (_tsOffset != null) {
-      message.prepareData(_tsOffset!);
-    }
-    _alarmDataStreamController.add(message);
+    final tsOffset = _tsOffset;
+    _alarmDataStreamController.add(
+      tsOffset != null ? message.withTsOffset(tsOffset) : message,
+    );
   }
 
   void _onEntityCount(EntityCountUpdate message) {
@@ -1472,10 +1265,11 @@ class TelemetrySubscriber {
 
   Stream<void> get reconnectStream => _reconnectStreamController.stream;
 
+  /// The attributes of every update so far: each update emits a new list.
   Stream<List<AttributeData>> get attributeDataStream {
-    final attributeData = <AttributeData>[];
+    var attributeData = <AttributeData>[];
     return dataStream.map(
-      (message) => message.updateAttributeData(attributeData),
+      (message) => attributeData = message.updateAttributeData(attributeData),
     );
   }
 }
