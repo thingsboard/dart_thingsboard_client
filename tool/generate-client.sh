@@ -862,7 +862,8 @@ YAML
   # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 6c: Generating per-operation serializer registries ==="
-  python3 "$SCRIPT_DIR/generate_api_serializers.py" "$output_dir" "$pkg"
+  python3 "$SCRIPT_DIR/generate_api_serializers.py" "$output_dir" "$pkg" \
+    "$SCRIPT_DIR/facade-serializer-roots.txt"
 
   if [ "$DRY_RUN" = true ]; then
     echo ""

@@ -16,7 +16,11 @@ This script replaces that dependency in the API classes:
   application never calls is tree-shaken together with the part of the graph
   only it needs.
 
-Usage: generate_api_serializers.py <edition output dir> <package name>
+Usage: generate_api_serializers.py <edition output dir> <package name> [roots file]
+
+The optional roots file lists models (one per line, `#` comments and blank lines
+allowed) that get a stable, operation-independent `register<Model>` function even
+if no operation names them, for hand-written code that (de)serializes them.
 """
 
 import os
@@ -212,9 +216,8 @@ class Graph:
         return seen
 
 
-def patch_apis(api_dir, package, graph):
-    """Point every operation at its own roots. Returns the root sets in use."""
-    root_sets = {}
+def patch_apis(api_dir, package, graph, root_sets):
+    """Point every operation at its own roots. Fills and returns the root sets."""
     import_line = f"import 'package:{package}/src/api_serializers.dart';\n"
     for name in sorted(os.listdir(api_dir)):
         if not name.endswith('_api.dart'):
@@ -381,8 +384,21 @@ class ApiSerializersRegistry {
     return len(used)
 
 
+def read_roots(path, graph):
+    """Model names listed in the roots file, validated against the graph."""
+    names = []
+    for line in open(path).read().split('\n'):
+        line = line.split('#', 1)[0].strip()
+        if line:
+            names.append(line)
+    unknown = [n for n in names if n not in graph.models]
+    if unknown:
+        raise SystemExit(f'Error: unknown model(s) in {path}: {", ".join(unknown)}')
+    return names
+
+
 def main():
-    if len(sys.argv) != 3:
+    if len(sys.argv) not in (3, 4):
         raise SystemExit(__doc__)
     output_dir, package = sys.argv[1], sys.argv[2]
     src_dir = os.path.join(output_dir, 'lib', 'src')
@@ -394,7 +410,13 @@ def main():
             graph.add_model_file(os.path.join(model_dir, name))
     graph.link_models()
 
-    root_sets = patch_apis(os.path.join(src_dir, 'api'), package, graph)
+    # Facade roots first: their singleton names are fixed, so an operation with
+    # the same root set shares the function and no other set can take the name.
+    root_sets = {}
+    if len(sys.argv) == 4:
+        for model in read_roots(sys.argv[3], graph):
+            root_set_fn(graph, {graph.models[model]}, root_sets)
+    patch_apis(os.path.join(src_dir, 'api'), package, graph, root_sets)
     nodes = write_registry(os.path.join(src_dir, 'api_serializers.dart'), package, graph, root_sets)
     print(f'api_serializers.dart: {len(root_sets)} root sets over {nodes} nodes '
           f'({len(graph.models)} serializable classes in the spec)')

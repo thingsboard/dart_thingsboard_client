@@ -1,0 +1,15 @@
+# Models the telemetry WebSocket facade (de)serializes. Each gets a stable
+# register<Model> function in lib/src/api_serializers.dart, independent of the
+# API operations.
+EntityDataQuery
+EntityCountQuery
+AlarmDataQuery
+PageDataEntityData
+PageDataAlarmData
+EntityData
+AlarmData
+TsValue
+Notification
+AttributeData
+EntityKey
+EntityId

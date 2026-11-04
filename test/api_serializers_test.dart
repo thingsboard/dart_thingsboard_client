@@ -10,6 +10,7 @@ import 'dart:typed_data';
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
+import 'package:thingsboard_client/src/api_serializers.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 
 /// Answers every request with [responses] for its path and records the body.
@@ -238,5 +239,74 @@ void main() {
       standardSerializers,
     ).getAllowedPermissions()).data!;
     expect(info.operationsByResource, isEmpty);
+  });
+
+  group('facade roots', () {
+    Object? fixture(String name) =>
+        jsonDecode(File('test/fixtures/ws/$name').readAsStringSync());
+
+    test(
+      'registerPageDataEntityData deserializes entity data with a DeviceId',
+      () {
+        // The fixture's `data` is null; its `update` is a list of entity data.
+        final json = {
+          'data': (fixture('entity_data_update.json')! as Map)['update'],
+          'totalPages': 1,
+          'totalElements': 1,
+          'hasNext': false,
+        };
+        final page = apiSerializers(
+          registerPageDataEntityData,
+        ).deserializeWith(PageDataEntityData.serializer, json)!;
+        expect(page.data!.first.entityId, isA<DeviceId>());
+      },
+    );
+
+    test(
+      'registerEntityDataQuery serializes a query with an alias entity id',
+      () {
+        final query = EntityDataQuery(
+          (b) => b
+            ..entityFilter = SingleEntityFilter(
+              (f) => f
+                ..singleEntity = AliasEntityId(
+                  (a) => a..entityType = 'CURRENT_USER',
+                ).toBuilder(),
+            )
+            ..pageLink = EntityDataPageLink(
+              (p) => p..pageSize = 10,
+            ).toBuilder(),
+        );
+        final json =
+            apiSerializers(
+                  registerEntityDataQuery,
+                ).serializeWith(EntityDataQuery.serializer, query)!
+                as Map;
+        final filter = json['entityFilter'] as Map;
+        expect(filter['type'], 'singleEntity');
+        expect((filter['singleEntity'] as Map)['entityType'], 'CURRENT_USER');
+      },
+    );
+
+    test('registerNotification deserializes a notification', () {
+      final json =
+          ((fixture('notifications_update.json')! as Map)['notifications']
+                  as List)
+              .first;
+      final n = apiSerializers(
+        registerNotification,
+      ).deserializeWith(Notification.serializer, json)!;
+      expect(n.recipientId, isA<UserId>());
+      expect(n.subject, isNotNull);
+    });
+
+    test('facade roots do not reference standardSerializers', () {
+      final src = File('lib/src/api_serializers.dart').readAsStringSync();
+      final code = src
+          .split('\n')
+          .where((l) => !l.trimLeft().startsWith('//'))
+          .join('\n');
+      expect(code, isNot(contains('standardSerializers')));
+    });
   });
 }

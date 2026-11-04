@@ -1204,6 +1204,14 @@ void registerAlarmCountQuery(ApiSerializersRegistry r) {
   _alarmCountQuery(r);
 }
 
+void registerAlarmData(ApiSerializersRegistry r) {
+  _alarmData(r);
+}
+
+void registerAlarmDataQuery(ApiSerializersRegistry r) {
+  _alarmDataQuery(r);
+}
+
 void registerAlarmDataQueryAndPageDataAlarmData(ApiSerializersRegistry r) {
   _alarmDataQuery(r);
   _pageDataAlarmData(r);
@@ -1248,6 +1256,10 @@ void registerAssetProfile(ApiSerializersRegistry r) {
 
 void registerAssetProfileInfo(ApiSerializersRegistry r) {
   _assetProfileInfo(r);
+}
+
+void registerAttributeData(ApiSerializersRegistry r) {
+  _attributeData(r);
 }
 
 void registerAvailableEntityKeysAndEntityDataQuery(ApiSerializersRegistry r) {
@@ -1423,6 +1435,10 @@ void registerEntityCountQuery(ApiSerializersRegistry r) {
   _entityCountQuery(r);
 }
 
+void registerEntityData(ApiSerializersRegistry r) {
+  _entityData(r);
+}
+
 void registerEntityDataDiff(ApiSerializersRegistry r) {
   _entityDataDiff(r);
 }
@@ -1430,6 +1446,10 @@ void registerEntityDataDiff(ApiSerializersRegistry r) {
 void registerEntityDataInfoAndEntityType(ApiSerializersRegistry r) {
   _entityDataInfo(r);
   _entityType(r);
+}
+
+void registerEntityDataQuery(ApiSerializersRegistry r) {
+  _entityDataQuery(r);
 }
 
 void registerEntityDataQueryAndPageDataEntityData(ApiSerializersRegistry r) {
@@ -1450,8 +1470,16 @@ void registerEntityGroupInfo(ApiSerializersRegistry r) {
   _entityGroupInfo(r);
 }
 
+void registerEntityId(ApiSerializersRegistry r) {
+  _entityId(r);
+}
+
 void registerEntityInfo(ApiSerializersRegistry r) {
   _entityInfo(r);
+}
+
+void registerEntityKey(ApiSerializersRegistry r) {
+  _entityKey(r);
 }
 
 void registerEntityRelation(ApiSerializersRegistry r) {
@@ -2065,6 +2093,10 @@ void registerMobileSessionInfo(ApiSerializersRegistry r) {
   _mobileSessionInfo(r);
 }
 
+void registerNotification(ApiSerializersRegistry r) {
+  _notification(r);
+}
+
 void registerNotificationRequest(ApiSerializersRegistry r) {
   _notificationRequest(r);
 }
@@ -2183,6 +2215,10 @@ void registerPageDataAlarmCommentInfo(ApiSerializersRegistry r) {
   _pageDataAlarmCommentInfo(r);
 }
 
+void registerPageDataAlarmData(ApiSerializersRegistry r) {
+  _pageDataAlarmData(r);
+}
+
 void registerPageDataAlarmInfo(ApiSerializersRegistry r) {
   _pageDataAlarmInfo(r);
 }
@@ -2277,6 +2313,10 @@ void registerPageDataEdgeEvent(ApiSerializersRegistry r) {
 
 void registerPageDataEdgeInfo(ApiSerializersRegistry r) {
   _pageDataEdgeInfo(r);
+}
+
+void registerPageDataEntityData(ApiSerializersRegistry r) {
+  _pageDataEntityData(r);
 }
 
 void registerPageDataEntityGroupInfo(ApiSerializersRegistry r) {
@@ -2706,6 +2746,10 @@ void registerTrendzUsage(ApiSerializersRegistry r) {
 
 void registerTrendzViewConfig(ApiSerializersRegistry r) {
   _trendzViewConfig(r);
+}
+
+void registerTsValue(ApiSerializersRegistry r) {
+  _tsValue(r);
 }
 
 void registerTwoFaAccountConfig(ApiSerializersRegistry r) {
