@@ -24,8 +24,50 @@ const MAX_PUBLISH_COMMANDS = 10;
 
 typedef WebSocketChannelFactory = WebSocketChannel Function(Uri uri);
 
+/// Parses any update the server sends.
+///
+/// It reaches the parser of every update type; the service parses each update
+/// with the parser of the command it belongs to instead.
 WebsocketDataMsg parseWebsocketDataMessage(dynamic raw) {
   return WebsocketDataMsg.fromJson(jsonDecode(raw));
+}
+
+/// A frame received from the server, with the update parser of every
+/// subscribed command by its cmdId.
+class _UpdateFrame {
+  final dynamic raw;
+  final Map<int, WebsocketUpdateParser> parsers;
+
+  _UpdateFrame(this.raw, this.parsers);
+}
+
+/// An error the server reported for a command no subscriber has.
+class _UnroutedError extends WebsocketDataMsg {
+  final int errorCode;
+  final String? errorMsg;
+
+  _UnroutedError(this.errorCode, this.errorMsg);
+}
+
+/// [frame] parsed by the parser of the command it is an update for: null when
+/// no subscribed command has its id.
+///
+/// Attribute and timeseries updates carry the cmdId as `subscriptionId`, the
+/// other updates as `cmdId` along with a `cmdUpdateType`.
+WebsocketDataMsg? _parseUpdateFrame(_UpdateFrame frame) {
+  final json = jsonDecode(frame.raw) as Map<String, dynamic>;
+  final id = json['cmdUpdateType'] == null
+      ? json['subscriptionId']
+      : json['cmdId'];
+  final parser = frame.parsers[id];
+  if (parser != null) {
+    return parser(json);
+  }
+  final errorCode = json['errorCode'];
+  if (errorCode is int && errorCode != 0) {
+    return _UnroutedError(errorCode, json['errorMsg'] as String?);
+  }
+  return null;
 }
 
 class TelemetryWebsocketService implements TelemetryService {
@@ -41,6 +83,7 @@ class TelemetryWebsocketService implements TelemetryService {
   int _lastCmdId = 0;
   int _subscribersCount = 0;
   final Map<int, TelemetrySubscriber> _subscribersMap = {};
+  final Map<int, WebsocketUpdateParser> _parsersMap = {};
 
   final Set<TelemetrySubscriber> _reconnectSubscribers = {};
 
@@ -82,6 +125,10 @@ class TelemetryWebsocketService implements TelemetryService {
       if (subscriptionCommand is! MarkAsReadCmd &&
           subscriptionCommand is! MarkAllAsReadCmd) {
         _subscribersMap[cmdId] = subscriber;
+      }
+      var parser = subscriptionCommand.updateParser;
+      if (parser != null) {
+        _parsersMap[cmdId] = parser;
       }
       subscriptionCommand.cmdId = cmdId;
       _cmdsWrapper.cmds.add(subscriptionCommand);
@@ -142,6 +189,7 @@ class TelemetryWebsocketService implements TelemetryService {
         var cmdId = subscriptionCommand.cmdId;
         if (cmdId != null) {
           _subscribersMap.remove(cmdId);
+          _parsersMap.remove(cmdId);
         }
       }
       if (_subscribersCount > 0) {
@@ -203,6 +251,7 @@ class TelemetryWebsocketService implements TelemetryService {
     }
     _lastCmdId = 0;
     _subscribersMap.clear();
+    _parsersMap.clear();
     _subscribersCount = 0;
     _cmdsWrapper.clear();
   }
@@ -315,10 +364,12 @@ class TelemetryWebsocketService implements TelemetryService {
   void _onMessage(dynamic rawMessage) async {
     try {
       var message = await _tbClient.compute(
-        parseWebsocketDataMessage,
-        rawMessage,
+        _parseUpdateFrame,
+        _UpdateFrame(rawMessage, _parsersMap),
       );
-      if (message is SubscriptionUpdate) {
+      if (message is _UnroutedError) {
+        _onWsError(message.errorCode, message.errorMsg);
+      } else if (message is SubscriptionUpdate) {
         if (message.errorCode != null && message.errorCode! != 0) {
           _onWsError(message.errorCode!, message.errorMsg);
         } else {

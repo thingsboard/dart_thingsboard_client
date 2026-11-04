@@ -111,11 +111,23 @@ extension WsCmdTypeTypeToString on WsCmdType {
   }
 }
 
+/// Parses the decoded JSON of an update the server sends for a command.
+typedef WebsocketUpdateParser =
+    WebsocketDataMsg Function(Map<String, dynamic> json);
+
 abstract class WebsocketCmd {
   int? cmdId;
   WsCmdType type;
 
   WebsocketCmd({this.cmdId, required this.type});
+
+  /// The parser of the updates this command subscribes to, or null when it
+  /// subscribes to none.
+  ///
+  /// A top-level function, so that it can run in another isolate. Each
+  /// command names only its own update type: an app that never creates a
+  /// command does not compile in the parser of its updates.
+  WebsocketUpdateParser? get updateParser => null;
 
   Map<String, dynamic> toJson() => {
     'cmdId': cmdId,
@@ -127,6 +139,9 @@ abstract class TelemetryPluginCmd extends WebsocketCmd {
   final String? keys;
 
   TelemetryPluginCmd({super.cmdId, this.keys, required super.type});
+
+  @override
+  WebsocketUpdateParser? get updateParser => _parseSubscriptionUpdate;
 
   @override
   Map<String, dynamic> toJson() {
@@ -444,6 +459,9 @@ class EntityDataCmd extends WebsocketCmd {
   }) : super(type: WsCmdType.ENTITY_DATA);
 
   @override
+  WebsocketUpdateParser? get updateParser => _parseEntityDataUpdate;
+
+  @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     if (query != null) {
@@ -486,6 +504,9 @@ class EntityCountCmd extends WebsocketCmd {
     : super(type: WsCmdType.ENTITY_COUNT);
 
   @override
+  WebsocketUpdateParser? get updateParser => _parseEntityCountUpdate;
+
+  @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     if (query != null) {
@@ -506,6 +527,9 @@ class AlarmDataCmd extends WebsocketCmd {
   AlarmDataCmd({super.cmdId, this.query}) : super(type: WsCmdType.ALARM_DATA);
 
   @override
+  WebsocketUpdateParser? get updateParser => _parseAlarmDataUpdate;
+
+  @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     if (query != null) {
@@ -522,6 +546,9 @@ class AlarmDataCmd extends WebsocketCmd {
 
 class UnreadCountSubCmd extends WebsocketCmd {
   UnreadCountSubCmd({super.cmdId}) : super(type: WsCmdType.NOTIFICATIONS_COUNT);
+
+  @override
+  WebsocketUpdateParser? get updateParser => _parseNotificationCountUpdate;
 }
 
 class UnreadSubCmd extends WebsocketCmd {
@@ -529,6 +556,9 @@ class UnreadSubCmd extends WebsocketCmd {
 
   UnreadSubCmd({super.cmdId, required this.limit})
     : super(type: WsCmdType.NOTIFICATIONS);
+
+  @override
+  WebsocketUpdateParser? get updateParser => _parseNotificationsUpdate;
 
   @override
   Map<String, dynamic> toJson() {
@@ -1030,6 +1060,24 @@ class NotificationsUpdate extends NotificationCountUpdate {
         'notifications: $notifications}';
   }
 }
+
+WebsocketDataMsg _parseSubscriptionUpdate(Map<String, dynamic> json) =>
+    SubscriptionUpdate.fromJson(json);
+
+WebsocketDataMsg _parseEntityDataUpdate(Map<String, dynamic> json) =>
+    EntityDataUpdate.fromJson(json);
+
+WebsocketDataMsg _parseAlarmDataUpdate(Map<String, dynamic> json) =>
+    AlarmDataUpdate.fromJson(json);
+
+WebsocketDataMsg _parseEntityCountUpdate(Map<String, dynamic> json) =>
+    EntityCountUpdate.fromJson(json);
+
+WebsocketDataMsg _parseNotificationCountUpdate(Map<String, dynamic> json) =>
+    NotificationCountUpdate.fromJson(json);
+
+WebsocketDataMsg _parseNotificationsUpdate(Map<String, dynamic> json) =>
+    NotificationsUpdate.fromJson(json);
 
 abstract class TelemetryService {
   void subscribe(TelemetrySubscriber subscriber);

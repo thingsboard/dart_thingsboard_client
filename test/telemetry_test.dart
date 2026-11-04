@@ -331,6 +331,15 @@ Map<String, dynamic> _fixtureJson(String name) =>
     jsonDecode(File('test/fixtures/ws/$name').readAsStringSync())
         as Map<String, dynamic>;
 
+var _isolateComputeCalls = 0;
+
+/// Like Flutter's `compute`: counts its calls and runs [callback] on
+/// [message] in another isolate, so both must be sendable.
+Future<R> _isolateCompute<Q, R>(TbComputeCallback<Q, R> callback, Q message) {
+  _isolateComputeCalls++;
+  return Isolate.run(() => callback(message));
+}
+
 // ---- Tests ----
 
 void main() {
@@ -1555,6 +1564,178 @@ void main() {
         'type': 'singleEntity',
         'singleEntity': {'entityType': 'CURRENT_USER'},
       });
+    });
+  });
+
+  group('WebSocket update routing', () {
+    /// An attribute subscriber and an entity-data subscriber on one opened
+    /// service, with the cmdIds they were given.
+    Future<
+      ({
+        TelemetryWebsocketService service,
+        FakeWebSocketChannel channel,
+        TelemetrySubscriber attributes,
+        TelemetrySubscriber entityData,
+        int attributesCmdId,
+        int entityDataCmdId,
+      })
+    >
+    openTwoSubscribers(ThingsboardClient c) async {
+      await loginClient(c);
+      final channel = FakeWebSocketChannel();
+      channelFactory.enqueue(channel);
+      final service = TelemetryWebsocketService(
+        c,
+        'http://localhost:8080',
+        channelFactory: channelFactory.call,
+      );
+      final attributes = attributesSubscriber(service, 'device-1');
+      final entityData = TelemetrySubscriber(service, [
+        EntityDataCmd(
+          query: EntityDataQuery(
+            (b) => b
+              ..entityFilter = EntityTypeFilter(
+                (f) => f..entityType = EntityType.DEVICE,
+              )
+              ..pageLink.pageSize = 10,
+          ),
+        ),
+      ]);
+      attributes.subscribe();
+      entityData.subscribe();
+      await Future<void>.delayed(Duration(milliseconds: 10));
+      final cmds = sentCmds(channel);
+      return (
+        service: service,
+        channel: channel,
+        attributes: attributes,
+        entityData: entityData,
+        attributesCmdId:
+            cmds.singleWhere((c) => c['type'] == 'TIMESERIES')['cmdId'] as int,
+        entityDataCmdId:
+            cmds.singleWhere((c) => c['type'] == 'ENTITY_DATA')['cmdId'] as int,
+      );
+    }
+
+    test("updates reach only their own subscriber's parser", () async {
+      final s = await openTwoSubscribers(client);
+      final attributeData = <SubscriptionUpdate>[];
+      final attributeEntityData = <EntityDataUpdate>[];
+      final entityDataData = <SubscriptionUpdate>[];
+      final entityDataUpdates = <EntityDataUpdate>[];
+      s.attributes.dataStream.listen(attributeData.add);
+      s.attributes.entityDataStream.listen(attributeEntityData.add);
+      s.entityData.dataStream.listen(entityDataData.add);
+      s.entityData.entityDataStream.listen(entityDataUpdates.add);
+
+      final subscriptionJson = _fixtureJson('subscription_update.json')
+        ..['subscriptionId'] = s.attributesCmdId;
+      final entityDataJson = _fixtureJson('entity_data_update.json')
+        ..['cmdId'] = s.entityDataCmdId;
+      s.channel.injectMessage(jsonEncode(subscriptionJson));
+      s.channel.injectMessage(jsonEncode(entityDataJson));
+      await Future<void>.delayed(Duration(milliseconds: 10));
+
+      expect(attributeData, hasLength(1));
+      expect(attributeData.single.subscriptionId, s.attributesCmdId);
+      expect(attributeData.single.data['active']!.single.value, 'false');
+      expect(attributeEntityData, isEmpty);
+      expect(entityDataData, isEmpty);
+      expect(entityDataUpdates, hasLength(1));
+      expect(entityDataUpdates.single.cmdId, s.entityDataCmdId);
+      expect(
+        entityDataUpdates.single.update!.single.entityId!.id,
+        '434deb10-c3cc-11f0-ba29-557ae2ab3d6a',
+      );
+      s.service.reset(true);
+    });
+
+    test('an update for an unknown subscription is ignored', () async {
+      final s = await openTwoSubscribers(client);
+      final attributeData = <SubscriptionUpdate>[];
+      final entityDataUpdates = <EntityDataUpdate>[];
+      s.attributes.dataStream.listen(attributeData.add);
+      s.entityData.entityDataStream.listen(entityDataUpdates.add);
+      final unknownId = s.entityDataCmdId + 100;
+
+      s.channel.injectMessage(
+        jsonEncode(
+          _fixtureJson('subscription_update.json')
+            ..['subscriptionId'] = unknownId,
+        ),
+      );
+      s.channel.injectMessage(
+        jsonEncode(
+          _fixtureJson('entity_data_update.json')..['cmdId'] = unknownId,
+        ),
+      );
+      s.channel.injectMessage(
+        jsonEncode(
+          _fixtureJson('notifications_update.json')..['cmdId'] = unknownId,
+        ),
+      );
+      // A known subscription still gets its updates afterwards.
+      s.channel.injectMessage(
+        jsonEncode(
+          _fixtureJson('subscription_update.json')
+            ..['subscriptionId'] = s.attributesCmdId,
+        ),
+      );
+      await Future<void>.delayed(Duration(milliseconds: 10));
+
+      expect(entityDataUpdates, isEmpty);
+      expect(attributeData, hasLength(1));
+      expect(attributeData.single.subscriptionId, s.attributesCmdId);
+      s.service.reset(true);
+    });
+
+    test('parsing runs through computeFunc', () async {
+      _isolateComputeCalls = 0;
+      final isolateClient = ThingsboardClient(
+        'http://localhost:8080',
+        computeFunc: _isolateCompute,
+      );
+      isolateClient.dio.httpClientAdapter = mockAdapter;
+      final s = await openTwoSubscribers(isolateClient);
+      final attributeData = <SubscriptionUpdate>[];
+      final entityDataUpdates = <EntityDataUpdate>[];
+      s.attributes.dataStream.listen(attributeData.add);
+      s.entityData.entityDataStream.listen(entityDataUpdates.add);
+      final callsBefore = _isolateComputeCalls;
+
+      s.channel.injectMessage(
+        jsonEncode(
+          _fixtureJson('subscription_update.json')
+            ..['subscriptionId'] = s.attributesCmdId,
+        ),
+      );
+      s.channel.injectMessage(
+        jsonEncode(
+          _fixtureJson('entity_data_update.json')
+            ..['cmdId'] = s.entityDataCmdId,
+        ),
+      );
+      s.channel.injectMessage(
+        jsonEncode(
+          _fixtureJson('entity_data_update.json')
+            ..['cmdId'] = s.entityDataCmdId + 100,
+        ),
+      );
+      // Isolates take a while to start: wait for all three parses.
+      for (var i = 0; i < 500; i++) {
+        if (attributeData.isNotEmpty && entityDataUpdates.isNotEmpty) break;
+        await Future<void>.delayed(Duration(milliseconds: 10));
+      }
+      await Future<void>.delayed(Duration(milliseconds: 100));
+
+      expect(_isolateComputeCalls - callsBefore, 3);
+      expect(attributeData, hasLength(1));
+      expect(entityDataUpdates, hasLength(1));
+      expect(
+        entityDataUpdates.single.update!.single.entityId!.id,
+        '434deb10-c3cc-11f0-ba29-557ae2ab3d6a',
+      );
+      s.service.reset(true);
     });
   });
 }
