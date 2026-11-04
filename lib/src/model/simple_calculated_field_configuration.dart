@@ -49,7 +49,8 @@ abstract class SimpleCalculatedFieldConfiguration
   ]) = _$SimpleCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SimpleCalculatedFieldConfigurationBuilder b) => b;
+  static void _defaults(SimpleCalculatedFieldConfigurationBuilder b) =>
+      b..type = r'SIMPLE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SimpleCalculatedFieldConfiguration> get serializer =>

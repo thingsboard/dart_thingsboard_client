@@ -415,7 +415,8 @@ abstract class DefaultTenantProfileConfiguration
   ]) = _$DefaultTenantProfileConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultTenantProfileConfigurationBuilder b) => b;
+  static void _defaults(DefaultTenantProfileConfigurationBuilder b) =>
+      b..type = r'DEFAULT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultTenantProfileConfiguration> get serializer =>

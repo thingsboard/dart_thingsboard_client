@@ -37,7 +37,8 @@ abstract class SlackNotificationDeliveryMethodConfig
   ]) = _$SlackNotificationDeliveryMethodConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SlackNotificationDeliveryMethodConfigBuilder b) => b;
+  static void _defaults(SlackNotificationDeliveryMethodConfigBuilder b) =>
+      b..method = r'SLACK';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SlackNotificationDeliveryMethodConfig> get serializer =>

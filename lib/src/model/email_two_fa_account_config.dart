@@ -35,7 +35,8 @@ abstract class EmailTwoFaAccountConfig
   ]) = _$EmailTwoFaAccountConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EmailTwoFaAccountConfigBuilder b) => b;
+  static void _defaults(EmailTwoFaAccountConfigBuilder b) =>
+      b..providerType = r'EMAIL';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EmailTwoFaAccountConfig> get serializer =>

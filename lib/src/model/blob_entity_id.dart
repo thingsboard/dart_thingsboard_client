@@ -28,7 +28,8 @@ abstract class BlobEntityId
   factory BlobEntityId([void updates(BlobEntityIdBuilder b)]) = _$BlobEntityId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(BlobEntityIdBuilder b) => b;
+  static void _defaults(BlobEntityIdBuilder b) =>
+      b..entityType = EntityType.BLOB_ENTITY;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<BlobEntityId> get serializer => _$BlobEntityIdSerializer();

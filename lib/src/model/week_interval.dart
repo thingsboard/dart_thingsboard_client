@@ -34,7 +34,7 @@ abstract class WeekInterval
   factory WeekInterval([void updates(WeekIntervalBuilder b)]) = _$WeekInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WeekIntervalBuilder b) => b;
+  static void _defaults(WeekIntervalBuilder b) => b..type = r'WEEK';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WeekInterval> get serializer => _$WeekIntervalSerializer();

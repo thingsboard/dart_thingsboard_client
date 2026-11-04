@@ -37,7 +37,7 @@ abstract class EntityNameFilter
       _$EntityNameFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityNameFilterBuilder b) => b;
+  static void _defaults(EntityNameFilterBuilder b) => b..type = r'entityName';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityNameFilter> get serializer =>

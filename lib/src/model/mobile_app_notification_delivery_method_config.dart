@@ -46,7 +46,7 @@ abstract class MobileAppNotificationDeliveryMethodConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileAppNotificationDeliveryMethodConfigBuilder b) =>
-      b;
+      b..method = r'MOBILE_APP';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MobileAppNotificationDeliveryMethodConfig> get serializer =>

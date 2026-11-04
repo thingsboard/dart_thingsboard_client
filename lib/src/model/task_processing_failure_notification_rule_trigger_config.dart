@@ -36,7 +36,7 @@ abstract class TaskProcessingFailureNotificationRuleTriggerConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     TaskProcessingFailureNotificationRuleTriggerConfigBuilder b,
-  ) => b;
+  ) => b..triggerType = NotificationRuleTriggerType.TASK_PROCESSING_FAILURE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TaskProcessingFailureNotificationRuleTriggerConfig>

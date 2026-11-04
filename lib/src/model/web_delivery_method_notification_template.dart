@@ -46,7 +46,8 @@ abstract class WebDeliveryMethodNotificationTemplate
   ]) = _$WebDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WebDeliveryMethodNotificationTemplateBuilder b) => b;
+  static void _defaults(WebDeliveryMethodNotificationTemplateBuilder b) =>
+      b..method = r'WEB';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WebDeliveryMethodNotificationTemplate> get serializer =>

@@ -39,7 +39,8 @@ abstract class RepeatingAlarmCondition
   ]) = _$RepeatingAlarmCondition;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RepeatingAlarmConditionBuilder b) => b;
+  static void _defaults(RepeatingAlarmConditionBuilder b) =>
+      b..type = r'REPEATING';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RepeatingAlarmCondition> get serializer =>

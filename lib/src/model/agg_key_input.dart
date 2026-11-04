@@ -30,7 +30,7 @@ abstract class AggKeyInput
   factory AggKeyInput([void updates(AggKeyInputBuilder b)]) = _$AggKeyInput;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AggKeyInputBuilder b) => b;
+  static void _defaults(AggKeyInputBuilder b) => b..type = r'key';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AggKeyInput> get serializer => _$AggKeyInputSerializer();

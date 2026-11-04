@@ -38,7 +38,7 @@ abstract class CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder b,
-  ) => b;
+  ) => b..type = r'CHECK_PRE_PROVISIONED_DEVICES';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<

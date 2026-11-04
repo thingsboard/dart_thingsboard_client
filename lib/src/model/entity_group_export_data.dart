@@ -62,7 +62,8 @@ abstract class EntityGroupExportData
   ]) = _$EntityGroupExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityGroupExportDataBuilder b) => b;
+  static void _defaults(EntityGroupExportDataBuilder b) =>
+      b..entityType = EntityType.ENTITY_GROUP;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityGroupExportData> get serializer =>

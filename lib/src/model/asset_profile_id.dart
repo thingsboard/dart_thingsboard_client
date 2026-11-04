@@ -29,7 +29,8 @@ abstract class AssetProfileId
       _$AssetProfileId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AssetProfileIdBuilder b) => b;
+  static void _defaults(AssetProfileIdBuilder b) =>
+      b..entityType = EntityType.ASSET_PROFILE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AssetProfileId> get serializer =>

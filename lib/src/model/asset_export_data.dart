@@ -39,7 +39,8 @@ abstract class AssetExportData
       _$AssetExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AssetExportDataBuilder b) => b;
+  static void _defaults(AssetExportDataBuilder b) =>
+      b..entityType = EntityType.ASSET;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AssetExportData> get serializer =>

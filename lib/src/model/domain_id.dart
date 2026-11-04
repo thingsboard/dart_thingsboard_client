@@ -27,7 +27,7 @@ abstract class DomainId implements EntityId, Built<DomainId, DomainIdBuilder> {
   factory DomainId([void updates(DomainIdBuilder b)]) = _$DomainId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DomainIdBuilder b) => b;
+  static void _defaults(DomainIdBuilder b) => b..entityType = EntityType.DOMAIN;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DomainId> get serializer => _$DomainIdSerializer();

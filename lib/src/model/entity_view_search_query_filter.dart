@@ -66,7 +66,8 @@ abstract class EntityViewSearchQueryFilter
   ]) = _$EntityViewSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityViewSearchQueryFilterBuilder b) => b;
+  static void _defaults(EntityViewSearchQueryFilterBuilder b) =>
+      b..type = r'entityViewSearchQuery';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityViewSearchQueryFilter> get serializer =>

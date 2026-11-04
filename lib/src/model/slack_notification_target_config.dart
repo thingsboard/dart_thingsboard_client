@@ -45,7 +45,8 @@ abstract class SlackNotificationTargetConfig
   ]) = _$SlackNotificationTargetConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SlackNotificationTargetConfigBuilder b) => b;
+  static void _defaults(SlackNotificationTargetConfigBuilder b) =>
+      b..type = r'SLACK';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SlackNotificationTargetConfig> get serializer =>

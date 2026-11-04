@@ -42,7 +42,8 @@ abstract class NumericFilterPredicate
   ]) = _$NumericFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NumericFilterPredicateBuilder b) => b;
+  static void _defaults(NumericFilterPredicateBuilder b) =>
+      b..type = r'NUMERIC';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NumericFilterPredicate> get serializer =>

@@ -44,7 +44,8 @@ abstract class AlarmRuleBooleanFilterPredicate
   ]) = _$AlarmRuleBooleanFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmRuleBooleanFilterPredicateBuilder b) => b;
+  static void _defaults(AlarmRuleBooleanFilterPredicateBuilder b) =>
+      b..type = r'BOOLEAN';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmRuleBooleanFilterPredicate> get serializer =>

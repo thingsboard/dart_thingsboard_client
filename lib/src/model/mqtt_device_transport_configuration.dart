@@ -33,7 +33,8 @@ abstract class MqttDeviceTransportConfiguration
   ]) = _$MqttDeviceTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MqttDeviceTransportConfigurationBuilder b) => b;
+  static void _defaults(MqttDeviceTransportConfigurationBuilder b) =>
+      b..type = r'MQTT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MqttDeviceTransportConfiguration> get serializer =>

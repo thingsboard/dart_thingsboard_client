@@ -29,7 +29,8 @@ abstract class AdminSettingsId
       _$AdminSettingsId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AdminSettingsIdBuilder b) => b;
+  static void _defaults(AdminSettingsIdBuilder b) =>
+      b..entityType = EntityType.ADMIN_SETTINGS;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AdminSettingsId> get serializer =>

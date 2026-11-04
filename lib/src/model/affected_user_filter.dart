@@ -29,7 +29,8 @@ abstract class AffectedUserFilter
       _$AffectedUserFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AffectedUserFilterBuilder b) => b;
+  static void _defaults(AffectedUserFilterBuilder b) =>
+      b..type = r'AFFECTED_USER';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AffectedUserFilter> get serializer =>

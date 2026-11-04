@@ -28,7 +28,8 @@ abstract class ConverterId
   factory ConverterId([void updates(ConverterIdBuilder b)]) = _$ConverterId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ConverterIdBuilder b) => b;
+  static void _defaults(ConverterIdBuilder b) =>
+      b..entityType = EntityType.CONVERTER;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ConverterId> get serializer => _$ConverterIdSerializer();

@@ -40,7 +40,7 @@ abstract class EscalatedNotificationRuleRecipientsConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EscalatedNotificationRuleRecipientsConfigBuilder b) =>
-      b;
+      b..triggerType = NotificationRuleTriggerType.ALARM;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EscalatedNotificationRuleRecipientsConfig> get serializer =>

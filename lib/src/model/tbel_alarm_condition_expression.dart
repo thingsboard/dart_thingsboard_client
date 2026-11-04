@@ -37,7 +37,8 @@ abstract class TbelAlarmConditionExpression
   ]) = _$TbelAlarmConditionExpression;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TbelAlarmConditionExpressionBuilder b) => b;
+  static void _defaults(TbelAlarmConditionExpressionBuilder b) =>
+      b..type = r'TBEL';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TbelAlarmConditionExpression> get serializer =>

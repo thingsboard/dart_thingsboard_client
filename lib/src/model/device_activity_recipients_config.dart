@@ -39,7 +39,8 @@ abstract class DeviceActivityRecipientsConfig
   ]) = _$DeviceActivityRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceActivityRecipientsConfigBuilder b) => b;
+  static void _defaults(DeviceActivityRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.DEVICE_ACTIVITY;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceActivityRecipientsConfig> get serializer =>

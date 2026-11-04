@@ -48,7 +48,8 @@ abstract class TwilioSmsProviderConfiguration
   ]) = _$TwilioSmsProviderConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TwilioSmsProviderConfigurationBuilder b) => b;
+  static void _defaults(TwilioSmsProviderConfigurationBuilder b) =>
+      b..type = r'TWILIO';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TwilioSmsProviderConfiguration> get serializer =>

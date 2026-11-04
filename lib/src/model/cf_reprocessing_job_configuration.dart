@@ -54,7 +54,8 @@ abstract class CfReprocessingJobConfiguration
   ]) = _$CfReprocessingJobConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CfReprocessingJobConfigurationBuilder b) => b;
+  static void _defaults(CfReprocessingJobConfigurationBuilder b) =>
+      b..type = r'CF_REPROCESSING';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CfReprocessingJobConfiguration> get serializer =>

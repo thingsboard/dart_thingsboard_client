@@ -54,7 +54,8 @@ abstract class PropagationCalculatedFieldConfiguration
   ]) = _$PropagationCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(PropagationCalculatedFieldConfigurationBuilder b) => b;
+  static void _defaults(PropagationCalculatedFieldConfigurationBuilder b) =>
+      b..type = r'PROPAGATION';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<PropagationCalculatedFieldConfiguration> get serializer =>

@@ -33,7 +33,8 @@ abstract class JsonTransportPayloadConfiguration
   ]) = _$JsonTransportPayloadConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(JsonTransportPayloadConfigurationBuilder b) => b;
+  static void _defaults(JsonTransportPayloadConfigurationBuilder b) =>
+      b..transportPayloadType = r'JSON';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<JsonTransportPayloadConfiguration> get serializer =>

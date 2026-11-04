@@ -41,7 +41,8 @@ abstract class ComplexFilterPredicate
   ]) = _$ComplexFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ComplexFilterPredicateBuilder b) => b;
+  static void _defaults(ComplexFilterPredicateBuilder b) =>
+      b..type = r'COMPLEX';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ComplexFilterPredicate> get serializer =>

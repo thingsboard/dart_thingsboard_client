@@ -48,7 +48,8 @@ abstract class AwsSnsSmsProviderConfiguration
   ]) = _$AwsSnsSmsProviderConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AwsSnsSmsProviderConfigurationBuilder b) => b;
+  static void _defaults(AwsSnsSmsProviderConfigurationBuilder b) =>
+      b..type = r'AWS_SNS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AwsSnsSmsProviderConfiguration> get serializer =>

@@ -42,7 +42,7 @@ abstract class SharedAttributesSettingSnmpCommunicationConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     SharedAttributesSettingSnmpCommunicationConfigBuilder b,
-  ) => b;
+  ) => b..spec = SnmpCommunicationSpec.SHARED_ATTRIBUTES_SETTING;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SharedAttributesSettingSnmpCommunicationConfig>

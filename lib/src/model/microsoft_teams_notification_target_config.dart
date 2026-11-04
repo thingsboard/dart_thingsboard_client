@@ -67,7 +67,8 @@ abstract class MicrosoftTeamsNotificationTargetConfig
   ]) = _$MicrosoftTeamsNotificationTargetConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MicrosoftTeamsNotificationTargetConfigBuilder b) => b;
+  static void _defaults(MicrosoftTeamsNotificationTargetConfigBuilder b) =>
+      b..type = r'MICROSOFT_TEAMS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MicrosoftTeamsNotificationTargetConfig> get serializer =>

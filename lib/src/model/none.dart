@@ -25,7 +25,7 @@ abstract class None implements OllamaAuth, Built<None, NoneBuilder> {
   factory None([void updates(NoneBuilder b)]) = _$None;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NoneBuilder b) => b;
+  static void _defaults(NoneBuilder b) => b..type = r'NONE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<None> get serializer => _$NoneSerializer();

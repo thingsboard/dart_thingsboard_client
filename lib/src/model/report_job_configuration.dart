@@ -89,7 +89,7 @@ abstract class ReportJobConfiguration
   ]) = _$ReportJobConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ReportJobConfigurationBuilder b) => b;
+  static void _defaults(ReportJobConfigurationBuilder b) => b..type = r'REPORT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ReportJobConfiguration> get serializer =>

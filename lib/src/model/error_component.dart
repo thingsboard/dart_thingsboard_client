@@ -39,7 +39,8 @@ abstract class ErrorComponent
       _$ErrorComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ErrorComponentBuilder b) => b;
+  static void _defaults(ErrorComponentBuilder b) =>
+      b..type = ReportComponentType.ERROR;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ErrorComponent> get serializer =>

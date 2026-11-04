@@ -61,7 +61,8 @@ abstract class DebugIntegrationEventFilter
   ]) = _$DebugIntegrationEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DebugIntegrationEventFilterBuilder b) => b;
+  static void _defaults(DebugIntegrationEventFilterBuilder b) =>
+      b..eventType = EventType.DEBUG_INTEGRATION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DebugIntegrationEventFilter> get serializer =>

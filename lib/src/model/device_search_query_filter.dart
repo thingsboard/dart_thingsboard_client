@@ -66,7 +66,8 @@ abstract class DeviceSearchQueryFilter
   ]) = _$DeviceSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceSearchQueryFilterBuilder b) => b;
+  static void _defaults(DeviceSearchQueryFilterBuilder b) =>
+      b..type = r'deviceSearchQuery';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceSearchQueryFilter> get serializer =>

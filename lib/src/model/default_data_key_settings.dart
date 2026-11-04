@@ -31,7 +31,8 @@ abstract class DefaultDataKeySettings
   ]) = _$DefaultDataKeySettings;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultDataKeySettingsBuilder b) => b;
+  static void _defaults(DefaultDataKeySettingsBuilder b) =>
+      b..type = DataKeySettingsType.DEFAULT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultDataKeySettings> get serializer =>

@@ -29,7 +29,8 @@ abstract class ReportTemplateId
       _$ReportTemplateId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ReportTemplateIdBuilder b) => b;
+  static void _defaults(ReportTemplateIdBuilder b) =>
+      b..entityType = EntityType.REPORT_TEMPLATE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ReportTemplateId> get serializer =>

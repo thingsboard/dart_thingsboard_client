@@ -48,7 +48,8 @@ abstract class AlarmRuleStringFilterPredicate
   ]) = _$AlarmRuleStringFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmRuleStringFilterPredicateBuilder b) => b;
+  static void _defaults(AlarmRuleStringFilterPredicateBuilder b) =>
+      b..type = r'STRING';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmRuleStringFilterPredicate> get serializer =>

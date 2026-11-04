@@ -28,7 +28,8 @@ abstract class RuleNodeId
   factory RuleNodeId([void updates(RuleNodeIdBuilder b)]) = _$RuleNodeId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RuleNodeIdBuilder b) => b;
+  static void _defaults(RuleNodeIdBuilder b) =>
+      b..entityType = EntityType.RULE_NODE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RuleNodeId> get serializer => _$RuleNodeIdSerializer();

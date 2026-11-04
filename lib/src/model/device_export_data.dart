@@ -44,7 +44,8 @@ abstract class DeviceExportData
       _$DeviceExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceExportDataBuilder b) => b;
+  static void _defaults(DeviceExportDataBuilder b) =>
+      b..entityType = EntityType.DEVICE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceExportData> get serializer =>

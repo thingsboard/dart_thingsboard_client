@@ -60,7 +60,8 @@ abstract class EnterpriseCaptchaParams
   ]) = _$EnterpriseCaptchaParams;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EnterpriseCaptchaParamsBuilder b) => b;
+  static void _defaults(EnterpriseCaptchaParamsBuilder b) =>
+      b..version = r'enterprise';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EnterpriseCaptchaParams> get serializer =>

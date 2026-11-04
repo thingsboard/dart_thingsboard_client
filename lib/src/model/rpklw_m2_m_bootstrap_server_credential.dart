@@ -93,7 +93,8 @@ abstract class RPKLwM2MBootstrapServerCredential
   ]) = _$RPKLwM2MBootstrapServerCredential;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RPKLwM2MBootstrapServerCredentialBuilder b) => b;
+  static void _defaults(RPKLwM2MBootstrapServerCredentialBuilder b) =>
+      b..securityMode = r'RPK';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RPKLwM2MBootstrapServerCredential> get serializer =>

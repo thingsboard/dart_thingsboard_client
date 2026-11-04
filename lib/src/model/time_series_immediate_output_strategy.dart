@@ -53,7 +53,8 @@ abstract class TimeSeriesImmediateOutputStrategy
   ]) = _$TimeSeriesImmediateOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TimeSeriesImmediateOutputStrategyBuilder b) => b;
+  static void _defaults(TimeSeriesImmediateOutputStrategyBuilder b) =>
+      b..type = r'IMMEDIATE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TimeSeriesImmediateOutputStrategy> get serializer =>

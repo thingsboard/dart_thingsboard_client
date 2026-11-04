@@ -62,7 +62,7 @@ abstract class EntityAggregationCalculatedFieldConfiguration
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     EntityAggregationCalculatedFieldConfigurationBuilder b,
-  ) => b;
+  ) => b..type = r'ENTITY_AGGREGATION';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityAggregationCalculatedFieldConfiguration>

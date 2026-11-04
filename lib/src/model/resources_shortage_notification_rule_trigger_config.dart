@@ -48,7 +48,7 @@ abstract class ResourcesShortageNotificationRuleTriggerConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     ResourcesShortageNotificationRuleTriggerConfigBuilder b,
-  ) => b;
+  ) => b..triggerType = NotificationRuleTriggerType.RESOURCES_SHORTAGE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ResourcesShortageNotificationRuleTriggerConfig>

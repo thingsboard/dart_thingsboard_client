@@ -93,7 +93,8 @@ abstract class NoSecLwM2MBootstrapServerCredential
   ]) = _$NoSecLwM2MBootstrapServerCredential;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NoSecLwM2MBootstrapServerCredentialBuilder b) => b;
+  static void _defaults(NoSecLwM2MBootstrapServerCredentialBuilder b) =>
+      b..securityMode = r'NO_SEC';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NoSecLwM2MBootstrapServerCredential> get serializer =>

@@ -29,7 +29,8 @@ abstract class IntegrationId
       _$IntegrationId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(IntegrationIdBuilder b) => b;
+  static void _defaults(IntegrationIdBuilder b) =>
+      b..entityType = EntityType.INTEGRATION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<IntegrationId> get serializer =>

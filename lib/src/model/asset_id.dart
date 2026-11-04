@@ -27,7 +27,7 @@ abstract class AssetId implements EntityId, Built<AssetId, AssetIdBuilder> {
   factory AssetId([void updates(AssetIdBuilder b)]) = _$AssetId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AssetIdBuilder b) => b;
+  static void _defaults(AssetIdBuilder b) => b..entityType = EntityType.ASSET;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AssetId> get serializer => _$AssetIdSerializer();

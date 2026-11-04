@@ -33,7 +33,8 @@ abstract class OriginatorEntityOwnerUsersFilter
   ]) = _$OriginatorEntityOwnerUsersFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(OriginatorEntityOwnerUsersFilterBuilder b) => b;
+  static void _defaults(OriginatorEntityOwnerUsersFilterBuilder b) =>
+      b..type = r'ORIGINATOR_ENTITY_OWNER_USERS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OriginatorEntityOwnerUsersFilter> get serializer =>

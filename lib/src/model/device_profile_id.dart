@@ -29,7 +29,8 @@ abstract class DeviceProfileId
       _$DeviceProfileId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceProfileIdBuilder b) => b;
+  static void _defaults(DeviceProfileIdBuilder b) =>
+      b..entityType = EntityType.DEVICE_PROFILE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceProfileId> get serializer =>

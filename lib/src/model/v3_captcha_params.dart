@@ -42,7 +42,7 @@ abstract class V3CaptchaParams
       _$V3CaptchaParams;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(V3CaptchaParamsBuilder b) => b;
+  static void _defaults(V3CaptchaParamsBuilder b) => b..version = r'v3';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<V3CaptchaParams> get serializer =>

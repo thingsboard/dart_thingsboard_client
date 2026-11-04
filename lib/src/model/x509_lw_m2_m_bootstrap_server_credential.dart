@@ -93,7 +93,8 @@ abstract class X509LwM2MBootstrapServerCredential
   ]) = _$X509LwM2MBootstrapServerCredential;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(X509LwM2MBootstrapServerCredentialBuilder b) => b;
+  static void _defaults(X509LwM2MBootstrapServerCredentialBuilder b) =>
+      b..securityMode = r'X509';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<X509LwM2MBootstrapServerCredential> get serializer =>

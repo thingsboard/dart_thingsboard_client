@@ -40,7 +40,8 @@ abstract class CsvReportTemplateConfig
   ]) = _$CsvReportTemplateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CsvReportTemplateConfigBuilder b) => b;
+  static void _defaults(CsvReportTemplateConfigBuilder b) =>
+      b..format = TbReportFormat.CSV;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CsvReportTemplateConfig> get serializer =>

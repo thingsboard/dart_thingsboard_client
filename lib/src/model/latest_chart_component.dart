@@ -88,7 +88,8 @@ abstract class LatestChartComponent
       _$LatestChartComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(LatestChartComponentBuilder b) => b;
+  static void _defaults(LatestChartComponentBuilder b) =>
+      b..type = ReportComponentType.LATEST_CHART;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<LatestChartComponent> get serializer =>

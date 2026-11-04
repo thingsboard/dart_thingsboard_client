@@ -27,7 +27,7 @@ abstract class RoleId implements EntityId, Built<RoleId, RoleIdBuilder> {
   factory RoleId([void updates(RoleIdBuilder b)]) = _$RoleId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RoleIdBuilder b) => b;
+  static void _defaults(RoleIdBuilder b) => b..entityType = EntityType.ROLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RoleId> get serializer => _$RoleIdSerializer();

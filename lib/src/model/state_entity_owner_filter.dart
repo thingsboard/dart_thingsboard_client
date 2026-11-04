@@ -39,7 +39,8 @@ abstract class StateEntityOwnerFilter
   ]) = _$StateEntityOwnerFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(StateEntityOwnerFilterBuilder b) => b;
+  static void _defaults(StateEntityOwnerFilterBuilder b) =>
+      b..type = r'stateEntityOwner';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<StateEntityOwnerFilter> get serializer =>

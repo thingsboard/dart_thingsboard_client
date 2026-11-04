@@ -28,7 +28,8 @@ abstract class CustomerId
   factory CustomerId([void updates(CustomerIdBuilder b)]) = _$CustomerId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CustomerIdBuilder b) => b;
+  static void _defaults(CustomerIdBuilder b) =>
+      b..entityType = EntityType.CUSTOMER;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CustomerId> get serializer => _$CustomerIdSerializer();

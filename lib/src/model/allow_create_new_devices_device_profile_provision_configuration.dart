@@ -38,7 +38,7 @@ abstract class AllowCreateNewDevicesDeviceProfileProvisionConfiguration
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder b,
-  ) => b;
+  ) => b..type = r'ALLOW_CREATE_NEW_DEVICES';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AllowCreateNewDevicesDeviceProfileProvisionConfiguration>

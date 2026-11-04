@@ -67,7 +67,7 @@ abstract class HomeMenuItem
   factory HomeMenuItem([void updates(HomeMenuItemBuilder b)]) = _$HomeMenuItem;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(HomeMenuItemBuilder b) => b;
+  static void _defaults(HomeMenuItemBuilder b) => b..type = MenuItemType.HOME;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<HomeMenuItem> get serializer => _$HomeMenuItemSerializer();

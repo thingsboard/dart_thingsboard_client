@@ -32,7 +32,7 @@ abstract class UserRoleFilter
       _$UserRoleFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(UserRoleFilterBuilder b) => b;
+  static void _defaults(UserRoleFilterBuilder b) => b..type = r'USER_ROLE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<UserRoleFilter> get serializer =>

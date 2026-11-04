@@ -50,7 +50,8 @@ abstract class DefaultMenuItem
       _$DefaultMenuItem;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultMenuItemBuilder b) => b;
+  static void _defaults(DefaultMenuItemBuilder b) =>
+      b..type = MenuItemType.DEFAULT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultMenuItem> get serializer =>

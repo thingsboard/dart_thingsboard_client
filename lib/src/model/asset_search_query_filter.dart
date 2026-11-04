@@ -66,7 +66,8 @@ abstract class AssetSearchQueryFilter
   ]) = _$AssetSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AssetSearchQueryFilterBuilder b) => b;
+  static void _defaults(AssetSearchQueryFilterBuilder b) =>
+      b..type = r'assetSearchQuery';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AssetSearchQueryFilter> get serializer =>

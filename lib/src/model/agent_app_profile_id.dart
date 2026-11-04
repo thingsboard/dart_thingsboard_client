@@ -29,7 +29,8 @@ abstract class AgentAppProfileId
       _$AgentAppProfileId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AgentAppProfileIdBuilder b) => b;
+  static void _defaults(AgentAppProfileIdBuilder b) =>
+      b..entityType = EntityType.AGENT_APP_PROFILE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AgentAppProfileId> get serializer =>

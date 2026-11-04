@@ -33,7 +33,8 @@ abstract class AttributesRuleChainOutputStrategy
   ]) = _$AttributesRuleChainOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AttributesRuleChainOutputStrategyBuilder b) => b;
+  static void _defaults(AttributesRuleChainOutputStrategyBuilder b) =>
+      b..type = r'RULE_CHAIN';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AttributesRuleChainOutputStrategy> get serializer =>

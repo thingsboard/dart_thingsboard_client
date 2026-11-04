@@ -41,7 +41,7 @@ abstract class ToServerRpcRequestSnmpCommunicationConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ToServerRpcRequestSnmpCommunicationConfigBuilder b) =>
-      b;
+      b..spec = SnmpCommunicationSpec.TO_SERVER_RPC_REQUEST;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ToServerRpcRequestSnmpCommunicationConfig> get serializer =>

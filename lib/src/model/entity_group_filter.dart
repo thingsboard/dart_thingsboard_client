@@ -52,7 +52,7 @@ abstract class EntityGroupFilter
       _$EntityGroupFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityGroupFilterBuilder b) => b;
+  static void _defaults(EntityGroupFilterBuilder b) => b..type = r'entityGroup';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityGroupFilter> get serializer =>

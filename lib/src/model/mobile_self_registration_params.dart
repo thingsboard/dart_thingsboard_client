@@ -72,7 +72,8 @@ abstract class MobileSelfRegistrationParams
   ]) = _$MobileSelfRegistrationParams;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MobileSelfRegistrationParamsBuilder b) => b;
+  static void _defaults(MobileSelfRegistrationParamsBuilder b) =>
+      b..type = SelfRegistrationType.MOBILE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MobileSelfRegistrationParams> get serializer =>

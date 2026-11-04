@@ -41,7 +41,7 @@ abstract class DeviceTypeFilter
       _$DeviceTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceTypeFilterBuilder b) => b;
+  static void _defaults(DeviceTypeFilterBuilder b) => b..type = r'deviceType';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceTypeFilter> get serializer =>

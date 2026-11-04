@@ -40,7 +40,8 @@ abstract class IntegrationExportData
   ]) = _$IntegrationExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(IntegrationExportDataBuilder b) => b;
+  static void _defaults(IntegrationExportDataBuilder b) =>
+      b..entityType = EntityType.INTEGRATION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<IntegrationExportData> get serializer =>

@@ -37,7 +37,8 @@ abstract class RoleExportData
       _$RoleExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RoleExportDataBuilder b) => b;
+  static void _defaults(RoleExportDataBuilder b) =>
+      b..entityType = EntityType.ROLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RoleExportData> get serializer =>

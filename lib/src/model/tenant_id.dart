@@ -27,7 +27,7 @@ abstract class TenantId implements EntityId, Built<TenantId, TenantIdBuilder> {
   factory TenantId([void updates(TenantIdBuilder b)]) = _$TenantId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TenantIdBuilder b) => b;
+  static void _defaults(TenantIdBuilder b) => b..entityType = EntityType.TENANT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TenantId> get serializer => _$TenantIdSerializer();

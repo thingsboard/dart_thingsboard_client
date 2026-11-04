@@ -29,7 +29,8 @@ abstract class EntityGroupId
       _$EntityGroupId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityGroupIdBuilder b) => b;
+  static void _defaults(EntityGroupIdBuilder b) =>
+      b..entityType = EntityType.ENTITY_GROUP;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityGroupId> get serializer =>

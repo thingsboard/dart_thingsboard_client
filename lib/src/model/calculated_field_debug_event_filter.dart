@@ -83,7 +83,8 @@ abstract class CalculatedFieldDebugEventFilter
   ]) = _$CalculatedFieldDebugEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CalculatedFieldDebugEventFilterBuilder b) => b;
+  static void _defaults(CalculatedFieldDebugEventFilterBuilder b) =>
+      b..eventType = EventType.DEBUG_CALCULATED_FIELD;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CalculatedFieldDebugEventFilter> get serializer =>

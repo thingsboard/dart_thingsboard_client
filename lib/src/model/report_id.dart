@@ -27,7 +27,7 @@ abstract class ReportId implements EntityId, Built<ReportId, ReportIdBuilder> {
   factory ReportId([void updates(ReportIdBuilder b)]) = _$ReportId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ReportIdBuilder b) => b;
+  static void _defaults(ReportIdBuilder b) => b..entityType = EntityType.REPORT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ReportId> get serializer => _$ReportIdSerializer();

@@ -69,7 +69,8 @@ abstract class AnthropicChatModelConfig
   ]) = _$AnthropicChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AnthropicChatModelConfigBuilder b) => b;
+  static void _defaults(AnthropicChatModelConfigBuilder b) =>
+      b..provider = r'ANTHROPIC';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AnthropicChatModelConfig> get serializer =>

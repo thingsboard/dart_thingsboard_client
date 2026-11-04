@@ -43,7 +43,8 @@ abstract class CoapDeviceProfileTransportConfiguration
   ]) = _$CoapDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CoapDeviceProfileTransportConfigurationBuilder b) => b;
+  static void _defaults(CoapDeviceProfileTransportConfigurationBuilder b) =>
+      b..type = r'COAP';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CoapDeviceProfileTransportConfiguration> get serializer =>

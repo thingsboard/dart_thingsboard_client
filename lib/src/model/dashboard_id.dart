@@ -28,7 +28,8 @@ abstract class DashboardId
   factory DashboardId([void updates(DashboardIdBuilder b)]) = _$DashboardId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DashboardIdBuilder b) => b;
+  static void _defaults(DashboardIdBuilder b) =>
+      b..entityType = EntityType.DASHBOARD;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DashboardId> get serializer => _$DashboardIdSerializer();

@@ -50,7 +50,7 @@ abstract class MicrosoftTeamsDeliveryMethodNotificationTemplate
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder b,
-  ) => b;
+  ) => b..method = r'MICROSOFT_TEAMS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MicrosoftTeamsDeliveryMethodNotificationTemplate>

@@ -66,7 +66,8 @@ abstract class EdgeSearchQueryFilter
   ]) = _$EdgeSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EdgeSearchQueryFilterBuilder b) => b;
+  static void _defaults(EdgeSearchQueryFilterBuilder b) =>
+      b..type = r'edgeSearchQuery';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EdgeSearchQueryFilter> get serializer =>

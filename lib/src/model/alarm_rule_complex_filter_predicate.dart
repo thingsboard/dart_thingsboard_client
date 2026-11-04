@@ -44,7 +44,8 @@ abstract class AlarmRuleComplexFilterPredicate
   ]) = _$AlarmRuleComplexFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmRuleComplexFilterPredicateBuilder b) => b;
+  static void _defaults(AlarmRuleComplexFilterPredicateBuilder b) =>
+      b..type = r'COMPLEX';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmRuleComplexFilterPredicate> get serializer =>

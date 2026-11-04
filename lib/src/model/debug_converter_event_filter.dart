@@ -65,7 +65,8 @@ abstract class DebugConverterEventFilter
   ]) = _$DebugConverterEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DebugConverterEventFilterBuilder b) => b;
+  static void _defaults(DebugConverterEventFilterBuilder b) =>
+      b..eventType = EventType.DEBUG_CONVERTER;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DebugConverterEventFilter> get serializer =>

@@ -41,7 +41,8 @@ abstract class ColumnSettings
       _$ColumnSettings;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ColumnSettingsBuilder b) => b;
+  static void _defaults(ColumnSettingsBuilder b) =>
+      b..type = DataKeySettingsType.COLUMN;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ColumnSettings> get serializer =>

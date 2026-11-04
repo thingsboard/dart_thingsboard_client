@@ -27,7 +27,7 @@ abstract class AlarmId implements EntityId, Built<AlarmId, AlarmIdBuilder> {
   factory AlarmId([void updates(AlarmIdBuilder b)]) = _$AlarmId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmIdBuilder b) => b;
+  static void _defaults(AlarmIdBuilder b) => b..entityType = EntityType.ALARM;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmId> get serializer => _$AlarmIdSerializer();

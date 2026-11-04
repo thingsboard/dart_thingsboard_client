@@ -28,7 +28,8 @@ abstract class WidgetTypeId
   factory WidgetTypeId([void updates(WidgetTypeIdBuilder b)]) = _$WidgetTypeId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WidgetTypeIdBuilder b) => b;
+  static void _defaults(WidgetTypeIdBuilder b) =>
+      b..entityType = EntityType.WIDGET_TYPE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WidgetTypeId> get serializer => _$WidgetTypeIdSerializer();

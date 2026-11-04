@@ -35,7 +35,7 @@ abstract class QuarterInterval
       _$QuarterInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(QuarterIntervalBuilder b) => b;
+  static void _defaults(QuarterIntervalBuilder b) => b..type = r'QUARTER';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<QuarterInterval> get serializer =>

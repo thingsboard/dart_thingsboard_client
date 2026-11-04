@@ -40,7 +40,8 @@ abstract class NotificationRuleExportData
   ]) = _$NotificationRuleExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NotificationRuleExportDataBuilder b) => b;
+  static void _defaults(NotificationRuleExportDataBuilder b) =>
+      b..entityType = EntityType.NOTIFICATION_RULE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NotificationRuleExportData> get serializer =>

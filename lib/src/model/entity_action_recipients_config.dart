@@ -39,7 +39,8 @@ abstract class EntityActionRecipientsConfig
   ]) = _$EntityActionRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityActionRecipientsConfigBuilder b) => b;
+  static void _defaults(EntityActionRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.ENTITY_ACTION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityActionRecipientsConfig> get serializer =>

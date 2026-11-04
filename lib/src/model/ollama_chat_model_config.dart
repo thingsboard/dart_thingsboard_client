@@ -73,7 +73,8 @@ abstract class OllamaChatModelConfig
   ]) = _$OllamaChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(OllamaChatModelConfigBuilder b) => b;
+  static void _defaults(OllamaChatModelConfigBuilder b) =>
+      b..provider = r'OLLAMA';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OllamaChatModelConfig> get serializer =>

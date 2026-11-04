@@ -39,7 +39,8 @@ abstract class ConverterExportData
       _$ConverterExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ConverterExportDataBuilder b) => b;
+  static void _defaults(ConverterExportDataBuilder b) =>
+      b..entityType = EntityType.CONVERTER;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ConverterExportData> get serializer =>

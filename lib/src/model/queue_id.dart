@@ -27,7 +27,7 @@ abstract class QueueId implements EntityId, Built<QueueId, QueueIdBuilder> {
   factory QueueId([void updates(QueueIdBuilder b)]) = _$QueueId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(QueueIdBuilder b) => b;
+  static void _defaults(QueueIdBuilder b) => b..entityType = EntityType.QUEUE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<QueueId> get serializer => _$QueueIdSerializer();

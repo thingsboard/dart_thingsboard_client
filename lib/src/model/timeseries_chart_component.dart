@@ -94,7 +94,8 @@ abstract class TimeseriesChartComponent
   ]) = _$TimeseriesChartComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TimeseriesChartComponentBuilder b) => b;
+  static void _defaults(TimeseriesChartComponentBuilder b) =>
+      b..type = ReportComponentType.TIME_SERIES_CHART;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TimeseriesChartComponent> get serializer =>

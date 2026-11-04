@@ -44,7 +44,8 @@ abstract class TelemetryQueryingSnmpCommunicationConfig
   ]) = _$TelemetryQueryingSnmpCommunicationConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TelemetryQueryingSnmpCommunicationConfigBuilder b) => b;
+  static void _defaults(TelemetryQueryingSnmpCommunicationConfigBuilder b) =>
+      b..spec = SnmpCommunicationSpec.TELEMETRY_QUERYING;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TelemetryQueryingSnmpCommunicationConfig> get serializer =>

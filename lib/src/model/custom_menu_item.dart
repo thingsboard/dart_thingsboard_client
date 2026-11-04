@@ -79,7 +79,8 @@ abstract class CustomMenuItem
       _$CustomMenuItem;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CustomMenuItemBuilder b) => b;
+  static void _defaults(CustomMenuItemBuilder b) =>
+      b..type = MenuItemType.CUSTOM;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CustomMenuItem> get serializer =>

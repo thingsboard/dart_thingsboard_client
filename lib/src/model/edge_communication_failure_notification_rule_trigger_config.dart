@@ -43,7 +43,7 @@ abstract class EdgeCommunicationFailureNotificationRuleTriggerConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder b,
-  ) => b;
+  ) => b..triggerType = NotificationRuleTriggerType.EDGE_COMMUNICATION_FAILURE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EdgeCommunicationFailureNotificationRuleTriggerConfig>

@@ -92,7 +92,8 @@ abstract class HeadingComponent
       _$HeadingComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(HeadingComponentBuilder b) => b;
+  static void _defaults(HeadingComponentBuilder b) =>
+      b..type = ReportComponentType.HEADING;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<HeadingComponent> get serializer =>

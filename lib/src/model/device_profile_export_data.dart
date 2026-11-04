@@ -40,7 +40,8 @@ abstract class DeviceProfileExportData
   ]) = _$DeviceProfileExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceProfileExportDataBuilder b) => b;
+  static void _defaults(DeviceProfileExportDataBuilder b) =>
+      b..entityType = EntityType.DEVICE_PROFILE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceProfileExportData> get serializer =>

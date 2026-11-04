@@ -35,7 +35,8 @@ abstract class TotpTwoFaAccountConfig
   ]) = _$TotpTwoFaAccountConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TotpTwoFaAccountConfigBuilder b) => b;
+  static void _defaults(TotpTwoFaAccountConfigBuilder b) =>
+      b..providerType = r'TOTP';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TotpTwoFaAccountConfig> get serializer =>

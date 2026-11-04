@@ -43,7 +43,8 @@ abstract class WebViewPage
   factory WebViewPage([void updates(WebViewPageBuilder b)]) = _$WebViewPage;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WebViewPageBuilder b) => b;
+  static void _defaults(WebViewPageBuilder b) =>
+      b..type = MobilePageType.WEB_VIEW;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WebViewPage> get serializer => _$WebViewPageSerializer();

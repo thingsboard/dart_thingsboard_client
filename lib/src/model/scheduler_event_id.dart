@@ -29,7 +29,8 @@ abstract class SchedulerEventId
       _$SchedulerEventId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SchedulerEventIdBuilder b) => b;
+  static void _defaults(SchedulerEventIdBuilder b) =>
+      b..entityType = EntityType.SCHEDULER_EVENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SchedulerEventId> get serializer =>

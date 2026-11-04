@@ -28,7 +28,8 @@ abstract class EntityViewId
   factory EntityViewId([void updates(EntityViewIdBuilder b)]) = _$EntityViewId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityViewIdBuilder b) => b;
+  static void _defaults(EntityViewIdBuilder b) =>
+      b..entityType = EntityType.ENTITY_VIEW;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityViewId> get serializer => _$EntityViewIdSerializer();

@@ -44,7 +44,8 @@ abstract class AlarmRuleNumericFilterPredicate
   ]) = _$AlarmRuleNumericFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmRuleNumericFilterPredicateBuilder b) => b;
+  static void _defaults(AlarmRuleNumericFilterPredicateBuilder b) =>
+      b..type = r'NUMERIC';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmRuleNumericFilterPredicate> get serializer =>

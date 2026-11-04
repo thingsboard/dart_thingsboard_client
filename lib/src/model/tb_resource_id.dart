@@ -28,7 +28,8 @@ abstract class TbResourceId
   factory TbResourceId([void updates(TbResourceIdBuilder b)]) = _$TbResourceId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TbResourceIdBuilder b) => b;
+  static void _defaults(TbResourceIdBuilder b) =>
+      b..entityType = EntityType.TB_RESOURCE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TbResourceId> get serializer => _$TbResourceIdSerializer();

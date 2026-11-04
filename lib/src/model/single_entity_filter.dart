@@ -34,7 +34,8 @@ abstract class SingleEntityFilter
       _$SingleEntityFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SingleEntityFilterBuilder b) => b;
+  static void _defaults(SingleEntityFilterBuilder b) =>
+      b..type = r'singleEntity';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SingleEntityFilter> get serializer =>

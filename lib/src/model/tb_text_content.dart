@@ -32,7 +32,7 @@ abstract class TbTextContent
       _$TbTextContent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TbTextContentBuilder b) => b;
+  static void _defaults(TbTextContentBuilder b) => b..contentType = r'TEXT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TbTextContent> get serializer =>

@@ -27,7 +27,7 @@ abstract class JobId implements EntityId, Built<JobId, JobIdBuilder> {
   factory JobId([void updates(JobIdBuilder b)]) = _$JobId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(JobIdBuilder b) => b;
+  static void _defaults(JobIdBuilder b) => b..entityType = EntityType.JOB;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<JobId> get serializer => _$JobIdSerializer();

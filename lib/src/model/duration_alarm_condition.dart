@@ -45,7 +45,8 @@ abstract class DurationAlarmCondition
   ]) = _$DurationAlarmCondition;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DurationAlarmConditionBuilder b) => b;
+  static void _defaults(DurationAlarmConditionBuilder b) =>
+      b..type = r'DURATION';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DurationAlarmCondition> get serializer =>

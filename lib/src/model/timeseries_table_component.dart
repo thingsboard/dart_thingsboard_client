@@ -100,7 +100,8 @@ abstract class TimeseriesTableComponent
   ]) = _$TimeseriesTableComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TimeseriesTableComponentBuilder b) => b;
+  static void _defaults(TimeseriesTableComponentBuilder b) =>
+      b..type = ReportComponentType.TIME_SERIES_TABLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TimeseriesTableComponent> get serializer =>

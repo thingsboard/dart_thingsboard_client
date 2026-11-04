@@ -39,7 +39,7 @@ abstract class CustomInterval
       _$CustomInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CustomIntervalBuilder b) => b;
+  static void _defaults(CustomIntervalBuilder b) => b..type = r'CUSTOM';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CustomInterval> get serializer =>

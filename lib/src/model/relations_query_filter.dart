@@ -80,7 +80,8 @@ abstract class RelationsQueryFilter
       _$RelationsQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RelationsQueryFilterBuilder b) => b;
+  static void _defaults(RelationsQueryFilterBuilder b) =>
+      b..type = r'relationsQuery';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RelationsQueryFilter> get serializer =>

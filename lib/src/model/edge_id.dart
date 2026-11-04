@@ -27,7 +27,7 @@ abstract class EdgeId implements EntityId, Built<EdgeId, EdgeIdBuilder> {
   factory EdgeId([void updates(EdgeIdBuilder b)]) = _$EdgeId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EdgeIdBuilder b) => b;
+  static void _defaults(EdgeIdBuilder b) => b..entityType = EntityType.EDGE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EdgeId> get serializer => _$EdgeIdSerializer();

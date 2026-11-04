@@ -41,7 +41,7 @@ abstract class ToDeviceRpcRequestSnmpCommunicationConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ToDeviceRpcRequestSnmpCommunicationConfigBuilder b) =>
-      b;
+      b..spec = SnmpCommunicationSpec.TO_DEVICE_RPC_REQUEST;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ToDeviceRpcRequestSnmpCommunicationConfig> get serializer =>

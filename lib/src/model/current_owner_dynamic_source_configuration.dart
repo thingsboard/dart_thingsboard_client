@@ -33,7 +33,8 @@ abstract class CurrentOwnerDynamicSourceConfiguration
   ]) = _$CurrentOwnerDynamicSourceConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CurrentOwnerDynamicSourceConfigurationBuilder b) => b;
+  static void _defaults(CurrentOwnerDynamicSourceConfigurationBuilder b) =>
+      b..type = r'CURRENT_OWNER';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CurrentOwnerDynamicSourceConfiguration> get serializer =>

@@ -77,7 +77,8 @@ abstract class EntityTableComponent
       _$EntityTableComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityTableComponentBuilder b) => b;
+  static void _defaults(EntityTableComponentBuilder b) =>
+      b..type = ReportComponentType.ENTITY_TABLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityTableComponent> get serializer =>

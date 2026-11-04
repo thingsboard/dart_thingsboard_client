@@ -29,7 +29,8 @@ abstract class MobileAppBundleId
       _$MobileAppBundleId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MobileAppBundleIdBuilder b) => b;
+  static void _defaults(MobileAppBundleIdBuilder b) =>
+      b..entityType = EntityType.MOBILE_APP_BUNDLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MobileAppBundleId> get serializer =>

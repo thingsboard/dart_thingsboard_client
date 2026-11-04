@@ -29,7 +29,8 @@ abstract class TenantProfileId
       _$TenantProfileId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TenantProfileIdBuilder b) => b;
+  static void _defaults(TenantProfileIdBuilder b) =>
+      b..entityType = EntityType.TENANT_PROFILE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TenantProfileId> get serializer =>

@@ -44,7 +44,8 @@ abstract class ErrorEventFilter
       _$ErrorEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ErrorEventFilterBuilder b) => b;
+  static void _defaults(ErrorEventFilterBuilder b) =>
+      b..eventType = EventType.ERROR;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ErrorEventFilter> get serializer =>

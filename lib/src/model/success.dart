@@ -31,7 +31,7 @@ abstract class Success
   factory Success([void updates(SuccessBuilder b)]) = _$Success;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SuccessBuilder b) => b;
+  static void _defaults(SuccessBuilder b) => b..status = r'SUCCESS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<Success> get serializer => _$SuccessSerializer();

@@ -40,7 +40,8 @@ abstract class CfReprocessingTaskResult
   ]) = _$CfReprocessingTaskResult;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CfReprocessingTaskResultBuilder b) => b;
+  static void _defaults(CfReprocessingTaskResultBuilder b) =>
+      b..jobType = r'CF_REPROCESSING';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CfReprocessingTaskResult> get serializer =>

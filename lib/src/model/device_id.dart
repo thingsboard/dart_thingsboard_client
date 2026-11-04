@@ -27,7 +27,7 @@ abstract class DeviceId implements EntityId, Built<DeviceId, DeviceIdBuilder> {
   factory DeviceId([void updates(DeviceIdBuilder b)]) = _$DeviceId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceIdBuilder b) => b;
+  static void _defaults(DeviceIdBuilder b) => b..entityType = EntityType.DEVICE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceId> get serializer => _$DeviceIdSerializer();

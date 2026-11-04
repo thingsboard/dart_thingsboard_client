@@ -57,7 +57,8 @@ abstract class StatisticsEventFilter
   ]) = _$StatisticsEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(StatisticsEventFilterBuilder b) => b;
+  static void _defaults(StatisticsEventFilterBuilder b) =>
+      b..eventType = EventType.STATS;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<StatisticsEventFilter> get serializer =>

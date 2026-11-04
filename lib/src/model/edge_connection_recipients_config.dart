@@ -39,7 +39,8 @@ abstract class EdgeConnectionRecipientsConfig
   ]) = _$EdgeConnectionRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EdgeConnectionRecipientsConfigBuilder b) => b;
+  static void _defaults(EdgeConnectionRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.EDGE_CONNECTION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EdgeConnectionRecipientsConfig> get serializer =>

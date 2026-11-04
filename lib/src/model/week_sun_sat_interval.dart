@@ -37,7 +37,8 @@ abstract class WeekSunSatInterval
       _$WeekSunSatInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WeekSunSatIntervalBuilder b) => b;
+  static void _defaults(WeekSunSatIntervalBuilder b) =>
+      b..type = r'WEEK_SUN_SAT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WeekSunSatInterval> get serializer =>

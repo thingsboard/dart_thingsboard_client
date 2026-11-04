@@ -28,7 +28,8 @@ abstract class MobileAppId
   factory MobileAppId([void updates(MobileAppIdBuilder b)]) = _$MobileAppId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MobileAppIdBuilder b) => b;
+  static void _defaults(MobileAppIdBuilder b) =>
+      b..entityType = EntityType.MOBILE_APP;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MobileAppId> get serializer => _$MobileAppIdSerializer();

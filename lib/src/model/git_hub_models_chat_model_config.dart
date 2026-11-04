@@ -73,7 +73,8 @@ abstract class GitHubModelsChatModelConfig
   ]) = _$GitHubModelsChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(GitHubModelsChatModelConfigBuilder b) => b;
+  static void _defaults(GitHubModelsChatModelConfigBuilder b) =>
+      b..provider = r'GITHUB_MODELS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<GitHubModelsChatModelConfig> get serializer =>

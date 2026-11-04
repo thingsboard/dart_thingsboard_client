@@ -34,7 +34,7 @@ abstract class DayInterval
   factory DayInterval([void updates(DayIntervalBuilder b)]) = _$DayInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DayIntervalBuilder b) => b;
+  static void _defaults(DayIntervalBuilder b) => b..type = r'DAY';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DayInterval> get serializer => _$DayIntervalSerializer();

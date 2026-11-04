@@ -40,7 +40,8 @@ abstract class SchedulerEventExportData
   ]) = _$SchedulerEventExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SchedulerEventExportDataBuilder b) => b;
+  static void _defaults(SchedulerEventExportDataBuilder b) =>
+      b..entityType = EntityType.SCHEDULER_EVENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SchedulerEventExportData> get serializer =>

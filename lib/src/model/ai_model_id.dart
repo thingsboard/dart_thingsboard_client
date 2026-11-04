@@ -28,7 +28,8 @@ abstract class AiModelId
   factory AiModelId([void updates(AiModelIdBuilder b)]) = _$AiModelId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AiModelIdBuilder b) => b;
+  static void _defaults(AiModelIdBuilder b) =>
+      b..entityType = EntityType.AI_MODEL;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AiModelId> get serializer => _$AiModelIdSerializer();

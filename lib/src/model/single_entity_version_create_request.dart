@@ -46,7 +46,8 @@ abstract class SingleEntityVersionCreateRequest
   ]) = _$SingleEntityVersionCreateRequest;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SingleEntityVersionCreateRequestBuilder b) => b;
+  static void _defaults(SingleEntityVersionCreateRequestBuilder b) =>
+      b..type = VersionCreateRequestType.SINGLE_ENTITY;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SingleEntityVersionCreateRequest> get serializer =>

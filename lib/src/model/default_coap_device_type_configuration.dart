@@ -38,7 +38,8 @@ abstract class DefaultCoapDeviceTypeConfiguration
   ]) = _$DefaultCoapDeviceTypeConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultCoapDeviceTypeConfigurationBuilder b) => b;
+  static void _defaults(DefaultCoapDeviceTypeConfigurationBuilder b) =>
+      b..coapDeviceType = r'DEFAULT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultCoapDeviceTypeConfiguration> get serializer =>

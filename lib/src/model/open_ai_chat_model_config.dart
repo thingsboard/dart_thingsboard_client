@@ -73,7 +73,8 @@ abstract class OpenAiChatModelConfig
   ]) = _$OpenAiChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(OpenAiChatModelConfigBuilder b) => b;
+  static void _defaults(OpenAiChatModelConfigBuilder b) =>
+      b..provider = r'OPENAI';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OpenAiChatModelConfig> get serializer =>

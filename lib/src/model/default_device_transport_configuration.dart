@@ -33,7 +33,8 @@ abstract class DefaultDeviceTransportConfiguration
   ]) = _$DefaultDeviceTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultDeviceTransportConfigurationBuilder b) => b;
+  static void _defaults(DefaultDeviceTransportConfigurationBuilder b) =>
+      b..type = r'DEFAULT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultDeviceTransportConfiguration> get serializer =>

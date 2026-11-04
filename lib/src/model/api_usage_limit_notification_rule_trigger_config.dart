@@ -46,7 +46,7 @@ abstract class ApiUsageLimitNotificationRuleTriggerConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ApiUsageLimitNotificationRuleTriggerConfigBuilder b) =>
-      b;
+      b..triggerType = NotificationRuleTriggerType.API_USAGE_LIMIT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ApiUsageLimitNotificationRuleTriggerConfig>

@@ -68,7 +68,8 @@ abstract class AmazonBedrockChatModelConfig
   ]) = _$AmazonBedrockChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AmazonBedrockChatModelConfigBuilder b) => b;
+  static void _defaults(AmazonBedrockChatModelConfigBuilder b) =>
+      b..provider = r'AMAZON_BEDROCK';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AmazonBedrockChatModelConfig> get serializer =>

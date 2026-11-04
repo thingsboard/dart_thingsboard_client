@@ -43,7 +43,7 @@ abstract class X509CertificateChainProvisionConfiguration
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(X509CertificateChainProvisionConfigurationBuilder b) =>
-      b;
+      b..type = r'X509_CERTIFICATE_CHAIN';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<X509CertificateChainProvisionConfiguration>

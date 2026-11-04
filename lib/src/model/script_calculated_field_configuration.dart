@@ -45,7 +45,8 @@ abstract class ScriptCalculatedFieldConfiguration
   ]) = _$ScriptCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ScriptCalculatedFieldConfigurationBuilder b) => b;
+  static void _defaults(ScriptCalculatedFieldConfigurationBuilder b) =>
+      b..type = r'SCRIPT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ScriptCalculatedFieldConfiguration> get serializer =>

@@ -43,7 +43,8 @@ abstract class BackupCodeTwoFaAccountConfig
   ]) = _$BackupCodeTwoFaAccountConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(BackupCodeTwoFaAccountConfigBuilder b) => b;
+  static void _defaults(BackupCodeTwoFaAccountConfigBuilder b) =>
+      b..providerType = r'BACKUP_CODE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<BackupCodeTwoFaAccountConfig> get serializer =>

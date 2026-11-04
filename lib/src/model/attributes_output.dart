@@ -33,7 +33,7 @@ abstract class AttributesOutput
       _$AttributesOutput;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AttributesOutputBuilder b) => b;
+  static void _defaults(AttributesOutputBuilder b) => b..type = r'ATTRIBUTES';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AttributesOutput> get serializer =>

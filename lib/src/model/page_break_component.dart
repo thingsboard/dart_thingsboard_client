@@ -32,7 +32,8 @@ abstract class PageBreakComponent
       _$PageBreakComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(PageBreakComponentBuilder b) => b;
+  static void _defaults(PageBreakComponentBuilder b) =>
+      b..type = ReportComponentType.PAGE_BREAK;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<PageBreakComponent> get serializer =>

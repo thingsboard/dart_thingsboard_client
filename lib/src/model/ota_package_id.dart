@@ -28,7 +28,8 @@ abstract class OtaPackageId
   factory OtaPackageId([void updates(OtaPackageIdBuilder b)]) = _$OtaPackageId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(OtaPackageIdBuilder b) => b;
+  static void _defaults(OtaPackageIdBuilder b) =>
+      b..entityType = EntityType.OTA_PACKAGE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OtaPackageId> get serializer => _$OtaPackageIdSerializer();

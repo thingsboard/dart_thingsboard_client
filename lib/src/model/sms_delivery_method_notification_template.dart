@@ -35,7 +35,8 @@ abstract class SmsDeliveryMethodNotificationTemplate
   ]) = _$SmsDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SmsDeliveryMethodNotificationTemplateBuilder b) => b;
+  static void _defaults(SmsDeliveryMethodNotificationTemplateBuilder b) =>
+      b..method = r'SMS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SmsDeliveryMethodNotificationTemplate> get serializer =>

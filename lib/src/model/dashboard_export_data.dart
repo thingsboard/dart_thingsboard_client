@@ -39,7 +39,8 @@ abstract class DashboardExportData
       _$DashboardExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DashboardExportDataBuilder b) => b;
+  static void _defaults(DashboardExportDataBuilder b) =>
+      b..entityType = EntityType.DASHBOARD;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DashboardExportData> get serializer =>

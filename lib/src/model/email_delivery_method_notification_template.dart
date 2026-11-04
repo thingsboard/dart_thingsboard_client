@@ -39,7 +39,8 @@ abstract class EmailDeliveryMethodNotificationTemplate
   ]) = _$EmailDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EmailDeliveryMethodNotificationTemplateBuilder b) => b;
+  static void _defaults(EmailDeliveryMethodNotificationTemplateBuilder b) =>
+      b..method = r'EMAIL';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EmailDeliveryMethodNotificationTemplate> get serializer =>

@@ -56,7 +56,8 @@ abstract class Lwm2mDeviceProfileTransportConfiguration
   ]) = _$Lwm2mDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(Lwm2mDeviceProfileTransportConfigurationBuilder b) => b;
+  static void _defaults(Lwm2mDeviceProfileTransportConfigurationBuilder b) =>
+      b..type = r'LWM2M';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<Lwm2mDeviceProfileTransportConfiguration> get serializer =>

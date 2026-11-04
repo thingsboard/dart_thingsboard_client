@@ -39,7 +39,8 @@ abstract class PlatformUsersNotificationTargetConfig
   ]) = _$PlatformUsersNotificationTargetConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(PlatformUsersNotificationTargetConfigBuilder b) => b;
+  static void _defaults(PlatformUsersNotificationTargetConfigBuilder b) =>
+      b..type = r'PLATFORM_USERS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<PlatformUsersNotificationTargetConfig> get serializer =>

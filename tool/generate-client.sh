@@ -843,6 +843,17 @@ YAML
   patch_generated_sources "$output_dir"
 
   # -------------------------------------------------------------------------
+  # Step 6b2: Default the discriminator field of generated subtypes
+  # Patch (C) above leaves `_defaults` empty, so callers would have to set
+  # `type` / `entityType` of every filter and entity id by hand. The parents
+  # record the value of each subtype in discriminatorMapping; the script
+  # writes it into the subtype's `_defaults`.
+  # -------------------------------------------------------------------------
+  echo ""
+  echo "=== [$edition] Step 6b2: Setting discriminator defaults in subtypes ==="
+  python3 "$SCRIPT_DIR/set_discriminator_defaults.py" "$output_dir/lib/src/model"
+
+  # -------------------------------------------------------------------------
   # Step 6c: Generate per-operation serializer registries
   # standardSerializers lists every model of the spec, so an API class that
   # uses it keeps all of them in an AOT build. Each operation instead registers

@@ -39,7 +39,8 @@ abstract class NewPlatformVersionRecipientsConfig
   ]) = _$NewPlatformVersionRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NewPlatformVersionRecipientsConfigBuilder b) => b;
+  static void _defaults(NewPlatformVersionRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.NEW_PLATFORM_VERSION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NewPlatformVersionRecipientsConfig> get serializer =>

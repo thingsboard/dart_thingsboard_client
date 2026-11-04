@@ -27,7 +27,7 @@ abstract class SecretId implements EntityId, Built<SecretId, SecretIdBuilder> {
   factory SecretId([void updates(SecretIdBuilder b)]) = _$SecretId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SecretIdBuilder b) => b;
+  static void _defaults(SecretIdBuilder b) => b..entityType = EntityType.SECRET;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SecretId> get serializer => _$SecretIdSerializer();

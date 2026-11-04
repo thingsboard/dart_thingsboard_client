@@ -29,7 +29,8 @@ abstract class WidgetsBundleId
       _$WidgetsBundleId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WidgetsBundleIdBuilder b) => b;
+  static void _defaults(WidgetsBundleIdBuilder b) =>
+      b..entityType = EntityType.WIDGETS_BUNDLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WidgetsBundleId> get serializer =>

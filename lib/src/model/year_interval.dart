@@ -34,7 +34,7 @@ abstract class YearInterval
   factory YearInterval([void updates(YearIntervalBuilder b)]) = _$YearInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(YearIntervalBuilder b) => b;
+  static void _defaults(YearIntervalBuilder b) => b..type = r'YEAR';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<YearInterval> get serializer => _$YearIntervalSerializer();

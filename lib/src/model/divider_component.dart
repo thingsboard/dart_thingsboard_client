@@ -77,7 +77,8 @@ abstract class DividerComponent
       _$DividerComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DividerComponentBuilder b) => b;
+  static void _defaults(DividerComponentBuilder b) =>
+      b..type = ReportComponentType.DIVIDER;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DividerComponent> get serializer =>

@@ -93,7 +93,8 @@ abstract class PSKLwM2MBootstrapServerCredential
   ]) = _$PSKLwM2MBootstrapServerCredential;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(PSKLwM2MBootstrapServerCredentialBuilder b) => b;
+  static void _defaults(PSKLwM2MBootstrapServerCredentialBuilder b) =>
+      b..securityMode = r'PSK';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<PSKLwM2MBootstrapServerCredential> get serializer =>

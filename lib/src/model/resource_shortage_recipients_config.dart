@@ -39,7 +39,8 @@ abstract class ResourceShortageRecipientsConfig
   ]) = _$ResourceShortageRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ResourceShortageRecipientsConfigBuilder b) => b;
+  static void _defaults(ResourceShortageRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.RESOURCES_SHORTAGE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ResourceShortageRecipientsConfig> get serializer =>

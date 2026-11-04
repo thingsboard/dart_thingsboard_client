@@ -44,7 +44,8 @@ abstract class RuleChainExportData
       _$RuleChainExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RuleChainExportDataBuilder b) => b;
+  static void _defaults(RuleChainExportDataBuilder b) =>
+      b..entityType = EntityType.RULE_CHAIN;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RuleChainExportData> get serializer =>

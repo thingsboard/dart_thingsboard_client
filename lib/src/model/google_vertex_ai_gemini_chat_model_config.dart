@@ -80,7 +80,8 @@ abstract class GoogleVertexAiGeminiChatModelConfig
   ]) = _$GoogleVertexAiGeminiChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(GoogleVertexAiGeminiChatModelConfigBuilder b) => b;
+  static void _defaults(GoogleVertexAiGeminiChatModelConfigBuilder b) =>
+      b..provider = r'GOOGLE_VERTEX_AI_GEMINI';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<GoogleVertexAiGeminiChatModelConfig> get serializer =>

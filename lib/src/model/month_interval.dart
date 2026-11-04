@@ -35,7 +35,7 @@ abstract class MonthInterval
       _$MonthInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MonthIntervalBuilder b) => b;
+  static void _defaults(MonthIntervalBuilder b) => b..type = r'MONTH';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MonthInterval> get serializer =>

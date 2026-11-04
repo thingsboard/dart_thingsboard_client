@@ -39,7 +39,8 @@ abstract class AlarmAssignmentRecipientsConfig
   ]) = _$AlarmAssignmentRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmAssignmentRecipientsConfigBuilder b) => b;
+  static void _defaults(AlarmAssignmentRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.ALARM_ASSIGNMENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmAssignmentRecipientsConfig> get serializer =>

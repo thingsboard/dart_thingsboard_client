@@ -35,7 +35,7 @@ abstract class DisabledDeviceProfileProvisionConfiguration
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DisabledDeviceProfileProvisionConfigurationBuilder b) =>
-      b;
+      b..type = r'DISABLED';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DisabledDeviceProfileProvisionConfiguration>

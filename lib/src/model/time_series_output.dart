@@ -33,7 +33,7 @@ abstract class TimeSeriesOutput
       _$TimeSeriesOutput;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TimeSeriesOutputBuilder b) => b;
+  static void _defaults(TimeSeriesOutputBuilder b) => b..type = r'TIME_SERIES';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TimeSeriesOutput> get serializer =>

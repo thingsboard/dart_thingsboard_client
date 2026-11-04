@@ -91,7 +91,8 @@ abstract class RuleNodeDebugEventFilter
   ]) = _$RuleNodeDebugEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RuleNodeDebugEventFilterBuilder b) => b;
+  static void _defaults(RuleNodeDebugEventFilterBuilder b) =>
+      b..eventType = EventType.DEBUG_RULE_NODE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RuleNodeDebugEventFilter> get serializer =>

@@ -85,7 +85,8 @@ abstract class DashboardComponent
       _$DashboardComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DashboardComponentBuilder b) => b;
+  static void _defaults(DashboardComponentBuilder b) =>
+      b..type = ReportComponentType.DASHBOARD;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DashboardComponent> get serializer =>

@@ -45,7 +45,8 @@ abstract class EntityTypeVersionLoadRequest
   ]) = _$EntityTypeVersionLoadRequest;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityTypeVersionLoadRequestBuilder b) => b;
+  static void _defaults(EntityTypeVersionLoadRequestBuilder b) =>
+      b..type = VersionLoadRequestType.ENTITY_TYPE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityTypeVersionLoadRequest> get serializer =>

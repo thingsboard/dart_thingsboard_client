@@ -37,7 +37,8 @@ abstract class UserExportData
       _$UserExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(UserExportDataBuilder b) => b;
+  static void _defaults(UserExportDataBuilder b) =>
+      b..entityType = EntityType.USER;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<UserExportData> get serializer =>

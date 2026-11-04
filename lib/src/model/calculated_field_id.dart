@@ -29,7 +29,8 @@ abstract class CalculatedFieldId
       _$CalculatedFieldId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CalculatedFieldIdBuilder b) => b;
+  static void _defaults(CalculatedFieldIdBuilder b) =>
+      b..entityType = EntityType.CALCULATED_FIELD;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CalculatedFieldId> get serializer =>

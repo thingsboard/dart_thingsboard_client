@@ -50,7 +50,8 @@ abstract class WidgetsBundleExportData
   ]) = _$WidgetsBundleExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WidgetsBundleExportDataBuilder b) => b;
+  static void _defaults(WidgetsBundleExportDataBuilder b) =>
+      b..entityType = EntityType.WIDGETS_BUNDLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WidgetsBundleExportData> get serializer =>

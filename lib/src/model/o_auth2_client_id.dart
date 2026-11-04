@@ -29,7 +29,8 @@ abstract class OAuth2ClientId
       _$OAuth2ClientId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(OAuth2ClientIdBuilder b) => b;
+  static void _defaults(OAuth2ClientIdBuilder b) =>
+      b..entityType = EntityType.OAUTH2_CLIENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OAuth2ClientId> get serializer =>

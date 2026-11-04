@@ -31,7 +31,8 @@ abstract class NotificationTargetId
       _$NotificationTargetId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NotificationTargetIdBuilder b) => b;
+  static void _defaults(NotificationTargetIdBuilder b) =>
+      b..entityType = EntityType.NOTIFICATION_TARGET;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NotificationTargetId> get serializer =>

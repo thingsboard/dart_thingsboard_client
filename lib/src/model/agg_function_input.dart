@@ -31,7 +31,7 @@ abstract class AggFunctionInput
       _$AggFunctionInput;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AggFunctionInputBuilder b) => b;
+  static void _defaults(AggFunctionInputBuilder b) => b..type = r'function';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AggFunctionInput> get serializer =>

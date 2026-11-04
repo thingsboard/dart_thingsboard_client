@@ -29,7 +29,8 @@ abstract class NotificationRuleId
       _$NotificationRuleId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NotificationRuleIdBuilder b) => b;
+  static void _defaults(NotificationRuleIdBuilder b) =>
+      b..entityType = EntityType.NOTIFICATION_RULE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NotificationRuleId> get serializer =>

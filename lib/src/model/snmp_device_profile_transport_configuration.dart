@@ -47,7 +47,8 @@ abstract class SnmpDeviceProfileTransportConfiguration
   ]) = _$SnmpDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SnmpDeviceProfileTransportConfigurationBuilder b) => b;
+  static void _defaults(SnmpDeviceProfileTransportConfigurationBuilder b) =>
+      b..type = r'SNMP';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SnmpDeviceProfileTransportConfiguration> get serializer =>

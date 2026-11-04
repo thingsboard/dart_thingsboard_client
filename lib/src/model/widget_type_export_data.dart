@@ -39,7 +39,8 @@ abstract class WidgetTypeExportData
       _$WidgetTypeExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WidgetTypeExportDataBuilder b) => b;
+  static void _defaults(WidgetTypeExportDataBuilder b) =>
+      b..entityType = EntityType.WIDGET_TYPE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WidgetTypeExportData> get serializer =>

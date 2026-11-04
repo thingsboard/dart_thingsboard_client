@@ -39,7 +39,8 @@ abstract class AlarmCommentRecipientsConfig
   ]) = _$AlarmCommentRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmCommentRecipientsConfigBuilder b) => b;
+  static void _defaults(AlarmCommentRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.ALARM_COMMENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmCommentRecipientsConfig> get serializer =>

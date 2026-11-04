@@ -39,7 +39,8 @@ abstract class OtaPackageExportData
       _$OtaPackageExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(OtaPackageExportDataBuilder b) => b;
+  static void _defaults(OtaPackageExportDataBuilder b) =>
+      b..entityType = EntityType.OTA_PACKAGE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OtaPackageExportData> get serializer =>

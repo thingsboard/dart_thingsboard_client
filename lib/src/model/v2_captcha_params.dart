@@ -42,7 +42,7 @@ abstract class V2CaptchaParams
       _$V2CaptchaParams;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(V2CaptchaParamsBuilder b) => b;
+  static void _defaults(V2CaptchaParamsBuilder b) => b..version = r'v2';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<V2CaptchaParams> get serializer =>

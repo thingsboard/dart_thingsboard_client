@@ -42,7 +42,8 @@ abstract class BooleanFilterPredicate
   ]) = _$BooleanFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(BooleanFilterPredicateBuilder b) => b;
+  static void _defaults(BooleanFilterPredicateBuilder b) =>
+      b..type = r'BOOLEAN';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<BooleanFilterPredicate> get serializer =>

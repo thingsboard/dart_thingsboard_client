@@ -30,7 +30,8 @@ abstract class SystemAdministratorsFilter
   ]) = _$SystemAdministratorsFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SystemAdministratorsFilterBuilder b) => b;
+  static void _defaults(SystemAdministratorsFilterBuilder b) =>
+      b..type = r'SYSTEM_ADMINISTRATORS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SystemAdministratorsFilter> get serializer =>

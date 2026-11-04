@@ -44,7 +44,8 @@ abstract class DashboardPage
       _$DashboardPage;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DashboardPageBuilder b) => b;
+  static void _defaults(DashboardPageBuilder b) =>
+      b..type = MobilePageType.DASHBOARD;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DashboardPage> get serializer =>

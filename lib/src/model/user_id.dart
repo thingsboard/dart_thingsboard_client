@@ -27,7 +27,7 @@ abstract class UserId implements EntityId, Built<UserId, UserIdBuilder> {
   factory UserId([void updates(UserIdBuilder b)]) = _$UserId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(UserIdBuilder b) => b;
+  static void _defaults(UserIdBuilder b) => b..entityType = EntityType.USER;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<UserId> get serializer => _$UserIdSerializer();

@@ -32,7 +32,7 @@ abstract class UserListFilter
       _$UserListFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(UserListFilterBuilder b) => b;
+  static void _defaults(UserListFilterBuilder b) => b..type = r'USER_LIST';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<UserListFilter> get serializer =>

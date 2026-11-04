@@ -53,7 +53,8 @@ abstract class EntitiesByGroupNameFilter
   ]) = _$EntitiesByGroupNameFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntitiesByGroupNameFilterBuilder b) => b;
+  static void _defaults(EntitiesByGroupNameFilterBuilder b) =>
+      b..type = r'entitiesByGroupName';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntitiesByGroupNameFilter> get serializer =>

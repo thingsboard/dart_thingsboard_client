@@ -46,7 +46,8 @@ abstract class DefaultMobilePage
       _$DefaultMobilePage;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultMobilePageBuilder b) => b;
+  static void _defaults(DefaultMobilePageBuilder b) =>
+      b..type = MobilePageType.DEFAULT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultMobilePage> get serializer =>

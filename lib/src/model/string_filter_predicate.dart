@@ -46,7 +46,7 @@ abstract class StringFilterPredicate
   ]) = _$StringFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(StringFilterPredicateBuilder b) => b;
+  static void _defaults(StringFilterPredicateBuilder b) => b..type = r'STRING';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<StringFilterPredicate> get serializer =>

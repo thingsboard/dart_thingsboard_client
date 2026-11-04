@@ -70,7 +70,8 @@ abstract class PdfReportTemplateConfig
   ]) = _$PdfReportTemplateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(PdfReportTemplateConfigBuilder b) => b;
+  static void _defaults(PdfReportTemplateConfigBuilder b) =>
+      b..format = TbReportFormat.PDF;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<PdfReportTemplateConfig> get serializer =>

@@ -40,7 +40,8 @@ abstract class RateLimitsNotificationRuleTriggerConfig
   ]) = _$RateLimitsNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RateLimitsNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(RateLimitsNotificationRuleTriggerConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.RATE_LIMITS;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RateLimitsNotificationRuleTriggerConfig> get serializer =>

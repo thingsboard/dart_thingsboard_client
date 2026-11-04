@@ -29,7 +29,8 @@ abstract class GroupPermissionId
       _$GroupPermissionId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(GroupPermissionIdBuilder b) => b;
+  static void _defaults(GroupPermissionIdBuilder b) =>
+      b..entityType = EntityType.GROUP_PERMISSION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<GroupPermissionId> get serializer =>

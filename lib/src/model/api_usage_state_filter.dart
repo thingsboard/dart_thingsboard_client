@@ -34,7 +34,8 @@ abstract class ApiUsageStateFilter
       _$ApiUsageStateFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ApiUsageStateFilterBuilder b) => b;
+  static void _defaults(ApiUsageStateFilterBuilder b) =>
+      b..type = r'apiUsageState';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ApiUsageStateFilter> get serializer =>

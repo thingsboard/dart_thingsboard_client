@@ -39,7 +39,8 @@ abstract class AiModelExportData
       _$AiModelExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AiModelExportDataBuilder b) => b;
+  static void _defaults(AiModelExportDataBuilder b) =>
+      b..entityType = EntityType.AI_MODEL;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AiModelExportData> get serializer =>

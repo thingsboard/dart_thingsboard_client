@@ -29,7 +29,8 @@ abstract class AgentAppUnitId
       _$AgentAppUnitId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AgentAppUnitIdBuilder b) => b;
+  static void _defaults(AgentAppUnitIdBuilder b) =>
+      b..entityType = EntityType.AGENT_APP_UNIT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AgentAppUnitId> get serializer =>

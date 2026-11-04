@@ -40,7 +40,7 @@ abstract class IntegrationLifecycleEventRecipientsConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(IntegrationLifecycleEventRecipientsConfigBuilder b) =>
-      b;
+      b..triggerType = NotificationRuleTriggerType.INTEGRATION_LIFECYCLE_EVENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<IntegrationLifecycleEventRecipientsConfig> get serializer =>

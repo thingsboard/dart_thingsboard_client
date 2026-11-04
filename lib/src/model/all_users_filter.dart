@@ -27,7 +27,7 @@ abstract class AllUsersFilter
       _$AllUsersFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AllUsersFilterBuilder b) => b;
+  static void _defaults(AllUsersFilterBuilder b) => b..type = r'ALL_USERS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AllUsersFilter> get serializer =>

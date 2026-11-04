@@ -39,7 +39,8 @@ abstract class TbResourceExportData
       _$TbResourceExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TbResourceExportDataBuilder b) => b;
+  static void _defaults(TbResourceExportDataBuilder b) =>
+      b..entityType = EntityType.TB_RESOURCE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TbResourceExportData> get serializer =>

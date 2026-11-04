@@ -40,7 +40,8 @@ abstract class AssetProfileExportData
   ]) = _$AssetProfileExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AssetProfileExportDataBuilder b) => b;
+  static void _defaults(AssetProfileExportDataBuilder b) =>
+      b..entityType = EntityType.ASSET_PROFILE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AssetProfileExportData> get serializer =>

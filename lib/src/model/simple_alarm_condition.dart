@@ -33,7 +33,7 @@ abstract class SimpleAlarmCondition
       _$SimpleAlarmCondition;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SimpleAlarmConditionBuilder b) => b;
+  static void _defaults(SimpleAlarmConditionBuilder b) => b..type = r'SIMPLE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SimpleAlarmCondition> get serializer =>

@@ -29,7 +29,7 @@ abstract class Token implements OllamaAuth, Built<Token, TokenBuilder> {
   factory Token([void updates(TokenBuilder b)]) = _$Token;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TokenBuilder b) => b;
+  static void _defaults(TokenBuilder b) => b..type = r'TOKEN';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<Token> get serializer => _$TokenSerializer();

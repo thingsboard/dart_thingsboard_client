@@ -47,7 +47,8 @@ abstract class SubReportComponent
       _$SubReportComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SubReportComponentBuilder b) => b;
+  static void _defaults(SubReportComponentBuilder b) =>
+      b..type = ReportComponentType.SUB_REPORT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SubReportComponent> get serializer =>

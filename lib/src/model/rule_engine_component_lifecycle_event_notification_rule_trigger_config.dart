@@ -64,7 +64,9 @@ abstract class RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder b,
-  ) => b;
+  ) => b
+    ..triggerType =
+        NotificationRuleTriggerType.RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<

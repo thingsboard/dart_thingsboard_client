@@ -53,7 +53,8 @@ abstract class LifeCycleEventFilter
       _$LifeCycleEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(LifeCycleEventFilterBuilder b) => b;
+  static void _defaults(LifeCycleEventFilterBuilder b) =>
+      b..eventType = EventType.LC_EVENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<LifeCycleEventFilter> get serializer =>

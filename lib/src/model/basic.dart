@@ -33,7 +33,7 @@ abstract class Basic implements OllamaAuth, Built<Basic, BasicBuilder> {
   factory Basic([void updates(BasicBuilder b)]) = _$Basic;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(BasicBuilder b) => b;
+  static void _defaults(BasicBuilder b) => b..type = r'BASIC';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<Basic> get serializer => _$BasicSerializer();

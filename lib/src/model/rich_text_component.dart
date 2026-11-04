@@ -67,7 +67,8 @@ abstract class RichTextComponent
       _$RichTextComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RichTextComponentBuilder b) => b;
+  static void _defaults(RichTextComponentBuilder b) =>
+      b..type = ReportComponentType.RICH_TEXT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RichTextComponent> get serializer =>

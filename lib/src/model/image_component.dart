@@ -87,7 +87,8 @@ abstract class ImageComponent
       _$ImageComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ImageComponentBuilder b) => b;
+  static void _defaults(ImageComponentBuilder b) =>
+      b..type = ReportComponentType.IMAGE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ImageComponent> get serializer =>

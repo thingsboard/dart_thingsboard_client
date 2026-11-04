@@ -54,7 +54,8 @@ abstract class RuleChainDebugEventFilter
   ]) = _$RuleChainDebugEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RuleChainDebugEventFilterBuilder b) => b;
+  static void _defaults(RuleChainDebugEventFilterBuilder b) =>
+      b..eventType = EventType.DEBUG_RULE_CHAIN;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RuleChainDebugEventFilter> get serializer =>

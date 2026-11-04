@@ -46,7 +46,8 @@ abstract class SchedulerEventFilter
       _$SchedulerEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SchedulerEventFilterBuilder b) => b;
+  static void _defaults(SchedulerEventFilterBuilder b) =>
+      b..type = r'schedulerEvent';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SchedulerEventFilter> get serializer =>

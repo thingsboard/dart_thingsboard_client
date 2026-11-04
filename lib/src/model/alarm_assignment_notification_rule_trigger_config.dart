@@ -56,7 +56,7 @@ abstract class AlarmAssignmentNotificationRuleTriggerConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     AlarmAssignmentNotificationRuleTriggerConfigBuilder b,
-  ) => b;
+  ) => b..triggerType = NotificationRuleTriggerType.ALARM_ASSIGNMENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmAssignmentNotificationRuleTriggerConfig>

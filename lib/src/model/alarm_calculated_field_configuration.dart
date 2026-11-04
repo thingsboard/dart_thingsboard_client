@@ -70,7 +70,8 @@ abstract class AlarmCalculatedFieldConfiguration
   ]) = _$AlarmCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmCalculatedFieldConfigurationBuilder b) => b;
+  static void _defaults(AlarmCalculatedFieldConfigurationBuilder b) =>
+      b..type = r'ALARM';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmCalculatedFieldConfiguration> get serializer =>

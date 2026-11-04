@@ -34,7 +34,7 @@ abstract class HourInterval
   factory HourInterval([void updates(HourIntervalBuilder b)]) = _$HourInterval;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(HourIntervalBuilder b) => b;
+  static void _defaults(HourIntervalBuilder b) => b..type = r'HOUR';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<HourInterval> get serializer => _$HourIntervalSerializer();

@@ -40,7 +40,8 @@ abstract class ReportTemplateExportData
   ]) = _$ReportTemplateExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ReportTemplateExportDataBuilder b) => b;
+  static void _defaults(ReportTemplateExportDataBuilder b) =>
+      b..entityType = EntityType.REPORT_TEMPLATE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ReportTemplateExportData> get serializer =>

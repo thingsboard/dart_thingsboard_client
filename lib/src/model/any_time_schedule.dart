@@ -27,7 +27,7 @@ abstract class AnyTimeSchedule
       _$AnyTimeSchedule;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AnyTimeScheduleBuilder b) => b;
+  static void _defaults(AnyTimeScheduleBuilder b) => b..type = r'ANY_TIME';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AnyTimeSchedule> get serializer =>

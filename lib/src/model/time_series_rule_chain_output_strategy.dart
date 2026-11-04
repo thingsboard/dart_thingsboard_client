@@ -33,7 +33,8 @@ abstract class TimeSeriesRuleChainOutputStrategy
   ]) = _$TimeSeriesRuleChainOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TimeSeriesRuleChainOutputStrategyBuilder b) => b;
+  static void _defaults(TimeSeriesRuleChainOutputStrategyBuilder b) =>
+      b..type = r'RULE_CHAIN';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TimeSeriesRuleChainOutputStrategy> get serializer =>

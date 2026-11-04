@@ -35,7 +35,8 @@ abstract class SmsTwoFaAccountConfig
   ]) = _$SmsTwoFaAccountConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SmsTwoFaAccountConfigBuilder b) => b;
+  static void _defaults(SmsTwoFaAccountConfigBuilder b) =>
+      b..providerType = r'SMS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SmsTwoFaAccountConfig> get serializer =>

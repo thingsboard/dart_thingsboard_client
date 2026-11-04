@@ -43,7 +43,8 @@ abstract class NotificationTargetExportData
   ]) = _$NotificationTargetExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NotificationTargetExportDataBuilder b) => b;
+  static void _defaults(NotificationTargetExportDataBuilder b) =>
+      b..entityType = EntityType.NOTIFICATION_TARGET;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NotificationTargetExportData> get serializer =>

@@ -39,7 +39,8 @@ abstract class EntityViewExportData
       _$EntityViewExportData;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityViewExportDataBuilder b) => b;
+  static void _defaults(EntityViewExportDataBuilder b) =>
+      b..entityType = EntityType.ENTITY_VIEW;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityViewExportData> get serializer =>

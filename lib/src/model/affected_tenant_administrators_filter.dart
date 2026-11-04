@@ -33,7 +33,8 @@ abstract class AffectedTenantAdministratorsFilter
   ]) = _$AffectedTenantAdministratorsFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AffectedTenantAdministratorsFilterBuilder b) => b;
+  static void _defaults(AffectedTenantAdministratorsFilterBuilder b) =>
+      b..type = r'AFFECTED_TENANT_ADMINISTRATORS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AffectedTenantAdministratorsFilter> get serializer =>

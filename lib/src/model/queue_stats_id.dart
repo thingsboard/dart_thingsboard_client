@@ -28,7 +28,8 @@ abstract class QueueStatsId
   factory QueueStatsId([void updates(QueueStatsIdBuilder b)]) = _$QueueStatsId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(QueueStatsIdBuilder b) => b;
+  static void _defaults(QueueStatsIdBuilder b) =>
+      b..entityType = EntityType.QUEUE_STATS;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<QueueStatsId> get serializer => _$QueueStatsIdSerializer();

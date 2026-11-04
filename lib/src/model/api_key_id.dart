@@ -27,7 +27,8 @@ abstract class ApiKeyId implements EntityId, Built<ApiKeyId, ApiKeyIdBuilder> {
   factory ApiKeyId([void updates(ApiKeyIdBuilder b)]) = _$ApiKeyId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ApiKeyIdBuilder b) => b;
+  static void _defaults(ApiKeyIdBuilder b) =>
+      b..entityType = EntityType.API_KEY;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ApiKeyId> get serializer => _$ApiKeyIdSerializer();

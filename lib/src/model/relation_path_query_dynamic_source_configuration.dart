@@ -40,7 +40,7 @@ abstract class RelationPathQueryDynamicSourceConfiguration
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RelationPathQueryDynamicSourceConfigurationBuilder b) =>
-      b;
+      b..type = r'RELATION_PATH_QUERY';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RelationPathQueryDynamicSourceConfiguration>

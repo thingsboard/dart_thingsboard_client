@@ -57,7 +57,8 @@ abstract class ProtoTransportPayloadConfiguration
   ]) = _$ProtoTransportPayloadConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ProtoTransportPayloadConfigurationBuilder b) => b;
+  static void _defaults(ProtoTransportPayloadConfigurationBuilder b) =>
+      b..transportPayloadType = r'PROTOBUF';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ProtoTransportPayloadConfiguration> get serializer =>

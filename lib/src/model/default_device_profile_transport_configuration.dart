@@ -34,7 +34,7 @@ abstract class DefaultDeviceProfileTransportConfiguration
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultDeviceProfileTransportConfigurationBuilder b) =>
-      b;
+      b..type = r'DEFAULT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultDeviceProfileTransportConfiguration>

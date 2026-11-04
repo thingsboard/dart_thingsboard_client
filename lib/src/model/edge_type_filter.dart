@@ -41,7 +41,7 @@ abstract class EdgeTypeFilter
       _$EdgeTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EdgeTypeFilterBuilder b) => b;
+  static void _defaults(EdgeTypeFilterBuilder b) => b..type = r'edgeType';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EdgeTypeFilter> get serializer =>

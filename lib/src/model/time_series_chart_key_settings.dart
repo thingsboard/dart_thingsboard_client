@@ -64,7 +64,8 @@ abstract class TimeSeriesChartKeySettings
   ]) = _$TimeSeriesChartKeySettings;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TimeSeriesChartKeySettingsBuilder b) => b;
+  static void _defaults(TimeSeriesChartKeySettingsBuilder b) =>
+      b..type = DataKeySettingsType.TIME_SERIES_CHART;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TimeSeriesChartKeySettings> get serializer =>

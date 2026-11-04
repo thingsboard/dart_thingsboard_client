@@ -73,7 +73,8 @@ abstract class MistralAiChatModelConfig
   ]) = _$MistralAiChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MistralAiChatModelConfigBuilder b) => b;
+  static void _defaults(MistralAiChatModelConfigBuilder b) =>
+      b..provider = r'MISTRAL_AI';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<MistralAiChatModelConfig> get serializer =>

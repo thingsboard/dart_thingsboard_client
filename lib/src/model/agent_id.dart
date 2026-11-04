@@ -27,7 +27,7 @@ abstract class AgentId implements EntityId, Built<AgentId, AgentIdBuilder> {
   factory AgentId([void updates(AgentIdBuilder b)]) = _$AgentId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AgentIdBuilder b) => b;
+  static void _defaults(AgentIdBuilder b) => b..entityType = EntityType.AGENT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AgentId> get serializer => _$AgentIdSerializer();

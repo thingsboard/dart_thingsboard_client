@@ -34,7 +34,8 @@ abstract class UserGroupListFilter
       _$UserGroupListFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(UserGroupListFilterBuilder b) => b;
+  static void _defaults(UserGroupListFilterBuilder b) =>
+      b..type = r'USER_GROUP_LIST';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<UserGroupListFilter> get serializer =>

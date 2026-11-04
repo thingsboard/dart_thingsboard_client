@@ -39,7 +39,8 @@ abstract class TaskProcessingFailureRecipientsConfig
   ]) = _$TaskProcessingFailureRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TaskProcessingFailureRecipientsConfigBuilder b) => b;
+  static void _defaults(TaskProcessingFailureRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.TASK_PROCESSING_FAILURE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<TaskProcessingFailureRecipientsConfig> get serializer =>

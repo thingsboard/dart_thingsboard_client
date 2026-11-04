@@ -39,7 +39,7 @@ abstract class CustomTimeSchedule
       _$CustomTimeSchedule;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CustomTimeScheduleBuilder b) => b;
+  static void _defaults(CustomTimeScheduleBuilder b) => b..type = r'CUSTOM';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CustomTimeSchedule> get serializer =>

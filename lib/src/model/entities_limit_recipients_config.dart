@@ -39,7 +39,8 @@ abstract class EntitiesLimitRecipientsConfig
   ]) = _$EntitiesLimitRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntitiesLimitRecipientsConfigBuilder b) => b;
+  static void _defaults(EntitiesLimitRecipientsConfigBuilder b) =>
+      b..triggerType = NotificationRuleTriggerType.ENTITIES_LIMIT;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntitiesLimitRecipientsConfig> get serializer =>

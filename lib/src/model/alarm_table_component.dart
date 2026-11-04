@@ -81,7 +81,8 @@ abstract class AlarmTableComponent
       _$AlarmTableComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmTableComponentBuilder b) => b;
+  static void _defaults(AlarmTableComponentBuilder b) =>
+      b..type = ReportComponentType.ALARM_TABLE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AlarmTableComponent> get serializer =>

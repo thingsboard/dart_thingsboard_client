@@ -29,7 +29,8 @@ abstract class ApiUsageStateId
       _$ApiUsageStateId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ApiUsageStateIdBuilder b) => b;
+  static void _defaults(ApiUsageStateIdBuilder b) =>
+      b..entityType = EntityType.API_USAGE_STATE;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ApiUsageStateId> get serializer =>

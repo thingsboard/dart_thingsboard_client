@@ -41,7 +41,7 @@ abstract class AssetTypeFilter
       _$AssetTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AssetTypeFilterBuilder b) => b;
+  static void _defaults(AssetTypeFilterBuilder b) => b..type = r'assetType';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AssetTypeFilter> get serializer =>

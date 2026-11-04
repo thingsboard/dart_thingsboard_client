@@ -41,7 +41,8 @@ abstract class EntityGroupListFilter
   ]) = _$EntityGroupListFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityGroupListFilterBuilder b) => b;
+  static void _defaults(EntityGroupListFilterBuilder b) =>
+      b..type = r'entityGroupList';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EntityGroupListFilter> get serializer =>

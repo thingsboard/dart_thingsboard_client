@@ -54,7 +54,8 @@ abstract class GeofencingCalculatedFieldConfiguration
   ]) = _$GeofencingCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(GeofencingCalculatedFieldConfigurationBuilder b) => b;
+  static void _defaults(GeofencingCalculatedFieldConfigurationBuilder b) =>
+      b..type = r'GEOFENCING';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<GeofencingCalculatedFieldConfiguration> get serializer =>

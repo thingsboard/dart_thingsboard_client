@@ -53,7 +53,8 @@ abstract class AttributesImmediateOutputStrategy
   ]) = _$AttributesImmediateOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AttributesImmediateOutputStrategyBuilder b) => b;
+  static void _defaults(AttributesImmediateOutputStrategyBuilder b) =>
+      b..type = r'IMMEDIATE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AttributesImmediateOutputStrategy> get serializer =>

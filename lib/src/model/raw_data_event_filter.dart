@@ -51,7 +51,8 @@ abstract class RawDataEventFilter
       _$RawDataEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RawDataEventFilterBuilder b) => b;
+  static void _defaults(RawDataEventFilterBuilder b) =>
+      b..eventType = EventType.RAW_DATA;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RawDataEventFilter> get serializer =>

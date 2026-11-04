@@ -33,7 +33,8 @@ abstract class EfentoCoapDeviceTypeConfiguration
   ]) = _$EfentoCoapDeviceTypeConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EfentoCoapDeviceTypeConfigurationBuilder b) => b;
+  static void _defaults(EfentoCoapDeviceTypeConfigurationBuilder b) =>
+      b..coapDeviceType = r'EFENTO';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<EfentoCoapDeviceTypeConfiguration> get serializer =>

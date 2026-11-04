@@ -31,7 +31,7 @@ abstract class Failure
   factory Failure([void updates(FailureBuilder b)]) = _$Failure;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(FailureBuilder b) => b;
+  static void _defaults(FailureBuilder b) => b..status = r'FAILURE';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<Failure> get serializer => _$FailureSerializer();

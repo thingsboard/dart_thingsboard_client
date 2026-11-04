@@ -33,7 +33,8 @@ abstract class DefaultDeviceProfileConfiguration
   ]) = _$DefaultDeviceProfileConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultDeviceProfileConfigurationBuilder b) => b;
+  static void _defaults(DefaultDeviceProfileConfigurationBuilder b) =>
+      b..type = r'DEFAULT';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DefaultDeviceProfileConfiguration> get serializer =>

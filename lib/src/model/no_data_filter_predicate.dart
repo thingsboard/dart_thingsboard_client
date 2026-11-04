@@ -41,7 +41,7 @@ abstract class NoDataFilterPredicate
   ]) = _$NoDataFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NoDataFilterPredicateBuilder b) => b;
+  static void _defaults(NoDataFilterPredicateBuilder b) => b..type = r'NO_DATA';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NoDataFilterPredicate> get serializer =>

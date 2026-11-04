@@ -46,7 +46,7 @@ abstract class ClientAttributesQueryingSnmpCommunicationConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     ClientAttributesQueryingSnmpCommunicationConfigBuilder b,
-  ) => b;
+  ) => b..spec = SnmpCommunicationSpec.CLIENT_ATTRIBUTES_QUERYING;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ClientAttributesQueryingSnmpCommunicationConfig>

@@ -36,7 +36,7 @@ abstract class NewPlatformVersionNotificationRuleTriggerConfig
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(
     NewPlatformVersionNotificationRuleTriggerConfigBuilder b,
-  ) => b;
+  ) => b..triggerType = NotificationRuleTriggerType.NEW_PLATFORM_VERSION;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<NewPlatformVersionNotificationRuleTriggerConfig>

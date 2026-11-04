@@ -27,7 +27,7 @@ abstract class RpcId implements EntityId, Built<RpcId, RpcIdBuilder> {
   factory RpcId([void updates(RpcIdBuilder b)]) = _$RpcId;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RpcIdBuilder b) => b;
+  static void _defaults(RpcIdBuilder b) => b..entityType = EntityType.RPC;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<RpcId> get serializer => _$RpcIdSerializer();

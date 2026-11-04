@@ -112,7 +112,8 @@ abstract class SmppSmsProviderConfiguration
   ]) = _$SmppSmsProviderConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SmppSmsProviderConfigurationBuilder b) => b;
+  static void _defaults(SmppSmsProviderConfigurationBuilder b) =>
+      b..type = r'SMPP';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SmppSmsProviderConfiguration> get serializer =>

@@ -84,7 +84,8 @@ abstract class SplitViewComponent
       _$SplitViewComponent;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SplitViewComponentBuilder b) => b;
+  static void _defaults(SplitViewComponentBuilder b) =>
+      b..type = ReportComponentType.SPLIT_VIEW;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<SplitViewComponent> get serializer =>

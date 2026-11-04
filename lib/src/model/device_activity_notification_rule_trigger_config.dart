@@ -49,7 +49,7 @@ abstract class DeviceActivityNotificationRuleTriggerConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceActivityNotificationRuleTriggerConfigBuilder b) =>
-      b;
+      b..triggerType = NotificationRuleTriggerType.DEVICE_ACTIVITY;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DeviceActivityNotificationRuleTriggerConfig>

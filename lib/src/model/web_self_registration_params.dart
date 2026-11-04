@@ -69,7 +69,8 @@ abstract class WebSelfRegistrationParams
   ]) = _$WebSelfRegistrationParams;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(WebSelfRegistrationParamsBuilder b) => b;
+  static void _defaults(WebSelfRegistrationParamsBuilder b) =>
+      b..type = SelfRegistrationType.WEB;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<WebSelfRegistrationParams> get serializer =>

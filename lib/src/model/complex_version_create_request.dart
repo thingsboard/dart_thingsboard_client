@@ -45,7 +45,8 @@ abstract class ComplexVersionCreateRequest
   ]) = _$ComplexVersionCreateRequest;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ComplexVersionCreateRequestBuilder b) => b;
+  static void _defaults(ComplexVersionCreateRequestBuilder b) =>
+      b..type = VersionCreateRequestType.COMPLEX;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<ComplexVersionCreateRequest> get serializer =>

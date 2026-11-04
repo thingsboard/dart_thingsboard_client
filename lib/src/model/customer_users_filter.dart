@@ -33,7 +33,8 @@ abstract class CustomerUsersFilter
       _$CustomerUsersFilter;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CustomerUsersFilterBuilder b) => b;
+  static void _defaults(CustomerUsersFilterBuilder b) =>
+      b..type = r'CUSTOMER_USERS';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<CustomerUsersFilter> get serializer =>

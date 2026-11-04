@@ -38,7 +38,7 @@ abstract class DummyJobResult
       _$DummyJobResult;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DummyJobResultBuilder b) => b;
+  static void _defaults(DummyJobResultBuilder b) => b..jobType = r'DUMMY';
 
   @BuiltValueSerializer(custom: true)
   static Serializer<DummyJobResult> get serializer =>
