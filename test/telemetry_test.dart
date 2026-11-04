@@ -578,6 +578,33 @@ void main() {
         expect(firstMsg['authCmd']['type'], equals('AUTH'));
       });
 
+      test('authCmd carries the API key of an API key client', () async {
+        final apiKeyClient =
+            ThingsboardClient('http://localhost:8080', apiKey: 'my-api-key');
+        apiKeyClient.dio.httpClientAdapter = mockAdapter;
+
+        final fakeChannel = FakeWebSocketChannel();
+        channelFactory.enqueue(fakeChannel);
+
+        final service = TelemetryWebsocketService(
+          apiKeyClient,
+          'http://localhost:8080',
+          channelFactory: channelFactory.call,
+        );
+        service.subscribe(attributesSubscriber(service, 'device-1'));
+
+        await Future.delayed(Duration(milliseconds: 10));
+
+        expect(channelFactory.connectCallCount, equals(1),
+            reason: 'The socket opens without a JWT or a token refresh');
+        expect(fakeChannel.sentMessages.isNotEmpty, isTrue);
+        final firstMsg =
+            jsonDecode(fakeChannel.sentMessages.first as String);
+        expect(firstMsg['authCmd']['type'], equals('AUTH'));
+        expect(firstMsg['authCmd']['apiKey'], equals('my-api-key'));
+        expect(firstMsg['authCmd'].containsKey('token'), isFalse);
+      });
+
       test('expired token triggers refreshJwtToken before socket open',
           () async {
         // Login with an expired token

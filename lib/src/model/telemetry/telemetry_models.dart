@@ -909,13 +909,20 @@ class UnsubscribeCmd extends WebsocketCmd {
 class AuthCmd extends WebsocketCmd {
   String? token;
 
-  AuthCmd({int? cmdId, this.token}) : super(cmdId: cmdId, type: WsCmdType.AUTH);
+  /// API key the session authenticates with instead of [token].
+  String? apiKey;
+
+  AuthCmd({int? cmdId, this.token, this.apiKey})
+      : super(cmdId: cmdId, type: WsCmdType.AUTH);
 
   @override
   Map<String, dynamic> toJson() {
     var json = super.toJson();
     if (token != null) {
       json['token'] = token;
+    }
+    if (apiKey != null) {
+      json['apiKey'] = apiKey;
     }
     return json;
   }
@@ -935,6 +942,10 @@ class TelemetryPluginCmdsWrapper {
 
   void setAuth(String token) {
     authCmd = new AuthCmd(cmdId: 0, token: token);
+  }
+
+  void setApiKeyAuth(String apiKey) {
+    authCmd = AuthCmd(cmdId: 0, apiKey: apiKey);
   }
 
   TelemetryPluginCmdsWrapper preparePublishCommands(int maxCommands) {

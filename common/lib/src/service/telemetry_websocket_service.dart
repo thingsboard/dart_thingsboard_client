@@ -208,13 +208,16 @@ class TelemetryWebsocketService implements TelemetryService {
         if (_isReconnect) {
           _reconnectAttempt++;
         }
-        if (_tbClient.isJwtTokenValid()) {
-          _openSocket(_tbClient.getJwtToken()!);
+        if (_tbClient.isApiKeyAuth()) {
+          // An API key does not expire, so there is nothing to refresh.
+          _openSocket(apiKey: _tbClient.apiKey!);
+        } else if (_tbClient.isJwtTokenValid()) {
+          _openSocket(token: _tbClient.getJwtToken()!);
         } else {
           _tbClient.refreshJwtToken().then((value) {
             var token = _tbClient.getJwtToken();
             if (_isActive && token != null) {
-              _openSocket(token);
+              _openSocket(token: token);
             } else {
               _isOpening = false;
             }
@@ -236,11 +239,14 @@ class TelemetryWebsocketService implements TelemetryService {
     }
   }
 
-  void _openSocket(String token) {
+  /// Opens the socket; the session authenticates with [token] (JWT) or
+  /// [apiKey], whichever is given.
+  void _openSocket({String? token, String? apiKey}) {
     try {
       var channel = _channelFactory(_telemetryUri);
       _sink = channel.sink;
-      channel.ready.then((value) => _onOpen(token), onError: ((e, stackTrace) {
+      channel.ready.then((value) => _onOpen(token: token, apiKey: apiKey),
+          onError: ((e, stackTrace) {
         _onError(e);
         _onClose(channel);
       }));
@@ -257,11 +263,15 @@ class TelemetryWebsocketService implements TelemetryService {
     }
   }
 
-  void _onOpen(String token) {
+  void _onOpen({String? token, String? apiKey}) {
     _isOpening = false;
     _isOpened = true;
     _reconnectAttempt = 0;
-    _cmdsWrapper.setAuth(token);
+    if (apiKey != null) {
+      _cmdsWrapper.setApiKeyAuth(apiKey);
+    } else {
+      _cmdsWrapper.setAuth(token!);
+    }
     if (_reconnectTimer != null) {
       _reconnectTimer!.cancel();
       _reconnectTimer = null;
