@@ -25,10 +25,10 @@ import '../entity_id.dart';
 import '../entity_key.dart';
 import '../key_filter.dart';
 import '../entity_type.dart';
+import '../notification.dart';
 import '../page_data_alarm_data.dart';
 import '../page_data_entity_data.dart';
 import '../ts_value.dart';
-import 'push_notification_models.dart';
 
 /// The wire name of [value], a generated enum value with its [serializer].
 ///
@@ -1005,19 +1005,24 @@ class NotificationCountUpdate extends CmdUpdate {
 }
 
 class NotificationsUpdate extends NotificationCountUpdate {
-  final PushNotification? update;
-  final List<PushNotification>? notifications;
+  final Notification? update;
+
+  /// The unread notifications, newest first. [TelemetrySubscriber] inserts
+  /// each later [update] into the list of its last update.
+  final List<Notification>? notifications;
 
   NotificationsUpdate.fromJson(super.json)
-    : update = json['update'] != null
-          ? PushNotification.fromJson(json['update'])
-          : null,
-      notifications = json['notifications'] != null
-          ? (json['notifications'] as List<dynamic>)
-                .map((e) => PushNotification.fromJson(e))
-                .toList()
-          : null,
+    : update = _notification(json['update']),
+      notifications = (json['notifications'] as List<dynamic>?)
+          ?.map((e) => _notification(e)!)
+          .toList(),
       super.fromJson();
+
+  static Notification? _notification(Object? json) => json == null
+      ? null
+      : apiSerializers(
+          registerNotification,
+        ).deserializeWith(Notification.serializer, json);
 
   @override
   String toString() {

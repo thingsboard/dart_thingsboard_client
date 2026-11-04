@@ -395,7 +395,6 @@ export 'package:${pkg}/src/model/page/page_data.dart';
 export 'package:${pkg}/src/model/page/page_link.dart';
 export 'package:${pkg}/src/model/page/sort_order.dart' hide Direction;
 export 'package:${pkg}/src/storage/storage.dart';
-export 'package:${pkg}/src/model/telemetry/push_notification_models.dart';
 export 'package:${pkg}/src/model/telemetry/telemetry_models.dart';
 export 'package:${pkg}/src/service/telemetry_websocket_service.dart';
 EXPORTS

@@ -156,10 +156,9 @@ class NotificationBuilder
   set additionalConfig(JsonObject? additionalConfig) =>
       _$this._additionalConfig = additionalConfig;
 
-  NotificationInfoBuilder? _info;
-  NotificationInfoBuilder get info =>
-      _$this._info ??= NotificationInfoBuilder();
-  set info(NotificationInfoBuilder? info) => _$this._info = info;
+  NotificationInfo? _info;
+  NotificationInfo? get info => _$this._info;
+  set info(NotificationInfo? info) => _$this._info = info;
 
   NotificationStatus? _status;
   NotificationStatus? get status => _$this._status;
@@ -181,7 +180,7 @@ class NotificationBuilder
       _subject = $v.subject;
       _text = $v.text;
       _additionalConfig = $v.additionalConfig;
-      _info = $v.info?.toBuilder();
+      _info = $v.info;
       _status = $v.status;
       _$v = null;
     }
@@ -216,7 +215,7 @@ class NotificationBuilder
             subject: subject,
             text: text,
             additionalConfig: additionalConfig,
-            info: _info?.build(),
+            info: info,
             status: status,
           );
     } catch (_) {
@@ -229,9 +228,6 @@ class NotificationBuilder
         _requestId?.build();
         _$failedField = 'recipientId';
         _recipientId?.build();
-
-        _$failedField = 'info';
-        _info?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
           r'Notification',

@@ -46,6 +46,7 @@ Serializers _$serializers =
           ..add($MenuItem.serializer)
           ..add($MobilePage.serializer)
           ..add($NotificationDeliveryMethodConfig.serializer)
+          ..add($NotificationInfo.serializer)
           ..add($NotificationRuleRecipientsConfig.serializer)
           ..add($NotificationRuleTriggerConfig.serializer)
           ..add($NotificationTargetConfig.serializer)
@@ -74,6 +75,9 @@ Serializers _$serializers =
           ..add(ActionStatus.serializer)
           ..add(ActionType.serializer)
           ..add(ActivateUserRequest.serializer)
+          ..add(AddonAccessErrorNotificationInfo.serializer)
+          ..add(AddonAccessRequestNotificationInfo.serializer)
+          ..add(AddonType.serializer)
           ..add(AdminSettings.serializer)
           ..add(AdminSettingsId.serializer)
           ..add(AffectedTenantAdministratorsFilter.serializer)
@@ -136,12 +140,14 @@ Serializers _$serializers =
           ..add(Alarm.serializer)
           ..add(AlarmAction.serializer)
           ..add(AlarmAssignee.serializer)
+          ..add(AlarmAssignmentNotificationInfo.serializer)
           ..add(AlarmAssignmentNotificationRuleTriggerConfig.serializer)
           ..add(AlarmAssignmentRecipientsConfig.serializer)
           ..add(AlarmCalculatedFieldConfiguration.serializer)
           ..add(AlarmComment.serializer)
           ..add(AlarmCommentId.serializer)
           ..add(AlarmCommentInfo.serializer)
+          ..add(AlarmCommentNotificationInfo.serializer)
           ..add(AlarmCommentNotificationRuleTriggerConfig.serializer)
           ..add(AlarmCommentRecipientsConfig.serializer)
           ..add(AlarmCommentType.serializer)
@@ -159,6 +165,7 @@ Serializers _$serializers =
           ..add(AlarmFilterConfig.serializer)
           ..add(AlarmId.serializer)
           ..add(AlarmInfo.serializer)
+          ..add(AlarmNotificationInfo.serializer)
           ..add(AlarmNotificationRuleTriggerConfig.serializer)
           ..add(AlarmRule.serializer)
           ..add(AlarmRuleBooleanFilterPredicate.serializer)
@@ -191,8 +198,10 @@ Serializers _$serializers =
           ..add(ApiKey.serializer)
           ..add(ApiKeyId.serializer)
           ..add(ApiKeyInfo.serializer)
+          ..add(ApiUsageLimitNotificationInfo.serializer)
           ..add(ApiUsageLimitNotificationRuleTriggerConfig.serializer)
           ..add(ApiUsageLimitRecipientsConfig.serializer)
+          ..add(ApiUsageRecordKey.serializer)
           ..add(ApiUsageStateFilter.serializer)
           ..add(ApiUsageStateId.serializer)
           ..add(ApiUsageStateValue.serializer)
@@ -364,6 +373,7 @@ Serializers _$serializers =
           ..add(DefaultRuleChainCreateRequest.serializer)
           ..add(DefaultTenantProfileConfiguration.serializer)
           ..add(Device.serializer)
+          ..add(DeviceActivityNotificationInfo.serializer)
           ..add(DeviceActivityNotificationRuleTriggerConfig.serializer)
           ..add(DeviceActivityRecipientsConfig.serializer)
           ..add(DeviceCredentials.serializer)
@@ -404,10 +414,12 @@ Serializers _$serializers =
           ..add(DynamicValueSourceType.serializer)
           ..add(DynamicValueString.serializer)
           ..add(Edge.serializer)
+          ..add(EdgeCommunicationFailureNotificationInfo.serializer)
           ..add(
             EdgeCommunicationFailureNotificationRuleTriggerConfig.serializer,
           )
           ..add(EdgeCommunicationFailureRecipientsConfig.serializer)
+          ..add(EdgeConnectionNotificationInfo.serializer)
           ..add(EdgeConnectionNotificationRuleTriggerConfig.serializer)
           ..add(EdgeConnectionRecipientsConfig.serializer)
           ..add(EdgeConnectivityEvent.serializer)
@@ -431,9 +443,12 @@ Serializers _$serializers =
           ..add(EmailTwoFaProviderConfig.serializer)
           ..add(EnterpriseCaptchaParams.serializer)
           ..add(EntitiesByGroupNameFilter.serializer)
+          ..add(EntitiesLimitIncreaseRequestNotificationInfo.serializer)
+          ..add(EntitiesLimitNotificationInfo.serializer)
           ..add(EntitiesLimitNotificationRuleTriggerConfig.serializer)
           ..add(EntitiesLimitRecipientsConfig.serializer)
           ..add(Entity.serializer)
+          ..add(EntityActionNotificationInfo.serializer)
           ..add(EntityActionNotificationRuleTriggerConfig.serializer)
           ..add(EntityActionRecipientsConfig.serializer)
           ..add(EntityAggregationCalculatedFieldConfiguration.serializer)
@@ -504,6 +519,7 @@ Serializers _$serializers =
           ..add(Font.serializer)
           ..add(FontStyle.serializer)
           ..add(FontWeight.serializer)
+          ..add(GeneralNotificationInfo.serializer)
           ..add(GeofencingCalculatedFieldConfiguration.serializer)
           ..add(GeofencingReportStrategy.serializer)
           ..add(GetManagedRelatedEntityIds200ResponseInner.serializer)
@@ -527,6 +543,7 @@ Serializers _$serializers =
           ..add(HomeMenuItem.serializer)
           ..add(HomeMenuItemType.serializer)
           ..add(HourInterval.serializer)
+          ..add(HousekeeperTaskType.serializer)
           ..add(ImageAlignment.serializer)
           ..add(ImageComponent.serializer)
           ..add(ImageSourceType.serializer)
@@ -537,6 +554,7 @@ Serializers _$serializers =
           ..add(IntegrationExportData.serializer)
           ..add(IntegrationId.serializer)
           ..add(IntegrationInfo.serializer)
+          ..add(IntegrationLifecycleEventNotificationInfo.serializer)
           ..add(
             IntegrationLifecycleEventNotificationRuleTriggerConfig.serializer,
           )
@@ -612,6 +630,7 @@ Serializers _$serializers =
           ..add(MqttDeviceProfileTransportConfiguration.serializer)
           ..add(MqttDeviceTransportConfiguration.serializer)
           ..add(NameConflictPolicy.serializer)
+          ..add(NewPlatformVersionNotificationInfo.serializer)
           ..add(NewPlatformVersionNotificationRuleTriggerConfig.serializer)
           ..add(NewPlatformVersionRecipientsConfig.serializer)
           ..add(NoDataFilterPredicate.serializer)
@@ -621,7 +640,6 @@ Serializers _$serializers =
           ..add(Notification.serializer)
           ..add(NotificationDeliveryMethod.serializer)
           ..add(NotificationId.serializer)
-          ..add(NotificationInfo.serializer)
           ..add(NotificationPref.serializer)
           ..add(NotificationRequest.serializer)
           ..add(NotificationRequestConfig.serializer)
@@ -761,6 +779,7 @@ Serializers _$serializers =
           ..add(PaletteSettings.serializer)
           ..add(PdfReportTemplateConfig.serializer)
           ..add(PieChartLabelPosition.serializer)
+          ..add(PlanUpgradeRequestNotificationInfo.serializer)
           ..add(PlatformTwoFaSettings.serializer)
           ..add(PlatformType.serializer)
           ..add(PlatformUsersNotificationTargetConfig.serializer)
@@ -782,6 +801,7 @@ Serializers _$serializers =
           ..add(QueueStatsId.serializer)
           ..add(QuickTimeInterval.serializer)
           ..add(RPKLwM2MBootstrapServerCredential.serializer)
+          ..add(RateLimitsNotificationInfo.serializer)
           ..add(RateLimitsNotificationRuleTriggerConfig.serializer)
           ..add(RateLimitsRecipientsConfig.serializer)
           ..add(RawDataEventFilter.serializer)
@@ -804,6 +824,7 @@ Serializers _$serializers =
           ..add(ReportComponentSubType.serializer)
           ..add(ReportComponentType.serializer)
           ..add(ReportDoughnutChartSettings.serializer)
+          ..add(ReportGeneratedNotificationInfo.serializer)
           ..add(ReportId.serializer)
           ..add(ReportInfo.serializer)
           ..add(ReportJobConfiguration.serializer)
@@ -827,6 +848,7 @@ Serializers _$serializers =
           ..add(ResourceShortageRecipientsConfig.serializer)
           ..add(ResourceSubType.serializer)
           ..add(ResourceType.serializer)
+          ..add(ResourcesShortageNotificationInfo.serializer)
           ..add(ResourcesShortageNotificationRuleTriggerConfig.serializer)
           ..add(RichTextComponent.serializer)
           ..add(Role.serializer)
@@ -850,11 +872,13 @@ Serializers _$serializers =
           ..add(RuleChainNote.serializer)
           ..add(RuleChainOutputLabelsUsage.serializer)
           ..add(RuleChainType.serializer)
+          ..add(RuleEngineComponentLifecycleEventNotificationInfo.serializer)
           ..add(
             RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig
                 .serializer,
           )
           ..add(RuleEngineComponentLifecycleEventRecipientsConfig.serializer)
+          ..add(RuleEngineOriginatedNotificationInfo.serializer)
           ..add(RuleNode.serializer)
           ..add(RuleNodeDebugEventFilter.serializer)
           ..add(RuleNodeDebugEventFilterEntityTypeEnum.serializer)
@@ -951,6 +975,7 @@ Serializers _$serializers =
           ..add(SystemSetupState.serializer)
           ..add(TableSortDirection.serializer)
           ..add(TableSortOrder.serializer)
+          ..add(TaskProcessingFailureNotificationInfo.serializer)
           ..add(TaskProcessingFailureNotificationRuleTriggerConfig.serializer)
           ..add(TaskProcessingFailureRecipientsConfig.serializer)
           ..add(TbChatRequest.serializer)
@@ -1030,6 +1055,7 @@ Serializers _$serializers =
           ..add(UpdateMessage.serializer)
           ..add(UsageInfo.serializer)
           ..add(User.serializer)
+          ..add(UserActivatedNotificationInfo.serializer)
           ..add(UserActivationLink.serializer)
           ..add(UserDashboardsInfo.serializer)
           ..add(UserEmailInfo.serializer)
@@ -1041,6 +1067,7 @@ Serializers _$serializers =
           ..add(UserMobileInfo.serializer)
           ..add(UserNotificationSettings.serializer)
           ..add(UserPasswordPolicy.serializer)
+          ..add(UserRegisteredNotificationInfo.serializer)
           ..add(UserRoleFilter.serializer)
           ..add(V2CaptchaParams.serializer)
           ..add(V3CaptchaParams.serializer)
@@ -3099,6 +3126,34 @@ Serializers _$serializers =
               const FullType(NotificationPref),
             ]),
             () => MapBuilder<String, NotificationPref>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, const [
+              const FullType(String),
+              const FullType(String),
+            ]),
+            () => MapBuilder<String, String>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, const [
+              const FullType(String),
+              const FullType(String),
+            ]),
+            () => MapBuilder<String, String>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, const [
+              const FullType(String),
+              const FullType(String),
+            ]),
+            () => MapBuilder<String, String>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, const [
+              const FullType(String),
+              const FullType(String),
+            ]),
+            () => MapBuilder<String, String>(),
           )
           ..addBuilderFactory(
             const FullType(BuiltMap, const [

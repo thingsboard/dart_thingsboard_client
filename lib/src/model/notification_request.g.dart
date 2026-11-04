@@ -153,10 +153,9 @@ class NotificationRequestBuilder
   set template(NotificationTemplateBuilder? template) =>
       _$this._template = template;
 
-  NotificationInfoBuilder? _info;
-  NotificationInfoBuilder get info =>
-      _$this._info ??= NotificationInfoBuilder();
-  set info(NotificationInfoBuilder? info) => _$this._info = info;
+  NotificationInfo? _info;
+  NotificationInfo? get info => _$this._info;
+  set info(NotificationInfo? info) => _$this._info = info;
 
   NotificationRequestConfigBuilder? _additionalConfig;
   NotificationRequestConfigBuilder get additionalConfig =>
@@ -196,7 +195,7 @@ class NotificationRequestBuilder
       _targets = $v.targets.toBuilder();
       _templateId = $v.templateId?.toBuilder();
       _template = $v.template?.toBuilder();
-      _info = $v.info?.toBuilder();
+      _info = $v.info;
       _additionalConfig = $v.additionalConfig?.toBuilder();
       _originatorEntityId = $v.originatorEntityId;
       _ruleId = $v.ruleId?.toBuilder();
@@ -232,7 +231,7 @@ class NotificationRequestBuilder
             targets: targets.build(),
             templateId: _templateId?.build(),
             template: _template?.build(),
-            info: _info?.build(),
+            info: info,
             additionalConfig: _additionalConfig?.build(),
             originatorEntityId: originatorEntityId,
             ruleId: _ruleId?.build(),
@@ -253,8 +252,7 @@ class NotificationRequestBuilder
         _templateId?.build();
         _$failedField = 'template';
         _template?.build();
-        _$failedField = 'info';
-        _info?.build();
+
         _$failedField = 'additionalConfig';
         _additionalConfig?.build();
 

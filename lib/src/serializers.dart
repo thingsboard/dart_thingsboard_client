@@ -24,6 +24,9 @@ import 'package:thingsboard_client/src/model/action.dart';
 import 'package:thingsboard_client/src/model/action_status.dart';
 import 'package:thingsboard_client/src/model/action_type.dart';
 import 'package:thingsboard_client/src/model/activate_user_request.dart';
+import 'package:thingsboard_client/src/model/addon_access_error_notification_info.dart';
+import 'package:thingsboard_client/src/model/addon_access_request_notification_info.dart';
+import 'package:thingsboard_client/src/model/addon_type.dart';
 import 'package:thingsboard_client/src/model/admin_settings.dart';
 import 'package:thingsboard_client/src/model/admin_settings_id.dart';
 import 'package:thingsboard_client/src/model/affected_tenant_administrators_filter.dart';
@@ -92,12 +95,14 @@ import 'package:thingsboard_client/src/model/ai_model_type.dart';
 import 'package:thingsboard_client/src/model/alarm.dart';
 import 'package:thingsboard_client/src/model/alarm_action.dart';
 import 'package:thingsboard_client/src/model/alarm_assignee.dart';
+import 'package:thingsboard_client/src/model/alarm_assignment_notification_info.dart';
 import 'package:thingsboard_client/src/model/alarm_assignment_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/alarm_assignment_recipients_config.dart';
 import 'package:thingsboard_client/src/model/alarm_calculated_field_configuration.dart';
 import 'package:thingsboard_client/src/model/alarm_comment.dart';
 import 'package:thingsboard_client/src/model/alarm_comment_id.dart';
 import 'package:thingsboard_client/src/model/alarm_comment_info.dart';
+import 'package:thingsboard_client/src/model/alarm_comment_notification_info.dart';
 import 'package:thingsboard_client/src/model/alarm_comment_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/alarm_comment_recipients_config.dart';
 import 'package:thingsboard_client/src/model/alarm_comment_type.dart';
@@ -117,6 +122,7 @@ import 'package:thingsboard_client/src/model/alarm_data_query.dart';
 import 'package:thingsboard_client/src/model/alarm_filter_config.dart';
 import 'package:thingsboard_client/src/model/alarm_id.dart';
 import 'package:thingsboard_client/src/model/alarm_info.dart';
+import 'package:thingsboard_client/src/model/alarm_notification_info.dart';
 import 'package:thingsboard_client/src/model/alarm_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/alarm_rule.dart';
 import 'package:thingsboard_client/src/model/alarm_rule_boolean_filter_predicate.dart';
@@ -149,8 +155,10 @@ import 'package:thingsboard_client/src/model/api_feature.dart';
 import 'package:thingsboard_client/src/model/api_key.dart';
 import 'package:thingsboard_client/src/model/api_key_id.dart';
 import 'package:thingsboard_client/src/model/api_key_info.dart';
+import 'package:thingsboard_client/src/model/api_usage_limit_notification_info.dart';
 import 'package:thingsboard_client/src/model/api_usage_limit_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/api_usage_limit_recipients_config.dart';
+import 'package:thingsboard_client/src/model/api_usage_record_key.dart';
 import 'package:thingsboard_client/src/model/api_usage_state_filter.dart';
 import 'package:thingsboard_client/src/model/api_usage_state_id.dart';
 import 'package:thingsboard_client/src/model/api_usage_state_value.dart';
@@ -320,6 +328,7 @@ import 'package:thingsboard_client/src/model/default_rule_chain_create_request.d
 import 'package:thingsboard_client/src/model/default_tenant_profile_configuration.dart';
 import 'package:thingsboard_client/src/model/delivery_method_notification_template.dart';
 import 'package:thingsboard_client/src/model/device.dart';
+import 'package:thingsboard_client/src/model/device_activity_notification_info.dart';
 import 'package:thingsboard_client/src/model/device_activity_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/device_activity_recipients_config.dart';
 import 'package:thingsboard_client/src/model/device_configuration.dart';
@@ -365,8 +374,10 @@ import 'package:thingsboard_client/src/model/dynamic_value_double.dart';
 import 'package:thingsboard_client/src/model/dynamic_value_source_type.dart';
 import 'package:thingsboard_client/src/model/dynamic_value_string.dart';
 import 'package:thingsboard_client/src/model/edge.dart';
+import 'package:thingsboard_client/src/model/edge_communication_failure_notification_info.dart';
 import 'package:thingsboard_client/src/model/edge_communication_failure_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/edge_communication_failure_recipients_config.dart';
+import 'package:thingsboard_client/src/model/edge_connection_notification_info.dart';
 import 'package:thingsboard_client/src/model/edge_connection_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/edge_connection_recipients_config.dart';
 import 'package:thingsboard_client/src/model/edge_connectivity_event.dart';
@@ -390,9 +401,12 @@ import 'package:thingsboard_client/src/model/email_two_fa_account_config.dart';
 import 'package:thingsboard_client/src/model/email_two_fa_provider_config.dart';
 import 'package:thingsboard_client/src/model/enterprise_captcha_params.dart';
 import 'package:thingsboard_client/src/model/entities_by_group_name_filter.dart';
+import 'package:thingsboard_client/src/model/entities_limit_increase_request_notification_info.dart';
+import 'package:thingsboard_client/src/model/entities_limit_notification_info.dart';
 import 'package:thingsboard_client/src/model/entities_limit_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/entities_limit_recipients_config.dart';
 import 'package:thingsboard_client/src/model/entity.dart';
+import 'package:thingsboard_client/src/model/entity_action_notification_info.dart';
 import 'package:thingsboard_client/src/model/entity_action_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/entity_action_recipients_config.dart';
 import 'package:thingsboard_client/src/model/entity_aggregation_calculated_field_configuration.dart';
@@ -465,6 +479,7 @@ import 'package:thingsboard_client/src/model/fixed_time_window.dart';
 import 'package:thingsboard_client/src/model/font.dart';
 import 'package:thingsboard_client/src/model/font_style.dart';
 import 'package:thingsboard_client/src/model/font_weight.dart';
+import 'package:thingsboard_client/src/model/general_notification_info.dart';
 import 'package:thingsboard_client/src/model/geofencing_calculated_field_configuration.dart';
 import 'package:thingsboard_client/src/model/geofencing_report_strategy.dart';
 import 'package:thingsboard_client/src/model/get_managed_related_entity_ids200_response_inner.dart';
@@ -488,6 +503,7 @@ import 'package:thingsboard_client/src/model/home_dashboard_params.dart';
 import 'package:thingsboard_client/src/model/home_menu_item.dart';
 import 'package:thingsboard_client/src/model/home_menu_item_type.dart';
 import 'package:thingsboard_client/src/model/hour_interval.dart';
+import 'package:thingsboard_client/src/model/housekeeper_task_type.dart';
 import 'package:thingsboard_client/src/model/image_alignment.dart';
 import 'package:thingsboard_client/src/model/image_component.dart';
 import 'package:thingsboard_client/src/model/image_source_type.dart';
@@ -498,6 +514,7 @@ import 'package:thingsboard_client/src/model/integration_converters_info.dart';
 import 'package:thingsboard_client/src/model/integration_export_data.dart';
 import 'package:thingsboard_client/src/model/integration_id.dart';
 import 'package:thingsboard_client/src/model/integration_info.dart';
+import 'package:thingsboard_client/src/model/integration_lifecycle_event_notification_info.dart';
 import 'package:thingsboard_client/src/model/integration_lifecycle_event_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/integration_lifecycle_event_recipients_config.dart';
 import 'package:thingsboard_client/src/model/integration_type.dart';
@@ -576,6 +593,7 @@ import 'package:thingsboard_client/src/model/month_interval.dart';
 import 'package:thingsboard_client/src/model/mqtt_device_profile_transport_configuration.dart';
 import 'package:thingsboard_client/src/model/mqtt_device_transport_configuration.dart';
 import 'package:thingsboard_client/src/model/name_conflict_policy.dart';
+import 'package:thingsboard_client/src/model/new_platform_version_notification_info.dart';
 import 'package:thingsboard_client/src/model/new_platform_version_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/new_platform_version_recipients_config.dart';
 import 'package:thingsboard_client/src/model/no_data_filter_predicate.dart';
@@ -731,6 +749,7 @@ import 'package:thingsboard_client/src/model/palette.dart';
 import 'package:thingsboard_client/src/model/palette_settings.dart';
 import 'package:thingsboard_client/src/model/pdf_report_template_config.dart';
 import 'package:thingsboard_client/src/model/pie_chart_label_position.dart';
+import 'package:thingsboard_client/src/model/plan_upgrade_request_notification_info.dart';
 import 'package:thingsboard_client/src/model/platform_two_fa_settings.dart';
 import 'package:thingsboard_client/src/model/platform_type.dart';
 import 'package:thingsboard_client/src/model/platform_users_notification_target_config.dart';
@@ -752,6 +771,7 @@ import 'package:thingsboard_client/src/model/queue_stats.dart';
 import 'package:thingsboard_client/src/model/queue_stats_id.dart';
 import 'package:thingsboard_client/src/model/quick_time_interval.dart';
 import 'package:thingsboard_client/src/model/rpklw_m2_m_bootstrap_server_credential.dart';
+import 'package:thingsboard_client/src/model/rate_limits_notification_info.dart';
 import 'package:thingsboard_client/src/model/rate_limits_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/rate_limits_recipients_config.dart';
 import 'package:thingsboard_client/src/model/raw_data_event_filter.dart';
@@ -773,6 +793,7 @@ import 'package:thingsboard_client/src/model/report_component.dart';
 import 'package:thingsboard_client/src/model/report_component_sub_type.dart';
 import 'package:thingsboard_client/src/model/report_component_type.dart';
 import 'package:thingsboard_client/src/model/report_doughnut_chart_settings.dart';
+import 'package:thingsboard_client/src/model/report_generated_notification_info.dart';
 import 'package:thingsboard_client/src/model/report_id.dart';
 import 'package:thingsboard_client/src/model/report_info.dart';
 import 'package:thingsboard_client/src/model/report_job_configuration.dart';
@@ -799,6 +820,7 @@ import 'package:thingsboard_client/src/model/resource_export_data.dart';
 import 'package:thingsboard_client/src/model/resource_shortage_recipients_config.dart';
 import 'package:thingsboard_client/src/model/resource_sub_type.dart';
 import 'package:thingsboard_client/src/model/resource_type.dart';
+import 'package:thingsboard_client/src/model/resources_shortage_notification_info.dart';
 import 'package:thingsboard_client/src/model/resources_shortage_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/rich_text_component.dart';
 import 'package:thingsboard_client/src/model/role.dart';
@@ -821,8 +843,10 @@ import 'package:thingsboard_client/src/model/rule_chain_meta_data.dart';
 import 'package:thingsboard_client/src/model/rule_chain_note.dart';
 import 'package:thingsboard_client/src/model/rule_chain_output_labels_usage.dart';
 import 'package:thingsboard_client/src/model/rule_chain_type.dart';
+import 'package:thingsboard_client/src/model/rule_engine_component_lifecycle_event_notification_info.dart';
 import 'package:thingsboard_client/src/model/rule_engine_component_lifecycle_event_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/rule_engine_component_lifecycle_event_recipients_config.dart';
+import 'package:thingsboard_client/src/model/rule_engine_originated_notification_info.dart';
 import 'package:thingsboard_client/src/model/rule_node.dart';
 import 'package:thingsboard_client/src/model/rule_node_debug_event_filter.dart';
 import 'package:thingsboard_client/src/model/rule_node_id.dart';
@@ -918,6 +942,7 @@ import 'package:thingsboard_client/src/model/system_setup_request.dart';
 import 'package:thingsboard_client/src/model/system_setup_state.dart';
 import 'package:thingsboard_client/src/model/table_sort_direction.dart';
 import 'package:thingsboard_client/src/model/table_sort_order.dart';
+import 'package:thingsboard_client/src/model/task_processing_failure_notification_info.dart';
 import 'package:thingsboard_client/src/model/task_processing_failure_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/task_processing_failure_recipients_config.dart';
 import 'package:thingsboard_client/src/model/task_result.dart';
@@ -1005,6 +1030,7 @@ import 'package:thingsboard_client/src/model/uniquify_strategy.dart';
 import 'package:thingsboard_client/src/model/update_message.dart';
 import 'package:thingsboard_client/src/model/usage_info.dart';
 import 'package:thingsboard_client/src/model/user.dart';
+import 'package:thingsboard_client/src/model/user_activated_notification_info.dart';
 import 'package:thingsboard_client/src/model/user_activation_link.dart';
 import 'package:thingsboard_client/src/model/user_dashboards_info.dart';
 import 'package:thingsboard_client/src/model/user_email_info.dart';
@@ -1016,6 +1042,7 @@ import 'package:thingsboard_client/src/model/user_list_filter.dart';
 import 'package:thingsboard_client/src/model/user_mobile_info.dart';
 import 'package:thingsboard_client/src/model/user_notification_settings.dart';
 import 'package:thingsboard_client/src/model/user_password_policy.dart';
+import 'package:thingsboard_client/src/model/user_registered_notification_info.dart';
 import 'package:thingsboard_client/src/model/user_role_filter.dart';
 import 'package:thingsboard_client/src/model/users_filter.dart';
 import 'package:thingsboard_client/src/model/v2_captcha_params.dart';
@@ -1063,6 +1090,9 @@ part 'serializers.g.dart';
   ActionStatus,
   ActionType,
   ActivateUserRequest,
+  AddonAccessErrorNotificationInfo,
+  AddonAccessRequestNotificationInfo,
+  AddonType,
   AdminSettings,
   AdminSettingsId,
   AffectedTenantAdministratorsFilter,
@@ -1137,12 +1167,14 @@ part 'serializers.g.dart';
   Alarm,
   AlarmAction,
   AlarmAssignee,
+  AlarmAssignmentNotificationInfo,
   AlarmAssignmentNotificationRuleTriggerConfig,
   AlarmAssignmentRecipientsConfig,
   AlarmCalculatedFieldConfiguration,
   AlarmComment,
   AlarmCommentId,
   AlarmCommentInfo,
+  AlarmCommentNotificationInfo,
   AlarmCommentNotificationRuleTriggerConfig,
   AlarmCommentRecipientsConfig,
   AlarmCommentType,
@@ -1164,6 +1196,7 @@ part 'serializers.g.dart';
   AlarmFilterConfig,
   AlarmId,
   AlarmInfo,
+  AlarmNotificationInfo,
   AlarmNotificationRuleTriggerConfig,
   AlarmRule,
   AlarmRuleBooleanFilterPredicate,
@@ -1198,8 +1231,10 @@ part 'serializers.g.dart';
   ApiKey,
   ApiKeyId,
   ApiKeyInfo,
+  ApiUsageLimitNotificationInfo,
   ApiUsageLimitNotificationRuleTriggerConfig,
   ApiUsageLimitRecipientsConfig,
+  ApiUsageRecordKey,
   ApiUsageStateFilter,
   ApiUsageStateId,
   ApiUsageStateValue,
@@ -1376,6 +1411,7 @@ part 'serializers.g.dart';
   DeliveryMethodNotificationTemplate,
   $DeliveryMethodNotificationTemplate,
   Device,
+  DeviceActivityNotificationInfo,
   DeviceActivityNotificationRuleTriggerConfig,
   DeviceActivityRecipientsConfig,
   DeviceConfiguration,
@@ -1426,8 +1462,10 @@ part 'serializers.g.dart';
   DynamicValueSourceType,
   DynamicValueString,
   Edge,
+  EdgeCommunicationFailureNotificationInfo,
   EdgeCommunicationFailureNotificationRuleTriggerConfig,
   EdgeCommunicationFailureRecipientsConfig,
+  EdgeConnectionNotificationInfo,
   EdgeConnectionNotificationRuleTriggerConfig,
   EdgeConnectionRecipientsConfig,
   EdgeConnectivityEvent,
@@ -1451,9 +1489,12 @@ part 'serializers.g.dart';
   EmailTwoFaProviderConfig,
   EnterpriseCaptchaParams,
   EntitiesByGroupNameFilter,
+  EntitiesLimitIncreaseRequestNotificationInfo,
+  EntitiesLimitNotificationInfo,
   EntitiesLimitNotificationRuleTriggerConfig,
   EntitiesLimitRecipientsConfig,
   Entity,
+  EntityActionNotificationInfo,
   EntityActionNotificationRuleTriggerConfig,
   EntityActionRecipientsConfig,
   EntityAggregationCalculatedFieldConfiguration,
@@ -1530,6 +1571,7 @@ part 'serializers.g.dart';
   Font,
   FontStyle,
   FontWeight,
+  GeneralNotificationInfo,
   GeofencingCalculatedFieldConfiguration,
   GeofencingReportStrategy,
   GetManagedRelatedEntityIds200ResponseInner,
@@ -1553,6 +1595,7 @@ part 'serializers.g.dart';
   HomeMenuItem,
   HomeMenuItemType,
   HourInterval,
+  HousekeeperTaskType,
   ImageAlignment,
   ImageComponent,
   ImageSourceType,
@@ -1563,6 +1606,7 @@ part 'serializers.g.dart';
   IntegrationExportData,
   IntegrationId,
   IntegrationInfo,
+  IntegrationLifecycleEventNotificationInfo,
   IntegrationLifecycleEventNotificationRuleTriggerConfig,
   IntegrationLifecycleEventRecipientsConfig,
   IntegrationType,
@@ -1647,6 +1691,7 @@ part 'serializers.g.dart';
   MqttDeviceProfileTransportConfiguration,
   MqttDeviceTransportConfiguration,
   NameConflictPolicy,
+  NewPlatformVersionNotificationInfo,
   NewPlatformVersionNotificationRuleTriggerConfig,
   NewPlatformVersionRecipientsConfig,
   NoDataFilterPredicate,
@@ -1659,6 +1704,7 @@ part 'serializers.g.dart';
   $NotificationDeliveryMethodConfig,
   NotificationId,
   NotificationInfo,
+  $NotificationInfo,
   NotificationPref,
   NotificationRequest,
   NotificationRequestConfig,
@@ -1808,6 +1854,7 @@ part 'serializers.g.dart';
   PaletteSettings,
   PdfReportTemplateConfig,
   PieChartLabelPosition,
+  PlanUpgradeRequestNotificationInfo,
   PlatformTwoFaSettings,
   PlatformType,
   PlatformUsersNotificationTargetConfig,
@@ -1829,6 +1876,7 @@ part 'serializers.g.dart';
   QueueStatsId,
   QuickTimeInterval,
   RPKLwM2MBootstrapServerCredential,
+  RateLimitsNotificationInfo,
   RateLimitsNotificationRuleTriggerConfig,
   RateLimitsRecipientsConfig,
   RawDataEventFilter,
@@ -1851,6 +1899,7 @@ part 'serializers.g.dart';
   ReportComponentSubType,
   ReportComponentType,
   ReportDoughnutChartSettings,
+  ReportGeneratedNotificationInfo,
   ReportId,
   ReportInfo,
   ReportJobConfiguration,
@@ -1880,6 +1929,7 @@ part 'serializers.g.dart';
   ResourceShortageRecipientsConfig,
   ResourceSubType,
   ResourceType,
+  ResourcesShortageNotificationInfo,
   ResourcesShortageNotificationRuleTriggerConfig,
   RichTextComponent,
   Role,
@@ -1902,8 +1952,10 @@ part 'serializers.g.dart';
   RuleChainNote,
   RuleChainOutputLabelsUsage,
   RuleChainType,
+  RuleEngineComponentLifecycleEventNotificationInfo,
   RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig,
   RuleEngineComponentLifecycleEventRecipientsConfig,
+  RuleEngineOriginatedNotificationInfo,
   RuleNode,
   RuleNodeDebugEventFilter,
   RuleNodeId,
@@ -2002,6 +2054,7 @@ part 'serializers.g.dart';
   SystemSetupState,
   TableSortDirection,
   TableSortOrder,
+  TaskProcessingFailureNotificationInfo,
   TaskProcessingFailureNotificationRuleTriggerConfig,
   TaskProcessingFailureRecipientsConfig,
   TaskResult,
@@ -2097,6 +2150,7 @@ part 'serializers.g.dart';
   UpdateMessage,
   UsageInfo,
   User,
+  UserActivatedNotificationInfo,
   UserActivationLink,
   UserDashboardsInfo,
   UserEmailInfo,
@@ -2108,6 +2162,7 @@ part 'serializers.g.dart';
   UserMobileInfo,
   UserNotificationSettings,
   UserPasswordPolicy,
+  UserRegisteredNotificationInfo,
   UserRoleFilter,
   UsersFilter,
   $UsersFilter,
@@ -3211,6 +3266,7 @@ Serializers serializers =
           ..add(MenuItem.serializer)
           ..add(MobilePage.serializer)
           ..add(NotificationDeliveryMethodConfig.serializer)
+          ..add(NotificationInfo.serializer)
           ..add(NotificationRuleRecipientsConfig.serializer)
           ..add(NotificationRuleTriggerConfig.serializer)
           ..add(NotificationTargetConfig.serializer)

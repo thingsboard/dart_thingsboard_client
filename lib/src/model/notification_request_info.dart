@@ -319,7 +319,7 @@ class _$NotificationRequestInfoSerializer
                   )
                   as NotificationInfo?;
           if (valueDes == null) continue;
-          result.info.replace(valueDes);
+          result.info = valueDes;
           break;
         case r'additionalConfig':
           final valueDes =

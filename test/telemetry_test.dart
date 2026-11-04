@@ -1490,6 +1490,44 @@ void main() {
       },
     );
 
+    test(
+      'a notification update is inserted first, trimmed to the limit',
+      () async {
+        final subscriber = TelemetrySubscriber(_NoopTelemetryService(), [
+          UnreadSubCmd(cmdId: 3, limit: 2),
+        ]);
+        final received = <NotificationsUpdate>[];
+        subscriber.notificationStream.listen(received.add);
+
+        final json = _fixtureJson('notifications_update.json');
+        subscriber.onCmdUpdate(
+          parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate,
+        );
+        final newest = Map.of(
+          (json['notifications'] as List).first as Map<String, dynamic>,
+        );
+        newest['id'] = {'entityType': 'NOTIFICATION', 'id': 'newest'};
+        newest['subject'] = 'Newest';
+        json['notifications'] = null;
+        json['update'] = newest;
+        json['totalUnreadCount'] = 235;
+        subscriber.onCmdUpdate(
+          parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate,
+        );
+        await Future<void>.delayed(Duration.zero);
+
+        expect(received, hasLength(2));
+        final last = subscriber.lastUpdatedNotification!;
+        expect(received.last, same(last));
+        expect(last.notifications, isA<List<Notification>>());
+        expect(last.notifications!.map((n) => n.id!.id), [
+          'newest',
+          '74c7b4d0-d859-11f1-b743-55278f64f06e',
+        ]);
+        expect(last.notifications!.first.subject, 'Newest');
+      },
+    );
+
     test('an unknown attribute scope is rejected', () {
       expect(
         () => TelemetrySubscriber.createEntityAttributesSubscription(

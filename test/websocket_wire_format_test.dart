@@ -387,17 +387,19 @@ void main() {
       expect(update.update, isNull);
       expect(update.notifications, hasLength(2));
       final notification = update.notifications!.first;
+      expect(notification, isA<Notification>());
       expect(notification.id, isA<NotificationId>());
       expect(notification.id!.id, '74c7b4d0-d859-11f1-b743-55278f64f06e');
       expect(notification.createdTime, 1793801414813);
       expect(notification.requestId, isA<NotificationRequestId>());
       expect(notification.recipientId, isA<UserId>());
       expect(notification.subject, "Rule node 'Node 1' failed to start");
-      expect(notification.status, PushNotificationStatus.SENT);
+      expect(notification.status, NotificationStatus.SENT);
       expect(
         notification.type,
-        PushNotificationType.RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT,
+        NotificationType.RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT,
       );
+      expect(notification.deliveryMethod, NotificationDeliveryMethod.WEB);
       expect(
         notification.info!.type,
         'org.thingsboard.server.common.data.notification.info.'
@@ -408,64 +410,128 @@ void main() {
         notification.info!.stateEntityId!.id,
         '9dc445b0-24d2-11eb-b5f6-1b90f7be014f',
       );
-      expect(notification.additionalConfig!['icon']['icon'], 'warning');
+      expect(
+        (notification.additionalConfig!.value as Map)['icon']['icon'],
+        'warning',
+      );
     });
 
-    test('notification with alarm info parses', () {
+    test('notification info decodes to its subtype', () {
       final json = jsonDecode(_fixture('notifications_update.json'));
       final notification = (json['notifications'] as List).first as Map;
       notification['type'] = 'ALARM';
       notification['info'] = {
-        'type': 'ALARM',
-        'description': 'High Temperature',
+        'type':
+            'org.thingsboard.server.common.data.notification.info.'
+            'AlarmNotificationInfo',
         'alarmId': '605ff674-ebb7-4c55-b167-7165126a1906',
         'alarmType': 'High Temperature',
         'alarmSeverity': 'CRITICAL',
         'alarmStatus': 'ACTIVE_UNACK',
         'acknowledged': false,
         'cleared': false,
+        'alarmOriginator': {'entityType': 'DEVICE', 'id': _deviceId},
+        'stateEntityId': null,
+        'dashboardId': null,
       };
       json['update'] = notification;
       final update =
           parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
-      final info = update.update!.info!;
-      expect(update.update!.type, PushNotificationType.ALARM);
-      expect(info.description, 'High Temperature');
-      expect(info.alarmId, '605ff674-ebb7-4c55-b167-7165126a1906');
-      expect(info.alarmType, 'High Temperature');
-      expect(info.alarmSeverity, AlarmSeverity.CRITICAL);
-      expect(info.alarmStatus, AlarmStatus.ACTIVE_UNACK);
-      expect(info.acknowledged, isFalse);
-      expect(info.cleared, isFalse);
-      expect(info.stateEntityId, isNull);
+      expect(update.update!.type, NotificationType.ALARM);
+      final alarm = update.update!.info;
+      expect(alarm, isA<AlarmNotificationInfo>());
+      alarm as AlarmNotificationInfo;
+      expect(alarm.alarmSeverity, AlarmSeverity.CRITICAL);
+      expect(alarm.alarmStatus, AlarmStatus.ACTIVE_UNACK);
+      expect(alarm.alarmType, 'High Temperature');
+      expect(alarm.alarmId, '605ff674-ebb7-4c55-b167-7165126a1906');
+      expect(alarm.acknowledged, isFalse);
+      expect(alarm.cleared, isFalse);
+      expect(alarm.alarmOriginator, isA<DeviceId>());
+      expect(alarm.stateEntityId, isNull);
+
+      final lifecycle = update.notifications!.last.info;
+      expect(
+        lifecycle,
+        isA<RuleEngineComponentLifecycleEventNotificationInfo>(),
+      );
+      lifecycle as RuleEngineComponentLifecycleEventNotificationInfo;
+      expect(lifecycle.ruleChainName, 'Root Rule Chain');
+      expect(lifecycle.eventType, ComponentLifecycleEvent.STARTED);
+      expect(lifecycle.ruleChainId, isA<RuleChainId>());
+      expect(lifecycle.componentName, 'Node 2');
+      expect(lifecycle.error, 'Script error');
     });
 
-    test('an unknown notification status decodes as UNKNOWN', () {
-      final json = jsonDecode(_fixture('notifications_update.json'));
-      final notification = (json['notifications'] as List).first as Map;
-      notification['status'] = 'ARCHIVED';
-      json['update'] = notification;
-      final update =
-          parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
-      expect(update.update!.status, PushNotificationStatus.UNKNOWN);
-      expect(update.update!.toJson()['status'], 'UNKNOWN');
-      expect(notificationStatusFromString('read'), PushNotificationStatus.READ);
-    });
+    test(
+      'unknown notification status and type decode to unknownDefaultOpenApi',
+      () {
+        final json = jsonDecode(_fixture('notifications_update.json'));
+        final notification = (json['notifications'] as List).first as Map;
+        notification['status'] = 'ARCHIVED';
+        notification['type'] = 'SOME_FUTURE_TYPE';
+        (notification['info'] as Map)['eventType'] = 'HIBERNATED';
+        json['update'] = notification;
+        final update =
+            parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
+        expect(update.update!.status, NotificationStatus.unknownDefaultOpenApi);
+        expect(update.update!.type, NotificationType.unknownDefaultOpenApi);
+        expect(
+          (update.update!.info!
+                  as RuleEngineComponentLifecycleEventNotificationInfo)
+              .eventType,
+          ComponentLifecycleEvent.unknownDefaultOpenApi,
+        );
+      },
+    );
 
     test('an unknown alarm severity and status in the info decode', () {
       final json = jsonDecode(_fixture('notifications_update.json'));
       final notification = (json['notifications'] as List).first as Map;
       notification['info'] = {
-        'type': 'ALARM',
+        'type':
+            'org.thingsboard.server.common.data.notification.info.'
+            'AlarmNotificationInfo',
         'alarmSeverity': 'CATASTROPHIC',
         'alarmStatus': 'SNOOZED',
       };
       json['update'] = notification;
       final update =
           parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
-      final info = update.update!.info!;
+      final info = update.update!.info! as AlarmNotificationInfo;
       expect(info.alarmSeverity, AlarmSeverity.unknownDefaultOpenApi);
       expect(info.alarmStatus, AlarmStatus.unknownDefaultOpenApi);
+    });
+
+    test('an unknown NotificationInfo type does not drop the notification', () {
+      const futureType =
+          'org.thingsboard.server.common.data.notification.info.'
+          'FutureNotificationInfo';
+      final json = jsonDecode(_fixture('notifications_update.json'));
+      final notification = (json['notifications'] as List).first as Map;
+      notification['info'] = {
+        'type': futureType,
+        'futureField': 'x',
+        'futureObject': {'a': 1},
+        'stateEntityId': {'entityType': 'DEVICE', 'id': _deviceId},
+      };
+      json['update'] = notification;
+      final update =
+          parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
+      expect(update.notifications, hasLength(2));
+      final decoded = update.update!;
+      expect(decoded.subject, "Rule node 'Node 1' failed to start");
+      expect(
+        decoded.text,
+        "Rule chain 'Root Rule Chain' - start failure:<br/>Script error",
+      );
+      // The generated serializer falls back to the base NotificationInfo
+      // ($NotificationInfo): its type and the common fields are kept, the
+      // fields of the unknown subtype are dropped.
+      final info = decoded.info!;
+      expect(info, isA<$NotificationInfo>());
+      expect(info.type, futureType);
+      expect(info.stateEntityId, isA<DeviceId>());
     });
   });
 }

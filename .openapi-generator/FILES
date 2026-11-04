@@ -6,6 +6,9 @@ doc/Action.md
 doc/ActionStatus.md
 doc/ActionType.md
 doc/ActivateUserRequest.md
+doc/AddonAccessErrorNotificationInfo.md
+doc/AddonAccessRequestNotificationInfo.md
+doc/AddonType.md
 doc/AdminControllerApi.md
 doc/AdminSettings.md
 doc/AdminSettingsId.md
@@ -86,6 +89,7 @@ doc/AiToolControllerApi.md
 doc/Alarm.md
 doc/AlarmAction.md
 doc/AlarmAssignee.md
+doc/AlarmAssignmentNotificationInfo.md
 doc/AlarmAssignmentNotificationRuleTriggerConfig.md
 doc/AlarmAssignmentRecipientsConfig.md
 doc/AlarmCalculatedFieldConfiguration.md
@@ -93,6 +97,7 @@ doc/AlarmComment.md
 doc/AlarmCommentControllerApi.md
 doc/AlarmCommentId.md
 doc/AlarmCommentInfo.md
+doc/AlarmCommentNotificationInfo.md
 doc/AlarmCommentNotificationRuleTriggerConfig.md
 doc/AlarmCommentRecipientsConfig.md
 doc/AlarmCommentType.md
@@ -113,6 +118,7 @@ doc/AlarmDataQuery.md
 doc/AlarmFilterConfig.md
 doc/AlarmId.md
 doc/AlarmInfo.md
+doc/AlarmNotificationInfo.md
 doc/AlarmNotificationRuleTriggerConfig.md
 doc/AlarmRule.md
 doc/AlarmRuleBooleanFilterPredicate.md
@@ -147,8 +153,10 @@ doc/ApiKey.md
 doc/ApiKeyControllerApi.md
 doc/ApiKeyId.md
 doc/ApiKeyInfo.md
+doc/ApiUsageLimitNotificationInfo.md
 doc/ApiUsageLimitNotificationRuleTriggerConfig.md
 doc/ApiUsageLimitRecipientsConfig.md
+doc/ApiUsageRecordKey.md
 doc/ApiUsageStateFilter.md
 doc/ApiUsageStateId.md
 doc/ApiUsageStateValue.md
@@ -332,6 +340,7 @@ doc/DefaultRuleChainCreateRequest.md
 doc/DefaultTenantProfileConfiguration.md
 doc/DeliveryMethodNotificationTemplate.md
 doc/Device.md
+doc/DeviceActivityNotificationInfo.md
 doc/DeviceActivityNotificationRuleTriggerConfig.md
 doc/DeviceActivityRecipientsConfig.md
 doc/DeviceConfiguration.md
@@ -382,8 +391,10 @@ doc/DynamicValueDouble.md
 doc/DynamicValueSourceType.md
 doc/DynamicValueString.md
 doc/Edge.md
+doc/EdgeCommunicationFailureNotificationInfo.md
 doc/EdgeCommunicationFailureNotificationRuleTriggerConfig.md
 doc/EdgeCommunicationFailureRecipientsConfig.md
+doc/EdgeConnectionNotificationInfo.md
 doc/EdgeConnectionNotificationRuleTriggerConfig.md
 doc/EdgeConnectionRecipientsConfig.md
 doc/EdgeConnectivityEvent.md
@@ -409,10 +420,13 @@ doc/EmailTwoFaAccountConfig.md
 doc/EmailTwoFaProviderConfig.md
 doc/EnterpriseCaptchaParams.md
 doc/EntitiesByGroupNameFilter.md
+doc/EntitiesLimitIncreaseRequestNotificationInfo.md
+doc/EntitiesLimitNotificationInfo.md
 doc/EntitiesLimitNotificationRuleTriggerConfig.md
 doc/EntitiesLimitRecipientsConfig.md
 doc/EntitiesVersionControlControllerApi.md
 doc/Entity.md
+doc/EntityActionNotificationInfo.md
 doc/EntityActionNotificationRuleTriggerConfig.md
 doc/EntityActionRecipientsConfig.md
 doc/EntityAggregationCalculatedFieldConfiguration.md
@@ -490,6 +504,7 @@ doc/FixedTimeWindow.md
 doc/Font.md
 doc/FontStyle.md
 doc/FontWeight.md
+doc/GeneralNotificationInfo.md
 doc/GeofencingCalculatedFieldConfiguration.md
 doc/GeofencingReportStrategy.md
 doc/GetManagedRelatedEntityIds200ResponseInner.md
@@ -514,6 +529,7 @@ doc/HomeDashboardParams.md
 doc/HomeMenuItem.md
 doc/HomeMenuItemType.md
 doc/HourInterval.md
+doc/HousekeeperTaskType.md
 doc/ImageAlignment.md
 doc/ImageComponent.md
 doc/ImageControllerApi.md
@@ -526,6 +542,7 @@ doc/IntegrationConvertersInfo.md
 doc/IntegrationExportData.md
 doc/IntegrationId.md
 doc/IntegrationInfo.md
+doc/IntegrationLifecycleEventNotificationInfo.md
 doc/IntegrationLifecycleEventNotificationRuleTriggerConfig.md
 doc/IntegrationLifecycleEventRecipientsConfig.md
 doc/IntegrationType.md
@@ -610,6 +627,7 @@ doc/MonthInterval.md
 doc/MqttDeviceProfileTransportConfiguration.md
 doc/MqttDeviceTransportConfiguration.md
 doc/NameConflictPolicy.md
+doc/NewPlatformVersionNotificationInfo.md
 doc/NewPlatformVersionNotificationRuleTriggerConfig.md
 doc/NewPlatformVersionRecipientsConfig.md
 doc/NoDataFilterPredicate.md
@@ -773,6 +791,7 @@ doc/Palette.md
 doc/PaletteSettings.md
 doc/PdfReportTemplateConfig.md
 doc/PieChartLabelPosition.md
+doc/PlanUpgradeRequestNotificationInfo.md
 doc/PlatformTwoFaSettings.md
 doc/PlatformType.md
 doc/PlatformUsersNotificationTargetConfig.md
@@ -797,6 +816,7 @@ doc/QueueStatsControllerApi.md
 doc/QueueStatsId.md
 doc/QuickTimeInterval.md
 doc/RPKLwM2MBootstrapServerCredential.md
+doc/RateLimitsNotificationInfo.md
 doc/RateLimitsNotificationRuleTriggerConfig.md
 doc/RateLimitsRecipientsConfig.md
 doc/RawDataEventFilter.md
@@ -819,6 +839,7 @@ doc/ReportComponentSubType.md
 doc/ReportComponentType.md
 doc/ReportControllerApi.md
 doc/ReportDoughnutChartSettings.md
+doc/ReportGeneratedNotificationInfo.md
 doc/ReportId.md
 doc/ReportInfo.md
 doc/ReportJobConfiguration.md
@@ -846,6 +867,7 @@ doc/ResourceExportData.md
 doc/ResourceShortageRecipientsConfig.md
 doc/ResourceSubType.md
 doc/ResourceType.md
+doc/ResourcesShortageNotificationInfo.md
 doc/ResourcesShortageNotificationRuleTriggerConfig.md
 doc/RichTextComponent.md
 doc/Role.md
@@ -872,9 +894,11 @@ doc/RuleChainMetaData.md
 doc/RuleChainNote.md
 doc/RuleChainOutputLabelsUsage.md
 doc/RuleChainType.md
+doc/RuleEngineComponentLifecycleEventNotificationInfo.md
 doc/RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig.md
 doc/RuleEngineComponentLifecycleEventRecipientsConfig.md
 doc/RuleEngineControllerApi.md
+doc/RuleEngineOriginatedNotificationInfo.md
 doc/RuleNode.md
 doc/RuleNodeDebugEventFilter.md
 doc/RuleNodeId.md
@@ -976,6 +1000,7 @@ doc/SystemSetupRequest.md
 doc/SystemSetupState.md
 doc/TableSortDirection.md
 doc/TableSortOrder.md
+doc/TaskProcessingFailureNotificationInfo.md
 doc/TaskProcessingFailureNotificationRuleTriggerConfig.md
 doc/TaskProcessingFailureRecipientsConfig.md
 doc/TaskResult.md
@@ -1074,6 +1099,7 @@ doc/UpdateMessage.md
 doc/UsageInfo.md
 doc/UsageInfoControllerApi.md
 doc/User.md
+doc/UserActivatedNotificationInfo.md
 doc/UserActivationLink.md
 doc/UserControllerApi.md
 doc/UserDashboardsInfo.md
@@ -1087,6 +1113,7 @@ doc/UserMobileInfo.md
 doc/UserNotificationSettings.md
 doc/UserPasswordPolicy.md
 doc/UserPermissionsControllerApi.md
+doc/UserRegisteredNotificationInfo.md
 doc/UserRoleFilter.md
 doc/UsersFilter.md
 doc/V2CaptchaParams.md
@@ -1233,6 +1260,9 @@ lib/src/model/action.dart
 lib/src/model/action_status.dart
 lib/src/model/action_type.dart
 lib/src/model/activate_user_request.dart
+lib/src/model/addon_access_error_notification_info.dart
+lib/src/model/addon_access_request_notification_info.dart
+lib/src/model/addon_type.dart
 lib/src/model/admin_settings.dart
 lib/src/model/admin_settings_id.dart
 lib/src/model/affected_tenant_administrators_filter.dart
@@ -1301,12 +1331,14 @@ lib/src/model/ai_model_type.dart
 lib/src/model/alarm.dart
 lib/src/model/alarm_action.dart
 lib/src/model/alarm_assignee.dart
+lib/src/model/alarm_assignment_notification_info.dart
 lib/src/model/alarm_assignment_notification_rule_trigger_config.dart
 lib/src/model/alarm_assignment_recipients_config.dart
 lib/src/model/alarm_calculated_field_configuration.dart
 lib/src/model/alarm_comment.dart
 lib/src/model/alarm_comment_id.dart
 lib/src/model/alarm_comment_info.dart
+lib/src/model/alarm_comment_notification_info.dart
 lib/src/model/alarm_comment_notification_rule_trigger_config.dart
 lib/src/model/alarm_comment_recipients_config.dart
 lib/src/model/alarm_comment_type.dart
@@ -1326,6 +1358,7 @@ lib/src/model/alarm_data_query.dart
 lib/src/model/alarm_filter_config.dart
 lib/src/model/alarm_id.dart
 lib/src/model/alarm_info.dart
+lib/src/model/alarm_notification_info.dart
 lib/src/model/alarm_notification_rule_trigger_config.dart
 lib/src/model/alarm_rule.dart
 lib/src/model/alarm_rule_boolean_filter_predicate.dart
@@ -1358,8 +1391,10 @@ lib/src/model/api_feature.dart
 lib/src/model/api_key.dart
 lib/src/model/api_key_id.dart
 lib/src/model/api_key_info.dart
+lib/src/model/api_usage_limit_notification_info.dart
 lib/src/model/api_usage_limit_notification_rule_trigger_config.dart
 lib/src/model/api_usage_limit_recipients_config.dart
+lib/src/model/api_usage_record_key.dart
 lib/src/model/api_usage_state_filter.dart
 lib/src/model/api_usage_state_id.dart
 lib/src/model/api_usage_state_value.dart
@@ -1530,6 +1565,7 @@ lib/src/model/default_rule_chain_create_request.dart
 lib/src/model/default_tenant_profile_configuration.dart
 lib/src/model/delivery_method_notification_template.dart
 lib/src/model/device.dart
+lib/src/model/device_activity_notification_info.dart
 lib/src/model/device_activity_notification_rule_trigger_config.dart
 lib/src/model/device_activity_recipients_config.dart
 lib/src/model/device_configuration.dart
@@ -1575,8 +1611,10 @@ lib/src/model/dynamic_value_double.dart
 lib/src/model/dynamic_value_source_type.dart
 lib/src/model/dynamic_value_string.dart
 lib/src/model/edge.dart
+lib/src/model/edge_communication_failure_notification_info.dart
 lib/src/model/edge_communication_failure_notification_rule_trigger_config.dart
 lib/src/model/edge_communication_failure_recipients_config.dart
+lib/src/model/edge_connection_notification_info.dart
 lib/src/model/edge_connection_notification_rule_trigger_config.dart
 lib/src/model/edge_connection_recipients_config.dart
 lib/src/model/edge_connectivity_event.dart
@@ -1600,9 +1638,12 @@ lib/src/model/email_two_fa_account_config.dart
 lib/src/model/email_two_fa_provider_config.dart
 lib/src/model/enterprise_captcha_params.dart
 lib/src/model/entities_by_group_name_filter.dart
+lib/src/model/entities_limit_increase_request_notification_info.dart
+lib/src/model/entities_limit_notification_info.dart
 lib/src/model/entities_limit_notification_rule_trigger_config.dart
 lib/src/model/entities_limit_recipients_config.dart
 lib/src/model/entity.dart
+lib/src/model/entity_action_notification_info.dart
 lib/src/model/entity_action_notification_rule_trigger_config.dart
 lib/src/model/entity_action_recipients_config.dart
 lib/src/model/entity_aggregation_calculated_field_configuration.dart
@@ -1675,6 +1716,7 @@ lib/src/model/fixed_time_window.dart
 lib/src/model/font.dart
 lib/src/model/font_style.dart
 lib/src/model/font_weight.dart
+lib/src/model/general_notification_info.dart
 lib/src/model/geofencing_calculated_field_configuration.dart
 lib/src/model/geofencing_report_strategy.dart
 lib/src/model/get_managed_related_entity_ids200_response_inner.dart
@@ -1698,6 +1740,7 @@ lib/src/model/home_dashboard_params.dart
 lib/src/model/home_menu_item.dart
 lib/src/model/home_menu_item_type.dart
 lib/src/model/hour_interval.dart
+lib/src/model/housekeeper_task_type.dart
 lib/src/model/image_alignment.dart
 lib/src/model/image_component.dart
 lib/src/model/image_source_type.dart
@@ -1708,6 +1751,7 @@ lib/src/model/integration_converters_info.dart
 lib/src/model/integration_export_data.dart
 lib/src/model/integration_id.dart
 lib/src/model/integration_info.dart
+lib/src/model/integration_lifecycle_event_notification_info.dart
 lib/src/model/integration_lifecycle_event_notification_rule_trigger_config.dart
 lib/src/model/integration_lifecycle_event_recipients_config.dart
 lib/src/model/integration_type.dart
@@ -1786,6 +1830,7 @@ lib/src/model/month_interval.dart
 lib/src/model/mqtt_device_profile_transport_configuration.dart
 lib/src/model/mqtt_device_transport_configuration.dart
 lib/src/model/name_conflict_policy.dart
+lib/src/model/new_platform_version_notification_info.dart
 lib/src/model/new_platform_version_notification_rule_trigger_config.dart
 lib/src/model/new_platform_version_recipients_config.dart
 lib/src/model/no_data_filter_predicate.dart
@@ -1940,6 +1985,7 @@ lib/src/model/palette.dart
 lib/src/model/palette_settings.dart
 lib/src/model/pdf_report_template_config.dart
 lib/src/model/pie_chart_label_position.dart
+lib/src/model/plan_upgrade_request_notification_info.dart
 lib/src/model/platform_two_fa_settings.dart
 lib/src/model/platform_type.dart
 lib/src/model/platform_users_notification_target_config.dart
@@ -1961,6 +2007,7 @@ lib/src/model/queue_id.dart
 lib/src/model/queue_stats.dart
 lib/src/model/queue_stats_id.dart
 lib/src/model/quick_time_interval.dart
+lib/src/model/rate_limits_notification_info.dart
 lib/src/model/rate_limits_notification_rule_trigger_config.dart
 lib/src/model/rate_limits_recipients_config.dart
 lib/src/model/raw_data_event_filter.dart
@@ -1982,6 +2029,7 @@ lib/src/model/report_component.dart
 lib/src/model/report_component_sub_type.dart
 lib/src/model/report_component_type.dart
 lib/src/model/report_doughnut_chart_settings.dart
+lib/src/model/report_generated_notification_info.dart
 lib/src/model/report_id.dart
 lib/src/model/report_info.dart
 lib/src/model/report_job_configuration.dart
@@ -2008,6 +2056,7 @@ lib/src/model/resource_export_data.dart
 lib/src/model/resource_shortage_recipients_config.dart
 lib/src/model/resource_sub_type.dart
 lib/src/model/resource_type.dart
+lib/src/model/resources_shortage_notification_info.dart
 lib/src/model/resources_shortage_notification_rule_trigger_config.dart
 lib/src/model/rich_text_component.dart
 lib/src/model/role.dart
@@ -2031,8 +2080,10 @@ lib/src/model/rule_chain_meta_data.dart
 lib/src/model/rule_chain_note.dart
 lib/src/model/rule_chain_output_labels_usage.dart
 lib/src/model/rule_chain_type.dart
+lib/src/model/rule_engine_component_lifecycle_event_notification_info.dart
 lib/src/model/rule_engine_component_lifecycle_event_notification_rule_trigger_config.dart
 lib/src/model/rule_engine_component_lifecycle_event_recipients_config.dart
+lib/src/model/rule_engine_originated_notification_info.dart
 lib/src/model/rule_node.dart
 lib/src/model/rule_node_debug_event_filter.dart
 lib/src/model/rule_node_id.dart
@@ -2128,6 +2179,7 @@ lib/src/model/system_setup_request.dart
 lib/src/model/system_setup_state.dart
 lib/src/model/table_sort_direction.dart
 lib/src/model/table_sort_order.dart
+lib/src/model/task_processing_failure_notification_info.dart
 lib/src/model/task_processing_failure_notification_rule_trigger_config.dart
 lib/src/model/task_processing_failure_recipients_config.dart
 lib/src/model/task_result.dart
@@ -2215,6 +2267,7 @@ lib/src/model/uniquify_strategy.dart
 lib/src/model/update_message.dart
 lib/src/model/usage_info.dart
 lib/src/model/user.dart
+lib/src/model/user_activated_notification_info.dart
 lib/src/model/user_activation_link.dart
 lib/src/model/user_dashboards_info.dart
 lib/src/model/user_email_info.dart
@@ -2226,6 +2279,7 @@ lib/src/model/user_list_filter.dart
 lib/src/model/user_mobile_info.dart
 lib/src/model/user_notification_settings.dart
 lib/src/model/user_password_policy.dart
+lib/src/model/user_registered_notification_info.dart
 lib/src/model/user_role_filter.dart
 lib/src/model/users_filter.dart
 lib/src/model/v2_captcha_params.dart

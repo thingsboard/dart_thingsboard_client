@@ -11,7 +11,20 @@ part of 'notification_info.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$NotificationInfo extends NotificationInfo {
+abstract mixin class NotificationInfoBuilder {
+  void replace(NotificationInfo other);
+  void update(void Function(NotificationInfoBuilder) updates);
+  DashboardIdBuilder get dashboardId;
+  set dashboardId(DashboardIdBuilder? dashboardId);
+
+  EntityId? get stateEntityId;
+  set stateEntityId(EntityId? stateEntityId);
+
+  String? get type;
+  set type(String? type);
+}
+
+class _$$NotificationInfo extends $NotificationInfo {
   @override
   final DashboardId? dashboardId;
   @override
@@ -19,27 +32,27 @@ class _$NotificationInfo extends NotificationInfo {
   @override
   final String type;
 
-  factory _$NotificationInfo([
-    void Function(NotificationInfoBuilder)? updates,
-  ]) => (NotificationInfoBuilder()..update(updates))._build();
+  factory _$$NotificationInfo([
+    void Function($NotificationInfoBuilder)? updates,
+  ]) => ($NotificationInfoBuilder()..update(updates))._build();
 
-  _$NotificationInfo._({
+  _$$NotificationInfo._({
     this.dashboardId,
     this.stateEntityId,
     required this.type,
   }) : super._();
   @override
-  NotificationInfo rebuild(void Function(NotificationInfoBuilder) updates) =>
+  $NotificationInfo rebuild(void Function($NotificationInfoBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  NotificationInfoBuilder toBuilder() =>
-      NotificationInfoBuilder()..replace(this);
+  $NotificationInfoBuilder toBuilder() =>
+      $NotificationInfoBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is NotificationInfo &&
+    return other is $NotificationInfo &&
         dashboardId == other.dashboardId &&
         stateEntityId == other.stateEntityId &&
         type == other.type;
@@ -57,7 +70,7 @@ class _$NotificationInfo extends NotificationInfo {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'NotificationInfo')
+    return (newBuiltValueToStringHelper(r'$NotificationInfo')
           ..add('dashboardId', dashboardId)
           ..add('stateEntityId', stateEntityId)
           ..add('type', type))
@@ -65,30 +78,32 @@ class _$NotificationInfo extends NotificationInfo {
   }
 }
 
-class NotificationInfoBuilder
-    implements Builder<NotificationInfo, NotificationInfoBuilder> {
-  _$NotificationInfo? _$v;
+class $NotificationInfoBuilder
+    implements
+        Builder<$NotificationInfo, $NotificationInfoBuilder>,
+        NotificationInfoBuilder {
+  _$$NotificationInfo? _$v;
 
   DashboardIdBuilder? _dashboardId;
   DashboardIdBuilder get dashboardId =>
       _$this._dashboardId ??= DashboardIdBuilder();
-  set dashboardId(DashboardIdBuilder? dashboardId) =>
+  set dashboardId(covariant DashboardIdBuilder? dashboardId) =>
       _$this._dashboardId = dashboardId;
 
   EntityId? _stateEntityId;
   EntityId? get stateEntityId => _$this._stateEntityId;
-  set stateEntityId(EntityId? stateEntityId) =>
+  set stateEntityId(covariant EntityId? stateEntityId) =>
       _$this._stateEntityId = stateEntityId;
 
   String? _type;
   String? get type => _$this._type;
-  set type(String? type) => _$this._type = type;
+  set type(covariant String? type) => _$this._type = type;
 
-  NotificationInfoBuilder() {
-    NotificationInfo._defaults(this);
+  $NotificationInfoBuilder() {
+    $NotificationInfo._defaults(this);
   }
 
-  NotificationInfoBuilder get _$this {
+  $NotificationInfoBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _dashboardId = $v.dashboardId?.toBuilder();
@@ -100,29 +115,29 @@ class NotificationInfoBuilder
   }
 
   @override
-  void replace(NotificationInfo other) {
-    _$v = other as _$NotificationInfo;
+  void replace(covariant $NotificationInfo other) {
+    _$v = other as _$$NotificationInfo;
   }
 
   @override
-  void update(void Function(NotificationInfoBuilder)? updates) {
+  void update(void Function($NotificationInfoBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  NotificationInfo build() => _build();
+  $NotificationInfo build() => _build();
 
-  _$NotificationInfo _build() {
-    _$NotificationInfo _$result;
+  _$$NotificationInfo _build() {
+    _$$NotificationInfo _$result;
     try {
       _$result =
           _$v ??
-          _$NotificationInfo._(
+          _$$NotificationInfo._(
             dashboardId: _dashboardId?.build(),
             stateEntityId: stateEntityId,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
-              r'NotificationInfo',
+              r'$NotificationInfo',
               'type',
             ),
           );
@@ -133,7 +148,7 @@ class NotificationInfoBuilder
         _dashboardId?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-          r'NotificationInfo',
+          r'$NotificationInfo',
           _$failedField,
           e.toString(),
         );

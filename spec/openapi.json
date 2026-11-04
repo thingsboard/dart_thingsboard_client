@@ -160989,7 +160989,50 @@
       "NotificationInfo": {
         "type": "object",
         "discriminator": {
-          "propertyName": "type"
+          "propertyName": "type",
+          "mapping": {
+            "org.thingsboard.server.common.data.notification.info.AddonAccessErrorNotificationInfo": "#/components/schemas/AddonAccessErrorNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.AddonAccessRequestNotificationInfo": "#/components/schemas/AddonAccessRequestNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.AlarmAssignmentNotificationInfo": "#/components/schemas/AlarmAssignmentNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.AlarmCommentNotificationInfo": "#/components/schemas/AlarmCommentNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.AlarmNotificationInfo": "#/components/schemas/AlarmNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.ApiUsageLimitNotificationInfo": "#/components/schemas/ApiUsageLimitNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.DeviceActivityNotificationInfo": "#/components/schemas/DeviceActivityNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.EdgeCommunicationFailureNotificationInfo": "#/components/schemas/EdgeCommunicationFailureNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.EdgeConnectionNotificationInfo": "#/components/schemas/EdgeConnectionNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.EntitiesLimitIncreaseRequestNotificationInfo": "#/components/schemas/EntitiesLimitIncreaseRequestNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.EntitiesLimitNotificationInfo": "#/components/schemas/EntitiesLimitNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.EntityActionNotificationInfo": "#/components/schemas/EntityActionNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.GeneralNotificationInfo": "#/components/schemas/GeneralNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.IntegrationLifecycleEventNotificationInfo": "#/components/schemas/IntegrationLifecycleEventNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.NewPlatformVersionNotificationInfo": "#/components/schemas/NewPlatformVersionNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.PlanUpgradeRequestNotificationInfo": "#/components/schemas/PlanUpgradeRequestNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.RateLimitsNotificationInfo": "#/components/schemas/RateLimitsNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.ReportGeneratedNotificationInfo": "#/components/schemas/ReportGeneratedNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.ResourcesShortageNotificationInfo": "#/components/schemas/ResourcesShortageNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.RuleEngineComponentLifecycleEventNotificationInfo": "#/components/schemas/RuleEngineComponentLifecycleEventNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.RuleEngineOriginatedNotificationInfo": "#/components/schemas/RuleEngineOriginatedNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.TaskProcessingFailureNotificationInfo": "#/components/schemas/TaskProcessingFailureNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.UserActivatedNotificationInfo": "#/components/schemas/UserActivatedNotificationInfo",
+            "org.thingsboard.server.common.data.notification.info.UserRegisteredNotificationInfo": "#/components/schemas/UserRegisteredNotificationInfo"
+          }
+        },
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.AddonAccessErrorNotificationInfo",
+          "addonType": {},
+          "addonNameOverride": null,
+          "userEmail": null,
+          "checkConfigurationActionLabel": null,
+          "checkConfigurationLink": null,
+          "baseUrl": null
         },
         "properties": {
           "dashboardId": {
@@ -175892,6 +175935,1691 @@
           "perimeterKeyName",
           "reportStrategy"
         ]
+      },
+      "AddonAccessErrorNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "addonType": {
+                "$ref": "#/components/schemas/AddonType"
+              },
+              "addonNameOverride": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "checkConfigurationActionLabel": {
+                "type": "string"
+              },
+              "checkConfigurationLink": {
+                "type": "string"
+              },
+              "baseUrl": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.AddonAccessErrorNotificationInfo",
+          "addonType": {},
+          "addonNameOverride": null,
+          "userEmail": null,
+          "checkConfigurationActionLabel": null,
+          "checkConfigurationLink": null,
+          "baseUrl": null
+        }
+      },
+      "AddonAccessRequestNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "addonType": {
+                "$ref": "#/components/schemas/AddonType"
+              },
+              "addonNameOverride": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "enableAddonActionLabel": {
+                "type": "string"
+              },
+              "enableAddonLink": {
+                "type": "string"
+              },
+              "baseUrl": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.AddonAccessRequestNotificationInfo",
+          "addonType": {},
+          "addonNameOverride": null,
+          "userEmail": null,
+          "enableAddonActionLabel": null,
+          "enableAddonLink": null,
+          "baseUrl": null
+        }
+      },
+      "AddonType": {
+        "type": "string",
+        "enum": [
+          "EDGE",
+          "TRENDZ",
+          "WHITE_LABELING",
+          "PROFESSIONAL_UPGRADE"
+        ]
+      },
+      "AlarmAssignmentNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string"
+              },
+              "assigneeEmail": {
+                "type": "string"
+              },
+              "assigneeFirstName": {
+                "type": "string"
+              },
+              "assigneeLastName": {
+                "type": "string"
+              },
+              "assigneeId": {
+                "$ref": "#/components/schemas/UserId"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "userFirstName": {
+                "type": "string"
+              },
+              "userLastName": {
+                "type": "string"
+              },
+              "alarmType": {
+                "type": "string"
+              },
+              "alarmId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "alarmOriginator": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "alarmOriginatorName": {
+                "type": "string"
+              },
+              "alarmOriginatorLabel": {
+                "type": "string"
+              },
+              "alarmSeverity": {
+                "$ref": "#/components/schemas/AlarmSeverity"
+              },
+              "alarmStatus": {
+                "$ref": "#/components/schemas/AlarmStatus"
+              },
+              "alarmCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.AlarmAssignmentNotificationInfo",
+          "action": null,
+          "assigneeEmail": null,
+          "assigneeFirstName": null,
+          "assigneeLastName": null,
+          "assigneeId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "userEmail": null,
+          "userFirstName": null,
+          "userLastName": null,
+          "alarmType": null,
+          "alarmId": null,
+          "alarmOriginator": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "alarmOriginatorName": null,
+          "alarmOriginatorLabel": null,
+          "alarmSeverity": {},
+          "alarmStatus": {},
+          "alarmCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "AlarmCommentNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "userFirstName": {
+                "type": "string"
+              },
+              "userLastName": {
+                "type": "string"
+              },
+              "alarmType": {
+                "type": "string"
+              },
+              "alarmId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "alarmOriginator": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "alarmOriginatorName": {
+                "type": "string"
+              },
+              "alarmOriginatorLabel": {
+                "type": "string"
+              },
+              "alarmSeverity": {
+                "$ref": "#/components/schemas/AlarmSeverity"
+              },
+              "alarmStatus": {
+                "$ref": "#/components/schemas/AlarmStatus"
+              },
+              "alarmCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.AlarmCommentNotificationInfo",
+          "comment": null,
+          "action": null,
+          "userEmail": null,
+          "userFirstName": null,
+          "userLastName": null,
+          "alarmType": null,
+          "alarmId": null,
+          "alarmOriginator": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "alarmOriginatorName": null,
+          "alarmOriginatorLabel": null,
+          "alarmSeverity": {},
+          "alarmStatus": {},
+          "alarmCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "AlarmNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "alarmType": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "alarmId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "alarmOriginator": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "alarmOriginatorName": {
+                "type": "string"
+              },
+              "alarmOriginatorLabel": {
+                "type": "string"
+              },
+              "alarmSeverity": {
+                "$ref": "#/components/schemas/AlarmSeverity"
+              },
+              "alarmStatus": {
+                "$ref": "#/components/schemas/AlarmStatus"
+              },
+              "acknowledged": {
+                "type": "boolean"
+              },
+              "cleared": {
+                "type": "boolean"
+              },
+              "alarmCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "details": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.AlarmNotificationInfo",
+          "alarmType": null,
+          "action": null,
+          "alarmId": null,
+          "alarmOriginator": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "alarmOriginatorName": null,
+          "alarmOriginatorLabel": null,
+          "alarmSeverity": {},
+          "alarmStatus": {},
+          "acknowledged": null,
+          "cleared": null,
+          "alarmCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "details": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "ApiUsageLimitNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "feature": {
+                "$ref": "#/components/schemas/ApiFeature"
+              },
+              "recordKey": {
+                "$ref": "#/components/schemas/ApiUsageRecordKey"
+              },
+              "status": {
+                "$ref": "#/components/schemas/ApiUsageStateValue"
+              },
+              "limit": {
+                "type": "string"
+              },
+              "currentValue": {
+                "type": "string"
+              },
+              "tenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "tenantName": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.ApiUsageLimitNotificationInfo",
+          "feature": {},
+          "recordKey": {},
+          "status": {},
+          "limit": null,
+          "currentValue": null,
+          "tenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "tenantName": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "ApiUsageRecordKey": {
+        "type": "string",
+        "enum": [
+          "TRANSPORT_MSG_COUNT",
+          "TRANSPORT_DP_COUNT",
+          "STORAGE_DP_COUNT",
+          "RE_EXEC_COUNT",
+          "JS_EXEC_COUNT",
+          "TBEL_EXEC_COUNT",
+          "EMAIL_EXEC_COUNT",
+          "SMS_EXEC_COUNT",
+          "CREATED_ALARMS_COUNT",
+          "ACTIVE_DEVICES",
+          "INACTIVE_DEVICES",
+          "GENERATED_REPORTS_COUNT",
+          "AI_CREDITS_COUNT"
+        ]
+      },
+      "DeviceActivityNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eventType": {
+                "type": "string"
+              },
+              "deviceId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "deviceName": {
+                "type": "string"
+              },
+              "deviceLabel": {
+                "type": "string"
+              },
+              "deviceType": {
+                "type": "string"
+              },
+              "deviceCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.DeviceActivityNotificationInfo",
+          "eventType": null,
+          "deviceId": null,
+          "deviceName": null,
+          "deviceLabel": null,
+          "deviceType": null,
+          "deviceCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "EdgeCommunicationFailureNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "customerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "edgeId": {
+                "$ref": "#/components/schemas/EdgeId"
+              },
+              "edgeName": {
+                "type": "string"
+              },
+              "failureMsg": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.EdgeCommunicationFailureNotificationInfo",
+          "tenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "customerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "edgeId": {
+            "entityType": "EDGE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "edgeName": null,
+          "failureMsg": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "EdgeConnectionNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "eventType": {
+                "type": "string"
+              },
+              "tenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "customerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "edgeId": {
+                "$ref": "#/components/schemas/EdgeId"
+              },
+              "edgeName": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.EdgeConnectionNotificationInfo",
+          "eventType": null,
+          "tenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "customerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "edgeId": {
+            "entityType": "EDGE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "edgeName": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "EntitiesLimitIncreaseRequestNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "entityType": {
+                "$ref": "#/components/schemas/EntityType"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "increaseLimitActionLabel": {
+                "type": "string"
+              },
+              "increaseLimitLink": {
+                "type": "string"
+              },
+              "baseUrl": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.EntitiesLimitIncreaseRequestNotificationInfo",
+          "entityType": {},
+          "userEmail": null,
+          "increaseLimitActionLabel": null,
+          "increaseLimitLink": null,
+          "baseUrl": null
+        }
+      },
+      "EntitiesLimitNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "entityType": {
+                "$ref": "#/components/schemas/EntityType"
+              },
+              "currentCount": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "limit": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "percents": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "tenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "tenantName": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.EntitiesLimitNotificationInfo",
+          "entityType": {},
+          "currentCount": null,
+          "limit": null,
+          "percents": null,
+          "tenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "tenantName": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "EntityActionNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "entityId": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "entityName": {
+                "type": "string"
+              },
+              "actionType": {
+                "$ref": "#/components/schemas/ActionType"
+              },
+              "customerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "userId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "userTitle": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "userFirstName": {
+                "type": "string"
+              },
+              "userLastName": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.EntityActionNotificationInfo",
+          "entityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "entityName": null,
+          "actionType": {},
+          "customerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "userId": null,
+          "userTitle": null,
+          "userEmail": null,
+          "userFirstName": null,
+          "userLastName": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "GeneralNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.GeneralNotificationInfo",
+          "data": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "HousekeeperTaskType": {
+        "type": "string",
+        "enum": [
+          "DELETE_ATTRIBUTES",
+          "DELETE_TELEMETRY",
+          "DELETE_LATEST_TS",
+          "DELETE_TS_HISTORY",
+          "DELETE_EVENTS",
+          "DELETE_ALARMS",
+          "DELETE_ALARM_COMMENTS",
+          "UNASSIGN_ALARMS",
+          "DELETE_TENANT_ENTITIES",
+          "DELETE_ENTITIES",
+          "CLEANUP_ENTITIES",
+          "DELETE_CALCULATED_FIELDS",
+          "DELETE_JOBS",
+          "DELETE_AI_USER_DATA",
+          "DELETE_AI_TENANT_DATA"
+        ]
+      },
+      "IntegrationLifecycleEventNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "integrationId": {
+                "$ref": "#/components/schemas/IntegrationId"
+              },
+              "integrationType": {
+                "type": "string"
+              },
+              "integrationName": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "eventType": {
+                "$ref": "#/components/schemas/ComponentLifecycleEvent"
+              },
+              "error": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.IntegrationLifecycleEventNotificationInfo",
+          "integrationId": {
+            "entityType": "INTEGRATION",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "integrationType": null,
+          "integrationName": null,
+          "action": null,
+          "eventType": {},
+          "error": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "NewPlatformVersionNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "latestVersion": {
+                "type": "string"
+              },
+              "latestVersionReleaseNotesUrl": {
+                "type": "string"
+              },
+              "upgradeInstructionsUrl": {
+                "type": "string"
+              },
+              "currentVersion": {
+                "type": "string"
+              },
+              "currentVersionReleaseNotesUrl": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.NewPlatformVersionNotificationInfo",
+          "latestVersion": null,
+          "latestVersionReleaseNotesUrl": null,
+          "upgradeInstructionsUrl": null,
+          "currentVersion": null,
+          "currentVersionReleaseNotesUrl": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "PlanUpgradeRequestNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "planName": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              },
+              "upgradePlanLink": {
+                "type": "string"
+              },
+              "baseUrl": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.PlanUpgradeRequestNotificationInfo",
+          "planName": null,
+          "userEmail": null,
+          "upgradePlanLink": null,
+          "baseUrl": null
+        }
+      },
+      "RateLimitsNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "tenantName": {
+                "type": "string"
+              },
+              "api": {
+                "$ref": "#/components/schemas/LimitedApi"
+              },
+              "limitLevel": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "limitLevelEntityName": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.RateLimitsNotificationInfo",
+          "tenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "tenantName": null,
+          "api": {},
+          "limitLevel": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "limitLevelEntityName": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "ReportGeneratedNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "customerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "reportFormat": {
+                "$ref": "#/components/schemas/TbReportFormat"
+              },
+              "reportName": {
+                "type": "string"
+              },
+              "userId": {
+                "$ref": "#/components/schemas/UserId"
+              },
+              "reportPublicUrl": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.ReportGeneratedNotificationInfo",
+          "tenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "customerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "reportFormat": {},
+          "reportName": null,
+          "userId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "reportPublicUrl": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "ResourcesShortageNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "resource": {
+                "type": "string"
+              },
+              "usage": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "serviceId": {
+                "type": "string"
+              },
+              "serviceType": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.ResourcesShortageNotificationInfo",
+          "resource": null,
+          "usage": null,
+          "serviceId": null,
+          "serviceType": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "RuleEngineComponentLifecycleEventNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ruleChainId": {
+                "$ref": "#/components/schemas/RuleChainId"
+              },
+              "ruleChainName": {
+                "type": "string"
+              },
+              "componentId": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "componentName": {
+                "type": "string"
+              },
+              "action": {
+                "type": "string"
+              },
+              "eventType": {
+                "$ref": "#/components/schemas/ComponentLifecycleEvent"
+              },
+              "error": {
+                "type": "string"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.RuleEngineComponentLifecycleEventNotificationInfo",
+          "ruleChainId": {
+            "entityType": "RULE_CHAIN",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "ruleChainName": null,
+          "componentId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "componentName": null,
+          "action": null,
+          "eventType": {},
+          "error": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "RuleEngineOriginatedNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "msgOriginator": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "msgCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "msgType": {
+                "type": "string"
+              },
+              "msgMetadata": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "msgData": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.RuleEngineOriginatedNotificationInfo",
+          "msgOriginator": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "msgCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "msgType": null,
+          "msgMetadata": null,
+          "msgData": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "TaskProcessingFailureNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "entityId": {
+                "$ref": "#/components/schemas/EntityId"
+              },
+              "taskType": {
+                "$ref": "#/components/schemas/HousekeeperTaskType"
+              },
+              "taskDescription": {
+                "type": "string"
+              },
+              "error": {
+                "type": "string"
+              },
+              "attempt": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "affectedCustomerId": {
+                "$ref": "#/components/schemas/CustomerId"
+              },
+              "affectedTenantId": {
+                "$ref": "#/components/schemas/TenantId"
+              },
+              "affectedUserId": {
+                "$ref": "#/components/schemas/UserId"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.TaskProcessingFailureNotificationInfo",
+          "tenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "entityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "taskType": {},
+          "taskDescription": null,
+          "error": null,
+          "attempt": null,
+          "affectedCustomerId": {
+            "entityType": "CUSTOMER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedTenantId": {
+            "entityType": "TENANT",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "affectedUserId": {
+            "entityType": "USER",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          }
+        }
+      },
+      "UserActivatedNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "userFullName": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.UserActivatedNotificationInfo",
+          "userFullName": null,
+          "userEmail": null
+        }
+      },
+      "UserRegisteredNotificationInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotificationInfo"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "userFullName": {
+                "type": "string"
+              },
+              "userEmail": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "example": {
+          "dashboardId": {
+            "entityType": "DASHBOARD",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "stateEntityId": {
+            "entityType": "DEVICE",
+            "id": "784f394c-42b6-435a-983c-b7beff2784f9"
+          },
+          "type": "org.thingsboard.server.common.data.notification.info.UserRegisteredNotificationInfo",
+          "userFullName": null,
+          "userEmail": null
+        }
       }
     },
     "securitySchemes": {

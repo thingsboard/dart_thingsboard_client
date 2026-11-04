@@ -12,7 +12,7 @@ Generated from the ThingsBoard OpenAPI spec, with a handwritten runtime facade f
 
 ## Features
 
-- **Full REST API coverage**: 92 API classes and 1041 model types.
+- **Full REST API coverage**: 92 API classes and 1068 model types.
 - **JWT authentication**: login, automatic refresh, concurrent request handling.
 - **WebSocket telemetry**: real-time subscriptions with automatic reconnect.
 - **Typed errors**: `ThingsboardError` with the `ThingsBoardErrorCode` enum and retry logic.

@@ -305,7 +305,7 @@ class _$NotificationSerializer implements PrimitiveSerializer<Notification> {
                   )
                   as NotificationInfo?;
           if (valueDes == null) continue;
-          result.info.replace(valueDes);
+          result.info = valueDes;
           break;
         case r'status':
           final valueDes =
