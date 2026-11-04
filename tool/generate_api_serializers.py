@@ -387,10 +387,11 @@ class ApiSerializersRegistry {
 def read_roots(path, graph):
     """Model names listed in the roots file, validated against the graph."""
     names = []
-    for line in open(path).read().split('\n'):
-        line = line.split('#', 1)[0].strip()
-        if line:
-            names.append(line)
+    with open(path) as f:
+        for line in f.read().split('\n'):
+            line = line.split('#', 1)[0].strip()
+            if line:
+                names.append(line)
     unknown = [n for n in names if n not in graph.models]
     if unknown:
         raise SystemExit(f'Error: unknown model(s) in {path}: {", ".join(unknown)}')

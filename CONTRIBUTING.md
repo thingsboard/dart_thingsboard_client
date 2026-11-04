@@ -8,8 +8,8 @@ Most of the package is generated from the ThingsBoard OpenAPI spec:
 |---|---|---|
 | `spec/openapi.json` | The OpenAPI spec of the ThingsBoard server | `tool/fetch-spec.sh <server url>` |
 | `lib/src/api/`, `lib/src/model/*.dart`, `doc/` | Generated REST API classes, models and their docs | Regenerate; never edit by hand |
-| `common/lib/` | The handwritten facade: `ThingsboardClient` base, authentication, storage, errors, telemetry WebSocket, `telemetry.dart` | Edit here |
-| `lib/src/` outside the generated paths, `lib/telemetry.dart` | Copies of `common/lib/` | Copied by the generator; CI checks they match |
+| `common/lib/` | The handwritten facade: `ThingsboardClient` base, authentication, storage, errors, telemetry WebSocket | Edit here |
+| `lib/src/` outside the generated paths | Copies of `common/lib/` | Copied by the generator; CI checks they match |
 | `tool/` | Generation and publishing scripts | Edit here |
 
 A fix in the REST models usually belongs in the server's API documentation (`@Schema`, `@ApiResponse`, ...) in the [ThingsBoard repository](https://github.com/thingsboard/thingsboard); the client is regenerated from the fixed spec.
@@ -24,6 +24,16 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 ```
 
 `generate-client.sh` copies `common/lib/` into `lib/`, adds the license headers, removes unused imports, formats the code and stages the result. See the comments at the top of the script for every step.
+
+## The spec is composed
+
+`spec/openapi.json` is not a plain fetch: it is the released lts-4.4 spec plus three unmerged ThingsBoard pull requests:
+
+- thingsboard/thingsboard#16510: the documented login response (`JwtPair`), including its `LoginResponse` fix (commit 9231afe93cb);
+- thingsboard/thingsboard#16555: device API responses (the device API is filtered out by `tool/fetch-spec.sh` anyway);
+- thingsboard/thingsboard#16557: the `NotificationInfo` subtypes.
+
+Do not re-fetch the spec from a server without them: the build breaks (`LoginResponse.scope`) and the `NotificationInfo` subtypes disappear. When all three are merged into lts-4.4, re-fetch and diff.
 
 ## Checks
 

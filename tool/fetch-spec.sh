@@ -7,6 +7,14 @@
 #
 
 #
+# WARNING: do not run this against a server that lacks thingsboard/thingsboard
+# #16510 (login response, incl. its LoginResponse fix), #16555 (device API
+# responses) and #16557 (NotificationInfo subtypes). The committed
+# spec/openapi.json is the released lts-4.4 spec plus these three unmerged
+# PRs; re-fetching without them breaks the build (LoginResponse.scope) and
+# drops the NotificationInfo subtypes. Once all are merged into lts-4.4,
+# re-fetch and diff. See "The spec is composed" in CONTRIBUTING.md.
+#
 # Fetches the OpenAPI spec of a running ThingsBoard server into
 # <edition_dir>/spec/openapi.json, ready for tool/generate-client.sh.
 #

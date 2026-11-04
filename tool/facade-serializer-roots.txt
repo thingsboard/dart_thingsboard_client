@@ -8,9 +8,7 @@ PageDataEntityData
 PageDataAlarmData
 EntityData
 AlarmData
-TsValue
 Notification
-AttributeData
 EntityKey
 EntityId
 LoginRequest

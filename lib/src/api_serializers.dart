@@ -1285,10 +1285,6 @@ void registerAssetProfileInfo(ApiSerializersRegistry r) {
   _assetProfileInfo(r);
 }
 
-void registerAttributeData(ApiSerializersRegistry r) {
-  _attributeData(r);
-}
-
 void registerAvailableEntityKeysAndEntityDataQuery(ApiSerializersRegistry r) {
   _availableEntityKeys(r);
   _entityDataQuery(r);
@@ -2785,10 +2781,6 @@ void registerTrendzUsage(ApiSerializersRegistry r) {
 
 void registerTrendzViewConfig(ApiSerializersRegistry r) {
   _trendzViewConfig(r);
-}
-
-void registerTsValue(ApiSerializersRegistry r) {
-  _tsValue(r);
 }
 
 void registerTwoFaAccountConfig(ApiSerializersRegistry r) {

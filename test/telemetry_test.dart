@@ -1666,6 +1666,46 @@ void main() {
       s.service.reset(true);
     });
 
+    test('updates still reach the subscribers after a reconnect', () async {
+      final s = await openTwoSubscribers(client);
+      final reconnectChannel = FakeWebSocketChannel();
+      channelFactory.enqueue(reconnectChannel);
+      final attributeData = <SubscriptionUpdate>[];
+      final entityDataUpdates = <EntityDataUpdate>[];
+      s.attributes.dataStream.listen(attributeData.add);
+      s.entityData.entityDataStream.listen(entityDataUpdates.add);
+
+      s.channel.simulateDisconnect();
+      // The first reconnect attempt waits RECONNECT_INTERVAL.
+      for (var i = 0; i < 300 && sentCmds(reconnectChannel).length < 2; i++) {
+        await Future<void>.delayed(Duration(milliseconds: 20));
+      }
+      final cmds = sentCmds(reconnectChannel);
+      final attributesCmdId =
+          cmds.singleWhere((c) => c['type'] == 'TIMESERIES')['cmdId'] as int;
+      final entityDataCmdId =
+          cmds.singleWhere((c) => c['type'] == 'ENTITY_DATA')['cmdId'] as int;
+
+      reconnectChannel.injectMessage(
+        jsonEncode(
+          _fixtureJson('subscription_update.json')
+            ..['subscriptionId'] = attributesCmdId,
+        ),
+      );
+      reconnectChannel.injectMessage(
+        jsonEncode(
+          _fixtureJson('entity_data_update.json')..['cmdId'] = entityDataCmdId,
+        ),
+      );
+      await Future<void>.delayed(Duration(milliseconds: 10));
+
+      expect(attributeData, hasLength(1));
+      expect(attributeData.single.subscriptionId, attributesCmdId);
+      expect(entityDataUpdates, hasLength(1));
+      expect(entityDataUpdates.single.cmdId, entityDataCmdId);
+      s.service.reset(true);
+    });
+
     test('an update for an unknown subscription is ignored', () async {
       final s = await openTwoSubscribers(client);
       final attributeData = <SubscriptionUpdate>[];

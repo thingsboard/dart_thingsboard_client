@@ -127,6 +127,8 @@ abstract class WebsocketCmd {
   /// A top-level function, so that it can run in another isolate. Each
   /// command names only its own update type: an app that never creates a
   /// command does not compile in the parser of its updates.
+  ///
+  /// A custom subclass must override this, otherwise its updates are ignored.
   WebsocketUpdateParser? get updateParser => null;
 
   Map<String, dynamic> toJson() => {
