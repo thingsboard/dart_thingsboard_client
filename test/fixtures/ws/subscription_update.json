@@ -1,0 +1,16 @@
+{
+  "subscriptionId": 4,
+  "errorCode": 0,
+  "errorMsg": null,
+  "data": {
+    "active": [
+      [
+        1767620790344,
+        "false"
+      ]
+    ]
+  },
+  "latestValues": {
+    "active": 1767620790344
+  }
+}

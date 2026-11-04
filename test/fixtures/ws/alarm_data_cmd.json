@@ -1,0 +1,69 @@
+{
+  "cmds": [
+    {
+      "cmdId": 3,
+      "type": "ALARM_DATA",
+      "query": {
+        "entityFilter": {
+          "type": "singleEntity",
+          "singleEntity": {
+            "id": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a",
+            "entityType": "DEVICE"
+          }
+        },
+        "keyFilters": [],
+        "pageLink": {
+          "pageSize": 10,
+          "page": 0,
+          "sortOrder": {
+            "key": {
+              "type": "ALARM_FIELD",
+              "key": "createdTime"
+            },
+            "direction": "DESC"
+          },
+          "dynamic": false,
+          "timeWindow": 86400000,
+          "statusList": [
+            "ACTIVE",
+            "UNACK"
+          ],
+          "severityList": [
+            "CRITICAL",
+            "MAJOR"
+          ]
+        },
+        "entityFields": [
+          {
+            "type": "ENTITY_FIELD",
+            "key": "name"
+          }
+        ],
+        "latestValues": [],
+        "alarmFields": [
+          {
+            "type": "ALARM_FIELD",
+            "key": "createdTime"
+          },
+          {
+            "type": "ALARM_FIELD",
+            "key": "type"
+          },
+          {
+            "type": "ALARM_FIELD",
+            "key": "severity"
+          },
+          {
+            "type": "ALARM_FIELD",
+            "key": "status"
+          }
+        ]
+      }
+    }
+  ],
+  "authCmd": {
+    "cmdId": 0,
+    "type": "AUTH",
+    "token": "JWT_TOKEN"
+  }
+}
