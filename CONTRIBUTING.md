@@ -35,6 +35,10 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 
 Do not re-fetch the spec from a server without them: the build breaks (`LoginResponse.scope`) and the `NotificationInfo` subtypes disappear. When all three are merged into lts-4.4, re-fetch and diff.
 
+## Dependency versions
+
+`pubspec.lock` is committed: the generated code (`.g.dart`, `lib/src/api_serializers.dart`) depends on the versions of `build_runner`, `built_value_generator` and `dart_style`, so everyone regenerates with the same ones. It does not affect applications that depend on the package. Dependabot updates it; CI also tests the newest and the lowest allowed versions.
+
 ## Checks
 
 ```bash

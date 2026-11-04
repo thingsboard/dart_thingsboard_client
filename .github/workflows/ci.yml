@@ -42,6 +42,18 @@ jobs:
           done < <(find common/lib -name '*.dart')
           exit $status
 
+  upgrade:
+    name: Latest dependency versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      # pubspec.lock pins the versions the generated code was built with; this
+      # job checks the newest versions an application would resolve.
+      - run: dart pub upgrade
+      - run: dart analyze --fatal-infos
+      - run: dart test
+
   downgrade:
     name: Lowest dependency versions
     runs-on: ubuntu-latest
