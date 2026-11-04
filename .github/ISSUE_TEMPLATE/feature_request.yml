@@ -1,0 +1,21 @@
+name: Feature request
+description: Suggest an improvement of the Dart client
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What do you want to do?
+      description: The use case, and what is missing or hard with the current client.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+  - type: markdown
+    attributes:
+      value: >
+        The REST API classes and models are generated from the ThingsBoard
+        OpenAPI spec. A missing or wrong REST operation or model usually needs
+        a change of the server's API documentation, not of this client.

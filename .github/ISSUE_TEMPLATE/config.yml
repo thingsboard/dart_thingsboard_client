@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: ThingsBoard documentation
+    url: https://thingsboard.io/docs/
+    about: Platform features, the REST API and the WebSocket API.
+  - name: Security vulnerability
+    url: https://github.com/thingsboard/dart_thingsboard_client/security/advisories/new
+    about: Report a vulnerability privately; do not open a public issue.
