@@ -64,11 +64,12 @@ extension NotificationTypeToString on PushNotificationType {
   }
 }
 
-enum PushNotificationStatus { SENT, READ }
+enum PushNotificationStatus { SENT, READ, UNKNOWN }
 
 PushNotificationStatus notificationStatusFromString(String value) {
   return PushNotificationStatus.values.firstWhere(
     (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+    orElse: () => PushNotificationStatus.UNKNOWN,
   );
 }
 

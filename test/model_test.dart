@@ -7,8 +7,6 @@ import 'package:test/test.dart';
 import 'package:thingsboard_client/src/model/page/page_data.dart';
 import 'package:thingsboard_client/src/model/page/page_link.dart';
 import 'package:thingsboard_client/src/model/page/sort_order.dart';
-import 'package:thingsboard_client/src/model/id/entity_id.dart';
-import 'package:thingsboard_client/src/model/id/entity_type_models.dart';
 
 void main() {
   group('PageData', () {
@@ -158,86 +156,6 @@ void main() {
       final order = sortOrderFromString('-name');
       expect(order.property, equals('name'));
       expect(order.direction, equals(Direction.DESC));
-    });
-  });
-
-  group('EntityId', () {
-    test('fromTypeAndUuid creates DeviceId for DEVICE', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.DEVICE, 'abc-123');
-      expect(id, isA<DeviceId>());
-      expect(id.entityType, equals(EntityType.DEVICE));
-      expect(id.id, equals('abc-123'));
-    });
-
-    test('fromTypeAndUuid creates AssetId for ASSET', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.ASSET, 'asset-uuid');
-      expect(id, isA<AssetId>());
-      expect(id.entityType, equals(EntityType.ASSET));
-    });
-
-    test('fromTypeAndUuid creates UserId for USER', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.USER, 'user-uuid');
-      expect(id, isA<UserId>());
-    });
-
-    test('fromTypeAndUuid creates TenantId for TENANT', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.TENANT, 'tenant-uuid');
-      expect(id, isA<TenantId>());
-    });
-
-    test('fromTypeAndUuid creates CustomerId for CUSTOMER', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.CUSTOMER, 'customer-uuid');
-      expect(id, isA<CustomerId>());
-    });
-
-    test('fromTypeAndUuid creates AlarmId for ALARM', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.ALARM, 'alarm-uuid');
-      expect(id, isA<AlarmId>());
-    });
-
-    test('fromTypeAndUuid creates DashboardId for DASHBOARD', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.DASHBOARD, 'dash-uuid');
-      expect(id, isA<DashboardId>());
-    });
-
-    test('toJson includes entityType and id', () {
-      final id = EntityId.fromTypeAndUuid(EntityType.DEVICE, 'dev-uuid');
-      final json = id.toJson();
-      expect(json['id'], equals('dev-uuid'));
-      expect(json['entityType'], equals('DEVICE'));
-    });
-
-    test('fromJson deserializes entityType and id', () {
-      final json = {'entityType': 'DEVICE', 'id': 'dev-uuid'};
-      final id = EntityId.fromJson(json);
-      expect(id, isA<DeviceId>());
-      expect(id.id, equals('dev-uuid'));
-    });
-
-    test('fromJson throws FormatException when entityType or id missing', () {
-      expect(
-        () => EntityId.fromJson({'entityType': 'DEVICE'}),
-        throwsFormatException,
-      );
-    });
-  });
-
-  group('entityTypeFromString', () {
-    test('DEVICE round-trips', () {
-      expect(entityTypeFromString('DEVICE'), equals(EntityType.DEVICE));
-    });
-
-    test('TENANT round-trips', () {
-      expect(entityTypeFromString('TENANT'), equals(EntityType.TENANT));
-    });
-
-    test('case insensitive matching', () {
-      expect(entityTypeFromString('device'), equals(EntityType.DEVICE));
-    });
-
-    test('toShortString returns enum name', () {
-      expect(EntityType.DEVICE.toShortString(), equals('DEVICE'));
-      expect(EntityType.RULE_CHAIN.toShortString(), equals('RULE_CHAIN'));
     });
   });
 }

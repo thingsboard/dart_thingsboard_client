@@ -52,15 +52,15 @@ void main() async {
 
 ## Telemetry WebSocket
 
-The WebSocket API (subscriptions, their commands and updates) is in a separate library, `package:thingsboard_client/telemetry.dart`. Several of its types share a name with a REST model of the main library (`EntityId`, `EntityType`, `EntityDataQuery`, ...), so import it with a prefix:
+The WebSocket API (subscriptions, their commands and updates) is part of the main library. Entity ids are the generated ones:
 
 ```dart
-import 'package:thingsboard_client/telemetry.dart' as ws;
+import 'package:thingsboard_client/thingsboard_client.dart';
 
-final subscriber = ws.TelemetrySubscriber.createEntityAttributesSubscription(
+final subscriber = TelemetrySubscriber.createEntityAttributesSubscription(
   telemetryService: tbClient.getTelemetryService(),
-  entityId: ws.DeviceId(deviceId),
-  attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
+  entityId: DeviceId((b) => b..id = deviceUuid),
+  attributeScope: LatestTelemetry.LATEST_TELEMETRY.toShortString(),
 );
 subscriber.attributeDataStream.listen((data) => print(data));
 subscriber.subscribe();

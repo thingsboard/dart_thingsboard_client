@@ -292,8 +292,13 @@ copy_common_code() {
   output_dir=$(edition_dir "$edition")
   echo "Copying common code into ${edition}..."
   cp -r "$REPO_ROOT"/common/lib/src/* "${output_dir}/lib/src/"
-  # Public libraries of the facade (telemetry.dart) next to the main library.
-  cp "$REPO_ROOT"/common/lib/*.dart "${output_dir}/lib/"
+  # Top-level files of common/lib (none at present) go next to the barrel.
+  local top_level_file
+  for top_level_file in "$REPO_ROOT"/common/lib/*.dart; do
+    if [[ -e "$top_level_file" ]]; then
+      cp "$top_level_file" "${output_dir}/lib/"
+    fi
+  done
   echo "Common code copied to ${output_dir}/lib/src/"
 
   local version_models="${output_dir}/lib/src/model/version_models.dart"
@@ -389,17 +394,7 @@ export 'package:${pkg}/src/model/user_models.dart';
 export 'package:${pkg}/src/model/page/page_data.dart';
 export 'package:${pkg}/src/model/page/page_link.dart';
 export 'package:${pkg}/src/model/page/sort_order.dart' hide Direction;
-export 'package:${pkg}/src/model/id/entity_id.dart' hide EntityId, TenantId, TenantProfileId, CustomerId, UserId, DashboardId, AssetId, DeviceId, DeviceProfileId, AssetProfileId, AlarmId, RuleChainId, RuleNodeId, EdgeId, EntityViewId, WidgetsBundleId, WidgetTypeId, ApiUsageStateId, TbResourceId, OtaPackageId, RpcId, QueueId, NotificationTargetId, NotificationTemplateId, NotificationRequestId, NotificationId, NotificationRuleId, CalculatedFieldId, QueueStatsId, Oauth2ClientId, AdminSettingsId, AiModelId, ApiKeyId, DomainId, MobileAppId, MobileAppBundleId, JobId;
-export 'package:${pkg}/src/model/id/entity_type_models.dart' hide EntityType;
-export 'package:${pkg}/src/model/id/has_uuid.dart';
 export 'package:${pkg}/src/storage/storage.dart';
-export 'package:${pkg}/src/model/id/has_id.dart';
-export 'package:${pkg}/src/model/id/id_based.dart';
-export 'package:${pkg}/src/model/telemetry/base_data.dart' hide FromJsonFunction;
-export 'package:${pkg}/src/model/telemetry/has_name.dart';
-export 'package:${pkg}/src/model/telemetry/has_tenant_id.dart';
-export 'package:${pkg}/src/model/telemetry/alarm_models.dart' hide AlarmSeverity, AlarmStatus, AlarmSearchStatus, AlarmInfo, Alarm, AlarmCommentType, AlarmAssignee, AlarmComment, AlarmCommentInfo;
-export 'package:${pkg}/src/model/telemetry/query/query_models.dart' hide AlarmData, AlarmDataQuery, EntityCountQuery, EntityData, EntityDataQuery, ApiUsageStateFilter, AssetSearchQueryFilter, AssetTypeFilter, DeviceSearchQueryFilter, DeviceTypeFilter, EdgeSearchQueryFilter, EdgeTypeFilter, EntityFilter, EntityListFilter, EntityNameFilter, EntitySearchDirection, EntityTypeFilter, EntityViewSearchQueryFilter, EntityViewTypeFilter, RelationEntityTypeFilter, RelationsQueryFilter, SingleEntityFilter, EntityKey, EntityKeyType, EntityKeyValueType, BooleanOperation, BooleanFilterPredicate, ComplexOperation, ComplexFilterPredicate, DynamicValueSourceType, KeyFilter, KeyFilterPredicate, NumericOperation, NumericFilterPredicate, StringOperation, StringFilterPredicate, AlarmDataPageLink, EntityDataPageLink, EntityDataSortOrder;
 export 'package:${pkg}/src/model/telemetry/push_notification_models.dart';
 export 'package:${pkg}/src/model/telemetry/telemetry_models.dart';
 export 'package:${pkg}/src/service/telemetry_websocket_service.dart';
@@ -568,8 +563,8 @@ DART
 # new spec no longer produces (a removed controller or schema), so they would
 # stay in the package. .openapi-generator/FILES lists what the last run wrote;
 # its lib/src/api, lib/src/model and doc entries, and their .g.dart parts, are
-# removed before generating. Handwritten copies of common/ (lib/src/model/id/,
-# lib/src/model/login_models.dart, ...) are not in FILES and stay.
+# removed before generating. Handwritten copies of common/ (lib/src/model/login_models.dart,
+# lib/src/model/telemetry/telemetry_models.dart, ...) are not in FILES and stay.
 # ---------------------------------------------------------------------------
 
 remove_previous_generated() {

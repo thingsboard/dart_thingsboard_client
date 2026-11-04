@@ -439,5 +439,33 @@ void main() {
       expect(info.cleared, isFalse);
       expect(info.stateEntityId, isNull);
     });
+
+    test('an unknown notification status decodes as UNKNOWN', () {
+      final json = jsonDecode(_fixture('notifications_update.json'));
+      final notification = (json['notifications'] as List).first as Map;
+      notification['status'] = 'ARCHIVED';
+      json['update'] = notification;
+      final update =
+          parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
+      expect(update.update!.status, PushNotificationStatus.UNKNOWN);
+      expect(update.update!.toJson()['status'], 'UNKNOWN');
+      expect(notificationStatusFromString('read'), PushNotificationStatus.READ);
+    });
+
+    test('an unknown alarm severity and status in the info decode', () {
+      final json = jsonDecode(_fixture('notifications_update.json'));
+      final notification = (json['notifications'] as List).first as Map;
+      notification['info'] = {
+        'type': 'ALARM',
+        'alarmSeverity': 'CATASTROPHIC',
+        'alarmStatus': 'SNOOZED',
+      };
+      json['update'] = notification;
+      final update =
+          parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
+      final info = update.update!.info!;
+      expect(info.alarmSeverity, AlarmSeverity.unknownDefaultOpenApi);
+      expect(info.alarmStatus, AlarmStatus.unknownDefaultOpenApi);
+    });
   });
 }

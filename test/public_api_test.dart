@@ -6,7 +6,6 @@
 // Uses only the public libraries of the package, as an application would: no
 // import of package:thingsboard_client/src/.
 import 'package:test/test.dart';
-import 'package:thingsboard_client/telemetry.dart' as ws;
 import 'package:thingsboard_client/thingsboard_client.dart';
 
 void main() {
@@ -57,29 +56,40 @@ void main() {
     });
   });
 
-  group('telemetry library', () {
+  group('WebSocket API in the main library', () {
     test('creates a subscription for a generated entity id', () {
       final client = ThingsboardClient('http://localhost:8080');
-      final subscriber =
-          ws.TelemetrySubscriber.createEntityAttributesSubscription(
-            telemetryService: client.getTelemetryService(),
-            entityId: DeviceId(
-              (b) => b..id = '03327560-8957-11ea-a27f-4b68cd5becb0',
-            ),
-            attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
-          );
-      expect(subscriber, isA<ws.TelemetrySubscriber>());
+      final subscriber = TelemetrySubscriber.createEntityAttributesSubscription(
+        telemetryService: client.getTelemetryService(),
+        entityId: DeviceId(
+          (b) => b..id = '03327560-8957-11ea-a27f-4b68cd5becb0',
+        ),
+        attributeScope: LatestTelemetry.LATEST_TELEMETRY.toShortString(),
+      );
+      expect(subscriber, isA<TelemetrySubscriber>());
     });
 
     test('builds an entity data query', () {
-      final query = ws.EntityDataQuery(
-        entityFilter: ws.EntityTypeFilter(entityType: ws.EntityType.DEVICE),
-        pageLink: ws.EntityDataPageLink(pageSize: 10),
-        entityFields: [
-          ws.EntityKey(type: ws.EntityKeyType.ENTITY_FIELD, key: 'name'),
-        ],
+      final query = EntityDataQuery(
+        (b) => b
+          ..entityFilter = EntityTypeFilter(
+            (f) => f..entityType = EntityType.DEVICE,
+          )
+          ..pageLink.pageSize = 10
+          ..entityFields.add(
+            EntityKey(
+              (k) => k
+                ..type = EntityKeyType.ENTITY_FIELD
+                ..key = 'name',
+            ),
+          ),
       );
-      expect(query.toJson()['entityFilter']['entityType'], 'DEVICE');
+      expect(query.entityFilter, isA<EntityTypeFilter>());
+      expect(
+        (query.entityFilter! as EntityTypeFilter).entityType,
+        EntityType.DEVICE,
+      );
+      expect(query.pageLink!.pageSize, 10);
     });
   });
 }

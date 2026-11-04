@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-import 'package:thingsboard_client/telemetry.dart' as ws;
 import 'package:thingsboard_client/thingsboard_client.dart';
 
 const thingsBoardApiEndpoint = 'http://localhost:8080';
@@ -26,16 +25,14 @@ void main() async {
       }
     }
 
-    // 4. Latest telemetry of the first device over the WebSocket. The
-    //    WebSocket types come from package:thingsboard_client/telemetry.dart.
+    // 4. Latest telemetry of the first device over the WebSocket.
     final devices = pageData?.data ?? <Device>[];
     if (devices.isNotEmpty) {
-      final subscriber =
-          ws.TelemetrySubscriber.createEntityAttributesSubscription(
-            telemetryService: tbClient.getTelemetryService(),
-            entityId: devices.first.id!,
-            attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
-          );
+      final subscriber = TelemetrySubscriber.createEntityAttributesSubscription(
+        telemetryService: tbClient.getTelemetryService(),
+        entityId: devices.first.id!,
+        attributeScope: LatestTelemetry.LATEST_TELEMETRY.toShortString(),
+      );
       final update = subscriber.attributeDataStream.first;
       subscriber.subscribe();
       final data = await update.timeout(const Duration(seconds: 10));
