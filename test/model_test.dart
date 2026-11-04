@@ -4,6 +4,7 @@
 // found in the LICENSE file.
 
 import 'package:test/test.dart';
+import 'package:thingsboard_client/src/model/direction.dart';
 import 'package:thingsboard_client/src/model/page/page_data.dart';
 import 'package:thingsboard_client/src/model/page/page_link.dart';
 import 'package:thingsboard_client/src/model/page/sort_order.dart';
@@ -132,14 +133,6 @@ void main() {
   });
 
   group('SortOrder', () {
-    test('Direction.ASC toShortString returns ASC', () {
-      expect(Direction.ASC.toShortString(), equals('ASC'));
-    });
-
-    test('Direction.DESC toShortString returns DESC', () {
-      expect(Direction.DESC.toShortString(), equals('DESC'));
-    });
-
     test('sortOrderFromString parses plain string as ASC', () {
       final order = sortOrderFromString('createdTime');
       expect(order.property, equals('createdTime'));

@@ -309,4 +309,33 @@ void main() {
       expect(code, isNot(contains('standardSerializers')));
     });
   });
+
+  group('standardSerializers', () {
+    test('decodes the nested timeseries of EntityData', () {
+      final data = standardSerializers.deserializeWith(EntityData.serializer, {
+        'entityId': {
+          'id': '784f394c-42b6-435a-983c-b7beff2784f9',
+          'entityType': 'DEVICE',
+        },
+        'readAttrs': false,
+        'readTimeseries': true,
+        'latest': {
+          'TIME_SERIES': {
+            'temp': {'ts': 5, 'value': '20'},
+          },
+        },
+        'timeseries': {
+          't': [
+            {'ts': 1, 'value': '2'},
+            {'ts': 3, 'value': '4'},
+          ],
+        },
+      });
+      expect(data, isNotNull);
+      final series = data!.timeseries!['t']!;
+      expect(series.map((v) => v.value), ['2', '4']);
+      expect(series.first.ts, 1);
+      expect(data.latest!['TIME_SERIES']!['temp']!.value, '20');
+    });
+  });
 }

@@ -3,7 +3,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:io';
+
 import 'package:test/test.dart';
+import 'package:thingsboard_client/src/storage/_local_file_storage_io.dart';
 import 'package:thingsboard_client/src/storage/in_memory_storage.dart';
 
 void main() {
@@ -85,6 +88,46 @@ void main() {
       await storage.setItem('b', 'beta');
       expect(await storage.getItem('a'), equals('alpha'));
       expect(await storage.getItem('b'), equals('beta'));
+    });
+  });
+
+  group('LocalFileStorage', () {
+    late Directory dir;
+
+    setUp(() {
+      dir = Directory.systemTemp.createTempSync('tb_storage_test');
+    });
+
+    tearDown(() {
+      dir.deleteSync(recursive: true);
+    });
+
+    test('getItem returns defaultValue for a missing key', () async {
+      final storage = LocalFileStorage('s.json', dir.path);
+      expect(await storage.getItem('missing', defaultValue: 'D'), 'D');
+      expect(await storage.getItem('missing'), isNull);
+      await storage.setItem('k', 'v');
+      expect(await storage.getItem('k', defaultValue: 'D'), 'v');
+    });
+
+    test(
+      'containsKey is true for a key persisted by a previous instance',
+      () async {
+        final first = LocalFileStorage('s.json', dir.path);
+        await first.setItem('k', 'v');
+
+        final second = LocalFileStorage('s.json', dir.path);
+        expect(await second.containsKey('k'), isTrue);
+        expect(await second.containsKey('other'), isFalse);
+        expect(await second.getItem('k'), 'v');
+      },
+    );
+
+    test('deleteItem removes a key', () async {
+      final storage = LocalFileStorage('s.json', dir.path);
+      await storage.setItem('k', 'v');
+      await storage.deleteItem('k');
+      expect(await storage.containsKey('k'), isFalse);
     });
   });
 }

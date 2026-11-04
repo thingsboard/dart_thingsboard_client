@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
+import 'package:thingsboard_client/src/model/thingsboard_error_code.dart';
 
 void main() {
   group('ThingsboardError', () {
@@ -99,13 +100,6 @@ void main() {
       );
     });
 
-    test('maps 12 to tenantTrialExpired', () {
-      expect(
-        ThingsBoardErrorCode.fromInt(12),
-        equals(ThingsBoardErrorCode.tenantTrialExpired),
-      );
-    });
-
     test('maps 15 to credentialsExpired', () {
       expect(
         ThingsBoardErrorCode.fromInt(15),
@@ -153,6 +147,54 @@ void main() {
         ThingsBoardErrorCode.fromInt(34),
         equals(ThingsBoardErrorCode.tooManyUpdates),
       );
+    });
+
+    test('maps 40 to subscriptionViolation', () {
+      expect(
+        ThingsBoardErrorCode.fromInt(40),
+        equals(ThingsBoardErrorCode.subscriptionViolation),
+      );
+    });
+
+    test('maps 41 to entitiesLimitExceeded', () {
+      expect(
+        ThingsBoardErrorCode.fromInt(41),
+        equals(ThingsBoardErrorCode.entitiesLimitExceeded),
+      );
+    });
+
+    test('maps 47 to setupIncomplete', () {
+      expect(
+        ThingsBoardErrorCode.fromInt(47),
+        equals(ThingsBoardErrorCode.setupIncomplete),
+      );
+    });
+
+    test('every generated ThingsboardErrorCode maps to a specific value', () {
+      for (final generated in ThingsboardErrorCode.values) {
+        if (generated == ThingsboardErrorCode.unknownDefaultOpenApi) continue;
+        final code = int.parse(generated.name.substring('number'.length));
+        final mapped = ThingsBoardErrorCode.fromInt(code);
+        expect(mapped.value, code, reason: '$generated');
+        if (code != 2) {
+          expect(mapped, isNot(ThingsBoardErrorCode.general));
+        }
+      }
+    });
+
+    test('server error responses with 40, 41 and 47 keep their code', () {
+      for (final entry in {
+        40: ThingsBoardErrorCode.subscriptionViolation,
+        41: ThingsBoardErrorCode.entitiesLimitExceeded,
+        47: ThingsBoardErrorCode.setupIncomplete,
+      }.entries) {
+        final error = ThingsboardError.fromJson({
+          'message': 'm',
+          'status': 403,
+          'errorCode': entry.key,
+        });
+        expect(error.errorCode, entry.value);
+      }
     });
 
     test('maps 45 to passwordViolation', () {

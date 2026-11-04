@@ -1180,7 +1180,6 @@ export 'package:thingsboard_client/src/error/thingsboard_error.dart';
 export 'package:thingsboard_client/src/http/http_utils.dart';
 export 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 export 'package:thingsboard_client/src/interceptor/interceptor_config.dart';
-export 'package:thingsboard_client/src/interceptor/key_intercept_config.dart';
 export 'package:thingsboard_client/src/model/constants.dart';
 export 'package:thingsboard_client/src/model/version_models.dart';
 export 'package:thingsboard_client/src/model/authority_enum.dart'
@@ -1188,8 +1187,7 @@ export 'package:thingsboard_client/src/model/authority_enum.dart'
 export 'package:thingsboard_client/src/model/user_models.dart';
 export 'package:thingsboard_client/src/model/page/page_data.dart';
 export 'package:thingsboard_client/src/model/page/page_link.dart';
-export 'package:thingsboard_client/src/model/page/sort_order.dart'
-    hide Direction;
+export 'package:thingsboard_client/src/model/page/sort_order.dart';
 export 'package:thingsboard_client/src/storage/storage.dart';
 export 'package:thingsboard_client/src/model/telemetry/telemetry_models.dart';
 export 'package:thingsboard_client/src/service/telemetry_websocket_service.dart';

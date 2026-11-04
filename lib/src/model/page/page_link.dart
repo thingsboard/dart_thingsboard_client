@@ -24,7 +24,7 @@ class PageLink {
     }
     if (sortOrder != null) {
       queryParameters['sortProperty'] = sortOrder!.property;
-      queryParameters['sortOrder'] = sortOrder!.direction.toShortString();
+      queryParameters['sortOrder'] = sortOrder!.direction.name;
     }
     return queryParameters;
   }

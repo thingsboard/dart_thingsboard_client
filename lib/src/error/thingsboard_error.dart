@@ -11,7 +11,6 @@ enum ThingsBoardErrorCode {
   general(2),
   authentication(10),
   jwtTokenExpired(11),
-  tenantTrialExpired(12),
   credentialsExpired(15),
   permissionDenied(20),
   invalidArguments(30),
@@ -20,9 +19,11 @@ enum ThingsBoardErrorCode {
   tooManyRequests(33),
   tooManyUpdates(34),
   versionConflict(35),
-  subscriptionViolation(35),
+  subscriptionViolation(40),
+  entitiesLimitExceeded(41),
   passwordViolation(45),
-  database(46);
+  database(46),
+  setupIncomplete(47);
 
   const ThingsBoardErrorCode(this.value);
   final int value;

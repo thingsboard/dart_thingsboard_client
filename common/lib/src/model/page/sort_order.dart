@@ -3,11 +3,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-enum Direction { ASC, DESC }
-
-extension DirectionToString on Direction {
-  String toShortString() => name;
-}
+import '../direction.dart';
 
 class SortOrder {
   String property;

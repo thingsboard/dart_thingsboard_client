@@ -90,5 +90,22 @@ void main() {
       );
       expect(query.pageLink!.pageSize, 10);
     });
+
+    test('SortOrder takes the exported Direction', () {
+      final link = PageLink(
+        10,
+        0,
+        null,
+        SortOrder('createdTime', Direction.DESC),
+      );
+      expect(link.toQueryParameters(), {
+        'pageSize': 10,
+        'page': 0,
+        'sortProperty': 'createdTime',
+        'sortOrder': 'DESC',
+      });
+      expect(sortOrderFromString('-name').direction, Direction.DESC);
+      expect(sortOrderFromString('name').direction, Direction.ASC);
+    });
   });
 }

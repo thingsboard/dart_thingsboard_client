@@ -3,8 +3,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:jwt_decoder/jwt_decoder.dart';
-
 import 'authority_enum.dart';
 
 class AuthUser {
@@ -38,11 +36,6 @@ class AuthUser {
     additionalData = Map<String, dynamic>.from(claims);
   }
 
-  factory AuthUser.fromToken(String jwtToken) {
-    final claims = JwtDecoder.decode(jwtToken);
-    return AuthUser.fromJson(claims);
-  }
-
   bool isSystemAdmin() => authority == Authority.SYS_ADMIN;
   bool isTenantAdmin() => authority == Authority.TENANT_ADMIN;
   bool isCustomerUser() => authority == Authority.CUSTOMER_USER;
@@ -56,14 +49,5 @@ class AuthUser {
     return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, '
         'lastName: $lastName, enabled: $enabled, tenantId: $tenantId, customerId: $customerId, '
         'isPublic: $isPublic, authority: ${authority?.toShortString()}}';
-  }
-}
-
-bool isJwtTokenValid(String? token) {
-  if (token == null) return false;
-  try {
-    return !JwtDecoder.isExpired(token);
-  } catch (e) {
-    return false;
   }
 }
