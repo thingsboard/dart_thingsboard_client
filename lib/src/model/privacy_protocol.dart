@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'privacy_protocol.g.dart';
 
 class PrivacyProtocol extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DES')
   static const PrivacyProtocol DES = _$DES;
   @BuiltValueEnumConst(wireName: r'AES_128')
@@ -27,9 +26,10 @@ class PrivacyProtocol extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const PrivacyProtocol unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<PrivacyProtocol> get serializer => _$privacyProtocolSerializer;
+  static Serializer<PrivacyProtocol> get serializer =>
+      _$privacyProtocolSerializer;
 
-  const PrivacyProtocol._(String name): super(name);
+  const PrivacyProtocol._(String name) : super(name);
 
   static BuiltSet<PrivacyProtocol> get values => _$values;
   static PrivacyProtocol valueOf(String name) => _$valueOf(name);
@@ -42,4 +42,3 @@ class PrivacyProtocol extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class PrivacyProtocolMixin = Object with _$PrivacyProtocolMixin;
-

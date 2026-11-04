@@ -22,9 +22,9 @@ part 'agent_app_step_state.g.dart';
 /// AgentAppStepState
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class AgentAppStepState  {
+abstract class AgentAppStepState {
   @BuiltValueField(wireName: r'type')
   AgentAppStepType? get type;
   // enum typeEnum {  COMPOSE_TEMPLATE,  COMPOSE,  COMPOSE_START,  COMPOSE_DOWN,  ROLLBACK,  BACKUP_VOLUME,  BACKUP_VOLUME_REMOVE,  COMPOSE_RESTART,  RUN_JOB,  AGENT_PREPARE,  AGENT_FINALIZE,  };
@@ -40,51 +40,54 @@ abstract class AgentAppStepState  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentAppStepState> get serializer => _$AgentAppStepStateSerializer();
+  static Serializer<AgentAppStepState> get serializer =>
+      _$AgentAppStepStateSerializer();
 }
 
 extension AgentAppStepStateDiscriminatorExt on AgentAppStepState {
-    String? get discriminatorValue {
-        if (this is BackupVolumesStepState) {
-            return r'BackupVolumesStepState';
-        }
-        if (this is ComposeDownStepState) {
-            return r'ComposeDownStepState';
-        }
-        if (this is ComposeStepState) {
-            return r'ComposeStepState';
-        }
-        if (this is RollBackStepState) {
-            return r'RollBackStepState';
-        }
-        if (this is RunJobStepState) {
-            return r'RunJobStepState';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is BackupVolumesStepState) {
+      return r'BackupVolumesStepState';
     }
-}
-extension AgentAppStepStateBuilderDiscriminatorExt on AgentAppStepStateBuilder {
-    String? get discriminatorValue {
-        if (this is BackupVolumesStepStateBuilder) {
-            return r'BackupVolumesStepState';
-        }
-        if (this is ComposeDownStepStateBuilder) {
-            return r'ComposeDownStepState';
-        }
-        if (this is ComposeStepStateBuilder) {
-            return r'ComposeStepState';
-        }
-        if (this is RollBackStepStateBuilder) {
-            return r'RollBackStepState';
-        }
-        if (this is RunJobStepStateBuilder) {
-            return r'RunJobStepState';
-        }
-        return null;
+    if (this is ComposeDownStepState) {
+      return r'ComposeDownStepState';
     }
+    if (this is ComposeStepState) {
+      return r'ComposeStepState';
+    }
+    if (this is RollBackStepState) {
+      return r'RollBackStepState';
+    }
+    if (this is RunJobStepState) {
+      return r'RunJobStepState';
+    }
+    return null;
+  }
 }
 
-class _$AgentAppStepStateSerializer implements PrimitiveSerializer<AgentAppStepState> {
+extension AgentAppStepStateBuilderDiscriminatorExt on AgentAppStepStateBuilder {
+  String? get discriminatorValue {
+    if (this is BackupVolumesStepStateBuilder) {
+      return r'BackupVolumesStepState';
+    }
+    if (this is ComposeDownStepStateBuilder) {
+      return r'ComposeDownStepState';
+    }
+    if (this is ComposeStepStateBuilder) {
+      return r'ComposeStepState';
+    }
+    if (this is RollBackStepStateBuilder) {
+      return r'RollBackStepState';
+    }
+    if (this is RunJobStepStateBuilder) {
+      return r'RunJobStepState';
+    }
+    return null;
+  }
+}
+
+class _$AgentAppStepStateSerializer
+    implements PrimitiveSerializer<AgentAppStepState> {
   @override
   final Iterable<Type> types = const [AgentAppStepState];
 
@@ -112,21 +115,40 @@ class _$AgentAppStepStateSerializer implements PrimitiveSerializer<AgentAppStepS
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is BackupVolumesStepState) {
-      return serializers.serialize(object, specifiedType: FullType(BackupVolumesStepState))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(BackupVolumesStepState),
+      )!;
     }
     if (object is ComposeDownStepState) {
-      return serializers.serialize(object, specifiedType: FullType(ComposeDownStepState))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ComposeDownStepState),
+      )!;
     }
     if (object is ComposeStepState) {
-      return serializers.serialize(object, specifiedType: FullType(ComposeStepState))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ComposeStepState),
+      )!;
     }
     if (object is RollBackStepState) {
-      return serializers.serialize(object, specifiedType: FullType(RollBackStepState))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RollBackStepState),
+      )!;
     }
     if (object is RunJobStepState) {
-      return serializers.serialize(object, specifiedType: FullType(RunJobStepState))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RunJobStepState),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -136,41 +158,77 @@ class _$AgentAppStepStateSerializer implements PrimitiveSerializer<AgentAppStepS
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(AgentAppStepState.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(AgentAppStepState.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'BackupVolumesStepState':
-        return serializers.deserialize(serialized, specifiedType: FullType(BackupVolumesStepState)) as BackupVolumesStepState;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(BackupVolumesStepState),
+            )
+            as BackupVolumesStepState;
       case r'ComposeDownStepState':
-        return serializers.deserialize(serialized, specifiedType: FullType(ComposeDownStepState)) as ComposeDownStepState;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ComposeDownStepState),
+            )
+            as ComposeDownStepState;
       case r'ComposeStepState':
-        return serializers.deserialize(serialized, specifiedType: FullType(ComposeStepState)) as ComposeStepState;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ComposeStepState),
+            )
+            as ComposeStepState;
       case r'RollBackStepState':
-        return serializers.deserialize(serialized, specifiedType: FullType(RollBackStepState)) as RollBackStepState;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RollBackStepState),
+            )
+            as RollBackStepState;
       case r'RunJobStepState':
-        return serializers.deserialize(serialized, specifiedType: FullType(RunJobStepState)) as RunJobStepState;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RunJobStepState),
+            )
+            as RunJobStepState;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($AgentAppStepState)) as $AgentAppStepState;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($AgentAppStepState),
+            )
+            as $AgentAppStepState;
     }
   }
 }
 
-
 /// a concrete implementation of [AgentAppStepState], since [AgentAppStepState] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $AgentAppStepState implements AgentAppStepState, Built<$AgentAppStepState, $AgentAppStepStateBuilder> {
+abstract class $AgentAppStepState
+    implements
+        AgentAppStepState,
+        Built<$AgentAppStepState, $AgentAppStepStateBuilder> {
   $AgentAppStepState._();
 
-  factory $AgentAppStepState([void Function($AgentAppStepStateBuilder)? updates]) = _$$AgentAppStepState;
+  factory $AgentAppStepState([
+    void Function($AgentAppStepStateBuilder)? updates,
+  ]) = _$$AgentAppStepState;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($AgentAppStepStateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$AgentAppStepState> get serializer => _$$AgentAppStepStateSerializer();
+  static Serializer<$AgentAppStepState> get serializer =>
+      _$$AgentAppStepStateSerializer();
 }
 
-class _$$AgentAppStepStateSerializer implements PrimitiveSerializer<$AgentAppStepState> {
+class _$$AgentAppStepStateSerializer
+    implements PrimitiveSerializer<$AgentAppStepState> {
   @override
   final Iterable<Type> types = const [$AgentAppStepState, _$$AgentAppStepState];
 
@@ -183,7 +241,10 @@ class _$$AgentAppStepStateSerializer implements PrimitiveSerializer<$AgentAppSte
     $AgentAppStepState object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(AgentAppStepState))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(AgentAppStepState),
+    )!;
   }
 
   void _deserializeProperties(
@@ -199,10 +260,12 @@ class _$$AgentAppStepStateSerializer implements PrimitiveSerializer<$AgentAppSte
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
@@ -234,4 +297,3 @@ class _$$AgentAppStepStateSerializer implements PrimitiveSerializer<$AgentAppSte
     return result.build();
   }
 }
-

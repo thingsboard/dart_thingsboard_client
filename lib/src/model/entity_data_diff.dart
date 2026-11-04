@@ -17,10 +17,11 @@ part 'entity_data_diff.g.dart';
 /// EntityDataDiff
 ///
 /// Properties:
-/// * [currentVersion] 
-/// * [otherVersion] 
+/// * [currentVersion]
+/// * [otherVersion]
 @BuiltValue()
-abstract class EntityDataDiff implements Built<EntityDataDiff, EntityDataDiffBuilder> {
+abstract class EntityDataDiff
+    implements Built<EntityDataDiff, EntityDataDiffBuilder> {
   @BuiltValueField(wireName: r'currentVersion')
   EntityExportData? get currentVersion;
 
@@ -29,16 +30,19 @@ abstract class EntityDataDiff implements Built<EntityDataDiff, EntityDataDiffBui
 
   EntityDataDiff._();
 
-  factory EntityDataDiff([void updates(EntityDataDiffBuilder b)]) = _$EntityDataDiff;
+  factory EntityDataDiff([void updates(EntityDataDiffBuilder b)]) =
+      _$EntityDataDiff;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityDataDiffBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityDataDiff> get serializer => _$EntityDataDiffSerializer();
+  static Serializer<EntityDataDiff> get serializer =>
+      _$EntityDataDiffSerializer();
 }
 
-class _$EntityDataDiffSerializer implements PrimitiveSerializer<EntityDataDiff> {
+class _$EntityDataDiffSerializer
+    implements PrimitiveSerializer<EntityDataDiff> {
   @override
   final Iterable<Type> types = const [EntityDataDiff, _$EntityDataDiff];
 
@@ -72,7 +76,11 @@ class _$EntityDataDiffSerializer implements PrimitiveSerializer<EntityDataDiff> 
     EntityDataDiff object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +96,22 @@ class _$EntityDataDiffSerializer implements PrimitiveSerializer<EntityDataDiff> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'currentVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityExportData),
-          ) as EntityExportData?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityExportData),
+                  )
+                  as EntityExportData?;
           if (valueDes == null) continue;
           result.currentVersion = valueDes;
           break;
         case r'otherVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityExportData),
-          ) as EntityExportData?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityExportData),
+                  )
+                  as EntityExportData?;
           if (valueDes == null) continue;
           result.otherVersion = valueDes;
           break;
@@ -131,5 +143,3 @@ class _$EntityDataDiffSerializer implements PrimitiveSerializer<EntityDataDiff> 
     return result.build();
   }
 }
-
-

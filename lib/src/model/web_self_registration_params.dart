@@ -28,25 +28,28 @@ part 'web_self_registration_params.g.dart';
 /// WebSelfRegistrationParams
 ///
 /// Properties:
-/// * [type] 
-/// * [enabled] 
-/// * [title] 
-/// * [captcha] 
-/// * [permissions] 
-/// * [notificationRecipient] 
-/// * [signUpFields] 
-/// * [customerTitlePrefix] 
-/// * [showPrivacyPolicy] 
-/// * [showTermsOfUse] 
-/// * [defaultDashboard] 
-/// * [homeDashboard] 
-/// * [customerGroupId] 
-/// * [customMenuId] 
+/// * [type]
+/// * [enabled]
+/// * [title]
+/// * [captcha]
+/// * [permissions]
+/// * [notificationRecipient]
+/// * [signUpFields]
+/// * [customerTitlePrefix]
+/// * [showPrivacyPolicy]
+/// * [showTermsOfUse]
+/// * [defaultDashboard]
+/// * [homeDashboard]
+/// * [customerGroupId]
+/// * [customMenuId]
 /// * [domainId] - Domain name for self registration URL. Typically this matches the domain name from the Login White Labeling page.
 /// * [privacyPolicy] - Privacy policy text. Supports HTML.
 /// * [termsOfUse] - Terms of User text. Supports HTML.
 @BuiltValue()
-abstract class WebSelfRegistrationParams implements SelfRegistrationParams, Built<WebSelfRegistrationParams, WebSelfRegistrationParamsBuilder> {
+abstract class WebSelfRegistrationParams
+    implements
+        SelfRegistrationParams,
+        Built<WebSelfRegistrationParams, WebSelfRegistrationParamsBuilder> {
   /// Terms of User text. Supports HTML.
   @BuiltValueField(wireName: r'termsOfUse')
   String? get termsOfUse;
@@ -61,18 +64,25 @@ abstract class WebSelfRegistrationParams implements SelfRegistrationParams, Buil
 
   WebSelfRegistrationParams._();
 
-  factory WebSelfRegistrationParams([void updates(WebSelfRegistrationParamsBuilder b)]) = _$WebSelfRegistrationParams;
+  factory WebSelfRegistrationParams([
+    void updates(WebSelfRegistrationParamsBuilder b),
+  ]) = _$WebSelfRegistrationParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WebSelfRegistrationParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WebSelfRegistrationParams> get serializer => _$WebSelfRegistrationParamsSerializer();
+  static Serializer<WebSelfRegistrationParams> get serializer =>
+      _$WebSelfRegistrationParamsSerializer();
 }
 
-class _$WebSelfRegistrationParamsSerializer implements PrimitiveSerializer<WebSelfRegistrationParams> {
+class _$WebSelfRegistrationParamsSerializer
+    implements PrimitiveSerializer<WebSelfRegistrationParams> {
   @override
-  final Iterable<Type> types = const [WebSelfRegistrationParams, _$WebSelfRegistrationParams];
+  final Iterable<Type> types = const [
+    WebSelfRegistrationParams,
+    _$WebSelfRegistrationParams,
+  ];
 
   @override
   final String wireName = r'WebSelfRegistrationParams';
@@ -205,7 +215,11 @@ class _$WebSelfRegistrationParamsSerializer implements PrimitiveSerializer<WebSe
     WebSelfRegistrationParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -221,136 +235,178 @@ class _$WebSelfRegistrationParamsSerializer implements PrimitiveSerializer<WebSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'customerGroupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityGroupId),
-          ) as EntityGroupId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityGroupId),
+                  )
+                  as EntityGroupId?;
           if (valueDes == null) continue;
           result.customerGroupId.replace(valueDes);
           break;
         case r'customMenuId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomMenuId),
-          ) as CustomMenuId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomMenuId),
+                  )
+                  as CustomMenuId?;
           if (valueDes == null) continue;
           result.customMenuId.replace(valueDes);
           break;
         case r'privacyPolicy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.privacyPolicy = valueDes;
           break;
         case r'signUpFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SignUpField)]),
-          ) as BuiltList<SignUpField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SignUpField),
+                    ]),
+                  )
+                  as BuiltList<SignUpField>?;
           if (valueDes == null) continue;
           result.signUpFields.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SelfRegistrationType),
-          ) as SelfRegistrationType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SelfRegistrationType),
+                  )
+                  as SelfRegistrationType;
           result.type = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'defaultDashboard':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DefaultDashboardParams),
-          ) as DefaultDashboardParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DefaultDashboardParams,
+                    ),
+                  )
+                  as DefaultDashboardParams?;
           if (valueDes == null) continue;
           result.defaultDashboard.replace(valueDes);
           break;
         case r'homeDashboard':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(HomeDashboardParams),
-          ) as HomeDashboardParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(HomeDashboardParams),
+                  )
+                  as HomeDashboardParams?;
           if (valueDes == null) continue;
           result.homeDashboard.replace(valueDes);
           break;
         case r'domainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DomainId),
-          ) as DomainId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DomainId),
+                  )
+                  as DomainId;
           result.domainId.replace(valueDes);
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'notificationRecipient':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationTargetId),
-          ) as NotificationTargetId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationTargetId,
+                    ),
+                  )
+                  as NotificationTargetId?;
           if (valueDes == null) continue;
           result.notificationRecipient.replace(valueDes);
           break;
         case r'termsOfUse':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.termsOfUse = valueDes;
           break;
         case r'captcha':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CaptchaParams),
-          ) as CaptchaParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CaptchaParams),
+                  )
+                  as CaptchaParams?;
           if (valueDes == null) continue;
           result.captcha = valueDes;
           break;
         case r'showPrivacyPolicy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showPrivacyPolicy = valueDes;
           break;
         case r'permissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(GroupPermission)]),
-          ) as BuiltList<GroupPermission>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(GroupPermission),
+                    ]),
+                  )
+                  as BuiltList<GroupPermission>?;
           if (valueDes == null) continue;
           result.permissions.replace(valueDes);
           break;
         case r'showTermsOfUse':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTermsOfUse = valueDes;
           break;
         case r'customerTitlePrefix':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.customerTitlePrefix = valueDes;
           break;
@@ -382,5 +438,3 @@ class _$WebSelfRegistrationParamsSerializer implements PrimitiveSerializer<WebSe
     return result.build();
   }
 }
-
-

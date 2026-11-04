@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'ai_model_type.g.dart';
 
 class AiModelType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CHAT')
   static const AiModelType CHAT = _$CHAT;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
@@ -23,7 +22,7 @@ class AiModelType extends EnumClass {
 
   static Serializer<AiModelType> get serializer => _$aiModelTypeSerializer;
 
-  const AiModelType._(String name): super(name);
+  const AiModelType._(String name) : super(name);
 
   static BuiltSet<AiModelType> get values => _$values;
   static AiModelType valueOf(String name) => _$valueOf(name);
@@ -36,4 +35,3 @@ class AiModelType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AiModelTypeMixin = Object with _$AiModelTypeMixin;
-

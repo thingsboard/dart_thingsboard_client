@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'mobile_app_status.g.dart';
 
 class MobileAppStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DRAFT')
   static const MobileAppStatus DRAFT = _$DRAFT;
   @BuiltValueEnumConst(wireName: r'PUBLISHED')
@@ -27,9 +26,10 @@ class MobileAppStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const MobileAppStatus unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<MobileAppStatus> get serializer => _$mobileAppStatusSerializer;
+  static Serializer<MobileAppStatus> get serializer =>
+      _$mobileAppStatusSerializer;
 
-  const MobileAppStatus._(String name): super(name);
+  const MobileAppStatus._(String name) : super(name);
 
   static BuiltSet<MobileAppStatus> get values => _$values;
   static MobileAppStatus valueOf(String name) => _$valueOf(name);
@@ -42,4 +42,3 @@ class MobileAppStatus extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class MobileAppStatusMixin = Object with _$MobileAppStatusMixin;
-

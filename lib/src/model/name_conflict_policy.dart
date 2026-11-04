@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'name_conflict_policy.g.dart';
 
 class NameConflictPolicy extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'FAIL')
   static const NameConflictPolicy FAIL = _$FAIL;
   @BuiltValueEnumConst(wireName: r'UNIQUIFY')
   static const NameConflictPolicy UNIQUIFY = _$UNIQUIFY;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const NameConflictPolicy unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const NameConflictPolicy unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<NameConflictPolicy> get serializer => _$nameConflictPolicySerializer;
+  static Serializer<NameConflictPolicy> get serializer =>
+      _$nameConflictPolicySerializer;
 
-  const NameConflictPolicy._(String name): super(name);
+  const NameConflictPolicy._(String name) : super(name);
 
   static BuiltSet<NameConflictPolicy> get values => _$values;
   static NameConflictPolicy valueOf(String name) => _$valueOf(name);
@@ -38,4 +39,3 @@ class NameConflictPolicy extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class NameConflictPolicyMixin = Object with _$NameConflictPolicyMixin;
-

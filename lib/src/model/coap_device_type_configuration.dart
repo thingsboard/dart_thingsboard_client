@@ -18,9 +18,9 @@ part 'coap_device_type_configuration.g.dart';
 /// CoAP device type configuration
 ///
 /// Properties:
-/// * [coapDeviceType] 
+/// * [coapDeviceType]
 @BuiltValue(instantiable: false)
-abstract class CoapDeviceTypeConfiguration  {
+abstract class CoapDeviceTypeConfiguration {
   @BuiltValueField(wireName: r'coapDeviceType')
   String get coapDeviceType;
 
@@ -32,33 +32,38 @@ abstract class CoapDeviceTypeConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CoapDeviceTypeConfiguration> get serializer => _$CoapDeviceTypeConfigurationSerializer();
+  static Serializer<CoapDeviceTypeConfiguration> get serializer =>
+      _$CoapDeviceTypeConfigurationSerializer();
 }
 
-extension CoapDeviceTypeConfigurationDiscriminatorExt on CoapDeviceTypeConfiguration {
-    String? get discriminatorValue {
-        if (this is DefaultCoapDeviceTypeConfiguration) {
-            return r'DEFAULT';
-        }
-        if (this is EfentoCoapDeviceTypeConfiguration) {
-            return r'EFENTO';
-        }
-        return null;
+extension CoapDeviceTypeConfigurationDiscriminatorExt
+    on CoapDeviceTypeConfiguration {
+  String? get discriminatorValue {
+    if (this is DefaultCoapDeviceTypeConfiguration) {
+      return r'DEFAULT';
     }
-}
-extension CoapDeviceTypeConfigurationBuilderDiscriminatorExt on CoapDeviceTypeConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is DefaultCoapDeviceTypeConfigurationBuilder) {
-            return r'DEFAULT';
-        }
-        if (this is EfentoCoapDeviceTypeConfigurationBuilder) {
-            return r'EFENTO';
-        }
-        return null;
+    if (this is EfentoCoapDeviceTypeConfiguration) {
+      return r'EFENTO';
     }
+    return null;
+  }
 }
 
-class _$CoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<CoapDeviceTypeConfiguration> {
+extension CoapDeviceTypeConfigurationBuilderDiscriminatorExt
+    on CoapDeviceTypeConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is DefaultCoapDeviceTypeConfigurationBuilder) {
+      return r'DEFAULT';
+    }
+    if (this is EfentoCoapDeviceTypeConfigurationBuilder) {
+      return r'EFENTO';
+    }
+    return null;
+  }
+}
+
+class _$CoapDeviceTypeConfigurationSerializer
+    implements PrimitiveSerializer<CoapDeviceTypeConfiguration> {
   @override
   final Iterable<Type> types = const [CoapDeviceTypeConfiguration];
 
@@ -84,12 +89,22 @@ class _$CoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<Coa
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is DefaultCoapDeviceTypeConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(DefaultCoapDeviceTypeConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DefaultCoapDeviceTypeConfiguration),
+      )!;
     }
     if (object is EfentoCoapDeviceTypeConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(EfentoCoapDeviceTypeConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EfentoCoapDeviceTypeConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -99,37 +114,70 @@ class _$CoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<Coa
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(CoapDeviceTypeConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          CoapDeviceTypeConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'DEFAULT':
-        return serializers.deserialize(serialized, specifiedType: FullType(DefaultCoapDeviceTypeConfiguration)) as DefaultCoapDeviceTypeConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DefaultCoapDeviceTypeConfiguration),
+            )
+            as DefaultCoapDeviceTypeConfiguration;
       case r'EFENTO':
-        return serializers.deserialize(serialized, specifiedType: FullType(EfentoCoapDeviceTypeConfiguration)) as EfentoCoapDeviceTypeConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EfentoCoapDeviceTypeConfiguration),
+            )
+            as EfentoCoapDeviceTypeConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($CoapDeviceTypeConfiguration)) as $CoapDeviceTypeConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($CoapDeviceTypeConfiguration),
+            )
+            as $CoapDeviceTypeConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [CoapDeviceTypeConfiguration], since [CoapDeviceTypeConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $CoapDeviceTypeConfiguration implements CoapDeviceTypeConfiguration, Built<$CoapDeviceTypeConfiguration, $CoapDeviceTypeConfigurationBuilder> {
+abstract class $CoapDeviceTypeConfiguration
+    implements
+        CoapDeviceTypeConfiguration,
+        Built<
+          $CoapDeviceTypeConfiguration,
+          $CoapDeviceTypeConfigurationBuilder
+        > {
   $CoapDeviceTypeConfiguration._();
 
-  factory $CoapDeviceTypeConfiguration([void Function($CoapDeviceTypeConfigurationBuilder)? updates]) = _$$CoapDeviceTypeConfiguration;
+  factory $CoapDeviceTypeConfiguration([
+    void Function($CoapDeviceTypeConfigurationBuilder)? updates,
+  ]) = _$$CoapDeviceTypeConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($CoapDeviceTypeConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$CoapDeviceTypeConfiguration> get serializer => _$$CoapDeviceTypeConfigurationSerializer();
+  static Serializer<$CoapDeviceTypeConfiguration> get serializer =>
+      _$$CoapDeviceTypeConfigurationSerializer();
 }
 
-class _$$CoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<$CoapDeviceTypeConfiguration> {
+class _$$CoapDeviceTypeConfigurationSerializer
+    implements PrimitiveSerializer<$CoapDeviceTypeConfiguration> {
   @override
-  final Iterable<Type> types = const [$CoapDeviceTypeConfiguration, _$$CoapDeviceTypeConfiguration];
+  final Iterable<Type> types = const [
+    $CoapDeviceTypeConfiguration,
+    _$$CoapDeviceTypeConfiguration,
+  ];
 
   @override
   final String wireName = r'$CoapDeviceTypeConfiguration';
@@ -140,7 +188,10 @@ class _$$CoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<$C
     $CoapDeviceTypeConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(CoapDeviceTypeConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(CoapDeviceTypeConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -156,10 +207,12 @@ class _$$CoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<$C
       final value = serializedList[i + 1];
       switch (key) {
         case r'coapDeviceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.coapDeviceType = valueDes;
           break;
         default:
@@ -190,4 +243,3 @@ class _$$CoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<$C
     return result.build();
   }
 }
-

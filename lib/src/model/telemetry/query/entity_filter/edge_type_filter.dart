@@ -8,13 +8,17 @@ import 'entity_filter_type.dart';
 
 class EdgeTypeFilter extends EntityFilter {
   @Deprecated(
-      "will be replaced by [edgeTypes]. This value will be appended to [edgeTypes] array")
+    "will be replaced by [edgeTypes]. This value will be appended to [edgeTypes] array",
+  )
   String? edgeType;
   String? edgeNameFilter;
   List<String> edgeTypes;
 
-  EdgeTypeFilter(
-      {this.edgeType, this.edgeNameFilter, required this.edgeTypes}) {
+  EdgeTypeFilter({
+    this.edgeType,
+    this.edgeNameFilter,
+    required this.edgeTypes,
+  }) {
     if (edgeType != null) {
       edgeTypes.add(edgeType!);
     }

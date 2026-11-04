@@ -18,22 +18,26 @@ part 'notification_id.g.dart';
 /// NotificationId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class NotificationId implements EntityId, Built<NotificationId, NotificationIdBuilder> {
+abstract class NotificationId
+    implements EntityId, Built<NotificationId, NotificationIdBuilder> {
   NotificationId._();
 
-  factory NotificationId([void updates(NotificationIdBuilder b)]) = _$NotificationId;
+  factory NotificationId([void updates(NotificationIdBuilder b)]) =
+      _$NotificationId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationId> get serializer => _$NotificationIdSerializer();
+  static Serializer<NotificationId> get serializer =>
+      _$NotificationIdSerializer();
 }
 
-class _$NotificationIdSerializer implements PrimitiveSerializer<NotificationId> {
+class _$NotificationIdSerializer
+    implements PrimitiveSerializer<NotificationId> {
   @override
   final Iterable<Type> types = const [NotificationId, _$NotificationId];
 
@@ -63,7 +67,11 @@ class _$NotificationIdSerializer implements PrimitiveSerializer<NotificationId> 
     NotificationId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$NotificationIdSerializer implements PrimitiveSerializer<NotificationId> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$NotificationIdSerializer implements PrimitiveSerializer<NotificationId> 
     return result.build();
   }
 }
-
-

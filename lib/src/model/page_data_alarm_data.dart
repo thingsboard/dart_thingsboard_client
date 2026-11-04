@@ -23,7 +23,8 @@ part 'page_data_alarm_data.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataAlarmData implements Built<PageDataAlarmData, PageDataAlarmDataBuilder> {
+abstract class PageDataAlarmData
+    implements Built<PageDataAlarmData, PageDataAlarmDataBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<AlarmData>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataAlarmData implements Built<PageDataAlarmData, PageDataAla
 
   PageDataAlarmData._();
 
-  factory PageDataAlarmData([void updates(PageDataAlarmDataBuilder b)]) = _$PageDataAlarmData;
+  factory PageDataAlarmData([void updates(PageDataAlarmDataBuilder b)]) =
+      _$PageDataAlarmData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataAlarmDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataAlarmData> get serializer => _$PageDataAlarmDataSerializer();
+  static Serializer<PageDataAlarmData> get serializer =>
+      _$PageDataAlarmDataSerializer();
 }
 
-class _$PageDataAlarmDataSerializer implements PrimitiveSerializer<PageDataAlarmData> {
+class _$PageDataAlarmDataSerializer
+    implements PrimitiveSerializer<PageDataAlarmData> {
   @override
   final Iterable<Type> types = const [PageDataAlarmData, _$PageDataAlarmData];
 
@@ -99,7 +103,11 @@ class _$PageDataAlarmDataSerializer implements PrimitiveSerializer<PageDataAlarm
     PageDataAlarmData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataAlarmDataSerializer implements PrimitiveSerializer<PageDataAlarm
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmData)]),
-          ) as BuiltList<AlarmData>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmData),
+                    ]),
+                  )
+                  as BuiltList<AlarmData>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataAlarmDataSerializer implements PrimitiveSerializer<PageDataAlarm
     return result.build();
   }
 }
-
-

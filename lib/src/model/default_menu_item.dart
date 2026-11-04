@@ -26,7 +26,8 @@ part 'default_menu_item.g.dart';
 /// * [icon] - URL of the menu item icon. Overrides 'materialIcon'
 /// * [pages] - List of child menu items
 @BuiltValue()
-abstract class DefaultMenuItem implements MenuItem, Built<DefaultMenuItem, DefaultMenuItemBuilder> {
+abstract class DefaultMenuItem
+    implements MenuItem, Built<DefaultMenuItem, DefaultMenuItemBuilder> {
   /// List of child menu items
   @BuiltValueField(wireName: r'pages')
   BuiltList<DefaultMenuItem>? get pages;
@@ -45,16 +46,19 @@ abstract class DefaultMenuItem implements MenuItem, Built<DefaultMenuItem, Defau
 
   DefaultMenuItem._();
 
-  factory DefaultMenuItem([void updates(DefaultMenuItemBuilder b)]) = _$DefaultMenuItem;
+  factory DefaultMenuItem([void updates(DefaultMenuItemBuilder b)]) =
+      _$DefaultMenuItem;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultMenuItemBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultMenuItem> get serializer => _$DefaultMenuItemSerializer();
+  static Serializer<DefaultMenuItem> get serializer =>
+      _$DefaultMenuItemSerializer();
 }
 
-class _$DefaultMenuItemSerializer implements PrimitiveSerializer<DefaultMenuItem> {
+class _$DefaultMenuItemSerializer
+    implements PrimitiveSerializer<DefaultMenuItem> {
   @override
   final Iterable<Type> types = const [DefaultMenuItem, _$DefaultMenuItem];
 
@@ -114,7 +118,11 @@ class _$DefaultMenuItemSerializer implements PrimitiveSerializer<DefaultMenuItem
     DefaultMenuItem object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -130,50 +138,64 @@ class _$DefaultMenuItemSerializer implements PrimitiveSerializer<DefaultMenuItem
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'icon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.icon = valueDes;
           break;
         case r'pages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DefaultMenuItem)]),
-          ) as BuiltList<DefaultMenuItem>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DefaultMenuItem),
+                    ]),
+                  )
+                  as BuiltList<DefaultMenuItem>?;
           if (valueDes == null) continue;
           result.pages.replace(valueDes);
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'visible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.visible = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MenuItemType),
-          ) as MenuItemType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MenuItemType),
+                  )
+                  as MenuItemType;
           result.type = valueDes;
           break;
         default:
@@ -204,5 +226,3 @@ class _$DefaultMenuItemSerializer implements PrimitiveSerializer<DefaultMenuItem
     return result.build();
   }
 }
-
-

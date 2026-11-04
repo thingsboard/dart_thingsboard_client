@@ -20,13 +20,14 @@ part 'alarm_filter_config.g.dart';
 /// AlarmFilterConfig
 ///
 /// Properties:
-/// * [typeList] 
-/// * [statusList] 
-/// * [severityList] 
-/// * [assigneeId] 
-/// * [searchPropagatedAlarms] 
+/// * [typeList]
+/// * [statusList]
+/// * [severityList]
+/// * [assigneeId]
+/// * [searchPropagatedAlarms]
 @BuiltValue()
-abstract class AlarmFilterConfig implements Built<AlarmFilterConfig, AlarmFilterConfigBuilder> {
+abstract class AlarmFilterConfig
+    implements Built<AlarmFilterConfig, AlarmFilterConfigBuilder> {
   @BuiltValueField(wireName: r'typeList')
   BuiltList<String>? get typeList;
 
@@ -44,16 +45,19 @@ abstract class AlarmFilterConfig implements Built<AlarmFilterConfig, AlarmFilter
 
   AlarmFilterConfig._();
 
-  factory AlarmFilterConfig([void updates(AlarmFilterConfigBuilder b)]) = _$AlarmFilterConfig;
+  factory AlarmFilterConfig([void updates(AlarmFilterConfigBuilder b)]) =
+      _$AlarmFilterConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmFilterConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmFilterConfig> get serializer => _$AlarmFilterConfigSerializer();
+  static Serializer<AlarmFilterConfig> get serializer =>
+      _$AlarmFilterConfigSerializer();
 }
 
-class _$AlarmFilterConfigSerializer implements PrimitiveSerializer<AlarmFilterConfig> {
+class _$AlarmFilterConfigSerializer
+    implements PrimitiveSerializer<AlarmFilterConfig> {
   @override
   final Iterable<Type> types = const [AlarmFilterConfig, _$AlarmFilterConfig];
 
@@ -108,7 +112,11 @@ class _$AlarmFilterConfigSerializer implements PrimitiveSerializer<AlarmFilterCo
     AlarmFilterConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -124,42 +132,58 @@ class _$AlarmFilterConfigSerializer implements PrimitiveSerializer<AlarmFilterCo
       final value = serializedList[i + 1];
       switch (key) {
         case r'typeList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.typeList.replace(valueDes);
           break;
         case r'statusList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmSearchStatus)]),
-          ) as BuiltList<AlarmSearchStatus>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmSearchStatus),
+                    ]),
+                  )
+                  as BuiltList<AlarmSearchStatus>?;
           if (valueDes == null) continue;
           result.statusList.replace(valueDes);
           break;
         case r'severityList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmSeverity)]),
-          ) as BuiltList<AlarmSeverity>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmSeverity),
+                    ]),
+                  )
+                  as BuiltList<AlarmSeverity>?;
           if (valueDes == null) continue;
           result.severityList.replace(valueDes);
           break;
         case r'assigneeId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.assigneeId.replace(valueDes);
           break;
         case r'searchPropagatedAlarms':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.searchPropagatedAlarms = valueDes;
           break;
@@ -191,5 +215,3 @@ class _$AlarmFilterConfigSerializer implements PrimitiveSerializer<AlarmFilterCo
     return result.build();
   }
 }
-
-

@@ -16,20 +16,21 @@ part 'license_usage_info.g.dart';
 /// LicenseUsageInfo
 ///
 /// Properties:
-/// * [maxDevices] 
-/// * [maxAssets] 
-/// * [maxEdges] 
-/// * [maxAgents] 
-/// * [whiteLabelingEnabled] 
-/// * [development] 
-/// * [plan] 
-/// * [devicesCount] 
-/// * [assetsCount] 
-/// * [edgesCount] 
-/// * [dashboardsCount] 
-/// * [integrationsCount] 
+/// * [maxDevices]
+/// * [maxAssets]
+/// * [maxEdges]
+/// * [maxAgents]
+/// * [whiteLabelingEnabled]
+/// * [development]
+/// * [plan]
+/// * [devicesCount]
+/// * [assetsCount]
+/// * [edgesCount]
+/// * [dashboardsCount]
+/// * [integrationsCount]
 @BuiltValue()
-abstract class LicenseUsageInfo implements Built<LicenseUsageInfo, LicenseUsageInfoBuilder> {
+abstract class LicenseUsageInfo
+    implements Built<LicenseUsageInfo, LicenseUsageInfoBuilder> {
   @BuiltValueField(wireName: r'maxDevices')
   int? get maxDevices;
 
@@ -68,16 +69,19 @@ abstract class LicenseUsageInfo implements Built<LicenseUsageInfo, LicenseUsageI
 
   LicenseUsageInfo._();
 
-  factory LicenseUsageInfo([void updates(LicenseUsageInfoBuilder b)]) = _$LicenseUsageInfo;
+  factory LicenseUsageInfo([void updates(LicenseUsageInfoBuilder b)]) =
+      _$LicenseUsageInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LicenseUsageInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LicenseUsageInfo> get serializer => _$LicenseUsageInfoSerializer();
+  static Serializer<LicenseUsageInfo> get serializer =>
+      _$LicenseUsageInfoSerializer();
 }
 
-class _$LicenseUsageInfoSerializer implements PrimitiveSerializer<LicenseUsageInfo> {
+class _$LicenseUsageInfoSerializer
+    implements PrimitiveSerializer<LicenseUsageInfo> {
   @override
   final Iterable<Type> types = const [LicenseUsageInfo, _$LicenseUsageInfo];
 
@@ -181,7 +185,11 @@ class _$LicenseUsageInfoSerializer implements PrimitiveSerializer<LicenseUsageIn
     LicenseUsageInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -197,98 +205,122 @@ class _$LicenseUsageInfoSerializer implements PrimitiveSerializer<LicenseUsageIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'maxDevices':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxDevices = valueDes;
           break;
         case r'maxAssets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAssets = valueDes;
           break;
         case r'maxEdges':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxEdges = valueDes;
           break;
         case r'maxAgents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAgents = valueDes;
           break;
         case r'whiteLabelingEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.whiteLabelingEnabled = valueDes;
           break;
         case r'development':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.development = valueDes;
           break;
         case r'plan':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.plan = valueDes;
           break;
         case r'devicesCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.devicesCount = valueDes;
           break;
         case r'assetsCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.assetsCount = valueDes;
           break;
         case r'edgesCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.edgesCount = valueDes;
           break;
         case r'dashboardsCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.dashboardsCount = valueDes;
           break;
         case r'integrationsCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.integrationsCount = valueDes;
           break;
@@ -320,5 +352,3 @@ class _$LicenseUsageInfoSerializer implements PrimitiveSerializer<LicenseUsageIn
     return result.build();
   }
 }
-
-

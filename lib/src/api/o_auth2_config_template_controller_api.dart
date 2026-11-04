@@ -9,18 +9,15 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/o_auth2_client_registration_template.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class OAuth2ConfigTemplateControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -41,7 +38,7 @@ class OAuth2ConfigTemplateControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteClientRegistrationTemplate({ 
+  Future<Response<void>> deleteClientRegistrationTemplate({
     required String clientRegistrationTemplateId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -51,12 +48,20 @@ class OAuth2ConfigTemplateControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/oauth2/config/template/{clientRegistrationTemplateId}'.replaceAll('{' r'clientRegistrationTemplateId' '}', encodeQueryParameter(_serializers, clientRegistrationTemplateId, const FullType(String)).toString());
+    final _path = r'/api/oauth2/config/template/{clientRegistrationTemplateId}'
+        .replaceAll(
+          '{'
+          r'clientRegistrationTemplateId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            clientRegistrationTemplateId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -64,11 +69,8 @@ class OAuth2ConfigTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -99,7 +101,8 @@ class OAuth2ConfigTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<OAuth2ClientRegistrationTemplate>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<OAuth2ClientRegistrationTemplate>>> getOAuth2ClientRegistrationTemplates({ 
+  Future<Response<BuiltList<OAuth2ClientRegistrationTemplate>>>
+  getOAuth2ClientRegistrationTemplates({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -107,13 +110,13 @@ class OAuth2ConfigTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfOAuth2ClientRegistrationTemplate);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfOAuth2ClientRegistrationTemplate);
     final _path = r'/api/oauth2/config/template';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -121,11 +124,8 @@ class OAuth2ConfigTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -144,11 +144,15 @@ class OAuth2ConfigTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(OAuth2ClientRegistrationTemplate)]),
-      ) as BuiltList<OAuth2ClientRegistrationTemplate>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(OAuth2ClientRegistrationTemplate),
+                  ]),
+                )
+                as BuiltList<OAuth2ClientRegistrationTemplate>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -175,7 +179,7 @@ class OAuth2ConfigTemplateControllerApi {
   /// Client registration template is OAuth2 provider configuration template with default settings for registering new OAuth2 clients
   ///
   /// Parameters:
-  /// * [oAuth2ClientRegistrationTemplate] 
+  /// * [oAuth2ClientRegistrationTemplate]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -185,7 +189,8 @@ class OAuth2ConfigTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OAuth2ClientRegistrationTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<OAuth2ClientRegistrationTemplate>> saveClientRegistrationTemplate({ 
+  Future<Response<OAuth2ClientRegistrationTemplate>>
+  saveClientRegistrationTemplate({
     required OAuth2ClientRegistrationTemplate oAuth2ClientRegistrationTemplate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -194,13 +199,13 @@ class OAuth2ConfigTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerOAuth2ClientRegistrationTemplate);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerOAuth2ClientRegistrationTemplate);
     final _path = r'/api/oauth2/config/template';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -208,11 +213,8 @@ class OAuth2ConfigTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -224,14 +226,13 @@ class OAuth2ConfigTemplateControllerApi {
 
     try {
       const _type = FullType(OAuth2ClientRegistrationTemplate);
-      _bodyData = _serializers.serialize(oAuth2ClientRegistrationTemplate, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        oAuth2ClientRegistrationTemplate,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -251,11 +252,15 @@ class OAuth2ConfigTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(OAuth2ClientRegistrationTemplate),
-      ) as OAuth2ClientRegistrationTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(
+                    OAuth2ClientRegistrationTemplate,
+                  ),
+                )
+                as OAuth2ClientRegistrationTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -277,5 +282,4 @@ class OAuth2ConfigTemplateControllerApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -16,14 +16,15 @@ part 'version_create_config.g.dart';
 /// VersionCreateConfig
 ///
 /// Properties:
-/// * [saveRelations] 
-/// * [saveAttributes] 
-/// * [saveCredentials] 
-/// * [saveCalculatedFields] 
-/// * [savePermissions] 
-/// * [saveGroupEntities] 
+/// * [saveRelations]
+/// * [saveAttributes]
+/// * [saveCredentials]
+/// * [saveCalculatedFields]
+/// * [savePermissions]
+/// * [saveGroupEntities]
 @BuiltValue()
-abstract class VersionCreateConfig implements Built<VersionCreateConfig, VersionCreateConfigBuilder> {
+abstract class VersionCreateConfig
+    implements Built<VersionCreateConfig, VersionCreateConfigBuilder> {
   @BuiltValueField(wireName: r'saveRelations')
   bool? get saveRelations;
 
@@ -44,18 +45,24 @@ abstract class VersionCreateConfig implements Built<VersionCreateConfig, Version
 
   VersionCreateConfig._();
 
-  factory VersionCreateConfig([void updates(VersionCreateConfigBuilder b)]) = _$VersionCreateConfig;
+  factory VersionCreateConfig([void updates(VersionCreateConfigBuilder b)]) =
+      _$VersionCreateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(VersionCreateConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<VersionCreateConfig> get serializer => _$VersionCreateConfigSerializer();
+  static Serializer<VersionCreateConfig> get serializer =>
+      _$VersionCreateConfigSerializer();
 }
 
-class _$VersionCreateConfigSerializer implements PrimitiveSerializer<VersionCreateConfig> {
+class _$VersionCreateConfigSerializer
+    implements PrimitiveSerializer<VersionCreateConfig> {
   @override
-  final Iterable<Type> types = const [VersionCreateConfig, _$VersionCreateConfig];
+  final Iterable<Type> types = const [
+    VersionCreateConfig,
+    _$VersionCreateConfig,
+  ];
 
   @override
   final String wireName = r'VersionCreateConfig';
@@ -115,7 +122,11 @@ class _$VersionCreateConfigSerializer implements PrimitiveSerializer<VersionCrea
     VersionCreateConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -131,50 +142,62 @@ class _$VersionCreateConfigSerializer implements PrimitiveSerializer<VersionCrea
       final value = serializedList[i + 1];
       switch (key) {
         case r'saveRelations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveRelations = valueDes;
           break;
         case r'saveAttributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveAttributes = valueDes;
           break;
         case r'saveCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveCredentials = valueDes;
           break;
         case r'saveCalculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveCalculatedFields = valueDes;
           break;
         case r'savePermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.savePermissions = valueDes;
           break;
         case r'saveGroupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveGroupEntities = valueDes;
           break;
@@ -206,5 +229,3 @@ class _$VersionCreateConfigSerializer implements PrimitiveSerializer<VersionCrea
     return result.build();
   }
 }
-
-

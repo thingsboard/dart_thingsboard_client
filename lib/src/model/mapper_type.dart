@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'mapper_type.g.dart';
 
 class MapperType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'BASIC')
   static const MapperType BASIC = _$BASIC;
   @BuiltValueEnumConst(wireName: r'CUSTOM')
@@ -29,7 +28,7 @@ class MapperType extends EnumClass {
 
   static Serializer<MapperType> get serializer => _$mapperTypeSerializer;
 
-  const MapperType._(String name): super(name);
+  const MapperType._(String name) : super(name);
 
   static BuiltSet<MapperType> get values => _$values;
   static MapperType valueOf(String name) => _$valueOf(name);
@@ -42,4 +41,3 @@ class MapperType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class MapperTypeMixin = Object with _$MapperTypeMixin;
-

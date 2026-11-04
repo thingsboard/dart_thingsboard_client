@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'job_status.g.dart';
 
 class JobStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'QUEUED')
   static const JobStatus QUEUED = _$QUEUED;
   @BuiltValueEnumConst(wireName: r'PENDING')
@@ -33,7 +32,7 @@ class JobStatus extends EnumClass {
 
   static Serializer<JobStatus> get serializer => _$jobStatusSerializer;
 
-  const JobStatus._(String name): super(name);
+  const JobStatus._(String name) : super(name);
 
   static BuiltSet<JobStatus> get values => _$values;
   static JobStatus valueOf(String name) => _$valueOf(name);
@@ -46,4 +45,3 @@ class JobStatus extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class JobStatusMixin = Object with _$JobStatusMixin;
-

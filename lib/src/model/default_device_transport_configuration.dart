@@ -17,23 +17,36 @@ part 'default_device_transport_configuration.g.dart';
 /// DefaultDeviceTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class DefaultDeviceTransportConfiguration implements DeviceTransportConfiguration, Built<DefaultDeviceTransportConfiguration, DefaultDeviceTransportConfigurationBuilder> {
+abstract class DefaultDeviceTransportConfiguration
+    implements
+        DeviceTransportConfiguration,
+        Built<
+          DefaultDeviceTransportConfiguration,
+          DefaultDeviceTransportConfigurationBuilder
+        > {
   DefaultDeviceTransportConfiguration._();
 
-  factory DefaultDeviceTransportConfiguration([void updates(DefaultDeviceTransportConfigurationBuilder b)]) = _$DefaultDeviceTransportConfiguration;
+  factory DefaultDeviceTransportConfiguration([
+    void updates(DefaultDeviceTransportConfigurationBuilder b),
+  ]) = _$DefaultDeviceTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultDeviceTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultDeviceTransportConfiguration> get serializer => _$DefaultDeviceTransportConfigurationSerializer();
+  static Serializer<DefaultDeviceTransportConfiguration> get serializer =>
+      _$DefaultDeviceTransportConfigurationSerializer();
 }
 
-class _$DefaultDeviceTransportConfigurationSerializer implements PrimitiveSerializer<DefaultDeviceTransportConfiguration> {
+class _$DefaultDeviceTransportConfigurationSerializer
+    implements PrimitiveSerializer<DefaultDeviceTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [DefaultDeviceTransportConfiguration, _$DefaultDeviceTransportConfiguration];
+  final Iterable<Type> types = const [
+    DefaultDeviceTransportConfiguration,
+    _$DefaultDeviceTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'DefaultDeviceTransportConfiguration';
@@ -56,7 +69,11 @@ class _$DefaultDeviceTransportConfigurationSerializer implements PrimitiveSerial
     DefaultDeviceTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$DefaultDeviceTransportConfigurationSerializer implements PrimitiveSerial
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$DefaultDeviceTransportConfigurationSerializer implements PrimitiveSerial
     return result.build();
   }
 }
-
-

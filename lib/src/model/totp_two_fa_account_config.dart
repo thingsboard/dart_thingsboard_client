@@ -17,28 +17,38 @@ part 'totp_two_fa_account_config.g.dart';
 /// TotpTwoFaAccountConfig
 ///
 /// Properties:
-/// * [useByDefault] 
-/// * [providerType] 
-/// * [authUrl] 
+/// * [useByDefault]
+/// * [providerType]
+/// * [authUrl]
 @BuiltValue()
-abstract class TotpTwoFaAccountConfig implements TwoFaAccountConfig, Built<TotpTwoFaAccountConfig, TotpTwoFaAccountConfigBuilder> {
+abstract class TotpTwoFaAccountConfig
+    implements
+        TwoFaAccountConfig,
+        Built<TotpTwoFaAccountConfig, TotpTwoFaAccountConfigBuilder> {
   @BuiltValueField(wireName: r'authUrl')
   String get authUrl;
 
   TotpTwoFaAccountConfig._();
 
-  factory TotpTwoFaAccountConfig([void updates(TotpTwoFaAccountConfigBuilder b)]) = _$TotpTwoFaAccountConfig;
+  factory TotpTwoFaAccountConfig([
+    void updates(TotpTwoFaAccountConfigBuilder b),
+  ]) = _$TotpTwoFaAccountConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TotpTwoFaAccountConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TotpTwoFaAccountConfig> get serializer => _$TotpTwoFaAccountConfigSerializer();
+  static Serializer<TotpTwoFaAccountConfig> get serializer =>
+      _$TotpTwoFaAccountConfigSerializer();
 }
 
-class _$TotpTwoFaAccountConfigSerializer implements PrimitiveSerializer<TotpTwoFaAccountConfig> {
+class _$TotpTwoFaAccountConfigSerializer
+    implements PrimitiveSerializer<TotpTwoFaAccountConfig> {
   @override
-  final Iterable<Type> types = const [TotpTwoFaAccountConfig, _$TotpTwoFaAccountConfig];
+  final Iterable<Type> types = const [
+    TotpTwoFaAccountConfig,
+    _$TotpTwoFaAccountConfig,
+  ];
 
   @override
   final String wireName = r'TotpTwoFaAccountConfig';
@@ -73,7 +83,11 @@ class _$TotpTwoFaAccountConfigSerializer implements PrimitiveSerializer<TotpTwoF
     TotpTwoFaAccountConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,25 +103,31 @@ class _$TotpTwoFaAccountConfigSerializer implements PrimitiveSerializer<TotpTwoF
       final value = serializedList[i + 1];
       switch (key) {
         case r'authUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.authUrl = valueDes;
           break;
         case r'useByDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useByDefault = valueDes;
           break;
         case r'providerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerType = valueDes;
           break;
         default:
@@ -138,5 +158,3 @@ class _$TotpTwoFaAccountConfigSerializer implements PrimitiveSerializer<TotpTwoF
     return result.build();
   }
 }
-
-

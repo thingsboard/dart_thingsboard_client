@@ -17,12 +17,13 @@ part 'entity_load_error.g.dart';
 /// EntityLoadError
 ///
 /// Properties:
-/// * [type] 
-/// * [source_] 
-/// * [target] 
-/// * [message] 
+/// * [type]
+/// * [source_]
+/// * [target]
+/// * [message]
 @BuiltValue()
-abstract class EntityLoadError implements Built<EntityLoadError, EntityLoadErrorBuilder> {
+abstract class EntityLoadError
+    implements Built<EntityLoadError, EntityLoadErrorBuilder> {
   @BuiltValueField(wireName: r'type')
   String? get type;
 
@@ -37,16 +38,19 @@ abstract class EntityLoadError implements Built<EntityLoadError, EntityLoadError
 
   EntityLoadError._();
 
-  factory EntityLoadError([void updates(EntityLoadErrorBuilder b)]) = _$EntityLoadError;
+  factory EntityLoadError([void updates(EntityLoadErrorBuilder b)]) =
+      _$EntityLoadError;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityLoadErrorBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityLoadError> get serializer => _$EntityLoadErrorSerializer();
+  static Serializer<EntityLoadError> get serializer =>
+      _$EntityLoadErrorSerializer();
 }
 
-class _$EntityLoadErrorSerializer implements PrimitiveSerializer<EntityLoadError> {
+class _$EntityLoadErrorSerializer
+    implements PrimitiveSerializer<EntityLoadError> {
   @override
   final Iterable<Type> types = const [EntityLoadError, _$EntityLoadError];
 
@@ -94,7 +98,11 @@ class _$EntityLoadErrorSerializer implements PrimitiveSerializer<EntityLoadError
     EntityLoadError object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,34 +118,42 @@ class _$EntityLoadErrorSerializer implements PrimitiveSerializer<EntityLoadError
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'source':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.source_ = valueDes;
           break;
         case r'target':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.target = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
@@ -169,5 +185,3 @@ class _$EntityLoadErrorSerializer implements PrimitiveSerializer<EntityLoadError
     return result.build();
   }
 }
-
-

@@ -20,13 +20,19 @@ part 'entity_action_notification_rule_trigger_config.g.dart';
 /// EntityActionNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [entityTypes] 
-/// * [created] 
-/// * [updated] 
-/// * [deleted] 
+/// * [triggerType]
+/// * [entityTypes]
+/// * [created]
+/// * [updated]
+/// * [deleted]
 @BuiltValue()
-abstract class EntityActionNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<EntityActionNotificationRuleTriggerConfig, EntityActionNotificationRuleTriggerConfigBuilder> {
+abstract class EntityActionNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          EntityActionNotificationRuleTriggerConfig,
+          EntityActionNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'deleted')
   bool? get deleted;
 
@@ -41,18 +47,26 @@ abstract class EntityActionNotificationRuleTriggerConfig implements Notification
 
   EntityActionNotificationRuleTriggerConfig._();
 
-  factory EntityActionNotificationRuleTriggerConfig([void updates(EntityActionNotificationRuleTriggerConfigBuilder b)]) = _$EntityActionNotificationRuleTriggerConfig;
+  factory EntityActionNotificationRuleTriggerConfig([
+    void updates(EntityActionNotificationRuleTriggerConfigBuilder b),
+  ]) = _$EntityActionNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityActionNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(EntityActionNotificationRuleTriggerConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityActionNotificationRuleTriggerConfig> get serializer => _$EntityActionNotificationRuleTriggerConfigSerializer();
+  static Serializer<EntityActionNotificationRuleTriggerConfig> get serializer =>
+      _$EntityActionNotificationRuleTriggerConfigSerializer();
 }
 
-class _$EntityActionNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<EntityActionNotificationRuleTriggerConfig> {
+class _$EntityActionNotificationRuleTriggerConfigSerializer
+    implements PrimitiveSerializer<EntityActionNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [EntityActionNotificationRuleTriggerConfig, _$EntityActionNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    EntityActionNotificationRuleTriggerConfig,
+    _$EntityActionNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'EntityActionNotificationRuleTriggerConfig';
@@ -103,7 +117,11 @@ class _$EntityActionNotificationRuleTriggerConfigSerializer implements Primitive
     EntityActionNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -119,41 +137,53 @@ class _$EntityActionNotificationRuleTriggerConfigSerializer implements Primitive
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(EntityType)]),
-          ) as BuiltSet<EntityType>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(EntityType),
+                    ]),
+                  )
+                  as BuiltSet<EntityType>?;
           if (valueDes == null) continue;
           result.entityTypes.replace(valueDes);
           break;
         case r'deleted':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.deleted = valueDes;
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'updated':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.updated = valueDes;
           break;
         case r'created':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.created = valueDes;
           break;
@@ -185,5 +215,3 @@ class _$EntityActionNotificationRuleTriggerConfigSerializer implements Primitive
     return result.build();
   }
 }
-
-

@@ -23,7 +23,12 @@ part 'page_data_notification_rule_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataNotificationRuleInfo implements Built<PageDataNotificationRuleInfo, PageDataNotificationRuleInfoBuilder> {
+abstract class PageDataNotificationRuleInfo
+    implements
+        Built<
+          PageDataNotificationRuleInfo,
+          PageDataNotificationRuleInfoBuilder
+        > {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<NotificationRuleInfo>? get data;
@@ -42,18 +47,25 @@ abstract class PageDataNotificationRuleInfo implements Built<PageDataNotificatio
 
   PageDataNotificationRuleInfo._();
 
-  factory PageDataNotificationRuleInfo([void updates(PageDataNotificationRuleInfoBuilder b)]) = _$PageDataNotificationRuleInfo;
+  factory PageDataNotificationRuleInfo([
+    void updates(PageDataNotificationRuleInfoBuilder b),
+  ]) = _$PageDataNotificationRuleInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataNotificationRuleInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataNotificationRuleInfo> get serializer => _$PageDataNotificationRuleInfoSerializer();
+  static Serializer<PageDataNotificationRuleInfo> get serializer =>
+      _$PageDataNotificationRuleInfoSerializer();
 }
 
-class _$PageDataNotificationRuleInfoSerializer implements PrimitiveSerializer<PageDataNotificationRuleInfo> {
+class _$PageDataNotificationRuleInfoSerializer
+    implements PrimitiveSerializer<PageDataNotificationRuleInfo> {
   @override
-  final Iterable<Type> types = const [PageDataNotificationRuleInfo, _$PageDataNotificationRuleInfo];
+  final Iterable<Type> types = const [
+    PageDataNotificationRuleInfo,
+    _$PageDataNotificationRuleInfo,
+  ];
 
   @override
   final String wireName = r'PageDataNotificationRuleInfo';
@@ -67,7 +79,9 @@ class _$PageDataNotificationRuleInfoSerializer implements PrimitiveSerializer<Pa
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(NotificationRuleInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(NotificationRuleInfo),
+        ]),
       );
     }
     if (object.totalPages != null) {
@@ -99,7 +113,11 @@ class _$PageDataNotificationRuleInfoSerializer implements PrimitiveSerializer<Pa
     PageDataNotificationRuleInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +133,44 @@ class _$PageDataNotificationRuleInfoSerializer implements PrimitiveSerializer<Pa
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(NotificationRuleInfo)]),
-          ) as BuiltList<NotificationRuleInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(NotificationRuleInfo),
+                    ]),
+                  )
+                  as BuiltList<NotificationRuleInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +202,3 @@ class _$PageDataNotificationRuleInfoSerializer implements PrimitiveSerializer<Pa
     return result.build();
   }
 }
-
-

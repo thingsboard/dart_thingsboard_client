@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -18,11 +17,9 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/page_data_report_template_info.dart';
 import 'package:thingsboard_client/src/model/report_template.dart';
 import 'package:thingsboard_client/src/model/report_template_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class ReportTemplateControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -43,7 +40,7 @@ class ReportTemplateControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteReportTemplate({ 
+  Future<Response<void>> deleteReportTemplate({
     required String reportTemplateId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -53,12 +50,19 @@ class ReportTemplateControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/reportTemplate/{reportTemplateId}'.replaceAll('{' r'reportTemplateId' '}', encodeQueryParameter(_serializers, reportTemplateId, const FullType(String)).toString());
+    final _path = r'/api/reportTemplate/{reportTemplateId}'.replaceAll(
+      '{'
+      r'reportTemplateId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        reportTemplateId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -66,11 +70,8 @@ class ReportTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -109,7 +110,7 @@ class ReportTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataReportTemplateInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataReportTemplateInfo>> getAllReportTemplateInfos({ 
+  Future<Response<PageDataReportTemplateInfo>> getAllReportTemplateInfos({
     required int pageSize,
     required int page,
     BuiltList<String>? typeList,
@@ -125,13 +126,13 @@ class ReportTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndPageDataReportTemplateInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfStringAndPageDataReportTemplateInfo);
     final _path = r'/api/reportTemplateInfos/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -139,11 +140,8 @@ class ReportTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -151,14 +149,50 @@ class ReportTemplateControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (typeList != null) r'typeList': encodeCollectionQueryParameter<String>(_serializers, typeList, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (formatList != null) r'formatList': encodeCollectionQueryParameter<String>(_serializers, formatList, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      if (typeList != null)
+        r'typeList': encodeCollectionQueryParameter<String>(
+          _serializers,
+          typeList,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (formatList != null)
+        r'formatList': encodeCollectionQueryParameter<String>(
+          _serializers,
+          formatList,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -174,11 +208,13 @@ class ReportTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataReportTemplateInfo),
-      ) as PageDataReportTemplateInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataReportTemplateInfo),
+                )
+                as PageDataReportTemplateInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -215,7 +251,7 @@ class ReportTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ReportTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ReportTemplate>> getReportTemplateById({ 
+  Future<Response<ReportTemplate>> getReportTemplateById({
     required String reportTemplateId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -224,13 +260,21 @@ class ReportTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerReportTemplate);
-    final _path = r'/api/reportTemplate/{reportTemplateId}'.replaceAll('{' r'reportTemplateId' '}', encodeQueryParameter(_serializers, reportTemplateId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerReportTemplate);
+    final _path = r'/api/reportTemplate/{reportTemplateId}'.replaceAll(
+      '{'
+      r'reportTemplateId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        reportTemplateId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -238,11 +282,8 @@ class ReportTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -261,11 +302,13 @@ class ReportTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ReportTemplate),
-      ) as ReportTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ReportTemplate),
+                )
+                as ReportTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -302,7 +345,7 @@ class ReportTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ReportTemplateInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ReportTemplateInfo>> getReportTemplateInfoById({ 
+  Future<Response<ReportTemplateInfo>> getReportTemplateInfoById({
     required String reportTemplateId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -311,13 +354,21 @@ class ReportTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerReportTemplateInfo);
-    final _path = r'/api/reportTemplate/info/{reportTemplateId}'.replaceAll('{' r'reportTemplateId' '}', encodeQueryParameter(_serializers, reportTemplateId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerReportTemplateInfo);
+    final _path = r'/api/reportTemplate/info/{reportTemplateId}'.replaceAll(
+      '{'
+      r'reportTemplateId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        reportTemplateId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -325,11 +376,8 @@ class ReportTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -348,11 +396,13 @@ class ReportTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ReportTemplateInfo),
-      ) as ReportTemplateInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ReportTemplateInfo),
+                )
+                as ReportTemplateInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -389,7 +439,7 @@ class ReportTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<ReportTemplateInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<ReportTemplateInfo>>> getReportTemplatesByIds({ 
+  Future<Response<BuiltList<ReportTemplateInfo>>> getReportTemplatesByIds({
     required BuiltList<String> reportTemplateIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -398,13 +448,13 @@ class ReportTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfReportTemplateInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfReportTemplateInfoAndListOfString);
     final _path = r'/api/reportTemplates';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -412,11 +462,8 @@ class ReportTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -424,7 +471,12 @@ class ReportTemplateControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'reportTemplateIds': encodeCollectionQueryParameter<String>(_serializers, reportTemplateIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'reportTemplateIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        reportTemplateIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -440,11 +492,15 @@ class ReportTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(ReportTemplateInfo)]),
-      ) as BuiltList<ReportTemplateInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(ReportTemplateInfo),
+                  ]),
+                )
+                as BuiltList<ReportTemplateInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -471,7 +527,7 @@ class ReportTemplateControllerApi {
   /// Creates or Updates report template. Report Template extends Report Template Info object and adds &#39;configuration&#39; - a JSON structure of report template configuration. See the &#39;Model&#39; tab of the Response Class for more details. When creating report template, platform generates report template Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created report template id will be present in the response. Specify existing report template id to update the report template. Referencing non-existing report template Id will cause &#39;Not Found&#39; error. Remove &#39;id&#39;, &#39;tenantId&#39; and optionally &#39;customerId&#39; from the request body example (below) to create new Report Template entity.   Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.   Security check is performed to verify that the user has &#39;WRITE&#39; permission for the entity (entities).
   ///
   /// Parameters:
-  /// * [reportTemplate] 
+  /// * [reportTemplate]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -481,7 +537,7 @@ class ReportTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ReportTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ReportTemplate>> saveReportTemplate({ 
+  Future<Response<ReportTemplate>> saveReportTemplate({
     required ReportTemplate reportTemplate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -490,13 +546,12 @@ class ReportTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerReportTemplate);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerReportTemplate);
     final _path = r'/api/reportTemplate';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -504,11 +559,8 @@ class ReportTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -521,13 +573,9 @@ class ReportTemplateControllerApi {
     try {
       const _type = FullType(ReportTemplate);
       _bodyData = _serializers.serialize(reportTemplate, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -547,11 +595,13 @@ class ReportTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ReportTemplate),
-      ) as ReportTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ReportTemplate),
+                )
+                as ReportTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -573,5 +623,4 @@ class ReportTemplateControllerApi {
       extra: _response.extra,
     );
   }
-
 }

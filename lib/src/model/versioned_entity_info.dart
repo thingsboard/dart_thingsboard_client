@@ -17,10 +17,11 @@ part 'versioned_entity_info.g.dart';
 /// VersionedEntityInfo
 ///
 /// Properties:
-/// * [externalId] 
-/// * [path] 
+/// * [externalId]
+/// * [path]
 @BuiltValue()
-abstract class VersionedEntityInfo implements Built<VersionedEntityInfo, VersionedEntityInfoBuilder> {
+abstract class VersionedEntityInfo
+    implements Built<VersionedEntityInfo, VersionedEntityInfoBuilder> {
   @BuiltValueField(wireName: r'externalId')
   EntityId? get externalId;
 
@@ -29,18 +30,24 @@ abstract class VersionedEntityInfo implements Built<VersionedEntityInfo, Version
 
   VersionedEntityInfo._();
 
-  factory VersionedEntityInfo([void updates(VersionedEntityInfoBuilder b)]) = _$VersionedEntityInfo;
+  factory VersionedEntityInfo([void updates(VersionedEntityInfoBuilder b)]) =
+      _$VersionedEntityInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(VersionedEntityInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<VersionedEntityInfo> get serializer => _$VersionedEntityInfoSerializer();
+  static Serializer<VersionedEntityInfo> get serializer =>
+      _$VersionedEntityInfoSerializer();
 }
 
-class _$VersionedEntityInfoSerializer implements PrimitiveSerializer<VersionedEntityInfo> {
+class _$VersionedEntityInfoSerializer
+    implements PrimitiveSerializer<VersionedEntityInfo> {
   @override
-  final Iterable<Type> types = const [VersionedEntityInfo, _$VersionedEntityInfo];
+  final Iterable<Type> types = const [
+    VersionedEntityInfo,
+    _$VersionedEntityInfo,
+  ];
 
   @override
   final String wireName = r'VersionedEntityInfo';
@@ -72,7 +79,11 @@ class _$VersionedEntityInfoSerializer implements PrimitiveSerializer<VersionedEn
     VersionedEntityInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +99,22 @@ class _$VersionedEntityInfoSerializer implements PrimitiveSerializer<VersionedEn
       final value = serializedList[i + 1];
       switch (key) {
         case r'externalId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.externalId = valueDes;
           break;
         case r'path':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.path = valueDes;
           break;
@@ -131,5 +146,3 @@ class _$VersionedEntityInfoSerializer implements PrimitiveSerializer<VersionedEn
     return result.build();
   }
 }
-
-

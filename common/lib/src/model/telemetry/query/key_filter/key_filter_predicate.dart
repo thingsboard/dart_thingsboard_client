@@ -9,7 +9,8 @@ enum FilterPredicateType { STRING, NUMERIC, BOOLEAN, COMPLEX }
 
 FilterPredicateType filterPredicateTypeFromString(String value) {
   return FilterPredicateType.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension FilterPredicateTypeToString on FilterPredicateType {

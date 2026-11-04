@@ -24,11 +24,13 @@ part 'thingsboard_error_response.g.dart';
 /// * [message] - Error message
 /// * [errorCode] - Platform error code: * `2` - General error (HTTP: 500 - Internal Server Error)  * `10` - Authentication failed (HTTP: 401 - Unauthorized)  * `11` - JWT token expired (HTTP: 401 - Unauthorized)  * `15` - Credentials expired (HTTP: 401 - Unauthorized)  * `20` - Permission denied (HTTP: 403 - Forbidden)  * `30` - Invalid arguments (HTTP: 400 - Bad Request)  * `31` - Bad request params (HTTP: 400 - Bad Request)  * `32` - Item not found (HTTP: 404 - Not Found)  * `33` - Too many requests (HTTP: 429 - Too Many Requests)  * `34` - Too many updates (Too many updates over Websocket session)  * `35` - Version conflict (HTTP: 409 - Conflict)  * `40` - Subscription violation (HTTP: 403 - Forbidden)  * `41` - Entities limit exceeded (HTTP: 403 - Forbidden)  * `47` - Setup incomplete (HTTP: 423 - Locked)
 /// * [timestamp] - Timestamp
-/// * [subscriptionErrorCode] 
-/// * [subscriptionEntry] 
+/// * [subscriptionErrorCode]
+/// * [subscriptionEntry]
 /// * [subscriptionValue] - A value representing the any type (object or primitive)
 @BuiltValue()
-abstract class ThingsboardErrorResponse implements Built<ThingsboardErrorResponse, ThingsboardErrorResponseBuilder> {
+abstract class ThingsboardErrorResponse
+    implements
+        Built<ThingsboardErrorResponse, ThingsboardErrorResponseBuilder> {
   /// HTTP Response Status Code
   @BuiltValueField(wireName: r'status')
   int? get status;
@@ -60,18 +62,25 @@ abstract class ThingsboardErrorResponse implements Built<ThingsboardErrorRespons
 
   ThingsboardErrorResponse._();
 
-  factory ThingsboardErrorResponse([void updates(ThingsboardErrorResponseBuilder b)]) = _$ThingsboardErrorResponse;
+  factory ThingsboardErrorResponse([
+    void updates(ThingsboardErrorResponseBuilder b),
+  ]) = _$ThingsboardErrorResponse;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ThingsboardErrorResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ThingsboardErrorResponse> get serializer => _$ThingsboardErrorResponseSerializer();
+  static Serializer<ThingsboardErrorResponse> get serializer =>
+      _$ThingsboardErrorResponseSerializer();
 }
 
-class _$ThingsboardErrorResponseSerializer implements PrimitiveSerializer<ThingsboardErrorResponse> {
+class _$ThingsboardErrorResponseSerializer
+    implements PrimitiveSerializer<ThingsboardErrorResponse> {
   @override
-  final Iterable<Type> types = const [ThingsboardErrorResponse, _$ThingsboardErrorResponse];
+  final Iterable<Type> types = const [
+    ThingsboardErrorResponse,
+    _$ThingsboardErrorResponse,
+  ];
 
   @override
   final String wireName = r'ThingsboardErrorResponse';
@@ -138,7 +147,11 @@ class _$ThingsboardErrorResponseSerializer implements PrimitiveSerializer<Things
     ThingsboardErrorResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -154,58 +167,76 @@ class _$ThingsboardErrorResponseSerializer implements PrimitiveSerializer<Things
       final value = serializedList[i + 1];
       switch (key) {
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
         case r'errorCode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ThingsboardErrorCode),
-          ) as ThingsboardErrorCode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ThingsboardErrorCode,
+                    ),
+                  )
+                  as ThingsboardErrorCode?;
           if (valueDes == null) continue;
           result.errorCode = valueDes;
           break;
         case r'timestamp':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timestamp = valueDes;
           break;
         case r'subscriptionErrorCode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SubscriptionErrorCode),
-          ) as SubscriptionErrorCode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      SubscriptionErrorCode,
+                    ),
+                  )
+                  as SubscriptionErrorCode?;
           if (valueDes == null) continue;
           result.subscriptionErrorCode = valueDes;
           break;
         case r'subscriptionEntry':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SubscriptionEntry),
-          ) as SubscriptionEntry?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SubscriptionEntry),
+                  )
+                  as SubscriptionEntry?;
           if (valueDes == null) continue;
           result.subscriptionEntry = valueDes;
           break;
         case r'subscriptionValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.subscriptionValue = valueDes;
           break;
@@ -237,5 +268,3 @@ class _$ThingsboardErrorResponseSerializer implements PrimitiveSerializer<Things
     return result.build();
   }
 }
-
-

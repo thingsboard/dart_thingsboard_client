@@ -9,15 +9,10 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
-import 'package:thingsboard_client/src/api_serializers.dart';
-
 class UiSettingsControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -37,7 +32,7 @@ class UiSettingsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getHelpBaseUrl({ 
+  Future<Response<String>> getHelpBaseUrl({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -48,9 +43,7 @@ class UiSettingsControllerApi {
     final _path = r'/api/uiSettings/helpBaseUrl';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -58,11 +51,8 @@ class UiSettingsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -82,7 +72,6 @@ class UiSettingsControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -104,5 +93,4 @@ class UiSettingsControllerApi {
       extra: _response.extra,
     );
   }
-
 }

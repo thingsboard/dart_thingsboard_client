@@ -21,12 +21,13 @@ part 'login_mobile_info.g.dart';
 /// LoginMobileInfo
 ///
 /// Properties:
-/// * [oAuth2ClientLoginInfos] 
-/// * [selfRegistrationParams] 
-/// * [storeInfo] 
-/// * [versionInfo] 
+/// * [oAuth2ClientLoginInfos]
+/// * [selfRegistrationParams]
+/// * [storeInfo]
+/// * [versionInfo]
 @BuiltValue()
-abstract class LoginMobileInfo implements Built<LoginMobileInfo, LoginMobileInfoBuilder> {
+abstract class LoginMobileInfo
+    implements Built<LoginMobileInfo, LoginMobileInfoBuilder> {
   @BuiltValueField(wireName: r'oAuth2ClientLoginInfos')
   BuiltList<OAuth2ClientLoginInfo>? get oAuth2ClientLoginInfos;
 
@@ -41,16 +42,19 @@ abstract class LoginMobileInfo implements Built<LoginMobileInfo, LoginMobileInfo
 
   LoginMobileInfo._();
 
-  factory LoginMobileInfo([void updates(LoginMobileInfoBuilder b)]) = _$LoginMobileInfo;
+  factory LoginMobileInfo([void updates(LoginMobileInfoBuilder b)]) =
+      _$LoginMobileInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LoginMobileInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LoginMobileInfo> get serializer => _$LoginMobileInfoSerializer();
+  static Serializer<LoginMobileInfo> get serializer =>
+      _$LoginMobileInfoSerializer();
 }
 
-class _$LoginMobileInfoSerializer implements PrimitiveSerializer<LoginMobileInfo> {
+class _$LoginMobileInfoSerializer
+    implements PrimitiveSerializer<LoginMobileInfo> {
   @override
   final Iterable<Type> types = const [LoginMobileInfo, _$LoginMobileInfo];
 
@@ -66,7 +70,9 @@ class _$LoginMobileInfoSerializer implements PrimitiveSerializer<LoginMobileInfo
       yield r'oAuth2ClientLoginInfos';
       yield serializers.serialize(
         object.oAuth2ClientLoginInfos,
-        specifiedType: const FullType(BuiltList, [FullType(OAuth2ClientLoginInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(OAuth2ClientLoginInfo),
+        ]),
       );
     }
     if (object.selfRegistrationParams != null) {
@@ -98,7 +104,11 @@ class _$LoginMobileInfoSerializer implements PrimitiveSerializer<LoginMobileInfo
     LoginMobileInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -114,34 +124,48 @@ class _$LoginMobileInfoSerializer implements PrimitiveSerializer<LoginMobileInfo
       final value = serializedList[i + 1];
       switch (key) {
         case r'oAuth2ClientLoginInfos':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(OAuth2ClientLoginInfo)]),
-          ) as BuiltList<OAuth2ClientLoginInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(OAuth2ClientLoginInfo),
+                    ]),
+                  )
+                  as BuiltList<OAuth2ClientLoginInfo>?;
           if (valueDes == null) continue;
           result.oAuth2ClientLoginInfos.replace(valueDes);
           break;
         case r'selfRegistrationParams':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SignUpSelfRegistrationParams),
-          ) as SignUpSelfRegistrationParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      SignUpSelfRegistrationParams,
+                    ),
+                  )
+                  as SignUpSelfRegistrationParams?;
           if (valueDes == null) continue;
           result.selfRegistrationParams.replace(valueDes);
           break;
         case r'storeInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StoreInfo),
-          ) as StoreInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StoreInfo),
+                  )
+                  as StoreInfo?;
           if (valueDes == null) continue;
           result.storeInfo.replace(valueDes);
           break;
         case r'versionInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileAppVersionInfo),
-          ) as MobileAppVersionInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      MobileAppVersionInfo,
+                    ),
+                  )
+                  as MobileAppVersionInfo?;
           if (valueDes == null) continue;
           result.versionInfo.replace(valueDes);
           break;
@@ -173,5 +197,3 @@ class _$LoginMobileInfoSerializer implements PrimitiveSerializer<LoginMobileInfo
     return result.build();
   }
 }
-
-

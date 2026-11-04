@@ -21,10 +21,16 @@ part 'client_attributes_querying_snmp_communication_config.g.dart';
 ///
 /// Properties:
 /// * [spec] - Specification of the SNMP communication
-/// * [mappings] 
-/// * [queryingFrequencyMs] 
+/// * [mappings]
+/// * [queryingFrequencyMs]
 @BuiltValue()
-abstract class ClientAttributesQueryingSnmpCommunicationConfig implements SnmpCommunicationConfig, Built<ClientAttributesQueryingSnmpCommunicationConfig, ClientAttributesQueryingSnmpCommunicationConfigBuilder> {
+abstract class ClientAttributesQueryingSnmpCommunicationConfig
+    implements
+        SnmpCommunicationConfig,
+        Built<
+          ClientAttributesQueryingSnmpCommunicationConfig,
+          ClientAttributesQueryingSnmpCommunicationConfigBuilder
+        > {
   @BuiltValueField(wireName: r'mappings')
   BuiltList<SnmpMapping>? get mappings;
 
@@ -33,18 +39,29 @@ abstract class ClientAttributesQueryingSnmpCommunicationConfig implements SnmpCo
 
   ClientAttributesQueryingSnmpCommunicationConfig._();
 
-  factory ClientAttributesQueryingSnmpCommunicationConfig([void updates(ClientAttributesQueryingSnmpCommunicationConfigBuilder b)]) = _$ClientAttributesQueryingSnmpCommunicationConfig;
+  factory ClientAttributesQueryingSnmpCommunicationConfig([
+    void updates(ClientAttributesQueryingSnmpCommunicationConfigBuilder b),
+  ]) = _$ClientAttributesQueryingSnmpCommunicationConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ClientAttributesQueryingSnmpCommunicationConfigBuilder b) => b;
+  static void _defaults(
+    ClientAttributesQueryingSnmpCommunicationConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ClientAttributesQueryingSnmpCommunicationConfig> get serializer => _$ClientAttributesQueryingSnmpCommunicationConfigSerializer();
+  static Serializer<ClientAttributesQueryingSnmpCommunicationConfig>
+  get serializer =>
+      _$ClientAttributesQueryingSnmpCommunicationConfigSerializer();
 }
 
-class _$ClientAttributesQueryingSnmpCommunicationConfigSerializer implements PrimitiveSerializer<ClientAttributesQueryingSnmpCommunicationConfig> {
+class _$ClientAttributesQueryingSnmpCommunicationConfigSerializer
+    implements
+        PrimitiveSerializer<ClientAttributesQueryingSnmpCommunicationConfig> {
   @override
-  final Iterable<Type> types = const [ClientAttributesQueryingSnmpCommunicationConfig, _$ClientAttributesQueryingSnmpCommunicationConfig];
+  final Iterable<Type> types = const [
+    ClientAttributesQueryingSnmpCommunicationConfig,
+    _$ClientAttributesQueryingSnmpCommunicationConfig,
+  ];
 
   @override
   final String wireName = r'ClientAttributesQueryingSnmpCommunicationConfig';
@@ -81,7 +98,11 @@ class _$ClientAttributesQueryingSnmpCommunicationConfigSerializer implements Pri
     ClientAttributesQueryingSnmpCommunicationConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,25 +118,33 @@ class _$ClientAttributesQueryingSnmpCommunicationConfigSerializer implements Pri
       final value = serializedList[i + 1];
       switch (key) {
         case r'mappings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SnmpMapping)]),
-          ) as BuiltList<SnmpMapping>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SnmpMapping),
+                    ]),
+                  )
+                  as BuiltList<SnmpMapping>?;
           if (valueDes == null) continue;
           result.mappings.replace(valueDes);
           break;
         case r'spec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SnmpCommunicationSpec),
-          ) as SnmpCommunicationSpec;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SnmpCommunicationSpec),
+                  )
+                  as SnmpCommunicationSpec;
           result.spec = valueDes;
           break;
         case r'queryingFrequencyMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.queryingFrequencyMs = valueDes;
           break;
@@ -147,5 +176,3 @@ class _$ClientAttributesQueryingSnmpCommunicationConfigSerializer implements Pri
     return result.build();
   }
 }
-
-

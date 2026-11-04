@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'border_length.g.dart';
 
 class BorderLength extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'LONG')
   static const BorderLength LONG = _$LONG;
   @BuiltValueEnumConst(wireName: r'SHORT')
@@ -25,7 +24,7 @@ class BorderLength extends EnumClass {
 
   static Serializer<BorderLength> get serializer => _$borderLengthSerializer;
 
-  const BorderLength._(String name): super(name);
+  const BorderLength._(String name) : super(name);
 
   static BuiltSet<BorderLength> get values => _$values;
   static BorderLength valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class BorderLength extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class BorderLengthMixin = Object with _$BorderLengthMixin;
-

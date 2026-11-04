@@ -19,11 +19,12 @@ part 'tb_image_delete_result.g.dart';
 /// TbImageDeleteResult
 ///
 /// Properties:
-/// * [success] 
-/// * [whiteLabelingList] 
-/// * [references] 
+/// * [success]
+/// * [whiteLabelingList]
+/// * [references]
 @BuiltValue()
-abstract class TbImageDeleteResult implements Built<TbImageDeleteResult, TbImageDeleteResultBuilder> {
+abstract class TbImageDeleteResult
+    implements Built<TbImageDeleteResult, TbImageDeleteResultBuilder> {
   @BuiltValueField(wireName: r'success')
   bool? get success;
 
@@ -35,18 +36,24 @@ abstract class TbImageDeleteResult implements Built<TbImageDeleteResult, TbImage
 
   TbImageDeleteResult._();
 
-  factory TbImageDeleteResult([void updates(TbImageDeleteResultBuilder b)]) = _$TbImageDeleteResult;
+  factory TbImageDeleteResult([void updates(TbImageDeleteResultBuilder b)]) =
+      _$TbImageDeleteResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbImageDeleteResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbImageDeleteResult> get serializer => _$TbImageDeleteResultSerializer();
+  static Serializer<TbImageDeleteResult> get serializer =>
+      _$TbImageDeleteResultSerializer();
 }
 
-class _$TbImageDeleteResultSerializer implements PrimitiveSerializer<TbImageDeleteResult> {
+class _$TbImageDeleteResultSerializer
+    implements PrimitiveSerializer<TbImageDeleteResult> {
   @override
-  final Iterable<Type> types = const [TbImageDeleteResult, _$TbImageDeleteResult];
+  final Iterable<Type> types = const [
+    TbImageDeleteResult,
+    _$TbImageDeleteResult,
+  ];
 
   @override
   final String wireName = r'TbImageDeleteResult';
@@ -74,7 +81,10 @@ class _$TbImageDeleteResultSerializer implements PrimitiveSerializer<TbImageDele
       yield r'references';
       yield serializers.serialize(
         object.references,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(HasIdObject)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(HasIdObject)]),
+        ]),
       );
     }
   }
@@ -85,7 +95,11 @@ class _$TbImageDeleteResultSerializer implements PrimitiveSerializer<TbImageDele
     TbImageDeleteResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +115,37 @@ class _$TbImageDeleteResultSerializer implements PrimitiveSerializer<TbImageDele
       final value = serializedList[i + 1];
       switch (key) {
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'whiteLabelingList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(WhiteLabeling)]),
-          ) as BuiltList<WhiteLabeling>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(WhiteLabeling),
+                    ]),
+                  )
+                  as BuiltList<WhiteLabeling>?;
           if (valueDes == null) continue;
           result.whiteLabelingList.replace(valueDes);
           break;
         case r'references':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(HasIdObject)])]),
-          ) as BuiltMap<String, BuiltList<HasIdObject>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(HasIdObject)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<HasIdObject>>?;
           if (valueDes == null) continue;
           result.references.replace(valueDes);
           break;
@@ -152,5 +177,3 @@ class _$TbImageDeleteResultSerializer implements PrimitiveSerializer<TbImageDele
     return result.build();
   }
 }
-
-

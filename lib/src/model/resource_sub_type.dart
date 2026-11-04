@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'resource_sub_type.g.dart';
 
 class ResourceSubType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'IMAGE')
   static const ResourceSubType IMAGE = _$IMAGE;
   @BuiltValueEnumConst(wireName: r'SCADA_SYMBOL')
@@ -27,9 +26,10 @@ class ResourceSubType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ResourceSubType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<ResourceSubType> get serializer => _$resourceSubTypeSerializer;
+  static Serializer<ResourceSubType> get serializer =>
+      _$resourceSubTypeSerializer;
 
-  const ResourceSubType._(String name): super(name);
+  const ResourceSubType._(String name) : super(name);
 
   static BuiltSet<ResourceSubType> get values => _$values;
   static ResourceSubType valueOf(String name) => _$valueOf(name);
@@ -42,4 +42,3 @@ class ResourceSubType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ResourceSubTypeMixin = Object with _$ResourceSubTypeMixin;
-

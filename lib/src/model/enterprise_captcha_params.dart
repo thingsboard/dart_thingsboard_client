@@ -17,7 +17,7 @@ part 'enterprise_captcha_params.g.dart';
 /// EnterpriseCaptchaParams
 ///
 /// Properties:
-/// * [version] 
+/// * [version]
 /// * [projectId] - Your Google Cloud project ID
 /// * [serviceAccountCredentials] - Service account credentials
 /// * [serviceAccountCredentialsFileName] - Service account credentials file name
@@ -25,7 +25,10 @@ part 'enterprise_captcha_params.g.dart';
 /// * [iosKey] - The reCAPTCHA key associated with iOS app.
 /// * [logActionName] - Optional action name used for logging
 @BuiltValue()
-abstract class EnterpriseCaptchaParams implements CaptchaParams, Built<EnterpriseCaptchaParams, EnterpriseCaptchaParamsBuilder> {
+abstract class EnterpriseCaptchaParams
+    implements
+        CaptchaParams,
+        Built<EnterpriseCaptchaParams, EnterpriseCaptchaParamsBuilder> {
   /// Optional action name used for logging
   @BuiltValueField(wireName: r'logActionName')
   String? get logActionName;
@@ -52,18 +55,25 @@ abstract class EnterpriseCaptchaParams implements CaptchaParams, Built<Enterpris
 
   EnterpriseCaptchaParams._();
 
-  factory EnterpriseCaptchaParams([void updates(EnterpriseCaptchaParamsBuilder b)]) = _$EnterpriseCaptchaParams;
+  factory EnterpriseCaptchaParams([
+    void updates(EnterpriseCaptchaParamsBuilder b),
+  ]) = _$EnterpriseCaptchaParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EnterpriseCaptchaParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EnterpriseCaptchaParams> get serializer => _$EnterpriseCaptchaParamsSerializer();
+  static Serializer<EnterpriseCaptchaParams> get serializer =>
+      _$EnterpriseCaptchaParamsSerializer();
 }
 
-class _$EnterpriseCaptchaParamsSerializer implements PrimitiveSerializer<EnterpriseCaptchaParams> {
+class _$EnterpriseCaptchaParamsSerializer
+    implements PrimitiveSerializer<EnterpriseCaptchaParams> {
   @override
-  final Iterable<Type> types = const [EnterpriseCaptchaParams, _$EnterpriseCaptchaParams];
+  final Iterable<Type> types = const [
+    EnterpriseCaptchaParams,
+    _$EnterpriseCaptchaParams,
+  ];
 
   @override
   final String wireName = r'EnterpriseCaptchaParams';
@@ -128,7 +138,11 @@ class _$EnterpriseCaptchaParamsSerializer implements PrimitiveSerializer<Enterpr
     EnterpriseCaptchaParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -144,57 +158,71 @@ class _$EnterpriseCaptchaParamsSerializer implements PrimitiveSerializer<Enterpr
       final value = serializedList[i + 1];
       switch (key) {
         case r'logActionName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.logActionName = valueDes;
           break;
         case r'androidKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.androidKey = valueDes;
           break;
         case r'serviceAccountCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serviceAccountCredentials = valueDes;
           break;
         case r'iosKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.iosKey = valueDes;
           break;
         case r'projectId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.projectId = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.version = valueDes;
           break;
         case r'serviceAccountCredentialsFileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serviceAccountCredentialsFileName = valueDes;
           break;
@@ -226,5 +254,3 @@ class _$EnterpriseCaptchaParamsSerializer implements PrimitiveSerializer<Enterpr
     return result.build();
   }
 }
-
-

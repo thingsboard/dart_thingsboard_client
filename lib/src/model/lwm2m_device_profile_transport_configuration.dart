@@ -21,13 +21,19 @@ part 'lwm2m_device_profile_transport_configuration.g.dart';
 /// Lwm2mDeviceProfileTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 /// * [observeAttr] - Configuration for mapping LwM2M resources to telemetry and attributes
 /// * [bootstrapServerUpdateEnable] - Flag indicating whether LwM2M bootstrap server update is enabled
-/// * [bootstrap] 
+/// * [bootstrap]
 /// * [clientLwM2mSettings] - Other LwM2M client settings
 @BuiltValue()
-abstract class Lwm2mDeviceProfileTransportConfiguration implements DeviceProfileTransportConfiguration, Built<Lwm2mDeviceProfileTransportConfiguration, Lwm2mDeviceProfileTransportConfigurationBuilder> {
+abstract class Lwm2mDeviceProfileTransportConfiguration
+    implements
+        DeviceProfileTransportConfiguration,
+        Built<
+          Lwm2mDeviceProfileTransportConfiguration,
+          Lwm2mDeviceProfileTransportConfigurationBuilder
+        > {
   /// Configuration for mapping LwM2M resources to telemetry and attributes
   @BuiltValueField(wireName: r'observeAttr')
   TelemetryMappingConfiguration? get observeAttr;
@@ -45,18 +51,25 @@ abstract class Lwm2mDeviceProfileTransportConfiguration implements DeviceProfile
 
   Lwm2mDeviceProfileTransportConfiguration._();
 
-  factory Lwm2mDeviceProfileTransportConfiguration([void updates(Lwm2mDeviceProfileTransportConfigurationBuilder b)]) = _$Lwm2mDeviceProfileTransportConfiguration;
+  factory Lwm2mDeviceProfileTransportConfiguration([
+    void updates(Lwm2mDeviceProfileTransportConfigurationBuilder b),
+  ]) = _$Lwm2mDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(Lwm2mDeviceProfileTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<Lwm2mDeviceProfileTransportConfiguration> get serializer => _$Lwm2mDeviceProfileTransportConfigurationSerializer();
+  static Serializer<Lwm2mDeviceProfileTransportConfiguration> get serializer =>
+      _$Lwm2mDeviceProfileTransportConfigurationSerializer();
 }
 
-class _$Lwm2mDeviceProfileTransportConfigurationSerializer implements PrimitiveSerializer<Lwm2mDeviceProfileTransportConfiguration> {
+class _$Lwm2mDeviceProfileTransportConfigurationSerializer
+    implements PrimitiveSerializer<Lwm2mDeviceProfileTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [Lwm2mDeviceProfileTransportConfiguration, _$Lwm2mDeviceProfileTransportConfiguration];
+  final Iterable<Type> types = const [
+    Lwm2mDeviceProfileTransportConfiguration,
+    _$Lwm2mDeviceProfileTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'Lwm2mDeviceProfileTransportConfiguration';
@@ -84,7 +97,9 @@ class _$Lwm2mDeviceProfileTransportConfigurationSerializer implements PrimitiveS
       yield r'bootstrap';
       yield serializers.serialize(
         object.bootstrap,
-        specifiedType: const FullType(BuiltList, [FullType(LwM2MBootstrapServerCredential)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(LwM2MBootstrapServerCredential),
+        ]),
       );
     }
     yield r'type';
@@ -107,7 +122,11 @@ class _$Lwm2mDeviceProfileTransportConfigurationSerializer implements PrimitiveS
     Lwm2mDeviceProfileTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -123,41 +142,55 @@ class _$Lwm2mDeviceProfileTransportConfigurationSerializer implements PrimitiveS
       final value = serializedList[i + 1];
       switch (key) {
         case r'observeAttr':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TelemetryMappingConfiguration),
-          ) as TelemetryMappingConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TelemetryMappingConfiguration,
+                    ),
+                  )
+                  as TelemetryMappingConfiguration?;
           if (valueDes == null) continue;
           result.observeAttr.replace(valueDes);
           break;
         case r'bootstrapServerUpdateEnable':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.bootstrapServerUpdateEnable = valueDes;
           break;
         case r'bootstrap':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(LwM2MBootstrapServerCredential)]),
-          ) as BuiltList<LwM2MBootstrapServerCredential>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(LwM2MBootstrapServerCredential),
+                    ]),
+                  )
+                  as BuiltList<LwM2MBootstrapServerCredential>?;
           if (valueDes == null) continue;
           result.bootstrap.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'clientLwM2mSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OtherConfiguration),
-          ) as OtherConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(OtherConfiguration),
+                  )
+                  as OtherConfiguration?;
           if (valueDes == null) continue;
           result.clientLwM2mSettings.replace(valueDes);
           break;
@@ -189,5 +222,3 @@ class _$Lwm2mDeviceProfileTransportConfigurationSerializer implements PrimitiveS
     return result.build();
   }
 }
-
-

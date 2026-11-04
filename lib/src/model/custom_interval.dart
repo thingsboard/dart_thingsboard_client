@@ -17,12 +17,13 @@ part 'custom_interval.g.dart';
 /// CustomInterval
 ///
 /// Properties:
-/// * [type] 
-/// * [tz] 
-/// * [offsetSec] 
-/// * [durationSec] 
+/// * [type]
+/// * [tz]
+/// * [offsetSec]
+/// * [durationSec]
 @BuiltValue()
-abstract class CustomInterval implements AggInterval, Built<CustomInterval, CustomIntervalBuilder> {
+abstract class CustomInterval
+    implements AggInterval, Built<CustomInterval, CustomIntervalBuilder> {
   @BuiltValueField(wireName: r'tz')
   String get tz;
 
@@ -34,16 +35,19 @@ abstract class CustomInterval implements AggInterval, Built<CustomInterval, Cust
 
   CustomInterval._();
 
-  factory CustomInterval([void updates(CustomIntervalBuilder b)]) = _$CustomInterval;
+  factory CustomInterval([void updates(CustomIntervalBuilder b)]) =
+      _$CustomInterval;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CustomIntervalBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CustomInterval> get serializer => _$CustomIntervalSerializer();
+  static Serializer<CustomInterval> get serializer =>
+      _$CustomIntervalSerializer();
 }
 
-class _$CustomIntervalSerializer implements PrimitiveSerializer<CustomInterval> {
+class _$CustomIntervalSerializer
+    implements PrimitiveSerializer<CustomInterval> {
   @override
   final Iterable<Type> types = const [CustomInterval, _$CustomInterval];
 
@@ -85,7 +89,11 @@ class _$CustomIntervalSerializer implements PrimitiveSerializer<CustomInterval> 
     CustomInterval object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,32 +109,37 @@ class _$CustomIntervalSerializer implements PrimitiveSerializer<CustomInterval> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'offsetSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.offsetSec = valueDes;
           break;
         case r'durationSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.durationSec = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'tz':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tz = valueDes;
           break;
         default:
@@ -157,5 +170,3 @@ class _$CustomIntervalSerializer implements PrimitiveSerializer<CustomInterval> 
     return result.build();
   }
 }
-
-

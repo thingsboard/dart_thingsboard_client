@@ -1,10 +1,28 @@
-# Generated analysis options — excludes generated code from lint
-# Overwritten by tool/generate-client.sh on each regeneration
+# Generated analysis options — overwritten by tool/generate-client.sh on each
+# regeneration.
+#
+# The recommended lints apply to the handwritten code: the facade copied from
+# common/ into lib/src/ (outside lib/src/model/*.dart), the public libraries in
+# lib/, test/ and example/. The generated code is excluded.
+include: package:lints/recommended.yaml
+
 analyzer:
   exclude:
     - lib/src/api/**
-    - lib/src/model/**
+    - lib/src/auth/**
+    - lib/src/model/*.dart
     - lib/src/**/*.g.dart
-    - test/*.dart
+    - lib/src/api.dart
+    - lib/src/api_serializers.dart
+    - lib/src/api_util.dart
+    - lib/src/date_serializer.dart
+    - lib/src/serializers.dart
     - common/**
     - cloud/**
+
+linter:
+  rules:
+    # Public constants of the facade (LatestTelemetry.LATEST_TELEMETRY,
+    # EntityKeyType.ENTITY_FIELD, ...) mirror the server's names; renaming
+    # them would break client code.
+    constant_identifier_names: false

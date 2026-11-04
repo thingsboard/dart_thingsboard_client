@@ -21,7 +21,8 @@ part 'test_sms_request.g.dart';
 /// * [numberTo] - The phone number or other identifier to specify as a recipient of the SMS.
 /// * [message] - The test message
 @BuiltValue()
-abstract class TestSmsRequest implements Built<TestSmsRequest, TestSmsRequestBuilder> {
+abstract class TestSmsRequest
+    implements Built<TestSmsRequest, TestSmsRequestBuilder> {
   /// The SMS provider configuration
   @BuiltValueField(wireName: r'providerConfiguration')
   SmsProviderConfiguration? get providerConfiguration;
@@ -36,16 +37,19 @@ abstract class TestSmsRequest implements Built<TestSmsRequest, TestSmsRequestBui
 
   TestSmsRequest._();
 
-  factory TestSmsRequest([void updates(TestSmsRequestBuilder b)]) = _$TestSmsRequest;
+  factory TestSmsRequest([void updates(TestSmsRequestBuilder b)]) =
+      _$TestSmsRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TestSmsRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TestSmsRequest> get serializer => _$TestSmsRequestSerializer();
+  static Serializer<TestSmsRequest> get serializer =>
+      _$TestSmsRequestSerializer();
 }
 
-class _$TestSmsRequestSerializer implements PrimitiveSerializer<TestSmsRequest> {
+class _$TestSmsRequestSerializer
+    implements PrimitiveSerializer<TestSmsRequest> {
   @override
   final Iterable<Type> types = const [TestSmsRequest, _$TestSmsRequest];
 
@@ -86,7 +90,11 @@ class _$TestSmsRequestSerializer implements PrimitiveSerializer<TestSmsRequest> 
     TestSmsRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +110,34 @@ class _$TestSmsRequestSerializer implements PrimitiveSerializer<TestSmsRequest> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'providerConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SmsProviderConfiguration),
-          ) as SmsProviderConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      SmsProviderConfiguration,
+                    ),
+                  )
+                  as SmsProviderConfiguration?;
           if (valueDes == null) continue;
           result.providerConfiguration = valueDes;
           break;
         case r'numberTo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.numberTo = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
@@ -153,5 +169,3 @@ class _$TestSmsRequestSerializer implements PrimitiveSerializer<TestSmsRequest> 
     return result.build();
   }
 }
-
-

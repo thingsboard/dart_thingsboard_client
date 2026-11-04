@@ -17,12 +17,18 @@ part 'mobile_app_notification_delivery_method_config.g.dart';
 /// MobileAppNotificationDeliveryMethodConfig
 ///
 /// Properties:
-/// * [method] 
-/// * [firebaseServiceAccountCredentialsFileName] 
-/// * [firebaseServiceAccountCredentials] 
-/// * [useSystemSettings] 
+/// * [method]
+/// * [firebaseServiceAccountCredentialsFileName]
+/// * [firebaseServiceAccountCredentials]
+/// * [useSystemSettings]
 @BuiltValue()
-abstract class MobileAppNotificationDeliveryMethodConfig implements NotificationDeliveryMethodConfig, Built<MobileAppNotificationDeliveryMethodConfig, MobileAppNotificationDeliveryMethodConfigBuilder> {
+abstract class MobileAppNotificationDeliveryMethodConfig
+    implements
+        NotificationDeliveryMethodConfig,
+        Built<
+          MobileAppNotificationDeliveryMethodConfig,
+          MobileAppNotificationDeliveryMethodConfigBuilder
+        > {
   @BuiltValueField(wireName: r'useSystemSettings')
   bool? get useSystemSettings;
 
@@ -34,18 +40,26 @@ abstract class MobileAppNotificationDeliveryMethodConfig implements Notification
 
   MobileAppNotificationDeliveryMethodConfig._();
 
-  factory MobileAppNotificationDeliveryMethodConfig([void updates(MobileAppNotificationDeliveryMethodConfigBuilder b)]) = _$MobileAppNotificationDeliveryMethodConfig;
+  factory MobileAppNotificationDeliveryMethodConfig([
+    void updates(MobileAppNotificationDeliveryMethodConfigBuilder b),
+  ]) = _$MobileAppNotificationDeliveryMethodConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MobileAppNotificationDeliveryMethodConfigBuilder b) => b;
+  static void _defaults(MobileAppNotificationDeliveryMethodConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileAppNotificationDeliveryMethodConfig> get serializer => _$MobileAppNotificationDeliveryMethodConfigSerializer();
+  static Serializer<MobileAppNotificationDeliveryMethodConfig> get serializer =>
+      _$MobileAppNotificationDeliveryMethodConfigSerializer();
 }
 
-class _$MobileAppNotificationDeliveryMethodConfigSerializer implements PrimitiveSerializer<MobileAppNotificationDeliveryMethodConfig> {
+class _$MobileAppNotificationDeliveryMethodConfigSerializer
+    implements PrimitiveSerializer<MobileAppNotificationDeliveryMethodConfig> {
   @override
-  final Iterable<Type> types = const [MobileAppNotificationDeliveryMethodConfig, _$MobileAppNotificationDeliveryMethodConfig];
+  final Iterable<Type> types = const [
+    MobileAppNotificationDeliveryMethodConfig,
+    _$MobileAppNotificationDeliveryMethodConfig,
+  ];
 
   @override
   final String wireName = r'MobileAppNotificationDeliveryMethodConfig';
@@ -89,7 +103,11 @@ class _$MobileAppNotificationDeliveryMethodConfigSerializer implements Primitive
     MobileAppNotificationDeliveryMethodConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -105,33 +123,41 @@ class _$MobileAppNotificationDeliveryMethodConfigSerializer implements Primitive
       final value = serializedList[i + 1];
       switch (key) {
         case r'useSystemSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useSystemSettings = valueDes;
           break;
         case r'firebaseServiceAccountCredentialsFileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.firebaseServiceAccountCredentialsFileName = valueDes;
           break;
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'firebaseServiceAccountCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.firebaseServiceAccountCredentials = valueDes;
           break;
@@ -163,5 +189,3 @@ class _$MobileAppNotificationDeliveryMethodConfigSerializer implements Primitive
     return result.build();
   }
 }
-
-

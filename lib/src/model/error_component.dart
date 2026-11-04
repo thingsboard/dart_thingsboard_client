@@ -20,12 +20,13 @@ part 'error_component.g.dart';
 /// ErrorComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [errorMessage] 
-/// * [exception] 
+/// * [subType]
+/// * [type]
+/// * [errorMessage]
+/// * [exception]
 @BuiltValue()
-abstract class ErrorComponent implements ReportComponent, Built<ErrorComponent, ErrorComponentBuilder> {
+abstract class ErrorComponent
+    implements ReportComponent, Built<ErrorComponent, ErrorComponentBuilder> {
   @BuiltValueField(wireName: r'exception')
   ErrorComponentAllOfException? get exception;
 
@@ -34,16 +35,19 @@ abstract class ErrorComponent implements ReportComponent, Built<ErrorComponent, 
 
   ErrorComponent._();
 
-  factory ErrorComponent([void updates(ErrorComponentBuilder b)]) = _$ErrorComponent;
+  factory ErrorComponent([void updates(ErrorComponentBuilder b)]) =
+      _$ErrorComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ErrorComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ErrorComponent> get serializer => _$ErrorComponentSerializer();
+  static Serializer<ErrorComponent> get serializer =>
+      _$ErrorComponentSerializer();
 }
 
-class _$ErrorComponentSerializer implements PrimitiveSerializer<ErrorComponent> {
+class _$ErrorComponentSerializer
+    implements PrimitiveSerializer<ErrorComponent> {
   @override
   final Iterable<Type> types = const [ErrorComponent, _$ErrorComponent];
 
@@ -87,7 +91,11 @@ class _$ErrorComponentSerializer implements PrimitiveSerializer<ErrorComponent> 
     ErrorComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,33 +111,43 @@ class _$ErrorComponentSerializer implements PrimitiveSerializer<ErrorComponent> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'exception':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ErrorComponentAllOfException),
-          ) as ErrorComponentAllOfException?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ErrorComponentAllOfException,
+                    ),
+                  )
+                  as ErrorComponentAllOfException?;
           if (valueDes == null) continue;
           result.exception.replace(valueDes);
           break;
         case r'errorMessage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorMessage = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         default:
@@ -160,5 +178,3 @@ class _$ErrorComponentSerializer implements PrimitiveSerializer<ErrorComponent> 
     return result.build();
   }
 }
-
-

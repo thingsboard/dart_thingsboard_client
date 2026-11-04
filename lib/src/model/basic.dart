@@ -17,9 +17,9 @@ part 'basic.g.dart';
 /// Basic
 ///
 /// Properties:
-/// * [type] 
-/// * [username] 
-/// * [password] 
+/// * [type]
+/// * [username]
+/// * [password]
 @BuiltValue()
 abstract class Basic implements OllamaAuth, Built<Basic, BasicBuilder> {
   @BuiltValueField(wireName: r'password')
@@ -74,7 +74,11 @@ class _$BasicSerializer implements PrimitiveSerializer<Basic> {
     Basic object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,24 +94,30 @@ class _$BasicSerializer implements PrimitiveSerializer<Basic> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'password':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.password = valueDes;
           break;
         case r'username':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.username = valueDes;
           break;
         default:
@@ -138,5 +148,3 @@ class _$BasicSerializer implements PrimitiveSerializer<Basic> {
     return result.build();
   }
 }
-
-

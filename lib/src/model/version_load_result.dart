@@ -19,11 +19,12 @@ part 'version_load_result.g.dart';
 /// VersionLoadResult
 ///
 /// Properties:
-/// * [result] 
-/// * [error] 
-/// * [done] 
+/// * [result]
+/// * [error]
+/// * [done]
 @BuiltValue()
-abstract class VersionLoadResult implements Built<VersionLoadResult, VersionLoadResultBuilder> {
+abstract class VersionLoadResult
+    implements Built<VersionLoadResult, VersionLoadResultBuilder> {
   @BuiltValueField(wireName: r'result')
   BuiltList<EntityTypeLoadResult>? get result;
 
@@ -35,16 +36,19 @@ abstract class VersionLoadResult implements Built<VersionLoadResult, VersionLoad
 
   VersionLoadResult._();
 
-  factory VersionLoadResult([void updates(VersionLoadResultBuilder b)]) = _$VersionLoadResult;
+  factory VersionLoadResult([void updates(VersionLoadResultBuilder b)]) =
+      _$VersionLoadResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(VersionLoadResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<VersionLoadResult> get serializer => _$VersionLoadResultSerializer();
+  static Serializer<VersionLoadResult> get serializer =>
+      _$VersionLoadResultSerializer();
 }
 
-class _$VersionLoadResultSerializer implements PrimitiveSerializer<VersionLoadResult> {
+class _$VersionLoadResultSerializer
+    implements PrimitiveSerializer<VersionLoadResult> {
   @override
   final Iterable<Type> types = const [VersionLoadResult, _$VersionLoadResult];
 
@@ -60,7 +64,9 @@ class _$VersionLoadResultSerializer implements PrimitiveSerializer<VersionLoadRe
       yield r'result';
       yield serializers.serialize(
         object.result,
-        specifiedType: const FullType(BuiltList, [FullType(EntityTypeLoadResult)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(EntityTypeLoadResult),
+        ]),
       );
     }
     if (object.error != null) {
@@ -85,7 +91,11 @@ class _$VersionLoadResultSerializer implements PrimitiveSerializer<VersionLoadRe
     VersionLoadResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +111,34 @@ class _$VersionLoadResultSerializer implements PrimitiveSerializer<VersionLoadRe
       final value = serializedList[i + 1];
       switch (key) {
         case r'result':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityTypeLoadResult)]),
-          ) as BuiltList<EntityTypeLoadResult>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityTypeLoadResult),
+                    ]),
+                  )
+                  as BuiltList<EntityTypeLoadResult>?;
           if (valueDes == null) continue;
           result.result.replace(valueDes);
           break;
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityLoadError),
-          ) as EntityLoadError?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityLoadError),
+                  )
+                  as EntityLoadError?;
           if (valueDes == null) continue;
           result.error.replace(valueDes);
           break;
         case r'done':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.done = valueDes;
           break;
@@ -152,5 +170,3 @@ class _$VersionLoadResultSerializer implements PrimitiveSerializer<VersionLoadRe
     return result.build();
   }
 }
-
-

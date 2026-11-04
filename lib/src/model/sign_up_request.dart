@@ -24,7 +24,8 @@ part 'sign_up_request.g.dart';
 /// * [platform] - For mobile apps only. Mobile app package platform
 /// * [appSecret] - For mobile apps only. Mobile app secret
 @BuiltValue()
-abstract class SignUpRequest implements Built<SignUpRequest, SignUpRequestBuilder> {
+abstract class SignUpRequest
+    implements Built<SignUpRequest, SignUpRequestBuilder> {
   /// List of sign-up form fields
   @BuiltValueField(wireName: r'fields')
   BuiltMap<String, String>? get fields;
@@ -48,13 +49,15 @@ abstract class SignUpRequest implements Built<SignUpRequest, SignUpRequestBuilde
 
   SignUpRequest._();
 
-  factory SignUpRequest([void updates(SignUpRequestBuilder b)]) = _$SignUpRequest;
+  factory SignUpRequest([void updates(SignUpRequestBuilder b)]) =
+      _$SignUpRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SignUpRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SignUpRequest> get serializer => _$SignUpRequestSerializer();
+  static Serializer<SignUpRequest> get serializer =>
+      _$SignUpRequestSerializer();
 }
 
 class _$SignUpRequestSerializer implements PrimitiveSerializer<SignUpRequest> {
@@ -73,7 +76,10 @@ class _$SignUpRequestSerializer implements PrimitiveSerializer<SignUpRequest> {
       yield r'fields';
       yield serializers.serialize(
         object.fields,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(String),
+        ]),
       );
     }
     if (object.recaptchaResponse != null) {
@@ -112,7 +118,11 @@ class _$SignUpRequestSerializer implements PrimitiveSerializer<SignUpRequest> {
     SignUpRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -128,42 +138,55 @@ class _$SignUpRequestSerializer implements PrimitiveSerializer<SignUpRequest> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'fields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(String)]),
-          ) as BuiltMap<String, String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltMap<String, String>?;
           if (valueDes == null) continue;
           result.fields.replace(valueDes);
           break;
         case r'recaptchaResponse':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.recaptchaResponse = valueDes;
           break;
         case r'pkgName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.pkgName = valueDes;
           break;
         case r'platform':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PlatformType),
-          ) as PlatformType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PlatformType),
+                  )
+                  as PlatformType?;
           if (valueDes == null) continue;
           result.platform = valueDes;
           break;
         case r'appSecret':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.appSecret = valueDes;
           break;
@@ -195,5 +218,3 @@ class _$SignUpRequestSerializer implements PrimitiveSerializer<SignUpRequest> {
     return result.build();
   }
 }
-
-

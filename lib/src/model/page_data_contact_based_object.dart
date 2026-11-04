@@ -23,7 +23,9 @@ part 'page_data_contact_based_object.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [totalPages] - Total number of available pages. Calculated based on the 'pageSize' request parameter and total number of entities that match search criteria
 @BuiltValue()
-abstract class PageDataContactBasedObject implements Built<PageDataContactBasedObject, PageDataContactBasedObjectBuilder> {
+abstract class PageDataContactBasedObject
+    implements
+        Built<PageDataContactBasedObject, PageDataContactBasedObjectBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<ContactBasedObject>? get data;
@@ -42,18 +44,25 @@ abstract class PageDataContactBasedObject implements Built<PageDataContactBasedO
 
   PageDataContactBasedObject._();
 
-  factory PageDataContactBasedObject([void updates(PageDataContactBasedObjectBuilder b)]) = _$PageDataContactBasedObject;
+  factory PageDataContactBasedObject([
+    void updates(PageDataContactBasedObjectBuilder b),
+  ]) = _$PageDataContactBasedObject;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataContactBasedObjectBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataContactBasedObject> get serializer => _$PageDataContactBasedObjectSerializer();
+  static Serializer<PageDataContactBasedObject> get serializer =>
+      _$PageDataContactBasedObjectSerializer();
 }
 
-class _$PageDataContactBasedObjectSerializer implements PrimitiveSerializer<PageDataContactBasedObject> {
+class _$PageDataContactBasedObjectSerializer
+    implements PrimitiveSerializer<PageDataContactBasedObject> {
   @override
-  final Iterable<Type> types = const [PageDataContactBasedObject, _$PageDataContactBasedObject];
+  final Iterable<Type> types = const [
+    PageDataContactBasedObject,
+    _$PageDataContactBasedObject,
+  ];
 
   @override
   final String wireName = r'PageDataContactBasedObject';
@@ -67,7 +76,9 @@ class _$PageDataContactBasedObjectSerializer implements PrimitiveSerializer<Page
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(ContactBasedObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(ContactBasedObject),
+        ]),
       );
     }
     if (object.hasNext != null) {
@@ -99,7 +110,11 @@ class _$PageDataContactBasedObjectSerializer implements PrimitiveSerializer<Page
     PageDataContactBasedObject object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +130,44 @@ class _$PageDataContactBasedObjectSerializer implements PrimitiveSerializer<Page
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ContactBasedObject)]),
-          ) as BuiltList<ContactBasedObject>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ContactBasedObject),
+                    ]),
+                  )
+                  as BuiltList<ContactBasedObject>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
@@ -174,5 +199,3 @@ class _$PageDataContactBasedObjectSerializer implements PrimitiveSerializer<Page
     return result.build();
   }
 }
-
-

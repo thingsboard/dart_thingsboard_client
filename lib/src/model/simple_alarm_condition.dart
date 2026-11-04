@@ -19,25 +19,34 @@ part 'simple_alarm_condition.g.dart';
 /// SimpleAlarmCondition
 ///
 /// Properties:
-/// * [expression] 
-/// * [schedule] 
-/// * [type] 
+/// * [expression]
+/// * [schedule]
+/// * [type]
 @BuiltValue()
-abstract class SimpleAlarmCondition implements AlarmCondition, Built<SimpleAlarmCondition, SimpleAlarmConditionBuilder> {
+abstract class SimpleAlarmCondition
+    implements
+        AlarmCondition,
+        Built<SimpleAlarmCondition, SimpleAlarmConditionBuilder> {
   SimpleAlarmCondition._();
 
-  factory SimpleAlarmCondition([void updates(SimpleAlarmConditionBuilder b)]) = _$SimpleAlarmCondition;
+  factory SimpleAlarmCondition([void updates(SimpleAlarmConditionBuilder b)]) =
+      _$SimpleAlarmCondition;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SimpleAlarmConditionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SimpleAlarmCondition> get serializer => _$SimpleAlarmConditionSerializer();
+  static Serializer<SimpleAlarmCondition> get serializer =>
+      _$SimpleAlarmConditionSerializer();
 }
 
-class _$SimpleAlarmConditionSerializer implements PrimitiveSerializer<SimpleAlarmCondition> {
+class _$SimpleAlarmConditionSerializer
+    implements PrimitiveSerializer<SimpleAlarmCondition> {
   @override
-  final Iterable<Type> types = const [SimpleAlarmCondition, _$SimpleAlarmCondition];
+  final Iterable<Type> types = const [
+    SimpleAlarmCondition,
+    _$SimpleAlarmCondition,
+  ];
 
   @override
   final String wireName = r'SimpleAlarmCondition';
@@ -72,7 +81,11 @@ class _$SimpleAlarmConditionSerializer implements PrimitiveSerializer<SimpleAlar
     SimpleAlarmCondition object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,25 +101,33 @@ class _$SimpleAlarmConditionSerializer implements PrimitiveSerializer<SimpleAlar
       final value = serializedList[i + 1];
       switch (key) {
         case r'schedule':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmConditionValueAlarmSchedule),
-          ) as AlarmConditionValueAlarmSchedule?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmConditionValueAlarmSchedule,
+                    ),
+                  )
+                  as AlarmConditionValueAlarmSchedule?;
           if (valueDes == null) continue;
           result.schedule.replace(valueDes);
           break;
         case r'expression':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionExpression),
-          ) as AlarmConditionExpression;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionExpression),
+                  )
+                  as AlarmConditionExpression;
           result.expression = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -137,5 +158,3 @@ class _$SimpleAlarmConditionSerializer implements PrimitiveSerializer<SimpleAlar
     return result.build();
   }
 }
-
-

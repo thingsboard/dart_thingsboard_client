@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -22,12 +21,10 @@ import 'package:thingsboard_client/src/model/entity_view_search_query.dart';
 import 'package:thingsboard_client/src/model/name_conflict_policy.dart';
 import 'package:thingsboard_client/src/model/page_data_entity_view.dart';
 import 'package:thingsboard_client/src/model/page_data_entity_view_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/uniquify_strategy.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class EntityViewControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -48,7 +45,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteEntityView({ 
+  Future<Response<void>> deleteEntityView({
     required String entityViewId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -58,12 +55,19 @@ class EntityViewControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/entityView/{entityViewId}'.replaceAll('{' r'entityViewId' '}', encodeQueryParameter(_serializers, entityViewId, const FullType(String)).toString());
+    final _path = r'/api/entityView/{entityViewId}'.replaceAll(
+      '{'
+      r'entityViewId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityViewId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -71,11 +75,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -97,7 +98,7 @@ class EntityViewControllerApi {
   /// Returns all entity views that are related to the specific entity. The entity id, relation type, entity view types, depth of the search, and other query parameters defined using complex &#39;EntityViewSearchQuery&#39; object. See &#39;Model&#39; tab of the Parameters for more info.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [entityViewSearchQuery] 
+  /// * [entityViewSearchQuery]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -107,7 +108,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityView>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityView>>> findEntityViewsByQuery({ 
+  Future<Response<BuiltList<EntityView>>> findEntityViewsByQuery({
     required EntityViewSearchQuery entityViewSearchQuery,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -116,13 +117,13 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityViewAndEntityViewSearchQuery);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfEntityViewAndEntityViewSearchQuery);
     final _path = r'/api/entityViews';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -130,11 +131,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -146,14 +144,13 @@ class EntityViewControllerApi {
 
     try {
       const _type = FullType(EntityViewSearchQuery);
-      _bodyData = _serializers.serialize(entityViewSearchQuery, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        entityViewSearchQuery,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -173,11 +170,15 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityView)]),
-      ) as BuiltList<EntityView>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityView),
+                  ]),
+                )
+                as BuiltList<EntityView>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -220,7 +221,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityViewInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityViewInfo>> getAllEntityViewInfos({ 
+  Future<Response<PageDataEntityViewInfo>> getAllEntityViewInfos({
     required int pageSize,
     required int page,
     bool? includeCustomers,
@@ -235,13 +236,12 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityViewInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityViewInfo);
     final _path = r'/api/entityViewInfos/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -249,11 +249,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -261,13 +258,42 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -283,11 +309,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityViewInfo),
-      ) as PageDataEntityViewInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityViewInfo),
+                )
+                as PageDataEntityViewInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -331,7 +359,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityViewInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityViewInfo>> getCustomerEntityViewInfos({ 
+  Future<Response<PageDataEntityViewInfo>> getCustomerEntityViewInfos({
     required String customerId,
     required int pageSize,
     required int page,
@@ -347,13 +375,21 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityViewInfo);
-    final _path = r'/api/customer/{customerId}/entityViewInfos'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityViewInfo);
+    final _path = r'/api/customer/{customerId}/entityViewInfos'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -361,11 +397,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -373,13 +406,42 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -395,11 +457,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityViewInfo),
-      ) as PageDataEntityViewInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityViewInfo),
+                )
+                as PageDataEntityViewInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -442,7 +506,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityView>> getCustomerEntityViews({ 
+  Future<Response<PageDataEntityView>> getCustomerEntityViews({
     required String customerId,
     required int pageSize,
     required int page,
@@ -457,13 +521,21 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityView);
-    final _path = r'/api/customer/{customerId}/entityViews'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityView);
+    final _path = r'/api/customer/{customerId}/entityViews'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -471,11 +543,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -483,12 +552,36 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -504,11 +597,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityView),
-      ) as PageDataEntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityView),
+                )
+                as PageDataEntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -545,7 +640,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityView>> getEntityViewById({ 
+  Future<Response<EntityView>> getEntityViewById({
     required String entityViewId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -554,13 +649,21 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityView);
-    final _path = r'/api/entityView/{entityViewId}'.replaceAll('{' r'entityViewId' '}', encodeQueryParameter(_serializers, entityViewId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityView);
+    final _path = r'/api/entityView/{entityViewId}'.replaceAll(
+      '{'
+      r'entityViewId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityViewId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -568,11 +671,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -591,11 +691,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityView),
-      ) as EntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityView),
+                )
+                as EntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -632,7 +734,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityViewInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityViewInfo>> getEntityViewInfoById({ 
+  Future<Response<EntityViewInfo>> getEntityViewInfoById({
     required String entityViewId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -641,13 +743,21 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityViewInfo);
-    final _path = r'/api/entityView/info/{entityViewId}'.replaceAll('{' r'entityViewId' '}', encodeQueryParameter(_serializers, entityViewId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityViewInfo);
+    final _path = r'/api/entityView/info/{entityViewId}'.replaceAll(
+      '{'
+      r'entityViewId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityViewId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -655,11 +765,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -678,11 +785,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityViewInfo),
-      ) as EntityViewInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityViewInfo),
+                )
+                as EntityViewInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -718,7 +827,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntitySubtype>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntitySubtype>>> getEntityViewTypes({ 
+  Future<Response<BuiltList<EntitySubtype>>> getEntityViewTypes({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -726,13 +835,12 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntitySubtype);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntitySubtype);
     final _path = r'/api/entityView/types';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -740,11 +848,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -763,11 +868,15 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntitySubtype)]),
-      ) as BuiltList<EntitySubtype>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntitySubtype),
+                  ]),
+                )
+                as BuiltList<EntitySubtype>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -809,7 +918,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityView>> getEntityViewsByEntityGroupId({ 
+  Future<Response<PageDataEntityView>> getEntityViewsByEntityGroupId({
     required String entityGroupId,
     required String pageSize,
     required String page,
@@ -823,13 +932,21 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityView);
-    final _path = r'/api/entityGroup/{entityGroupId}/entityViews'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityView);
+    final _path = r'/api/entityGroup/{entityGroupId}/entityViews'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -837,11 +954,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -849,11 +963,30 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -869,11 +1002,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityView),
-      ) as PageDataEntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityView),
+                )
+                as PageDataEntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -910,7 +1045,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityView>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityView>>> getEntityViewsByIds({ 
+  Future<Response<BuiltList<EntityView>>> getEntityViewsByIds({
     required BuiltList<String> entityViewIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -919,13 +1054,12 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityView);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityView);
     final _path = r'/api/entityViews/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -933,11 +1067,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -945,7 +1076,12 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'entityViewIds': encodeCollectionQueryParameter<String>(_serializers, entityViewIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'entityViewIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        entityViewIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -961,11 +1097,15 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityView)]),
-      ) as BuiltList<EntityView>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityView),
+                  ]),
+                )
+                as BuiltList<EntityView>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1002,7 +1142,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityView>> getTenantEntityViewByName({ 
+  Future<Response<EntityView>> getTenantEntityViewByName({
     required String entityViewName,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1011,13 +1151,12 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityView);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityView);
     final _path = r'/api/tenant/entityView';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1025,11 +1164,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1037,7 +1173,11 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'entityViewName': encodeQueryParameter(_serializers, entityViewName, const FullType(String)),
+      r'entityViewName': encodeQueryParameter(
+        _serializers,
+        entityViewName,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1053,11 +1193,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityView),
-      ) as EntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityView),
+                )
+                as EntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1099,7 +1241,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityView>> getTenantEntityViews({ 
+  Future<Response<PageDataEntityView>> getTenantEntityViews({
     required int pageSize,
     required int page,
     String? type,
@@ -1113,13 +1255,12 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityView);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityView);
     final _path = r'/api/tenant/entityViews';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1127,11 +1268,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1139,12 +1277,36 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1160,11 +1322,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityView),
-      ) as PageDataEntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityView),
+                )
+                as PageDataEntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1206,7 +1370,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityView>> getUserEntityViews({ 
+  Future<Response<PageDataEntityView>> getUserEntityViews({
     required String pageSize,
     required String page,
     String? type,
@@ -1220,13 +1384,12 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityView);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityView);
     final _path = r'/api/user/entityViews';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1234,11 +1397,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1246,12 +1406,36 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1267,11 +1451,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityView),
-      ) as PageDataEntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityView),
+                )
+                as PageDataEntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1298,8 +1484,8 @@ class EntityViewControllerApi {
   /// Entity Views limit the degree of exposure of the Device or Asset telemetry and attributes to the Customers. Every Entity View references exactly one entity (device or asset) and defines telemetry and attribute keys that will be visible to the assigned Customer. As a Tenant Administrator you are able to create multiple EVs per Device or Asset and assign them to different Customers. See the &#39;Model&#39; tab for more details.Remove &#39;id&#39;, &#39;tenantId&#39; and optionally &#39;customerId&#39; from the request body example (below) to create new Entity View entity.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [entityView] 
-  /// * [entityGroupId] 
+  /// * [entityView]
+  /// * [entityGroupId]
   /// * [entityGroupIds] - A list of entity group ids, separated by comma ','
   /// * [nameConflictPolicy] - Optional value of name conflict policy. Possible values: FAIL or UNIQUIFY.  If omitted, FAIL policy is applied. FAIL policy implies exception will be thrown if an entity with the same name already exists.  UNIQUIFY policy appends a suffix to the entity name, if a name conflict occurs.
   /// * [uniquifySeparator] - Optional value of name suffix separator used by UNIQUIFY policy. By default, underscore separator is used. For example, strategy is UNIQUIFY, separator is '-'; if a name conflict occurs for entity name 'test-name', created entity will have name like 'test-name-7fsh4f'.
@@ -1313,7 +1499,7 @@ class EntityViewControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityView>> saveEntityView({ 
+  Future<Response<EntityView>> saveEntityView({
     required EntityView entityView,
     String? entityGroupId,
     BuiltList<String>? entityGroupIds,
@@ -1327,13 +1513,15 @@ class EntityViewControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityViewAndNameConflictPolicyAndUniquifyStrategy);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(
+          registerEntityViewAndNameConflictPolicyAndUniquifyStrategy,
+        );
     final _path = r'/api/entityView';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1341,11 +1529,8 @@ class EntityViewControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1354,11 +1539,37 @@ class EntityViewControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (entityGroupId != null) r'entityGroupId': encodeQueryParameter(_serializers, entityGroupId, const FullType(String)),
-      if (entityGroupIds != null) r'entityGroupIds': encodeCollectionQueryParameter<String>(_serializers, entityGroupIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (nameConflictPolicy != null) r'nameConflictPolicy': encodeQueryParameter(_serializers, nameConflictPolicy, const FullType(NameConflictPolicy)),
-      if (uniquifySeparator != null) r'uniquifySeparator': encodeQueryParameter(_serializers, uniquifySeparator, const FullType(String)),
-      if (uniquifyStrategy != null) r'uniquifyStrategy': encodeQueryParameter(_serializers, uniquifyStrategy, const FullType(UniquifyStrategy)),
+      if (entityGroupId != null)
+        r'entityGroupId': encodeQueryParameter(
+          _serializers,
+          entityGroupId,
+          const FullType(String),
+        ),
+      if (entityGroupIds != null)
+        r'entityGroupIds': encodeCollectionQueryParameter<String>(
+          _serializers,
+          entityGroupIds,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (nameConflictPolicy != null)
+        r'nameConflictPolicy': encodeQueryParameter(
+          _serializers,
+          nameConflictPolicy,
+          const FullType(NameConflictPolicy),
+        ),
+      if (uniquifySeparator != null)
+        r'uniquifySeparator': encodeQueryParameter(
+          _serializers,
+          uniquifySeparator,
+          const FullType(String),
+        ),
+      if (uniquifyStrategy != null)
+        r'uniquifyStrategy': encodeQueryParameter(
+          _serializers,
+          uniquifyStrategy,
+          const FullType(UniquifyStrategy),
+        ),
     };
 
     dynamic _bodyData;
@@ -1366,10 +1577,9 @@ class EntityViewControllerApi {
     try {
       const _type = FullType(EntityView);
       _bodyData = _serializers.serialize(entityView, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1394,11 +1604,13 @@ class EntityViewControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityView),
-      ) as EntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityView),
+                )
+                as EntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1420,5 +1632,4 @@ class EntityViewControllerApi {
       extra: _response.extra,
     );
   }
-
 }

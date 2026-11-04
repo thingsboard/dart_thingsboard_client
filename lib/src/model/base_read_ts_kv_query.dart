@@ -18,17 +18,18 @@ part 'base_read_ts_kv_query.g.dart';
 /// BaseReadTsKvQuery
 ///
 /// Properties:
-/// * [id] 
-/// * [key] 
-/// * [startTs] 
-/// * [endTs] 
-/// * [aggParameters] 
-/// * [limit] 
-/// * [order] 
-/// * [aggregation] 
-/// * [interval] 
+/// * [id]
+/// * [key]
+/// * [startTs]
+/// * [endTs]
+/// * [aggParameters]
+/// * [limit]
+/// * [order]
+/// * [aggregation]
+/// * [interval]
 @BuiltValue()
-abstract class BaseReadTsKvQuery implements Built<BaseReadTsKvQuery, BaseReadTsKvQueryBuilder> {
+abstract class BaseReadTsKvQuery
+    implements Built<BaseReadTsKvQuery, BaseReadTsKvQueryBuilder> {
   @BuiltValueField(wireName: r'id')
   int? get id;
 
@@ -59,16 +60,19 @@ abstract class BaseReadTsKvQuery implements Built<BaseReadTsKvQuery, BaseReadTsK
 
   BaseReadTsKvQuery._();
 
-  factory BaseReadTsKvQuery([void updates(BaseReadTsKvQueryBuilder b)]) = _$BaseReadTsKvQuery;
+  factory BaseReadTsKvQuery([void updates(BaseReadTsKvQueryBuilder b)]) =
+      _$BaseReadTsKvQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BaseReadTsKvQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BaseReadTsKvQuery> get serializer => _$BaseReadTsKvQuerySerializer();
+  static Serializer<BaseReadTsKvQuery> get serializer =>
+      _$BaseReadTsKvQuerySerializer();
 }
 
-class _$BaseReadTsKvQuerySerializer implements PrimitiveSerializer<BaseReadTsKvQuery> {
+class _$BaseReadTsKvQuerySerializer
+    implements PrimitiveSerializer<BaseReadTsKvQuery> {
   @override
   final Iterable<Type> types = const [BaseReadTsKvQuery, _$BaseReadTsKvQuery];
 
@@ -151,7 +155,11 @@ class _$BaseReadTsKvQuerySerializer implements PrimitiveSerializer<BaseReadTsKvQ
     BaseReadTsKvQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -167,74 +175,92 @@ class _$BaseReadTsKvQuerySerializer implements PrimitiveSerializer<BaseReadTsKvQ
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'startTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startTs = valueDes;
           break;
         case r'endTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endTs = valueDes;
           break;
         case r'aggParameters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AggregationParams),
-          ) as AggregationParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AggregationParams),
+                  )
+                  as AggregationParams?;
           if (valueDes == null) continue;
           result.aggParameters.replace(valueDes);
           break;
         case r'limit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.limit = valueDes;
           break;
         case r'order':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.order = valueDes;
           break;
         case r'aggregation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Aggregation),
-          ) as Aggregation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Aggregation),
+                  )
+                  as Aggregation?;
           if (valueDes == null) continue;
           result.aggregation = valueDes;
           break;
         case r'interval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.interval = valueDes;
           break;
@@ -266,5 +292,3 @@ class _$BaseReadTsKvQuerySerializer implements PrimitiveSerializer<BaseReadTsKvQ
     return result.build();
   }
 }
-
-

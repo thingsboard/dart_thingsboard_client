@@ -17,14 +17,15 @@ part 'slack_conversation.g.dart';
 /// SlackConversation
 ///
 /// Properties:
-/// * [type] 
-/// * [id] 
-/// * [name] 
-/// * [wholeName] 
-/// * [email] 
-/// * [title] 
+/// * [type]
+/// * [id]
+/// * [name]
+/// * [wholeName]
+/// * [email]
+/// * [title]
 @BuiltValue()
-abstract class SlackConversation implements Built<SlackConversation, SlackConversationBuilder> {
+abstract class SlackConversation
+    implements Built<SlackConversation, SlackConversationBuilder> {
   @BuiltValueField(wireName: r'type')
   SlackConversationType get type;
   // enum typeEnum {  DIRECT,  PUBLIC_CHANNEL,  PRIVATE_CHANNEL,  };
@@ -46,16 +47,19 @@ abstract class SlackConversation implements Built<SlackConversation, SlackConver
 
   SlackConversation._();
 
-  factory SlackConversation([void updates(SlackConversationBuilder b)]) = _$SlackConversation;
+  factory SlackConversation([void updates(SlackConversationBuilder b)]) =
+      _$SlackConversation;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SlackConversationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SlackConversation> get serializer => _$SlackConversationSerializer();
+  static Serializer<SlackConversation> get serializer =>
+      _$SlackConversationSerializer();
 }
 
-class _$SlackConversationSerializer implements PrimitiveSerializer<SlackConversation> {
+class _$SlackConversationSerializer
+    implements PrimitiveSerializer<SlackConversation> {
   @override
   final Iterable<Type> types = const [SlackConversation, _$SlackConversation];
 
@@ -111,7 +115,11 @@ class _$SlackConversationSerializer implements PrimitiveSerializer<SlackConversa
     SlackConversation object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -127,47 +135,59 @@ class _$SlackConversationSerializer implements PrimitiveSerializer<SlackConversa
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SlackConversationType),
-          ) as SlackConversationType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SlackConversationType),
+                  )
+                  as SlackConversationType;
           result.type = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'wholeName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.wholeName = valueDes;
           break;
         case r'email':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.email = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
@@ -199,5 +219,3 @@ class _$SlackConversationSerializer implements PrimitiveSerializer<SlackConversa
     return result.build();
   }
 }
-
-

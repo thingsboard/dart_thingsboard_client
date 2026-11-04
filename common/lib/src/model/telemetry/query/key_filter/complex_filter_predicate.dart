@@ -9,7 +9,8 @@ enum ComplexOperation { AND, OR }
 
 ComplexOperation complexOperationFromString(String value) {
   return ComplexOperation.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension ComplexOperationToString on ComplexOperation {

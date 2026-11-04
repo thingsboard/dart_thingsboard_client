@@ -19,9 +19,9 @@ part 'alarm_schedule.g.dart';
 /// AlarmSchedule
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class AlarmSchedule  {
+abstract class AlarmSchedule {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -34,36 +34,38 @@ abstract class AlarmSchedule  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmSchedule> get serializer => _$AlarmScheduleSerializer();
+  static Serializer<AlarmSchedule> get serializer =>
+      _$AlarmScheduleSerializer();
 }
 
 extension AlarmScheduleDiscriminatorExt on AlarmSchedule {
-    String? get discriminatorValue {
-        if (this is AnyTimeSchedule) {
-            return r'ANY_TIME';
-        }
-        if (this is CustomTimeSchedule) {
-            return r'CUSTOM';
-        }
-        if (this is SpecificTimeSchedule) {
-            return r'SPECIFIC_TIME';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AnyTimeSchedule) {
+      return r'ANY_TIME';
     }
+    if (this is CustomTimeSchedule) {
+      return r'CUSTOM';
+    }
+    if (this is SpecificTimeSchedule) {
+      return r'SPECIFIC_TIME';
+    }
+    return null;
+  }
 }
+
 extension AlarmScheduleBuilderDiscriminatorExt on AlarmScheduleBuilder {
-    String? get discriminatorValue {
-        if (this is AnyTimeScheduleBuilder) {
-            return r'ANY_TIME';
-        }
-        if (this is CustomTimeScheduleBuilder) {
-            return r'CUSTOM';
-        }
-        if (this is SpecificTimeScheduleBuilder) {
-            return r'SPECIFIC_TIME';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AnyTimeScheduleBuilder) {
+      return r'ANY_TIME';
     }
+    if (this is CustomTimeScheduleBuilder) {
+      return r'CUSTOM';
+    }
+    if (this is SpecificTimeScheduleBuilder) {
+      return r'SPECIFIC_TIME';
+    }
+    return null;
+  }
 }
 
 class _$AlarmScheduleSerializer implements PrimitiveSerializer<AlarmSchedule> {
@@ -92,15 +94,28 @@ class _$AlarmScheduleSerializer implements PrimitiveSerializer<AlarmSchedule> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AnyTimeSchedule) {
-      return serializers.serialize(object, specifiedType: FullType(AnyTimeSchedule))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AnyTimeSchedule),
+      )!;
     }
     if (object is CustomTimeSchedule) {
-      return serializers.serialize(object, specifiedType: FullType(CustomTimeSchedule))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CustomTimeSchedule),
+      )!;
     }
     if (object is SpecificTimeSchedule) {
-      return serializers.serialize(object, specifiedType: FullType(SpecificTimeSchedule))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SpecificTimeSchedule),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -110,37 +125,62 @@ class _$AlarmScheduleSerializer implements PrimitiveSerializer<AlarmSchedule> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(AlarmSchedule.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(AlarmSchedule.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'ANY_TIME':
-        return serializers.deserialize(serialized, specifiedType: FullType(AnyTimeSchedule)) as AnyTimeSchedule;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AnyTimeSchedule),
+            )
+            as AnyTimeSchedule;
       case r'CUSTOM':
-        return serializers.deserialize(serialized, specifiedType: FullType(CustomTimeSchedule)) as CustomTimeSchedule;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CustomTimeSchedule),
+            )
+            as CustomTimeSchedule;
       case r'SPECIFIC_TIME':
-        return serializers.deserialize(serialized, specifiedType: FullType(SpecificTimeSchedule)) as SpecificTimeSchedule;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SpecificTimeSchedule),
+            )
+            as SpecificTimeSchedule;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($AlarmSchedule)) as $AlarmSchedule;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($AlarmSchedule),
+            )
+            as $AlarmSchedule;
     }
   }
 }
 
-
 /// a concrete implementation of [AlarmSchedule], since [AlarmSchedule] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $AlarmSchedule implements AlarmSchedule, Built<$AlarmSchedule, $AlarmScheduleBuilder> {
+abstract class $AlarmSchedule
+    implements AlarmSchedule, Built<$AlarmSchedule, $AlarmScheduleBuilder> {
   $AlarmSchedule._();
 
-  factory $AlarmSchedule([void Function($AlarmScheduleBuilder)? updates]) = _$$AlarmSchedule;
+  factory $AlarmSchedule([void Function($AlarmScheduleBuilder)? updates]) =
+      _$$AlarmSchedule;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($AlarmScheduleBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$AlarmSchedule> get serializer => _$$AlarmScheduleSerializer();
+  static Serializer<$AlarmSchedule> get serializer =>
+      _$$AlarmScheduleSerializer();
 }
 
-class _$$AlarmScheduleSerializer implements PrimitiveSerializer<$AlarmSchedule> {
+class _$$AlarmScheduleSerializer
+    implements PrimitiveSerializer<$AlarmSchedule> {
   @override
   final Iterable<Type> types = const [$AlarmSchedule, _$$AlarmSchedule];
 
@@ -153,7 +193,10 @@ class _$$AlarmScheduleSerializer implements PrimitiveSerializer<$AlarmSchedule> 
     $AlarmSchedule object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(AlarmSchedule))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(AlarmSchedule),
+    )!;
   }
 
   void _deserializeProperties(
@@ -169,10 +212,12 @@ class _$$AlarmScheduleSerializer implements PrimitiveSerializer<$AlarmSchedule> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -203,4 +248,3 @@ class _$$AlarmScheduleSerializer implements PrimitiveSerializer<$AlarmSchedule> 
     return result.build();
   }
 }
-

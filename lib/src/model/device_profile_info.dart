@@ -23,13 +23,14 @@ part 'device_profile_info.g.dart';
 /// Properties:
 /// * [id] - JSON object with the Device Profile Id.
 /// * [name] - Entity Name
-/// * [image] - Either URL or Base64 data of the icon. Used in the mobile application to visualize set of device profiles in the grid view. 
+/// * [image] - Either URL or Base64 data of the icon. Used in the mobile application to visualize set of device profiles in the grid view.
 /// * [defaultDashboardId] - Reference to the dashboard. Used in the mobile application to open the default dashboard when user navigates to device details.
 /// * [type] - Type of the profile. Always 'DEFAULT' for now. Reserved for future use.
 /// * [transportType] - Type of the transport used to connect the device. Default transport supports HTTP, CoAP and MQTT.
 /// * [tenantId] - Tenant id.
 @BuiltValue()
-abstract class DeviceProfileInfo implements Built<DeviceProfileInfo, DeviceProfileInfoBuilder> {
+abstract class DeviceProfileInfo
+    implements Built<DeviceProfileInfo, DeviceProfileInfoBuilder> {
   /// JSON object with the Device Profile Id.
   @BuiltValueField(wireName: r'id')
   DeviceProfileId? get id;
@@ -38,7 +39,7 @@ abstract class DeviceProfileInfo implements Built<DeviceProfileInfo, DeviceProfi
   @BuiltValueField(wireName: r'name')
   String? get name;
 
-  /// Either URL or Base64 data of the icon. Used in the mobile application to visualize set of device profiles in the grid view. 
+  /// Either URL or Base64 data of the icon. Used in the mobile application to visualize set of device profiles in the grid view.
   @BuiltValueField(wireName: r'image')
   String? get image;
 
@@ -62,16 +63,19 @@ abstract class DeviceProfileInfo implements Built<DeviceProfileInfo, DeviceProfi
 
   DeviceProfileInfo._();
 
-  factory DeviceProfileInfo([void updates(DeviceProfileInfoBuilder b)]) = _$DeviceProfileInfo;
+  factory DeviceProfileInfo([void updates(DeviceProfileInfoBuilder b)]) =
+      _$DeviceProfileInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceProfileInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceProfileInfo> get serializer => _$DeviceProfileInfoSerializer();
+  static Serializer<DeviceProfileInfo> get serializer =>
+      _$DeviceProfileInfoSerializer();
 }
 
-class _$DeviceProfileInfoSerializer implements PrimitiveSerializer<DeviceProfileInfo> {
+class _$DeviceProfileInfoSerializer
+    implements PrimitiveSerializer<DeviceProfileInfo> {
   @override
   final Iterable<Type> types = const [DeviceProfileInfo, _$DeviceProfileInfo];
 
@@ -140,7 +144,11 @@ class _$DeviceProfileInfoSerializer implements PrimitiveSerializer<DeviceProfile
     DeviceProfileInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -156,58 +164,72 @@ class _$DeviceProfileInfoSerializer implements PrimitiveSerializer<DeviceProfile
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceProfileId),
-          ) as DeviceProfileId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DeviceProfileId),
+                  )
+                  as DeviceProfileId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'image':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.image = valueDes;
           break;
         case r'defaultDashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DashboardId),
-          ) as DashboardId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DashboardId),
+                  )
+                  as DashboardId?;
           if (valueDes == null) continue;
           result.defaultDashboardId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceProfileType),
-          ) as DeviceProfileType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DeviceProfileType),
+                  )
+                  as DeviceProfileType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'transportType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceTransportType),
-          ) as DeviceTransportType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DeviceTransportType),
+                  )
+                  as DeviceTransportType?;
           if (valueDes == null) continue;
           result.transportType = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
@@ -239,5 +261,3 @@ class _$DeviceProfileInfoSerializer implements PrimitiveSerializer<DeviceProfile
     return result.build();
   }
 }
-
-

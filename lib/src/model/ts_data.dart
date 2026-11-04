@@ -74,7 +74,11 @@ class _$TsDataSerializer implements PrimitiveSerializer<TsData> {
     TsData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,18 +94,22 @@ class _$TsDataSerializer implements PrimitiveSerializer<TsData> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'ts':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.ts = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
@@ -133,5 +141,3 @@ class _$TsDataSerializer implements PrimitiveSerializer<TsData> {
     return result.build();
   }
 }
-
-

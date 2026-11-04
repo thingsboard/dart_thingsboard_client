@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'resource.g.dart';
 
 class Resource extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ALL')
   static const Resource ALL = _$ALL;
   @BuiltValueEnumConst(wireName: r'PROFILE')
@@ -55,7 +54,8 @@ class Resource extends EnumClass {
   @BuiltValueEnumConst(wireName: r'MOBILE_APP_BUNDLE')
   static const Resource MOBILE_APP_BUNDLE = _$MOBILE_APP_BUNDLE;
   @BuiltValueEnumConst(wireName: r'OAUTH2_CONFIGURATION_TEMPLATE')
-  static const Resource OAUTH2_CONFIGURATION_TEMPLATE = _$OAUTH2_CONFIGURATION_TEMPLATE;
+  static const Resource OAUTH2_CONFIGURATION_TEMPLATE =
+      _$OAUTH2_CONFIGURATION_TEMPLATE;
   @BuiltValueEnumConst(wireName: r'TENANT_PROFILE')
   static const Resource TENANT_PROFILE = _$TENANT_PROFILE;
   @BuiltValueEnumConst(wireName: r'DEVICE_PROFILE')
@@ -137,7 +137,7 @@ class Resource extends EnumClass {
 
   static Serializer<Resource> get serializer => _$resourceSerializer;
 
-  const Resource._(String name): super(name);
+  const Resource._(String name) : super(name);
 
   static BuiltSet<Resource> get values => _$values;
   static Resource valueOf(String name) => _$valueOf(name);
@@ -150,4 +150,3 @@ class Resource extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ResourceMixin = Object with _$ResourceMixin;
-

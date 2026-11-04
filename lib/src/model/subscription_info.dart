@@ -16,45 +16,46 @@ part 'subscription_info.g.dart';
 /// SubscriptionInfo
 ///
 /// Properties:
-/// * [subscriptionId] 
-/// * [subscriptionPlanName] 
-/// * [planUiType] 
-/// * [currentPeriodStartTs] 
-/// * [currentPeriodEndTs] 
-/// * [endTs] 
-/// * [upcomingInvoiceDate] 
-/// * [upcomingInvoiceAmountDue] 
-/// * [planExtraDeviceEnabled] 
-/// * [planEdgeEnabled] 
-/// * [planExtraEdgeEnabled] 
-/// * [planTrendzEnabled] 
-/// * [planExtraAiCreditsEnabled] 
-/// * [planExtraInstanceEnabled] 
-/// * [planExtraAgentEnabled] 
-/// * [dataTs] 
-/// * [licenseServerEndpoint] 
-/// * [maxDevices] 
-/// * [maxAssets] 
-/// * [maxEdges] 
-/// * [maxAgents] 
-/// * [maxInstances] 
-/// * [maxAiCredits] 
-/// * [whiteLabelingEnabled] 
-/// * [edgeEnabled] 
-/// * [trendzEnabled] 
-/// * [development] 
-/// * [nonProduction] 
-/// * [devicesCount] 
-/// * [assetsCount] 
-/// * [edgesCount] 
-/// * [agentsCount] 
-/// * [instancesCount] 
-/// * [usedAiCredits] 
-/// * [communityGrantLicense] 
-/// * [offline] 
-/// * [perpetual] 
+/// * [subscriptionId]
+/// * [subscriptionPlanName]
+/// * [planUiType]
+/// * [currentPeriodStartTs]
+/// * [currentPeriodEndTs]
+/// * [endTs]
+/// * [upcomingInvoiceDate]
+/// * [upcomingInvoiceAmountDue]
+/// * [planExtraDeviceEnabled]
+/// * [planEdgeEnabled]
+/// * [planExtraEdgeEnabled]
+/// * [planTrendzEnabled]
+/// * [planExtraAiCreditsEnabled]
+/// * [planExtraInstanceEnabled]
+/// * [planExtraAgentEnabled]
+/// * [dataTs]
+/// * [licenseServerEndpoint]
+/// * [maxDevices]
+/// * [maxAssets]
+/// * [maxEdges]
+/// * [maxAgents]
+/// * [maxInstances]
+/// * [maxAiCredits]
+/// * [whiteLabelingEnabled]
+/// * [edgeEnabled]
+/// * [trendzEnabled]
+/// * [development]
+/// * [nonProduction]
+/// * [devicesCount]
+/// * [assetsCount]
+/// * [edgesCount]
+/// * [agentsCount]
+/// * [instancesCount]
+/// * [usedAiCredits]
+/// * [communityGrantLicense]
+/// * [offline]
+/// * [perpetual]
 @BuiltValue()
-abstract class SubscriptionInfo implements Built<SubscriptionInfo, SubscriptionInfoBuilder> {
+abstract class SubscriptionInfo
+    implements Built<SubscriptionInfo, SubscriptionInfoBuilder> {
   @BuiltValueField(wireName: r'subscriptionId')
   String? get subscriptionId;
 
@@ -168,16 +169,19 @@ abstract class SubscriptionInfo implements Built<SubscriptionInfo, SubscriptionI
 
   SubscriptionInfo._();
 
-  factory SubscriptionInfo([void updates(SubscriptionInfoBuilder b)]) = _$SubscriptionInfo;
+  factory SubscriptionInfo([void updates(SubscriptionInfoBuilder b)]) =
+      _$SubscriptionInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SubscriptionInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SubscriptionInfo> get serializer => _$SubscriptionInfoSerializer();
+  static Serializer<SubscriptionInfo> get serializer =>
+      _$SubscriptionInfoSerializer();
 }
 
-class _$SubscriptionInfoSerializer implements PrimitiveSerializer<SubscriptionInfo> {
+class _$SubscriptionInfoSerializer
+    implements PrimitiveSerializer<SubscriptionInfo> {
   @override
   final Iterable<Type> types = const [SubscriptionInfo, _$SubscriptionInfo];
 
@@ -456,7 +460,11 @@ class _$SubscriptionInfoSerializer implements PrimitiveSerializer<SubscriptionIn
     SubscriptionInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -472,298 +480,372 @@ class _$SubscriptionInfoSerializer implements PrimitiveSerializer<SubscriptionIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'subscriptionId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.subscriptionId = valueDes;
           break;
         case r'subscriptionPlanName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.subscriptionPlanName = valueDes;
           break;
         case r'planUiType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.planUiType = valueDes;
           break;
         case r'currentPeriodStartTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.currentPeriodStartTs = valueDes;
           break;
         case r'currentPeriodEndTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.currentPeriodEndTs = valueDes;
           break;
         case r'endTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endTs = valueDes;
           break;
         case r'upcomingInvoiceDate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.upcomingInvoiceDate = valueDes;
           break;
         case r'upcomingInvoiceAmountDue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.upcomingInvoiceAmountDue = valueDes;
           break;
         case r'planExtraDeviceEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.planExtraDeviceEnabled = valueDes;
           break;
         case r'planEdgeEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.planEdgeEnabled = valueDes;
           break;
         case r'planExtraEdgeEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.planExtraEdgeEnabled = valueDes;
           break;
         case r'planTrendzEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.planTrendzEnabled = valueDes;
           break;
         case r'planExtraAiCreditsEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.planExtraAiCreditsEnabled = valueDes;
           break;
         case r'planExtraInstanceEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.planExtraInstanceEnabled = valueDes;
           break;
         case r'planExtraAgentEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.planExtraAgentEnabled = valueDes;
           break;
         case r'dataTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.dataTs = valueDes;
           break;
         case r'licenseServerEndpoint':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.licenseServerEndpoint = valueDes;
           break;
         case r'maxDevices':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxDevices = valueDes;
           break;
         case r'maxAssets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAssets = valueDes;
           break;
         case r'maxEdges':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxEdges = valueDes;
           break;
         case r'maxAgents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAgents = valueDes;
           break;
         case r'maxInstances':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxInstances = valueDes;
           break;
         case r'maxAiCredits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAiCredits = valueDes;
           break;
         case r'whiteLabelingEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.whiteLabelingEnabled = valueDes;
           break;
         case r'edgeEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.edgeEnabled = valueDes;
           break;
         case r'trendzEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.trendzEnabled = valueDes;
           break;
         case r'development':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.development = valueDes;
           break;
         case r'nonProduction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.nonProduction = valueDes;
           break;
         case r'devicesCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.devicesCount = valueDes;
           break;
         case r'assetsCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.assetsCount = valueDes;
           break;
         case r'edgesCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.edgesCount = valueDes;
           break;
         case r'agentsCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.agentsCount = valueDes;
           break;
         case r'instancesCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.instancesCount = valueDes;
           break;
         case r'usedAiCredits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.usedAiCredits = valueDes;
           break;
         case r'communityGrantLicense':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.communityGrantLicense = valueDes;
           break;
         case r'offline':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.offline = valueDes;
           break;
         case r'perpetual':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.perpetual = valueDes;
           break;
@@ -795,5 +877,3 @@ class _$SubscriptionInfoSerializer implements PrimitiveSerializer<SubscriptionIn
     return result.build();
   }
 }
-
-

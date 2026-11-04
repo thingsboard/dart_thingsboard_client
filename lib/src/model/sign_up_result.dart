@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'sign_up_result.g.dart';
 
 class SignUpResult extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SUCCESS')
   static const SignUpResult SUCCESS = _$SUCCESS;
   @BuiltValueEnumConst(wireName: r'INACTIVE_USER_EXISTS')
@@ -25,7 +24,7 @@ class SignUpResult extends EnumClass {
 
   static Serializer<SignUpResult> get serializer => _$signUpResultSerializer;
 
-  const SignUpResult._(String name): super(name);
+  const SignUpResult._(String name) : super(name);
 
   static BuiltSet<SignUpResult> get values => _$values;
   static SignUpResult valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class SignUpResult extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class SignUpResultMixin = Object with _$SignUpResultMixin;
-

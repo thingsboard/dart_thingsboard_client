@@ -32,7 +32,8 @@ part 'blob_entity_info.g.dart';
 /// * [contentType] - blob content type
 /// * [ownerId] - JSON object with Customer or Tenant Id
 @BuiltValue()
-abstract class BlobEntityInfo implements Built<BlobEntityInfo, BlobEntityInfoBuilder> {
+abstract class BlobEntityInfo
+    implements Built<BlobEntityInfo, BlobEntityInfoBuilder> {
   /// JSON object with the blob entity Id. Referencing non-existing blob entity Id will cause error
   @BuiltValueField(wireName: r'id')
   BlobEntityId? get id;
@@ -72,16 +73,19 @@ abstract class BlobEntityInfo implements Built<BlobEntityInfo, BlobEntityInfoBui
 
   BlobEntityInfo._();
 
-  factory BlobEntityInfo([void updates(BlobEntityInfoBuilder b)]) = _$BlobEntityInfo;
+  factory BlobEntityInfo([void updates(BlobEntityInfoBuilder b)]) =
+      _$BlobEntityInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BlobEntityInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BlobEntityInfo> get serializer => _$BlobEntityInfoSerializer();
+  static Serializer<BlobEntityInfo> get serializer =>
+      _$BlobEntityInfoSerializer();
 }
 
-class _$BlobEntityInfoSerializer implements PrimitiveSerializer<BlobEntityInfo> {
+class _$BlobEntityInfoSerializer
+    implements PrimitiveSerializer<BlobEntityInfo> {
   @override
   final Iterable<Type> types = const [BlobEntityInfo, _$BlobEntityInfo];
 
@@ -164,7 +168,11 @@ class _$BlobEntityInfoSerializer implements PrimitiveSerializer<BlobEntityInfo> 
     BlobEntityInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -180,74 +188,94 @@ class _$BlobEntityInfoSerializer implements PrimitiveSerializer<BlobEntityInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BlobEntityId),
-          ) as BlobEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BlobEntityId),
+                  )
+                  as BlobEntityId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'contentType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BlobEntityInfoContentTypeEnum),
-          ) as BlobEntityInfoContentTypeEnum?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      BlobEntityInfoContentTypeEnum,
+                    ),
+                  )
+                  as BlobEntityInfoContentTypeEnum?;
           if (valueDes == null) continue;
           result.contentType = valueDes;
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
@@ -280,24 +308,28 @@ class _$BlobEntityInfoSerializer implements PrimitiveSerializer<BlobEntityInfo> 
   }
 }
 
-
 /// blob content type
 class BlobEntityInfoContentTypeEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'application/pdf')
-  static const BlobEntityInfoContentTypeEnum applicationSlashPdf = _$blobEntityInfoContentTypeEnum_applicationSlashPdf;
+  static const BlobEntityInfoContentTypeEnum applicationSlashPdf =
+      _$blobEntityInfoContentTypeEnum_applicationSlashPdf;
   @BuiltValueEnumConst(wireName: r'image/jpeg')
-  static const BlobEntityInfoContentTypeEnum imageSlashJpeg = _$blobEntityInfoContentTypeEnum_imageSlashJpeg;
+  static const BlobEntityInfoContentTypeEnum imageSlashJpeg =
+      _$blobEntityInfoContentTypeEnum_imageSlashJpeg;
   @BuiltValueEnumConst(wireName: r'image/png')
-  static const BlobEntityInfoContentTypeEnum imageSlashPng = _$blobEntityInfoContentTypeEnum_imageSlashPng;
+  static const BlobEntityInfoContentTypeEnum imageSlashPng =
+      _$blobEntityInfoContentTypeEnum_imageSlashPng;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const BlobEntityInfoContentTypeEnum unknownDefaultOpenApi = _$blobEntityInfoContentTypeEnum_unknownDefaultOpenApi;
+  static const BlobEntityInfoContentTypeEnum unknownDefaultOpenApi =
+      _$blobEntityInfoContentTypeEnum_unknownDefaultOpenApi;
 
-  static Serializer<BlobEntityInfoContentTypeEnum> get serializer => _$blobEntityInfoContentTypeEnumSerializer;
+  static Serializer<BlobEntityInfoContentTypeEnum> get serializer =>
+      _$blobEntityInfoContentTypeEnumSerializer;
 
-  const BlobEntityInfoContentTypeEnum._(String name): super(name);
+  const BlobEntityInfoContentTypeEnum._(String name) : super(name);
 
-  static BuiltSet<BlobEntityInfoContentTypeEnum> get values => _$blobEntityInfoContentTypeEnumValues;
-  static BlobEntityInfoContentTypeEnum valueOf(String name) => _$blobEntityInfoContentTypeEnumValueOf(name);
+  static BuiltSet<BlobEntityInfoContentTypeEnum> get values =>
+      _$blobEntityInfoContentTypeEnumValues;
+  static BlobEntityInfoContentTypeEnum valueOf(String name) =>
+      _$blobEntityInfoContentTypeEnumValueOf(name);
 }
-

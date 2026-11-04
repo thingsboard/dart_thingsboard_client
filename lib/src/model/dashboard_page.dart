@@ -18,13 +18,14 @@ part 'dashboard_page.g.dart';
 /// DashboardPage
 ///
 /// Properties:
-/// * [type] 
-/// * [visible] 
+/// * [type]
+/// * [visible]
 /// * [label] - Page label
 /// * [icon] - URL of the page icon
 /// * [dashboardId] - Dashboard id
 @BuiltValue()
-abstract class DashboardPage implements MobilePage, Built<DashboardPage, DashboardPageBuilder> {
+abstract class DashboardPage
+    implements MobilePage, Built<DashboardPage, DashboardPageBuilder> {
   /// Dashboard id
   @BuiltValueField(wireName: r'dashboardId')
   String? get dashboardId;
@@ -39,13 +40,15 @@ abstract class DashboardPage implements MobilePage, Built<DashboardPage, Dashboa
 
   DashboardPage._();
 
-  factory DashboardPage([void updates(DashboardPageBuilder b)]) = _$DashboardPage;
+  factory DashboardPage([void updates(DashboardPageBuilder b)]) =
+      _$DashboardPage;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DashboardPageBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DashboardPage> get serializer => _$DashboardPageSerializer();
+  static Serializer<DashboardPage> get serializer =>
+      _$DashboardPageSerializer();
 }
 
 class _$DashboardPageSerializer implements PrimitiveSerializer<DashboardPage> {
@@ -101,7 +104,11 @@ class _$DashboardPageSerializer implements PrimitiveSerializer<DashboardPage> {
     DashboardPage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -117,41 +124,51 @@ class _$DashboardPageSerializer implements PrimitiveSerializer<DashboardPage> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'icon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.icon = valueDes;
           break;
         case r'label':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.label = valueDes;
           break;
         case r'visible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.visible = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MobilePageType),
-          ) as MobilePageType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MobilePageType),
+                  )
+                  as MobilePageType;
           result.type = valueDes;
           break;
         case r'dashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.dashboardId = valueDes;
           break;
@@ -183,5 +200,3 @@ class _$DashboardPageSerializer implements PrimitiveSerializer<DashboardPage> {
     return result.build();
   }
 }
-
-

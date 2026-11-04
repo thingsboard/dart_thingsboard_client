@@ -16,9 +16,9 @@ part 'store_info.g.dart';
 /// StoreInfo
 ///
 /// Properties:
-/// * [appId] 
-/// * [sha256CertFingerprints] 
-/// * [storeLink] 
+/// * [appId]
+/// * [sha256CertFingerprints]
+/// * [storeLink]
 @BuiltValue()
 abstract class StoreInfo implements Built<StoreInfo, StoreInfoBuilder> {
   @BuiltValueField(wireName: r'appId')
@@ -82,7 +82,11 @@ class _$StoreInfoSerializer implements PrimitiveSerializer<StoreInfo> {
     StoreInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +102,32 @@ class _$StoreInfoSerializer implements PrimitiveSerializer<StoreInfo> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'appId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.appId = valueDes;
           break;
         case r'sha256CertFingerprints':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.sha256CertFingerprints = valueDes;
           break;
         case r'storeLink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.storeLink = valueDes;
           break;
@@ -149,5 +159,3 @@ class _$StoreInfoSerializer implements PrimitiveSerializer<StoreInfo> {
     return result.build();
   }
 }
-
-

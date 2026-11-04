@@ -24,17 +24,17 @@ part 'job.g.dart';
 /// Job
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
-/// * [tenantId] 
-/// * [customerId] 
-/// * [type] 
-/// * [key] 
-/// * [entityId] 
-/// * [entityName] 
-/// * [status] 
-/// * [configuration] 
-/// * [result] 
+/// * [tenantId]
+/// * [customerId]
+/// * [type]
+/// * [key]
+/// * [entityId]
+/// * [entityName]
+/// * [status]
+/// * [configuration]
+/// * [result]
 /// * [ownerId] - JSON object with Customer or Tenant Id
 @BuiltValue()
 abstract class Job implements Built<Job, JobBuilder> {
@@ -179,7 +179,11 @@ class _$JobSerializer implements PrimitiveSerializer<Job> {
     Job object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -195,91 +199,115 @@ class _$JobSerializer implements PrimitiveSerializer<Job> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JobId),
-          ) as JobId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JobId),
+                  )
+                  as JobId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TenantId),
-          ) as TenantId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TenantId),
+                  )
+                  as TenantId;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(JobType),
-          ) as JobType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(JobType),
+                  )
+                  as JobType;
           result.type = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.key = valueDes;
           break;
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityId),
-          ) as EntityId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityId),
+                  )
+                  as EntityId;
           result.entityId = valueDes;
           break;
         case r'entityName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityName = valueDes;
           break;
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(JobStatus),
-          ) as JobStatus;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(JobStatus),
+                  )
+                  as JobStatus;
           result.status = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(JobConfiguration),
-          ) as JobConfiguration;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(JobConfiguration),
+                  )
+                  as JobConfiguration;
           result.configuration = valueDes;
           break;
         case r'result':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(JobResult),
-          ) as JobResult;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(JobResult),
+                  )
+                  as JobResult;
           result.result = valueDes;
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
@@ -311,5 +339,3 @@ class _$JobSerializer implements PrimitiveSerializer<Job> {
     return result.build();
   }
 }
-
-

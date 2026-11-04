@@ -19,19 +19,20 @@ part 'bar_series_settings.g.dart';
 /// BarSeriesSettings
 ///
 /// Properties:
-/// * [showBorder] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [barWidth] 
-/// * [showLabel] 
-/// * [labelPosition] 
-/// * [labelFont] 
-/// * [labelColor] 
-/// * [enableLabelBackground] 
-/// * [labelBackground] 
-/// * [backgroundSettings] 
+/// * [showBorder]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [barWidth]
+/// * [showLabel]
+/// * [labelPosition]
+/// * [labelFont]
+/// * [labelColor]
+/// * [enableLabelBackground]
+/// * [labelBackground]
+/// * [backgroundSettings]
 @BuiltValue()
-abstract class BarSeriesSettings implements Built<BarSeriesSettings, BarSeriesSettingsBuilder> {
+abstract class BarSeriesSettings
+    implements Built<BarSeriesSettings, BarSeriesSettingsBuilder> {
   @BuiltValueField(wireName: r'showBorder')
   bool? get showBorder;
 
@@ -68,16 +69,19 @@ abstract class BarSeriesSettings implements Built<BarSeriesSettings, BarSeriesSe
 
   BarSeriesSettings._();
 
-  factory BarSeriesSettings([void updates(BarSeriesSettingsBuilder b)]) = _$BarSeriesSettings;
+  factory BarSeriesSettings([void updates(BarSeriesSettingsBuilder b)]) =
+      _$BarSeriesSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BarSeriesSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BarSeriesSettings> get serializer => _$BarSeriesSettingsSerializer();
+  static Serializer<BarSeriesSettings> get serializer =>
+      _$BarSeriesSettingsSerializer();
 }
 
-class _$BarSeriesSettingsSerializer implements PrimitiveSerializer<BarSeriesSettings> {
+class _$BarSeriesSettingsSerializer
+    implements PrimitiveSerializer<BarSeriesSettings> {
   @override
   final Iterable<Type> types = const [BarSeriesSettings, _$BarSeriesSettings];
 
@@ -174,7 +178,11 @@ class _$BarSeriesSettingsSerializer implements PrimitiveSerializer<BarSeriesSett
     BarSeriesSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -190,90 +198,112 @@ class _$BarSeriesSettingsSerializer implements PrimitiveSerializer<BarSeriesSett
       final value = serializedList[i + 1];
       switch (key) {
         case r'showBorder':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showBorder = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'barWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.barWidth = valueDes;
           break;
         case r'showLabel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showLabel = valueDes;
           break;
         case r'labelPosition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartLabelPosition),
-          ) as ChartLabelPosition?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartLabelPosition),
+                  )
+                  as ChartLabelPosition?;
           if (valueDes == null) continue;
           result.labelPosition = valueDes;
           break;
         case r'labelFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.labelFont.replace(valueDes);
           break;
         case r'labelColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.labelColor = valueDes;
           break;
         case r'enableLabelBackground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enableLabelBackground = valueDes;
           break;
         case r'labelBackground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.labelBackground = valueDes;
           break;
         case r'backgroundSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartFillSettings),
-          ) as ChartFillSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartFillSettings),
+                  )
+                  as ChartFillSettings?;
           if (valueDes == null) continue;
           result.backgroundSettings.replace(valueDes);
           break;
@@ -305,5 +335,3 @@ class _$BarSeriesSettingsSerializer implements PrimitiveSerializer<BarSeriesSett
     return result.build();
   }
 }
-
-

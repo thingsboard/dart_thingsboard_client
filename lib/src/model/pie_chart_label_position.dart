@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'pie_chart_label_position.g.dart';
 
 class PieChartLabelPosition extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'inside')
   static const PieChartLabelPosition inside = _$inside;
   @BuiltValueEnumConst(wireName: r'outside')
   static const PieChartLabelPosition outside = _$outside;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const PieChartLabelPosition unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const PieChartLabelPosition unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<PieChartLabelPosition> get serializer => _$pieChartLabelPositionSerializer;
+  static Serializer<PieChartLabelPosition> get serializer =>
+      _$pieChartLabelPositionSerializer;
 
-  const PieChartLabelPosition._(String name): super(name);
+  const PieChartLabelPosition._(String name) : super(name);
 
   static BuiltSet<PieChartLabelPosition> get values => _$values;
   static PieChartLabelPosition valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class PieChartLabelPosition extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class PieChartLabelPositionMixin = Object with _$PieChartLabelPositionMixin;
-
+abstract class PieChartLabelPositionMixin = Object
+    with _$PieChartLabelPositionMixin;

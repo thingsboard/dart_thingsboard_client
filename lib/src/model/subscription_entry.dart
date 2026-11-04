@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'subscription_entry.g.dart';
 
 class SubscriptionEntry extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DEVICE_COUNT')
   static const SubscriptionEntry DEVICE_COUNT = _$DEVICE_COUNT;
   @BuiltValueEnumConst(wireName: r'ASSET_COUNT')
@@ -33,11 +32,13 @@ class SubscriptionEntry extends EnumClass {
   @BuiltValueEnumConst(wireName: r'AGENT_COUNT')
   static const SubscriptionEntry AGENT_COUNT = _$AGENT_COUNT;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const SubscriptionEntry unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const SubscriptionEntry unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<SubscriptionEntry> get serializer => _$subscriptionEntrySerializer;
+  static Serializer<SubscriptionEntry> get serializer =>
+      _$subscriptionEntrySerializer;
 
-  const SubscriptionEntry._(String name): super(name);
+  const SubscriptionEntry._(String name) : super(name);
 
   static BuiltSet<SubscriptionEntry> get values => _$values;
   static SubscriptionEntry valueOf(String name) => _$valueOf(name);
@@ -50,4 +51,3 @@ class SubscriptionEntry extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class SubscriptionEntryMixin = Object with _$SubscriptionEntryMixin;
-

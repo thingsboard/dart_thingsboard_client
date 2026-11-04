@@ -19,10 +19,12 @@ part 'merged_group_permission_info.g.dart';
 /// MergedGroupPermissionInfo
 ///
 /// Properties:
-/// * [entityType] 
-/// * [operations] 
+/// * [entityType]
+/// * [operations]
 @BuiltValue()
-abstract class MergedGroupPermissionInfo implements Built<MergedGroupPermissionInfo, MergedGroupPermissionInfoBuilder> {
+abstract class MergedGroupPermissionInfo
+    implements
+        Built<MergedGroupPermissionInfo, MergedGroupPermissionInfoBuilder> {
   @BuiltValueField(wireName: r'entityType')
   EntityType? get entityType;
   // enum entityTypeEnum {  TENANT,  CUSTOMER,  USER,  DASHBOARD,  ASSET,  DEVICE,  ALARM,  ENTITY_GROUP,  CONVERTER,  INTEGRATION,  RULE_CHAIN,  RULE_NODE,  SCHEDULER_EVENT,  BLOB_ENTITY,  REPORT_TEMPLATE,  REPORT,  ENTITY_VIEW,  WIDGETS_BUNDLE,  WIDGET_TYPE,  ROLE,  GROUP_PERMISSION,  TENANT_PROFILE,  DEVICE_PROFILE,  ASSET_PROFILE,  API_USAGE_STATE,  TB_RESOURCE,  OTA_PACKAGE,  EDGE,  RPC,  QUEUE,  NOTIFICATION_TARGET,  NOTIFICATION_TEMPLATE,  NOTIFICATION_REQUEST,  NOTIFICATION,  NOTIFICATION_RULE,  QUEUE_STATS,  OAUTH2_CLIENT,  DOMAIN,  MOBILE_APP,  MOBILE_APP_BUNDLE,  CALCULATED_FIELD,  JOB,  SECRET,  ADMIN_SETTINGS,  AI_MODEL,  API_KEY,  AGENT,  AGENT_APPLICATION,  AGENT_APP_EVENT,  AGENT_APP_UNIT,  AGENT_APP_PROFILE,  AGENT_PROFILE,  AGENT_BULK_ACTION,  };
@@ -32,18 +34,25 @@ abstract class MergedGroupPermissionInfo implements Built<MergedGroupPermissionI
 
   MergedGroupPermissionInfo._();
 
-  factory MergedGroupPermissionInfo([void updates(MergedGroupPermissionInfoBuilder b)]) = _$MergedGroupPermissionInfo;
+  factory MergedGroupPermissionInfo([
+    void updates(MergedGroupPermissionInfoBuilder b),
+  ]) = _$MergedGroupPermissionInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MergedGroupPermissionInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MergedGroupPermissionInfo> get serializer => _$MergedGroupPermissionInfoSerializer();
+  static Serializer<MergedGroupPermissionInfo> get serializer =>
+      _$MergedGroupPermissionInfoSerializer();
 }
 
-class _$MergedGroupPermissionInfoSerializer implements PrimitiveSerializer<MergedGroupPermissionInfo> {
+class _$MergedGroupPermissionInfoSerializer
+    implements PrimitiveSerializer<MergedGroupPermissionInfo> {
   @override
-  final Iterable<Type> types = const [MergedGroupPermissionInfo, _$MergedGroupPermissionInfo];
+  final Iterable<Type> types = const [
+    MergedGroupPermissionInfo,
+    _$MergedGroupPermissionInfo,
+  ];
 
   @override
   final String wireName = r'MergedGroupPermissionInfo';
@@ -75,7 +84,11 @@ class _$MergedGroupPermissionInfoSerializer implements PrimitiveSerializer<Merge
     MergedGroupPermissionInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +104,24 @@ class _$MergedGroupPermissionInfoSerializer implements PrimitiveSerializer<Merge
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.entityType = valueDes;
           break;
         case r'operations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(Operation)]),
-          ) as BuiltSet<Operation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(Operation),
+                    ]),
+                  )
+                  as BuiltSet<Operation>?;
           if (valueDes == null) continue;
           result.operations.replace(valueDes);
           break;
@@ -134,5 +153,3 @@ class _$MergedGroupPermissionInfoSerializer implements PrimitiveSerializer<Merge
     return result.build();
   }
 }
-
-

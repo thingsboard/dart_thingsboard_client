@@ -18,10 +18,11 @@ part 'customer_id.g.dart';
 /// CustomerId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class CustomerId implements EntityId, Built<CustomerId, CustomerIdBuilder> {
+abstract class CustomerId
+    implements EntityId, Built<CustomerId, CustomerIdBuilder> {
   CustomerId._();
 
   factory CustomerId([void updates(CustomerIdBuilder b)]) = _$CustomerId;
@@ -63,7 +64,11 @@ class _$CustomerIdSerializer implements PrimitiveSerializer<CustomerId> {
     CustomerId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +84,21 @@ class _$CustomerIdSerializer implements PrimitiveSerializer<CustomerId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +129,3 @@ class _$CustomerIdSerializer implements PrimitiveSerializer<CustomerId> {
     return result.build();
   }
 }
-
-

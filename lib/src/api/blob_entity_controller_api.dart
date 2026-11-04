@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/blob_entity_info.dart';
 import 'package:thingsboard_client/src/model/blob_entity_with_customer_info.dart';
 import 'package:thingsboard_client/src/model/page_data_blob_entity_with_customer_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class BlobEntityControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -44,7 +41,7 @@ class BlobEntityControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteBlobEntity({ 
+  Future<Response<void>> deleteBlobEntity({
     required String blobEntityId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,19 @@ class BlobEntityControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/blobEntity/{blobEntityId}'.replaceAll('{' r'blobEntityId' '}', encodeQueryParameter(_serializers, blobEntityId, const FullType(String)).toString());
+    final _path = r'/api/blobEntity/{blobEntityId}'.replaceAll(
+      '{'
+      r'blobEntityId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        blobEntityId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +71,8 @@ class BlobEntityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -103,7 +104,7 @@ class BlobEntityControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadBlobEntity({ 
+  Future<Response<Uint8List>> downloadBlobEntity({
     required String blobEntityId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -113,13 +114,20 @@ class BlobEntityControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/blobEntity/{blobEntityId}/download'.replaceAll('{' r'blobEntityId' '}', encodeQueryParameter(_serializers, blobEntityId, const FullType(String)).toString());
+    final _path = r'/api/blobEntity/{blobEntityId}/download'.replaceAll(
+      '{'
+      r'blobEntityId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        blobEntityId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -127,11 +135,8 @@ class BlobEntityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -151,7 +156,6 @@ class BlobEntityControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -195,7 +199,7 @@ class BlobEntityControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataBlobEntityWithCustomerInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataBlobEntityWithCustomerInfo>> getBlobEntities({ 
+  Future<Response<PageDataBlobEntityWithCustomerInfo>> getBlobEntities({
     required int pageSize,
     required int page,
     String? type,
@@ -211,13 +215,13 @@ class BlobEntityControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataBlobEntityWithCustomerInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerPageDataBlobEntityWithCustomerInfo);
     final _path = r'/api/blobEntities';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -225,11 +229,8 @@ class BlobEntityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -237,14 +238,48 @@ class BlobEntityControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (startTime != null) r'startTime': encodeQueryParameter(_serializers, startTime, const FullType(int)),
-      if (endTime != null) r'endTime': encodeQueryParameter(_serializers, endTime, const FullType(int)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (startTime != null)
+        r'startTime': encodeQueryParameter(
+          _serializers,
+          startTime,
+          const FullType(int),
+        ),
+      if (endTime != null)
+        r'endTime': encodeQueryParameter(
+          _serializers,
+          endTime,
+          const FullType(int),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -260,11 +295,15 @@ class BlobEntityControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataBlobEntityWithCustomerInfo),
-      ) as PageDataBlobEntityWithCustomerInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(
+                    PageDataBlobEntityWithCustomerInfo,
+                  ),
+                )
+                as PageDataBlobEntityWithCustomerInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -301,7 +340,7 @@ class BlobEntityControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<BlobEntityInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<BlobEntityInfo>>> getBlobEntitiesByIds({ 
+  Future<Response<BuiltList<BlobEntityInfo>>> getBlobEntitiesByIds({
     required BuiltList<String> blobEntityIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -310,13 +349,13 @@ class BlobEntityControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfBlobEntityInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfBlobEntityInfoAndListOfString);
     final _path = r'/api/blobEntities/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -324,11 +363,8 @@ class BlobEntityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -336,7 +372,12 @@ class BlobEntityControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'blobEntityIds': encodeCollectionQueryParameter<String>(_serializers, blobEntityIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'blobEntityIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        blobEntityIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -352,11 +393,15 @@ class BlobEntityControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(BlobEntityInfo)]),
-      ) as BuiltList<BlobEntityInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(BlobEntityInfo),
+                  ]),
+                )
+                as BuiltList<BlobEntityInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -393,7 +438,7 @@ class BlobEntityControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BlobEntityWithCustomerInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BlobEntityWithCustomerInfo>> getBlobEntityInfoById({ 
+  Future<Response<BlobEntityWithCustomerInfo>> getBlobEntityInfoById({
     required String blobEntityId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -402,13 +447,21 @@ class BlobEntityControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerBlobEntityWithCustomerInfo);
-    final _path = r'/api/blobEntity/info/{blobEntityId}'.replaceAll('{' r'blobEntityId' '}', encodeQueryParameter(_serializers, blobEntityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerBlobEntityWithCustomerInfo);
+    final _path = r'/api/blobEntity/info/{blobEntityId}'.replaceAll(
+      '{'
+      r'blobEntityId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        blobEntityId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -416,11 +469,8 @@ class BlobEntityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -439,11 +489,13 @@ class BlobEntityControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BlobEntityWithCustomerInfo),
-      ) as BlobEntityWithCustomerInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BlobEntityWithCustomerInfo),
+                )
+                as BlobEntityWithCustomerInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -465,5 +517,4 @@ class BlobEntityControllerApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agent_processing_status.g.dart';
 
 class AgentProcessingStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'PENDING')
   static const AgentProcessingStatus PENDING = _$PENDING;
   @BuiltValueEnumConst(wireName: r'QUEUED')
@@ -29,11 +28,13 @@ class AgentProcessingStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'START_FAILED')
   static const AgentProcessingStatus START_FAILED = _$START_FAILED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentProcessingStatus unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentProcessingStatus unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentProcessingStatus> get serializer => _$agentProcessingStatusSerializer;
+  static Serializer<AgentProcessingStatus> get serializer =>
+      _$agentProcessingStatusSerializer;
 
-  const AgentProcessingStatus._(String name): super(name);
+  const AgentProcessingStatus._(String name) : super(name);
 
   static BuiltSet<AgentProcessingStatus> get values => _$values;
   static AgentProcessingStatus valueOf(String name) => _$valueOf(name);
@@ -45,5 +46,5 @@ class AgentProcessingStatus extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AgentProcessingStatusMixin = Object with _$AgentProcessingStatusMixin;
-
+abstract class AgentProcessingStatusMixin = Object
+    with _$AgentProcessingStatusMixin;

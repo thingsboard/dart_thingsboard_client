@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'alarm_rule_complex_operation.g.dart';
 
 class AlarmRuleComplexOperation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'AND')
   static const AlarmRuleComplexOperation AND = _$AND;
   @BuiltValueEnumConst(wireName: r'OR')
   static const AlarmRuleComplexOperation OR = _$OR;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AlarmRuleComplexOperation unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AlarmRuleComplexOperation unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AlarmRuleComplexOperation> get serializer => _$alarmRuleComplexOperationSerializer;
+  static Serializer<AlarmRuleComplexOperation> get serializer =>
+      _$alarmRuleComplexOperationSerializer;
 
-  const AlarmRuleComplexOperation._(String name): super(name);
+  const AlarmRuleComplexOperation._(String name) : super(name);
 
   static BuiltSet<AlarmRuleComplexOperation> get values => _$values;
   static AlarmRuleComplexOperation valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class AlarmRuleComplexOperation extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AlarmRuleComplexOperationMixin = Object with _$AlarmRuleComplexOperationMixin;
-
+abstract class AlarmRuleComplexOperationMixin = Object
+    with _$AlarmRuleComplexOperationMixin;

@@ -17,7 +17,7 @@ part 'no_sec_lw_m2_m_bootstrap_server_credential.g.dart';
 /// NoSecLwM2MBootstrapServerCredential
 ///
 /// Properties:
-/// * [securityMode] 
+/// * [securityMode]
 /// * [shortServerId] - Server short Id. Used as link to associate server Object Instance. This identifier uniquely identifies each LwM2M Server configured for the LwM2M Client. This Resource MUST be set when the Bootstrap-Server Resource has a value of 'false' and MUST be null when Bootstrap-Server is 'true'. The values 0 and 65535 MUST NOT be used for identifying the LwM2M Server.
 /// * [bootstrapServerIs] - Is Bootstrap Server or Lwm2m Server. The LwM2M Client MAY be configured to use one or more LwM2M Server Account(s). The LwM2M Client MUST have at most one LwM2M Bootstrap-Server Account. (*) The LwM2M client MUST have at least one LwM2M server account after completing the boot sequence specified.
 /// * [host] - Host for 'No Security' mode
@@ -31,7 +31,13 @@ part 'no_sec_lw_m2_m_bootstrap_server_credential.g.dart';
 /// * [notifIfDisabled] - If true, the LwM2M Client stores “Notify” operations to the LwM2M Server while the LwM2M Server account is disabled or the LwM2M Client is offline. After the LwM2M Server account is enabled or the LwM2M Client is online, the LwM2M Client reports the stored “Notify” operations to the Server. If false, the LwM2M Client discards all the “Notify” operations or temporarily disables the Observe function while the LwM2M Server is disabled or the LwM2M Client is offline. The default value is true.
 /// * [binding] - This Resource defines the transport binding configured for the LwM2M Client. If the LwM2M Client supports the binding specified in this Resource, the LwM2M Client MUST use that transport for the Current Binding Mode.
 @BuiltValue()
-abstract class NoSecLwM2MBootstrapServerCredential implements LwM2MBootstrapServerCredential, Built<NoSecLwM2MBootstrapServerCredential, NoSecLwM2MBootstrapServerCredentialBuilder> {
+abstract class NoSecLwM2MBootstrapServerCredential
+    implements
+        LwM2MBootstrapServerCredential,
+        Built<
+          NoSecLwM2MBootstrapServerCredential,
+          NoSecLwM2MBootstrapServerCredentialBuilder
+        > {
   /// Client Hold Off Time. The number of seconds to wait before initiating a Client Initiated Bootstrap once the LwM2M Client has determined it should initiate this bootstrap mode. (This information is relevant for use with a Bootstrap-Server only.)
   @BuiltValueField(wireName: r'clientHoldOffTime')
   int? get clientHoldOffTime;
@@ -82,18 +88,25 @@ abstract class NoSecLwM2MBootstrapServerCredential implements LwM2MBootstrapServ
 
   NoSecLwM2MBootstrapServerCredential._();
 
-  factory NoSecLwM2MBootstrapServerCredential([void updates(NoSecLwM2MBootstrapServerCredentialBuilder b)]) = _$NoSecLwM2MBootstrapServerCredential;
+  factory NoSecLwM2MBootstrapServerCredential([
+    void updates(NoSecLwM2MBootstrapServerCredentialBuilder b),
+  ]) = _$NoSecLwM2MBootstrapServerCredential;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NoSecLwM2MBootstrapServerCredentialBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NoSecLwM2MBootstrapServerCredential> get serializer => _$NoSecLwM2MBootstrapServerCredentialSerializer();
+  static Serializer<NoSecLwM2MBootstrapServerCredential> get serializer =>
+      _$NoSecLwM2MBootstrapServerCredentialSerializer();
 }
 
-class _$NoSecLwM2MBootstrapServerCredentialSerializer implements PrimitiveSerializer<NoSecLwM2MBootstrapServerCredential> {
+class _$NoSecLwM2MBootstrapServerCredentialSerializer
+    implements PrimitiveSerializer<NoSecLwM2MBootstrapServerCredential> {
   @override
-  final Iterable<Type> types = const [NoSecLwM2MBootstrapServerCredential, _$NoSecLwM2MBootstrapServerCredential];
+  final Iterable<Type> types = const [
+    NoSecLwM2MBootstrapServerCredential,
+    _$NoSecLwM2MBootstrapServerCredential,
+  ];
 
   @override
   final String wireName = r'NoSecLwM2MBootstrapServerCredential';
@@ -200,7 +213,11 @@ class _$NoSecLwM2MBootstrapServerCredentialSerializer implements PrimitiveSerial
     NoSecLwM2MBootstrapServerCredential object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -216,105 +233,131 @@ class _$NoSecLwM2MBootstrapServerCredentialSerializer implements PrimitiveSerial
       final value = serializedList[i + 1];
       switch (key) {
         case r'bootstrapServerAccountTimeout':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.bootstrapServerAccountTimeout = valueDes;
           break;
         case r'lifetime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.lifetime = valueDes;
           break;
         case r'binding':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.binding = valueDes;
           break;
         case r'notifIfDisabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notifIfDisabled = valueDes;
           break;
         case r'securityMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.securityMode = valueDes;
           break;
         case r'shortServerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.shortServerId = valueDes;
           break;
         case r'clientHoldOffTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.clientHoldOffTime = valueDes;
           break;
         case r'port':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.port = valueDes;
           break;
         case r'serverCertificate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serverCertificate = valueDes;
           break;
         case r'bootstrapServerIs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.bootstrapServerIs = valueDes;
           break;
         case r'host':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.host = valueDes;
           break;
         case r'serverPublicKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serverPublicKey = valueDes;
           break;
         case r'defaultMinPeriod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.defaultMinPeriod = valueDes;
           break;
@@ -346,5 +389,3 @@ class _$NoSecLwM2MBootstrapServerCredentialSerializer implements PrimitiveSerial
     return result.build();
   }
 }
-
-

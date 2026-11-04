@@ -25,7 +25,8 @@ part 'o_auth2_mapper_config.g.dart';
 /// * [basic] - Mapper config for BASIC and GITHUB mapper types
 /// * [custom] - Mapper config for CUSTOM mapper type
 @BuiltValue()
-abstract class OAuth2MapperConfig implements Built<OAuth2MapperConfig, OAuth2MapperConfigBuilder> {
+abstract class OAuth2MapperConfig
+    implements Built<OAuth2MapperConfig, OAuth2MapperConfigBuilder> {
   /// Whether user should be created if not yet present on the platform after successful authentication
   @BuiltValueField(wireName: r'allowUserCreation')
   bool? get allowUserCreation;
@@ -49,16 +50,19 @@ abstract class OAuth2MapperConfig implements Built<OAuth2MapperConfig, OAuth2Map
 
   OAuth2MapperConfig._();
 
-  factory OAuth2MapperConfig([void updates(OAuth2MapperConfigBuilder b)]) = _$OAuth2MapperConfig;
+  factory OAuth2MapperConfig([void updates(OAuth2MapperConfigBuilder b)]) =
+      _$OAuth2MapperConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OAuth2MapperConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OAuth2MapperConfig> get serializer => _$OAuth2MapperConfigSerializer();
+  static Serializer<OAuth2MapperConfig> get serializer =>
+      _$OAuth2MapperConfigSerializer();
 }
 
-class _$OAuth2MapperConfigSerializer implements PrimitiveSerializer<OAuth2MapperConfig> {
+class _$OAuth2MapperConfigSerializer
+    implements PrimitiveSerializer<OAuth2MapperConfig> {
   @override
   final Iterable<Type> types = const [OAuth2MapperConfig, _$OAuth2MapperConfig];
 
@@ -111,7 +115,11 @@ class _$OAuth2MapperConfigSerializer implements PrimitiveSerializer<OAuth2Mapper
     OAuth2MapperConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -127,41 +135,55 @@ class _$OAuth2MapperConfigSerializer implements PrimitiveSerializer<OAuth2Mapper
       final value = serializedList[i + 1];
       switch (key) {
         case r'allowUserCreation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.allowUserCreation = valueDes;
           break;
         case r'activateUser':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.activateUser = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MapperType),
-          ) as MapperType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MapperType),
+                  )
+                  as MapperType;
           result.type = valueDes;
           break;
         case r'basic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OAuth2BasicMapperConfig),
-          ) as OAuth2BasicMapperConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      OAuth2BasicMapperConfig,
+                    ),
+                  )
+                  as OAuth2BasicMapperConfig?;
           if (valueDes == null) continue;
           result.basic.replace(valueDes);
           break;
         case r'custom':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OAuth2CustomMapperConfig),
-          ) as OAuth2CustomMapperConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      OAuth2CustomMapperConfig,
+                    ),
+                  )
+                  as OAuth2CustomMapperConfig?;
           if (valueDes == null) continue;
           result.custom.replace(valueDes);
           break;
@@ -193,5 +215,3 @@ class _$OAuth2MapperConfigSerializer implements PrimitiveSerializer<OAuth2Mapper
     return result.build();
   }
 }
-
-

@@ -19,19 +19,22 @@ part 'mistral_ai_chat_model_config.g.dart';
 /// MistralAiChatModelConfig
 ///
 /// Properties:
-/// * [provider] 
-/// * [providerConfig] 
-/// * [modelId] 
-/// * [temperature] 
-/// * [topP] 
-/// * [frequencyPenalty] 
-/// * [presencePenalty] 
-/// * [maxOutputTokens] 
-/// * [timeoutSeconds] 
-/// * [maxRetries] 
-/// * [modelType] 
+/// * [provider]
+/// * [providerConfig]
+/// * [modelId]
+/// * [temperature]
+/// * [topP]
+/// * [frequencyPenalty]
+/// * [presencePenalty]
+/// * [maxOutputTokens]
+/// * [timeoutSeconds]
+/// * [maxRetries]
+/// * [modelType]
 @BuiltValue()
-abstract class MistralAiChatModelConfig implements AiModelConfig, Built<MistralAiChatModelConfig, MistralAiChatModelConfigBuilder> {
+abstract class MistralAiChatModelConfig
+    implements
+        AiModelConfig,
+        Built<MistralAiChatModelConfig, MistralAiChatModelConfigBuilder> {
   @BuiltValueField(wireName: r'presencePenalty')
   double? get presencePenalty;
 
@@ -65,18 +68,25 @@ abstract class MistralAiChatModelConfig implements AiModelConfig, Built<MistralA
 
   MistralAiChatModelConfig._();
 
-  factory MistralAiChatModelConfig([void updates(MistralAiChatModelConfigBuilder b)]) = _$MistralAiChatModelConfig;
+  factory MistralAiChatModelConfig([
+    void updates(MistralAiChatModelConfigBuilder b),
+  ]) = _$MistralAiChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MistralAiChatModelConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MistralAiChatModelConfig> get serializer => _$MistralAiChatModelConfigSerializer();
+  static Serializer<MistralAiChatModelConfig> get serializer =>
+      _$MistralAiChatModelConfigSerializer();
 }
 
-class _$MistralAiChatModelConfigSerializer implements PrimitiveSerializer<MistralAiChatModelConfig> {
+class _$MistralAiChatModelConfigSerializer
+    implements PrimitiveSerializer<MistralAiChatModelConfig> {
   @override
-  final Iterable<Type> types = const [MistralAiChatModelConfig, _$MistralAiChatModelConfig];
+  final Iterable<Type> types = const [
+    MistralAiChatModelConfig,
+    _$MistralAiChatModelConfig,
+  ];
 
   @override
   final String wireName = r'MistralAiChatModelConfig';
@@ -165,7 +175,11 @@ class _$MistralAiChatModelConfigSerializer implements PrimitiveSerializer<Mistra
     MistralAiChatModelConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -181,87 +195,109 @@ class _$MistralAiChatModelConfigSerializer implements PrimitiveSerializer<Mistra
       final value = serializedList[i + 1];
       switch (key) {
         case r'presencePenalty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.presencePenalty = valueDes;
           break;
         case r'maxRetries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRetries = valueDes;
           break;
         case r'modelId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.modelId = valueDes;
           break;
         case r'provider':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.provider = valueDes;
           break;
         case r'temperature':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.temperature = valueDes;
           break;
         case r'timeoutSeconds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeoutSeconds = valueDes;
           break;
         case r'modelType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelType),
-          ) as AiModelType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelType),
+                  )
+                  as AiModelType?;
           if (valueDes == null) continue;
           result.modelType = valueDes;
           break;
         case r'providerConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MistralAiProviderConfig),
-          ) as MistralAiProviderConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MistralAiProviderConfig),
+                  )
+                  as MistralAiProviderConfig;
           result.providerConfig.replace(valueDes);
           break;
         case r'topP':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.topP = valueDes;
           break;
         case r'frequencyPenalty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.frequencyPenalty = valueDes;
           break;
         case r'maxOutputTokens':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxOutputTokens = valueDes;
           break;
@@ -293,5 +329,3 @@ class _$MistralAiChatModelConfigSerializer implements PrimitiveSerializer<Mistra
     return result.build();
   }
 }
-
-

@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -17,11 +16,9 @@ import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/group_permission.dart';
 import 'package:thingsboard_client/src/model/group_permission_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class GroupPermissionControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +39,7 @@ class GroupPermissionControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteGroupPermission({ 
+  Future<Response<void>> deleteGroupPermission({
     required String groupPermissionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -52,12 +49,19 @@ class GroupPermissionControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/groupPermission/{groupPermissionId}'.replaceAll('{' r'groupPermissionId' '}', encodeQueryParameter(_serializers, groupPermissionId, const FullType(String)).toString());
+    final _path = r'/api/groupPermission/{groupPermissionId}'.replaceAll(
+      '{'
+      r'groupPermissionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupPermissionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -65,11 +69,8 @@ class GroupPermissionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -101,7 +102,7 @@ class GroupPermissionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<GroupPermissionInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<GroupPermissionInfo>>> getEntityGroupPermissions({ 
+  Future<Response<BuiltList<GroupPermissionInfo>>> getEntityGroupPermissions({
     required String entityGroupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -110,13 +111,22 @@ class GroupPermissionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfGroupPermissionInfo);
-    final _path = r'/api/entityGroup/{entityGroupId}/groupPermissions'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfGroupPermissionInfo);
+    final _path = r'/api/entityGroup/{entityGroupId}/groupPermissions'
+        .replaceAll(
+          '{'
+          r'entityGroupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityGroupId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -124,11 +134,8 @@ class GroupPermissionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -147,11 +154,15 @@ class GroupPermissionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(GroupPermissionInfo)]),
-      ) as BuiltList<GroupPermissionInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(GroupPermissionInfo),
+                  ]),
+                )
+                as BuiltList<GroupPermissionInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -188,7 +199,7 @@ class GroupPermissionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [GroupPermission] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<GroupPermission>> getGroupPermissionById({ 
+  Future<Response<GroupPermission>> getGroupPermissionById({
     required String groupPermissionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -197,13 +208,21 @@ class GroupPermissionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerGroupPermission);
-    final _path = r'/api/groupPermission/{groupPermissionId}'.replaceAll('{' r'groupPermissionId' '}', encodeQueryParameter(_serializers, groupPermissionId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerGroupPermission);
+    final _path = r'/api/groupPermission/{groupPermissionId}'.replaceAll(
+      '{'
+      r'groupPermissionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupPermissionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -211,11 +230,8 @@ class GroupPermissionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -234,11 +250,13 @@ class GroupPermissionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(GroupPermission),
-      ) as GroupPermission;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(GroupPermission),
+                )
+                as GroupPermission;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -276,7 +294,7 @@ class GroupPermissionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [GroupPermissionInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<GroupPermissionInfo>> getGroupPermissionInfoById({ 
+  Future<Response<GroupPermissionInfo>> getGroupPermissionInfoById({
     required String groupPermissionId,
     required bool isUserGroup,
     CancelToken? cancelToken,
@@ -286,13 +304,21 @@ class GroupPermissionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerGroupPermissionInfo);
-    final _path = r'/api/groupPermission/info/{groupPermissionId}'.replaceAll('{' r'groupPermissionId' '}', encodeQueryParameter(_serializers, groupPermissionId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerGroupPermissionInfo);
+    final _path = r'/api/groupPermission/info/{groupPermissionId}'.replaceAll(
+      '{'
+      r'groupPermissionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupPermissionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -300,11 +326,8 @@ class GroupPermissionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -312,7 +335,11 @@ class GroupPermissionControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'isUserGroup': encodeQueryParameter(_serializers, isUserGroup, const FullType(bool)),
+      r'isUserGroup': encodeQueryParameter(
+        _serializers,
+        isUserGroup,
+        const FullType(bool),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -328,11 +355,13 @@ class GroupPermissionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(GroupPermissionInfo),
-      ) as GroupPermissionInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(GroupPermissionInfo),
+                )
+                as GroupPermissionInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -369,7 +398,7 @@ class GroupPermissionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<GroupPermissionInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<GroupPermissionInfo>>> getUserGroupPermissions({ 
+  Future<Response<BuiltList<GroupPermissionInfo>>> getUserGroupPermissions({
     required String userGroupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -378,13 +407,21 @@ class GroupPermissionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfGroupPermissionInfo);
-    final _path = r'/api/userGroup/{userGroupId}/groupPermissions'.replaceAll('{' r'userGroupId' '}', encodeQueryParameter(_serializers, userGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfGroupPermissionInfo);
+    final _path = r'/api/userGroup/{userGroupId}/groupPermissions'.replaceAll(
+      '{'
+      r'userGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        userGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -392,11 +429,8 @@ class GroupPermissionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -415,11 +449,15 @@ class GroupPermissionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(GroupPermissionInfo)]),
-      ) as BuiltList<GroupPermissionInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(GroupPermissionInfo),
+                  ]),
+                )
+                as BuiltList<GroupPermissionInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -446,7 +484,7 @@ class GroupPermissionControllerApi {
   /// Enrich a list of group permission objects with the information about Role, User and Entity Groups. Group permission entity represents list of allowed operations for certain User Group to perform against certain Entity Group. Basically, this entity wires three other entities:    * Role that defines set of allowed operations;  * User Group that defines set of users who may perform the operations;   * Entity Group that defines set of entities which will be accessible to users;  There are two types of group permissions depending on the Role type:    * **Generic permission** — uses a GENERIC role. The &#39;entityGroupId&#39; field must be null (or omitted). Grants the role&#39;s operations to all entities within the owner&#39;s scope (all tenant entities for tenant admins, only customer-owned entities for customer users).  * **Group permission** — uses a GROUP role. The &#39;entityGroupId&#39; field must reference a valid entity group. Grants the role&#39;s operations only to entities in the specified group.  Assigning a GENERIC role with a non-null &#39;entityGroupId&#39; will cause an error. The &#39;entityGroupType&#39; field is auto-populated from the referenced entity group and should not be set manually. Duplicate permissions (same userGroupId + roleId + entityGroupId combination) are rejected.   Group Permission Info object extends the Group Permissions with the full information about Role and User and/or Entity Groups.    Security check is performed to verify that the user has &#39;READ&#39; permission for the entity (entities).
   ///
   /// Parameters:
-  /// * [groupPermission] 
+  /// * [groupPermission]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -456,7 +494,8 @@ class GroupPermissionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<GroupPermissionInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<GroupPermissionInfo>>> loadUserGroupPermissionInfos({ 
+  Future<Response<BuiltList<GroupPermissionInfo>>>
+  loadUserGroupPermissionInfos({
     required BuiltList<GroupPermission> groupPermission,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -465,13 +504,15 @@ class GroupPermissionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfGroupPermissionAndListOfGroupPermissionInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(
+          registerListOfGroupPermissionAndListOfGroupPermissionInfo,
+        );
     final _path = r'/api/userGroup/groupPermissions/info';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -479,11 +520,8 @@ class GroupPermissionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -496,13 +534,9 @@ class GroupPermissionControllerApi {
     try {
       const _type = FullType(BuiltList, [FullType(GroupPermission)]);
       _bodyData = _serializers.serialize(groupPermission, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -522,11 +556,15 @@ class GroupPermissionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(GroupPermissionInfo)]),
-      ) as BuiltList<GroupPermissionInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(GroupPermissionInfo),
+                  ]),
+                )
+                as BuiltList<GroupPermissionInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -553,7 +591,7 @@ class GroupPermissionControllerApi {
   /// Creates or Updates the Group Permission. When creating group permission, platform generates Group Permission Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Group Permission id will be present in the response. Specify existing Group Permission id to update the permission. Referencing non-existing Group Permission Id will cause &#39;Not Found&#39; error.  Group permission entity represents list of allowed operations for certain User Group to perform against certain Entity Group. Basically, this entity wires three other entities:    * Role that defines set of allowed operations;  * User Group that defines set of users who may perform the operations;   * Entity Group that defines set of entities which will be accessible to users;  There are two types of group permissions depending on the Role type:    * **Generic permission** — uses a GENERIC role. The &#39;entityGroupId&#39; field must be null (or omitted). Grants the role&#39;s operations to all entities within the owner&#39;s scope (all tenant entities for tenant admins, only customer-owned entities for customer users).  * **Group permission** — uses a GROUP role. The &#39;entityGroupId&#39; field must reference a valid entity group. Grants the role&#39;s operations only to entities in the specified group.  Assigning a GENERIC role with a non-null &#39;entityGroupId&#39; will cause an error. The &#39;entityGroupType&#39; field is auto-populated from the referenced entity group and should not be set manually. Duplicate permissions (same userGroupId + roleId + entityGroupId combination) are rejected.   Security check is performed to verify that the user has &#39;WRITE&#39; permission for the entity (entities).
   ///
   /// Parameters:
-  /// * [groupPermission] 
+  /// * [groupPermission]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -563,7 +601,7 @@ class GroupPermissionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [GroupPermission] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<GroupPermission>> saveGroupPermission({ 
+  Future<Response<GroupPermission>> saveGroupPermission({
     required GroupPermission groupPermission,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -572,13 +610,12 @@ class GroupPermissionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerGroupPermission);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerGroupPermission);
     final _path = r'/api/groupPermission';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -586,11 +623,8 @@ class GroupPermissionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -603,13 +637,9 @@ class GroupPermissionControllerApi {
     try {
       const _type = FullType(GroupPermission);
       _bodyData = _serializers.serialize(groupPermission, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -629,11 +659,13 @@ class GroupPermissionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(GroupPermission),
-      ) as GroupPermission;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(GroupPermission),
+                )
+                as GroupPermission;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -655,5 +687,4 @@ class GroupPermissionControllerApi {
       extra: _response.extra,
     );
   }
-
 }

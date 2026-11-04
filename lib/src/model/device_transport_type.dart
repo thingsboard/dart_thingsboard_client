@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'device_transport_type.g.dart';
 
 class DeviceTransportType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DEFAULT')
   static const DeviceTransportType DEFAULT = _$DEFAULT;
   @BuiltValueEnumConst(wireName: r'MQTT')
@@ -27,11 +26,13 @@ class DeviceTransportType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'SNMP')
   static const DeviceTransportType SNMP = _$SNMP;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const DeviceTransportType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const DeviceTransportType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<DeviceTransportType> get serializer => _$deviceTransportTypeSerializer;
+  static Serializer<DeviceTransportType> get serializer =>
+      _$deviceTransportTypeSerializer;
 
-  const DeviceTransportType._(String name): super(name);
+  const DeviceTransportType._(String name) : super(name);
 
   static BuiltSet<DeviceTransportType> get values => _$values;
   static DeviceTransportType valueOf(String name) => _$valueOf(name);
@@ -43,5 +44,5 @@ class DeviceTransportType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class DeviceTransportTypeMixin = Object with _$DeviceTransportTypeMixin;
-
+abstract class DeviceTransportTypeMixin = Object
+    with _$DeviceTransportTypeMixin;

@@ -75,7 +75,10 @@ class _$PaletteSerializer implements PrimitiveSerializer<Palette> {
       yield r'colors';
       yield serializers.serialize(
         object.colors,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(String),
+        ]),
       );
     }
   }
@@ -86,7 +89,11 @@ class _$PaletteSerializer implements PrimitiveSerializer<Palette> {
     Palette object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +109,35 @@ class _$PaletteSerializer implements PrimitiveSerializer<Palette> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'extends':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.extends_ = valueDes;
           break;
         case r'colors':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(String)]),
-          ) as BuiltMap<String, String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltMap<String, String>?;
           if (valueDes == null) continue;
           result.colors.replace(valueDes);
           break;
@@ -153,5 +169,3 @@ class _$PaletteSerializer implements PrimitiveSerializer<Palette> {
     return result.build();
   }
 }
-
-

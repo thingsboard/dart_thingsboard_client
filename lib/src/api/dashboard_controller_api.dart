@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -20,11 +19,9 @@ import 'package:thingsboard_client/src/model/dashboard_info.dart';
 import 'package:thingsboard_client/src/model/home_dashboard.dart';
 import 'package:thingsboard_client/src/model/home_dashboard_info.dart';
 import 'package:thingsboard_client/src/model/page_data_dashboard_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class DashboardControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -45,7 +42,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteDashboard({ 
+  Future<Response<void>> deleteDashboard({
     required String dashboardId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -55,12 +52,19 @@ class DashboardControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/dashboard/{dashboardId}'.replaceAll('{' r'dashboardId' '}', encodeQueryParameter(_serializers, dashboardId, const FullType(String)).toString());
+    final _path = r'/api/dashboard/{dashboardId}'.replaceAll(
+      '{'
+      r'dashboardId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        dashboardId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -68,11 +72,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -96,7 +97,7 @@ class DashboardControllerApi {
   /// Parameters:
   /// * [entityGroupId] - A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
   /// * [limit] - Limit of the entities to export
-  /// * [acceptEncoding] 
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -106,7 +107,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Dashboard>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Dashboard>>> exportGroupDashboards({ 
+  Future<Response<BuiltList<Dashboard>>> exportGroupDashboards({
     required String entityGroupId,
     required int limit,
     String? acceptEncoding,
@@ -117,8 +118,19 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfDashboard);
-    final _path = r'/api/entityGroup/{entityGroupId}/dashboards/export'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfDashboard);
+    final _path = r'/api/entityGroup/{entityGroupId}/dashboards/export'
+        .replaceAll(
+          '{'
+          r'entityGroupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityGroupId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -132,11 +144,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -160,11 +169,15 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Dashboard)]),
-      ) as BuiltList<Dashboard>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(Dashboard),
+                  ]),
+                )
+                as BuiltList<Dashboard>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -206,7 +219,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataDashboardInfo>> getAllDashboards({ 
+  Future<Response<PageDataDashboardInfo>> getAllDashboards({
     required int pageSize,
     required int page,
     bool? includeCustomers,
@@ -220,13 +233,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
     final _path = r'/api/dashboards/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -234,11 +246,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -246,12 +255,36 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -267,11 +300,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataDashboardInfo),
-      ) as PageDataDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataDashboardInfo),
+                )
+                as PageDataDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -314,7 +349,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataDashboardInfo>> getCustomerDashboards({ 
+  Future<Response<PageDataDashboardInfo>> getCustomerDashboards({
     required String customerId,
     required int pageSize,
     required int page,
@@ -329,13 +364,21 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
-    final _path = r'/api/customer/{customerId}/dashboards'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
+    final _path = r'/api/customer/{customerId}/dashboards'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -343,11 +386,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -355,12 +395,36 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -376,11 +440,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataDashboardInfo),
-      ) as PageDataDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataDashboardInfo),
+                )
+                as PageDataDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -416,7 +482,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [HomeDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<HomeDashboardInfo>> getCustomerHomeDashboardInfo({ 
+  Future<Response<HomeDashboardInfo>> getCustomerHomeDashboardInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -424,13 +490,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerHomeDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerHomeDashboardInfo);
     final _path = r'/api/customer/dashboard/home/info';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -438,11 +503,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -461,11 +523,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(HomeDashboardInfo),
-      ) as HomeDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(HomeDashboardInfo),
+                )
+                as HomeDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -494,7 +558,7 @@ class DashboardControllerApi {
   /// Parameters:
   /// * [dashboardId] - A string value representing the dashboard id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
   /// * [includeResources] - Export used resources and replace resource links with resource metadata
-  /// * [acceptEncoding] 
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -504,7 +568,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Dashboard] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Dashboard>> getDashboardById({ 
+  Future<Response<Dashboard>> getDashboardById({
     required String dashboardId,
     bool? includeResources,
     String? acceptEncoding,
@@ -516,7 +580,16 @@ class DashboardControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerDashboard);
-    final _path = r'/api/dashboard/{dashboardId}'.replaceAll('{' r'dashboardId' '}', encodeQueryParameter(_serializers, dashboardId, const FullType(String)).toString());
+    final _path = r'/api/dashboard/{dashboardId}'.replaceAll(
+      '{'
+      r'dashboardId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        dashboardId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -530,11 +603,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -542,7 +612,12 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (includeResources != null) r'includeResources': encodeQueryParameter(_serializers, includeResources, const FullType(bool)),
+      if (includeResources != null)
+        r'includeResources': encodeQueryParameter(
+          _serializers,
+          includeResources,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -558,11 +633,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Dashboard),
-      ) as Dashboard;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Dashboard),
+                )
+                as Dashboard;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -599,7 +676,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [DashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<DashboardInfo>> getDashboardInfoById({ 
+  Future<Response<DashboardInfo>> getDashboardInfoById({
     required String dashboardId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -608,13 +685,21 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerDashboardInfo);
-    final _path = r'/api/dashboard/info/{dashboardId}'.replaceAll('{' r'dashboardId' '}', encodeQueryParameter(_serializers, dashboardId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerDashboardInfo);
+    final _path = r'/api/dashboard/info/{dashboardId}'.replaceAll(
+      '{'
+      r'dashboardId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        dashboardId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -622,11 +707,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -645,11 +727,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(DashboardInfo),
-      ) as DashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(DashboardInfo),
+                )
+                as DashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -691,7 +775,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataDashboardInfo>> getDashboardsByEntityGroupId({ 
+  Future<Response<PageDataDashboardInfo>> getDashboardsByEntityGroupId({
     required String entityGroupId,
     required int pageSize,
     required int page,
@@ -705,13 +789,21 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
-    final _path = r'/api/entityGroup/{entityGroupId}/dashboards'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
+    final _path = r'/api/entityGroup/{entityGroupId}/dashboards'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -719,11 +811,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -731,11 +820,30 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -751,11 +859,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataDashboardInfo),
-      ) as PageDataDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataDashboardInfo),
+                )
+                as PageDataDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -792,7 +902,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<DashboardInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<DashboardInfo>>> getDashboardsByIds({ 
+  Future<Response<BuiltList<DashboardInfo>>> getDashboardsByIds({
     required BuiltList<String> dashboardIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -801,13 +911,13 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfDashboardInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfDashboardInfoAndListOfString);
     final _path = r'/api/dashboards';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -815,11 +925,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -827,7 +934,12 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'dashboardIds': encodeCollectionQueryParameter<String>(_serializers, dashboardIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'dashboardIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        dashboardIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -843,11 +955,15 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(DashboardInfo)]),
-      ) as BuiltList<DashboardInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(DashboardInfo),
+                  ]),
+                )
+                as BuiltList<DashboardInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -874,7 +990,7 @@ class DashboardControllerApi {
   /// Returns the home dashboard object that is configured as &#39;homeDashboardId&#39; parameter in the &#39;additionalInfo&#39; of the User. If &#39;homeDashboardId&#39; parameter is not set on the User level and the User has authority &#39;CUSTOMER_USER&#39;, check the same parameter for the corresponding Customer. If &#39;homeDashboardId&#39; parameter is not set on the User and Customer levels then checks the same parameter for the Tenant that owns the user. The Dashboard object is a heavyweight object that contains information about the dashboard (e.g. title, image, assigned customers) and also configuration JSON (e.g. layouts, widgets, entity aliases).  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [acceptEncoding] 
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -884,7 +1000,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [HomeDashboard] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<HomeDashboard>> getHomeDashboard({ 
+  Future<Response<HomeDashboard>> getHomeDashboard({
     String? acceptEncoding,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -893,7 +1009,8 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerHomeDashboard);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerHomeDashboard);
     final _path = r'/api/dashboard/home';
     final _options = Options(
       method: r'GET',
@@ -908,11 +1025,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -931,11 +1045,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(HomeDashboard),
-      ) as HomeDashboard;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(HomeDashboard),
+                )
+                as HomeDashboard;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -971,7 +1087,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [HomeDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<HomeDashboardInfo>> getHomeDashboardInfo({ 
+  Future<Response<HomeDashboardInfo>> getHomeDashboardInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -979,13 +1095,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerHomeDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerHomeDashboardInfo);
     final _path = r'/api/dashboard/home/info';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -993,11 +1108,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1016,11 +1128,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(HomeDashboardInfo),
-      ) as HomeDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(HomeDashboardInfo),
+                )
+                as HomeDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1056,7 +1170,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [int] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<int>> getMaxDatapointsLimit({ 
+  Future<Response<int>> getMaxDatapointsLimit({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1067,9 +1181,7 @@ class DashboardControllerApi {
     final _path = r'/api/dashboard/maxDatapointsLimit';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1077,11 +1189,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1101,7 +1210,6 @@ class DashboardControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as int;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1137,7 +1245,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [int] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<int>> getServerTime({ 
+  Future<Response<int>> getServerTime({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1148,9 +1256,7 @@ class DashboardControllerApi {
     final _path = r'/api/dashboard/serverTime';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1158,11 +1264,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1182,7 +1285,6 @@ class DashboardControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as int;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1224,7 +1326,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataDashboardInfo>> getTenantDashboards({ 
+  Future<Response<PageDataDashboardInfo>> getTenantDashboards({
     required int pageSize,
     required int page,
     bool? mobile,
@@ -1238,13 +1340,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
     final _path = r'/api/tenant/dashboards';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1252,11 +1353,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1264,12 +1362,36 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (mobile != null) r'mobile': encodeQueryParameter(_serializers, mobile, const FullType(bool)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (mobile != null)
+        r'mobile': encodeQueryParameter(
+          _serializers,
+          mobile,
+          const FullType(bool),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1285,11 +1407,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataDashboardInfo),
-      ) as PageDataDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataDashboardInfo),
+                )
+                as PageDataDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1331,7 +1455,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataDashboardInfo>> getTenantDashboardsByTenantId({ 
+  Future<Response<PageDataDashboardInfo>> getTenantDashboardsByTenantId({
     required String tenantId,
     required int pageSize,
     required int page,
@@ -1345,13 +1469,21 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
-    final _path = r'/api/tenant/{tenantId}/dashboards'.replaceAll('{' r'tenantId' '}', encodeQueryParameter(_serializers, tenantId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
+    final _path = r'/api/tenant/{tenantId}/dashboards'.replaceAll(
+      '{'
+      r'tenantId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        tenantId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1359,11 +1491,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1371,11 +1500,30 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1391,11 +1539,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataDashboardInfo),
-      ) as PageDataDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataDashboardInfo),
+                )
+                as PageDataDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1431,7 +1581,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [HomeDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<HomeDashboardInfo>> getTenantHomeDashboardInfo({ 
+  Future<Response<HomeDashboardInfo>> getTenantHomeDashboardInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1439,13 +1589,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerHomeDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerHomeDashboardInfo);
     final _path = r'/api/tenant/dashboard/home/info';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1453,11 +1602,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1476,11 +1622,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(HomeDashboardInfo),
-      ) as HomeDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(HomeDashboardInfo),
+                )
+                as HomeDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1524,7 +1672,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataDashboardInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataDashboardInfo>> getUserDashboards({ 
+  Future<Response<PageDataDashboardInfo>> getUserDashboards({
     required int pageSize,
     required int page,
     bool? mobile,
@@ -1540,13 +1688,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataDashboardInfo);
     final _path = r'/api/user/dashboards';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1554,11 +1701,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1566,14 +1710,48 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (mobile != null) r'mobile': encodeQueryParameter(_serializers, mobile, const FullType(bool)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (operation != null) r'operation': encodeQueryParameter(_serializers, operation, const FullType(String)),
-      if (userId != null) r'userId': encodeQueryParameter(_serializers, userId, const FullType(String)),
+      if (mobile != null)
+        r'mobile': encodeQueryParameter(
+          _serializers,
+          mobile,
+          const FullType(bool),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (operation != null)
+        r'operation': encodeQueryParameter(
+          _serializers,
+          operation,
+          const FullType(String),
+        ),
+      if (userId != null)
+        r'userId': encodeQueryParameter(
+          _serializers,
+          userId,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1589,11 +1767,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataDashboardInfo),
-      ) as PageDataDashboardInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataDashboardInfo),
+                )
+                as PageDataDashboardInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1621,7 +1801,7 @@ class DashboardControllerApi {
   ///
   /// Parameters:
   /// * [entityGroupId] - A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [dashboard] 
+  /// * [dashboard]
   /// * [overwrite] - Overwrite dashboards with the same name
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -1632,7 +1812,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> importGroupDashboards({ 
+  Future<Response<void>> importGroupDashboards({
     required String entityGroupId,
     required BuiltList<Dashboard> dashboard,
     bool? overwrite = false,
@@ -1643,13 +1823,22 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfDashboard);
-    final _path = r'/api/entityGroup/{entityGroupId}/dashboards/import'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfDashboard);
+    final _path = r'/api/entityGroup/{entityGroupId}/dashboards/import'
+        .replaceAll(
+          '{'
+          r'entityGroupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityGroupId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1657,11 +1846,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1670,7 +1856,12 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (overwrite != null) r'overwrite': encodeQueryParameter(_serializers, overwrite, const FullType(bool)),
+      if (overwrite != null)
+        r'overwrite': encodeQueryParameter(
+          _serializers,
+          overwrite,
+          const FullType(bool),
+        ),
     };
 
     dynamic _bodyData;
@@ -1678,10 +1869,9 @@ class DashboardControllerApi {
     try {
       const _type = FullType(BuiltList, [FullType(Dashboard)]);
       _bodyData = _serializers.serialize(dashboard, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1710,9 +1900,9 @@ class DashboardControllerApi {
   ///
   /// Parameters:
   /// * [dashboard] - A JSON value representing the dashboard.
-  /// * [entityGroupId] 
+  /// * [entityGroupId]
   /// * [entityGroupIds] - A list of entity group ids, separated by comma ','
-  /// * [acceptEncoding] 
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1722,7 +1912,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Dashboard] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Dashboard>> saveDashboard({ 
+  Future<Response<Dashboard>> saveDashboard({
     required Dashboard dashboard,
     String? entityGroupId,
     BuiltList<String>? entityGroupIds,
@@ -1734,7 +1924,8 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndDashboard);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfStringAndDashboard);
     final _path = r'/api/dashboard';
     final _options = Options(
       method: r'POST',
@@ -1749,11 +1940,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1762,8 +1950,19 @@ class DashboardControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (entityGroupId != null) r'entityGroupId': encodeQueryParameter(_serializers, entityGroupId, const FullType(String)),
-      if (entityGroupIds != null) r'entityGroupIds': encodeCollectionQueryParameter<String>(_serializers, entityGroupIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (entityGroupId != null)
+        r'entityGroupId': encodeQueryParameter(
+          _serializers,
+          entityGroupId,
+          const FullType(String),
+        ),
+      if (entityGroupIds != null)
+        r'entityGroupIds': encodeCollectionQueryParameter<String>(
+          _serializers,
+          entityGroupIds,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     dynamic _bodyData;
@@ -1771,10 +1970,9 @@ class DashboardControllerApi {
     try {
       const _type = FullType(Dashboard);
       _bodyData = _serializers.serialize(dashboard, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1799,11 +1997,13 @@ class DashboardControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Dashboard),
-      ) as Dashboard;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Dashboard),
+                )
+                as Dashboard;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1830,7 +2030,7 @@ class DashboardControllerApi {
   /// Update the home dashboard assignment for the current customer.   Available for users with &#39;CUSTOMER_USER&#39; authority.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the white labeling resource.
   ///
   /// Parameters:
-  /// * [homeDashboardInfo] 
+  /// * [homeDashboardInfo]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1840,7 +2040,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> setCustomerHomeDashboardInfo({ 
+  Future<Response<void>> setCustomerHomeDashboardInfo({
     required HomeDashboardInfo homeDashboardInfo,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1849,13 +2049,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerHomeDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerHomeDashboardInfo);
     final _path = r'/api/customer/dashboard/home/info';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1863,11 +2062,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1879,14 +2075,13 @@ class DashboardControllerApi {
 
     try {
       const _type = FullType(HomeDashboardInfo);
-      _bodyData = _serializers.serialize(homeDashboardInfo, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        homeDashboardInfo,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1909,7 +2104,7 @@ class DashboardControllerApi {
   /// Update the home dashboard assignment for the current tenant.   Available for users with &#39;TENANT_ADMIN&#39; authority.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the white labeling resource.
   ///
   /// Parameters:
-  /// * [homeDashboardInfo] 
+  /// * [homeDashboardInfo]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1919,7 +2114,7 @@ class DashboardControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> setTenantHomeDashboardInfo({ 
+  Future<Response<void>> setTenantHomeDashboardInfo({
     required HomeDashboardInfo homeDashboardInfo,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1928,13 +2123,12 @@ class DashboardControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerHomeDashboardInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerHomeDashboardInfo);
     final _path = r'/api/tenant/dashboard/home/info';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1942,11 +2136,8 @@ class DashboardControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1958,14 +2149,13 @@ class DashboardControllerApi {
 
     try {
       const _type = FullType(HomeDashboardInfo);
-      _bodyData = _serializers.serialize(homeDashboardInfo, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        homeDashboardInfo,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1983,5 +2173,4 @@ class DashboardControllerApi {
 
     return _response;
   }
-
 }

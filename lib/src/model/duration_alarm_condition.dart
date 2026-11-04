@@ -21,13 +21,16 @@ part 'duration_alarm_condition.g.dart';
 /// DurationAlarmCondition
 ///
 /// Properties:
-/// * [expression] 
-/// * [schedule] 
-/// * [type] 
-/// * [unit] 
-/// * [value] 
+/// * [expression]
+/// * [schedule]
+/// * [type]
+/// * [unit]
+/// * [value]
 @BuiltValue()
-abstract class DurationAlarmCondition implements AlarmCondition, Built<DurationAlarmCondition, DurationAlarmConditionBuilder> {
+abstract class DurationAlarmCondition
+    implements
+        AlarmCondition,
+        Built<DurationAlarmCondition, DurationAlarmConditionBuilder> {
   @BuiltValueField(wireName: r'unit')
   TimeUnit get unit;
   // enum unitEnum {  NANOSECONDS,  MICROSECONDS,  MILLISECONDS,  SECONDS,  MINUTES,  HOURS,  DAYS,  };
@@ -37,18 +40,25 @@ abstract class DurationAlarmCondition implements AlarmCondition, Built<DurationA
 
   DurationAlarmCondition._();
 
-  factory DurationAlarmCondition([void updates(DurationAlarmConditionBuilder b)]) = _$DurationAlarmCondition;
+  factory DurationAlarmCondition([
+    void updates(DurationAlarmConditionBuilder b),
+  ]) = _$DurationAlarmCondition;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DurationAlarmConditionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DurationAlarmCondition> get serializer => _$DurationAlarmConditionSerializer();
+  static Serializer<DurationAlarmCondition> get serializer =>
+      _$DurationAlarmConditionSerializer();
 }
 
-class _$DurationAlarmConditionSerializer implements PrimitiveSerializer<DurationAlarmCondition> {
+class _$DurationAlarmConditionSerializer
+    implements PrimitiveSerializer<DurationAlarmCondition> {
   @override
-  final Iterable<Type> types = const [DurationAlarmCondition, _$DurationAlarmCondition];
+  final Iterable<Type> types = const [
+    DurationAlarmCondition,
+    _$DurationAlarmCondition,
+  ];
 
   @override
   final String wireName = r'DurationAlarmCondition';
@@ -93,7 +103,11 @@ class _$DurationAlarmConditionSerializer implements PrimitiveSerializer<Duration
     DurationAlarmCondition object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,39 +123,51 @@ class _$DurationAlarmConditionSerializer implements PrimitiveSerializer<Duration
       final value = serializedList[i + 1];
       switch (key) {
         case r'schedule':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmConditionValueAlarmSchedule),
-          ) as AlarmConditionValueAlarmSchedule?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmConditionValueAlarmSchedule,
+                    ),
+                  )
+                  as AlarmConditionValueAlarmSchedule?;
           if (valueDes == null) continue;
           result.schedule.replace(valueDes);
           break;
         case r'unit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TimeUnit),
-          ) as TimeUnit;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TimeUnit),
+                  )
+                  as TimeUnit;
           result.unit = valueDes;
           break;
         case r'expression':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionExpression),
-          ) as AlarmConditionExpression;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionExpression),
+                  )
+                  as AlarmConditionExpression;
           result.expression = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionValueLong),
-          ) as AlarmConditionValueLong;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionValueLong),
+                  )
+                  as AlarmConditionValueLong;
           result.value.replace(valueDes);
           break;
         default:
@@ -172,5 +198,3 @@ class _$DurationAlarmConditionSerializer implements PrimitiveSerializer<Duration
     return result.build();
   }
 }
-
-

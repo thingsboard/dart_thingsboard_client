@@ -22,7 +22,8 @@ part 'tb_chat_request.g.dart';
 /// * [userMessage] - The actual user prompt that will be answered by the AI model
 /// * [chatModelConfig] - Configuration of the AI chat model that should execute the request
 @BuiltValue()
-abstract class TbChatRequest implements Built<TbChatRequest, TbChatRequestBuilder> {
+abstract class TbChatRequest
+    implements Built<TbChatRequest, TbChatRequestBuilder> {
   /// A system-level instruction that frames the user's input, setting the persona, tone, and constraints for the generated response
   @BuiltValueField(wireName: r'systemMessage')
   String? get systemMessage;
@@ -37,13 +38,15 @@ abstract class TbChatRequest implements Built<TbChatRequest, TbChatRequestBuilde
 
   TbChatRequest._();
 
-  factory TbChatRequest([void updates(TbChatRequestBuilder b)]) = _$TbChatRequest;
+  factory TbChatRequest([void updates(TbChatRequestBuilder b)]) =
+      _$TbChatRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbChatRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbChatRequest> get serializer => _$TbChatRequestSerializer();
+  static Serializer<TbChatRequest> get serializer =>
+      _$TbChatRequestSerializer();
 }
 
 class _$TbChatRequestSerializer implements PrimitiveSerializer<TbChatRequest> {
@@ -83,7 +86,11 @@ class _$TbChatRequestSerializer implements PrimitiveSerializer<TbChatRequest> {
     TbChatRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,25 +106,31 @@ class _$TbChatRequestSerializer implements PrimitiveSerializer<TbChatRequest> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'systemMessage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.systemMessage = valueDes;
           break;
         case r'userMessage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TbUserMessage),
-          ) as TbUserMessage;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TbUserMessage),
+                  )
+                  as TbUserMessage;
           result.userMessage.replace(valueDes);
           break;
         case r'chatModelConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AiModelConfig),
-          ) as AiModelConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AiModelConfig),
+                  )
+                  as AiModelConfig;
           result.chatModelConfig = valueDes;
           break;
         default:
@@ -148,5 +161,3 @@ class _$TbChatRequestSerializer implements PrimitiveSerializer<TbChatRequest> {
     return result.build();
   }
 }
-
-

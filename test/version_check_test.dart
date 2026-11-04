@@ -9,10 +9,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
-import 'package:thingsboard_client/src/thingsboard_client_base.dart';
 import 'package:thingsboard_client/src/thingsboard_client.dart';
-import 'package:thingsboard_client/src/model/login_models.dart';
-import 'package:thingsboard_client/src/http/http_utils.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/model/version_models.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
@@ -24,20 +21,23 @@ String createTestJwt({
   int expInSeconds = 3600,
   String tenantId = 'tenant-id',
 }) {
-  final header =
-      base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(utf8.encode(jsonEncode({
-    'sub': sub,
-    'scopes': [scope],
-    'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
-    'iss': 'test',
-    'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-    'firstName': 'Test',
-    'lastName': 'User',
-    'enabled': true,
-    'isPublic': false,
-    'tenantId': tenantId,
-  })));
+  final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
+  final payload = base64Url.encode(
+    utf8.encode(
+      jsonEncode({
+        'sub': sub,
+        'scopes': [scope],
+        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
+        'iss': 'test',
+        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
+        'firstName': 'Test',
+        'lastName': 'User',
+        'enabled': true,
+        'isPublic': false,
+        'tenantId': tenantId,
+      }),
+    ),
+  );
   return '$header.$payload.fake-signature';
 }
 
@@ -50,16 +50,24 @@ class MockHttpClientAdapter implements HttpClientAdapter {
   }
 
   @override
-  Future<ResponseBody> fetch(RequestOptions options,
-      Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
     requestedPaths.add(options.path);
     final handlers = _handlers[options.path];
     if (handlers != null && handlers.isNotEmpty) {
       final handler = handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
       return handler(options);
     }
-    return ResponseBody.fromString('{"message":"Not found"}', 404,
-        headers: {'content-type': ['application/json']});
+    return ResponseBody.fromString(
+      '{"message":"Not found"}',
+      404,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
   }
 
   @override
@@ -134,100 +142,124 @@ void main() {
       return client;
     }
 
-    test('init() throws ThingsboardError when server version is below minimum',
-        () async {
-      final client = await makeAuthenticatedClient();
+    test(
+      'init() throws ThingsboardError when server version is below minimum',
+      () async {
+        final client = await makeAuthenticatedClient();
 
-      mockAdapter.onRoute('/api/admin/updates', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({
-            'currentVersion': '3.5.0',
-            'updateAvailable': true,
-            'latestVersion': '4.4.0',
-          }),
-          200,
-          headers: {'content-type': ['application/json']},
-        );
-      });
+        mockAdapter.onRoute('/api/admin/updates', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({
+              'currentVersion': '3.5.0',
+              'updateAvailable': true,
+              'latestVersion': '4.4.0',
+            }),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      await expectLater(client.init(), throwsA(isA<ThingsboardError>()));
-    });
+        await expectLater(client.init(), throwsA(isA<ThingsboardError>()));
+      },
+    );
 
-    test('init() completes normally when server version meets minimum',
-        () async {
-      final client = await makeAuthenticatedClient();
+    test(
+      'init() completes normally when server version meets minimum',
+      () async {
+        final client = await makeAuthenticatedClient();
 
-      mockAdapter.onRoute('/api/admin/updates', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({
-            'currentVersion': '4.4.0',
-            'updateAvailable': false,
-          }),
-          200,
-          headers: {'content-type': ['application/json']},
-        );
-      });
+        mockAdapter.onRoute('/api/admin/updates', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({'currentVersion': '4.4.0', 'updateAvailable': false}),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      await expectLater(client.init(), completes);
-    });
+        await expectLater(client.init(), completes);
+      },
+    );
 
-    test('init() completes normally when /api/admin/updates returns 403 (non-admin)',
-        () async {
-      final client = await makeAuthenticatedClient(scope: 'TENANT_ADMIN');
+    test(
+      'init() completes normally when /api/admin/updates returns 403 (non-admin)',
+      () async {
+        final client = await makeAuthenticatedClient(scope: 'TENANT_ADMIN');
 
-      mockAdapter.onRoute('/api/admin/updates', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({'status': 403, 'message': 'Forbidden'}),
-          403,
-          headers: {'content-type': ['application/json']},
-        );
-      });
+        mockAdapter.onRoute('/api/admin/updates', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({'status': 403, 'message': 'Forbidden'}),
+            403,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      await expectLater(client.init(), completes);
-    });
+        await expectLater(client.init(), completes);
+      },
+    );
 
-    test('init() completes normally when /api/admin/updates returns 401 (unauthenticated)',
-        () async {
-      final client = await makeAuthenticatedClient();
+    test(
+      'init() completes normally when /api/admin/updates returns 401 (unauthenticated)',
+      () async {
+        final client = await makeAuthenticatedClient();
 
-      mockAdapter.onRoute('/api/admin/updates', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({'status': 401, 'message': 'Unauthorized'}),
-          401,
-          headers: {'content-type': ['application/json']},
-        );
-      });
+        mockAdapter.onRoute('/api/admin/updates', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({'status': 401, 'message': 'Unauthorized'}),
+            401,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      await expectLater(client.init(), completes);
-    });
+        await expectLater(client.init(), completes);
+      },
+    );
 
-    test('init() completes normally when /api/admin/updates returns a network error',
-        () async {
-      final client = await makeAuthenticatedClient();
+    test(
+      'init() completes normally when /api/admin/updates returns a network error',
+      () async {
+        final client = await makeAuthenticatedClient();
 
-      // Return a 500 to simulate server error — should be silently ignored
-      mockAdapter.onRoute('/api/admin/updates', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({'status': 500, 'message': 'Internal Server Error'}),
-          500,
-          headers: {'content-type': ['application/json']},
-        );
-      });
+        // Return a 500 to simulate server error — should be silently ignored
+        mockAdapter.onRoute('/api/admin/updates', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({'status': 500, 'message': 'Internal Server Error'}),
+            500,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      await expectLater(client.init(), completes);
-    });
+        await expectLater(client.init(), completes);
+      },
+    );
 
     test('init() does not report an unreachable server to onError', () async {
       final reportedErrors = <ThingsboardError>[];
-      final client = ThingsboardClient('http://localhost:8080',
-          onError: reportedErrors.add);
+      final client = ThingsboardClient(
+        'http://localhost:8080',
+        onError: reportedErrors.add,
+      );
       setMockAdapter(client, mockAdapter);
       await client.setUserFromJwtToken(
-          createTestJwt(), createTestJwt(scope: 'REFRESH_TOKEN'), false);
+        createTestJwt(),
+        createTestJwt(scope: 'REFRESH_TOKEN'),
+        false,
+      );
 
       mockAdapter.onRoute('/api/admin/updates', (req) {
         throw DioException.connectionTimeout(
-            timeout: const Duration(seconds: 20), requestOptions: req);
+          timeout: const Duration(seconds: 20),
+          requestOptions: req,
+        );
       });
 
       await expectLater(client.init(), completes);

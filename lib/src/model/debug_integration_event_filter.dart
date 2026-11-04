@@ -20,15 +20,18 @@ part 'debug_integration_event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 /// * [server] - String value representing the server name, identifier or ip address where the platform is running
 /// * [isError] - Boolean value to filter the errors
 /// * [errorStr] - The case insensitive 'contains' filter based on error message
-/// * [type] 
-/// * [message] 
-/// * [statusIntegration] 
+/// * [type]
+/// * [message]
+/// * [statusIntegration]
 @BuiltValue()
-abstract class DebugIntegrationEventFilter implements EventFilter, Built<DebugIntegrationEventFilter, DebugIntegrationEventFilterBuilder> {
+abstract class DebugIntegrationEventFilter
+    implements
+        EventFilter,
+        Built<DebugIntegrationEventFilter, DebugIntegrationEventFilterBuilder> {
   /// String value representing the server name, identifier or ip address where the platform is running
   @BuiltValueField(wireName: r'server')
   String? get server;
@@ -53,18 +56,25 @@ abstract class DebugIntegrationEventFilter implements EventFilter, Built<DebugIn
 
   DebugIntegrationEventFilter._();
 
-  factory DebugIntegrationEventFilter([void updates(DebugIntegrationEventFilterBuilder b)]) = _$DebugIntegrationEventFilter;
+  factory DebugIntegrationEventFilter([
+    void updates(DebugIntegrationEventFilterBuilder b),
+  ]) = _$DebugIntegrationEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DebugIntegrationEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DebugIntegrationEventFilter> get serializer => _$DebugIntegrationEventFilterSerializer();
+  static Serializer<DebugIntegrationEventFilter> get serializer =>
+      _$DebugIntegrationEventFilterSerializer();
 }
 
-class _$DebugIntegrationEventFilterSerializer implements PrimitiveSerializer<DebugIntegrationEventFilter> {
+class _$DebugIntegrationEventFilterSerializer
+    implements PrimitiveSerializer<DebugIntegrationEventFilter> {
   @override
-  final Iterable<Type> types = const [DebugIntegrationEventFilter, _$DebugIntegrationEventFilter];
+  final Iterable<Type> types = const [
+    DebugIntegrationEventFilter,
+    _$DebugIntegrationEventFilter,
+  ];
 
   @override
   final String wireName = r'DebugIntegrationEventFilter';
@@ -136,7 +146,11 @@ class _$DebugIntegrationEventFilterSerializer implements PrimitiveSerializer<Deb
     DebugIntegrationEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -152,65 +166,83 @@ class _$DebugIntegrationEventFilterSerializer implements PrimitiveSerializer<Deb
       final value = serializedList[i + 1];
       switch (key) {
         case r'server':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.server = valueDes;
           break;
         case r'isError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DebugIntegrationEventFilterIsErrorEnum),
-          ) as DebugIntegrationEventFilterIsErrorEnum?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DebugIntegrationEventFilterIsErrorEnum,
+                    ),
+                  )
+                  as DebugIntegrationEventFilterIsErrorEnum?;
           if (valueDes == null) continue;
           result.isError = valueDes;
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
         case r'statusIntegration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.statusIntegration = valueDes;
           break;
         case r'errorStr':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorStr = valueDes;
           break;
@@ -243,22 +275,25 @@ class _$DebugIntegrationEventFilterSerializer implements PrimitiveSerializer<Deb
   }
 }
 
-
 /// Boolean value to filter the errors
 class DebugIntegrationEventFilterIsErrorEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'false')
-  static const DebugIntegrationEventFilterIsErrorEnum false_ = _$debugIntegrationEventFilterIsErrorEnum_false_;
+  static const DebugIntegrationEventFilterIsErrorEnum false_ =
+      _$debugIntegrationEventFilterIsErrorEnum_false_;
   @BuiltValueEnumConst(wireName: r'true')
-  static const DebugIntegrationEventFilterIsErrorEnum true_ = _$debugIntegrationEventFilterIsErrorEnum_true_;
+  static const DebugIntegrationEventFilterIsErrorEnum true_ =
+      _$debugIntegrationEventFilterIsErrorEnum_true_;
   @BuiltValueEnumConst(wireName: r'11184809', fallback: true)
-  static const DebugIntegrationEventFilterIsErrorEnum unknownDefaultOpenApi = _$debugIntegrationEventFilterIsErrorEnum_unknownDefaultOpenApi;
+  static const DebugIntegrationEventFilterIsErrorEnum unknownDefaultOpenApi =
+      _$debugIntegrationEventFilterIsErrorEnum_unknownDefaultOpenApi;
 
-  static Serializer<DebugIntegrationEventFilterIsErrorEnum> get serializer => _$debugIntegrationEventFilterIsErrorEnumSerializer;
+  static Serializer<DebugIntegrationEventFilterIsErrorEnum> get serializer =>
+      _$debugIntegrationEventFilterIsErrorEnumSerializer;
 
-  const DebugIntegrationEventFilterIsErrorEnum._(String name): super(name);
+  const DebugIntegrationEventFilterIsErrorEnum._(String name) : super(name);
 
-  static BuiltSet<DebugIntegrationEventFilterIsErrorEnum> get values => _$debugIntegrationEventFilterIsErrorEnumValues;
-  static DebugIntegrationEventFilterIsErrorEnum valueOf(String name) => _$debugIntegrationEventFilterIsErrorEnumValueOf(name);
+  static BuiltSet<DebugIntegrationEventFilterIsErrorEnum> get values =>
+      _$debugIntegrationEventFilterIsErrorEnumValues;
+  static DebugIntegrationEventFilterIsErrorEnum valueOf(String name) =>
+      _$debugIntegrationEventFilterIsErrorEnumValueOf(name);
 }
-

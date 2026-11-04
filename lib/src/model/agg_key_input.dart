@@ -17,10 +17,11 @@ part 'agg_key_input.g.dart';
 /// AggKeyInput
 ///
 /// Properties:
-/// * [type] 
-/// * [key] 
+/// * [type]
+/// * [key]
 @BuiltValue()
-abstract class AggKeyInput implements AggInput, Built<AggKeyInput, AggKeyInputBuilder> {
+abstract class AggKeyInput
+    implements AggInput, Built<AggKeyInput, AggKeyInputBuilder> {
   @BuiltValueField(wireName: r'key')
   String? get key;
 
@@ -67,7 +68,11 @@ class _$AggKeyInputSerializer implements PrimitiveSerializer<AggKeyInput> {
     AggKeyInput object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -83,17 +88,21 @@ class _$AggKeyInputSerializer implements PrimitiveSerializer<AggKeyInput> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
@@ -125,5 +134,3 @@ class _$AggKeyInputSerializer implements PrimitiveSerializer<AggKeyInput> {
     return result.build();
   }
 }
-
-

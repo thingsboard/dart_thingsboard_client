@@ -23,7 +23,8 @@ part 'page_data_agent_bulk_action.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataAgentBulkAction implements Built<PageDataAgentBulkAction, PageDataAgentBulkActionBuilder> {
+abstract class PageDataAgentBulkAction
+    implements Built<PageDataAgentBulkAction, PageDataAgentBulkActionBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<AgentBulkAction>? get data;
@@ -42,18 +43,25 @@ abstract class PageDataAgentBulkAction implements Built<PageDataAgentBulkAction,
 
   PageDataAgentBulkAction._();
 
-  factory PageDataAgentBulkAction([void updates(PageDataAgentBulkActionBuilder b)]) = _$PageDataAgentBulkAction;
+  factory PageDataAgentBulkAction([
+    void updates(PageDataAgentBulkActionBuilder b),
+  ]) = _$PageDataAgentBulkAction;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataAgentBulkActionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataAgentBulkAction> get serializer => _$PageDataAgentBulkActionSerializer();
+  static Serializer<PageDataAgentBulkAction> get serializer =>
+      _$PageDataAgentBulkActionSerializer();
 }
 
-class _$PageDataAgentBulkActionSerializer implements PrimitiveSerializer<PageDataAgentBulkAction> {
+class _$PageDataAgentBulkActionSerializer
+    implements PrimitiveSerializer<PageDataAgentBulkAction> {
   @override
-  final Iterable<Type> types = const [PageDataAgentBulkAction, _$PageDataAgentBulkAction];
+  final Iterable<Type> types = const [
+    PageDataAgentBulkAction,
+    _$PageDataAgentBulkAction,
+  ];
 
   @override
   final String wireName = r'PageDataAgentBulkAction';
@@ -99,7 +107,11 @@ class _$PageDataAgentBulkActionSerializer implements PrimitiveSerializer<PageDat
     PageDataAgentBulkAction object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +127,44 @@ class _$PageDataAgentBulkActionSerializer implements PrimitiveSerializer<PageDat
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentBulkAction)]),
-          ) as BuiltList<AgentBulkAction>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentBulkAction),
+                    ]),
+                  )
+                  as BuiltList<AgentBulkAction>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +196,3 @@ class _$PageDataAgentBulkActionSerializer implements PrimitiveSerializer<PageDat
     return result.build();
   }
 }
-
-

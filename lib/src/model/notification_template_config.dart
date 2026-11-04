@@ -20,16 +20,19 @@ part 'notification_template_config.g.dart';
 /// NotificationTemplateConfig
 ///
 /// Properties:
-/// * [deliveryMethodsTemplates] 
-/// * [attachReport] 
-/// * [reportTemplateId] 
-/// * [userId] 
-/// * [timezone] 
-/// * [makePublic] 
+/// * [deliveryMethodsTemplates]
+/// * [attachReport]
+/// * [reportTemplateId]
+/// * [userId]
+/// * [timezone]
+/// * [makePublic]
 @BuiltValue()
-abstract class NotificationTemplateConfig implements Built<NotificationTemplateConfig, NotificationTemplateConfigBuilder> {
+abstract class NotificationTemplateConfig
+    implements
+        Built<NotificationTemplateConfig, NotificationTemplateConfigBuilder> {
   @BuiltValueField(wireName: r'deliveryMethodsTemplates')
-  BuiltMap<String, DeliveryMethodNotificationTemplate> get deliveryMethodsTemplates;
+  BuiltMap<String, DeliveryMethodNotificationTemplate>
+  get deliveryMethodsTemplates;
 
   @BuiltValueField(wireName: r'attachReport')
   bool? get attachReport;
@@ -48,18 +51,25 @@ abstract class NotificationTemplateConfig implements Built<NotificationTemplateC
 
   NotificationTemplateConfig._();
 
-  factory NotificationTemplateConfig([void updates(NotificationTemplateConfigBuilder b)]) = _$NotificationTemplateConfig;
+  factory NotificationTemplateConfig([
+    void updates(NotificationTemplateConfigBuilder b),
+  ]) = _$NotificationTemplateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationTemplateConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationTemplateConfig> get serializer => _$NotificationTemplateConfigSerializer();
+  static Serializer<NotificationTemplateConfig> get serializer =>
+      _$NotificationTemplateConfigSerializer();
 }
 
-class _$NotificationTemplateConfigSerializer implements PrimitiveSerializer<NotificationTemplateConfig> {
+class _$NotificationTemplateConfigSerializer
+    implements PrimitiveSerializer<NotificationTemplateConfig> {
   @override
-  final Iterable<Type> types = const [NotificationTemplateConfig, _$NotificationTemplateConfig];
+  final Iterable<Type> types = const [
+    NotificationTemplateConfig,
+    _$NotificationTemplateConfig,
+  ];
 
   @override
   final String wireName = r'NotificationTemplateConfig';
@@ -72,7 +82,10 @@ class _$NotificationTemplateConfigSerializer implements PrimitiveSerializer<Noti
     yield r'deliveryMethodsTemplates';
     yield serializers.serialize(
       object.deliveryMethodsTemplates,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(DeliveryMethodNotificationTemplate)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(DeliveryMethodNotificationTemplate),
+      ]),
     );
     if (object.attachReport != null) {
       yield r'attachReport';
@@ -117,7 +130,11 @@ class _$NotificationTemplateConfigSerializer implements PrimitiveSerializer<Noti
     NotificationTemplateConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -133,49 +150,64 @@ class _$NotificationTemplateConfigSerializer implements PrimitiveSerializer<Noti
       final value = serializedList[i + 1];
       switch (key) {
         case r'deliveryMethodsTemplates':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(DeliveryMethodNotificationTemplate)]),
-          ) as BuiltMap<String, DeliveryMethodNotificationTemplate>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(DeliveryMethodNotificationTemplate),
+                    ]),
+                  )
+                  as BuiltMap<String, DeliveryMethodNotificationTemplate>;
           result.deliveryMethodsTemplates.replace(valueDes);
           break;
         case r'attachReport':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.attachReport = valueDes;
           break;
         case r'reportTemplateId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportTemplateId),
-          ) as ReportTemplateId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReportTemplateId),
+                  )
+                  as ReportTemplateId?;
           if (valueDes == null) continue;
           result.reportTemplateId.replace(valueDes);
           break;
         case r'userId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.userId.replace(valueDes);
           break;
         case r'timezone':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.timezone = valueDes;
           break;
         case r'makePublic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.makePublic = valueDes;
           break;
@@ -207,5 +239,3 @@ class _$NotificationTemplateConfigSerializer implements PrimitiveSerializer<Noti
     return result.build();
   }
 }
-
-

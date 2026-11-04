@@ -19,13 +19,14 @@ part 'cell_settings.g.dart';
 /// CellSettings
 ///
 /// Properties:
-/// * [font] 
-/// * [color] 
-/// * [backgroundColor] 
-/// * [textAlignment] 
-/// * [verticalAlignment] 
+/// * [font]
+/// * [color]
+/// * [backgroundColor]
+/// * [textAlignment]
+/// * [verticalAlignment]
 @BuiltValue()
-abstract class CellSettings implements Built<CellSettings, CellSettingsBuilder> {
+abstract class CellSettings
+    implements Built<CellSettings, CellSettingsBuilder> {
   @BuiltValueField(wireName: r'font')
   Font? get font;
 
@@ -109,7 +110,11 @@ class _$CellSettingsSerializer implements PrimitiveSerializer<CellSettings> {
     CellSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -125,42 +130,52 @@ class _$CellSettingsSerializer implements PrimitiveSerializer<CellSettings> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'font':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.font.replace(valueDes);
           break;
         case r'color':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.color = valueDes;
           break;
         case r'backgroundColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.backgroundColor = valueDes;
           break;
         case r'textAlignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TextAlignment),
-          ) as TextAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TextAlignment),
+                  )
+                  as TextAlignment?;
           if (valueDes == null) continue;
           result.textAlignment = valueDes;
           break;
         case r'verticalAlignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(VerticalAlignment),
-          ) as VerticalAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(VerticalAlignment),
+                  )
+                  as VerticalAlignment?;
           if (valueDes == null) continue;
           result.verticalAlignment = valueDes;
           break;
@@ -192,5 +207,3 @@ class _$CellSettingsSerializer implements PrimitiveSerializer<CellSettings> {
     return result.build();
   }
 }
-
-

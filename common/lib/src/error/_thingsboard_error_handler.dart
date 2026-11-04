@@ -5,5 +5,5 @@
 
 import 'thingsboard_error.dart';
 
-ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) =>
+ThingsboardError toThingsboardError(Object error, [StackTrace? stackTrace]) =>
     throw UnsupportedError('');

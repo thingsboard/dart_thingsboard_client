@@ -19,9 +19,9 @@ part 'key_filter.g.dart';
 /// KeyFilter
 ///
 /// Properties:
-/// * [key] 
-/// * [valueType] 
-/// * [predicate] 
+/// * [key]
+/// * [valueType]
+/// * [predicate]
 @BuiltValue()
 abstract class KeyFilter implements Built<KeyFilter, KeyFilterBuilder> {
   @BuiltValueField(wireName: r'key')
@@ -86,7 +86,11 @@ class _$KeyFilterSerializer implements PrimitiveSerializer<KeyFilter> {
     KeyFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +106,32 @@ class _$KeyFilterSerializer implements PrimitiveSerializer<KeyFilter> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityKey),
-          ) as EntityKey?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityKey),
+                  )
+                  as EntityKey?;
           if (valueDes == null) continue;
           result.key.replace(valueDes);
           break;
         case r'valueType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityKeyValueType),
-          ) as EntityKeyValueType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityKeyValueType),
+                  )
+                  as EntityKeyValueType?;
           if (valueDes == null) continue;
           result.valueType = valueDes;
           break;
         case r'predicate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(KeyFilterPredicate),
-          ) as KeyFilterPredicate?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(KeyFilterPredicate),
+                  )
+                  as KeyFilterPredicate?;
           if (valueDes == null) continue;
           result.predicate = valueDes;
           break;
@@ -153,5 +163,3 @@ class _$KeyFilterSerializer implements PrimitiveSerializer<KeyFilter> {
     return result.build();
   }
 }
-
-

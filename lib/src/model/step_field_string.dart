@@ -16,10 +16,11 @@ part 'step_field_string.g.dart';
 /// StepFieldString
 ///
 /// Properties:
-/// * [value] 
-/// * [userChoice] 
+/// * [value]
+/// * [userChoice]
 @BuiltValue()
-abstract class StepFieldString implements Built<StepFieldString, StepFieldStringBuilder> {
+abstract class StepFieldString
+    implements Built<StepFieldString, StepFieldStringBuilder> {
   @BuiltValueField(wireName: r'value')
   String? get value;
 
@@ -28,16 +29,19 @@ abstract class StepFieldString implements Built<StepFieldString, StepFieldString
 
   StepFieldString._();
 
-  factory StepFieldString([void updates(StepFieldStringBuilder b)]) = _$StepFieldString;
+  factory StepFieldString([void updates(StepFieldStringBuilder b)]) =
+      _$StepFieldString;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StepFieldStringBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StepFieldString> get serializer => _$StepFieldStringSerializer();
+  static Serializer<StepFieldString> get serializer =>
+      _$StepFieldStringSerializer();
 }
 
-class _$StepFieldStringSerializer implements PrimitiveSerializer<StepFieldString> {
+class _$StepFieldStringSerializer
+    implements PrimitiveSerializer<StepFieldString> {
   @override
   final Iterable<Type> types = const [StepFieldString, _$StepFieldString];
 
@@ -71,7 +75,11 @@ class _$StepFieldStringSerializer implements PrimitiveSerializer<StepFieldString
     StepFieldString object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +95,22 @@ class _$StepFieldStringSerializer implements PrimitiveSerializer<StepFieldString
       final value = serializedList[i + 1];
       switch (key) {
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'userChoice':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.userChoice = valueDes;
           break;
@@ -130,5 +142,3 @@ class _$StepFieldStringSerializer implements PrimitiveSerializer<StepFieldString
     return result.build();
   }
 }
-
-

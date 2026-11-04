@@ -16,12 +16,14 @@ part 'time_series_chart_grid_settings.g.dart';
 /// TimeSeriesChartGridSettings
 ///
 /// Properties:
-/// * [show_] 
-/// * [backgroundColor] 
-/// * [borderWidth] 
-/// * [borderColor] 
+/// * [show_]
+/// * [backgroundColor]
+/// * [borderWidth]
+/// * [borderColor]
 @BuiltValue()
-abstract class TimeSeriesChartGridSettings implements Built<TimeSeriesChartGridSettings, TimeSeriesChartGridSettingsBuilder> {
+abstract class TimeSeriesChartGridSettings
+    implements
+        Built<TimeSeriesChartGridSettings, TimeSeriesChartGridSettingsBuilder> {
   @BuiltValueField(wireName: r'show')
   bool? get show_;
 
@@ -36,18 +38,25 @@ abstract class TimeSeriesChartGridSettings implements Built<TimeSeriesChartGridS
 
   TimeSeriesChartGridSettings._();
 
-  factory TimeSeriesChartGridSettings([void updates(TimeSeriesChartGridSettingsBuilder b)]) = _$TimeSeriesChartGridSettings;
+  factory TimeSeriesChartGridSettings([
+    void updates(TimeSeriesChartGridSettingsBuilder b),
+  ]) = _$TimeSeriesChartGridSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesChartGridSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartGridSettings> get serializer => _$TimeSeriesChartGridSettingsSerializer();
+  static Serializer<TimeSeriesChartGridSettings> get serializer =>
+      _$TimeSeriesChartGridSettingsSerializer();
 }
 
-class _$TimeSeriesChartGridSettingsSerializer implements PrimitiveSerializer<TimeSeriesChartGridSettings> {
+class _$TimeSeriesChartGridSettingsSerializer
+    implements PrimitiveSerializer<TimeSeriesChartGridSettings> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartGridSettings, _$TimeSeriesChartGridSettings];
+  final Iterable<Type> types = const [
+    TimeSeriesChartGridSettings,
+    _$TimeSeriesChartGridSettings,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartGridSettings';
@@ -93,7 +102,11 @@ class _$TimeSeriesChartGridSettingsSerializer implements PrimitiveSerializer<Tim
     TimeSeriesChartGridSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,34 +122,42 @@ class _$TimeSeriesChartGridSettingsSerializer implements PrimitiveSerializer<Tim
       final value = serializedList[i + 1];
       switch (key) {
         case r'show':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.show_ = valueDes;
           break;
         case r'backgroundColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.backgroundColor = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
@@ -168,5 +189,3 @@ class _$TimeSeriesChartGridSettingsSerializer implements PrimitiveSerializer<Tim
     return result.build();
   }
 }
-
-

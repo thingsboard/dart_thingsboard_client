@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'edge_connectivity_event.g.dart';
 
 class EdgeConnectivityEvent extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CONNECTED')
   static const EdgeConnectivityEvent CONNECTED = _$CONNECTED;
   @BuiltValueEnumConst(wireName: r'DISCONNECTED')
   static const EdgeConnectivityEvent DISCONNECTED = _$DISCONNECTED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const EdgeConnectivityEvent unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const EdgeConnectivityEvent unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<EdgeConnectivityEvent> get serializer => _$edgeConnectivityEventSerializer;
+  static Serializer<EdgeConnectivityEvent> get serializer =>
+      _$edgeConnectivityEventSerializer;
 
-  const EdgeConnectivityEvent._(String name): super(name);
+  const EdgeConnectivityEvent._(String name) : super(name);
 
   static BuiltSet<EdgeConnectivityEvent> get values => _$values;
   static EdgeConnectivityEvent valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class EdgeConnectivityEvent extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class EdgeConnectivityEventMixin = Object with _$EdgeConnectivityEventMixin;
-
+abstract class EdgeConnectivityEventMixin = Object
+    with _$EdgeConnectivityEventMixin;

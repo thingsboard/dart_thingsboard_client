@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'device_credentials_type.g.dart';
 
 class DeviceCredentialsType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ACCESS_TOKEN')
   static const DeviceCredentialsType ACCESS_TOKEN = _$ACCESS_TOKEN;
   @BuiltValueEnumConst(wireName: r'X509_CERTIFICATE')
@@ -25,11 +24,13 @@ class DeviceCredentialsType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'LWM2M_CREDENTIALS')
   static const DeviceCredentialsType LWM2M_CREDENTIALS = _$LWM2M_CREDENTIALS;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const DeviceCredentialsType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const DeviceCredentialsType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<DeviceCredentialsType> get serializer => _$deviceCredentialsTypeSerializer;
+  static Serializer<DeviceCredentialsType> get serializer =>
+      _$deviceCredentialsTypeSerializer;
 
-  const DeviceCredentialsType._(String name): super(name);
+  const DeviceCredentialsType._(String name) : super(name);
 
   static BuiltSet<DeviceCredentialsType> get values => _$values;
   static DeviceCredentialsType valueOf(String name) => _$valueOf(name);
@@ -41,5 +42,5 @@ class DeviceCredentialsType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class DeviceCredentialsTypeMixin = Object with _$DeviceCredentialsTypeMixin;
-
+abstract class DeviceCredentialsTypeMixin = Object
+    with _$DeviceCredentialsTypeMixin;

@@ -22,13 +22,16 @@ part 'sub_report_component.g.dart';
 /// SubReportComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [dataSources] 
-/// * [templateId] 
-/// * [avoidPageBreakInside] 
+/// * [subType]
+/// * [type]
+/// * [dataSources]
+/// * [templateId]
+/// * [avoidPageBreakInside]
 @BuiltValue()
-abstract class SubReportComponent implements ReportComponent, Built<SubReportComponent, SubReportComponentBuilder> {
+abstract class SubReportComponent
+    implements
+        ReportComponent,
+        Built<SubReportComponent, SubReportComponentBuilder> {
   @BuiltValueField(wireName: r'templateId')
   ReportTemplateId? get templateId;
 
@@ -40,16 +43,19 @@ abstract class SubReportComponent implements ReportComponent, Built<SubReportCom
 
   SubReportComponent._();
 
-  factory SubReportComponent([void updates(SubReportComponentBuilder b)]) = _$SubReportComponent;
+  factory SubReportComponent([void updates(SubReportComponentBuilder b)]) =
+      _$SubReportComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SubReportComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SubReportComponent> get serializer => _$SubReportComponentSerializer();
+  static Serializer<SubReportComponent> get serializer =>
+      _$SubReportComponentSerializer();
 }
 
-class _$SubReportComponentSerializer implements PrimitiveSerializer<SubReportComponent> {
+class _$SubReportComponentSerializer
+    implements PrimitiveSerializer<SubReportComponent> {
   @override
   final Iterable<Type> types = const [SubReportComponent, _$SubReportComponent];
 
@@ -100,7 +106,11 @@ class _$SubReportComponentSerializer implements PrimitiveSerializer<SubReportCom
     SubReportComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -116,40 +126,52 @@ class _$SubReportComponentSerializer implements PrimitiveSerializer<SubReportCom
       final value = serializedList[i + 1];
       switch (key) {
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'templateId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportTemplateId),
-          ) as ReportTemplateId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReportTemplateId),
+                  )
+                  as ReportTemplateId?;
           if (valueDes == null) continue;
           result.templateId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'dataSources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DataSource)]),
-          ) as BuiltList<DataSource>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DataSource),
+                    ]),
+                  )
+                  as BuiltList<DataSource>?;
           if (valueDes == null) continue;
           result.dataSources.replace(valueDes);
           break;
         case r'avoidPageBreakInside':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.avoidPageBreakInside = valueDes;
           break;
@@ -181,5 +203,3 @@ class _$SubReportComponentSerializer implements PrimitiveSerializer<SubReportCom
     return result.build();
   }
 }
-
-

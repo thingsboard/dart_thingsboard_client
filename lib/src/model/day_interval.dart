@@ -17,11 +17,12 @@ part 'day_interval.g.dart';
 /// DayInterval
 ///
 /// Properties:
-/// * [type] 
-/// * [tz] 
-/// * [offsetSec] 
+/// * [type]
+/// * [tz]
+/// * [offsetSec]
 @BuiltValue()
-abstract class DayInterval implements AggInterval, Built<DayInterval, DayIntervalBuilder> {
+abstract class DayInterval
+    implements AggInterval, Built<DayInterval, DayIntervalBuilder> {
   @BuiltValueField(wireName: r'tz')
   String get tz;
 
@@ -76,7 +77,11 @@ class _$DayIntervalSerializer implements PrimitiveSerializer<DayInterval> {
     DayInterval object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,25 +97,31 @@ class _$DayIntervalSerializer implements PrimitiveSerializer<DayInterval> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'offsetSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.offsetSec = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'tz':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tz = valueDes;
           break;
         default:
@@ -141,5 +152,3 @@ class _$DayIntervalSerializer implements PrimitiveSerializer<DayInterval> {
     return result.build();
   }
 }
-
-

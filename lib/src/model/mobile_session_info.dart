@@ -16,24 +16,28 @@ part 'mobile_session_info.g.dart';
 /// MobileSessionInfo
 ///
 /// Properties:
-/// * [fcmTokenTimestamp] 
+/// * [fcmTokenTimestamp]
 @BuiltValue()
-abstract class MobileSessionInfo implements Built<MobileSessionInfo, MobileSessionInfoBuilder> {
+abstract class MobileSessionInfo
+    implements Built<MobileSessionInfo, MobileSessionInfoBuilder> {
   @BuiltValueField(wireName: r'fcmTokenTimestamp')
   int? get fcmTokenTimestamp;
 
   MobileSessionInfo._();
 
-  factory MobileSessionInfo([void updates(MobileSessionInfoBuilder b)]) = _$MobileSessionInfo;
+  factory MobileSessionInfo([void updates(MobileSessionInfoBuilder b)]) =
+      _$MobileSessionInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileSessionInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileSessionInfo> get serializer => _$MobileSessionInfoSerializer();
+  static Serializer<MobileSessionInfo> get serializer =>
+      _$MobileSessionInfoSerializer();
 }
 
-class _$MobileSessionInfoSerializer implements PrimitiveSerializer<MobileSessionInfo> {
+class _$MobileSessionInfoSerializer
+    implements PrimitiveSerializer<MobileSessionInfo> {
   @override
   final Iterable<Type> types = const [MobileSessionInfo, _$MobileSessionInfo];
 
@@ -60,7 +64,11 @@ class _$MobileSessionInfoSerializer implements PrimitiveSerializer<MobileSession
     MobileSessionInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +84,12 @@ class _$MobileSessionInfoSerializer implements PrimitiveSerializer<MobileSession
       final value = serializedList[i + 1];
       switch (key) {
         case r'fcmTokenTimestamp':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.fcmTokenTimestamp = valueDes;
           break;
@@ -111,5 +121,3 @@ class _$MobileSessionInfoSerializer implements PrimitiveSerializer<MobileSession
     return result.build();
   }
 }
-
-

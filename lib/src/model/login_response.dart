@@ -19,7 +19,8 @@ part 'login_response.g.dart';
 /// * [token] - JWT token
 /// * [refreshToken] - Refresh token
 @BuiltValue()
-abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilder> {
+abstract class LoginResponse
+    implements Built<LoginResponse, LoginResponseBuilder> {
   /// JWT token
   @BuiltValueField(wireName: r'token')
   String get token;
@@ -30,13 +31,15 @@ abstract class LoginResponse implements Built<LoginResponse, LoginResponseBuilde
 
   LoginResponse._();
 
-  factory LoginResponse([void updates(LoginResponseBuilder b)]) = _$LoginResponse;
+  factory LoginResponse([void updates(LoginResponseBuilder b)]) =
+      _$LoginResponse;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LoginResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LoginResponse> get serializer => _$LoginResponseSerializer();
+  static Serializer<LoginResponse> get serializer =>
+      _$LoginResponseSerializer();
 }
 
 class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
@@ -69,7 +72,11 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
     LoginResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +92,21 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'token':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.token = valueDes;
           break;
         case r'refreshToken':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.refreshToken = valueDes;
           break;
         default:
@@ -126,5 +137,3 @@ class _$LoginResponseSerializer implements PrimitiveSerializer<LoginResponse> {
     return result.build();
   }
 }
-
-

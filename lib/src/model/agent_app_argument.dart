@@ -30,7 +30,8 @@ part 'agent_app_argument.g.dart';
 /// * [defaultValue] - Optional fallback value used when the source has no value for the key.
 /// * [format] - How the resolved value is injected into the compose: STRING (quoted) or JSON (raw, for arrays/objects/numbers when the placeholder is the whole value). Defaults to STRING.
 @BuiltValue()
-abstract class AgentAppArgument implements Built<AgentAppArgument, AgentAppArgumentBuilder> {
+abstract class AgentAppArgument
+    implements Built<AgentAppArgument, AgentAppArgumentBuilder> {
   /// Argument name, referenced in the compose as ${tb.<name>}.
   @BuiltValueField(wireName: r'name')
   String? get name;
@@ -69,16 +70,19 @@ abstract class AgentAppArgument implements Built<AgentAppArgument, AgentAppArgum
 
   AgentAppArgument._();
 
-  factory AgentAppArgument([void updates(AgentAppArgumentBuilder b)]) = _$AgentAppArgument;
+  factory AgentAppArgument([void updates(AgentAppArgumentBuilder b)]) =
+      _$AgentAppArgument;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentAppArgumentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentAppArgument> get serializer => _$AgentAppArgumentSerializer();
+  static Serializer<AgentAppArgument> get serializer =>
+      _$AgentAppArgumentSerializer();
 }
 
-class _$AgentAppArgumentSerializer implements PrimitiveSerializer<AgentAppArgument> {
+class _$AgentAppArgumentSerializer
+    implements PrimitiveSerializer<AgentAppArgument> {
   @override
   final Iterable<Type> types = const [AgentAppArgument, _$AgentAppArgument];
 
@@ -154,7 +158,11 @@ class _$AgentAppArgumentSerializer implements PrimitiveSerializer<AgentAppArgume
     AgentAppArgument object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -170,66 +178,88 @@ class _$AgentAppArgumentSerializer implements PrimitiveSerializer<AgentAppArgume
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'sourceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppArgumentSource),
-          ) as AgentAppArgumentSource?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentAppArgumentSource,
+                    ),
+                  )
+                  as AgentAppArgumentSource?;
           if (valueDes == null) continue;
           result.sourceType = valueDes;
           break;
         case r'sourceEntityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.sourceEntityId = valueDes;
           break;
         case r'valueType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppArgumentValueType),
-          ) as AgentAppArgumentValueType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentAppArgumentValueType,
+                    ),
+                  )
+                  as AgentAppArgumentValueType?;
           if (valueDes == null) continue;
           result.valueType = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AttributeScope),
-          ) as AttributeScope?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AttributeScope),
+                  )
+                  as AttributeScope?;
           if (valueDes == null) continue;
           result.scope = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'defaultValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultValue = valueDes;
           break;
         case r'format':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppArgumentFormat),
-          ) as AgentAppArgumentFormat?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentAppArgumentFormat,
+                    ),
+                  )
+                  as AgentAppArgumentFormat?;
           if (valueDes == null) continue;
           result.format = valueDes;
           break;
@@ -261,5 +291,3 @@ class _$AgentAppArgumentSerializer implements PrimitiveSerializer<AgentAppArgume
     return result.build();
   }
 }
-
-

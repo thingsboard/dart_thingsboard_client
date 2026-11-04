@@ -26,45 +26,59 @@ String createTestJwt({
   String tenantId = 'tenant-id',
   String? customerId,
 }) {
-  final header =
-      base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(utf8.encode(jsonEncode({
-    'sub': sub,
-    'scopes': [scope],
-    'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
-    'iss': 'test',
-    'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-    'firstName': 'Test',
-    'lastName': 'User',
-    'enabled': true,
-    'isPublic': false,
-    'tenantId': tenantId,
-    if (customerId != null) 'customerId': customerId,
-  })));
+  final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
+  final payload = base64Url.encode(
+    utf8.encode(
+      jsonEncode({
+        'sub': sub,
+        'scopes': [scope],
+        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
+        'iss': 'test',
+        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
+        'firstName': 'Test',
+        'lastName': 'User',
+        'enabled': true,
+        'isPublic': false,
+        'tenantId': tenantId,
+        'customerId': ?customerId,
+      }),
+    ),
+  );
   return '$header.$payload.fake-signature';
 }
 
 // A mock HTTP adapter that handles specific paths
 class MockHttpClientAdapter implements HttpClientAdapter {
-  final Map<String, List<FutureOr<ResponseBody> Function(RequestOptions)>> _handlers = {};
+  final Map<String, List<FutureOr<ResponseBody> Function(RequestOptions)>>
+  _handlers = {};
   final List<String> requestedPaths = [];
 
   void onRoute(
-      String path, FutureOr<ResponseBody> Function(RequestOptions) handler) {
+    String path,
+    FutureOr<ResponseBody> Function(RequestOptions) handler,
+  ) {
     _handlers.putIfAbsent(path, () => []).add(handler);
   }
 
   @override
-  Future<ResponseBody> fetch(RequestOptions options,
-      Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
     requestedPaths.add(options.path);
     final handlers = _handlers[options.path];
     if (handlers != null && handlers.isNotEmpty) {
       final handler = handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
       return await handler(options);
     }
-    return ResponseBody.fromString('{"message":"Not found"}', 404,
-        headers: {'content-type': ['application/json']});
+    return ResponseBody.fromString(
+      '{"message":"Not found"}',
+      404,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
   }
 
   @override
@@ -84,10 +98,15 @@ void setMockAdapter(ThingsboardClient client, MockHttpClientAdapter adapter) {
 
 ResponseBody rejectedRefreshTokenResponse(RequestOptions req) {
   return ResponseBody.fromString(
-    jsonEncode(
-        {'status': 401, 'errorCode': 11, 'message': 'Token has expired'}),
+    jsonEncode({
+      'status': 401,
+      'errorCode': 11,
+      'message': 'Token has expired',
+    }),
     401,
-    headers: {'content-type': ['application/json']},
+    headers: {
+      'content-type': ['application/json'],
+    },
   );
 }
 
@@ -102,31 +121,36 @@ void main() {
   });
 
   group('login', () {
-    test('login sends POST /api/auth/login with correct body and stores JWT',
-        () async {
-      final jwtToken = createTestJwt();
-      final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
-      mockAdapter.onRoute('/api/auth/login', (req) {
-        // Verify request body contains username and password
-        final body = req.data is String ? jsonDecode(req.data) : req.data;
-        expect(body['username'], equals('user@test.com'));
-        expect(body['password'], equals('pass'));
-        return ResponseBody.fromString(
-          jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
-          200,
-          headers: {'content-type': ['application/json']},
+    test(
+      'login sends POST /api/auth/login with correct body and stores JWT',
+      () async {
+        final jwtToken = createTestJwt();
+        final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
+        mockAdapter.onRoute('/api/auth/login', (req) {
+          // Verify request body contains username and password
+          final body = req.data is String ? jsonDecode(req.data) : req.data;
+          expect(body['username'], equals('user@test.com'));
+          expect(body['password'], equals('pass'));
+          return ResponseBody.fromString(
+            jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
+
+        final response = await client.login(
+          LoginRequest(userName: 'user@test.com', password: 'pass'),
         );
-      });
 
-      final response = await client.login(
-          LoginRequest(userName: 'user@test.com', password: 'pass'));
-
-      expect(response.token, equals(jwtToken));
-      expect(client.getJwtToken(), equals(jwtToken));
-      expect(client.isAuthenticated(), isTrue);
-      expect(client.getAuthUser(), isNotNull);
-      expect(client.getAuthUser()!.authority, equals(Authority.TENANT_ADMIN));
-    });
+        expect(response.token, equals(jwtToken));
+        expect(client.getJwtToken(), equals(jwtToken));
+        expect(client.isAuthenticated(), isTrue);
+        expect(client.getAuthUser(), isNotNull);
+        expect(client.getAuthUser()!.authority, equals(Authority.TENANT_ADMIN));
+      },
+    );
 
     test('login stores tokens in storage', () async {
       final jwtToken = createTestJwt();
@@ -135,11 +159,15 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
 
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
+      await client.login(
+        LoginRequest(userName: 'user@test.com', password: 'pass'),
+      );
 
       expect(client.getJwtToken(), equals(jwtToken));
       expect(client.getRefreshToken(), equals(refreshToken));
@@ -147,109 +175,132 @@ void main() {
   });
 
   group('MFA', () {
-    test('login with PRE_VERIFICATION_TOKEN triggers onMfaAuth callback',
-        () async {
-      final mfaCompleter = Completer<void>();
-      var mfaAuthCalled = false;
+    test(
+      'login with PRE_VERIFICATION_TOKEN triggers onMfaAuth callback',
+      () async {
+        final mfaCompleter = Completer<void>();
+        var mfaAuthCalled = false;
 
-      final mfaToken = createTestJwt(scope: 'PRE_VERIFICATION_TOKEN');
-      final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
+        final mfaToken = createTestJwt(scope: 'PRE_VERIFICATION_TOKEN');
+        final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
 
-      client = ThingsboardClient(
-        'http://localhost:8080',
-        onMfaAuth: () {
-          mfaAuthCalled = true;
-          mfaCompleter.complete();
-        },
-      );
-      client.dio.httpClientAdapter = mockAdapter;
-
-      mockAdapter.onRoute('/api/auth/login', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({
-            'token': mfaToken,
-            'refreshToken': refreshToken,
-            'scope': 'PRE_VERIFICATION_TOKEN',
-          }),
-          200,
-          headers: {'content-type': ['application/json']},
+        client = ThingsboardClient(
+          'http://localhost:8080',
+          onMfaAuth: () {
+            mfaAuthCalled = true;
+            mfaCompleter.complete();
+          },
         );
-      });
+        client.dio.httpClientAdapter = mockAdapter;
 
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
-      await mfaCompleter.future.timeout(Duration(seconds: 2));
+        mockAdapter.onRoute('/api/auth/login', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({
+              'token': mfaToken,
+              'refreshToken': refreshToken,
+              'scope': 'PRE_VERIFICATION_TOKEN',
+            }),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      expect(mfaAuthCalled, isTrue);
-    });
-
-    test('login with MFA_CONFIGURATION_TOKEN triggers onMfaForce callback',
-        () async {
-      final mfaCompleter = Completer<void>();
-      var mfaForceCalled = false;
-
-      final mfaToken = createTestJwt(scope: 'MFA_CONFIGURATION_TOKEN');
-      final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
-
-      client = ThingsboardClient(
-        'http://localhost:8080',
-        onMfaForce: () {
-          mfaForceCalled = true;
-          mfaCompleter.complete();
-        },
-      );
-      client.dio.httpClientAdapter = mockAdapter;
-
-      mockAdapter.onRoute('/api/auth/login', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({
-            'token': mfaToken,
-            'refreshToken': refreshToken,
-            'scope': 'MFA_CONFIGURATION_TOKEN',
-          }),
-          200,
-          headers: {'content-type': ['application/json']},
+        await client.login(
+          LoginRequest(userName: 'user@test.com', password: 'pass'),
         );
-      });
+        await mfaCompleter.future.timeout(Duration(seconds: 2));
 
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
-      await mfaCompleter.future.timeout(Duration(seconds: 2));
+        expect(mfaAuthCalled, isTrue);
+      },
+    );
 
-      expect(mfaForceCalled, isTrue);
-    });
+    test(
+      'login with MFA_CONFIGURATION_TOKEN triggers onMfaForce callback',
+      () async {
+        final mfaCompleter = Completer<void>();
+        var mfaForceCalled = false;
+
+        final mfaToken = createTestJwt(scope: 'MFA_CONFIGURATION_TOKEN');
+        final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
+
+        client = ThingsboardClient(
+          'http://localhost:8080',
+          onMfaForce: () {
+            mfaForceCalled = true;
+            mfaCompleter.complete();
+          },
+        );
+        client.dio.httpClientAdapter = mockAdapter;
+
+        mockAdapter.onRoute('/api/auth/login', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({
+              'token': mfaToken,
+              'refreshToken': refreshToken,
+              'scope': 'MFA_CONFIGURATION_TOKEN',
+            }),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
+
+        await client.login(
+          LoginRequest(userName: 'user@test.com', password: 'pass'),
+        );
+        await mfaCompleter.future.timeout(Duration(seconds: 2));
+
+        expect(mfaForceCalled, isTrue);
+      },
+    );
   });
 
   group('refresh', () {
-    test('refreshJwtToken issues POST /api/auth/token with refresh token',
-        () async {
-      final initialJwt = createTestJwt();
-      final initialRefresh = createTestJwt(scope: 'REFRESH_TOKEN');
-      final newJwt = createTestJwt(sub: 'user-id-refreshed');
-      final newRefresh = createTestJwt(scope: 'REFRESH_TOKEN', sub: 'refreshed');
-
-      // First login
-      mockAdapter.onRoute('/api/auth/login', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({'token': initialJwt, 'refreshToken': initialRefresh}),
-          200,
-          headers: {'content-type': ['application/json']},
+    test(
+      'refreshJwtToken issues POST /api/auth/token with refresh token',
+      () async {
+        final initialJwt = createTestJwt();
+        final initialRefresh = createTestJwt(scope: 'REFRESH_TOKEN');
+        final newJwt = createTestJwt(sub: 'user-id-refreshed');
+        final newRefresh = createTestJwt(
+          scope: 'REFRESH_TOKEN',
+          sub: 'refreshed',
         );
-      });
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
 
-      mockAdapter.onRoute('/api/auth/token', (req) {
-        final body = req.data is String ? jsonDecode(req.data) : req.data;
-        expect(body['refreshToken'], equals(initialRefresh));
-        return ResponseBody.fromString(
-          jsonEncode({'token': newJwt, 'refreshToken': newRefresh}),
-          200,
-          headers: {'content-type': ['application/json']},
+        // First login
+        mockAdapter.onRoute('/api/auth/login', (req) {
+          return ResponseBody.fromString(
+            jsonEncode({'token': initialJwt, 'refreshToken': initialRefresh}),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
+        await client.login(
+          LoginRequest(userName: 'user@test.com', password: 'pass'),
         );
-      });
 
-      await client.refreshJwtToken(notify: false);
+        mockAdapter.onRoute('/api/auth/token', (req) {
+          final body = req.data is String ? jsonDecode(req.data) : req.data;
+          expect(body['refreshToken'], equals(initialRefresh));
+          return ResponseBody.fromString(
+            jsonEncode({'token': newJwt, 'refreshToken': newRefresh}),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
 
-      expect(client.getJwtToken(), equals(newJwt));
-    });
+        await client.refreshJwtToken(notify: false);
+
+        expect(client.getJwtToken(), equals(newJwt));
+      },
+    );
   });
 
   group('concurrent refresh', () {
@@ -258,17 +309,24 @@ void main() {
       final initialRefresh = createTestJwt(scope: 'REFRESH_TOKEN');
       var refreshCallCount = 0;
       final newJwt = createTestJwt(sub: 'user-id-refreshed');
-      final newRefresh = createTestJwt(scope: 'REFRESH_TOKEN', sub: 'refreshed');
+      final newRefresh = createTestJwt(
+        scope: 'REFRESH_TOKEN',
+        sub: 'refreshed',
+      );
 
       // First login
       mockAdapter.onRoute('/api/auth/login', (req) {
         return ResponseBody.fromString(
           jsonEncode({'token': initialJwt, 'refreshToken': initialRefresh}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
+      await client.login(
+        LoginRequest(userName: 'user@test.com', password: 'pass'),
+      );
 
       // Slow refresh handler to allow concurrency
       mockAdapter.onRoute('/api/auth/token', (req) async {
@@ -277,7 +335,9 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'token': newJwt, 'refreshToken': newRefresh}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
 
@@ -302,14 +362,18 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
       mockAdapter.onRoute('/api/auth/logout', (req) {
         return ResponseBody.fromString('', 200);
       });
 
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
+      await client.login(
+        LoginRequest(userName: 'user@test.com', password: 'pass'),
+      );
       expect(client.isAuthenticated(), isTrue);
 
       await client.logout();
@@ -330,16 +394,25 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
       // Logout returns 500 — tokens should still be cleared
       mockAdapter.onRoute('/api/auth/logout', (req) {
-        return ResponseBody.fromString('{"message":"error"}', 500,
-            headers: {'content-type': ['application/json']});
+        return ResponseBody.fromString(
+          '{"message":"error"}',
+          500,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        );
       });
 
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
+      await client.login(
+        LoginRequest(userName: 'user@test.com', password: 'pass'),
+      );
       await client.logout();
 
       expect(client.isAuthenticated(), isFalse);
@@ -368,11 +441,15 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
 
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
+      await client.login(
+        LoginRequest(userName: 'user@test.com', password: 'pass'),
+      );
       await loadedCompleter.future.timeout(Duration(seconds: 2));
 
       expect(userLoadedCalled, isTrue);
@@ -399,10 +476,14 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
-      await client.login(LoginRequest(userName: 'user@test.com', password: 'pass'));
+      await client.login(
+        LoginRequest(userName: 'user@test.com', password: 'pass'),
+      );
 
       try {
         await client.get('/api/devices');
@@ -458,7 +539,9 @@ void main() {
 
     test('connection error keeps the session', () async {
       mockAdapter.onRoute(
-          '/api/auth/token', (req) => throw SocketException('offline'));
+        '/api/auth/token',
+        (req) => throw SocketException('offline'),
+      );
 
       await expectRefreshFails();
 
@@ -467,9 +550,12 @@ void main() {
 
     test('timeout keeps the session', () async {
       mockAdapter.onRoute(
-          '/api/auth/token',
-          (req) => throw DioException.receiveTimeout(
-              timeout: Duration(seconds: 15), requestOptions: req));
+        '/api/auth/token',
+        (req) => throw DioException.receiveTimeout(
+          timeout: Duration(seconds: 15),
+          requestOptions: req,
+        ),
+      );
 
       await expectRefreshFails();
 
@@ -477,8 +563,10 @@ void main() {
     });
 
     test('HTTP 5xx keeps the session', () async {
-      mockAdapter.onRoute('/api/auth/token',
-          (req) => ResponseBody.fromString('<html>Bad Gateway</html>', 502));
+      mockAdapter.onRoute(
+        '/api/auth/token',
+        (req) => ResponseBody.fromString('<html>Bad Gateway</html>', 502),
+      );
 
       await expectRefreshFails();
 
@@ -490,7 +578,9 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'status': 403, 'errorCode': 20, 'message': 'Forbidden'}),
           403,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
 
@@ -501,12 +591,16 @@ void main() {
 
     test('a failed refresh is not reported through onError', () async {
       var errorCount = 0;
-      client = ThingsboardClient('http://localhost:8080',
-          onError: (_) => errorCount++);
+      client = ThingsboardClient(
+        'http://localhost:8080',
+        onError: (_) => errorCount++,
+      );
       setMockAdapter(client, mockAdapter);
       await client.setUserFromJwtToken(jwt, refresh, false);
       mockAdapter.onRoute(
-          '/api/auth/token', (req) => ResponseBody.fromString('', 502));
+        '/api/auth/token',
+        (req) => ResponseBody.fromString('', 502),
+      );
 
       await expectRefreshFails();
       await Future.delayed(Duration(milliseconds: 50));
@@ -521,7 +615,9 @@ void main() {
         return ResponseBody.fromString(
           jsonEncode({'token': createTestJwt(), 'refreshToken': refresh}),
           200,
-          headers: {'content-type': ['application/json']},
+          headers: {
+            'content-type': ['application/json'],
+          },
         );
       });
 
@@ -543,19 +639,27 @@ void main() {
       await storage.setItem('refresh_token', refresh);
     });
 
-    ThingsboardClient makeClient(
-        {UserLoadedCallback? onUserLoaded, ErrorCallback? onError}) {
-      final c = ThingsboardClient('http://localhost:8080',
-          storage: storage, onUserLoaded: onUserLoaded, onError: onError);
+    ThingsboardClient makeClient({
+      UserLoadedCallback? onUserLoaded,
+      ErrorCallback? onError,
+    }) {
+      final c = ThingsboardClient(
+        'http://localhost:8080',
+        storage: storage,
+        onUserLoaded: onUserLoaded,
+        onError: onError,
+      );
       setMockAdapter(c, mockAdapter);
       return c;
     }
 
     ResponseBody refreshedTokens(String jwt) => ResponseBody.fromString(
-          jsonEncode({'token': jwt, 'refreshToken': refresh}),
-          200,
-          headers: {'content-type': ['application/json']},
-        );
+      jsonEncode({'token': jwt, 'refreshToken': refresh}),
+      200,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
 
     test('refreshes an expired access token from storage', () async {
       final newJwt = createTestJwt(sub: 'refreshed');
@@ -568,29 +672,41 @@ void main() {
       expect(await storage.getItem('jwt_token'), equals(newJwt));
     });
 
-    test('offline cold start keeps the stored session and restores the user',
-        () async {
-      var userLoaded = false;
-      var errorCount = 0;
-      mockAdapter.onRoute(
-          '/api/auth/token', (req) => throw SocketException('offline'));
-      client = makeClient(
-          onUserLoaded: () => userLoaded = true, onError: (_) => errorCount++);
+    test(
+      'offline cold start keeps the stored session and restores the user',
+      () async {
+        var userLoaded = false;
+        var errorCount = 0;
+        mockAdapter.onRoute(
+          '/api/auth/token',
+          (req) => throw SocketException('offline'),
+        );
+        client = makeClient(
+          onUserLoaded: () => userLoaded = true,
+          onError: (_) => errorCount++,
+        );
 
-      await client.init();
-      await Future.delayed(Duration(milliseconds: 50));
+        await client.init();
+        await Future.delayed(Duration(milliseconds: 50));
 
-      expect(client.isAuthenticated(), isTrue);
-      expect(client.isJwtTokenValid(), isFalse);
-      expect(client.getRefreshToken(), equals(refresh));
-      expect(await storage.getItem('jwt_token'), equals(expiredJwt));
-      expect(await storage.getItem('refresh_token'), equals(refresh));
-      expect(userLoaded, isTrue);
-      expect(errorCount, equals(0),
-          reason: 'A recovered cold start is not an error to report');
-      expect(mockAdapter.requestedPaths, equals(['/api/auth/token']),
-          reason: 'No version check against a server known to be unreachable');
-    });
+        expect(client.isAuthenticated(), isTrue);
+        expect(client.isJwtTokenValid(), isFalse);
+        expect(client.getRefreshToken(), equals(refresh));
+        expect(await storage.getItem('jwt_token'), equals(expiredJwt));
+        expect(await storage.getItem('refresh_token'), equals(refresh));
+        expect(userLoaded, isTrue);
+        expect(
+          errorCount,
+          equals(0),
+          reason: 'A recovered cold start is not an error to report',
+        );
+        expect(
+          mockAdapter.requestedPaths,
+          equals(['/api/auth/token']),
+          reason: 'No version check against a server known to be unreachable',
+        );
+      },
+    );
 
     test('a session restored offline refreshes on the next request', () async {
       var online = false;
@@ -600,8 +716,13 @@ void main() {
         return refreshedTokens(newJwt);
       });
       mockAdapter.onRoute('/api/devices', (req) {
-        return ResponseBody.fromString('[]', 200,
-            headers: {'content-type': ['application/json']});
+        return ResponseBody.fromString(
+          '[]',
+          200,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        );
       });
       client = makeClient();
       await client.init();
@@ -624,20 +745,26 @@ void main() {
       expect(client.getRefreshToken(), isNull);
       expect(await storage.containsKey('refresh_token'), isFalse);
       // The 401 on the refresh call itself must not trigger another refresh.
-      expect(mockAdapter.requestedPaths.where((p) => p == '/api/auth/token'),
-          hasLength(1));
+      expect(
+        mockAdapter.requestedPaths.where((p) => p == '/api/auth/token'),
+        hasLength(1),
+      );
     }, timeout: Timeout(Duration(seconds: 5)));
 
-    test('expired refresh token clears the session without calling the server',
-        () async {
-      await storage.setItem('refresh_token',
-          createTestJwt(scope: 'REFRESH_TOKEN', expInSeconds: -60));
-      client = makeClient();
+    test(
+      'expired refresh token clears the session without calling the server',
+      () async {
+        await storage.setItem(
+          'refresh_token',
+          createTestJwt(scope: 'REFRESH_TOKEN', expInSeconds: -60),
+        );
+        client = makeClient();
 
-      await client.init();
+        await client.init();
 
-      expect(client.isAuthenticated(), isFalse);
-      expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/token')));
-    });
+        expect(client.isAuthenticated(), isFalse);
+        expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/token')));
+      },
+    );
   });
 }

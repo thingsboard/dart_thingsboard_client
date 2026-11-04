@@ -19,17 +19,17 @@ part 'data_key.g.dart';
 /// DataKey
 ///
 /// Properties:
-/// * [name] 
-/// * [type] 
-/// * [label] 
-/// * [color] 
-/// * [decimals] 
-/// * [units] 
-/// * [aggregationType] 
-/// * [timewindow] 
-/// * [usePostProcessing] 
-/// * [postFuncBody] 
-/// * [settings] 
+/// * [name]
+/// * [type]
+/// * [label]
+/// * [color]
+/// * [decimals]
+/// * [units]
+/// * [aggregationType]
+/// * [timewindow]
+/// * [usePostProcessing]
+/// * [postFuncBody]
+/// * [settings]
 @BuiltValue()
 abstract class DataKey implements Built<DataKey, DataKeyBuilder> {
   @BuiltValueField(wireName: r'name')
@@ -174,7 +174,11 @@ class _$DataKeySerializer implements PrimitiveSerializer<DataKey> {
     DataKey object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -190,90 +194,114 @@ class _$DataKeySerializer implements PrimitiveSerializer<DataKey> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'label':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.label = valueDes;
           break;
         case r'color':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.color = valueDes;
           break;
         case r'decimals':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.decimals = valueDes;
           break;
         case r'units':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.units = valueDes;
           break;
         case r'aggregationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Aggregation),
-          ) as Aggregation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Aggregation),
+                  )
+                  as Aggregation?;
           if (valueDes == null) continue;
           result.aggregationType = valueDes;
           break;
         case r'timewindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeWindowConfiguration),
-          ) as TimeWindowConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeWindowConfiguration,
+                    ),
+                  )
+                  as TimeWindowConfiguration?;
           if (valueDes == null) continue;
           result.timewindow.replace(valueDes);
           break;
         case r'usePostProcessing':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.usePostProcessing = valueDes;
           break;
         case r'postFuncBody':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.postFuncBody = valueDes;
           break;
         case r'settings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DataKeySettings),
-          ) as DataKeySettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DataKeySettings),
+                  )
+                  as DataKeySettings?;
           if (valueDes == null) continue;
           result.settings = valueDes;
           break;
@@ -305,5 +333,3 @@ class _$DataKeySerializer implements PrimitiveSerializer<DataKey> {
     return result.build();
   }
 }
-
-

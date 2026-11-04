@@ -21,7 +21,8 @@ enum DataType { STRING, LONG, BOOLEAN, DOUBLE, JSON }
 
 DataType dataTypeFromString(String value) {
   return DataType.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension DataTypeToString on DataType {
@@ -153,9 +154,10 @@ class BasicTsKvEntry implements TsKvEntry {
       default:
         return 1;
     }
-    return max(1,
-            (length + MAX_CHARS_PER_DATA_POINT - 1) / MAX_CHARS_PER_DATA_POINT)
-        .toInt();
+    return max(
+      1,
+      (length + MAX_CHARS_PER_DATA_POINT - 1) / MAX_CHARS_PER_DATA_POINT,
+    ).toInt();
   }
 
   @override
@@ -196,7 +198,7 @@ abstract class BasicKvEntry implements KvEntry {
 class BooleanDataEntry extends BasicKvEntry {
   final bool value;
 
-  BooleanDataEntry(String key, this.value) : super(key);
+  BooleanDataEntry(super.key, this.value);
 
   @override
   DataType getDataType() => DataType.BOOLEAN;
@@ -212,14 +214,14 @@ class BooleanDataEntry extends BasicKvEntry {
 
   @override
   String toString() {
-    return 'BooleanDataEntry{value: $value} ' + super.toString();
+    return 'BooleanDataEntry{value: $value} ${super.toString()}';
   }
 }
 
 class StringDataEntry extends BasicKvEntry {
   final String value;
 
-  StringDataEntry(String key, this.value) : super(key);
+  StringDataEntry(super.key, this.value);
 
   @override
   DataType getDataType() => DataType.STRING;
@@ -235,14 +237,14 @@ class StringDataEntry extends BasicKvEntry {
 
   @override
   String toString() {
-    return 'StringDataEntry{value: $value} ' + super.toString();
+    return 'StringDataEntry{value: $value} ${super.toString()}';
   }
 }
 
 class LongDataEntry extends BasicKvEntry {
   final int value;
 
-  LongDataEntry(String key, this.value) : super(key);
+  LongDataEntry(super.key, this.value);
 
   @override
   DataType getDataType() => DataType.LONG;
@@ -258,14 +260,14 @@ class LongDataEntry extends BasicKvEntry {
 
   @override
   String toString() {
-    return 'LongDataEntry{value: $value} ' + super.toString();
+    return 'LongDataEntry{value: $value} ${super.toString()}';
   }
 }
 
 class DoubleDataEntry extends BasicKvEntry {
   final double value;
 
-  DoubleDataEntry(String key, this.value) : super(key);
+  DoubleDataEntry(super.key, this.value);
 
   @override
   DataType getDataType() => DataType.DOUBLE;
@@ -281,14 +283,14 @@ class DoubleDataEntry extends BasicKvEntry {
 
   @override
   String toString() {
-    return 'DoubleDataEntry{value: $value} ' + super.toString();
+    return 'DoubleDataEntry{value: $value} ${super.toString()}';
   }
 }
 
 class JsonDataEntry extends BasicKvEntry {
   final String value;
 
-  JsonDataEntry(String key, this.value) : super(key);
+  JsonDataEntry(super.key, this.value);
 
   @override
   DataType getDataType() => DataType.JSON;
@@ -304,7 +306,7 @@ class JsonDataEntry extends BasicKvEntry {
 
   @override
   String toString() {
-    return 'JsonDataEntry{value: $value} ' + super.toString();
+    return 'JsonDataEntry{value: $value} ${super.toString()}';
   }
 }
 
@@ -312,7 +314,8 @@ enum Aggregation { MIN, MAX, AVG, SUM, COUNT, NONE }
 
 Aggregation aggregationFromString(String value) {
   return Aggregation.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension AggregationToString on Aggregation {
@@ -345,10 +348,12 @@ abstract class RestJsonConverter {
       var result = <TsKvEntry>[];
       timeseries.forEach((key, value) {
         var values = value as List<dynamic>;
-        result.addAll(values.where((ts) => ts[VALUE] != null).map((ts) {
-          var entry = _parseValue(key, ts[VALUE]);
-          return BasicTsKvEntry(ts[TS] as int, entry);
-        }));
+        result.addAll(
+          values.where((ts) => ts[VALUE] != null).map((ts) {
+            var entry = _parseValue(key, ts[VALUE]);
+            return BasicTsKvEntry(ts[TS] as int, entry);
+          }),
+        );
       });
       return result;
     } else {
@@ -366,8 +371,9 @@ abstract class RestJsonConverter {
         return StringDataEntry(key, value);
       } else {
         throw ThingsboardError(
-            message: CAN_T_PARSE_VALUE + value,
-            errorCode: ThingsBoardErrorCode.invalidArguments);
+          message: CAN_T_PARSE_VALUE + value,
+          errorCode: ThingsBoardErrorCode.invalidArguments,
+        );
       }
     } else {
       return JsonDataEntry(key, jsonEncode(value));
@@ -401,7 +407,8 @@ extension AttributeScopeToString on AttributeScope {
 
 AttributeScope attributeScopeFromString(String value) {
   return AttributeScope.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 class AttributeData {
@@ -437,12 +444,13 @@ enum WsCmdType {
   ALARM_COUNT_UNSUBSCRIBE,
   ENTITY_DATA_UNSUBSCRIBE,
   ENTITY_COUNT_UNSUBSCRIBE,
-  NOTIFICATIONS_UNSUBSCRIBE
+  NOTIFICATIONS_UNSUBSCRIBE,
 }
 
 WsCmdType wsCmdTypeTypeFromString(String value) {
   return WsCmdType.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension WsCmdTypeTypeToString on WsCmdType {
@@ -457,15 +465,16 @@ abstract class WebsocketCmd {
 
   WebsocketCmd({this.cmdId, required this.type});
 
-  Map<String, dynamic> toJson() =>
-      {'cmdId': cmdId, 'type': type.toShortString()};
+  Map<String, dynamic> toJson() => {
+    'cmdId': cmdId,
+    'type': type.toShortString(),
+  };
 }
 
 abstract class TelemetryPluginCmd extends WebsocketCmd {
   final String? keys;
 
-  TelemetryPluginCmd({int? cmdId, this.keys, required WsCmdType type})
-      : super(cmdId: cmdId, type: type);
+  TelemetryPluginCmd({super.cmdId, this.keys, required super.type});
 
   @override
   Map<String, dynamic> toJson() {
@@ -483,15 +492,15 @@ abstract class SubscriptionCmd extends TelemetryPluginCmd {
   final AttributeScope? scope;
   bool unsubscribe;
 
-  SubscriptionCmd(
-      {int? cmdId,
-      String? keys,
-      required this.entityType,
-      required this.entityId,
-      this.scope,
-      this.unsubscribe = false,
-      required WsCmdType type})
-      : super(cmdId: cmdId, keys: keys, type: type);
+  SubscriptionCmd({
+    super.cmdId,
+    super.keys,
+    required this.entityType,
+    required this.entityId,
+    this.scope,
+    this.unsubscribe = false,
+    required super.type,
+  });
 
   @override
   Map<String, dynamic> toJson() {
@@ -507,21 +516,14 @@ abstract class SubscriptionCmd extends TelemetryPluginCmd {
 }
 
 class AttributesSubscriptionCmd extends SubscriptionCmd {
-  AttributesSubscriptionCmd(
-      {int? cmdId,
-      String? keys,
-      required EntityType entityType,
-      required String entityId,
-      AttributeScope? scope,
-      bool unsubscribe = false})
-      : super(
-            cmdId: cmdId,
-            keys: keys,
-            entityType: entityType,
-            entityId: entityId,
-            scope: scope,
-            unsubscribe: unsubscribe,
-            type: WsCmdType.ATTRIBUTES);
+  AttributesSubscriptionCmd({
+    super.cmdId,
+    super.keys,
+    required super.entityType,
+    required super.entityId,
+    super.scope,
+    super.unsubscribe,
+  }) : super(type: WsCmdType.ATTRIBUTES);
 }
 
 class TimeseriesSubscriptionCmd extends SubscriptionCmd {
@@ -531,26 +533,19 @@ class TimeseriesSubscriptionCmd extends SubscriptionCmd {
   final int? limit;
   final Aggregation agg;
 
-  TimeseriesSubscriptionCmd(
-      {int? cmdId,
-      String? keys,
-      required EntityType entityType,
-      required String entityId,
-      this.startTs,
-      this.timeWindow,
-      this.interval = 1000,
-      this.limit,
-      this.agg = Aggregation.NONE,
-      AttributeScope? scope,
-      bool unsubscribe = false})
-      : super(
-            cmdId: cmdId,
-            keys: keys,
-            entityType: entityType,
-            entityId: entityId,
-            scope: scope,
-            unsubscribe: unsubscribe,
-            type: WsCmdType.TIMESERIES);
+  TimeseriesSubscriptionCmd({
+    super.cmdId,
+    super.keys,
+    required super.entityType,
+    required super.entityId,
+    this.startTs,
+    this.timeWindow,
+    this.interval = 1000,
+    this.limit,
+    this.agg = Aggregation.NONE,
+    super.scope,
+    super.unsubscribe,
+  }) : super(type: WsCmdType.TIMESERIES);
 
   @override
   Map<String, dynamic> toJson() {
@@ -581,17 +576,17 @@ class GetHistoryCmd extends TelemetryPluginCmd {
   final int? limit;
   final Aggregation agg;
 
-  GetHistoryCmd(
-      {int? cmdId,
-      String? keys,
-      required this.entityType,
-      required this.entityId,
-      required this.startTs,
-      required this.endTs,
-      this.interval = 1000,
-      this.limit,
-      this.agg = Aggregation.NONE})
-      : super(cmdId: cmdId, keys: keys, type: WsCmdType.TIMESERIES_HISTORY);
+  GetHistoryCmd({
+    super.cmdId,
+    super.keys,
+    required this.entityType,
+    required this.entityId,
+    required this.startTs,
+    required this.endTs,
+    this.interval = 1000,
+    this.limit,
+    this.agg = Aggregation.NONE,
+  }) : super(type: WsCmdType.TIMESERIES_HISTORY);
 
   @override
   Map<String, dynamic> toJson() {
@@ -618,14 +613,15 @@ class EntityHistoryCmd {
   final Aggregation agg;
   final bool? fetchLatestPreviousPoint;
 
-  EntityHistoryCmd(
-      {required this.keys,
-      required this.startTs,
-      required this.endTs,
-      this.interval = 1000,
-      this.limit,
-      this.agg = Aggregation.NONE,
-      this.fetchLatestPreviousPoint});
+  EntityHistoryCmd({
+    required this.keys,
+    required this.startTs,
+    required this.endTs,
+    this.interval = 1000,
+    this.limit,
+    this.agg = Aggregation.NONE,
+    this.fetchLatestPreviousPoint,
+  });
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
@@ -633,7 +629,7 @@ class EntityHistoryCmd {
       'startTs': startTs,
       'endTs': endTs,
       'interval': interval,
-      'agg': agg.toShortString()
+      'agg': agg.toShortString(),
     };
     if (limit != null) {
       json['limit'] = limit;
@@ -650,8 +646,9 @@ class LatestValueCmd {
 
   LatestValueCmd({required this.keys});
 
-  Map<String, dynamic> toJson() =>
-      {'keys': keys.map((e) => e.toJson()).toList()};
+  Map<String, dynamic> toJson() => {
+    'keys': keys.map((e) => e.toJson()).toList(),
+  };
 }
 
 class TimeSeriesCmd {
@@ -663,14 +660,15 @@ class TimeSeriesCmd {
   final Aggregation agg;
   final bool? fetchLatestPreviousPoint;
 
-  TimeSeriesCmd(
-      {required this.keys,
-      required this.startTs,
-      required this.timeWindow,
-      this.interval = 1000,
-      this.limit,
-      this.agg = Aggregation.NONE,
-      this.fetchLatestPreviousPoint});
+  TimeSeriesCmd({
+    required this.keys,
+    required this.startTs,
+    required this.timeWindow,
+    this.interval = 1000,
+    this.limit,
+    this.agg = Aggregation.NONE,
+    this.fetchLatestPreviousPoint,
+  });
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
@@ -678,7 +676,7 @@ class TimeSeriesCmd {
       'startTs': startTs,
       'timeWindow': timeWindow,
       'interval': interval,
-      'agg': agg.toShortString()
+      'agg': agg.toShortString(),
     };
     if (limit != null) {
       json['limit'] = limit;
@@ -698,19 +696,20 @@ class AggKey {
   final int? previousEndTs;
   final bool? previousValueOnly;
 
-  AggKey(
-      {required this.id,
-      required this.key,
-      required this.agg,
-      this.previousStartTs,
-      this.previousEndTs,
-      this.previousValueOnly});
+  AggKey({
+    required this.id,
+    required this.key,
+    required this.agg,
+    this.previousStartTs,
+    this.previousEndTs,
+    this.previousValueOnly,
+  });
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
       'id': id,
       'key': key,
-      'agg': agg.toShortString()
+      'agg': agg.toShortString(),
     };
     if (previousStartTs != null) {
       json['previousStartTs'] = previousStartTs;
@@ -730,14 +729,17 @@ class AggHistoryCmd {
   final int startTs;
   final int endTs;
 
-  AggHistoryCmd(
-      {required this.keys, required this.startTs, required this.endTs});
+  AggHistoryCmd({
+    required this.keys,
+    required this.startTs,
+    required this.endTs,
+  });
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
       'keys': keys.map((k) => k.toJson()).toList(),
       'startTs': startTs,
-      'endTs': endTs
+      'endTs': endTs,
     };
     return json;
   }
@@ -748,14 +750,17 @@ class AggTimeSeriesCmd {
   final int startTs;
   final int timeWindow;
 
-  AggTimeSeriesCmd(
-      {required this.keys, required this.startTs, required this.timeWindow});
+  AggTimeSeriesCmd({
+    required this.keys,
+    required this.startTs,
+    required this.timeWindow,
+  });
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{
       'keys': keys.map((k) => k.toJson()).toList(),
       'startTs': startTs,
-      'timeWindow': timeWindow
+      'timeWindow': timeWindow,
     };
     return json;
   }
@@ -769,15 +774,15 @@ class EntityDataCmd extends WebsocketCmd {
   final AggHistoryCmd? aggHistoryCmd;
   final AggTimeSeriesCmd? aggTsCmd;
 
-  EntityDataCmd(
-      {int? cmdId,
-      this.query,
-      this.historyCmd,
-      this.latestCmd,
-      this.tsCmd,
-      this.aggHistoryCmd,
-      this.aggTsCmd})
-      : super(cmdId: cmdId, type: WsCmdType.ENTITY_DATA);
+  EntityDataCmd({
+    super.cmdId,
+    this.query,
+    this.historyCmd,
+    this.latestCmd,
+    this.tsCmd,
+    this.aggHistoryCmd,
+    this.aggTsCmd,
+  }) : super(type: WsCmdType.ENTITY_DATA);
 
   @override
   Map<String, dynamic> toJson() {
@@ -815,8 +820,8 @@ class EntityDataCmd extends WebsocketCmd {
 class EntityCountCmd extends WebsocketCmd {
   final EntityCountQuery? query;
 
-  EntityCountCmd({int? cmdId, this.query})
-      : super(cmdId: cmdId, type: WsCmdType.ENTITY_COUNT);
+  EntityCountCmd({super.cmdId, this.query})
+    : super(type: WsCmdType.ENTITY_COUNT);
 
   @override
   Map<String, dynamic> toJson() {
@@ -833,8 +838,7 @@ class EntityCountCmd extends WebsocketCmd {
 class AlarmDataCmd extends WebsocketCmd {
   final AlarmDataQuery? query;
 
-  AlarmDataCmd({int? cmdId, this.query})
-      : super(cmdId: cmdId, type: WsCmdType.ALARM_DATA);
+  AlarmDataCmd({super.cmdId, this.query}) : super(type: WsCmdType.ALARM_DATA);
 
   @override
   Map<String, dynamic> toJson() {
@@ -849,15 +853,14 @@ class AlarmDataCmd extends WebsocketCmd {
 }
 
 class UnreadCountSubCmd extends WebsocketCmd {
-  UnreadCountSubCmd({int? cmdId})
-      : super(cmdId: cmdId, type: WsCmdType.NOTIFICATIONS_COUNT);
+  UnreadCountSubCmd({super.cmdId}) : super(type: WsCmdType.NOTIFICATIONS_COUNT);
 }
 
 class UnreadSubCmd extends WebsocketCmd {
   final int limit;
 
-  UnreadSubCmd({int? cmdId, required this.limit})
-      : super(cmdId: cmdId, type: WsCmdType.NOTIFICATIONS);
+  UnreadSubCmd({super.cmdId, required this.limit})
+    : super(type: WsCmdType.NOTIFICATIONS);
 
   @override
   Map<String, dynamic> toJson() {
@@ -870,8 +873,8 @@ class UnreadSubCmd extends WebsocketCmd {
 class MarkAsReadCmd extends WebsocketCmd {
   final List<String> notifications;
 
-  MarkAsReadCmd({int? cmdId, required this.notifications})
-      : super(cmdId: cmdId, type: WsCmdType.MARK_NOTIFICATIONS_AS_READ);
+  MarkAsReadCmd({super.cmdId, required this.notifications})
+    : super(type: WsCmdType.MARK_NOTIFICATIONS_AS_READ);
 
   @override
   Map<String, dynamic> toJson() {
@@ -882,28 +885,28 @@ class MarkAsReadCmd extends WebsocketCmd {
 }
 
 class MarkAllAsReadCmd extends WebsocketCmd {
-  MarkAllAsReadCmd({int? cmdId})
-      : super(cmdId: cmdId, type: WsCmdType.MARK_ALL_NOTIFICATIONS_AS_READ);
+  MarkAllAsReadCmd({super.cmdId})
+    : super(type: WsCmdType.MARK_ALL_NOTIFICATIONS_AS_READ);
 }
 
 class EntityDataUnsubscribeCmd extends WebsocketCmd {
-  EntityDataUnsubscribeCmd({int? cmdId})
-      : super(cmdId: cmdId, type: WsCmdType.ENTITY_DATA_UNSUBSCRIBE);
+  EntityDataUnsubscribeCmd({super.cmdId})
+    : super(type: WsCmdType.ENTITY_DATA_UNSUBSCRIBE);
 }
 
 class EntityCountUnsubscribeCmd extends WebsocketCmd {
-  EntityCountUnsubscribeCmd({int? cmdId})
-      : super(cmdId: cmdId, type: WsCmdType.ENTITY_COUNT_UNSUBSCRIBE);
+  EntityCountUnsubscribeCmd({super.cmdId})
+    : super(type: WsCmdType.ENTITY_COUNT_UNSUBSCRIBE);
 }
 
 class AlarmDataUnsubscribeCmd extends WebsocketCmd {
-  AlarmDataUnsubscribeCmd({int? cmdId})
-      : super(cmdId: cmdId, type: WsCmdType.ALARM_DATA_UNSUBSCRIBE);
+  AlarmDataUnsubscribeCmd({super.cmdId})
+    : super(type: WsCmdType.ALARM_DATA_UNSUBSCRIBE);
 }
 
 class UnsubscribeCmd extends WebsocketCmd {
-  UnsubscribeCmd({int? cmdId})
-      : super(cmdId: cmdId, type: WsCmdType.NOTIFICATIONS_UNSUBSCRIBE);
+  UnsubscribeCmd({super.cmdId})
+    : super(type: WsCmdType.NOTIFICATIONS_UNSUBSCRIBE);
 }
 
 class AuthCmd extends WebsocketCmd {
@@ -912,8 +915,7 @@ class AuthCmd extends WebsocketCmd {
   /// API key the session authenticates with instead of [token].
   String? apiKey;
 
-  AuthCmd({int? cmdId, this.token, this.apiKey})
-      : super(cmdId: cmdId, type: WsCmdType.AUTH);
+  AuthCmd({super.cmdId, this.token, this.apiKey}) : super(type: WsCmdType.AUTH);
 
   @override
   Map<String, dynamic> toJson() {
@@ -941,7 +943,7 @@ class TelemetryPluginCmdsWrapper {
   }
 
   void setAuth(String token) {
-    authCmd = new AuthCmd(cmdId: 0, token: token);
+    authCmd = AuthCmd(cmdId: 0, token: token);
   }
 
   void setApiKeyAuth(String apiKey) {
@@ -959,9 +961,7 @@ class TelemetryPluginCmdsWrapper {
   }
 
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> json = {
-      'cmds': cmds.map((e) => e.toJson()).toList(),
-    };
+    Map<String, dynamic> json = {'cmds': cmds.map((e) => e.toJson()).toList()};
     if (authCmd != null) {
       json['authCmd'] = authCmd!.toJson();
     }
@@ -1013,12 +1013,11 @@ class SubscriptionDataHolder extends WebsocketDataMsg {
   final Map<String, List<TsValue>> data;
 
   SubscriptionDataHolder.fromJson(Map<String, dynamic> json)
-      : data = (json['data'] as Map<String, dynamic>).map((key, value) {
-          var tsList = value as List<dynamic>;
-          var tsValuesList =
-              tsList.map((e) => TsValue.fromJsonList(e)).toList();
-          return MapEntry(key, tsValuesList);
-        });
+    : data = (json['data'] as Map<String, dynamic>).map((key, value) {
+        var tsList = value as List<dynamic>;
+        var tsValuesList = tsList.map((e) => TsValue.fromJsonList(e)).toList();
+        return MapEntry(key, tsValuesList);
+      });
 
   @override
   String toString() {
@@ -1031,19 +1030,19 @@ class SubscriptionUpdate extends SubscriptionDataHolder {
   final int? errorCode;
   final String? errorMsg;
 
-  SubscriptionUpdate.fromJson(Map<String, dynamic> json)
-      : subscriptionId = json['subscriptionId'],
-        errorCode = json['errorCode'],
-        errorMsg = json['errorMsg'],
-        super.fromJson(json);
+  SubscriptionUpdate.fromJson(super.json)
+    : subscriptionId = json['subscriptionId'],
+      errorCode = json['errorCode'],
+      errorMsg = json['errorMsg'],
+      super.fromJson();
 
   void prepareData(List<String>? keys) {
     if (keys != null) {
-      keys.forEach((key) {
+      for (var key in keys) {
         if (!data.containsKey(key)) {
           data[key] = [];
         }
-      });
+      }
     }
   }
 
@@ -1056,8 +1055,13 @@ class SubscriptionUpdate extends SubscriptionDataHolder {
           existingData.lastUpdateTs = keyData[0].ts;
           existingData.value = keyData[0].value;
         } else {
-          origData.add(AttributeData(
-              key: key, lastUpdateTs: keyData[0].ts, value: keyData[0].value));
+          origData.add(
+            AttributeData(
+              key: key,
+              lastUpdateTs: keyData[0].ts,
+              value: keyData[0].value,
+            ),
+          );
         }
       }
     });
@@ -1075,12 +1079,13 @@ enum CmdUpdateType {
   ALARM_DATA,
   COUNT_DATA,
   NOTIFICATIONS_COUNT,
-  NOTIFICATIONS
+  NOTIFICATIONS,
 }
 
 CmdUpdateType cmdUpdateTypeFromString(String value) {
   return CmdUpdateType.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 abstract class CmdUpdate extends WebsocketDataMsg {
@@ -1089,26 +1094,27 @@ abstract class CmdUpdate extends WebsocketDataMsg {
   final String? errorMsg;
 
   CmdUpdate.fromJson(Map<String, dynamic> json)
-      : cmdId = json['cmdId'],
-        errorCode = json['errorCode'],
-        errorMsg = json['errorMsg'];
+    : cmdId = json['cmdId'],
+      errorCode = json['errorCode'],
+      errorMsg = json['errorMsg'];
 }
 
 abstract class DataUpdate<T> extends CmdUpdate {
   final PageData<T>? data;
   final List<T>? update;
 
-  DataUpdate.fromJson(Map<String, dynamic> json,
-      T Function(Map<String, dynamic> json) dataFromJson)
-      : data = json['data'] != null
-            ? PageData.fromJson(json['data'], (json) => dataFromJson(json))
-            : null,
-        update = json['update'] != null
-            ? (json['update'] as List<dynamic>)
+  DataUpdate.fromJson(
+    super.json,
+    T Function(Map<String, dynamic> json) dataFromJson,
+  ) : data = json['data'] != null
+          ? PageData.fromJson(json['data'], (json) => dataFromJson(json))
+          : null,
+      update = json['update'] != null
+          ? (json['update'] as List<dynamic>)
                 .map((e) => dataFromJson(e))
                 .toList()
-            : null,
-        super.fromJson(json);
+          : null,
+      super.fromJson();
 
   @override
   String toString() {
@@ -1118,7 +1124,7 @@ abstract class DataUpdate<T> extends CmdUpdate {
 
 class EntityDataUpdate extends DataUpdate<EntityData> {
   EntityDataUpdate.fromJson(Map<String, dynamic> json)
-      : super.fromJson(json, (json) => EntityData.fromJson(json));
+    : super.fromJson(json, (json) => EntityData.fromJson(json));
 
   void prepareData(int tsOffset) {
     if (data != null) {
@@ -1130,11 +1136,11 @@ class EntityDataUpdate extends DataUpdate<EntityData> {
   }
 
   void _processEntityData(List<EntityData> data, int tsOffset) {
-    data.forEach((entityData) {
+    for (var entityData in data) {
       entityData.timeseries.forEach((key, tsValues) {
-        tsValues.forEach((tsValue) {
+        for (var tsValue in tsValues) {
           tsValue.ts += tsOffset;
-        });
+        }
       });
       entityData.latest.forEach((key, keyTypeValues) {
         keyTypeValues.forEach((key, tsValue) {
@@ -1144,7 +1150,7 @@ class EntityDataUpdate extends DataUpdate<EntityData> {
           }
         });
       });
-    });
+    }
   }
 }
 
@@ -1153,9 +1159,9 @@ class AlarmDataUpdate extends DataUpdate<AlarmData> {
   final int? totalEntities;
 
   AlarmDataUpdate.fromJson(Map<String, dynamic> json)
-      : allowedEntities = json['allowedEntities'],
-        totalEntities = json['totalEntities'],
-        super.fromJson(json, (json) => AlarmData.fromJson(json));
+    : allowedEntities = json['allowedEntities'],
+      totalEntities = json['totalEntities'],
+      super.fromJson(json, (json) => AlarmData.fromJson(json));
 
   void prepareData(int tsOffset) {
     if (data != null) {
@@ -1167,7 +1173,7 @@ class AlarmDataUpdate extends DataUpdate<AlarmData> {
   }
 
   void _processAlarmData(List<AlarmData> data, int tsOffset) {
-    data.forEach((alarmData) {
+    for (var alarmData in data) {
       alarmData.createdTime = alarmData.createdTime! + tsOffset;
       alarmData.ackTs = alarmData.ackTs! + tsOffset;
       alarmData.clearTs = alarmData.clearTs! + tsOffset;
@@ -1175,23 +1181,28 @@ class AlarmDataUpdate extends DataUpdate<AlarmData> {
       alarmData.latest.forEach((key, keyTypeValues) {
         keyTypeValues.forEach((key, tsValue) {
           tsValue.ts += tsOffset;
-          if (['createdTime', 'startTime', 'endTime', 'ackTime', 'clearTime']
-                  .contains(key) &&
+          if ([
+                'createdTime',
+                'startTime',
+                'endTime',
+                'ackTime',
+                'clearTime',
+              ].contains(key) &&
               tsValue.value != null) {
             tsValue.value = (int.parse(tsValue.value!) + tsOffset).toString();
           }
         });
       });
-    });
+    }
   }
 }
 
 class EntityCountUpdate extends CmdUpdate {
   final int count;
 
-  EntityCountUpdate.fromJson(Map<String, dynamic> json)
-      : count = json['count'],
-        super.fromJson(json);
+  EntityCountUpdate.fromJson(super.json)
+    : count = json['count'],
+      super.fromJson();
 
   @override
   String toString() {
@@ -1202,9 +1213,9 @@ class EntityCountUpdate extends CmdUpdate {
 class NotificationCountUpdate extends CmdUpdate {
   final int totalUnreadCount;
 
-  NotificationCountUpdate.fromJson(Map<String, dynamic> json)
-      : totalUnreadCount = json['totalUnreadCount'],
-        super.fromJson(json);
+  NotificationCountUpdate.fromJson(super.json)
+    : totalUnreadCount = json['totalUnreadCount'],
+      super.fromJson();
 
   @override
   String toString() {
@@ -1216,16 +1227,16 @@ class NotificationsUpdate extends NotificationCountUpdate {
   final PushNotification? update;
   final List<PushNotification>? notifications;
 
-  NotificationsUpdate.fromJson(Map<String, dynamic> json)
-      : update = json['update'] != null
-            ? PushNotification.fromJson(json['update'])
-            : null,
-        notifications = json['notifications'] != null
-            ? (json['notifications'] as List<dynamic>)
+  NotificationsUpdate.fromJson(super.json)
+    : update = json['update'] != null
+          ? PushNotification.fromJson(json['update'])
+          : null,
+      notifications = json['notifications'] != null
+          ? (json['notifications'] as List<dynamic>)
                 .map((e) => PushNotification.fromJson(e))
                 .toList()
-            : null,
-        super.fromJson(json);
+          : null,
+      super.fromJson();
 
   @override
   String toString() {
@@ -1250,72 +1261,82 @@ class TelemetrySubscriber {
   final StreamController<AlarmDataUpdate> _alarmDataStreamController;
   final StreamController<EntityCountUpdate> _entityCountStreamController;
   final StreamController<NotificationCountUpdate>
-      _notificationCountStreamController;
+  _notificationCountStreamController;
   final StreamController<NotificationsUpdate>
-      _notificationUpdateStreamController;
+  _notificationUpdateStreamController;
   final StreamController<void> _reconnectStreamController;
 
   NotificationsUpdate? lastUpdatedNotification;
 
   int? _tsOffset;
 
-  TelemetrySubscriber(TelemetryService telemetryService,
-      List<WebsocketCmd> subscriptionCommands)
-      : _telemetryService = telemetryService,
-        _subscriptionCommands = subscriptionCommands,
-        _dataStreamController = StreamController.broadcast(),
-        _entityDataStreamController = StreamController.broadcast(),
-        _alarmDataStreamController = StreamController.broadcast(),
-        _entityCountStreamController = StreamController.broadcast(),
-        _notificationCountStreamController = StreamController.broadcast(),
-        _notificationUpdateStreamController = StreamController.broadcast(),
-        _reconnectStreamController = StreamController.broadcast();
+  TelemetrySubscriber(
+    TelemetryService telemetryService,
+    List<WebsocketCmd> subscriptionCommands,
+  ) : _telemetryService = telemetryService,
+      _subscriptionCommands = subscriptionCommands,
+      _dataStreamController = StreamController.broadcast(),
+      _entityDataStreamController = StreamController.broadcast(),
+      _alarmDataStreamController = StreamController.broadcast(),
+      _entityCountStreamController = StreamController.broadcast(),
+      _notificationCountStreamController = StreamController.broadcast(),
+      _notificationUpdateStreamController = StreamController.broadcast(),
+      _reconnectStreamController = StreamController.broadcast();
 
-  static TelemetrySubscriber createEntityAttributesSubscription(
-      {required TelemetryService telemetryService,
-      required EntityId entityId,
-      required String attributeScope,
-      List<String>? keys}) {
+  static TelemetrySubscriber createEntityAttributesSubscription({
+    required TelemetryService telemetryService,
+    required EntityId entityId,
+    required String attributeScope,
+    List<String>? keys,
+  }) {
     SubscriptionCmd subscriptionCommand;
-    var subscriptionKeys = keys != null ? keys.join(',') : null;
+    var subscriptionKeys = keys?.join(',');
     if (attributeScope == LatestTelemetry.LATEST_TELEMETRY.toShortString()) {
       subscriptionCommand = TimeseriesSubscriptionCmd(
-          entityId: entityId.id!,
-          entityType: entityId.entityType,
-          keys: subscriptionKeys);
+        entityId: entityId.id!,
+        entityType: entityId.entityType,
+        keys: subscriptionKeys,
+      );
     } else {
       var scope = attributeScopeFromString(attributeScope);
       subscriptionCommand = AttributesSubscriptionCmd(
-          entityId: entityId.id!,
-          entityType: entityId.entityType,
-          keys: subscriptionKeys,
-          scope: scope);
+        entityId: entityId.id!,
+        entityType: entityId.entityType,
+        keys: subscriptionKeys,
+        scope: scope,
+      );
     }
     return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
   }
 
-  static TelemetrySubscriber createNotificationCountSubscription(
-      {required TelemetryService telemetryService}) {
+  static TelemetrySubscriber createNotificationCountSubscription({
+    required TelemetryService telemetryService,
+  }) {
     UnreadCountSubCmd subscriptionCommand = UnreadCountSubCmd();
     return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
   }
 
-  static TelemetrySubscriber createNotificationsSubscription(
-      {required TelemetryService telemetryService, int limit = 10}) {
+  static TelemetrySubscriber createNotificationsSubscription({
+    required TelemetryService telemetryService,
+    int limit = 10,
+  }) {
     UnreadSubCmd subscriptionCommand = UnreadSubCmd(limit: limit);
     return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
   }
 
-  static TelemetrySubscriber createMarkAsReadCommand(
-      {required TelemetryService telemetryService,
-      required List<String> notifications}) {
-    MarkAsReadCmd subscriptionCommand =
-        MarkAsReadCmd(notifications: notifications);
+  static TelemetrySubscriber createMarkAsReadCommand({
+    required TelemetryService telemetryService,
+    required List<String> notifications,
+  }) {
+    MarkAsReadCmd subscriptionCommand = MarkAsReadCmd(
+      notifications: notifications,
+    );
     return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
   }
 
-  static TelemetrySubscriber createMarkAllAsReadCommand(
-      {required TelemetryService telemetryService}) {
+  static TelemetrySubscriber createMarkAllAsReadCommand({
+    required TelemetryService telemetryService,
+  }) {
     MarkAllAsReadCmd subscriptionCommand = MarkAllAsReadCmd();
     return TelemetrySubscriber(telemetryService, [subscriptionCommand]);
   }
@@ -1356,8 +1377,9 @@ class TelemetrySubscriber {
   void onData(SubscriptionUpdate message) {
     var cmdId = message.subscriptionId;
     List<String>? keys;
-    var foundCmd =
-        _subscriptionCommands.where((command) => command.cmdId == cmdId);
+    var foundCmd = _subscriptionCommands.where(
+      (command) => command.cmdId == cmdId,
+    );
     if (foundCmd.isNotEmpty) {
       var cmd = foundCmd.first;
       var telemetryPluginCmd = cmd as TelemetryPluginCmd;
@@ -1414,8 +1436,9 @@ class TelemetrySubscriber {
     NotificationsUpdate processMessage = message;
     if (lastUpdatedNotification != null && message.update != null) {
       lastUpdatedNotification!.notifications?.insert(0, message.update!);
-      WebsocketCmd? foundCmd = _subscriptionCommands
-          .firstWhereOrNull((command) => command.cmdId == message.cmdId);
+      WebsocketCmd? foundCmd = _subscriptionCommands.firstWhereOrNull(
+        (command) => command.cmdId == message.cmdId,
+      );
       if (foundCmd != null &&
           lastUpdatedNotification!.notifications!.length >
               (foundCmd as UnreadSubCmd).limit) {
@@ -1451,7 +1474,8 @@ class TelemetrySubscriber {
 
   Stream<List<AttributeData>> get attributeDataStream {
     final attributeData = <AttributeData>[];
-    return dataStream
-        .map((message) => message.updateAttributeData(attributeData));
+    return dataStream.map(
+      (message) => message.updateAttributeData(attributeData),
+    );
   }
 }

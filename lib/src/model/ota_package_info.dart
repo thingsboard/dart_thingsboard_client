@@ -38,9 +38,10 @@ part 'ota_package_info.g.dart';
 /// * [checksumAlgorithm] - OTA Package checksum algorithm.
 /// * [checksum] - OTA Package checksum.
 /// * [dataSize] - OTA Package data size.
-/// * [name] 
+/// * [name]
 @BuiltValue()
-abstract class OtaPackageInfo implements Built<OtaPackageInfo, OtaPackageInfoBuilder> {
+abstract class OtaPackageInfo
+    implements Built<OtaPackageInfo, OtaPackageInfoBuilder> {
   /// JSON object with the ota package Id. Specify existing ota package Id to update the ota package. Referencing non-existing ota package id will cause error. Omit this field to create new ota package.
   @BuiltValueField(wireName: r'id')
   OtaPackageId? get id;
@@ -112,16 +113,19 @@ abstract class OtaPackageInfo implements Built<OtaPackageInfo, OtaPackageInfoBui
 
   OtaPackageInfo._();
 
-  factory OtaPackageInfo([void updates(OtaPackageInfoBuilder b)]) = _$OtaPackageInfo;
+  factory OtaPackageInfo([void updates(OtaPackageInfoBuilder b)]) =
+      _$OtaPackageInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OtaPackageInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OtaPackageInfo> get serializer => _$OtaPackageInfoSerializer();
+  static Serializer<OtaPackageInfo> get serializer =>
+      _$OtaPackageInfoSerializer();
 }
 
-class _$OtaPackageInfoSerializer implements PrimitiveSerializer<OtaPackageInfo> {
+class _$OtaPackageInfoSerializer
+    implements PrimitiveSerializer<OtaPackageInfo> {
   @override
   final Iterable<Type> types = const [OtaPackageInfo, _$OtaPackageInfo];
 
@@ -260,7 +264,11 @@ class _$OtaPackageInfoSerializer implements PrimitiveSerializer<OtaPackageInfo> 
     OtaPackageInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -276,138 +284,172 @@ class _$OtaPackageInfoSerializer implements PrimitiveSerializer<OtaPackageInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OtaPackageId),
-          ) as OtaPackageId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(OtaPackageId),
+                  )
+                  as OtaPackageId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'deviceProfileId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceProfileId),
-          ) as DeviceProfileId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DeviceProfileId),
+                  )
+                  as DeviceProfileId?;
           if (valueDes == null) continue;
           result.deviceProfileId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OtaPackageType),
-          ) as OtaPackageType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(OtaPackageType),
+                  )
+                  as OtaPackageType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'tag':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tag = valueDes;
           break;
         case r'url':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.url = valueDes;
           break;
         case r'hasData':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasData = valueDes;
           break;
         case r'fileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fileName = valueDes;
           break;
         case r'contentType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.contentType = valueDes;
           break;
         case r'checksumAlgorithm':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChecksumAlgorithm),
-          ) as ChecksumAlgorithm?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChecksumAlgorithm),
+                  )
+                  as ChecksumAlgorithm?;
           if (valueDes == null) continue;
           result.checksumAlgorithm = valueDes;
           break;
         case r'checksum':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.checksum = valueDes;
           break;
         case r'dataSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.dataSize = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -439,5 +481,3 @@ class _$OtaPackageInfoSerializer implements PrimitiveSerializer<OtaPackageInfo> 
     return result.build();
   }
 }
-
-

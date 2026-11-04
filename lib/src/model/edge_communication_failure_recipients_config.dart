@@ -19,27 +19,40 @@ part 'edge_communication_failure_recipients_config.g.dart';
 /// EdgeCommunicationFailureRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class EdgeCommunicationFailureRecipientsConfig implements NotificationRuleRecipientsConfig, Built<EdgeCommunicationFailureRecipientsConfig, EdgeCommunicationFailureRecipientsConfigBuilder> {
+abstract class EdgeCommunicationFailureRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          EdgeCommunicationFailureRecipientsConfig,
+          EdgeCommunicationFailureRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   EdgeCommunicationFailureRecipientsConfig._();
 
-  factory EdgeCommunicationFailureRecipientsConfig([void updates(EdgeCommunicationFailureRecipientsConfigBuilder b)]) = _$EdgeCommunicationFailureRecipientsConfig;
+  factory EdgeCommunicationFailureRecipientsConfig([
+    void updates(EdgeCommunicationFailureRecipientsConfigBuilder b),
+  ]) = _$EdgeCommunicationFailureRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EdgeCommunicationFailureRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdgeCommunicationFailureRecipientsConfig> get serializer => _$EdgeCommunicationFailureRecipientsConfigSerializer();
+  static Serializer<EdgeCommunicationFailureRecipientsConfig> get serializer =>
+      _$EdgeCommunicationFailureRecipientsConfigSerializer();
 }
 
-class _$EdgeCommunicationFailureRecipientsConfigSerializer implements PrimitiveSerializer<EdgeCommunicationFailureRecipientsConfig> {
+class _$EdgeCommunicationFailureRecipientsConfigSerializer
+    implements PrimitiveSerializer<EdgeCommunicationFailureRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [EdgeCommunicationFailureRecipientsConfig, _$EdgeCommunicationFailureRecipientsConfig];
+  final Iterable<Type> types = const [
+    EdgeCommunicationFailureRecipientsConfig,
+    _$EdgeCommunicationFailureRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'EdgeCommunicationFailureRecipientsConfig';
@@ -69,7 +82,11 @@ class _$EdgeCommunicationFailureRecipientsConfigSerializer implements PrimitiveS
     EdgeCommunicationFailureRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$EdgeCommunicationFailureRecipientsConfigSerializer implements PrimitiveS
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$EdgeCommunicationFailureRecipientsConfigSerializer implements PrimitiveS
     return result.build();
   }
 }
-
-

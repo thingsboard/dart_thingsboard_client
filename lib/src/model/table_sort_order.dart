@@ -17,10 +17,11 @@ part 'table_sort_order.g.dart';
 /// TableSortOrder
 ///
 /// Properties:
-/// * [column] 
-/// * [direction] 
+/// * [column]
+/// * [direction]
 @BuiltValue()
-abstract class TableSortOrder implements Built<TableSortOrder, TableSortOrderBuilder> {
+abstract class TableSortOrder
+    implements Built<TableSortOrder, TableSortOrderBuilder> {
   @BuiltValueField(wireName: r'column')
   String? get column;
 
@@ -30,16 +31,19 @@ abstract class TableSortOrder implements Built<TableSortOrder, TableSortOrderBui
 
   TableSortOrder._();
 
-  factory TableSortOrder([void updates(TableSortOrderBuilder b)]) = _$TableSortOrder;
+  factory TableSortOrder([void updates(TableSortOrderBuilder b)]) =
+      _$TableSortOrder;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TableSortOrderBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TableSortOrder> get serializer => _$TableSortOrderSerializer();
+  static Serializer<TableSortOrder> get serializer =>
+      _$TableSortOrderSerializer();
 }
 
-class _$TableSortOrderSerializer implements PrimitiveSerializer<TableSortOrder> {
+class _$TableSortOrderSerializer
+    implements PrimitiveSerializer<TableSortOrder> {
   @override
   final Iterable<Type> types = const [TableSortOrder, _$TableSortOrder];
 
@@ -73,7 +77,11 @@ class _$TableSortOrderSerializer implements PrimitiveSerializer<TableSortOrder> 
     TableSortOrder object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +97,22 @@ class _$TableSortOrderSerializer implements PrimitiveSerializer<TableSortOrder> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'column':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.column = valueDes;
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TableSortDirection),
-          ) as TableSortDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TableSortDirection),
+                  )
+                  as TableSortDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -132,5 +144,3 @@ class _$TableSortOrderSerializer implements PrimitiveSerializer<TableSortOrder> 
     return result.build();
   }
 }
-
-

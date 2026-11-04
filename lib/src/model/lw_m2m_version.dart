@@ -16,9 +16,10 @@ part 'lw_m2m_version.g.dart';
 /// LwM2mVersion
 ///
 /// Properties:
-/// * [supported] 
+/// * [supported]
 @BuiltValue()
-abstract class LwM2mVersion implements Built<LwM2mVersion, LwM2mVersionBuilder> {
+abstract class LwM2mVersion
+    implements Built<LwM2mVersion, LwM2mVersionBuilder> {
   @BuiltValueField(wireName: r'supported')
   bool? get supported;
 
@@ -60,7 +61,11 @@ class _$LwM2mVersionSerializer implements PrimitiveSerializer<LwM2mVersion> {
     LwM2mVersion object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +81,12 @@ class _$LwM2mVersionSerializer implements PrimitiveSerializer<LwM2mVersion> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'supported':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.supported = valueDes;
           break;
@@ -111,5 +118,3 @@ class _$LwM2mVersionSerializer implements PrimitiveSerializer<LwM2mVersion> {
     return result.build();
   }
 }
-
-

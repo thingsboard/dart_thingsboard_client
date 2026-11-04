@@ -17,29 +17,42 @@ part 'email_delivery_method_notification_template.g.dart';
 /// EmailDeliveryMethodNotificationTemplate
 ///
 /// Properties:
-/// * [enabled] 
-/// * [body] 
-/// * [method] 
-/// * [subject] 
+/// * [enabled]
+/// * [body]
+/// * [method]
+/// * [subject]
 @BuiltValue()
-abstract class EmailDeliveryMethodNotificationTemplate implements DeliveryMethodNotificationTemplate, Built<EmailDeliveryMethodNotificationTemplate, EmailDeliveryMethodNotificationTemplateBuilder> {
+abstract class EmailDeliveryMethodNotificationTemplate
+    implements
+        DeliveryMethodNotificationTemplate,
+        Built<
+          EmailDeliveryMethodNotificationTemplate,
+          EmailDeliveryMethodNotificationTemplateBuilder
+        > {
   @BuiltValueField(wireName: r'subject')
   String get subject;
 
   EmailDeliveryMethodNotificationTemplate._();
 
-  factory EmailDeliveryMethodNotificationTemplate([void updates(EmailDeliveryMethodNotificationTemplateBuilder b)]) = _$EmailDeliveryMethodNotificationTemplate;
+  factory EmailDeliveryMethodNotificationTemplate([
+    void updates(EmailDeliveryMethodNotificationTemplateBuilder b),
+  ]) = _$EmailDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EmailDeliveryMethodNotificationTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EmailDeliveryMethodNotificationTemplate> get serializer => _$EmailDeliveryMethodNotificationTemplateSerializer();
+  static Serializer<EmailDeliveryMethodNotificationTemplate> get serializer =>
+      _$EmailDeliveryMethodNotificationTemplateSerializer();
 }
 
-class _$EmailDeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<EmailDeliveryMethodNotificationTemplate> {
+class _$EmailDeliveryMethodNotificationTemplateSerializer
+    implements PrimitiveSerializer<EmailDeliveryMethodNotificationTemplate> {
   @override
-  final Iterable<Type> types = const [EmailDeliveryMethodNotificationTemplate, _$EmailDeliveryMethodNotificationTemplate];
+  final Iterable<Type> types = const [
+    EmailDeliveryMethodNotificationTemplate,
+    _$EmailDeliveryMethodNotificationTemplate,
+  ];
 
   @override
   final String wireName = r'EmailDeliveryMethodNotificationTemplate';
@@ -79,7 +92,11 @@ class _$EmailDeliveryMethodNotificationTemplateSerializer implements PrimitiveSe
     EmailDeliveryMethodNotificationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -95,31 +112,39 @@ class _$EmailDeliveryMethodNotificationTemplateSerializer implements PrimitiveSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.body = valueDes;
           break;
         case r'subject':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.subject = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
@@ -151,5 +176,3 @@ class _$EmailDeliveryMethodNotificationTemplateSerializer implements PrimitiveSe
     return result.build();
   }
 }
-
-

@@ -19,7 +19,8 @@ part 'change_password_request.g.dart';
 /// * [currentPassword] - The old password
 /// * [newPassword] - The new password
 @BuiltValue()
-abstract class ChangePasswordRequest implements Built<ChangePasswordRequest, ChangePasswordRequestBuilder> {
+abstract class ChangePasswordRequest
+    implements Built<ChangePasswordRequest, ChangePasswordRequestBuilder> {
   /// The old password
   @BuiltValueField(wireName: r'currentPassword')
   String? get currentPassword;
@@ -30,18 +31,25 @@ abstract class ChangePasswordRequest implements Built<ChangePasswordRequest, Cha
 
   ChangePasswordRequest._();
 
-  factory ChangePasswordRequest([void updates(ChangePasswordRequestBuilder b)]) = _$ChangePasswordRequest;
+  factory ChangePasswordRequest([
+    void updates(ChangePasswordRequestBuilder b),
+  ]) = _$ChangePasswordRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ChangePasswordRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ChangePasswordRequest> get serializer => _$ChangePasswordRequestSerializer();
+  static Serializer<ChangePasswordRequest> get serializer =>
+      _$ChangePasswordRequestSerializer();
 }
 
-class _$ChangePasswordRequestSerializer implements PrimitiveSerializer<ChangePasswordRequest> {
+class _$ChangePasswordRequestSerializer
+    implements PrimitiveSerializer<ChangePasswordRequest> {
   @override
-  final Iterable<Type> types = const [ChangePasswordRequest, _$ChangePasswordRequest];
+  final Iterable<Type> types = const [
+    ChangePasswordRequest,
+    _$ChangePasswordRequest,
+  ];
 
   @override
   final String wireName = r'ChangePasswordRequest';
@@ -73,7 +81,11 @@ class _$ChangePasswordRequestSerializer implements PrimitiveSerializer<ChangePas
     ChangePasswordRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +101,22 @@ class _$ChangePasswordRequestSerializer implements PrimitiveSerializer<ChangePas
       final value = serializedList[i + 1];
       switch (key) {
         case r'currentPassword':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.currentPassword = valueDes;
           break;
         case r'newPassword':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.newPassword = valueDes;
           break;
@@ -132,5 +148,3 @@ class _$ChangePasswordRequestSerializer implements PrimitiveSerializer<ChangePas
     return result.build();
   }
 }
-
-

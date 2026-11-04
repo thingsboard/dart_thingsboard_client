@@ -17,21 +17,25 @@ part 'any_time_schedule.g.dart';
 /// AnyTimeSchedule
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class AnyTimeSchedule implements AlarmSchedule, Built<AnyTimeSchedule, AnyTimeScheduleBuilder> {
+abstract class AnyTimeSchedule
+    implements AlarmSchedule, Built<AnyTimeSchedule, AnyTimeScheduleBuilder> {
   AnyTimeSchedule._();
 
-  factory AnyTimeSchedule([void updates(AnyTimeScheduleBuilder b)]) = _$AnyTimeSchedule;
+  factory AnyTimeSchedule([void updates(AnyTimeScheduleBuilder b)]) =
+      _$AnyTimeSchedule;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AnyTimeScheduleBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AnyTimeSchedule> get serializer => _$AnyTimeScheduleSerializer();
+  static Serializer<AnyTimeSchedule> get serializer =>
+      _$AnyTimeScheduleSerializer();
 }
 
-class _$AnyTimeScheduleSerializer implements PrimitiveSerializer<AnyTimeSchedule> {
+class _$AnyTimeScheduleSerializer
+    implements PrimitiveSerializer<AnyTimeSchedule> {
   @override
   final Iterable<Type> types = const [AnyTimeSchedule, _$AnyTimeSchedule];
 
@@ -56,7 +60,11 @@ class _$AnyTimeScheduleSerializer implements PrimitiveSerializer<AnyTimeSchedule
     AnyTimeSchedule object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +80,12 @@ class _$AnyTimeScheduleSerializer implements PrimitiveSerializer<AnyTimeSchedule
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +116,3 @@ class _$AnyTimeScheduleSerializer implements PrimitiveSerializer<AnyTimeSchedule
     return result.build();
   }
 }
-
-

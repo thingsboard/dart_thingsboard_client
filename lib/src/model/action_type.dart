@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'action_type.g.dart';
 
 class ActionType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ADDED')
   static const ActionType ADDED = _$ADDED;
   @BuiltValueEnumConst(wireName: r'DELETED')
@@ -67,9 +66,11 @@ class ActionType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'ADDED_TO_ENTITY_GROUP')
   static const ActionType ADDED_TO_ENTITY_GROUP = _$ADDED_TO_ENTITY_GROUP;
   @BuiltValueEnumConst(wireName: r'REMOVED_FROM_ENTITY_GROUP')
-  static const ActionType REMOVED_FROM_ENTITY_GROUP = _$REMOVED_FROM_ENTITY_GROUP;
+  static const ActionType REMOVED_FROM_ENTITY_GROUP =
+      _$REMOVED_FROM_ENTITY_GROUP;
   @BuiltValueEnumConst(wireName: r'REST_API_RULE_ENGINE_CALL')
-  static const ActionType REST_API_RULE_ENGINE_CALL = _$REST_API_RULE_ENGINE_CALL;
+  static const ActionType REST_API_RULE_ENGINE_CALL =
+      _$REST_API_RULE_ENGINE_CALL;
   @BuiltValueEnumConst(wireName: r'MADE_PUBLIC')
   static const ActionType MADE_PUBLIC = _$MADE_PUBLIC;
   @BuiltValueEnumConst(wireName: r'MADE_PRIVATE')
@@ -103,17 +104,20 @@ class ActionType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'NON_PRODUCTION_CONFIRMED')
   static const ActionType NON_PRODUCTION_CONFIRMED = _$NON_PRODUCTION_CONFIRMED;
   @BuiltValueEnumConst(wireName: r'COMMUNITY_GRANT_OFFLINE_CHECKER_RUN')
-  static const ActionType COMMUNITY_GRANT_OFFLINE_CHECKER_RUN = _$COMMUNITY_GRANT_OFFLINE_CHECKER_RUN;
+  static const ActionType COMMUNITY_GRANT_OFFLINE_CHECKER_RUN =
+      _$COMMUNITY_GRANT_OFFLINE_CHECKER_RUN;
   @BuiltValueEnumConst(wireName: r'COMMUNITY_GRANT_REQUEST_ACCESS')
-  static const ActionType COMMUNITY_GRANT_REQUEST_ACCESS = _$COMMUNITY_GRANT_REQUEST_ACCESS;
+  static const ActionType COMMUNITY_GRANT_REQUEST_ACCESS =
+      _$COMMUNITY_GRANT_REQUEST_ACCESS;
   @BuiltValueEnumConst(wireName: r'COMMUNITY_GRANT_ENROLLMENT')
-  static const ActionType COMMUNITY_GRANT_ENROLLMENT = _$COMMUNITY_GRANT_ENROLLMENT;
+  static const ActionType COMMUNITY_GRANT_ENROLLMENT =
+      _$COMMUNITY_GRANT_ENROLLMENT;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ActionType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
   static Serializer<ActionType> get serializer => _$actionTypeSerializer;
 
-  const ActionType._(String name): super(name);
+  const ActionType._(String name) : super(name);
 
   static BuiltSet<ActionType> get values => _$values;
   static ActionType valueOf(String name) => _$valueOf(name);
@@ -126,4 +130,3 @@ class ActionType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ActionTypeMixin = Object with _$ActionTypeMixin;
-

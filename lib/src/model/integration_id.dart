@@ -18,19 +18,22 @@ part 'integration_id.g.dart';
 /// IntegrationId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class IntegrationId implements EntityId, Built<IntegrationId, IntegrationIdBuilder> {
+abstract class IntegrationId
+    implements EntityId, Built<IntegrationId, IntegrationIdBuilder> {
   IntegrationId._();
 
-  factory IntegrationId([void updates(IntegrationIdBuilder b)]) = _$IntegrationId;
+  factory IntegrationId([void updates(IntegrationIdBuilder b)]) =
+      _$IntegrationId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(IntegrationIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<IntegrationId> get serializer => _$IntegrationIdSerializer();
+  static Serializer<IntegrationId> get serializer =>
+      _$IntegrationIdSerializer();
 }
 
 class _$IntegrationIdSerializer implements PrimitiveSerializer<IntegrationId> {
@@ -63,7 +66,11 @@ class _$IntegrationIdSerializer implements PrimitiveSerializer<IntegrationId> {
     IntegrationId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +86,21 @@ class _$IntegrationIdSerializer implements PrimitiveSerializer<IntegrationId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +131,3 @@ class _$IntegrationIdSerializer implements PrimitiveSerializer<IntegrationId> {
     return result.build();
   }
 }
-
-

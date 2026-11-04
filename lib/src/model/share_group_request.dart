@@ -26,7 +26,8 @@ part 'share_group_request.g.dart';
 /// * [readElseWrite] - Used if 'roleIds' property is not present. if the value is 'true', creates role with read-only permissions. If the value is 'false', creates role with write permissions.
 /// * [roleIds] - List of group role Ids that should be used to share the entity group with the user group. If not set, the platform will create new role (see 'readElseWrite' property description)
 @BuiltValue()
-abstract class ShareGroupRequest implements Built<ShareGroupRequest, ShareGroupRequestBuilder> {
+abstract class ShareGroupRequest
+    implements Built<ShareGroupRequest, ShareGroupRequestBuilder> {
   /// In case 'allUserGroup' is set to true, this property specifies the owner of the user group 'All'. Either Tenant or Customer Id.
   @BuiltValueField(wireName: r'ownerId')
   EntityId? get ownerId;
@@ -49,16 +50,19 @@ abstract class ShareGroupRequest implements Built<ShareGroupRequest, ShareGroupR
 
   ShareGroupRequest._();
 
-  factory ShareGroupRequest([void updates(ShareGroupRequestBuilder b)]) = _$ShareGroupRequest;
+  factory ShareGroupRequest([void updates(ShareGroupRequestBuilder b)]) =
+      _$ShareGroupRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ShareGroupRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ShareGroupRequest> get serializer => _$ShareGroupRequestSerializer();
+  static Serializer<ShareGroupRequest> get serializer =>
+      _$ShareGroupRequestSerializer();
 }
 
-class _$ShareGroupRequestSerializer implements PrimitiveSerializer<ShareGroupRequest> {
+class _$ShareGroupRequestSerializer
+    implements PrimitiveSerializer<ShareGroupRequest> {
   @override
   final Iterable<Type> types = const [ShareGroupRequest, _$ShareGroupRequest];
 
@@ -111,7 +115,11 @@ class _$ShareGroupRequestSerializer implements PrimitiveSerializer<ShareGroupReq
     ShareGroupRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -127,41 +135,53 @@ class _$ShareGroupRequestSerializer implements PrimitiveSerializer<ShareGroupReq
       final value = serializedList[i + 1];
       switch (key) {
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
         case r'allUserGroup':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(bool),
-          ) as bool;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(bool),
+                  )
+                  as bool;
           result.allUserGroup = valueDes;
           break;
         case r'userGroupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityGroupId),
-          ) as EntityGroupId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityGroupId),
+                  )
+                  as EntityGroupId?;
           if (valueDes == null) continue;
           result.userGroupId.replace(valueDes);
           break;
         case r'readElseWrite':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.readElseWrite = valueDes;
           break;
         case r'roleIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(RoleId)]),
-          ) as BuiltList<RoleId>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(RoleId),
+                    ]),
+                  )
+                  as BuiltList<RoleId>?;
           if (valueDes == null) continue;
           result.roleIds.replace(valueDes);
           break;
@@ -193,5 +213,3 @@ class _$ShareGroupRequestSerializer implements PrimitiveSerializer<ShareGroupReq
     return result.build();
   }
 }
-
-

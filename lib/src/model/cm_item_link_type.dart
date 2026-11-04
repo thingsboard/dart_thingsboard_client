@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'cm_item_link_type.g.dart';
 
 class CMItemLinkType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'URL')
   static const CMItemLinkType URL = _$URL;
   @BuiltValueEnumConst(wireName: r'DASHBOARD')
@@ -23,9 +22,10 @@ class CMItemLinkType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const CMItemLinkType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<CMItemLinkType> get serializer => _$cMItemLinkTypeSerializer;
+  static Serializer<CMItemLinkType> get serializer =>
+      _$cMItemLinkTypeSerializer;
 
-  const CMItemLinkType._(String name): super(name);
+  const CMItemLinkType._(String name) : super(name);
 
   static BuiltSet<CMItemLinkType> get values => _$values;
   static CMItemLinkType valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class CMItemLinkType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class CMItemLinkTypeMixin = Object with _$CMItemLinkTypeMixin;
-

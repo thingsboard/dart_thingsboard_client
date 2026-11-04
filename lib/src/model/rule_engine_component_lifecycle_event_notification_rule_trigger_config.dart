@@ -20,15 +20,21 @@ part 'rule_engine_component_lifecycle_event_notification_rule_trigger_config.g.d
 /// RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [ruleChains] 
-/// * [ruleChainEvents] 
-/// * [onlyRuleChainLifecycleFailures] 
-/// * [trackRuleNodeEvents] 
-/// * [ruleNodeEvents] 
-/// * [onlyRuleNodeLifecycleFailures] 
+/// * [triggerType]
+/// * [ruleChains]
+/// * [ruleChainEvents]
+/// * [onlyRuleChainLifecycleFailures]
+/// * [trackRuleNodeEvents]
+/// * [ruleNodeEvents]
+/// * [onlyRuleNodeLifecycleFailures]
 @BuiltValue()
-abstract class RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig, RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder> {
+abstract class RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig,
+          RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'trackRuleNodeEvents')
   bool? get trackRuleNodeEvents;
 
@@ -49,21 +55,39 @@ abstract class RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig im
 
   RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig._();
 
-  factory RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig([void updates(RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder b)]) = _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig;
+  factory RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig([
+    void updates(
+      RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder b,
+    ),
+  ]) = _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(
+    RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig> get serializer => _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer();
+  static Serializer<
+    RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig
+  >
+  get serializer =>
+      _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer();
 }
 
-class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig> {
+class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<
+          RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig
+        > {
   @override
-  final Iterable<Type> types = const [RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig, _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig,
+    _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig,
+  ];
 
   @override
-  final String wireName = r'RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig';
+  final String wireName =
+      r'RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
@@ -81,7 +105,9 @@ class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
       yield r'ruleNodeEvents';
       yield serializers.serialize(
         object.ruleNodeEvents,
-        specifiedType: const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]),
+        specifiedType: const FullType(BuiltSet, [
+          FullType(ComponentLifecycleEvent),
+        ]),
       );
     }
     if (object.ruleChains != null) {
@@ -100,7 +126,9 @@ class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
       yield r'ruleChainEvents';
       yield serializers.serialize(
         object.ruleChainEvents,
-        specifiedType: const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]),
+        specifiedType: const FullType(BuiltSet, [
+          FullType(ComponentLifecycleEvent),
+        ]),
       );
     }
     if (object.onlyRuleNodeLifecycleFailures != null) {
@@ -125,7 +153,11 @@ class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
     RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -133,7 +165,8 @@ class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder result,
+    required RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder
+    result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -141,57 +174,77 @@ class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
       final value = serializedList[i + 1];
       switch (key) {
         case r'trackRuleNodeEvents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.trackRuleNodeEvents = valueDes;
           break;
         case r'ruleNodeEvents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(ComponentLifecycleEvent)]),
-          ) as BuiltSet<ComponentLifecycleEvent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(ComponentLifecycleEvent),
+                    ]),
+                  )
+                  as BuiltSet<ComponentLifecycleEvent>?;
           if (valueDes == null) continue;
           result.ruleNodeEvents.replace(valueDes);
           break;
         case r'ruleChains':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.ruleChains.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'ruleChainEvents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(ComponentLifecycleEvent)]),
-          ) as BuiltSet<ComponentLifecycleEvent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(ComponentLifecycleEvent),
+                    ]),
+                  )
+                  as BuiltSet<ComponentLifecycleEvent>?;
           if (valueDes == null) continue;
           result.ruleChainEvents.replace(valueDes);
           break;
         case r'onlyRuleNodeLifecycleFailures':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.onlyRuleNodeLifecycleFailures = valueDes;
           break;
         case r'onlyRuleChainLifecycleFailures':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.onlyRuleChainLifecycleFailures = valueDes;
           break;
@@ -209,7 +262,8 @@ class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder();
+    final result =
+        RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(
@@ -223,5 +277,3 @@ class _$RuleEngineComponentLifecycleEventNotificationRuleTriggerConfigSerializer
     return result.build();
   }
 }
-
-

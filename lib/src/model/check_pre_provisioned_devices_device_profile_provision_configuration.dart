@@ -18,26 +18,50 @@ part 'check_pre_provisioned_devices_device_profile_provision_configuration.g.dar
 ///
 /// Properties:
 /// * [provisionDeviceSecret] - Provision device secret
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration implements DeviceProfileProvisionConfiguration, Built<CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration, CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder> {
+abstract class CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration
+    implements
+        DeviceProfileProvisionConfiguration,
+        Built<
+          CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration,
+          CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder
+        > {
   CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration._();
 
-  factory CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration([void updates(CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder b)]) = _$CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration;
+  factory CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration([
+    void updates(
+      CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder b,
+    ),
+  ]) = _$CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder b) => b;
+  static void _defaults(
+    CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration> get serializer => _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer();
+  static Serializer<
+    CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration
+  >
+  get serializer =>
+      _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer();
 }
 
-class _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer implements PrimitiveSerializer<CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration> {
+class _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer
+    implements
+        PrimitiveSerializer<
+          CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration
+        > {
   @override
-  final Iterable<Type> types = const [CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration, _$CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration];
+  final Iterable<Type> types = const [
+    CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration,
+    _$CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration,
+  ];
 
   @override
-  final String wireName = r'CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration';
+  final String wireName =
+      r'CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
@@ -64,7 +88,11 @@ class _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer 
     CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,7 +100,8 @@ class _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer 
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder result,
+    required CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder
+    result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -80,17 +109,21 @@ class _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer 
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'provisionDeviceSecret':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.provisionDeviceSecret = valueDes;
           break;
@@ -108,7 +141,8 @@ class _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer 
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder();
+    final result =
+        CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(
@@ -122,5 +156,3 @@ class _$CheckPreProvisionedDevicesDeviceProfileProvisionConfigurationSerializer 
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'aggregation.g.dart';
 
 class Aggregation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'MIN')
   static const Aggregation MIN = _$MIN;
   @BuiltValueEnumConst(wireName: r'MAX')
@@ -33,7 +32,7 @@ class Aggregation extends EnumClass {
 
   static Serializer<Aggregation> get serializer => _$aggregationSerializer;
 
-  const Aggregation._(String name): super(name);
+  const Aggregation._(String name) : super(name);
 
   static BuiltSet<Aggregation> get values => _$values;
   static Aggregation valueOf(String name) => _$valueOf(name);
@@ -46,4 +45,3 @@ class Aggregation extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AggregationMixin = Object with _$AggregationMixin;
-

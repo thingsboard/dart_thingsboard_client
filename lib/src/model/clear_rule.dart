@@ -18,7 +18,7 @@ part 'clear_rule.g.dart';
 /// ClearRule
 ///
 /// Properties:
-/// * [alarmStatuses] 
+/// * [alarmStatuses]
 @BuiltValue()
 abstract class ClearRule implements Built<ClearRule, ClearRuleBuilder> {
   @BuiltValueField(wireName: r'alarmStatuses')
@@ -62,7 +62,11 @@ class _$ClearRuleSerializer implements PrimitiveSerializer<ClearRule> {
     ClearRule object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +82,14 @@ class _$ClearRuleSerializer implements PrimitiveSerializer<ClearRule> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'alarmStatuses':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(AlarmSearchStatus)]),
-          ) as BuiltSet<AlarmSearchStatus>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(AlarmSearchStatus),
+                    ]),
+                  )
+                  as BuiltSet<AlarmSearchStatus>?;
           if (valueDes == null) continue;
           result.alarmStatuses.replace(valueDes);
           break;
@@ -113,5 +121,3 @@ class _$ClearRuleSerializer implements PrimitiveSerializer<ClearRule> {
     return result.build();
   }
 }
-
-

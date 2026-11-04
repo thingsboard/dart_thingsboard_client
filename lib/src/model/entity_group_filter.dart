@@ -18,14 +18,17 @@ part 'entity_group_filter.g.dart';
 /// EntityGroupFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [groupType] 
-/// * [entityGroup] 
-/// * [groupStateEntity] 
-/// * [defaultStateGroupType] 
-/// * [defaultStateEntityGroup] 
+/// * [type]
+/// * [groupType]
+/// * [entityGroup]
+/// * [groupStateEntity]
+/// * [defaultStateGroupType]
+/// * [defaultStateEntityGroup]
 @BuiltValue()
-abstract class EntityGroupFilter implements EntityFilter, Built<EntityGroupFilter, EntityGroupFilterBuilder> {
+abstract class EntityGroupFilter
+    implements
+        EntityFilter,
+        Built<EntityGroupFilter, EntityGroupFilterBuilder> {
   @BuiltValueField(wireName: r'groupType')
   EntityType? get groupType;
   // enum groupTypeEnum {  TENANT,  CUSTOMER,  USER,  DASHBOARD,  ASSET,  DEVICE,  ALARM,  ENTITY_GROUP,  CONVERTER,  INTEGRATION,  RULE_CHAIN,  RULE_NODE,  SCHEDULER_EVENT,  BLOB_ENTITY,  REPORT_TEMPLATE,  REPORT,  ENTITY_VIEW,  WIDGETS_BUNDLE,  WIDGET_TYPE,  ROLE,  GROUP_PERMISSION,  TENANT_PROFILE,  DEVICE_PROFILE,  ASSET_PROFILE,  API_USAGE_STATE,  TB_RESOURCE,  OTA_PACKAGE,  EDGE,  RPC,  QUEUE,  NOTIFICATION_TARGET,  NOTIFICATION_TEMPLATE,  NOTIFICATION_REQUEST,  NOTIFICATION,  NOTIFICATION_RULE,  QUEUE_STATS,  OAUTH2_CLIENT,  DOMAIN,  MOBILE_APP,  MOBILE_APP_BUNDLE,  CALCULATED_FIELD,  JOB,  SECRET,  ADMIN_SETTINGS,  AI_MODEL,  API_KEY,  AGENT,  AGENT_APPLICATION,  AGENT_APP_EVENT,  AGENT_APP_UNIT,  AGENT_APP_PROFILE,  AGENT_PROFILE,  AGENT_BULK_ACTION,  };
@@ -45,16 +48,19 @@ abstract class EntityGroupFilter implements EntityFilter, Built<EntityGroupFilte
 
   EntityGroupFilter._();
 
-  factory EntityGroupFilter([void updates(EntityGroupFilterBuilder b)]) = _$EntityGroupFilter;
+  factory EntityGroupFilter([void updates(EntityGroupFilterBuilder b)]) =
+      _$EntityGroupFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityGroupFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityGroupFilter> get serializer => _$EntityGroupFilterSerializer();
+  static Serializer<EntityGroupFilter> get serializer =>
+      _$EntityGroupFilterSerializer();
 }
 
-class _$EntityGroupFilterSerializer implements PrimitiveSerializer<EntityGroupFilter> {
+class _$EntityGroupFilterSerializer
+    implements PrimitiveSerializer<EntityGroupFilter> {
   @override
   final Iterable<Type> types = const [EntityGroupFilter, _$EntityGroupFilter];
 
@@ -114,7 +120,11 @@ class _$EntityGroupFilterSerializer implements PrimitiveSerializer<EntityGroupFi
     EntityGroupFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -130,49 +140,61 @@ class _$EntityGroupFilterSerializer implements PrimitiveSerializer<EntityGroupFi
       final value = serializedList[i + 1];
       switch (key) {
         case r'groupType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.groupType = valueDes;
           break;
         case r'groupStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.groupStateEntity = valueDes;
           break;
         case r'defaultStateGroupType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.defaultStateGroupType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'defaultStateEntityGroup':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultStateEntityGroup = valueDes;
           break;
         case r'entityGroup':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityGroup = valueDes;
           break;
@@ -204,5 +226,3 @@ class _$EntityGroupFilterSerializer implements PrimitiveSerializer<EntityGroupFi
     return result.build();
   }
 }
-
-

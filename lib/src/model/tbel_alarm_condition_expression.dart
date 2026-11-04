@@ -17,27 +17,40 @@ part 'tbel_alarm_condition_expression.g.dart';
 /// TbelAlarmConditionExpression
 ///
 /// Properties:
-/// * [type] 
-/// * [expression] 
+/// * [type]
+/// * [expression]
 @BuiltValue()
-abstract class TbelAlarmConditionExpression implements AlarmConditionExpression, Built<TbelAlarmConditionExpression, TbelAlarmConditionExpressionBuilder> {
+abstract class TbelAlarmConditionExpression
+    implements
+        AlarmConditionExpression,
+        Built<
+          TbelAlarmConditionExpression,
+          TbelAlarmConditionExpressionBuilder
+        > {
   @BuiltValueField(wireName: r'expression')
   String get expression;
 
   TbelAlarmConditionExpression._();
 
-  factory TbelAlarmConditionExpression([void updates(TbelAlarmConditionExpressionBuilder b)]) = _$TbelAlarmConditionExpression;
+  factory TbelAlarmConditionExpression([
+    void updates(TbelAlarmConditionExpressionBuilder b),
+  ]) = _$TbelAlarmConditionExpression;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbelAlarmConditionExpressionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbelAlarmConditionExpression> get serializer => _$TbelAlarmConditionExpressionSerializer();
+  static Serializer<TbelAlarmConditionExpression> get serializer =>
+      _$TbelAlarmConditionExpressionSerializer();
 }
 
-class _$TbelAlarmConditionExpressionSerializer implements PrimitiveSerializer<TbelAlarmConditionExpression> {
+class _$TbelAlarmConditionExpressionSerializer
+    implements PrimitiveSerializer<TbelAlarmConditionExpression> {
   @override
-  final Iterable<Type> types = const [TbelAlarmConditionExpression, _$TbelAlarmConditionExpression];
+  final Iterable<Type> types = const [
+    TbelAlarmConditionExpression,
+    _$TbelAlarmConditionExpression,
+  ];
 
   @override
   final String wireName = r'TbelAlarmConditionExpression';
@@ -65,7 +78,11 @@ class _$TbelAlarmConditionExpressionSerializer implements PrimitiveSerializer<Tb
     TbelAlarmConditionExpression object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -81,17 +98,21 @@ class _$TbelAlarmConditionExpressionSerializer implements PrimitiveSerializer<Tb
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'expression':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.expression = valueDes;
           break;
         default:
@@ -122,5 +143,3 @@ class _$TbelAlarmConditionExpressionSerializer implements PrimitiveSerializer<Tb
     return result.build();
   }
 }
-
-

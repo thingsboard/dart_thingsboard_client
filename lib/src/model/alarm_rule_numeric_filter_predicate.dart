@@ -19,11 +19,17 @@ part 'alarm_rule_numeric_filter_predicate.g.dart';
 /// AlarmRuleNumericFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [operation] 
-/// * [value] 
+/// * [type]
+/// * [operation]
+/// * [value]
 @BuiltValue()
-abstract class AlarmRuleNumericFilterPredicate implements AlarmRuleKeyFilterPredicate, Built<AlarmRuleNumericFilterPredicate, AlarmRuleNumericFilterPredicateBuilder> {
+abstract class AlarmRuleNumericFilterPredicate
+    implements
+        AlarmRuleKeyFilterPredicate,
+        Built<
+          AlarmRuleNumericFilterPredicate,
+          AlarmRuleNumericFilterPredicateBuilder
+        > {
   @BuiltValueField(wireName: r'operation')
   AlarmRuleNumericOperation get operation;
   // enum operationEnum {  EQUAL,  NOT_EQUAL,  GREATER,  LESS,  GREATER_OR_EQUAL,  LESS_OR_EQUAL,  };
@@ -33,18 +39,25 @@ abstract class AlarmRuleNumericFilterPredicate implements AlarmRuleKeyFilterPred
 
   AlarmRuleNumericFilterPredicate._();
 
-  factory AlarmRuleNumericFilterPredicate([void updates(AlarmRuleNumericFilterPredicateBuilder b)]) = _$AlarmRuleNumericFilterPredicate;
+  factory AlarmRuleNumericFilterPredicate([
+    void updates(AlarmRuleNumericFilterPredicateBuilder b),
+  ]) = _$AlarmRuleNumericFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmRuleNumericFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmRuleNumericFilterPredicate> get serializer => _$AlarmRuleNumericFilterPredicateSerializer();
+  static Serializer<AlarmRuleNumericFilterPredicate> get serializer =>
+      _$AlarmRuleNumericFilterPredicateSerializer();
 }
 
-class _$AlarmRuleNumericFilterPredicateSerializer implements PrimitiveSerializer<AlarmRuleNumericFilterPredicate> {
+class _$AlarmRuleNumericFilterPredicateSerializer
+    implements PrimitiveSerializer<AlarmRuleNumericFilterPredicate> {
   @override
-  final Iterable<Type> types = const [AlarmRuleNumericFilterPredicate, _$AlarmRuleNumericFilterPredicate];
+  final Iterable<Type> types = const [
+    AlarmRuleNumericFilterPredicate,
+    _$AlarmRuleNumericFilterPredicate,
+  ];
 
   @override
   final String wireName = r'AlarmRuleNumericFilterPredicate';
@@ -77,7 +90,11 @@ class _$AlarmRuleNumericFilterPredicateSerializer implements PrimitiveSerializer
     AlarmRuleNumericFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -93,24 +110,30 @@ class _$AlarmRuleNumericFilterPredicateSerializer implements PrimitiveSerializer
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmRuleNumericOperation),
-          ) as AlarmRuleNumericOperation;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmRuleNumericOperation),
+                  )
+                  as AlarmRuleNumericOperation;
           result.operation = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionValueDouble),
-          ) as AlarmConditionValueDouble;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionValueDouble),
+                  )
+                  as AlarmConditionValueDouble;
           result.value.replace(valueDes);
           break;
         default:
@@ -141,5 +164,3 @@ class _$AlarmRuleNumericFilterPredicateSerializer implements PrimitiveSerializer
     return result.build();
   }
 }
-
-

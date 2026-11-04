@@ -22,7 +22,7 @@ part 'data_key_settings.g.dart';
 /// Properties:
 /// * [type] - Data key settings type
 @BuiltValue(instantiable: false)
-abstract class DataKeySettings  {
+abstract class DataKeySettings {
   /// Data key settings type
   @BuiltValueField(wireName: r'type')
   DataKeySettingsType get type;
@@ -37,39 +37,42 @@ abstract class DataKeySettings  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DataKeySettings> get serializer => _$DataKeySettingsSerializer();
+  static Serializer<DataKeySettings> get serializer =>
+      _$DataKeySettingsSerializer();
 }
 
 extension DataKeySettingsDiscriminatorExt on DataKeySettings {
-    String? get discriminatorValue {
-        if (this is ColumnSettings) {
-            return r'COLUMN';
-        }
-        if (this is DefaultDataKeySettings) {
-            return r'DEFAULT';
-        }
-        if (this is TimeSeriesChartKeySettings) {
-            return r'TIME_SERIES_CHART';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is ColumnSettings) {
+      return r'COLUMN';
     }
-}
-extension DataKeySettingsBuilderDiscriminatorExt on DataKeySettingsBuilder {
-    String? get discriminatorValue {
-        if (this is ColumnSettingsBuilder) {
-            return r'COLUMN';
-        }
-        if (this is DefaultDataKeySettingsBuilder) {
-            return r'DEFAULT';
-        }
-        if (this is TimeSeriesChartKeySettingsBuilder) {
-            return r'TIME_SERIES_CHART';
-        }
-        return null;
+    if (this is DefaultDataKeySettings) {
+      return r'DEFAULT';
     }
+    if (this is TimeSeriesChartKeySettings) {
+      return r'TIME_SERIES_CHART';
+    }
+    return null;
+  }
 }
 
-class _$DataKeySettingsSerializer implements PrimitiveSerializer<DataKeySettings> {
+extension DataKeySettingsBuilderDiscriminatorExt on DataKeySettingsBuilder {
+  String? get discriminatorValue {
+    if (this is ColumnSettingsBuilder) {
+      return r'COLUMN';
+    }
+    if (this is DefaultDataKeySettingsBuilder) {
+      return r'DEFAULT';
+    }
+    if (this is TimeSeriesChartKeySettingsBuilder) {
+      return r'TIME_SERIES_CHART';
+    }
+    return null;
+  }
+}
+
+class _$DataKeySettingsSerializer
+    implements PrimitiveSerializer<DataKeySettings> {
   @override
   final Iterable<Type> types = const [DataKeySettings];
 
@@ -95,15 +98,28 @@ class _$DataKeySettingsSerializer implements PrimitiveSerializer<DataKeySettings
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is ColumnSettings) {
-      return serializers.serialize(object, specifiedType: FullType(ColumnSettings))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ColumnSettings),
+      )!;
     }
     if (object is DefaultDataKeySettings) {
-      return serializers.serialize(object, specifiedType: FullType(DefaultDataKeySettings))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DefaultDataKeySettings),
+      )!;
     }
     if (object is TimeSeriesChartKeySettings) {
-      return serializers.serialize(object, specifiedType: FullType(TimeSeriesChartKeySettings))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TimeSeriesChartKeySettings),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -113,37 +129,64 @@ class _$DataKeySettingsSerializer implements PrimitiveSerializer<DataKeySettings
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(DataKeySettings.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(DataKeySettings.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'COLUMN':
-        return serializers.deserialize(serialized, specifiedType: FullType(ColumnSettings)) as ColumnSettings;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ColumnSettings),
+            )
+            as ColumnSettings;
       case r'DEFAULT':
-        return serializers.deserialize(serialized, specifiedType: FullType(DefaultDataKeySettings)) as DefaultDataKeySettings;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DefaultDataKeySettings),
+            )
+            as DefaultDataKeySettings;
       case r'TIME_SERIES_CHART':
-        return serializers.deserialize(serialized, specifiedType: FullType(TimeSeriesChartKeySettings)) as TimeSeriesChartKeySettings;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TimeSeriesChartKeySettings),
+            )
+            as TimeSeriesChartKeySettings;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($DataKeySettings)) as $DataKeySettings;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($DataKeySettings),
+            )
+            as $DataKeySettings;
     }
   }
 }
 
-
 /// a concrete implementation of [DataKeySettings], since [DataKeySettings] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $DataKeySettings implements DataKeySettings, Built<$DataKeySettings, $DataKeySettingsBuilder> {
+abstract class $DataKeySettings
+    implements
+        DataKeySettings,
+        Built<$DataKeySettings, $DataKeySettingsBuilder> {
   $DataKeySettings._();
 
-  factory $DataKeySettings([void Function($DataKeySettingsBuilder)? updates]) = _$$DataKeySettings;
+  factory $DataKeySettings([void Function($DataKeySettingsBuilder)? updates]) =
+      _$$DataKeySettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($DataKeySettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$DataKeySettings> get serializer => _$$DataKeySettingsSerializer();
+  static Serializer<$DataKeySettings> get serializer =>
+      _$$DataKeySettingsSerializer();
 }
 
-class _$$DataKeySettingsSerializer implements PrimitiveSerializer<$DataKeySettings> {
+class _$$DataKeySettingsSerializer
+    implements PrimitiveSerializer<$DataKeySettings> {
   @override
   final Iterable<Type> types = const [$DataKeySettings, _$$DataKeySettings];
 
@@ -156,7 +199,10 @@ class _$$DataKeySettingsSerializer implements PrimitiveSerializer<$DataKeySettin
     $DataKeySettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(DataKeySettings))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(DataKeySettings),
+    )!;
   }
 
   void _deserializeProperties(
@@ -172,10 +218,12 @@ class _$$DataKeySettingsSerializer implements PrimitiveSerializer<$DataKeySettin
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DataKeySettingsType),
-          ) as DataKeySettingsType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DataKeySettingsType),
+                  )
+                  as DataKeySettingsType;
           result.type = valueDes;
           break;
         default:
@@ -206,4 +254,3 @@ class _$$DataKeySettingsSerializer implements PrimitiveSerializer<$DataKeySettin
     return result.build();
   }
 }
-

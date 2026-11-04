@@ -18,19 +18,20 @@ part 'resource_export_data.g.dart';
 /// ResourceExportData
 ///
 /// Properties:
-/// * [link] 
-/// * [title] 
-/// * [type] 
-/// * [subType] 
-/// * [resourceKey] 
-/// * [fileName] 
-/// * [publicResourceKey] 
-/// * [mediaType] 
-/// * [data] 
-/// * [isPublic] 
-/// * [public] 
+/// * [link]
+/// * [title]
+/// * [type]
+/// * [subType]
+/// * [resourceKey]
+/// * [fileName]
+/// * [publicResourceKey]
+/// * [mediaType]
+/// * [data]
+/// * [isPublic]
+/// * [public]
 @BuiltValue()
-abstract class ResourceExportData implements Built<ResourceExportData, ResourceExportDataBuilder> {
+abstract class ResourceExportData
+    implements Built<ResourceExportData, ResourceExportDataBuilder> {
   @BuiltValueField(wireName: r'link')
   String? get link;
 
@@ -68,16 +69,19 @@ abstract class ResourceExportData implements Built<ResourceExportData, ResourceE
 
   ResourceExportData._();
 
-  factory ResourceExportData([void updates(ResourceExportDataBuilder b)]) = _$ResourceExportData;
+  factory ResourceExportData([void updates(ResourceExportDataBuilder b)]) =
+      _$ResourceExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ResourceExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ResourceExportData> get serializer => _$ResourceExportDataSerializer();
+  static Serializer<ResourceExportData> get serializer =>
+      _$ResourceExportDataSerializer();
 }
 
-class _$ResourceExportDataSerializer implements PrimitiveSerializer<ResourceExportData> {
+class _$ResourceExportDataSerializer
+    implements PrimitiveSerializer<ResourceExportData> {
   @override
   final Iterable<Type> types = const [ResourceExportData, _$ResourceExportData];
 
@@ -174,7 +178,11 @@ class _$ResourceExportDataSerializer implements PrimitiveSerializer<ResourceExpo
     ResourceExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -190,90 +198,112 @@ class _$ResourceExportDataSerializer implements PrimitiveSerializer<ResourceExpo
       final value = serializedList[i + 1];
       switch (key) {
         case r'link':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.link = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ResourceType),
-          ) as ResourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ResourceType),
+                  )
+                  as ResourceType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ResourceSubType),
-          ) as ResourceSubType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ResourceSubType),
+                  )
+                  as ResourceSubType?;
           if (valueDes == null) continue;
           result.subType = valueDes;
           break;
         case r'resourceKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.resourceKey = valueDes;
           break;
         case r'fileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fileName = valueDes;
           break;
         case r'publicResourceKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.publicResourceKey = valueDes;
           break;
         case r'mediaType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.mediaType = valueDes;
           break;
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.data = valueDes;
           break;
         case r'isPublic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.isPublic = valueDes;
           break;
         case r'public':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.public = valueDes;
           break;
@@ -305,5 +335,3 @@ class _$ResourceExportDataSerializer implements PrimitiveSerializer<ResourceExpo
     return result.build();
   }
 }
-
-

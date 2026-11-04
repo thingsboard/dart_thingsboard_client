@@ -27,9 +27,9 @@ part 'event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 @BuiltValue(instantiable: false)
-abstract class EventFilter  {
+abstract class EventFilter {
   /// String value representing the event type
   @BuiltValueField(wireName: r'eventType')
   EventType get eventType;
@@ -57,68 +57,69 @@ abstract class EventFilter  {
 }
 
 extension EventFilterDiscriminatorExt on EventFilter {
-    String? get discriminatorValue {
-        if (this is CalculatedFieldDebugEventFilter) {
-            return r'DEBUG_CALCULATED_FIELD';
-        }
-        if (this is DebugConverterEventFilter) {
-            return r'DEBUG_CONVERTER';
-        }
-        if (this is DebugIntegrationEventFilter) {
-            return r'DEBUG_INTEGRATION';
-        }
-        if (this is RuleChainDebugEventFilter) {
-            return r'DEBUG_RULE_CHAIN';
-        }
-        if (this is RuleNodeDebugEventFilter) {
-            return r'DEBUG_RULE_NODE';
-        }
-        if (this is ErrorEventFilter) {
-            return r'ERROR';
-        }
-        if (this is LifeCycleEventFilter) {
-            return r'LC_EVENT';
-        }
-        if (this is RawDataEventFilter) {
-            return r'RAW_DATA';
-        }
-        if (this is StatisticsEventFilter) {
-            return r'STATS';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CalculatedFieldDebugEventFilter) {
+      return r'DEBUG_CALCULATED_FIELD';
     }
+    if (this is DebugConverterEventFilter) {
+      return r'DEBUG_CONVERTER';
+    }
+    if (this is DebugIntegrationEventFilter) {
+      return r'DEBUG_INTEGRATION';
+    }
+    if (this is RuleChainDebugEventFilter) {
+      return r'DEBUG_RULE_CHAIN';
+    }
+    if (this is RuleNodeDebugEventFilter) {
+      return r'DEBUG_RULE_NODE';
+    }
+    if (this is ErrorEventFilter) {
+      return r'ERROR';
+    }
+    if (this is LifeCycleEventFilter) {
+      return r'LC_EVENT';
+    }
+    if (this is RawDataEventFilter) {
+      return r'RAW_DATA';
+    }
+    if (this is StatisticsEventFilter) {
+      return r'STATS';
+    }
+    return null;
+  }
 }
+
 extension EventFilterBuilderDiscriminatorExt on EventFilterBuilder {
-    String? get discriminatorValue {
-        if (this is CalculatedFieldDebugEventFilterBuilder) {
-            return r'DEBUG_CALCULATED_FIELD';
-        }
-        if (this is DebugConverterEventFilterBuilder) {
-            return r'DEBUG_CONVERTER';
-        }
-        if (this is DebugIntegrationEventFilterBuilder) {
-            return r'DEBUG_INTEGRATION';
-        }
-        if (this is RuleChainDebugEventFilterBuilder) {
-            return r'DEBUG_RULE_CHAIN';
-        }
-        if (this is RuleNodeDebugEventFilterBuilder) {
-            return r'DEBUG_RULE_NODE';
-        }
-        if (this is ErrorEventFilterBuilder) {
-            return r'ERROR';
-        }
-        if (this is LifeCycleEventFilterBuilder) {
-            return r'LC_EVENT';
-        }
-        if (this is RawDataEventFilterBuilder) {
-            return r'RAW_DATA';
-        }
-        if (this is StatisticsEventFilterBuilder) {
-            return r'STATS';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CalculatedFieldDebugEventFilterBuilder) {
+      return r'DEBUG_CALCULATED_FIELD';
     }
+    if (this is DebugConverterEventFilterBuilder) {
+      return r'DEBUG_CONVERTER';
+    }
+    if (this is DebugIntegrationEventFilterBuilder) {
+      return r'DEBUG_INTEGRATION';
+    }
+    if (this is RuleChainDebugEventFilterBuilder) {
+      return r'DEBUG_RULE_CHAIN';
+    }
+    if (this is RuleNodeDebugEventFilterBuilder) {
+      return r'DEBUG_RULE_NODE';
+    }
+    if (this is ErrorEventFilterBuilder) {
+      return r'ERROR';
+    }
+    if (this is LifeCycleEventFilterBuilder) {
+      return r'LC_EVENT';
+    }
+    if (this is RawDataEventFilterBuilder) {
+      return r'RAW_DATA';
+    }
+    if (this is StatisticsEventFilterBuilder) {
+      return r'STATS';
+    }
+    return null;
+  }
 }
 
 class _$EventFilterSerializer implements PrimitiveSerializer<EventFilter> {
@@ -154,33 +155,64 @@ class _$EventFilterSerializer implements PrimitiveSerializer<EventFilter> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CalculatedFieldDebugEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(CalculatedFieldDebugEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CalculatedFieldDebugEventFilter),
+      )!;
     }
     if (object is DebugConverterEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(DebugConverterEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DebugConverterEventFilter),
+      )!;
     }
     if (object is DebugIntegrationEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(DebugIntegrationEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DebugIntegrationEventFilter),
+      )!;
     }
     if (object is RuleChainDebugEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(RuleChainDebugEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RuleChainDebugEventFilter),
+      )!;
     }
     if (object is RuleNodeDebugEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(RuleNodeDebugEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RuleNodeDebugEventFilter),
+      )!;
     }
     if (object is ErrorEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(ErrorEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ErrorEventFilter),
+      )!;
     }
     if (object is LifeCycleEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(LifeCycleEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(LifeCycleEventFilter),
+      )!;
     }
     if (object is RawDataEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(RawDataEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RawDataEventFilter),
+      )!;
     }
     if (object is StatisticsEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(StatisticsEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(StatisticsEventFilter),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -190,40 +222,87 @@ class _$EventFilterSerializer implements PrimitiveSerializer<EventFilter> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(EventFilter.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(EventFilter.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'DEBUG_CALCULATED_FIELD':
-        return serializers.deserialize(serialized, specifiedType: FullType(CalculatedFieldDebugEventFilter)) as CalculatedFieldDebugEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CalculatedFieldDebugEventFilter),
+            )
+            as CalculatedFieldDebugEventFilter;
       case r'DEBUG_CONVERTER':
-        return serializers.deserialize(serialized, specifiedType: FullType(DebugConverterEventFilter)) as DebugConverterEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DebugConverterEventFilter),
+            )
+            as DebugConverterEventFilter;
       case r'DEBUG_INTEGRATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(DebugIntegrationEventFilter)) as DebugIntegrationEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DebugIntegrationEventFilter),
+            )
+            as DebugIntegrationEventFilter;
       case r'DEBUG_RULE_CHAIN':
-        return serializers.deserialize(serialized, specifiedType: FullType(RuleChainDebugEventFilter)) as RuleChainDebugEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RuleChainDebugEventFilter),
+            )
+            as RuleChainDebugEventFilter;
       case r'DEBUG_RULE_NODE':
-        return serializers.deserialize(serialized, specifiedType: FullType(RuleNodeDebugEventFilter)) as RuleNodeDebugEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RuleNodeDebugEventFilter),
+            )
+            as RuleNodeDebugEventFilter;
       case r'ERROR':
-        return serializers.deserialize(serialized, specifiedType: FullType(ErrorEventFilter)) as ErrorEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ErrorEventFilter),
+            )
+            as ErrorEventFilter;
       case r'LC_EVENT':
-        return serializers.deserialize(serialized, specifiedType: FullType(LifeCycleEventFilter)) as LifeCycleEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(LifeCycleEventFilter),
+            )
+            as LifeCycleEventFilter;
       case r'RAW_DATA':
-        return serializers.deserialize(serialized, specifiedType: FullType(RawDataEventFilter)) as RawDataEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RawDataEventFilter),
+            )
+            as RawDataEventFilter;
       case r'STATS':
-        return serializers.deserialize(serialized, specifiedType: FullType(StatisticsEventFilter)) as StatisticsEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(StatisticsEventFilter),
+            )
+            as StatisticsEventFilter;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($EventFilter)) as $EventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($EventFilter),
+            )
+            as $EventFilter;
     }
   }
 }
 
-
 /// a concrete implementation of [EventFilter], since [EventFilter] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $EventFilter implements EventFilter, Built<$EventFilter, $EventFilterBuilder> {
+abstract class $EventFilter
+    implements EventFilter, Built<$EventFilter, $EventFilterBuilder> {
   $EventFilter._();
 
-  factory $EventFilter([void Function($EventFilterBuilder)? updates]) = _$$EventFilter;
+  factory $EventFilter([void Function($EventFilterBuilder)? updates]) =
+      _$$EventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($EventFilterBuilder b) => b;
@@ -261,17 +340,21 @@ class _$$EventFilterSerializer implements PrimitiveSerializer<$EventFilter> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
@@ -303,4 +386,3 @@ class _$$EventFilterSerializer implements PrimitiveSerializer<$EventFilter> {
     return result.build();
   }
 }
-

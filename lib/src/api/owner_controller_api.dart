@@ -9,17 +9,14 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class OwnerControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -33,7 +30,7 @@ class OwnerControllerApi {
   /// * [ownerId] - A string value representing the customer id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
   /// * [entityType] - A string value representing the entity type. For example, 'DEVICE'
   /// * [entityId] - A string value representing the entity id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -43,7 +40,7 @@ class OwnerControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> changeOwnerToCustomer({ 
+  Future<Response<void>> changeOwnerToCustomer({
     required String ownerId,
     required String entityType,
     required String entityId,
@@ -55,13 +52,42 @@ class OwnerControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/owner/CUSTOMER/{ownerId}/{entityType}/{entityId}'.replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/owner/CUSTOMER/{ownerId}/{entityType}/{entityId}'
+        .replaceAll(
+          '{'
+          r'ownerId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -69,11 +95,8 @@ class OwnerControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -85,14 +108,12 @@ class OwnerControllerApi {
 
     try {
       const _type = FullType(BuiltList, [FullType(String)]);
-      _bodyData = requestBody == null ? null : _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = requestBody == null
+          ? null
+          : _serializers.serialize(requestBody, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -118,7 +139,7 @@ class OwnerControllerApi {
   /// * [ownerId] - A string value representing the tenant id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
   /// * [entityType] - A string value representing the entity type. For example, 'DEVICE'
   /// * [entityId] - A string value representing the entity id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -128,7 +149,7 @@ class OwnerControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> changeOwnerToTenant({ 
+  Future<Response<void>> changeOwnerToTenant({
     required String ownerId,
     required String entityType,
     required String entityId,
@@ -140,13 +161,42 @@ class OwnerControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/owner/TENANT/{ownerId}/{entityType}/{entityId}'.replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/owner/TENANT/{ownerId}/{entityType}/{entityId}'
+        .replaceAll(
+          '{'
+          r'ownerId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -154,11 +204,8 @@ class OwnerControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -170,14 +217,12 @@ class OwnerControllerApi {
 
     try {
       const _type = FullType(BuiltList, [FullType(String)]);
-      _bodyData = requestBody == null ? null : _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = requestBody == null
+          ? null
+          : _serializers.serialize(requestBody, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -195,5 +240,4 @@ class OwnerControllerApi {
 
     return _response;
   }
-
 }

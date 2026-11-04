@@ -23,7 +23,8 @@ part 'rule_chain_connection_info.g.dart';
 /// * [additionalInfo] - JSON object with the additional information about the connection.
 /// * [type] - Type of the relation. Typically indicated the result of processing by the 'from' rule node. For example, 'Success' or 'Failure'
 @BuiltValue()
-abstract class RuleChainConnectionInfo implements Built<RuleChainConnectionInfo, RuleChainConnectionInfoBuilder> {
+abstract class RuleChainConnectionInfo
+    implements Built<RuleChainConnectionInfo, RuleChainConnectionInfoBuilder> {
   /// Index of rule node in the 'nodes' array of the RuleChainMetaData. Indicates the 'from' part of the connection.
   @BuiltValueField(wireName: r'fromIndex')
   int get fromIndex;
@@ -42,18 +43,25 @@ abstract class RuleChainConnectionInfo implements Built<RuleChainConnectionInfo,
 
   RuleChainConnectionInfo._();
 
-  factory RuleChainConnectionInfo([void updates(RuleChainConnectionInfoBuilder b)]) = _$RuleChainConnectionInfo;
+  factory RuleChainConnectionInfo([
+    void updates(RuleChainConnectionInfoBuilder b),
+  ]) = _$RuleChainConnectionInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainConnectionInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainConnectionInfo> get serializer => _$RuleChainConnectionInfoSerializer();
+  static Serializer<RuleChainConnectionInfo> get serializer =>
+      _$RuleChainConnectionInfoSerializer();
 }
 
-class _$RuleChainConnectionInfoSerializer implements PrimitiveSerializer<RuleChainConnectionInfo> {
+class _$RuleChainConnectionInfoSerializer
+    implements PrimitiveSerializer<RuleChainConnectionInfo> {
   @override
-  final Iterable<Type> types = const [RuleChainConnectionInfo, _$RuleChainConnectionInfo];
+  final Iterable<Type> types = const [
+    RuleChainConnectionInfo,
+    _$RuleChainConnectionInfo,
+  ];
 
   @override
   final String wireName = r'RuleChainConnectionInfo';
@@ -74,10 +82,12 @@ class _$RuleChainConnectionInfoSerializer implements PrimitiveSerializer<RuleCha
       specifiedType: const FullType(RuleChainId),
     );
     yield r'additionalInfo';
-    yield object.additionalInfo == null ? null : serializers.serialize(
-      object.additionalInfo,
-      specifiedType: const FullType.nullable(JsonObject),
-    );
+    yield object.additionalInfo == null
+        ? null
+        : serializers.serialize(
+            object.additionalInfo,
+            specifiedType: const FullType.nullable(JsonObject),
+          );
     yield r'type';
     yield serializers.serialize(
       object.type,
@@ -91,7 +101,11 @@ class _$RuleChainConnectionInfoSerializer implements PrimitiveSerializer<RuleCha
     RuleChainConnectionInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,32 +121,37 @@ class _$RuleChainConnectionInfoSerializer implements PrimitiveSerializer<RuleCha
       final value = serializedList[i + 1];
       switch (key) {
         case r'fromIndex':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.fromIndex = valueDes;
           break;
         case r'targetRuleChainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RuleChainId),
-          ) as RuleChainId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RuleChainId),
+                  )
+                  as RuleChainId;
           result.targetRuleChainId.replace(valueDes);
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -163,5 +182,3 @@ class _$RuleChainConnectionInfoSerializer implements PrimitiveSerializer<RuleCha
     return result.build();
   }
 }
-
-

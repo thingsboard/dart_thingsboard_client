@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'notification_request_status.g.dart';
 
 class NotificationRequestStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'PROCESSING')
   static const NotificationRequestStatus PROCESSING = _$PROCESSING;
   @BuiltValueEnumConst(wireName: r'SENT')
@@ -23,11 +22,13 @@ class NotificationRequestStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'SCHEDULED')
   static const NotificationRequestStatus SCHEDULED = _$SCHEDULED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const NotificationRequestStatus unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const NotificationRequestStatus unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<NotificationRequestStatus> get serializer => _$notificationRequestStatusSerializer;
+  static Serializer<NotificationRequestStatus> get serializer =>
+      _$notificationRequestStatusSerializer;
 
-  const NotificationRequestStatus._(String name): super(name);
+  const NotificationRequestStatus._(String name) : super(name);
 
   static BuiltSet<NotificationRequestStatus> get values => _$values;
   static NotificationRequestStatus valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class NotificationRequestStatus extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class NotificationRequestStatusMixin = Object with _$NotificationRequestStatusMixin;
-
+abstract class NotificationRequestStatusMixin = Object
+    with _$NotificationRequestStatusMixin;

@@ -16,26 +16,38 @@ part 'two_fa_account_config_update_request.g.dart';
 /// TwoFaAccountConfigUpdateRequest
 ///
 /// Properties:
-/// * [useByDefault] 
+/// * [useByDefault]
 @BuiltValue()
-abstract class TwoFaAccountConfigUpdateRequest implements Built<TwoFaAccountConfigUpdateRequest, TwoFaAccountConfigUpdateRequestBuilder> {
+abstract class TwoFaAccountConfigUpdateRequest
+    implements
+        Built<
+          TwoFaAccountConfigUpdateRequest,
+          TwoFaAccountConfigUpdateRequestBuilder
+        > {
   @BuiltValueField(wireName: r'useByDefault')
   bool? get useByDefault;
 
   TwoFaAccountConfigUpdateRequest._();
 
-  factory TwoFaAccountConfigUpdateRequest([void updates(TwoFaAccountConfigUpdateRequestBuilder b)]) = _$TwoFaAccountConfigUpdateRequest;
+  factory TwoFaAccountConfigUpdateRequest([
+    void updates(TwoFaAccountConfigUpdateRequestBuilder b),
+  ]) = _$TwoFaAccountConfigUpdateRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TwoFaAccountConfigUpdateRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TwoFaAccountConfigUpdateRequest> get serializer => _$TwoFaAccountConfigUpdateRequestSerializer();
+  static Serializer<TwoFaAccountConfigUpdateRequest> get serializer =>
+      _$TwoFaAccountConfigUpdateRequestSerializer();
 }
 
-class _$TwoFaAccountConfigUpdateRequestSerializer implements PrimitiveSerializer<TwoFaAccountConfigUpdateRequest> {
+class _$TwoFaAccountConfigUpdateRequestSerializer
+    implements PrimitiveSerializer<TwoFaAccountConfigUpdateRequest> {
   @override
-  final Iterable<Type> types = const [TwoFaAccountConfigUpdateRequest, _$TwoFaAccountConfigUpdateRequest];
+  final Iterable<Type> types = const [
+    TwoFaAccountConfigUpdateRequest,
+    _$TwoFaAccountConfigUpdateRequest,
+  ];
 
   @override
   final String wireName = r'TwoFaAccountConfigUpdateRequest';
@@ -60,7 +72,11 @@ class _$TwoFaAccountConfigUpdateRequestSerializer implements PrimitiveSerializer
     TwoFaAccountConfigUpdateRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +92,12 @@ class _$TwoFaAccountConfigUpdateRequestSerializer implements PrimitiveSerializer
       final value = serializedList[i + 1];
       switch (key) {
         case r'useByDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useByDefault = valueDes;
           break;
@@ -111,5 +129,3 @@ class _$TwoFaAccountConfigUpdateRequestSerializer implements PrimitiveSerializer
     return result.build();
   }
 }
-
-

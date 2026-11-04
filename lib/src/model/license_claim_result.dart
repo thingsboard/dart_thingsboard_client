@@ -17,11 +17,12 @@ part 'license_claim_result.g.dart';
 /// LicenseClaimResult
 ///
 /// Properties:
-/// * [signUpUrl] 
-/// * [mode] 
-/// * [claimToken] 
+/// * [signUpUrl]
+/// * [mode]
+/// * [claimToken]
 @BuiltValue()
-abstract class LicenseClaimResult implements Built<LicenseClaimResult, LicenseClaimResultBuilder> {
+abstract class LicenseClaimResult
+    implements Built<LicenseClaimResult, LicenseClaimResultBuilder> {
   @BuiltValueField(wireName: r'signUpUrl')
   String? get signUpUrl;
 
@@ -34,16 +35,19 @@ abstract class LicenseClaimResult implements Built<LicenseClaimResult, LicenseCl
 
   LicenseClaimResult._();
 
-  factory LicenseClaimResult([void updates(LicenseClaimResultBuilder b)]) = _$LicenseClaimResult;
+  factory LicenseClaimResult([void updates(LicenseClaimResultBuilder b)]) =
+      _$LicenseClaimResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LicenseClaimResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LicenseClaimResult> get serializer => _$LicenseClaimResultSerializer();
+  static Serializer<LicenseClaimResult> get serializer =>
+      _$LicenseClaimResultSerializer();
 }
 
-class _$LicenseClaimResultSerializer implements PrimitiveSerializer<LicenseClaimResult> {
+class _$LicenseClaimResultSerializer
+    implements PrimitiveSerializer<LicenseClaimResult> {
   @override
   final Iterable<Type> types = const [LicenseClaimResult, _$LicenseClaimResult];
 
@@ -84,7 +88,11 @@ class _$LicenseClaimResultSerializer implements PrimitiveSerializer<LicenseClaim
     LicenseClaimResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -100,26 +108,32 @@ class _$LicenseClaimResultSerializer implements PrimitiveSerializer<LicenseClaim
       final value = serializedList[i + 1];
       switch (key) {
         case r'signUpUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.signUpUrl = valueDes;
           break;
         case r'mode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LicenseClaimMode),
-          ) as LicenseClaimMode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LicenseClaimMode),
+                  )
+                  as LicenseClaimMode?;
           if (valueDes == null) continue;
           result.mode = valueDes;
           break;
         case r'claimToken':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.claimToken = valueDes;
           break;
@@ -151,5 +165,3 @@ class _$LicenseClaimResultSerializer implements PrimitiveSerializer<LicenseClaim
     return result.build();
   }
 }
-
-

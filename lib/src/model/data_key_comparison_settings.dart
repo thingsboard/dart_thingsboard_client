@@ -16,11 +16,13 @@ part 'data_key_comparison_settings.g.dart';
 /// DataKeyComparisonSettings
 ///
 /// Properties:
-/// * [showValuesForComparison] 
-/// * [comparisonValuesLabel] 
-/// * [color] 
+/// * [showValuesForComparison]
+/// * [comparisonValuesLabel]
+/// * [color]
 @BuiltValue()
-abstract class DataKeyComparisonSettings implements Built<DataKeyComparisonSettings, DataKeyComparisonSettingsBuilder> {
+abstract class DataKeyComparisonSettings
+    implements
+        Built<DataKeyComparisonSettings, DataKeyComparisonSettingsBuilder> {
   @BuiltValueField(wireName: r'showValuesForComparison')
   bool? get showValuesForComparison;
 
@@ -32,18 +34,25 @@ abstract class DataKeyComparisonSettings implements Built<DataKeyComparisonSetti
 
   DataKeyComparisonSettings._();
 
-  factory DataKeyComparisonSettings([void updates(DataKeyComparisonSettingsBuilder b)]) = _$DataKeyComparisonSettings;
+  factory DataKeyComparisonSettings([
+    void updates(DataKeyComparisonSettingsBuilder b),
+  ]) = _$DataKeyComparisonSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DataKeyComparisonSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DataKeyComparisonSettings> get serializer => _$DataKeyComparisonSettingsSerializer();
+  static Serializer<DataKeyComparisonSettings> get serializer =>
+      _$DataKeyComparisonSettingsSerializer();
 }
 
-class _$DataKeyComparisonSettingsSerializer implements PrimitiveSerializer<DataKeyComparisonSettings> {
+class _$DataKeyComparisonSettingsSerializer
+    implements PrimitiveSerializer<DataKeyComparisonSettings> {
   @override
-  final Iterable<Type> types = const [DataKeyComparisonSettings, _$DataKeyComparisonSettings];
+  final Iterable<Type> types = const [
+    DataKeyComparisonSettings,
+    _$DataKeyComparisonSettings,
+  ];
 
   @override
   final String wireName = r'DataKeyComparisonSettings';
@@ -82,7 +91,11 @@ class _$DataKeyComparisonSettingsSerializer implements PrimitiveSerializer<DataK
     DataKeyComparisonSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +111,32 @@ class _$DataKeyComparisonSettingsSerializer implements PrimitiveSerializer<DataK
       final value = serializedList[i + 1];
       switch (key) {
         case r'showValuesForComparison':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showValuesForComparison = valueDes;
           break;
         case r'comparisonValuesLabel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.comparisonValuesLabel = valueDes;
           break;
         case r'color':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.color = valueDes;
           break;
@@ -149,5 +168,3 @@ class _$DataKeyComparisonSettingsSerializer implements PrimitiveSerializer<DataK
     return result.build();
   }
 }
-
-

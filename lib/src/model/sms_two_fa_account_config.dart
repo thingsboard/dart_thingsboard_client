@@ -17,28 +17,38 @@ part 'sms_two_fa_account_config.g.dart';
 /// SmsTwoFaAccountConfig
 ///
 /// Properties:
-/// * [useByDefault] 
-/// * [providerType] 
-/// * [phoneNumber] 
+/// * [useByDefault]
+/// * [providerType]
+/// * [phoneNumber]
 @BuiltValue()
-abstract class SmsTwoFaAccountConfig implements TwoFaAccountConfig, Built<SmsTwoFaAccountConfig, SmsTwoFaAccountConfigBuilder> {
+abstract class SmsTwoFaAccountConfig
+    implements
+        TwoFaAccountConfig,
+        Built<SmsTwoFaAccountConfig, SmsTwoFaAccountConfigBuilder> {
   @BuiltValueField(wireName: r'phoneNumber')
   String get phoneNumber;
 
   SmsTwoFaAccountConfig._();
 
-  factory SmsTwoFaAccountConfig([void updates(SmsTwoFaAccountConfigBuilder b)]) = _$SmsTwoFaAccountConfig;
+  factory SmsTwoFaAccountConfig([
+    void updates(SmsTwoFaAccountConfigBuilder b),
+  ]) = _$SmsTwoFaAccountConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SmsTwoFaAccountConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SmsTwoFaAccountConfig> get serializer => _$SmsTwoFaAccountConfigSerializer();
+  static Serializer<SmsTwoFaAccountConfig> get serializer =>
+      _$SmsTwoFaAccountConfigSerializer();
 }
 
-class _$SmsTwoFaAccountConfigSerializer implements PrimitiveSerializer<SmsTwoFaAccountConfig> {
+class _$SmsTwoFaAccountConfigSerializer
+    implements PrimitiveSerializer<SmsTwoFaAccountConfig> {
   @override
-  final Iterable<Type> types = const [SmsTwoFaAccountConfig, _$SmsTwoFaAccountConfig];
+  final Iterable<Type> types = const [
+    SmsTwoFaAccountConfig,
+    _$SmsTwoFaAccountConfig,
+  ];
 
   @override
   final String wireName = r'SmsTwoFaAccountConfig';
@@ -73,7 +83,11 @@ class _$SmsTwoFaAccountConfigSerializer implements PrimitiveSerializer<SmsTwoFaA
     SmsTwoFaAccountConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,25 +103,31 @@ class _$SmsTwoFaAccountConfigSerializer implements PrimitiveSerializer<SmsTwoFaA
       final value = serializedList[i + 1];
       switch (key) {
         case r'useByDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useByDefault = valueDes;
           break;
         case r'providerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerType = valueDes;
           break;
         case r'phoneNumber':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.phoneNumber = valueDes;
           break;
         default:
@@ -138,5 +158,3 @@ class _$SmsTwoFaAccountConfigSerializer implements PrimitiveSerializer<SmsTwoFaA
     return result.build();
   }
 }
-
-

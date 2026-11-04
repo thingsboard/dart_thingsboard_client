@@ -19,16 +19,22 @@ part 'mqtt_device_profile_transport_configuration.g.dart';
 /// MqttDeviceProfileTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [deviceTelemetryTopic] 
-/// * [deviceAttributesTopic] 
-/// * [deviceAttributesSubscribeTopic] 
-/// * [transportPayloadTypeConfiguration] 
-/// * [sparkplug] 
-/// * [sparkplugAttributesMetricNames] 
-/// * [sendAckOnValidationException] 
+/// * [type]
+/// * [deviceTelemetryTopic]
+/// * [deviceAttributesTopic]
+/// * [deviceAttributesSubscribeTopic]
+/// * [transportPayloadTypeConfiguration]
+/// * [sparkplug]
+/// * [sparkplugAttributesMetricNames]
+/// * [sendAckOnValidationException]
 @BuiltValue()
-abstract class MqttDeviceProfileTransportConfiguration implements DeviceProfileTransportConfiguration, Built<MqttDeviceProfileTransportConfiguration, MqttDeviceProfileTransportConfigurationBuilder> {
+abstract class MqttDeviceProfileTransportConfiguration
+    implements
+        DeviceProfileTransportConfiguration,
+        Built<
+          MqttDeviceProfileTransportConfiguration,
+          MqttDeviceProfileTransportConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'transportPayloadTypeConfiguration')
   TransportPayloadTypeConfiguration? get transportPayloadTypeConfiguration;
 
@@ -52,18 +58,25 @@ abstract class MqttDeviceProfileTransportConfiguration implements DeviceProfileT
 
   MqttDeviceProfileTransportConfiguration._();
 
-  factory MqttDeviceProfileTransportConfiguration([void updates(MqttDeviceProfileTransportConfigurationBuilder b)]) = _$MqttDeviceProfileTransportConfiguration;
+  factory MqttDeviceProfileTransportConfiguration([
+    void updates(MqttDeviceProfileTransportConfigurationBuilder b),
+  ]) = _$MqttDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MqttDeviceProfileTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MqttDeviceProfileTransportConfiguration> get serializer => _$MqttDeviceProfileTransportConfigurationSerializer();
+  static Serializer<MqttDeviceProfileTransportConfiguration> get serializer =>
+      _$MqttDeviceProfileTransportConfigurationSerializer();
 }
 
-class _$MqttDeviceProfileTransportConfigurationSerializer implements PrimitiveSerializer<MqttDeviceProfileTransportConfiguration> {
+class _$MqttDeviceProfileTransportConfigurationSerializer
+    implements PrimitiveSerializer<MqttDeviceProfileTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [MqttDeviceProfileTransportConfiguration, _$MqttDeviceProfileTransportConfiguration];
+  final Iterable<Type> types = const [
+    MqttDeviceProfileTransportConfiguration,
+    _$MqttDeviceProfileTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'MqttDeviceProfileTransportConfiguration';
@@ -135,7 +148,11 @@ class _$MqttDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
     MqttDeviceProfileTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -151,65 +168,85 @@ class _$MqttDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'transportPayloadTypeConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TransportPayloadTypeConfiguration),
-          ) as TransportPayloadTypeConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TransportPayloadTypeConfiguration,
+                    ),
+                  )
+                  as TransportPayloadTypeConfiguration?;
           if (valueDes == null) continue;
           result.transportPayloadTypeConfiguration = valueDes;
           break;
         case r'sparkplug':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.sparkplug = valueDes;
           break;
         case r'deviceTelemetryTopic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceTelemetryTopic = valueDes;
           break;
         case r'deviceAttributesTopic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceAttributesTopic = valueDes;
           break;
         case r'sendAckOnValidationException':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.sendAckOnValidationException = valueDes;
           break;
         case r'sparkplugAttributesMetricNames':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.sparkplugAttributesMetricNames.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'deviceAttributesSubscribeTopic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceAttributesSubscribeTopic = valueDes;
           break;
@@ -241,5 +278,3 @@ class _$MqttDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
     return result.build();
   }
 }
-
-

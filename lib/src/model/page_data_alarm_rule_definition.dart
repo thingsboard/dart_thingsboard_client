@@ -23,7 +23,9 @@ part 'page_data_alarm_rule_definition.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataAlarmRuleDefinition implements Built<PageDataAlarmRuleDefinition, PageDataAlarmRuleDefinitionBuilder> {
+abstract class PageDataAlarmRuleDefinition
+    implements
+        Built<PageDataAlarmRuleDefinition, PageDataAlarmRuleDefinitionBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<AlarmRuleDefinition>? get data;
@@ -42,18 +44,25 @@ abstract class PageDataAlarmRuleDefinition implements Built<PageDataAlarmRuleDef
 
   PageDataAlarmRuleDefinition._();
 
-  factory PageDataAlarmRuleDefinition([void updates(PageDataAlarmRuleDefinitionBuilder b)]) = _$PageDataAlarmRuleDefinition;
+  factory PageDataAlarmRuleDefinition([
+    void updates(PageDataAlarmRuleDefinitionBuilder b),
+  ]) = _$PageDataAlarmRuleDefinition;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataAlarmRuleDefinitionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataAlarmRuleDefinition> get serializer => _$PageDataAlarmRuleDefinitionSerializer();
+  static Serializer<PageDataAlarmRuleDefinition> get serializer =>
+      _$PageDataAlarmRuleDefinitionSerializer();
 }
 
-class _$PageDataAlarmRuleDefinitionSerializer implements PrimitiveSerializer<PageDataAlarmRuleDefinition> {
+class _$PageDataAlarmRuleDefinitionSerializer
+    implements PrimitiveSerializer<PageDataAlarmRuleDefinition> {
   @override
-  final Iterable<Type> types = const [PageDataAlarmRuleDefinition, _$PageDataAlarmRuleDefinition];
+  final Iterable<Type> types = const [
+    PageDataAlarmRuleDefinition,
+    _$PageDataAlarmRuleDefinition,
+  ];
 
   @override
   final String wireName = r'PageDataAlarmRuleDefinition';
@@ -67,7 +76,9 @@ class _$PageDataAlarmRuleDefinitionSerializer implements PrimitiveSerializer<Pag
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(AlarmRuleDefinition)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(AlarmRuleDefinition),
+        ]),
       );
     }
     if (object.totalPages != null) {
@@ -99,7 +110,11 @@ class _$PageDataAlarmRuleDefinitionSerializer implements PrimitiveSerializer<Pag
     PageDataAlarmRuleDefinition object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +130,44 @@ class _$PageDataAlarmRuleDefinitionSerializer implements PrimitiveSerializer<Pag
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmRuleDefinition)]),
-          ) as BuiltList<AlarmRuleDefinition>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmRuleDefinition),
+                    ]),
+                  )
+                  as BuiltList<AlarmRuleDefinition>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +199,3 @@ class _$PageDataAlarmRuleDefinitionSerializer implements PrimitiveSerializer<Pag
     return result.build();
   }
 }
-
-

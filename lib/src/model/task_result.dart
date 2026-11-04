@@ -19,14 +19,14 @@ part 'task_result.g.dart';
 /// TaskResult
 ///
 /// Properties:
-/// * [key] 
-/// * [success] 
-/// * [discarded] 
-/// * [finishTs] 
-/// * [error] 
-/// * [jobType] 
+/// * [key]
+/// * [success]
+/// * [discarded]
+/// * [finishTs]
+/// * [error]
+/// * [jobType]
 @BuiltValue(instantiable: false)
-abstract class TaskResult  {
+abstract class TaskResult {
   @BuiltValueField(wireName: r'key')
   String? get key;
 
@@ -58,32 +58,33 @@ abstract class TaskResult  {
 }
 
 extension TaskResultDiscriminatorExt on TaskResult {
-    String? get discriminatorValue {
-        if (this is CfReprocessingTaskResult) {
-            return r'CF_REPROCESSING';
-        }
-        if (this is DummyTaskResult) {
-            return r'DUMMY';
-        }
-        if (this is ReportTaskResult) {
-            return r'REPORT';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CfReprocessingTaskResult) {
+      return r'CF_REPROCESSING';
     }
+    if (this is DummyTaskResult) {
+      return r'DUMMY';
+    }
+    if (this is ReportTaskResult) {
+      return r'REPORT';
+    }
+    return null;
+  }
 }
+
 extension TaskResultBuilderDiscriminatorExt on TaskResultBuilder {
-    String? get discriminatorValue {
-        if (this is CfReprocessingTaskResultBuilder) {
-            return r'CF_REPROCESSING';
-        }
-        if (this is DummyTaskResultBuilder) {
-            return r'DUMMY';
-        }
-        if (this is ReportTaskResultBuilder) {
-            return r'REPORT';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CfReprocessingTaskResultBuilder) {
+      return r'CF_REPROCESSING';
     }
+    if (this is DummyTaskResultBuilder) {
+      return r'DUMMY';
+    }
+    if (this is ReportTaskResultBuilder) {
+      return r'REPORT';
+    }
+    return null;
+  }
 }
 
 class _$TaskResultSerializer implements PrimitiveSerializer<TaskResult> {
@@ -147,15 +148,28 @@ class _$TaskResultSerializer implements PrimitiveSerializer<TaskResult> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CfReprocessingTaskResult) {
-      return serializers.serialize(object, specifiedType: FullType(CfReprocessingTaskResult))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CfReprocessingTaskResult),
+      )!;
     }
     if (object is DummyTaskResult) {
-      return serializers.serialize(object, specifiedType: FullType(DummyTaskResult))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DummyTaskResult),
+      )!;
     }
     if (object is ReportTaskResult) {
-      return serializers.serialize(object, specifiedType: FullType(ReportTaskResult))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ReportTaskResult),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -165,28 +179,51 @@ class _$TaskResultSerializer implements PrimitiveSerializer<TaskResult> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(TaskResult.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(TaskResult.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CF_REPROCESSING':
-        return serializers.deserialize(serialized, specifiedType: FullType(CfReprocessingTaskResult)) as CfReprocessingTaskResult;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CfReprocessingTaskResult),
+            )
+            as CfReprocessingTaskResult;
       case r'DUMMY':
-        return serializers.deserialize(serialized, specifiedType: FullType(DummyTaskResult)) as DummyTaskResult;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DummyTaskResult),
+            )
+            as DummyTaskResult;
       case r'REPORT':
-        return serializers.deserialize(serialized, specifiedType: FullType(ReportTaskResult)) as ReportTaskResult;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ReportTaskResult),
+            )
+            as ReportTaskResult;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($TaskResult)) as $TaskResult;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($TaskResult),
+            )
+            as $TaskResult;
     }
   }
 }
 
-
 /// a concrete implementation of [TaskResult], since [TaskResult] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $TaskResult implements TaskResult, Built<$TaskResult, $TaskResultBuilder> {
+abstract class $TaskResult
+    implements TaskResult, Built<$TaskResult, $TaskResultBuilder> {
   $TaskResult._();
 
-  factory $TaskResult([void Function($TaskResultBuilder)? updates]) = _$$TaskResult;
+  factory $TaskResult([void Function($TaskResultBuilder)? updates]) =
+      _$$TaskResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($TaskResultBuilder b) => b;
@@ -224,50 +261,62 @@ class _$$TaskResultSerializer implements PrimitiveSerializer<$TaskResult> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'discarded':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.discarded = valueDes;
           break;
         case r'finishTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.finishTs = valueDes;
           break;
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
         case r'jobType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.jobType = valueDes;
           break;
         default:
@@ -298,4 +347,3 @@ class _$$TaskResultSerializer implements PrimitiveSerializer<$TaskResult> {
     return result.build();
   }
 }
-

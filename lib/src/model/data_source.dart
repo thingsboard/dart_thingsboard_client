@@ -20,13 +20,13 @@ part 'data_source.g.dart';
 /// DataSource
 ///
 /// Properties:
-/// * [type] 
-/// * [deviceId] 
-/// * [entityAliasId] 
-/// * [filterId] 
-/// * [dataKeys] 
-/// * [latestDataKeys] 
-/// * [alarmFilterConfig] 
+/// * [type]
+/// * [deviceId]
+/// * [entityAliasId]
+/// * [filterId]
+/// * [dataKeys]
+/// * [latestDataKeys]
+/// * [alarmFilterConfig]
 @BuiltValue()
 abstract class DataSource implements Built<DataSource, DataSourceBuilder> {
   @BuiltValueField(wireName: r'type')
@@ -131,7 +131,11 @@ class _$DataSourceSerializer implements PrimitiveSerializer<DataSource> {
     DataSource object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -147,58 +151,76 @@ class _$DataSourceSerializer implements PrimitiveSerializer<DataSource> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DataSourceType),
-          ) as DataSourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DataSourceType),
+                  )
+                  as DataSourceType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'deviceId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceId = valueDes;
           break;
         case r'entityAliasId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityAliasId = valueDes;
           break;
         case r'filterId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.filterId = valueDes;
           break;
         case r'dataKeys':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DataKey)]),
-          ) as BuiltList<DataKey>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DataKey),
+                    ]),
+                  )
+                  as BuiltList<DataKey>?;
           if (valueDes == null) continue;
           result.dataKeys.replace(valueDes);
           break;
         case r'latestDataKeys':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DataKey)]),
-          ) as BuiltList<DataKey>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DataKey),
+                    ]),
+                  )
+                  as BuiltList<DataKey>?;
           if (valueDes == null) continue;
           result.latestDataKeys.replace(valueDes);
           break;
         case r'alarmFilterConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmFilterConfig),
-          ) as AlarmFilterConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AlarmFilterConfig),
+                  )
+                  as AlarmFilterConfig?;
           if (valueDes == null) continue;
           result.alarmFilterConfig.replace(valueDes);
           break;
@@ -230,5 +252,3 @@ class _$DataSourceSerializer implements PrimitiveSerializer<DataSource> {
     return result.build();
   }
 }
-
-

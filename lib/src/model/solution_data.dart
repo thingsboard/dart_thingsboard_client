@@ -20,7 +20,8 @@ part 'solution_data.g.dart';
 /// Properties:
 /// * [entities] - Exported entities grouped by entity type. Each key is an entity type (e.g. DEVICE_PROFILE, RULE_CHAIN) and the value is a list of entity export data objects.
 @BuiltValue()
-abstract class SolutionData implements Built<SolutionData, SolutionDataBuilder> {
+abstract class SolutionData
+    implements Built<SolutionData, SolutionDataBuilder> {
   /// Exported entities grouped by entity type. Each key is an entity type (e.g. DEVICE_PROFILE, RULE_CHAIN) and the value is a list of entity export data objects.
   @BuiltValueField(wireName: r'entities')
   BuiltMap<String, BuiltList<EntityExportData>> get entities;
@@ -51,7 +52,10 @@ class _$SolutionDataSerializer implements PrimitiveSerializer<SolutionData> {
     yield r'entities';
     yield serializers.serialize(
       object.entities,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityExportData)])]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(BuiltList, [FullType(EntityExportData)]),
+      ]),
     );
   }
 
@@ -61,7 +65,11 @@ class _$SolutionDataSerializer implements PrimitiveSerializer<SolutionData> {
     SolutionData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -77,10 +85,15 @@ class _$SolutionDataSerializer implements PrimitiveSerializer<SolutionData> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityExportData)])]),
-          ) as BuiltMap<String, BuiltList<EntityExportData>>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(EntityExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<EntityExportData>>;
           result.entities.replace(valueDes);
           break;
         default:
@@ -111,5 +124,3 @@ class _$SolutionDataSerializer implements PrimitiveSerializer<SolutionData> {
     return result.build();
   }
 }
-
-

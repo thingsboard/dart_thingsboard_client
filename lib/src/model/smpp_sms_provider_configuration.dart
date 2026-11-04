@@ -19,7 +19,7 @@ part 'smpp_sms_provider_configuration.g.dart';
 /// SmppSmsProviderConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 /// * [protocolVersion] - SMPP version
 /// * [host] - SMPP host
 /// * [port] - SMPP port
@@ -36,7 +36,13 @@ part 'smpp_sms_provider_configuration.g.dart';
 /// * [addressRange] - Address range
 /// * [codingScheme] - 0 - SMSC Default Alphabet (ASCII for short and long code and to GSM for toll-free, used as default) 1 - IA5 (ASCII for short and long code, Latin 9 for toll-free (ISO-8859-9)) 2 - Octet Unspecified (8-bit binary) 3 - Latin 1 (ISO-8859-1) 4 - Octet Unspecified (8-bit binary) 5 - JIS (X 0208-1990) 6 - Cyrillic (ISO-8859-5) 7 - Latin/Hebrew (ISO-8859-8) 8 - UCS2/UTF-16 (ISO/IEC-10646) 9 - Pictogram Encoding 10 - Music Codes (ISO-2022-JP) 13 - Extended Kanji JIS (X 0212-1990) 14 - Korean Graphic Character Set (KS C 5601/KS X 1001)
 @BuiltValue()
-abstract class SmppSmsProviderConfiguration implements SmsProviderConfiguration, Built<SmppSmsProviderConfiguration, SmppSmsProviderConfigurationBuilder> {
+abstract class SmppSmsProviderConfiguration
+    implements
+        SmsProviderConfiguration,
+        Built<
+          SmppSmsProviderConfiguration,
+          SmppSmsProviderConfigurationBuilder
+        > {
   /// Service type
   @BuiltValueField(wireName: r'serviceType')
   String? get serviceType;
@@ -101,18 +107,25 @@ abstract class SmppSmsProviderConfiguration implements SmsProviderConfiguration,
 
   SmppSmsProviderConfiguration._();
 
-  factory SmppSmsProviderConfiguration([void updates(SmppSmsProviderConfigurationBuilder b)]) = _$SmppSmsProviderConfiguration;
+  factory SmppSmsProviderConfiguration([
+    void updates(SmppSmsProviderConfigurationBuilder b),
+  ]) = _$SmppSmsProviderConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SmppSmsProviderConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SmppSmsProviderConfiguration> get serializer => _$SmppSmsProviderConfigurationSerializer();
+  static Serializer<SmppSmsProviderConfiguration> get serializer =>
+      _$SmppSmsProviderConfigurationSerializer();
 }
 
-class _$SmppSmsProviderConfigurationSerializer implements PrimitiveSerializer<SmppSmsProviderConfiguration> {
+class _$SmppSmsProviderConfigurationSerializer
+    implements PrimitiveSerializer<SmppSmsProviderConfiguration> {
   @override
-  final Iterable<Type> types = const [SmppSmsProviderConfiguration, _$SmppSmsProviderConfiguration];
+  final Iterable<Type> types = const [
+    SmppSmsProviderConfiguration,
+    _$SmppSmsProviderConfiguration,
+  ];
 
   @override
   final String wireName = r'SmppSmsProviderConfiguration';
@@ -213,7 +226,9 @@ class _$SmppSmsProviderConfigurationSerializer implements PrimitiveSerializer<Sm
     yield r'protocolVersion';
     yield serializers.serialize(
       object.protocolVersion,
-      specifiedType: const FullType(SmppSmsProviderConfigurationProtocolVersionEnum),
+      specifiedType: const FullType(
+        SmppSmsProviderConfigurationProtocolVersionEnum,
+      ),
     );
     if (object.sourceTon != null) {
       yield r'sourceTon';
@@ -230,7 +245,11 @@ class _$SmppSmsProviderConfigurationSerializer implements PrimitiveSerializer<Sm
     SmppSmsProviderConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -246,124 +265,155 @@ class _$SmppSmsProviderConfigurationSerializer implements PrimitiveSerializer<Sm
       final value = serializedList[i + 1];
       switch (key) {
         case r'serviceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serviceType = valueDes;
           break;
         case r'systemId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.systemId = valueDes;
           break;
         case r'sourceAddress':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.sourceAddress = valueDes;
           break;
         case r'bindType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SmppBindType),
-          ) as SmppBindType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SmppBindType),
+                  )
+                  as SmppBindType?;
           if (valueDes == null) continue;
           result.bindType = valueDes;
           break;
         case r'sourceNpi':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.sourceNpi = valueDes;
           break;
         case r'addressRange':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.addressRange = valueDes;
           break;
         case r'codingScheme':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.codingScheme = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'destinationTon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.destinationTon = valueDes;
           break;
         case r'password':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.password = valueDes;
           break;
         case r'destinationNpi':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.destinationNpi = valueDes;
           break;
         case r'port':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.port = valueDes;
           break;
         case r'host':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.host = valueDes;
           break;
         case r'systemType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.systemType = valueDes;
           break;
         case r'protocolVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SmppSmsProviderConfigurationProtocolVersionEnum),
-          ) as SmppSmsProviderConfigurationProtocolVersionEnum;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(
+                      SmppSmsProviderConfigurationProtocolVersionEnum,
+                    ),
+                  )
+                  as SmppSmsProviderConfigurationProtocolVersionEnum;
           result.protocolVersion = valueDes;
           break;
         case r'sourceTon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.sourceTon = valueDes;
           break;
@@ -396,20 +446,25 @@ class _$SmppSmsProviderConfigurationSerializer implements PrimitiveSerializer<Sm
   }
 }
 
-
 /// SMPP version
 class SmppSmsProviderConfigurationProtocolVersionEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'3.3, 3.4')
-  static const SmppSmsProviderConfigurationProtocolVersionEnum n3period3Comma3Period4 = _$smppSmsProviderConfigurationProtocolVersionEnum_n3period3Comma3Period4;
+  static const SmppSmsProviderConfigurationProtocolVersionEnum
+  n3period3Comma3Period4 =
+      _$smppSmsProviderConfigurationProtocolVersionEnum_n3period3Comma3Period4;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const SmppSmsProviderConfigurationProtocolVersionEnum unknownDefaultOpenApi = _$smppSmsProviderConfigurationProtocolVersionEnum_unknownDefaultOpenApi;
+  static const SmppSmsProviderConfigurationProtocolVersionEnum
+  unknownDefaultOpenApi =
+      _$smppSmsProviderConfigurationProtocolVersionEnum_unknownDefaultOpenApi;
 
-  static Serializer<SmppSmsProviderConfigurationProtocolVersionEnum> get serializer => _$smppSmsProviderConfigurationProtocolVersionEnumSerializer;
+  static Serializer<SmppSmsProviderConfigurationProtocolVersionEnum>
+  get serializer => _$smppSmsProviderConfigurationProtocolVersionEnumSerializer;
 
-  const SmppSmsProviderConfigurationProtocolVersionEnum._(String name): super(name);
+  const SmppSmsProviderConfigurationProtocolVersionEnum._(String name)
+    : super(name);
 
-  static BuiltSet<SmppSmsProviderConfigurationProtocolVersionEnum> get values => _$smppSmsProviderConfigurationProtocolVersionEnumValues;
-  static SmppSmsProviderConfigurationProtocolVersionEnum valueOf(String name) => _$smppSmsProviderConfigurationProtocolVersionEnumValueOf(name);
+  static BuiltSet<SmppSmsProviderConfigurationProtocolVersionEnum> get values =>
+      _$smppSmsProviderConfigurationProtocolVersionEnumValues;
+  static SmppSmsProviderConfigurationProtocolVersionEnum valueOf(String name) =>
+      _$smppSmsProviderConfigurationProtocolVersionEnumValueOf(name);
 }
-

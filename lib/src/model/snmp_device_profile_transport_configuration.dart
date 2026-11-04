@@ -19,12 +19,18 @@ part 'snmp_device_profile_transport_configuration.g.dart';
 /// SnmpDeviceProfileTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [timeoutMs] 
-/// * [retries] 
-/// * [communicationConfigs] 
+/// * [type]
+/// * [timeoutMs]
+/// * [retries]
+/// * [communicationConfigs]
 @BuiltValue()
-abstract class SnmpDeviceProfileTransportConfiguration implements DeviceProfileTransportConfiguration, Built<SnmpDeviceProfileTransportConfiguration, SnmpDeviceProfileTransportConfigurationBuilder> {
+abstract class SnmpDeviceProfileTransportConfiguration
+    implements
+        DeviceProfileTransportConfiguration,
+        Built<
+          SnmpDeviceProfileTransportConfiguration,
+          SnmpDeviceProfileTransportConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'retries')
   int? get retries;
 
@@ -36,18 +42,25 @@ abstract class SnmpDeviceProfileTransportConfiguration implements DeviceProfileT
 
   SnmpDeviceProfileTransportConfiguration._();
 
-  factory SnmpDeviceProfileTransportConfiguration([void updates(SnmpDeviceProfileTransportConfigurationBuilder b)]) = _$SnmpDeviceProfileTransportConfiguration;
+  factory SnmpDeviceProfileTransportConfiguration([
+    void updates(SnmpDeviceProfileTransportConfigurationBuilder b),
+  ]) = _$SnmpDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SnmpDeviceProfileTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SnmpDeviceProfileTransportConfiguration> get serializer => _$SnmpDeviceProfileTransportConfigurationSerializer();
+  static Serializer<SnmpDeviceProfileTransportConfiguration> get serializer =>
+      _$SnmpDeviceProfileTransportConfigurationSerializer();
 }
 
-class _$SnmpDeviceProfileTransportConfigurationSerializer implements PrimitiveSerializer<SnmpDeviceProfileTransportConfiguration> {
+class _$SnmpDeviceProfileTransportConfigurationSerializer
+    implements PrimitiveSerializer<SnmpDeviceProfileTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [SnmpDeviceProfileTransportConfiguration, _$SnmpDeviceProfileTransportConfiguration];
+  final Iterable<Type> types = const [
+    SnmpDeviceProfileTransportConfiguration,
+    _$SnmpDeviceProfileTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'SnmpDeviceProfileTransportConfiguration';
@@ -61,7 +74,9 @@ class _$SnmpDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
       yield r'communicationConfigs';
       yield serializers.serialize(
         object.communicationConfigs,
-        specifiedType: const FullType(BuiltList, [FullType(SnmpCommunicationConfig)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(SnmpCommunicationConfig),
+        ]),
       );
     }
     if (object.retries != null) {
@@ -91,7 +106,11 @@ class _$SnmpDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
     SnmpDeviceProfileTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,33 +126,43 @@ class _$SnmpDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'communicationConfigs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SnmpCommunicationConfig)]),
-          ) as BuiltList<SnmpCommunicationConfig>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SnmpCommunicationConfig),
+                    ]),
+                  )
+                  as BuiltList<SnmpCommunicationConfig>?;
           if (valueDes == null) continue;
           result.communicationConfigs.replace(valueDes);
           break;
         case r'retries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.retries = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'timeoutMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeoutMs = valueDes;
           break;
@@ -165,5 +194,3 @@ class _$SnmpDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
     return result.build();
   }
 }
-
-

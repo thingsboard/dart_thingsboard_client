@@ -18,11 +18,14 @@ part 'tenant_administrators_filter.g.dart';
 /// TenantAdministratorsFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [tenantsIds] 
-/// * [tenantProfilesIds] 
+/// * [type]
+/// * [tenantsIds]
+/// * [tenantProfilesIds]
 @BuiltValue()
-abstract class TenantAdministratorsFilter implements UsersFilter, Built<TenantAdministratorsFilter, TenantAdministratorsFilterBuilder> {
+abstract class TenantAdministratorsFilter
+    implements
+        UsersFilter,
+        Built<TenantAdministratorsFilter, TenantAdministratorsFilterBuilder> {
   @BuiltValueField(wireName: r'tenantProfilesIds')
   BuiltSet<String>? get tenantProfilesIds;
 
@@ -31,18 +34,25 @@ abstract class TenantAdministratorsFilter implements UsersFilter, Built<TenantAd
 
   TenantAdministratorsFilter._();
 
-  factory TenantAdministratorsFilter([void updates(TenantAdministratorsFilterBuilder b)]) = _$TenantAdministratorsFilter;
+  factory TenantAdministratorsFilter([
+    void updates(TenantAdministratorsFilterBuilder b),
+  ]) = _$TenantAdministratorsFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TenantAdministratorsFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TenantAdministratorsFilter> get serializer => _$TenantAdministratorsFilterSerializer();
+  static Serializer<TenantAdministratorsFilter> get serializer =>
+      _$TenantAdministratorsFilterSerializer();
 }
 
-class _$TenantAdministratorsFilterSerializer implements PrimitiveSerializer<TenantAdministratorsFilter> {
+class _$TenantAdministratorsFilterSerializer
+    implements PrimitiveSerializer<TenantAdministratorsFilter> {
   @override
-  final Iterable<Type> types = const [TenantAdministratorsFilter, _$TenantAdministratorsFilter];
+  final Iterable<Type> types = const [
+    TenantAdministratorsFilter,
+    _$TenantAdministratorsFilter,
+  ];
 
   @override
   final String wireName = r'TenantAdministratorsFilter';
@@ -79,7 +89,11 @@ class _$TenantAdministratorsFilterSerializer implements PrimitiveSerializer<Tena
     TenantAdministratorsFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -95,25 +109,35 @@ class _$TenantAdministratorsFilterSerializer implements PrimitiveSerializer<Tena
       final value = serializedList[i + 1];
       switch (key) {
         case r'tenantProfilesIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.tenantProfilesIds.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'tenantsIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.tenantsIds.replace(valueDes);
           break;
@@ -145,5 +169,3 @@ class _$TenantAdministratorsFilterSerializer implements PrimitiveSerializer<Tena
     return result.build();
   }
 }
-
-

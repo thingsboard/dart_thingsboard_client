@@ -17,8 +17,8 @@ part 'interval.g.dart';
 /// Interval
 ///
 /// Properties:
-/// * [interval] 
-/// * [intervalType] 
+/// * [interval]
+/// * [intervalType]
 @BuiltValue()
 abstract class Interval implements Built<Interval, IntervalBuilder> {
   @BuiltValueField(wireName: r'interval')
@@ -73,7 +73,11 @@ class _$IntervalSerializer implements PrimitiveSerializer<Interval> {
     Interval object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +93,22 @@ class _$IntervalSerializer implements PrimitiveSerializer<Interval> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'interval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.interval = valueDes;
           break;
         case r'intervalType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(IntervalType),
-          ) as IntervalType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(IntervalType),
+                  )
+                  as IntervalType?;
           if (valueDes == null) continue;
           result.intervalType = valueDes;
           break;
@@ -132,5 +140,3 @@ class _$IntervalSerializer implements PrimitiveSerializer<Interval> {
     return result.build();
   }
 }
-
-

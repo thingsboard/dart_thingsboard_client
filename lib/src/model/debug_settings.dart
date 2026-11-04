@@ -16,12 +16,13 @@ part 'debug_settings.g.dart';
 /// DebugSettings
 ///
 /// Properties:
-/// * [failuresEnabled] - Debug failures. 
+/// * [failuresEnabled] - Debug failures.
 /// * [allEnabled] - Debug All. Used as a trigger for updating debugAllUntil.
 /// * [allEnabledUntil] - Timestamp of the end time for the processing debug events.
 @BuiltValue()
-abstract class DebugSettings implements Built<DebugSettings, DebugSettingsBuilder> {
-  /// Debug failures. 
+abstract class DebugSettings
+    implements Built<DebugSettings, DebugSettingsBuilder> {
+  /// Debug failures.
   @BuiltValueField(wireName: r'failuresEnabled')
   bool? get failuresEnabled;
 
@@ -35,13 +36,15 @@ abstract class DebugSettings implements Built<DebugSettings, DebugSettingsBuilde
 
   DebugSettings._();
 
-  factory DebugSettings([void updates(DebugSettingsBuilder b)]) = _$DebugSettings;
+  factory DebugSettings([void updates(DebugSettingsBuilder b)]) =
+      _$DebugSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DebugSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DebugSettings> get serializer => _$DebugSettingsSerializer();
+  static Serializer<DebugSettings> get serializer =>
+      _$DebugSettingsSerializer();
 }
 
 class _$DebugSettingsSerializer implements PrimitiveSerializer<DebugSettings> {
@@ -85,7 +88,11 @@ class _$DebugSettingsSerializer implements PrimitiveSerializer<DebugSettings> {
     DebugSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +108,32 @@ class _$DebugSettingsSerializer implements PrimitiveSerializer<DebugSettings> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'failuresEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.failuresEnabled = valueDes;
           break;
         case r'allEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.allEnabled = valueDes;
           break;
         case r'allEnabledUntil':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.allEnabledUntil = valueDes;
           break;
@@ -152,5 +165,3 @@ class _$DebugSettingsSerializer implements PrimitiveSerializer<DebugSettings> {
     return result.build();
   }
 }
-
-

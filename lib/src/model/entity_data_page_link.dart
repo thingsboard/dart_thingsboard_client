@@ -17,13 +17,14 @@ part 'entity_data_page_link.g.dart';
 /// EntityDataPageLink
 ///
 /// Properties:
-/// * [pageSize] 
-/// * [page] 
-/// * [textSearch] 
-/// * [sortOrder] 
-/// * [dynamic_] 
+/// * [pageSize]
+/// * [page]
+/// * [textSearch]
+/// * [sortOrder]
+/// * [dynamic_]
 @BuiltValue()
-abstract class EntityDataPageLink implements Built<EntityDataPageLink, EntityDataPageLinkBuilder> {
+abstract class EntityDataPageLink
+    implements Built<EntityDataPageLink, EntityDataPageLinkBuilder> {
   @BuiltValueField(wireName: r'pageSize')
   int? get pageSize;
 
@@ -41,16 +42,19 @@ abstract class EntityDataPageLink implements Built<EntityDataPageLink, EntityDat
 
   EntityDataPageLink._();
 
-  factory EntityDataPageLink([void updates(EntityDataPageLinkBuilder b)]) = _$EntityDataPageLink;
+  factory EntityDataPageLink([void updates(EntityDataPageLinkBuilder b)]) =
+      _$EntityDataPageLink;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityDataPageLinkBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityDataPageLink> get serializer => _$EntityDataPageLinkSerializer();
+  static Serializer<EntityDataPageLink> get serializer =>
+      _$EntityDataPageLinkSerializer();
 }
 
-class _$EntityDataPageLinkSerializer implements PrimitiveSerializer<EntityDataPageLink> {
+class _$EntityDataPageLinkSerializer
+    implements PrimitiveSerializer<EntityDataPageLink> {
   @override
   final Iterable<Type> types = const [EntityDataPageLink, _$EntityDataPageLink];
 
@@ -105,7 +109,11 @@ class _$EntityDataPageLinkSerializer implements PrimitiveSerializer<EntityDataPa
     EntityDataPageLink object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -121,42 +129,52 @@ class _$EntityDataPageLinkSerializer implements PrimitiveSerializer<EntityDataPa
       final value = serializedList[i + 1];
       switch (key) {
         case r'pageSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pageSize = valueDes;
           break;
         case r'page':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.page = valueDes;
           break;
         case r'textSearch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.textSearch = valueDes;
           break;
         case r'sortOrder':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityDataSortOrder),
-          ) as EntityDataSortOrder?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityDataSortOrder),
+                  )
+                  as EntityDataSortOrder?;
           if (valueDes == null) continue;
           result.sortOrder.replace(valueDes);
           break;
         case r'dynamic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.dynamic_ = valueDes;
           break;
@@ -188,5 +206,3 @@ class _$EntityDataPageLinkSerializer implements PrimitiveSerializer<EntityDataPa
     return result.build();
   }
 }
-
-

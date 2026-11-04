@@ -21,7 +21,7 @@ part 'mobile_app_bundle.g.dart';
 /// A JSON value representing the Mobile Application Bundle.
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
 /// * [tenantId] - JSON object with Tenant Id
 /// * [title] - Application bundle title. Cannot be empty
@@ -33,7 +33,8 @@ part 'mobile_app_bundle.g.dart';
 /// * [oauth2Enabled] - Whether OAuth2 settings are enabled or not
 /// * [name] - Mobile app bundle title
 @BuiltValue()
-abstract class MobileAppBundle implements Built<MobileAppBundle, MobileAppBundleBuilder> {
+abstract class MobileAppBundle
+    implements Built<MobileAppBundle, MobileAppBundleBuilder> {
   @BuiltValueField(wireName: r'id')
   MobileAppBundleId? get id;
 
@@ -79,16 +80,19 @@ abstract class MobileAppBundle implements Built<MobileAppBundle, MobileAppBundle
 
   MobileAppBundle._();
 
-  factory MobileAppBundle([void updates(MobileAppBundleBuilder b)]) = _$MobileAppBundle;
+  factory MobileAppBundle([void updates(MobileAppBundleBuilder b)]) =
+      _$MobileAppBundle;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileAppBundleBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileAppBundle> get serializer => _$MobileAppBundleSerializer();
+  static Serializer<MobileAppBundle> get serializer =>
+      _$MobileAppBundleSerializer();
 }
 
-class _$MobileAppBundleSerializer implements PrimitiveSerializer<MobileAppBundle> {
+class _$MobileAppBundleSerializer
+    implements PrimitiveSerializer<MobileAppBundle> {
   @override
   final Iterable<Type> types = const [MobileAppBundle, _$MobileAppBundle];
 
@@ -183,7 +187,11 @@ class _$MobileAppBundleSerializer implements PrimitiveSerializer<MobileAppBundle
     MobileAppBundle object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -199,89 +207,113 @@ class _$MobileAppBundleSerializer implements PrimitiveSerializer<MobileAppBundle
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileAppBundleId),
-          ) as MobileAppBundleId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(MobileAppBundleId),
+                  )
+                  as MobileAppBundleId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.title = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'androidAppId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileAppId),
-          ) as MobileAppId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(MobileAppId),
+                  )
+                  as MobileAppId?;
           if (valueDes == null) continue;
           result.androidAppId.replace(valueDes);
           break;
         case r'iosAppId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileAppId),
-          ) as MobileAppId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(MobileAppId),
+                  )
+                  as MobileAppId?;
           if (valueDes == null) continue;
           result.iosAppId.replace(valueDes);
           break;
         case r'layoutConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileLayoutConfig),
-          ) as MobileLayoutConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(MobileLayoutConfig),
+                  )
+                  as MobileLayoutConfig?;
           if (valueDes == null) continue;
           result.layoutConfig.replace(valueDes);
           break;
         case r'selfRegistrationParams':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileSelfRegistrationParams),
-          ) as MobileSelfRegistrationParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      MobileSelfRegistrationParams,
+                    ),
+                  )
+                  as MobileSelfRegistrationParams?;
           if (valueDes == null) continue;
           result.selfRegistrationParams.replace(valueDes);
           break;
         case r'oauth2Enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.oauth2Enabled = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -313,5 +345,3 @@ class _$MobileAppBundleSerializer implements PrimitiveSerializer<MobileAppBundle
     return result.build();
   }
 }
-
-

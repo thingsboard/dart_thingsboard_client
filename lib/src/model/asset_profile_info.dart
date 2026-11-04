@@ -21,11 +21,12 @@ part 'asset_profile_info.g.dart';
 /// Properties:
 /// * [id] - JSON object with the Asset Profile Id.
 /// * [name] - Entity Name
-/// * [image] - Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view. 
+/// * [image] - Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view.
 /// * [defaultDashboardId] - Reference to the dashboard. Used in the mobile application to open the default dashboard when user navigates to asset details.
 /// * [tenantId] - Tenant id.
 @BuiltValue()
-abstract class AssetProfileInfo implements Built<AssetProfileInfo, AssetProfileInfoBuilder> {
+abstract class AssetProfileInfo
+    implements Built<AssetProfileInfo, AssetProfileInfoBuilder> {
   /// JSON object with the Asset Profile Id.
   @BuiltValueField(wireName: r'id')
   AssetProfileId? get id;
@@ -34,7 +35,7 @@ abstract class AssetProfileInfo implements Built<AssetProfileInfo, AssetProfileI
   @BuiltValueField(wireName: r'name')
   String? get name;
 
-  /// Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view. 
+  /// Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view.
   @BuiltValueField(wireName: r'image')
   String? get image;
 
@@ -48,16 +49,19 @@ abstract class AssetProfileInfo implements Built<AssetProfileInfo, AssetProfileI
 
   AssetProfileInfo._();
 
-  factory AssetProfileInfo([void updates(AssetProfileInfoBuilder b)]) = _$AssetProfileInfo;
+  factory AssetProfileInfo([void updates(AssetProfileInfoBuilder b)]) =
+      _$AssetProfileInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AssetProfileInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AssetProfileInfo> get serializer => _$AssetProfileInfoSerializer();
+  static Serializer<AssetProfileInfo> get serializer =>
+      _$AssetProfileInfoSerializer();
 }
 
-class _$AssetProfileInfoSerializer implements PrimitiveSerializer<AssetProfileInfo> {
+class _$AssetProfileInfoSerializer
+    implements PrimitiveSerializer<AssetProfileInfo> {
   @override
   final Iterable<Type> types = const [AssetProfileInfo, _$AssetProfileInfo];
 
@@ -112,7 +116,11 @@ class _$AssetProfileInfoSerializer implements PrimitiveSerializer<AssetProfileIn
     AssetProfileInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -128,42 +136,52 @@ class _$AssetProfileInfoSerializer implements PrimitiveSerializer<AssetProfileIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AssetProfileId),
-          ) as AssetProfileId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AssetProfileId),
+                  )
+                  as AssetProfileId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'image':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.image = valueDes;
           break;
         case r'defaultDashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DashboardId),
-          ) as DashboardId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DashboardId),
+                  )
+                  as DashboardId?;
           if (valueDes == null) continue;
           result.defaultDashboardId.replace(valueDes);
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
@@ -195,5 +213,3 @@ class _$AssetProfileInfoSerializer implements PrimitiveSerializer<AssetProfileIn
     return result.build();
   }
 }
-
-

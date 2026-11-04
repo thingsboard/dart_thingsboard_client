@@ -23,27 +23,37 @@ part 'asset_profile_export_data.g.dart';
 /// AssetProfileExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class AssetProfileExportData implements EntityExportData, Built<AssetProfileExportData, AssetProfileExportDataBuilder> {
+abstract class AssetProfileExportData
+    implements
+        EntityExportData,
+        Built<AssetProfileExportData, AssetProfileExportDataBuilder> {
   AssetProfileExportData._();
 
-  factory AssetProfileExportData([void updates(AssetProfileExportDataBuilder b)]) = _$AssetProfileExportData;
+  factory AssetProfileExportData([
+    void updates(AssetProfileExportDataBuilder b),
+  ]) = _$AssetProfileExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AssetProfileExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AssetProfileExportData> get serializer => _$AssetProfileExportDataSerializer();
+  static Serializer<AssetProfileExportData> get serializer =>
+      _$AssetProfileExportDataSerializer();
 }
 
-class _$AssetProfileExportDataSerializer implements PrimitiveSerializer<AssetProfileExportData> {
+class _$AssetProfileExportDataSerializer
+    implements PrimitiveSerializer<AssetProfileExportData> {
   @override
-  final Iterable<Type> types = const [AssetProfileExportData, _$AssetProfileExportData];
+  final Iterable<Type> types = const [
+    AssetProfileExportData,
+    _$AssetProfileExportData,
+  ];
 
   @override
   final String wireName = r'AssetProfileExportData';
@@ -57,7 +67,10 @@ class _$AssetProfileExportDataSerializer implements PrimitiveSerializer<AssetPro
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +107,11 @@ class _$AssetProfileExportDataSerializer implements PrimitiveSerializer<AssetPro
     AssetProfileExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +127,58 @@ class _$AssetProfileExportDataSerializer implements PrimitiveSerializer<AssetPro
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +210,3 @@ class _$AssetProfileExportDataSerializer implements PrimitiveSerializer<AssetPro
     return result.build();
   }
 }
-
-

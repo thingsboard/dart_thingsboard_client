@@ -27,7 +27,7 @@ part 'home_dashboard.g.dart';
 /// * [id] - JSON object with the dashboard Id. Specify existing dashboard Id to update the dashboard. Referencing non-existing dashboard id will cause error. Omit this field to create new dashboard.
 /// * [createdTime] - Timestamp of the dashboard creation, in milliseconds
 /// * [tenantId] - JSON object with Tenant Id. Tenant Id of the dashboard can't be changed.
-/// * [customerId] - JSON object with Customer Id. 
+/// * [customerId] - JSON object with Customer Id.
 /// * [ownerId] - JSON object with Customer or Tenant Id
 /// * [title] - Title of the dashboard.
 /// * [name] - Same as title of the dashboard. Read-only field. Update the 'title' to change the 'name' of the dashboard.
@@ -36,11 +36,12 @@ part 'home_dashboard.g.dart';
 /// * [mobileHide] - Hide dashboard from mobile devices. Useful if the dashboard is not designed for small screens.
 /// * [mobileOrder] - Order on mobile devices. Useful to adjust sorting of the dashboards for mobile applications
 /// * [configuration] - JSON object with main configuration of the dashboard: layouts, widgets, aliases, etc. The JSON structure of the dashboard configuration is quite complex. The easiest way to learn it is to export existing dashboard to JSON.
-/// * [resources] 
-/// * [version] 
+/// * [resources]
+/// * [version]
 /// * [hideDashboardToolbar] - Hide dashboard toolbar flag. Useful for rendering dashboards on mobile.
 @BuiltValue()
-abstract class HomeDashboard implements Built<HomeDashboard, HomeDashboardBuilder> {
+abstract class HomeDashboard
+    implements Built<HomeDashboard, HomeDashboardBuilder> {
   /// JSON object with the dashboard Id. Specify existing dashboard Id to update the dashboard. Referencing non-existing dashboard id will cause error. Omit this field to create new dashboard.
   @BuiltValueField(wireName: r'id')
   DashboardId? get id;
@@ -53,7 +54,7 @@ abstract class HomeDashboard implements Built<HomeDashboard, HomeDashboardBuilde
   @BuiltValueField(wireName: r'tenantId')
   TenantId? get tenantId;
 
-  /// JSON object with Customer Id. 
+  /// JSON object with Customer Id.
   @BuiltValueField(wireName: r'customerId')
   CustomerId? get customerId;
 
@@ -101,13 +102,15 @@ abstract class HomeDashboard implements Built<HomeDashboard, HomeDashboardBuilde
 
   HomeDashboard._();
 
-  factory HomeDashboard([void updates(HomeDashboardBuilder b)]) = _$HomeDashboard;
+  factory HomeDashboard([void updates(HomeDashboardBuilder b)]) =
+      _$HomeDashboard;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(HomeDashboardBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<HomeDashboard> get serializer => _$HomeDashboardSerializer();
+  static Serializer<HomeDashboard> get serializer =>
+      _$HomeDashboardSerializer();
 }
 
 class _$HomeDashboardSerializer implements PrimitiveSerializer<HomeDashboard> {
@@ -210,7 +213,9 @@ class _$HomeDashboardSerializer implements PrimitiveSerializer<HomeDashboard> {
       yield r'resources';
       yield serializers.serialize(
         object.resources,
-        specifiedType: const FullType(BuiltList, [FullType(ResourceExportData)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(ResourceExportData),
+        ]),
       );
     }
     if (object.version != null) {
@@ -235,7 +240,11 @@ class _$HomeDashboardSerializer implements PrimitiveSerializer<HomeDashboard> {
     HomeDashboard object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -251,122 +260,156 @@ class _$HomeDashboardSerializer implements PrimitiveSerializer<HomeDashboard> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DashboardId),
-          ) as DashboardId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DashboardId),
+                  )
+                  as DashboardId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'image':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.image = valueDes;
           break;
         case r'assignedCustomers':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(ShortCustomerInfo)]),
-          ) as BuiltSet<ShortCustomerInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(ShortCustomerInfo),
+                    ]),
+                  )
+                  as BuiltSet<ShortCustomerInfo>?;
           if (valueDes == null) continue;
           result.assignedCustomers.replace(valueDes);
           break;
         case r'mobileHide':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.mobileHide = valueDes;
           break;
         case r'mobileOrder':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.mobileOrder = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
         case r'resources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ResourceExportData)]),
-          ) as BuiltList<ResourceExportData>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ResourceExportData),
+                    ]),
+                  )
+                  as BuiltList<ResourceExportData>?;
           if (valueDes == null) continue;
           result.resources.replace(valueDes);
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'hideDashboardToolbar':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hideDashboardToolbar = valueDes;
           break;
@@ -398,5 +441,3 @@ class _$HomeDashboardSerializer implements PrimitiveSerializer<HomeDashboard> {
     return result.build();
   }
 }
-
-

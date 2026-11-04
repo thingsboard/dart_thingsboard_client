@@ -22,7 +22,8 @@ part 'user_email_info.g.dart';
 /// * [firstName] - User first name
 /// * [lastName] - User last name
 @BuiltValue()
-abstract class UserEmailInfo implements Built<UserEmailInfo, UserEmailInfoBuilder> {
+abstract class UserEmailInfo
+    implements Built<UserEmailInfo, UserEmailInfoBuilder> {
   /// User id
   @BuiltValueField(wireName: r'id')
   UserId? get id;
@@ -41,13 +42,15 @@ abstract class UserEmailInfo implements Built<UserEmailInfo, UserEmailInfoBuilde
 
   UserEmailInfo._();
 
-  factory UserEmailInfo([void updates(UserEmailInfoBuilder b)]) = _$UserEmailInfo;
+  factory UserEmailInfo([void updates(UserEmailInfoBuilder b)]) =
+      _$UserEmailInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserEmailInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserEmailInfo> get serializer => _$UserEmailInfoSerializer();
+  static Serializer<UserEmailInfo> get serializer =>
+      _$UserEmailInfoSerializer();
 }
 
 class _$UserEmailInfoSerializer implements PrimitiveSerializer<UserEmailInfo> {
@@ -98,7 +101,11 @@ class _$UserEmailInfoSerializer implements PrimitiveSerializer<UserEmailInfo> {
     UserEmailInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -114,34 +121,42 @@ class _$UserEmailInfoSerializer implements PrimitiveSerializer<UserEmailInfo> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'email':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.email = valueDes;
           break;
         case r'firstName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.firstName = valueDes;
           break;
         case r'lastName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.lastName = valueDes;
           break;
@@ -173,5 +188,3 @@ class _$UserEmailInfoSerializer implements PrimitiveSerializer<UserEmailInfo> {
     return result.build();
   }
 }
-
-

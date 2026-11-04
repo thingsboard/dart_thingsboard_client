@@ -16,9 +16,9 @@ part 'ts_value.g.dart';
 /// TsValue
 ///
 /// Properties:
-/// * [ts] 
-/// * [value] 
-/// * [count] 
+/// * [ts]
+/// * [value]
+/// * [count]
 @BuiltValue()
 abstract class TsValue implements Built<TsValue, TsValueBuilder> {
   @BuiltValueField(wireName: r'ts')
@@ -82,7 +82,11 @@ class _$TsValueSerializer implements PrimitiveSerializer<TsValue> {
     TsValue object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +102,32 @@ class _$TsValueSerializer implements PrimitiveSerializer<TsValue> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'ts':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.ts = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'count':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.count = valueDes;
           break;
@@ -149,5 +159,3 @@ class _$TsValueSerializer implements PrimitiveSerializer<TsValue> {
     return result.build();
   }
 }
-
-

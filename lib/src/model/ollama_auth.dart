@@ -19,9 +19,9 @@ part 'ollama_auth.g.dart';
 /// Ollama authentication schemes
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class OllamaAuth  {
+abstract class OllamaAuth {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -38,32 +38,33 @@ abstract class OllamaAuth  {
 }
 
 extension OllamaAuthDiscriminatorExt on OllamaAuth {
-    String? get discriminatorValue {
-        if (this is Basic) {
-            return r'BASIC';
-        }
-        if (this is None) {
-            return r'NONE';
-        }
-        if (this is Token) {
-            return r'TOKEN';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is Basic) {
+      return r'BASIC';
     }
+    if (this is None) {
+      return r'NONE';
+    }
+    if (this is Token) {
+      return r'TOKEN';
+    }
+    return null;
+  }
 }
+
 extension OllamaAuthBuilderDiscriminatorExt on OllamaAuthBuilder {
-    String? get discriminatorValue {
-        if (this is BasicBuilder) {
-            return r'BASIC';
-        }
-        if (this is NoneBuilder) {
-            return r'NONE';
-        }
-        if (this is TokenBuilder) {
-            return r'TOKEN';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is BasicBuilder) {
+      return r'BASIC';
     }
+    if (this is NoneBuilder) {
+      return r'NONE';
+    }
+    if (this is TokenBuilder) {
+      return r'TOKEN';
+    }
+    return null;
+  }
 }
 
 class _$OllamaAuthSerializer implements PrimitiveSerializer<OllamaAuth> {
@@ -100,7 +101,11 @@ class _$OllamaAuthSerializer implements PrimitiveSerializer<OllamaAuth> {
     if (object is Token) {
       return serializers.serialize(object, specifiedType: FullType(Token))!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -110,28 +115,51 @@ class _$OllamaAuthSerializer implements PrimitiveSerializer<OllamaAuth> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(OllamaAuth.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(OllamaAuth.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'BASIC':
-        return serializers.deserialize(serialized, specifiedType: FullType(Basic)) as Basic;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(Basic),
+            )
+            as Basic;
       case r'NONE':
-        return serializers.deserialize(serialized, specifiedType: FullType(None)) as None;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(None),
+            )
+            as None;
       case r'TOKEN':
-        return serializers.deserialize(serialized, specifiedType: FullType(Token)) as Token;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(Token),
+            )
+            as Token;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($OllamaAuth)) as $OllamaAuth;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($OllamaAuth),
+            )
+            as $OllamaAuth;
     }
   }
 }
 
-
 /// a concrete implementation of [OllamaAuth], since [OllamaAuth] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $OllamaAuth implements OllamaAuth, Built<$OllamaAuth, $OllamaAuthBuilder> {
+abstract class $OllamaAuth
+    implements OllamaAuth, Built<$OllamaAuth, $OllamaAuthBuilder> {
   $OllamaAuth._();
 
-  factory $OllamaAuth([void Function($OllamaAuthBuilder)? updates]) = _$$OllamaAuth;
+  factory $OllamaAuth([void Function($OllamaAuthBuilder)? updates]) =
+      _$$OllamaAuth;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($OllamaAuthBuilder b) => b;
@@ -169,10 +197,12 @@ class _$$OllamaAuthSerializer implements PrimitiveSerializer<$OllamaAuth> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -203,4 +233,3 @@ class _$$OllamaAuthSerializer implements PrimitiveSerializer<$OllamaAuth> {
     return result.build();
   }
 }
-

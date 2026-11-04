@@ -20,11 +20,14 @@ part 'compose_step_state.g.dart';
 /// ComposeStepState
 ///
 /// Properties:
-/// * [type] 
-/// * [serviceImageRegexPatterns] 
-/// * [pullImages] 
+/// * [type]
+/// * [serviceImageRegexPatterns]
+/// * [pullImages]
 @BuiltValue()
-abstract class ComposeStepState implements AgentAppStepState, Built<ComposeStepState, ComposeStepStateBuilder> {
+abstract class ComposeStepState
+    implements
+        AgentAppStepState,
+        Built<ComposeStepState, ComposeStepStateBuilder> {
   @BuiltValueField(wireName: r'serviceImageRegexPatterns')
   StepFieldListString? get serviceImageRegexPatterns;
 
@@ -33,16 +36,19 @@ abstract class ComposeStepState implements AgentAppStepState, Built<ComposeStepS
 
   ComposeStepState._();
 
-  factory ComposeStepState([void updates(ComposeStepStateBuilder b)]) = _$ComposeStepState;
+  factory ComposeStepState([void updates(ComposeStepStateBuilder b)]) =
+      _$ComposeStepState;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ComposeStepStateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ComposeStepState> get serializer => _$ComposeStepStateSerializer();
+  static Serializer<ComposeStepState> get serializer =>
+      _$ComposeStepStateSerializer();
 }
 
-class _$ComposeStepStateSerializer implements PrimitiveSerializer<ComposeStepState> {
+class _$ComposeStepStateSerializer
+    implements PrimitiveSerializer<ComposeStepState> {
   @override
   final Iterable<Type> types = const [ComposeStepState, _$ComposeStepState];
 
@@ -83,7 +89,11 @@ class _$ComposeStepStateSerializer implements PrimitiveSerializer<ComposeStepSta
     ComposeStepState object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,26 +109,32 @@ class _$ComposeStepStateSerializer implements PrimitiveSerializer<ComposeStepSta
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'serviceImageRegexPatterns':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.serviceImageRegexPatterns.replace(valueDes);
           break;
         case r'pullImages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldBoolean),
-          ) as StepFieldBoolean?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldBoolean),
+                  )
+                  as StepFieldBoolean?;
           if (valueDes == null) continue;
           result.pullImages.replace(valueDes);
           break;
@@ -150,5 +166,3 @@ class _$ComposeStepStateSerializer implements PrimitiveSerializer<ComposeStepSta
     return result.build();
   }
 }
-
-

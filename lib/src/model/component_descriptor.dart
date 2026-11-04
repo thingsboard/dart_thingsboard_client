@@ -34,7 +34,8 @@ part 'component_descriptor.g.dart';
 /// * [hasQueueName] - Indicates that the RuleNode supports queue name configuration.
 /// * [hasSecrets] - Indicates that the RuleNode configuration uses secrets placeholders.
 @BuiltValue()
-abstract class ComponentDescriptor implements Built<ComponentDescriptor, ComponentDescriptorBuilder> {
+abstract class ComponentDescriptor
+    implements Built<ComponentDescriptor, ComponentDescriptorBuilder> {
   /// JSON object with the descriptor Id. Specify existing descriptor id to update the descriptor. Referencing non-existing descriptor Id will cause error. Omit this field to create new descriptor.
   @BuiltValueField(wireName: r'id')
   ComponentDescriptorId? get id;
@@ -88,18 +89,24 @@ abstract class ComponentDescriptor implements Built<ComponentDescriptor, Compone
 
   ComponentDescriptor._();
 
-  factory ComponentDescriptor([void updates(ComponentDescriptorBuilder b)]) = _$ComponentDescriptor;
+  factory ComponentDescriptor([void updates(ComponentDescriptorBuilder b)]) =
+      _$ComponentDescriptor;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ComponentDescriptorBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ComponentDescriptor> get serializer => _$ComponentDescriptorSerializer();
+  static Serializer<ComponentDescriptor> get serializer =>
+      _$ComponentDescriptorSerializer();
 }
 
-class _$ComponentDescriptorSerializer implements PrimitiveSerializer<ComponentDescriptor> {
+class _$ComponentDescriptorSerializer
+    implements PrimitiveSerializer<ComponentDescriptor> {
   @override
-  final Iterable<Type> types = const [ComponentDescriptor, _$ComponentDescriptor];
+  final Iterable<Type> types = const [
+    ComponentDescriptor,
+    _$ComponentDescriptor,
+  ];
 
   @override
   final String wireName = r'ComponentDescriptor';
@@ -201,7 +208,11 @@ class _$ComponentDescriptorSerializer implements PrimitiveSerializer<ComponentDe
     ComponentDescriptor object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -217,98 +228,126 @@ class _$ComponentDescriptorSerializer implements PrimitiveSerializer<ComponentDe
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ComponentDescriptorId),
-          ) as ComponentDescriptorId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ComponentDescriptorId,
+                    ),
+                  )
+                  as ComponentDescriptorId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ComponentType),
-          ) as ComponentType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ComponentType),
+                  )
+                  as ComponentType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ComponentScope),
-          ) as ComponentScope?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ComponentScope),
+                  )
+                  as ComponentScope?;
           if (valueDes == null) continue;
           result.scope = valueDes;
           break;
         case r'clusteringMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ComponentClusteringMode),
-          ) as ComponentClusteringMode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ComponentClusteringMode,
+                    ),
+                  )
+                  as ComponentClusteringMode?;
           if (valueDes == null) continue;
           result.clusteringMode = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'clazz':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.clazz = valueDes;
           break;
         case r'configurationDescriptor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.configurationDescriptor = valueDes;
           break;
         case r'configurationVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.configurationVersion = valueDes;
           break;
         case r'actions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.actions = valueDes;
           break;
         case r'hasQueueName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasQueueName = valueDes;
           break;
         case r'hasSecrets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasSecrets = valueDes;
           break;
@@ -340,5 +379,3 @@ class _$ComponentDescriptorSerializer implements PrimitiveSerializer<ComponentDe
     return result.build();
   }
 }
-
-

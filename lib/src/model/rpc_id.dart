@@ -18,7 +18,7 @@ part 'rpc_id.g.dart';
 /// RpcId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
 abstract class RpcId implements EntityId, Built<RpcId, RpcIdBuilder> {
@@ -63,7 +63,11 @@ class _$RpcIdSerializer implements PrimitiveSerializer<RpcId> {
     RpcId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +83,21 @@ class _$RpcIdSerializer implements PrimitiveSerializer<RpcId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +128,3 @@ class _$RpcIdSerializer implements PrimitiveSerializer<RpcId> {
     return result.build();
   }
 }
-
-

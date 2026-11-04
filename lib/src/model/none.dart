@@ -17,7 +17,7 @@ part 'none.g.dart';
 /// None
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
 abstract class None implements OllamaAuth, Built<None, NoneBuilder> {
   None._();
@@ -56,7 +56,11 @@ class _$NoneSerializer implements PrimitiveSerializer<None> {
     None object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +76,12 @@ class _$NoneSerializer implements PrimitiveSerializer<None> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +112,3 @@ class _$NoneSerializer implements PrimitiveSerializer<None> {
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'font_style.g.dart';
 
 class FontStyle extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'normal')
   static const FontStyle normal = _$normal;
   @BuiltValueEnumConst(wireName: r'italic')
@@ -25,7 +24,7 @@ class FontStyle extends EnumClass {
 
   static Serializer<FontStyle> get serializer => _$fontStyleSerializer;
 
-  const FontStyle._(String name): super(name);
+  const FontStyle._(String name) : super(name);
 
   static BuiltSet<FontStyle> get values => _$values;
   static FontStyle valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class FontStyle extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class FontStyleMixin = Object with _$FontStyleMixin;
-

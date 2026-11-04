@@ -17,23 +17,36 @@ part 'mqtt_device_transport_configuration.g.dart';
 /// MqttDeviceTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class MqttDeviceTransportConfiguration implements DeviceTransportConfiguration, Built<MqttDeviceTransportConfiguration, MqttDeviceTransportConfigurationBuilder> {
+abstract class MqttDeviceTransportConfiguration
+    implements
+        DeviceTransportConfiguration,
+        Built<
+          MqttDeviceTransportConfiguration,
+          MqttDeviceTransportConfigurationBuilder
+        > {
   MqttDeviceTransportConfiguration._();
 
-  factory MqttDeviceTransportConfiguration([void updates(MqttDeviceTransportConfigurationBuilder b)]) = _$MqttDeviceTransportConfiguration;
+  factory MqttDeviceTransportConfiguration([
+    void updates(MqttDeviceTransportConfigurationBuilder b),
+  ]) = _$MqttDeviceTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MqttDeviceTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MqttDeviceTransportConfiguration> get serializer => _$MqttDeviceTransportConfigurationSerializer();
+  static Serializer<MqttDeviceTransportConfiguration> get serializer =>
+      _$MqttDeviceTransportConfigurationSerializer();
 }
 
-class _$MqttDeviceTransportConfigurationSerializer implements PrimitiveSerializer<MqttDeviceTransportConfiguration> {
+class _$MqttDeviceTransportConfigurationSerializer
+    implements PrimitiveSerializer<MqttDeviceTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [MqttDeviceTransportConfiguration, _$MqttDeviceTransportConfiguration];
+  final Iterable<Type> types = const [
+    MqttDeviceTransportConfiguration,
+    _$MqttDeviceTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'MqttDeviceTransportConfiguration';
@@ -56,7 +69,11 @@ class _$MqttDeviceTransportConfigurationSerializer implements PrimitiveSerialize
     MqttDeviceTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$MqttDeviceTransportConfigurationSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$MqttDeviceTransportConfigurationSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

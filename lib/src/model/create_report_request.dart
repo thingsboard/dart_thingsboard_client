@@ -17,10 +17,11 @@ part 'create_report_request.g.dart';
 /// CreateReportRequest
 ///
 /// Properties:
-/// * [file] 
-/// * [info] 
+/// * [file]
+/// * [info]
 @BuiltValue()
-abstract class CreateReportRequest implements Built<CreateReportRequest, CreateReportRequestBuilder> {
+abstract class CreateReportRequest
+    implements Built<CreateReportRequest, CreateReportRequestBuilder> {
   @BuiltValueField(wireName: r'file')
   Uint8List get file;
 
@@ -29,18 +30,24 @@ abstract class CreateReportRequest implements Built<CreateReportRequest, CreateR
 
   CreateReportRequest._();
 
-  factory CreateReportRequest([void updates(CreateReportRequestBuilder b)]) = _$CreateReportRequest;
+  factory CreateReportRequest([void updates(CreateReportRequestBuilder b)]) =
+      _$CreateReportRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CreateReportRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CreateReportRequest> get serializer => _$CreateReportRequestSerializer();
+  static Serializer<CreateReportRequest> get serializer =>
+      _$CreateReportRequestSerializer();
 }
 
-class _$CreateReportRequestSerializer implements PrimitiveSerializer<CreateReportRequest> {
+class _$CreateReportRequestSerializer
+    implements PrimitiveSerializer<CreateReportRequest> {
   @override
-  final Iterable<Type> types = const [CreateReportRequest, _$CreateReportRequest];
+  final Iterable<Type> types = const [
+    CreateReportRequest,
+    _$CreateReportRequest,
+  ];
 
   @override
   final String wireName = r'CreateReportRequest';
@@ -68,7 +75,11 @@ class _$CreateReportRequestSerializer implements PrimitiveSerializer<CreateRepor
     CreateReportRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -84,17 +95,21 @@ class _$CreateReportRequestSerializer implements PrimitiveSerializer<CreateRepor
       final value = serializedList[i + 1];
       switch (key) {
         case r'file':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(Uint8List),
-          ) as Uint8List;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(Uint8List),
+                  )
+                  as Uint8List;
           result.file = valueDes;
           break;
         case r'info':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.info = valueDes;
           break;
         default:
@@ -125,5 +140,3 @@ class _$CreateReportRequestSerializer implements PrimitiveSerializer<CreateRepor
     return result.build();
   }
 }
-
-

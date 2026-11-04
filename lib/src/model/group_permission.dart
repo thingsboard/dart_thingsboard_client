@@ -28,11 +28,12 @@ part 'group_permission.g.dart';
 /// * [roleId] - JSON object with the Role Id. Represents the set of permissions. The role type (GENERIC or GROUP) determines whether 'entityGroupId' is required.
 /// * [entityGroupId] - JSON object with the Entity Group Id. Required when using a GROUP role — specifies the entity group to which the permissions apply. Must be null or omitted when using a GENERIC role.
 /// * [entityGroupType] - Type of the entities in the group: DEVICE, ASSET, CUSTOMER, etc. Auto-populated from the referenced entity group. Null for generic permissions.
-/// * [isPublic] 
+/// * [isPublic]
 /// * [name] - Name of the Group Permissions. Auto-generated
-/// * [public] 
+/// * [public]
 @BuiltValue()
-abstract class GroupPermission implements Built<GroupPermission, GroupPermissionBuilder> {
+abstract class GroupPermission
+    implements Built<GroupPermission, GroupPermissionBuilder> {
   /// JSON object with the Group Permission Id. Specify this field to update the Group Permission. Referencing non-existing Group Permission Id will cause error. Omit this field to create new Group Permission.
   @BuiltValueField(wireName: r'id')
   GroupPermissionId? get id;
@@ -74,16 +75,19 @@ abstract class GroupPermission implements Built<GroupPermission, GroupPermission
 
   GroupPermission._();
 
-  factory GroupPermission([void updates(GroupPermissionBuilder b)]) = _$GroupPermission;
+  factory GroupPermission([void updates(GroupPermissionBuilder b)]) =
+      _$GroupPermission;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GroupPermissionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GroupPermission> get serializer => _$GroupPermissionSerializer();
+  static Serializer<GroupPermission> get serializer =>
+      _$GroupPermissionSerializer();
 }
 
-class _$GroupPermissionSerializer implements PrimitiveSerializer<GroupPermission> {
+class _$GroupPermissionSerializer
+    implements PrimitiveSerializer<GroupPermission> {
   @override
   final Iterable<Type> types = const [GroupPermission, _$GroupPermission];
 
@@ -169,7 +173,11 @@ class _$GroupPermissionSerializer implements PrimitiveSerializer<GroupPermission
     GroupPermission object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -185,80 +193,100 @@ class _$GroupPermissionSerializer implements PrimitiveSerializer<GroupPermission
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(GroupPermissionId),
-          ) as GroupPermissionId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(GroupPermissionId),
+                  )
+                  as GroupPermissionId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'userGroupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityGroupId),
-          ) as EntityGroupId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityGroupId),
+                  )
+                  as EntityGroupId;
           result.userGroupId.replace(valueDes);
           break;
         case r'roleId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RoleId),
-          ) as RoleId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RoleId),
+                  )
+                  as RoleId;
           result.roleId.replace(valueDes);
           break;
         case r'entityGroupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityGroupId),
-          ) as EntityGroupId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityGroupId),
+                  )
+                  as EntityGroupId?;
           if (valueDes == null) continue;
           result.entityGroupId.replace(valueDes);
           break;
         case r'entityGroupType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.entityGroupType = valueDes;
           break;
         case r'isPublic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.isPublic = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'public':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.public = valueDes;
           break;
@@ -290,5 +318,3 @@ class _$GroupPermissionSerializer implements PrimitiveSerializer<GroupPermission
     return result.build();
   }
 }
-
-

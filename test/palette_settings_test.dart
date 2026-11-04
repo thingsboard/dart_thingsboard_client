@@ -13,13 +13,13 @@ import 'package:thingsboard_client/thingsboard_client.dart';
 void main() {
   final deserializers =
       <String, PaletteSettings? Function(Map<String, Object?>)>{
-    'WhiteLabelingParams': (json) => standardSerializers
-        .deserializeWith(WhiteLabelingParams.serializer, json)!
-        .paletteSettings,
-    'LoginWhiteLabelingParams': (json) => standardSerializers
-        .deserializeWith(LoginWhiteLabelingParams.serializer, json)!
-        .paletteSettings,
-  };
+        'WhiteLabelingParams': (json) => standardSerializers
+            .deserializeWith(WhiteLabelingParams.serializer, json)!
+            .paletteSettings,
+        'LoginWhiteLabelingParams': (json) => standardSerializers
+            .deserializeWith(LoginWhiteLabelingParams.serializer, json)!
+            .paletteSettings,
+      };
 
   deserializers.forEach((type, paletteSettingsOf) {
     group('$type paletteSettings deserialization', () {
@@ -36,8 +36,9 @@ void main() {
       });
 
       test('palettes missing from the settings', () {
-        final settings =
-            paletteSettingsOf({'paletteSettings': <String, Object?>{}})!;
+        final settings = paletteSettingsOf({
+          'paletteSettings': <String, Object?>{},
+        })!;
 
         expect(settings.primaryPalette, isNull);
         expect(settings.accentPalette, isNull);

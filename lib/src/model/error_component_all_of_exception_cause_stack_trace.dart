@@ -16,16 +16,21 @@ part 'error_component_all_of_exception_cause_stack_trace.g.dart';
 /// ErrorComponentAllOfExceptionCauseStackTrace
 ///
 /// Properties:
-/// * [classLoaderName] 
-/// * [moduleName] 
-/// * [moduleVersion] 
-/// * [methodName] 
-/// * [fileName] 
-/// * [lineNumber] 
-/// * [className] 
-/// * [nativeMethod] 
+/// * [classLoaderName]
+/// * [moduleName]
+/// * [moduleVersion]
+/// * [methodName]
+/// * [fileName]
+/// * [lineNumber]
+/// * [className]
+/// * [nativeMethod]
 @BuiltValue()
-abstract class ErrorComponentAllOfExceptionCauseStackTrace implements Built<ErrorComponentAllOfExceptionCauseStackTrace, ErrorComponentAllOfExceptionCauseStackTraceBuilder> {
+abstract class ErrorComponentAllOfExceptionCauseStackTrace
+    implements
+        Built<
+          ErrorComponentAllOfExceptionCauseStackTrace,
+          ErrorComponentAllOfExceptionCauseStackTraceBuilder
+        > {
   @BuiltValueField(wireName: r'classLoaderName')
   String? get classLoaderName;
 
@@ -52,18 +57,27 @@ abstract class ErrorComponentAllOfExceptionCauseStackTrace implements Built<Erro
 
   ErrorComponentAllOfExceptionCauseStackTrace._();
 
-  factory ErrorComponentAllOfExceptionCauseStackTrace([void updates(ErrorComponentAllOfExceptionCauseStackTraceBuilder b)]) = _$ErrorComponentAllOfExceptionCauseStackTrace;
+  factory ErrorComponentAllOfExceptionCauseStackTrace([
+    void updates(ErrorComponentAllOfExceptionCauseStackTraceBuilder b),
+  ]) = _$ErrorComponentAllOfExceptionCauseStackTrace;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ErrorComponentAllOfExceptionCauseStackTraceBuilder b) => b;
+  static void _defaults(ErrorComponentAllOfExceptionCauseStackTraceBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ErrorComponentAllOfExceptionCauseStackTrace> get serializer => _$ErrorComponentAllOfExceptionCauseStackTraceSerializer();
+  static Serializer<ErrorComponentAllOfExceptionCauseStackTrace>
+  get serializer => _$ErrorComponentAllOfExceptionCauseStackTraceSerializer();
 }
 
-class _$ErrorComponentAllOfExceptionCauseStackTraceSerializer implements PrimitiveSerializer<ErrorComponentAllOfExceptionCauseStackTrace> {
+class _$ErrorComponentAllOfExceptionCauseStackTraceSerializer
+    implements
+        PrimitiveSerializer<ErrorComponentAllOfExceptionCauseStackTrace> {
   @override
-  final Iterable<Type> types = const [ErrorComponentAllOfExceptionCauseStackTrace, _$ErrorComponentAllOfExceptionCauseStackTrace];
+  final Iterable<Type> types = const [
+    ErrorComponentAllOfExceptionCauseStackTrace,
+    _$ErrorComponentAllOfExceptionCauseStackTrace,
+  ];
 
   @override
   final String wireName = r'ErrorComponentAllOfExceptionCauseStackTrace';
@@ -137,7 +151,11 @@ class _$ErrorComponentAllOfExceptionCauseStackTraceSerializer implements Primiti
     ErrorComponentAllOfExceptionCauseStackTrace object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -153,66 +171,82 @@ class _$ErrorComponentAllOfExceptionCauseStackTraceSerializer implements Primiti
       final value = serializedList[i + 1];
       switch (key) {
         case r'classLoaderName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.classLoaderName = valueDes;
           break;
         case r'moduleName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.moduleName = valueDes;
           break;
         case r'moduleVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.moduleVersion = valueDes;
           break;
         case r'methodName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.methodName = valueDes;
           break;
         case r'fileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fileName = valueDes;
           break;
         case r'lineNumber':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.lineNumber = valueDes;
           break;
         case r'className':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.className = valueDes;
           break;
         case r'nativeMethod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.nativeMethod = valueDes;
           break;
@@ -244,5 +278,3 @@ class _$ErrorComponentAllOfExceptionCauseStackTraceSerializer implements Primiti
     return result.build();
   }
 }
-
-

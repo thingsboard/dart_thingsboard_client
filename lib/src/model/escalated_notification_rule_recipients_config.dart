@@ -19,27 +19,41 @@ part 'escalated_notification_rule_recipients_config.g.dart';
 /// Escalated notification rule recipients configuration
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [escalationTable] 
+/// * [triggerType]
+/// * [escalationTable]
 @BuiltValue()
-abstract class EscalatedNotificationRuleRecipientsConfig implements NotificationRuleRecipientsConfig, Built<EscalatedNotificationRuleRecipientsConfig, EscalatedNotificationRuleRecipientsConfigBuilder> {
+abstract class EscalatedNotificationRuleRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          EscalatedNotificationRuleRecipientsConfig,
+          EscalatedNotificationRuleRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'escalationTable')
   BuiltMap<String, BuiltList<String>> get escalationTable;
 
   EscalatedNotificationRuleRecipientsConfig._();
 
-  factory EscalatedNotificationRuleRecipientsConfig([void updates(EscalatedNotificationRuleRecipientsConfigBuilder b)]) = _$EscalatedNotificationRuleRecipientsConfig;
+  factory EscalatedNotificationRuleRecipientsConfig([
+    void updates(EscalatedNotificationRuleRecipientsConfigBuilder b),
+  ]) = _$EscalatedNotificationRuleRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EscalatedNotificationRuleRecipientsConfigBuilder b) => b;
+  static void _defaults(EscalatedNotificationRuleRecipientsConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EscalatedNotificationRuleRecipientsConfig> get serializer => _$EscalatedNotificationRuleRecipientsConfigSerializer();
+  static Serializer<EscalatedNotificationRuleRecipientsConfig> get serializer =>
+      _$EscalatedNotificationRuleRecipientsConfigSerializer();
 }
 
-class _$EscalatedNotificationRuleRecipientsConfigSerializer implements PrimitiveSerializer<EscalatedNotificationRuleRecipientsConfig> {
+class _$EscalatedNotificationRuleRecipientsConfigSerializer
+    implements PrimitiveSerializer<EscalatedNotificationRuleRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [EscalatedNotificationRuleRecipientsConfig, _$EscalatedNotificationRuleRecipientsConfig];
+  final Iterable<Type> types = const [
+    EscalatedNotificationRuleRecipientsConfig,
+    _$EscalatedNotificationRuleRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'EscalatedNotificationRuleRecipientsConfig';
@@ -52,7 +66,10 @@ class _$EscalatedNotificationRuleRecipientsConfigSerializer implements Primitive
     yield r'escalationTable';
     yield serializers.serialize(
       object.escalationTable,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(String)])]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(BuiltList, [FullType(String)]),
+      ]),
     );
     if (object.triggerType != null) {
       yield r'triggerType';
@@ -69,7 +86,11 @@ class _$EscalatedNotificationRuleRecipientsConfigSerializer implements Primitive
     EscalatedNotificationRuleRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +106,26 @@ class _$EscalatedNotificationRuleRecipientsConfigSerializer implements Primitive
       final value = serializedList[i + 1];
       switch (key) {
         case r'escalationTable':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(String)])]),
-          ) as BuiltMap<String, BuiltList<String>>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(String)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<String>>;
           result.escalationTable.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +157,3 @@ class _$EscalatedNotificationRuleRecipientsConfigSerializer implements Primitive
     return result.build();
   }
 }
-
-

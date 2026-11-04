@@ -18,27 +18,31 @@ part 'agent_prepare_step.g.dart';
 /// AgentPrepareStep
 ///
 /// Properties:
-/// * [id] 
-/// * [nextId] 
-/// * [title] 
-/// * [templateOnly] 
-/// * [condition] 
-/// * [stateful] 
-/// * [type] 
+/// * [id]
+/// * [nextId]
+/// * [title]
+/// * [templateOnly]
+/// * [condition]
+/// * [stateful]
+/// * [type]
 @BuiltValue()
-abstract class AgentPrepareStep implements AgentAppStep, Built<AgentPrepareStep, AgentPrepareStepBuilder> {
+abstract class AgentPrepareStep
+    implements AgentAppStep, Built<AgentPrepareStep, AgentPrepareStepBuilder> {
   AgentPrepareStep._();
 
-  factory AgentPrepareStep([void updates(AgentPrepareStepBuilder b)]) = _$AgentPrepareStep;
+  factory AgentPrepareStep([void updates(AgentPrepareStepBuilder b)]) =
+      _$AgentPrepareStep;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentPrepareStepBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentPrepareStep> get serializer => _$AgentPrepareStepSerializer();
+  static Serializer<AgentPrepareStep> get serializer =>
+      _$AgentPrepareStepSerializer();
 }
 
-class _$AgentPrepareStepSerializer implements PrimitiveSerializer<AgentPrepareStep> {
+class _$AgentPrepareStepSerializer
+    implements PrimitiveSerializer<AgentPrepareStep> {
   @override
   final Iterable<Type> types = const [AgentPrepareStep, _$AgentPrepareStep];
 
@@ -107,7 +111,11 @@ class _$AgentPrepareStepSerializer implements PrimitiveSerializer<AgentPrepareSt
     AgentPrepareStep object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -123,58 +131,72 @@ class _$AgentPrepareStepSerializer implements PrimitiveSerializer<AgentPrepareSt
       final value = serializedList[i + 1];
       switch (key) {
         case r'nextId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.nextId = valueDes;
           break;
         case r'condition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.condition = valueDes;
           break;
         case r'templateOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.templateOnly = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'stateful':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.stateful = valueDes;
           break;
@@ -206,5 +228,3 @@ class _$AgentPrepareStepSerializer implements PrimitiveSerializer<AgentPrepareSt
     return result.build();
   }
 }
-
-

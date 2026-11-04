@@ -23,15 +23,21 @@ part 'entity_aggregation_calculated_field_configuration.g.dart';
 /// EntityAggregationCalculatedFieldConfiguration
 ///
 /// Properties:
-/// * [output] 
-/// * [type] 
-/// * [arguments] 
-/// * [metrics] 
-/// * [interval] 
-/// * [watermark] 
-/// * [produceIntermediateResult] 
+/// * [output]
+/// * [type]
+/// * [arguments]
+/// * [metrics]
+/// * [interval]
+/// * [watermark]
+/// * [produceIntermediateResult]
 @BuiltValue()
-abstract class EntityAggregationCalculatedFieldConfiguration implements CalculatedFieldConfiguration, Built<EntityAggregationCalculatedFieldConfiguration, EntityAggregationCalculatedFieldConfigurationBuilder> {
+abstract class EntityAggregationCalculatedFieldConfiguration
+    implements
+        CalculatedFieldConfiguration,
+        Built<
+          EntityAggregationCalculatedFieldConfiguration,
+          EntityAggregationCalculatedFieldConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'watermark')
   Watermark? get watermark;
 
@@ -49,18 +55,28 @@ abstract class EntityAggregationCalculatedFieldConfiguration implements Calculat
 
   EntityAggregationCalculatedFieldConfiguration._();
 
-  factory EntityAggregationCalculatedFieldConfiguration([void updates(EntityAggregationCalculatedFieldConfigurationBuilder b)]) = _$EntityAggregationCalculatedFieldConfiguration;
+  factory EntityAggregationCalculatedFieldConfiguration([
+    void updates(EntityAggregationCalculatedFieldConfigurationBuilder b),
+  ]) = _$EntityAggregationCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntityAggregationCalculatedFieldConfigurationBuilder b) => b;
+  static void _defaults(
+    EntityAggregationCalculatedFieldConfigurationBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityAggregationCalculatedFieldConfiguration> get serializer => _$EntityAggregationCalculatedFieldConfigurationSerializer();
+  static Serializer<EntityAggregationCalculatedFieldConfiguration>
+  get serializer => _$EntityAggregationCalculatedFieldConfigurationSerializer();
 }
 
-class _$EntityAggregationCalculatedFieldConfigurationSerializer implements PrimitiveSerializer<EntityAggregationCalculatedFieldConfiguration> {
+class _$EntityAggregationCalculatedFieldConfigurationSerializer
+    implements
+        PrimitiveSerializer<EntityAggregationCalculatedFieldConfiguration> {
   @override
-  final Iterable<Type> types = const [EntityAggregationCalculatedFieldConfiguration, _$EntityAggregationCalculatedFieldConfiguration];
+  final Iterable<Type> types = const [
+    EntityAggregationCalculatedFieldConfiguration,
+    _$EntityAggregationCalculatedFieldConfiguration,
+  ];
 
   @override
   final String wireName = r'EntityAggregationCalculatedFieldConfiguration';
@@ -94,7 +110,10 @@ class _$EntityAggregationCalculatedFieldConfigurationSerializer implements Primi
     yield r'arguments';
     yield serializers.serialize(
       object.arguments,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(Argument),
+      ]),
     );
     yield r'interval';
     yield serializers.serialize(
@@ -104,7 +123,10 @@ class _$EntityAggregationCalculatedFieldConfigurationSerializer implements Primi
     yield r'metrics';
     yield serializers.serialize(
       object.metrics,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AggMetric)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(AggMetric),
+      ]),
     );
     yield r'type';
     yield serializers.serialize(
@@ -119,7 +141,11 @@ class _$EntityAggregationCalculatedFieldConfigurationSerializer implements Primi
     EntityAggregationCalculatedFieldConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -135,55 +161,75 @@ class _$EntityAggregationCalculatedFieldConfigurationSerializer implements Primi
       final value = serializedList[i + 1];
       switch (key) {
         case r'output':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Output),
-          ) as Output?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Output),
+                  )
+                  as Output?;
           if (valueDes == null) continue;
           result.output = valueDes;
           break;
         case r'watermark':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Watermark),
-          ) as Watermark?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Watermark),
+                  )
+                  as Watermark?;
           if (valueDes == null) continue;
           result.watermark.replace(valueDes);
           break;
         case r'produceIntermediateResult':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.produceIntermediateResult = valueDes;
           break;
         case r'arguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
-          ) as BuiltMap<String, Argument>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(Argument),
+                    ]),
+                  )
+                  as BuiltMap<String, Argument>;
           result.arguments.replace(valueDes);
           break;
         case r'interval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AggInterval),
-          ) as AggInterval;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AggInterval),
+                  )
+                  as AggInterval;
           result.interval = valueDes;
           break;
         case r'metrics':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AggMetric)]),
-          ) as BuiltMap<String, AggMetric>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(AggMetric),
+                    ]),
+                  )
+                  as BuiltMap<String, AggMetric>;
           result.metrics.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -214,5 +260,3 @@ class _$EntityAggregationCalculatedFieldConfigurationSerializer implements Primi
     return result.build();
   }
 }
-
-

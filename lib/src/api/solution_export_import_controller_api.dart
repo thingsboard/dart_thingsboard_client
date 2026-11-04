@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -18,11 +17,9 @@ import 'package:thingsboard_client/src/model/solution_export_request.dart';
 import 'package:thingsboard_client/src/model/solution_export_response.dart';
 import 'package:thingsboard_client/src/model/solution_import_result.dart';
 import 'package:thingsboard_client/src/model/solution_validation_result.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class SolutionExportImportControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -43,7 +40,7 @@ class SolutionExportImportControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SolutionExportResponse] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SolutionExportResponse>> exportSolution({ 
+  Future<Response<SolutionExportResponse>> exportSolution({
     required SolutionExportRequest solutionExportRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -52,13 +49,13 @@ class SolutionExportImportControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSolutionExportRequestAndSolutionExportResponse);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerSolutionExportRequestAndSolutionExportResponse);
     final _path = r'/api/solution/export';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -66,11 +63,8 @@ class SolutionExportImportControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -82,14 +76,13 @@ class SolutionExportImportControllerApi {
 
     try {
       const _type = FullType(SolutionExportRequest);
-      _bodyData = _serializers.serialize(solutionExportRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        solutionExportRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -109,11 +102,13 @@ class SolutionExportImportControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SolutionExportResponse),
-      ) as SolutionExportResponse;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SolutionExportResponse),
+                )
+                as SolutionExportResponse;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -150,7 +145,7 @@ class SolutionExportImportControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SolutionImportResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SolutionImportResult>> importSolution({ 
+  Future<Response<SolutionImportResult>> importSolution({
     required SolutionData solutionData,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -159,13 +154,13 @@ class SolutionExportImportControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSolutionDataAndSolutionImportResult);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerSolutionDataAndSolutionImportResult);
     final _path = r'/api/solution/import';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -173,11 +168,8 @@ class SolutionExportImportControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -190,13 +182,9 @@ class SolutionExportImportControllerApi {
     try {
       const _type = FullType(SolutionData);
       _bodyData = _serializers.serialize(solutionData, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -216,11 +204,13 @@ class SolutionExportImportControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SolutionImportResult),
-      ) as SolutionImportResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SolutionImportResult),
+                )
+                as SolutionImportResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -257,7 +247,7 @@ class SolutionExportImportControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SolutionValidationResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SolutionValidationResult>> validateSolution({ 
+  Future<Response<SolutionValidationResult>> validateSolution({
     required SolutionData solutionData,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -266,13 +256,13 @@ class SolutionExportImportControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSolutionDataAndSolutionValidationResult);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerSolutionDataAndSolutionValidationResult);
     final _path = r'/api/solution/validate';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -280,11 +270,8 @@ class SolutionExportImportControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -297,13 +284,9 @@ class SolutionExportImportControllerApi {
     try {
       const _type = FullType(SolutionData);
       _bodyData = _serializers.serialize(solutionData, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -323,11 +306,13 @@ class SolutionExportImportControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SolutionValidationResult),
-      ) as SolutionValidationResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SolutionValidationResult),
+                )
+                as SolutionValidationResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -349,5 +334,4 @@ class SolutionExportImportControllerApi {
       extra: _response.extra,
     );
   }
-
 }

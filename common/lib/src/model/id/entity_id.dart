@@ -15,10 +15,7 @@ abstract class EntityId extends HasUuid {
     if (json.containsKey('entityType') && json.containsKey('id')) {
       var entityType = entityTypeFromString(json['entityType']);
       String uuid = json['id'];
-      return EntityId.fromTypeAndUuid(
-        entityType,
-        uuid,
-      );
+      return EntityId.fromTypeAndUuid(entityType, uuid);
     } else {
       throw FormatException('Missing entityType or id!');
     }
@@ -111,8 +108,7 @@ abstract class EntityId extends HasUuid {
 
 class TenantId extends EntityId {
   TenantId(String id) : super(EntityType.TENANT, id);
-  factory TenantId.fromJson(Map<String, dynamic> json) =>
-      TenantId(json['id']);
+  factory TenantId.fromJson(Map<String, dynamic> json) => TenantId(json['id']);
 }
 
 class TenantProfileId extends EntityId {
@@ -236,14 +232,13 @@ class NotificationTargetId extends EntityId {
 
 class NotificationTemplateId extends EntityId {
   NotificationTemplateId(String id)
-      : super(EntityType.NOTIFICATION_TEMPLATE, id);
+    : super(EntityType.NOTIFICATION_TEMPLATE, id);
   factory NotificationTemplateId.fromJson(Map<String, dynamic> json) =>
       NotificationTemplateId(json['id']);
 }
 
 class NotificationRequestId extends EntityId {
-  NotificationRequestId(String id)
-      : super(EntityType.NOTIFICATION_REQUEST, id);
+  NotificationRequestId(String id) : super(EntityType.NOTIFICATION_REQUEST, id);
   factory NotificationRequestId.fromJson(Map<String, dynamic> json) =>
       NotificationRequestId(json['id']);
 }
@@ -292,14 +287,12 @@ class AiModelId extends EntityId {
 
 class ApiKeyId extends EntityId {
   ApiKeyId(String id) : super(EntityType.API_KEY, id);
-  factory ApiKeyId.fromJson(Map<String, dynamic> json) =>
-      ApiKeyId(json['id']);
+  factory ApiKeyId.fromJson(Map<String, dynamic> json) => ApiKeyId(json['id']);
 }
 
 class DomainId extends EntityId {
   DomainId(String id) : super(EntityType.DOMAIN, id);
-  factory DomainId.fromJson(Map<String, dynamic> json) =>
-      DomainId(json['id']);
+  factory DomainId.fromJson(Map<String, dynamic> json) => DomainId(json['id']);
 }
 
 class MobileAppId extends EntityId {

@@ -14,13 +14,10 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AiChatControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -28,10 +25,10 @@ class AiChatControllerApi {
   const AiChatControllerApi(this._dio, [this._serializers]);
 
   /// createChat
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -41,7 +38,7 @@ class AiChatControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> createChat({ 
+  Future<Response<JsonObject>> createChat({
     JsonObject? body,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,9 +51,7 @@ class AiChatControllerApi {
     final _path = r'/api/ai/chats';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -64,11 +59,8 @@ class AiChatControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -80,13 +72,9 @@ class AiChatControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -106,11 +94,13 @@ class AiChatControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -134,10 +124,10 @@ class AiChatControllerApi {
   }
 
   /// deleteChat
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [chatId] 
+  /// * [chatId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -147,7 +137,7 @@ class AiChatControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteChat({ 
+  Future<Response<void>> deleteChat({
     required String chatId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -157,12 +147,19 @@ class AiChatControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/chats/{chatId}'.replaceAll('{' r'chatId' '}', encodeQueryParameter(_serializers, chatId, const FullType(String)).toString());
+    final _path = r'/api/ai/chats/{chatId}'.replaceAll(
+      '{'
+      r'chatId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        chatId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -170,11 +167,8 @@ class AiChatControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -193,10 +187,10 @@ class AiChatControllerApi {
   }
 
   /// getChatMessages
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [chatId] 
+  /// * [chatId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -206,7 +200,7 @@ class AiChatControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getChatMessages({ 
+  Future<Response<JsonObject>> getChatMessages({
     required String chatId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -216,12 +210,19 @@ class AiChatControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/chats/{chatId}/messages'.replaceAll('{' r'chatId' '}', encodeQueryParameter(_serializers, chatId, const FullType(String)).toString());
+    final _path = r'/api/ai/chats/{chatId}/messages'.replaceAll(
+      '{'
+      r'chatId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        chatId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -229,11 +230,8 @@ class AiChatControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -252,11 +250,13 @@ class AiChatControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -280,7 +280,7 @@ class AiChatControllerApi {
   }
 
   /// listChats
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -292,7 +292,7 @@ class AiChatControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> listChats({ 
+  Future<Response<JsonObject>> listChats({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -304,9 +304,7 @@ class AiChatControllerApi {
     final _path = r'/api/ai/chats';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -314,11 +312,8 @@ class AiChatControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -337,11 +332,13 @@ class AiChatControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -365,12 +362,12 @@ class AiChatControllerApi {
   }
 
   /// resumeChat
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [chatId] 
-  /// * [xAuthorization] 
-  /// * [acceptLanguage] 
+  /// * [chatId]
+  /// * [xAuthorization]
+  /// * [acceptLanguage]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -380,7 +377,7 @@ class AiChatControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<JsonObject>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<JsonObject>>> resumeChat({ 
+  Future<Response<BuiltList<JsonObject>>> resumeChat({
     required String chatId,
     required String xAuthorization,
     String? acceptLanguage,
@@ -391,8 +388,18 @@ class AiChatControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfJsonObject);
-    final _path = r'/api/ai/chats/{chatId}/resume'.replaceAll('{' r'chatId' '}', encodeQueryParameter(_serializers, chatId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfJsonObject);
+    final _path = r'/api/ai/chats/{chatId}/resume'.replaceAll(
+      '{'
+      r'chatId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        chatId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -407,11 +414,8 @@ class AiChatControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -430,11 +434,15 @@ class AiChatControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(JsonObject)]),
-      ) as BuiltList<JsonObject>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(JsonObject),
+                  ]),
+                )
+                as BuiltList<JsonObject>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -458,13 +466,13 @@ class AiChatControllerApi {
   }
 
   /// sendChatMessage
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [chatId] 
-  /// * [xAuthorization] 
-  /// * [body] 
-  /// * [acceptLanguage] 
+  /// * [chatId]
+  /// * [xAuthorization]
+  /// * [body]
+  /// * [acceptLanguage]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -474,7 +482,7 @@ class AiChatControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<JsonObject>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<JsonObject>>> sendChatMessage({ 
+  Future<Response<BuiltList<JsonObject>>> sendChatMessage({
     required String chatId,
     required String xAuthorization,
     JsonObject? body,
@@ -486,8 +494,18 @@ class AiChatControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfJsonObject);
-    final _path = r'/api/ai/chats/{chatId}/messages'.replaceAll('{' r'chatId' '}', encodeQueryParameter(_serializers, chatId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfJsonObject);
+    final _path = r'/api/ai/chats/{chatId}/messages'.replaceAll(
+      '{'
+      r'chatId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        chatId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -502,11 +520,8 @@ class AiChatControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -518,13 +533,9 @@ class AiChatControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -544,11 +555,15 @@ class AiChatControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(JsonObject)]),
-      ) as BuiltList<JsonObject>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(JsonObject),
+                  ]),
+                )
+                as BuiltList<JsonObject>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -572,11 +587,11 @@ class AiChatControllerApi {
   }
 
   /// updateChat
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [chatId] 
-  /// * [body] 
+  /// * [chatId]
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -586,7 +601,7 @@ class AiChatControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> updateChat({ 
+  Future<Response<void>> updateChat({
     required String chatId,
     JsonObject? body,
     CancelToken? cancelToken,
@@ -597,12 +612,19 @@ class AiChatControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/chats/{chatId}'.replaceAll('{' r'chatId' '}', encodeQueryParameter(_serializers, chatId, const FullType(String)).toString());
+    final _path = r'/api/ai/chats/{chatId}'.replaceAll(
+      '{'
+      r'chatId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        chatId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'PATCH',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -610,11 +632,8 @@ class AiChatControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -626,13 +645,9 @@ class AiChatControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -650,5 +665,4 @@ class AiChatControllerApi {
 
     return _response;
   }
-
 }

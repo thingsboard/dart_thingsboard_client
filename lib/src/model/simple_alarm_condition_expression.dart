@@ -20,11 +20,17 @@ part 'simple_alarm_condition_expression.g.dart';
 /// SimpleAlarmConditionExpression
 ///
 /// Properties:
-/// * [type] 
-/// * [filters] 
-/// * [operation] 
+/// * [type]
+/// * [filters]
+/// * [operation]
 @BuiltValue()
-abstract class SimpleAlarmConditionExpression implements AlarmConditionExpression, Built<SimpleAlarmConditionExpression, SimpleAlarmConditionExpressionBuilder> {
+abstract class SimpleAlarmConditionExpression
+    implements
+        AlarmConditionExpression,
+        Built<
+          SimpleAlarmConditionExpression,
+          SimpleAlarmConditionExpressionBuilder
+        > {
   @BuiltValueField(wireName: r'filters')
   BuiltList<AlarmConditionFilter> get filters;
 
@@ -34,18 +40,25 @@ abstract class SimpleAlarmConditionExpression implements AlarmConditionExpressio
 
   SimpleAlarmConditionExpression._();
 
-  factory SimpleAlarmConditionExpression([void updates(SimpleAlarmConditionExpressionBuilder b)]) = _$SimpleAlarmConditionExpression;
+  factory SimpleAlarmConditionExpression([
+    void updates(SimpleAlarmConditionExpressionBuilder b),
+  ]) = _$SimpleAlarmConditionExpression;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SimpleAlarmConditionExpressionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SimpleAlarmConditionExpression> get serializer => _$SimpleAlarmConditionExpressionSerializer();
+  static Serializer<SimpleAlarmConditionExpression> get serializer =>
+      _$SimpleAlarmConditionExpressionSerializer();
 }
 
-class _$SimpleAlarmConditionExpressionSerializer implements PrimitiveSerializer<SimpleAlarmConditionExpression> {
+class _$SimpleAlarmConditionExpressionSerializer
+    implements PrimitiveSerializer<SimpleAlarmConditionExpression> {
   @override
-  final Iterable<Type> types = const [SimpleAlarmConditionExpression, _$SimpleAlarmConditionExpression];
+  final Iterable<Type> types = const [
+    SimpleAlarmConditionExpression,
+    _$SimpleAlarmConditionExpression,
+  ];
 
   @override
   final String wireName = r'SimpleAlarmConditionExpression';
@@ -70,7 +83,9 @@ class _$SimpleAlarmConditionExpressionSerializer implements PrimitiveSerializer<
     yield r'filters';
     yield serializers.serialize(
       object.filters,
-      specifiedType: const FullType(BuiltList, [FullType(AlarmConditionFilter)]),
+      specifiedType: const FullType(BuiltList, [
+        FullType(AlarmConditionFilter),
+      ]),
     );
   }
 
@@ -80,7 +95,11 @@ class _$SimpleAlarmConditionExpressionSerializer implements PrimitiveSerializer<
     SimpleAlarmConditionExpression object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -96,25 +115,35 @@ class _$SimpleAlarmConditionExpressionSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.operation = valueDes;
           break;
         case r'filters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(AlarmConditionFilter)]),
-          ) as BuiltList<AlarmConditionFilter>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(AlarmConditionFilter),
+                    ]),
+                  )
+                  as BuiltList<AlarmConditionFilter>;
           result.filters.replace(valueDes);
           break;
         default:
@@ -145,5 +174,3 @@ class _$SimpleAlarmConditionExpressionSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

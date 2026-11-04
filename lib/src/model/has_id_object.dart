@@ -17,7 +17,7 @@ part 'has_id_object.g.dart';
 /// HasIdObject
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 @BuiltValue()
 abstract class HasIdObject implements Built<HasIdObject, HasIdObjectBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -61,7 +61,11 @@ class _$HasIdObjectSerializer implements PrimitiveSerializer<HasIdObject> {
     HasIdObject object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -77,10 +81,12 @@ class _$HasIdObjectSerializer implements PrimitiveSerializer<HasIdObject> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
@@ -112,5 +118,3 @@ class _$HasIdObjectSerializer implements PrimitiveSerializer<HasIdObject> {
     return result.build();
   }
 }
-
-

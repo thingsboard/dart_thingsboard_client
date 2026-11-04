@@ -17,12 +17,13 @@ part 'alarm_assignee.g.dart';
 /// AlarmAssignee
 ///
 /// Properties:
-/// * [id] 
-/// * [firstName] 
-/// * [lastName] 
-/// * [email] 
+/// * [id]
+/// * [firstName]
+/// * [lastName]
+/// * [email]
 @BuiltValue()
-abstract class AlarmAssignee implements Built<AlarmAssignee, AlarmAssigneeBuilder> {
+abstract class AlarmAssignee
+    implements Built<AlarmAssignee, AlarmAssigneeBuilder> {
   @BuiltValueField(wireName: r'id')
   UserId? get id;
 
@@ -37,13 +38,15 @@ abstract class AlarmAssignee implements Built<AlarmAssignee, AlarmAssigneeBuilde
 
   AlarmAssignee._();
 
-  factory AlarmAssignee([void updates(AlarmAssigneeBuilder b)]) = _$AlarmAssignee;
+  factory AlarmAssignee([void updates(AlarmAssigneeBuilder b)]) =
+      _$AlarmAssignee;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmAssigneeBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmAssignee> get serializer => _$AlarmAssigneeSerializer();
+  static Serializer<AlarmAssignee> get serializer =>
+      _$AlarmAssigneeSerializer();
 }
 
 class _$AlarmAssigneeSerializer implements PrimitiveSerializer<AlarmAssignee> {
@@ -94,7 +97,11 @@ class _$AlarmAssigneeSerializer implements PrimitiveSerializer<AlarmAssignee> {
     AlarmAssignee object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,34 +117,42 @@ class _$AlarmAssigneeSerializer implements PrimitiveSerializer<AlarmAssignee> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'firstName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.firstName = valueDes;
           break;
         case r'lastName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.lastName = valueDes;
           break;
         case r'email':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.email = valueDes;
           break;
@@ -169,5 +184,3 @@ class _$AlarmAssigneeSerializer implements PrimitiveSerializer<AlarmAssignee> {
     return result.build();
   }
 }
-
-

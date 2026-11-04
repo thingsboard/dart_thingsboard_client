@@ -16,15 +16,16 @@ part 'version_load_config.g.dart';
 /// VersionLoadConfig
 ///
 /// Properties:
-/// * [loadRelations] 
-/// * [loadAttributes] 
-/// * [loadCredentials] 
-/// * [loadCalculatedFields] 
-/// * [loadPermissions] 
-/// * [loadGroupEntities] 
-/// * [autoGenerateIntegrationKey] 
+/// * [loadRelations]
+/// * [loadAttributes]
+/// * [loadCredentials]
+/// * [loadCalculatedFields]
+/// * [loadPermissions]
+/// * [loadGroupEntities]
+/// * [autoGenerateIntegrationKey]
 @BuiltValue()
-abstract class VersionLoadConfig implements Built<VersionLoadConfig, VersionLoadConfigBuilder> {
+abstract class VersionLoadConfig
+    implements Built<VersionLoadConfig, VersionLoadConfigBuilder> {
   @BuiltValueField(wireName: r'loadRelations')
   bool? get loadRelations;
 
@@ -48,16 +49,19 @@ abstract class VersionLoadConfig implements Built<VersionLoadConfig, VersionLoad
 
   VersionLoadConfig._();
 
-  factory VersionLoadConfig([void updates(VersionLoadConfigBuilder b)]) = _$VersionLoadConfig;
+  factory VersionLoadConfig([void updates(VersionLoadConfigBuilder b)]) =
+      _$VersionLoadConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(VersionLoadConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<VersionLoadConfig> get serializer => _$VersionLoadConfigSerializer();
+  static Serializer<VersionLoadConfig> get serializer =>
+      _$VersionLoadConfigSerializer();
 }
 
-class _$VersionLoadConfigSerializer implements PrimitiveSerializer<VersionLoadConfig> {
+class _$VersionLoadConfigSerializer
+    implements PrimitiveSerializer<VersionLoadConfig> {
   @override
   final Iterable<Type> types = const [VersionLoadConfig, _$VersionLoadConfig];
 
@@ -126,7 +130,11 @@ class _$VersionLoadConfigSerializer implements PrimitiveSerializer<VersionLoadCo
     VersionLoadConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -142,58 +150,72 @@ class _$VersionLoadConfigSerializer implements PrimitiveSerializer<VersionLoadCo
       final value = serializedList[i + 1];
       switch (key) {
         case r'loadRelations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadRelations = valueDes;
           break;
         case r'loadAttributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadAttributes = valueDes;
           break;
         case r'loadCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadCredentials = valueDes;
           break;
         case r'loadCalculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadCalculatedFields = valueDes;
           break;
         case r'loadPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadPermissions = valueDes;
           break;
         case r'loadGroupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadGroupEntities = valueDes;
           break;
         case r'autoGenerateIntegrationKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.autoGenerateIntegrationKey = valueDes;
           break;
@@ -225,5 +247,3 @@ class _$VersionLoadConfigSerializer implements PrimitiveSerializer<VersionLoadCo
     return result.build();
   }
 }
-
-

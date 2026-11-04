@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agent_app_event_action_type.g.dart';
 
 class AgentAppEventActionType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'INSTALL')
   static const AgentAppEventActionType INSTALL = _$INSTALL;
   @BuiltValueEnumConst(wireName: r'UPDATE')
@@ -31,11 +30,13 @@ class AgentAppEventActionType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'AGENT_UPGRADE')
   static const AgentAppEventActionType AGENT_UPGRADE = _$AGENT_UPGRADE;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentAppEventActionType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentAppEventActionType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentAppEventActionType> get serializer => _$agentAppEventActionTypeSerializer;
+  static Serializer<AgentAppEventActionType> get serializer =>
+      _$agentAppEventActionTypeSerializer;
 
-  const AgentAppEventActionType._(String name): super(name);
+  const AgentAppEventActionType._(String name) : super(name);
 
   static BuiltSet<AgentAppEventActionType> get values => _$values;
   static AgentAppEventActionType valueOf(String name) => _$valueOf(name);
@@ -47,5 +48,5 @@ class AgentAppEventActionType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AgentAppEventActionTypeMixin = Object with _$AgentAppEventActionTypeMixin;
-
+abstract class AgentAppEventActionTypeMixin = Object
+    with _$AgentAppEventActionTypeMixin;

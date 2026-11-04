@@ -32,13 +32,18 @@ part 'scheduler_event_with_customer_info.g.dart';
 /// * [type] - scheduler event type
 /// * [schedule] - a JSON value with schedule time configuration
 /// * [enabled] - Enable/disable scheduler
-/// * [version] 
+/// * [version]
 /// * [customerTitle] - Title of the customer
 /// * [customerIsPublic] - Parameter that specifies if customer is public
-/// * [timestamps] 
+/// * [timestamps]
 /// * [ownerId] - JSON object with Customer or Tenant Id
 @BuiltValue()
-abstract class SchedulerEventWithCustomerInfo implements Built<SchedulerEventWithCustomerInfo, SchedulerEventWithCustomerInfoBuilder> {
+abstract class SchedulerEventWithCustomerInfo
+    implements
+        Built<
+          SchedulerEventWithCustomerInfo,
+          SchedulerEventWithCustomerInfoBuilder
+        > {
   /// JSON object with the scheduler event Id. Specify this field to update the scheduler event. Referencing non-existing scheduler event Id will cause error. Omit this field to create new scheduler event
   @BuiltValueField(wireName: r'id')
   SchedulerEventId? get id;
@@ -99,18 +104,25 @@ abstract class SchedulerEventWithCustomerInfo implements Built<SchedulerEventWit
 
   SchedulerEventWithCustomerInfo._();
 
-  factory SchedulerEventWithCustomerInfo([void updates(SchedulerEventWithCustomerInfoBuilder b)]) = _$SchedulerEventWithCustomerInfo;
+  factory SchedulerEventWithCustomerInfo([
+    void updates(SchedulerEventWithCustomerInfoBuilder b),
+  ]) = _$SchedulerEventWithCustomerInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SchedulerEventWithCustomerInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SchedulerEventWithCustomerInfo> get serializer => _$SchedulerEventWithCustomerInfoSerializer();
+  static Serializer<SchedulerEventWithCustomerInfo> get serializer =>
+      _$SchedulerEventWithCustomerInfoSerializer();
 }
 
-class _$SchedulerEventWithCustomerInfoSerializer implements PrimitiveSerializer<SchedulerEventWithCustomerInfo> {
+class _$SchedulerEventWithCustomerInfoSerializer
+    implements PrimitiveSerializer<SchedulerEventWithCustomerInfo> {
   @override
-  final Iterable<Type> types = const [SchedulerEventWithCustomerInfo, _$SchedulerEventWithCustomerInfo];
+  final Iterable<Type> types = const [
+    SchedulerEventWithCustomerInfo,
+    _$SchedulerEventWithCustomerInfo,
+  ];
 
   @override
   final String wireName = r'SchedulerEventWithCustomerInfo';
@@ -233,7 +245,11 @@ class _$SchedulerEventWithCustomerInfoSerializer implements PrimitiveSerializer<
     SchedulerEventWithCustomerInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -249,122 +265,154 @@ class _$SchedulerEventWithCustomerInfoSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SchedulerEventId),
-          ) as SchedulerEventId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SchedulerEventId),
+                  )
+                  as SchedulerEventId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'originatorId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.originatorId = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'schedule':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.schedule = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'customerTitle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.customerTitle = valueDes;
           break;
         case r'customerIsPublic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.customerIsPublic = valueDes;
           break;
         case r'timestamps':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(int)]),
-          ) as BuiltList<int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltList<int>?;
           if (valueDes == null) continue;
           result.timestamps.replace(valueDes);
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
@@ -396,5 +444,3 @@ class _$SchedulerEventWithCustomerInfoSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

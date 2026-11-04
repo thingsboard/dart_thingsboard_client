@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'authority.g.dart';
 
 class Authority extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SYS_ADMIN')
   static const Authority SYS_ADMIN = _$SYS_ADMIN;
   @BuiltValueEnumConst(wireName: r'TENANT_ADMIN')
@@ -33,7 +32,7 @@ class Authority extends EnumClass {
 
   static Serializer<Authority> get serializer => _$authoritySerializer;
 
-  const Authority._(String name): super(name);
+  const Authority._(String name) : super(name);
 
   static BuiltSet<Authority> get values => _$values;
   static Authority valueOf(String name) => _$valueOf(name);
@@ -46,4 +45,3 @@ class Authority extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AuthorityMixin = Object with _$AuthorityMixin;
-

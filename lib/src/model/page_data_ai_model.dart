@@ -23,7 +23,8 @@ part 'page_data_ai_model.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataAiModel implements Built<PageDataAiModel, PageDataAiModelBuilder> {
+abstract class PageDataAiModel
+    implements Built<PageDataAiModel, PageDataAiModelBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<AiModel>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataAiModel implements Built<PageDataAiModel, PageDataAiModel
 
   PageDataAiModel._();
 
-  factory PageDataAiModel([void updates(PageDataAiModelBuilder b)]) = _$PageDataAiModel;
+  factory PageDataAiModel([void updates(PageDataAiModelBuilder b)]) =
+      _$PageDataAiModel;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataAiModelBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataAiModel> get serializer => _$PageDataAiModelSerializer();
+  static Serializer<PageDataAiModel> get serializer =>
+      _$PageDataAiModelSerializer();
 }
 
-class _$PageDataAiModelSerializer implements PrimitiveSerializer<PageDataAiModel> {
+class _$PageDataAiModelSerializer
+    implements PrimitiveSerializer<PageDataAiModel> {
   @override
   final Iterable<Type> types = const [PageDataAiModel, _$PageDataAiModel];
 
@@ -99,7 +103,11 @@ class _$PageDataAiModelSerializer implements PrimitiveSerializer<PageDataAiModel
     PageDataAiModel object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataAiModelSerializer implements PrimitiveSerializer<PageDataAiModel
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AiModel)]),
-          ) as BuiltList<AiModel>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AiModel),
+                    ]),
+                  )
+                  as BuiltList<AiModel>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataAiModelSerializer implements PrimitiveSerializer<PageDataAiModel
     return result.build();
   }
 }
-
-

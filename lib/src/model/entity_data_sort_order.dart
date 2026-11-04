@@ -18,10 +18,11 @@ part 'entity_data_sort_order.g.dart';
 /// EntityDataSortOrder
 ///
 /// Properties:
-/// * [key] 
-/// * [direction] 
+/// * [key]
+/// * [direction]
 @BuiltValue()
-abstract class EntityDataSortOrder implements Built<EntityDataSortOrder, EntityDataSortOrderBuilder> {
+abstract class EntityDataSortOrder
+    implements Built<EntityDataSortOrder, EntityDataSortOrderBuilder> {
   @BuiltValueField(wireName: r'key')
   EntityKey? get key;
 
@@ -31,18 +32,24 @@ abstract class EntityDataSortOrder implements Built<EntityDataSortOrder, EntityD
 
   EntityDataSortOrder._();
 
-  factory EntityDataSortOrder([void updates(EntityDataSortOrderBuilder b)]) = _$EntityDataSortOrder;
+  factory EntityDataSortOrder([void updates(EntityDataSortOrderBuilder b)]) =
+      _$EntityDataSortOrder;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityDataSortOrderBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityDataSortOrder> get serializer => _$EntityDataSortOrderSerializer();
+  static Serializer<EntityDataSortOrder> get serializer =>
+      _$EntityDataSortOrderSerializer();
 }
 
-class _$EntityDataSortOrderSerializer implements PrimitiveSerializer<EntityDataSortOrder> {
+class _$EntityDataSortOrderSerializer
+    implements PrimitiveSerializer<EntityDataSortOrder> {
   @override
-  final Iterable<Type> types = const [EntityDataSortOrder, _$EntityDataSortOrder];
+  final Iterable<Type> types = const [
+    EntityDataSortOrder,
+    _$EntityDataSortOrder,
+  ];
 
   @override
   final String wireName = r'EntityDataSortOrder';
@@ -74,7 +81,11 @@ class _$EntityDataSortOrderSerializer implements PrimitiveSerializer<EntityDataS
     EntityDataSortOrder object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,18 +101,22 @@ class _$EntityDataSortOrderSerializer implements PrimitiveSerializer<EntityDataS
       final value = serializedList[i + 1];
       switch (key) {
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityKey),
-          ) as EntityKey?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityKey),
+                  )
+                  as EntityKey?;
           if (valueDes == null) continue;
           result.key.replace(valueDes);
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Direction),
-          ) as Direction?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Direction),
+                  )
+                  as Direction?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -133,5 +148,3 @@ class _$EntityDataSortOrderSerializer implements PrimitiveSerializer<EntityDataS
     return result.build();
   }
 }
-
-

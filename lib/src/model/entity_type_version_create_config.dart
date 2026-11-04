@@ -18,17 +18,22 @@ part 'entity_type_version_create_config.g.dart';
 /// EntityTypeVersionCreateConfig
 ///
 /// Properties:
-/// * [saveRelations] 
-/// * [saveAttributes] 
-/// * [saveCredentials] 
-/// * [saveCalculatedFields] 
-/// * [savePermissions] 
-/// * [saveGroupEntities] 
-/// * [syncStrategy] 
-/// * [entityIds] 
-/// * [allEntities] 
+/// * [saveRelations]
+/// * [saveAttributes]
+/// * [saveCredentials]
+/// * [saveCalculatedFields]
+/// * [savePermissions]
+/// * [saveGroupEntities]
+/// * [syncStrategy]
+/// * [entityIds]
+/// * [allEntities]
 @BuiltValue()
-abstract class EntityTypeVersionCreateConfig implements Built<EntityTypeVersionCreateConfig, EntityTypeVersionCreateConfigBuilder> {
+abstract class EntityTypeVersionCreateConfig
+    implements
+        Built<
+          EntityTypeVersionCreateConfig,
+          EntityTypeVersionCreateConfigBuilder
+        > {
   @BuiltValueField(wireName: r'saveRelations')
   bool? get saveRelations;
 
@@ -59,18 +64,25 @@ abstract class EntityTypeVersionCreateConfig implements Built<EntityTypeVersionC
 
   EntityTypeVersionCreateConfig._();
 
-  factory EntityTypeVersionCreateConfig([void updates(EntityTypeVersionCreateConfigBuilder b)]) = _$EntityTypeVersionCreateConfig;
+  factory EntityTypeVersionCreateConfig([
+    void updates(EntityTypeVersionCreateConfigBuilder b),
+  ]) = _$EntityTypeVersionCreateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityTypeVersionCreateConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityTypeVersionCreateConfig> get serializer => _$EntityTypeVersionCreateConfigSerializer();
+  static Serializer<EntityTypeVersionCreateConfig> get serializer =>
+      _$EntityTypeVersionCreateConfigSerializer();
 }
 
-class _$EntityTypeVersionCreateConfigSerializer implements PrimitiveSerializer<EntityTypeVersionCreateConfig> {
+class _$EntityTypeVersionCreateConfigSerializer
+    implements PrimitiveSerializer<EntityTypeVersionCreateConfig> {
   @override
-  final Iterable<Type> types = const [EntityTypeVersionCreateConfig, _$EntityTypeVersionCreateConfig];
+  final Iterable<Type> types = const [
+    EntityTypeVersionCreateConfig,
+    _$EntityTypeVersionCreateConfig,
+  ];
 
   @override
   final String wireName = r'EntityTypeVersionCreateConfig';
@@ -151,7 +163,11 @@ class _$EntityTypeVersionCreateConfigSerializer implements PrimitiveSerializer<E
     EntityTypeVersionCreateConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -167,74 +183,94 @@ class _$EntityTypeVersionCreateConfigSerializer implements PrimitiveSerializer<E
       final value = serializedList[i + 1];
       switch (key) {
         case r'saveRelations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveRelations = valueDes;
           break;
         case r'saveAttributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveAttributes = valueDes;
           break;
         case r'saveCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveCredentials = valueDes;
           break;
         case r'saveCalculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveCalculatedFields = valueDes;
           break;
         case r'savePermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.savePermissions = valueDes;
           break;
         case r'saveGroupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveGroupEntities = valueDes;
           break;
         case r'syncStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SyncStrategy),
-          ) as SyncStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SyncStrategy),
+                  )
+                  as SyncStrategy?;
           if (valueDes == null) continue;
           result.syncStrategy = valueDes;
           break;
         case r'entityIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.entityIds.replace(valueDes);
           break;
         case r'allEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.allEntities = valueDes;
           break;
@@ -266,5 +302,3 @@ class _$EntityTypeVersionCreateConfigSerializer implements PrimitiveSerializer<E
     return result.build();
   }
 }
-
-

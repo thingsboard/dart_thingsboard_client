@@ -9,17 +9,14 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/page_data_edge_event.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class EdgeEventControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -27,7 +24,7 @@ class EdgeEventControllerApi {
   const EdgeEventControllerApi(this._dio, [this._serializers]);
 
   /// Get Edge Events (getEdgeEvents)
-  /// Returns a page of edge events for the requested edge. You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details. 
+  /// Returns a page of edge events for the requested edge. You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.
   ///
   /// Parameters:
   /// * [edgeId] - A string value representing the edge id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
@@ -47,7 +44,7 @@ class EdgeEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdgeEvent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdgeEvent>> getEdgeEvents({ 
+  Future<Response<PageDataEdgeEvent>> getEdgeEvents({
     required String edgeId,
     required int pageSize,
     required int page,
@@ -63,13 +60,21 @@ class EdgeEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdgeEvent);
-    final _path = r'/api/edge/{edgeId}/events'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdgeEvent);
+    final _path = r'/api/edge/{edgeId}/events'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -77,11 +82,8 @@ class EdgeEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -89,13 +91,42 @@ class EdgeEventControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (startTime != null) r'startTime': encodeQueryParameter(_serializers, startTime, const FullType(int)),
-      if (endTime != null) r'endTime': encodeQueryParameter(_serializers, endTime, const FullType(int)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (startTime != null)
+        r'startTime': encodeQueryParameter(
+          _serializers,
+          startTime,
+          const FullType(int),
+        ),
+      if (endTime != null)
+        r'endTime': encodeQueryParameter(
+          _serializers,
+          endTime,
+          const FullType(int),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -111,11 +142,13 @@ class EdgeEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdgeEvent),
-      ) as PageDataEdgeEvent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdgeEvent),
+                )
+                as PageDataEdgeEvent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -137,5 +170,4 @@ class EdgeEventControllerApi {
       extra: _response.extra,
     );
   }
-
 }

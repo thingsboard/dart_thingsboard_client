@@ -23,10 +23,11 @@ part 'entity_relation.g.dart';
 /// * [to] - JSON object with [to] Entity Id.
 /// * [type] - String value of relation type.
 /// * [typeGroup] - Represents the type group of the relation.
-/// * [version] 
+/// * [version]
 /// * [additionalInfo] - Additional parameters of the relation.
 @BuiltValue()
-abstract class EntityRelation implements Built<EntityRelation, EntityRelationBuilder> {
+abstract class EntityRelation
+    implements Built<EntityRelation, EntityRelationBuilder> {
   /// JSON object with [from] Entity Id.
   @BuiltValueField(wireName: r'from')
   EntityId get from;
@@ -53,16 +54,19 @@ abstract class EntityRelation implements Built<EntityRelation, EntityRelationBui
 
   EntityRelation._();
 
-  factory EntityRelation([void updates(EntityRelationBuilder b)]) = _$EntityRelation;
+  factory EntityRelation([void updates(EntityRelationBuilder b)]) =
+      _$EntityRelation;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityRelationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityRelation> get serializer => _$EntityRelationSerializer();
+  static Serializer<EntityRelation> get serializer =>
+      _$EntityRelationSerializer();
 }
 
-class _$EntityRelationSerializer implements PrimitiveSerializer<EntityRelation> {
+class _$EntityRelationSerializer
+    implements PrimitiveSerializer<EntityRelation> {
   @override
   final Iterable<Type> types = const [EntityRelation, _$EntityRelation];
 
@@ -116,7 +120,11 @@ class _$EntityRelationSerializer implements PrimitiveSerializer<EntityRelation> 
     EntityRelation object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -132,46 +140,58 @@ class _$EntityRelationSerializer implements PrimitiveSerializer<EntityRelation> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'from':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityId),
-          ) as EntityId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityId),
+                  )
+                  as EntityId;
           result.from = valueDes;
           break;
         case r'to':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityId),
-          ) as EntityId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityId),
+                  )
+                  as EntityId;
           result.to = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'typeGroup':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RelationTypeGroup),
-          ) as RelationTypeGroup;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RelationTypeGroup),
+                  )
+                  as RelationTypeGroup;
           result.typeGroup = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
@@ -203,5 +223,3 @@ class _$EntityRelationSerializer implements PrimitiveSerializer<EntityRelation> 
     return result.build();
   }
 }
-
-

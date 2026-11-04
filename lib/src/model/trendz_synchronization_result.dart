@@ -18,12 +18,14 @@ part 'trendz_synchronization_result.g.dart';
 /// TrendzSynchronizationResult
 ///
 /// Properties:
-/// * [version] 
-/// * [updatedTs] 
-/// * [type] 
-/// * [status] 
+/// * [version]
+/// * [updatedTs]
+/// * [type]
+/// * [status]
 @BuiltValue()
-abstract class TrendzSynchronizationResult implements Built<TrendzSynchronizationResult, TrendzSynchronizationResultBuilder> {
+abstract class TrendzSynchronizationResult
+    implements
+        Built<TrendzSynchronizationResult, TrendzSynchronizationResultBuilder> {
   @BuiltValueField(wireName: r'version')
   String? get version;
 
@@ -40,18 +42,25 @@ abstract class TrendzSynchronizationResult implements Built<TrendzSynchronizatio
 
   TrendzSynchronizationResult._();
 
-  factory TrendzSynchronizationResult([void updates(TrendzSynchronizationResultBuilder b)]) = _$TrendzSynchronizationResult;
+  factory TrendzSynchronizationResult([
+    void updates(TrendzSynchronizationResultBuilder b),
+  ]) = _$TrendzSynchronizationResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TrendzSynchronizationResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TrendzSynchronizationResult> get serializer => _$TrendzSynchronizationResultSerializer();
+  static Serializer<TrendzSynchronizationResult> get serializer =>
+      _$TrendzSynchronizationResultSerializer();
 }
 
-class _$TrendzSynchronizationResultSerializer implements PrimitiveSerializer<TrendzSynchronizationResult> {
+class _$TrendzSynchronizationResultSerializer
+    implements PrimitiveSerializer<TrendzSynchronizationResult> {
   @override
-  final Iterable<Type> types = const [TrendzSynchronizationResult, _$TrendzSynchronizationResult];
+  final Iterable<Type> types = const [
+    TrendzSynchronizationResult,
+    _$TrendzSynchronizationResult,
+  ];
 
   @override
   final String wireName = r'TrendzSynchronizationResult';
@@ -97,7 +106,11 @@ class _$TrendzSynchronizationResultSerializer implements PrimitiveSerializer<Tre
     TrendzSynchronizationResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,34 +126,46 @@ class _$TrendzSynchronizationResultSerializer implements PrimitiveSerializer<Tre
       final value = serializedList[i + 1];
       switch (key) {
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'updatedTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.updatedTs = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TrendzSynchronizationResultType),
-          ) as TrendzSynchronizationResultType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TrendzSynchronizationResultType,
+                    ),
+                  )
+                  as TrendzSynchronizationResultType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TrendzSynchronizationStatus),
-          ) as TrendzSynchronizationStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TrendzSynchronizationStatus,
+                    ),
+                  )
+                  as TrendzSynchronizationStatus?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
@@ -172,5 +197,3 @@ class _$TrendzSynchronizationResultSerializer implements PrimitiveSerializer<Tre
     return result.build();
   }
 }
-
-

@@ -19,17 +19,23 @@ part 'amazon_bedrock_chat_model_config.g.dart';
 /// AmazonBedrockChatModelConfig
 ///
 /// Properties:
-/// * [provider] 
-/// * [providerConfig] 
-/// * [modelId] 
-/// * [temperature] 
-/// * [topP] 
-/// * [maxOutputTokens] 
-/// * [timeoutSeconds] 
-/// * [maxRetries] 
-/// * [modelType] 
+/// * [provider]
+/// * [providerConfig]
+/// * [modelId]
+/// * [temperature]
+/// * [topP]
+/// * [maxOutputTokens]
+/// * [timeoutSeconds]
+/// * [maxRetries]
+/// * [modelType]
 @BuiltValue()
-abstract class AmazonBedrockChatModelConfig implements AiModelConfig, Built<AmazonBedrockChatModelConfig, AmazonBedrockChatModelConfigBuilder> {
+abstract class AmazonBedrockChatModelConfig
+    implements
+        AiModelConfig,
+        Built<
+          AmazonBedrockChatModelConfig,
+          AmazonBedrockChatModelConfigBuilder
+        > {
   @BuiltValueField(wireName: r'maxRetries')
   int? get maxRetries;
 
@@ -57,18 +63,25 @@ abstract class AmazonBedrockChatModelConfig implements AiModelConfig, Built<Amaz
 
   AmazonBedrockChatModelConfig._();
 
-  factory AmazonBedrockChatModelConfig([void updates(AmazonBedrockChatModelConfigBuilder b)]) = _$AmazonBedrockChatModelConfig;
+  factory AmazonBedrockChatModelConfig([
+    void updates(AmazonBedrockChatModelConfigBuilder b),
+  ]) = _$AmazonBedrockChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AmazonBedrockChatModelConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AmazonBedrockChatModelConfig> get serializer => _$AmazonBedrockChatModelConfigSerializer();
+  static Serializer<AmazonBedrockChatModelConfig> get serializer =>
+      _$AmazonBedrockChatModelConfigSerializer();
 }
 
-class _$AmazonBedrockChatModelConfigSerializer implements PrimitiveSerializer<AmazonBedrockChatModelConfig> {
+class _$AmazonBedrockChatModelConfigSerializer
+    implements PrimitiveSerializer<AmazonBedrockChatModelConfig> {
   @override
-  final Iterable<Type> types = const [AmazonBedrockChatModelConfig, _$AmazonBedrockChatModelConfig];
+  final Iterable<Type> types = const [
+    AmazonBedrockChatModelConfig,
+    _$AmazonBedrockChatModelConfig,
+  ];
 
   @override
   final String wireName = r'AmazonBedrockChatModelConfig';
@@ -143,7 +156,11 @@ class _$AmazonBedrockChatModelConfigSerializer implements PrimitiveSerializer<Am
     AmazonBedrockChatModelConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -159,71 +176,89 @@ class _$AmazonBedrockChatModelConfigSerializer implements PrimitiveSerializer<Am
       final value = serializedList[i + 1];
       switch (key) {
         case r'maxRetries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRetries = valueDes;
           break;
         case r'modelId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.modelId = valueDes;
           break;
         case r'provider':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.provider = valueDes;
           break;
         case r'temperature':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.temperature = valueDes;
           break;
         case r'timeoutSeconds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeoutSeconds = valueDes;
           break;
         case r'modelType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelType),
-          ) as AiModelType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelType),
+                  )
+                  as AiModelType?;
           if (valueDes == null) continue;
           result.modelType = valueDes;
           break;
         case r'providerConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AmazonBedrockProviderConfig),
-          ) as AmazonBedrockProviderConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AmazonBedrockProviderConfig),
+                  )
+                  as AmazonBedrockProviderConfig;
           result.providerConfig.replace(valueDes);
           break;
         case r'topP':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.topP = valueDes;
           break;
         case r'maxOutputTokens':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxOutputTokens = valueDes;
           break;
@@ -255,5 +290,3 @@ class _$AmazonBedrockChatModelConfigSerializer implements PrimitiveSerializer<Am
     return result.build();
   }
 }
-
-

@@ -21,7 +21,8 @@ part 'solution_export_response.g.dart';
 /// * [solution] - The exported solution data containing all requested entities grouped by type.
 /// * [warnings] - List of dependency warnings. Generated when exported entities reference other entities that are not included in the export (e.g. a device profile references a rule chain that was not selected for export).
 @BuiltValue()
-abstract class SolutionExportResponse implements Built<SolutionExportResponse, SolutionExportResponseBuilder> {
+abstract class SolutionExportResponse
+    implements Built<SolutionExportResponse, SolutionExportResponseBuilder> {
   /// The exported solution data containing all requested entities grouped by type.
   @BuiltValueField(wireName: r'solution')
   SolutionData? get solution;
@@ -32,18 +33,25 @@ abstract class SolutionExportResponse implements Built<SolutionExportResponse, S
 
   SolutionExportResponse._();
 
-  factory SolutionExportResponse([void updates(SolutionExportResponseBuilder b)]) = _$SolutionExportResponse;
+  factory SolutionExportResponse([
+    void updates(SolutionExportResponseBuilder b),
+  ]) = _$SolutionExportResponse;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SolutionExportResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SolutionExportResponse> get serializer => _$SolutionExportResponseSerializer();
+  static Serializer<SolutionExportResponse> get serializer =>
+      _$SolutionExportResponseSerializer();
 }
 
-class _$SolutionExportResponseSerializer implements PrimitiveSerializer<SolutionExportResponse> {
+class _$SolutionExportResponseSerializer
+    implements PrimitiveSerializer<SolutionExportResponse> {
   @override
-  final Iterable<Type> types = const [SolutionExportResponse, _$SolutionExportResponse];
+  final Iterable<Type> types = const [
+    SolutionExportResponse,
+    _$SolutionExportResponse,
+  ];
 
   @override
   final String wireName = r'SolutionExportResponse';
@@ -75,7 +83,11 @@ class _$SolutionExportResponseSerializer implements PrimitiveSerializer<Solution
     SolutionExportResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +103,24 @@ class _$SolutionExportResponseSerializer implements PrimitiveSerializer<Solution
       final value = serializedList[i + 1];
       switch (key) {
         case r'solution':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SolutionData),
-          ) as SolutionData?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SolutionData),
+                  )
+                  as SolutionData?;
           if (valueDes == null) continue;
           result.solution.replace(valueDes);
           break;
         case r'warnings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.warnings.replace(valueDes);
           break;
@@ -134,5 +152,3 @@ class _$SolutionExportResponseSerializer implements PrimitiveSerializer<Solution
     return result.build();
   }
 }
-
-

@@ -1141,7 +1141,6 @@ export 'package:thingsboard_client/src/model/x509_lw_m2_m_bootstrap_server_crede
 export 'package:thingsboard_client/src/model/year_interval.dart';
 export 'package:thingsboard_client/src/model/zone_group_configuration.dart';
 
-
 // Handwritten runtime facade
 // Note: hide clauses suppress names also exported by generated model types.
 // The generated model versions take precedence; facade types accessible via direct src/ imports.
@@ -1154,23 +1153,116 @@ export 'package:thingsboard_client/src/interceptor/interceptor_config.dart';
 export 'package:thingsboard_client/src/interceptor/key_intercept_config.dart';
 export 'package:thingsboard_client/src/model/constants.dart';
 export 'package:thingsboard_client/src/model/version_models.dart';
-export 'package:thingsboard_client/src/model/authority_enum.dart' hide Authority;
+export 'package:thingsboard_client/src/model/authority_enum.dart'
+    hide Authority;
 export 'package:thingsboard_client/src/model/login_models.dart';
 export 'package:thingsboard_client/src/model/user_models.dart';
 export 'package:thingsboard_client/src/model/page/page_data.dart';
 export 'package:thingsboard_client/src/model/page/page_link.dart';
-export 'package:thingsboard_client/src/model/page/sort_order.dart' hide Direction;
-export 'package:thingsboard_client/src/model/id/entity_id.dart' hide EntityId, TenantId, TenantProfileId, CustomerId, UserId, DashboardId, AssetId, DeviceId, DeviceProfileId, AssetProfileId, AlarmId, RuleChainId, RuleNodeId, EdgeId, EntityViewId, WidgetsBundleId, WidgetTypeId, ApiUsageStateId, TbResourceId, OtaPackageId, RpcId, QueueId, NotificationTargetId, NotificationTemplateId, NotificationRequestId, NotificationId, NotificationRuleId, CalculatedFieldId, QueueStatsId, Oauth2ClientId, AdminSettingsId, AiModelId, ApiKeyId, DomainId, MobileAppId, MobileAppBundleId, JobId;
-export 'package:thingsboard_client/src/model/id/entity_type_models.dart' hide EntityType;
+export 'package:thingsboard_client/src/model/page/sort_order.dart'
+    hide Direction;
+export 'package:thingsboard_client/src/model/id/entity_id.dart'
+    hide
+        EntityId,
+        TenantId,
+        TenantProfileId,
+        CustomerId,
+        UserId,
+        DashboardId,
+        AssetId,
+        DeviceId,
+        DeviceProfileId,
+        AssetProfileId,
+        AlarmId,
+        RuleChainId,
+        RuleNodeId,
+        EdgeId,
+        EntityViewId,
+        WidgetsBundleId,
+        WidgetTypeId,
+        ApiUsageStateId,
+        TbResourceId,
+        OtaPackageId,
+        RpcId,
+        QueueId,
+        NotificationTargetId,
+        NotificationTemplateId,
+        NotificationRequestId,
+        NotificationId,
+        NotificationRuleId,
+        CalculatedFieldId,
+        QueueStatsId,
+        Oauth2ClientId,
+        AdminSettingsId,
+        AiModelId,
+        ApiKeyId,
+        DomainId,
+        MobileAppId,
+        MobileAppBundleId,
+        JobId;
+export 'package:thingsboard_client/src/model/id/entity_type_models.dart'
+    hide EntityType;
 export 'package:thingsboard_client/src/model/id/has_uuid.dart';
 export 'package:thingsboard_client/src/storage/storage.dart';
 export 'package:thingsboard_client/src/model/id/has_id.dart';
 export 'package:thingsboard_client/src/model/id/id_based.dart';
-export 'package:thingsboard_client/src/model/telemetry/base_data.dart' hide FromJsonFunction;
+export 'package:thingsboard_client/src/model/telemetry/base_data.dart'
+    hide FromJsonFunction;
 export 'package:thingsboard_client/src/model/telemetry/has_name.dart';
 export 'package:thingsboard_client/src/model/telemetry/has_tenant_id.dart';
-export 'package:thingsboard_client/src/model/telemetry/alarm_models.dart' hide AlarmSeverity, AlarmStatus, AlarmSearchStatus, AlarmInfo, Alarm, AlarmCommentType, AlarmAssignee, AlarmComment, AlarmCommentInfo;
-export 'package:thingsboard_client/src/model/telemetry/query/query_models.dart' hide AlarmData, AlarmDataQuery, EntityCountQuery, EntityData, EntityDataQuery, ApiUsageStateFilter, AssetSearchQueryFilter, AssetTypeFilter, DeviceSearchQueryFilter, DeviceTypeFilter, EdgeSearchQueryFilter, EdgeTypeFilter, EntityFilter, EntityListFilter, EntityNameFilter, EntitySearchDirection, EntityTypeFilter, EntityViewSearchQueryFilter, EntityViewTypeFilter, RelationEntityTypeFilter, RelationsQueryFilter, SingleEntityFilter, EntityKey, EntityKeyType, EntityKeyValueType, BooleanOperation, BooleanFilterPredicate, ComplexOperation, ComplexFilterPredicate, DynamicValueSourceType, KeyFilter, KeyFilterPredicate, NumericOperation, NumericFilterPredicate, StringOperation, StringFilterPredicate, AlarmDataPageLink, EntityDataPageLink, EntityDataSortOrder;
+export 'package:thingsboard_client/src/model/telemetry/alarm_models.dart'
+    hide
+        AlarmSeverity,
+        AlarmStatus,
+        AlarmSearchStatus,
+        AlarmInfo,
+        Alarm,
+        AlarmCommentType,
+        AlarmAssignee,
+        AlarmComment,
+        AlarmCommentInfo;
+export 'package:thingsboard_client/src/model/telemetry/query/query_models.dart'
+    hide
+        AlarmData,
+        AlarmDataQuery,
+        EntityCountQuery,
+        EntityData,
+        EntityDataQuery,
+        ApiUsageStateFilter,
+        AssetSearchQueryFilter,
+        AssetTypeFilter,
+        DeviceSearchQueryFilter,
+        DeviceTypeFilter,
+        EdgeSearchQueryFilter,
+        EdgeTypeFilter,
+        EntityFilter,
+        EntityListFilter,
+        EntityNameFilter,
+        EntitySearchDirection,
+        EntityTypeFilter,
+        EntityViewSearchQueryFilter,
+        EntityViewTypeFilter,
+        RelationEntityTypeFilter,
+        RelationsQueryFilter,
+        SingleEntityFilter,
+        EntityKey,
+        EntityKeyType,
+        EntityKeyValueType,
+        BooleanOperation,
+        BooleanFilterPredicate,
+        ComplexOperation,
+        ComplexFilterPredicate,
+        DynamicValueSourceType,
+        KeyFilter,
+        KeyFilterPredicate,
+        NumericOperation,
+        NumericFilterPredicate,
+        StringOperation,
+        StringFilterPredicate,
+        AlarmDataPageLink,
+        EntityDataPageLink,
+        EntityDataSortOrder;
 export 'package:thingsboard_client/src/model/telemetry/push_notification_models.dart';
-export 'package:thingsboard_client/src/model/telemetry/telemetry_models.dart' hide DataType, AttributeScope, AttributeData, TsKvEntry, Aggregation;
+export 'package:thingsboard_client/src/model/telemetry/telemetry_models.dart'
+    hide DataType, AttributeScope, AttributeData, TsKvEntry, Aggregation;
 export 'package:thingsboard_client/src/service/telemetry_websocket_service.dart';

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'threshold_label_position.g.dart';
 
 class ThresholdLabelPosition extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'start')
   static const ThresholdLabelPosition start = _$start;
   @BuiltValueEnumConst(wireName: r'middle')
@@ -41,11 +40,13 @@ class ThresholdLabelPosition extends EnumClass {
   @BuiltValueEnumConst(wireName: r'insideEndBottom')
   static const ThresholdLabelPosition insideEndBottom = _$insideEndBottom;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ThresholdLabelPosition unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ThresholdLabelPosition unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ThresholdLabelPosition> get serializer => _$thresholdLabelPositionSerializer;
+  static Serializer<ThresholdLabelPosition> get serializer =>
+      _$thresholdLabelPositionSerializer;
 
-  const ThresholdLabelPosition._(String name): super(name);
+  const ThresholdLabelPosition._(String name) : super(name);
 
   static BuiltSet<ThresholdLabelPosition> get values => _$values;
   static ThresholdLabelPosition valueOf(String name) => _$valueOf(name);
@@ -57,5 +58,5 @@ class ThresholdLabelPosition extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class ThresholdLabelPositionMixin = Object with _$ThresholdLabelPositionMixin;
-
+abstract class ThresholdLabelPositionMixin = Object
+    with _$ThresholdLabelPositionMixin;

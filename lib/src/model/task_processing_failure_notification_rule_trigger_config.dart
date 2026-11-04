@@ -18,23 +18,42 @@ part 'task_processing_failure_notification_rule_trigger_config.g.dart';
 /// TaskProcessingFailureNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
+/// * [triggerType]
 @BuiltValue()
-abstract class TaskProcessingFailureNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<TaskProcessingFailureNotificationRuleTriggerConfig, TaskProcessingFailureNotificationRuleTriggerConfigBuilder> {
+abstract class TaskProcessingFailureNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          TaskProcessingFailureNotificationRuleTriggerConfig,
+          TaskProcessingFailureNotificationRuleTriggerConfigBuilder
+        > {
   TaskProcessingFailureNotificationRuleTriggerConfig._();
 
-  factory TaskProcessingFailureNotificationRuleTriggerConfig([void updates(TaskProcessingFailureNotificationRuleTriggerConfigBuilder b)]) = _$TaskProcessingFailureNotificationRuleTriggerConfig;
+  factory TaskProcessingFailureNotificationRuleTriggerConfig([
+    void updates(TaskProcessingFailureNotificationRuleTriggerConfigBuilder b),
+  ]) = _$TaskProcessingFailureNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TaskProcessingFailureNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(
+    TaskProcessingFailureNotificationRuleTriggerConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TaskProcessingFailureNotificationRuleTriggerConfig> get serializer => _$TaskProcessingFailureNotificationRuleTriggerConfigSerializer();
+  static Serializer<TaskProcessingFailureNotificationRuleTriggerConfig>
+  get serializer =>
+      _$TaskProcessingFailureNotificationRuleTriggerConfigSerializer();
 }
 
-class _$TaskProcessingFailureNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<TaskProcessingFailureNotificationRuleTriggerConfig> {
+class _$TaskProcessingFailureNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<
+          TaskProcessingFailureNotificationRuleTriggerConfig
+        > {
   @override
-  final Iterable<Type> types = const [TaskProcessingFailureNotificationRuleTriggerConfig, _$TaskProcessingFailureNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    TaskProcessingFailureNotificationRuleTriggerConfig,
+    _$TaskProcessingFailureNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'TaskProcessingFailureNotificationRuleTriggerConfig';
@@ -57,7 +76,11 @@ class _$TaskProcessingFailureNotificationRuleTriggerConfigSerializer implements 
     TaskProcessingFailureNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -73,10 +96,12 @@ class _$TaskProcessingFailureNotificationRuleTriggerConfigSerializer implements 
       final value = serializedList[i + 1];
       switch (key) {
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         default:
@@ -107,5 +132,3 @@ class _$TaskProcessingFailureNotificationRuleTriggerConfigSerializer implements 
     return result.build();
   }
 }
-
-

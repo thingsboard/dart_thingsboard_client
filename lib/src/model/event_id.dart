@@ -59,7 +59,11 @@ class _$EventIdSerializer implements PrimitiveSerializer<EventId> {
     EventId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +79,12 @@ class _$EventIdSerializer implements PrimitiveSerializer<EventId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -109,5 +115,3 @@ class _$EventIdSerializer implements PrimitiveSerializer<EventId> {
     return result.build();
   }
 }
-
-

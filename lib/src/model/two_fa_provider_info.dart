@@ -17,12 +17,13 @@ part 'two_fa_provider_info.g.dart';
 /// TwoFaProviderInfo
 ///
 /// Properties:
-/// * [type] 
-/// * [default_] 
-/// * [contact] 
-/// * [minVerificationCodeSendPeriod] 
+/// * [type]
+/// * [default_]
+/// * [contact]
+/// * [minVerificationCodeSendPeriod]
 @BuiltValue()
-abstract class TwoFaProviderInfo implements Built<TwoFaProviderInfo, TwoFaProviderInfoBuilder> {
+abstract class TwoFaProviderInfo
+    implements Built<TwoFaProviderInfo, TwoFaProviderInfoBuilder> {
   @BuiltValueField(wireName: r'type')
   TwoFaProviderType? get type;
   // enum typeEnum {  TOTP,  SMS,  EMAIL,  BACKUP_CODE,  };
@@ -38,16 +39,19 @@ abstract class TwoFaProviderInfo implements Built<TwoFaProviderInfo, TwoFaProvid
 
   TwoFaProviderInfo._();
 
-  factory TwoFaProviderInfo([void updates(TwoFaProviderInfoBuilder b)]) = _$TwoFaProviderInfo;
+  factory TwoFaProviderInfo([void updates(TwoFaProviderInfoBuilder b)]) =
+      _$TwoFaProviderInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TwoFaProviderInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TwoFaProviderInfo> get serializer => _$TwoFaProviderInfoSerializer();
+  static Serializer<TwoFaProviderInfo> get serializer =>
+      _$TwoFaProviderInfoSerializer();
 }
 
-class _$TwoFaProviderInfoSerializer implements PrimitiveSerializer<TwoFaProviderInfo> {
+class _$TwoFaProviderInfoSerializer
+    implements PrimitiveSerializer<TwoFaProviderInfo> {
   @override
   final Iterable<Type> types = const [TwoFaProviderInfo, _$TwoFaProviderInfo];
 
@@ -95,7 +99,11 @@ class _$TwoFaProviderInfoSerializer implements PrimitiveSerializer<TwoFaProvider
     TwoFaProviderInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -111,34 +119,42 @@ class _$TwoFaProviderInfoSerializer implements PrimitiveSerializer<TwoFaProvider
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TwoFaProviderType),
-          ) as TwoFaProviderType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TwoFaProviderType),
+                  )
+                  as TwoFaProviderType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'default':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.default_ = valueDes;
           break;
         case r'contact':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.contact = valueDes;
           break;
         case r'minVerificationCodeSendPeriod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minVerificationCodeSendPeriod = valueDes;
           break;
@@ -170,5 +186,3 @@ class _$TwoFaProviderInfoSerializer implements PrimitiveSerializer<TwoFaProvider
     return result.build();
   }
 }
-
-

@@ -17,23 +17,36 @@ part 'json_transport_payload_configuration.g.dart';
 /// JsonTransportPayloadConfiguration
 ///
 /// Properties:
-/// * [transportPayloadType] 
+/// * [transportPayloadType]
 @BuiltValue()
-abstract class JsonTransportPayloadConfiguration implements TransportPayloadTypeConfiguration, Built<JsonTransportPayloadConfiguration, JsonTransportPayloadConfigurationBuilder> {
+abstract class JsonTransportPayloadConfiguration
+    implements
+        TransportPayloadTypeConfiguration,
+        Built<
+          JsonTransportPayloadConfiguration,
+          JsonTransportPayloadConfigurationBuilder
+        > {
   JsonTransportPayloadConfiguration._();
 
-  factory JsonTransportPayloadConfiguration([void updates(JsonTransportPayloadConfigurationBuilder b)]) = _$JsonTransportPayloadConfiguration;
+  factory JsonTransportPayloadConfiguration([
+    void updates(JsonTransportPayloadConfigurationBuilder b),
+  ]) = _$JsonTransportPayloadConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(JsonTransportPayloadConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<JsonTransportPayloadConfiguration> get serializer => _$JsonTransportPayloadConfigurationSerializer();
+  static Serializer<JsonTransportPayloadConfiguration> get serializer =>
+      _$JsonTransportPayloadConfigurationSerializer();
 }
 
-class _$JsonTransportPayloadConfigurationSerializer implements PrimitiveSerializer<JsonTransportPayloadConfiguration> {
+class _$JsonTransportPayloadConfigurationSerializer
+    implements PrimitiveSerializer<JsonTransportPayloadConfiguration> {
   @override
-  final Iterable<Type> types = const [JsonTransportPayloadConfiguration, _$JsonTransportPayloadConfiguration];
+  final Iterable<Type> types = const [
+    JsonTransportPayloadConfiguration,
+    _$JsonTransportPayloadConfiguration,
+  ];
 
   @override
   final String wireName = r'JsonTransportPayloadConfiguration';
@@ -56,7 +69,11 @@ class _$JsonTransportPayloadConfigurationSerializer implements PrimitiveSerializ
     JsonTransportPayloadConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$JsonTransportPayloadConfigurationSerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'transportPayloadType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.transportPayloadType = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$JsonTransportPayloadConfigurationSerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

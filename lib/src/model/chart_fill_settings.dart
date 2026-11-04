@@ -18,11 +18,12 @@ part 'chart_fill_settings.g.dart';
 /// ChartFillSettings
 ///
 /// Properties:
-/// * [type] 
-/// * [opacity] 
-/// * [gradient] 
+/// * [type]
+/// * [opacity]
+/// * [gradient]
 @BuiltValue()
-abstract class ChartFillSettings implements Built<ChartFillSettings, ChartFillSettingsBuilder> {
+abstract class ChartFillSettings
+    implements Built<ChartFillSettings, ChartFillSettingsBuilder> {
   @BuiltValueField(wireName: r'type')
   ChartFillType? get type;
   // enum typeEnum {  none,  opacity,  gradient,  };
@@ -35,16 +36,19 @@ abstract class ChartFillSettings implements Built<ChartFillSettings, ChartFillSe
 
   ChartFillSettings._();
 
-  factory ChartFillSettings([void updates(ChartFillSettingsBuilder b)]) = _$ChartFillSettings;
+  factory ChartFillSettings([void updates(ChartFillSettingsBuilder b)]) =
+      _$ChartFillSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ChartFillSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ChartFillSettings> get serializer => _$ChartFillSettingsSerializer();
+  static Serializer<ChartFillSettings> get serializer =>
+      _$ChartFillSettingsSerializer();
 }
 
-class _$ChartFillSettingsSerializer implements PrimitiveSerializer<ChartFillSettings> {
+class _$ChartFillSettingsSerializer
+    implements PrimitiveSerializer<ChartFillSettings> {
   @override
   final Iterable<Type> types = const [ChartFillSettings, _$ChartFillSettings];
 
@@ -85,7 +89,11 @@ class _$ChartFillSettingsSerializer implements PrimitiveSerializer<ChartFillSett
     ChartFillSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +109,34 @@ class _$ChartFillSettingsSerializer implements PrimitiveSerializer<ChartFillSett
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartFillType),
-          ) as ChartFillType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartFillType),
+                  )
+                  as ChartFillType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'opacity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.opacity = valueDes;
           break;
         case r'gradient':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartFillSettingsGradient),
-          ) as ChartFillSettingsGradient?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ChartFillSettingsGradient,
+                    ),
+                  )
+                  as ChartFillSettingsGradient?;
           if (valueDes == null) continue;
           result.gradient.replace(valueDes);
           break;
@@ -152,5 +168,3 @@ class _$ChartFillSettingsSerializer implements PrimitiveSerializer<ChartFillSett
     return result.build();
   }
 }
-
-

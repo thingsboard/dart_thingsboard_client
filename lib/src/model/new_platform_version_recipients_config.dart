@@ -19,27 +19,40 @@ part 'new_platform_version_recipients_config.g.dart';
 /// NewPlatformVersionRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class NewPlatformVersionRecipientsConfig implements NotificationRuleRecipientsConfig, Built<NewPlatformVersionRecipientsConfig, NewPlatformVersionRecipientsConfigBuilder> {
+abstract class NewPlatformVersionRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          NewPlatformVersionRecipientsConfig,
+          NewPlatformVersionRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   NewPlatformVersionRecipientsConfig._();
 
-  factory NewPlatformVersionRecipientsConfig([void updates(NewPlatformVersionRecipientsConfigBuilder b)]) = _$NewPlatformVersionRecipientsConfig;
+  factory NewPlatformVersionRecipientsConfig([
+    void updates(NewPlatformVersionRecipientsConfigBuilder b),
+  ]) = _$NewPlatformVersionRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NewPlatformVersionRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NewPlatformVersionRecipientsConfig> get serializer => _$NewPlatformVersionRecipientsConfigSerializer();
+  static Serializer<NewPlatformVersionRecipientsConfig> get serializer =>
+      _$NewPlatformVersionRecipientsConfigSerializer();
 }
 
-class _$NewPlatformVersionRecipientsConfigSerializer implements PrimitiveSerializer<NewPlatformVersionRecipientsConfig> {
+class _$NewPlatformVersionRecipientsConfigSerializer
+    implements PrimitiveSerializer<NewPlatformVersionRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [NewPlatformVersionRecipientsConfig, _$NewPlatformVersionRecipientsConfig];
+  final Iterable<Type> types = const [
+    NewPlatformVersionRecipientsConfig,
+    _$NewPlatformVersionRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'NewPlatformVersionRecipientsConfig';
@@ -69,7 +82,11 @@ class _$NewPlatformVersionRecipientsConfigSerializer implements PrimitiveSeriali
     NewPlatformVersionRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$NewPlatformVersionRecipientsConfigSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$NewPlatformVersionRecipientsConfigSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

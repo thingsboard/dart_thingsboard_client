@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'edqs_sync_status.g.dart';
 
 class EdqsSyncStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'REQUESTED')
   static const EdqsSyncStatus REQUESTED = _$REQUESTED;
   @BuiltValueEnumConst(wireName: r'STARTED')
@@ -27,9 +26,10 @@ class EdqsSyncStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const EdqsSyncStatus unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<EdqsSyncStatus> get serializer => _$edqsSyncStatusSerializer;
+  static Serializer<EdqsSyncStatus> get serializer =>
+      _$edqsSyncStatusSerializer;
 
-  const EdqsSyncStatus._(String name): super(name);
+  const EdqsSyncStatus._(String name) : super(name);
 
   static BuiltSet<EdqsSyncStatus> get values => _$values;
   static EdqsSyncStatus valueOf(String name) => _$valueOf(name);
@@ -42,4 +42,3 @@ class EdqsSyncStatus extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class EdqsSyncStatusMixin = Object with _$EdqsSyncStatusMixin;
-

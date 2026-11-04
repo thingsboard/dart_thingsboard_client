@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'default_page_id.g.dart';
 
 class DefaultPageId extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'HOME')
   static const DefaultPageId HOME = _$HOME;
   @BuiltValueEnumConst(wireName: r'ALARMS')
@@ -41,7 +40,7 @@ class DefaultPageId extends EnumClass {
 
   static Serializer<DefaultPageId> get serializer => _$defaultPageIdSerializer;
 
-  const DefaultPageId._(String name): super(name);
+  const DefaultPageId._(String name) : super(name);
 
   static BuiltSet<DefaultPageId> get values => _$values;
   static DefaultPageId valueOf(String name) => _$valueOf(name);
@@ -54,4 +53,3 @@ class DefaultPageId extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class DefaultPageIdMixin = Object with _$DefaultPageIdMixin;
-

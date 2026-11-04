@@ -23,7 +23,8 @@ part 'device_profile_data.g.dart';
 /// * [transportConfiguration] - JSON object of device profile transport configuration
 /// * [provisionConfiguration] - JSON object of provisioning strategy type per device profile
 @BuiltValue()
-abstract class DeviceProfileData implements Built<DeviceProfileData, DeviceProfileDataBuilder> {
+abstract class DeviceProfileData
+    implements Built<DeviceProfileData, DeviceProfileDataBuilder> {
   /// JSON object of device profile configuration
   @BuiltValueField(wireName: r'configuration')
   DeviceProfileConfiguration? get configuration;
@@ -38,16 +39,19 @@ abstract class DeviceProfileData implements Built<DeviceProfileData, DeviceProfi
 
   DeviceProfileData._();
 
-  factory DeviceProfileData([void updates(DeviceProfileDataBuilder b)]) = _$DeviceProfileData;
+  factory DeviceProfileData([void updates(DeviceProfileDataBuilder b)]) =
+      _$DeviceProfileData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceProfileDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceProfileData> get serializer => _$DeviceProfileDataSerializer();
+  static Serializer<DeviceProfileData> get serializer =>
+      _$DeviceProfileDataSerializer();
 }
 
-class _$DeviceProfileDataSerializer implements PrimitiveSerializer<DeviceProfileData> {
+class _$DeviceProfileDataSerializer
+    implements PrimitiveSerializer<DeviceProfileData> {
   @override
   final Iterable<Type> types = const [DeviceProfileData, _$DeviceProfileData];
 
@@ -88,7 +92,11 @@ class _$DeviceProfileDataSerializer implements PrimitiveSerializer<DeviceProfile
     DeviceProfileData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -104,26 +112,38 @@ class _$DeviceProfileDataSerializer implements PrimitiveSerializer<DeviceProfile
       final value = serializedList[i + 1];
       switch (key) {
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceProfileConfiguration),
-          ) as DeviceProfileConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DeviceProfileConfiguration,
+                    ),
+                  )
+                  as DeviceProfileConfiguration?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
         case r'transportConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceProfileTransportConfiguration),
-          ) as DeviceProfileTransportConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DeviceProfileTransportConfiguration,
+                    ),
+                  )
+                  as DeviceProfileTransportConfiguration?;
           if (valueDes == null) continue;
           result.transportConfiguration = valueDes;
           break;
         case r'provisionConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceProfileProvisionConfiguration),
-          ) as DeviceProfileProvisionConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DeviceProfileProvisionConfiguration,
+                    ),
+                  )
+                  as DeviceProfileProvisionConfiguration?;
           if (valueDes == null) continue;
           result.provisionConfiguration = valueDes;
           break;
@@ -155,5 +175,3 @@ class _$DeviceProfileDataSerializer implements PrimitiveSerializer<DeviceProfile
     return result.build();
   }
 }
-
-

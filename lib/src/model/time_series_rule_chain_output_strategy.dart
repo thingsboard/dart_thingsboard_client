@@ -17,23 +17,36 @@ part 'time_series_rule_chain_output_strategy.g.dart';
 /// TimeSeriesRuleChainOutputStrategy
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class TimeSeriesRuleChainOutputStrategy implements TimeSeriesOutputStrategy, Built<TimeSeriesRuleChainOutputStrategy, TimeSeriesRuleChainOutputStrategyBuilder> {
+abstract class TimeSeriesRuleChainOutputStrategy
+    implements
+        TimeSeriesOutputStrategy,
+        Built<
+          TimeSeriesRuleChainOutputStrategy,
+          TimeSeriesRuleChainOutputStrategyBuilder
+        > {
   TimeSeriesRuleChainOutputStrategy._();
 
-  factory TimeSeriesRuleChainOutputStrategy([void updates(TimeSeriesRuleChainOutputStrategyBuilder b)]) = _$TimeSeriesRuleChainOutputStrategy;
+  factory TimeSeriesRuleChainOutputStrategy([
+    void updates(TimeSeriesRuleChainOutputStrategyBuilder b),
+  ]) = _$TimeSeriesRuleChainOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesRuleChainOutputStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesRuleChainOutputStrategy> get serializer => _$TimeSeriesRuleChainOutputStrategySerializer();
+  static Serializer<TimeSeriesRuleChainOutputStrategy> get serializer =>
+      _$TimeSeriesRuleChainOutputStrategySerializer();
 }
 
-class _$TimeSeriesRuleChainOutputStrategySerializer implements PrimitiveSerializer<TimeSeriesRuleChainOutputStrategy> {
+class _$TimeSeriesRuleChainOutputStrategySerializer
+    implements PrimitiveSerializer<TimeSeriesRuleChainOutputStrategy> {
   @override
-  final Iterable<Type> types = const [TimeSeriesRuleChainOutputStrategy, _$TimeSeriesRuleChainOutputStrategy];
+  final Iterable<Type> types = const [
+    TimeSeriesRuleChainOutputStrategy,
+    _$TimeSeriesRuleChainOutputStrategy,
+  ];
 
   @override
   final String wireName = r'TimeSeriesRuleChainOutputStrategy';
@@ -56,7 +69,11 @@ class _$TimeSeriesRuleChainOutputStrategySerializer implements PrimitiveSerializ
     TimeSeriesRuleChainOutputStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$TimeSeriesRuleChainOutputStrategySerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$TimeSeriesRuleChainOutputStrategySerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

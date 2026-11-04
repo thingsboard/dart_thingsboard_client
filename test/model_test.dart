@@ -12,23 +12,25 @@ import 'package:thingsboard_client/src/model/id/entity_type_models.dart';
 
 void main() {
   group('PageData', () {
-    test('fromJson deserializes data array, totalPages, totalElements, hasNext',
-        () {
-      final json = {
-        'data': [
-          {'id': '1'},
-          {'id': '2'},
-        ],
-        'totalPages': 3,
-        'totalElements': 25,
-        'hasNext': true,
-      };
-      final page = PageData.fromJson(json, (j) => j['id'] as String);
-      expect(page.data, equals(['1', '2']));
-      expect(page.totalPages, equals(3));
-      expect(page.totalElements, equals(25));
-      expect(page.hasNext, isTrue);
-    });
+    test(
+      'fromJson deserializes data array, totalPages, totalElements, hasNext',
+      () {
+        final json = {
+          'data': [
+            {'id': '1'},
+            {'id': '2'},
+          ],
+          'totalPages': 3,
+          'totalElements': 25,
+          'hasNext': true,
+        };
+        final page = PageData.fromJson(json, (j) => j['id'] as String);
+        expect(page.data, equals(['1', '2']));
+        expect(page.totalPages, equals(3));
+        expect(page.totalElements, equals(25));
+        expect(page.hasNext, isTrue);
+      },
+    );
 
     test('fromJson with empty data list', () {
       final json = {
@@ -74,15 +76,19 @@ void main() {
     });
 
     test('toQueryParameters with sortOrder', () {
-      final link = PageLink(10, 0, 'name',
-          SortOrder('name', Direction.ASC));
+      final link = PageLink(10, 0, 'name', SortOrder('name', Direction.ASC));
       final params = link.toQueryParameters();
       expect(params['sortProperty'], equals('name'));
       expect(params['sortOrder'], equals('ASC'));
     });
 
     test('toQueryParameters with DESC sort order', () {
-      final link = PageLink(20, 2, null, SortOrder('createdTime', Direction.DESC));
+      final link = PageLink(
+        20,
+        2,
+        null,
+        SortOrder('createdTime', Direction.DESC),
+      );
       final params = link.toQueryParameters();
       expect(params['sortProperty'], equals('createdTime'));
       expect(params['sortOrder'], equals('DESC'));
@@ -122,7 +128,7 @@ void main() {
       final next = link.nextPageLink();
       expect(next, isA<TimePageLink>());
       expect(next.page, equals(1));
-      expect((next as TimePageLink).startTime, equals(1000));
+      expect((next).startTime, equals(1000));
       expect(next.endTime, equals(2000));
     });
   });
@@ -209,8 +215,10 @@ void main() {
     });
 
     test('fromJson throws FormatException when entityType or id missing', () {
-      expect(() => EntityId.fromJson({'entityType': 'DEVICE'}),
-          throwsFormatException);
+      expect(
+        () => EntityId.fromJson({'entityType': 'DEVICE'}),
+        throwsFormatException,
+      );
     });
   });
 

@@ -19,11 +19,17 @@ part 'alarm_rule_boolean_filter_predicate.g.dart';
 /// AlarmRuleBooleanFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [operation] 
-/// * [value] 
+/// * [type]
+/// * [operation]
+/// * [value]
 @BuiltValue()
-abstract class AlarmRuleBooleanFilterPredicate implements AlarmRuleKeyFilterPredicate, Built<AlarmRuleBooleanFilterPredicate, AlarmRuleBooleanFilterPredicateBuilder> {
+abstract class AlarmRuleBooleanFilterPredicate
+    implements
+        AlarmRuleKeyFilterPredicate,
+        Built<
+          AlarmRuleBooleanFilterPredicate,
+          AlarmRuleBooleanFilterPredicateBuilder
+        > {
   @BuiltValueField(wireName: r'operation')
   AlarmRuleBooleanOperation get operation;
   // enum operationEnum {  EQUAL,  NOT_EQUAL,  };
@@ -33,18 +39,25 @@ abstract class AlarmRuleBooleanFilterPredicate implements AlarmRuleKeyFilterPred
 
   AlarmRuleBooleanFilterPredicate._();
 
-  factory AlarmRuleBooleanFilterPredicate([void updates(AlarmRuleBooleanFilterPredicateBuilder b)]) = _$AlarmRuleBooleanFilterPredicate;
+  factory AlarmRuleBooleanFilterPredicate([
+    void updates(AlarmRuleBooleanFilterPredicateBuilder b),
+  ]) = _$AlarmRuleBooleanFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmRuleBooleanFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmRuleBooleanFilterPredicate> get serializer => _$AlarmRuleBooleanFilterPredicateSerializer();
+  static Serializer<AlarmRuleBooleanFilterPredicate> get serializer =>
+      _$AlarmRuleBooleanFilterPredicateSerializer();
 }
 
-class _$AlarmRuleBooleanFilterPredicateSerializer implements PrimitiveSerializer<AlarmRuleBooleanFilterPredicate> {
+class _$AlarmRuleBooleanFilterPredicateSerializer
+    implements PrimitiveSerializer<AlarmRuleBooleanFilterPredicate> {
   @override
-  final Iterable<Type> types = const [AlarmRuleBooleanFilterPredicate, _$AlarmRuleBooleanFilterPredicate];
+  final Iterable<Type> types = const [
+    AlarmRuleBooleanFilterPredicate,
+    _$AlarmRuleBooleanFilterPredicate,
+  ];
 
   @override
   final String wireName = r'AlarmRuleBooleanFilterPredicate';
@@ -77,7 +90,11 @@ class _$AlarmRuleBooleanFilterPredicateSerializer implements PrimitiveSerializer
     AlarmRuleBooleanFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -93,24 +110,30 @@ class _$AlarmRuleBooleanFilterPredicateSerializer implements PrimitiveSerializer
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmRuleBooleanOperation),
-          ) as AlarmRuleBooleanOperation;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmRuleBooleanOperation),
+                  )
+                  as AlarmRuleBooleanOperation;
           result.operation = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionValueBoolean),
-          ) as AlarmConditionValueBoolean;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionValueBoolean),
+                  )
+                  as AlarmConditionValueBoolean;
           result.value.replace(valueDes);
           break;
         default:
@@ -141,5 +164,3 @@ class _$AlarmRuleBooleanFilterPredicateSerializer implements PrimitiveSerializer
     return result.build();
   }
 }
-
-

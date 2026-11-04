@@ -21,7 +21,8 @@ part 'attribute_data.g.dart';
 /// * [key] - String representing attribute key
 /// * [value] - Object representing value of attribute key
 @BuiltValue()
-abstract class AttributeData implements Built<AttributeData, AttributeDataBuilder> {
+abstract class AttributeData
+    implements Built<AttributeData, AttributeDataBuilder> {
   /// Timestamp last updated attribute, in milliseconds
   @BuiltValueField(wireName: r'lastUpdateTs')
   int? get lastUpdateTs;
@@ -36,13 +37,15 @@ abstract class AttributeData implements Built<AttributeData, AttributeDataBuilde
 
   AttributeData._();
 
-  factory AttributeData([void updates(AttributeDataBuilder b)]) = _$AttributeData;
+  factory AttributeData([void updates(AttributeDataBuilder b)]) =
+      _$AttributeData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AttributeDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AttributeData> get serializer => _$AttributeDataSerializer();
+  static Serializer<AttributeData> get serializer =>
+      _$AttributeDataSerializer();
 }
 
 class _$AttributeDataSerializer implements PrimitiveSerializer<AttributeData> {
@@ -86,7 +89,11 @@ class _$AttributeDataSerializer implements PrimitiveSerializer<AttributeData> {
     AttributeData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +109,32 @@ class _$AttributeDataSerializer implements PrimitiveSerializer<AttributeData> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'lastUpdateTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.lastUpdateTs = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
@@ -153,5 +166,3 @@ class _$AttributeDataSerializer implements PrimitiveSerializer<AttributeData> {
     return result.build();
   }
 }
-
-

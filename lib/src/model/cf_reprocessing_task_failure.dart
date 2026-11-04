@@ -17,10 +17,12 @@ part 'cf_reprocessing_task_failure.g.dart';
 /// CfReprocessingTaskFailure
 ///
 /// Properties:
-/// * [error] 
-/// * [entityInfo] 
+/// * [error]
+/// * [entityInfo]
 @BuiltValue()
-abstract class CfReprocessingTaskFailure implements Built<CfReprocessingTaskFailure, CfReprocessingTaskFailureBuilder> {
+abstract class CfReprocessingTaskFailure
+    implements
+        Built<CfReprocessingTaskFailure, CfReprocessingTaskFailureBuilder> {
   @BuiltValueField(wireName: r'error')
   String? get error;
 
@@ -29,18 +31,25 @@ abstract class CfReprocessingTaskFailure implements Built<CfReprocessingTaskFail
 
   CfReprocessingTaskFailure._();
 
-  factory CfReprocessingTaskFailure([void updates(CfReprocessingTaskFailureBuilder b)]) = _$CfReprocessingTaskFailure;
+  factory CfReprocessingTaskFailure([
+    void updates(CfReprocessingTaskFailureBuilder b),
+  ]) = _$CfReprocessingTaskFailure;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CfReprocessingTaskFailureBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CfReprocessingTaskFailure> get serializer => _$CfReprocessingTaskFailureSerializer();
+  static Serializer<CfReprocessingTaskFailure> get serializer =>
+      _$CfReprocessingTaskFailureSerializer();
 }
 
-class _$CfReprocessingTaskFailureSerializer implements PrimitiveSerializer<CfReprocessingTaskFailure> {
+class _$CfReprocessingTaskFailureSerializer
+    implements PrimitiveSerializer<CfReprocessingTaskFailure> {
   @override
-  final Iterable<Type> types = const [CfReprocessingTaskFailure, _$CfReprocessingTaskFailure];
+  final Iterable<Type> types = const [
+    CfReprocessingTaskFailure,
+    _$CfReprocessingTaskFailure,
+  ];
 
   @override
   final String wireName = r'CfReprocessingTaskFailure';
@@ -72,7 +81,11 @@ class _$CfReprocessingTaskFailureSerializer implements PrimitiveSerializer<CfRep
     CfReprocessingTaskFailure object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +101,22 @@ class _$CfReprocessingTaskFailureSerializer implements PrimitiveSerializer<CfRep
       final value = serializedList[i + 1];
       switch (key) {
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
         case r'entityInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityInfo),
-          ) as EntityInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityInfo),
+                  )
+                  as EntityInfo?;
           if (valueDes == null) continue;
           result.entityInfo.replace(valueDes);
           break;
@@ -131,5 +148,3 @@ class _$CfReprocessingTaskFailureSerializer implements PrimitiveSerializer<CfRep
     return result.build();
   }
 }
-
-

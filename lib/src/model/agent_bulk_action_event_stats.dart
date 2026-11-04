@@ -20,7 +20,9 @@ part 'agent_bulk_action_event_stats.g.dart';
 /// * [countsByStatus] - Number of events produced by the bulk action per processing status
 /// * [total] - Total number of events produced by the bulk action
 @BuiltValue()
-abstract class AgentBulkActionEventStats implements Built<AgentBulkActionEventStats, AgentBulkActionEventStatsBuilder> {
+abstract class AgentBulkActionEventStats
+    implements
+        Built<AgentBulkActionEventStats, AgentBulkActionEventStatsBuilder> {
   /// Number of events produced by the bulk action per processing status
   @BuiltValueField(wireName: r'countsByStatus')
   BuiltMap<String, int>? get countsByStatus;
@@ -31,18 +33,25 @@ abstract class AgentBulkActionEventStats implements Built<AgentBulkActionEventSt
 
   AgentBulkActionEventStats._();
 
-  factory AgentBulkActionEventStats([void updates(AgentBulkActionEventStatsBuilder b)]) = _$AgentBulkActionEventStats;
+  factory AgentBulkActionEventStats([
+    void updates(AgentBulkActionEventStatsBuilder b),
+  ]) = _$AgentBulkActionEventStats;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentBulkActionEventStatsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentBulkActionEventStats> get serializer => _$AgentBulkActionEventStatsSerializer();
+  static Serializer<AgentBulkActionEventStats> get serializer =>
+      _$AgentBulkActionEventStatsSerializer();
 }
 
-class _$AgentBulkActionEventStatsSerializer implements PrimitiveSerializer<AgentBulkActionEventStats> {
+class _$AgentBulkActionEventStatsSerializer
+    implements PrimitiveSerializer<AgentBulkActionEventStats> {
   @override
-  final Iterable<Type> types = const [AgentBulkActionEventStats, _$AgentBulkActionEventStats];
+  final Iterable<Type> types = const [
+    AgentBulkActionEventStats,
+    _$AgentBulkActionEventStats,
+  ];
 
   @override
   final String wireName = r'AgentBulkActionEventStats';
@@ -56,7 +65,10 @@ class _$AgentBulkActionEventStatsSerializer implements PrimitiveSerializer<Agent
       yield r'countsByStatus';
       yield serializers.serialize(
         object.countsByStatus,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(int),
+        ]),
       );
     }
     if (object.total != null) {
@@ -74,7 +86,11 @@ class _$AgentBulkActionEventStatsSerializer implements PrimitiveSerializer<Agent
     AgentBulkActionEventStats object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,18 +106,25 @@ class _$AgentBulkActionEventStatsSerializer implements PrimitiveSerializer<Agent
       final value = serializedList[i + 1];
       switch (key) {
         case r'countsByStatus':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(int)]),
-          ) as BuiltMap<String, int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltMap<String, int>?;
           if (valueDes == null) continue;
           result.countsByStatus.replace(valueDes);
           break;
         case r'total':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.total = valueDes;
           break;
@@ -133,5 +156,3 @@ class _$AgentBulkActionEventStatsSerializer implements PrimitiveSerializer<Agent
     return result.build();
   }
 }
-
-

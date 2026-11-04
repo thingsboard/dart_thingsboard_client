@@ -19,7 +19,8 @@ part 'login_request.g.dart';
 /// * [username] - User email
 /// * [password] - User password
 @BuiltValue()
-abstract class LoginRequest implements Built<LoginRequest, LoginRequestBuilder> {
+abstract class LoginRequest
+    implements Built<LoginRequest, LoginRequestBuilder> {
   /// User email
   @BuiltValueField(wireName: r'username')
   String get username;
@@ -69,7 +70,11 @@ class _$LoginRequestSerializer implements PrimitiveSerializer<LoginRequest> {
     LoginRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +90,21 @@ class _$LoginRequestSerializer implements PrimitiveSerializer<LoginRequest> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'username':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.username = valueDes;
           break;
         case r'password':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.password = valueDes;
           break;
         default:
@@ -126,5 +135,3 @@ class _$LoginRequestSerializer implements PrimitiveSerializer<LoginRequest> {
     return result.build();
   }
 }
-
-

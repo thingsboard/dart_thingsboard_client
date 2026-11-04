@@ -18,9 +18,9 @@ part 'edqs_state.g.dart';
 /// EdqsState
 ///
 /// Properties:
-/// * [edqsReady] 
-/// * [syncStatus] 
-/// * [apiMode] 
+/// * [edqsReady]
+/// * [syncStatus]
+/// * [apiMode]
 @BuiltValue()
 abstract class EdqsState implements Built<EdqsState, EdqsStateBuilder> {
   @BuiltValueField(wireName: r'edqsReady')
@@ -86,7 +86,11 @@ class _$EdqsStateSerializer implements PrimitiveSerializer<EdqsState> {
     EdqsState object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +106,32 @@ class _$EdqsStateSerializer implements PrimitiveSerializer<EdqsState> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'edqsReady':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.edqsReady = valueDes;
           break;
         case r'syncStatus':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EdqsSyncStatus),
-          ) as EdqsSyncStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EdqsSyncStatus),
+                  )
+                  as EdqsSyncStatus?;
           if (valueDes == null) continue;
           result.syncStatus = valueDes;
           break;
         case r'apiMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EdqsApiMode),
-          ) as EdqsApiMode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EdqsApiMode),
+                  )
+                  as EdqsApiMode?;
           if (valueDes == null) continue;
           result.apiMode = valueDes;
           break;
@@ -153,5 +163,3 @@ class _$EdqsStateSerializer implements PrimitiveSerializer<EdqsState> {
     return result.build();
   }
 }
-
-

@@ -23,7 +23,8 @@ part 'page_data_entity_group_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataEntityGroupInfo implements Built<PageDataEntityGroupInfo, PageDataEntityGroupInfoBuilder> {
+abstract class PageDataEntityGroupInfo
+    implements Built<PageDataEntityGroupInfo, PageDataEntityGroupInfoBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<EntityGroupInfo>? get data;
@@ -42,18 +43,25 @@ abstract class PageDataEntityGroupInfo implements Built<PageDataEntityGroupInfo,
 
   PageDataEntityGroupInfo._();
 
-  factory PageDataEntityGroupInfo([void updates(PageDataEntityGroupInfoBuilder b)]) = _$PageDataEntityGroupInfo;
+  factory PageDataEntityGroupInfo([
+    void updates(PageDataEntityGroupInfoBuilder b),
+  ]) = _$PageDataEntityGroupInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataEntityGroupInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataEntityGroupInfo> get serializer => _$PageDataEntityGroupInfoSerializer();
+  static Serializer<PageDataEntityGroupInfo> get serializer =>
+      _$PageDataEntityGroupInfoSerializer();
 }
 
-class _$PageDataEntityGroupInfoSerializer implements PrimitiveSerializer<PageDataEntityGroupInfo> {
+class _$PageDataEntityGroupInfoSerializer
+    implements PrimitiveSerializer<PageDataEntityGroupInfo> {
   @override
-  final Iterable<Type> types = const [PageDataEntityGroupInfo, _$PageDataEntityGroupInfo];
+  final Iterable<Type> types = const [
+    PageDataEntityGroupInfo,
+    _$PageDataEntityGroupInfo,
+  ];
 
   @override
   final String wireName = r'PageDataEntityGroupInfo';
@@ -99,7 +107,11 @@ class _$PageDataEntityGroupInfoSerializer implements PrimitiveSerializer<PageDat
     PageDataEntityGroupInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +127,44 @@ class _$PageDataEntityGroupInfoSerializer implements PrimitiveSerializer<PageDat
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityGroupInfo)]),
-          ) as BuiltList<EntityGroupInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityGroupInfo),
+                    ]),
+                  )
+                  as BuiltList<EntityGroupInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +196,3 @@ class _$PageDataEntityGroupInfoSerializer implements PrimitiveSerializer<PageDat
     return result.build();
   }
 }
-
-

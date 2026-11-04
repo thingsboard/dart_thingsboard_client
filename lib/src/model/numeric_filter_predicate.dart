@@ -19,11 +19,14 @@ part 'numeric_filter_predicate.g.dart';
 /// NumericFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [operation] 
+/// * [type]
+/// * [operation]
 /// * [value] - The value associated with the filter predicate
 @BuiltValue()
-abstract class NumericFilterPredicate implements KeyFilterPredicate, Built<NumericFilterPredicate, NumericFilterPredicateBuilder> {
+abstract class NumericFilterPredicate
+    implements
+        KeyFilterPredicate,
+        Built<NumericFilterPredicate, NumericFilterPredicateBuilder> {
   @BuiltValueField(wireName: r'operation')
   NumericOperation? get operation;
   // enum operationEnum {  EQUAL,  NOT_EQUAL,  GREATER,  LESS,  GREATER_OR_EQUAL,  LESS_OR_EQUAL,  };
@@ -34,18 +37,25 @@ abstract class NumericFilterPredicate implements KeyFilterPredicate, Built<Numer
 
   NumericFilterPredicate._();
 
-  factory NumericFilterPredicate([void updates(NumericFilterPredicateBuilder b)]) = _$NumericFilterPredicate;
+  factory NumericFilterPredicate([
+    void updates(NumericFilterPredicateBuilder b),
+  ]) = _$NumericFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NumericFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NumericFilterPredicate> get serializer => _$NumericFilterPredicateSerializer();
+  static Serializer<NumericFilterPredicate> get serializer =>
+      _$NumericFilterPredicateSerializer();
 }
 
-class _$NumericFilterPredicateSerializer implements PrimitiveSerializer<NumericFilterPredicate> {
+class _$NumericFilterPredicateSerializer
+    implements PrimitiveSerializer<NumericFilterPredicate> {
   @override
-  final Iterable<Type> types = const [NumericFilterPredicate, _$NumericFilterPredicate];
+  final Iterable<Type> types = const [
+    NumericFilterPredicate,
+    _$NumericFilterPredicate,
+  ];
 
   @override
   final String wireName = r'NumericFilterPredicate';
@@ -82,7 +92,11 @@ class _$NumericFilterPredicateSerializer implements PrimitiveSerializer<NumericF
     NumericFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,25 +112,33 @@ class _$NumericFilterPredicateSerializer implements PrimitiveSerializer<NumericF
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NumericOperation),
-          ) as NumericOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(NumericOperation),
+                  )
+                  as NumericOperation?;
           if (valueDes == null) continue;
           result.operation = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(FilterPredicateValueDouble),
-          ) as FilterPredicateValueDouble?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      FilterPredicateValueDouble,
+                    ),
+                  )
+                  as FilterPredicateValueDouble?;
           if (valueDes == null) continue;
           result.value.replace(valueDes);
           break;
@@ -148,5 +170,3 @@ class _$NumericFilterPredicateSerializer implements PrimitiveSerializer<NumericF
     return result.build();
   }
 }
-
-

@@ -17,14 +17,15 @@ part 'version_creation_result.g.dart';
 /// VersionCreationResult
 ///
 /// Properties:
-/// * [version] 
-/// * [added] 
-/// * [modified] 
-/// * [removed] 
-/// * [error] 
-/// * [done] 
+/// * [version]
+/// * [added]
+/// * [modified]
+/// * [removed]
+/// * [error]
+/// * [done]
 @BuiltValue()
-abstract class VersionCreationResult implements Built<VersionCreationResult, VersionCreationResultBuilder> {
+abstract class VersionCreationResult
+    implements Built<VersionCreationResult, VersionCreationResultBuilder> {
   @BuiltValueField(wireName: r'version')
   EntityVersion? get version;
 
@@ -45,18 +46,25 @@ abstract class VersionCreationResult implements Built<VersionCreationResult, Ver
 
   VersionCreationResult._();
 
-  factory VersionCreationResult([void updates(VersionCreationResultBuilder b)]) = _$VersionCreationResult;
+  factory VersionCreationResult([
+    void updates(VersionCreationResultBuilder b),
+  ]) = _$VersionCreationResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(VersionCreationResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<VersionCreationResult> get serializer => _$VersionCreationResultSerializer();
+  static Serializer<VersionCreationResult> get serializer =>
+      _$VersionCreationResultSerializer();
 }
 
-class _$VersionCreationResultSerializer implements PrimitiveSerializer<VersionCreationResult> {
+class _$VersionCreationResultSerializer
+    implements PrimitiveSerializer<VersionCreationResult> {
   @override
-  final Iterable<Type> types = const [VersionCreationResult, _$VersionCreationResult];
+  final Iterable<Type> types = const [
+    VersionCreationResult,
+    _$VersionCreationResult,
+  ];
 
   @override
   final String wireName = r'VersionCreationResult';
@@ -116,7 +124,11 @@ class _$VersionCreationResultSerializer implements PrimitiveSerializer<VersionCr
     VersionCreationResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -132,50 +144,62 @@ class _$VersionCreationResultSerializer implements PrimitiveSerializer<VersionCr
       final value = serializedList[i + 1];
       switch (key) {
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityVersion),
-          ) as EntityVersion?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityVersion),
+                  )
+                  as EntityVersion?;
           if (valueDes == null) continue;
           result.version.replace(valueDes);
           break;
         case r'added':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.added = valueDes;
           break;
         case r'modified':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.modified = valueDes;
           break;
         case r'removed':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.removed = valueDes;
           break;
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
         case r'done':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.done = valueDes;
           break;
@@ -207,5 +231,3 @@ class _$VersionCreationResultSerializer implements PrimitiveSerializer<VersionCr
     return result.build();
   }
 }
-
-

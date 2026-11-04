@@ -23,7 +23,12 @@ part 'page_data_blob_entity_with_customer_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataBlobEntityWithCustomerInfo implements Built<PageDataBlobEntityWithCustomerInfo, PageDataBlobEntityWithCustomerInfoBuilder> {
+abstract class PageDataBlobEntityWithCustomerInfo
+    implements
+        Built<
+          PageDataBlobEntityWithCustomerInfo,
+          PageDataBlobEntityWithCustomerInfoBuilder
+        > {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<BlobEntityWithCustomerInfo>? get data;
@@ -42,18 +47,25 @@ abstract class PageDataBlobEntityWithCustomerInfo implements Built<PageDataBlobE
 
   PageDataBlobEntityWithCustomerInfo._();
 
-  factory PageDataBlobEntityWithCustomerInfo([void updates(PageDataBlobEntityWithCustomerInfoBuilder b)]) = _$PageDataBlobEntityWithCustomerInfo;
+  factory PageDataBlobEntityWithCustomerInfo([
+    void updates(PageDataBlobEntityWithCustomerInfoBuilder b),
+  ]) = _$PageDataBlobEntityWithCustomerInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataBlobEntityWithCustomerInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataBlobEntityWithCustomerInfo> get serializer => _$PageDataBlobEntityWithCustomerInfoSerializer();
+  static Serializer<PageDataBlobEntityWithCustomerInfo> get serializer =>
+      _$PageDataBlobEntityWithCustomerInfoSerializer();
 }
 
-class _$PageDataBlobEntityWithCustomerInfoSerializer implements PrimitiveSerializer<PageDataBlobEntityWithCustomerInfo> {
+class _$PageDataBlobEntityWithCustomerInfoSerializer
+    implements PrimitiveSerializer<PageDataBlobEntityWithCustomerInfo> {
   @override
-  final Iterable<Type> types = const [PageDataBlobEntityWithCustomerInfo, _$PageDataBlobEntityWithCustomerInfo];
+  final Iterable<Type> types = const [
+    PageDataBlobEntityWithCustomerInfo,
+    _$PageDataBlobEntityWithCustomerInfo,
+  ];
 
   @override
   final String wireName = r'PageDataBlobEntityWithCustomerInfo';
@@ -67,7 +79,9 @@ class _$PageDataBlobEntityWithCustomerInfoSerializer implements PrimitiveSeriali
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(BlobEntityWithCustomerInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(BlobEntityWithCustomerInfo),
+        ]),
       );
     }
     if (object.totalPages != null) {
@@ -99,7 +113,11 @@ class _$PageDataBlobEntityWithCustomerInfoSerializer implements PrimitiveSeriali
     PageDataBlobEntityWithCustomerInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +133,44 @@ class _$PageDataBlobEntityWithCustomerInfoSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(BlobEntityWithCustomerInfo)]),
-          ) as BuiltList<BlobEntityWithCustomerInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(BlobEntityWithCustomerInfo),
+                    ]),
+                  )
+                  as BuiltList<BlobEntityWithCustomerInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +202,3 @@ class _$PageDataBlobEntityWithCustomerInfoSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

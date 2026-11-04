@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -20,7 +19,6 @@ import 'package:thingsboard_client/src/model/entity_data_diff.dart';
 import 'package:thingsboard_client/src/model/entity_data_info.dart';
 import 'package:thingsboard_client/src/model/entity_type.dart';
 import 'package:thingsboard_client/src/model/page_data_entity_version.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/version_create_request.dart';
 import 'package:thingsboard_client/src/model/version_creation_result.dart';
 import 'package:thingsboard_client/src/model/version_load_request.dart';
@@ -29,7 +27,6 @@ import 'package:thingsboard_client/src/model/versioned_entity_info.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class EntitiesVersionControlControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -52,7 +49,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityDataDiff] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityDataDiff>> compareEntityDataToVersion({ 
+  Future<Response<EntityDataDiff>> compareEntityDataToVersion({
     required EntityType entityType,
     required String internalEntityUuid,
     required String versionId,
@@ -63,13 +60,32 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityDataDiff);
-    final _path = r'/api/entities/vc/diff/{entityType}/{internalEntityUuid}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(EntityType)).toString()).replaceAll('{' r'internalEntityUuid' '}', encodeQueryParameter(_serializers, internalEntityUuid, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityDataDiff);
+    final _path = r'/api/entities/vc/diff/{entityType}/{internalEntityUuid}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(EntityType),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'internalEntityUuid'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            internalEntityUuid,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -77,11 +93,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -89,7 +102,11 @@ class EntitiesVersionControlControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'versionId': encodeQueryParameter(_serializers, versionId, const FullType(String)),
+      r'versionId': encodeQueryParameter(
+        _serializers,
+        versionId,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -105,11 +122,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityDataDiff),
-      ) as EntityDataDiff;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityDataDiff),
+                )
+                as EntityDataDiff;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -149,7 +168,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityDataInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityDataInfo>> getEntityDataInfo({ 
+  Future<Response<EntityDataInfo>> getEntityDataInfo({
     required String versionId,
     required EntityType entityType,
     required String externalEntityUuid,
@@ -161,13 +180,44 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityDataInfoAndEntityType);
-    final _path = r'/api/entities/vc/info/{versionId}/{entityType}/{externalEntityUuid}'.replaceAll('{' r'versionId' '}', encodeQueryParameter(_serializers, versionId, const FullType(String)).toString()).replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(EntityType)).toString()).replaceAll('{' r'externalEntityUuid' '}', encodeQueryParameter(_serializers, externalEntityUuid, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerEntityDataInfoAndEntityType);
+    final _path =
+        r'/api/entities/vc/info/{versionId}/{entityType}/{externalEntityUuid}'
+            .replaceAll(
+              '{'
+              r'versionId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                versionId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(EntityType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'externalEntityUuid'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                externalEntityUuid,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -175,11 +225,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -187,7 +234,12 @@ class EntitiesVersionControlControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (internalEntityId != null) r'internalEntityId': encodeQueryParameter(_serializers, internalEntityId, const FullType(String)),
+      if (internalEntityId != null)
+        r'internalEntityId': encodeQueryParameter(
+          _serializers,
+          internalEntityId,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -203,11 +255,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityDataInfo),
-      ) as EntityDataInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityDataInfo),
+                )
+                as EntityDataInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -244,7 +298,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [VersionCreationResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<VersionCreationResult>> getVersionCreateRequestStatus({ 
+  Future<Response<VersionCreationResult>> getVersionCreateRequestStatus({
     required String requestId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -253,13 +307,21 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerVersionCreationResult);
-    final _path = r'/api/entities/vc/version/{requestId}/status'.replaceAll('{' r'requestId' '}', encodeQueryParameter(_serializers, requestId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerVersionCreationResult);
+    final _path = r'/api/entities/vc/version/{requestId}/status'.replaceAll(
+      '{'
+      r'requestId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        requestId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -267,11 +329,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -290,11 +349,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(VersionCreationResult),
-      ) as VersionCreationResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(VersionCreationResult),
+                )
+                as VersionCreationResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -331,7 +392,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [VersionLoadResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<VersionLoadResult>> getVersionLoadRequestStatus({ 
+  Future<Response<VersionLoadResult>> getVersionLoadRequestStatus({
     required String requestId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -340,13 +401,21 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerVersionLoadResult);
-    final _path = r'/api/entities/vc/entity/{requestId}/status'.replaceAll('{' r'requestId' '}', encodeQueryParameter(_serializers, requestId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerVersionLoadResult);
+    final _path = r'/api/entities/vc/entity/{requestId}/status'.replaceAll(
+      '{'
+      r'requestId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        requestId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -354,11 +423,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -377,11 +443,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(VersionLoadResult),
-      ) as VersionLoadResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(VersionLoadResult),
+                )
+                as VersionLoadResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -418,7 +486,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<VersionedEntityInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<VersionedEntityInfo>>> listAllEntitiesAtVersion({ 
+  Future<Response<BuiltList<VersionedEntityInfo>>> listAllEntitiesAtVersion({
     required String versionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -427,13 +495,21 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfVersionedEntityInfo);
-    final _path = r'/api/entities/vc/entity/{versionId}'.replaceAll('{' r'versionId' '}', encodeQueryParameter(_serializers, versionId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfVersionedEntityInfo);
+    final _path = r'/api/entities/vc/entity/{versionId}'.replaceAll(
+      '{'
+      r'versionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        versionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -441,11 +517,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -464,11 +537,15 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(VersionedEntityInfo)]),
-      ) as BuiltList<VersionedEntityInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(VersionedEntityInfo),
+                  ]),
+                )
+                as BuiltList<VersionedEntityInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -504,7 +581,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<BranchInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<BranchInfo>>> listBranches({ 
+  Future<Response<BuiltList<BranchInfo>>> listBranches({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -512,13 +589,12 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfBranchInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfBranchInfo);
     final _path = r'/api/entities/vc/branches';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -526,11 +602,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -549,11 +622,15 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(BranchInfo)]),
-      ) as BuiltList<BranchInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(BranchInfo),
+                  ]),
+                )
+                as BuiltList<BranchInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -591,7 +668,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<VersionedEntityInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<VersionedEntityInfo>>> listEntitiesAtVersion({ 
+  Future<Response<BuiltList<VersionedEntityInfo>>> listEntitiesAtVersion({
     required EntityType entityType,
     required String versionId,
     CancelToken? cancelToken,
@@ -601,13 +678,32 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfVersionedEntityInfo);
-    final _path = r'/api/entities/vc/entity/{entityType}/{versionId}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(EntityType)).toString()).replaceAll('{' r'versionId' '}', encodeQueryParameter(_serializers, versionId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfVersionedEntityInfo);
+    final _path = r'/api/entities/vc/entity/{entityType}/{versionId}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(EntityType),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'versionId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            versionId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -615,11 +711,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -638,11 +731,15 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(VersionedEntityInfo)]),
-      ) as BuiltList<VersionedEntityInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(VersionedEntityInfo),
+                  ]),
+                )
+                as BuiltList<VersionedEntityInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -685,7 +782,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityVersion] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityVersion>> listEntityTypeVersions({ 
+  Future<Response<PageDataEntityVersion>> listEntityTypeVersions({
     required EntityType entityType,
     required String branch,
     required int pageSize,
@@ -700,13 +797,22 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityTypeAndPageDataEntityVersion);
-    final _path = r'/api/entities/vc/version/{entityType}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(EntityType)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerEntityTypeAndPageDataEntityVersion);
+    final _path = r'/api/entities/vc/version/{entityType}'.replaceAll(
+      '{'
+      r'entityType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityType,
+        const FullType(EntityType),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -714,11 +820,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -726,12 +829,35 @@ class EntitiesVersionControlControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'branch': encodeQueryParameter(_serializers, branch, const FullType(String)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'branch': encodeQueryParameter(
+        _serializers,
+        branch,
+        const FullType(String),
+      ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -747,11 +873,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityVersion),
-      ) as PageDataEntityVersion;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityVersion),
+                )
+                as PageDataEntityVersion;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -783,7 +911,7 @@ class EntitiesVersionControlControllerApi {
   /// * [branch] - The name of the working branch, for example 'master'
   /// * [pageSize] - Maximum amount of entities in a one page
   /// * [page] - Sequence number of page starting from 0
-  /// * [internalEntityId] 
+  /// * [internalEntityId]
   /// * [textSearch] - The case insensitive 'substring' filter based on the entity version name.
   /// * [sortProperty] - Property of entity to sort by
   /// * [sortOrder] - Sort order. ASC (ASCENDING) or DESC (DESCENDING)
@@ -796,7 +924,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityVersion] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityVersion>> listEntityVersions({ 
+  Future<Response<PageDataEntityVersion>> listEntityVersions({
     required EntityType entityType,
     required String externalEntityUuid,
     required String branch,
@@ -813,13 +941,33 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityTypeAndPageDataEntityVersion);
-    final _path = r'/api/entities/vc/version/{entityType}/{externalEntityUuid}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(EntityType)).toString()).replaceAll('{' r'externalEntityUuid' '}', encodeQueryParameter(_serializers, externalEntityUuid, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerEntityTypeAndPageDataEntityVersion);
+    final _path = r'/api/entities/vc/version/{entityType}/{externalEntityUuid}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(EntityType),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'externalEntityUuid'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            externalEntityUuid,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -827,11 +975,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -839,13 +984,41 @@ class EntitiesVersionControlControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'branch': encodeQueryParameter(_serializers, branch, const FullType(String)),
-      if (internalEntityId != null) r'internalEntityId': encodeQueryParameter(_serializers, internalEntityId, const FullType(String)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'branch': encodeQueryParameter(
+        _serializers,
+        branch,
+        const FullType(String),
+      ),
+      if (internalEntityId != null)
+        r'internalEntityId': encodeQueryParameter(
+          _serializers,
+          internalEntityId,
+          const FullType(String),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -861,11 +1034,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityVersion),
-      ) as PageDataEntityVersion;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityVersion),
+                )
+                as PageDataEntityVersion;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -907,7 +1082,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityVersion] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityVersion>> listVersions({ 
+  Future<Response<PageDataEntityVersion>> listVersions({
     required String branch,
     required int pageSize,
     required int page,
@@ -921,13 +1096,12 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityVersion);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityVersion);
     final _path = r'/api/entities/vc/version';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -935,11 +1109,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -947,12 +1118,35 @@ class EntitiesVersionControlControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'branch': encodeQueryParameter(_serializers, branch, const FullType(String)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'branch': encodeQueryParameter(
+        _serializers,
+        branch,
+        const FullType(String),
+      ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -968,11 +1162,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityVersion),
-      ) as PageDataEntityVersion;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityVersion),
+                )
+                as PageDataEntityVersion;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -999,7 +1195,7 @@ class EntitiesVersionControlControllerApi {
   /// Loads specific version of remote entities (or single entity) by request. Supported entity types: CUSTOMER, ASSET, RULE_CHAIN, DASHBOARD, DEVICE_PROFILE, DEVICE, ENTITY_VIEW, WIDGETS_BUNDLE, CONVERTER, INTEGRATION, ROLE and USER group.  There are multiple types of request. Each of them requires branch name (&#x60;branch&#x60;) and version id (&#x60;versionId&#x60;). Request of type &#x60;SINGLE_ENTITY&#x60; is needed to restore a concrete version of a specific entity. It contains id of a remote entity (&#x60;externalEntityId&#x60;), internal entity id (&#x60;internalEntityId&#x60;) and additional configuration (&#x60;config&#x60;): - &#x60;loadRelations&#x60; - to update relations list (in case &#x60;saveRelations&#x60; option was enabled during version creation); - &#x60;loadAttributes&#x60; - to load entity attributes (if &#x60;saveAttributes&#x60; config option was enabled); - &#x60;loadCredentials&#x60; - to update device credentials (if &#x60;saveCredentials&#x60; option was enabled during version creation); - &#x60;loadPermissions&#x60; - when loading user group, to update group permission list; - &#x60;loadGroupEntities&#x60; - when loading an entity group, to load its entities as well; - &#x60;autoGenerateIntegrationKey&#x60; - if loading integration version, to autogenerate routing key.  An example of such request: &#x60;&#x60;&#x60;json {   \&quot;type\&quot;: \&quot;SINGLE_ENTITY\&quot;,      \&quot;branch\&quot;: \&quot;dev\&quot;,   \&quot;versionId\&quot;: \&quot;b3c28d722d328324c7c15b0b30047b0c40011cf7\&quot;,      \&quot;externalEntityId\&quot;: {     \&quot;entityType\&quot;: \&quot;DEVICE\&quot;,     \&quot;id\&quot;: \&quot;b7944123-d4f4-11ec-847b-0f432358ab48\&quot;   },   \&quot;config\&quot;: {     \&quot;loadRelations\&quot;: false,     \&quot;loadAttributes\&quot;: true,     \&quot;loadCredentials\&quot;: true   } } &#x60;&#x60;&#x60;  Another request type (&#x60;ENTITY_TYPE&#x60;) is needed to load specific version of the whole entity types. It contains a structure with entity types to load and configs for each entity type (&#x60;entityTypes&#x60;). For each specified entity type, the method will load all remote entities of this type that are present at the version. A config for each entity type contains the same options as in &#x60;SINGLE_ENTITY&#x60; request type, and additionally contains following options: - &#x60;removeOtherEntities&#x60; - to remove local entities that are not present on the remote - basically to    overwrite local entity type with the remote one; - &#x60;findExistingEntityByName&#x60; - when you are loading some remote entities that are not yet present at this tenant,    try to find existing entity by name and update it rather than create new.  Here is an example of the request to completely restore version of the whole device entity type: &#x60;&#x60;&#x60;json {   \&quot;type\&quot;: \&quot;ENTITY_TYPE\&quot;,    \&quot;branch\&quot;: \&quot;dev\&quot;,   \&quot;versionId\&quot;: \&quot;b3c28d722d328324c7c15b0b30047b0c40011cf7\&quot;,    \&quot;entityTypes\&quot;: {     \&quot;DEVICE\&quot;: {       \&quot;removeOtherEntities\&quot;: true,       \&quot;findExistingEntityByName\&quot;: false,       \&quot;loadRelations\&quot;: true,       \&quot;loadAttributes\&quot;: true,       \&quot;loadCredentials\&quot;: true     }   } } &#x60;&#x60;&#x60;  The response will contain generated request UUID that is to be used to check the status of operation via &#x60;getVersionLoadRequestStatus&#x60;.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [versionLoadRequest] 
+  /// * [versionLoadRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1009,7 +1205,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> loadEntitiesVersion({ 
+  Future<Response<String>> loadEntitiesVersion({
     required VersionLoadRequest versionLoadRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1018,13 +1214,12 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerVersionLoadRequest);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerVersionLoadRequest);
     final _path = r'/api/entities/vc/entity';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1032,11 +1227,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1048,14 +1240,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       const _type = FullType(VersionLoadRequest);
-      _bodyData = _serializers.serialize(versionLoadRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        versionLoadRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1076,7 +1267,6 @@ class EntitiesVersionControlControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1103,7 +1293,7 @@ class EntitiesVersionControlControllerApi {
   /// Creates a new version of entities (or a single entity) by request. Supported entity types: CUSTOMER, ASSET, RULE_CHAIN, DASHBOARD, DEVICE_PROFILE, DEVICE, ENTITY_VIEW, WIDGETS_BUNDLE, CONVERTER, INTEGRATION, ROLE and USER group.  There are two available types of request: &#x60;SINGLE_ENTITY&#x60; and &#x60;COMPLEX&#x60;. Each of them contains version name (&#x60;versionName&#x60;) and name of a branch (&#x60;branch&#x60;) to create version (commit) in. If specified branch does not exists in a remote repo, then new empty branch will be created. Request of the &#x60;SINGLE_ENTITY&#x60; type has id of an entity (&#x60;entityId&#x60;) and additional configuration (&#x60;config&#x60;) which has following options:  - &#x60;saveRelations&#x60; - whether to add inbound and outbound relations of type COMMON to created entity version; - &#x60;saveAttributes&#x60; - to save attributes of server scope (and also shared scope for devices); - &#x60;saveCredentials&#x60; - when saving a version of a device, to add its credentials to the version; - &#x60;savePermissions&#x60; - when saving a user group - to save group permission list; - &#x60;saveGroupEntities&#x60; - when saving an entity group - to save its entities as well.  An example of a &#x60;SINGLE_ENTITY&#x60; version create request: &#x60;&#x60;&#x60;json {   \&quot;type\&quot;: \&quot;SINGLE_ENTITY\&quot;,    \&quot;versionName\&quot;: \&quot;Version 1.0\&quot;,   \&quot;branch\&quot;: \&quot;dev\&quot;,    \&quot;entityId\&quot;: {     \&quot;entityType\&quot;: \&quot;DEVICE\&quot;,     \&quot;id\&quot;: \&quot;b79448e0-d4f4-11ec-847b-0f432358ab48\&quot;   },   \&quot;config\&quot;: {     \&quot;saveRelations\&quot;: true,     \&quot;saveAttributes\&quot;: true,     \&quot;saveCredentials\&quot;: false   } } &#x60;&#x60;&#x60;  Second request type (&#x60;COMPLEX&#x60;), additionally to &#x60;branch&#x60; and &#x60;versionName&#x60;, contains following properties: - &#x60;entityTypes&#x60; - a structure with entity types to export and configuration for each entity type;    this configuration has all the options available for &#x60;SINGLE_ENTITY&#x60; and additionally has these ones:       - &#x60;allEntities&#x60; and &#x60;entityIds&#x60; - if you want to save the version of all entities of the entity type         then set &#x60;allEntities&#x60; param to true, otherwise set it to false and specify &#x60;entityIds&#x60; -         in case entity type is group entity, list of specific entity groups, or if not - list of entities;      - &#x60;syncStrategy&#x60; - synchronization strategy to use for this entity type: when set to &#x60;OVERWRITE&#x60;         then the list of remote entities of this type will be overwritten by newly added entities. If set to         &#x60;MERGE&#x60; - existing remote entities of this entity type will not be removed, new entities will just         be added on top (or existing remote entities will be updated). - &#x60;syncStrategy&#x60; - default synchronization strategy to use when it is not specified for an entity type.  Example for this type of request: &#x60;&#x60;&#x60;json {   \&quot;type\&quot;: \&quot;COMPLEX\&quot;,    \&quot;versionName\&quot;: \&quot;Devices and profiles: release 2\&quot;,   \&quot;branch\&quot;: \&quot;master\&quot;,    \&quot;syncStrategy\&quot;: \&quot;OVERWRITE\&quot;,   \&quot;entityTypes\&quot;: {     \&quot;DEVICE\&quot;: {       \&quot;syncStrategy\&quot;: null,       \&quot;allEntities\&quot;: true,       \&quot;saveRelations\&quot;: true,       \&quot;saveAttributes\&quot;: true,       \&quot;saveCredentials\&quot;: true     },     \&quot;DEVICE_PROFILE\&quot;: {       \&quot;syncStrategy\&quot;: \&quot;MERGE\&quot;,       \&quot;allEntities\&quot;: false,       \&quot;entityIds\&quot;: [         \&quot;b79448e0-d4f4-11ec-847b-0f432358ab48\&quot;       ],       \&quot;saveRelations\&quot;: true     }   } } &#x60;&#x60;&#x60;  Response wil contain generated request UUID, that can be then used to retrieve status of operation via &#x60;getVersionCreateRequestStatus&#x60;.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [versionCreateRequest] 
+  /// * [versionCreateRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1113,7 +1303,7 @@ class EntitiesVersionControlControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> saveEntitiesVersion({ 
+  Future<Response<String>> saveEntitiesVersion({
     required VersionCreateRequest versionCreateRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1122,13 +1312,12 @@ class EntitiesVersionControlControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerVersionCreateRequest);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerVersionCreateRequest);
     final _path = r'/api/entities/vc/version';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1136,11 +1325,8 @@ class EntitiesVersionControlControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1152,14 +1338,13 @@ class EntitiesVersionControlControllerApi {
 
     try {
       const _type = FullType(VersionCreateRequest);
-      _bodyData = _serializers.serialize(versionCreateRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        versionCreateRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1180,7 +1365,6 @@ class EntitiesVersionControlControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1202,5 +1386,4 @@ class EntitiesVersionControlControllerApi {
       extra: _response.extra,
     );
   }
-
 }

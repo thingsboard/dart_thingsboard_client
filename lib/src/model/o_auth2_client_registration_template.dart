@@ -20,7 +20,7 @@ part 'o_auth2_client_registration_template.g.dart';
 /// OAuth2ClientRegistrationTemplate
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
 /// * [additionalInfo] - A value representing the any type (object or primitive)
 /// * [providerId] - OAuth2 provider identifier (e.g. its name)
@@ -36,9 +36,14 @@ part 'o_auth2_client_registration_template.g.dart';
 /// * [loginButtonIcon] - Default log in button icon for OAuth2 provider
 /// * [loginButtonLabel] - Default OAuth2 provider label
 /// * [helpLink] - Help link for OAuth2 provider
-/// * [name] 
+/// * [name]
 @BuiltValue()
-abstract class OAuth2ClientRegistrationTemplate implements Built<OAuth2ClientRegistrationTemplate, OAuth2ClientRegistrationTemplateBuilder> {
+abstract class OAuth2ClientRegistrationTemplate
+    implements
+        Built<
+          OAuth2ClientRegistrationTemplate,
+          OAuth2ClientRegistrationTemplateBuilder
+        > {
   @BuiltValueField(wireName: r'id')
   OAuth2ClientRegistrationTemplateId? get id;
 
@@ -107,18 +112,25 @@ abstract class OAuth2ClientRegistrationTemplate implements Built<OAuth2ClientReg
 
   OAuth2ClientRegistrationTemplate._();
 
-  factory OAuth2ClientRegistrationTemplate([void updates(OAuth2ClientRegistrationTemplateBuilder b)]) = _$OAuth2ClientRegistrationTemplate;
+  factory OAuth2ClientRegistrationTemplate([
+    void updates(OAuth2ClientRegistrationTemplateBuilder b),
+  ]) = _$OAuth2ClientRegistrationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OAuth2ClientRegistrationTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OAuth2ClientRegistrationTemplate> get serializer => _$OAuth2ClientRegistrationTemplateSerializer();
+  static Serializer<OAuth2ClientRegistrationTemplate> get serializer =>
+      _$OAuth2ClientRegistrationTemplateSerializer();
 }
 
-class _$OAuth2ClientRegistrationTemplateSerializer implements PrimitiveSerializer<OAuth2ClientRegistrationTemplate> {
+class _$OAuth2ClientRegistrationTemplateSerializer
+    implements PrimitiveSerializer<OAuth2ClientRegistrationTemplate> {
   @override
-  final Iterable<Type> types = const [OAuth2ClientRegistrationTemplate, _$OAuth2ClientRegistrationTemplate];
+  final Iterable<Type> types = const [
+    OAuth2ClientRegistrationTemplate,
+    _$OAuth2ClientRegistrationTemplate,
+  ];
 
   @override
   final String wireName = r'OAuth2ClientRegistrationTemplate';
@@ -253,7 +265,11 @@ class _$OAuth2ClientRegistrationTemplateSerializer implements PrimitiveSerialize
     OAuth2ClientRegistrationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -269,137 +285,175 @@ class _$OAuth2ClientRegistrationTemplateSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OAuth2ClientRegistrationTemplateId),
-          ) as OAuth2ClientRegistrationTemplateId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      OAuth2ClientRegistrationTemplateId,
+                    ),
+                  )
+                  as OAuth2ClientRegistrationTemplateId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'providerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerId = valueDes;
           break;
         case r'mapperConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OAuth2MapperConfig),
-          ) as OAuth2MapperConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(OAuth2MapperConfig),
+                  )
+                  as OAuth2MapperConfig?;
           if (valueDes == null) continue;
           result.mapperConfig.replace(valueDes);
           break;
         case r'authorizationUri':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.authorizationUri = valueDes;
           break;
         case r'accessTokenUri':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.accessTokenUri = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.scope.replace(valueDes);
           break;
         case r'userInfoUri':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.userInfoUri = valueDes;
           break;
         case r'userNameAttributeName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.userNameAttributeName = valueDes;
           break;
         case r'jwkSetUri':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.jwkSetUri = valueDes;
           break;
         case r'clientAuthenticationMethod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.clientAuthenticationMethod = valueDes;
           break;
         case r'comment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.comment = valueDes;
           break;
         case r'loginButtonIcon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.loginButtonIcon = valueDes;
           break;
         case r'loginButtonLabel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.loginButtonLabel = valueDes;
           break;
         case r'helpLink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.helpLink = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -431,5 +485,3 @@ class _$OAuth2ClientRegistrationTemplateSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

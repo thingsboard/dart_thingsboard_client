@@ -19,11 +19,12 @@ part 'header_footer.g.dart';
 /// HeaderFooter
 ///
 /// Properties:
-/// * [enabled] 
-/// * [components] 
-/// * [firstPage] 
+/// * [enabled]
+/// * [components]
+/// * [firstPage]
 @BuiltValue()
-abstract class HeaderFooter implements Built<HeaderFooter, HeaderFooterBuilder> {
+abstract class HeaderFooter
+    implements Built<HeaderFooter, HeaderFooterBuilder> {
   @BuiltValueField(wireName: r'enabled')
   bool? get enabled;
 
@@ -83,7 +84,11 @@ class _$HeaderFooterSerializer implements PrimitiveSerializer<HeaderFooter> {
     HeaderFooter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,25 +104,33 @@ class _$HeaderFooterSerializer implements PrimitiveSerializer<HeaderFooter> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'components':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(ReportComponent)]),
-          ) as BuiltList<ReportComponent>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(ReportComponent),
+                    ]),
+                  )
+                  as BuiltList<ReportComponent>;
           result.components.replace(valueDes);
           break;
         case r'firstPage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.firstPage = valueDes;
           break;
@@ -149,5 +162,3 @@ class _$HeaderFooterSerializer implements PrimitiveSerializer<HeaderFooter> {
     return result.build();
   }
 }
-
-

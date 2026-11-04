@@ -26,23 +26,26 @@ part 'timeseries_chart_component.g.dart';
 /// TimeseriesChartComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [dataSources] 
-/// * [margins] 
-/// * [paddings] 
-/// * [background] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [borderColor] 
-/// * [widthType] 
-/// * [customWidth] 
-/// * [alignment] 
-/// * [height] 
-/// * [timewindow] 
-/// * [timeSeriesChartSettings] 
+/// * [subType]
+/// * [type]
+/// * [dataSources]
+/// * [margins]
+/// * [paddings]
+/// * [background]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [borderColor]
+/// * [widthType]
+/// * [customWidth]
+/// * [alignment]
+/// * [height]
+/// * [timewindow]
+/// * [timeSeriesChartSettings]
 @BuiltValue()
-abstract class TimeseriesChartComponent implements ReportComponent, Built<TimeseriesChartComponent, TimeseriesChartComponentBuilder> {
+abstract class TimeseriesChartComponent
+    implements
+        ReportComponent,
+        Built<TimeseriesChartComponent, TimeseriesChartComponentBuilder> {
   @BuiltValueField(wireName: r'margins')
   Insets? get margins;
 
@@ -86,18 +89,25 @@ abstract class TimeseriesChartComponent implements ReportComponent, Built<Timese
 
   TimeseriesChartComponent._();
 
-  factory TimeseriesChartComponent([void updates(TimeseriesChartComponentBuilder b)]) = _$TimeseriesChartComponent;
+  factory TimeseriesChartComponent([
+    void updates(TimeseriesChartComponentBuilder b),
+  ]) = _$TimeseriesChartComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeseriesChartComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeseriesChartComponent> get serializer => _$TimeseriesChartComponentSerializer();
+  static Serializer<TimeseriesChartComponent> get serializer =>
+      _$TimeseriesChartComponentSerializer();
 }
 
-class _$TimeseriesChartComponentSerializer implements PrimitiveSerializer<TimeseriesChartComponent> {
+class _$TimeseriesChartComponentSerializer
+    implements PrimitiveSerializer<TimeseriesChartComponent> {
   @override
-  final Iterable<Type> types = const [TimeseriesChartComponent, _$TimeseriesChartComponent];
+  final Iterable<Type> types = const [
+    TimeseriesChartComponent,
+    _$TimeseriesChartComponent,
+  ];
 
   @override
   final String wireName = r'TimeseriesChartComponent';
@@ -216,7 +226,11 @@ class _$TimeseriesChartComponentSerializer implements PrimitiveSerializer<Timese
     TimeseriesChartComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -232,120 +246,156 @@ class _$TimeseriesChartComponentSerializer implements PrimitiveSerializer<Timese
       final value = serializedList[i + 1];
       switch (key) {
         case r'margins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.margins.replace(valueDes);
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'customWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.customWidth = valueDes;
           break;
         case r'timewindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeWindowConfiguration),
-          ) as TimeWindowConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeWindowConfiguration,
+                    ),
+                  )
+                  as TimeWindowConfiguration?;
           if (valueDes == null) continue;
           result.timewindow.replace(valueDes);
           break;
         case r'timeSeriesChartSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportTimeSeriesChartSettings),
-          ) as ReportTimeSeriesChartSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ReportTimeSeriesChartSettings,
+                    ),
+                  )
+                  as ReportTimeSeriesChartSettings?;
           if (valueDes == null) continue;
           result.timeSeriesChartSettings = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'widthType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ImageWidthType),
-          ) as ImageWidthType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ImageWidthType),
+                  )
+                  as ImageWidthType?;
           if (valueDes == null) continue;
           result.widthType = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'paddings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.paddings.replace(valueDes);
           break;
         case r'background':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.background = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'alignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ImageAlignment),
-          ) as ImageAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ImageAlignment),
+                  )
+                  as ImageAlignment?;
           if (valueDes == null) continue;
           result.alignment = valueDes;
           break;
         case r'dataSources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DataSource)]),
-          ) as BuiltList<DataSource>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DataSource),
+                    ]),
+                  )
+                  as BuiltList<DataSource>?;
           if (valueDes == null) continue;
           result.dataSources.replace(valueDes);
           break;
         case r'height':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.height = valueDes;
           break;
@@ -377,5 +427,3 @@ class _$TimeseriesChartComponentSerializer implements PrimitiveSerializer<Timese
     return result.build();
   }
 }
-
-

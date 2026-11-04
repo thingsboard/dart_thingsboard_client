@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'authentication_protocol.g.dart';
 
 class AuthenticationProtocol extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SHA_1')
   static const AuthenticationProtocol SHA_1 = _$SHA_1;
   @BuiltValueEnumConst(wireName: r'SHA_224')
@@ -29,11 +28,13 @@ class AuthenticationProtocol extends EnumClass {
   @BuiltValueEnumConst(wireName: r'MD5')
   static const AuthenticationProtocol MD5 = _$MD5;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AuthenticationProtocol unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AuthenticationProtocol unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AuthenticationProtocol> get serializer => _$authenticationProtocolSerializer;
+  static Serializer<AuthenticationProtocol> get serializer =>
+      _$authenticationProtocolSerializer;
 
-  const AuthenticationProtocol._(String name): super(name);
+  const AuthenticationProtocol._(String name) : super(name);
 
   static BuiltSet<AuthenticationProtocol> get values => _$values;
   static AuthenticationProtocol valueOf(String name) => _$valueOf(name);
@@ -45,5 +46,5 @@ class AuthenticationProtocol extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AuthenticationProtocolMixin = Object with _$AuthenticationProtocolMixin;
-
+abstract class AuthenticationProtocolMixin = Object
+    with _$AuthenticationProtocolMixin;

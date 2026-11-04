@@ -20,7 +20,7 @@ part 'tb_chat_response.g.dart';
 /// Properties:
 /// * [status] - Indicates whether the request was successful or not
 @BuiltValue(instantiable: false)
-abstract class TbChatResponse  {
+abstract class TbChatResponse {
   /// Indicates whether the request was successful or not
   @BuiltValueField(wireName: r'status')
   String get status;
@@ -33,33 +33,36 @@ abstract class TbChatResponse  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbChatResponse> get serializer => _$TbChatResponseSerializer();
+  static Serializer<TbChatResponse> get serializer =>
+      _$TbChatResponseSerializer();
 }
 
 extension TbChatResponseDiscriminatorExt on TbChatResponse {
-    String? get discriminatorValue {
-        if (this is Failure) {
-            return r'FAILURE';
-        }
-        if (this is Success) {
-            return r'SUCCESS';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is Failure) {
+      return r'FAILURE';
     }
-}
-extension TbChatResponseBuilderDiscriminatorExt on TbChatResponseBuilder {
-    String? get discriminatorValue {
-        if (this is FailureBuilder) {
-            return r'FAILURE';
-        }
-        if (this is SuccessBuilder) {
-            return r'SUCCESS';
-        }
-        return null;
+    if (this is Success) {
+      return r'SUCCESS';
     }
+    return null;
+  }
 }
 
-class _$TbChatResponseSerializer implements PrimitiveSerializer<TbChatResponse> {
+extension TbChatResponseBuilderDiscriminatorExt on TbChatResponseBuilder {
+  String? get discriminatorValue {
+    if (this is FailureBuilder) {
+      return r'FAILURE';
+    }
+    if (this is SuccessBuilder) {
+      return r'SUCCESS';
+    }
+    return null;
+  }
+}
+
+class _$TbChatResponseSerializer
+    implements PrimitiveSerializer<TbChatResponse> {
   @override
   final Iterable<Type> types = const [TbChatResponse];
 
@@ -90,7 +93,11 @@ class _$TbChatResponseSerializer implements PrimitiveSerializer<TbChatResponse> 
     if (object is Success) {
       return serializers.serialize(object, specifiedType: FullType(Success))!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -100,35 +107,56 @@ class _$TbChatResponseSerializer implements PrimitiveSerializer<TbChatResponse> 
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(TbChatResponse.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(TbChatResponse.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'FAILURE':
-        return serializers.deserialize(serialized, specifiedType: FullType(Failure)) as Failure;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(Failure),
+            )
+            as Failure;
       case r'SUCCESS':
-        return serializers.deserialize(serialized, specifiedType: FullType(Success)) as Success;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(Success),
+            )
+            as Success;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($TbChatResponse)) as $TbChatResponse;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($TbChatResponse),
+            )
+            as $TbChatResponse;
     }
   }
 }
 
-
 /// a concrete implementation of [TbChatResponse], since [TbChatResponse] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $TbChatResponse implements TbChatResponse, Built<$TbChatResponse, $TbChatResponseBuilder> {
+abstract class $TbChatResponse
+    implements TbChatResponse, Built<$TbChatResponse, $TbChatResponseBuilder> {
   $TbChatResponse._();
 
-  factory $TbChatResponse([void Function($TbChatResponseBuilder)? updates]) = _$$TbChatResponse;
+  factory $TbChatResponse([void Function($TbChatResponseBuilder)? updates]) =
+      _$$TbChatResponse;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($TbChatResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$TbChatResponse> get serializer => _$$TbChatResponseSerializer();
+  static Serializer<$TbChatResponse> get serializer =>
+      _$$TbChatResponseSerializer();
 }
 
-class _$$TbChatResponseSerializer implements PrimitiveSerializer<$TbChatResponse> {
+class _$$TbChatResponseSerializer
+    implements PrimitiveSerializer<$TbChatResponse> {
   @override
   final Iterable<Type> types = const [$TbChatResponse, _$$TbChatResponse];
 
@@ -141,7 +169,10 @@ class _$$TbChatResponseSerializer implements PrimitiveSerializer<$TbChatResponse
     $TbChatResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(TbChatResponse))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(TbChatResponse),
+    )!;
   }
 
   void _deserializeProperties(
@@ -157,10 +188,12 @@ class _$$TbChatResponseSerializer implements PrimitiveSerializer<$TbChatResponse
       final value = serializedList[i + 1];
       switch (key) {
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.status = valueDes;
           break;
         default:
@@ -191,4 +224,3 @@ class _$$TbChatResponseSerializer implements PrimitiveSerializer<$TbChatResponse
     return result.build();
   }
 }
-

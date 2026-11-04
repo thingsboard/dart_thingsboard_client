@@ -18,11 +18,11 @@ part 'queue_stats.g.dart';
 /// QueueStats
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
-/// * [tenantId] 
-/// * [queueName] 
-/// * [serviceId] 
+/// * [tenantId]
+/// * [queueName]
+/// * [serviceId]
 @BuiltValue()
 abstract class QueueStats implements Built<QueueStats, QueueStatsBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -107,7 +107,11 @@ class _$QueueStatsSerializer implements PrimitiveSerializer<QueueStats> {
     QueueStats object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -123,42 +127,52 @@ class _$QueueStatsSerializer implements PrimitiveSerializer<QueueStats> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(QueueStatsId),
-          ) as QueueStatsId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(QueueStatsId),
+                  )
+                  as QueueStatsId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'queueName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.queueName = valueDes;
           break;
         case r'serviceId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serviceId = valueDes;
           break;
@@ -190,5 +204,3 @@ class _$QueueStatsSerializer implements PrimitiveSerializer<QueueStats> {
     return result.build();
   }
 }
-
-

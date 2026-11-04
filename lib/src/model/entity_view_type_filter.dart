@@ -18,12 +18,15 @@ part 'entity_view_type_filter.g.dart';
 /// EntityViewTypeFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [entityViewTypes] 
-/// * [entityViewNameFilter] 
-/// * [entityViewType] 
+/// * [type]
+/// * [entityViewTypes]
+/// * [entityViewNameFilter]
+/// * [entityViewType]
 @BuiltValue()
-abstract class EntityViewTypeFilter implements EntityFilter, Built<EntityViewTypeFilter, EntityViewTypeFilterBuilder> {
+abstract class EntityViewTypeFilter
+    implements
+        EntityFilter,
+        Built<EntityViewTypeFilter, EntityViewTypeFilterBuilder> {
   @BuiltValueField(wireName: r'entityViewNameFilter')
   String? get entityViewNameFilter;
 
@@ -36,18 +39,24 @@ abstract class EntityViewTypeFilter implements EntityFilter, Built<EntityViewTyp
 
   EntityViewTypeFilter._();
 
-  factory EntityViewTypeFilter([void updates(EntityViewTypeFilterBuilder b)]) = _$EntityViewTypeFilter;
+  factory EntityViewTypeFilter([void updates(EntityViewTypeFilterBuilder b)]) =
+      _$EntityViewTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityViewTypeFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityViewTypeFilter> get serializer => _$EntityViewTypeFilterSerializer();
+  static Serializer<EntityViewTypeFilter> get serializer =>
+      _$EntityViewTypeFilterSerializer();
 }
 
-class _$EntityViewTypeFilterSerializer implements PrimitiveSerializer<EntityViewTypeFilter> {
+class _$EntityViewTypeFilterSerializer
+    implements PrimitiveSerializer<EntityViewTypeFilter> {
   @override
-  final Iterable<Type> types = const [EntityViewTypeFilter, _$EntityViewTypeFilter];
+  final Iterable<Type> types = const [
+    EntityViewTypeFilter,
+    _$EntityViewTypeFilter,
+  ];
 
   @override
   final String wireName = r'EntityViewTypeFilter';
@@ -91,7 +100,11 @@ class _$EntityViewTypeFilterSerializer implements PrimitiveSerializer<EntityView
     EntityViewTypeFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,33 +120,43 @@ class _$EntityViewTypeFilterSerializer implements PrimitiveSerializer<EntityView
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityViewNameFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityViewNameFilter = valueDes;
           break;
         case r'entityViewType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityViewType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'entityViewTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.entityViewTypes.replace(valueDes);
           break;
@@ -165,5 +188,3 @@ class _$EntityViewTypeFilterSerializer implements PrimitiveSerializer<EntityView
     return result.build();
   }
 }
-
-

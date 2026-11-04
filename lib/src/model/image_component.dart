@@ -25,22 +25,23 @@ part 'image_component.g.dart';
 /// ImageComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [dataSources] 
-/// * [margins] 
-/// * [paddings] 
-/// * [background] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [borderColor] 
-/// * [widthType] 
-/// * [customWidth] 
-/// * [alignment] 
-/// * [sourceType] 
-/// * [imageUrl] 
+/// * [subType]
+/// * [type]
+/// * [dataSources]
+/// * [margins]
+/// * [paddings]
+/// * [background]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [borderColor]
+/// * [widthType]
+/// * [customWidth]
+/// * [alignment]
+/// * [sourceType]
+/// * [imageUrl]
 @BuiltValue()
-abstract class ImageComponent implements ReportComponent, Built<ImageComponent, ImageComponentBuilder> {
+abstract class ImageComponent
+    implements ReportComponent, Built<ImageComponent, ImageComponentBuilder> {
   @BuiltValueField(wireName: r'margins')
   Insets? get margins;
 
@@ -82,16 +83,19 @@ abstract class ImageComponent implements ReportComponent, Built<ImageComponent, 
 
   ImageComponent._();
 
-  factory ImageComponent([void updates(ImageComponentBuilder b)]) = _$ImageComponent;
+  factory ImageComponent([void updates(ImageComponentBuilder b)]) =
+      _$ImageComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ImageComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ImageComponent> get serializer => _$ImageComponentSerializer();
+  static Serializer<ImageComponent> get serializer =>
+      _$ImageComponentSerializer();
 }
 
-class _$ImageComponentSerializer implements PrimitiveSerializer<ImageComponent> {
+class _$ImageComponentSerializer
+    implements PrimitiveSerializer<ImageComponent> {
   @override
   final Iterable<Type> types = const [ImageComponent, _$ImageComponent];
 
@@ -205,7 +209,11 @@ class _$ImageComponentSerializer implements PrimitiveSerializer<ImageComponent> 
     ImageComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -221,112 +229,142 @@ class _$ImageComponentSerializer implements PrimitiveSerializer<ImageComponent> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'margins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.margins.replace(valueDes);
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'customWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.customWidth = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'widthType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ImageWidthType),
-          ) as ImageWidthType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ImageWidthType),
+                  )
+                  as ImageWidthType?;
           if (valueDes == null) continue;
           result.widthType = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'paddings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.paddings.replace(valueDes);
           break;
         case r'sourceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ImageSourceType),
-          ) as ImageSourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ImageSourceType),
+                  )
+                  as ImageSourceType?;
           if (valueDes == null) continue;
           result.sourceType = valueDes;
           break;
         case r'background':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.background = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'imageUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.imageUrl = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'alignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ImageAlignment),
-          ) as ImageAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ImageAlignment),
+                  )
+                  as ImageAlignment?;
           if (valueDes == null) continue;
           result.alignment = valueDes;
           break;
         case r'dataSources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DataSource)]),
-          ) as BuiltList<DataSource>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DataSource),
+                    ]),
+                  )
+                  as BuiltList<DataSource>?;
           if (valueDes == null) continue;
           result.dataSources.replace(valueDes);
           break;
@@ -358,5 +396,3 @@ class _$ImageComponentSerializer implements PrimitiveSerializer<ImageComponent> 
     return result.build();
   }
 }
-
-

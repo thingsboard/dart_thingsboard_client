@@ -18,10 +18,11 @@ part 'tb_resource_delete_result.g.dart';
 /// TbResourceDeleteResult
 ///
 /// Properties:
-/// * [success] 
-/// * [references] 
+/// * [success]
+/// * [references]
 @BuiltValue()
-abstract class TbResourceDeleteResult implements Built<TbResourceDeleteResult, TbResourceDeleteResultBuilder> {
+abstract class TbResourceDeleteResult
+    implements Built<TbResourceDeleteResult, TbResourceDeleteResultBuilder> {
   @BuiltValueField(wireName: r'success')
   bool? get success;
 
@@ -30,18 +31,25 @@ abstract class TbResourceDeleteResult implements Built<TbResourceDeleteResult, T
 
   TbResourceDeleteResult._();
 
-  factory TbResourceDeleteResult([void updates(TbResourceDeleteResultBuilder b)]) = _$TbResourceDeleteResult;
+  factory TbResourceDeleteResult([
+    void updates(TbResourceDeleteResultBuilder b),
+  ]) = _$TbResourceDeleteResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbResourceDeleteResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbResourceDeleteResult> get serializer => _$TbResourceDeleteResultSerializer();
+  static Serializer<TbResourceDeleteResult> get serializer =>
+      _$TbResourceDeleteResultSerializer();
 }
 
-class _$TbResourceDeleteResultSerializer implements PrimitiveSerializer<TbResourceDeleteResult> {
+class _$TbResourceDeleteResultSerializer
+    implements PrimitiveSerializer<TbResourceDeleteResult> {
   @override
-  final Iterable<Type> types = const [TbResourceDeleteResult, _$TbResourceDeleteResult];
+  final Iterable<Type> types = const [
+    TbResourceDeleteResult,
+    _$TbResourceDeleteResult,
+  ];
 
   @override
   final String wireName = r'TbResourceDeleteResult';
@@ -62,7 +70,10 @@ class _$TbResourceDeleteResultSerializer implements PrimitiveSerializer<TbResour
       yield r'references';
       yield serializers.serialize(
         object.references,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityInfo)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(EntityInfo)]),
+        ]),
       );
     }
   }
@@ -73,7 +84,11 @@ class _$TbResourceDeleteResultSerializer implements PrimitiveSerializer<TbResour
     TbResourceDeleteResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +104,25 @@ class _$TbResourceDeleteResultSerializer implements PrimitiveSerializer<TbResour
       final value = serializedList[i + 1];
       switch (key) {
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'references':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityInfo)])]),
-          ) as BuiltMap<String, BuiltList<EntityInfo>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(EntityInfo)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<EntityInfo>>?;
           if (valueDes == null) continue;
           result.references.replace(valueDes);
           break;
@@ -132,5 +154,3 @@ class _$TbResourceDeleteResultSerializer implements PrimitiveSerializer<TbResour
     return result.build();
   }
 }
-
-

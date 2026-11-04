@@ -29,17 +29,18 @@ part 'agent_application.g.dart';
 /// * [agentId] - Agent this application belongs to
 /// * [name] - Application name (not unique across tenant)
 /// * [templateVersion] - Template version this application is based on
-/// * [desiredTemplateVersion] 
+/// * [desiredTemplateVersion]
 /// * [appType] - Application type
 /// * [config] - Config (with compose field and type = 'DOCKER_COMPOSE' for EDGE/GATEWAY)
-/// * [version] 
-/// * [projectName] 
-/// * [pendingDeletion] 
+/// * [version]
+/// * [projectName]
+/// * [pendingDeletion]
 /// * [origin] - Origin of the application (INSTALLED or DISCOVERED)
 /// * [applicationProfileId] - Application Profile Id. When set, config is read-only and inherited from the profile.
-/// * [profileConfigVersion] 
+/// * [profileConfigVersion]
 @BuiltValue()
-abstract class AgentApplication implements Built<AgentApplication, AgentApplicationBuilder> {
+abstract class AgentApplication
+    implements Built<AgentApplication, AgentApplicationBuilder> {
   /// JSON object with the Agent Application Id.
   @BuiltValueField(wireName: r'id')
   AgentApplicationId? get id;
@@ -99,16 +100,19 @@ abstract class AgentApplication implements Built<AgentApplication, AgentApplicat
 
   AgentApplication._();
 
-  factory AgentApplication([void updates(AgentApplicationBuilder b)]) = _$AgentApplication;
+  factory AgentApplication([void updates(AgentApplicationBuilder b)]) =
+      _$AgentApplication;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentApplicationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentApplication> get serializer => _$AgentApplicationSerializer();
+  static Serializer<AgentApplication> get serializer =>
+      _$AgentApplicationSerializer();
 }
 
-class _$AgentApplicationSerializer implements PrimitiveSerializer<AgentApplication> {
+class _$AgentApplicationSerializer
+    implements PrimitiveSerializer<AgentApplication> {
   @override
   final Iterable<Type> types = const [AgentApplication, _$AgentApplication];
 
@@ -227,7 +231,11 @@ class _$AgentApplicationSerializer implements PrimitiveSerializer<AgentApplicati
     AgentApplication object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -243,119 +251,151 @@ class _$AgentApplicationSerializer implements PrimitiveSerializer<AgentApplicati
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentApplicationId),
-          ) as AgentApplicationId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentApplicationId),
+                  )
+                  as AgentApplicationId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'agentId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AgentId),
-          ) as AgentId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AgentId),
+                  )
+                  as AgentId;
           result.agentId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'templateVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.templateVersion = valueDes;
           break;
         case r'desiredTemplateVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.desiredTemplateVersion = valueDes;
           break;
         case r'appType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AgentApplicationType),
-          ) as AgentApplicationType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AgentApplicationType),
+                  )
+                  as AgentApplicationType;
           result.appType = valueDes;
           break;
         case r'config':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DockerComposeConfig),
-          ) as DockerComposeConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DockerComposeConfig),
+                  )
+                  as DockerComposeConfig?;
           if (valueDes == null) continue;
           result.config.replace(valueDes);
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'projectName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.projectName = valueDes;
           break;
         case r'pendingDeletion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.pendingDeletion = valueDes;
           break;
         case r'origin':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentApplicationOrigin),
-          ) as AgentApplicationOrigin?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentApplicationOrigin,
+                    ),
+                  )
+                  as AgentApplicationOrigin?;
           if (valueDes == null) continue;
           result.origin = valueDes;
           break;
         case r'applicationProfileId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppProfileId),
-          ) as AgentAppProfileId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppProfileId),
+                  )
+                  as AgentAppProfileId?;
           if (valueDes == null) continue;
           result.applicationProfileId.replace(valueDes);
           break;
         case r'profileConfigVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.profileConfigVersion = valueDes;
           break;
@@ -387,5 +427,3 @@ class _$AgentApplicationSerializer implements PrimitiveSerializer<AgentApplicati
     return result.build();
   }
 }
-
-

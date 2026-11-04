@@ -17,10 +17,12 @@ part 'integration_converters_info.g.dart';
 /// IntegrationConvertersInfo
 ///
 /// Properties:
-/// * [uplink] 
-/// * [downlink] 
+/// * [uplink]
+/// * [downlink]
 @BuiltValue()
-abstract class IntegrationConvertersInfo implements Built<IntegrationConvertersInfo, IntegrationConvertersInfoBuilder> {
+abstract class IntegrationConvertersInfo
+    implements
+        Built<IntegrationConvertersInfo, IntegrationConvertersInfoBuilder> {
   @BuiltValueField(wireName: r'uplink')
   ConvertersInfo? get uplink;
 
@@ -29,18 +31,25 @@ abstract class IntegrationConvertersInfo implements Built<IntegrationConvertersI
 
   IntegrationConvertersInfo._();
 
-  factory IntegrationConvertersInfo([void updates(IntegrationConvertersInfoBuilder b)]) = _$IntegrationConvertersInfo;
+  factory IntegrationConvertersInfo([
+    void updates(IntegrationConvertersInfoBuilder b),
+  ]) = _$IntegrationConvertersInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(IntegrationConvertersInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<IntegrationConvertersInfo> get serializer => _$IntegrationConvertersInfoSerializer();
+  static Serializer<IntegrationConvertersInfo> get serializer =>
+      _$IntegrationConvertersInfoSerializer();
 }
 
-class _$IntegrationConvertersInfoSerializer implements PrimitiveSerializer<IntegrationConvertersInfo> {
+class _$IntegrationConvertersInfoSerializer
+    implements PrimitiveSerializer<IntegrationConvertersInfo> {
   @override
-  final Iterable<Type> types = const [IntegrationConvertersInfo, _$IntegrationConvertersInfo];
+  final Iterable<Type> types = const [
+    IntegrationConvertersInfo,
+    _$IntegrationConvertersInfo,
+  ];
 
   @override
   final String wireName = r'IntegrationConvertersInfo';
@@ -72,7 +81,11 @@ class _$IntegrationConvertersInfoSerializer implements PrimitiveSerializer<Integ
     IntegrationConvertersInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +101,22 @@ class _$IntegrationConvertersInfoSerializer implements PrimitiveSerializer<Integ
       final value = serializedList[i + 1];
       switch (key) {
         case r'uplink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ConvertersInfo),
-          ) as ConvertersInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ConvertersInfo),
+                  )
+                  as ConvertersInfo?;
           if (valueDes == null) continue;
           result.uplink.replace(valueDes);
           break;
         case r'downlink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ConvertersInfo),
-          ) as ConvertersInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ConvertersInfo),
+                  )
+                  as ConvertersInfo?;
           if (valueDes == null) continue;
           result.downlink.replace(valueDes);
           break;
@@ -131,5 +148,3 @@ class _$IntegrationConvertersInfoSerializer implements PrimitiveSerializer<Integ
     return result.build();
   }
 }
-
-

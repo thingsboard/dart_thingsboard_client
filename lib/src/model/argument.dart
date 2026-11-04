@@ -19,12 +19,12 @@ part 'argument.g.dart';
 /// Argument
 ///
 /// Properties:
-/// * [refEntityId] 
-/// * [refDynamicSourceConfiguration] 
-/// * [refEntityKey] 
-/// * [defaultValue] 
-/// * [limit] 
-/// * [timeWindow] 
+/// * [refEntityId]
+/// * [refDynamicSourceConfiguration]
+/// * [refEntityKey]
+/// * [defaultValue]
+/// * [limit]
+/// * [timeWindow]
 @BuiltValue()
 abstract class Argument implements Built<Argument, ArgumentBuilder> {
   @BuiltValueField(wireName: r'refEntityId')
@@ -118,7 +118,11 @@ class _$ArgumentSerializer implements PrimitiveSerializer<Argument> {
     Argument object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -134,50 +138,64 @@ class _$ArgumentSerializer implements PrimitiveSerializer<Argument> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'refEntityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.refEntityId = valueDes;
           break;
         case r'refDynamicSourceConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CfArgumentDynamicSourceConfiguration),
-          ) as CfArgumentDynamicSourceConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      CfArgumentDynamicSourceConfiguration,
+                    ),
+                  )
+                  as CfArgumentDynamicSourceConfiguration?;
           if (valueDes == null) continue;
           result.refDynamicSourceConfiguration = valueDes;
           break;
         case r'refEntityKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReferencedEntityKey),
-          ) as ReferencedEntityKey?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReferencedEntityKey),
+                  )
+                  as ReferencedEntityKey?;
           if (valueDes == null) continue;
           result.refEntityKey.replace(valueDes);
           break;
         case r'defaultValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultValue = valueDes;
           break;
         case r'limit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.limit = valueDes;
           break;
         case r'timeWindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeWindow = valueDes;
           break;
@@ -209,5 +227,3 @@ class _$ArgumentSerializer implements PrimitiveSerializer<Argument> {
     return result.build();
   }
 }
-
-

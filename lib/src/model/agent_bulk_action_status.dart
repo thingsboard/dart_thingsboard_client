@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agent_bulk_action_status.g.dart';
 
 class AgentBulkActionStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'QUEUED')
   static const AgentBulkActionStatus QUEUED = _$QUEUED;
   @BuiltValueEnumConst(wireName: r'IN_PROGRESS')
@@ -25,11 +24,13 @@ class AgentBulkActionStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'START_FAILED')
   static const AgentBulkActionStatus START_FAILED = _$START_FAILED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentBulkActionStatus unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentBulkActionStatus unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentBulkActionStatus> get serializer => _$agentBulkActionStatusSerializer;
+  static Serializer<AgentBulkActionStatus> get serializer =>
+      _$agentBulkActionStatusSerializer;
 
-  const AgentBulkActionStatus._(String name): super(name);
+  const AgentBulkActionStatus._(String name) : super(name);
 
   static BuiltSet<AgentBulkActionStatus> get values => _$values;
   static AgentBulkActionStatus valueOf(String name) => _$valueOf(name);
@@ -41,5 +42,5 @@ class AgentBulkActionStatus extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AgentBulkActionStatusMixin = Object with _$AgentBulkActionStatusMixin;
-
+abstract class AgentBulkActionStatusMixin = Object
+    with _$AgentBulkActionStatusMixin;

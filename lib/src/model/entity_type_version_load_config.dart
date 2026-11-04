@@ -16,17 +16,19 @@ part 'entity_type_version_load_config.g.dart';
 /// EntityTypeVersionLoadConfig
 ///
 /// Properties:
-/// * [loadRelations] 
-/// * [loadAttributes] 
-/// * [loadCredentials] 
-/// * [loadCalculatedFields] 
-/// * [loadPermissions] 
-/// * [loadGroupEntities] 
-/// * [autoGenerateIntegrationKey] 
-/// * [removeOtherEntities] 
-/// * [findExistingEntityByName] 
+/// * [loadRelations]
+/// * [loadAttributes]
+/// * [loadCredentials]
+/// * [loadCalculatedFields]
+/// * [loadPermissions]
+/// * [loadGroupEntities]
+/// * [autoGenerateIntegrationKey]
+/// * [removeOtherEntities]
+/// * [findExistingEntityByName]
 @BuiltValue()
-abstract class EntityTypeVersionLoadConfig implements Built<EntityTypeVersionLoadConfig, EntityTypeVersionLoadConfigBuilder> {
+abstract class EntityTypeVersionLoadConfig
+    implements
+        Built<EntityTypeVersionLoadConfig, EntityTypeVersionLoadConfigBuilder> {
   @BuiltValueField(wireName: r'loadRelations')
   bool? get loadRelations;
 
@@ -56,18 +58,25 @@ abstract class EntityTypeVersionLoadConfig implements Built<EntityTypeVersionLoa
 
   EntityTypeVersionLoadConfig._();
 
-  factory EntityTypeVersionLoadConfig([void updates(EntityTypeVersionLoadConfigBuilder b)]) = _$EntityTypeVersionLoadConfig;
+  factory EntityTypeVersionLoadConfig([
+    void updates(EntityTypeVersionLoadConfigBuilder b),
+  ]) = _$EntityTypeVersionLoadConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityTypeVersionLoadConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityTypeVersionLoadConfig> get serializer => _$EntityTypeVersionLoadConfigSerializer();
+  static Serializer<EntityTypeVersionLoadConfig> get serializer =>
+      _$EntityTypeVersionLoadConfigSerializer();
 }
 
-class _$EntityTypeVersionLoadConfigSerializer implements PrimitiveSerializer<EntityTypeVersionLoadConfig> {
+class _$EntityTypeVersionLoadConfigSerializer
+    implements PrimitiveSerializer<EntityTypeVersionLoadConfig> {
   @override
-  final Iterable<Type> types = const [EntityTypeVersionLoadConfig, _$EntityTypeVersionLoadConfig];
+  final Iterable<Type> types = const [
+    EntityTypeVersionLoadConfig,
+    _$EntityTypeVersionLoadConfig,
+  ];
 
   @override
   final String wireName = r'EntityTypeVersionLoadConfig';
@@ -148,7 +157,11 @@ class _$EntityTypeVersionLoadConfigSerializer implements PrimitiveSerializer<Ent
     EntityTypeVersionLoadConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -164,74 +177,92 @@ class _$EntityTypeVersionLoadConfigSerializer implements PrimitiveSerializer<Ent
       final value = serializedList[i + 1];
       switch (key) {
         case r'loadRelations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadRelations = valueDes;
           break;
         case r'loadAttributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadAttributes = valueDes;
           break;
         case r'loadCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadCredentials = valueDes;
           break;
         case r'loadCalculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadCalculatedFields = valueDes;
           break;
         case r'loadPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadPermissions = valueDes;
           break;
         case r'loadGroupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadGroupEntities = valueDes;
           break;
         case r'autoGenerateIntegrationKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.autoGenerateIntegrationKey = valueDes;
           break;
         case r'removeOtherEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.removeOtherEntities = valueDes;
           break;
         case r'findExistingEntityByName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.findExistingEntityByName = valueDes;
           break;
@@ -263,5 +294,3 @@ class _$EntityTypeVersionLoadConfigSerializer implements PrimitiveSerializer<Ent
     return result.build();
   }
 }
-
-

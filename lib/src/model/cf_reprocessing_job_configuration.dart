@@ -20,15 +20,21 @@ part 'cf_reprocessing_job_configuration.g.dart';
 /// CfReprocessingJobConfiguration
 ///
 /// Properties:
-/// * [tasksKey] 
-/// * [toReprocess] 
-/// * [type] 
-/// * [calculatedFieldId] 
-/// * [calculatedFieldName] 
-/// * [startTs] 
-/// * [endTs] 
+/// * [tasksKey]
+/// * [toReprocess]
+/// * [type]
+/// * [calculatedFieldId]
+/// * [calculatedFieldName]
+/// * [startTs]
+/// * [endTs]
 @BuiltValue()
-abstract class CfReprocessingJobConfiguration implements JobConfiguration, Built<CfReprocessingJobConfiguration, CfReprocessingJobConfigurationBuilder> {
+abstract class CfReprocessingJobConfiguration
+    implements
+        JobConfiguration,
+        Built<
+          CfReprocessingJobConfiguration,
+          CfReprocessingJobConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'calculatedFieldId')
   CalculatedFieldId get calculatedFieldId;
 
@@ -43,18 +49,25 @@ abstract class CfReprocessingJobConfiguration implements JobConfiguration, Built
 
   CfReprocessingJobConfiguration._();
 
-  factory CfReprocessingJobConfiguration([void updates(CfReprocessingJobConfigurationBuilder b)]) = _$CfReprocessingJobConfiguration;
+  factory CfReprocessingJobConfiguration([
+    void updates(CfReprocessingJobConfigurationBuilder b),
+  ]) = _$CfReprocessingJobConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CfReprocessingJobConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CfReprocessingJobConfiguration> get serializer => _$CfReprocessingJobConfigurationSerializer();
+  static Serializer<CfReprocessingJobConfiguration> get serializer =>
+      _$CfReprocessingJobConfigurationSerializer();
 }
 
-class _$CfReprocessingJobConfigurationSerializer implements PrimitiveSerializer<CfReprocessingJobConfiguration> {
+class _$CfReprocessingJobConfigurationSerializer
+    implements PrimitiveSerializer<CfReprocessingJobConfiguration> {
   @override
-  final Iterable<Type> types = const [CfReprocessingJobConfiguration, _$CfReprocessingJobConfiguration];
+  final Iterable<Type> types = const [
+    CfReprocessingJobConfiguration,
+    _$CfReprocessingJobConfiguration,
+  ];
 
   @override
   final String wireName = r'CfReprocessingJobConfiguration';
@@ -115,7 +128,11 @@ class _$CfReprocessingJobConfigurationSerializer implements PrimitiveSerializer<
     CfReprocessingJobConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -131,56 +148,72 @@ class _$CfReprocessingJobConfigurationSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'calculatedFieldId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(CalculatedFieldId),
-          ) as CalculatedFieldId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(CalculatedFieldId),
+                  )
+                  as CalculatedFieldId;
           result.calculatedFieldId.replace(valueDes);
           break;
         case r'endTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endTs = valueDes;
           break;
         case r'toReprocess':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TaskResult)]),
-          ) as BuiltList<TaskResult>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TaskResult),
+                    ]),
+                  )
+                  as BuiltList<TaskResult>?;
           if (valueDes == null) continue;
           result.toReprocess.replace(valueDes);
           break;
         case r'calculatedFieldName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.calculatedFieldName = valueDes;
           break;
         case r'startTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startTs = valueDes;
           break;
         case r'tasksKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tasksKey = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -211,5 +244,3 @@ class _$CfReprocessingJobConfigurationSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

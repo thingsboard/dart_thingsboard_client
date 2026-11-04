@@ -18,11 +18,17 @@ part 'x509_certificate_chain_provision_configuration.g.dart';
 ///
 /// Properties:
 /// * [provisionDeviceSecret] - Provision device secret
-/// * [type] 
-/// * [certificateRegExPattern] 
-/// * [allowCreateNewDevicesByX509Certificate] 
+/// * [type]
+/// * [certificateRegExPattern]
+/// * [allowCreateNewDevicesByX509Certificate]
 @BuiltValue()
-abstract class X509CertificateChainProvisionConfiguration implements DeviceProfileProvisionConfiguration, Built<X509CertificateChainProvisionConfiguration, X509CertificateChainProvisionConfigurationBuilder> {
+abstract class X509CertificateChainProvisionConfiguration
+    implements
+        DeviceProfileProvisionConfiguration,
+        Built<
+          X509CertificateChainProvisionConfiguration,
+          X509CertificateChainProvisionConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'allowCreateNewDevicesByX509Certificate')
   bool? get allowCreateNewDevicesByX509Certificate;
 
@@ -31,18 +37,26 @@ abstract class X509CertificateChainProvisionConfiguration implements DeviceProfi
 
   X509CertificateChainProvisionConfiguration._();
 
-  factory X509CertificateChainProvisionConfiguration([void updates(X509CertificateChainProvisionConfigurationBuilder b)]) = _$X509CertificateChainProvisionConfiguration;
+  factory X509CertificateChainProvisionConfiguration([
+    void updates(X509CertificateChainProvisionConfigurationBuilder b),
+  ]) = _$X509CertificateChainProvisionConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(X509CertificateChainProvisionConfigurationBuilder b) => b;
+  static void _defaults(X509CertificateChainProvisionConfigurationBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<X509CertificateChainProvisionConfiguration> get serializer => _$X509CertificateChainProvisionConfigurationSerializer();
+  static Serializer<X509CertificateChainProvisionConfiguration>
+  get serializer => _$X509CertificateChainProvisionConfigurationSerializer();
 }
 
-class _$X509CertificateChainProvisionConfigurationSerializer implements PrimitiveSerializer<X509CertificateChainProvisionConfiguration> {
+class _$X509CertificateChainProvisionConfigurationSerializer
+    implements PrimitiveSerializer<X509CertificateChainProvisionConfiguration> {
   @override
-  final Iterable<Type> types = const [X509CertificateChainProvisionConfiguration, _$X509CertificateChainProvisionConfiguration];
+  final Iterable<Type> types = const [
+    X509CertificateChainProvisionConfiguration,
+    _$X509CertificateChainProvisionConfiguration,
+  ];
 
   @override
   final String wireName = r'X509CertificateChainProvisionConfiguration';
@@ -86,7 +100,11 @@ class _$X509CertificateChainProvisionConfigurationSerializer implements Primitiv
     X509CertificateChainProvisionConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,33 +120,41 @@ class _$X509CertificateChainProvisionConfigurationSerializer implements Primitiv
       final value = serializedList[i + 1];
       switch (key) {
         case r'allowCreateNewDevicesByX509Certificate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.allowCreateNewDevicesByX509Certificate = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'certificateRegExPattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.certificateRegExPattern = valueDes;
           break;
         case r'provisionDeviceSecret':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.provisionDeviceSecret = valueDes;
           break;
@@ -160,5 +186,3 @@ class _$X509CertificateChainProvisionConfigurationSerializer implements Primitiv
     return result.build();
   }
 }
-
-

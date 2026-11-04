@@ -23,7 +23,9 @@ part 'page_data_scheduled_report_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataScheduledReportInfo implements Built<PageDataScheduledReportInfo, PageDataScheduledReportInfoBuilder> {
+abstract class PageDataScheduledReportInfo
+    implements
+        Built<PageDataScheduledReportInfo, PageDataScheduledReportInfoBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<ScheduledReportInfo>? get data;
@@ -42,18 +44,25 @@ abstract class PageDataScheduledReportInfo implements Built<PageDataScheduledRep
 
   PageDataScheduledReportInfo._();
 
-  factory PageDataScheduledReportInfo([void updates(PageDataScheduledReportInfoBuilder b)]) = _$PageDataScheduledReportInfo;
+  factory PageDataScheduledReportInfo([
+    void updates(PageDataScheduledReportInfoBuilder b),
+  ]) = _$PageDataScheduledReportInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataScheduledReportInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataScheduledReportInfo> get serializer => _$PageDataScheduledReportInfoSerializer();
+  static Serializer<PageDataScheduledReportInfo> get serializer =>
+      _$PageDataScheduledReportInfoSerializer();
 }
 
-class _$PageDataScheduledReportInfoSerializer implements PrimitiveSerializer<PageDataScheduledReportInfo> {
+class _$PageDataScheduledReportInfoSerializer
+    implements PrimitiveSerializer<PageDataScheduledReportInfo> {
   @override
-  final Iterable<Type> types = const [PageDataScheduledReportInfo, _$PageDataScheduledReportInfo];
+  final Iterable<Type> types = const [
+    PageDataScheduledReportInfo,
+    _$PageDataScheduledReportInfo,
+  ];
 
   @override
   final String wireName = r'PageDataScheduledReportInfo';
@@ -67,7 +76,9 @@ class _$PageDataScheduledReportInfoSerializer implements PrimitiveSerializer<Pag
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(ScheduledReportInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(ScheduledReportInfo),
+        ]),
       );
     }
     if (object.totalPages != null) {
@@ -99,7 +110,11 @@ class _$PageDataScheduledReportInfoSerializer implements PrimitiveSerializer<Pag
     PageDataScheduledReportInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +130,44 @@ class _$PageDataScheduledReportInfoSerializer implements PrimitiveSerializer<Pag
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ScheduledReportInfo)]),
-          ) as BuiltList<ScheduledReportInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ScheduledReportInfo),
+                    ]),
+                  )
+                  as BuiltList<ScheduledReportInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +199,3 @@ class _$PageDataScheduledReportInfoSerializer implements PrimitiveSerializer<Pag
     return result.build();
   }
 }
-
-

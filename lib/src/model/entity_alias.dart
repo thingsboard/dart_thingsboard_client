@@ -17,9 +17,9 @@ part 'entity_alias.g.dart';
 /// EntityAlias
 ///
 /// Properties:
-/// * [id] 
-/// * [alias] 
-/// * [filter] 
+/// * [id]
+/// * [alias]
+/// * [filter]
 @BuiltValue()
 abstract class EntityAlias implements Built<EntityAlias, EntityAliasBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -83,7 +83,11 @@ class _$EntityAliasSerializer implements PrimitiveSerializer<EntityAlias> {
     EntityAlias object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,26 +103,32 @@ class _$EntityAliasSerializer implements PrimitiveSerializer<EntityAlias> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'alias':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.alias = valueDes;
           break;
         case r'filter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityFilter),
-          ) as EntityFilter?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityFilter),
+                  )
+                  as EntityFilter?;
           if (valueDes == null) continue;
           result.filter = valueDes;
           break;
@@ -150,5 +160,3 @@ class _$EntityAliasSerializer implements PrimitiveSerializer<EntityAlias> {
     return result.build();
   }
 }
-
-

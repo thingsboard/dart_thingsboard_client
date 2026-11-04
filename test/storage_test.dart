@@ -39,7 +39,10 @@ void main() {
     });
 
     test('getItem returns defaultValue for missing key', () async {
-      final result = await storage.getItem('nonexistent', defaultValue: 'default');
+      final result = await storage.getItem(
+        'nonexistent',
+        defaultValue: 'default',
+      );
       expect(result, equals('default'));
     });
 

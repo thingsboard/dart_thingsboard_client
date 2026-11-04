@@ -17,21 +17,25 @@ part 'all_users_filter.g.dart';
 /// AllUsersFilter
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class AllUsersFilter implements UsersFilter, Built<AllUsersFilter, AllUsersFilterBuilder> {
+abstract class AllUsersFilter
+    implements UsersFilter, Built<AllUsersFilter, AllUsersFilterBuilder> {
   AllUsersFilter._();
 
-  factory AllUsersFilter([void updates(AllUsersFilterBuilder b)]) = _$AllUsersFilter;
+  factory AllUsersFilter([void updates(AllUsersFilterBuilder b)]) =
+      _$AllUsersFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AllUsersFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AllUsersFilter> get serializer => _$AllUsersFilterSerializer();
+  static Serializer<AllUsersFilter> get serializer =>
+      _$AllUsersFilterSerializer();
 }
 
-class _$AllUsersFilterSerializer implements PrimitiveSerializer<AllUsersFilter> {
+class _$AllUsersFilterSerializer
+    implements PrimitiveSerializer<AllUsersFilter> {
   @override
   final Iterable<Type> types = const [AllUsersFilter, _$AllUsersFilter];
 
@@ -56,7 +60,11 @@ class _$AllUsersFilterSerializer implements PrimitiveSerializer<AllUsersFilter> 
     AllUsersFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +80,12 @@ class _$AllUsersFilterSerializer implements PrimitiveSerializer<AllUsersFilter> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +116,3 @@ class _$AllUsersFilterSerializer implements PrimitiveSerializer<AllUsersFilter> 
     return result.build();
   }
 }
-
-

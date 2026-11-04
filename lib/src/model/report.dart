@@ -23,17 +23,17 @@ part 'report.g.dart';
 /// Report
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
-/// * [tenantId] 
-/// * [customerId] 
-/// * [templateId] 
-/// * [format] 
-/// * [name] 
-/// * [userId] 
-/// * [publicKey] 
+/// * [tenantId]
+/// * [customerId]
+/// * [templateId]
+/// * [format]
+/// * [name]
+/// * [userId]
+/// * [publicKey]
 /// * [ownerId] - JSON object with Customer or Tenant Id
-/// * [public] 
+/// * [public]
 @BuiltValue()
 abstract class Report implements Built<Report, ReportBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -170,7 +170,11 @@ class _$ReportSerializer implements PrimitiveSerializer<Report> {
     Report object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -186,85 +190,107 @@ class _$ReportSerializer implements PrimitiveSerializer<Report> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportId),
-          ) as ReportId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReportId),
+                  )
+                  as ReportId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TenantId),
-          ) as TenantId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TenantId),
+                  )
+                  as TenantId;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'templateId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportTemplateId),
-          ) as ReportTemplateId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportTemplateId),
+                  )
+                  as ReportTemplateId;
           result.templateId.replace(valueDes);
           break;
         case r'format':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TbReportFormat),
-          ) as TbReportFormat;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TbReportFormat),
+                  )
+                  as TbReportFormat;
           result.format = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'userId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(UserId),
-          ) as UserId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(UserId),
+                  )
+                  as UserId;
           result.userId.replace(valueDes);
           break;
         case r'publicKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.publicKey = valueDes;
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
         case r'public':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.public = valueDes;
           break;
@@ -296,5 +322,3 @@ class _$ReportSerializer implements PrimitiveSerializer<Report> {
     return result.build();
   }
 }
-
-

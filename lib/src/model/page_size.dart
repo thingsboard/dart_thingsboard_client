@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'page_size.g.dart';
 
 class PageSize extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'A4')
   static const PageSize A4 = _$A4;
   @BuiltValueEnumConst(wireName: r'LETTER')
@@ -33,7 +32,7 @@ class PageSize extends EnumClass {
 
   static Serializer<PageSize> get serializer => _$pageSizeSerializer;
 
-  const PageSize._(String name): super(name);
+  const PageSize._(String name) : super(name);
 
   static BuiltSet<PageSize> get values => _$values;
   static PageSize valueOf(String name) => _$valueOf(name);
@@ -46,4 +45,3 @@ class PageSize extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class PageSizeMixin = Object with _$PageSizeMixin;
-

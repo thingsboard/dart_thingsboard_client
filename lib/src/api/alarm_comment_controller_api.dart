@@ -9,18 +9,15 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/alarm_comment.dart';
 import 'package:thingsboard_client/src/model/page_data_alarm_comment_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AlarmCommentControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +39,7 @@ class AlarmCommentControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteAlarmComment({ 
+  Future<Response<void>> deleteAlarmComment({
     required String alarmId,
     required String commentId,
     CancelToken? cancelToken,
@@ -53,12 +50,30 @@ class AlarmCommentControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/alarm/{alarmId}/comment/{commentId}'.replaceAll('{' r'alarmId' '}', encodeQueryParameter(_serializers, alarmId, const FullType(String)).toString()).replaceAll('{' r'commentId' '}', encodeQueryParameter(_serializers, commentId, const FullType(String)).toString());
+    final _path = r'/api/alarm/{alarmId}/comment/{commentId}'
+        .replaceAll(
+          '{'
+          r'alarmId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            alarmId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'commentId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            commentId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -66,11 +81,8 @@ class AlarmCommentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -106,7 +118,7 @@ class AlarmCommentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAlarmCommentInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAlarmCommentInfo>> getAlarmComments({ 
+  Future<Response<PageDataAlarmCommentInfo>> getAlarmComments({
     required String alarmId,
     required int pageSize,
     required int page,
@@ -119,13 +131,21 @@ class AlarmCommentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAlarmCommentInfo);
-    final _path = r'/api/alarm/{alarmId}/comment'.replaceAll('{' r'alarmId' '}', encodeQueryParameter(_serializers, alarmId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAlarmCommentInfo);
+    final _path = r'/api/alarm/{alarmId}/comment'.replaceAll(
+      '{'
+      r'alarmId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        alarmId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -133,11 +153,8 @@ class AlarmCommentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -145,10 +162,24 @@ class AlarmCommentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -164,11 +195,13 @@ class AlarmCommentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAlarmCommentInfo),
-      ) as PageDataAlarmCommentInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAlarmCommentInfo),
+                )
+                as PageDataAlarmCommentInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -191,7 +224,7 @@ class AlarmCommentControllerApi {
     );
   }
 
-  /// Create or update Alarm Comment 
+  /// Create or update Alarm Comment
   /// Creates or Updates the Alarm Comment. When creating comment, platform generates Alarm Comment Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Alarm Comment id will be present in the response. Specify existing Alarm Comment id to update the alarm. Referencing non-existing Alarm Comment Id will cause &#39;Not Found&#39; error.    To create new Alarm comment entity it is enough to specify &#39;comment&#39; json element with &#39;text&#39; node, for example: {\&quot;comment\&quot;: { \&quot;text\&quot;: \&quot;my comment\&quot;}}.    If comment type is not specified the default value &#39;OTHER&#39; will be saved. If &#39;alarmId&#39; or &#39;userId&#39; specified in body it will be ignored.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
@@ -206,7 +239,7 @@ class AlarmCommentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AlarmComment] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AlarmComment>> saveAlarmComment({ 
+  Future<Response<AlarmComment>> saveAlarmComment({
     required String alarmId,
     required AlarmComment alarmComment,
     CancelToken? cancelToken,
@@ -216,13 +249,21 @@ class AlarmCommentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAlarmComment);
-    final _path = r'/api/alarm/{alarmId}/comment'.replaceAll('{' r'alarmId' '}', encodeQueryParameter(_serializers, alarmId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAlarmComment);
+    final _path = r'/api/alarm/{alarmId}/comment'.replaceAll(
+      '{'
+      r'alarmId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        alarmId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -230,11 +271,8 @@ class AlarmCommentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -247,13 +285,9 @@ class AlarmCommentControllerApi {
     try {
       const _type = FullType(AlarmComment);
       _bodyData = _serializers.serialize(alarmComment, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -273,11 +307,13 @@ class AlarmCommentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AlarmComment),
-      ) as AlarmComment;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AlarmComment),
+                )
+                as AlarmComment;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -299,5 +335,4 @@ class AlarmCommentControllerApi {
       extra: _response.extra,
     );
   }
-
 }

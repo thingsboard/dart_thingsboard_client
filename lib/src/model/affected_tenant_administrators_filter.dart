@@ -17,23 +17,36 @@ part 'affected_tenant_administrators_filter.g.dart';
 /// AffectedTenantAdministratorsFilter
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class AffectedTenantAdministratorsFilter implements UsersFilter, Built<AffectedTenantAdministratorsFilter, AffectedTenantAdministratorsFilterBuilder> {
+abstract class AffectedTenantAdministratorsFilter
+    implements
+        UsersFilter,
+        Built<
+          AffectedTenantAdministratorsFilter,
+          AffectedTenantAdministratorsFilterBuilder
+        > {
   AffectedTenantAdministratorsFilter._();
 
-  factory AffectedTenantAdministratorsFilter([void updates(AffectedTenantAdministratorsFilterBuilder b)]) = _$AffectedTenantAdministratorsFilter;
+  factory AffectedTenantAdministratorsFilter([
+    void updates(AffectedTenantAdministratorsFilterBuilder b),
+  ]) = _$AffectedTenantAdministratorsFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AffectedTenantAdministratorsFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AffectedTenantAdministratorsFilter> get serializer => _$AffectedTenantAdministratorsFilterSerializer();
+  static Serializer<AffectedTenantAdministratorsFilter> get serializer =>
+      _$AffectedTenantAdministratorsFilterSerializer();
 }
 
-class _$AffectedTenantAdministratorsFilterSerializer implements PrimitiveSerializer<AffectedTenantAdministratorsFilter> {
+class _$AffectedTenantAdministratorsFilterSerializer
+    implements PrimitiveSerializer<AffectedTenantAdministratorsFilter> {
   @override
-  final Iterable<Type> types = const [AffectedTenantAdministratorsFilter, _$AffectedTenantAdministratorsFilter];
+  final Iterable<Type> types = const [
+    AffectedTenantAdministratorsFilter,
+    _$AffectedTenantAdministratorsFilter,
+  ];
 
   @override
   final String wireName = r'AffectedTenantAdministratorsFilter';
@@ -56,7 +69,11 @@ class _$AffectedTenantAdministratorsFilterSerializer implements PrimitiveSeriali
     AffectedTenantAdministratorsFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$AffectedTenantAdministratorsFilterSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$AffectedTenantAdministratorsFilterSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

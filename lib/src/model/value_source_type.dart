@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'value_source_type.g.dart';
 
 class ValueSourceType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'constant')
   static const ValueSourceType constant = _$constant;
   @BuiltValueEnumConst(wireName: r'latestKey')
@@ -25,9 +24,10 @@ class ValueSourceType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ValueSourceType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<ValueSourceType> get serializer => _$valueSourceTypeSerializer;
+  static Serializer<ValueSourceType> get serializer =>
+      _$valueSourceTypeSerializer;
 
-  const ValueSourceType._(String name): super(name);
+  const ValueSourceType._(String name) : super(name);
 
   static BuiltSet<ValueSourceType> get values => _$values;
   static ValueSourceType valueOf(String name) => _$valueOf(name);
@@ -40,4 +40,3 @@ class ValueSourceType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ValueSourceTypeMixin = Object with _$ValueSourceTypeMixin;
-

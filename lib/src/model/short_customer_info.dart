@@ -21,7 +21,8 @@ part 'short_customer_info.g.dart';
 /// * [title] - Title of the customer.
 /// * [public] - Indicates special 'Public' customer used to embed dashboards on public websites.
 @BuiltValue()
-abstract class ShortCustomerInfo implements Built<ShortCustomerInfo, ShortCustomerInfoBuilder> {
+abstract class ShortCustomerInfo
+    implements Built<ShortCustomerInfo, ShortCustomerInfoBuilder> {
   /// JSON object with the customer Id.
   @BuiltValueField(wireName: r'customerId')
   CustomerId? get customerId;
@@ -36,16 +37,19 @@ abstract class ShortCustomerInfo implements Built<ShortCustomerInfo, ShortCustom
 
   ShortCustomerInfo._();
 
-  factory ShortCustomerInfo([void updates(ShortCustomerInfoBuilder b)]) = _$ShortCustomerInfo;
+  factory ShortCustomerInfo([void updates(ShortCustomerInfoBuilder b)]) =
+      _$ShortCustomerInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ShortCustomerInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ShortCustomerInfo> get serializer => _$ShortCustomerInfoSerializer();
+  static Serializer<ShortCustomerInfo> get serializer =>
+      _$ShortCustomerInfoSerializer();
 }
 
-class _$ShortCustomerInfoSerializer implements PrimitiveSerializer<ShortCustomerInfo> {
+class _$ShortCustomerInfoSerializer
+    implements PrimitiveSerializer<ShortCustomerInfo> {
   @override
   final Iterable<Type> types = const [ShortCustomerInfo, _$ShortCustomerInfo];
 
@@ -86,7 +90,11 @@ class _$ShortCustomerInfoSerializer implements PrimitiveSerializer<ShortCustomer
     ShortCustomerInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +110,32 @@ class _$ShortCustomerInfoSerializer implements PrimitiveSerializer<ShortCustomer
       final value = serializedList[i + 1];
       switch (key) {
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'public':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.public = valueDes;
           break;
@@ -153,5 +167,3 @@ class _$ShortCustomerInfoSerializer implements PrimitiveSerializer<ShortCustomer
     return result.build();
   }
 }
-
-

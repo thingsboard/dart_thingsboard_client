@@ -19,11 +19,12 @@ part 'entity_list_filter.g.dart';
 /// EntityListFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [entityType] 
-/// * [entityList] 
+/// * [type]
+/// * [entityType]
+/// * [entityList]
 @BuiltValue()
-abstract class EntityListFilter implements EntityFilter, Built<EntityListFilter, EntityListFilterBuilder> {
+abstract class EntityListFilter
+    implements EntityFilter, Built<EntityListFilter, EntityListFilterBuilder> {
   @BuiltValueField(wireName: r'entityType')
   EntityType? get entityType;
   // enum entityTypeEnum {  TENANT,  CUSTOMER,  USER,  DASHBOARD,  ASSET,  DEVICE,  ALARM,  ENTITY_GROUP,  CONVERTER,  INTEGRATION,  RULE_CHAIN,  RULE_NODE,  SCHEDULER_EVENT,  BLOB_ENTITY,  REPORT_TEMPLATE,  REPORT,  ENTITY_VIEW,  WIDGETS_BUNDLE,  WIDGET_TYPE,  ROLE,  GROUP_PERMISSION,  TENANT_PROFILE,  DEVICE_PROFILE,  ASSET_PROFILE,  API_USAGE_STATE,  TB_RESOURCE,  OTA_PACKAGE,  EDGE,  RPC,  QUEUE,  NOTIFICATION_TARGET,  NOTIFICATION_TEMPLATE,  NOTIFICATION_REQUEST,  NOTIFICATION,  NOTIFICATION_RULE,  QUEUE_STATS,  OAUTH2_CLIENT,  DOMAIN,  MOBILE_APP,  MOBILE_APP_BUNDLE,  CALCULATED_FIELD,  JOB,  SECRET,  ADMIN_SETTINGS,  AI_MODEL,  API_KEY,  AGENT,  AGENT_APPLICATION,  AGENT_APP_EVENT,  AGENT_APP_UNIT,  AGENT_APP_PROFILE,  AGENT_PROFILE,  AGENT_BULK_ACTION,  };
@@ -33,16 +34,19 @@ abstract class EntityListFilter implements EntityFilter, Built<EntityListFilter,
 
   EntityListFilter._();
 
-  factory EntityListFilter([void updates(EntityListFilterBuilder b)]) = _$EntityListFilter;
+  factory EntityListFilter([void updates(EntityListFilterBuilder b)]) =
+      _$EntityListFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityListFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityListFilter> get serializer => _$EntityListFilterSerializer();
+  static Serializer<EntityListFilter> get serializer =>
+      _$EntityListFilterSerializer();
 }
 
-class _$EntityListFilterSerializer implements PrimitiveSerializer<EntityListFilter> {
+class _$EntityListFilterSerializer
+    implements PrimitiveSerializer<EntityListFilter> {
   @override
   final Iterable<Type> types = const [EntityListFilter, _$EntityListFilter];
 
@@ -81,7 +85,11 @@ class _$EntityListFilterSerializer implements PrimitiveSerializer<EntityListFilt
     EntityListFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,25 +105,33 @@ class _$EntityListFilterSerializer implements PrimitiveSerializer<EntityListFilt
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.entityType = valueDes;
           break;
         case r'entityList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.entityList.replace(valueDes);
           break;
@@ -147,5 +163,3 @@ class _$EntityListFilterSerializer implements PrimitiveSerializer<EntityListFilt
     return result.build();
   }
 }
-
-

@@ -17,13 +17,14 @@ part 'qr_code_config.g.dart';
 /// QRCodeConfig
 ///
 /// Properties:
-/// * [showOnHomePage] 
-/// * [badgeEnabled] 
-/// * [qrCodeLabelEnabled] 
-/// * [badgePosition] 
-/// * [qrCodeLabel] 
+/// * [showOnHomePage]
+/// * [badgeEnabled]
+/// * [qrCodeLabelEnabled]
+/// * [badgePosition]
+/// * [qrCodeLabel]
 @BuiltValue()
-abstract class QRCodeConfig implements Built<QRCodeConfig, QRCodeConfigBuilder> {
+abstract class QRCodeConfig
+    implements Built<QRCodeConfig, QRCodeConfigBuilder> {
   @BuiltValueField(wireName: r'showOnHomePage')
   bool? get showOnHomePage;
 
@@ -106,7 +107,11 @@ class _$QRCodeConfigSerializer implements PrimitiveSerializer<QRCodeConfig> {
     QRCodeConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -122,42 +127,52 @@ class _$QRCodeConfigSerializer implements PrimitiveSerializer<QRCodeConfig> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'showOnHomePage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showOnHomePage = valueDes;
           break;
         case r'badgeEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.badgeEnabled = valueDes;
           break;
         case r'qrCodeLabelEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.qrCodeLabelEnabled = valueDes;
           break;
         case r'badgePosition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BadgePosition),
-          ) as BadgePosition?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BadgePosition),
+                  )
+                  as BadgePosition?;
           if (valueDes == null) continue;
           result.badgePosition = valueDes;
           break;
         case r'qrCodeLabel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.qrCodeLabel = valueDes;
           break;
@@ -189,5 +204,3 @@ class _$QRCodeConfigSerializer implements PrimitiveSerializer<QRCodeConfig> {
     return result.build();
   }
 }
-
-

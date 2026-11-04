@@ -17,23 +17,36 @@ part 'default_device_profile_configuration.g.dart';
 /// Default device profile configuration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class DefaultDeviceProfileConfiguration implements DeviceProfileConfiguration, Built<DefaultDeviceProfileConfiguration, DefaultDeviceProfileConfigurationBuilder> {
+abstract class DefaultDeviceProfileConfiguration
+    implements
+        DeviceProfileConfiguration,
+        Built<
+          DefaultDeviceProfileConfiguration,
+          DefaultDeviceProfileConfigurationBuilder
+        > {
   DefaultDeviceProfileConfiguration._();
 
-  factory DefaultDeviceProfileConfiguration([void updates(DefaultDeviceProfileConfigurationBuilder b)]) = _$DefaultDeviceProfileConfiguration;
+  factory DefaultDeviceProfileConfiguration([
+    void updates(DefaultDeviceProfileConfigurationBuilder b),
+  ]) = _$DefaultDeviceProfileConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultDeviceProfileConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultDeviceProfileConfiguration> get serializer => _$DefaultDeviceProfileConfigurationSerializer();
+  static Serializer<DefaultDeviceProfileConfiguration> get serializer =>
+      _$DefaultDeviceProfileConfigurationSerializer();
 }
 
-class _$DefaultDeviceProfileConfigurationSerializer implements PrimitiveSerializer<DefaultDeviceProfileConfiguration> {
+class _$DefaultDeviceProfileConfigurationSerializer
+    implements PrimitiveSerializer<DefaultDeviceProfileConfiguration> {
   @override
-  final Iterable<Type> types = const [DefaultDeviceProfileConfiguration, _$DefaultDeviceProfileConfiguration];
+  final Iterable<Type> types = const [
+    DefaultDeviceProfileConfiguration,
+    _$DefaultDeviceProfileConfiguration,
+  ];
 
   @override
   final String wireName = r'DefaultDeviceProfileConfiguration';
@@ -56,7 +69,11 @@ class _$DefaultDeviceProfileConfigurationSerializer implements PrimitiveSerializ
     DefaultDeviceProfileConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$DefaultDeviceProfileConfigurationSerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$DefaultDeviceProfileConfigurationSerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

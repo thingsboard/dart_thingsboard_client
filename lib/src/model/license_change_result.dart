@@ -18,10 +18,11 @@ part 'license_change_result.g.dart';
 /// LicenseChangeResult
 ///
 /// Properties:
-/// * [status] 
-/// * [subscription] 
+/// * [status]
+/// * [subscription]
 @BuiltValue()
-abstract class LicenseChangeResult implements Built<LicenseChangeResult, LicenseChangeResultBuilder> {
+abstract class LicenseChangeResult
+    implements Built<LicenseChangeResult, LicenseChangeResultBuilder> {
   @BuiltValueField(wireName: r'status')
   SystemSetupState? get status;
   // enum statusEnum {  LICENSE_REQUIRED,  ACCOUNT_REQUIRED,  NON_PRODUCTION_CONFIRMATION_REQUIRED,  READY,  };
@@ -31,18 +32,24 @@ abstract class LicenseChangeResult implements Built<LicenseChangeResult, License
 
   LicenseChangeResult._();
 
-  factory LicenseChangeResult([void updates(LicenseChangeResultBuilder b)]) = _$LicenseChangeResult;
+  factory LicenseChangeResult([void updates(LicenseChangeResultBuilder b)]) =
+      _$LicenseChangeResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LicenseChangeResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LicenseChangeResult> get serializer => _$LicenseChangeResultSerializer();
+  static Serializer<LicenseChangeResult> get serializer =>
+      _$LicenseChangeResultSerializer();
 }
 
-class _$LicenseChangeResultSerializer implements PrimitiveSerializer<LicenseChangeResult> {
+class _$LicenseChangeResultSerializer
+    implements PrimitiveSerializer<LicenseChangeResult> {
   @override
-  final Iterable<Type> types = const [LicenseChangeResult, _$LicenseChangeResult];
+  final Iterable<Type> types = const [
+    LicenseChangeResult,
+    _$LicenseChangeResult,
+  ];
 
   @override
   final String wireName = r'LicenseChangeResult';
@@ -74,7 +81,11 @@ class _$LicenseChangeResultSerializer implements PrimitiveSerializer<LicenseChan
     LicenseChangeResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,18 +101,22 @@ class _$LicenseChangeResultSerializer implements PrimitiveSerializer<LicenseChan
       final value = serializedList[i + 1];
       switch (key) {
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SystemSetupState),
-          ) as SystemSetupState?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SystemSetupState),
+                  )
+                  as SystemSetupState?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
         case r'subscription':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SubscriptionInfo),
-          ) as SubscriptionInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SubscriptionInfo),
+                  )
+                  as SubscriptionInfo?;
           if (valueDes == null) continue;
           result.subscription.replace(valueDes);
           break;
@@ -133,5 +148,3 @@ class _$LicenseChangeResultSerializer implements PrimitiveSerializer<LicenseChan
     return result.build();
   }
 }
-
-

@@ -18,22 +18,26 @@ part 'asset_profile_id.g.dart';
 /// AssetProfileId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class AssetProfileId implements EntityId, Built<AssetProfileId, AssetProfileIdBuilder> {
+abstract class AssetProfileId
+    implements EntityId, Built<AssetProfileId, AssetProfileIdBuilder> {
   AssetProfileId._();
 
-  factory AssetProfileId([void updates(AssetProfileIdBuilder b)]) = _$AssetProfileId;
+  factory AssetProfileId([void updates(AssetProfileIdBuilder b)]) =
+      _$AssetProfileId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AssetProfileIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AssetProfileId> get serializer => _$AssetProfileIdSerializer();
+  static Serializer<AssetProfileId> get serializer =>
+      _$AssetProfileIdSerializer();
 }
 
-class _$AssetProfileIdSerializer implements PrimitiveSerializer<AssetProfileId> {
+class _$AssetProfileIdSerializer
+    implements PrimitiveSerializer<AssetProfileId> {
   @override
   final Iterable<Type> types = const [AssetProfileId, _$AssetProfileId];
 
@@ -63,7 +67,11 @@ class _$AssetProfileIdSerializer implements PrimitiveSerializer<AssetProfileId> 
     AssetProfileId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$AssetProfileIdSerializer implements PrimitiveSerializer<AssetProfileId> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$AssetProfileIdSerializer implements PrimitiveSerializer<AssetProfileId> 
     return result.build();
   }
 }
-
-

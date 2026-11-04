@@ -19,10 +19,10 @@ part 'notification_target_config.g.dart';
 /// NotificationTargetConfig
 ///
 /// Properties:
-/// * [description] 
-/// * [type] 
+/// * [description]
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class NotificationTargetConfig  {
+abstract class NotificationTargetConfig {
   @BuiltValueField(wireName: r'description')
   String? get description;
 
@@ -38,39 +38,43 @@ abstract class NotificationTargetConfig  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationTargetConfig> get serializer => _$NotificationTargetConfigSerializer();
+  static Serializer<NotificationTargetConfig> get serializer =>
+      _$NotificationTargetConfigSerializer();
 }
 
 extension NotificationTargetConfigDiscriminatorExt on NotificationTargetConfig {
-    String? get discriminatorValue {
-        if (this is MicrosoftTeamsNotificationTargetConfig) {
-            return r'MICROSOFT_TEAMS';
-        }
-        if (this is PlatformUsersNotificationTargetConfig) {
-            return r'PLATFORM_USERS';
-        }
-        if (this is SlackNotificationTargetConfig) {
-            return r'SLACK';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is MicrosoftTeamsNotificationTargetConfig) {
+      return r'MICROSOFT_TEAMS';
     }
-}
-extension NotificationTargetConfigBuilderDiscriminatorExt on NotificationTargetConfigBuilder {
-    String? get discriminatorValue {
-        if (this is MicrosoftTeamsNotificationTargetConfigBuilder) {
-            return r'MICROSOFT_TEAMS';
-        }
-        if (this is PlatformUsersNotificationTargetConfigBuilder) {
-            return r'PLATFORM_USERS';
-        }
-        if (this is SlackNotificationTargetConfigBuilder) {
-            return r'SLACK';
-        }
-        return null;
+    if (this is PlatformUsersNotificationTargetConfig) {
+      return r'PLATFORM_USERS';
     }
+    if (this is SlackNotificationTargetConfig) {
+      return r'SLACK';
+    }
+    return null;
+  }
 }
 
-class _$NotificationTargetConfigSerializer implements PrimitiveSerializer<NotificationTargetConfig> {
+extension NotificationTargetConfigBuilderDiscriminatorExt
+    on NotificationTargetConfigBuilder {
+  String? get discriminatorValue {
+    if (this is MicrosoftTeamsNotificationTargetConfigBuilder) {
+      return r'MICROSOFT_TEAMS';
+    }
+    if (this is PlatformUsersNotificationTargetConfigBuilder) {
+      return r'PLATFORM_USERS';
+    }
+    if (this is SlackNotificationTargetConfigBuilder) {
+      return r'SLACK';
+    }
+    return null;
+  }
+}
+
+class _$NotificationTargetConfigSerializer
+    implements PrimitiveSerializer<NotificationTargetConfig> {
   @override
   final Iterable<Type> types = const [NotificationTargetConfig];
 
@@ -103,15 +107,28 @@ class _$NotificationTargetConfigSerializer implements PrimitiveSerializer<Notifi
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is MicrosoftTeamsNotificationTargetConfig) {
-      return serializers.serialize(object, specifiedType: FullType(MicrosoftTeamsNotificationTargetConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(MicrosoftTeamsNotificationTargetConfig),
+      )!;
     }
     if (object is PlatformUsersNotificationTargetConfig) {
-      return serializers.serialize(object, specifiedType: FullType(PlatformUsersNotificationTargetConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(PlatformUsersNotificationTargetConfig),
+      )!;
     }
     if (object is SlackNotificationTargetConfig) {
-      return serializers.serialize(object, specifiedType: FullType(SlackNotificationTargetConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SlackNotificationTargetConfig),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -121,39 +138,73 @@ class _$NotificationTargetConfigSerializer implements PrimitiveSerializer<Notifi
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(NotificationTargetConfig.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          NotificationTargetConfig.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'MICROSOFT_TEAMS':
-        return serializers.deserialize(serialized, specifiedType: FullType(MicrosoftTeamsNotificationTargetConfig)) as MicrosoftTeamsNotificationTargetConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(MicrosoftTeamsNotificationTargetConfig),
+            )
+            as MicrosoftTeamsNotificationTargetConfig;
       case r'PLATFORM_USERS':
-        return serializers.deserialize(serialized, specifiedType: FullType(PlatformUsersNotificationTargetConfig)) as PlatformUsersNotificationTargetConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(PlatformUsersNotificationTargetConfig),
+            )
+            as PlatformUsersNotificationTargetConfig;
       case r'SLACK':
-        return serializers.deserialize(serialized, specifiedType: FullType(SlackNotificationTargetConfig)) as SlackNotificationTargetConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SlackNotificationTargetConfig),
+            )
+            as SlackNotificationTargetConfig;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($NotificationTargetConfig)) as $NotificationTargetConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($NotificationTargetConfig),
+            )
+            as $NotificationTargetConfig;
     }
   }
 }
 
-
 /// a concrete implementation of [NotificationTargetConfig], since [NotificationTargetConfig] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $NotificationTargetConfig implements NotificationTargetConfig, Built<$NotificationTargetConfig, $NotificationTargetConfigBuilder> {
+abstract class $NotificationTargetConfig
+    implements
+        NotificationTargetConfig,
+        Built<$NotificationTargetConfig, $NotificationTargetConfigBuilder> {
   $NotificationTargetConfig._();
 
-  factory $NotificationTargetConfig([void Function($NotificationTargetConfigBuilder)? updates]) = _$$NotificationTargetConfig;
+  factory $NotificationTargetConfig([
+    void Function($NotificationTargetConfigBuilder)? updates,
+  ]) = _$$NotificationTargetConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($NotificationTargetConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$NotificationTargetConfig> get serializer => _$$NotificationTargetConfigSerializer();
+  static Serializer<$NotificationTargetConfig> get serializer =>
+      _$$NotificationTargetConfigSerializer();
 }
 
-class _$$NotificationTargetConfigSerializer implements PrimitiveSerializer<$NotificationTargetConfig> {
+class _$$NotificationTargetConfigSerializer
+    implements PrimitiveSerializer<$NotificationTargetConfig> {
   @override
-  final Iterable<Type> types = const [$NotificationTargetConfig, _$$NotificationTargetConfig];
+  final Iterable<Type> types = const [
+    $NotificationTargetConfig,
+    _$$NotificationTargetConfig,
+  ];
 
   @override
   final String wireName = r'$NotificationTargetConfig';
@@ -164,7 +215,10 @@ class _$$NotificationTargetConfigSerializer implements PrimitiveSerializer<$Noti
     $NotificationTargetConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(NotificationTargetConfig))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(NotificationTargetConfig),
+    )!;
   }
 
   void _deserializeProperties(
@@ -180,18 +234,22 @@ class _$$NotificationTargetConfigSerializer implements PrimitiveSerializer<$Noti
       final value = serializedList[i + 1];
       switch (key) {
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -222,4 +280,3 @@ class _$$NotificationTargetConfigSerializer implements PrimitiveSerializer<$Noti
     return result.build();
   }
 }
-

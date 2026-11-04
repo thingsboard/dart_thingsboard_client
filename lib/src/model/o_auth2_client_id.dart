@@ -18,22 +18,26 @@ part 'o_auth2_client_id.g.dart';
 /// OAuth2ClientId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class OAuth2ClientId implements EntityId, Built<OAuth2ClientId, OAuth2ClientIdBuilder> {
+abstract class OAuth2ClientId
+    implements EntityId, Built<OAuth2ClientId, OAuth2ClientIdBuilder> {
   OAuth2ClientId._();
 
-  factory OAuth2ClientId([void updates(OAuth2ClientIdBuilder b)]) = _$OAuth2ClientId;
+  factory OAuth2ClientId([void updates(OAuth2ClientIdBuilder b)]) =
+      _$OAuth2ClientId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OAuth2ClientIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OAuth2ClientId> get serializer => _$OAuth2ClientIdSerializer();
+  static Serializer<OAuth2ClientId> get serializer =>
+      _$OAuth2ClientIdSerializer();
 }
 
-class _$OAuth2ClientIdSerializer implements PrimitiveSerializer<OAuth2ClientId> {
+class _$OAuth2ClientIdSerializer
+    implements PrimitiveSerializer<OAuth2ClientId> {
   @override
   final Iterable<Type> types = const [OAuth2ClientId, _$OAuth2ClientId];
 
@@ -63,7 +67,11 @@ class _$OAuth2ClientIdSerializer implements PrimitiveSerializer<OAuth2ClientId> 
     OAuth2ClientId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$OAuth2ClientIdSerializer implements PrimitiveSerializer<OAuth2ClientId> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$OAuth2ClientIdSerializer implements PrimitiveSerializer<OAuth2ClientId> 
     return result.build();
   }
 }
-
-

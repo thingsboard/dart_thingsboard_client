@@ -23,16 +23,16 @@ part 'rule_node.g.dart';
 /// * [id] - JSON object with the Rule Node Id. Specify this field to update the Rule Node. Referencing non-existing Rule Node Id will cause error. Omit this field to create new rule node.
 /// * [createdTime] - Timestamp of the rule node creation, in milliseconds
 /// * [additionalInfo] - Additional parameters of the rule node. May include: 'layoutX' (number, X coordinate for visualization), 'layoutY' (number, Y coordinate for visualization), 'description' (string).
-/// * [ruleChainId] - JSON object with the Rule Chain Id. 
-/// * [type] - Full Java Class Name of the rule node implementation. 
-/// * [name] - User defined name of the rule node. Used on UI and for logging. 
+/// * [ruleChainId] - JSON object with the Rule Chain Id.
+/// * [type] - Full Java Class Name of the rule node implementation.
+/// * [name] - User defined name of the rule node. Used on UI and for logging.
 /// * [debugSettings] - Debug settings object.
-/// * [singletonMode] - Enable/disable singleton mode. 
-/// * [queueName] - Queue name. 
-/// * [configurationVersion] - Version of rule node configuration. 
+/// * [singletonMode] - Enable/disable singleton mode.
+/// * [queueName] - Queue name.
+/// * [configurationVersion] - Version of rule node configuration.
 /// * [configuration] - JSON with the rule node configuration. Structure depends on the rule node implementation.
-/// * [externalId] 
-/// * [debugMode] 
+/// * [externalId]
+/// * [debugMode]
 @BuiltValue()
 abstract class RuleNode implements Built<RuleNode, RuleNodeBuilder> {
   /// JSON object with the Rule Node Id. Specify this field to update the Rule Node. Referencing non-existing Rule Node Id will cause error. Omit this field to create new rule node.
@@ -47,15 +47,15 @@ abstract class RuleNode implements Built<RuleNode, RuleNodeBuilder> {
   @BuiltValueField(wireName: r'additionalInfo')
   JsonObject? get additionalInfo;
 
-  /// JSON object with the Rule Chain Id. 
+  /// JSON object with the Rule Chain Id.
   @BuiltValueField(wireName: r'ruleChainId')
   RuleChainId? get ruleChainId;
 
-  /// Full Java Class Name of the rule node implementation. 
+  /// Full Java Class Name of the rule node implementation.
   @BuiltValueField(wireName: r'type')
   String? get type;
 
-  /// User defined name of the rule node. Used on UI and for logging. 
+  /// User defined name of the rule node. Used on UI and for logging.
   @BuiltValueField(wireName: r'name')
   String? get name;
 
@@ -63,15 +63,15 @@ abstract class RuleNode implements Built<RuleNode, RuleNodeBuilder> {
   @BuiltValueField(wireName: r'debugSettings')
   DebugSettings? get debugSettings;
 
-  /// Enable/disable singleton mode. 
+  /// Enable/disable singleton mode.
   @BuiltValueField(wireName: r'singletonMode')
   bool? get singletonMode;
 
-  /// Queue name. 
+  /// Queue name.
   @BuiltValueField(wireName: r'queueName')
   String? get queueName;
 
-  /// Version of rule node configuration. 
+  /// Version of rule node configuration.
   @BuiltValueField(wireName: r'configurationVersion')
   int? get configurationVersion;
 
@@ -208,7 +208,11 @@ class _$RuleNodeSerializer implements PrimitiveSerializer<RuleNode> {
     RuleNode object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -224,106 +228,132 @@ class _$RuleNodeSerializer implements PrimitiveSerializer<RuleNode> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleNodeId),
-          ) as RuleNodeId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleNodeId),
+                  )
+                  as RuleNodeId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'ruleChainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleChainId),
-          ) as RuleChainId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleChainId),
+                  )
+                  as RuleChainId?;
           if (valueDes == null) continue;
           result.ruleChainId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'debugSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DebugSettings),
-          ) as DebugSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DebugSettings),
+                  )
+                  as DebugSettings?;
           if (valueDes == null) continue;
           result.debugSettings.replace(valueDes);
           break;
         case r'singletonMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.singletonMode = valueDes;
           break;
         case r'queueName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.queueName = valueDes;
           break;
         case r'configurationVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.configurationVersion = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
         case r'externalId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleNodeId),
-          ) as RuleNodeId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleNodeId),
+                  )
+                  as RuleNodeId?;
           if (valueDes == null) continue;
           result.externalId.replace(valueDes);
           break;
         case r'debugMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.debugMode = valueDes;
           break;
@@ -355,5 +385,3 @@ class _$RuleNodeSerializer implements PrimitiveSerializer<RuleNode> {
     return result.build();
   }
 }
-
-

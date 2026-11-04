@@ -6,7 +6,6 @@
 import '../../alarm_models.dart';
 import '../../../id/entity_id.dart';
 import 'entity_data_page_link.dart';
-import 'entity_data_sort_order.dart';
 
 class AlarmDataPageLink extends EntityDataPageLink {
   int? startTs;
@@ -19,11 +18,11 @@ class AlarmDataPageLink extends EntityDataPageLink {
   UserId? assigneeId;
 
   AlarmDataPageLink({
-    required int pageSize,
-    int page = 0,
-    String? textSearch,
-    EntityDataSortOrder? sortOrder,
-    bool isDynamic = false,
+    required super.pageSize,
+    super.page,
+    super.textSearch,
+    super.sortOrder,
+    super.isDynamic,
     this.startTs,
     this.endTs,
     this.timeWindow,
@@ -32,28 +31,24 @@ class AlarmDataPageLink extends EntityDataPageLink {
     this.severityList,
     this.searchPropagatedAlarms,
     this.assigneeId,
-  }) : super(
-            pageSize: pageSize,
-            page: page,
-            textSearch: textSearch,
-            sortOrder: sortOrder,
-            isDynamic: isDynamic);
+  });
 
   @override
   AlarmDataPageLink nextPageLink() {
     return AlarmDataPageLink(
-        pageSize: pageSize,
-        page: page + 1,
-        textSearch: textSearch,
-        sortOrder: sortOrder,
-        isDynamic: isDynamic,
-        startTs: startTs,
-        endTs: endTs,
-        timeWindow: timeWindow,
-        typeList: typeList,
-        statusList: statusList,
-        severityList: severityList,
-        searchPropagatedAlarms: searchPropagatedAlarms);
+      pageSize: pageSize,
+      page: page + 1,
+      textSearch: textSearch,
+      sortOrder: sortOrder,
+      isDynamic: isDynamic,
+      startTs: startTs,
+      endTs: endTs,
+      timeWindow: timeWindow,
+      typeList: typeList,
+      statusList: statusList,
+      severityList: severityList,
+      searchPropagatedAlarms: searchPropagatedAlarms,
+    );
   }
 
   @override
@@ -75,8 +70,9 @@ class AlarmDataPageLink extends EntityDataPageLink {
       json['statusList'] = statusList!.map((e) => e.toShortString()).toList();
     }
     if (severityList != null) {
-      json['severityList'] =
-          severityList!.map((e) => e.toShortString()).toList();
+      json['severityList'] = severityList!
+          .map((e) => e.toShortString())
+          .toList();
     }
     if (searchPropagatedAlarms != null) {
       json['searchPropagatedAlarms'] = searchPropagatedAlarms;

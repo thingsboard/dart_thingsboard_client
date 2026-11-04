@@ -26,20 +26,23 @@ part 'pdf_report_template_config.g.dart';
 /// PdfReportTemplateConfig
 ///
 /// Properties:
-/// * [namePattern] 
-/// * [timeDataPattern] 
+/// * [namePattern]
+/// * [timeDataPattern]
 /// * [format] - Report format
-/// * [entityAliases] 
-/// * [filters] 
-/// * [components] 
-/// * [footer] 
-/// * [header] 
-/// * [pageBackground] 
-/// * [pageMargins] 
-/// * [pageOrientation] 
-/// * [pageSize] 
+/// * [entityAliases]
+/// * [filters]
+/// * [components]
+/// * [footer]
+/// * [header]
+/// * [pageBackground]
+/// * [pageMargins]
+/// * [pageOrientation]
+/// * [pageSize]
 @BuiltValue()
-abstract class PdfReportTemplateConfig implements ReportTemplateConfig, Built<PdfReportTemplateConfig, PdfReportTemplateConfigBuilder> {
+abstract class PdfReportTemplateConfig
+    implements
+        ReportTemplateConfig,
+        Built<PdfReportTemplateConfig, PdfReportTemplateConfigBuilder> {
   @BuiltValueField(wireName: r'pageOrientation')
   PageOrientation? get pageOrientation;
   // enum pageOrientationEnum {  PORTRAIT,  LANDSCAPE,  };
@@ -62,18 +65,25 @@ abstract class PdfReportTemplateConfig implements ReportTemplateConfig, Built<Pd
 
   PdfReportTemplateConfig._();
 
-  factory PdfReportTemplateConfig([void updates(PdfReportTemplateConfigBuilder b)]) = _$PdfReportTemplateConfig;
+  factory PdfReportTemplateConfig([
+    void updates(PdfReportTemplateConfigBuilder b),
+  ]) = _$PdfReportTemplateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PdfReportTemplateConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PdfReportTemplateConfig> get serializer => _$PdfReportTemplateConfigSerializer();
+  static Serializer<PdfReportTemplateConfig> get serializer =>
+      _$PdfReportTemplateConfigSerializer();
 }
 
-class _$PdfReportTemplateConfigSerializer implements PrimitiveSerializer<PdfReportTemplateConfig> {
+class _$PdfReportTemplateConfigSerializer
+    implements PrimitiveSerializer<PdfReportTemplateConfig> {
   @override
-  final Iterable<Type> types = const [PdfReportTemplateConfig, _$PdfReportTemplateConfig];
+  final Iterable<Type> types = const [
+    PdfReportTemplateConfig,
+    _$PdfReportTemplateConfig,
+  ];
 
   @override
   final String wireName = r'PdfReportTemplateConfig';
@@ -173,7 +183,11 @@ class _$PdfReportTemplateConfigSerializer implements PrimitiveSerializer<PdfRepo
     PdfReportTemplateConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -189,97 +203,127 @@ class _$PdfReportTemplateConfigSerializer implements PrimitiveSerializer<PdfRepo
       final value = serializedList[i + 1];
       switch (key) {
         case r'namePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.namePattern = valueDes;
           break;
         case r'components':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ReportComponent)]),
-          ) as BuiltList<ReportComponent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ReportComponent),
+                    ]),
+                  )
+                  as BuiltList<ReportComponent>?;
           if (valueDes == null) continue;
           result.components.replace(valueDes);
           break;
         case r'pageOrientation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PageOrientation),
-          ) as PageOrientation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PageOrientation),
+                  )
+                  as PageOrientation?;
           if (valueDes == null) continue;
           result.pageOrientation = valueDes;
           break;
         case r'timeDataPattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.timeDataPattern = valueDes;
           break;
         case r'footer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(HeaderFooter),
-          ) as HeaderFooter?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(HeaderFooter),
+                  )
+                  as HeaderFooter?;
           if (valueDes == null) continue;
           result.footer.replace(valueDes);
           break;
         case r'pageBackground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.pageBackground = valueDes;
           break;
         case r'entityAliases':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityAlias)]),
-          ) as BuiltList<EntityAlias>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityAlias),
+                    ]),
+                  )
+                  as BuiltList<EntityAlias>?;
           if (valueDes == null) continue;
           result.entityAliases.replace(valueDes);
           break;
         case r'pageMargins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.pageMargins.replace(valueDes);
           break;
         case r'format':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TbReportFormat),
-          ) as TbReportFormat;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TbReportFormat),
+                  )
+                  as TbReportFormat;
           result.format = valueDes;
           break;
         case r'header':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(HeaderFooter),
-          ) as HeaderFooter?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(HeaderFooter),
+                  )
+                  as HeaderFooter?;
           if (valueDes == null) continue;
           result.header.replace(valueDes);
           break;
         case r'pageSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PageSize),
-          ) as PageSize?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PageSize),
+                  )
+                  as PageSize?;
           if (valueDes == null) continue;
           result.pageSize = valueDes;
           break;
         case r'filters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(Filter)]),
-          ) as BuiltList<Filter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(Filter),
+                    ]),
+                  )
+                  as BuiltList<Filter>?;
           if (valueDes == null) continue;
           result.filters.replace(valueDes);
           break;
@@ -311,5 +355,3 @@ class _$PdfReportTemplateConfigSerializer implements PrimitiveSerializer<PdfRepo
     return result.build();
   }
 }
-
-

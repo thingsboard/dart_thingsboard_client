@@ -27,7 +27,8 @@ part 'user_password_policy.g.dart';
 /// * [passwordExpirationPeriodDays] - Password expiration period (days). Force expiration of the password.
 /// * [passwordReuseFrequencyDays] - Password reuse frequency (days). Disallow to use the same password for the defined number of days
 @BuiltValue()
-abstract class UserPasswordPolicy implements Built<UserPasswordPolicy, UserPasswordPolicyBuilder> {
+abstract class UserPasswordPolicy
+    implements Built<UserPasswordPolicy, UserPasswordPolicyBuilder> {
   /// Minimum number of symbols in the password.
   @BuiltValueField(wireName: r'minimumLength')
   int? get minimumLength;
@@ -70,16 +71,19 @@ abstract class UserPasswordPolicy implements Built<UserPasswordPolicy, UserPassw
 
   UserPasswordPolicy._();
 
-  factory UserPasswordPolicy([void updates(UserPasswordPolicyBuilder b)]) = _$UserPasswordPolicy;
+  factory UserPasswordPolicy([void updates(UserPasswordPolicyBuilder b)]) =
+      _$UserPasswordPolicy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserPasswordPolicyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserPasswordPolicy> get serializer => _$UserPasswordPolicySerializer();
+  static Serializer<UserPasswordPolicy> get serializer =>
+      _$UserPasswordPolicySerializer();
 }
 
-class _$UserPasswordPolicySerializer implements PrimitiveSerializer<UserPasswordPolicy> {
+class _$UserPasswordPolicySerializer
+    implements PrimitiveSerializer<UserPasswordPolicy> {
   @override
   final Iterable<Type> types = const [UserPasswordPolicy, _$UserPasswordPolicy];
 
@@ -169,7 +173,11 @@ class _$UserPasswordPolicySerializer implements PrimitiveSerializer<UserPassword
     UserPasswordPolicy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -185,82 +193,102 @@ class _$UserPasswordPolicySerializer implements PrimitiveSerializer<UserPassword
       final value = serializedList[i + 1];
       switch (key) {
         case r'minimumLength':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minimumLength = valueDes;
           break;
         case r'maximumLength':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maximumLength = valueDes;
           break;
         case r'minimumUppercaseLetters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minimumUppercaseLetters = valueDes;
           break;
         case r'minimumLowercaseLetters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minimumLowercaseLetters = valueDes;
           break;
         case r'minimumDigits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minimumDigits = valueDes;
           break;
         case r'minimumSpecialCharacters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minimumSpecialCharacters = valueDes;
           break;
         case r'allowWhitespaces':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.allowWhitespaces = valueDes;
           break;
         case r'forceUserToResetPasswordIfNotValid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.forceUserToResetPasswordIfNotValid = valueDes;
           break;
         case r'passwordExpirationPeriodDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.passwordExpirationPeriodDays = valueDes;
           break;
         case r'passwordReuseFrequencyDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.passwordReuseFrequencyDays = valueDes;
           break;
@@ -292,5 +320,3 @@ class _$UserPasswordPolicySerializer implements PrimitiveSerializer<UserPassword
     return result.build();
   }
 }
-
-

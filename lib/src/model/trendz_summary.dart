@@ -18,14 +18,15 @@ part 'trendz_summary.g.dart';
 /// TrendzSummary
 ///
 /// Properties:
-/// * [metricSummaryItems] 
-/// * [anomalyModelSummaryItems] 
-/// * [calculationFieldSummaryItems] 
-/// * [predictionModelSummaryItems] 
-/// * [viewSummaryItems] 
-/// * [aiSummaryItems] 
+/// * [metricSummaryItems]
+/// * [anomalyModelSummaryItems]
+/// * [calculationFieldSummaryItems]
+/// * [predictionModelSummaryItems]
+/// * [viewSummaryItems]
+/// * [aiSummaryItems]
 @BuiltValue()
-abstract class TrendzSummary implements Built<TrendzSummary, TrendzSummaryBuilder> {
+abstract class TrendzSummary
+    implements Built<TrendzSummary, TrendzSummaryBuilder> {
   @BuiltValueField(wireName: r'metricSummaryItems')
   BuiltList<JsonObject?>? get metricSummaryItems;
 
@@ -46,13 +47,15 @@ abstract class TrendzSummary implements Built<TrendzSummary, TrendzSummaryBuilde
 
   TrendzSummary._();
 
-  factory TrendzSummary([void updates(TrendzSummaryBuilder b)]) = _$TrendzSummary;
+  factory TrendzSummary([void updates(TrendzSummaryBuilder b)]) =
+      _$TrendzSummary;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TrendzSummaryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TrendzSummary> get serializer => _$TrendzSummarySerializer();
+  static Serializer<TrendzSummary> get serializer =>
+      _$TrendzSummarySerializer();
 }
 
 class _$TrendzSummarySerializer implements PrimitiveSerializer<TrendzSummary> {
@@ -71,42 +74,54 @@ class _$TrendzSummarySerializer implements PrimitiveSerializer<TrendzSummary> {
       yield r'metricSummaryItems';
       yield serializers.serialize(
         object.metricSummaryItems,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
     if (object.anomalyModelSummaryItems != null) {
       yield r'anomalyModelSummaryItems';
       yield serializers.serialize(
         object.anomalyModelSummaryItems,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
     if (object.calculationFieldSummaryItems != null) {
       yield r'calculationFieldSummaryItems';
       yield serializers.serialize(
         object.calculationFieldSummaryItems,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
     if (object.predictionModelSummaryItems != null) {
       yield r'predictionModelSummaryItems';
       yield serializers.serialize(
         object.predictionModelSummaryItems,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
     if (object.viewSummaryItems != null) {
       yield r'viewSummaryItems';
       yield serializers.serialize(
         object.viewSummaryItems,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
     if (object.aiSummaryItems != null) {
       yield r'aiSummaryItems';
       yield serializers.serialize(
         object.aiSummaryItems,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
   }
@@ -117,7 +132,11 @@ class _$TrendzSummarySerializer implements PrimitiveSerializer<TrendzSummary> {
     TrendzSummary object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -133,50 +152,74 @@ class _$TrendzSummarySerializer implements PrimitiveSerializer<TrendzSummary> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'metricSummaryItems':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.metricSummaryItems.replace(valueDes);
           break;
         case r'anomalyModelSummaryItems':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.anomalyModelSummaryItems.replace(valueDes);
           break;
         case r'calculationFieldSummaryItems':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.calculationFieldSummaryItems.replace(valueDes);
           break;
         case r'predictionModelSummaryItems':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.predictionModelSummaryItems.replace(valueDes);
           break;
         case r'viewSummaryItems':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.viewSummaryItems.replace(valueDes);
           break;
         case r'aiSummaryItems':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.aiSummaryItems.replace(valueDes);
           break;
@@ -208,5 +251,3 @@ class _$TrendzSummarySerializer implements PrimitiveSerializer<TrendzSummary> {
     return result.build();
   }
 }
-
-

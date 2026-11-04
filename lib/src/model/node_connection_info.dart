@@ -20,7 +20,8 @@ part 'node_connection_info.g.dart';
 /// * [toIndex] - Index of rule node in the 'nodes' array of the RuleChainMetaData. Indicates the 'to' part of the connection.
 /// * [type] - Type of the relation. Typically indicated the result of processing by the 'from' rule node. For example, 'Success' or 'Failure'
 @BuiltValue()
-abstract class NodeConnectionInfo implements Built<NodeConnectionInfo, NodeConnectionInfoBuilder> {
+abstract class NodeConnectionInfo
+    implements Built<NodeConnectionInfo, NodeConnectionInfoBuilder> {
   /// Index of rule node in the 'nodes' array of the RuleChainMetaData. Indicates the 'from' part of the connection.
   @BuiltValueField(wireName: r'fromIndex')
   int get fromIndex;
@@ -35,16 +36,19 @@ abstract class NodeConnectionInfo implements Built<NodeConnectionInfo, NodeConne
 
   NodeConnectionInfo._();
 
-  factory NodeConnectionInfo([void updates(NodeConnectionInfoBuilder b)]) = _$NodeConnectionInfo;
+  factory NodeConnectionInfo([void updates(NodeConnectionInfoBuilder b)]) =
+      _$NodeConnectionInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NodeConnectionInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NodeConnectionInfo> get serializer => _$NodeConnectionInfoSerializer();
+  static Serializer<NodeConnectionInfo> get serializer =>
+      _$NodeConnectionInfoSerializer();
 }
 
-class _$NodeConnectionInfoSerializer implements PrimitiveSerializer<NodeConnectionInfo> {
+class _$NodeConnectionInfoSerializer
+    implements PrimitiveSerializer<NodeConnectionInfo> {
   @override
   final Iterable<Type> types = const [NodeConnectionInfo, _$NodeConnectionInfo];
 
@@ -79,7 +83,11 @@ class _$NodeConnectionInfoSerializer implements PrimitiveSerializer<NodeConnecti
     NodeConnectionInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -95,24 +103,24 @@ class _$NodeConnectionInfoSerializer implements PrimitiveSerializer<NodeConnecti
       final value = serializedList[i + 1];
       switch (key) {
         case r'fromIndex':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.fromIndex = valueDes;
           break;
         case r'toIndex':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.toIndex = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -143,5 +151,3 @@ class _$NodeConnectionInfoSerializer implements PrimitiveSerializer<NodeConnecti
     return result.build();
   }
 }
-
-

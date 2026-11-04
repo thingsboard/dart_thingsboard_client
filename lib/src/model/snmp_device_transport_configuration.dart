@@ -20,21 +20,27 @@ part 'snmp_device_transport_configuration.g.dart';
 /// SnmpDeviceTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [host] 
-/// * [port] 
-/// * [protocolVersion] 
-/// * [community] 
-/// * [username] 
-/// * [securityName] 
-/// * [contextName] 
-/// * [authenticationProtocol] 
-/// * [authenticationPassphrase] 
-/// * [privacyProtocol] 
-/// * [privacyPassphrase] 
-/// * [engineId] 
+/// * [type]
+/// * [host]
+/// * [port]
+/// * [protocolVersion]
+/// * [community]
+/// * [username]
+/// * [securityName]
+/// * [contextName]
+/// * [authenticationProtocol]
+/// * [authenticationPassphrase]
+/// * [privacyProtocol]
+/// * [privacyPassphrase]
+/// * [engineId]
 @BuiltValue()
-abstract class SnmpDeviceTransportConfiguration implements DeviceTransportConfiguration, Built<SnmpDeviceTransportConfiguration, SnmpDeviceTransportConfigurationBuilder> {
+abstract class SnmpDeviceTransportConfiguration
+    implements
+        DeviceTransportConfiguration,
+        Built<
+          SnmpDeviceTransportConfiguration,
+          SnmpDeviceTransportConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'contextName')
   String? get contextName;
 
@@ -76,18 +82,25 @@ abstract class SnmpDeviceTransportConfiguration implements DeviceTransportConfig
 
   SnmpDeviceTransportConfiguration._();
 
-  factory SnmpDeviceTransportConfiguration([void updates(SnmpDeviceTransportConfigurationBuilder b)]) = _$SnmpDeviceTransportConfiguration;
+  factory SnmpDeviceTransportConfiguration([
+    void updates(SnmpDeviceTransportConfigurationBuilder b),
+  ]) = _$SnmpDeviceTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SnmpDeviceTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SnmpDeviceTransportConfiguration> get serializer => _$SnmpDeviceTransportConfigurationSerializer();
+  static Serializer<SnmpDeviceTransportConfiguration> get serializer =>
+      _$SnmpDeviceTransportConfigurationSerializer();
 }
 
-class _$SnmpDeviceTransportConfigurationSerializer implements PrimitiveSerializer<SnmpDeviceTransportConfiguration> {
+class _$SnmpDeviceTransportConfigurationSerializer
+    implements PrimitiveSerializer<SnmpDeviceTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [SnmpDeviceTransportConfiguration, _$SnmpDeviceTransportConfiguration];
+  final Iterable<Type> types = const [
+    SnmpDeviceTransportConfiguration,
+    _$SnmpDeviceTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'SnmpDeviceTransportConfiguration';
@@ -194,7 +207,11 @@ class _$SnmpDeviceTransportConfigurationSerializer implements PrimitiveSerialize
     SnmpDeviceTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -210,105 +227,133 @@ class _$SnmpDeviceTransportConfigurationSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'contextName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.contextName = valueDes;
           break;
         case r'privacyPassphrase':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.privacyPassphrase = valueDes;
           break;
         case r'securityName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.securityName = valueDes;
           break;
         case r'authenticationPassphrase':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.authenticationPassphrase = valueDes;
           break;
         case r'community':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.community = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'authenticationProtocol':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AuthenticationProtocol),
-          ) as AuthenticationProtocol?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AuthenticationProtocol,
+                    ),
+                  )
+                  as AuthenticationProtocol?;
           if (valueDes == null) continue;
           result.authenticationProtocol = valueDes;
           break;
         case r'privacyProtocol':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PrivacyProtocol),
-          ) as PrivacyProtocol?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PrivacyProtocol),
+                  )
+                  as PrivacyProtocol?;
           if (valueDes == null) continue;
           result.privacyProtocol = valueDes;
           break;
         case r'port':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.port = valueDes;
           break;
         case r'host':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.host = valueDes;
           break;
         case r'protocolVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SnmpProtocolVersion),
-          ) as SnmpProtocolVersion?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SnmpProtocolVersion),
+                  )
+                  as SnmpProtocolVersion?;
           if (valueDes == null) continue;
           result.protocolVersion = valueDes;
           break;
         case r'username':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.username = valueDes;
           break;
         case r'engineId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.engineId = valueDes;
           break;
@@ -340,5 +385,3 @@ class _$SnmpDeviceTransportConfigurationSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

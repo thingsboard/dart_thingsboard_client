@@ -23,27 +23,40 @@ part 'notification_target_export_data.g.dart';
 /// NotificationTargetExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class NotificationTargetExportData implements EntityExportData, Built<NotificationTargetExportData, NotificationTargetExportDataBuilder> {
+abstract class NotificationTargetExportData
+    implements
+        EntityExportData,
+        Built<
+          NotificationTargetExportData,
+          NotificationTargetExportDataBuilder
+        > {
   NotificationTargetExportData._();
 
-  factory NotificationTargetExportData([void updates(NotificationTargetExportDataBuilder b)]) = _$NotificationTargetExportData;
+  factory NotificationTargetExportData([
+    void updates(NotificationTargetExportDataBuilder b),
+  ]) = _$NotificationTargetExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationTargetExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationTargetExportData> get serializer => _$NotificationTargetExportDataSerializer();
+  static Serializer<NotificationTargetExportData> get serializer =>
+      _$NotificationTargetExportDataSerializer();
 }
 
-class _$NotificationTargetExportDataSerializer implements PrimitiveSerializer<NotificationTargetExportData> {
+class _$NotificationTargetExportDataSerializer
+    implements PrimitiveSerializer<NotificationTargetExportData> {
   @override
-  final Iterable<Type> types = const [NotificationTargetExportData, _$NotificationTargetExportData];
+  final Iterable<Type> types = const [
+    NotificationTargetExportData,
+    _$NotificationTargetExportData,
+  ];
 
   @override
   final String wireName = r'NotificationTargetExportData';
@@ -57,7 +70,10 @@ class _$NotificationTargetExportDataSerializer implements PrimitiveSerializer<No
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +110,11 @@ class _$NotificationTargetExportDataSerializer implements PrimitiveSerializer<No
     NotificationTargetExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +130,58 @@ class _$NotificationTargetExportDataSerializer implements PrimitiveSerializer<No
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +213,3 @@ class _$NotificationTargetExportDataSerializer implements PrimitiveSerializer<No
     return result.build();
   }
 }
-
-

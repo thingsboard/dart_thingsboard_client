@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'attribute_scope.g.dart';
 
 class AttributeScope extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CLIENT_SCOPE')
   static const AttributeScope CLIENT_SCOPE = _$CLIENT_SCOPE;
   @BuiltValueEnumConst(wireName: r'SERVER_SCOPE')
@@ -25,9 +24,10 @@ class AttributeScope extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AttributeScope unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<AttributeScope> get serializer => _$attributeScopeSerializer;
+  static Serializer<AttributeScope> get serializer =>
+      _$attributeScopeSerializer;
 
-  const AttributeScope._(String name): super(name);
+  const AttributeScope._(String name) : super(name);
 
   static BuiltSet<AttributeScope> get values => _$values;
   static AttributeScope valueOf(String name) => _$valueOf(name);
@@ -40,4 +40,3 @@ class AttributeScope extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AttributeScopeMixin = Object with _$AttributeScopeMixin;
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'component_lifecycle_event.g.dart';
 
 class ComponentLifecycleEvent extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CREATED')
   static const ComponentLifecycleEvent CREATED = _$CREATED;
   @BuiltValueEnumConst(wireName: r'STARTED')
@@ -39,11 +38,13 @@ class ComponentLifecycleEvent extends EnumClass {
   @BuiltValueEnumConst(wireName: r'RELATION_DELETED')
   static const ComponentLifecycleEvent RELATION_DELETED = _$RELATION_DELETED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ComponentLifecycleEvent unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ComponentLifecycleEvent unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ComponentLifecycleEvent> get serializer => _$componentLifecycleEventSerializer;
+  static Serializer<ComponentLifecycleEvent> get serializer =>
+      _$componentLifecycleEventSerializer;
 
-  const ComponentLifecycleEvent._(String name): super(name);
+  const ComponentLifecycleEvent._(String name) : super(name);
 
   static BuiltSet<ComponentLifecycleEvent> get values => _$values;
   static ComponentLifecycleEvent valueOf(String name) => _$valueOf(name);
@@ -55,5 +56,5 @@ class ComponentLifecycleEvent extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class ComponentLifecycleEventMixin = Object with _$ComponentLifecycleEventMixin;
-
+abstract class ComponentLifecycleEventMixin = Object
+    with _$ComponentLifecycleEventMixin;

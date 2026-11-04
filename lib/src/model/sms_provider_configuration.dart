@@ -19,9 +19,9 @@ part 'sms_provider_configuration.g.dart';
 /// Base configuration for SMS providers
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class SmsProviderConfiguration  {
+abstract class SmsProviderConfiguration {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -34,39 +34,43 @@ abstract class SmsProviderConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SmsProviderConfiguration> get serializer => _$SmsProviderConfigurationSerializer();
+  static Serializer<SmsProviderConfiguration> get serializer =>
+      _$SmsProviderConfigurationSerializer();
 }
 
 extension SmsProviderConfigurationDiscriminatorExt on SmsProviderConfiguration {
-    String? get discriminatorValue {
-        if (this is AwsSnsSmsProviderConfiguration) {
-            return r'AWS_SNS';
-        }
-        if (this is SmppSmsProviderConfiguration) {
-            return r'SMPP';
-        }
-        if (this is TwilioSmsProviderConfiguration) {
-            return r'TWILIO';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AwsSnsSmsProviderConfiguration) {
+      return r'AWS_SNS';
     }
-}
-extension SmsProviderConfigurationBuilderDiscriminatorExt on SmsProviderConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is AwsSnsSmsProviderConfigurationBuilder) {
-            return r'AWS_SNS';
-        }
-        if (this is SmppSmsProviderConfigurationBuilder) {
-            return r'SMPP';
-        }
-        if (this is TwilioSmsProviderConfigurationBuilder) {
-            return r'TWILIO';
-        }
-        return null;
+    if (this is SmppSmsProviderConfiguration) {
+      return r'SMPP';
     }
+    if (this is TwilioSmsProviderConfiguration) {
+      return r'TWILIO';
+    }
+    return null;
+  }
 }
 
-class _$SmsProviderConfigurationSerializer implements PrimitiveSerializer<SmsProviderConfiguration> {
+extension SmsProviderConfigurationBuilderDiscriminatorExt
+    on SmsProviderConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is AwsSnsSmsProviderConfigurationBuilder) {
+      return r'AWS_SNS';
+    }
+    if (this is SmppSmsProviderConfigurationBuilder) {
+      return r'SMPP';
+    }
+    if (this is TwilioSmsProviderConfigurationBuilder) {
+      return r'TWILIO';
+    }
+    return null;
+  }
+}
+
+class _$SmsProviderConfigurationSerializer
+    implements PrimitiveSerializer<SmsProviderConfiguration> {
   @override
   final Iterable<Type> types = const [SmsProviderConfiguration];
 
@@ -92,15 +96,28 @@ class _$SmsProviderConfigurationSerializer implements PrimitiveSerializer<SmsPro
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AwsSnsSmsProviderConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(AwsSnsSmsProviderConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AwsSnsSmsProviderConfiguration),
+      )!;
     }
     if (object is SmppSmsProviderConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(SmppSmsProviderConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SmppSmsProviderConfiguration),
+      )!;
     }
     if (object is TwilioSmsProviderConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(TwilioSmsProviderConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TwilioSmsProviderConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -110,39 +127,73 @@ class _$SmsProviderConfigurationSerializer implements PrimitiveSerializer<SmsPro
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(SmsProviderConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          SmsProviderConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'AWS_SNS':
-        return serializers.deserialize(serialized, specifiedType: FullType(AwsSnsSmsProviderConfiguration)) as AwsSnsSmsProviderConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AwsSnsSmsProviderConfiguration),
+            )
+            as AwsSnsSmsProviderConfiguration;
       case r'SMPP':
-        return serializers.deserialize(serialized, specifiedType: FullType(SmppSmsProviderConfiguration)) as SmppSmsProviderConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SmppSmsProviderConfiguration),
+            )
+            as SmppSmsProviderConfiguration;
       case r'TWILIO':
-        return serializers.deserialize(serialized, specifiedType: FullType(TwilioSmsProviderConfiguration)) as TwilioSmsProviderConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TwilioSmsProviderConfiguration),
+            )
+            as TwilioSmsProviderConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($SmsProviderConfiguration)) as $SmsProviderConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($SmsProviderConfiguration),
+            )
+            as $SmsProviderConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [SmsProviderConfiguration], since [SmsProviderConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $SmsProviderConfiguration implements SmsProviderConfiguration, Built<$SmsProviderConfiguration, $SmsProviderConfigurationBuilder> {
+abstract class $SmsProviderConfiguration
+    implements
+        SmsProviderConfiguration,
+        Built<$SmsProviderConfiguration, $SmsProviderConfigurationBuilder> {
   $SmsProviderConfiguration._();
 
-  factory $SmsProviderConfiguration([void Function($SmsProviderConfigurationBuilder)? updates]) = _$$SmsProviderConfiguration;
+  factory $SmsProviderConfiguration([
+    void Function($SmsProviderConfigurationBuilder)? updates,
+  ]) = _$$SmsProviderConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($SmsProviderConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$SmsProviderConfiguration> get serializer => _$$SmsProviderConfigurationSerializer();
+  static Serializer<$SmsProviderConfiguration> get serializer =>
+      _$$SmsProviderConfigurationSerializer();
 }
 
-class _$$SmsProviderConfigurationSerializer implements PrimitiveSerializer<$SmsProviderConfiguration> {
+class _$$SmsProviderConfigurationSerializer
+    implements PrimitiveSerializer<$SmsProviderConfiguration> {
   @override
-  final Iterable<Type> types = const [$SmsProviderConfiguration, _$$SmsProviderConfiguration];
+  final Iterable<Type> types = const [
+    $SmsProviderConfiguration,
+    _$$SmsProviderConfiguration,
+  ];
 
   @override
   final String wireName = r'$SmsProviderConfiguration';
@@ -153,7 +204,10 @@ class _$$SmsProviderConfigurationSerializer implements PrimitiveSerializer<$SmsP
     $SmsProviderConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(SmsProviderConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(SmsProviderConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -169,10 +223,12 @@ class _$$SmsProviderConfigurationSerializer implements PrimitiveSerializer<$SmsP
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -203,4 +259,3 @@ class _$$SmsProviderConfigurationSerializer implements PrimitiveSerializer<$SmsP
     return result.build();
   }
 }
-

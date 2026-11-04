@@ -21,21 +21,22 @@ part 'alarm_data_page_link.g.dart';
 /// AlarmDataPageLink
 ///
 /// Properties:
-/// * [pageSize] 
-/// * [page] 
-/// * [textSearch] 
-/// * [sortOrder] 
-/// * [dynamic_] 
-/// * [startTs] 
-/// * [endTs] 
-/// * [timeWindow] 
-/// * [typeList] 
-/// * [statusList] 
-/// * [severityList] 
-/// * [searchPropagatedAlarms] 
-/// * [assigneeId] 
+/// * [pageSize]
+/// * [page]
+/// * [textSearch]
+/// * [sortOrder]
+/// * [dynamic_]
+/// * [startTs]
+/// * [endTs]
+/// * [timeWindow]
+/// * [typeList]
+/// * [statusList]
+/// * [severityList]
+/// * [searchPropagatedAlarms]
+/// * [assigneeId]
 @BuiltValue()
-abstract class AlarmDataPageLink implements Built<AlarmDataPageLink, AlarmDataPageLinkBuilder> {
+abstract class AlarmDataPageLink
+    implements Built<AlarmDataPageLink, AlarmDataPageLinkBuilder> {
   @BuiltValueField(wireName: r'pageSize')
   int? get pageSize;
 
@@ -77,16 +78,19 @@ abstract class AlarmDataPageLink implements Built<AlarmDataPageLink, AlarmDataPa
 
   AlarmDataPageLink._();
 
-  factory AlarmDataPageLink([void updates(AlarmDataPageLinkBuilder b)]) = _$AlarmDataPageLink;
+  factory AlarmDataPageLink([void updates(AlarmDataPageLinkBuilder b)]) =
+      _$AlarmDataPageLink;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmDataPageLinkBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmDataPageLink> get serializer => _$AlarmDataPageLinkSerializer();
+  static Serializer<AlarmDataPageLink> get serializer =>
+      _$AlarmDataPageLinkSerializer();
 }
 
-class _$AlarmDataPageLinkSerializer implements PrimitiveSerializer<AlarmDataPageLink> {
+class _$AlarmDataPageLinkSerializer
+    implements PrimitiveSerializer<AlarmDataPageLink> {
   @override
   final Iterable<Type> types = const [AlarmDataPageLink, _$AlarmDataPageLink];
 
@@ -197,7 +201,11 @@ class _$AlarmDataPageLinkSerializer implements PrimitiveSerializer<AlarmDataPage
     AlarmDataPageLink object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -213,106 +221,138 @@ class _$AlarmDataPageLinkSerializer implements PrimitiveSerializer<AlarmDataPage
       final value = serializedList[i + 1];
       switch (key) {
         case r'pageSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pageSize = valueDes;
           break;
         case r'page':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.page = valueDes;
           break;
         case r'textSearch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.textSearch = valueDes;
           break;
         case r'sortOrder':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityDataSortOrder),
-          ) as EntityDataSortOrder?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityDataSortOrder),
+                  )
+                  as EntityDataSortOrder?;
           if (valueDes == null) continue;
           result.sortOrder.replace(valueDes);
           break;
         case r'dynamic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.dynamic_ = valueDes;
           break;
         case r'startTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startTs = valueDes;
           break;
         case r'endTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endTs = valueDes;
           break;
         case r'timeWindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeWindow = valueDes;
           break;
         case r'typeList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.typeList.replace(valueDes);
           break;
         case r'statusList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmSearchStatus)]),
-          ) as BuiltList<AlarmSearchStatus>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmSearchStatus),
+                    ]),
+                  )
+                  as BuiltList<AlarmSearchStatus>?;
           if (valueDes == null) continue;
           result.statusList.replace(valueDes);
           break;
         case r'severityList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmSeverity)]),
-          ) as BuiltList<AlarmSeverity>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmSeverity),
+                    ]),
+                  )
+                  as BuiltList<AlarmSeverity>?;
           if (valueDes == null) continue;
           result.severityList.replace(valueDes);
           break;
         case r'searchPropagatedAlarms':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.searchPropagatedAlarms = valueDes;
           break;
         case r'assigneeId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.assigneeId.replace(valueDes);
           break;
@@ -344,5 +384,3 @@ class _$AlarmDataPageLinkSerializer implements PrimitiveSerializer<AlarmDataPage
     return result.build();
   }
 }
-
-

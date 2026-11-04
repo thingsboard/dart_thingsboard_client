@@ -12,12 +12,13 @@ enum NumericOperation {
   GREATER,
   LESS,
   GREATER_OR_EQUAL,
-  LESS_OR_EQUAL
+  LESS_OR_EQUAL,
 }
 
 NumericOperation numericOperationFromString(String value) {
   return NumericOperation.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension NumericOperationToString on NumericOperation {

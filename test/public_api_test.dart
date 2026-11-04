@@ -13,11 +13,17 @@ void main() {
   group('main library', () {
     test('exports the login models that ThingsboardClient.login() takes', () {
       final client = ThingsboardClient('http://localhost:8080');
-      final request = LoginRequest(userName: 'tenant@thingsboard.org', password: 'tenant');
+      final request = LoginRequest(
+        userName: 'tenant@thingsboard.org',
+        password: 'tenant',
+      );
       // Compiles only if LoginRequest is the facade type of login().
       final Future<LoginResponse> Function(LoginRequest) login = client.login;
       expect(login, isNotNull);
-      expect(request.toJson(), {'username': 'tenant@thingsboard.org', 'password': 'tenant'});
+      expect(request.toJson(), {
+        'username': 'tenant@thingsboard.org',
+        'password': 'tenant',
+      });
     });
 
     test('Authority of AuthUser is the Authority of the REST models', () {
@@ -28,9 +34,11 @@ void main() {
       expect(user.authority, Authority.TENANT_ADMIN);
       expect(user.authority == Authority.TENANT_ADMIN, isTrue);
       expect(user.isTenantAdmin(), isTrue);
-      final restUser = User((b) => b
-        ..email = 'tenant@thingsboard.org'
-        ..authority = Authority.TENANT_ADMIN);
+      final restUser = User(
+        (b) => b
+          ..email = 'tenant@thingsboard.org'
+          ..authority = Authority.TENANT_ADMIN,
+      );
       expect(restUser.authority, user.authority);
     });
 
@@ -52,11 +60,12 @@ void main() {
   group('telemetry library', () {
     test('creates a subscription with its own entity id types', () {
       final client = ThingsboardClient('http://localhost:8080');
-      final subscriber = ws.TelemetrySubscriber.createEntityAttributesSubscription(
-        telemetryService: client.getTelemetryService(),
-        entityId: ws.DeviceId('03327560-8957-11ea-a27f-4b68cd5becb0'),
-        attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
-      );
+      final subscriber =
+          ws.TelemetrySubscriber.createEntityAttributesSubscription(
+            telemetryService: client.getTelemetryService(),
+            entityId: ws.DeviceId('03327560-8957-11ea-a27f-4b68cd5becb0'),
+            attributeScope: ws.LatestTelemetry.LATEST_TELEMETRY.toShortString(),
+          );
       expect(subscriber, isA<ws.TelemetrySubscriber>());
     });
 
@@ -64,7 +73,9 @@ void main() {
       final query = ws.EntityDataQuery(
         entityFilter: ws.EntityTypeFilter(entityType: ws.EntityType.DEVICE),
         pageLink: ws.EntityDataPageLink(pageSize: 10),
-        entityFields: [ws.EntityKey(type: ws.EntityKeyType.ENTITY_FIELD, key: 'name')],
+        entityFields: [
+          ws.EntityKey(type: ws.EntityKeyType.ENTITY_FIELD, key: 'name'),
+        ],
       );
       expect(query.toJson()['entityFilter']['entityType'], 'DEVICE');
     });

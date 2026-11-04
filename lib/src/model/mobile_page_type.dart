@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'mobile_page_type.g.dart';
 
 class MobilePageType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DEFAULT')
   static const MobilePageType DEFAULT = _$DEFAULT;
   @BuiltValueEnumConst(wireName: r'DASHBOARD')
@@ -27,9 +26,10 @@ class MobilePageType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const MobilePageType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<MobilePageType> get serializer => _$mobilePageTypeSerializer;
+  static Serializer<MobilePageType> get serializer =>
+      _$mobilePageTypeSerializer;
 
-  const MobilePageType._(String name): super(name);
+  const MobilePageType._(String name) : super(name);
 
   static BuiltSet<MobilePageType> get values => _$values;
   static MobilePageType valueOf(String name) => _$valueOf(name);
@@ -42,4 +42,3 @@ class MobilePageType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class MobilePageTypeMixin = Object with _$MobilePageTypeMixin;
-

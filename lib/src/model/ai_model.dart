@@ -19,7 +19,7 @@ part 'ai_model.g.dart';
 /// AiModel
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
 /// * [tenantId] - JSON object representing the ID of the tenant associated with this AI model
 /// * [version] - Version of the AI model record; increments automatically whenever the record is changed
@@ -55,8 +55,7 @@ abstract class AiModel implements Built<AiModel, AiModelBuilder> {
   factory AiModel([void updates(AiModelBuilder b)]) = _$AiModel;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AiModelBuilder b) => b
-      ..version = 1;
+  static void _defaults(AiModelBuilder b) => b..version = 1;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AiModel> get serializer => _$AiModelSerializer();
@@ -122,7 +121,11 @@ class _$AiModelSerializer implements PrimitiveSerializer<AiModel> {
     AiModel object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -138,49 +141,61 @@ class _$AiModelSerializer implements PrimitiveSerializer<AiModel> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelId),
-          ) as AiModelId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelId),
+                  )
+                  as AiModelId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelConfig),
-          ) as AiModelConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelConfig),
+                  )
+                  as AiModelConfig?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
@@ -212,5 +227,3 @@ class _$AiModelSerializer implements PrimitiveSerializer<AiModel> {
     return result.build();
   }
 }
-
-

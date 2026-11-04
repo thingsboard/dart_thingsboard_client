@@ -17,9 +17,9 @@ part 'model.g.dart';
 /// Model
 ///
 /// Properties:
-/// * [name] 
+/// * [name]
 /// * [info] - A value representing the any type (object or primitive)
-/// * [photo] 
+/// * [photo]
 @BuiltValue()
 abstract class Model implements Built<Model, ModelBuilder> {
   @BuiltValueField(wireName: r'name')
@@ -84,7 +84,11 @@ class _$ModelSerializer implements PrimitiveSerializer<Model> {
     Model object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -100,26 +104,32 @@ class _$ModelSerializer implements PrimitiveSerializer<Model> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'info':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.info = valueDes;
           break;
         case r'photo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.photo = valueDes;
           break;
@@ -151,5 +161,3 @@ class _$ModelSerializer implements PrimitiveSerializer<Model> {
     return result.build();
   }
 }
-
-

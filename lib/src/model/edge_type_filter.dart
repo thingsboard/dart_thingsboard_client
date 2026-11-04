@@ -18,12 +18,13 @@ part 'edge_type_filter.g.dart';
 /// EdgeTypeFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [edgeTypes] 
-/// * [edgeNameFilter] 
-/// * [edgeType] 
+/// * [type]
+/// * [edgeTypes]
+/// * [edgeNameFilter]
+/// * [edgeType]
 @BuiltValue()
-abstract class EdgeTypeFilter implements EntityFilter, Built<EdgeTypeFilter, EdgeTypeFilterBuilder> {
+abstract class EdgeTypeFilter
+    implements EntityFilter, Built<EdgeTypeFilter, EdgeTypeFilterBuilder> {
   @BuiltValueField(wireName: r'edgeNameFilter')
   String? get edgeNameFilter;
 
@@ -36,16 +37,19 @@ abstract class EdgeTypeFilter implements EntityFilter, Built<EdgeTypeFilter, Edg
 
   EdgeTypeFilter._();
 
-  factory EdgeTypeFilter([void updates(EdgeTypeFilterBuilder b)]) = _$EdgeTypeFilter;
+  factory EdgeTypeFilter([void updates(EdgeTypeFilterBuilder b)]) =
+      _$EdgeTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EdgeTypeFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdgeTypeFilter> get serializer => _$EdgeTypeFilterSerializer();
+  static Serializer<EdgeTypeFilter> get serializer =>
+      _$EdgeTypeFilterSerializer();
 }
 
-class _$EdgeTypeFilterSerializer implements PrimitiveSerializer<EdgeTypeFilter> {
+class _$EdgeTypeFilterSerializer
+    implements PrimitiveSerializer<EdgeTypeFilter> {
   @override
   final Iterable<Type> types = const [EdgeTypeFilter, _$EdgeTypeFilter];
 
@@ -91,7 +95,11 @@ class _$EdgeTypeFilterSerializer implements PrimitiveSerializer<EdgeTypeFilter> 
     EdgeTypeFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,33 +115,43 @@ class _$EdgeTypeFilterSerializer implements PrimitiveSerializer<EdgeTypeFilter> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'edgeNameFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeNameFilter = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'edgeTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.edgeTypes.replace(valueDes);
           break;
         case r'edgeType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeType = valueDes;
           break;
@@ -165,5 +183,3 @@ class _$EdgeTypeFilterSerializer implements PrimitiveSerializer<EdgeTypeFilter> 
     return result.build();
   }
 }
-
-

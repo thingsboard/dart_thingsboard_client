@@ -14,17 +14,14 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/converter.dart';
 import 'package:thingsboard_client/src/model/integration_type.dart';
 import 'package:thingsboard_client/src/model/page_data_converter.dart';
 import 'package:thingsboard_client/src/model/script_language.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class ConverterControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -45,7 +42,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteConverter({ 
+  Future<Response<void>> deleteConverter({
     required String converterId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -55,12 +52,19 @@ class ConverterControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/converter/{converterId}'.replaceAll('{' r'converterId' '}', encodeQueryParameter(_serializers, converterId, const FullType(String)).toString());
+    final _path = r'/api/converter/{converterId}'.replaceAll(
+      '{'
+      r'converterId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        converterId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -68,11 +72,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -104,7 +105,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Converter] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Converter>> getConverterById({ 
+  Future<Response<Converter>> getConverterById({
     required String converterId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -114,12 +115,19 @@ class ConverterControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerConverter);
-    final _path = r'/api/converter/{converterId}'.replaceAll('{' r'converterId' '}', encodeQueryParameter(_serializers, converterId, const FullType(String)).toString());
+    final _path = r'/api/converter/{converterId}'.replaceAll(
+      '{'
+      r'converterId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        converterId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -127,11 +135,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -150,11 +155,13 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Converter),
-      ) as Converter;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Converter),
+                )
+                as Converter;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -197,7 +204,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataConverter] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataConverter>> getConverters({ 
+  Future<Response<PageDataConverter>> getConverters({
     required String pageSize,
     required String page,
     bool? isEdgeTemplate = false,
@@ -212,13 +219,12 @@ class ConverterControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataConverter);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataConverter);
     final _path = r'/api/converters';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -226,11 +232,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -238,13 +241,42 @@ class ConverterControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (isEdgeTemplate != null) r'isEdgeTemplate': encodeQueryParameter(_serializers, isEdgeTemplate, const FullType(bool)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      if (isEdgeTemplate != null)
+        r'isEdgeTemplate': encodeQueryParameter(
+          _serializers,
+          isEdgeTemplate,
+          const FullType(bool),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (integrationType != null) r'integrationType': encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (integrationType != null)
+        r'integrationType': encodeQueryParameter(
+          _serializers,
+          integrationType,
+          const FullType(IntegrationType),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -260,11 +292,13 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataConverter),
-      ) as PageDataConverter;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataConverter),
+                )
+                as PageDataConverter;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -301,7 +335,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Converter>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Converter>>> getConvertersByIds({ 
+  Future<Response<BuiltList<Converter>>> getConvertersByIds({
     required BuiltList<String> converterIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -310,13 +344,13 @@ class ConverterControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfConverterAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfConverterAndListOfString);
     final _path = r'/api/converters/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -324,11 +358,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -336,7 +367,12 @@ class ConverterControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'converterIds': encodeCollectionQueryParameter<String>(_serializers, converterIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'converterIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        converterIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -352,11 +388,15 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Converter)]),
-      ) as BuiltList<Converter>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(Converter),
+                  ]),
+                )
+                as BuiltList<Converter>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -397,7 +437,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getLatestConverterDebugInput({ 
+  Future<Response<JsonObject>> getLatestConverterDebugInput({
     required String converterId,
     String? converterType,
     String? integrationType,
@@ -411,12 +451,19 @@ class ConverterControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/converter/{converterId}/debugIn'.replaceAll('{' r'converterId' '}', encodeQueryParameter(_serializers, converterId, const FullType(String)).toString());
+    final _path = r'/api/converter/{converterId}/debugIn'.replaceAll(
+      '{'
+      r'converterId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        converterId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -424,11 +471,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -436,10 +480,30 @@ class ConverterControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (converterType != null) r'converterType': encodeQueryParameter(_serializers, converterType, const FullType(String)),
-      if (integrationType != null) r'integrationType': encodeQueryParameter(_serializers, integrationType, const FullType(String)),
-      if (integrationName != null) r'integrationName': encodeQueryParameter(_serializers, integrationName, const FullType(String)),
-      if (converterVersion != null) r'converterVersion': encodeQueryParameter(_serializers, converterVersion, const FullType(int)),
+      if (converterType != null)
+        r'converterType': encodeQueryParameter(
+          _serializers,
+          converterType,
+          const FullType(String),
+        ),
+      if (integrationType != null)
+        r'integrationType': encodeQueryParameter(
+          _serializers,
+          integrationType,
+          const FullType(String),
+        ),
+      if (integrationName != null)
+        r'integrationName': encodeQueryParameter(
+          _serializers,
+          integrationName,
+          const FullType(String),
+        ),
+      if (converterVersion != null)
+        r'converterVersion': encodeQueryParameter(
+          _serializers,
+          converterVersion,
+          const FullType(int),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -455,11 +519,13 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -496,7 +562,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Converter] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Converter>> saveConverter({ 
+  Future<Response<Converter>> saveConverter({
     required Converter converter,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -509,9 +575,7 @@ class ConverterControllerApi {
     final _path = r'/api/converter';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -519,11 +583,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -536,13 +597,9 @@ class ConverterControllerApi {
     try {
       const _type = FullType(Converter);
       _bodyData = _serializers.serialize(converter, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -562,11 +619,13 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Converter),
-      ) as Converter;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Converter),
+                )
+                as Converter;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -590,7 +649,7 @@ class ConverterControllerApi {
   }
 
   /// Test converter function (testDownLinkConverter)
-  /// Returns a JSON object representing the result of the processed incoming message.   ## Request Body Example  &#x60;&#x60;&#x60;json {    \&quot;metadata\&quot;:{       \&quot;data\&quot;:\&quot;40\&quot;    },    \&quot;msg\&quot;:\&quot;{\\n    \\\&quot;temp\\\&quot;: 42,\\n    \\\&quot;humidity\\\&quot;: 77\\n}\&quot;,    \&quot;msgType\&quot;:\&quot;POST_TELEMETRY_REQUEST\&quot;,    \&quot;integrationMetadata\&quot;:{       \&quot;integrationName\&quot;:\&quot;Integration\&quot;    },    \&quot;encoder\&quot;:\&quot;// Encode downlink data from incoming Rule Engine message\\n\\n// msg - JSON message payload downlink message json\\n// msgType - type of message, for ex. &#39;ATTRIBUTES_UPDATED&#39;, &#39;POST_TELEMETRY_REQUEST&#39;, etc.\\n// metadata - list of key-value pairs with additional data about the message\\n// integrationMetadata - list of key-value pairs with additional data defined in Integration executing this converter\\n\\n/_** Encoder **_/\\n\\nvar data &#x3D; {};\\n\\n// Process data from incoming message and metadata\\n\\ndata.tempValue &#x3D; msg.temp;\\ndata.humValue &#x3D; msg.humidity;\\n\\ndata.devSerialNumber &#x3D; metadata[&#39;ss_serialNumber&#39;];\\n\\n// Result object with encoded downlink payload\\nvar result &#x3D; {\\n\\n    // downlink data content type: JSON, TEXT or BINARY (base64 format)\\n    contentType: \\\&quot;JSON\\\&quot;,\\n\\n    // downlink data\\n    data: JSON.stringify(data),\\n\\n    // Optional metadata object presented in key/value format\\n    metadata: {\\n            topic: metadata[&#39;deviceType&#39;]+&#39;/&#39;+metadata[&#39;deviceName&#39;]+&#39;/upload&#39;\\n    }\\n\\n};\\n\\nreturn result;\&quot; } &#x60;&#x60;&#x60;   * &#39;metadata&#39; - message metadata pushed from the rule engine;   * &#39;msg&#39; - message data pushed from the rule engine;   * &#39;msgType&#39; - type of the message pushed from the rule engine;   * &#39;integrationMetadata&#39; - integration metadata object;   * &#39;encoder&#39; - string representation of the encoder configuration.  ## Response Body Example  &#x60;&#x60;&#x60;json {    \&quot;contentType\&quot;:\&quot;JSON\&quot;,    \&quot;data\&quot;:\&quot;{\\\&quot;tempValue\\\&quot;:42,\\\&quot;humValue\\\&quot;:77}\&quot;,    \&quot;metadata\&quot;:{       \&quot;topic\&quot;:\&quot;sensor/Temp Sensor/upload\&quot;    } } &#x60;&#x60;&#x60;   * &#39;contentType&#39; - downlink data content type;   * &#39;data&#39; - downlink data;   * &#39;metadata&#39; - optional metadata object.  
+  /// Returns a JSON object representing the result of the processed incoming message.   ## Request Body Example  &#x60;&#x60;&#x60;json {    \&quot;metadata\&quot;:{       \&quot;data\&quot;:\&quot;40\&quot;    },    \&quot;msg\&quot;:\&quot;{\\n    \\\&quot;temp\\\&quot;: 42,\\n    \\\&quot;humidity\\\&quot;: 77\\n}\&quot;,    \&quot;msgType\&quot;:\&quot;POST_TELEMETRY_REQUEST\&quot;,    \&quot;integrationMetadata\&quot;:{       \&quot;integrationName\&quot;:\&quot;Integration\&quot;    },    \&quot;encoder\&quot;:\&quot;// Encode downlink data from incoming Rule Engine message\\n\\n// msg - JSON message payload downlink message json\\n// msgType - type of message, for ex. &#39;ATTRIBUTES_UPDATED&#39;, &#39;POST_TELEMETRY_REQUEST&#39;, etc.\\n// metadata - list of key-value pairs with additional data about the message\\n// integrationMetadata - list of key-value pairs with additional data defined in Integration executing this converter\\n\\n/_** Encoder **_/\\n\\nvar data &#x3D; {};\\n\\n// Process data from incoming message and metadata\\n\\ndata.tempValue &#x3D; msg.temp;\\ndata.humValue &#x3D; msg.humidity;\\n\\ndata.devSerialNumber &#x3D; metadata[&#39;ss_serialNumber&#39;];\\n\\n// Result object with encoded downlink payload\\nvar result &#x3D; {\\n\\n    // downlink data content type: JSON, TEXT or BINARY (base64 format)\\n    contentType: \\\&quot;JSON\\\&quot;,\\n\\n    // downlink data\\n    data: JSON.stringify(data),\\n\\n    // Optional metadata object presented in key/value format\\n    metadata: {\\n            topic: metadata[&#39;deviceType&#39;]+&#39;/&#39;+metadata[&#39;deviceName&#39;]+&#39;/upload&#39;\\n    }\\n\\n};\\n\\nreturn result;\&quot; } &#x60;&#x60;&#x60;   * &#39;metadata&#39; - message metadata pushed from the rule engine;   * &#39;msg&#39; - message data pushed from the rule engine;   * &#39;msgType&#39; - type of the message pushed from the rule engine;   * &#39;integrationMetadata&#39; - integration metadata object;   * &#39;encoder&#39; - string representation of the encoder configuration.  ## Response Body Example  &#x60;&#x60;&#x60;json {    \&quot;contentType\&quot;:\&quot;JSON\&quot;,    \&quot;data\&quot;:\&quot;{\\\&quot;tempValue\\\&quot;:42,\\\&quot;humValue\\\&quot;:77}\&quot;,    \&quot;metadata\&quot;:{       \&quot;topic\&quot;:\&quot;sensor/Temp Sensor/upload\&quot;    } } &#x60;&#x60;&#x60;   * &#39;contentType&#39; - downlink data content type;   * &#39;data&#39; - downlink data;   * &#39;metadata&#39; - optional metadata object.
   ///
   /// Parameters:
   /// * [body] - A JSON value representing the input to the converter function.
@@ -604,7 +663,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> testDownLinkConverter({ 
+  Future<Response<JsonObject>> testDownLinkConverter({
     JsonObject? body,
     ScriptLanguage? scriptLang,
     CancelToken? cancelToken,
@@ -614,13 +673,12 @@ class ConverterControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerScriptLanguage);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerScriptLanguage);
     final _path = r'/api/converter/testDownLink';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -628,11 +686,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -641,17 +696,21 @@ class ConverterControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (scriptLang != null) r'scriptLang': encodeQueryParameter(_serializers, scriptLang, const FullType(ScriptLanguage)),
+      if (scriptLang != null)
+        r'scriptLang': encodeQueryParameter(
+          _serializers,
+          scriptLang,
+          const FullType(ScriptLanguage),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -676,11 +735,13 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -704,7 +765,7 @@ class ConverterControllerApi {
   }
 
   /// Test converter function (testUpLinkConverter)
-  /// Returns a JSON object representing the result of the processed incoming message.   ## Request Body Example  &#x60;&#x60;&#x60;json {    \&quot;metadata\&quot;:{    },    \&quot;payload\&quot;:\&quot;ewogICAgImRhdGEiOiAiZGF0YSIKfQ&#x3D;&#x3D;\&quot;,    \&quot;decoder\&quot;:\&quot;// Decode an uplink message from a buffer\\n// payload - array of bytes\\n// metadata - key/value object\\n\\n/_** Decoder **_/\\n\\n// decode payload to string\\nvar payloadStr &#x3D; decodeToString(payload);\\n\\n// decode payload to JSON\\n// var data &#x3D; decodeToJson(payload);\\n\\nvar deviceName &#x3D; &#39;Device A&#39;;\\nvar deviceType &#x3D; &#39;thermostat&#39;;\\nvar customerName &#x3D; &#39;customer&#39;;\\nvar groupName &#x3D; &#39;thermostat devices&#39;;\\nvar manufacturer &#x3D; &#39;Example corporation&#39;;\\n// use assetName and assetType instead of deviceName and deviceType\\n// to automatically create assets instead of devices.\\n// var assetName &#x3D; &#39;Asset A&#39;;\\n// var assetType &#x3D; &#39;building&#39;;\\n\\n// Result object with device/asset attributes/telemetry data\\nvar result &#x3D; {\\n// Use deviceName and deviceType or assetName and assetType, but not both.\\n   deviceName: deviceName,\\n   deviceType: deviceType,\\n// assetName: assetName,\\n// assetType: assetType,\\n   customerName: customerName,\\n   groupName: groupName,\\n   attributes: {\\n       model: &#39;Model A&#39;,\\n       serialNumber: &#39;SN111&#39;,\\n       integrationName: metadata[&#39;integrationName&#39;]\\n       manufacturer: manufacturer\\n   },\\n   telemetry: {\\n       temperature: 42,\\n       humidity: 80,\\n       rawData: payloadStr\\n   }\\n};\\n\\n/_** Helper functions **_/\\n\\nfunction decodeToString(payload) {\\n   return String.fromCharCode.apply(String, payload);\\n}\\n\\nfunction decodeToJson(payload) {\\n   // covert payload to string.\\n   var str &#x3D; decodeToString(payload);\\n\\n   // parse string to JSON\\n   var data &#x3D; JSON.parse(str);\\n   return data;\\n}\\n\\nreturn result;\&quot; } &#x60;&#x60;&#x60;   * &#39;metadata&#39; - integration metadata;   * &#39;payload&#39; - base64 string representation of the data;   * &#39;decoder&#39; - string representation of the decoder configuration;   * &#39;converter&#39; - JSON object representing converter.  ## Response Body Example  &#x60;&#x60;&#x60;json {    \&quot;output\&quot;:\&quot;{\\\&quot;deviceName\\\&quot;:\\\&quot;Device A\\\&quot;,\\\&quot;deviceType\\\&quot;:\\\&quot;thermostat\\\&quot;,\\\&quot;customerName\\\&quot;:\\\&quot;customer\\\&quot;,\\\&quot;groupName\\\&quot;:\\\&quot;thermostat devices\\\&quot;,\\\&quot;attributes\\\&quot;:{\\\&quot;model\\\&quot;:\\\&quot;Model A\\\&quot;,\\\&quot;serialNumber\\\&quot;:\\\&quot;SN111\\\&quot;},\\\&quot;telemetry\\\&quot;:{\\\&quot;temperature\\\&quot;:42,\\\&quot;humidity\\\&quot;:80,\\\&quot;rawData\\\&quot;:\\\&quot;{\\\\n    \\\\\\\&quot;data\\\\\\\&quot;: \\\\\\\&quot;data\\\\\\\&quot;\\\\n}\\\&quot;}}\&quot;,    \&quot;error\&quot;:\&quot;\&quot; } &#x60;&#x60;&#x60;   * &#39;output&#39; - string representation of the output message;   * &#39;error&#39; - string representation of the error message.  
+  /// Returns a JSON object representing the result of the processed incoming message.   ## Request Body Example  &#x60;&#x60;&#x60;json {    \&quot;metadata\&quot;:{    },    \&quot;payload\&quot;:\&quot;ewogICAgImRhdGEiOiAiZGF0YSIKfQ&#x3D;&#x3D;\&quot;,    \&quot;decoder\&quot;:\&quot;// Decode an uplink message from a buffer\\n// payload - array of bytes\\n// metadata - key/value object\\n\\n/_** Decoder **_/\\n\\n// decode payload to string\\nvar payloadStr &#x3D; decodeToString(payload);\\n\\n// decode payload to JSON\\n// var data &#x3D; decodeToJson(payload);\\n\\nvar deviceName &#x3D; &#39;Device A&#39;;\\nvar deviceType &#x3D; &#39;thermostat&#39;;\\nvar customerName &#x3D; &#39;customer&#39;;\\nvar groupName &#x3D; &#39;thermostat devices&#39;;\\nvar manufacturer &#x3D; &#39;Example corporation&#39;;\\n// use assetName and assetType instead of deviceName and deviceType\\n// to automatically create assets instead of devices.\\n// var assetName &#x3D; &#39;Asset A&#39;;\\n// var assetType &#x3D; &#39;building&#39;;\\n\\n// Result object with device/asset attributes/telemetry data\\nvar result &#x3D; {\\n// Use deviceName and deviceType or assetName and assetType, but not both.\\n   deviceName: deviceName,\\n   deviceType: deviceType,\\n// assetName: assetName,\\n// assetType: assetType,\\n   customerName: customerName,\\n   groupName: groupName,\\n   attributes: {\\n       model: &#39;Model A&#39;,\\n       serialNumber: &#39;SN111&#39;,\\n       integrationName: metadata[&#39;integrationName&#39;]\\n       manufacturer: manufacturer\\n   },\\n   telemetry: {\\n       temperature: 42,\\n       humidity: 80,\\n       rawData: payloadStr\\n   }\\n};\\n\\n/_** Helper functions **_/\\n\\nfunction decodeToString(payload) {\\n   return String.fromCharCode.apply(String, payload);\\n}\\n\\nfunction decodeToJson(payload) {\\n   // covert payload to string.\\n   var str &#x3D; decodeToString(payload);\\n\\n   // parse string to JSON\\n   var data &#x3D; JSON.parse(str);\\n   return data;\\n}\\n\\nreturn result;\&quot; } &#x60;&#x60;&#x60;   * &#39;metadata&#39; - integration metadata;   * &#39;payload&#39; - base64 string representation of the data;   * &#39;decoder&#39; - string representation of the decoder configuration;   * &#39;converter&#39; - JSON object representing converter.  ## Response Body Example  &#x60;&#x60;&#x60;json {    \&quot;output\&quot;:\&quot;{\\\&quot;deviceName\\\&quot;:\\\&quot;Device A\\\&quot;,\\\&quot;deviceType\\\&quot;:\\\&quot;thermostat\\\&quot;,\\\&quot;customerName\\\&quot;:\\\&quot;customer\\\&quot;,\\\&quot;groupName\\\&quot;:\\\&quot;thermostat devices\\\&quot;,\\\&quot;attributes\\\&quot;:{\\\&quot;model\\\&quot;:\\\&quot;Model A\\\&quot;,\\\&quot;serialNumber\\\&quot;:\\\&quot;SN111\\\&quot;},\\\&quot;telemetry\\\&quot;:{\\\&quot;temperature\\\&quot;:42,\\\&quot;humidity\\\&quot;:80,\\\&quot;rawData\\\&quot;:\\\&quot;{\\\\n    \\\\\\\&quot;data\\\\\\\&quot;: \\\\\\\&quot;data\\\\\\\&quot;\\\\n}\\\&quot;}}\&quot;,    \&quot;error\&quot;:\&quot;\&quot; } &#x60;&#x60;&#x60;   * &#39;output&#39; - string representation of the output message;   * &#39;error&#39; - string representation of the error message.
   ///
   /// Parameters:
   /// * [body] - A JSON value representing the input to the converter function.
@@ -718,7 +779,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> testUpLinkConverter({ 
+  Future<Response<JsonObject>> testUpLinkConverter({
     JsonObject? body,
     ScriptLanguage? scriptLang,
     CancelToken? cancelToken,
@@ -728,13 +789,12 @@ class ConverterControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerScriptLanguage);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerScriptLanguage);
     final _path = r'/api/converter/testUpLink';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -742,11 +802,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -755,17 +812,21 @@ class ConverterControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (scriptLang != null) r'scriptLang': encodeQueryParameter(_serializers, scriptLang, const FullType(ScriptLanguage)),
+      if (scriptLang != null)
+        r'scriptLang': encodeQueryParameter(
+          _serializers,
+          scriptLang,
+          const FullType(ScriptLanguage),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -790,11 +851,13 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -832,7 +895,7 @@ class ConverterControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> unwrapRawPayload({ 
+  Future<Response<JsonObject>> unwrapRawPayload({
     required IntegrationType integrationType,
     JsonObject? body,
     CancelToken? cancelToken,
@@ -842,13 +905,21 @@ class ConverterControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerIntegrationType);
-    final _path = r'/api/converter/unwrap/{integrationType}'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerIntegrationType);
+    final _path = r'/api/converter/unwrap/{integrationType}'.replaceAll(
+      '{'
+      r'integrationType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        integrationType,
+        const FullType(IntegrationType),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -856,11 +927,8 @@ class ConverterControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -872,13 +940,9 @@ class ConverterControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -898,11 +962,13 @@ class ConverterControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -924,5 +990,4 @@ class ConverterControllerApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -18,13 +18,19 @@ part 'web_delivery_method_notification_template.g.dart';
 /// WebDeliveryMethodNotificationTemplate
 ///
 /// Properties:
-/// * [enabled] 
-/// * [body] 
-/// * [method] 
+/// * [enabled]
+/// * [body]
+/// * [method]
 /// * [subject] - Subject line for the web notification
 /// * [additionalConfig] - Additional JSON configuration for web buttons/actions
 @BuiltValue()
-abstract class WebDeliveryMethodNotificationTemplate implements DeliveryMethodNotificationTemplate, Built<WebDeliveryMethodNotificationTemplate, WebDeliveryMethodNotificationTemplateBuilder> {
+abstract class WebDeliveryMethodNotificationTemplate
+    implements
+        DeliveryMethodNotificationTemplate,
+        Built<
+          WebDeliveryMethodNotificationTemplate,
+          WebDeliveryMethodNotificationTemplateBuilder
+        > {
   /// Subject line for the web notification
   @BuiltValueField(wireName: r'subject')
   String get subject;
@@ -35,18 +41,25 @@ abstract class WebDeliveryMethodNotificationTemplate implements DeliveryMethodNo
 
   WebDeliveryMethodNotificationTemplate._();
 
-  factory WebDeliveryMethodNotificationTemplate([void updates(WebDeliveryMethodNotificationTemplateBuilder b)]) = _$WebDeliveryMethodNotificationTemplate;
+  factory WebDeliveryMethodNotificationTemplate([
+    void updates(WebDeliveryMethodNotificationTemplateBuilder b),
+  ]) = _$WebDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WebDeliveryMethodNotificationTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WebDeliveryMethodNotificationTemplate> get serializer => _$WebDeliveryMethodNotificationTemplateSerializer();
+  static Serializer<WebDeliveryMethodNotificationTemplate> get serializer =>
+      _$WebDeliveryMethodNotificationTemplateSerializer();
 }
 
-class _$WebDeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<WebDeliveryMethodNotificationTemplate> {
+class _$WebDeliveryMethodNotificationTemplateSerializer
+    implements PrimitiveSerializer<WebDeliveryMethodNotificationTemplate> {
   @override
-  final Iterable<Type> types = const [WebDeliveryMethodNotificationTemplate, _$WebDeliveryMethodNotificationTemplate];
+  final Iterable<Type> types = const [
+    WebDeliveryMethodNotificationTemplate,
+    _$WebDeliveryMethodNotificationTemplate,
+  ];
 
   @override
   final String wireName = r'WebDeliveryMethodNotificationTemplate';
@@ -93,7 +106,11 @@ class _$WebDeliveryMethodNotificationTemplateSerializer implements PrimitiveSeri
     WebDeliveryMethodNotificationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,39 +126,49 @@ class _$WebDeliveryMethodNotificationTemplateSerializer implements PrimitiveSeri
       final value = serializedList[i + 1];
       switch (key) {
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.body = valueDes;
           break;
         case r'subject':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.subject = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'additionalConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalConfig = valueDes;
           break;
@@ -173,5 +200,3 @@ class _$WebDeliveryMethodNotificationTemplateSerializer implements PrimitiveSeri
     return result.build();
   }
 }
-
-

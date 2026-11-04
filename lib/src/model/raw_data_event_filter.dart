@@ -19,13 +19,16 @@ part 'raw_data_event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 /// * [server] - String value representing the server name, identifier or ip address where the platform is running
 /// * [uuid] - String value representing the uuid
 /// * [messageType] - String value representing the message type
 /// * [message] - String value representing the message
 @BuiltValue()
-abstract class RawDataEventFilter implements EventFilter, Built<RawDataEventFilter, RawDataEventFilterBuilder> {
+abstract class RawDataEventFilter
+    implements
+        EventFilter,
+        Built<RawDataEventFilter, RawDataEventFilterBuilder> {
   /// String value representing the server name, identifier or ip address where the platform is running
   @BuiltValueField(wireName: r'server')
   String? get server;
@@ -44,16 +47,19 @@ abstract class RawDataEventFilter implements EventFilter, Built<RawDataEventFilt
 
   RawDataEventFilter._();
 
-  factory RawDataEventFilter([void updates(RawDataEventFilterBuilder b)]) = _$RawDataEventFilter;
+  factory RawDataEventFilter([void updates(RawDataEventFilterBuilder b)]) =
+      _$RawDataEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RawDataEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RawDataEventFilter> get serializer => _$RawDataEventFilterSerializer();
+  static Serializer<RawDataEventFilter> get serializer =>
+      _$RawDataEventFilterSerializer();
 }
 
-class _$RawDataEventFilterSerializer implements PrimitiveSerializer<RawDataEventFilter> {
+class _$RawDataEventFilterSerializer
+    implements PrimitiveSerializer<RawDataEventFilter> {
   @override
   final Iterable<Type> types = const [RawDataEventFilter, _$RawDataEventFilter];
 
@@ -113,7 +119,11 @@ class _$RawDataEventFilterSerializer implements PrimitiveSerializer<RawDataEvent
     RawDataEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -129,49 +139,61 @@ class _$RawDataEventFilterSerializer implements PrimitiveSerializer<RawDataEvent
       final value = serializedList[i + 1];
       switch (key) {
         case r'server':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.server = valueDes;
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'messageType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.messageType = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
         case r'uuid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.uuid = valueDes;
           break;
@@ -203,5 +225,3 @@ class _$RawDataEventFilterSerializer implements PrimitiveSerializer<RawDataEvent
     return result.build();
   }
 }
-
-

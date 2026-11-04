@@ -10,7 +10,8 @@ enum EntitySearchDirection { FROM, TO }
 
 EntitySearchDirection entitySearchDirectionFromString(String value) {
   return EntitySearchDirection.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension EntitySearchDirectionToString on EntitySearchDirection {

@@ -17,25 +17,38 @@ part 'sms_delivery_method_notification_template.g.dart';
 /// SmsDeliveryMethodNotificationTemplate
 ///
 /// Properties:
-/// * [enabled] 
-/// * [body] 
-/// * [method] 
+/// * [enabled]
+/// * [body]
+/// * [method]
 @BuiltValue()
-abstract class SmsDeliveryMethodNotificationTemplate implements DeliveryMethodNotificationTemplate, Built<SmsDeliveryMethodNotificationTemplate, SmsDeliveryMethodNotificationTemplateBuilder> {
+abstract class SmsDeliveryMethodNotificationTemplate
+    implements
+        DeliveryMethodNotificationTemplate,
+        Built<
+          SmsDeliveryMethodNotificationTemplate,
+          SmsDeliveryMethodNotificationTemplateBuilder
+        > {
   SmsDeliveryMethodNotificationTemplate._();
 
-  factory SmsDeliveryMethodNotificationTemplate([void updates(SmsDeliveryMethodNotificationTemplateBuilder b)]) = _$SmsDeliveryMethodNotificationTemplate;
+  factory SmsDeliveryMethodNotificationTemplate([
+    void updates(SmsDeliveryMethodNotificationTemplateBuilder b),
+  ]) = _$SmsDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SmsDeliveryMethodNotificationTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SmsDeliveryMethodNotificationTemplate> get serializer => _$SmsDeliveryMethodNotificationTemplateSerializer();
+  static Serializer<SmsDeliveryMethodNotificationTemplate> get serializer =>
+      _$SmsDeliveryMethodNotificationTemplateSerializer();
 }
 
-class _$SmsDeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<SmsDeliveryMethodNotificationTemplate> {
+class _$SmsDeliveryMethodNotificationTemplateSerializer
+    implements PrimitiveSerializer<SmsDeliveryMethodNotificationTemplate> {
   @override
-  final Iterable<Type> types = const [SmsDeliveryMethodNotificationTemplate, _$SmsDeliveryMethodNotificationTemplate];
+  final Iterable<Type> types = const [
+    SmsDeliveryMethodNotificationTemplate,
+    _$SmsDeliveryMethodNotificationTemplate,
+  ];
 
   @override
   final String wireName = r'SmsDeliveryMethodNotificationTemplate';
@@ -70,7 +83,11 @@ class _$SmsDeliveryMethodNotificationTemplateSerializer implements PrimitiveSeri
     SmsDeliveryMethodNotificationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,24 +103,30 @@ class _$SmsDeliveryMethodNotificationTemplateSerializer implements PrimitiveSeri
       final value = serializedList[i + 1];
       switch (key) {
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.body = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
@@ -135,5 +158,3 @@ class _$SmsDeliveryMethodNotificationTemplateSerializer implements PrimitiveSeri
     return result.build();
   }
 }
-
-

@@ -47,7 +47,8 @@ enum PushNotificationStatus { SENT, READ }
 
 PushNotificationStatus notificationStatusFromString(String value) {
   return PushNotificationStatus.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension NotificationStatusToString on PushNotificationStatus {
@@ -66,21 +67,28 @@ class PushNotification extends BaseData<NotificationId> {
   final PushNotificationInfo? info;
   Map<String, dynamic>? additionalConfig;
 
-  PushNotification(this.requestId, this.recipientId, this.subject, this.text,
-      this.type, this.status, this.info);
+  PushNotification(
+    this.requestId,
+    this.recipientId,
+    this.subject,
+    this.text,
+    this.type,
+    this.status,
+    this.info,
+  );
 
-  PushNotification.fromJson(Map<String, dynamic> json)
-      : requestId = NotificationRequestId.fromJson(json['requestId']),
-        recipientId = UserId.fromJson(json['recipientId']),
-        subject = json['subject'],
-        text = json['text'],
-        type = notificationTypeFromString(json['type']),
-        status = notificationStatusFromString(json['status']),
-        info = json['info'] != null
-            ? PushNotificationInfo.fromJson(json['info'])
-            : null,
-        additionalConfig = json['additionalConfig'],
-        super.fromJson(json);
+  PushNotification.fromJson(super.json)
+    : requestId = NotificationRequestId.fromJson(json['requestId']),
+      recipientId = UserId.fromJson(json['recipientId']),
+      subject = json['subject'],
+      text = json['text'],
+      type = notificationTypeFromString(json['type']),
+      status = notificationStatusFromString(json['status']),
+      info = json['info'] != null
+          ? PushNotificationInfo.fromJson(json['info'])
+          : null,
+      additionalConfig = json['additionalConfig'],
+      super.fromJson();
 
   @override
   Map<String, dynamic> toJson() {
@@ -104,9 +112,11 @@ class PushNotification extends BaseData<NotificationId> {
   }
 
   String notificationString([String? toStringBody]) {
-    return '${baseDataString('requestId: $recipientId, recipientId: $recipientId,'
-        'subject: $subject, text: $text, type: $type, status: $status, info: $info, '
-        'additionalConfig: $additionalConfig')}';
+    return baseDataString(
+      'requestId: $recipientId, recipientId: $recipientId,'
+      'subject: $subject, text: $text, type: $type, status: $status, info: $info, '
+      'additionalConfig: $additionalConfig',
+    );
   }
 }
 
@@ -122,21 +132,21 @@ class PushNotificationInfo {
   final bool? cleared;
 
   PushNotificationInfo.fromJson(Map<String, dynamic> json)
-      : description = json['description'],
-        type = json['type'],
-        alarmSeverity = json['alarmSeverity'] != null
-            ? alarmSeverityFromString(json['alarmSeverity'])
-            : null,
-        alarmStatus = json['alarmStatus'] != null
-            ? alarmStatusFromString(json['alarmStatus'])
-            : null,
-        alarmId = json['alarmId'],
-        alarmType = json['alarmType'],
-        stateEntityId = json['stateEntityId'] != null
-            ? EntityId.fromJson(json['stateEntityId'])
-            : null,
-        acknowledged = json['acknowledged'],
-        cleared = json['cleared'];
+    : description = json['description'],
+      type = json['type'],
+      alarmSeverity = json['alarmSeverity'] != null
+          ? alarmSeverityFromString(json['alarmSeverity'])
+          : null,
+      alarmStatus = json['alarmStatus'] != null
+          ? alarmStatusFromString(json['alarmStatus'])
+          : null,
+      alarmId = json['alarmId'],
+      alarmType = json['alarmType'],
+      stateEntityId = json['stateEntityId'] != null
+          ? EntityId.fromJson(json['stateEntityId'])
+          : null,
+      acknowledged = json['acknowledged'],
+      cleared = json['cleared'];
 
   @override
   String toString() {

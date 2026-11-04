@@ -21,18 +21,24 @@ part 'alarm_calculated_field_configuration.g.dart';
 /// AlarmCalculatedFieldConfiguration
 ///
 /// Properties:
-/// * [output] 
-/// * [type] 
-/// * [arguments] 
-/// * [createRules] 
-/// * [clearRule] 
-/// * [propagate] 
-/// * [propagateToOwner] 
-/// * [propagateToOwnerHierarchy] 
-/// * [propagateToTenant] 
-/// * [propagateRelationTypes] 
+/// * [output]
+/// * [type]
+/// * [arguments]
+/// * [createRules]
+/// * [clearRule]
+/// * [propagate]
+/// * [propagateToOwner]
+/// * [propagateToOwnerHierarchy]
+/// * [propagateToTenant]
+/// * [propagateRelationTypes]
 @BuiltValue()
-abstract class AlarmCalculatedFieldConfiguration implements CalculatedFieldConfiguration, Built<AlarmCalculatedFieldConfiguration, AlarmCalculatedFieldConfigurationBuilder> {
+abstract class AlarmCalculatedFieldConfiguration
+    implements
+        CalculatedFieldConfiguration,
+        Built<
+          AlarmCalculatedFieldConfiguration,
+          AlarmCalculatedFieldConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'propagateToTenant')
   bool? get propagateToTenant;
 
@@ -59,18 +65,25 @@ abstract class AlarmCalculatedFieldConfiguration implements CalculatedFieldConfi
 
   AlarmCalculatedFieldConfiguration._();
 
-  factory AlarmCalculatedFieldConfiguration([void updates(AlarmCalculatedFieldConfigurationBuilder b)]) = _$AlarmCalculatedFieldConfiguration;
+  factory AlarmCalculatedFieldConfiguration([
+    void updates(AlarmCalculatedFieldConfigurationBuilder b),
+  ]) = _$AlarmCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmCalculatedFieldConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmCalculatedFieldConfiguration> get serializer => _$AlarmCalculatedFieldConfigurationSerializer();
+  static Serializer<AlarmCalculatedFieldConfiguration> get serializer =>
+      _$AlarmCalculatedFieldConfigurationSerializer();
 }
 
-class _$AlarmCalculatedFieldConfigurationSerializer implements PrimitiveSerializer<AlarmCalculatedFieldConfiguration> {
+class _$AlarmCalculatedFieldConfigurationSerializer
+    implements PrimitiveSerializer<AlarmCalculatedFieldConfiguration> {
   @override
-  final Iterable<Type> types = const [AlarmCalculatedFieldConfiguration, _$AlarmCalculatedFieldConfiguration];
+  final Iterable<Type> types = const [
+    AlarmCalculatedFieldConfiguration,
+    _$AlarmCalculatedFieldConfiguration,
+  ];
 
   @override
   final String wireName = r'AlarmCalculatedFieldConfiguration';
@@ -104,7 +117,10 @@ class _$AlarmCalculatedFieldConfigurationSerializer implements PrimitiveSerializ
     yield r'createRules';
     yield serializers.serialize(
       object.createRules,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AlarmRule)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(AlarmRule),
+      ]),
     );
     if (object.propagateRelationTypes != null) {
       yield r'propagateRelationTypes';
@@ -130,7 +146,10 @@ class _$AlarmCalculatedFieldConfigurationSerializer implements PrimitiveSerializ
     yield r'arguments';
     yield serializers.serialize(
       object.arguments,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(Argument),
+      ]),
     );
     yield r'type';
     yield serializers.serialize(
@@ -152,7 +171,11 @@ class _$AlarmCalculatedFieldConfigurationSerializer implements PrimitiveSerializ
     AlarmCalculatedFieldConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -168,79 +191,107 @@ class _$AlarmCalculatedFieldConfigurationSerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'output':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Output),
-          ) as Output?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Output),
+                  )
+                  as Output?;
           if (valueDes == null) continue;
           result.output = valueDes;
           break;
         case r'propagateToTenant':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.propagateToTenant = valueDes;
           break;
         case r'propagateToOwner':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.propagateToOwner = valueDes;
           break;
         case r'createRules':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AlarmRule)]),
-          ) as BuiltMap<String, AlarmRule>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(AlarmRule),
+                    ]),
+                  )
+                  as BuiltMap<String, AlarmRule>;
           result.createRules.replace(valueDes);
           break;
         case r'propagateRelationTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.propagateRelationTypes.replace(valueDes);
           break;
         case r'clearRule':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRule),
-          ) as AlarmRule?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AlarmRule),
+                  )
+                  as AlarmRule?;
           if (valueDes == null) continue;
           result.clearRule.replace(valueDes);
           break;
         case r'propagate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.propagate = valueDes;
           break;
         case r'arguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
-          ) as BuiltMap<String, Argument>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(Argument),
+                    ]),
+                  )
+                  as BuiltMap<String, Argument>;
           result.arguments.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'propagateToOwnerHierarchy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.propagateToOwnerHierarchy = valueDes;
           break;
@@ -272,5 +323,3 @@ class _$AlarmCalculatedFieldConfigurationSerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

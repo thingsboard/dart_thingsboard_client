@@ -20,7 +20,8 @@ part 'o_auth2_client_login_info.g.dart';
 /// * [icon] - Name of the icon, displayed on OAuth2 log in button
 /// * [url] - URI for OAuth2 log in. On HTTP GET request to this URI, it redirects to the OAuth2 provider page
 @BuiltValue()
-abstract class OAuth2ClientLoginInfo implements Built<OAuth2ClientLoginInfo, OAuth2ClientLoginInfoBuilder> {
+abstract class OAuth2ClientLoginInfo
+    implements Built<OAuth2ClientLoginInfo, OAuth2ClientLoginInfoBuilder> {
   /// OAuth2 client name
   @BuiltValueField(wireName: r'name')
   String? get name;
@@ -35,18 +36,25 @@ abstract class OAuth2ClientLoginInfo implements Built<OAuth2ClientLoginInfo, OAu
 
   OAuth2ClientLoginInfo._();
 
-  factory OAuth2ClientLoginInfo([void updates(OAuth2ClientLoginInfoBuilder b)]) = _$OAuth2ClientLoginInfo;
+  factory OAuth2ClientLoginInfo([
+    void updates(OAuth2ClientLoginInfoBuilder b),
+  ]) = _$OAuth2ClientLoginInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OAuth2ClientLoginInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OAuth2ClientLoginInfo> get serializer => _$OAuth2ClientLoginInfoSerializer();
+  static Serializer<OAuth2ClientLoginInfo> get serializer =>
+      _$OAuth2ClientLoginInfoSerializer();
 }
 
-class _$OAuth2ClientLoginInfoSerializer implements PrimitiveSerializer<OAuth2ClientLoginInfo> {
+class _$OAuth2ClientLoginInfoSerializer
+    implements PrimitiveSerializer<OAuth2ClientLoginInfo> {
   @override
-  final Iterable<Type> types = const [OAuth2ClientLoginInfo, _$OAuth2ClientLoginInfo];
+  final Iterable<Type> types = const [
+    OAuth2ClientLoginInfo,
+    _$OAuth2ClientLoginInfo,
+  ];
 
   @override
   final String wireName = r'OAuth2ClientLoginInfo';
@@ -85,7 +93,11 @@ class _$OAuth2ClientLoginInfoSerializer implements PrimitiveSerializer<OAuth2Cli
     OAuth2ClientLoginInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +113,32 @@ class _$OAuth2ClientLoginInfoSerializer implements PrimitiveSerializer<OAuth2Cli
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'icon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.icon = valueDes;
           break;
         case r'url':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.url = valueDes;
           break;
@@ -152,5 +170,3 @@ class _$OAuth2ClientLoginInfoSerializer implements PrimitiveSerializer<OAuth2Cli
     return result.build();
   }
 }
-
-

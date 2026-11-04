@@ -17,10 +17,11 @@ part 'relation_path_level.g.dart';
 /// RelationPathLevel
 ///
 /// Properties:
-/// * [direction] 
-/// * [relationType] 
+/// * [direction]
+/// * [relationType]
 @BuiltValue()
-abstract class RelationPathLevel implements Built<RelationPathLevel, RelationPathLevelBuilder> {
+abstract class RelationPathLevel
+    implements Built<RelationPathLevel, RelationPathLevelBuilder> {
   @BuiltValueField(wireName: r'direction')
   EntitySearchDirection get direction;
   // enum directionEnum {  FROM,  TO,  };
@@ -30,16 +31,19 @@ abstract class RelationPathLevel implements Built<RelationPathLevel, RelationPat
 
   RelationPathLevel._();
 
-  factory RelationPathLevel([void updates(RelationPathLevelBuilder b)]) = _$RelationPathLevel;
+  factory RelationPathLevel([void updates(RelationPathLevelBuilder b)]) =
+      _$RelationPathLevel;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RelationPathLevelBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RelationPathLevel> get serializer => _$RelationPathLevelSerializer();
+  static Serializer<RelationPathLevel> get serializer =>
+      _$RelationPathLevelSerializer();
 }
 
-class _$RelationPathLevelSerializer implements PrimitiveSerializer<RelationPathLevel> {
+class _$RelationPathLevelSerializer
+    implements PrimitiveSerializer<RelationPathLevel> {
   @override
   final Iterable<Type> types = const [RelationPathLevel, _$RelationPathLevel];
 
@@ -69,7 +73,11 @@ class _$RelationPathLevelSerializer implements PrimitiveSerializer<RelationPathL
     RelationPathLevel object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +93,21 @@ class _$RelationPathLevelSerializer implements PrimitiveSerializer<RelationPathL
       final value = serializedList[i + 1];
       switch (key) {
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntitySearchDirection),
-          ) as EntitySearchDirection;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntitySearchDirection),
+                  )
+                  as EntitySearchDirection;
           result.direction = valueDes;
           break;
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.relationType = valueDes;
           break;
         default:
@@ -126,5 +138,3 @@ class _$RelationPathLevelSerializer implements PrimitiveSerializer<RelationPathL
     return result.build();
   }
 }
-
-

@@ -21,13 +21,14 @@ part 'white_labeling.g.dart';
 /// WhiteLabeling
 ///
 /// Properties:
-/// * [tenantId] 
-/// * [customerId] 
-/// * [type] 
+/// * [tenantId]
+/// * [customerId]
+/// * [type]
 /// * [settings] - A value representing the any type (object or primitive)
-/// * [domainId] 
+/// * [domainId]
 @BuiltValue()
-abstract class WhiteLabeling implements Built<WhiteLabeling, WhiteLabelingBuilder> {
+abstract class WhiteLabeling
+    implements Built<WhiteLabeling, WhiteLabelingBuilder> {
   @BuiltValueField(wireName: r'tenantId')
   TenantId? get tenantId;
 
@@ -47,13 +48,15 @@ abstract class WhiteLabeling implements Built<WhiteLabeling, WhiteLabelingBuilde
 
   WhiteLabeling._();
 
-  factory WhiteLabeling([void updates(WhiteLabelingBuilder b)]) = _$WhiteLabeling;
+  factory WhiteLabeling([void updates(WhiteLabelingBuilder b)]) =
+      _$WhiteLabeling;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WhiteLabelingBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WhiteLabeling> get serializer => _$WhiteLabelingSerializer();
+  static Serializer<WhiteLabeling> get serializer =>
+      _$WhiteLabelingSerializer();
 }
 
 class _$WhiteLabelingSerializer implements PrimitiveSerializer<WhiteLabeling> {
@@ -111,7 +114,11 @@ class _$WhiteLabelingSerializer implements PrimitiveSerializer<WhiteLabeling> {
     WhiteLabeling object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -127,42 +134,52 @@ class _$WhiteLabelingSerializer implements PrimitiveSerializer<WhiteLabeling> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(WhiteLabelingType),
-          ) as WhiteLabelingType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(WhiteLabelingType),
+                  )
+                  as WhiteLabelingType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'settings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.settings = valueDes;
           break;
         case r'domainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DomainId),
-          ) as DomainId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DomainId),
+                  )
+                  as DomainId?;
           if (valueDes == null) continue;
           result.domainId.replace(valueDes);
           break;
@@ -194,5 +211,3 @@ class _$WhiteLabelingSerializer implements PrimitiveSerializer<WhiteLabeling> {
     return result.build();
   }
 }
-
-

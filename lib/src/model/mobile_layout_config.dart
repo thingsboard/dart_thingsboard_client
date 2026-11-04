@@ -18,24 +18,28 @@ part 'mobile_layout_config.g.dart';
 /// MobileLayoutConfig
 ///
 /// Properties:
-/// * [pages] 
+/// * [pages]
 @BuiltValue()
-abstract class MobileLayoutConfig implements Built<MobileLayoutConfig, MobileLayoutConfigBuilder> {
+abstract class MobileLayoutConfig
+    implements Built<MobileLayoutConfig, MobileLayoutConfigBuilder> {
   @BuiltValueField(wireName: r'pages')
   BuiltList<MobilePage>? get pages;
 
   MobileLayoutConfig._();
 
-  factory MobileLayoutConfig([void updates(MobileLayoutConfigBuilder b)]) = _$MobileLayoutConfig;
+  factory MobileLayoutConfig([void updates(MobileLayoutConfigBuilder b)]) =
+      _$MobileLayoutConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileLayoutConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileLayoutConfig> get serializer => _$MobileLayoutConfigSerializer();
+  static Serializer<MobileLayoutConfig> get serializer =>
+      _$MobileLayoutConfigSerializer();
 }
 
-class _$MobileLayoutConfigSerializer implements PrimitiveSerializer<MobileLayoutConfig> {
+class _$MobileLayoutConfigSerializer
+    implements PrimitiveSerializer<MobileLayoutConfig> {
   @override
   final Iterable<Type> types = const [MobileLayoutConfig, _$MobileLayoutConfig];
 
@@ -62,7 +66,11 @@ class _$MobileLayoutConfigSerializer implements PrimitiveSerializer<MobileLayout
     MobileLayoutConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +86,14 @@ class _$MobileLayoutConfigSerializer implements PrimitiveSerializer<MobileLayout
       final value = serializedList[i + 1];
       switch (key) {
         case r'pages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(MobilePage)]),
-          ) as BuiltList<MobilePage>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(MobilePage),
+                    ]),
+                  )
+                  as BuiltList<MobilePage>?;
           if (valueDes == null) continue;
           result.pages.replace(valueDes);
           break;
@@ -113,5 +125,3 @@ class _$MobileLayoutConfigSerializer implements PrimitiveSerializer<MobileLayout
     return result.build();
   }
 }
-
-

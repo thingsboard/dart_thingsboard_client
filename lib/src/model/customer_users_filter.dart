@@ -17,27 +17,36 @@ part 'customer_users_filter.g.dart';
 /// CustomerUsersFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [customerId] 
+/// * [type]
+/// * [customerId]
 @BuiltValue()
-abstract class CustomerUsersFilter implements UsersFilter, Built<CustomerUsersFilter, CustomerUsersFilterBuilder> {
+abstract class CustomerUsersFilter
+    implements
+        UsersFilter,
+        Built<CustomerUsersFilter, CustomerUsersFilterBuilder> {
   @BuiltValueField(wireName: r'customerId')
   String get customerId;
 
   CustomerUsersFilter._();
 
-  factory CustomerUsersFilter([void updates(CustomerUsersFilterBuilder b)]) = _$CustomerUsersFilter;
+  factory CustomerUsersFilter([void updates(CustomerUsersFilterBuilder b)]) =
+      _$CustomerUsersFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CustomerUsersFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CustomerUsersFilter> get serializer => _$CustomerUsersFilterSerializer();
+  static Serializer<CustomerUsersFilter> get serializer =>
+      _$CustomerUsersFilterSerializer();
 }
 
-class _$CustomerUsersFilterSerializer implements PrimitiveSerializer<CustomerUsersFilter> {
+class _$CustomerUsersFilterSerializer
+    implements PrimitiveSerializer<CustomerUsersFilter> {
   @override
-  final Iterable<Type> types = const [CustomerUsersFilter, _$CustomerUsersFilter];
+  final Iterable<Type> types = const [
+    CustomerUsersFilter,
+    _$CustomerUsersFilter,
+  ];
 
   @override
   final String wireName = r'CustomerUsersFilter';
@@ -65,7 +74,11 @@ class _$CustomerUsersFilterSerializer implements PrimitiveSerializer<CustomerUse
     CustomerUsersFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -81,17 +94,21 @@ class _$CustomerUsersFilterSerializer implements PrimitiveSerializer<CustomerUse
       final value = serializedList[i + 1];
       switch (key) {
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.customerId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -122,5 +139,3 @@ class _$CustomerUsersFilterSerializer implements PrimitiveSerializer<CustomerUse
     return result.build();
   }
 }
-
-

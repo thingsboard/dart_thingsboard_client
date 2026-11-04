@@ -17,11 +17,14 @@ part 'week_sun_sat_interval.g.dart';
 /// WeekSunSatInterval
 ///
 /// Properties:
-/// * [type] 
-/// * [tz] 
-/// * [offsetSec] 
+/// * [type]
+/// * [tz]
+/// * [offsetSec]
 @BuiltValue()
-abstract class WeekSunSatInterval implements AggInterval, Built<WeekSunSatInterval, WeekSunSatIntervalBuilder> {
+abstract class WeekSunSatInterval
+    implements
+        AggInterval,
+        Built<WeekSunSatInterval, WeekSunSatIntervalBuilder> {
   @BuiltValueField(wireName: r'tz')
   String get tz;
 
@@ -30,16 +33,19 @@ abstract class WeekSunSatInterval implements AggInterval, Built<WeekSunSatInterv
 
   WeekSunSatInterval._();
 
-  factory WeekSunSatInterval([void updates(WeekSunSatIntervalBuilder b)]) = _$WeekSunSatInterval;
+  factory WeekSunSatInterval([void updates(WeekSunSatIntervalBuilder b)]) =
+      _$WeekSunSatInterval;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WeekSunSatIntervalBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WeekSunSatInterval> get serializer => _$WeekSunSatIntervalSerializer();
+  static Serializer<WeekSunSatInterval> get serializer =>
+      _$WeekSunSatIntervalSerializer();
 }
 
-class _$WeekSunSatIntervalSerializer implements PrimitiveSerializer<WeekSunSatInterval> {
+class _$WeekSunSatIntervalSerializer
+    implements PrimitiveSerializer<WeekSunSatInterval> {
   @override
   final Iterable<Type> types = const [WeekSunSatInterval, _$WeekSunSatInterval];
 
@@ -76,7 +82,11 @@ class _$WeekSunSatIntervalSerializer implements PrimitiveSerializer<WeekSunSatIn
     WeekSunSatInterval object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,25 +102,31 @@ class _$WeekSunSatIntervalSerializer implements PrimitiveSerializer<WeekSunSatIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'offsetSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.offsetSec = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'tz':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tz = valueDes;
           break;
         default:
@@ -141,5 +157,3 @@ class _$WeekSunSatIntervalSerializer implements PrimitiveSerializer<WeekSunSatIn
     return result.build();
   }
 }
-
-

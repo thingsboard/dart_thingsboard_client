@@ -12,14 +12,20 @@ void main() {
   group('Serializers builder factory patch', () {
     test('serializers.dart contains addBuilderFactory entries', () {
       final content = File('lib/src/serializers.dart').readAsStringSync();
-      expect(content.contains('addBuilderFactory'), isTrue,
-          reason: 'serializers.dart must have nested generic builder factories');
+      expect(
+        content.contains('addBuilderFactory'),
+        isTrue,
+        reason: 'serializers.dart must have nested generic builder factories',
+      );
     });
 
     test('serializers.dart has builder factory for TsValue', () {
       final content = File('lib/src/serializers.dart').readAsStringSync();
-      expect(content.contains('TsValue'), isTrue,
-          reason: 'TsValue builder factory required for EntityData.timeseries');
+      expect(
+        content.contains('TsValue'),
+        isTrue,
+        reason: 'TsValue builder factory required for EntityData.timeseries',
+      );
     });
   });
 }

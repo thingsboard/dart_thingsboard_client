@@ -14,14 +14,11 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'dart:typed_data';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/dashboard_report_config.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class DashboardReportControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -33,7 +30,7 @@ class DashboardReportControllerApi {
   ///
   /// Parameters:
   /// * [dashboardId] - A string value representing the dashboard id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -43,7 +40,7 @@ class DashboardReportControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadDashboardReport({ 
+  Future<Response<Uint8List>> downloadDashboardReport({
     required String dashboardId,
     JsonObject? body,
     CancelToken? cancelToken,
@@ -54,13 +51,20 @@ class DashboardReportControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/report/{dashboardId}/download'.replaceAll('{' r'dashboardId' '}', encodeQueryParameter(_serializers, dashboardId, const FullType(String)).toString());
+    final _path = r'/api/report/{dashboardId}/download'.replaceAll(
+      '{'
+      r'dashboardId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        dashboardId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
       responseType: ResponseType.bytes,
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -68,11 +72,8 @@ class DashboardReportControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -84,13 +85,9 @@ class DashboardReportControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -111,7 +108,6 @@ class DashboardReportControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -138,7 +134,7 @@ class DashboardReportControllerApi {
   /// Generate and download test report.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [dashboardReportConfig] 
+  /// * [dashboardReportConfig]
   /// * [reportsServerEndpointUrl] - A string value representing the report server endpoint.
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -149,7 +145,7 @@ class DashboardReportControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadTestReport({ 
+  Future<Response<Uint8List>> downloadTestReport({
     required DashboardReportConfig dashboardReportConfig,
     String? reportsServerEndpointUrl,
     CancelToken? cancelToken,
@@ -159,14 +155,13 @@ class DashboardReportControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerDashboardReportConfig);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerDashboardReportConfig);
     final _path = r'/api/report/test';
     final _options = Options(
       method: r'POST',
       responseType: ResponseType.bytes,
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -174,11 +169,8 @@ class DashboardReportControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -187,18 +179,25 @@ class DashboardReportControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (reportsServerEndpointUrl != null) r'reportsServerEndpointUrl': encodeQueryParameter(_serializers, reportsServerEndpointUrl, const FullType(String)),
+      if (reportsServerEndpointUrl != null)
+        r'reportsServerEndpointUrl': encodeQueryParameter(
+          _serializers,
+          reportsServerEndpointUrl,
+          const FullType(String),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       const _type = FullType(DashboardReportConfig);
-      _bodyData = _serializers.serialize(dashboardReportConfig, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        dashboardReportConfig,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -224,7 +223,6 @@ class DashboardReportControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -246,5 +244,4 @@ class DashboardReportControllerApi {
       extra: _response.extra,
     );
   }
-
 }

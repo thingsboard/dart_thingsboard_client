@@ -23,7 +23,8 @@ part 'page_data_mobile_app.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataMobileApp implements Built<PageDataMobileApp, PageDataMobileAppBuilder> {
+abstract class PageDataMobileApp
+    implements Built<PageDataMobileApp, PageDataMobileAppBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<MobileApp>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataMobileApp implements Built<PageDataMobileApp, PageDataMob
 
   PageDataMobileApp._();
 
-  factory PageDataMobileApp([void updates(PageDataMobileAppBuilder b)]) = _$PageDataMobileApp;
+  factory PageDataMobileApp([void updates(PageDataMobileAppBuilder b)]) =
+      _$PageDataMobileApp;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataMobileAppBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataMobileApp> get serializer => _$PageDataMobileAppSerializer();
+  static Serializer<PageDataMobileApp> get serializer =>
+      _$PageDataMobileAppSerializer();
 }
 
-class _$PageDataMobileAppSerializer implements PrimitiveSerializer<PageDataMobileApp> {
+class _$PageDataMobileAppSerializer
+    implements PrimitiveSerializer<PageDataMobileApp> {
   @override
   final Iterable<Type> types = const [PageDataMobileApp, _$PageDataMobileApp];
 
@@ -99,7 +103,11 @@ class _$PageDataMobileAppSerializer implements PrimitiveSerializer<PageDataMobil
     PageDataMobileApp object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataMobileAppSerializer implements PrimitiveSerializer<PageDataMobil
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(MobileApp)]),
-          ) as BuiltList<MobileApp>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(MobileApp),
+                    ]),
+                  )
+                  as BuiltList<MobileApp>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataMobileAppSerializer implements PrimitiveSerializer<PageDataMobil
     return result.build();
   }
 }
-
-

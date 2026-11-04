@@ -19,10 +19,11 @@ part 'bulk_operation_request.g.dart';
 /// BulkOperationRequest
 ///
 /// Properties:
-/// * [actionType] 
-/// * [stepInputs] 
+/// * [actionType]
+/// * [stepInputs]
 @BuiltValue()
-abstract class BulkOperationRequest implements Built<BulkOperationRequest, BulkOperationRequestBuilder> {
+abstract class BulkOperationRequest
+    implements Built<BulkOperationRequest, BulkOperationRequestBuilder> {
   @BuiltValueField(wireName: r'actionType')
   AgentAppEventActionType? get actionType;
   // enum actionTypeEnum {  INSTALL,  UPDATE,  DELETE,  RESTART,  ROLLBACK,  UPGRADE,  AGENT_UPGRADE,  };
@@ -32,18 +33,24 @@ abstract class BulkOperationRequest implements Built<BulkOperationRequest, BulkO
 
   BulkOperationRequest._();
 
-  factory BulkOperationRequest([void updates(BulkOperationRequestBuilder b)]) = _$BulkOperationRequest;
+  factory BulkOperationRequest([void updates(BulkOperationRequestBuilder b)]) =
+      _$BulkOperationRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BulkOperationRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BulkOperationRequest> get serializer => _$BulkOperationRequestSerializer();
+  static Serializer<BulkOperationRequest> get serializer =>
+      _$BulkOperationRequestSerializer();
 }
 
-class _$BulkOperationRequestSerializer implements PrimitiveSerializer<BulkOperationRequest> {
+class _$BulkOperationRequestSerializer
+    implements PrimitiveSerializer<BulkOperationRequest> {
   @override
-  final Iterable<Type> types = const [BulkOperationRequest, _$BulkOperationRequest];
+  final Iterable<Type> types = const [
+    BulkOperationRequest,
+    _$BulkOperationRequest,
+  ];
 
   @override
   final String wireName = r'BulkOperationRequest';
@@ -64,7 +71,10 @@ class _$BulkOperationRequestSerializer implements PrimitiveSerializer<BulkOperat
       yield r'stepInputs';
       yield serializers.serialize(
         object.stepInputs,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(AgentAppEventStepStatesValue),
+        ]),
       );
     }
   }
@@ -75,7 +85,11 @@ class _$BulkOperationRequestSerializer implements PrimitiveSerializer<BulkOperat
     BulkOperationRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +105,27 @@ class _$BulkOperationRequestSerializer implements PrimitiveSerializer<BulkOperat
       final value = serializedList[i + 1];
       switch (key) {
         case r'actionType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppEventActionType),
-          ) as AgentAppEventActionType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentAppEventActionType,
+                    ),
+                  )
+                  as AgentAppEventActionType?;
           if (valueDes == null) continue;
           result.actionType = valueDes;
           break;
         case r'stepInputs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]),
-          ) as BuiltMap<String, AgentAppEventStepStatesValue>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(AgentAppEventStepStatesValue),
+                    ]),
+                  )
+                  as BuiltMap<String, AgentAppEventStepStatesValue>?;
           if (valueDes == null) continue;
           result.stepInputs.replace(valueDes);
           break;
@@ -134,5 +157,3 @@ class _$BulkOperationRequestSerializer implements PrimitiveSerializer<BulkOperat
     return result.build();
   }
 }
-
-

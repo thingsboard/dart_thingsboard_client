@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'line_series_step_type.g.dart';
 
 class LineSeriesStepType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'start')
   static const LineSeriesStepType start = _$start;
   @BuiltValueEnumConst(wireName: r'middle')
@@ -23,11 +22,13 @@ class LineSeriesStepType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'end')
   static const LineSeriesStepType end = _$end;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const LineSeriesStepType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const LineSeriesStepType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<LineSeriesStepType> get serializer => _$lineSeriesStepTypeSerializer;
+  static Serializer<LineSeriesStepType> get serializer =>
+      _$lineSeriesStepTypeSerializer;
 
-  const LineSeriesStepType._(String name): super(name);
+  const LineSeriesStepType._(String name) : super(name);
 
   static BuiltSet<LineSeriesStepType> get values => _$values;
   static LineSeriesStepType valueOf(String name) => _$valueOf(name);
@@ -40,4 +41,3 @@ class LineSeriesStepType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class LineSeriesStepTypeMixin = Object with _$LineSeriesStepTypeMixin;
-

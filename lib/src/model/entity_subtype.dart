@@ -18,11 +18,12 @@ part 'entity_subtype.g.dart';
 /// EntitySubtype
 ///
 /// Properties:
-/// * [tenantId] 
-/// * [entityType] 
-/// * [type] 
+/// * [tenantId]
+/// * [entityType]
+/// * [type]
 @BuiltValue()
-abstract class EntitySubtype implements Built<EntitySubtype, EntitySubtypeBuilder> {
+abstract class EntitySubtype
+    implements Built<EntitySubtype, EntitySubtypeBuilder> {
   @BuiltValueField(wireName: r'tenantId')
   TenantId? get tenantId;
 
@@ -35,13 +36,15 @@ abstract class EntitySubtype implements Built<EntitySubtype, EntitySubtypeBuilde
 
   EntitySubtype._();
 
-  factory EntitySubtype([void updates(EntitySubtypeBuilder b)]) = _$EntitySubtype;
+  factory EntitySubtype([void updates(EntitySubtypeBuilder b)]) =
+      _$EntitySubtype;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntitySubtypeBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntitySubtype> get serializer => _$EntitySubtypeSerializer();
+  static Serializer<EntitySubtype> get serializer =>
+      _$EntitySubtypeSerializer();
 }
 
 class _$EntitySubtypeSerializer implements PrimitiveSerializer<EntitySubtype> {
@@ -85,7 +88,11 @@ class _$EntitySubtypeSerializer implements PrimitiveSerializer<EntitySubtype> {
     EntitySubtype object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +108,32 @@ class _$EntitySubtypeSerializer implements PrimitiveSerializer<EntitySubtype> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.entityType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
@@ -152,5 +165,3 @@ class _$EntitySubtypeSerializer implements PrimitiveSerializer<EntitySubtype> {
     return result.build();
   }
 }
-
-

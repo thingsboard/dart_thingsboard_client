@@ -17,15 +17,16 @@ part 'simple_value_source_config.g.dart';
 /// SimpleValueSourceConfig
 ///
 /// Properties:
-/// * [type] 
-/// * [value] 
-/// * [latestKeyType] 
-/// * [latestKey] 
-/// * [entityKeyType] 
-/// * [entityAlias] 
-/// * [entityKey] 
+/// * [type]
+/// * [value]
+/// * [latestKeyType]
+/// * [latestKey]
+/// * [entityKeyType]
+/// * [entityAlias]
+/// * [entityKey]
 @BuiltValue()
-abstract class SimpleValueSourceConfig implements Built<SimpleValueSourceConfig, SimpleValueSourceConfigBuilder> {
+abstract class SimpleValueSourceConfig
+    implements Built<SimpleValueSourceConfig, SimpleValueSourceConfigBuilder> {
   @BuiltValueField(wireName: r'type')
   ValueSourceType? get type;
   // enum typeEnum {  constant,  latestKey,  entity,  };
@@ -50,18 +51,25 @@ abstract class SimpleValueSourceConfig implements Built<SimpleValueSourceConfig,
 
   SimpleValueSourceConfig._();
 
-  factory SimpleValueSourceConfig([void updates(SimpleValueSourceConfigBuilder b)]) = _$SimpleValueSourceConfig;
+  factory SimpleValueSourceConfig([
+    void updates(SimpleValueSourceConfigBuilder b),
+  ]) = _$SimpleValueSourceConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SimpleValueSourceConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SimpleValueSourceConfig> get serializer => _$SimpleValueSourceConfigSerializer();
+  static Serializer<SimpleValueSourceConfig> get serializer =>
+      _$SimpleValueSourceConfigSerializer();
 }
 
-class _$SimpleValueSourceConfigSerializer implements PrimitiveSerializer<SimpleValueSourceConfig> {
+class _$SimpleValueSourceConfigSerializer
+    implements PrimitiveSerializer<SimpleValueSourceConfig> {
   @override
-  final Iterable<Type> types = const [SimpleValueSourceConfig, _$SimpleValueSourceConfig];
+  final Iterable<Type> types = const [
+    SimpleValueSourceConfig,
+    _$SimpleValueSourceConfig,
+  ];
 
   @override
   final String wireName = r'SimpleValueSourceConfig';
@@ -128,7 +136,11 @@ class _$SimpleValueSourceConfigSerializer implements PrimitiveSerializer<SimpleV
     SimpleValueSourceConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -144,58 +156,72 @@ class _$SimpleValueSourceConfigSerializer implements PrimitiveSerializer<SimpleV
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ValueSourceType),
-          ) as ValueSourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ValueSourceType),
+                  )
+                  as ValueSourceType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'latestKeyType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestKeyType = valueDes;
           break;
         case r'latestKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestKey = valueDes;
           break;
         case r'entityKeyType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityKeyType = valueDes;
           break;
         case r'entityAlias':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityAlias = valueDes;
           break;
         case r'entityKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityKey = valueDes;
           break;
@@ -227,5 +253,3 @@ class _$SimpleValueSourceConfigSerializer implements PrimitiveSerializer<SimpleV
     return result.build();
   }
 }
-
-

@@ -16,10 +16,11 @@ part 'trendz_configuration.g.dart';
 /// TrendzConfiguration
 ///
 /// Properties:
-/// * [trendzUrl] 
-/// * [tbUrl] 
+/// * [trendzUrl]
+/// * [tbUrl]
 @BuiltValue()
-abstract class TrendzConfiguration implements Built<TrendzConfiguration, TrendzConfigurationBuilder> {
+abstract class TrendzConfiguration
+    implements Built<TrendzConfiguration, TrendzConfigurationBuilder> {
   @BuiltValueField(wireName: r'trendzUrl')
   String? get trendzUrl;
 
@@ -28,18 +29,24 @@ abstract class TrendzConfiguration implements Built<TrendzConfiguration, TrendzC
 
   TrendzConfiguration._();
 
-  factory TrendzConfiguration([void updates(TrendzConfigurationBuilder b)]) = _$TrendzConfiguration;
+  factory TrendzConfiguration([void updates(TrendzConfigurationBuilder b)]) =
+      _$TrendzConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TrendzConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TrendzConfiguration> get serializer => _$TrendzConfigurationSerializer();
+  static Serializer<TrendzConfiguration> get serializer =>
+      _$TrendzConfigurationSerializer();
 }
 
-class _$TrendzConfigurationSerializer implements PrimitiveSerializer<TrendzConfiguration> {
+class _$TrendzConfigurationSerializer
+    implements PrimitiveSerializer<TrendzConfiguration> {
   @override
-  final Iterable<Type> types = const [TrendzConfiguration, _$TrendzConfiguration];
+  final Iterable<Type> types = const [
+    TrendzConfiguration,
+    _$TrendzConfiguration,
+  ];
 
   @override
   final String wireName = r'TrendzConfiguration';
@@ -71,7 +78,11 @@ class _$TrendzConfigurationSerializer implements PrimitiveSerializer<TrendzConfi
     TrendzConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +98,22 @@ class _$TrendzConfigurationSerializer implements PrimitiveSerializer<TrendzConfi
       final value = serializedList[i + 1];
       switch (key) {
         case r'trendzUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.trendzUrl = valueDes;
           break;
         case r'tbUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tbUrl = valueDes;
           break;
@@ -130,5 +145,3 @@ class _$TrendzConfigurationSerializer implements PrimitiveSerializer<TrendzConfi
     return result.build();
   }
 }
-
-

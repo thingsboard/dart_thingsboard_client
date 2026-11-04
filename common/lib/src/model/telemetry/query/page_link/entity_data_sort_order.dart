@@ -8,9 +8,11 @@ import '../entity_key/entity_key.dart';
 enum EntityDataSortOrderDirection { ASC, DESC }
 
 EntityDataSortOrderDirection entityDataSortOrderDirectionFromString(
-    String value) {
+  String value,
+) {
   return EntityDataSortOrderDirection.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension EntityDataSortOrderDirectionToString on EntityDataSortOrderDirection {

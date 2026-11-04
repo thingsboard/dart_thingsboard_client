@@ -16,7 +16,6 @@ part 'alias_entity_type.g.dart';
 
 /// Alias for an entity of the current user, used as AliasEntityId.entityType
 class AliasEntityType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CURRENT_CUSTOMER')
   static const AliasEntityType CURRENT_CUSTOMER = _$CURRENT_CUSTOMER;
   @BuiltValueEnumConst(wireName: r'CURRENT_TENANT')
@@ -28,9 +27,10 @@ class AliasEntityType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AliasEntityType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<AliasEntityType> get serializer => _$aliasEntityTypeSerializer;
+  static Serializer<AliasEntityType> get serializer =>
+      _$aliasEntityTypeSerializer;
 
-  const AliasEntityType._(String name): super(name);
+  const AliasEntityType._(String name) : super(name);
 
   static BuiltSet<AliasEntityType> get values => _$values;
   static AliasEntityType valueOf(String name) => _$valueOf(name);
@@ -43,4 +43,3 @@ class AliasEntityType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AliasEntityTypeMixin = Object with _$AliasEntityTypeMixin;
-

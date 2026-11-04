@@ -19,25 +19,25 @@ part 'report_latest_chart_settings.g.dart';
 /// ReportLatestChartSettings
 ///
 /// Properties:
-/// * [showTitle] 
-/// * [title] 
-/// * [titleFont] 
-/// * [titleColor] 
-/// * [titleAlignment] 
-/// * [units] 
-/// * [decimals] 
-/// * [autoScale] 
-/// * [sortSeries] 
-/// * [showTotal] 
-/// * [showLegend] 
-/// * [legendPosition] 
-/// * [legendLabelFont] 
-/// * [legendLabelColor] 
-/// * [legendValueFont] 
-/// * [legendValueColor] 
-/// * [legendShowTotal] 
+/// * [showTitle]
+/// * [title]
+/// * [titleFont]
+/// * [titleColor]
+/// * [titleAlignment]
+/// * [units]
+/// * [decimals]
+/// * [autoScale]
+/// * [sortSeries]
+/// * [showTotal]
+/// * [showLegend]
+/// * [legendPosition]
+/// * [legendLabelFont]
+/// * [legendLabelColor]
+/// * [legendValueFont]
+/// * [legendValueColor]
+/// * [legendShowTotal]
 @BuiltValue(instantiable: false)
-abstract class ReportLatestChartSettings  {
+abstract class ReportLatestChartSettings {
   @BuiltValueField(wireName: r'showTitle')
   bool? get showTitle;
 
@@ -92,10 +92,12 @@ abstract class ReportLatestChartSettings  {
   bool? get legendShowTotal;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReportLatestChartSettings> get serializer => _$ReportLatestChartSettingsSerializer();
+  static Serializer<ReportLatestChartSettings> get serializer =>
+      _$ReportLatestChartSettingsSerializer();
 }
 
-class _$ReportLatestChartSettingsSerializer implements PrimitiveSerializer<ReportLatestChartSettings> {
+class _$ReportLatestChartSettingsSerializer
+    implements PrimitiveSerializer<ReportLatestChartSettings> {
   @override
   final Iterable<Type> types = const [ReportLatestChartSettings];
 
@@ -234,7 +236,11 @@ class _$ReportLatestChartSettingsSerializer implements PrimitiveSerializer<Repor
     ReportLatestChartSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -243,28 +249,41 @@ class _$ReportLatestChartSettingsSerializer implements PrimitiveSerializer<Repor
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.deserialize(serialized, specifiedType: FullType($ReportLatestChartSettings)) as $ReportLatestChartSettings;
+    return serializers.deserialize(
+          serialized,
+          specifiedType: FullType($ReportLatestChartSettings),
+        )
+        as $ReportLatestChartSettings;
   }
 }
 
-
 /// a concrete implementation of [ReportLatestChartSettings], since [ReportLatestChartSettings] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $ReportLatestChartSettings implements ReportLatestChartSettings, Built<$ReportLatestChartSettings, $ReportLatestChartSettingsBuilder> {
+abstract class $ReportLatestChartSettings
+    implements
+        ReportLatestChartSettings,
+        Built<$ReportLatestChartSettings, $ReportLatestChartSettingsBuilder> {
   $ReportLatestChartSettings._();
 
-  factory $ReportLatestChartSettings([void Function($ReportLatestChartSettingsBuilder)? updates]) = _$$ReportLatestChartSettings;
+  factory $ReportLatestChartSettings([
+    void Function($ReportLatestChartSettingsBuilder)? updates,
+  ]) = _$$ReportLatestChartSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($ReportLatestChartSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$ReportLatestChartSettings> get serializer => _$$ReportLatestChartSettingsSerializer();
+  static Serializer<$ReportLatestChartSettings> get serializer =>
+      _$$ReportLatestChartSettingsSerializer();
 }
 
-class _$$ReportLatestChartSettingsSerializer implements PrimitiveSerializer<$ReportLatestChartSettings> {
+class _$$ReportLatestChartSettingsSerializer
+    implements PrimitiveSerializer<$ReportLatestChartSettings> {
   @override
-  final Iterable<Type> types = const [$ReportLatestChartSettings, _$$ReportLatestChartSettings];
+  final Iterable<Type> types = const [
+    $ReportLatestChartSettings,
+    _$$ReportLatestChartSettings,
+  ];
 
   @override
   final String wireName = r'$ReportLatestChartSettings';
@@ -275,7 +294,10 @@ class _$$ReportLatestChartSettingsSerializer implements PrimitiveSerializer<$Rep
     $ReportLatestChartSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(ReportLatestChartSettings))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(ReportLatestChartSettings),
+    )!;
   }
 
   void _deserializeProperties(
@@ -291,138 +313,172 @@ class _$$ReportLatestChartSettingsSerializer implements PrimitiveSerializer<$Rep
       final value = serializedList[i + 1];
       switch (key) {
         case r'showTitle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTitle = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'titleFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.titleFont.replace(valueDes);
           break;
         case r'titleColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.titleColor = valueDes;
           break;
         case r'titleAlignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TextAlignment),
-          ) as TextAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TextAlignment),
+                  )
+                  as TextAlignment?;
           if (valueDes == null) continue;
           result.titleAlignment = valueDes;
           break;
         case r'units':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.units = valueDes;
           break;
         case r'decimals':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.decimals = valueDes;
           break;
         case r'autoScale':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.autoScale = valueDes;
           break;
         case r'sortSeries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.sortSeries = valueDes;
           break;
         case r'showTotal':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTotal = valueDes;
           break;
         case r'showLegend':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showLegend = valueDes;
           break;
         case r'legendPosition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LegendPosition),
-          ) as LegendPosition?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LegendPosition),
+                  )
+                  as LegendPosition?;
           if (valueDes == null) continue;
           result.legendPosition = valueDes;
           break;
         case r'legendLabelFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.legendLabelFont.replace(valueDes);
           break;
         case r'legendLabelColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.legendLabelColor = valueDes;
           break;
         case r'legendValueFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.legendValueFont.replace(valueDes);
           break;
         case r'legendValueColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.legendValueColor = valueDes;
           break;
         case r'legendShowTotal':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.legendShowTotal = valueDes;
           break;
@@ -454,4 +510,3 @@ class _$$ReportLatestChartSettingsSerializer implements PrimitiveSerializer<$Rep
     return result.build();
   }
 }
-

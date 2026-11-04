@@ -24,7 +24,8 @@ part 'security_settings.g.dart';
 /// * [userActivationTokenTtl] - TTL in hours for user activation link
 /// * [passwordResetTokenTtl] - TTL in hours for password reset link
 @BuiltValue()
-abstract class SecuritySettings implements Built<SecuritySettings, SecuritySettingsBuilder> {
+abstract class SecuritySettings
+    implements Built<SecuritySettings, SecuritySettingsBuilder> {
   /// The user password policy object.
   @BuiltValueField(wireName: r'passwordPolicy')
   UserPasswordPolicy? get passwordPolicy;
@@ -51,16 +52,19 @@ abstract class SecuritySettings implements Built<SecuritySettings, SecuritySetti
 
   SecuritySettings._();
 
-  factory SecuritySettings([void updates(SecuritySettingsBuilder b)]) = _$SecuritySettings;
+  factory SecuritySettings([void updates(SecuritySettingsBuilder b)]) =
+      _$SecuritySettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SecuritySettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SecuritySettings> get serializer => _$SecuritySettingsSerializer();
+  static Serializer<SecuritySettings> get serializer =>
+      _$SecuritySettingsSerializer();
 }
 
-class _$SecuritySettingsSerializer implements PrimitiveSerializer<SecuritySettings> {
+class _$SecuritySettingsSerializer
+    implements PrimitiveSerializer<SecuritySettings> {
   @override
   final Iterable<Type> types = const [SecuritySettings, _$SecuritySettings];
 
@@ -118,7 +122,11 @@ class _$SecuritySettingsSerializer implements PrimitiveSerializer<SecuritySettin
     SecuritySettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -134,49 +142,55 @@ class _$SecuritySettingsSerializer implements PrimitiveSerializer<SecuritySettin
       final value = serializedList[i + 1];
       switch (key) {
         case r'passwordPolicy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserPasswordPolicy),
-          ) as UserPasswordPolicy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserPasswordPolicy),
+                  )
+                  as UserPasswordPolicy?;
           if (valueDes == null) continue;
           result.passwordPolicy.replace(valueDes);
           break;
         case r'maxFailedLoginAttempts':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxFailedLoginAttempts = valueDes;
           break;
         case r'userLockoutNotificationEmail':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.userLockoutNotificationEmail = valueDes;
           break;
         case r'mobileSecretKeyLength':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.mobileSecretKeyLength = valueDes;
           break;
         case r'userActivationTokenTtl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.userActivationTokenTtl = valueDes;
           break;
         case r'passwordResetTokenTtl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.passwordResetTokenTtl = valueDes;
           break;
         default:
@@ -207,5 +221,3 @@ class _$SecuritySettingsSerializer implements PrimitiveSerializer<SecuritySettin
     return result.build();
   }
 }
-
-

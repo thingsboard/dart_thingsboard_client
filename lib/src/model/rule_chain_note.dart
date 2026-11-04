@@ -28,7 +28,8 @@ part 'rule_chain_note.g.dart';
 /// * [applyDefaultMarkdownStyle] - Whether to apply the default markdown stylesheet to the note content
 /// * [markdownCss] - Custom CSS styles applied to the note content
 @BuiltValue()
-abstract class RuleChainNote implements Built<RuleChainNote, RuleChainNoteBuilder> {
+abstract class RuleChainNote
+    implements Built<RuleChainNote, RuleChainNoteBuilder> {
   /// Unique identifier of the note on the canvas
   @BuiltValueField(wireName: r'id')
   String? get id;
@@ -75,13 +76,15 @@ abstract class RuleChainNote implements Built<RuleChainNote, RuleChainNoteBuilde
 
   RuleChainNote._();
 
-  factory RuleChainNote([void updates(RuleChainNoteBuilder b)]) = _$RuleChainNote;
+  factory RuleChainNote([void updates(RuleChainNoteBuilder b)]) =
+      _$RuleChainNote;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainNoteBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainNote> get serializer => _$RuleChainNoteSerializer();
+  static Serializer<RuleChainNote> get serializer =>
+      _$RuleChainNoteSerializer();
 }
 
 class _$RuleChainNoteSerializer implements PrimitiveSerializer<RuleChainNote> {
@@ -105,17 +108,11 @@ class _$RuleChainNoteSerializer implements PrimitiveSerializer<RuleChainNote> {
     }
     if (object.x != null) {
       yield r'x';
-      yield serializers.serialize(
-        object.x,
-        specifiedType: const FullType(int),
-      );
+      yield serializers.serialize(object.x, specifiedType: const FullType(int));
     }
     if (object.y != null) {
       yield r'y';
-      yield serializers.serialize(
-        object.y,
-        specifiedType: const FullType(int),
-      );
+      yield serializers.serialize(object.y, specifiedType: const FullType(int));
     }
     if (object.width != null) {
       yield r'width';
@@ -181,7 +178,11 @@ class _$RuleChainNoteSerializer implements PrimitiveSerializer<RuleChainNote> {
     RuleChainNote object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -197,90 +198,112 @@ class _$RuleChainNoteSerializer implements PrimitiveSerializer<RuleChainNote> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'x':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.x = valueDes;
           break;
         case r'y':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.y = valueDes;
           break;
         case r'width':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.width = valueDes;
           break;
         case r'height':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.height = valueDes;
           break;
         case r'content':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.content = valueDes;
           break;
         case r'backgroundColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.backgroundColor = valueDes;
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'applyDefaultMarkdownStyle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.applyDefaultMarkdownStyle = valueDes;
           break;
         case r'markdownCss':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.markdownCss = valueDes;
           break;
@@ -312,5 +335,3 @@ class _$RuleChainNoteSerializer implements PrimitiveSerializer<RuleChainNote> {
     return result.build();
   }
 }
-
-

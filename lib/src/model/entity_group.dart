@@ -9,7 +9,6 @@
 
 // ignore_for_file: unused_element
 import 'package:built_collection/built_collection.dart';
-import 'package:thingsboard_client/src/model/entity_type.dart';
 import 'package:thingsboard_client/src/model/tenant_id.dart';
 import 'package:thingsboard_client/src/model/entity_group_id.dart';
 import 'package:thingsboard_client/src/model/entity_id.dart';
@@ -24,15 +23,15 @@ part 'entity_group.g.dart';
 /// Properties:
 /// * [id] - JSON object with the EntityGroupId Id. Specify this field to update the Entity Group. Referencing non-existing Entity Group Id will cause error. Omit this field to create new Entity Group.
 /// * [createdTime] - Timestamp of the entity group creation, in milliseconds
-/// * [type] 
+/// * [type]
 /// * [name] - Name of the entity group
 /// * [ownerId] - JSON object with the owner of the group - Tenant or Customer Id. When omitted or null on creation, defaults to the current user's owner (Tenant for tenant admins, Customer for customer users).
 /// * [additionalInfo] - Additional parameters of the entity group. May include: 'description' (string), 'isPublic' (boolean, whether this group is shared publicly), 'publicCustomerId' (string, UUID of the public customer associated with this group).
-/// * [configuration] - JSON with the configuration for UI components: list of columns, settings, actions, etc 
-/// * [version] 
+/// * [configuration] - JSON with the configuration for UI components: list of columns, settings, actions, etc
+/// * [version]
 /// * [edgeGroupAll] - Indicates special edge group 'All' that contains all entities and can't be deleted.
 /// * [groupAll] - Indicates special group 'All' that contains all entities and can't be deleted.
-/// * [tenantId] 
+/// * [tenantId]
 @BuiltValue()
 abstract class EntityGroup implements Built<EntityGroup, EntityGroupBuilder> {
   /// JSON object with the EntityGroupId Id. Specify this field to update the Entity Group. Referencing non-existing Entity Group Id will cause error. Omit this field to create new Entity Group.
@@ -59,7 +58,7 @@ abstract class EntityGroup implements Built<EntityGroup, EntityGroupBuilder> {
   @BuiltValueField(wireName: r'additionalInfo')
   JsonObject? get additionalInfo;
 
-  /// JSON with the configuration for UI components: list of columns, settings, actions, etc 
+  /// JSON with the configuration for UI components: list of columns, settings, actions, etc
   @BuiltValueField(wireName: r'configuration')
   JsonObject? get configuration;
 
@@ -181,7 +180,11 @@ class _$EntityGroupSerializer implements PrimitiveSerializer<EntityGroup> {
     EntityGroup object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -197,88 +200,110 @@ class _$EntityGroupSerializer implements PrimitiveSerializer<EntityGroup> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityGroupId),
-          ) as EntityGroupId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityGroupId),
+                  )
+                  as EntityGroupId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityGroupTypeEnum),
-          ) as EntityGroupTypeEnum;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityGroupTypeEnum),
+                  )
+                  as EntityGroupTypeEnum;
           result.type = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'edgeGroupAll':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.edgeGroupAll = valueDes;
           break;
         case r'groupAll':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.groupAll = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
@@ -311,9 +336,7 @@ class _$EntityGroupSerializer implements PrimitiveSerializer<EntityGroup> {
   }
 }
 
-
 class EntityGroupTypeEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'TENANT')
   static const EntityGroupTypeEnum TENANT = _$entityGroupTypeEnum_TENANT;
   @BuiltValueEnumConst(wireName: r'CUSTOMER')
@@ -329,45 +352,61 @@ class EntityGroupTypeEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'ALARM')
   static const EntityGroupTypeEnum ALARM = _$entityGroupTypeEnum_ALARM;
   @BuiltValueEnumConst(wireName: r'ENTITY_GROUP')
-  static const EntityGroupTypeEnum ENTITY_GROUP = _$entityGroupTypeEnum_ENTITY_GROUP;
+  static const EntityGroupTypeEnum ENTITY_GROUP =
+      _$entityGroupTypeEnum_ENTITY_GROUP;
   @BuiltValueEnumConst(wireName: r'CONVERTER')
   static const EntityGroupTypeEnum CONVERTER = _$entityGroupTypeEnum_CONVERTER;
   @BuiltValueEnumConst(wireName: r'INTEGRATION')
-  static const EntityGroupTypeEnum INTEGRATION = _$entityGroupTypeEnum_INTEGRATION;
+  static const EntityGroupTypeEnum INTEGRATION =
+      _$entityGroupTypeEnum_INTEGRATION;
   @BuiltValueEnumConst(wireName: r'RULE_CHAIN')
-  static const EntityGroupTypeEnum RULE_CHAIN = _$entityGroupTypeEnum_RULE_CHAIN;
+  static const EntityGroupTypeEnum RULE_CHAIN =
+      _$entityGroupTypeEnum_RULE_CHAIN;
   @BuiltValueEnumConst(wireName: r'RULE_NODE')
   static const EntityGroupTypeEnum RULE_NODE = _$entityGroupTypeEnum_RULE_NODE;
   @BuiltValueEnumConst(wireName: r'SCHEDULER_EVENT')
-  static const EntityGroupTypeEnum SCHEDULER_EVENT = _$entityGroupTypeEnum_SCHEDULER_EVENT;
+  static const EntityGroupTypeEnum SCHEDULER_EVENT =
+      _$entityGroupTypeEnum_SCHEDULER_EVENT;
   @BuiltValueEnumConst(wireName: r'BLOB_ENTITY')
-  static const EntityGroupTypeEnum BLOB_ENTITY = _$entityGroupTypeEnum_BLOB_ENTITY;
+  static const EntityGroupTypeEnum BLOB_ENTITY =
+      _$entityGroupTypeEnum_BLOB_ENTITY;
   @BuiltValueEnumConst(wireName: r'REPORT_TEMPLATE')
-  static const EntityGroupTypeEnum REPORT_TEMPLATE = _$entityGroupTypeEnum_REPORT_TEMPLATE;
+  static const EntityGroupTypeEnum REPORT_TEMPLATE =
+      _$entityGroupTypeEnum_REPORT_TEMPLATE;
   @BuiltValueEnumConst(wireName: r'REPORT')
   static const EntityGroupTypeEnum REPORT = _$entityGroupTypeEnum_REPORT;
   @BuiltValueEnumConst(wireName: r'ENTITY_VIEW')
-  static const EntityGroupTypeEnum ENTITY_VIEW = _$entityGroupTypeEnum_ENTITY_VIEW;
+  static const EntityGroupTypeEnum ENTITY_VIEW =
+      _$entityGroupTypeEnum_ENTITY_VIEW;
   @BuiltValueEnumConst(wireName: r'WIDGETS_BUNDLE')
-  static const EntityGroupTypeEnum WIDGETS_BUNDLE = _$entityGroupTypeEnum_WIDGETS_BUNDLE;
+  static const EntityGroupTypeEnum WIDGETS_BUNDLE =
+      _$entityGroupTypeEnum_WIDGETS_BUNDLE;
   @BuiltValueEnumConst(wireName: r'WIDGET_TYPE')
-  static const EntityGroupTypeEnum WIDGET_TYPE = _$entityGroupTypeEnum_WIDGET_TYPE;
+  static const EntityGroupTypeEnum WIDGET_TYPE =
+      _$entityGroupTypeEnum_WIDGET_TYPE;
   @BuiltValueEnumConst(wireName: r'ROLE')
   static const EntityGroupTypeEnum ROLE = _$entityGroupTypeEnum_ROLE;
   @BuiltValueEnumConst(wireName: r'GROUP_PERMISSION')
-  static const EntityGroupTypeEnum GROUP_PERMISSION = _$entityGroupTypeEnum_GROUP_PERMISSION;
+  static const EntityGroupTypeEnum GROUP_PERMISSION =
+      _$entityGroupTypeEnum_GROUP_PERMISSION;
   @BuiltValueEnumConst(wireName: r'TENANT_PROFILE')
-  static const EntityGroupTypeEnum TENANT_PROFILE = _$entityGroupTypeEnum_TENANT_PROFILE;
+  static const EntityGroupTypeEnum TENANT_PROFILE =
+      _$entityGroupTypeEnum_TENANT_PROFILE;
   @BuiltValueEnumConst(wireName: r'DEVICE_PROFILE')
-  static const EntityGroupTypeEnum DEVICE_PROFILE = _$entityGroupTypeEnum_DEVICE_PROFILE;
+  static const EntityGroupTypeEnum DEVICE_PROFILE =
+      _$entityGroupTypeEnum_DEVICE_PROFILE;
   @BuiltValueEnumConst(wireName: r'ASSET_PROFILE')
-  static const EntityGroupTypeEnum ASSET_PROFILE = _$entityGroupTypeEnum_ASSET_PROFILE;
+  static const EntityGroupTypeEnum ASSET_PROFILE =
+      _$entityGroupTypeEnum_ASSET_PROFILE;
   @BuiltValueEnumConst(wireName: r'API_USAGE_STATE')
-  static const EntityGroupTypeEnum API_USAGE_STATE = _$entityGroupTypeEnum_API_USAGE_STATE;
+  static const EntityGroupTypeEnum API_USAGE_STATE =
+      _$entityGroupTypeEnum_API_USAGE_STATE;
   @BuiltValueEnumConst(wireName: r'TB_RESOURCE')
-  static const EntityGroupTypeEnum TB_RESOURCE = _$entityGroupTypeEnum_TB_RESOURCE;
+  static const EntityGroupTypeEnum TB_RESOURCE =
+      _$entityGroupTypeEnum_TB_RESOURCE;
   @BuiltValueEnumConst(wireName: r'OTA_PACKAGE')
-  static const EntityGroupTypeEnum OTA_PACKAGE = _$entityGroupTypeEnum_OTA_PACKAGE;
+  static const EntityGroupTypeEnum OTA_PACKAGE =
+      _$entityGroupTypeEnum_OTA_PACKAGE;
   @BuiltValueEnumConst(wireName: r'EDGE')
   static const EntityGroupTypeEnum EDGE = _$entityGroupTypeEnum_EDGE;
   @BuiltValueEnumConst(wireName: r'RPC')
@@ -375,33 +414,44 @@ class EntityGroupTypeEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'QUEUE')
   static const EntityGroupTypeEnum QUEUE = _$entityGroupTypeEnum_QUEUE;
   @BuiltValueEnumConst(wireName: r'NOTIFICATION_TARGET')
-  static const EntityGroupTypeEnum NOTIFICATION_TARGET = _$entityGroupTypeEnum_NOTIFICATION_TARGET;
+  static const EntityGroupTypeEnum NOTIFICATION_TARGET =
+      _$entityGroupTypeEnum_NOTIFICATION_TARGET;
   @BuiltValueEnumConst(wireName: r'NOTIFICATION_TEMPLATE')
-  static const EntityGroupTypeEnum NOTIFICATION_TEMPLATE = _$entityGroupTypeEnum_NOTIFICATION_TEMPLATE;
+  static const EntityGroupTypeEnum NOTIFICATION_TEMPLATE =
+      _$entityGroupTypeEnum_NOTIFICATION_TEMPLATE;
   @BuiltValueEnumConst(wireName: r'NOTIFICATION_REQUEST')
-  static const EntityGroupTypeEnum NOTIFICATION_REQUEST = _$entityGroupTypeEnum_NOTIFICATION_REQUEST;
+  static const EntityGroupTypeEnum NOTIFICATION_REQUEST =
+      _$entityGroupTypeEnum_NOTIFICATION_REQUEST;
   @BuiltValueEnumConst(wireName: r'NOTIFICATION')
-  static const EntityGroupTypeEnum NOTIFICATION = _$entityGroupTypeEnum_NOTIFICATION;
+  static const EntityGroupTypeEnum NOTIFICATION =
+      _$entityGroupTypeEnum_NOTIFICATION;
   @BuiltValueEnumConst(wireName: r'NOTIFICATION_RULE')
-  static const EntityGroupTypeEnum NOTIFICATION_RULE = _$entityGroupTypeEnum_NOTIFICATION_RULE;
+  static const EntityGroupTypeEnum NOTIFICATION_RULE =
+      _$entityGroupTypeEnum_NOTIFICATION_RULE;
   @BuiltValueEnumConst(wireName: r'QUEUE_STATS')
-  static const EntityGroupTypeEnum QUEUE_STATS = _$entityGroupTypeEnum_QUEUE_STATS;
+  static const EntityGroupTypeEnum QUEUE_STATS =
+      _$entityGroupTypeEnum_QUEUE_STATS;
   @BuiltValueEnumConst(wireName: r'OAUTH2_CLIENT')
-  static const EntityGroupTypeEnum OAUTH2_CLIENT = _$entityGroupTypeEnum_OAUTH2_CLIENT;
+  static const EntityGroupTypeEnum OAUTH2_CLIENT =
+      _$entityGroupTypeEnum_OAUTH2_CLIENT;
   @BuiltValueEnumConst(wireName: r'DOMAIN')
   static const EntityGroupTypeEnum DOMAIN = _$entityGroupTypeEnum_DOMAIN;
   @BuiltValueEnumConst(wireName: r'MOBILE_APP')
-  static const EntityGroupTypeEnum MOBILE_APP = _$entityGroupTypeEnum_MOBILE_APP;
+  static const EntityGroupTypeEnum MOBILE_APP =
+      _$entityGroupTypeEnum_MOBILE_APP;
   @BuiltValueEnumConst(wireName: r'MOBILE_APP_BUNDLE')
-  static const EntityGroupTypeEnum MOBILE_APP_BUNDLE = _$entityGroupTypeEnum_MOBILE_APP_BUNDLE;
+  static const EntityGroupTypeEnum MOBILE_APP_BUNDLE =
+      _$entityGroupTypeEnum_MOBILE_APP_BUNDLE;
   @BuiltValueEnumConst(wireName: r'CALCULATED_FIELD')
-  static const EntityGroupTypeEnum CALCULATED_FIELD = _$entityGroupTypeEnum_CALCULATED_FIELD;
+  static const EntityGroupTypeEnum CALCULATED_FIELD =
+      _$entityGroupTypeEnum_CALCULATED_FIELD;
   @BuiltValueEnumConst(wireName: r'JOB')
   static const EntityGroupTypeEnum JOB = _$entityGroupTypeEnum_JOB;
   @BuiltValueEnumConst(wireName: r'SECRET')
   static const EntityGroupTypeEnum SECRET = _$entityGroupTypeEnum_SECRET;
   @BuiltValueEnumConst(wireName: r'ADMIN_SETTINGS')
-  static const EntityGroupTypeEnum ADMIN_SETTINGS = _$entityGroupTypeEnum_ADMIN_SETTINGS;
+  static const EntityGroupTypeEnum ADMIN_SETTINGS =
+      _$entityGroupTypeEnum_ADMIN_SETTINGS;
   @BuiltValueEnumConst(wireName: r'AI_MODEL')
   static const EntityGroupTypeEnum AI_MODEL = _$entityGroupTypeEnum_AI_MODEL;
   @BuiltValueEnumConst(wireName: r'API_KEY')
@@ -409,25 +459,34 @@ class EntityGroupTypeEnum extends EnumClass {
   @BuiltValueEnumConst(wireName: r'AGENT')
   static const EntityGroupTypeEnum AGENT = _$entityGroupTypeEnum_AGENT;
   @BuiltValueEnumConst(wireName: r'AGENT_APPLICATION')
-  static const EntityGroupTypeEnum AGENT_APPLICATION = _$entityGroupTypeEnum_AGENT_APPLICATION;
+  static const EntityGroupTypeEnum AGENT_APPLICATION =
+      _$entityGroupTypeEnum_AGENT_APPLICATION;
   @BuiltValueEnumConst(wireName: r'AGENT_APP_EVENT')
-  static const EntityGroupTypeEnum AGENT_APP_EVENT = _$entityGroupTypeEnum_AGENT_APP_EVENT;
+  static const EntityGroupTypeEnum AGENT_APP_EVENT =
+      _$entityGroupTypeEnum_AGENT_APP_EVENT;
   @BuiltValueEnumConst(wireName: r'AGENT_APP_UNIT')
-  static const EntityGroupTypeEnum AGENT_APP_UNIT = _$entityGroupTypeEnum_AGENT_APP_UNIT;
+  static const EntityGroupTypeEnum AGENT_APP_UNIT =
+      _$entityGroupTypeEnum_AGENT_APP_UNIT;
   @BuiltValueEnumConst(wireName: r'AGENT_APP_PROFILE')
-  static const EntityGroupTypeEnum AGENT_APP_PROFILE = _$entityGroupTypeEnum_AGENT_APP_PROFILE;
+  static const EntityGroupTypeEnum AGENT_APP_PROFILE =
+      _$entityGroupTypeEnum_AGENT_APP_PROFILE;
   @BuiltValueEnumConst(wireName: r'AGENT_PROFILE')
-  static const EntityGroupTypeEnum AGENT_PROFILE = _$entityGroupTypeEnum_AGENT_PROFILE;
+  static const EntityGroupTypeEnum AGENT_PROFILE =
+      _$entityGroupTypeEnum_AGENT_PROFILE;
   @BuiltValueEnumConst(wireName: r'AGENT_BULK_ACTION')
-  static const EntityGroupTypeEnum AGENT_BULK_ACTION = _$entityGroupTypeEnum_AGENT_BULK_ACTION;
+  static const EntityGroupTypeEnum AGENT_BULK_ACTION =
+      _$entityGroupTypeEnum_AGENT_BULK_ACTION;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const EntityGroupTypeEnum unknownDefaultOpenApi = _$entityGroupTypeEnum_unknownDefaultOpenApi;
+  static const EntityGroupTypeEnum unknownDefaultOpenApi =
+      _$entityGroupTypeEnum_unknownDefaultOpenApi;
 
-  static Serializer<EntityGroupTypeEnum> get serializer => _$entityGroupTypeEnumSerializer;
+  static Serializer<EntityGroupTypeEnum> get serializer =>
+      _$entityGroupTypeEnumSerializer;
 
-  const EntityGroupTypeEnum._(String name): super(name);
+  const EntityGroupTypeEnum._(String name) : super(name);
 
-  static BuiltSet<EntityGroupTypeEnum> get values => _$entityGroupTypeEnumValues;
-  static EntityGroupTypeEnum valueOf(String name) => _$entityGroupTypeEnumValueOf(name);
+  static BuiltSet<EntityGroupTypeEnum> get values =>
+      _$entityGroupTypeEnumValues;
+  static EntityGroupTypeEnum valueOf(String name) =>
+      _$entityGroupTypeEnumValueOf(name);
 }
-

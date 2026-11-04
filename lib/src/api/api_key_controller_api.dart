@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -17,11 +16,9 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/api_key.dart';
 import 'package:thingsboard_client/src/model/api_key_info.dart';
 import 'package:thingsboard_client/src/model/page_data_api_key_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class ApiKeyControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -29,10 +26,10 @@ class ApiKeyControllerApi {
   const ApiKeyControllerApi(this._dio, [this._serializers]);
 
   /// Delete API key by ID (deleteApiKey)
-  /// Deletes the API key. Referencing non-existing ApiKey Id will cause an error.  Available for any authorized user. 
+  /// Deletes the API key. Referencing non-existing ApiKey Id will cause an error.  Available for any authorized user.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -42,7 +39,7 @@ class ApiKeyControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteApiKey({ 
+  Future<Response<void>> deleteApiKey({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -52,12 +49,15 @@ class ApiKeyControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/apiKey/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/apiKey/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -65,11 +65,8 @@ class ApiKeyControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -88,7 +85,7 @@ class ApiKeyControllerApi {
   }
 
   /// Enable or disable API key (enableApiKey)
-  /// Updates api key with enabled &#x3D; true/false.   Available for any authorized user. 
+  /// Updates api key with enabled &#x3D; true/false.   Available for any authorized user.
   ///
   /// Parameters:
   /// * [id] - Unique identifier of the API key to enable/disable
@@ -102,7 +99,7 @@ class ApiKeyControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ApiKeyInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiKeyInfo>> enableApiKey({ 
+  Future<Response<ApiKeyInfo>> enableApiKey({
     required String id,
     required bool enabledValue,
     CancelToken? cancelToken,
@@ -112,13 +109,32 @@ class ApiKeyControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerApiKeyInfo);
-    final _path = r'/api/apiKey/{id}/enabled/{enabledValue}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString()).replaceAll('{' r'enabledValue' '}', encodeQueryParameter(_serializers, enabledValue, const FullType(bool)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerApiKeyInfo);
+    final _path = r'/api/apiKey/{id}/enabled/{enabledValue}'
+        .replaceAll(
+          '{'
+          r'id'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            id,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'enabledValue'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            enabledValue,
+            const FullType(bool),
+          ).toString(),
+        );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -126,11 +142,8 @@ class ApiKeyControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -149,11 +162,13 @@ class ApiKeyControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ApiKeyInfo),
-      ) as ApiKeyInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ApiKeyInfo),
+                )
+                as ApiKeyInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -177,7 +192,7 @@ class ApiKeyControllerApi {
   }
 
   /// Get User Api Keys (getUserApiKeys)
-  /// Returns a page of api keys owned by user. You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.   Available for any authorized user. 
+  /// Returns a page of api keys owned by user. You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.   Available for any authorized user.
   ///
   /// Parameters:
   /// * [userId] - A string value representing the user id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
@@ -195,7 +210,7 @@ class ApiKeyControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataApiKeyInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataApiKeyInfo>> getUserApiKeys({ 
+  Future<Response<PageDataApiKeyInfo>> getUserApiKeys({
     required String userId,
     required int pageSize,
     required int page,
@@ -209,13 +224,21 @@ class ApiKeyControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataApiKeyInfo);
-    final _path = r'/api/apiKeys/{userId}'.replaceAll('{' r'userId' '}', encodeQueryParameter(_serializers, userId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataApiKeyInfo);
+    final _path = r'/api/apiKeys/{userId}'.replaceAll(
+      '{'
+      r'userId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        userId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -223,11 +246,8 @@ class ApiKeyControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -235,11 +255,30 @@ class ApiKeyControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -255,11 +294,13 @@ class ApiKeyControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataApiKeyInfo),
-      ) as PageDataApiKeyInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataApiKeyInfo),
+                )
+                as PageDataApiKeyInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -283,10 +324,10 @@ class ApiKeyControllerApi {
   }
 
   /// Save API key for user (saveApiKey)
-  /// Creates an API key for the given user and returns the token ONCE as &#39;ApiKey {value}&#39;.  Available for any authorized user. 
+  /// Creates an API key for the given user and returns the token ONCE as &#39;ApiKey {value}&#39;.  Available for any authorized user.
   ///
   /// Parameters:
-  /// * [apiKeyInfo] 
+  /// * [apiKeyInfo]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -296,7 +337,7 @@ class ApiKeyControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ApiKey] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiKey>> saveApiKey({ 
+  Future<Response<ApiKey>> saveApiKey({
     required ApiKeyInfo apiKeyInfo,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -305,13 +346,12 @@ class ApiKeyControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerApiKeyAndApiKeyInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerApiKeyAndApiKeyInfo);
     final _path = r'/api/apiKey';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -319,11 +359,8 @@ class ApiKeyControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -336,13 +373,9 @@ class ApiKeyControllerApi {
     try {
       const _type = FullType(ApiKeyInfo);
       _bodyData = _serializers.serialize(apiKeyInfo, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -362,11 +395,13 @@ class ApiKeyControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ApiKey),
-      ) as ApiKey;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ApiKey),
+                )
+                as ApiKey;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -390,11 +425,11 @@ class ApiKeyControllerApi {
   }
 
   /// Update API key Description
-  /// Updates the description of the existing API key by apiKeyId. Only the description can be updated. Referencing a non-existing ApiKey Id will cause a &#39;Not Found&#39; error.  Available for any authorized user. 
+  /// Updates the description of the existing API key by apiKeyId. Only the description can be updated. Referencing a non-existing ApiKey Id will cause a &#39;Not Found&#39; error.  Available for any authorized user.
   ///
   /// Parameters:
   /// * [id] - A string value representing the api key id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -404,7 +439,7 @@ class ApiKeyControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ApiKeyInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ApiKeyInfo>> updateApiKeyDescription({ 
+  Future<Response<ApiKeyInfo>> updateApiKeyDescription({
     required String id,
     String? body,
     CancelToken? cancelToken,
@@ -414,13 +449,17 @@ class ApiKeyControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerApiKeyInfo);
-    final _path = r'/api/apiKey/{id}/description'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerApiKeyInfo);
+    final _path = r'/api/apiKey/{id}/description'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -428,11 +467,8 @@ class ApiKeyControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -444,13 +480,9 @@ class ApiKeyControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -470,11 +502,13 @@ class ApiKeyControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ApiKeyInfo),
-      ) as ApiKeyInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ApiKeyInfo),
+                )
+                as ApiKeyInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -496,5 +530,4 @@ class ApiKeyControllerApi {
       extra: _response.extra,
     );
   }
-
 }

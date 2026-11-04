@@ -27,13 +27,13 @@ part 'integration.g.dart';
 /// * [tenantId] - JSON object with Tenant Id
 /// * [name] - Integration Name
 /// * [type] - The type of the integration
-/// * [debugMode] - Enable/disable debug. 
+/// * [debugMode] - Enable/disable debug.
 /// * [debugSettings] - Debug settings object.
 /// * [enabled] - Boolean flag to enable/disable the integration
 /// * [remote] - Boolean flag to enable/disable the integration to be executed remotely. Remote integration is launched in a separate microservice. Local integration is executed by the platform core
 /// * [allowCreateDevicesOrAssets] - Boolean flag to allow/disallow the integration to create devices or assets that send message and do not exist in the system yet
 /// * [edgeTemplate] - Boolean flag that specifies that is regular or edge template integration
-/// * [version] 
+/// * [version]
 /// * [defaultConverterId] - JSON object with the Uplink Converter Id
 /// * [downlinkConverterId] - JSON object with the Downlink Converter Id
 /// * [routingKey] - String value used by HTTP based integrations for the base URL construction and by the remote integrations. Remote integration uses this value along with the 'secret' for kind of security and validation to be able to connect to the platform using Grpc
@@ -63,7 +63,7 @@ abstract class Integration implements Built<Integration, IntegrationBuilder> {
   IntegrationType get type;
   // enum typeEnum {  OCEANCONNECT,  SIGFOX,  THINGPARK,  TPE,  CHIRPSTACK,  PARTICLE,  TMOBILE_IOT_CDP,  HTTP,  MQTT,  PUB_SUB,  AWS_IOT,  AWS_SQS,  AWS_KINESIS,  TTN,  TTI,  AZURE_EVENT_HUB,  OPC_UA,  CUSTOM,  UDP,  TCP,  KAFKA,  AZURE_IOT_HUB,  APACHE_PULSAR,  RABBITMQ,  LORIOT,  COAP,  TUYA,  AZURE_SERVICE_BUS,  KPN,  };
 
-  /// Enable/disable debug. 
+  /// Enable/disable debug.
   @Deprecated('debugMode has been deprecated')
   @BuiltValueField(wireName: r'debugMode')
   bool? get debugMode;
@@ -243,10 +243,12 @@ class _$IntegrationSerializer implements PrimitiveSerializer<Integration> {
       );
     }
     yield r'configuration';
-    yield object.configuration == null ? null : serializers.serialize(
-      object.configuration,
-      specifiedType: const FullType.nullable(JsonObject),
-    );
+    yield object.configuration == null
+        ? null
+        : serializers.serialize(
+            object.configuration,
+            specifiedType: const FullType.nullable(JsonObject),
+          );
     if (object.additionalInfo != null) {
       yield r'additionalInfo';
       yield serializers.serialize(
@@ -262,7 +264,11 @@ class _$IntegrationSerializer implements PrimitiveSerializer<Integration> {
     Integration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -278,142 +284,178 @@ class _$IntegrationSerializer implements PrimitiveSerializer<Integration> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(IntegrationId),
-          ) as IntegrationId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(IntegrationId),
+                  )
+                  as IntegrationId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(IntegrationType),
-          ) as IntegrationType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(IntegrationType),
+                  )
+                  as IntegrationType;
           result.type = valueDes;
           break;
         case r'debugMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.debugMode = valueDes;
           break;
         case r'debugSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DebugSettings),
-          ) as DebugSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DebugSettings),
+                  )
+                  as DebugSettings?;
           if (valueDes == null) continue;
           result.debugSettings.replace(valueDes);
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'remote':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.remote = valueDes;
           break;
         case r'allowCreateDevicesOrAssets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.allowCreateDevicesOrAssets = valueDes;
           break;
         case r'edgeTemplate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.edgeTemplate = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'defaultConverterId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ConverterId),
-          ) as ConverterId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ConverterId),
+                  )
+                  as ConverterId;
           result.defaultConverterId.replace(valueDes);
           break;
         case r'downlinkConverterId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ConverterId),
-          ) as ConverterId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ConverterId),
+                  )
+                  as ConverterId?;
           if (valueDes == null) continue;
           result.downlinkConverterId.replace(valueDes);
           break;
         case r'routingKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.routingKey = valueDes;
           break;
         case r'secret':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.secret = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
@@ -445,5 +487,3 @@ class _$IntegrationSerializer implements PrimitiveSerializer<Integration> {
     return result.build();
   }
 }
-
-

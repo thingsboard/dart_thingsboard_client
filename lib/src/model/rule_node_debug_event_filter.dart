@@ -20,7 +20,7 @@ part 'rule_node_debug_event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 /// * [server] - String value representing the server name, identifier or ip address where the platform is running
 /// * [isError] - Boolean value to filter the errors
 /// * [errorStr] - The case insensitive 'contains' filter based on error message
@@ -33,7 +33,10 @@ part 'rule_node_debug_event_filter.g.dart';
 /// * [dataSearch] - The case insensitive 'contains' filter based on data (key and value) for the message.
 /// * [metadataSearch] - The case insensitive 'contains' filter based on metadata (key and value) for the message.
 @BuiltValue()
-abstract class RuleNodeDebugEventFilter implements EventFilter, Built<RuleNodeDebugEventFilter, RuleNodeDebugEventFilterBuilder> {
+abstract class RuleNodeDebugEventFilter
+    implements
+        EventFilter,
+        Built<RuleNodeDebugEventFilter, RuleNodeDebugEventFilterBuilder> {
   /// String value representing the type of message routing
   @BuiltValueField(wireName: r'relationType')
   String? get relationType;
@@ -83,18 +86,25 @@ abstract class RuleNodeDebugEventFilter implements EventFilter, Built<RuleNodeDe
 
   RuleNodeDebugEventFilter._();
 
-  factory RuleNodeDebugEventFilter([void updates(RuleNodeDebugEventFilterBuilder b)]) = _$RuleNodeDebugEventFilter;
+  factory RuleNodeDebugEventFilter([
+    void updates(RuleNodeDebugEventFilterBuilder b),
+  ]) = _$RuleNodeDebugEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleNodeDebugEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleNodeDebugEventFilter> get serializer => _$RuleNodeDebugEventFilterSerializer();
+  static Serializer<RuleNodeDebugEventFilter> get serializer =>
+      _$RuleNodeDebugEventFilterSerializer();
 }
 
-class _$RuleNodeDebugEventFilterSerializer implements PrimitiveSerializer<RuleNodeDebugEventFilter> {
+class _$RuleNodeDebugEventFilterSerializer
+    implements PrimitiveSerializer<RuleNodeDebugEventFilter> {
   @override
-  final Iterable<Type> types = const [RuleNodeDebugEventFilter, _$RuleNodeDebugEventFilter];
+  final Iterable<Type> types = const [
+    RuleNodeDebugEventFilter,
+    _$RuleNodeDebugEventFilter,
+  ];
 
   @override
   final String wireName = r'RuleNodeDebugEventFilter';
@@ -136,7 +146,9 @@ class _$RuleNodeDebugEventFilterSerializer implements PrimitiveSerializer<RuleNo
       yield r'msgDirectionType';
       yield serializers.serialize(
         object.msgDirectionType,
-        specifiedType: const FullType(RuleNodeDebugEventFilterMsgDirectionTypeEnum),
+        specifiedType: const FullType(
+          RuleNodeDebugEventFilterMsgDirectionTypeEnum,
+        ),
       );
     }
     if (object.msgId != null) {
@@ -201,7 +213,11 @@ class _$RuleNodeDebugEventFilterSerializer implements PrimitiveSerializer<RuleNo
     RuleNodeDebugEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -217,105 +233,137 @@ class _$RuleNodeDebugEventFilterSerializer implements PrimitiveSerializer<RuleNo
       final value = serializedList[i + 1];
       switch (key) {
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'server':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.server = valueDes;
           break;
         case r'msgType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.msgType = valueDes;
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleNodeDebugEventFilterEntityTypeEnum),
-          ) as RuleNodeDebugEventFilterEntityTypeEnum?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RuleNodeDebugEventFilterEntityTypeEnum,
+                    ),
+                  )
+                  as RuleNodeDebugEventFilterEntityTypeEnum?;
           if (valueDes == null) continue;
           result.entityType = valueDes;
           break;
         case r'msgDirectionType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleNodeDebugEventFilterMsgDirectionTypeEnum),
-          ) as RuleNodeDebugEventFilterMsgDirectionTypeEnum?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RuleNodeDebugEventFilterMsgDirectionTypeEnum,
+                    ),
+                  )
+                  as RuleNodeDebugEventFilterMsgDirectionTypeEnum?;
           if (valueDes == null) continue;
           result.msgDirectionType = valueDes;
           break;
         case r'msgId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.msgId = valueDes;
           break;
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityId = valueDes;
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'dataSearch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.dataSearch = valueDes;
           break;
         case r'isError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleNodeDebugEventFilterIsErrorEnum),
-          ) as RuleNodeDebugEventFilterIsErrorEnum?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RuleNodeDebugEventFilterIsErrorEnum,
+                    ),
+                  )
+                  as RuleNodeDebugEventFilterIsErrorEnum?;
           if (valueDes == null) continue;
           result.isError = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
         case r'metadataSearch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.metadataSearch = valueDes;
           break;
         case r'errorStr':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorStr = valueDes;
           break;
@@ -348,56 +396,70 @@ class _$RuleNodeDebugEventFilterSerializer implements PrimitiveSerializer<RuleNo
   }
 }
 
-
 /// Boolean value to filter the errors
 class RuleNodeDebugEventFilterIsErrorEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'false')
-  static const RuleNodeDebugEventFilterIsErrorEnum false_ = _$ruleNodeDebugEventFilterIsErrorEnum_false_;
+  static const RuleNodeDebugEventFilterIsErrorEnum false_ =
+      _$ruleNodeDebugEventFilterIsErrorEnum_false_;
   @BuiltValueEnumConst(wireName: r'true')
-  static const RuleNodeDebugEventFilterIsErrorEnum true_ = _$ruleNodeDebugEventFilterIsErrorEnum_true_;
+  static const RuleNodeDebugEventFilterIsErrorEnum true_ =
+      _$ruleNodeDebugEventFilterIsErrorEnum_true_;
   @BuiltValueEnumConst(wireName: r'11184809', fallback: true)
-  static const RuleNodeDebugEventFilterIsErrorEnum unknownDefaultOpenApi = _$ruleNodeDebugEventFilterIsErrorEnum_unknownDefaultOpenApi;
+  static const RuleNodeDebugEventFilterIsErrorEnum unknownDefaultOpenApi =
+      _$ruleNodeDebugEventFilterIsErrorEnum_unknownDefaultOpenApi;
 
-  static Serializer<RuleNodeDebugEventFilterIsErrorEnum> get serializer => _$ruleNodeDebugEventFilterIsErrorEnumSerializer;
+  static Serializer<RuleNodeDebugEventFilterIsErrorEnum> get serializer =>
+      _$ruleNodeDebugEventFilterIsErrorEnumSerializer;
 
-  const RuleNodeDebugEventFilterIsErrorEnum._(String name): super(name);
+  const RuleNodeDebugEventFilterIsErrorEnum._(String name) : super(name);
 
-  static BuiltSet<RuleNodeDebugEventFilterIsErrorEnum> get values => _$ruleNodeDebugEventFilterIsErrorEnumValues;
-  static RuleNodeDebugEventFilterIsErrorEnum valueOf(String name) => _$ruleNodeDebugEventFilterIsErrorEnumValueOf(name);
+  static BuiltSet<RuleNodeDebugEventFilterIsErrorEnum> get values =>
+      _$ruleNodeDebugEventFilterIsErrorEnumValues;
+  static RuleNodeDebugEventFilterIsErrorEnum valueOf(String name) =>
+      _$ruleNodeDebugEventFilterIsErrorEnumValueOf(name);
 }
 
 /// String value representing msg direction type (incoming to entity or outcoming from entity)
 class RuleNodeDebugEventFilterMsgDirectionTypeEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'IN')
-  static const RuleNodeDebugEventFilterMsgDirectionTypeEnum IN = _$ruleNodeDebugEventFilterMsgDirectionTypeEnum_IN;
+  static const RuleNodeDebugEventFilterMsgDirectionTypeEnum IN =
+      _$ruleNodeDebugEventFilterMsgDirectionTypeEnum_IN;
   @BuiltValueEnumConst(wireName: r'OUT')
-  static const RuleNodeDebugEventFilterMsgDirectionTypeEnum OUT = _$ruleNodeDebugEventFilterMsgDirectionTypeEnum_OUT;
+  static const RuleNodeDebugEventFilterMsgDirectionTypeEnum OUT =
+      _$ruleNodeDebugEventFilterMsgDirectionTypeEnum_OUT;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const RuleNodeDebugEventFilterMsgDirectionTypeEnum unknownDefaultOpenApi = _$ruleNodeDebugEventFilterMsgDirectionTypeEnum_unknownDefaultOpenApi;
+  static const RuleNodeDebugEventFilterMsgDirectionTypeEnum
+  unknownDefaultOpenApi =
+      _$ruleNodeDebugEventFilterMsgDirectionTypeEnum_unknownDefaultOpenApi;
 
-  static Serializer<RuleNodeDebugEventFilterMsgDirectionTypeEnum> get serializer => _$ruleNodeDebugEventFilterMsgDirectionTypeEnumSerializer;
+  static Serializer<RuleNodeDebugEventFilterMsgDirectionTypeEnum>
+  get serializer => _$ruleNodeDebugEventFilterMsgDirectionTypeEnumSerializer;
 
-  const RuleNodeDebugEventFilterMsgDirectionTypeEnum._(String name): super(name);
+  const RuleNodeDebugEventFilterMsgDirectionTypeEnum._(String name)
+    : super(name);
 
-  static BuiltSet<RuleNodeDebugEventFilterMsgDirectionTypeEnum> get values => _$ruleNodeDebugEventFilterMsgDirectionTypeEnumValues;
-  static RuleNodeDebugEventFilterMsgDirectionTypeEnum valueOf(String name) => _$ruleNodeDebugEventFilterMsgDirectionTypeEnumValueOf(name);
+  static BuiltSet<RuleNodeDebugEventFilterMsgDirectionTypeEnum> get values =>
+      _$ruleNodeDebugEventFilterMsgDirectionTypeEnumValues;
+  static RuleNodeDebugEventFilterMsgDirectionTypeEnum valueOf(String name) =>
+      _$ruleNodeDebugEventFilterMsgDirectionTypeEnumValueOf(name);
 }
 
 /// String value representing the entity type
 class RuleNodeDebugEventFilterEntityTypeEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DEVICE')
-  static const RuleNodeDebugEventFilterEntityTypeEnum DEVICE = _$ruleNodeDebugEventFilterEntityTypeEnum_DEVICE;
+  static const RuleNodeDebugEventFilterEntityTypeEnum DEVICE =
+      _$ruleNodeDebugEventFilterEntityTypeEnum_DEVICE;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const RuleNodeDebugEventFilterEntityTypeEnum unknownDefaultOpenApi = _$ruleNodeDebugEventFilterEntityTypeEnum_unknownDefaultOpenApi;
+  static const RuleNodeDebugEventFilterEntityTypeEnum unknownDefaultOpenApi =
+      _$ruleNodeDebugEventFilterEntityTypeEnum_unknownDefaultOpenApi;
 
-  static Serializer<RuleNodeDebugEventFilterEntityTypeEnum> get serializer => _$ruleNodeDebugEventFilterEntityTypeEnumSerializer;
+  static Serializer<RuleNodeDebugEventFilterEntityTypeEnum> get serializer =>
+      _$ruleNodeDebugEventFilterEntityTypeEnumSerializer;
 
-  const RuleNodeDebugEventFilterEntityTypeEnum._(String name): super(name);
+  const RuleNodeDebugEventFilterEntityTypeEnum._(String name) : super(name);
 
-  static BuiltSet<RuleNodeDebugEventFilterEntityTypeEnum> get values => _$ruleNodeDebugEventFilterEntityTypeEnumValues;
-  static RuleNodeDebugEventFilterEntityTypeEnum valueOf(String name) => _$ruleNodeDebugEventFilterEntityTypeEnumValueOf(name);
+  static BuiltSet<RuleNodeDebugEventFilterEntityTypeEnum> get values =>
+      _$ruleNodeDebugEventFilterEntityTypeEnumValues;
+  static RuleNodeDebugEventFilterEntityTypeEnum valueOf(String name) =>
+      _$ruleNodeDebugEventFilterEntityTypeEnumValueOf(name);
 }
-

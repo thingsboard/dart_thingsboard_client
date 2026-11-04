@@ -18,22 +18,26 @@ part 'widgets_bundle_id.g.dart';
 /// WidgetsBundleId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class WidgetsBundleId implements EntityId, Built<WidgetsBundleId, WidgetsBundleIdBuilder> {
+abstract class WidgetsBundleId
+    implements EntityId, Built<WidgetsBundleId, WidgetsBundleIdBuilder> {
   WidgetsBundleId._();
 
-  factory WidgetsBundleId([void updates(WidgetsBundleIdBuilder b)]) = _$WidgetsBundleId;
+  factory WidgetsBundleId([void updates(WidgetsBundleIdBuilder b)]) =
+      _$WidgetsBundleId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WidgetsBundleIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WidgetsBundleId> get serializer => _$WidgetsBundleIdSerializer();
+  static Serializer<WidgetsBundleId> get serializer =>
+      _$WidgetsBundleIdSerializer();
 }
 
-class _$WidgetsBundleIdSerializer implements PrimitiveSerializer<WidgetsBundleId> {
+class _$WidgetsBundleIdSerializer
+    implements PrimitiveSerializer<WidgetsBundleId> {
   @override
   final Iterable<Type> types = const [WidgetsBundleId, _$WidgetsBundleId];
 
@@ -63,7 +67,11 @@ class _$WidgetsBundleIdSerializer implements PrimitiveSerializer<WidgetsBundleId
     WidgetsBundleId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$WidgetsBundleIdSerializer implements PrimitiveSerializer<WidgetsBundleId
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$WidgetsBundleIdSerializer implements PrimitiveSerializer<WidgetsBundleId
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'slack_conversation_type.g.dart';
 
 class SlackConversationType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DIRECT')
   static const SlackConversationType DIRECT = _$DIRECT;
   @BuiltValueEnumConst(wireName: r'PUBLIC_CHANNEL')
@@ -23,11 +22,13 @@ class SlackConversationType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'PRIVATE_CHANNEL')
   static const SlackConversationType PRIVATE_CHANNEL = _$PRIVATE_CHANNEL;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const SlackConversationType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const SlackConversationType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<SlackConversationType> get serializer => _$slackConversationTypeSerializer;
+  static Serializer<SlackConversationType> get serializer =>
+      _$slackConversationTypeSerializer;
 
-  const SlackConversationType._(String name): super(name);
+  const SlackConversationType._(String name) : super(name);
 
   static BuiltSet<SlackConversationType> get values => _$values;
   static SlackConversationType valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class SlackConversationType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class SlackConversationTypeMixin = Object with _$SlackConversationTypeMixin;
-
+abstract class SlackConversationTypeMixin = Object
+    with _$SlackConversationTypeMixin;

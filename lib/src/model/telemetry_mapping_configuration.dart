@@ -24,10 +24,15 @@ part 'telemetry_mapping_configuration.g.dart';
 /// * [attribute] - Set of attribute keys
 /// * [telemetry] - Set of telemetry keys
 /// * [attributeLwm2m] - Map of resource paths to specific LwM2M object attributes
-/// * [initAttrTelAsObsStrategy] 
+/// * [initAttrTelAsObsStrategy]
 /// * [observeStrategy] - Observation strategy for telemetry
 @BuiltValue()
-abstract class TelemetryMappingConfiguration implements Built<TelemetryMappingConfiguration, TelemetryMappingConfigurationBuilder> {
+abstract class TelemetryMappingConfiguration
+    implements
+        Built<
+          TelemetryMappingConfiguration,
+          TelemetryMappingConfigurationBuilder
+        > {
   /// Map of LwM2M resource paths to telemetry key names
   @BuiltValueField(wireName: r'keyName')
   BuiltMap<String, String>? get keyName;
@@ -58,18 +63,25 @@ abstract class TelemetryMappingConfiguration implements Built<TelemetryMappingCo
 
   TelemetryMappingConfiguration._();
 
-  factory TelemetryMappingConfiguration([void updates(TelemetryMappingConfigurationBuilder b)]) = _$TelemetryMappingConfiguration;
+  factory TelemetryMappingConfiguration([
+    void updates(TelemetryMappingConfigurationBuilder b),
+  ]) = _$TelemetryMappingConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TelemetryMappingConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TelemetryMappingConfiguration> get serializer => _$TelemetryMappingConfigurationSerializer();
+  static Serializer<TelemetryMappingConfiguration> get serializer =>
+      _$TelemetryMappingConfigurationSerializer();
 }
 
-class _$TelemetryMappingConfigurationSerializer implements PrimitiveSerializer<TelemetryMappingConfiguration> {
+class _$TelemetryMappingConfigurationSerializer
+    implements PrimitiveSerializer<TelemetryMappingConfiguration> {
   @override
-  final Iterable<Type> types = const [TelemetryMappingConfiguration, _$TelemetryMappingConfiguration];
+  final Iterable<Type> types = const [
+    TelemetryMappingConfiguration,
+    _$TelemetryMappingConfiguration,
+  ];
 
   @override
   final String wireName = r'TelemetryMappingConfiguration';
@@ -83,7 +95,10 @@ class _$TelemetryMappingConfigurationSerializer implements PrimitiveSerializer<T
       yield r'keyName';
       yield serializers.serialize(
         object.keyName,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(String),
+        ]),
       );
     }
     if (object.observe != null) {
@@ -111,7 +126,10 @@ class _$TelemetryMappingConfigurationSerializer implements PrimitiveSerializer<T
       yield r'attributeLwm2m';
       yield serializers.serialize(
         object.attributeLwm2m,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(ObjectAttributes)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(ObjectAttributes),
+        ]),
       );
     }
     if (object.initAttrTelAsObsStrategy != null) {
@@ -136,7 +154,11 @@ class _$TelemetryMappingConfigurationSerializer implements PrimitiveSerializer<T
     TelemetryMappingConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -152,58 +174,86 @@ class _$TelemetryMappingConfigurationSerializer implements PrimitiveSerializer<T
       final value = serializedList[i + 1];
       switch (key) {
         case r'keyName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(String)]),
-          ) as BuiltMap<String, String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltMap<String, String>?;
           if (valueDes == null) continue;
           result.keyName.replace(valueDes);
           break;
         case r'observe':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.observe.replace(valueDes);
           break;
         case r'attribute':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.attribute.replace(valueDes);
           break;
         case r'telemetry':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.telemetry.replace(valueDes);
           break;
         case r'attributeLwm2m':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(ObjectAttributes)]),
-          ) as BuiltMap<String, ObjectAttributes>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(ObjectAttributes),
+                    ]),
+                  )
+                  as BuiltMap<String, ObjectAttributes>?;
           if (valueDes == null) continue;
           result.attributeLwm2m.replace(valueDes);
           break;
         case r'initAttrTelAsObsStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.initAttrTelAsObsStrategy = valueDes;
           break;
         case r'observeStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TelemetryObserveStrategy),
-          ) as TelemetryObserveStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TelemetryObserveStrategy,
+                    ),
+                  )
+                  as TelemetryObserveStrategy?;
           if (valueDes == null) continue;
           result.observeStrategy = valueDes;
           break;
@@ -235,5 +285,3 @@ class _$TelemetryMappingConfigurationSerializer implements PrimitiveSerializer<T
     return result.build();
   }
 }
-
-

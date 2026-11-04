@@ -18,23 +18,27 @@ part 'qr_code_settings_id.g.dart';
 /// Properties:
 /// * [id] - string
 @BuiltValue()
-abstract class QrCodeSettingsId implements Built<QrCodeSettingsId, QrCodeSettingsIdBuilder> {
+abstract class QrCodeSettingsId
+    implements Built<QrCodeSettingsId, QrCodeSettingsIdBuilder> {
   /// string
   @BuiltValueField(wireName: r'id')
   String get id;
 
   QrCodeSettingsId._();
 
-  factory QrCodeSettingsId([void updates(QrCodeSettingsIdBuilder b)]) = _$QrCodeSettingsId;
+  factory QrCodeSettingsId([void updates(QrCodeSettingsIdBuilder b)]) =
+      _$QrCodeSettingsId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(QrCodeSettingsIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<QrCodeSettingsId> get serializer => _$QrCodeSettingsIdSerializer();
+  static Serializer<QrCodeSettingsId> get serializer =>
+      _$QrCodeSettingsIdSerializer();
 }
 
-class _$QrCodeSettingsIdSerializer implements PrimitiveSerializer<QrCodeSettingsId> {
+class _$QrCodeSettingsIdSerializer
+    implements PrimitiveSerializer<QrCodeSettingsId> {
   @override
   final Iterable<Type> types = const [QrCodeSettingsId, _$QrCodeSettingsId];
 
@@ -59,7 +63,11 @@ class _$QrCodeSettingsIdSerializer implements PrimitiveSerializer<QrCodeSettings
     QrCodeSettingsId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +83,12 @@ class _$QrCodeSettingsIdSerializer implements PrimitiveSerializer<QrCodeSettings
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -109,5 +119,3 @@ class _$QrCodeSettingsIdSerializer implements PrimitiveSerializer<QrCodeSettings
     return result.build();
   }
 }
-
-

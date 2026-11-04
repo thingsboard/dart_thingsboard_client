@@ -20,20 +20,23 @@ part 'tb_user_message.g.dart';
 /// Properties:
 /// * [contents] - A list of content parts that make up the complete user prompt
 @BuiltValue()
-abstract class TbUserMessage implements Built<TbUserMessage, TbUserMessageBuilder> {
+abstract class TbUserMessage
+    implements Built<TbUserMessage, TbUserMessageBuilder> {
   /// A list of content parts that make up the complete user prompt
   @BuiltValueField(wireName: r'contents')
   BuiltList<TbContent> get contents;
 
   TbUserMessage._();
 
-  factory TbUserMessage([void updates(TbUserMessageBuilder b)]) = _$TbUserMessage;
+  factory TbUserMessage([void updates(TbUserMessageBuilder b)]) =
+      _$TbUserMessage;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbUserMessageBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbUserMessage> get serializer => _$TbUserMessageSerializer();
+  static Serializer<TbUserMessage> get serializer =>
+      _$TbUserMessageSerializer();
 }
 
 class _$TbUserMessageSerializer implements PrimitiveSerializer<TbUserMessage> {
@@ -61,7 +64,11 @@ class _$TbUserMessageSerializer implements PrimitiveSerializer<TbUserMessage> {
     TbUserMessage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -77,10 +84,14 @@ class _$TbUserMessageSerializer implements PrimitiveSerializer<TbUserMessage> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'contents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(TbContent)]),
-          ) as BuiltList<TbContent>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(TbContent),
+                    ]),
+                  )
+                  as BuiltList<TbContent>;
           result.contents.replace(valueDes);
           break;
         default:
@@ -111,5 +122,3 @@ class _$TbUserMessageSerializer implements PrimitiveSerializer<TbUserMessage> {
     return result.build();
   }
 }
-
-

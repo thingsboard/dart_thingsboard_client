@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -24,12 +23,10 @@ import 'package:thingsboard_client/src/model/entity_subtype.dart';
 import 'package:thingsboard_client/src/model/name_conflict_policy.dart';
 import 'package:thingsboard_client/src/model/page_data_asset.dart';
 import 'package:thingsboard_client/src/model/page_data_asset_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/uniquify_strategy.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AssetControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -50,7 +47,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteAsset({ 
+  Future<Response<void>> deleteAsset({
     required String assetId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -60,12 +57,19 @@ class AssetControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/asset/{assetId}'.replaceAll('{' r'assetId' '}', encodeQueryParameter(_serializers, assetId, const FullType(String)).toString());
+    final _path = r'/api/asset/{assetId}'.replaceAll(
+      '{'
+      r'assetId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        assetId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -73,11 +77,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -99,7 +100,7 @@ class AssetControllerApi {
   /// Returns all assets that are related to the specific entity. The entity id, relation type, asset types, depth of the search, and other query parameters defined using complex &#39;AssetSearchQuery&#39; object. See &#39;Model&#39; tab of the Parameters for more info.    Security check is performed to verify that the user has &#39;READ&#39; permission for the entity (entities).
   ///
   /// Parameters:
-  /// * [assetSearchQuery] 
+  /// * [assetSearchQuery]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -109,7 +110,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Asset>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Asset>>> findAssetsByQuery({ 
+  Future<Response<BuiltList<Asset>>> findAssetsByQuery({
     required AssetSearchQuery assetSearchQuery,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -118,13 +119,13 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfAssetAndAssetSearchQuery);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfAssetAndAssetSearchQuery);
     final _path = r'/api/assets';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -132,11 +133,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -148,14 +146,13 @@ class AssetControllerApi {
 
     try {
       const _type = FullType(AssetSearchQuery);
-      _bodyData = _serializers.serialize(assetSearchQuery, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        assetSearchQuery,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -175,11 +172,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Asset)]),
-      ) as BuiltList<Asset>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(Asset)]),
+                )
+                as BuiltList<Asset>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -222,7 +221,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAssetInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAssetInfo>> getAllAssetInfos({ 
+  Future<Response<PageDataAssetInfo>> getAllAssetInfos({
     required int pageSize,
     required int page,
     bool? includeCustomers,
@@ -237,13 +236,12 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAssetInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAssetInfo);
     final _path = r'/api/assetInfos/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -251,11 +249,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -263,13 +258,42 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (assetProfileId != null) r'assetProfileId': encodeQueryParameter(_serializers, assetProfileId, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (assetProfileId != null)
+        r'assetProfileId': encodeQueryParameter(
+          _serializers,
+          assetProfileId,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -285,11 +309,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAssetInfo),
-      ) as PageDataAssetInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAssetInfo),
+                )
+                as PageDataAssetInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -326,7 +352,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Asset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Asset>> getAssetById({ 
+  Future<Response<Asset>> getAssetById({
     required String assetId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -336,12 +362,19 @@ class AssetControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerAsset);
-    final _path = r'/api/asset/{assetId}'.replaceAll('{' r'assetId' '}', encodeQueryParameter(_serializers, assetId, const FullType(String)).toString());
+    final _path = r'/api/asset/{assetId}'.replaceAll(
+      '{'
+      r'assetId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        assetId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -349,11 +382,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -372,11 +402,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Asset),
-      ) as Asset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Asset),
+                )
+                as Asset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -413,7 +445,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AssetInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AssetInfo>> getAssetInfoById({ 
+  Future<Response<AssetInfo>> getAssetInfoById({
     required String assetId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -423,12 +455,19 @@ class AssetControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerAssetInfo);
-    final _path = r'/api/asset/info/{assetId}'.replaceAll('{' r'assetId' '}', encodeQueryParameter(_serializers, assetId, const FullType(String)).toString());
+    final _path = r'/api/asset/info/{assetId}'.replaceAll(
+      '{'
+      r'assetId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        assetId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -436,11 +475,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -459,11 +495,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AssetInfo),
-      ) as AssetInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AssetInfo),
+                )
+                as AssetInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -500,7 +538,7 @@ class AssetControllerApi {
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntitySubtype>] as data
   /// Throws [DioException] if API call or serialization fails
   @Deprecated('This operation has been deprecated')
-  Future<Response<BuiltList<EntitySubtype>>> getAssetTypes({ 
+  Future<Response<BuiltList<EntitySubtype>>> getAssetTypes({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -508,13 +546,12 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntitySubtype);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntitySubtype);
     final _path = r'/api/asset/types';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -522,11 +559,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -545,11 +579,15 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntitySubtype)]),
-      ) as BuiltList<EntitySubtype>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntitySubtype),
+                  ]),
+                )
+                as BuiltList<EntitySubtype>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -591,7 +629,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAsset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAsset>> getAssetsByEntityGroupId({ 
+  Future<Response<PageDataAsset>> getAssetsByEntityGroupId({
     required String entityGroupId,
     required String pageSize,
     required String page,
@@ -605,13 +643,21 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAsset);
-    final _path = r'/api/entityGroup/{entityGroupId}/assets'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAsset);
+    final _path = r'/api/entityGroup/{entityGroupId}/assets'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -619,11 +665,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -631,11 +674,30 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -651,11 +713,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAsset),
-      ) as PageDataAsset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAsset),
+                )
+                as PageDataAsset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -692,7 +756,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Asset>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Asset>>> getAssetsByIds({ 
+  Future<Response<BuiltList<Asset>>> getAssetsByIds({
     required BuiltList<String> assetIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -701,13 +765,12 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfAssetAndListOfString);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfAssetAndListOfString);
     final _path = r'/api/assets';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -715,11 +778,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -727,7 +787,12 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'assetIds': encodeCollectionQueryParameter<String>(_serializers, assetIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'assetIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        assetIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -743,11 +808,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Asset)]),
-      ) as BuiltList<Asset>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(Asset)]),
+                )
+                as BuiltList<Asset>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -791,7 +858,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAssetInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAssetInfo>> getCustomerAssetInfos({ 
+  Future<Response<PageDataAssetInfo>> getCustomerAssetInfos({
     required String customerId,
     required int pageSize,
     required int page,
@@ -807,13 +874,21 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAssetInfo);
-    final _path = r'/api/customer/{customerId}/assetInfos'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAssetInfo);
+    final _path = r'/api/customer/{customerId}/assetInfos'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -821,11 +896,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -833,13 +905,42 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (assetProfileId != null) r'assetProfileId': encodeQueryParameter(_serializers, assetProfileId, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (assetProfileId != null)
+        r'assetProfileId': encodeQueryParameter(
+          _serializers,
+          assetProfileId,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -855,11 +956,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAssetInfo),
-      ) as PageDataAssetInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAssetInfo),
+                )
+                as PageDataAssetInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -902,7 +1005,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAsset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAsset>> getCustomerAssets({ 
+  Future<Response<PageDataAsset>> getCustomerAssets({
     required String customerId,
     required int pageSize,
     required int page,
@@ -917,13 +1020,21 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAsset);
-    final _path = r'/api/customer/{customerId}/assets'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAsset);
+    final _path = r'/api/customer/{customerId}/assets'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -931,11 +1042,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -943,12 +1051,36 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -964,11 +1096,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAsset),
-      ) as PageDataAsset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAsset),
+                )
+                as PageDataAsset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1005,7 +1139,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Asset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Asset>> getTenantAssetByName({ 
+  Future<Response<Asset>> getTenantAssetByName({
     required String assetName,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1018,9 +1152,7 @@ class AssetControllerApi {
     final _path = r'/api/tenant/asset';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1028,11 +1160,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1040,7 +1169,11 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'assetName': encodeQueryParameter(_serializers, assetName, const FullType(String)),
+      r'assetName': encodeQueryParameter(
+        _serializers,
+        assetName,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1056,11 +1189,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Asset),
-      ) as Asset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Asset),
+                )
+                as Asset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1102,7 +1237,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAsset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAsset>> getTenantAssets({ 
+  Future<Response<PageDataAsset>> getTenantAssets({
     required int pageSize,
     required int page,
     String? type,
@@ -1116,13 +1251,12 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAsset);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAsset);
     final _path = r'/api/tenant/assets';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1130,11 +1264,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1142,12 +1273,36 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1163,11 +1318,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAsset),
-      ) as PageDataAsset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAsset),
+                )
+                as PageDataAsset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1210,7 +1367,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAsset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAsset>> getUserAssets({ 
+  Future<Response<PageDataAsset>> getUserAssets({
     required String pageSize,
     required String page,
     String? type,
@@ -1225,13 +1382,12 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAsset);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAsset);
     final _path = r'/api/user/assets';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1239,11 +1395,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1251,13 +1404,42 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (assetProfileId != null) r'assetProfileId': encodeQueryParameter(_serializers, assetProfileId, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (assetProfileId != null)
+        r'assetProfileId': encodeQueryParameter(
+          _serializers,
+          assetProfileId,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1273,11 +1455,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAsset),
-      ) as PageDataAsset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAsset),
+                )
+                as PageDataAsset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1304,7 +1488,7 @@ class AssetControllerApi {
   /// There&#39;s an ability to import the bulk of assets using the only .csv file.   Security check is performed to verify that the user has &#39;WRITE&#39; permission for the entity (entities).
   ///
   /// Parameters:
-  /// * [bulkImportRequest] 
+  /// * [bulkImportRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1314,7 +1498,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BulkImportResultAsset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BulkImportResultAsset>> processAssetBulkImport({ 
+  Future<Response<BulkImportResultAsset>> processAssetBulkImport({
     required BulkImportRequest bulkImportRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1323,13 +1507,13 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerBulkImportRequestAndBulkImportResultAsset);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerBulkImportRequestAndBulkImportResultAsset);
     final _path = r'/api/asset/bulk_import';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1337,11 +1521,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1353,14 +1534,13 @@ class AssetControllerApi {
 
     try {
       const _type = FullType(BulkImportRequest);
-      _bodyData = _serializers.serialize(bulkImportRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        bulkImportRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1380,11 +1560,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BulkImportResultAsset),
-      ) as BulkImportResultAsset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BulkImportResultAsset),
+                )
+                as BulkImportResultAsset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1426,7 +1608,7 @@ class AssetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Asset] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Asset>> saveAsset({ 
+  Future<Response<Asset>> saveAsset({
     required Asset asset,
     String? entityGroupId,
     BuiltList<String>? entityGroupIds,
@@ -1440,13 +1622,15 @@ class AssetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndAssetAndNameConflictPolicyAnd1More);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(
+          registerListOfStringAndAssetAndNameConflictPolicyAnd1More,
+        );
     final _path = r'/api/asset';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1454,11 +1638,8 @@ class AssetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1467,11 +1648,37 @@ class AssetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (entityGroupId != null) r'entityGroupId': encodeQueryParameter(_serializers, entityGroupId, const FullType(String)),
-      if (entityGroupIds != null) r'entityGroupIds': encodeCollectionQueryParameter<String>(_serializers, entityGroupIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (nameConflictPolicy != null) r'nameConflictPolicy': encodeQueryParameter(_serializers, nameConflictPolicy, const FullType(NameConflictPolicy)),
-      if (uniquifySeparator != null) r'uniquifySeparator': encodeQueryParameter(_serializers, uniquifySeparator, const FullType(String)),
-      if (uniquifyStrategy != null) r'uniquifyStrategy': encodeQueryParameter(_serializers, uniquifyStrategy, const FullType(UniquifyStrategy)),
+      if (entityGroupId != null)
+        r'entityGroupId': encodeQueryParameter(
+          _serializers,
+          entityGroupId,
+          const FullType(String),
+        ),
+      if (entityGroupIds != null)
+        r'entityGroupIds': encodeCollectionQueryParameter<String>(
+          _serializers,
+          entityGroupIds,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (nameConflictPolicy != null)
+        r'nameConflictPolicy': encodeQueryParameter(
+          _serializers,
+          nameConflictPolicy,
+          const FullType(NameConflictPolicy),
+        ),
+      if (uniquifySeparator != null)
+        r'uniquifySeparator': encodeQueryParameter(
+          _serializers,
+          uniquifySeparator,
+          const FullType(String),
+        ),
+      if (uniquifyStrategy != null)
+        r'uniquifyStrategy': encodeQueryParameter(
+          _serializers,
+          uniquifyStrategy,
+          const FullType(UniquifyStrategy),
+        ),
     };
 
     dynamic _bodyData;
@@ -1479,10 +1686,9 @@ class AssetControllerApi {
     try {
       const _type = FullType(Asset);
       _bodyData = _serializers.serialize(asset, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1507,11 +1713,13 @@ class AssetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Asset),
-      ) as Asset;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Asset),
+                )
+                as Asset;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1533,5 +1741,4 @@ class AssetControllerApi {
       extra: _response.extra,
     );
   }
-
 }

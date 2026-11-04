@@ -23,18 +23,19 @@ part 'agent_bulk_action.g.dart';
 /// Properties:
 /// * [id] - JSON object with the Agent Bulk Action Id.
 /// * [createdTime] - Timestamp of the bulk action creation, in milliseconds
-/// * [tenantId] 
-/// * [agentProfileId] 
-/// * [applicationProfileId] 
-/// * [actionType] 
-/// * [status] 
-/// * [errorMsg] 
-/// * [processingStartedTime] 
-/// * [total] 
-/// * [submitted] 
-/// * [skipCounts] 
+/// * [tenantId]
+/// * [agentProfileId]
+/// * [applicationProfileId]
+/// * [actionType]
+/// * [status]
+/// * [errorMsg]
+/// * [processingStartedTime]
+/// * [total]
+/// * [submitted]
+/// * [skipCounts]
 @BuiltValue()
-abstract class AgentBulkAction implements Built<AgentBulkAction, AgentBulkActionBuilder> {
+abstract class AgentBulkAction
+    implements Built<AgentBulkAction, AgentBulkActionBuilder> {
   /// JSON object with the Agent Bulk Action Id.
   @BuiltValueField(wireName: r'id')
   AgentBulkActionId? get id;
@@ -77,16 +78,19 @@ abstract class AgentBulkAction implements Built<AgentBulkAction, AgentBulkAction
 
   AgentBulkAction._();
 
-  factory AgentBulkAction([void updates(AgentBulkActionBuilder b)]) = _$AgentBulkAction;
+  factory AgentBulkAction([void updates(AgentBulkActionBuilder b)]) =
+      _$AgentBulkAction;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentBulkActionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentBulkAction> get serializer => _$AgentBulkActionSerializer();
+  static Serializer<AgentBulkAction> get serializer =>
+      _$AgentBulkActionSerializer();
 }
 
-class _$AgentBulkActionSerializer implements PrimitiveSerializer<AgentBulkAction> {
+class _$AgentBulkActionSerializer
+    implements PrimitiveSerializer<AgentBulkAction> {
   @override
   final Iterable<Type> types = const [AgentBulkAction, _$AgentBulkAction];
 
@@ -179,7 +183,10 @@ class _$AgentBulkActionSerializer implements PrimitiveSerializer<AgentBulkAction
       yield r'skipCounts';
       yield serializers.serialize(
         object.skipCounts,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(int),
+        ]),
       );
     }
   }
@@ -190,7 +197,11 @@ class _$AgentBulkActionSerializer implements PrimitiveSerializer<AgentBulkAction
     AgentBulkAction object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -206,98 +217,129 @@ class _$AgentBulkActionSerializer implements PrimitiveSerializer<AgentBulkAction
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentBulkActionId),
-          ) as AgentBulkActionId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentBulkActionId),
+                  )
+                  as AgentBulkActionId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'agentProfileId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.agentProfileId = valueDes;
           break;
         case r'applicationProfileId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.applicationProfileId = valueDes;
           break;
         case r'actionType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppEventActionType),
-          ) as AgentAppEventActionType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentAppEventActionType,
+                    ),
+                  )
+                  as AgentAppEventActionType?;
           if (valueDes == null) continue;
           result.actionType = valueDes;
           break;
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentBulkActionStatus),
-          ) as AgentBulkActionStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentBulkActionStatus,
+                    ),
+                  )
+                  as AgentBulkActionStatus?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
         case r'errorMsg':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorMsg = valueDes;
           break;
         case r'processingStartedTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.processingStartedTime = valueDes;
           break;
         case r'total':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.total = valueDes;
           break;
         case r'submitted':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.submitted = valueDes;
           break;
         case r'skipCounts':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(int)]),
-          ) as BuiltMap<String, int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltMap<String, int>?;
           if (valueDes == null) continue;
           result.skipCounts.replace(valueDes);
           break;
@@ -329,5 +371,3 @@ class _$AgentBulkActionSerializer implements PrimitiveSerializer<AgentBulkAction
     return result.build();
   }
 }
-
-

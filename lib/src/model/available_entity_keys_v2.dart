@@ -24,7 +24,8 @@ part 'available_entity_keys_v2.g.dart';
 /// * [timeseries] - List of unique time series keys available on the matched entities, sorted alphabetically. Omitted when timeseries keys were not requested.
 /// * [attributes] - Map of attribute scope to the list of unique attribute keys available on the matched entities. Only scopes supported by the matched entity types are included. Omitted when attribute keys were not requested or when none of the requested scopes apply to the matched entity types.
 @BuiltValue()
-abstract class AvailableEntityKeysV2 implements Built<AvailableEntityKeysV2, AvailableEntityKeysV2Builder> {
+abstract class AvailableEntityKeysV2
+    implements Built<AvailableEntityKeysV2, AvailableEntityKeysV2Builder> {
   /// Total number of entities that matched the query filter.
   @BuiltValueField(wireName: r'totalEntities')
   int get totalEntities;
@@ -43,18 +44,25 @@ abstract class AvailableEntityKeysV2 implements Built<AvailableEntityKeysV2, Ava
 
   AvailableEntityKeysV2._();
 
-  factory AvailableEntityKeysV2([void updates(AvailableEntityKeysV2Builder b)]) = _$AvailableEntityKeysV2;
+  factory AvailableEntityKeysV2([
+    void updates(AvailableEntityKeysV2Builder b),
+  ]) = _$AvailableEntityKeysV2;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AvailableEntityKeysV2Builder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AvailableEntityKeysV2> get serializer => _$AvailableEntityKeysV2Serializer();
+  static Serializer<AvailableEntityKeysV2> get serializer =>
+      _$AvailableEntityKeysV2Serializer();
 }
 
-class _$AvailableEntityKeysV2Serializer implements PrimitiveSerializer<AvailableEntityKeysV2> {
+class _$AvailableEntityKeysV2Serializer
+    implements PrimitiveSerializer<AvailableEntityKeysV2> {
   @override
-  final Iterable<Type> types = const [AvailableEntityKeysV2, _$AvailableEntityKeysV2];
+  final Iterable<Type> types = const [
+    AvailableEntityKeysV2,
+    _$AvailableEntityKeysV2,
+  ];
 
   @override
   final String wireName = r'AvailableEntityKeysV2';
@@ -85,7 +93,10 @@ class _$AvailableEntityKeysV2Serializer implements PrimitiveSerializer<Available
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(KeyInfo)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(KeyInfo)]),
+        ]),
       );
     }
   }
@@ -96,7 +107,11 @@ class _$AvailableEntityKeysV2Serializer implements PrimitiveSerializer<Available
     AvailableEntityKeysV2 object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -112,32 +127,44 @@ class _$AvailableEntityKeysV2Serializer implements PrimitiveSerializer<Available
       final value = serializedList[i + 1];
       switch (key) {
         case r'totalEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.totalEntities = valueDes;
           break;
         case r'entityTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(EntityType)]),
-          ) as BuiltSet<EntityType>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltSet, [
+                      FullType(EntityType),
+                    ]),
+                  )
+                  as BuiltSet<EntityType>;
           result.entityTypes.replace(valueDes);
           break;
         case r'timeseries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(KeyInfo)]),
-          ) as BuiltList<KeyInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(KeyInfo),
+                    ]),
+                  )
+                  as BuiltList<KeyInfo>?;
           if (valueDes == null) continue;
           result.timeseries.replace(valueDes);
           break;
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(KeyInfo)])]),
-          ) as BuiltMap<String, BuiltList<KeyInfo>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(KeyInfo)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<KeyInfo>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
@@ -169,5 +196,3 @@ class _$AvailableEntityKeysV2Serializer implements PrimitiveSerializer<Available
     return result.build();
   }
 }
-
-

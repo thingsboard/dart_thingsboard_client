@@ -16,24 +16,28 @@ part 'license_key_request.g.dart';
 /// LicenseKeyRequest
 ///
 /// Properties:
-/// * [secret] 
+/// * [secret]
 @BuiltValue()
-abstract class LicenseKeyRequest implements Built<LicenseKeyRequest, LicenseKeyRequestBuilder> {
+abstract class LicenseKeyRequest
+    implements Built<LicenseKeyRequest, LicenseKeyRequestBuilder> {
   @BuiltValueField(wireName: r'secret')
   String? get secret;
 
   LicenseKeyRequest._();
 
-  factory LicenseKeyRequest([void updates(LicenseKeyRequestBuilder b)]) = _$LicenseKeyRequest;
+  factory LicenseKeyRequest([void updates(LicenseKeyRequestBuilder b)]) =
+      _$LicenseKeyRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LicenseKeyRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LicenseKeyRequest> get serializer => _$LicenseKeyRequestSerializer();
+  static Serializer<LicenseKeyRequest> get serializer =>
+      _$LicenseKeyRequestSerializer();
 }
 
-class _$LicenseKeyRequestSerializer implements PrimitiveSerializer<LicenseKeyRequest> {
+class _$LicenseKeyRequestSerializer
+    implements PrimitiveSerializer<LicenseKeyRequest> {
   @override
   final Iterable<Type> types = const [LicenseKeyRequest, _$LicenseKeyRequest];
 
@@ -60,7 +64,11 @@ class _$LicenseKeyRequestSerializer implements PrimitiveSerializer<LicenseKeyReq
     LicenseKeyRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +84,12 @@ class _$LicenseKeyRequestSerializer implements PrimitiveSerializer<LicenseKeyReq
       final value = serializedList[i + 1];
       switch (key) {
         case r'secret':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.secret = valueDes;
           break;
@@ -111,5 +121,3 @@ class _$LicenseKeyRequestSerializer implements PrimitiveSerializer<LicenseKeyReq
     return result.build();
   }
 }
-
-

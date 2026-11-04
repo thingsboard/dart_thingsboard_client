@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'report_template_type.g.dart';
 
 class ReportTemplateType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'REPORT')
   static const ReportTemplateType REPORT = _$REPORT;
   @BuiltValueEnumConst(wireName: r'SUB_REPORT')
   static const ReportTemplateType SUB_REPORT = _$SUB_REPORT;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ReportTemplateType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ReportTemplateType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ReportTemplateType> get serializer => _$reportTemplateTypeSerializer;
+  static Serializer<ReportTemplateType> get serializer =>
+      _$reportTemplateTypeSerializer;
 
-  const ReportTemplateType._(String name): super(name);
+  const ReportTemplateType._(String name) : super(name);
 
   static BuiltSet<ReportTemplateType> get values => _$values;
   static ReportTemplateType valueOf(String name) => _$valueOf(name);
@@ -38,4 +39,3 @@ class ReportTemplateType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ReportTemplateTypeMixin = Object with _$ReportTemplateTypeMixin;
-

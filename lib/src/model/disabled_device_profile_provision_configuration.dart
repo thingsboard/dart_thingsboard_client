@@ -18,23 +18,38 @@ part 'disabled_device_profile_provision_configuration.g.dart';
 ///
 /// Properties:
 /// * [provisionDeviceSecret] - Provision device secret
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class DisabledDeviceProfileProvisionConfiguration implements DeviceProfileProvisionConfiguration, Built<DisabledDeviceProfileProvisionConfiguration, DisabledDeviceProfileProvisionConfigurationBuilder> {
+abstract class DisabledDeviceProfileProvisionConfiguration
+    implements
+        DeviceProfileProvisionConfiguration,
+        Built<
+          DisabledDeviceProfileProvisionConfiguration,
+          DisabledDeviceProfileProvisionConfigurationBuilder
+        > {
   DisabledDeviceProfileProvisionConfiguration._();
 
-  factory DisabledDeviceProfileProvisionConfiguration([void updates(DisabledDeviceProfileProvisionConfigurationBuilder b)]) = _$DisabledDeviceProfileProvisionConfiguration;
+  factory DisabledDeviceProfileProvisionConfiguration([
+    void updates(DisabledDeviceProfileProvisionConfigurationBuilder b),
+  ]) = _$DisabledDeviceProfileProvisionConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DisabledDeviceProfileProvisionConfigurationBuilder b) => b;
+  static void _defaults(DisabledDeviceProfileProvisionConfigurationBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DisabledDeviceProfileProvisionConfiguration> get serializer => _$DisabledDeviceProfileProvisionConfigurationSerializer();
+  static Serializer<DisabledDeviceProfileProvisionConfiguration>
+  get serializer => _$DisabledDeviceProfileProvisionConfigurationSerializer();
 }
 
-class _$DisabledDeviceProfileProvisionConfigurationSerializer implements PrimitiveSerializer<DisabledDeviceProfileProvisionConfiguration> {
+class _$DisabledDeviceProfileProvisionConfigurationSerializer
+    implements
+        PrimitiveSerializer<DisabledDeviceProfileProvisionConfiguration> {
   @override
-  final Iterable<Type> types = const [DisabledDeviceProfileProvisionConfiguration, _$DisabledDeviceProfileProvisionConfiguration];
+  final Iterable<Type> types = const [
+    DisabledDeviceProfileProvisionConfiguration,
+    _$DisabledDeviceProfileProvisionConfiguration,
+  ];
 
   @override
   final String wireName = r'DisabledDeviceProfileProvisionConfiguration';
@@ -64,7 +79,11 @@ class _$DisabledDeviceProfileProvisionConfigurationSerializer implements Primiti
     DisabledDeviceProfileProvisionConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -80,17 +99,21 @@ class _$DisabledDeviceProfileProvisionConfigurationSerializer implements Primiti
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'provisionDeviceSecret':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.provisionDeviceSecret = valueDes;
           break;
@@ -122,5 +145,3 @@ class _$DisabledDeviceProfileProvisionConfigurationSerializer implements Primiti
     return result.build();
   }
 }
-
-

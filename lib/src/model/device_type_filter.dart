@@ -18,12 +18,13 @@ part 'device_type_filter.g.dart';
 /// DeviceTypeFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [deviceTypes] 
-/// * [deviceNameFilter] 
-/// * [deviceType] 
+/// * [type]
+/// * [deviceTypes]
+/// * [deviceNameFilter]
+/// * [deviceType]
 @BuiltValue()
-abstract class DeviceTypeFilter implements EntityFilter, Built<DeviceTypeFilter, DeviceTypeFilterBuilder> {
+abstract class DeviceTypeFilter
+    implements EntityFilter, Built<DeviceTypeFilter, DeviceTypeFilterBuilder> {
   @Deprecated('deviceType has been deprecated')
   @BuiltValueField(wireName: r'deviceType')
   String? get deviceType;
@@ -36,16 +37,19 @@ abstract class DeviceTypeFilter implements EntityFilter, Built<DeviceTypeFilter,
 
   DeviceTypeFilter._();
 
-  factory DeviceTypeFilter([void updates(DeviceTypeFilterBuilder b)]) = _$DeviceTypeFilter;
+  factory DeviceTypeFilter([void updates(DeviceTypeFilterBuilder b)]) =
+      _$DeviceTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceTypeFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceTypeFilter> get serializer => _$DeviceTypeFilterSerializer();
+  static Serializer<DeviceTypeFilter> get serializer =>
+      _$DeviceTypeFilterSerializer();
 }
 
-class _$DeviceTypeFilterSerializer implements PrimitiveSerializer<DeviceTypeFilter> {
+class _$DeviceTypeFilterSerializer
+    implements PrimitiveSerializer<DeviceTypeFilter> {
   @override
   final Iterable<Type> types = const [DeviceTypeFilter, _$DeviceTypeFilter];
 
@@ -91,7 +95,11 @@ class _$DeviceTypeFilterSerializer implements PrimitiveSerializer<DeviceTypeFilt
     DeviceTypeFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,34 +115,44 @@ class _$DeviceTypeFilterSerializer implements PrimitiveSerializer<DeviceTypeFilt
       final value = serializedList[i + 1];
       switch (key) {
         case r'deviceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceType = valueDes;
           break;
         case r'deviceNameFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceNameFilter = valueDes;
           break;
         case r'deviceTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.deviceTypes.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -165,5 +183,3 @@ class _$DeviceTypeFilterSerializer implements PrimitiveSerializer<DeviceTypeFilt
     return result.build();
   }
 }
-
-

@@ -32,7 +32,8 @@ part 'agent_app_template.g.dart';
 /// * [rollbackSteps] - Rollback steps
 /// * [restartSteps] - Restart steps
 @BuiltValue()
-abstract class AgentAppTemplate implements Built<AgentAppTemplate, AgentAppTemplateBuilder> {
+abstract class AgentAppTemplate
+    implements Built<AgentAppTemplate, AgentAppTemplateBuilder> {
   /// JSON object with Tenant Id.
   @BuiltValueField(wireName: r'tenantId')
   TenantId? get tenantId;
@@ -77,16 +78,19 @@ abstract class AgentAppTemplate implements Built<AgentAppTemplate, AgentAppTempl
 
   AgentAppTemplate._();
 
-  factory AgentAppTemplate([void updates(AgentAppTemplateBuilder b)]) = _$AgentAppTemplate;
+  factory AgentAppTemplate([void updates(AgentAppTemplateBuilder b)]) =
+      _$AgentAppTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentAppTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentAppTemplate> get serializer => _$AgentAppTemplateSerializer();
+  static Serializer<AgentAppTemplate> get serializer =>
+      _$AgentAppTemplateSerializer();
 }
 
-class _$AgentAppTemplateSerializer implements PrimitiveSerializer<AgentAppTemplate> {
+class _$AgentAppTemplateSerializer
+    implements PrimitiveSerializer<AgentAppTemplate> {
   @override
   final Iterable<Type> types = const [AgentAppTemplate, _$AgentAppTemplate];
 
@@ -133,35 +137,45 @@ class _$AgentAppTemplateSerializer implements PrimitiveSerializer<AgentAppTempla
       yield r'startSteps';
       yield serializers.serialize(
         object.startSteps,
-        specifiedType: const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(AgentAppTemplateStartStepsInner),
+        ]),
       );
     }
     if (object.upgradeSteps != null) {
       yield r'upgradeSteps';
       yield serializers.serialize(
         object.upgradeSteps,
-        specifiedType: const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(AgentAppTemplateStartStepsInner),
+        ]),
       );
     }
     if (object.deleteSteps != null) {
       yield r'deleteSteps';
       yield serializers.serialize(
         object.deleteSteps,
-        specifiedType: const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(AgentAppTemplateStartStepsInner),
+        ]),
       );
     }
     if (object.rollbackSteps != null) {
       yield r'rollbackSteps';
       yield serializers.serialize(
         object.rollbackSteps,
-        specifiedType: const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(AgentAppTemplateStartStepsInner),
+        ]),
       );
     }
     if (object.restartSteps != null) {
       yield r'restartSteps';
       yield serializers.serialize(
         object.restartSteps,
-        specifiedType: const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(AgentAppTemplateStartStepsInner),
+        ]),
       );
     }
   }
@@ -172,7 +186,11 @@ class _$AgentAppTemplateSerializer implements PrimitiveSerializer<AgentAppTempla
     AgentAppTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -188,80 +206,110 @@ class _$AgentAppTemplateSerializer implements PrimitiveSerializer<AgentAppTempla
       final value = serializedList[i + 1];
       switch (key) {
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'appType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AgentApplicationType),
-          ) as AgentApplicationType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AgentApplicationType),
+                  )
+                  as AgentApplicationType;
           result.appType = valueDes;
           break;
         case r'configType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppConfigType),
-          ) as AgentAppConfigType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppConfigType),
+                  )
+                  as AgentAppConfigType?;
           if (valueDes == null) continue;
           result.configType = valueDes;
           break;
         case r'currentVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.currentVersion = valueDes;
           break;
         case r'nextVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.nextVersion = valueDes;
           break;
         case r'startSteps':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
-          ) as BuiltList<AgentAppTemplateStartStepsInner>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentAppTemplateStartStepsInner),
+                    ]),
+                  )
+                  as BuiltList<AgentAppTemplateStartStepsInner>?;
           if (valueDes == null) continue;
           result.startSteps.replace(valueDes);
           break;
         case r'upgradeSteps':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
-          ) as BuiltList<AgentAppTemplateStartStepsInner>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentAppTemplateStartStepsInner),
+                    ]),
+                  )
+                  as BuiltList<AgentAppTemplateStartStepsInner>?;
           if (valueDes == null) continue;
           result.upgradeSteps.replace(valueDes);
           break;
         case r'deleteSteps':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
-          ) as BuiltList<AgentAppTemplateStartStepsInner>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentAppTemplateStartStepsInner),
+                    ]),
+                  )
+                  as BuiltList<AgentAppTemplateStartStepsInner>?;
           if (valueDes == null) continue;
           result.deleteSteps.replace(valueDes);
           break;
         case r'rollbackSteps':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
-          ) as BuiltList<AgentAppTemplateStartStepsInner>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentAppTemplateStartStepsInner),
+                    ]),
+                  )
+                  as BuiltList<AgentAppTemplateStartStepsInner>?;
           if (valueDes == null) continue;
           result.rollbackSteps.replace(valueDes);
           break;
         case r'restartSteps':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
-          ) as BuiltList<AgentAppTemplateStartStepsInner>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentAppTemplateStartStepsInner),
+                    ]),
+                  )
+                  as BuiltList<AgentAppTemplateStartStepsInner>?;
           if (valueDes == null) continue;
           result.restartSteps.replace(valueDes);
           break;
@@ -293,5 +341,3 @@ class _$AgentAppTemplateSerializer implements PrimitiveSerializer<AgentAppTempla
     return result.build();
   }
 }
-
-

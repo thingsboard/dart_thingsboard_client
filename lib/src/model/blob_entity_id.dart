@@ -18,10 +18,11 @@ part 'blob_entity_id.g.dart';
 /// BlobEntityId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class BlobEntityId implements EntityId, Built<BlobEntityId, BlobEntityIdBuilder> {
+abstract class BlobEntityId
+    implements EntityId, Built<BlobEntityId, BlobEntityIdBuilder> {
   BlobEntityId._();
 
   factory BlobEntityId([void updates(BlobEntityIdBuilder b)]) = _$BlobEntityId;
@@ -63,7 +64,11 @@ class _$BlobEntityIdSerializer implements PrimitiveSerializer<BlobEntityId> {
     BlobEntityId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +84,21 @@ class _$BlobEntityIdSerializer implements PrimitiveSerializer<BlobEntityId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +129,3 @@ class _$BlobEntityIdSerializer implements PrimitiveSerializer<BlobEntityId> {
     return result.build();
   }
 }
-
-

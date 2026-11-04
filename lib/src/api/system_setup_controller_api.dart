@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -21,11 +20,9 @@ import 'package:thingsboard_client/src/model/license_key_request.dart';
 import 'package:thingsboard_client/src/model/setup_info.dart';
 import 'package:thingsboard_client/src/model/subscription_info.dart';
 import 'package:thingsboard_client/src/model/system_setup_request.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class SystemSetupControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -36,7 +33,7 @@ class SystemSetupControllerApi {
   /// Installs the license key pasted into the setup wizard and answers with the resulting setup state, so the caller learns whether the instance is now ready or still needs an initial system administrator account. Accepted only while the license is the missing step.
   ///
   /// Parameters:
-  /// * [licenseKeyRequest] 
+  /// * [licenseKeyRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -46,7 +43,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SetupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SetupInfo>> applySetupLicense({ 
+  Future<Response<SetupInfo>> applySetupLicense({
     required LicenseKeyRequest licenseKeyRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -55,17 +52,14 @@ class SystemSetupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLicenseKeyRequestAndSetupInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerLicenseKeyRequestAndSetupInfo);
     final _path = r'/api/noauth/setup/license';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
@@ -74,14 +68,13 @@ class SystemSetupControllerApi {
 
     try {
       const _type = FullType(LicenseKeyRequest);
-      _bodyData = _serializers.serialize(licenseKeyRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        licenseKeyRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -101,11 +94,13 @@ class SystemSetupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SetupInfo),
-      ) as SetupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SetupInfo),
+                )
+                as SetupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -132,7 +127,7 @@ class SystemSetupControllerApi {
   /// Replaces the license key of the whole deployment and answers with the resulting setup state and the license now in force, so the caller needs no second request. Available to a system administrator in every state, including while the instance is locked.
   ///
   /// Parameters:
-  /// * [licenseKeyRequest] 
+  /// * [licenseKeyRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -142,7 +137,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LicenseChangeResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LicenseChangeResult>> changeLicenseKey({ 
+  Future<Response<LicenseChangeResult>> changeLicenseKey({
     required LicenseKeyRequest licenseKeyRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -151,13 +146,13 @@ class SystemSetupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLicenseChangeResultAndLicenseKeyRequest);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerLicenseChangeResultAndLicenseKeyRequest);
     final _path = r'/api/admin/license/key';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -165,11 +160,8 @@ class SystemSetupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -181,14 +173,13 @@ class SystemSetupControllerApi {
 
     try {
       const _type = FullType(LicenseKeyRequest);
-      _bodyData = _serializers.serialize(licenseKeyRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        licenseKeyRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -208,11 +199,13 @@ class SystemSetupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LicenseChangeResult),
-      ) as LicenseChangeResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LicenseChangeResult),
+                )
+                as LicenseChangeResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -248,7 +241,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SetupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SetupInfo>> clearLicense({ 
+  Future<Response<SetupInfo>> clearLicense({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -260,9 +253,7 @@ class SystemSetupControllerApi {
     final _path = r'/api/admin/license/clear';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -270,11 +261,8 @@ class SystemSetupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -293,11 +281,13 @@ class SystemSetupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SetupInfo),
-      ) as SetupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SetupInfo),
+                )
+                as SetupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -324,7 +314,7 @@ class SystemSetupControllerApi {
   /// Creates the initial system administrator account, optionally loading the demo data, and lifts the setup lock. Accepted only while the instance has no system administrator - which is what stops an anonymous caller taking over a provisioned instance.
   ///
   /// Parameters:
-  /// * [systemSetupRequest] 
+  /// * [systemSetupRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -334,7 +324,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> completeSetup({ 
+  Future<Response<void>> completeSetup({
     required SystemSetupRequest systemSetupRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -343,17 +333,13 @@ class SystemSetupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSystemSetupRequest);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSystemSetupRequest);
     final _path = r'/api/noauth/setup/complete';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
@@ -362,14 +348,13 @@ class SystemSetupControllerApi {
 
     try {
       const _type = FullType(SystemSetupRequest);
-      _bodyData = _serializers.serialize(systemSetupRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        systemSetupRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -401,7 +386,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> confirmNonProduction({ 
+  Future<Response<void>> confirmNonProduction({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -412,9 +397,7 @@ class SystemSetupControllerApi {
     final _path = r'/api/admin/nonProduction/confirm';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -422,11 +405,8 @@ class SystemSetupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -458,7 +438,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LicenseClaimInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LicenseClaimInfo>> getClaim({ 
+  Future<Response<LicenseClaimInfo>> getClaim({
     String? claimToken,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -467,22 +447,23 @@ class SystemSetupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLicenseClaimInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerLicenseClaimInfo);
     final _path = r'/api/noauth/setup/claim';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      if (claimToken != null) r'claimToken': encodeQueryParameter(_serializers, claimToken, const FullType(String)),
+      if (claimToken != null)
+        r'claimToken': encodeQueryParameter(
+          _serializers,
+          claimToken,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -498,11 +479,13 @@ class SystemSetupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LicenseClaimInfo),
-      ) as LicenseClaimInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LicenseClaimInfo),
+                )
+                as LicenseClaimInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -538,7 +521,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SetupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SetupInfo>> getState({ 
+  Future<Response<SetupInfo>> getState({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -550,13 +533,8 @@ class SystemSetupControllerApi {
     final _path = r'/api/noauth/setup/state';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -572,11 +550,13 @@ class SystemSetupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SetupInfo),
-      ) as SetupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SetupInfo),
+                )
+                as SetupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -603,7 +583,7 @@ class SystemSetupControllerApi {
   /// Reports what a license key would install, without installing it. Nothing is activated, no instance slot is spent and the deployment keeps the license it has. Answers 400 with an operator-facing message when the key is refused.
   ///
   /// Parameters:
-  /// * [licenseKeyRequest] 
+  /// * [licenseKeyRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -613,7 +593,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SubscriptionInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SubscriptionInfo>> previewLicenseKey({ 
+  Future<Response<SubscriptionInfo>> previewLicenseKey({
     required LicenseKeyRequest licenseKeyRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -622,13 +602,13 @@ class SystemSetupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLicenseKeyRequestAndSubscriptionInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerLicenseKeyRequestAndSubscriptionInfo);
     final _path = r'/api/admin/license/preview';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -636,11 +616,8 @@ class SystemSetupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -652,14 +629,13 @@ class SystemSetupControllerApi {
 
     try {
       const _type = FullType(LicenseKeyRequest);
-      _bodyData = _serializers.serialize(licenseKeyRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        licenseKeyRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -679,11 +655,13 @@ class SystemSetupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SubscriptionInfo),
-      ) as SubscriptionInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SubscriptionInfo),
+                )
+                as SubscriptionInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -719,7 +697,7 @@ class SystemSetupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LicenseClaimResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LicenseClaimResult>> requestClaim({ 
+  Future<Response<LicenseClaimResult>> requestClaim({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -727,17 +705,13 @@ class SystemSetupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLicenseClaimResult);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerLicenseClaimResult);
     final _path = r'/api/noauth/setup/claim';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -753,11 +727,13 @@ class SystemSetupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LicenseClaimResult),
-      ) as LicenseClaimResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LicenseClaimResult),
+                )
+                as LicenseClaimResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -779,5 +755,4 @@ class SystemSetupControllerApi {
       extra: _response.extra,
     );
   }
-
 }

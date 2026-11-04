@@ -12,8 +12,10 @@ abstract class HasUuid {
 
   HasUuid(this.id);
 
-  factory HasUuid.fromJson(Map<String, dynamic> json,
-      [FromIdFunction<HasUuid>? fromId]) {
+  factory HasUuid.fromJson(
+    Map<String, dynamic> json, [
+    FromIdFunction<HasUuid>? fromId,
+  ]) {
     if (json.containsKey('id')) {
       if (json.containsKey('entityType')) {
         return EntityId.fromJson(json);

@@ -22,7 +22,8 @@ part 'rule_chain_data.g.dart';
 /// * [ruleChains] - List of the Rule Chain objects.
 /// * [metadata] - List of the Rule Chain metadata objects.
 @BuiltValue()
-abstract class RuleChainData implements Built<RuleChainData, RuleChainDataBuilder> {
+abstract class RuleChainData
+    implements Built<RuleChainData, RuleChainDataBuilder> {
   /// List of the Rule Chain objects.
   @BuiltValueField(wireName: r'ruleChains')
   BuiltList<RuleChain> get ruleChains;
@@ -33,13 +34,15 @@ abstract class RuleChainData implements Built<RuleChainData, RuleChainDataBuilde
 
   RuleChainData._();
 
-  factory RuleChainData([void updates(RuleChainDataBuilder b)]) = _$RuleChainData;
+  factory RuleChainData([void updates(RuleChainDataBuilder b)]) =
+      _$RuleChainData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainData> get serializer => _$RuleChainDataSerializer();
+  static Serializer<RuleChainData> get serializer =>
+      _$RuleChainDataSerializer();
 }
 
 class _$RuleChainDataSerializer implements PrimitiveSerializer<RuleChainData> {
@@ -72,7 +75,11 @@ class _$RuleChainDataSerializer implements PrimitiveSerializer<RuleChainData> {
     RuleChainData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,17 +95,25 @@ class _$RuleChainDataSerializer implements PrimitiveSerializer<RuleChainData> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'ruleChains':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(RuleChain)]),
-          ) as BuiltList<RuleChain>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(RuleChain),
+                    ]),
+                  )
+                  as BuiltList<RuleChain>;
           result.ruleChains.replace(valueDes);
           break;
         case r'metadata':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(RuleChainMetaData)]),
-          ) as BuiltList<RuleChainMetaData>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(RuleChainMetaData),
+                    ]),
+                  )
+                  as BuiltList<RuleChainMetaData>;
           result.metadata.replace(valueDes);
           break;
         default:
@@ -129,5 +144,3 @@ class _$RuleChainDataSerializer implements PrimitiveSerializer<RuleChainData> {
     return result.build();
   }
 }
-
-

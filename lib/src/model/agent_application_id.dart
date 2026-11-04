@@ -18,22 +18,26 @@ part 'agent_application_id.g.dart';
 /// AgentApplicationId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class AgentApplicationId implements EntityId, Built<AgentApplicationId, AgentApplicationIdBuilder> {
+abstract class AgentApplicationId
+    implements EntityId, Built<AgentApplicationId, AgentApplicationIdBuilder> {
   AgentApplicationId._();
 
-  factory AgentApplicationId([void updates(AgentApplicationIdBuilder b)]) = _$AgentApplicationId;
+  factory AgentApplicationId([void updates(AgentApplicationIdBuilder b)]) =
+      _$AgentApplicationId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentApplicationIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentApplicationId> get serializer => _$AgentApplicationIdSerializer();
+  static Serializer<AgentApplicationId> get serializer =>
+      _$AgentApplicationIdSerializer();
 }
 
-class _$AgentApplicationIdSerializer implements PrimitiveSerializer<AgentApplicationId> {
+class _$AgentApplicationIdSerializer
+    implements PrimitiveSerializer<AgentApplicationId> {
   @override
   final Iterable<Type> types = const [AgentApplicationId, _$AgentApplicationId];
 
@@ -63,7 +67,11 @@ class _$AgentApplicationIdSerializer implements PrimitiveSerializer<AgentApplica
     AgentApplicationId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$AgentApplicationIdSerializer implements PrimitiveSerializer<AgentApplica
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$AgentApplicationIdSerializer implements PrimitiveSerializer<AgentApplica
     return result.build();
   }
 }
-
-

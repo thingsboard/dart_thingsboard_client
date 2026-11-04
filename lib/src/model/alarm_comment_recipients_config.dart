@@ -19,27 +19,40 @@ part 'alarm_comment_recipients_config.g.dart';
 /// AlarmCommentRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class AlarmCommentRecipientsConfig implements NotificationRuleRecipientsConfig, Built<AlarmCommentRecipientsConfig, AlarmCommentRecipientsConfigBuilder> {
+abstract class AlarmCommentRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          AlarmCommentRecipientsConfig,
+          AlarmCommentRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   AlarmCommentRecipientsConfig._();
 
-  factory AlarmCommentRecipientsConfig([void updates(AlarmCommentRecipientsConfigBuilder b)]) = _$AlarmCommentRecipientsConfig;
+  factory AlarmCommentRecipientsConfig([
+    void updates(AlarmCommentRecipientsConfigBuilder b),
+  ]) = _$AlarmCommentRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmCommentRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmCommentRecipientsConfig> get serializer => _$AlarmCommentRecipientsConfigSerializer();
+  static Serializer<AlarmCommentRecipientsConfig> get serializer =>
+      _$AlarmCommentRecipientsConfigSerializer();
 }
 
-class _$AlarmCommentRecipientsConfigSerializer implements PrimitiveSerializer<AlarmCommentRecipientsConfig> {
+class _$AlarmCommentRecipientsConfigSerializer
+    implements PrimitiveSerializer<AlarmCommentRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [AlarmCommentRecipientsConfig, _$AlarmCommentRecipientsConfig];
+  final Iterable<Type> types = const [
+    AlarmCommentRecipientsConfig,
+    _$AlarmCommentRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'AlarmCommentRecipientsConfig';
@@ -69,7 +82,11 @@ class _$AlarmCommentRecipientsConfigSerializer implements PrimitiveSerializer<Al
     AlarmCommentRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$AlarmCommentRecipientsConfigSerializer implements PrimitiveSerializer<Al
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$AlarmCommentRecipientsConfigSerializer implements PrimitiveSerializer<Al
     return result.build();
   }
 }
-
-

@@ -17,12 +17,13 @@ part 'rule_chain_import_result.g.dart';
 /// RuleChainImportResult
 ///
 /// Properties:
-/// * [ruleChainId] 
-/// * [ruleChainName] 
-/// * [updated] 
-/// * [error] 
+/// * [ruleChainId]
+/// * [ruleChainName]
+/// * [updated]
+/// * [error]
 @BuiltValue()
-abstract class RuleChainImportResult implements Built<RuleChainImportResult, RuleChainImportResultBuilder> {
+abstract class RuleChainImportResult
+    implements Built<RuleChainImportResult, RuleChainImportResultBuilder> {
   @BuiltValueField(wireName: r'ruleChainId')
   RuleChainId? get ruleChainId;
 
@@ -37,18 +38,25 @@ abstract class RuleChainImportResult implements Built<RuleChainImportResult, Rul
 
   RuleChainImportResult._();
 
-  factory RuleChainImportResult([void updates(RuleChainImportResultBuilder b)]) = _$RuleChainImportResult;
+  factory RuleChainImportResult([
+    void updates(RuleChainImportResultBuilder b),
+  ]) = _$RuleChainImportResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainImportResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainImportResult> get serializer => _$RuleChainImportResultSerializer();
+  static Serializer<RuleChainImportResult> get serializer =>
+      _$RuleChainImportResultSerializer();
 }
 
-class _$RuleChainImportResultSerializer implements PrimitiveSerializer<RuleChainImportResult> {
+class _$RuleChainImportResultSerializer
+    implements PrimitiveSerializer<RuleChainImportResult> {
   @override
-  final Iterable<Type> types = const [RuleChainImportResult, _$RuleChainImportResult];
+  final Iterable<Type> types = const [
+    RuleChainImportResult,
+    _$RuleChainImportResult,
+  ];
 
   @override
   final String wireName = r'RuleChainImportResult';
@@ -94,7 +102,11 @@ class _$RuleChainImportResultSerializer implements PrimitiveSerializer<RuleChain
     RuleChainImportResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,34 +122,42 @@ class _$RuleChainImportResultSerializer implements PrimitiveSerializer<RuleChain
       final value = serializedList[i + 1];
       switch (key) {
         case r'ruleChainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleChainId),
-          ) as RuleChainId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleChainId),
+                  )
+                  as RuleChainId?;
           if (valueDes == null) continue;
           result.ruleChainId.replace(valueDes);
           break;
         case r'ruleChainName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.ruleChainName = valueDes;
           break;
         case r'updated':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.updated = valueDes;
           break;
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
@@ -169,5 +189,3 @@ class _$RuleChainImportResultSerializer implements PrimitiveSerializer<RuleChain
     return result.build();
   }
 }
-
-

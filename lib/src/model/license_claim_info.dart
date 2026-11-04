@@ -17,25 +17,29 @@ part 'license_claim_info.g.dart';
 /// LicenseClaimInfo
 ///
 /// Properties:
-/// * [status] 
+/// * [status]
 @BuiltValue()
-abstract class LicenseClaimInfo implements Built<LicenseClaimInfo, LicenseClaimInfoBuilder> {
+abstract class LicenseClaimInfo
+    implements Built<LicenseClaimInfo, LicenseClaimInfoBuilder> {
   @BuiltValueField(wireName: r'status')
   LicenseClaimStatus? get status;
   // enum statusEnum {  NOT_REQUESTED,  PENDING,  EXPIRED,  ACTIVATED,  };
 
   LicenseClaimInfo._();
 
-  factory LicenseClaimInfo([void updates(LicenseClaimInfoBuilder b)]) = _$LicenseClaimInfo;
+  factory LicenseClaimInfo([void updates(LicenseClaimInfoBuilder b)]) =
+      _$LicenseClaimInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LicenseClaimInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LicenseClaimInfo> get serializer => _$LicenseClaimInfoSerializer();
+  static Serializer<LicenseClaimInfo> get serializer =>
+      _$LicenseClaimInfoSerializer();
 }
 
-class _$LicenseClaimInfoSerializer implements PrimitiveSerializer<LicenseClaimInfo> {
+class _$LicenseClaimInfoSerializer
+    implements PrimitiveSerializer<LicenseClaimInfo> {
   @override
   final Iterable<Type> types = const [LicenseClaimInfo, _$LicenseClaimInfo];
 
@@ -62,7 +66,11 @@ class _$LicenseClaimInfoSerializer implements PrimitiveSerializer<LicenseClaimIn
     LicenseClaimInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +86,12 @@ class _$LicenseClaimInfoSerializer implements PrimitiveSerializer<LicenseClaimIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LicenseClaimStatus),
-          ) as LicenseClaimStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LicenseClaimStatus),
+                  )
+                  as LicenseClaimStatus?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
@@ -113,5 +123,3 @@ class _$LicenseClaimInfoSerializer implements PrimitiveSerializer<LicenseClaimIn
     return result.build();
   }
 }
-
-

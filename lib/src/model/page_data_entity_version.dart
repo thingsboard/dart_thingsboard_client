@@ -23,7 +23,8 @@ part 'page_data_entity_version.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataEntityVersion implements Built<PageDataEntityVersion, PageDataEntityVersionBuilder> {
+abstract class PageDataEntityVersion
+    implements Built<PageDataEntityVersion, PageDataEntityVersionBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<EntityVersion>? get data;
@@ -42,18 +43,25 @@ abstract class PageDataEntityVersion implements Built<PageDataEntityVersion, Pag
 
   PageDataEntityVersion._();
 
-  factory PageDataEntityVersion([void updates(PageDataEntityVersionBuilder b)]) = _$PageDataEntityVersion;
+  factory PageDataEntityVersion([
+    void updates(PageDataEntityVersionBuilder b),
+  ]) = _$PageDataEntityVersion;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataEntityVersionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataEntityVersion> get serializer => _$PageDataEntityVersionSerializer();
+  static Serializer<PageDataEntityVersion> get serializer =>
+      _$PageDataEntityVersionSerializer();
 }
 
-class _$PageDataEntityVersionSerializer implements PrimitiveSerializer<PageDataEntityVersion> {
+class _$PageDataEntityVersionSerializer
+    implements PrimitiveSerializer<PageDataEntityVersion> {
   @override
-  final Iterable<Type> types = const [PageDataEntityVersion, _$PageDataEntityVersion];
+  final Iterable<Type> types = const [
+    PageDataEntityVersion,
+    _$PageDataEntityVersion,
+  ];
 
   @override
   final String wireName = r'PageDataEntityVersion';
@@ -99,7 +107,11 @@ class _$PageDataEntityVersionSerializer implements PrimitiveSerializer<PageDataE
     PageDataEntityVersion object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +127,44 @@ class _$PageDataEntityVersionSerializer implements PrimitiveSerializer<PageDataE
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityVersion)]),
-          ) as BuiltList<EntityVersion>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityVersion),
+                    ]),
+                  )
+                  as BuiltList<EntityVersion>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +196,3 @@ class _$PageDataEntityVersionSerializer implements PrimitiveSerializer<PageDataE
     return result.build();
   }
 }
-
-

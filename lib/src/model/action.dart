@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'action.g.dart';
 
 class Action extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ASSIGNED')
   static const Action ASSIGNED = _$ASSIGNED;
   @BuiltValueEnumConst(wireName: r'UNASSIGNED')
@@ -25,7 +24,7 @@ class Action extends EnumClass {
 
   static Serializer<Action> get serializer => _$actionSerializer;
 
-  const Action._(String name): super(name);
+  const Action._(String name) : super(name);
 
   static BuiltSet<Action> get values => _$values;
   static Action valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class Action extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ActionMixin = Object with _$ActionMixin;
-

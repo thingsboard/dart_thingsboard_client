@@ -18,28 +18,41 @@ part 'platform_users_notification_target_config.g.dart';
 /// PlatformUsersNotificationTargetConfig
 ///
 /// Properties:
-/// * [description] 
-/// * [type] 
-/// * [usersFilter] 
+/// * [description]
+/// * [type]
+/// * [usersFilter]
 @BuiltValue()
-abstract class PlatformUsersNotificationTargetConfig implements NotificationTargetConfig, Built<PlatformUsersNotificationTargetConfig, PlatformUsersNotificationTargetConfigBuilder> {
+abstract class PlatformUsersNotificationTargetConfig
+    implements
+        NotificationTargetConfig,
+        Built<
+          PlatformUsersNotificationTargetConfig,
+          PlatformUsersNotificationTargetConfigBuilder
+        > {
   @BuiltValueField(wireName: r'usersFilter')
   UsersFilter get usersFilter;
 
   PlatformUsersNotificationTargetConfig._();
 
-  factory PlatformUsersNotificationTargetConfig([void updates(PlatformUsersNotificationTargetConfigBuilder b)]) = _$PlatformUsersNotificationTargetConfig;
+  factory PlatformUsersNotificationTargetConfig([
+    void updates(PlatformUsersNotificationTargetConfigBuilder b),
+  ]) = _$PlatformUsersNotificationTargetConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PlatformUsersNotificationTargetConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PlatformUsersNotificationTargetConfig> get serializer => _$PlatformUsersNotificationTargetConfigSerializer();
+  static Serializer<PlatformUsersNotificationTargetConfig> get serializer =>
+      _$PlatformUsersNotificationTargetConfigSerializer();
 }
 
-class _$PlatformUsersNotificationTargetConfigSerializer implements PrimitiveSerializer<PlatformUsersNotificationTargetConfig> {
+class _$PlatformUsersNotificationTargetConfigSerializer
+    implements PrimitiveSerializer<PlatformUsersNotificationTargetConfig> {
   @override
-  final Iterable<Type> types = const [PlatformUsersNotificationTargetConfig, _$PlatformUsersNotificationTargetConfig];
+  final Iterable<Type> types = const [
+    PlatformUsersNotificationTargetConfig,
+    _$PlatformUsersNotificationTargetConfig,
+  ];
 
   @override
   final String wireName = r'PlatformUsersNotificationTargetConfig';
@@ -74,7 +87,11 @@ class _$PlatformUsersNotificationTargetConfigSerializer implements PrimitiveSeri
     PlatformUsersNotificationTargetConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,25 +107,31 @@ class _$PlatformUsersNotificationTargetConfigSerializer implements PrimitiveSeri
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'usersFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(UsersFilter),
-          ) as UsersFilter;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(UsersFilter),
+                  )
+                  as UsersFilter;
           result.usersFilter = valueDes;
           break;
         default:
@@ -139,5 +162,3 @@ class _$PlatformUsersNotificationTargetConfigSerializer implements PrimitiveSeri
     return result.build();
   }
 }
-
-

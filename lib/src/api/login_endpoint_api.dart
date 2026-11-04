@@ -9,19 +9,15 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:thingsboard_client/src/model/login401_response.dart';
 import 'package:thingsboard_client/src/model/login_request.dart';
 import 'package:thingsboard_client/src/model/login_response.dart';
 import 'package:thingsboard_client/src/model/refresh_token_request.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class LoginEndpointApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +38,7 @@ class LoginEndpointApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LoginResponse] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LoginResponse>> login({ 
+  Future<Response<LoginResponse>> login({
     LoginRequest? loginRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -51,17 +47,14 @@ class LoginEndpointApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLoginRequestAndLoginResponse);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerLoginRequestAndLoginResponse);
     final _path = r'/api/auth/login';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
@@ -70,14 +63,12 @@ class LoginEndpointApi {
 
     try {
       const _type = FullType(LoginRequest);
-      _bodyData = loginRequest == null ? null : _serializers.serialize(loginRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = loginRequest == null
+          ? null
+          : _serializers.serialize(loginRequest, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -97,11 +88,13 @@ class LoginEndpointApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LoginResponse),
-      ) as LoginResponse;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LoginResponse),
+                )
+                as LoginResponse;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -138,7 +131,7 @@ class LoginEndpointApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LoginResponse] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LoginResponse>> refreshToken({ 
+  Future<Response<LoginResponse>> refreshToken({
     RefreshTokenRequest? refreshTokenRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -147,17 +140,14 @@ class LoginEndpointApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLoginResponseAndRefreshTokenRequest);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerLoginResponseAndRefreshTokenRequest);
     final _path = r'/api/auth/token';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
@@ -166,14 +156,12 @@ class LoginEndpointApi {
 
     try {
       const _type = FullType(RefreshTokenRequest);
-      _bodyData = refreshTokenRequest == null ? null : _serializers.serialize(refreshTokenRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = refreshTokenRequest == null
+          ? null
+          : _serializers.serialize(refreshTokenRequest, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -193,11 +181,13 @@ class LoginEndpointApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LoginResponse),
-      ) as LoginResponse;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LoginResponse),
+                )
+                as LoginResponse;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -219,5 +209,4 @@ class LoginEndpointApi {
       extra: _response.extra,
     );
   }
-
 }

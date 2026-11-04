@@ -23,7 +23,8 @@ part 'solution_export_request.g.dart';
 /// * [externalIds] - Set of external entity IDs to export. The 'id' of each EntityId is the external UUID (as stored in the 'externalId' field on the entity in the current tenant). The server looks up each entity by 'externalId' and 'entityType' within the current tenant. Optional, but at least one of 'internalIds' or 'externalIds' must be non-empty.
 /// * [settings] - Optional export settings controlling what additional data is included (relations, attributes, credentials, etc.). If not specified, default settings will be used that include all available data.
 @BuiltValue()
-abstract class SolutionExportRequest implements Built<SolutionExportRequest, SolutionExportRequestBuilder> {
+abstract class SolutionExportRequest
+    implements Built<SolutionExportRequest, SolutionExportRequestBuilder> {
   /// Set of internal entity IDs to export. The 'id' of each EntityId is the server-internal UUID. All listed entities must belong to the current tenant. Optional, but at least one of 'internalIds' or 'externalIds' must be non-empty.
   @BuiltValueField(wireName: r'internalIds')
   BuiltSet<EntityId>? get internalIds;
@@ -38,18 +39,25 @@ abstract class SolutionExportRequest implements Built<SolutionExportRequest, Sol
 
   SolutionExportRequest._();
 
-  factory SolutionExportRequest([void updates(SolutionExportRequestBuilder b)]) = _$SolutionExportRequest;
+  factory SolutionExportRequest([
+    void updates(SolutionExportRequestBuilder b),
+  ]) = _$SolutionExportRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SolutionExportRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SolutionExportRequest> get serializer => _$SolutionExportRequestSerializer();
+  static Serializer<SolutionExportRequest> get serializer =>
+      _$SolutionExportRequestSerializer();
 }
 
-class _$SolutionExportRequestSerializer implements PrimitiveSerializer<SolutionExportRequest> {
+class _$SolutionExportRequestSerializer
+    implements PrimitiveSerializer<SolutionExportRequest> {
   @override
-  final Iterable<Type> types = const [SolutionExportRequest, _$SolutionExportRequest];
+  final Iterable<Type> types = const [
+    SolutionExportRequest,
+    _$SolutionExportRequest,
+  ];
 
   @override
   final String wireName = r'SolutionExportRequest';
@@ -88,7 +96,11 @@ class _$SolutionExportRequestSerializer implements PrimitiveSerializer<SolutionE
     SolutionExportRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -104,26 +116,38 @@ class _$SolutionExportRequestSerializer implements PrimitiveSerializer<SolutionE
       final value = serializedList[i + 1];
       switch (key) {
         case r'internalIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(EntityId)]),
-          ) as BuiltSet<EntityId>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(EntityId),
+                    ]),
+                  )
+                  as BuiltSet<EntityId>?;
           if (valueDes == null) continue;
           result.internalIds.replace(valueDes);
           break;
         case r'externalIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(EntityId)]),
-          ) as BuiltSet<EntityId>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(EntityId),
+                    ]),
+                  )
+                  as BuiltSet<EntityId>?;
           if (valueDes == null) continue;
           result.externalIds.replace(valueDes);
           break;
         case r'settings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityExportSettings),
-          ) as EntityExportSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntityExportSettings,
+                    ),
+                  )
+                  as EntityExportSettings?;
           if (valueDes == null) continue;
           result.settings.replace(valueDes);
           break;
@@ -155,5 +179,3 @@ class _$SolutionExportRequestSerializer implements PrimitiveSerializer<SolutionE
     return result.build();
   }
 }
-
-

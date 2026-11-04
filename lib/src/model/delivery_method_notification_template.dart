@@ -22,11 +22,11 @@ part 'delivery_method_notification_template.g.dart';
 /// Base template for different delivery methods
 ///
 /// Properties:
-/// * [enabled] 
-/// * [body] 
-/// * [method] 
+/// * [enabled]
+/// * [body]
+/// * [method]
 @BuiltValue(instantiable: false)
-abstract class DeliveryMethodNotificationTemplate  {
+abstract class DeliveryMethodNotificationTemplate {
   @BuiltValueField(wireName: r'enabled')
   bool? get enabled;
 
@@ -48,57 +48,62 @@ abstract class DeliveryMethodNotificationTemplate  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeliveryMethodNotificationTemplate> get serializer => _$DeliveryMethodNotificationTemplateSerializer();
+  static Serializer<DeliveryMethodNotificationTemplate> get serializer =>
+      _$DeliveryMethodNotificationTemplateSerializer();
 }
 
-extension DeliveryMethodNotificationTemplateDiscriminatorExt on DeliveryMethodNotificationTemplate {
-    String? get discriminatorValue {
-        if (this is EmailDeliveryMethodNotificationTemplate) {
-            return r'EMAIL';
-        }
-        if (this is MicrosoftTeamsDeliveryMethodNotificationTemplate) {
-            return r'MICROSOFT_TEAMS';
-        }
-        if (this is MobileAppDeliveryMethodNotificationTemplate) {
-            return r'MOBILE_APP';
-        }
-        if (this is SlackDeliveryMethodNotificationTemplate) {
-            return r'SLACK';
-        }
-        if (this is SmsDeliveryMethodNotificationTemplate) {
-            return r'SMS';
-        }
-        if (this is WebDeliveryMethodNotificationTemplate) {
-            return r'WEB';
-        }
-        return null;
+extension DeliveryMethodNotificationTemplateDiscriminatorExt
+    on DeliveryMethodNotificationTemplate {
+  String? get discriminatorValue {
+    if (this is EmailDeliveryMethodNotificationTemplate) {
+      return r'EMAIL';
     }
-}
-extension DeliveryMethodNotificationTemplateBuilderDiscriminatorExt on DeliveryMethodNotificationTemplateBuilder {
-    String? get discriminatorValue {
-        if (this is EmailDeliveryMethodNotificationTemplateBuilder) {
-            return r'EMAIL';
-        }
-        if (this is MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder) {
-            return r'MICROSOFT_TEAMS';
-        }
-        if (this is MobileAppDeliveryMethodNotificationTemplateBuilder) {
-            return r'MOBILE_APP';
-        }
-        if (this is SlackDeliveryMethodNotificationTemplateBuilder) {
-            return r'SLACK';
-        }
-        if (this is SmsDeliveryMethodNotificationTemplateBuilder) {
-            return r'SMS';
-        }
-        if (this is WebDeliveryMethodNotificationTemplateBuilder) {
-            return r'WEB';
-        }
-        return null;
+    if (this is MicrosoftTeamsDeliveryMethodNotificationTemplate) {
+      return r'MICROSOFT_TEAMS';
     }
+    if (this is MobileAppDeliveryMethodNotificationTemplate) {
+      return r'MOBILE_APP';
+    }
+    if (this is SlackDeliveryMethodNotificationTemplate) {
+      return r'SLACK';
+    }
+    if (this is SmsDeliveryMethodNotificationTemplate) {
+      return r'SMS';
+    }
+    if (this is WebDeliveryMethodNotificationTemplate) {
+      return r'WEB';
+    }
+    return null;
+  }
 }
 
-class _$DeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<DeliveryMethodNotificationTemplate> {
+extension DeliveryMethodNotificationTemplateBuilderDiscriminatorExt
+    on DeliveryMethodNotificationTemplateBuilder {
+  String? get discriminatorValue {
+    if (this is EmailDeliveryMethodNotificationTemplateBuilder) {
+      return r'EMAIL';
+    }
+    if (this is MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder) {
+      return r'MICROSOFT_TEAMS';
+    }
+    if (this is MobileAppDeliveryMethodNotificationTemplateBuilder) {
+      return r'MOBILE_APP';
+    }
+    if (this is SlackDeliveryMethodNotificationTemplateBuilder) {
+      return r'SLACK';
+    }
+    if (this is SmsDeliveryMethodNotificationTemplateBuilder) {
+      return r'SMS';
+    }
+    if (this is WebDeliveryMethodNotificationTemplateBuilder) {
+      return r'WEB';
+    }
+    return null;
+  }
+}
+
+class _$DeliveryMethodNotificationTemplateSerializer
+    implements PrimitiveSerializer<DeliveryMethodNotificationTemplate> {
   @override
   final Iterable<Type> types = const [DeliveryMethodNotificationTemplate];
 
@@ -136,24 +141,48 @@ class _$DeliveryMethodNotificationTemplateSerializer implements PrimitiveSeriali
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is EmailDeliveryMethodNotificationTemplate) {
-      return serializers.serialize(object, specifiedType: FullType(EmailDeliveryMethodNotificationTemplate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EmailDeliveryMethodNotificationTemplate),
+      )!;
     }
     if (object is MicrosoftTeamsDeliveryMethodNotificationTemplate) {
-      return serializers.serialize(object, specifiedType: FullType(MicrosoftTeamsDeliveryMethodNotificationTemplate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(
+          MicrosoftTeamsDeliveryMethodNotificationTemplate,
+        ),
+      )!;
     }
     if (object is MobileAppDeliveryMethodNotificationTemplate) {
-      return serializers.serialize(object, specifiedType: FullType(MobileAppDeliveryMethodNotificationTemplate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(MobileAppDeliveryMethodNotificationTemplate),
+      )!;
     }
     if (object is SlackDeliveryMethodNotificationTemplate) {
-      return serializers.serialize(object, specifiedType: FullType(SlackDeliveryMethodNotificationTemplate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SlackDeliveryMethodNotificationTemplate),
+      )!;
     }
     if (object is SmsDeliveryMethodNotificationTemplate) {
-      return serializers.serialize(object, specifiedType: FullType(SmsDeliveryMethodNotificationTemplate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SmsDeliveryMethodNotificationTemplate),
+      )!;
     }
     if (object is WebDeliveryMethodNotificationTemplate) {
-      return serializers.serialize(object, specifiedType: FullType(WebDeliveryMethodNotificationTemplate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WebDeliveryMethodNotificationTemplate),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -163,45 +192,98 @@ class _$DeliveryMethodNotificationTemplateSerializer implements PrimitiveSeriali
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(DeliveryMethodNotificationTemplate.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          DeliveryMethodNotificationTemplate.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'EMAIL':
-        return serializers.deserialize(serialized, specifiedType: FullType(EmailDeliveryMethodNotificationTemplate)) as EmailDeliveryMethodNotificationTemplate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EmailDeliveryMethodNotificationTemplate),
+            )
+            as EmailDeliveryMethodNotificationTemplate;
       case r'MICROSOFT_TEAMS':
-        return serializers.deserialize(serialized, specifiedType: FullType(MicrosoftTeamsDeliveryMethodNotificationTemplate)) as MicrosoftTeamsDeliveryMethodNotificationTemplate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                MicrosoftTeamsDeliveryMethodNotificationTemplate,
+              ),
+            )
+            as MicrosoftTeamsDeliveryMethodNotificationTemplate;
       case r'MOBILE_APP':
-        return serializers.deserialize(serialized, specifiedType: FullType(MobileAppDeliveryMethodNotificationTemplate)) as MobileAppDeliveryMethodNotificationTemplate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                MobileAppDeliveryMethodNotificationTemplate,
+              ),
+            )
+            as MobileAppDeliveryMethodNotificationTemplate;
       case r'SLACK':
-        return serializers.deserialize(serialized, specifiedType: FullType(SlackDeliveryMethodNotificationTemplate)) as SlackDeliveryMethodNotificationTemplate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SlackDeliveryMethodNotificationTemplate),
+            )
+            as SlackDeliveryMethodNotificationTemplate;
       case r'SMS':
-        return serializers.deserialize(serialized, specifiedType: FullType(SmsDeliveryMethodNotificationTemplate)) as SmsDeliveryMethodNotificationTemplate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SmsDeliveryMethodNotificationTemplate),
+            )
+            as SmsDeliveryMethodNotificationTemplate;
       case r'WEB':
-        return serializers.deserialize(serialized, specifiedType: FullType(WebDeliveryMethodNotificationTemplate)) as WebDeliveryMethodNotificationTemplate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WebDeliveryMethodNotificationTemplate),
+            )
+            as WebDeliveryMethodNotificationTemplate;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($DeliveryMethodNotificationTemplate)) as $DeliveryMethodNotificationTemplate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($DeliveryMethodNotificationTemplate),
+            )
+            as $DeliveryMethodNotificationTemplate;
     }
   }
 }
 
-
 /// a concrete implementation of [DeliveryMethodNotificationTemplate], since [DeliveryMethodNotificationTemplate] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $DeliveryMethodNotificationTemplate implements DeliveryMethodNotificationTemplate, Built<$DeliveryMethodNotificationTemplate, $DeliveryMethodNotificationTemplateBuilder> {
+abstract class $DeliveryMethodNotificationTemplate
+    implements
+        DeliveryMethodNotificationTemplate,
+        Built<
+          $DeliveryMethodNotificationTemplate,
+          $DeliveryMethodNotificationTemplateBuilder
+        > {
   $DeliveryMethodNotificationTemplate._();
 
-  factory $DeliveryMethodNotificationTemplate([void Function($DeliveryMethodNotificationTemplateBuilder)? updates]) = _$$DeliveryMethodNotificationTemplate;
+  factory $DeliveryMethodNotificationTemplate([
+    void Function($DeliveryMethodNotificationTemplateBuilder)? updates,
+  ]) = _$$DeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($DeliveryMethodNotificationTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$DeliveryMethodNotificationTemplate> get serializer => _$$DeliveryMethodNotificationTemplateSerializer();
+  static Serializer<$DeliveryMethodNotificationTemplate> get serializer =>
+      _$$DeliveryMethodNotificationTemplateSerializer();
 }
 
-class _$$DeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<$DeliveryMethodNotificationTemplate> {
+class _$$DeliveryMethodNotificationTemplateSerializer
+    implements PrimitiveSerializer<$DeliveryMethodNotificationTemplate> {
   @override
-  final Iterable<Type> types = const [$DeliveryMethodNotificationTemplate, _$$DeliveryMethodNotificationTemplate];
+  final Iterable<Type> types = const [
+    $DeliveryMethodNotificationTemplate,
+    _$$DeliveryMethodNotificationTemplate,
+  ];
 
   @override
   final String wireName = r'$DeliveryMethodNotificationTemplate';
@@ -212,7 +294,10 @@ class _$$DeliveryMethodNotificationTemplateSerializer implements PrimitiveSerial
     $DeliveryMethodNotificationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(DeliveryMethodNotificationTemplate))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(DeliveryMethodNotificationTemplate),
+    )!;
   }
 
   void _deserializeProperties(
@@ -228,25 +313,31 @@ class _$$DeliveryMethodNotificationTemplateSerializer implements PrimitiveSerial
       final value = serializedList[i + 1];
       switch (key) {
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.body = valueDes;
           break;
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         default:
@@ -277,4 +368,3 @@ class _$$DeliveryMethodNotificationTemplateSerializer implements PrimitiveSerial
     return result.build();
   }
 }
-

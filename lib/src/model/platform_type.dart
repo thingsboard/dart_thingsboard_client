@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'platform_type.g.dart';
 
 class PlatformType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'WEB')
   static const PlatformType WEB = _$WEB;
   @BuiltValueEnumConst(wireName: r'ANDROID')
@@ -27,7 +26,7 @@ class PlatformType extends EnumClass {
 
   static Serializer<PlatformType> get serializer => _$platformTypeSerializer;
 
-  const PlatformType._(String name): super(name);
+  const PlatformType._(String name) : super(name);
 
   static BuiltSet<PlatformType> get values => _$values;
   static PlatformType valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class PlatformType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class PlatformTypeMixin = Object with _$PlatformTypeMixin;
-

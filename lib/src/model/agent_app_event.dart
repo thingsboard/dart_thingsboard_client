@@ -27,25 +27,26 @@ part 'agent_app_event.g.dart';
 /// Properties:
 /// * [id] - JSON object with the Agent App Event Id.
 /// * [createdTime] - Timestamp of the event creation, in milliseconds
-/// * [tenantId] 
-/// * [applicationId] 
-/// * [agentId] 
-/// * [applicationName] 
-/// * [actionType] 
-/// * [startStatus] 
-/// * [processingStatus] 
-/// * [currentStepId] 
-/// * [currentActivity] 
-/// * [errorMessage] 
-/// * [updatedTime] 
-/// * [stepStates] 
-/// * [bulkActionId] 
-/// * [resolvedArguments] 
-/// * [winnerContainerId] 
-/// * [finalizeDeadlineTs] 
-/// * [contextMetadata] 
+/// * [tenantId]
+/// * [applicationId]
+/// * [agentId]
+/// * [applicationName]
+/// * [actionType]
+/// * [startStatus]
+/// * [processingStatus]
+/// * [currentStepId]
+/// * [currentActivity]
+/// * [errorMessage]
+/// * [updatedTime]
+/// * [stepStates]
+/// * [bulkActionId]
+/// * [resolvedArguments]
+/// * [winnerContainerId]
+/// * [finalizeDeadlineTs]
+/// * [contextMetadata]
 @BuiltValue()
-abstract class AgentAppEvent implements Built<AgentAppEvent, AgentAppEventBuilder> {
+abstract class AgentAppEvent
+    implements Built<AgentAppEvent, AgentAppEventBuilder> {
   /// JSON object with the Agent App Event Id.
   @BuiltValueField(wireName: r'id')
   AgentAppEventId? get id;
@@ -110,13 +111,15 @@ abstract class AgentAppEvent implements Built<AgentAppEvent, AgentAppEventBuilde
 
   AgentAppEvent._();
 
-  factory AgentAppEvent([void updates(AgentAppEventBuilder b)]) = _$AgentAppEvent;
+  factory AgentAppEvent([void updates(AgentAppEventBuilder b)]) =
+      _$AgentAppEvent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentAppEventBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentAppEvent> get serializer => _$AgentAppEventSerializer();
+  static Serializer<AgentAppEvent> get serializer =>
+      _$AgentAppEventSerializer();
 }
 
 class _$AgentAppEventSerializer implements PrimitiveSerializer<AgentAppEvent> {
@@ -226,7 +229,10 @@ class _$AgentAppEventSerializer implements PrimitiveSerializer<AgentAppEvent> {
       yield r'stepStates';
       yield serializers.serialize(
         object.stepStates,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(AgentAppEventStepStatesValue),
+        ]),
       );
     }
     if (object.bulkActionId != null) {
@@ -240,7 +246,10 @@ class _$AgentAppEventSerializer implements PrimitiveSerializer<AgentAppEvent> {
       yield r'resolvedArguments';
       yield serializers.serialize(
         object.resolvedArguments,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(String),
+        ]),
       );
     }
     if (object.winnerContainerId != null) {
@@ -261,7 +270,10 @@ class _$AgentAppEventSerializer implements PrimitiveSerializer<AgentAppEvent> {
       yield r'contextMetadata';
       yield serializers.serialize(
         object.contextMetadata,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(String),
+        ]),
       );
     }
   }
@@ -272,7 +284,11 @@ class _$AgentAppEventSerializer implements PrimitiveSerializer<AgentAppEvent> {
     AgentAppEvent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -288,154 +304,207 @@ class _$AgentAppEventSerializer implements PrimitiveSerializer<AgentAppEvent> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppEventId),
-          ) as AgentAppEventId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppEventId),
+                  )
+                  as AgentAppEventId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'applicationId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentApplicationId),
-          ) as AgentApplicationId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentApplicationId),
+                  )
+                  as AgentApplicationId?;
           if (valueDes == null) continue;
           result.applicationId.replace(valueDes);
           break;
         case r'agentId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentId),
-          ) as AgentId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentId),
+                  )
+                  as AgentId?;
           if (valueDes == null) continue;
           result.agentId.replace(valueDes);
           break;
         case r'applicationName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.applicationName = valueDes;
           break;
         case r'actionType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppEventActionType),
-          ) as AgentAppEventActionType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentAppEventActionType,
+                    ),
+                  )
+                  as AgentAppEventActionType?;
           if (valueDes == null) continue;
           result.actionType = valueDes;
           break;
         case r'startStatus':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ProcessingStartStatus),
-          ) as ProcessingStartStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ProcessingStartStatus,
+                    ),
+                  )
+                  as ProcessingStartStatus?;
           if (valueDes == null) continue;
           result.startStatus = valueDes;
           break;
         case r'processingStatus':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentProcessingStatus),
-          ) as AgentProcessingStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentProcessingStatus,
+                    ),
+                  )
+                  as AgentProcessingStatus?;
           if (valueDes == null) continue;
           result.processingStatus = valueDes;
           break;
         case r'currentStepId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.currentStepId = valueDes;
           break;
         case r'currentActivity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.currentActivity = valueDes;
           break;
         case r'errorMessage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorMessage = valueDes;
           break;
         case r'updatedTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.updatedTime = valueDes;
           break;
         case r'stepStates':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]),
-          ) as BuiltMap<String, AgentAppEventStepStatesValue>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(AgentAppEventStepStatesValue),
+                    ]),
+                  )
+                  as BuiltMap<String, AgentAppEventStepStatesValue>?;
           if (valueDes == null) continue;
           result.stepStates.replace(valueDes);
           break;
         case r'bulkActionId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.bulkActionId = valueDes;
           break;
         case r'resolvedArguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(String)]),
-          ) as BuiltMap<String, String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltMap<String, String>?;
           if (valueDes == null) continue;
           result.resolvedArguments.replace(valueDes);
           break;
         case r'winnerContainerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.winnerContainerId = valueDes;
           break;
         case r'finalizeDeadlineTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.finalizeDeadlineTs = valueDes;
           break;
         case r'contextMetadata':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(String)]),
-          ) as BuiltMap<String, String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltMap<String, String>?;
           if (valueDes == null) continue;
           result.contextMetadata.replace(valueDes);
           break;
@@ -467,5 +536,3 @@ class _$AgentAppEventSerializer implements PrimitiveSerializer<AgentAppEvent> {
     return result.build();
   }
 }
-
-

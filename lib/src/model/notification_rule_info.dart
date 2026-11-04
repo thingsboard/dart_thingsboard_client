@@ -25,20 +25,21 @@ part 'notification_rule_info.g.dart';
 /// NotificationRuleInfo
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
-/// * [tenantId] 
-/// * [name] 
-/// * [enabled] 
-/// * [templateId] 
-/// * [triggerType] 
-/// * [triggerConfig] 
-/// * [recipientsConfig] 
-/// * [additionalConfig] 
-/// * [templateName] 
-/// * [deliveryMethods] 
+/// * [tenantId]
+/// * [name]
+/// * [enabled]
+/// * [templateId]
+/// * [triggerType]
+/// * [triggerConfig]
+/// * [recipientsConfig]
+/// * [additionalConfig]
+/// * [templateName]
+/// * [deliveryMethods]
 @BuiltValue()
-abstract class NotificationRuleInfo implements Built<NotificationRuleInfo, NotificationRuleInfoBuilder> {
+abstract class NotificationRuleInfo
+    implements Built<NotificationRuleInfo, NotificationRuleInfoBuilder> {
   @BuiltValueField(wireName: r'id')
   NotificationRuleId? get id;
 
@@ -79,18 +80,24 @@ abstract class NotificationRuleInfo implements Built<NotificationRuleInfo, Notif
 
   NotificationRuleInfo._();
 
-  factory NotificationRuleInfo([void updates(NotificationRuleInfoBuilder b)]) = _$NotificationRuleInfo;
+  factory NotificationRuleInfo([void updates(NotificationRuleInfoBuilder b)]) =
+      _$NotificationRuleInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationRuleInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationRuleInfo> get serializer => _$NotificationRuleInfoSerializer();
+  static Serializer<NotificationRuleInfo> get serializer =>
+      _$NotificationRuleInfoSerializer();
 }
 
-class _$NotificationRuleInfoSerializer implements PrimitiveSerializer<NotificationRuleInfo> {
+class _$NotificationRuleInfoSerializer
+    implements PrimitiveSerializer<NotificationRuleInfo> {
   @override
-  final Iterable<Type> types = const [NotificationRuleInfo, _$NotificationRuleInfo];
+  final Iterable<Type> types = const [
+    NotificationRuleInfo,
+    _$NotificationRuleInfo,
+  ];
 
   @override
   final String wireName = r'NotificationRuleInfo';
@@ -171,7 +178,9 @@ class _$NotificationRuleInfoSerializer implements PrimitiveSerializer<Notificati
       yield r'deliveryMethods';
       yield serializers.serialize(
         object.deliveryMethods,
-        specifiedType: const FullType(BuiltList, [FullType(NotificationDeliveryMethod)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(NotificationDeliveryMethod),
+        ]),
       );
     }
   }
@@ -182,7 +191,11 @@ class _$NotificationRuleInfoSerializer implements PrimitiveSerializer<Notificati
     NotificationRuleInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -198,93 +211,125 @@ class _$NotificationRuleInfoSerializer implements PrimitiveSerializer<Notificati
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleId),
-          ) as NotificationRuleId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(NotificationRuleId),
+                  )
+                  as NotificationRuleId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'templateId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationTemplateId),
-          ) as NotificationTemplateId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationTemplateId),
+                  )
+                  as NotificationTemplateId;
           result.templateId.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'triggerConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerConfig),
-          ) as NotificationRuleTriggerConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(
+                      NotificationRuleTriggerConfig,
+                    ),
+                  )
+                  as NotificationRuleTriggerConfig;
           result.triggerConfig = valueDes;
           break;
         case r'recipientsConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleRecipientsConfig),
-          ) as NotificationRuleRecipientsConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(
+                      NotificationRuleRecipientsConfig,
+                    ),
+                  )
+                  as NotificationRuleRecipientsConfig;
           result.recipientsConfig = valueDes;
           break;
         case r'additionalConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleConfig),
-          ) as NotificationRuleConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleConfig,
+                    ),
+                  )
+                  as NotificationRuleConfig?;
           if (valueDes == null) continue;
           result.additionalConfig.replace(valueDes);
           break;
         case r'templateName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.templateName = valueDes;
           break;
         case r'deliveryMethods':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(NotificationDeliveryMethod)]),
-          ) as BuiltList<NotificationDeliveryMethod>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(NotificationDeliveryMethod),
+                    ]),
+                  )
+                  as BuiltList<NotificationDeliveryMethod>?;
           if (valueDes == null) continue;
           result.deliveryMethods.replace(valueDes);
           break;
@@ -316,5 +361,3 @@ class _$NotificationRuleInfoSerializer implements PrimitiveSerializer<Notificati
     return result.build();
   }
 }
-
-

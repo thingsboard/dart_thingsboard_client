@@ -20,7 +20,8 @@ part 'starred_dashboard_info.g.dart';
 /// * [title] - Title of the dashboard.
 /// * [starredAt] - Starred timestamp
 @BuiltValue()
-abstract class StarredDashboardInfo implements Built<StarredDashboardInfo, StarredDashboardInfoBuilder> {
+abstract class StarredDashboardInfo
+    implements Built<StarredDashboardInfo, StarredDashboardInfoBuilder> {
   /// JSON object with Dashboard id.
   @BuiltValueField(wireName: r'id')
   String? get id;
@@ -35,18 +36,24 @@ abstract class StarredDashboardInfo implements Built<StarredDashboardInfo, Starr
 
   StarredDashboardInfo._();
 
-  factory StarredDashboardInfo([void updates(StarredDashboardInfoBuilder b)]) = _$StarredDashboardInfo;
+  factory StarredDashboardInfo([void updates(StarredDashboardInfoBuilder b)]) =
+      _$StarredDashboardInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StarredDashboardInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StarredDashboardInfo> get serializer => _$StarredDashboardInfoSerializer();
+  static Serializer<StarredDashboardInfo> get serializer =>
+      _$StarredDashboardInfoSerializer();
 }
 
-class _$StarredDashboardInfoSerializer implements PrimitiveSerializer<StarredDashboardInfo> {
+class _$StarredDashboardInfoSerializer
+    implements PrimitiveSerializer<StarredDashboardInfo> {
   @override
-  final Iterable<Type> types = const [StarredDashboardInfo, _$StarredDashboardInfo];
+  final Iterable<Type> types = const [
+    StarredDashboardInfo,
+    _$StarredDashboardInfo,
+  ];
 
   @override
   final String wireName = r'StarredDashboardInfo';
@@ -85,7 +92,11 @@ class _$StarredDashboardInfoSerializer implements PrimitiveSerializer<StarredDas
     StarredDashboardInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +112,32 @@ class _$StarredDashboardInfoSerializer implements PrimitiveSerializer<StarredDas
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'starredAt':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.starredAt = valueDes;
           break;
@@ -152,5 +169,3 @@ class _$StarredDashboardInfoSerializer implements PrimitiveSerializer<StarredDas
     return result.build();
   }
 }
-
-

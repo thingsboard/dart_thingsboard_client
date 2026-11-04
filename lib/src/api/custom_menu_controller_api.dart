@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -23,11 +22,9 @@ import 'package:thingsboard_client/src/model/custom_menu_delete_result.dart';
 import 'package:thingsboard_client/src/model/custom_menu_info.dart';
 import 'package:thingsboard_client/src/model/entity_info.dart';
 import 'package:thingsboard_client/src/model/page_data_custom_menu_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class CustomMenuControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -38,7 +35,7 @@ class CustomMenuControllerApi {
   /// The api is designed to create Custom Menu without configuration. Is not applicable for update.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the custom menu with specified id.
   ///
   /// Parameters:
-  /// * [customMenuInfo] 
+  /// * [customMenuInfo]
   /// * [assignToList] - A list of entity ids, separated by comma ','
   /// * [force] - Use force if you want to create default menu that conflicts with the existing one (old one will be update NO_ASSIGN assignee type)
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -50,7 +47,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CustomMenu] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CustomMenu>> createCustomMenu({ 
+  Future<Response<CustomMenu>> createCustomMenu({
     required CustomMenuInfo customMenuInfo,
     BuiltList<String>? assignToList,
     bool? force,
@@ -61,13 +58,13 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCustomMenuAndCustomMenuInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerCustomMenuAndCustomMenuInfo);
     final _path = r'/api/customMenu';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -75,11 +72,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -88,8 +82,19 @@ class CustomMenuControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (assignToList != null) r'assignToList': encodeCollectionQueryParameter<String>(_serializers, assignToList, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (force != null) r'force': encodeQueryParameter(_serializers, force, const FullType(bool)),
+      if (assignToList != null)
+        r'assignToList': encodeCollectionQueryParameter<String>(
+          _serializers,
+          assignToList,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (force != null)
+        r'force': encodeQueryParameter(
+          _serializers,
+          force,
+          const FullType(bool),
+        ),
     };
 
     dynamic _bodyData;
@@ -97,10 +102,9 @@ class CustomMenuControllerApi {
     try {
       const _type = FullType(CustomMenuInfo);
       _bodyData = _serializers.serialize(customMenuInfo, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -125,11 +129,13 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CustomMenu),
-      ) as CustomMenu;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CustomMenu),
+                )
+                as CustomMenu;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -153,7 +159,7 @@ class CustomMenuControllerApi {
   }
 
   /// Delete custom menu (deleteCustomMenu)
-  /// Deletes the custom menu based on the provided Custom Menu Id. Referencing non-existing custom menu Id will cause an error. If the custom menu is assigned to the list of users or customers bad request is returned.To delete a custom menu that has assignee list set &#39;force&#39; request param to true 
+  /// Deletes the custom menu based on the provided Custom Menu Id. Referencing non-existing custom menu Id will cause an error. If the custom menu is assigned to the list of users or customers bad request is returned.To delete a custom menu that has assignee list set &#39;force&#39; request param to true
   ///
   /// Parameters:
   /// * [customMenuId] - A string value representing the custom menu id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
@@ -167,7 +173,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CustomMenuDeleteResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CustomMenuDeleteResult>> deleteCustomMenu({ 
+  Future<Response<CustomMenuDeleteResult>> deleteCustomMenu({
     required String customMenuId,
     bool? force,
     CancelToken? cancelToken,
@@ -177,13 +183,21 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCustomMenuDeleteResult);
-    final _path = r'/api/customMenu/{customMenuId}'.replaceAll('{' r'customMenuId' '}', encodeQueryParameter(_serializers, customMenuId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerCustomMenuDeleteResult);
+    final _path = r'/api/customMenu/{customMenuId}'.replaceAll(
+      '{'
+      r'customMenuId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customMenuId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -191,11 +205,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -203,7 +214,12 @@ class CustomMenuControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (force != null) r'force': encodeQueryParameter(_serializers, force, const FullType(bool)),
+      if (force != null)
+        r'force': encodeQueryParameter(
+          _serializers,
+          force,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -219,11 +235,13 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CustomMenuDeleteResult),
-      ) as CustomMenuDeleteResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CustomMenuDeleteResult),
+                )
+                as CustomMenuDeleteResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -250,7 +268,7 @@ class CustomMenuControllerApi {
   /// Fetch the Custom Menu configuration object for the authorized user. The custom menu is configured in the white labeling parameters and has one of three user scopes:SYSTEM, TENANT, CUSTOMER and four assignee type: NO_ASSIGN, ALL, CUSTOMERS, USERS.There are three default (assignee type: ALL) menus configured on the system level for each scope and if no other menu is configured for user, system configuration of the corresponding scope will be applied.If a custom menu with assignee type ALL is configured on the tenant level, it overrides the menu configuration of the corresponding scope on the system level. If a custom menu with assignee type USER_GROUPS is configured on the tenant level, it overrides default tenant menu.If a custom menu with assignee type CUSTOMERS is configured on tenant level for specific customer, it will be applied to all customer users.If a custom menu with assignee type ALL is configured on the customer level, it overrides the menu assigned on tenant level.If a custom menu with assignee type USER_GROUPS is configured on the customer level, it overrides default customer menu.If a custom menu is assigned to specific user, it overrides all other configuration.
   ///
   /// Parameters:
-  /// * [ifNoneMatch] 
+  /// * [ifNoneMatch]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -260,7 +278,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CustomMenuConfig] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CustomMenuConfig>> getCustomMenu({ 
+  Future<Response<CustomMenuConfig>> getCustomMenu({
     String? ifNoneMatch,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -269,7 +287,8 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCustomMenuConfig);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerCustomMenuConfig);
     final _path = r'/api/customMenu';
     final _options = Options(
       method: r'GET',
@@ -284,11 +303,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -307,11 +323,13 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CustomMenuConfig),
-      ) as CustomMenuConfig;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CustomMenuConfig),
+                )
+                as CustomMenuConfig;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -348,7 +366,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityInfo>>> getCustomMenuAssigneeList({ 
+  Future<Response<BuiltList<EntityInfo>>> getCustomMenuAssigneeList({
     required String customMenuId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -357,13 +375,21 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityInfo);
-    final _path = r'/api/customMenu/{customMenuId}/assigneeList'.replaceAll('{' r'customMenuId' '}', encodeQueryParameter(_serializers, customMenuId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityInfo);
+    final _path = r'/api/customMenu/{customMenuId}/assigneeList'.replaceAll(
+      '{'
+      r'customMenuId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customMenuId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -371,11 +397,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -394,11 +417,15 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityInfo)]),
-      ) as BuiltList<EntityInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityInfo),
+                  ]),
+                )
+                as BuiltList<EntityInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -435,7 +462,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CustomMenuConfig] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CustomMenuConfig>> getCustomMenuConfig({ 
+  Future<Response<CustomMenuConfig>> getCustomMenuConfig({
     required String customMenuId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -444,13 +471,21 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCustomMenuConfig);
-    final _path = r'/api/customMenu/{customMenuId}/config'.replaceAll('{' r'customMenuId' '}', encodeQueryParameter(_serializers, customMenuId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerCustomMenuConfig);
+    final _path = r'/api/customMenu/{customMenuId}/config'.replaceAll(
+      '{'
+      r'customMenuId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customMenuId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -458,11 +493,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -481,11 +513,13 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CustomMenuConfig),
-      ) as CustomMenuConfig;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CustomMenuConfig),
+                )
+                as CustomMenuConfig;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -522,7 +556,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CustomMenuInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CustomMenuInfo>> getCustomMenuInfoById({ 
+  Future<Response<CustomMenuInfo>> getCustomMenuInfoById({
     required String customMenuId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -531,13 +565,21 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCustomMenuInfo);
-    final _path = r'/api/customMenu/{customMenuId}/info'.replaceAll('{' r'customMenuId' '}', encodeQueryParameter(_serializers, customMenuId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerCustomMenuInfo);
+    final _path = r'/api/customMenu/{customMenuId}/info'.replaceAll(
+      '{'
+      r'customMenuId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customMenuId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -545,11 +587,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -568,11 +607,13 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CustomMenuInfo),
-      ) as CustomMenuInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CustomMenuInfo),
+                )
+                as CustomMenuInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -615,7 +656,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataCustomMenuInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataCustomMenuInfo>> getCustomMenuInfos({ 
+  Future<Response<PageDataCustomMenuInfo>> getCustomMenuInfos({
     required int pageSize,
     required int page,
     CMScope? scope,
@@ -630,13 +671,12 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataCustomMenuInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataCustomMenuInfo);
     final _path = r'/api/customMenu/infos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -644,11 +684,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -656,13 +693,42 @@ class CustomMenuControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (scope != null) r'scope': encodeQueryParameter(_serializers, scope, const FullType(CMScope)),
-      if (assigneeType != null) r'assigneeType': encodeQueryParameter(_serializers, assigneeType, const FullType(CMAssigneeType)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      if (scope != null)
+        r'scope': encodeQueryParameter(
+          _serializers,
+          scope,
+          const FullType(CMScope),
+        ),
+      if (assigneeType != null)
+        r'assigneeType': encodeQueryParameter(
+          _serializers,
+          assigneeType,
+          const FullType(CMAssigneeType),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -678,11 +744,13 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataCustomMenuInfo),
-      ) as PageDataCustomMenuInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataCustomMenuInfo),
+                )
+                as PageDataCustomMenuInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -709,10 +777,10 @@ class CustomMenuControllerApi {
   /// The api designed to update the list of assignees or assignee type based on the provided Custom Menu Id. To change assignee type, put new assignee type in path parameter.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the custom menu with specified id.
   ///
   /// Parameters:
-  /// * [id] 
-  /// * [assigneeType] 
+  /// * [id]
+  /// * [assigneeType]
   /// * [force] - Use force if you want to override default menu
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -722,7 +790,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> updateCustomMenuAssigneeList({ 
+  Future<Response<void>> updateCustomMenuAssigneeList({
     required String id,
     required CMAssigneeType assigneeType,
     bool? force,
@@ -734,13 +802,33 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndCMAssigneeType);
-    final _path = r'/api/customMenu/{id}/assign/{assigneeType}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString()).replaceAll('{' r'assigneeType' '}', encodeQueryParameter(_serializers, assigneeType, const FullType(CMAssigneeType)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfStringAndCMAssigneeType);
+    final _path = r'/api/customMenu/{id}/assign/{assigneeType}'
+        .replaceAll(
+          '{'
+          r'id'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            id,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'assigneeType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            assigneeType,
+            const FullType(CMAssigneeType),
+          ).toString(),
+        );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -748,11 +836,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -761,18 +846,24 @@ class CustomMenuControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (force != null) r'force': encodeQueryParameter(_serializers, force, const FullType(bool)),
+      if (force != null)
+        r'force': encodeQueryParameter(
+          _serializers,
+          force,
+          const FullType(bool),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       const _type = FullType(BuiltList, [FullType(String)]);
-      _bodyData = requestBody == null ? null : _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = requestBody == null
+          ? null
+          : _serializers.serialize(requestBody, specifiedType: _type);
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -801,7 +892,7 @@ class CustomMenuControllerApi {
   ///
   /// Parameters:
   /// * [customMenuId] - A string value representing the custom menu id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [customMenuConfig] 
+  /// * [customMenuConfig]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -811,7 +902,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CustomMenu] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CustomMenu>> updateCustomMenuConfig({ 
+  Future<Response<CustomMenu>> updateCustomMenuConfig({
     required String customMenuId,
     required CustomMenuConfig customMenuConfig,
     CancelToken? cancelToken,
@@ -821,13 +912,21 @@ class CustomMenuControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCustomMenu);
-    final _path = r'/api/customMenu/{customMenuId}/config'.replaceAll('{' r'customMenuId' '}', encodeQueryParameter(_serializers, customMenuId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerCustomMenu);
+    final _path = r'/api/customMenu/{customMenuId}/config'.replaceAll(
+      '{'
+      r'customMenuId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customMenuId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -835,11 +934,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -851,14 +947,13 @@ class CustomMenuControllerApi {
 
     try {
       const _type = FullType(CustomMenuConfig);
-      _bodyData = _serializers.serialize(customMenuConfig, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        customMenuConfig,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -878,11 +973,13 @@ class CustomMenuControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CustomMenu),
-      ) as CustomMenu;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CustomMenu),
+                )
+                as CustomMenu;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -910,7 +1007,7 @@ class CustomMenuControllerApi {
   ///
   /// Parameters:
   /// * [customMenuId] - A string value representing the custom menu id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -920,7 +1017,7 @@ class CustomMenuControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> updateCustomMenuName({ 
+  Future<Response<void>> updateCustomMenuName({
     required String customMenuId,
     required String body,
     CancelToken? cancelToken,
@@ -931,12 +1028,19 @@ class CustomMenuControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/customMenu/{customMenuId}/name'.replaceAll('{' r'customMenuId' '}', encodeQueryParameter(_serializers, customMenuId, const FullType(String)).toString());
+    final _path = r'/api/customMenu/{customMenuId}/name'.replaceAll(
+      '{'
+      r'customMenuId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customMenuId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -944,11 +1048,8 @@ class CustomMenuControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -960,13 +1061,9 @@ class CustomMenuControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -984,5 +1081,4 @@ class CustomMenuControllerApi {
 
     return _response;
   }
-
 }

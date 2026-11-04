@@ -18,24 +18,28 @@ part 'edqs_sync_request.g.dart';
 /// EdqsSyncRequest
 ///
 /// Properties:
-/// * [objectTypes] 
+/// * [objectTypes]
 @BuiltValue()
-abstract class EdqsSyncRequest implements Built<EdqsSyncRequest, EdqsSyncRequestBuilder> {
+abstract class EdqsSyncRequest
+    implements Built<EdqsSyncRequest, EdqsSyncRequestBuilder> {
   @BuiltValueField(wireName: r'objectTypes')
   BuiltSet<ObjectType>? get objectTypes;
 
   EdqsSyncRequest._();
 
-  factory EdqsSyncRequest([void updates(EdqsSyncRequestBuilder b)]) = _$EdqsSyncRequest;
+  factory EdqsSyncRequest([void updates(EdqsSyncRequestBuilder b)]) =
+      _$EdqsSyncRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EdqsSyncRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdqsSyncRequest> get serializer => _$EdqsSyncRequestSerializer();
+  static Serializer<EdqsSyncRequest> get serializer =>
+      _$EdqsSyncRequestSerializer();
 }
 
-class _$EdqsSyncRequestSerializer implements PrimitiveSerializer<EdqsSyncRequest> {
+class _$EdqsSyncRequestSerializer
+    implements PrimitiveSerializer<EdqsSyncRequest> {
   @override
   final Iterable<Type> types = const [EdqsSyncRequest, _$EdqsSyncRequest];
 
@@ -62,7 +66,11 @@ class _$EdqsSyncRequestSerializer implements PrimitiveSerializer<EdqsSyncRequest
     EdqsSyncRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +86,14 @@ class _$EdqsSyncRequestSerializer implements PrimitiveSerializer<EdqsSyncRequest
       final value = serializedList[i + 1];
       switch (key) {
         case r'objectTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(ObjectType)]),
-          ) as BuiltSet<ObjectType>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(ObjectType),
+                    ]),
+                  )
+                  as BuiltSet<ObjectType>?;
           if (valueDes == null) continue;
           result.objectTypes.replace(valueDes);
           break;
@@ -113,5 +125,3 @@ class _$EdqsSyncRequestSerializer implements PrimitiveSerializer<EdqsSyncRequest
     return result.build();
   }
 }
-
-

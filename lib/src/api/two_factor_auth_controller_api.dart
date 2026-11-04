@@ -9,20 +9,17 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/jwt_pair.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/two_fa_provider_info.dart';
 import 'package:thingsboard_client/src/model/two_fa_provider_type.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class TwoFactorAuthControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +39,7 @@ class TwoFactorAuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> authenticateByTwoFaConfigurationToken({ 
+  Future<Response<JwtPair>> authenticateByTwoFaConfigurationToken({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -54,9 +51,7 @@ class TwoFactorAuthControllerApi {
     final _path = r'/api/auth/2fa/login';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -64,11 +59,8 @@ class TwoFactorAuthControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -87,11 +79,13 @@ class TwoFactorAuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -118,8 +112,8 @@ class TwoFactorAuthControllerApi {
   /// Checks 2FA verification code, and if it is correct the method returns a regular access and refresh token pair.  The API method is rate limited (using rate limit config from TwoFactorAuthSettings), and also will block a user after X unsuccessful verification attempts if such behavior is configured (in TwoFactorAuthSettings).  Will return a Bad Request error if provider is not configured for usage, and Too Many Requests error if rate limits are exceeded.
   ///
   /// Parameters:
-  /// * [providerType] 
-  /// * [verificationCode] 
+  /// * [providerType]
+  /// * [verificationCode]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -129,7 +123,7 @@ class TwoFactorAuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> checkTwoFaVerificationCode({ 
+  Future<Response<JwtPair>> checkTwoFaVerificationCode({
     required TwoFaProviderType providerType,
     required String verificationCode,
     CancelToken? cancelToken,
@@ -139,13 +133,13 @@ class TwoFactorAuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerJwtPairAndTwoFaProviderType);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerJwtPairAndTwoFaProviderType);
     final _path = r'/api/auth/2fa/verification/check';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -153,11 +147,8 @@ class TwoFactorAuthControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -165,8 +156,16 @@ class TwoFactorAuthControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'providerType': encodeQueryParameter(_serializers, providerType, const FullType(TwoFaProviderType)),
-      r'verificationCode': encodeQueryParameter(_serializers, verificationCode, const FullType(String)),
+      r'providerType': encodeQueryParameter(
+        _serializers,
+        providerType,
+        const FullType(TwoFaProviderType),
+      ),
+      r'verificationCode': encodeQueryParameter(
+        _serializers,
+        verificationCode,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -182,11 +181,13 @@ class TwoFactorAuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -222,7 +223,8 @@ class TwoFactorAuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<TwoFaProviderInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<TwoFaProviderInfo>>> getAvailableTwoFaProviderInfos({ 
+  Future<Response<BuiltList<TwoFaProviderInfo>>>
+  getAvailableTwoFaProviderInfos({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -230,13 +232,12 @@ class TwoFactorAuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfTwoFaProviderInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfTwoFaProviderInfo);
     final _path = r'/api/auth/2fa/providers';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -244,11 +245,8 @@ class TwoFactorAuthControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -267,11 +265,15 @@ class TwoFactorAuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(TwoFaProviderInfo)]),
-      ) as BuiltList<TwoFaProviderInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(TwoFaProviderInfo),
+                  ]),
+                )
+                as BuiltList<TwoFaProviderInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -298,7 +300,7 @@ class TwoFactorAuthControllerApi {
   /// Request 2FA verification code.  To make a request to this endpoint, you need an access token with the scope of PRE_VERIFICATION_TOKEN, which is issued on username/password auth if 2FA is enabled.  The API method is rate limited (using rate limit config from TwoFactorAuthSettings). Will return a Bad Request error if provider is not configured for usage, and Too Many Requests error if rate limits are exceeded.
   ///
   /// Parameters:
-  /// * [providerType] 
+  /// * [providerType]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -308,7 +310,7 @@ class TwoFactorAuthControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> requestTwoFaVerificationCode({ 
+  Future<Response<void>> requestTwoFaVerificationCode({
     required TwoFaProviderType providerType,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -317,13 +319,12 @@ class TwoFactorAuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTwoFaProviderType);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTwoFaProviderType);
     final _path = r'/api/auth/2fa/verification/send';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -331,11 +332,8 @@ class TwoFactorAuthControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -343,7 +341,11 @@ class TwoFactorAuthControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'providerType': encodeQueryParameter(_serializers, providerType, const FullType(TwoFaProviderType)),
+      r'providerType': encodeQueryParameter(
+        _serializers,
+        providerType,
+        const FullType(TwoFaProviderType),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -357,5 +359,4 @@ class TwoFactorAuthControllerApi {
 
     return _response;
   }
-
 }

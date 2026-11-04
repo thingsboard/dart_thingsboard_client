@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'snmp_protocol_version.g.dart';
 
 class SnmpProtocolVersion extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'V1')
   static const SnmpProtocolVersion V1 = _$V1;
   @BuiltValueEnumConst(wireName: r'V2C')
@@ -23,11 +22,13 @@ class SnmpProtocolVersion extends EnumClass {
   @BuiltValueEnumConst(wireName: r'V3')
   static const SnmpProtocolVersion V3 = _$V3;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const SnmpProtocolVersion unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const SnmpProtocolVersion unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<SnmpProtocolVersion> get serializer => _$snmpProtocolVersionSerializer;
+  static Serializer<SnmpProtocolVersion> get serializer =>
+      _$snmpProtocolVersionSerializer;
 
-  const SnmpProtocolVersion._(String name): super(name);
+  const SnmpProtocolVersion._(String name) : super(name);
 
   static BuiltSet<SnmpProtocolVersion> get values => _$values;
   static SnmpProtocolVersion valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class SnmpProtocolVersion extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class SnmpProtocolVersionMixin = Object with _$SnmpProtocolVersionMixin;
-
+abstract class SnmpProtocolVersionMixin = Object
+    with _$SnmpProtocolVersionMixin;

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'two_fa_provider_type.g.dart';
 
 class TwoFaProviderType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'TOTP')
   static const TwoFaProviderType TOTP = _$TOTP;
   @BuiltValueEnumConst(wireName: r'SMS')
@@ -25,11 +24,13 @@ class TwoFaProviderType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'BACKUP_CODE')
   static const TwoFaProviderType BACKUP_CODE = _$BACKUP_CODE;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const TwoFaProviderType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const TwoFaProviderType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<TwoFaProviderType> get serializer => _$twoFaProviderTypeSerializer;
+  static Serializer<TwoFaProviderType> get serializer =>
+      _$twoFaProviderTypeSerializer;
 
-  const TwoFaProviderType._(String name): super(name);
+  const TwoFaProviderType._(String name) : super(name);
 
   static BuiltSet<TwoFaProviderType> get values => _$values;
   static TwoFaProviderType valueOf(String name) => _$valueOf(name);
@@ -42,4 +43,3 @@ class TwoFaProviderType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class TwoFaProviderTypeMixin = Object with _$TwoFaProviderTypeMixin;
-

@@ -24,7 +24,7 @@ part 'snmp_communication_config.g.dart';
 /// Properties:
 /// * [spec] - Specification of the SNMP communication
 @BuiltValue(instantiable: false)
-abstract class SnmpCommunicationConfig  {
+abstract class SnmpCommunicationConfig {
   /// Specification of the SNMP communication
   @BuiltValueField(wireName: r'spec')
   SnmpCommunicationSpec get spec;
@@ -33,59 +33,65 @@ abstract class SnmpCommunicationConfig  {
   static const String discriminatorFieldName = r'spec';
 
   static const Map<String, Type> discriminatorMapping = {
-    r'CLIENT_ATTRIBUTES_QUERYING': ClientAttributesQueryingSnmpCommunicationConfig,
-    r'SHARED_ATTRIBUTES_SETTING': SharedAttributesSettingSnmpCommunicationConfig,
+    r'CLIENT_ATTRIBUTES_QUERYING':
+        ClientAttributesQueryingSnmpCommunicationConfig,
+    r'SHARED_ATTRIBUTES_SETTING':
+        SharedAttributesSettingSnmpCommunicationConfig,
     r'TELEMETRY_QUERYING': TelemetryQueryingSnmpCommunicationConfig,
     r'TO_DEVICE_RPC_REQUEST': ToDeviceRpcRequestSnmpCommunicationConfig,
     r'TO_SERVER_RPC_REQUEST': ToServerRpcRequestSnmpCommunicationConfig,
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SnmpCommunicationConfig> get serializer => _$SnmpCommunicationConfigSerializer();
+  static Serializer<SnmpCommunicationConfig> get serializer =>
+      _$SnmpCommunicationConfigSerializer();
 }
 
 extension SnmpCommunicationConfigDiscriminatorExt on SnmpCommunicationConfig {
-    String? get discriminatorValue {
-        if (this is ClientAttributesQueryingSnmpCommunicationConfig) {
-            return r'CLIENT_ATTRIBUTES_QUERYING';
-        }
-        if (this is SharedAttributesSettingSnmpCommunicationConfig) {
-            return r'SHARED_ATTRIBUTES_SETTING';
-        }
-        if (this is TelemetryQueryingSnmpCommunicationConfig) {
-            return r'TELEMETRY_QUERYING';
-        }
-        if (this is ToDeviceRpcRequestSnmpCommunicationConfig) {
-            return r'TO_DEVICE_RPC_REQUEST';
-        }
-        if (this is ToServerRpcRequestSnmpCommunicationConfig) {
-            return r'TO_SERVER_RPC_REQUEST';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is ClientAttributesQueryingSnmpCommunicationConfig) {
+      return r'CLIENT_ATTRIBUTES_QUERYING';
     }
-}
-extension SnmpCommunicationConfigBuilderDiscriminatorExt on SnmpCommunicationConfigBuilder {
-    String? get discriminatorValue {
-        if (this is ClientAttributesQueryingSnmpCommunicationConfigBuilder) {
-            return r'CLIENT_ATTRIBUTES_QUERYING';
-        }
-        if (this is SharedAttributesSettingSnmpCommunicationConfigBuilder) {
-            return r'SHARED_ATTRIBUTES_SETTING';
-        }
-        if (this is TelemetryQueryingSnmpCommunicationConfigBuilder) {
-            return r'TELEMETRY_QUERYING';
-        }
-        if (this is ToDeviceRpcRequestSnmpCommunicationConfigBuilder) {
-            return r'TO_DEVICE_RPC_REQUEST';
-        }
-        if (this is ToServerRpcRequestSnmpCommunicationConfigBuilder) {
-            return r'TO_SERVER_RPC_REQUEST';
-        }
-        return null;
+    if (this is SharedAttributesSettingSnmpCommunicationConfig) {
+      return r'SHARED_ATTRIBUTES_SETTING';
     }
+    if (this is TelemetryQueryingSnmpCommunicationConfig) {
+      return r'TELEMETRY_QUERYING';
+    }
+    if (this is ToDeviceRpcRequestSnmpCommunicationConfig) {
+      return r'TO_DEVICE_RPC_REQUEST';
+    }
+    if (this is ToServerRpcRequestSnmpCommunicationConfig) {
+      return r'TO_SERVER_RPC_REQUEST';
+    }
+    return null;
+  }
 }
 
-class _$SnmpCommunicationConfigSerializer implements PrimitiveSerializer<SnmpCommunicationConfig> {
+extension SnmpCommunicationConfigBuilderDiscriminatorExt
+    on SnmpCommunicationConfigBuilder {
+  String? get discriminatorValue {
+    if (this is ClientAttributesQueryingSnmpCommunicationConfigBuilder) {
+      return r'CLIENT_ATTRIBUTES_QUERYING';
+    }
+    if (this is SharedAttributesSettingSnmpCommunicationConfigBuilder) {
+      return r'SHARED_ATTRIBUTES_SETTING';
+    }
+    if (this is TelemetryQueryingSnmpCommunicationConfigBuilder) {
+      return r'TELEMETRY_QUERYING';
+    }
+    if (this is ToDeviceRpcRequestSnmpCommunicationConfigBuilder) {
+      return r'TO_DEVICE_RPC_REQUEST';
+    }
+    if (this is ToServerRpcRequestSnmpCommunicationConfigBuilder) {
+      return r'TO_SERVER_RPC_REQUEST';
+    }
+    return null;
+  }
+}
+
+class _$SnmpCommunicationConfigSerializer
+    implements PrimitiveSerializer<SnmpCommunicationConfig> {
   @override
   final Iterable<Type> types = const [SnmpCommunicationConfig];
 
@@ -111,21 +117,42 @@ class _$SnmpCommunicationConfigSerializer implements PrimitiveSerializer<SnmpCom
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is ClientAttributesQueryingSnmpCommunicationConfig) {
-      return serializers.serialize(object, specifiedType: FullType(ClientAttributesQueryingSnmpCommunicationConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(
+          ClientAttributesQueryingSnmpCommunicationConfig,
+        ),
+      )!;
     }
     if (object is SharedAttributesSettingSnmpCommunicationConfig) {
-      return serializers.serialize(object, specifiedType: FullType(SharedAttributesSettingSnmpCommunicationConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SharedAttributesSettingSnmpCommunicationConfig),
+      )!;
     }
     if (object is TelemetryQueryingSnmpCommunicationConfig) {
-      return serializers.serialize(object, specifiedType: FullType(TelemetryQueryingSnmpCommunicationConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TelemetryQueryingSnmpCommunicationConfig),
+      )!;
     }
     if (object is ToDeviceRpcRequestSnmpCommunicationConfig) {
-      return serializers.serialize(object, specifiedType: FullType(ToDeviceRpcRequestSnmpCommunicationConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ToDeviceRpcRequestSnmpCommunicationConfig),
+      )!;
     }
     if (object is ToServerRpcRequestSnmpCommunicationConfig) {
-      return serializers.serialize(object, specifiedType: FullType(ToServerRpcRequestSnmpCommunicationConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ToServerRpcRequestSnmpCommunicationConfig),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -135,43 +162,91 @@ class _$SnmpCommunicationConfigSerializer implements PrimitiveSerializer<SnmpCom
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(SnmpCommunicationConfig.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(SnmpCommunicationConfig.discriminatorFieldName) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CLIENT_ATTRIBUTES_QUERYING':
-        return serializers.deserialize(serialized, specifiedType: FullType(ClientAttributesQueryingSnmpCommunicationConfig)) as ClientAttributesQueryingSnmpCommunicationConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                ClientAttributesQueryingSnmpCommunicationConfig,
+              ),
+            )
+            as ClientAttributesQueryingSnmpCommunicationConfig;
       case r'SHARED_ATTRIBUTES_SETTING':
-        return serializers.deserialize(serialized, specifiedType: FullType(SharedAttributesSettingSnmpCommunicationConfig)) as SharedAttributesSettingSnmpCommunicationConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                SharedAttributesSettingSnmpCommunicationConfig,
+              ),
+            )
+            as SharedAttributesSettingSnmpCommunicationConfig;
       case r'TELEMETRY_QUERYING':
-        return serializers.deserialize(serialized, specifiedType: FullType(TelemetryQueryingSnmpCommunicationConfig)) as TelemetryQueryingSnmpCommunicationConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TelemetryQueryingSnmpCommunicationConfig),
+            )
+            as TelemetryQueryingSnmpCommunicationConfig;
       case r'TO_DEVICE_RPC_REQUEST':
-        return serializers.deserialize(serialized, specifiedType: FullType(ToDeviceRpcRequestSnmpCommunicationConfig)) as ToDeviceRpcRequestSnmpCommunicationConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                ToDeviceRpcRequestSnmpCommunicationConfig,
+              ),
+            )
+            as ToDeviceRpcRequestSnmpCommunicationConfig;
       case r'TO_SERVER_RPC_REQUEST':
-        return serializers.deserialize(serialized, specifiedType: FullType(ToServerRpcRequestSnmpCommunicationConfig)) as ToServerRpcRequestSnmpCommunicationConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                ToServerRpcRequestSnmpCommunicationConfig,
+              ),
+            )
+            as ToServerRpcRequestSnmpCommunicationConfig;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($SnmpCommunicationConfig)) as $SnmpCommunicationConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($SnmpCommunicationConfig),
+            )
+            as $SnmpCommunicationConfig;
     }
   }
 }
 
-
 /// a concrete implementation of [SnmpCommunicationConfig], since [SnmpCommunicationConfig] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $SnmpCommunicationConfig implements SnmpCommunicationConfig, Built<$SnmpCommunicationConfig, $SnmpCommunicationConfigBuilder> {
+abstract class $SnmpCommunicationConfig
+    implements
+        SnmpCommunicationConfig,
+        Built<$SnmpCommunicationConfig, $SnmpCommunicationConfigBuilder> {
   $SnmpCommunicationConfig._();
 
-  factory $SnmpCommunicationConfig([void Function($SnmpCommunicationConfigBuilder)? updates]) = _$$SnmpCommunicationConfig;
+  factory $SnmpCommunicationConfig([
+    void Function($SnmpCommunicationConfigBuilder)? updates,
+  ]) = _$$SnmpCommunicationConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($SnmpCommunicationConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$SnmpCommunicationConfig> get serializer => _$$SnmpCommunicationConfigSerializer();
+  static Serializer<$SnmpCommunicationConfig> get serializer =>
+      _$$SnmpCommunicationConfigSerializer();
 }
 
-class _$$SnmpCommunicationConfigSerializer implements PrimitiveSerializer<$SnmpCommunicationConfig> {
+class _$$SnmpCommunicationConfigSerializer
+    implements PrimitiveSerializer<$SnmpCommunicationConfig> {
   @override
-  final Iterable<Type> types = const [$SnmpCommunicationConfig, _$$SnmpCommunicationConfig];
+  final Iterable<Type> types = const [
+    $SnmpCommunicationConfig,
+    _$$SnmpCommunicationConfig,
+  ];
 
   @override
   final String wireName = r'$SnmpCommunicationConfig';
@@ -182,7 +257,10 @@ class _$$SnmpCommunicationConfigSerializer implements PrimitiveSerializer<$SnmpC
     $SnmpCommunicationConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(SnmpCommunicationConfig))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(SnmpCommunicationConfig),
+    )!;
   }
 
   void _deserializeProperties(
@@ -198,10 +276,12 @@ class _$$SnmpCommunicationConfigSerializer implements PrimitiveSerializer<$SnmpC
       final value = serializedList[i + 1];
       switch (key) {
         case r'spec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SnmpCommunicationSpec),
-          ) as SnmpCommunicationSpec;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SnmpCommunicationSpec),
+                  )
+                  as SnmpCommunicationSpec;
           result.spec = valueDes;
           break;
         default:
@@ -232,4 +312,3 @@ class _$$SnmpCommunicationConfigSerializer implements PrimitiveSerializer<$SnmpC
     return result.build();
   }
 }
-

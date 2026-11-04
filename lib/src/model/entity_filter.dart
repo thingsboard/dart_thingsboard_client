@@ -37,9 +37,9 @@ part 'entity_filter.g.dart';
 /// Filter for selecting entities
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class EntityFilter  {
+abstract class EntityFilter {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -74,140 +74,141 @@ abstract class EntityFilter  {
 }
 
 extension EntityFilterDiscriminatorExt on EntityFilter {
-    String? get discriminatorValue {
-        if (this is ApiUsageStateFilter) {
-            return r'apiUsageState';
-        }
-        if (this is AssetSearchQueryFilter) {
-            return r'assetSearchQuery';
-        }
-        if (this is AssetTypeFilter) {
-            return r'assetType';
-        }
-        if (this is DeviceSearchQueryFilter) {
-            return r'deviceSearchQuery';
-        }
-        if (this is DeviceTypeFilter) {
-            return r'deviceType';
-        }
-        if (this is EdgeSearchQueryFilter) {
-            return r'edgeSearchQuery';
-        }
-        if (this is EdgeTypeFilter) {
-            return r'edgeType';
-        }
-        if (this is EntitiesByGroupNameFilter) {
-            return r'entitiesByGroupName';
-        }
-        if (this is EntityGroupFilter) {
-            return r'entityGroup';
-        }
-        if (this is EntityGroupListFilter) {
-            return r'entityGroupList';
-        }
-        if (this is EntityGroupNameFilter) {
-            return r'entityGroupName';
-        }
-        if (this is EntityListFilter) {
-            return r'entityList';
-        }
-        if (this is EntityNameFilter) {
-            return r'entityName';
-        }
-        if (this is EntityTypeFilter) {
-            return r'entityType';
-        }
-        if (this is EntityViewSearchQueryFilter) {
-            return r'entityViewSearchQuery';
-        }
-        if (this is EntityViewTypeFilter) {
-            return r'entityViewType';
-        }
-        if (this is RelationsQueryFilter) {
-            return r'relationsQuery';
-        }
-        if (this is SchedulerEventFilter) {
-            return r'schedulerEvent';
-        }
-        if (this is SingleEntityFilter) {
-            return r'singleEntity';
-        }
-        if (this is StateEntityFilter) {
-            return r'stateEntity';
-        }
-        if (this is StateEntityOwnerFilter) {
-            return r'stateEntityOwner';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is ApiUsageStateFilter) {
+      return r'apiUsageState';
     }
+    if (this is AssetSearchQueryFilter) {
+      return r'assetSearchQuery';
+    }
+    if (this is AssetTypeFilter) {
+      return r'assetType';
+    }
+    if (this is DeviceSearchQueryFilter) {
+      return r'deviceSearchQuery';
+    }
+    if (this is DeviceTypeFilter) {
+      return r'deviceType';
+    }
+    if (this is EdgeSearchQueryFilter) {
+      return r'edgeSearchQuery';
+    }
+    if (this is EdgeTypeFilter) {
+      return r'edgeType';
+    }
+    if (this is EntitiesByGroupNameFilter) {
+      return r'entitiesByGroupName';
+    }
+    if (this is EntityGroupFilter) {
+      return r'entityGroup';
+    }
+    if (this is EntityGroupListFilter) {
+      return r'entityGroupList';
+    }
+    if (this is EntityGroupNameFilter) {
+      return r'entityGroupName';
+    }
+    if (this is EntityListFilter) {
+      return r'entityList';
+    }
+    if (this is EntityNameFilter) {
+      return r'entityName';
+    }
+    if (this is EntityTypeFilter) {
+      return r'entityType';
+    }
+    if (this is EntityViewSearchQueryFilter) {
+      return r'entityViewSearchQuery';
+    }
+    if (this is EntityViewTypeFilter) {
+      return r'entityViewType';
+    }
+    if (this is RelationsQueryFilter) {
+      return r'relationsQuery';
+    }
+    if (this is SchedulerEventFilter) {
+      return r'schedulerEvent';
+    }
+    if (this is SingleEntityFilter) {
+      return r'singleEntity';
+    }
+    if (this is StateEntityFilter) {
+      return r'stateEntity';
+    }
+    if (this is StateEntityOwnerFilter) {
+      return r'stateEntityOwner';
+    }
+    return null;
+  }
 }
+
 extension EntityFilterBuilderDiscriminatorExt on EntityFilterBuilder {
-    String? get discriminatorValue {
-        if (this is ApiUsageStateFilterBuilder) {
-            return r'apiUsageState';
-        }
-        if (this is AssetSearchQueryFilterBuilder) {
-            return r'assetSearchQuery';
-        }
-        if (this is AssetTypeFilterBuilder) {
-            return r'assetType';
-        }
-        if (this is DeviceSearchQueryFilterBuilder) {
-            return r'deviceSearchQuery';
-        }
-        if (this is DeviceTypeFilterBuilder) {
-            return r'deviceType';
-        }
-        if (this is EdgeSearchQueryFilterBuilder) {
-            return r'edgeSearchQuery';
-        }
-        if (this is EdgeTypeFilterBuilder) {
-            return r'edgeType';
-        }
-        if (this is EntitiesByGroupNameFilterBuilder) {
-            return r'entitiesByGroupName';
-        }
-        if (this is EntityGroupFilterBuilder) {
-            return r'entityGroup';
-        }
-        if (this is EntityGroupListFilterBuilder) {
-            return r'entityGroupList';
-        }
-        if (this is EntityGroupNameFilterBuilder) {
-            return r'entityGroupName';
-        }
-        if (this is EntityListFilterBuilder) {
-            return r'entityList';
-        }
-        if (this is EntityNameFilterBuilder) {
-            return r'entityName';
-        }
-        if (this is EntityTypeFilterBuilder) {
-            return r'entityType';
-        }
-        if (this is EntityViewSearchQueryFilterBuilder) {
-            return r'entityViewSearchQuery';
-        }
-        if (this is EntityViewTypeFilterBuilder) {
-            return r'entityViewType';
-        }
-        if (this is RelationsQueryFilterBuilder) {
-            return r'relationsQuery';
-        }
-        if (this is SchedulerEventFilterBuilder) {
-            return r'schedulerEvent';
-        }
-        if (this is SingleEntityFilterBuilder) {
-            return r'singleEntity';
-        }
-        if (this is StateEntityFilterBuilder) {
-            return r'stateEntity';
-        }
-        if (this is StateEntityOwnerFilterBuilder) {
-            return r'stateEntityOwner';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is ApiUsageStateFilterBuilder) {
+      return r'apiUsageState';
     }
+    if (this is AssetSearchQueryFilterBuilder) {
+      return r'assetSearchQuery';
+    }
+    if (this is AssetTypeFilterBuilder) {
+      return r'assetType';
+    }
+    if (this is DeviceSearchQueryFilterBuilder) {
+      return r'deviceSearchQuery';
+    }
+    if (this is DeviceTypeFilterBuilder) {
+      return r'deviceType';
+    }
+    if (this is EdgeSearchQueryFilterBuilder) {
+      return r'edgeSearchQuery';
+    }
+    if (this is EdgeTypeFilterBuilder) {
+      return r'edgeType';
+    }
+    if (this is EntitiesByGroupNameFilterBuilder) {
+      return r'entitiesByGroupName';
+    }
+    if (this is EntityGroupFilterBuilder) {
+      return r'entityGroup';
+    }
+    if (this is EntityGroupListFilterBuilder) {
+      return r'entityGroupList';
+    }
+    if (this is EntityGroupNameFilterBuilder) {
+      return r'entityGroupName';
+    }
+    if (this is EntityListFilterBuilder) {
+      return r'entityList';
+    }
+    if (this is EntityNameFilterBuilder) {
+      return r'entityName';
+    }
+    if (this is EntityTypeFilterBuilder) {
+      return r'entityType';
+    }
+    if (this is EntityViewSearchQueryFilterBuilder) {
+      return r'entityViewSearchQuery';
+    }
+    if (this is EntityViewTypeFilterBuilder) {
+      return r'entityViewType';
+    }
+    if (this is RelationsQueryFilterBuilder) {
+      return r'relationsQuery';
+    }
+    if (this is SchedulerEventFilterBuilder) {
+      return r'schedulerEvent';
+    }
+    if (this is SingleEntityFilterBuilder) {
+      return r'singleEntity';
+    }
+    if (this is StateEntityFilterBuilder) {
+      return r'stateEntity';
+    }
+    if (this is StateEntityOwnerFilterBuilder) {
+      return r'stateEntityOwner';
+    }
+    return null;
+  }
 }
 
 class _$EntityFilterSerializer implements PrimitiveSerializer<EntityFilter> {
@@ -236,69 +237,136 @@ class _$EntityFilterSerializer implements PrimitiveSerializer<EntityFilter> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is ApiUsageStateFilter) {
-      return serializers.serialize(object, specifiedType: FullType(ApiUsageStateFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ApiUsageStateFilter),
+      )!;
     }
     if (object is AssetSearchQueryFilter) {
-      return serializers.serialize(object, specifiedType: FullType(AssetSearchQueryFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AssetSearchQueryFilter),
+      )!;
     }
     if (object is AssetTypeFilter) {
-      return serializers.serialize(object, specifiedType: FullType(AssetTypeFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AssetTypeFilter),
+      )!;
     }
     if (object is DeviceSearchQueryFilter) {
-      return serializers.serialize(object, specifiedType: FullType(DeviceSearchQueryFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DeviceSearchQueryFilter),
+      )!;
     }
     if (object is DeviceTypeFilter) {
-      return serializers.serialize(object, specifiedType: FullType(DeviceTypeFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DeviceTypeFilter),
+      )!;
     }
     if (object is EdgeSearchQueryFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EdgeSearchQueryFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EdgeSearchQueryFilter),
+      )!;
     }
     if (object is EdgeTypeFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EdgeTypeFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EdgeTypeFilter),
+      )!;
     }
     if (object is EntitiesByGroupNameFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntitiesByGroupNameFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntitiesByGroupNameFilter),
+      )!;
     }
     if (object is EntityGroupFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityGroupFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityGroupFilter),
+      )!;
     }
     if (object is EntityGroupListFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityGroupListFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityGroupListFilter),
+      )!;
     }
     if (object is EntityGroupNameFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityGroupNameFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityGroupNameFilter),
+      )!;
     }
     if (object is EntityListFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityListFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityListFilter),
+      )!;
     }
     if (object is EntityNameFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityNameFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityNameFilter),
+      )!;
     }
     if (object is EntityTypeFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityTypeFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityTypeFilter),
+      )!;
     }
     if (object is EntityViewSearchQueryFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityViewSearchQueryFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityViewSearchQueryFilter),
+      )!;
     }
     if (object is EntityViewTypeFilter) {
-      return serializers.serialize(object, specifiedType: FullType(EntityViewTypeFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityViewTypeFilter),
+      )!;
     }
     if (object is RelationsQueryFilter) {
-      return serializers.serialize(object, specifiedType: FullType(RelationsQueryFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RelationsQueryFilter),
+      )!;
     }
     if (object is SchedulerEventFilter) {
-      return serializers.serialize(object, specifiedType: FullType(SchedulerEventFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SchedulerEventFilter),
+      )!;
     }
     if (object is SingleEntityFilter) {
-      return serializers.serialize(object, specifiedType: FullType(SingleEntityFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SingleEntityFilter),
+      )!;
     }
     if (object is StateEntityFilter) {
-      return serializers.serialize(object, specifiedType: FullType(StateEntityFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(StateEntityFilter),
+      )!;
     }
     if (object is StateEntityOwnerFilter) {
-      return serializers.serialize(object, specifiedType: FullType(StateEntityOwnerFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(StateEntityOwnerFilter),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -308,70 +376,166 @@ class _$EntityFilterSerializer implements PrimitiveSerializer<EntityFilter> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(EntityFilter.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(EntityFilter.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'apiUsageState':
-        return serializers.deserialize(serialized, specifiedType: FullType(ApiUsageStateFilter)) as ApiUsageStateFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ApiUsageStateFilter),
+            )
+            as ApiUsageStateFilter;
       case r'assetSearchQuery':
-        return serializers.deserialize(serialized, specifiedType: FullType(AssetSearchQueryFilter)) as AssetSearchQueryFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AssetSearchQueryFilter),
+            )
+            as AssetSearchQueryFilter;
       case r'assetType':
-        return serializers.deserialize(serialized, specifiedType: FullType(AssetTypeFilter)) as AssetTypeFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AssetTypeFilter),
+            )
+            as AssetTypeFilter;
       case r'deviceSearchQuery':
-        return serializers.deserialize(serialized, specifiedType: FullType(DeviceSearchQueryFilter)) as DeviceSearchQueryFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DeviceSearchQueryFilter),
+            )
+            as DeviceSearchQueryFilter;
       case r'deviceType':
-        return serializers.deserialize(serialized, specifiedType: FullType(DeviceTypeFilter)) as DeviceTypeFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DeviceTypeFilter),
+            )
+            as DeviceTypeFilter;
       case r'edgeSearchQuery':
-        return serializers.deserialize(serialized, specifiedType: FullType(EdgeSearchQueryFilter)) as EdgeSearchQueryFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EdgeSearchQueryFilter),
+            )
+            as EdgeSearchQueryFilter;
       case r'edgeType':
-        return serializers.deserialize(serialized, specifiedType: FullType(EdgeTypeFilter)) as EdgeTypeFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EdgeTypeFilter),
+            )
+            as EdgeTypeFilter;
       case r'entitiesByGroupName':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntitiesByGroupNameFilter)) as EntitiesByGroupNameFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntitiesByGroupNameFilter),
+            )
+            as EntitiesByGroupNameFilter;
       case r'entityGroup':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityGroupFilter)) as EntityGroupFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityGroupFilter),
+            )
+            as EntityGroupFilter;
       case r'entityGroupList':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityGroupListFilter)) as EntityGroupListFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityGroupListFilter),
+            )
+            as EntityGroupListFilter;
       case r'entityGroupName':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityGroupNameFilter)) as EntityGroupNameFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityGroupNameFilter),
+            )
+            as EntityGroupNameFilter;
       case r'entityList':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityListFilter)) as EntityListFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityListFilter),
+            )
+            as EntityListFilter;
       case r'entityName':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityNameFilter)) as EntityNameFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityNameFilter),
+            )
+            as EntityNameFilter;
       case r'entityType':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityTypeFilter)) as EntityTypeFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityTypeFilter),
+            )
+            as EntityTypeFilter;
       case r'entityViewSearchQuery':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityViewSearchQueryFilter)) as EntityViewSearchQueryFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityViewSearchQueryFilter),
+            )
+            as EntityViewSearchQueryFilter;
       case r'entityViewType':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityViewTypeFilter)) as EntityViewTypeFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityViewTypeFilter),
+            )
+            as EntityViewTypeFilter;
       case r'relationsQuery':
-        return serializers.deserialize(serialized, specifiedType: FullType(RelationsQueryFilter)) as RelationsQueryFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RelationsQueryFilter),
+            )
+            as RelationsQueryFilter;
       case r'schedulerEvent':
-        return serializers.deserialize(serialized, specifiedType: FullType(SchedulerEventFilter)) as SchedulerEventFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SchedulerEventFilter),
+            )
+            as SchedulerEventFilter;
       case r'singleEntity':
-        return serializers.deserialize(serialized, specifiedType: FullType(SingleEntityFilter)) as SingleEntityFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SingleEntityFilter),
+            )
+            as SingleEntityFilter;
       case r'stateEntity':
-        return serializers.deserialize(serialized, specifiedType: FullType(StateEntityFilter)) as StateEntityFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(StateEntityFilter),
+            )
+            as StateEntityFilter;
       case r'stateEntityOwner':
-        return serializers.deserialize(serialized, specifiedType: FullType(StateEntityOwnerFilter)) as StateEntityOwnerFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(StateEntityOwnerFilter),
+            )
+            as StateEntityOwnerFilter;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($EntityFilter)) as $EntityFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($EntityFilter),
+            )
+            as $EntityFilter;
     }
   }
 }
 
-
 /// a concrete implementation of [EntityFilter], since [EntityFilter] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $EntityFilter implements EntityFilter, Built<$EntityFilter, $EntityFilterBuilder> {
+abstract class $EntityFilter
+    implements EntityFilter, Built<$EntityFilter, $EntityFilterBuilder> {
   $EntityFilter._();
 
-  factory $EntityFilter([void Function($EntityFilterBuilder)? updates]) = _$$EntityFilter;
+  factory $EntityFilter([void Function($EntityFilterBuilder)? updates]) =
+      _$$EntityFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($EntityFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$EntityFilter> get serializer => _$$EntityFilterSerializer();
+  static Serializer<$EntityFilter> get serializer =>
+      _$$EntityFilterSerializer();
 }
 
 class _$$EntityFilterSerializer implements PrimitiveSerializer<$EntityFilter> {
@@ -387,7 +551,10 @@ class _$$EntityFilterSerializer implements PrimitiveSerializer<$EntityFilter> {
     $EntityFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(EntityFilter))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(EntityFilter),
+    )!;
   }
 
   void _deserializeProperties(
@@ -403,10 +570,12 @@ class _$$EntityFilterSerializer implements PrimitiveSerializer<$EntityFilter> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -437,4 +606,3 @@ class _$$EntityFilterSerializer implements PrimitiveSerializer<$EntityFilter> {
     return result.build();
   }
 }
-

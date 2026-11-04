@@ -18,12 +18,18 @@ part 'resources_shortage_notification_rule_trigger_config.g.dart';
 /// ResourcesShortageNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [cpuThreshold] 
-/// * [ramThreshold] 
-/// * [storageThreshold] 
+/// * [triggerType]
+/// * [cpuThreshold]
+/// * [ramThreshold]
+/// * [storageThreshold]
 @BuiltValue()
-abstract class ResourcesShortageNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<ResourcesShortageNotificationRuleTriggerConfig, ResourcesShortageNotificationRuleTriggerConfigBuilder> {
+abstract class ResourcesShortageNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          ResourcesShortageNotificationRuleTriggerConfig,
+          ResourcesShortageNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'ramThreshold')
   double? get ramThreshold;
 
@@ -35,18 +41,29 @@ abstract class ResourcesShortageNotificationRuleTriggerConfig implements Notific
 
   ResourcesShortageNotificationRuleTriggerConfig._();
 
-  factory ResourcesShortageNotificationRuleTriggerConfig([void updates(ResourcesShortageNotificationRuleTriggerConfigBuilder b)]) = _$ResourcesShortageNotificationRuleTriggerConfig;
+  factory ResourcesShortageNotificationRuleTriggerConfig([
+    void updates(ResourcesShortageNotificationRuleTriggerConfigBuilder b),
+  ]) = _$ResourcesShortageNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ResourcesShortageNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(
+    ResourcesShortageNotificationRuleTriggerConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ResourcesShortageNotificationRuleTriggerConfig> get serializer => _$ResourcesShortageNotificationRuleTriggerConfigSerializer();
+  static Serializer<ResourcesShortageNotificationRuleTriggerConfig>
+  get serializer =>
+      _$ResourcesShortageNotificationRuleTriggerConfigSerializer();
 }
 
-class _$ResourcesShortageNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<ResourcesShortageNotificationRuleTriggerConfig> {
+class _$ResourcesShortageNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<ResourcesShortageNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [ResourcesShortageNotificationRuleTriggerConfig, _$ResourcesShortageNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    ResourcesShortageNotificationRuleTriggerConfig,
+    _$ResourcesShortageNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'ResourcesShortageNotificationRuleTriggerConfig';
@@ -90,7 +107,11 @@ class _$ResourcesShortageNotificationRuleTriggerConfigSerializer implements Prim
     ResourcesShortageNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -106,33 +127,41 @@ class _$ResourcesShortageNotificationRuleTriggerConfigSerializer implements Prim
       final value = serializedList[i + 1];
       switch (key) {
         case r'ramThreshold':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.ramThreshold = valueDes;
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'cpuThreshold':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.cpuThreshold = valueDes;
           break;
         case r'storageThreshold':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.storageThreshold = valueDes;
           break;
@@ -164,5 +193,3 @@ class _$ResourcesShortageNotificationRuleTriggerConfigSerializer implements Prim
     return result.build();
   }
 }
-
-

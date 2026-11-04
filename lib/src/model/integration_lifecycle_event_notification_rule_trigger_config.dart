@@ -21,13 +21,19 @@ part 'integration_lifecycle_event_notification_rule_trigger_config.g.dart';
 /// IntegrationLifecycleEventNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [integrationTypes] 
-/// * [integrations] 
-/// * [notifyOn] 
-/// * [onlyOnError] 
+/// * [triggerType]
+/// * [integrationTypes]
+/// * [integrations]
+/// * [notifyOn]
+/// * [onlyOnError]
 @BuiltValue()
-abstract class IntegrationLifecycleEventNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<IntegrationLifecycleEventNotificationRuleTriggerConfig, IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder> {
+abstract class IntegrationLifecycleEventNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          IntegrationLifecycleEventNotificationRuleTriggerConfig,
+          IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'integrationTypes')
   BuiltSet<IntegrationType>? get integrationTypes;
 
@@ -42,21 +48,37 @@ abstract class IntegrationLifecycleEventNotificationRuleTriggerConfig implements
 
   IntegrationLifecycleEventNotificationRuleTriggerConfig._();
 
-  factory IntegrationLifecycleEventNotificationRuleTriggerConfig([void updates(IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder b)]) = _$IntegrationLifecycleEventNotificationRuleTriggerConfig;
+  factory IntegrationLifecycleEventNotificationRuleTriggerConfig([
+    void updates(
+      IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder b,
+    ),
+  ]) = _$IntegrationLifecycleEventNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(
+    IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<IntegrationLifecycleEventNotificationRuleTriggerConfig> get serializer => _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer();
+  static Serializer<IntegrationLifecycleEventNotificationRuleTriggerConfig>
+  get serializer =>
+      _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer();
 }
 
-class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<IntegrationLifecycleEventNotificationRuleTriggerConfig> {
+class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<
+          IntegrationLifecycleEventNotificationRuleTriggerConfig
+        > {
   @override
-  final Iterable<Type> types = const [IntegrationLifecycleEventNotificationRuleTriggerConfig, _$IntegrationLifecycleEventNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    IntegrationLifecycleEventNotificationRuleTriggerConfig,
+    _$IntegrationLifecycleEventNotificationRuleTriggerConfig,
+  ];
 
   @override
-  final String wireName = r'IntegrationLifecycleEventNotificationRuleTriggerConfig';
+  final String wireName =
+      r'IntegrationLifecycleEventNotificationRuleTriggerConfig';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
@@ -93,7 +115,9 @@ class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer impleme
       yield r'notifyOn';
       yield serializers.serialize(
         object.notifyOn,
-        specifiedType: const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]),
+        specifiedType: const FullType(BuiltSet, [
+          FullType(ComponentLifecycleEvent),
+        ]),
       );
     }
   }
@@ -104,7 +128,11 @@ class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer impleme
     IntegrationLifecycleEventNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -112,7 +140,8 @@ class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer impleme
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder result,
+    required IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder
+    result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -120,41 +149,57 @@ class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer impleme
       final value = serializedList[i + 1];
       switch (key) {
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'integrationTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(IntegrationType)]),
-          ) as BuiltSet<IntegrationType>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(IntegrationType),
+                    ]),
+                  )
+                  as BuiltSet<IntegrationType>?;
           if (valueDes == null) continue;
           result.integrationTypes.replace(valueDes);
           break;
         case r'onlyOnError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.onlyOnError = valueDes;
           break;
         case r'integrations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.integrations.replace(valueDes);
           break;
         case r'notifyOn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(ComponentLifecycleEvent)]),
-          ) as BuiltSet<ComponentLifecycleEvent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(ComponentLifecycleEvent),
+                    ]),
+                  )
+                  as BuiltSet<ComponentLifecycleEvent>?;
           if (valueDes == null) continue;
           result.notifyOn.replace(valueDes);
           break;
@@ -172,7 +217,8 @@ class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer impleme
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder();
+    final result =
+        IntegrationLifecycleEventNotificationRuleTriggerConfigBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(
@@ -186,5 +232,3 @@ class _$IntegrationLifecycleEventNotificationRuleTriggerConfigSerializer impleme
     return result.build();
   }
 }
-
-

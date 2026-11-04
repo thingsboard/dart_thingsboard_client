@@ -23,7 +23,12 @@ part 'page_data_trendz_view_config_lite.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataTrendzViewConfigLite implements Built<PageDataTrendzViewConfigLite, PageDataTrendzViewConfigLiteBuilder> {
+abstract class PageDataTrendzViewConfigLite
+    implements
+        Built<
+          PageDataTrendzViewConfigLite,
+          PageDataTrendzViewConfigLiteBuilder
+        > {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<TrendzViewConfigLite>? get data;
@@ -42,18 +47,25 @@ abstract class PageDataTrendzViewConfigLite implements Built<PageDataTrendzViewC
 
   PageDataTrendzViewConfigLite._();
 
-  factory PageDataTrendzViewConfigLite([void updates(PageDataTrendzViewConfigLiteBuilder b)]) = _$PageDataTrendzViewConfigLite;
+  factory PageDataTrendzViewConfigLite([
+    void updates(PageDataTrendzViewConfigLiteBuilder b),
+  ]) = _$PageDataTrendzViewConfigLite;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataTrendzViewConfigLiteBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataTrendzViewConfigLite> get serializer => _$PageDataTrendzViewConfigLiteSerializer();
+  static Serializer<PageDataTrendzViewConfigLite> get serializer =>
+      _$PageDataTrendzViewConfigLiteSerializer();
 }
 
-class _$PageDataTrendzViewConfigLiteSerializer implements PrimitiveSerializer<PageDataTrendzViewConfigLite> {
+class _$PageDataTrendzViewConfigLiteSerializer
+    implements PrimitiveSerializer<PageDataTrendzViewConfigLite> {
   @override
-  final Iterable<Type> types = const [PageDataTrendzViewConfigLite, _$PageDataTrendzViewConfigLite];
+  final Iterable<Type> types = const [
+    PageDataTrendzViewConfigLite,
+    _$PageDataTrendzViewConfigLite,
+  ];
 
   @override
   final String wireName = r'PageDataTrendzViewConfigLite';
@@ -67,7 +79,9 @@ class _$PageDataTrendzViewConfigLiteSerializer implements PrimitiveSerializer<Pa
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(TrendzViewConfigLite)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(TrendzViewConfigLite),
+        ]),
       );
     }
     if (object.totalPages != null) {
@@ -99,7 +113,11 @@ class _$PageDataTrendzViewConfigLiteSerializer implements PrimitiveSerializer<Pa
     PageDataTrendzViewConfigLite object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +133,44 @@ class _$PageDataTrendzViewConfigLiteSerializer implements PrimitiveSerializer<Pa
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TrendzViewConfigLite)]),
-          ) as BuiltList<TrendzViewConfigLite>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TrendzViewConfigLite),
+                    ]),
+                  )
+                  as BuiltList<TrendzViewConfigLite>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +202,3 @@ class _$PageDataTrendzViewConfigLiteSerializer implements PrimitiveSerializer<Pa
     return result.build();
   }
 }
-
-

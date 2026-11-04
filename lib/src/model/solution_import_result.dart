@@ -21,7 +21,8 @@ part 'solution_import_result.g.dart';
 /// * [created] - Number of newly created entities per entity type. Entity types with zero created entities are omitted. Entity groups are reported under the ENTITY_GROUP key regardless of their inner type (e.g. a user group and a device group both contribute to ENTITY_GROUP).
 /// * [idMapping] - Mapping from external entity IDs (as they appear in the solution file) to the internal entity IDs assigned during import.
 @BuiltValue()
-abstract class SolutionImportResult implements Built<SolutionImportResult, SolutionImportResultBuilder> {
+abstract class SolutionImportResult
+    implements Built<SolutionImportResult, SolutionImportResultBuilder> {
   /// 'true' if all entities were imported successfully.
   @BuiltValueField(wireName: r'success')
   bool? get success;
@@ -36,18 +37,24 @@ abstract class SolutionImportResult implements Built<SolutionImportResult, Solut
 
   SolutionImportResult._();
 
-  factory SolutionImportResult([void updates(SolutionImportResultBuilder b)]) = _$SolutionImportResult;
+  factory SolutionImportResult([void updates(SolutionImportResultBuilder b)]) =
+      _$SolutionImportResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SolutionImportResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SolutionImportResult> get serializer => _$SolutionImportResultSerializer();
+  static Serializer<SolutionImportResult> get serializer =>
+      _$SolutionImportResultSerializer();
 }
 
-class _$SolutionImportResultSerializer implements PrimitiveSerializer<SolutionImportResult> {
+class _$SolutionImportResultSerializer
+    implements PrimitiveSerializer<SolutionImportResult> {
   @override
-  final Iterable<Type> types = const [SolutionImportResult, _$SolutionImportResult];
+  final Iterable<Type> types = const [
+    SolutionImportResult,
+    _$SolutionImportResult,
+  ];
 
   @override
   final String wireName = r'SolutionImportResult';
@@ -68,14 +75,20 @@ class _$SolutionImportResultSerializer implements PrimitiveSerializer<SolutionIm
       yield r'created';
       yield serializers.serialize(
         object.created,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(int),
+        ]),
       );
     }
     if (object.idMapping != null) {
       yield r'idMapping';
       yield serializers.serialize(
         object.idMapping,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(String)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(String),
+        ]),
       );
     }
   }
@@ -86,7 +99,11 @@ class _$SolutionImportResultSerializer implements PrimitiveSerializer<SolutionIm
     SolutionImportResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +119,38 @@ class _$SolutionImportResultSerializer implements PrimitiveSerializer<SolutionIm
       final value = serializedList[i + 1];
       switch (key) {
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'created':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(int)]),
-          ) as BuiltMap<String, int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltMap<String, int>?;
           if (valueDes == null) continue;
           result.created.replace(valueDes);
           break;
         case r'idMapping':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(String)]),
-          ) as BuiltMap<String, String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltMap<String, String>?;
           if (valueDes == null) continue;
           result.idMapping.replace(valueDes);
           break;
@@ -153,5 +182,3 @@ class _$SolutionImportResultSerializer implements PrimitiveSerializer<SolutionIm
     return result.build();
   }
 }
-
-

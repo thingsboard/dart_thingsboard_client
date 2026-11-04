@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'tb_report_format.g.dart';
 
 class TbReportFormat extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'PDF')
   static const TbReportFormat PDF = _$PDF;
   @BuiltValueEnumConst(wireName: r'CSV')
@@ -23,9 +22,10 @@ class TbReportFormat extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const TbReportFormat unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<TbReportFormat> get serializer => _$tbReportFormatSerializer;
+  static Serializer<TbReportFormat> get serializer =>
+      _$tbReportFormatSerializer;
 
-  const TbReportFormat._(String name): super(name);
+  const TbReportFormat._(String name) : super(name);
 
   static BuiltSet<TbReportFormat> get values => _$values;
   static TbReportFormat valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class TbReportFormat extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class TbReportFormatMixin = Object with _$TbReportFormatMixin;
-

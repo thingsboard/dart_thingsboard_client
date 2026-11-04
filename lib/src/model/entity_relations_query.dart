@@ -22,7 +22,8 @@ part 'entity_relations_query.g.dart';
 /// * [parameters] - Main search parameters.
 /// * [filters] - Main filters.
 @BuiltValue()
-abstract class EntityRelationsQuery implements Built<EntityRelationsQuery, EntityRelationsQueryBuilder> {
+abstract class EntityRelationsQuery
+    implements Built<EntityRelationsQuery, EntityRelationsQueryBuilder> {
   /// Main search parameters.
   @BuiltValueField(wireName: r'parameters')
   RelationsSearchParameters? get parameters;
@@ -33,18 +34,24 @@ abstract class EntityRelationsQuery implements Built<EntityRelationsQuery, Entit
 
   EntityRelationsQuery._();
 
-  factory EntityRelationsQuery([void updates(EntityRelationsQueryBuilder b)]) = _$EntityRelationsQuery;
+  factory EntityRelationsQuery([void updates(EntityRelationsQueryBuilder b)]) =
+      _$EntityRelationsQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityRelationsQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityRelationsQuery> get serializer => _$EntityRelationsQuerySerializer();
+  static Serializer<EntityRelationsQuery> get serializer =>
+      _$EntityRelationsQuerySerializer();
 }
 
-class _$EntityRelationsQuerySerializer implements PrimitiveSerializer<EntityRelationsQuery> {
+class _$EntityRelationsQuerySerializer
+    implements PrimitiveSerializer<EntityRelationsQuery> {
   @override
-  final Iterable<Type> types = const [EntityRelationsQuery, _$EntityRelationsQuery];
+  final Iterable<Type> types = const [
+    EntityRelationsQuery,
+    _$EntityRelationsQuery,
+  ];
 
   @override
   final String wireName = r'EntityRelationsQuery';
@@ -65,7 +72,9 @@ class _$EntityRelationsQuerySerializer implements PrimitiveSerializer<EntityRela
       yield r'filters';
       yield serializers.serialize(
         object.filters,
-        specifiedType: const FullType(BuiltList, [FullType(RelationEntityTypeFilter)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(RelationEntityTypeFilter),
+        ]),
       );
     }
   }
@@ -76,7 +85,11 @@ class _$EntityRelationsQuerySerializer implements PrimitiveSerializer<EntityRela
     EntityRelationsQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,18 +105,26 @@ class _$EntityRelationsQuerySerializer implements PrimitiveSerializer<EntityRela
       final value = serializedList[i + 1];
       switch (key) {
         case r'parameters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RelationsSearchParameters),
-          ) as RelationsSearchParameters?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RelationsSearchParameters,
+                    ),
+                  )
+                  as RelationsSearchParameters?;
           if (valueDes == null) continue;
           result.parameters.replace(valueDes);
           break;
         case r'filters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(RelationEntityTypeFilter)]),
-          ) as BuiltList<RelationEntityTypeFilter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(RelationEntityTypeFilter),
+                    ]),
+                  )
+                  as BuiltList<RelationEntityTypeFilter>?;
           if (valueDes == null) continue;
           result.filters.replace(valueDes);
           break;
@@ -135,5 +156,3 @@ class _$EntityRelationsQuerySerializer implements PrimitiveSerializer<EntityRela
     return result.build();
   }
 }
-
-

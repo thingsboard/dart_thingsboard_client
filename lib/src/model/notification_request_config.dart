@@ -18,10 +18,12 @@ part 'notification_request_config.g.dart';
 /// NotificationRequestConfig
 ///
 /// Properties:
-/// * [sendingDelayInSec] 
-/// * [reports] 
+/// * [sendingDelayInSec]
+/// * [reports]
 @BuiltValue()
-abstract class NotificationRequestConfig implements Built<NotificationRequestConfig, NotificationRequestConfigBuilder> {
+abstract class NotificationRequestConfig
+    implements
+        Built<NotificationRequestConfig, NotificationRequestConfigBuilder> {
   @BuiltValueField(wireName: r'sendingDelayInSec')
   int? get sendingDelayInSec;
 
@@ -30,18 +32,25 @@ abstract class NotificationRequestConfig implements Built<NotificationRequestCon
 
   NotificationRequestConfig._();
 
-  factory NotificationRequestConfig([void updates(NotificationRequestConfigBuilder b)]) = _$NotificationRequestConfig;
+  factory NotificationRequestConfig([
+    void updates(NotificationRequestConfigBuilder b),
+  ]) = _$NotificationRequestConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationRequestConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationRequestConfig> get serializer => _$NotificationRequestConfigSerializer();
+  static Serializer<NotificationRequestConfig> get serializer =>
+      _$NotificationRequestConfigSerializer();
 }
 
-class _$NotificationRequestConfigSerializer implements PrimitiveSerializer<NotificationRequestConfig> {
+class _$NotificationRequestConfigSerializer
+    implements PrimitiveSerializer<NotificationRequestConfig> {
   @override
-  final Iterable<Type> types = const [NotificationRequestConfig, _$NotificationRequestConfig];
+  final Iterable<Type> types = const [
+    NotificationRequestConfig,
+    _$NotificationRequestConfig,
+  ];
 
   @override
   final String wireName = r'NotificationRequestConfig';
@@ -73,7 +82,11 @@ class _$NotificationRequestConfigSerializer implements PrimitiveSerializer<Notif
     NotificationRequestConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +102,24 @@ class _$NotificationRequestConfigSerializer implements PrimitiveSerializer<Notif
       final value = serializedList[i + 1];
       switch (key) {
         case r'sendingDelayInSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.sendingDelayInSec = valueDes;
           break;
         case r'reports':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ReportId)]),
-          ) as BuiltList<ReportId>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ReportId),
+                    ]),
+                  )
+                  as BuiltList<ReportId>?;
           if (valueDes == null) continue;
           result.reports.replace(valueDes);
           break;
@@ -132,5 +151,3 @@ class _$NotificationRequestConfigSerializer implements PrimitiveSerializer<Notif
     return result.build();
   }
 }
-
-

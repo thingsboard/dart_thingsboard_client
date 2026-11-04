@@ -34,12 +34,13 @@ part 'tb_resource_info.g.dart';
 /// * [etag] - Resource etag.
 /// * [fileName] - Resource file name.
 /// * [descriptor] - Resource descriptor.
-/// * [link] 
-/// * [name] 
-/// * [public] 
-/// * [publicLink] 
+/// * [link]
+/// * [name]
+/// * [public]
+/// * [publicLink]
 @BuiltValue()
-abstract class TbResourceInfo implements Built<TbResourceInfo, TbResourceInfoBuilder> {
+abstract class TbResourceInfo
+    implements Built<TbResourceInfo, TbResourceInfoBuilder> {
   /// JSON object with the Resource Id. Specify this field to update the Resource. Referencing non-existing Resource Id will cause error. Omit this field to create new Resource.
   @BuiltValueField(wireName: r'id')
   TbResourceId? get id;
@@ -104,16 +105,19 @@ abstract class TbResourceInfo implements Built<TbResourceInfo, TbResourceInfoBui
 
   TbResourceInfo._();
 
-  factory TbResourceInfo([void updates(TbResourceInfoBuilder b)]) = _$TbResourceInfo;
+  factory TbResourceInfo([void updates(TbResourceInfoBuilder b)]) =
+      _$TbResourceInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbResourceInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbResourceInfo> get serializer => _$TbResourceInfoSerializer();
+  static Serializer<TbResourceInfo> get serializer =>
+      _$TbResourceInfoSerializer();
 }
 
-class _$TbResourceInfoSerializer implements PrimitiveSerializer<TbResourceInfo> {
+class _$TbResourceInfoSerializer
+    implements PrimitiveSerializer<TbResourceInfo> {
   @override
   final Iterable<Type> types = const [TbResourceInfo, _$TbResourceInfo];
 
@@ -245,7 +249,11 @@ class _$TbResourceInfoSerializer implements PrimitiveSerializer<TbResourceInfo> 
     TbResourceInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -261,130 +269,162 @@ class _$TbResourceInfoSerializer implements PrimitiveSerializer<TbResourceInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TbResourceId),
-          ) as TbResourceId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TbResourceId),
+                  )
+                  as TbResourceId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'resourceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ResourceType),
-          ) as ResourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ResourceType),
+                  )
+                  as ResourceType?;
           if (valueDes == null) continue;
           result.resourceType = valueDes;
           break;
         case r'resourceSubType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ResourceSubType),
-          ) as ResourceSubType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ResourceSubType),
+                  )
+                  as ResourceSubType?;
           if (valueDes == null) continue;
           result.resourceSubType = valueDes;
           break;
         case r'resourceKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.resourceKey = valueDes;
           break;
         case r'publicResourceKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.publicResourceKey = valueDes;
           break;
         case r'etag':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.etag = valueDes;
           break;
         case r'fileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fileName = valueDes;
           break;
         case r'descriptor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.descriptor = valueDes;
           break;
         case r'link':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.link = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'public':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.public = valueDes;
           break;
         case r'publicLink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.publicLink = valueDes;
           break;
@@ -416,5 +456,3 @@ class _$TbResourceInfoSerializer implements PrimitiveSerializer<TbResourceInfo> 
     return result.build();
   }
 }
-
-

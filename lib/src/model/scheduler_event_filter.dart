@@ -18,13 +18,16 @@ part 'scheduler_event_filter.g.dart';
 /// SchedulerEventFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [originator] 
-/// * [eventType] 
-/// * [originatorStateEntity] 
-/// * [defaultStateEntity] 
+/// * [type]
+/// * [originator]
+/// * [eventType]
+/// * [originatorStateEntity]
+/// * [defaultStateEntity]
 @BuiltValue()
-abstract class SchedulerEventFilter implements EntityFilter, Built<SchedulerEventFilter, SchedulerEventFilterBuilder> {
+abstract class SchedulerEventFilter
+    implements
+        EntityFilter,
+        Built<SchedulerEventFilter, SchedulerEventFilterBuilder> {
   @BuiltValueField(wireName: r'defaultStateEntity')
   AliasEntityId? get defaultStateEntity;
 
@@ -39,18 +42,24 @@ abstract class SchedulerEventFilter implements EntityFilter, Built<SchedulerEven
 
   SchedulerEventFilter._();
 
-  factory SchedulerEventFilter([void updates(SchedulerEventFilterBuilder b)]) = _$SchedulerEventFilter;
+  factory SchedulerEventFilter([void updates(SchedulerEventFilterBuilder b)]) =
+      _$SchedulerEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SchedulerEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SchedulerEventFilter> get serializer => _$SchedulerEventFilterSerializer();
+  static Serializer<SchedulerEventFilter> get serializer =>
+      _$SchedulerEventFilterSerializer();
 }
 
-class _$SchedulerEventFilterSerializer implements PrimitiveSerializer<SchedulerEventFilter> {
+class _$SchedulerEventFilterSerializer
+    implements PrimitiveSerializer<SchedulerEventFilter> {
   @override
-  final Iterable<Type> types = const [SchedulerEventFilter, _$SchedulerEventFilter];
+  final Iterable<Type> types = const [
+    SchedulerEventFilter,
+    _$SchedulerEventFilter,
+  ];
 
   @override
   final String wireName = r'SchedulerEventFilter';
@@ -101,7 +110,11 @@ class _$SchedulerEventFilterSerializer implements PrimitiveSerializer<SchedulerE
     SchedulerEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -117,42 +130,52 @@ class _$SchedulerEventFilterSerializer implements PrimitiveSerializer<SchedulerE
       final value = serializedList[i + 1];
       switch (key) {
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
         case r'originatorStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.originatorStateEntity = valueDes;
           break;
         case r'originator':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.originator.replace(valueDes);
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.eventType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -183,5 +206,3 @@ class _$SchedulerEventFilterSerializer implements PrimitiveSerializer<SchedulerE
     return result.build();
   }
 }
-
-

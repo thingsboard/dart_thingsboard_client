@@ -18,25 +18,31 @@ part 'state_entity_filter.g.dart';
 /// StateEntityFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [defaultStateEntity] 
+/// * [type]
+/// * [defaultStateEntity]
 @BuiltValue()
-abstract class StateEntityFilter implements EntityFilter, Built<StateEntityFilter, StateEntityFilterBuilder> {
+abstract class StateEntityFilter
+    implements
+        EntityFilter,
+        Built<StateEntityFilter, StateEntityFilterBuilder> {
   @BuiltValueField(wireName: r'defaultStateEntity')
   AliasEntityId? get defaultStateEntity;
 
   StateEntityFilter._();
 
-  factory StateEntityFilter([void updates(StateEntityFilterBuilder b)]) = _$StateEntityFilter;
+  factory StateEntityFilter([void updates(StateEntityFilterBuilder b)]) =
+      _$StateEntityFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StateEntityFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StateEntityFilter> get serializer => _$StateEntityFilterSerializer();
+  static Serializer<StateEntityFilter> get serializer =>
+      _$StateEntityFilterSerializer();
 }
 
-class _$StateEntityFilterSerializer implements PrimitiveSerializer<StateEntityFilter> {
+class _$StateEntityFilterSerializer
+    implements PrimitiveSerializer<StateEntityFilter> {
   @override
   final Iterable<Type> types = const [StateEntityFilter, _$StateEntityFilter];
 
@@ -68,7 +74,11 @@ class _$StateEntityFilterSerializer implements PrimitiveSerializer<StateEntityFi
     StateEntityFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -84,17 +94,21 @@ class _$StateEntityFilterSerializer implements PrimitiveSerializer<StateEntityFi
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
@@ -126,5 +140,3 @@ class _$StateEntityFilterSerializer implements PrimitiveSerializer<StateEntityFi
     return result.build();
   }
 }
-
-

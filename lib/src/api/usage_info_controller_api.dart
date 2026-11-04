@@ -9,16 +9,13 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/usage_info.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class UsageInfoControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -26,7 +23,7 @@ class UsageInfoControllerApi {
   const UsageInfoControllerApi(this._dio, [this._serializers]);
 
   /// getTenantUsageInfo
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -38,7 +35,7 @@ class UsageInfoControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [UsageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<UsageInfo>> getTenantUsageInfo({ 
+  Future<Response<UsageInfo>> getTenantUsageInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -50,9 +47,7 @@ class UsageInfoControllerApi {
     final _path = r'/api/usage';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -60,11 +55,8 @@ class UsageInfoControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -83,11 +75,13 @@ class UsageInfoControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(UsageInfo),
-      ) as UsageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(UsageInfo),
+                )
+                as UsageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -109,5 +103,4 @@ class UsageInfoControllerApi {
       extra: _response.extra,
     );
   }
-
 }

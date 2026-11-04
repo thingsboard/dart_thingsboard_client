@@ -16,7 +16,7 @@ part 'favicon.g.dart';
 /// Favicon
 ///
 /// Properties:
-/// * [url] 
+/// * [url]
 @BuiltValue()
 abstract class Favicon implements Built<Favicon, FaviconBuilder> {
   @BuiltValueField(wireName: r'url')
@@ -60,7 +60,11 @@ class _$FaviconSerializer implements PrimitiveSerializer<Favicon> {
     Favicon object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +80,12 @@ class _$FaviconSerializer implements PrimitiveSerializer<Favicon> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'url':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.url = valueDes;
           break;
@@ -111,5 +117,3 @@ class _$FaviconSerializer implements PrimitiveSerializer<Favicon> {
     return result.build();
   }
 }
-
-

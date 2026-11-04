@@ -20,7 +20,8 @@ part 'palette_settings.g.dart';
 /// * [primaryPalette] - Primary palette JSON
 /// * [accentPalette] - Accent palette JSON
 @BuiltValue()
-abstract class PaletteSettings implements Built<PaletteSettings, PaletteSettingsBuilder> {
+abstract class PaletteSettings
+    implements Built<PaletteSettings, PaletteSettingsBuilder> {
   /// Primary palette JSON
   @BuiltValueField(wireName: r'primaryPalette')
   Palette? get primaryPalette;
@@ -31,16 +32,19 @@ abstract class PaletteSettings implements Built<PaletteSettings, PaletteSettings
 
   PaletteSettings._();
 
-  factory PaletteSettings([void updates(PaletteSettingsBuilder b)]) = _$PaletteSettings;
+  factory PaletteSettings([void updates(PaletteSettingsBuilder b)]) =
+      _$PaletteSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PaletteSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PaletteSettings> get serializer => _$PaletteSettingsSerializer();
+  static Serializer<PaletteSettings> get serializer =>
+      _$PaletteSettingsSerializer();
 }
 
-class _$PaletteSettingsSerializer implements PrimitiveSerializer<PaletteSettings> {
+class _$PaletteSettingsSerializer
+    implements PrimitiveSerializer<PaletteSettings> {
   @override
   final Iterable<Type> types = const [PaletteSettings, _$PaletteSettings];
 
@@ -74,7 +78,11 @@ class _$PaletteSettingsSerializer implements PrimitiveSerializer<PaletteSettings
     PaletteSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,18 +98,22 @@ class _$PaletteSettingsSerializer implements PrimitiveSerializer<PaletteSettings
       final value = serializedList[i + 1];
       switch (key) {
         case r'primaryPalette':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Palette),
-          ) as Palette?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Palette),
+                  )
+                  as Palette?;
           if (valueDes == null) continue;
           result.primaryPalette.replace(valueDes);
           break;
         case r'accentPalette':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Palette),
-          ) as Palette?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Palette),
+                  )
+                  as Palette?;
           if (valueDes == null) continue;
           result.accentPalette.replace(valueDes);
           break;
@@ -133,5 +145,3 @@ class _$PaletteSettingsSerializer implements PrimitiveSerializer<PaletteSettings
     return result.build();
   }
 }
-
-

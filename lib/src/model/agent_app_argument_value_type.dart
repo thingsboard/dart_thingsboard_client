@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'agent_app_argument_value_type.g.dart';
 
 class AgentAppArgumentValueType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ATTRIBUTE')
   static const AgentAppArgumentValueType ATTRIBUTE = _$ATTRIBUTE;
   @BuiltValueEnumConst(wireName: r'LATEST_TELEMETRY')
   static const AgentAppArgumentValueType LATEST_TELEMETRY = _$LATEST_TELEMETRY;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentAppArgumentValueType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentAppArgumentValueType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentAppArgumentValueType> get serializer => _$agentAppArgumentValueTypeSerializer;
+  static Serializer<AgentAppArgumentValueType> get serializer =>
+      _$agentAppArgumentValueTypeSerializer;
 
-  const AgentAppArgumentValueType._(String name): super(name);
+  const AgentAppArgumentValueType._(String name) : super(name);
 
   static BuiltSet<AgentAppArgumentValueType> get values => _$values;
   static AgentAppArgumentValueType valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class AgentAppArgumentValueType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AgentAppArgumentValueTypeMixin = Object with _$AgentAppArgumentValueTypeMixin;
-
+abstract class AgentAppArgumentValueTypeMixin = Object
+    with _$AgentAppArgumentValueTypeMixin;

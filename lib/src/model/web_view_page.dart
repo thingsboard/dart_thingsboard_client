@@ -18,13 +18,14 @@ part 'web_view_page.g.dart';
 /// WebViewPage
 ///
 /// Properties:
-/// * [type] 
-/// * [visible] 
+/// * [type]
+/// * [visible]
 /// * [label] - Page label
 /// * [icon] - URL of the page icon
 /// * [url] - Url
 @BuiltValue()
-abstract class WebViewPage implements MobilePage, Built<WebViewPage, WebViewPageBuilder> {
+abstract class WebViewPage
+    implements MobilePage, Built<WebViewPage, WebViewPageBuilder> {
   /// URL of the page icon
   @BuiltValueField(wireName: r'icon')
   String? get icon;
@@ -101,7 +102,11 @@ class _$WebViewPageSerializer implements PrimitiveSerializer<WebViewPage> {
     WebViewPage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -117,41 +122,51 @@ class _$WebViewPageSerializer implements PrimitiveSerializer<WebViewPage> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'icon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.icon = valueDes;
           break;
         case r'label':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.label = valueDes;
           break;
         case r'visible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.visible = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MobilePageType),
-          ) as MobilePageType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MobilePageType),
+                  )
+                  as MobilePageType;
           result.type = valueDes;
           break;
         case r'url':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.url = valueDes;
           break;
@@ -183,5 +198,3 @@ class _$WebViewPageSerializer implements PrimitiveSerializer<WebViewPage> {
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'text_alignment.g.dart';
 
 class TextAlignment extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'center')
   static const TextAlignment center = _$center;
   @BuiltValueEnumConst(wireName: r'right')
@@ -29,7 +28,7 @@ class TextAlignment extends EnumClass {
 
   static Serializer<TextAlignment> get serializer => _$textAlignmentSerializer;
 
-  const TextAlignment._(String name): super(name);
+  const TextAlignment._(String name) : super(name);
 
   static BuiltSet<TextAlignment> get values => _$values;
   static TextAlignment valueOf(String name) => _$valueOf(name);
@@ -42,4 +41,3 @@ class TextAlignment extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class TextAlignmentMixin = Object with _$TextAlignmentMixin;
-

@@ -17,6 +17,7 @@ class AuthUser {
   late String tenantId;
   late String? customerId;
   late bool? isPublic;
+
   /// The authority of the user, or `null` for an anonymous user (a token
   /// without scopes) or an authority the client does not know.
   late Authority? authority;
@@ -45,8 +46,10 @@ class AuthUser {
   bool isSystemAdmin() => authority == Authority.SYS_ADMIN;
   bool isTenantAdmin() => authority == Authority.TENANT_ADMIN;
   bool isCustomerUser() => authority == Authority.CUSTOMER_USER;
-  bool isPreVerificationToken() => authority == Authority.PRE_VERIFICATION_TOKEN;
-  bool isMfaConfigurationToken() => authority == Authority.MFA_CONFIGURATION_TOKEN;
+  bool isPreVerificationToken() =>
+      authority == Authority.PRE_VERIFICATION_TOKEN;
+  bool isMfaConfigurationToken() =>
+      authority == Authority.MFA_CONFIGURATION_TOKEN;
 
   @override
   String toString() {

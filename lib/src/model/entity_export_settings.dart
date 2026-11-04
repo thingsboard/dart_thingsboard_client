@@ -16,15 +16,16 @@ part 'entity_export_settings.g.dart';
 /// EntityExportSettings
 ///
 /// Properties:
-/// * [exportRelations] 
-/// * [exportAttributes] 
-/// * [exportCredentials] 
-/// * [exportCalculatedFields] 
-/// * [exportPermissions] 
-/// * [exportGroupEntities] 
-/// * [embedGroupMembers] 
+/// * [exportRelations]
+/// * [exportAttributes]
+/// * [exportCredentials]
+/// * [exportCalculatedFields]
+/// * [exportPermissions]
+/// * [exportGroupEntities]
+/// * [embedGroupMembers]
 @BuiltValue()
-abstract class EntityExportSettings implements Built<EntityExportSettings, EntityExportSettingsBuilder> {
+abstract class EntityExportSettings
+    implements Built<EntityExportSettings, EntityExportSettingsBuilder> {
   @BuiltValueField(wireName: r'exportRelations')
   bool? get exportRelations;
 
@@ -48,18 +49,24 @@ abstract class EntityExportSettings implements Built<EntityExportSettings, Entit
 
   EntityExportSettings._();
 
-  factory EntityExportSettings([void updates(EntityExportSettingsBuilder b)]) = _$EntityExportSettings;
+  factory EntityExportSettings([void updates(EntityExportSettingsBuilder b)]) =
+      _$EntityExportSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityExportSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityExportSettings> get serializer => _$EntityExportSettingsSerializer();
+  static Serializer<EntityExportSettings> get serializer =>
+      _$EntityExportSettingsSerializer();
 }
 
-class _$EntityExportSettingsSerializer implements PrimitiveSerializer<EntityExportSettings> {
+class _$EntityExportSettingsSerializer
+    implements PrimitiveSerializer<EntityExportSettings> {
   @override
-  final Iterable<Type> types = const [EntityExportSettings, _$EntityExportSettings];
+  final Iterable<Type> types = const [
+    EntityExportSettings,
+    _$EntityExportSettings,
+  ];
 
   @override
   final String wireName = r'EntityExportSettings';
@@ -126,7 +133,11 @@ class _$EntityExportSettingsSerializer implements PrimitiveSerializer<EntityExpo
     EntityExportSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -142,58 +153,72 @@ class _$EntityExportSettingsSerializer implements PrimitiveSerializer<EntityExpo
       final value = serializedList[i + 1];
       switch (key) {
         case r'exportRelations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.exportRelations = valueDes;
           break;
         case r'exportAttributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.exportAttributes = valueDes;
           break;
         case r'exportCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.exportCredentials = valueDes;
           break;
         case r'exportCalculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.exportCalculatedFields = valueDes;
           break;
         case r'exportPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.exportPermissions = valueDes;
           break;
         case r'exportGroupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.exportGroupEntities = valueDes;
           break;
         case r'embedGroupMembers':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.embedGroupMembers = valueDes;
           break;
@@ -225,5 +250,3 @@ class _$EntityExportSettingsSerializer implements PrimitiveSerializer<EntityExpo
     return result.build();
   }
 }
-
-

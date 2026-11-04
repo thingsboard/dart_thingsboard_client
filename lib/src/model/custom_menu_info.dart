@@ -22,7 +22,7 @@ part 'custom_menu_info.g.dart';
 /// A JSON value representing the custom menu basic info fields
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
 /// * [tenantId] - JSON object with Tenant Id that owns the menu.
 /// * [customerId] - JSON object with Customer Id that owns the menu.
@@ -31,7 +31,8 @@ part 'custom_menu_info.g.dart';
 /// * [assigneeType] - Custom menu assignee type. Possible values are: All (all users of specified scope), CUSTOMERS (specified customers), USERS (specified list of users), NO_ASSIGN (no assignees), USER_GROUPS (user groups)
 /// * [userGroupNames] - User group names menu is applied to
 @BuiltValue()
-abstract class CustomMenuInfo implements Built<CustomMenuInfo, CustomMenuInfoBuilder> {
+abstract class CustomMenuInfo
+    implements Built<CustomMenuInfo, CustomMenuInfoBuilder> {
   @BuiltValueField(wireName: r'id')
   CustomMenuId? get id;
 
@@ -67,16 +68,19 @@ abstract class CustomMenuInfo implements Built<CustomMenuInfo, CustomMenuInfoBui
 
   CustomMenuInfo._();
 
-  factory CustomMenuInfo([void updates(CustomMenuInfoBuilder b)]) = _$CustomMenuInfo;
+  factory CustomMenuInfo([void updates(CustomMenuInfoBuilder b)]) =
+      _$CustomMenuInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CustomMenuInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CustomMenuInfo> get serializer => _$CustomMenuInfoSerializer();
+  static Serializer<CustomMenuInfo> get serializer =>
+      _$CustomMenuInfoSerializer();
 }
 
-class _$CustomMenuInfoSerializer implements PrimitiveSerializer<CustomMenuInfo> {
+class _$CustomMenuInfoSerializer
+    implements PrimitiveSerializer<CustomMenuInfo> {
   @override
   final Iterable<Type> types = const [CustomMenuInfo, _$CustomMenuInfo];
 
@@ -146,7 +150,11 @@ class _$CustomMenuInfoSerializer implements PrimitiveSerializer<CustomMenuInfo> 
     CustomMenuInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -162,63 +170,81 @@ class _$CustomMenuInfoSerializer implements PrimitiveSerializer<CustomMenuInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomMenuId),
-          ) as CustomMenuId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomMenuId),
+                  )
+                  as CustomMenuId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(CMScope),
-          ) as CMScope;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(CMScope),
+                  )
+                  as CMScope;
           result.scope = valueDes;
           break;
         case r'assigneeType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(CMAssigneeType),
-          ) as CMAssigneeType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(CMAssigneeType),
+                  )
+                  as CMAssigneeType;
           result.assigneeType = valueDes;
           break;
         case r'userGroupNames':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.userGroupNames.replace(valueDes);
           break;
@@ -250,5 +276,3 @@ class _$CustomMenuInfoSerializer implements PrimitiveSerializer<CustomMenuInfo> 
     return result.build();
   }
 }
-
-

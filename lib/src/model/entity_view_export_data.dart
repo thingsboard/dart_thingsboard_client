@@ -23,27 +23,36 @@ part 'entity_view_export_data.g.dart';
 /// EntityViewExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class EntityViewExportData implements EntityExportData, Built<EntityViewExportData, EntityViewExportDataBuilder> {
+abstract class EntityViewExportData
+    implements
+        EntityExportData,
+        Built<EntityViewExportData, EntityViewExportDataBuilder> {
   EntityViewExportData._();
 
-  factory EntityViewExportData([void updates(EntityViewExportDataBuilder b)]) = _$EntityViewExportData;
+  factory EntityViewExportData([void updates(EntityViewExportDataBuilder b)]) =
+      _$EntityViewExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityViewExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityViewExportData> get serializer => _$EntityViewExportDataSerializer();
+  static Serializer<EntityViewExportData> get serializer =>
+      _$EntityViewExportDataSerializer();
 }
 
-class _$EntityViewExportDataSerializer implements PrimitiveSerializer<EntityViewExportData> {
+class _$EntityViewExportDataSerializer
+    implements PrimitiveSerializer<EntityViewExportData> {
   @override
-  final Iterable<Type> types = const [EntityViewExportData, _$EntityViewExportData];
+  final Iterable<Type> types = const [
+    EntityViewExportData,
+    _$EntityViewExportData,
+  ];
 
   @override
   final String wireName = r'EntityViewExportData';
@@ -57,7 +66,10 @@ class _$EntityViewExportDataSerializer implements PrimitiveSerializer<EntityView
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +106,11 @@ class _$EntityViewExportDataSerializer implements PrimitiveSerializer<EntityView
     EntityViewExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +126,58 @@ class _$EntityViewExportDataSerializer implements PrimitiveSerializer<EntityView
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +209,3 @@ class _$EntityViewExportDataSerializer implements PrimitiveSerializer<EntityView
     return result.build();
   }
 }
-
-

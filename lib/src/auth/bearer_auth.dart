@@ -14,11 +14,13 @@ class BearerAuthInterceptor extends AuthInterceptor {
   final Map<String, String> tokens = {};
 
   @override
-  void onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) {
-    final authInfo = getAuthInfo(options, (secure) => secure['type'] == 'http' && secure['scheme']?.toLowerCase() == 'bearer');
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final authInfo = getAuthInfo(
+      options,
+      (secure) =>
+          secure['type'] == 'http' &&
+          secure['scheme']?.toLowerCase() == 'bearer',
+    );
     for (final info in authInfo) {
       final token = tokens[info['name']];
       if (token != null) {

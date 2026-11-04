@@ -18,9 +18,9 @@ part 'alarm_condition_expression.g.dart';
 /// AlarmConditionExpression
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class AlarmConditionExpression  {
+abstract class AlarmConditionExpression {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -32,33 +32,37 @@ abstract class AlarmConditionExpression  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmConditionExpression> get serializer => _$AlarmConditionExpressionSerializer();
+  static Serializer<AlarmConditionExpression> get serializer =>
+      _$AlarmConditionExpressionSerializer();
 }
 
 extension AlarmConditionExpressionDiscriminatorExt on AlarmConditionExpression {
-    String? get discriminatorValue {
-        if (this is SimpleAlarmConditionExpression) {
-            return r'SIMPLE';
-        }
-        if (this is TbelAlarmConditionExpression) {
-            return r'TBEL';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is SimpleAlarmConditionExpression) {
+      return r'SIMPLE';
     }
-}
-extension AlarmConditionExpressionBuilderDiscriminatorExt on AlarmConditionExpressionBuilder {
-    String? get discriminatorValue {
-        if (this is SimpleAlarmConditionExpressionBuilder) {
-            return r'SIMPLE';
-        }
-        if (this is TbelAlarmConditionExpressionBuilder) {
-            return r'TBEL';
-        }
-        return null;
+    if (this is TbelAlarmConditionExpression) {
+      return r'TBEL';
     }
+    return null;
+  }
 }
 
-class _$AlarmConditionExpressionSerializer implements PrimitiveSerializer<AlarmConditionExpression> {
+extension AlarmConditionExpressionBuilderDiscriminatorExt
+    on AlarmConditionExpressionBuilder {
+  String? get discriminatorValue {
+    if (this is SimpleAlarmConditionExpressionBuilder) {
+      return r'SIMPLE';
+    }
+    if (this is TbelAlarmConditionExpressionBuilder) {
+      return r'TBEL';
+    }
+    return null;
+  }
+}
+
+class _$AlarmConditionExpressionSerializer
+    implements PrimitiveSerializer<AlarmConditionExpression> {
   @override
   final Iterable<Type> types = const [AlarmConditionExpression];
 
@@ -84,12 +88,22 @@ class _$AlarmConditionExpressionSerializer implements PrimitiveSerializer<AlarmC
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is SimpleAlarmConditionExpression) {
-      return serializers.serialize(object, specifiedType: FullType(SimpleAlarmConditionExpression))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SimpleAlarmConditionExpression),
+      )!;
     }
     if (object is TbelAlarmConditionExpression) {
-      return serializers.serialize(object, specifiedType: FullType(TbelAlarmConditionExpression))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TbelAlarmConditionExpression),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -99,37 +113,67 @@ class _$AlarmConditionExpressionSerializer implements PrimitiveSerializer<AlarmC
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(AlarmConditionExpression.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          AlarmConditionExpression.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'SIMPLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(SimpleAlarmConditionExpression)) as SimpleAlarmConditionExpression;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SimpleAlarmConditionExpression),
+            )
+            as SimpleAlarmConditionExpression;
       case r'TBEL':
-        return serializers.deserialize(serialized, specifiedType: FullType(TbelAlarmConditionExpression)) as TbelAlarmConditionExpression;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TbelAlarmConditionExpression),
+            )
+            as TbelAlarmConditionExpression;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($AlarmConditionExpression)) as $AlarmConditionExpression;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($AlarmConditionExpression),
+            )
+            as $AlarmConditionExpression;
     }
   }
 }
 
-
 /// a concrete implementation of [AlarmConditionExpression], since [AlarmConditionExpression] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $AlarmConditionExpression implements AlarmConditionExpression, Built<$AlarmConditionExpression, $AlarmConditionExpressionBuilder> {
+abstract class $AlarmConditionExpression
+    implements
+        AlarmConditionExpression,
+        Built<$AlarmConditionExpression, $AlarmConditionExpressionBuilder> {
   $AlarmConditionExpression._();
 
-  factory $AlarmConditionExpression([void Function($AlarmConditionExpressionBuilder)? updates]) = _$$AlarmConditionExpression;
+  factory $AlarmConditionExpression([
+    void Function($AlarmConditionExpressionBuilder)? updates,
+  ]) = _$$AlarmConditionExpression;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($AlarmConditionExpressionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$AlarmConditionExpression> get serializer => _$$AlarmConditionExpressionSerializer();
+  static Serializer<$AlarmConditionExpression> get serializer =>
+      _$$AlarmConditionExpressionSerializer();
 }
 
-class _$$AlarmConditionExpressionSerializer implements PrimitiveSerializer<$AlarmConditionExpression> {
+class _$$AlarmConditionExpressionSerializer
+    implements PrimitiveSerializer<$AlarmConditionExpression> {
   @override
-  final Iterable<Type> types = const [$AlarmConditionExpression, _$$AlarmConditionExpression];
+  final Iterable<Type> types = const [
+    $AlarmConditionExpression,
+    _$$AlarmConditionExpression,
+  ];
 
   @override
   final String wireName = r'$AlarmConditionExpression';
@@ -140,7 +184,10 @@ class _$$AlarmConditionExpressionSerializer implements PrimitiveSerializer<$Alar
     $AlarmConditionExpression object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(AlarmConditionExpression))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(AlarmConditionExpression),
+    )!;
   }
 
   void _deserializeProperties(
@@ -156,10 +203,12 @@ class _$$AlarmConditionExpressionSerializer implements PrimitiveSerializer<$Alar
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -190,4 +239,3 @@ class _$$AlarmConditionExpressionSerializer implements PrimitiveSerializer<$Alar
     return result.build();
   }
 }
-

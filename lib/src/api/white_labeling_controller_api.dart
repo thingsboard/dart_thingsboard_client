@@ -13,15 +13,12 @@ import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/login_white_labeling_params.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/white_labeling_params.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class WhiteLabelingControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +39,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteCurrentLoginWhiteLabelParams({ 
+  Future<Response<void>> deleteCurrentLoginWhiteLabelParams({
     String? customerId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -55,9 +52,7 @@ class WhiteLabelingControllerApi {
     final _path = r'/api/whiteLabel/currentLoginWhiteLabelParams';
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -65,11 +60,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -77,7 +69,12 @@ class WhiteLabelingControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (customerId != null) r'customerId': encodeQueryParameter(_serializers, customerId, const FullType(String)),
+      if (customerId != null)
+        r'customerId': encodeQueryParameter(
+          _serializers,
+          customerId,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -106,7 +103,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteCurrentWhiteLabelParams({ 
+  Future<Response<void>> deleteCurrentWhiteLabelParams({
     String? customerId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -119,9 +116,7 @@ class WhiteLabelingControllerApi {
     final _path = r'/api/whiteLabel/currentWhiteLabelParams';
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -129,11 +124,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -141,7 +133,12 @@ class WhiteLabelingControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (customerId != null) r'customerId': encodeQueryParameter(_serializers, customerId, const FullType(String)),
+      if (customerId != null)
+        r'customerId': encodeQueryParameter(
+          _serializers,
+          customerId,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -170,7 +167,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LoginWhiteLabelingParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LoginWhiteLabelingParams>> getCurrentLoginWhiteLabelParams({ 
+  Future<Response<LoginWhiteLabelingParams>> getCurrentLoginWhiteLabelParams({
     String? customerId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -179,13 +176,12 @@ class WhiteLabelingControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLoginWhiteLabelingParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerLoginWhiteLabelingParams);
     final _path = r'/api/whiteLabel/currentLoginWhiteLabelParams';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -193,11 +189,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -205,7 +198,12 @@ class WhiteLabelingControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (customerId != null) r'customerId': encodeQueryParameter(_serializers, customerId, const FullType(String)),
+      if (customerId != null)
+        r'customerId': encodeQueryParameter(
+          _serializers,
+          customerId,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -221,11 +219,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LoginWhiteLabelingParams),
-      ) as LoginWhiteLabelingParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LoginWhiteLabelingParams),
+                )
+                as LoginWhiteLabelingParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -262,7 +262,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WhiteLabelingParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WhiteLabelingParams>> getCurrentWhiteLabelParams({ 
+  Future<Response<WhiteLabelingParams>> getCurrentWhiteLabelParams({
     String? customerId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -271,13 +271,12 @@ class WhiteLabelingControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWhiteLabelingParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWhiteLabelingParams);
     final _path = r'/api/whiteLabel/currentWhiteLabelParams';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -285,11 +284,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -297,7 +293,12 @@ class WhiteLabelingControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (customerId != null) r'customerId': encodeQueryParameter(_serializers, customerId, const FullType(String)),
+      if (customerId != null)
+        r'customerId': encodeQueryParameter(
+          _serializers,
+          customerId,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -313,11 +314,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WhiteLabelingParams),
-      ) as WhiteLabelingParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WhiteLabelingParams),
+                )
+                as WhiteLabelingParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -353,7 +356,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LoginWhiteLabelingParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LoginWhiteLabelingParams>> getLoginWhiteLabelParams({ 
+  Future<Response<LoginWhiteLabelingParams>> getLoginWhiteLabelParams({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -361,17 +364,13 @@ class WhiteLabelingControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLoginWhiteLabelingParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerLoginWhiteLabelingParams);
     final _path = r'/api/noauth/whiteLabel/loginWhiteLabelParams';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -387,11 +386,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LoginWhiteLabelingParams),
-      ) as LoginWhiteLabelingParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LoginWhiteLabelingParams),
+                )
+                as LoginWhiteLabelingParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -428,7 +429,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getMailTemplates({ 
+  Future<Response<JsonObject>> getMailTemplates({
     bool? systemByDefault = false,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -441,9 +442,7 @@ class WhiteLabelingControllerApi {
     final _path = r'/api/whiteLabel/mailTemplates';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -451,11 +450,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -463,7 +459,12 @@ class WhiteLabelingControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (systemByDefault != null) r'systemByDefault': encodeQueryParameter(_serializers, systemByDefault, const FullType(bool)),
+      if (systemByDefault != null)
+        r'systemByDefault': encodeQueryParameter(
+          _serializers,
+          systemByDefault,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -479,11 +480,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -519,7 +522,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WhiteLabelingParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WhiteLabelingParams>> getWhiteLabelParams({ 
+  Future<Response<WhiteLabelingParams>> getWhiteLabelParams({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -527,13 +530,12 @@ class WhiteLabelingControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWhiteLabelingParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWhiteLabelingParams);
     final _path = r'/api/whiteLabel/whiteLabelParams';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -541,11 +543,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -564,11 +563,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WhiteLabelingParams),
-      ) as WhiteLabelingParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WhiteLabelingParams),
+                )
+                as WhiteLabelingParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -604,7 +605,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> isCustomerWhiteLabelingAllowed({ 
+  Future<Response<bool>> isCustomerWhiteLabelingAllowed({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -615,9 +616,7 @@ class WhiteLabelingControllerApi {
     final _path = r'/api/whiteLabel/isCustomerWhiteLabelingAllowed';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -625,11 +624,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -649,7 +645,6 @@ class WhiteLabelingControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -685,7 +680,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> isWhiteLabelingAllowed({ 
+  Future<Response<bool>> isWhiteLabelingAllowed({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -696,9 +691,7 @@ class WhiteLabelingControllerApi {
     final _path = r'/api/whiteLabel/isWhiteLabelingAllowed';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -706,11 +699,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -730,7 +720,6 @@ class WhiteLabelingControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -757,7 +746,7 @@ class WhiteLabelingControllerApi {
   /// Merge the White Labeling configuration with the parent configuration and return the result.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the white labeling resource.
   ///
   /// Parameters:
-  /// * [whiteLabelingParams] 
+  /// * [whiteLabelingParams]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -767,7 +756,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WhiteLabelingParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WhiteLabelingParams>> previewWhiteLabelParams({ 
+  Future<Response<WhiteLabelingParams>> previewWhiteLabelParams({
     required WhiteLabelingParams whiteLabelingParams,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -776,13 +765,12 @@ class WhiteLabelingControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWhiteLabelingParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWhiteLabelingParams);
     final _path = r'/api/whiteLabel/previewWhiteLabelParams';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -790,11 +778,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -806,14 +791,13 @@ class WhiteLabelingControllerApi {
 
     try {
       const _type = FullType(WhiteLabelingParams);
-      _bodyData = _serializers.serialize(whiteLabelingParams, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        whiteLabelingParams,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -833,11 +817,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WhiteLabelingParams),
-      ) as WhiteLabelingParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WhiteLabelingParams),
+                )
+                as WhiteLabelingParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -864,7 +850,7 @@ class WhiteLabelingControllerApi {
   /// Creates or Updates the White Labeling configuration.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the white labeling resource.
   ///
   /// Parameters:
-  /// * [loginWhiteLabelingParams] 
+  /// * [loginWhiteLabelingParams]
   /// * [customerId] - A string value representing the customer id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -875,7 +861,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LoginWhiteLabelingParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LoginWhiteLabelingParams>> saveLoginWhiteLabelParams({ 
+  Future<Response<LoginWhiteLabelingParams>> saveLoginWhiteLabelParams({
     required LoginWhiteLabelingParams loginWhiteLabelingParams,
     String? customerId,
     CancelToken? cancelToken,
@@ -885,13 +871,12 @@ class WhiteLabelingControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLoginWhiteLabelingParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerLoginWhiteLabelingParams);
     final _path = r'/api/whiteLabel/loginWhiteLabelParams';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -899,11 +884,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -912,18 +894,25 @@ class WhiteLabelingControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (customerId != null) r'customerId': encodeQueryParameter(_serializers, customerId, const FullType(String)),
+      if (customerId != null)
+        r'customerId': encodeQueryParameter(
+          _serializers,
+          customerId,
+          const FullType(String),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       const _type = FullType(LoginWhiteLabelingParams);
-      _bodyData = _serializers.serialize(loginWhiteLabelingParams, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        loginWhiteLabelingParams,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -948,11 +937,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LoginWhiteLabelingParams),
-      ) as LoginWhiteLabelingParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LoginWhiteLabelingParams),
+                )
+                as LoginWhiteLabelingParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -989,7 +980,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> saveMailTemplates({ 
+  Future<Response<JsonObject>> saveMailTemplates({
     JsonObject? body,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1002,9 +993,7 @@ class WhiteLabelingControllerApi {
     final _path = r'/api/whiteLabel/mailTemplates';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1012,11 +1001,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1028,13 +1014,9 @@ class WhiteLabelingControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1054,11 +1036,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1085,7 +1069,7 @@ class WhiteLabelingControllerApi {
   /// Creates or Updates the White Labeling configuration.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the white labeling resource.
   ///
   /// Parameters:
-  /// * [whiteLabelingParams] 
+  /// * [whiteLabelingParams]
   /// * [customerId] - A string value representing the customer id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -1096,7 +1080,7 @@ class WhiteLabelingControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WhiteLabelingParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WhiteLabelingParams>> saveWhiteLabelParams({ 
+  Future<Response<WhiteLabelingParams>> saveWhiteLabelParams({
     required WhiteLabelingParams whiteLabelingParams,
     String? customerId,
     CancelToken? cancelToken,
@@ -1106,13 +1090,12 @@ class WhiteLabelingControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWhiteLabelingParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWhiteLabelingParams);
     final _path = r'/api/whiteLabel/whiteLabelParams';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1120,11 +1103,8 @@ class WhiteLabelingControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1133,18 +1113,25 @@ class WhiteLabelingControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (customerId != null) r'customerId': encodeQueryParameter(_serializers, customerId, const FullType(String)),
+      if (customerId != null)
+        r'customerId': encodeQueryParameter(
+          _serializers,
+          customerId,
+          const FullType(String),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       const _type = FullType(WhiteLabelingParams);
-      _bodyData = _serializers.serialize(whiteLabelingParams, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        whiteLabelingParams,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1169,11 +1156,13 @@ class WhiteLabelingControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WhiteLabelingParams),
-      ) as WhiteLabelingParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WhiteLabelingParams),
+                )
+                as WhiteLabelingParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1195,5 +1184,4 @@ class WhiteLabelingControllerApi {
       extra: _response.extra,
     );
   }
-
 }

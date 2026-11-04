@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'repository_auth_method.g.dart';
 
 class RepositoryAuthMethod extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'USERNAME_PASSWORD')
   static const RepositoryAuthMethod USERNAME_PASSWORD = _$USERNAME_PASSWORD;
   @BuiltValueEnumConst(wireName: r'PRIVATE_KEY')
   static const RepositoryAuthMethod PRIVATE_KEY = _$PRIVATE_KEY;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const RepositoryAuthMethod unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const RepositoryAuthMethod unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<RepositoryAuthMethod> get serializer => _$repositoryAuthMethodSerializer;
+  static Serializer<RepositoryAuthMethod> get serializer =>
+      _$repositoryAuthMethodSerializer;
 
-  const RepositoryAuthMethod._(String name): super(name);
+  const RepositoryAuthMethod._(String name) : super(name);
 
   static BuiltSet<RepositoryAuthMethod> get values => _$values;
   static RepositoryAuthMethod valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class RepositoryAuthMethod extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class RepositoryAuthMethodMixin = Object with _$RepositoryAuthMethodMixin;
-
+abstract class RepositoryAuthMethodMixin = Object
+    with _$RepositoryAuthMethodMixin;

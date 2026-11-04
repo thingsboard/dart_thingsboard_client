@@ -19,11 +19,14 @@ part 'custom_time_schedule.g.dart';
 /// CustomTimeSchedule
 ///
 /// Properties:
-/// * [type] 
-/// * [timezone] 
-/// * [items] 
+/// * [type]
+/// * [timezone]
+/// * [items]
 @BuiltValue()
-abstract class CustomTimeSchedule implements AlarmSchedule, Built<CustomTimeSchedule, CustomTimeScheduleBuilder> {
+abstract class CustomTimeSchedule
+    implements
+        AlarmSchedule,
+        Built<CustomTimeSchedule, CustomTimeScheduleBuilder> {
   @BuiltValueField(wireName: r'timezone')
   String? get timezone;
 
@@ -32,16 +35,19 @@ abstract class CustomTimeSchedule implements AlarmSchedule, Built<CustomTimeSche
 
   CustomTimeSchedule._();
 
-  factory CustomTimeSchedule([void updates(CustomTimeScheduleBuilder b)]) = _$CustomTimeSchedule;
+  factory CustomTimeSchedule([void updates(CustomTimeScheduleBuilder b)]) =
+      _$CustomTimeSchedule;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CustomTimeScheduleBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CustomTimeSchedule> get serializer => _$CustomTimeScheduleSerializer();
+  static Serializer<CustomTimeSchedule> get serializer =>
+      _$CustomTimeScheduleSerializer();
 }
 
-class _$CustomTimeScheduleSerializer implements PrimitiveSerializer<CustomTimeSchedule> {
+class _$CustomTimeScheduleSerializer
+    implements PrimitiveSerializer<CustomTimeSchedule> {
   @override
   final Iterable<Type> types = const [CustomTimeSchedule, _$CustomTimeSchedule];
 
@@ -62,7 +68,9 @@ class _$CustomTimeScheduleSerializer implements PrimitiveSerializer<CustomTimeSc
       yield r'items';
       yield serializers.serialize(
         object.items,
-        specifiedType: const FullType(BuiltList, [FullType(CustomTimeScheduleItem)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(CustomTimeScheduleItem),
+        ]),
       );
     }
     if (object.timezone != null) {
@@ -80,7 +88,11 @@ class _$CustomTimeScheduleSerializer implements PrimitiveSerializer<CustomTimeSc
     CustomTimeSchedule object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -96,25 +108,33 @@ class _$CustomTimeScheduleSerializer implements PrimitiveSerializer<CustomTimeSc
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'items':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CustomTimeScheduleItem)]),
-          ) as BuiltList<CustomTimeScheduleItem>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CustomTimeScheduleItem),
+                    ]),
+                  )
+                  as BuiltList<CustomTimeScheduleItem>?;
           if (valueDes == null) continue;
           result.items.replace(valueDes);
           break;
         case r'timezone':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.timezone = valueDes;
           break;
@@ -146,5 +166,3 @@ class _$CustomTimeScheduleSerializer implements PrimitiveSerializer<CustomTimeSc
     return result.build();
   }
 }
-
-

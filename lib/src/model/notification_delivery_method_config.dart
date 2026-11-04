@@ -18,9 +18,9 @@ part 'notification_delivery_method_config.g.dart';
 /// NotificationDeliveryMethodConfig
 ///
 /// Properties:
-/// * [method] 
+/// * [method]
 @BuiltValue(instantiable: false)
-abstract class NotificationDeliveryMethodConfig  {
+abstract class NotificationDeliveryMethodConfig {
   @BuiltValueField(wireName: r'method')
   String get method;
 
@@ -32,33 +32,38 @@ abstract class NotificationDeliveryMethodConfig  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationDeliveryMethodConfig> get serializer => _$NotificationDeliveryMethodConfigSerializer();
+  static Serializer<NotificationDeliveryMethodConfig> get serializer =>
+      _$NotificationDeliveryMethodConfigSerializer();
 }
 
-extension NotificationDeliveryMethodConfigDiscriminatorExt on NotificationDeliveryMethodConfig {
-    String? get discriminatorValue {
-        if (this is MobileAppNotificationDeliveryMethodConfig) {
-            return r'MOBILE_APP';
-        }
-        if (this is SlackNotificationDeliveryMethodConfig) {
-            return r'SLACK';
-        }
-        return null;
+extension NotificationDeliveryMethodConfigDiscriminatorExt
+    on NotificationDeliveryMethodConfig {
+  String? get discriminatorValue {
+    if (this is MobileAppNotificationDeliveryMethodConfig) {
+      return r'MOBILE_APP';
     }
-}
-extension NotificationDeliveryMethodConfigBuilderDiscriminatorExt on NotificationDeliveryMethodConfigBuilder {
-    String? get discriminatorValue {
-        if (this is MobileAppNotificationDeliveryMethodConfigBuilder) {
-            return r'MOBILE_APP';
-        }
-        if (this is SlackNotificationDeliveryMethodConfigBuilder) {
-            return r'SLACK';
-        }
-        return null;
+    if (this is SlackNotificationDeliveryMethodConfig) {
+      return r'SLACK';
     }
+    return null;
+  }
 }
 
-class _$NotificationDeliveryMethodConfigSerializer implements PrimitiveSerializer<NotificationDeliveryMethodConfig> {
+extension NotificationDeliveryMethodConfigBuilderDiscriminatorExt
+    on NotificationDeliveryMethodConfigBuilder {
+  String? get discriminatorValue {
+    if (this is MobileAppNotificationDeliveryMethodConfigBuilder) {
+      return r'MOBILE_APP';
+    }
+    if (this is SlackNotificationDeliveryMethodConfigBuilder) {
+      return r'SLACK';
+    }
+    return null;
+  }
+}
+
+class _$NotificationDeliveryMethodConfigSerializer
+    implements PrimitiveSerializer<NotificationDeliveryMethodConfig> {
   @override
   final Iterable<Type> types = const [NotificationDeliveryMethodConfig];
 
@@ -84,12 +89,22 @@ class _$NotificationDeliveryMethodConfigSerializer implements PrimitiveSerialize
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is MobileAppNotificationDeliveryMethodConfig) {
-      return serializers.serialize(object, specifiedType: FullType(MobileAppNotificationDeliveryMethodConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(MobileAppNotificationDeliveryMethodConfig),
+      )!;
     }
     if (object is SlackNotificationDeliveryMethodConfig) {
-      return serializers.serialize(object, specifiedType: FullType(SlackNotificationDeliveryMethodConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SlackNotificationDeliveryMethodConfig),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -99,37 +114,72 @@ class _$NotificationDeliveryMethodConfigSerializer implements PrimitiveSerialize
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(NotificationDeliveryMethodConfig.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          NotificationDeliveryMethodConfig.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'MOBILE_APP':
-        return serializers.deserialize(serialized, specifiedType: FullType(MobileAppNotificationDeliveryMethodConfig)) as MobileAppNotificationDeliveryMethodConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                MobileAppNotificationDeliveryMethodConfig,
+              ),
+            )
+            as MobileAppNotificationDeliveryMethodConfig;
       case r'SLACK':
-        return serializers.deserialize(serialized, specifiedType: FullType(SlackNotificationDeliveryMethodConfig)) as SlackNotificationDeliveryMethodConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SlackNotificationDeliveryMethodConfig),
+            )
+            as SlackNotificationDeliveryMethodConfig;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($NotificationDeliveryMethodConfig)) as $NotificationDeliveryMethodConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($NotificationDeliveryMethodConfig),
+            )
+            as $NotificationDeliveryMethodConfig;
     }
   }
 }
 
-
 /// a concrete implementation of [NotificationDeliveryMethodConfig], since [NotificationDeliveryMethodConfig] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $NotificationDeliveryMethodConfig implements NotificationDeliveryMethodConfig, Built<$NotificationDeliveryMethodConfig, $NotificationDeliveryMethodConfigBuilder> {
+abstract class $NotificationDeliveryMethodConfig
+    implements
+        NotificationDeliveryMethodConfig,
+        Built<
+          $NotificationDeliveryMethodConfig,
+          $NotificationDeliveryMethodConfigBuilder
+        > {
   $NotificationDeliveryMethodConfig._();
 
-  factory $NotificationDeliveryMethodConfig([void Function($NotificationDeliveryMethodConfigBuilder)? updates]) = _$$NotificationDeliveryMethodConfig;
+  factory $NotificationDeliveryMethodConfig([
+    void Function($NotificationDeliveryMethodConfigBuilder)? updates,
+  ]) = _$$NotificationDeliveryMethodConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($NotificationDeliveryMethodConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$NotificationDeliveryMethodConfig> get serializer => _$$NotificationDeliveryMethodConfigSerializer();
+  static Serializer<$NotificationDeliveryMethodConfig> get serializer =>
+      _$$NotificationDeliveryMethodConfigSerializer();
 }
 
-class _$$NotificationDeliveryMethodConfigSerializer implements PrimitiveSerializer<$NotificationDeliveryMethodConfig> {
+class _$$NotificationDeliveryMethodConfigSerializer
+    implements PrimitiveSerializer<$NotificationDeliveryMethodConfig> {
   @override
-  final Iterable<Type> types = const [$NotificationDeliveryMethodConfig, _$$NotificationDeliveryMethodConfig];
+  final Iterable<Type> types = const [
+    $NotificationDeliveryMethodConfig,
+    _$$NotificationDeliveryMethodConfig,
+  ];
 
   @override
   final String wireName = r'$NotificationDeliveryMethodConfig';
@@ -140,7 +190,10 @@ class _$$NotificationDeliveryMethodConfigSerializer implements PrimitiveSerializ
     $NotificationDeliveryMethodConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(NotificationDeliveryMethodConfig))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(NotificationDeliveryMethodConfig),
+    )!;
   }
 
   void _deserializeProperties(
@@ -156,10 +209,12 @@ class _$$NotificationDeliveryMethodConfigSerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         default:
@@ -190,4 +245,3 @@ class _$$NotificationDeliveryMethodConfigSerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-

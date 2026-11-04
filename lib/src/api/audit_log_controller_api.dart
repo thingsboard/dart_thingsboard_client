@@ -9,17 +9,14 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/page_data_audit_log.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AuditLogControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -47,7 +44,7 @@ class AuditLogControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAuditLog] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAuditLog>> getAuditLogs({ 
+  Future<Response<PageDataAuditLog>> getAuditLogs({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -63,13 +60,12 @@ class AuditLogControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAuditLog);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAuditLog);
     final _path = r'/api/audit/logs';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -77,11 +73,8 @@ class AuditLogControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -89,14 +82,48 @@ class AuditLogControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (startTime != null) r'startTime': encodeQueryParameter(_serializers, startTime, const FullType(int)),
-      if (endTime != null) r'endTime': encodeQueryParameter(_serializers, endTime, const FullType(int)),
-      if (actionTypes != null) r'actionTypes': encodeQueryParameter(_serializers, actionTypes, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (startTime != null)
+        r'startTime': encodeQueryParameter(
+          _serializers,
+          startTime,
+          const FullType(int),
+        ),
+      if (endTime != null)
+        r'endTime': encodeQueryParameter(
+          _serializers,
+          endTime,
+          const FullType(int),
+        ),
+      if (actionTypes != null)
+        r'actionTypes': encodeQueryParameter(
+          _serializers,
+          actionTypes,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -112,11 +139,13 @@ class AuditLogControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAuditLog),
-      ) as PageDataAuditLog;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAuditLog),
+                )
+                as PageDataAuditLog;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -161,7 +190,7 @@ class AuditLogControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAuditLog] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAuditLog>> getAuditLogsByCustomerId({ 
+  Future<Response<PageDataAuditLog>> getAuditLogsByCustomerId({
     required String customerId,
     required int pageSize,
     required int page,
@@ -178,13 +207,21 @@ class AuditLogControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAuditLog);
-    final _path = r'/api/audit/logs/customer/{customerId}'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAuditLog);
+    final _path = r'/api/audit/logs/customer/{customerId}'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -192,11 +229,8 @@ class AuditLogControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -204,14 +238,48 @@ class AuditLogControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (startTime != null) r'startTime': encodeQueryParameter(_serializers, startTime, const FullType(int)),
-      if (endTime != null) r'endTime': encodeQueryParameter(_serializers, endTime, const FullType(int)),
-      if (actionTypes != null) r'actionTypes': encodeQueryParameter(_serializers, actionTypes, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (startTime != null)
+        r'startTime': encodeQueryParameter(
+          _serializers,
+          startTime,
+          const FullType(int),
+        ),
+      if (endTime != null)
+        r'endTime': encodeQueryParameter(
+          _serializers,
+          endTime,
+          const FullType(int),
+        ),
+      if (actionTypes != null)
+        r'actionTypes': encodeQueryParameter(
+          _serializers,
+          actionTypes,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -227,11 +295,13 @@ class AuditLogControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAuditLog),
-      ) as PageDataAuditLog;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAuditLog),
+                )
+                as PageDataAuditLog;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -277,7 +347,7 @@ class AuditLogControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAuditLog] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAuditLog>> getAuditLogsByEntityId({ 
+  Future<Response<PageDataAuditLog>> getAuditLogsByEntityId({
     required String entityType,
     required String entityId,
     required int pageSize,
@@ -295,13 +365,32 @@ class AuditLogControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAuditLog);
-    final _path = r'/api/audit/logs/entity/{entityType}/{entityId}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAuditLog);
+    final _path = r'/api/audit/logs/entity/{entityType}/{entityId}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -309,11 +398,8 @@ class AuditLogControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -321,14 +407,48 @@ class AuditLogControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (startTime != null) r'startTime': encodeQueryParameter(_serializers, startTime, const FullType(int)),
-      if (endTime != null) r'endTime': encodeQueryParameter(_serializers, endTime, const FullType(int)),
-      if (actionTypes != null) r'actionTypes': encodeQueryParameter(_serializers, actionTypes, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (startTime != null)
+        r'startTime': encodeQueryParameter(
+          _serializers,
+          startTime,
+          const FullType(int),
+        ),
+      if (endTime != null)
+        r'endTime': encodeQueryParameter(
+          _serializers,
+          endTime,
+          const FullType(int),
+        ),
+      if (actionTypes != null)
+        r'actionTypes': encodeQueryParameter(
+          _serializers,
+          actionTypes,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -344,11 +464,13 @@ class AuditLogControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAuditLog),
-      ) as PageDataAuditLog;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAuditLog),
+                )
+                as PageDataAuditLog;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -393,7 +515,7 @@ class AuditLogControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAuditLog] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAuditLog>> getAuditLogsByUserId({ 
+  Future<Response<PageDataAuditLog>> getAuditLogsByUserId({
     required String userId,
     required int pageSize,
     required int page,
@@ -410,13 +532,21 @@ class AuditLogControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAuditLog);
-    final _path = r'/api/audit/logs/user/{userId}'.replaceAll('{' r'userId' '}', encodeQueryParameter(_serializers, userId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAuditLog);
+    final _path = r'/api/audit/logs/user/{userId}'.replaceAll(
+      '{'
+      r'userId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        userId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -424,11 +554,8 @@ class AuditLogControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -436,14 +563,48 @@ class AuditLogControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (startTime != null) r'startTime': encodeQueryParameter(_serializers, startTime, const FullType(int)),
-      if (endTime != null) r'endTime': encodeQueryParameter(_serializers, endTime, const FullType(int)),
-      if (actionTypes != null) r'actionTypes': encodeQueryParameter(_serializers, actionTypes, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (startTime != null)
+        r'startTime': encodeQueryParameter(
+          _serializers,
+          startTime,
+          const FullType(int),
+        ),
+      if (endTime != null)
+        r'endTime': encodeQueryParameter(
+          _serializers,
+          endTime,
+          const FullType(int),
+        ),
+      if (actionTypes != null)
+        r'actionTypes': encodeQueryParameter(
+          _serializers,
+          actionTypes,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -459,11 +620,13 @@ class AuditLogControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAuditLog),
-      ) as PageDataAuditLog;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAuditLog),
+                )
+                as PageDataAuditLog;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -485,5 +648,4 @@ class AuditLogControllerApi {
       extra: _response.extra,
     );
   }
-
 }

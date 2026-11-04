@@ -19,11 +19,17 @@ part 'alarm_rule_complex_filter_predicate.g.dart';
 /// AlarmRuleComplexFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [operation] 
-/// * [predicates] 
+/// * [type]
+/// * [operation]
+/// * [predicates]
 @BuiltValue()
-abstract class AlarmRuleComplexFilterPredicate implements AlarmRuleKeyFilterPredicate, Built<AlarmRuleComplexFilterPredicate, AlarmRuleComplexFilterPredicateBuilder> {
+abstract class AlarmRuleComplexFilterPredicate
+    implements
+        AlarmRuleKeyFilterPredicate,
+        Built<
+          AlarmRuleComplexFilterPredicate,
+          AlarmRuleComplexFilterPredicateBuilder
+        > {
   @BuiltValueField(wireName: r'predicates')
   BuiltList<AlarmRuleKeyFilterPredicate>? get predicates;
 
@@ -33,18 +39,25 @@ abstract class AlarmRuleComplexFilterPredicate implements AlarmRuleKeyFilterPred
 
   AlarmRuleComplexFilterPredicate._();
 
-  factory AlarmRuleComplexFilterPredicate([void updates(AlarmRuleComplexFilterPredicateBuilder b)]) = _$AlarmRuleComplexFilterPredicate;
+  factory AlarmRuleComplexFilterPredicate([
+    void updates(AlarmRuleComplexFilterPredicateBuilder b),
+  ]) = _$AlarmRuleComplexFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmRuleComplexFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmRuleComplexFilterPredicate> get serializer => _$AlarmRuleComplexFilterPredicateSerializer();
+  static Serializer<AlarmRuleComplexFilterPredicate> get serializer =>
+      _$AlarmRuleComplexFilterPredicateSerializer();
 }
 
-class _$AlarmRuleComplexFilterPredicateSerializer implements PrimitiveSerializer<AlarmRuleComplexFilterPredicate> {
+class _$AlarmRuleComplexFilterPredicateSerializer
+    implements PrimitiveSerializer<AlarmRuleComplexFilterPredicate> {
   @override
-  final Iterable<Type> types = const [AlarmRuleComplexFilterPredicate, _$AlarmRuleComplexFilterPredicate];
+  final Iterable<Type> types = const [
+    AlarmRuleComplexFilterPredicate,
+    _$AlarmRuleComplexFilterPredicate,
+  ];
 
   @override
   final String wireName = r'AlarmRuleComplexFilterPredicate';
@@ -70,7 +83,9 @@ class _$AlarmRuleComplexFilterPredicateSerializer implements PrimitiveSerializer
       yield r'predicates';
       yield serializers.serialize(
         object.predicates,
-        specifiedType: const FullType(BuiltList, [FullType(AlarmRuleKeyFilterPredicate)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(AlarmRuleKeyFilterPredicate),
+        ]),
       );
     }
   }
@@ -81,7 +96,11 @@ class _$AlarmRuleComplexFilterPredicateSerializer implements PrimitiveSerializer
     AlarmRuleComplexFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,25 +116,35 @@ class _$AlarmRuleComplexFilterPredicateSerializer implements PrimitiveSerializer
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.operation = valueDes;
           break;
         case r'predicates':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmRuleKeyFilterPredicate)]),
-          ) as BuiltList<AlarmRuleKeyFilterPredicate>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmRuleKeyFilterPredicate),
+                    ]),
+                  )
+                  as BuiltList<AlarmRuleKeyFilterPredicate>?;
           if (valueDes == null) continue;
           result.predicates.replace(valueDes);
           break;
@@ -147,5 +176,3 @@ class _$AlarmRuleComplexFilterPredicateSerializer implements PrimitiveSerializer
     return result.build();
   }
 }
-
-

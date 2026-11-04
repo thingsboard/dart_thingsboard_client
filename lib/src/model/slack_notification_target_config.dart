@@ -19,12 +19,18 @@ part 'slack_notification_target_config.g.dart';
 /// SlackNotificationTargetConfig
 ///
 /// Properties:
-/// * [description] 
-/// * [type] 
-/// * [conversationType] 
-/// * [conversation] 
+/// * [description]
+/// * [type]
+/// * [conversationType]
+/// * [conversation]
 @BuiltValue()
-abstract class SlackNotificationTargetConfig implements NotificationTargetConfig, Built<SlackNotificationTargetConfig, SlackNotificationTargetConfigBuilder> {
+abstract class SlackNotificationTargetConfig
+    implements
+        NotificationTargetConfig,
+        Built<
+          SlackNotificationTargetConfig,
+          SlackNotificationTargetConfigBuilder
+        > {
   @BuiltValueField(wireName: r'conversationType')
   SlackConversationType? get conversationType;
   // enum conversationTypeEnum {  DIRECT,  PUBLIC_CHANNEL,  PRIVATE_CHANNEL,  };
@@ -34,18 +40,25 @@ abstract class SlackNotificationTargetConfig implements NotificationTargetConfig
 
   SlackNotificationTargetConfig._();
 
-  factory SlackNotificationTargetConfig([void updates(SlackNotificationTargetConfigBuilder b)]) = _$SlackNotificationTargetConfig;
+  factory SlackNotificationTargetConfig([
+    void updates(SlackNotificationTargetConfigBuilder b),
+  ]) = _$SlackNotificationTargetConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SlackNotificationTargetConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SlackNotificationTargetConfig> get serializer => _$SlackNotificationTargetConfigSerializer();
+  static Serializer<SlackNotificationTargetConfig> get serializer =>
+      _$SlackNotificationTargetConfigSerializer();
 }
 
-class _$SlackNotificationTargetConfigSerializer implements PrimitiveSerializer<SlackNotificationTargetConfig> {
+class _$SlackNotificationTargetConfigSerializer
+    implements PrimitiveSerializer<SlackNotificationTargetConfig> {
   @override
-  final Iterable<Type> types = const [SlackNotificationTargetConfig, _$SlackNotificationTargetConfig];
+  final Iterable<Type> types = const [
+    SlackNotificationTargetConfig,
+    _$SlackNotificationTargetConfig,
+  ];
 
   @override
   final String wireName = r'SlackNotificationTargetConfig';
@@ -87,7 +100,11 @@ class _$SlackNotificationTargetConfigSerializer implements PrimitiveSerializer<S
     SlackNotificationTargetConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,33 +120,43 @@ class _$SlackNotificationTargetConfigSerializer implements PrimitiveSerializer<S
       final value = serializedList[i + 1];
       switch (key) {
         case r'conversationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SlackConversationType),
-          ) as SlackConversationType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      SlackConversationType,
+                    ),
+                  )
+                  as SlackConversationType?;
           if (valueDes == null) continue;
           result.conversationType = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'conversation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SlackConversation),
-          ) as SlackConversation;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SlackConversation),
+                  )
+                  as SlackConversation;
           result.conversation.replace(valueDes);
           break;
         default:
@@ -160,5 +187,3 @@ class _$SlackNotificationTargetConfigSerializer implements PrimitiveSerializer<S
     return result.build();
   }
 }
-
-

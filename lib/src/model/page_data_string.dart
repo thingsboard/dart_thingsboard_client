@@ -22,7 +22,8 @@ part 'page_data_string.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataString implements Built<PageDataString, PageDataStringBuilder> {
+abstract class PageDataString
+    implements Built<PageDataString, PageDataStringBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<String>? get data;
@@ -41,16 +42,19 @@ abstract class PageDataString implements Built<PageDataString, PageDataStringBui
 
   PageDataString._();
 
-  factory PageDataString([void updates(PageDataStringBuilder b)]) = _$PageDataString;
+  factory PageDataString([void updates(PageDataStringBuilder b)]) =
+      _$PageDataString;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataStringBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataString> get serializer => _$PageDataStringSerializer();
+  static Serializer<PageDataString> get serializer =>
+      _$PageDataStringSerializer();
 }
 
-class _$PageDataStringSerializer implements PrimitiveSerializer<PageDataString> {
+class _$PageDataStringSerializer
+    implements PrimitiveSerializer<PageDataString> {
   @override
   final Iterable<Type> types = const [PageDataString, _$PageDataString];
 
@@ -98,7 +102,11 @@ class _$PageDataStringSerializer implements PrimitiveSerializer<PageDataString> 
     PageDataString object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -114,34 +122,44 @@ class _$PageDataStringSerializer implements PrimitiveSerializer<PageDataString> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -173,5 +191,3 @@ class _$PageDataStringSerializer implements PrimitiveSerializer<PageDataString> 
     return result.build();
   }
 }
-
-

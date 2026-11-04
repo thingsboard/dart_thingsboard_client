@@ -16,11 +16,12 @@ part 'system_setup_request.g.dart';
 /// SystemSetupRequest
 ///
 /// Properties:
-/// * [email] 
-/// * [password] 
-/// * [loadDemo] 
+/// * [email]
+/// * [password]
+/// * [loadDemo]
 @BuiltValue()
-abstract class SystemSetupRequest implements Built<SystemSetupRequest, SystemSetupRequestBuilder> {
+abstract class SystemSetupRequest
+    implements Built<SystemSetupRequest, SystemSetupRequestBuilder> {
   @BuiltValueField(wireName: r'email')
   String get email;
 
@@ -32,16 +33,19 @@ abstract class SystemSetupRequest implements Built<SystemSetupRequest, SystemSet
 
   SystemSetupRequest._();
 
-  factory SystemSetupRequest([void updates(SystemSetupRequestBuilder b)]) = _$SystemSetupRequest;
+  factory SystemSetupRequest([void updates(SystemSetupRequestBuilder b)]) =
+      _$SystemSetupRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SystemSetupRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SystemSetupRequest> get serializer => _$SystemSetupRequestSerializer();
+  static Serializer<SystemSetupRequest> get serializer =>
+      _$SystemSetupRequestSerializer();
 }
 
-class _$SystemSetupRequestSerializer implements PrimitiveSerializer<SystemSetupRequest> {
+class _$SystemSetupRequestSerializer
+    implements PrimitiveSerializer<SystemSetupRequest> {
   @override
   final Iterable<Type> types = const [SystemSetupRequest, _$SystemSetupRequest];
 
@@ -78,7 +82,11 @@ class _$SystemSetupRequestSerializer implements PrimitiveSerializer<SystemSetupR
     SystemSetupRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -94,24 +102,30 @@ class _$SystemSetupRequestSerializer implements PrimitiveSerializer<SystemSetupR
       final value = serializedList[i + 1];
       switch (key) {
         case r'email':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.email = valueDes;
           break;
         case r'password':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.password = valueDes;
           break;
         case r'loadDemo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.loadDemo = valueDes;
           break;
@@ -143,5 +157,3 @@ class _$SystemSetupRequestSerializer implements PrimitiveSerializer<SystemSetupR
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'processing_start_status.g.dart';
 
 class ProcessingStartStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DELIVERY_FAIL')
   static const ProcessingStartStatus DELIVERY_FAIL = _$DELIVERY_FAIL;
   @BuiltValueEnumConst(wireName: r'PENDING')
@@ -23,11 +22,13 @@ class ProcessingStartStatus extends EnumClass {
   @BuiltValueEnumConst(wireName: r'DELIVERED')
   static const ProcessingStartStatus DELIVERED = _$DELIVERED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ProcessingStartStatus unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ProcessingStartStatus unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ProcessingStartStatus> get serializer => _$processingStartStatusSerializer;
+  static Serializer<ProcessingStartStatus> get serializer =>
+      _$processingStartStatusSerializer;
 
-  const ProcessingStartStatus._(String name): super(name);
+  const ProcessingStartStatus._(String name) : super(name);
 
   static BuiltSet<ProcessingStartStatus> get values => _$values;
   static ProcessingStartStatus valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class ProcessingStartStatus extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class ProcessingStartStatusMixin = Object with _$ProcessingStartStatusMixin;
-
+abstract class ProcessingStartStatusMixin = Object
+    with _$ProcessingStartStatusMixin;

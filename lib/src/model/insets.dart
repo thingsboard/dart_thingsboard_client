@@ -16,10 +16,10 @@ part 'insets.g.dart';
 /// Insets
 ///
 /// Properties:
-/// * [left] 
-/// * [right] 
-/// * [top] 
-/// * [bottom] 
+/// * [left]
+/// * [right]
+/// * [top]
+/// * [bottom]
 @BuiltValue()
 abstract class Insets implements Built<Insets, InsetsBuilder> {
   @BuiltValueField(wireName: r'left')
@@ -93,7 +93,11 @@ class _$InsetsSerializer implements PrimitiveSerializer<Insets> {
     Insets object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,34 +113,42 @@ class _$InsetsSerializer implements PrimitiveSerializer<Insets> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'left':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.left = valueDes;
           break;
         case r'right':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.right = valueDes;
           break;
         case r'top':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.top = valueDes;
           break;
         case r'bottom':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.bottom = valueDes;
           break;
@@ -168,5 +180,3 @@ class _$InsetsSerializer implements PrimitiveSerializer<Insets> {
     return result.build();
   }
 }
-
-

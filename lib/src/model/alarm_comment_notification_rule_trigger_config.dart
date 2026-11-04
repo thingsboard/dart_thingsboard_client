@@ -21,14 +21,20 @@ part 'alarm_comment_notification_rule_trigger_config.g.dart';
 /// AlarmCommentNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [alarmTypes] 
-/// * [alarmSeverities] 
-/// * [alarmStatuses] 
-/// * [onlyUserComments] 
-/// * [notifyOnCommentUpdate] 
+/// * [triggerType]
+/// * [alarmTypes]
+/// * [alarmSeverities]
+/// * [alarmStatuses]
+/// * [onlyUserComments]
+/// * [notifyOnCommentUpdate]
 @BuiltValue()
-abstract class AlarmCommentNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<AlarmCommentNotificationRuleTriggerConfig, AlarmCommentNotificationRuleTriggerConfigBuilder> {
+abstract class AlarmCommentNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          AlarmCommentNotificationRuleTriggerConfig,
+          AlarmCommentNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'notifyOnCommentUpdate')
   bool? get notifyOnCommentUpdate;
 
@@ -46,18 +52,26 @@ abstract class AlarmCommentNotificationRuleTriggerConfig implements Notification
 
   AlarmCommentNotificationRuleTriggerConfig._();
 
-  factory AlarmCommentNotificationRuleTriggerConfig([void updates(AlarmCommentNotificationRuleTriggerConfigBuilder b)]) = _$AlarmCommentNotificationRuleTriggerConfig;
+  factory AlarmCommentNotificationRuleTriggerConfig([
+    void updates(AlarmCommentNotificationRuleTriggerConfigBuilder b),
+  ]) = _$AlarmCommentNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AlarmCommentNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(AlarmCommentNotificationRuleTriggerConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmCommentNotificationRuleTriggerConfig> get serializer => _$AlarmCommentNotificationRuleTriggerConfigSerializer();
+  static Serializer<AlarmCommentNotificationRuleTriggerConfig> get serializer =>
+      _$AlarmCommentNotificationRuleTriggerConfigSerializer();
 }
 
-class _$AlarmCommentNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<AlarmCommentNotificationRuleTriggerConfig> {
+class _$AlarmCommentNotificationRuleTriggerConfigSerializer
+    implements PrimitiveSerializer<AlarmCommentNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [AlarmCommentNotificationRuleTriggerConfig, _$AlarmCommentNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    AlarmCommentNotificationRuleTriggerConfig,
+    _$AlarmCommentNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'AlarmCommentNotificationRuleTriggerConfig';
@@ -115,7 +129,11 @@ class _$AlarmCommentNotificationRuleTriggerConfigSerializer implements Primitive
     AlarmCommentNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -131,49 +149,67 @@ class _$AlarmCommentNotificationRuleTriggerConfigSerializer implements Primitive
       final value = serializedList[i + 1];
       switch (key) {
         case r'onlyUserComments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.onlyUserComments = valueDes;
           break;
         case r'notifyOnCommentUpdate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notifyOnCommentUpdate = valueDes;
           break;
         case r'alarmTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.alarmTypes.replace(valueDes);
           break;
         case r'alarmStatuses':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(AlarmSearchStatus)]),
-          ) as BuiltSet<AlarmSearchStatus>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(AlarmSearchStatus),
+                    ]),
+                  )
+                  as BuiltSet<AlarmSearchStatus>?;
           if (valueDes == null) continue;
           result.alarmStatuses.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'alarmSeverities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(AlarmSeverity)]),
-          ) as BuiltSet<AlarmSeverity>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(AlarmSeverity),
+                    ]),
+                  )
+                  as BuiltSet<AlarmSeverity>?;
           if (valueDes == null) continue;
           result.alarmSeverities.replace(valueDes);
           break;
@@ -205,5 +241,3 @@ class _$AlarmCommentNotificationRuleTriggerConfigSerializer implements Primitive
     return result.build();
   }
 }
-
-

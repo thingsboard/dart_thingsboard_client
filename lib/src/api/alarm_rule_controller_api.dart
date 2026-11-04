@@ -14,18 +14,15 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/alarm_rule_definition.dart';
 import 'package:thingsboard_client/src/model/entity_type.dart';
 import 'package:thingsboard_client/src/model/page_data_alarm_rule_definition.dart';
 import 'package:thingsboard_client/src/model/page_data_alarm_rule_definition_info.dart';
 import 'package:thingsboard_client/src/model/page_data_string.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AlarmRuleControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -36,7 +33,7 @@ class AlarmRuleControllerApi {
   /// Deletes the alarm rule. Referencing non-existing Alarm Rule Id will cause an error.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [alarmRuleId] 
+  /// * [alarmRuleId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -46,7 +43,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteAlarmRule({ 
+  Future<Response<void>> deleteAlarmRule({
     required String alarmRuleId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -56,12 +53,19 @@ class AlarmRuleControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/alarm/rule/{alarmRuleId}'.replaceAll('{' r'alarmRuleId' '}', encodeQueryParameter(_serializers, alarmRuleId, const FullType(String)).toString());
+    final _path = r'/api/alarm/rule/{alarmRuleId}'.replaceAll(
+      '{'
+      r'alarmRuleId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        alarmRuleId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -69,11 +73,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -95,7 +96,7 @@ class AlarmRuleControllerApi {
   /// Fetch the Alarm Rule object based on the provided Alarm Rule Id.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [alarmRuleId] 
+  /// * [alarmRuleId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -105,7 +106,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AlarmRuleDefinition] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AlarmRuleDefinition>> getAlarmRuleById({ 
+  Future<Response<AlarmRuleDefinition>> getAlarmRuleById({
     required String alarmRuleId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -114,13 +115,21 @@ class AlarmRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAlarmRuleDefinition);
-    final _path = r'/api/alarm/rule/{alarmRuleId}'.replaceAll('{' r'alarmRuleId' '}', encodeQueryParameter(_serializers, alarmRuleId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAlarmRuleDefinition);
+    final _path = r'/api/alarm/rule/{alarmRuleId}'.replaceAll(
+      '{'
+      r'alarmRuleId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        alarmRuleId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -128,11 +137,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -151,11 +157,13 @@ class AlarmRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AlarmRuleDefinition),
-      ) as AlarmRuleDefinition;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AlarmRuleDefinition),
+                )
+                as AlarmRuleDefinition;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -195,7 +203,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataString] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataString>> getAlarmRuleNames({ 
+  Future<Response<PageDataString>> getAlarmRuleNames({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -207,13 +215,12 @@ class AlarmRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataString);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataString);
     final _path = r'/api/alarm/rules/names';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -221,11 +228,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -233,10 +237,24 @@ class AlarmRuleControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -252,11 +270,13 @@ class AlarmRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataString),
-      ) as PageDataString;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataString),
+                )
+                as PageDataString;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -299,7 +319,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAlarmRuleDefinitionInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAlarmRuleDefinitionInfo>> getAlarmRules({ 
+  Future<Response<PageDataAlarmRuleDefinitionInfo>> getAlarmRules({
     required int pageSize,
     required int page,
     EntityType? entityType,
@@ -314,13 +334,13 @@ class AlarmRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSetOfStringAndPageDataAlarmRuleDefinitionInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerSetOfStringAndPageDataAlarmRuleDefinitionInfo);
     final _path = r'/api/alarm/rules';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -328,11 +348,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -340,13 +357,43 @@ class AlarmRuleControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (entityType != null) r'entityType': encodeQueryParameter(_serializers, entityType, const FullType(EntityType)),
-      if (entities != null) r'entities': encodeCollectionQueryParameter<String>(_serializers, entities, const FullType(BuiltSet, [FullType(String)]), format: ListFormat.multi,),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (entityType != null)
+        r'entityType': encodeQueryParameter(
+          _serializers,
+          entityType,
+          const FullType(EntityType),
+        ),
+      if (entities != null)
+        r'entities': encodeCollectionQueryParameter<String>(
+          _serializers,
+          entities,
+          const FullType(BuiltSet, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -362,11 +409,15 @@ class AlarmRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAlarmRuleDefinitionInfo),
-      ) as PageDataAlarmRuleDefinitionInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(
+                    PageDataAlarmRuleDefinitionInfo,
+                  ),
+                )
+                as PageDataAlarmRuleDefinitionInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -409,7 +460,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAlarmRuleDefinition] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAlarmRuleDefinition>> getAlarmRulesByEntityId({ 
+  Future<Response<PageDataAlarmRuleDefinition>> getAlarmRulesByEntityId({
     required String entityType,
     required String entityId,
     required int pageSize,
@@ -424,13 +475,33 @@ class AlarmRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAlarmRuleDefinition);
-    final _path = r'/api/alarm/rules/{entityType}/{entityId}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerPageDataAlarmRuleDefinition);
+    final _path = r'/api/alarm/rules/{entityType}/{entityId}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -438,11 +509,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -450,11 +518,30 @@ class AlarmRuleControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -470,11 +557,13 @@ class AlarmRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAlarmRuleDefinition),
-      ) as PageDataAlarmRuleDefinition;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAlarmRuleDefinition),
+                )
+                as PageDataAlarmRuleDefinition;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -501,7 +590,7 @@ class AlarmRuleControllerApi {
   /// Gets latest alarm rule debug event for specified alarm rule id. Referencing non-existing alarm rule id will cause an error.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [alarmRuleId] 
+  /// * [alarmRuleId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -511,7 +600,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getLatestAlarmRuleDebugEvent({ 
+  Future<Response<JsonObject>> getLatestAlarmRuleDebugEvent({
     required String alarmRuleId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -521,12 +610,19 @@ class AlarmRuleControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/alarm/rule/{alarmRuleId}/debug'.replaceAll('{' r'alarmRuleId' '}', encodeQueryParameter(_serializers, alarmRuleId, const FullType(String)).toString());
+    final _path = r'/api/alarm/rule/{alarmRuleId}/debug'.replaceAll(
+      '{'
+      r'alarmRuleId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        alarmRuleId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -534,11 +630,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -557,11 +650,13 @@ class AlarmRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -598,7 +693,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AlarmRuleDefinition] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AlarmRuleDefinition>> saveAlarmRule({ 
+  Future<Response<AlarmRuleDefinition>> saveAlarmRule({
     required AlarmRuleDefinition alarmRuleDefinition,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -607,13 +702,12 @@ class AlarmRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAlarmRuleDefinition);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAlarmRuleDefinition);
     final _path = r'/api/alarm/rule';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -621,11 +715,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -637,14 +728,13 @@ class AlarmRuleControllerApi {
 
     try {
       const _type = FullType(AlarmRuleDefinition);
-      _bodyData = _serializers.serialize(alarmRuleDefinition, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        alarmRuleDefinition,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -664,11 +754,13 @@ class AlarmRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AlarmRuleDefinition),
-      ) as AlarmRuleDefinition;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AlarmRuleDefinition),
+                )
+                as AlarmRuleDefinition;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -705,7 +797,7 @@ class AlarmRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> testAlarmRuleScript({ 
+  Future<Response<JsonObject>> testAlarmRuleScript({
     JsonObject? body,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -718,9 +810,7 @@ class AlarmRuleControllerApi {
     final _path = r'/api/alarm/rule/testScript';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -728,11 +818,8 @@ class AlarmRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -744,13 +831,9 @@ class AlarmRuleControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -770,11 +853,13 @@ class AlarmRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -796,5 +881,4 @@ class AlarmRuleControllerApi {
       extra: _response.extra,
     );
   }
-
 }

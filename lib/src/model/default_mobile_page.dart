@@ -19,13 +19,14 @@ part 'default_mobile_page.g.dart';
 /// DefaultMobilePage
 ///
 /// Properties:
-/// * [type] 
-/// * [visible] 
+/// * [type]
+/// * [visible]
 /// * [label] - Page label
 /// * [icon] - URL of the page icon
 /// * [id] - Identifier for default page
 @BuiltValue()
-abstract class DefaultMobilePage implements MobilePage, Built<DefaultMobilePage, DefaultMobilePageBuilder> {
+abstract class DefaultMobilePage
+    implements MobilePage, Built<DefaultMobilePage, DefaultMobilePageBuilder> {
   /// URL of the page icon
   @BuiltValueField(wireName: r'icon')
   String? get icon;
@@ -41,16 +42,19 @@ abstract class DefaultMobilePage implements MobilePage, Built<DefaultMobilePage,
 
   DefaultMobilePage._();
 
-  factory DefaultMobilePage([void updates(DefaultMobilePageBuilder b)]) = _$DefaultMobilePage;
+  factory DefaultMobilePage([void updates(DefaultMobilePageBuilder b)]) =
+      _$DefaultMobilePage;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultMobilePageBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultMobilePage> get serializer => _$DefaultMobilePageSerializer();
+  static Serializer<DefaultMobilePage> get serializer =>
+      _$DefaultMobilePageSerializer();
 }
 
-class _$DefaultMobilePageSerializer implements PrimitiveSerializer<DefaultMobilePage> {
+class _$DefaultMobilePageSerializer
+    implements PrimitiveSerializer<DefaultMobilePage> {
   @override
   final Iterable<Type> types = const [DefaultMobilePage, _$DefaultMobilePage];
 
@@ -103,7 +107,11 @@ class _$DefaultMobilePageSerializer implements PrimitiveSerializer<DefaultMobile
     DefaultMobilePage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -119,42 +127,52 @@ class _$DefaultMobilePageSerializer implements PrimitiveSerializer<DefaultMobile
       final value = serializedList[i + 1];
       switch (key) {
         case r'icon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.icon = valueDes;
           break;
         case r'label':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.label = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DefaultPageId),
-          ) as DefaultPageId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DefaultPageId),
+                  )
+                  as DefaultPageId?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'visible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.visible = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MobilePageType),
-          ) as MobilePageType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MobilePageType),
+                  )
+                  as MobilePageType;
           result.type = valueDes;
           break;
         default:
@@ -185,5 +203,3 @@ class _$DefaultMobilePageSerializer implements PrimitiveSerializer<DefaultMobile
     return result.build();
   }
 }
-
-

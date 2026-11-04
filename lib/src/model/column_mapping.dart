@@ -17,10 +17,11 @@ part 'column_mapping.g.dart';
 /// ColumnMapping
 ///
 /// Properties:
-/// * [type] 
-/// * [key] 
+/// * [type]
+/// * [key]
 @BuiltValue()
-abstract class ColumnMapping implements Built<ColumnMapping, ColumnMappingBuilder> {
+abstract class ColumnMapping
+    implements Built<ColumnMapping, ColumnMappingBuilder> {
   @BuiltValueField(wireName: r'type')
   BulkImportColumnType? get type;
   // enum typeEnum {  NAME,  TYPE,  LABEL,  SHARED_ATTRIBUTE,  SERVER_ATTRIBUTE,  TIMESERIES,  ACCESS_TOKEN,  X509,  MQTT_CLIENT_ID,  MQTT_USER_NAME,  MQTT_PASSWORD,  LWM2M_CLIENT_ENDPOINT,  LWM2M_CLIENT_SECURITY_CONFIG_MODE,  LWM2M_CLIENT_IDENTITY,  LWM2M_CLIENT_KEY,  LWM2M_CLIENT_CERT,  LWM2M_BOOTSTRAP_SERVER_SECURITY_MODE,  LWM2M_BOOTSTRAP_SERVER_PUBLIC_KEY_OR_ID,  LWM2M_BOOTSTRAP_SERVER_SECRET_KEY,  LWM2M_SERVER_SECURITY_MODE,  LWM2M_SERVER_CLIENT_PUBLIC_KEY_OR_ID,  LWM2M_SERVER_CLIENT_SECRET_KEY,  SNMP_HOST,  SNMP_PORT,  SNMP_VERSION,  SNMP_COMMUNITY_STRING,  IS_GATEWAY,  DESCRIPTION,  EDGE_LICENSE_KEY,  CLOUD_ENDPOINT,  ROUTING_KEY,  SECRET,  };
@@ -30,13 +31,15 @@ abstract class ColumnMapping implements Built<ColumnMapping, ColumnMappingBuilde
 
   ColumnMapping._();
 
-  factory ColumnMapping([void updates(ColumnMappingBuilder b)]) = _$ColumnMapping;
+  factory ColumnMapping([void updates(ColumnMappingBuilder b)]) =
+      _$ColumnMapping;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ColumnMappingBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ColumnMapping> get serializer => _$ColumnMappingSerializer();
+  static Serializer<ColumnMapping> get serializer =>
+      _$ColumnMappingSerializer();
 }
 
 class _$ColumnMappingSerializer implements PrimitiveSerializer<ColumnMapping> {
@@ -73,7 +76,11 @@ class _$ColumnMappingSerializer implements PrimitiveSerializer<ColumnMapping> {
     ColumnMapping object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +96,24 @@ class _$ColumnMappingSerializer implements PrimitiveSerializer<ColumnMapping> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BulkImportColumnType),
-          ) as BulkImportColumnType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      BulkImportColumnType,
+                    ),
+                  )
+                  as BulkImportColumnType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
@@ -132,5 +145,3 @@ class _$ColumnMappingSerializer implements PrimitiveSerializer<ColumnMapping> {
     return result.build();
   }
 }
-
-

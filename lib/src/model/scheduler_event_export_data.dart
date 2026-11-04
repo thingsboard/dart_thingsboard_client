@@ -23,27 +23,37 @@ part 'scheduler_event_export_data.g.dart';
 /// SchedulerEventExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class SchedulerEventExportData implements EntityExportData, Built<SchedulerEventExportData, SchedulerEventExportDataBuilder> {
+abstract class SchedulerEventExportData
+    implements
+        EntityExportData,
+        Built<SchedulerEventExportData, SchedulerEventExportDataBuilder> {
   SchedulerEventExportData._();
 
-  factory SchedulerEventExportData([void updates(SchedulerEventExportDataBuilder b)]) = _$SchedulerEventExportData;
+  factory SchedulerEventExportData([
+    void updates(SchedulerEventExportDataBuilder b),
+  ]) = _$SchedulerEventExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SchedulerEventExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SchedulerEventExportData> get serializer => _$SchedulerEventExportDataSerializer();
+  static Serializer<SchedulerEventExportData> get serializer =>
+      _$SchedulerEventExportDataSerializer();
 }
 
-class _$SchedulerEventExportDataSerializer implements PrimitiveSerializer<SchedulerEventExportData> {
+class _$SchedulerEventExportDataSerializer
+    implements PrimitiveSerializer<SchedulerEventExportData> {
   @override
-  final Iterable<Type> types = const [SchedulerEventExportData, _$SchedulerEventExportData];
+  final Iterable<Type> types = const [
+    SchedulerEventExportData,
+    _$SchedulerEventExportData,
+  ];
 
   @override
   final String wireName = r'SchedulerEventExportData';
@@ -57,7 +67,10 @@ class _$SchedulerEventExportDataSerializer implements PrimitiveSerializer<Schedu
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +107,11 @@ class _$SchedulerEventExportDataSerializer implements PrimitiveSerializer<Schedu
     SchedulerEventExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +127,58 @@ class _$SchedulerEventExportDataSerializer implements PrimitiveSerializer<Schedu
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +210,3 @@ class _$SchedulerEventExportDataSerializer implements PrimitiveSerializer<Schedu
     return result.build();
   }
 }
-
-

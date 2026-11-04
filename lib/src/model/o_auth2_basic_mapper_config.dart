@@ -26,10 +26,11 @@ part 'o_auth2_basic_mapper_config.g.dart';
 /// * [customerNamePattern] - Customer name pattern. When creating a user on the first OAuth2 log in, if specified, customer name will be used to create or find existing customer in the platform and assign customerId to the user
 /// * [defaultDashboardName] - Name of the tenant's dashboard to set as default dashboard for newly created user
 /// * [alwaysFullScreen] - Whether default dashboard should be open in full screen
-/// * [parentCustomerNamePattern] 
-/// * [userGroupsNamePattern] 
+/// * [parentCustomerNamePattern]
+/// * [userGroupsNamePattern]
 @BuiltValue()
-abstract class OAuth2BasicMapperConfig implements Built<OAuth2BasicMapperConfig, OAuth2BasicMapperConfigBuilder> {
+abstract class OAuth2BasicMapperConfig
+    implements Built<OAuth2BasicMapperConfig, OAuth2BasicMapperConfigBuilder> {
   /// Email attribute key of OAuth2 principal attributes. Must be specified for BASIC mapper type and cannot be specified for GITHUB type
   @BuiltValueField(wireName: r'emailAttributeKey')
   String? get emailAttributeKey;
@@ -71,18 +72,25 @@ abstract class OAuth2BasicMapperConfig implements Built<OAuth2BasicMapperConfig,
 
   OAuth2BasicMapperConfig._();
 
-  factory OAuth2BasicMapperConfig([void updates(OAuth2BasicMapperConfigBuilder b)]) = _$OAuth2BasicMapperConfig;
+  factory OAuth2BasicMapperConfig([
+    void updates(OAuth2BasicMapperConfigBuilder b),
+  ]) = _$OAuth2BasicMapperConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OAuth2BasicMapperConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OAuth2BasicMapperConfig> get serializer => _$OAuth2BasicMapperConfigSerializer();
+  static Serializer<OAuth2BasicMapperConfig> get serializer =>
+      _$OAuth2BasicMapperConfigSerializer();
 }
 
-class _$OAuth2BasicMapperConfigSerializer implements PrimitiveSerializer<OAuth2BasicMapperConfig> {
+class _$OAuth2BasicMapperConfigSerializer
+    implements PrimitiveSerializer<OAuth2BasicMapperConfig> {
   @override
-  final Iterable<Type> types = const [OAuth2BasicMapperConfig, _$OAuth2BasicMapperConfig];
+  final Iterable<Type> types = const [
+    OAuth2BasicMapperConfig,
+    _$OAuth2BasicMapperConfig,
+  ];
 
   @override
   final String wireName = r'OAuth2BasicMapperConfig';
@@ -168,7 +176,11 @@ class _$OAuth2BasicMapperConfigSerializer implements PrimitiveSerializer<OAuth2B
     OAuth2BasicMapperConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -184,81 +196,103 @@ class _$OAuth2BasicMapperConfigSerializer implements PrimitiveSerializer<OAuth2B
       final value = serializedList[i + 1];
       switch (key) {
         case r'emailAttributeKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.emailAttributeKey = valueDes;
           break;
         case r'firstNameAttributeKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.firstNameAttributeKey = valueDes;
           break;
         case r'lastNameAttributeKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.lastNameAttributeKey = valueDes;
           break;
         case r'tenantNameStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TenantNameStrategyType),
-          ) as TenantNameStrategyType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TenantNameStrategyType),
+                  )
+                  as TenantNameStrategyType;
           result.tenantNameStrategy = valueDes;
           break;
         case r'tenantNamePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tenantNamePattern = valueDes;
           break;
         case r'customerNamePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.customerNamePattern = valueDes;
           break;
         case r'defaultDashboardName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultDashboardName = valueDes;
           break;
         case r'alwaysFullScreen':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.alwaysFullScreen = valueDes;
           break;
         case r'parentCustomerNamePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.parentCustomerNamePattern = valueDes;
           break;
         case r'userGroupsNamePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.userGroupsNamePattern.replace(valueDes);
           break;
@@ -290,5 +324,3 @@ class _$OAuth2BasicMapperConfigSerializer implements PrimitiveSerializer<OAuth2B
     return result.build();
   }
 }
-
-

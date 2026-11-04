@@ -16,9 +16,10 @@ part 'claim_request.g.dart';
 /// Claiming request which can optionally contain secret key
 ///
 /// Properties:
-/// * [secretKey] 
+/// * [secretKey]
 @BuiltValue()
-abstract class ClaimRequest implements Built<ClaimRequest, ClaimRequestBuilder> {
+abstract class ClaimRequest
+    implements Built<ClaimRequest, ClaimRequestBuilder> {
   @BuiltValueField(wireName: r'secretKey')
   String? get secretKey;
 
@@ -60,7 +61,11 @@ class _$ClaimRequestSerializer implements PrimitiveSerializer<ClaimRequest> {
     ClaimRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +81,12 @@ class _$ClaimRequestSerializer implements PrimitiveSerializer<ClaimRequest> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'secretKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.secretKey = valueDes;
           break;
@@ -111,5 +118,3 @@ class _$ClaimRequestSerializer implements PrimitiveSerializer<ClaimRequest> {
     return result.build();
   }
 }
-
-

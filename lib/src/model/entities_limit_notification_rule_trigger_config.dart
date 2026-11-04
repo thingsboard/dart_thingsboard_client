@@ -20,11 +20,17 @@ part 'entities_limit_notification_rule_trigger_config.g.dart';
 /// EntitiesLimitNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [entityTypes] 
-/// * [threshold] 
+/// * [triggerType]
+/// * [entityTypes]
+/// * [threshold]
 @BuiltValue()
-abstract class EntitiesLimitNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<EntitiesLimitNotificationRuleTriggerConfig, EntitiesLimitNotificationRuleTriggerConfigBuilder> {
+abstract class EntitiesLimitNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          EntitiesLimitNotificationRuleTriggerConfig,
+          EntitiesLimitNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'entityTypes')
   BuiltSet<EntityType>? get entityTypes;
 
@@ -33,18 +39,26 @@ abstract class EntitiesLimitNotificationRuleTriggerConfig implements Notificatio
 
   EntitiesLimitNotificationRuleTriggerConfig._();
 
-  factory EntitiesLimitNotificationRuleTriggerConfig([void updates(EntitiesLimitNotificationRuleTriggerConfigBuilder b)]) = _$EntitiesLimitNotificationRuleTriggerConfig;
+  factory EntitiesLimitNotificationRuleTriggerConfig([
+    void updates(EntitiesLimitNotificationRuleTriggerConfigBuilder b),
+  ]) = _$EntitiesLimitNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EntitiesLimitNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(EntitiesLimitNotificationRuleTriggerConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntitiesLimitNotificationRuleTriggerConfig> get serializer => _$EntitiesLimitNotificationRuleTriggerConfigSerializer();
+  static Serializer<EntitiesLimitNotificationRuleTriggerConfig>
+  get serializer => _$EntitiesLimitNotificationRuleTriggerConfigSerializer();
 }
 
-class _$EntitiesLimitNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<EntitiesLimitNotificationRuleTriggerConfig> {
+class _$EntitiesLimitNotificationRuleTriggerConfigSerializer
+    implements PrimitiveSerializer<EntitiesLimitNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [EntitiesLimitNotificationRuleTriggerConfig, _$EntitiesLimitNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    EntitiesLimitNotificationRuleTriggerConfig,
+    _$EntitiesLimitNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'EntitiesLimitNotificationRuleTriggerConfig';
@@ -81,7 +95,11 @@ class _$EntitiesLimitNotificationRuleTriggerConfigSerializer implements Primitiv
     EntitiesLimitNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,26 +115,34 @@ class _$EntitiesLimitNotificationRuleTriggerConfigSerializer implements Primitiv
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(EntityType)]),
-          ) as BuiltSet<EntityType>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(EntityType),
+                    ]),
+                  )
+                  as BuiltSet<EntityType>?;
           if (valueDes == null) continue;
           result.entityTypes.replace(valueDes);
           break;
         case r'threshold':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.threshold = valueDes;
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         default:
@@ -147,5 +173,3 @@ class _$EntitiesLimitNotificationRuleTriggerConfigSerializer implements Primitiv
     return result.build();
   }
 }
-
-

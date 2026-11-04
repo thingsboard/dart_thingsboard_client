@@ -17,15 +17,16 @@ part 'legend_config.g.dart';
 /// LegendConfig
 ///
 /// Properties:
-/// * [position] 
-/// * [sortDataKeys] 
-/// * [showMin] 
-/// * [showMax] 
-/// * [showAvg] 
-/// * [showTotal] 
-/// * [showLatest] 
+/// * [position]
+/// * [sortDataKeys]
+/// * [showMin]
+/// * [showMax]
+/// * [showAvg]
+/// * [showTotal]
+/// * [showLatest]
 @BuiltValue()
-abstract class LegendConfig implements Built<LegendConfig, LegendConfigBuilder> {
+abstract class LegendConfig
+    implements Built<LegendConfig, LegendConfigBuilder> {
   @BuiltValueField(wireName: r'position')
   LegendPosition? get position;
   // enum positionEnum {  top,  bottom,  left,  right,  };
@@ -128,7 +129,11 @@ class _$LegendConfigSerializer implements PrimitiveSerializer<LegendConfig> {
     LegendConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -144,58 +149,72 @@ class _$LegendConfigSerializer implements PrimitiveSerializer<LegendConfig> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'position':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LegendPosition),
-          ) as LegendPosition?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LegendPosition),
+                  )
+                  as LegendPosition?;
           if (valueDes == null) continue;
           result.position = valueDes;
           break;
         case r'sortDataKeys':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.sortDataKeys = valueDes;
           break;
         case r'showMin':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showMin = valueDes;
           break;
         case r'showMax':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showMax = valueDes;
           break;
         case r'showAvg':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showAvg = valueDes;
           break;
         case r'showTotal':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTotal = valueDes;
           break;
         case r'showLatest':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showLatest = valueDes;
           break;
@@ -227,5 +246,3 @@ class _$LegendConfigSerializer implements PrimitiveSerializer<LegendConfig> {
     return result.build();
   }
 }
-
-

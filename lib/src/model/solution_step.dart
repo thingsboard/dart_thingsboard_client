@@ -15,17 +15,17 @@ import 'package:built_value/serializer.dart';
 part 'solution_step.g.dart';
 
 class SolutionStep extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'INITIAL_CONFIGURATION')
   static const SolutionStep INITIAL_CONFIGURATION = _$INITIAL_CONFIGURATION;
   @BuiltValueEnumConst(wireName: r'DASHBOARDS_CONFIGURATION')
-  static const SolutionStep DASHBOARDS_CONFIGURATION = _$DASHBOARDS_CONFIGURATION;
+  static const SolutionStep DASHBOARDS_CONFIGURATION =
+      _$DASHBOARDS_CONFIGURATION;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const SolutionStep unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
   static Serializer<SolutionStep> get serializer => _$solutionStepSerializer;
 
-  const SolutionStep._(String name): super(name);
+  const SolutionStep._(String name) : super(name);
 
   static BuiltSet<SolutionStep> get values => _$values;
   static SolutionStep valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class SolutionStep extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class SolutionStepMixin = Object with _$SolutionStepMixin;
-

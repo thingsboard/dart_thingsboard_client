@@ -23,12 +23,13 @@ part 'entity_relation_info.g.dart';
 /// * [to] - JSON object with [to] Entity Id.
 /// * [type] - String value of relation type.
 /// * [typeGroup] - Represents the type group of the relation.
-/// * [version] 
+/// * [version]
 /// * [additionalInfo] - Additional parameters of the relation.
 /// * [fromName] - Name of the entity for [from] direction.
 /// * [toName] - Name of the entity for [to] direction.
 @BuiltValue()
-abstract class EntityRelationInfo implements Built<EntityRelationInfo, EntityRelationInfoBuilder> {
+abstract class EntityRelationInfo
+    implements Built<EntityRelationInfo, EntityRelationInfoBuilder> {
   /// JSON object with [from] Entity Id.
   @BuiltValueField(wireName: r'from')
   EntityId get from;
@@ -63,16 +64,19 @@ abstract class EntityRelationInfo implements Built<EntityRelationInfo, EntityRel
 
   EntityRelationInfo._();
 
-  factory EntityRelationInfo([void updates(EntityRelationInfoBuilder b)]) = _$EntityRelationInfo;
+  factory EntityRelationInfo([void updates(EntityRelationInfoBuilder b)]) =
+      _$EntityRelationInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityRelationInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityRelationInfo> get serializer => _$EntityRelationInfoSerializer();
+  static Serializer<EntityRelationInfo> get serializer =>
+      _$EntityRelationInfoSerializer();
 }
 
-class _$EntityRelationInfoSerializer implements PrimitiveSerializer<EntityRelationInfo> {
+class _$EntityRelationInfoSerializer
+    implements PrimitiveSerializer<EntityRelationInfo> {
   @override
   final Iterable<Type> types = const [EntityRelationInfo, _$EntityRelationInfo];
 
@@ -140,7 +144,11 @@ class _$EntityRelationInfoSerializer implements PrimitiveSerializer<EntityRelati
     EntityRelationInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -156,62 +164,78 @@ class _$EntityRelationInfoSerializer implements PrimitiveSerializer<EntityRelati
       final value = serializedList[i + 1];
       switch (key) {
         case r'from':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityId),
-          ) as EntityId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityId),
+                  )
+                  as EntityId;
           result.from = valueDes;
           break;
         case r'to':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityId),
-          ) as EntityId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityId),
+                  )
+                  as EntityId;
           result.to = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'typeGroup':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RelationTypeGroup),
-          ) as RelationTypeGroup;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RelationTypeGroup),
+                  )
+                  as RelationTypeGroup;
           result.typeGroup = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'fromName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fromName = valueDes;
           break;
         case r'toName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.toName = valueDes;
           break;
@@ -243,5 +267,3 @@ class _$EntityRelationInfoSerializer implements PrimitiveSerializer<EntityRelati
     return result.build();
   }
 }
-
-

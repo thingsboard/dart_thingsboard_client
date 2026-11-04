@@ -19,13 +19,18 @@ part 'error_component_all_of_exception.g.dart';
 /// ErrorComponentAllOfException
 ///
 /// Properties:
-/// * [cause] 
-/// * [stackTrace] 
-/// * [message] 
-/// * [suppressed] 
-/// * [localizedMessage] 
+/// * [cause]
+/// * [stackTrace]
+/// * [message]
+/// * [suppressed]
+/// * [localizedMessage]
 @BuiltValue()
-abstract class ErrorComponentAllOfException implements Built<ErrorComponentAllOfException, ErrorComponentAllOfExceptionBuilder> {
+abstract class ErrorComponentAllOfException
+    implements
+        Built<
+          ErrorComponentAllOfException,
+          ErrorComponentAllOfExceptionBuilder
+        > {
   @BuiltValueField(wireName: r'cause')
   ErrorComponentAllOfExceptionCause? get cause;
 
@@ -43,18 +48,25 @@ abstract class ErrorComponentAllOfException implements Built<ErrorComponentAllOf
 
   ErrorComponentAllOfException._();
 
-  factory ErrorComponentAllOfException([void updates(ErrorComponentAllOfExceptionBuilder b)]) = _$ErrorComponentAllOfException;
+  factory ErrorComponentAllOfException([
+    void updates(ErrorComponentAllOfExceptionBuilder b),
+  ]) = _$ErrorComponentAllOfException;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ErrorComponentAllOfExceptionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ErrorComponentAllOfException> get serializer => _$ErrorComponentAllOfExceptionSerializer();
+  static Serializer<ErrorComponentAllOfException> get serializer =>
+      _$ErrorComponentAllOfExceptionSerializer();
 }
 
-class _$ErrorComponentAllOfExceptionSerializer implements PrimitiveSerializer<ErrorComponentAllOfException> {
+class _$ErrorComponentAllOfExceptionSerializer
+    implements PrimitiveSerializer<ErrorComponentAllOfException> {
   @override
-  final Iterable<Type> types = const [ErrorComponentAllOfException, _$ErrorComponentAllOfException];
+  final Iterable<Type> types = const [
+    ErrorComponentAllOfException,
+    _$ErrorComponentAllOfException,
+  ];
 
   @override
   final String wireName = r'ErrorComponentAllOfException';
@@ -75,7 +87,9 @@ class _$ErrorComponentAllOfExceptionSerializer implements PrimitiveSerializer<Er
       yield r'stackTrace';
       yield serializers.serialize(
         object.stackTrace,
-        specifiedType: const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCauseStackTrace)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(ErrorComponentAllOfExceptionCauseStackTrace),
+        ]),
       );
     }
     if (object.message != null) {
@@ -89,7 +103,9 @@ class _$ErrorComponentAllOfExceptionSerializer implements PrimitiveSerializer<Er
       yield r'suppressed';
       yield serializers.serialize(
         object.suppressed,
-        specifiedType: const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCause)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(ErrorComponentAllOfExceptionCause),
+        ]),
       );
     }
     if (object.localizedMessage != null) {
@@ -107,7 +123,11 @@ class _$ErrorComponentAllOfExceptionSerializer implements PrimitiveSerializer<Er
     ErrorComponentAllOfException object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -123,42 +143,58 @@ class _$ErrorComponentAllOfExceptionSerializer implements PrimitiveSerializer<Er
       final value = serializedList[i + 1];
       switch (key) {
         case r'cause':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ErrorComponentAllOfExceptionCause),
-          ) as ErrorComponentAllOfExceptionCause?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ErrorComponentAllOfExceptionCause,
+                    ),
+                  )
+                  as ErrorComponentAllOfExceptionCause?;
           if (valueDes == null) continue;
           result.cause.replace(valueDes);
           break;
         case r'stackTrace':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ErrorComponentAllOfExceptionCauseStackTrace)]),
-          ) as BuiltList<ErrorComponentAllOfExceptionCauseStackTrace>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ErrorComponentAllOfExceptionCauseStackTrace),
+                    ]),
+                  )
+                  as BuiltList<ErrorComponentAllOfExceptionCauseStackTrace>?;
           if (valueDes == null) continue;
           result.stackTrace.replace(valueDes);
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
         case r'suppressed':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ErrorComponentAllOfExceptionCause)]),
-          ) as BuiltList<ErrorComponentAllOfExceptionCause>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ErrorComponentAllOfExceptionCause),
+                    ]),
+                  )
+                  as BuiltList<ErrorComponentAllOfExceptionCause>?;
           if (valueDes == null) continue;
           result.suppressed.replace(valueDes);
           break;
         case r'localizedMessage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.localizedMessage = valueDes;
           break;
@@ -190,5 +226,3 @@ class _$ErrorComponentAllOfExceptionSerializer implements PrimitiveSerializer<Er
     return result.build();
   }
 }
-
-

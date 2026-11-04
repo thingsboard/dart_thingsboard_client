@@ -19,27 +19,40 @@ part 'api_usage_limit_recipients_config.g.dart';
 /// ApiUsageLimitRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class ApiUsageLimitRecipientsConfig implements NotificationRuleRecipientsConfig, Built<ApiUsageLimitRecipientsConfig, ApiUsageLimitRecipientsConfigBuilder> {
+abstract class ApiUsageLimitRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          ApiUsageLimitRecipientsConfig,
+          ApiUsageLimitRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   ApiUsageLimitRecipientsConfig._();
 
-  factory ApiUsageLimitRecipientsConfig([void updates(ApiUsageLimitRecipientsConfigBuilder b)]) = _$ApiUsageLimitRecipientsConfig;
+  factory ApiUsageLimitRecipientsConfig([
+    void updates(ApiUsageLimitRecipientsConfigBuilder b),
+  ]) = _$ApiUsageLimitRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ApiUsageLimitRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiUsageLimitRecipientsConfig> get serializer => _$ApiUsageLimitRecipientsConfigSerializer();
+  static Serializer<ApiUsageLimitRecipientsConfig> get serializer =>
+      _$ApiUsageLimitRecipientsConfigSerializer();
 }
 
-class _$ApiUsageLimitRecipientsConfigSerializer implements PrimitiveSerializer<ApiUsageLimitRecipientsConfig> {
+class _$ApiUsageLimitRecipientsConfigSerializer
+    implements PrimitiveSerializer<ApiUsageLimitRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [ApiUsageLimitRecipientsConfig, _$ApiUsageLimitRecipientsConfig];
+  final Iterable<Type> types = const [
+    ApiUsageLimitRecipientsConfig,
+    _$ApiUsageLimitRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'ApiUsageLimitRecipientsConfig';
@@ -69,7 +82,11 @@ class _$ApiUsageLimitRecipientsConfigSerializer implements PrimitiveSerializer<A
     ApiUsageLimitRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$ApiUsageLimitRecipientsConfigSerializer implements PrimitiveSerializer<A
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$ApiUsageLimitRecipientsConfigSerializer implements PrimitiveSerializer<A
     return result.build();
   }
 }
-
-

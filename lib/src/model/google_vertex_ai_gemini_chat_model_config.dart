@@ -19,20 +19,26 @@ part 'google_vertex_ai_gemini_chat_model_config.g.dart';
 /// GoogleVertexAiGeminiChatModelConfig
 ///
 /// Properties:
-/// * [provider] 
-/// * [providerConfig] 
-/// * [modelId] 
-/// * [temperature] 
-/// * [topP] 
-/// * [topK] 
-/// * [frequencyPenalty] 
-/// * [presencePenalty] 
-/// * [maxOutputTokens] 
-/// * [timeoutSeconds] 
-/// * [maxRetries] 
-/// * [modelType] 
+/// * [provider]
+/// * [providerConfig]
+/// * [modelId]
+/// * [temperature]
+/// * [topP]
+/// * [topK]
+/// * [frequencyPenalty]
+/// * [presencePenalty]
+/// * [maxOutputTokens]
+/// * [timeoutSeconds]
+/// * [maxRetries]
+/// * [modelType]
 @BuiltValue()
-abstract class GoogleVertexAiGeminiChatModelConfig implements AiModelConfig, Built<GoogleVertexAiGeminiChatModelConfig, GoogleVertexAiGeminiChatModelConfigBuilder> {
+abstract class GoogleVertexAiGeminiChatModelConfig
+    implements
+        AiModelConfig,
+        Built<
+          GoogleVertexAiGeminiChatModelConfig,
+          GoogleVertexAiGeminiChatModelConfigBuilder
+        > {
   @BuiltValueField(wireName: r'topK')
   int? get topK;
 
@@ -69,18 +75,25 @@ abstract class GoogleVertexAiGeminiChatModelConfig implements AiModelConfig, Bui
 
   GoogleVertexAiGeminiChatModelConfig._();
 
-  factory GoogleVertexAiGeminiChatModelConfig([void updates(GoogleVertexAiGeminiChatModelConfigBuilder b)]) = _$GoogleVertexAiGeminiChatModelConfig;
+  factory GoogleVertexAiGeminiChatModelConfig([
+    void updates(GoogleVertexAiGeminiChatModelConfigBuilder b),
+  ]) = _$GoogleVertexAiGeminiChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GoogleVertexAiGeminiChatModelConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GoogleVertexAiGeminiChatModelConfig> get serializer => _$GoogleVertexAiGeminiChatModelConfigSerializer();
+  static Serializer<GoogleVertexAiGeminiChatModelConfig> get serializer =>
+      _$GoogleVertexAiGeminiChatModelConfigSerializer();
 }
 
-class _$GoogleVertexAiGeminiChatModelConfigSerializer implements PrimitiveSerializer<GoogleVertexAiGeminiChatModelConfig> {
+class _$GoogleVertexAiGeminiChatModelConfigSerializer
+    implements PrimitiveSerializer<GoogleVertexAiGeminiChatModelConfig> {
   @override
-  final Iterable<Type> types = const [GoogleVertexAiGeminiChatModelConfig, _$GoogleVertexAiGeminiChatModelConfig];
+  final Iterable<Type> types = const [
+    GoogleVertexAiGeminiChatModelConfig,
+    _$GoogleVertexAiGeminiChatModelConfig,
+  ];
 
   @override
   final String wireName = r'GoogleVertexAiGeminiChatModelConfig';
@@ -176,7 +189,11 @@ class _$GoogleVertexAiGeminiChatModelConfigSerializer implements PrimitiveSerial
     GoogleVertexAiGeminiChatModelConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -192,95 +209,121 @@ class _$GoogleVertexAiGeminiChatModelConfigSerializer implements PrimitiveSerial
       final value = serializedList[i + 1];
       switch (key) {
         case r'topK':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.topK = valueDes;
           break;
         case r'presencePenalty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.presencePenalty = valueDes;
           break;
         case r'maxRetries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRetries = valueDes;
           break;
         case r'modelId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.modelId = valueDes;
           break;
         case r'provider':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.provider = valueDes;
           break;
         case r'temperature':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.temperature = valueDes;
           break;
         case r'timeoutSeconds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeoutSeconds = valueDes;
           break;
         case r'modelType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelType),
-          ) as AiModelType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelType),
+                  )
+                  as AiModelType?;
           if (valueDes == null) continue;
           result.modelType = valueDes;
           break;
         case r'providerConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(GoogleVertexAiGeminiProviderConfig),
-          ) as GoogleVertexAiGeminiProviderConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(
+                      GoogleVertexAiGeminiProviderConfig,
+                    ),
+                  )
+                  as GoogleVertexAiGeminiProviderConfig;
           result.providerConfig.replace(valueDes);
           break;
         case r'topP':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.topP = valueDes;
           break;
         case r'frequencyPenalty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.frequencyPenalty = valueDes;
           break;
         case r'maxOutputTokens':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxOutputTokens = valueDes;
           break;
@@ -312,5 +355,3 @@ class _$GoogleVertexAiGeminiChatModelConfigSerializer implements PrimitiveSerial
     return result.build();
   }
 }
-
-

@@ -20,7 +20,7 @@ part 'qr_code_settings.g.dart';
 /// A JSON value representing the mobile apps configuration
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
 /// * [tenantId] - JSON object with Tenant Id.
 /// * [useSystemSettings] - Use settings from system level
@@ -29,10 +29,11 @@ part 'qr_code_settings.g.dart';
 /// * [qrCodeConfig] - QR code config configuration.
 /// * [androidEnabled] - Indicates if google play link is available
 /// * [iosEnabled] - Indicates if apple store link is available
-/// * [googlePlayLink] 
-/// * [appStoreLink] 
+/// * [googlePlayLink]
+/// * [appStoreLink]
 @BuiltValue()
-abstract class QrCodeSettings implements Built<QrCodeSettings, QrCodeSettingsBuilder> {
+abstract class QrCodeSettings
+    implements Built<QrCodeSettings, QrCodeSettingsBuilder> {
   @BuiltValueField(wireName: r'id')
   QrCodeSettingsId? get id;
 
@@ -76,16 +77,19 @@ abstract class QrCodeSettings implements Built<QrCodeSettings, QrCodeSettingsBui
 
   QrCodeSettings._();
 
-  factory QrCodeSettings([void updates(QrCodeSettingsBuilder b)]) = _$QrCodeSettings;
+  factory QrCodeSettings([void updates(QrCodeSettingsBuilder b)]) =
+      _$QrCodeSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(QrCodeSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<QrCodeSettings> get serializer => _$QrCodeSettingsSerializer();
+  static Serializer<QrCodeSettings> get serializer =>
+      _$QrCodeSettingsSerializer();
 }
 
-class _$QrCodeSettingsSerializer implements PrimitiveSerializer<QrCodeSettings> {
+class _$QrCodeSettingsSerializer
+    implements PrimitiveSerializer<QrCodeSettings> {
   @override
   final Iterable<Type> types = const [QrCodeSettings, _$QrCodeSettings];
 
@@ -180,7 +184,11 @@ class _$QrCodeSettingsSerializer implements PrimitiveSerializer<QrCodeSettings> 
     QrCodeSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -196,89 +204,111 @@ class _$QrCodeSettingsSerializer implements PrimitiveSerializer<QrCodeSettings> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(QrCodeSettingsId),
-          ) as QrCodeSettingsId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(QrCodeSettingsId),
+                  )
+                  as QrCodeSettingsId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'useSystemSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useSystemSettings = valueDes;
           break;
         case r'useDefaultApp':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useDefaultApp = valueDes;
           break;
         case r'mobileAppBundleId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileAppBundleId),
-          ) as MobileAppBundleId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(MobileAppBundleId),
+                  )
+                  as MobileAppBundleId?;
           if (valueDes == null) continue;
           result.mobileAppBundleId.replace(valueDes);
           break;
         case r'qrCodeConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(QRCodeConfig),
-          ) as QRCodeConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(QRCodeConfig),
+                  )
+                  as QRCodeConfig;
           result.qrCodeConfig.replace(valueDes);
           break;
         case r'androidEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.androidEnabled = valueDes;
           break;
         case r'iosEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.iosEnabled = valueDes;
           break;
         case r'googlePlayLink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.googlePlayLink = valueDes;
           break;
         case r'appStoreLink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.appStoreLink = valueDes;
           break;
@@ -310,5 +340,3 @@ class _$QrCodeSettingsSerializer implements PrimitiveSerializer<QrCodeSettings> 
     return result.build();
   }
 }
-
-

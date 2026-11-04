@@ -19,14 +19,17 @@ part 'entities_by_group_name_filter.g.dart';
 /// EntitiesByGroupNameFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [groupType] 
-/// * [ownerId] 
-/// * [entityGroupNameFilter] 
-/// * [groupStateEntity] 
-/// * [stateEntityParamName] 
+/// * [type]
+/// * [groupType]
+/// * [ownerId]
+/// * [entityGroupNameFilter]
+/// * [groupStateEntity]
+/// * [stateEntityParamName]
 @BuiltValue()
-abstract class EntitiesByGroupNameFilter implements EntityFilter, Built<EntitiesByGroupNameFilter, EntitiesByGroupNameFilterBuilder> {
+abstract class EntitiesByGroupNameFilter
+    implements
+        EntityFilter,
+        Built<EntitiesByGroupNameFilter, EntitiesByGroupNameFilterBuilder> {
   @BuiltValueField(wireName: r'groupType')
   EntityType? get groupType;
   // enum groupTypeEnum {  TENANT,  CUSTOMER,  USER,  DASHBOARD,  ASSET,  DEVICE,  ALARM,  ENTITY_GROUP,  CONVERTER,  INTEGRATION,  RULE_CHAIN,  RULE_NODE,  SCHEDULER_EVENT,  BLOB_ENTITY,  REPORT_TEMPLATE,  REPORT,  ENTITY_VIEW,  WIDGETS_BUNDLE,  WIDGET_TYPE,  ROLE,  GROUP_PERMISSION,  TENANT_PROFILE,  DEVICE_PROFILE,  ASSET_PROFILE,  API_USAGE_STATE,  TB_RESOURCE,  OTA_PACKAGE,  EDGE,  RPC,  QUEUE,  NOTIFICATION_TARGET,  NOTIFICATION_TEMPLATE,  NOTIFICATION_REQUEST,  NOTIFICATION,  NOTIFICATION_RULE,  QUEUE_STATS,  OAUTH2_CLIENT,  DOMAIN,  MOBILE_APP,  MOBILE_APP_BUNDLE,  CALCULATED_FIELD,  JOB,  SECRET,  ADMIN_SETTINGS,  AI_MODEL,  API_KEY,  AGENT,  AGENT_APPLICATION,  AGENT_APP_EVENT,  AGENT_APP_UNIT,  AGENT_APP_PROFILE,  AGENT_PROFILE,  AGENT_BULK_ACTION,  };
@@ -45,18 +48,25 @@ abstract class EntitiesByGroupNameFilter implements EntityFilter, Built<Entities
 
   EntitiesByGroupNameFilter._();
 
-  factory EntitiesByGroupNameFilter([void updates(EntitiesByGroupNameFilterBuilder b)]) = _$EntitiesByGroupNameFilter;
+  factory EntitiesByGroupNameFilter([
+    void updates(EntitiesByGroupNameFilterBuilder b),
+  ]) = _$EntitiesByGroupNameFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntitiesByGroupNameFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntitiesByGroupNameFilter> get serializer => _$EntitiesByGroupNameFilterSerializer();
+  static Serializer<EntitiesByGroupNameFilter> get serializer =>
+      _$EntitiesByGroupNameFilterSerializer();
 }
 
-class _$EntitiesByGroupNameFilterSerializer implements PrimitiveSerializer<EntitiesByGroupNameFilter> {
+class _$EntitiesByGroupNameFilterSerializer
+    implements PrimitiveSerializer<EntitiesByGroupNameFilter> {
   @override
-  final Iterable<Type> types = const [EntitiesByGroupNameFilter, _$EntitiesByGroupNameFilter];
+  final Iterable<Type> types = const [
+    EntitiesByGroupNameFilter,
+    _$EntitiesByGroupNameFilter,
+  ];
 
   @override
   final String wireName = r'EntitiesByGroupNameFilter';
@@ -114,7 +124,11 @@ class _$EntitiesByGroupNameFilterSerializer implements PrimitiveSerializer<Entit
     EntitiesByGroupNameFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -130,50 +144,62 @@ class _$EntitiesByGroupNameFilterSerializer implements PrimitiveSerializer<Entit
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityGroupNameFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityGroupNameFilter = valueDes;
           break;
         case r'stateEntityParamName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.stateEntityParamName = valueDes;
           break;
         case r'groupType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.groupType = valueDes;
           break;
         case r'groupStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.groupStateEntity = valueDes;
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -204,5 +230,3 @@ class _$EntitiesByGroupNameFilterSerializer implements PrimitiveSerializer<Entit
     return result.build();
   }
 }
-
-

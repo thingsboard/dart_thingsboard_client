@@ -18,22 +18,26 @@ part 'calculated_field_id.g.dart';
 /// CalculatedFieldId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class CalculatedFieldId implements EntityId, Built<CalculatedFieldId, CalculatedFieldIdBuilder> {
+abstract class CalculatedFieldId
+    implements EntityId, Built<CalculatedFieldId, CalculatedFieldIdBuilder> {
   CalculatedFieldId._();
 
-  factory CalculatedFieldId([void updates(CalculatedFieldIdBuilder b)]) = _$CalculatedFieldId;
+  factory CalculatedFieldId([void updates(CalculatedFieldIdBuilder b)]) =
+      _$CalculatedFieldId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CalculatedFieldIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CalculatedFieldId> get serializer => _$CalculatedFieldIdSerializer();
+  static Serializer<CalculatedFieldId> get serializer =>
+      _$CalculatedFieldIdSerializer();
 }
 
-class _$CalculatedFieldIdSerializer implements PrimitiveSerializer<CalculatedFieldId> {
+class _$CalculatedFieldIdSerializer
+    implements PrimitiveSerializer<CalculatedFieldId> {
   @override
   final Iterable<Type> types = const [CalculatedFieldId, _$CalculatedFieldId];
 
@@ -63,7 +67,11 @@ class _$CalculatedFieldIdSerializer implements PrimitiveSerializer<CalculatedFie
     CalculatedFieldId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$CalculatedFieldIdSerializer implements PrimitiveSerializer<CalculatedFie
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$CalculatedFieldIdSerializer implements PrimitiveSerializer<CalculatedFie
     return result.build();
   }
 }
-
-

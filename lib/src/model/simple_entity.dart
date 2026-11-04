@@ -16,10 +16,11 @@ part 'simple_entity.g.dart';
 /// SimpleEntity
 ///
 /// Properties:
-/// * [used] 
-/// * [totalCount] 
+/// * [used]
+/// * [totalCount]
 @BuiltValue()
-abstract class SimpleEntity implements Built<SimpleEntity, SimpleEntityBuilder> {
+abstract class SimpleEntity
+    implements Built<SimpleEntity, SimpleEntityBuilder> {
   @BuiltValueField(wireName: r'used')
   bool? get used;
 
@@ -71,7 +72,11 @@ class _$SimpleEntitySerializer implements PrimitiveSerializer<SimpleEntity> {
     SimpleEntity object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +92,22 @@ class _$SimpleEntitySerializer implements PrimitiveSerializer<SimpleEntity> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'used':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.used = valueDes;
           break;
         case r'totalCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalCount = valueDes;
           break;
@@ -130,5 +139,3 @@ class _$SimpleEntitySerializer implements PrimitiveSerializer<SimpleEntity> {
     return result.build();
   }
 }
-
-

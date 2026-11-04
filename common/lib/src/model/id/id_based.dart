@@ -12,9 +12,9 @@ abstract class IdBased<I extends HasUuid> extends HasId<I> {
   IdBased();
 
   IdBased.fromJson(Map<String, dynamic> json, [FromIdFunction<I>? fromId])
-      : id = json['id'] != null
-            ? HasUuid.fromJson(json['id'], fromId) as I
-            : null;
+    : id = json['id'] != null
+          ? HasUuid.fromJson(json['id'], fromId) as I
+          : null;
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
@@ -29,7 +29,7 @@ abstract class IdBased<I extends HasUuid> extends HasId<I> {
     return id;
   }
 
-  setId(I? id) {
+  void setId(I? id) {
     this.id = id;
   }
 

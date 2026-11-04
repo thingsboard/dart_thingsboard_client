@@ -21,26 +21,43 @@ part 'shared_attributes_setting_snmp_communication_config.g.dart';
 ///
 /// Properties:
 /// * [spec] - Specification of the SNMP communication
-/// * [mappings] 
+/// * [mappings]
 @BuiltValue()
-abstract class SharedAttributesSettingSnmpCommunicationConfig implements SnmpCommunicationConfig, Built<SharedAttributesSettingSnmpCommunicationConfig, SharedAttributesSettingSnmpCommunicationConfigBuilder> {
+abstract class SharedAttributesSettingSnmpCommunicationConfig
+    implements
+        SnmpCommunicationConfig,
+        Built<
+          SharedAttributesSettingSnmpCommunicationConfig,
+          SharedAttributesSettingSnmpCommunicationConfigBuilder
+        > {
   @BuiltValueField(wireName: r'mappings')
   BuiltList<SnmpMapping>? get mappings;
 
   SharedAttributesSettingSnmpCommunicationConfig._();
 
-  factory SharedAttributesSettingSnmpCommunicationConfig([void updates(SharedAttributesSettingSnmpCommunicationConfigBuilder b)]) = _$SharedAttributesSettingSnmpCommunicationConfig;
+  factory SharedAttributesSettingSnmpCommunicationConfig([
+    void updates(SharedAttributesSettingSnmpCommunicationConfigBuilder b),
+  ]) = _$SharedAttributesSettingSnmpCommunicationConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(SharedAttributesSettingSnmpCommunicationConfigBuilder b) => b;
+  static void _defaults(
+    SharedAttributesSettingSnmpCommunicationConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SharedAttributesSettingSnmpCommunicationConfig> get serializer => _$SharedAttributesSettingSnmpCommunicationConfigSerializer();
+  static Serializer<SharedAttributesSettingSnmpCommunicationConfig>
+  get serializer =>
+      _$SharedAttributesSettingSnmpCommunicationConfigSerializer();
 }
 
-class _$SharedAttributesSettingSnmpCommunicationConfigSerializer implements PrimitiveSerializer<SharedAttributesSettingSnmpCommunicationConfig> {
+class _$SharedAttributesSettingSnmpCommunicationConfigSerializer
+    implements
+        PrimitiveSerializer<SharedAttributesSettingSnmpCommunicationConfig> {
   @override
-  final Iterable<Type> types = const [SharedAttributesSettingSnmpCommunicationConfig, _$SharedAttributesSettingSnmpCommunicationConfig];
+  final Iterable<Type> types = const [
+    SharedAttributesSettingSnmpCommunicationConfig,
+    _$SharedAttributesSettingSnmpCommunicationConfig,
+  ];
 
   @override
   final String wireName = r'SharedAttributesSettingSnmpCommunicationConfig';
@@ -70,7 +87,11 @@ class _$SharedAttributesSettingSnmpCommunicationConfigSerializer implements Prim
     SharedAttributesSettingSnmpCommunicationConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,18 +107,24 @@ class _$SharedAttributesSettingSnmpCommunicationConfigSerializer implements Prim
       final value = serializedList[i + 1];
       switch (key) {
         case r'mappings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SnmpMapping)]),
-          ) as BuiltList<SnmpMapping>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SnmpMapping),
+                    ]),
+                  )
+                  as BuiltList<SnmpMapping>?;
           if (valueDes == null) continue;
           result.mappings.replace(valueDes);
           break;
         case r'spec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SnmpCommunicationSpec),
-          ) as SnmpCommunicationSpec;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SnmpCommunicationSpec),
+                  )
+                  as SnmpCommunicationSpec;
           result.spec = valueDes;
           break;
         default:
@@ -128,5 +155,3 @@ class _$SharedAttributesSettingSnmpCommunicationConfigSerializer implements Prim
     return result.build();
   }
 }
-
-

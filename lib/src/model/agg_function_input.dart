@@ -17,25 +17,29 @@ part 'agg_function_input.g.dart';
 /// AggFunctionInput
 ///
 /// Properties:
-/// * [type] 
-/// * [function_] 
+/// * [type]
+/// * [function_]
 @BuiltValue()
-abstract class AggFunctionInput implements AggInput, Built<AggFunctionInput, AggFunctionInputBuilder> {
+abstract class AggFunctionInput
+    implements AggInput, Built<AggFunctionInput, AggFunctionInputBuilder> {
   @BuiltValueField(wireName: r'function')
   String? get function_;
 
   AggFunctionInput._();
 
-  factory AggFunctionInput([void updates(AggFunctionInputBuilder b)]) = _$AggFunctionInput;
+  factory AggFunctionInput([void updates(AggFunctionInputBuilder b)]) =
+      _$AggFunctionInput;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AggFunctionInputBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AggFunctionInput> get serializer => _$AggFunctionInputSerializer();
+  static Serializer<AggFunctionInput> get serializer =>
+      _$AggFunctionInputSerializer();
 }
 
-class _$AggFunctionInputSerializer implements PrimitiveSerializer<AggFunctionInput> {
+class _$AggFunctionInputSerializer
+    implements PrimitiveSerializer<AggFunctionInput> {
   @override
   final Iterable<Type> types = const [AggFunctionInput, _$AggFunctionInput];
 
@@ -67,7 +71,11 @@ class _$AggFunctionInputSerializer implements PrimitiveSerializer<AggFunctionInp
     AggFunctionInput object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -83,18 +91,22 @@ class _$AggFunctionInputSerializer implements PrimitiveSerializer<AggFunctionInp
       final value = serializedList[i + 1];
       switch (key) {
         case r'function':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.function_ = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -125,5 +137,3 @@ class _$AggFunctionInputSerializer implements PrimitiveSerializer<AggFunctionInp
     return result.build();
   }
 }
-
-

@@ -23,27 +23,36 @@ part 'tb_resource_export_data.g.dart';
 /// TbResourceExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class TbResourceExportData implements EntityExportData, Built<TbResourceExportData, TbResourceExportDataBuilder> {
+abstract class TbResourceExportData
+    implements
+        EntityExportData,
+        Built<TbResourceExportData, TbResourceExportDataBuilder> {
   TbResourceExportData._();
 
-  factory TbResourceExportData([void updates(TbResourceExportDataBuilder b)]) = _$TbResourceExportData;
+  factory TbResourceExportData([void updates(TbResourceExportDataBuilder b)]) =
+      _$TbResourceExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbResourceExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbResourceExportData> get serializer => _$TbResourceExportDataSerializer();
+  static Serializer<TbResourceExportData> get serializer =>
+      _$TbResourceExportDataSerializer();
 }
 
-class _$TbResourceExportDataSerializer implements PrimitiveSerializer<TbResourceExportData> {
+class _$TbResourceExportDataSerializer
+    implements PrimitiveSerializer<TbResourceExportData> {
   @override
-  final Iterable<Type> types = const [TbResourceExportData, _$TbResourceExportData];
+  final Iterable<Type> types = const [
+    TbResourceExportData,
+    _$TbResourceExportData,
+  ];
 
   @override
   final String wireName = r'TbResourceExportData';
@@ -57,7 +66,10 @@ class _$TbResourceExportDataSerializer implements PrimitiveSerializer<TbResource
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +106,11 @@ class _$TbResourceExportDataSerializer implements PrimitiveSerializer<TbResource
     TbResourceExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +126,58 @@ class _$TbResourceExportDataSerializer implements PrimitiveSerializer<TbResource
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +209,3 @@ class _$TbResourceExportDataSerializer implements PrimitiveSerializer<TbResource
     return result.build();
   }
 }
-
-

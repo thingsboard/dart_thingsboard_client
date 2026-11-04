@@ -16,26 +16,35 @@ part 'git_hub_models_provider_config.g.dart';
 /// GitHubModelsProviderConfig
 ///
 /// Properties:
-/// * [personalAccessToken] 
+/// * [personalAccessToken]
 @BuiltValue()
-abstract class GitHubModelsProviderConfig implements Built<GitHubModelsProviderConfig, GitHubModelsProviderConfigBuilder> {
+abstract class GitHubModelsProviderConfig
+    implements
+        Built<GitHubModelsProviderConfig, GitHubModelsProviderConfigBuilder> {
   @BuiltValueField(wireName: r'personalAccessToken')
   String get personalAccessToken;
 
   GitHubModelsProviderConfig._();
 
-  factory GitHubModelsProviderConfig([void updates(GitHubModelsProviderConfigBuilder b)]) = _$GitHubModelsProviderConfig;
+  factory GitHubModelsProviderConfig([
+    void updates(GitHubModelsProviderConfigBuilder b),
+  ]) = _$GitHubModelsProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GitHubModelsProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GitHubModelsProviderConfig> get serializer => _$GitHubModelsProviderConfigSerializer();
+  static Serializer<GitHubModelsProviderConfig> get serializer =>
+      _$GitHubModelsProviderConfigSerializer();
 }
 
-class _$GitHubModelsProviderConfigSerializer implements PrimitiveSerializer<GitHubModelsProviderConfig> {
+class _$GitHubModelsProviderConfigSerializer
+    implements PrimitiveSerializer<GitHubModelsProviderConfig> {
   @override
-  final Iterable<Type> types = const [GitHubModelsProviderConfig, _$GitHubModelsProviderConfig];
+  final Iterable<Type> types = const [
+    GitHubModelsProviderConfig,
+    _$GitHubModelsProviderConfig,
+  ];
 
   @override
   final String wireName = r'GitHubModelsProviderConfig';
@@ -58,7 +67,11 @@ class _$GitHubModelsProviderConfigSerializer implements PrimitiveSerializer<GitH
     GitHubModelsProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -74,10 +87,12 @@ class _$GitHubModelsProviderConfigSerializer implements PrimitiveSerializer<GitH
       final value = serializedList[i + 1];
       switch (key) {
         case r'personalAccessToken':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.personalAccessToken = valueDes;
           break;
         default:
@@ -108,5 +123,3 @@ class _$GitHubModelsProviderConfigSerializer implements PrimitiveSerializer<GitH
     return result.build();
   }
 }
-
-

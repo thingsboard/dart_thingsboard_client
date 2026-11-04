@@ -19,11 +19,14 @@ part 'complex_filter_predicate.g.dart';
 /// ComplexFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [operation] 
-/// * [predicates] 
+/// * [type]
+/// * [operation]
+/// * [predicates]
 @BuiltValue()
-abstract class ComplexFilterPredicate implements KeyFilterPredicate, Built<ComplexFilterPredicate, ComplexFilterPredicateBuilder> {
+abstract class ComplexFilterPredicate
+    implements
+        KeyFilterPredicate,
+        Built<ComplexFilterPredicate, ComplexFilterPredicateBuilder> {
   @BuiltValueField(wireName: r'predicates')
   BuiltList<KeyFilterPredicate>? get predicates;
 
@@ -33,18 +36,25 @@ abstract class ComplexFilterPredicate implements KeyFilterPredicate, Built<Compl
 
   ComplexFilterPredicate._();
 
-  factory ComplexFilterPredicate([void updates(ComplexFilterPredicateBuilder b)]) = _$ComplexFilterPredicate;
+  factory ComplexFilterPredicate([
+    void updates(ComplexFilterPredicateBuilder b),
+  ]) = _$ComplexFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ComplexFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ComplexFilterPredicate> get serializer => _$ComplexFilterPredicateSerializer();
+  static Serializer<ComplexFilterPredicate> get serializer =>
+      _$ComplexFilterPredicateSerializer();
 }
 
-class _$ComplexFilterPredicateSerializer implements PrimitiveSerializer<ComplexFilterPredicate> {
+class _$ComplexFilterPredicateSerializer
+    implements PrimitiveSerializer<ComplexFilterPredicate> {
   @override
-  final Iterable<Type> types = const [ComplexFilterPredicate, _$ComplexFilterPredicate];
+  final Iterable<Type> types = const [
+    ComplexFilterPredicate,
+    _$ComplexFilterPredicate,
+  ];
 
   @override
   final String wireName = r'ComplexFilterPredicate';
@@ -70,7 +80,9 @@ class _$ComplexFilterPredicateSerializer implements PrimitiveSerializer<ComplexF
       yield r'predicates';
       yield serializers.serialize(
         object.predicates,
-        specifiedType: const FullType(BuiltList, [FullType(KeyFilterPredicate)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(KeyFilterPredicate),
+        ]),
       );
     }
   }
@@ -81,7 +93,11 @@ class _$ComplexFilterPredicateSerializer implements PrimitiveSerializer<ComplexF
     ComplexFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,25 +113,35 @@ class _$ComplexFilterPredicateSerializer implements PrimitiveSerializer<ComplexF
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.operation = valueDes;
           break;
         case r'predicates':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(KeyFilterPredicate)]),
-          ) as BuiltList<KeyFilterPredicate>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(KeyFilterPredicate),
+                    ]),
+                  )
+                  as BuiltList<KeyFilterPredicate>?;
           if (valueDes == null) continue;
           result.predicates.replace(valueDes);
           break;
@@ -147,5 +173,3 @@ class _$ComplexFilterPredicateSerializer implements PrimitiveSerializer<ComplexF
     return result.build();
   }
 }
-
-

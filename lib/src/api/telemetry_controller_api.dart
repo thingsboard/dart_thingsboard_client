@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -18,12 +17,10 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/attribute_data.dart';
 import 'package:thingsboard_client/src/model/base_read_ts_kv_query.dart';
 import 'package:thingsboard_client/src/model/read_ts_kv_query_result.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/ts_data.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class TelemetryControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -47,7 +44,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> deleteDeviceAttributes({ 
+  Future<Response<String>> deleteDeviceAttributes({
     required String deviceId,
     required String scope,
     String? keys,
@@ -59,13 +56,32 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/plugins/telemetry/{deviceId}/{scope}'.replaceAll('{' r'deviceId' '}', encodeQueryParameter(_serializers, deviceId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/plugins/telemetry/{deviceId}/{scope}'
+        .replaceAll(
+          '{'
+          r'deviceId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            deviceId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'scope'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            scope,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -73,11 +89,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -85,8 +98,19 @@ class TelemetryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (keys != null) r'keys': encodeQueryParameter(_serializers, keys, const FullType(String)),
-      if (key != null) r'key': encodeCollectionQueryParameter<String>(_serializers, key, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (keys != null)
+        r'keys': encodeQueryParameter(
+          _serializers,
+          keys,
+          const FullType(String),
+        ),
+      if (key != null)
+        r'key': encodeCollectionQueryParameter<String>(
+          _serializers,
+          key,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -103,7 +127,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -144,7 +167,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> deleteEntityAttributes({ 
+  Future<Response<String>> deleteEntityAttributes({
     required String entityType,
     required String entityId,
     required String scope,
@@ -157,13 +180,42 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/{scope}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/{scope}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'scope'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            scope,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -171,11 +223,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -183,8 +232,19 @@ class TelemetryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (keys != null) r'keys': encodeQueryParameter(_serializers, keys, const FullType(String)),
-      if (key != null) r'key': encodeCollectionQueryParameter<String>(_serializers, key, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (keys != null)
+        r'keys': encodeQueryParameter(
+          _serializers,
+          keys,
+          const FullType(String),
+        ),
+      if (key != null)
+        r'key': encodeCollectionQueryParameter<String>(
+          _serializers,
+          key,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -201,7 +261,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -246,7 +305,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> deleteEntityTimeseries({ 
+  Future<Response<String>> deleteEntityTimeseries({
     required String entityType,
     required String entityId,
     String? keys,
@@ -263,13 +322,33 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/timeseries/delete'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/timeseries/delete'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -277,11 +356,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -289,13 +365,49 @@ class TelemetryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (keys != null) r'keys': encodeQueryParameter(_serializers, keys, const FullType(String)),
-      if (deleteAllDataForKeys != null) r'deleteAllDataForKeys': encodeQueryParameter(_serializers, deleteAllDataForKeys, const FullType(bool)),
-      if (startTs != null) r'startTs': encodeQueryParameter(_serializers, startTs, const FullType(int)),
-      if (endTs != null) r'endTs': encodeQueryParameter(_serializers, endTs, const FullType(int)),
-      if (deleteLatest != null) r'deleteLatest': encodeQueryParameter(_serializers, deleteLatest, const FullType(bool)),
-      if (rewriteLatestIfDeleted != null) r'rewriteLatestIfDeleted': encodeQueryParameter(_serializers, rewriteLatestIfDeleted, const FullType(bool)),
-      if (key != null) r'key': encodeCollectionQueryParameter<String>(_serializers, key, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (keys != null)
+        r'keys': encodeQueryParameter(
+          _serializers,
+          keys,
+          const FullType(String),
+        ),
+      if (deleteAllDataForKeys != null)
+        r'deleteAllDataForKeys': encodeQueryParameter(
+          _serializers,
+          deleteAllDataForKeys,
+          const FullType(bool),
+        ),
+      if (startTs != null)
+        r'startTs': encodeQueryParameter(
+          _serializers,
+          startTs,
+          const FullType(int),
+        ),
+      if (endTs != null)
+        r'endTs': encodeQueryParameter(
+          _serializers,
+          endTs,
+          const FullType(int),
+        ),
+      if (deleteLatest != null)
+        r'deleteLatest': encodeQueryParameter(
+          _serializers,
+          deleteLatest,
+          const FullType(bool),
+        ),
+      if (rewriteLatestIfDeleted != null)
+        r'rewriteLatestIfDeleted': encodeQueryParameter(
+          _serializers,
+          rewriteLatestIfDeleted,
+          const FullType(bool),
+        ),
+      if (key != null)
+        r'key': encodeCollectionQueryParameter<String>(
+          _serializers,
+          key,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -312,7 +424,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -350,7 +461,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<String>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<String>>> getAttributeKeys({ 
+  Future<Response<BuiltList<String>>> getAttributeKeys({
     required String entityType,
     required String entityId,
     CancelToken? cancelToken,
@@ -360,13 +471,33 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/keys/attributes'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/keys/attributes'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -374,11 +505,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -397,11 +525,13 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(String)]),
-      ) as BuiltList<String>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(String)]),
+                )
+                as BuiltList<String>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -440,7 +570,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<String>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<String>>> getAttributeKeysByScope({ 
+  Future<Response<BuiltList<String>>> getAttributeKeysByScope({
     required String entityType,
     required String entityId,
     required String scope,
@@ -451,13 +581,43 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/keys/attributes/{scope}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/keys/attributes/{scope}'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'scope'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                scope,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -465,11 +625,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -488,11 +645,13 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(String)]),
-      ) as BuiltList<String>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(String)]),
+                )
+                as BuiltList<String>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -532,7 +691,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<AttributeData>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<AttributeData>>> getAttributes({ 
+  Future<Response<BuiltList<AttributeData>>> getAttributes({
     required String entityType,
     required String entityId,
     String? keys,
@@ -544,13 +703,34 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfAttributeDataAndListOfString);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/values/attributes'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfAttributeDataAndListOfString);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/values/attributes'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -558,11 +738,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -570,8 +747,19 @@ class TelemetryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (keys != null) r'keys': encodeQueryParameter(_serializers, keys, const FullType(String)),
-      if (key != null) r'key': encodeCollectionQueryParameter<String>(_serializers, key, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (keys != null)
+        r'keys': encodeQueryParameter(
+          _serializers,
+          keys,
+          const FullType(String),
+        ),
+      if (key != null)
+        r'key': encodeCollectionQueryParameter<String>(
+          _serializers,
+          key,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -587,11 +775,15 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(AttributeData)]),
-      ) as BuiltList<AttributeData>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(AttributeData),
+                  ]),
+                )
+                as BuiltList<AttributeData>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -632,7 +824,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<AttributeData>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<AttributeData>>> getAttributesByScope({ 
+  Future<Response<BuiltList<AttributeData>>> getAttributesByScope({
     required String entityType,
     required String entityId,
     required String scope,
@@ -645,13 +837,44 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfAttributeDataAndListOfString);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/values/attributes/{scope}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfAttributeDataAndListOfString);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/values/attributes/{scope}'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'scope'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                scope,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -659,11 +882,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -671,8 +891,19 @@ class TelemetryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (keys != null) r'keys': encodeQueryParameter(_serializers, keys, const FullType(String)),
-      if (key != null) r'key': encodeCollectionQueryParameter<String>(_serializers, key, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (keys != null)
+        r'keys': encodeQueryParameter(
+          _serializers,
+          keys,
+          const FullType(String),
+        ),
+      if (key != null)
+        r'key': encodeCollectionQueryParameter<String>(
+          _serializers,
+          key,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -688,11 +919,15 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(AttributeData)]),
-      ) as BuiltList<AttributeData>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(AttributeData),
+                  ]),
+                )
+                as BuiltList<AttributeData>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -733,7 +968,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltMap<String, BuiltList<TsData>>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, BuiltList<TsData>>>> getLatestTimeseries({ 
+  Future<Response<BuiltMap<String, BuiltList<TsData>>>> getLatestTimeseries({
     required String entityType,
     required String entityId,
     String? keys,
@@ -746,13 +981,34 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndMapOfStringToList);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfStringAndMapOfStringToList);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -760,11 +1016,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -772,9 +1025,25 @@ class TelemetryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (keys != null) r'keys': encodeQueryParameter(_serializers, keys, const FullType(String)),
-      if (useStrictDataTypes != null) r'useStrictDataTypes': encodeQueryParameter(_serializers, useStrictDataTypes, const FullType(bool)),
-      if (key != null) r'key': encodeCollectionQueryParameter<String>(_serializers, key, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (keys != null)
+        r'keys': encodeQueryParameter(
+          _serializers,
+          keys,
+          const FullType(String),
+        ),
+      if (useStrictDataTypes != null)
+        r'useStrictDataTypes': encodeQueryParameter(
+          _serializers,
+          useStrictDataTypes,
+          const FullType(bool),
+        ),
+      if (key != null)
+        r'key': encodeCollectionQueryParameter<String>(
+          _serializers,
+          key,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -790,11 +1059,16 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList)]),
-      ) as BuiltMap<String, BuiltList<TsData>>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltMap, [
+                    FullType(String),
+                    FullType(BuiltList),
+                  ]),
+                )
+                as BuiltMap<String, BuiltList<TsData>>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -833,7 +1107,8 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<ReadTsKvQueryResult>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<ReadTsKvQueryResult>>> getTimeseriesByReadTsKvQueries({ 
+  Future<Response<BuiltList<ReadTsKvQueryResult>>>
+  getTimeseriesByReadTsKvQueries({
     required String entityType,
     required String entityId,
     required BuiltList<BaseReadTsKvQuery> baseReadTsKvQuery,
@@ -844,13 +1119,36 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfBaseReadTsKvQueryAndListOfReadTsKvQueryResult);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(
+          registerListOfBaseReadTsKvQueryAndListOfReadTsKvQueryResult,
+        );
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -858,11 +1156,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -874,14 +1169,13 @@ class TelemetryControllerApi {
 
     try {
       const _type = FullType(BuiltList, [FullType(BaseReadTsKvQuery)]);
-      _bodyData = _serializers.serialize(baseReadTsKvQuery, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        baseReadTsKvQuery,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -901,11 +1195,15 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(ReadTsKvQueryResult)]),
-      ) as BuiltList<ReadTsKvQueryResult>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(ReadTsKvQueryResult),
+                  ]),
+                )
+                as BuiltList<ReadTsKvQueryResult>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -954,7 +1252,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltMap<String, BuiltList<TsData>>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, BuiltList<TsData>>>> getTimeseriesHistory({ 
+  Future<Response<BuiltMap<String, BuiltList<TsData>>>> getTimeseriesHistory({
     required String entityType,
     required String entityId,
     required int startTs,
@@ -975,13 +1273,34 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndMapOfStringToList);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries/history'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfStringAndMapOfStringToList);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries/history'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -989,11 +1308,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1001,17 +1317,63 @@ class TelemetryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (keys != null) r'keys': encodeQueryParameter(_serializers, keys, const FullType(String)),
-      r'startTs': encodeQueryParameter(_serializers, startTs, const FullType(int)),
+      if (keys != null)
+        r'keys': encodeQueryParameter(
+          _serializers,
+          keys,
+          const FullType(String),
+        ),
+      r'startTs': encodeQueryParameter(
+        _serializers,
+        startTs,
+        const FullType(int),
+      ),
       r'endTs': encodeQueryParameter(_serializers, endTs, const FullType(int)),
-      if (intervalType != null) r'intervalType': encodeQueryParameter(_serializers, intervalType, const FullType(String)),
-      if (interval != null) r'interval': encodeQueryParameter(_serializers, interval, const FullType(int)),
-      if (timeZone != null) r'timeZone': encodeQueryParameter(_serializers, timeZone, const FullType(String)),
-      if (limit != null) r'limit': encodeQueryParameter(_serializers, limit, const FullType(String)),
-      if (agg != null) r'agg': encodeQueryParameter(_serializers, agg, const FullType(String)),
-      if (orderBy != null) r'orderBy': encodeQueryParameter(_serializers, orderBy, const FullType(String)),
-      if (useStrictDataTypes != null) r'useStrictDataTypes': encodeQueryParameter(_serializers, useStrictDataTypes, const FullType(bool)),
-      if (key != null) r'key': encodeCollectionQueryParameter<String>(_serializers, key, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (intervalType != null)
+        r'intervalType': encodeQueryParameter(
+          _serializers,
+          intervalType,
+          const FullType(String),
+        ),
+      if (interval != null)
+        r'interval': encodeQueryParameter(
+          _serializers,
+          interval,
+          const FullType(int),
+        ),
+      if (timeZone != null)
+        r'timeZone': encodeQueryParameter(
+          _serializers,
+          timeZone,
+          const FullType(String),
+        ),
+      if (limit != null)
+        r'limit': encodeQueryParameter(
+          _serializers,
+          limit,
+          const FullType(String),
+        ),
+      if (agg != null)
+        r'agg': encodeQueryParameter(_serializers, agg, const FullType(String)),
+      if (orderBy != null)
+        r'orderBy': encodeQueryParameter(
+          _serializers,
+          orderBy,
+          const FullType(String),
+        ),
+      if (useStrictDataTypes != null)
+        r'useStrictDataTypes': encodeQueryParameter(
+          _serializers,
+          useStrictDataTypes,
+          const FullType(bool),
+        ),
+      if (key != null)
+        r'key': encodeCollectionQueryParameter<String>(
+          _serializers,
+          key,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1027,11 +1389,16 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList)]),
-      ) as BuiltMap<String, BuiltList<TsData>>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltMap, [
+                    FullType(String),
+                    FullType(BuiltList),
+                  ]),
+                )
+                as BuiltMap<String, BuiltList<TsData>>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1069,7 +1436,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<String>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<String>>> getTimeseriesKeys({ 
+  Future<Response<BuiltList<String>>> getTimeseriesKeys({
     required String entityType,
     required String entityId,
     CancelToken? cancelToken,
@@ -1079,13 +1446,33 @@ class TelemetryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/keys/timeseries'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/keys/timeseries'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1093,11 +1480,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1116,11 +1500,13 @@ class TelemetryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(String)]),
-      ) as BuiltList<String>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(String)]),
+                )
+                as BuiltList<String>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1159,7 +1545,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> saveDeviceAttributes({ 
+  Future<Response<String>> saveDeviceAttributes({
     required String deviceId,
     required String scope,
     required String body,
@@ -1171,12 +1557,30 @@ class TelemetryControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/plugins/telemetry/{deviceId}/{scope}'.replaceAll('{' r'deviceId' '}', encodeQueryParameter(_serializers, deviceId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _path = r'/api/plugins/telemetry/{deviceId}/{scope}'
+        .replaceAll(
+          '{'
+          r'deviceId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            deviceId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'scope'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            scope,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1184,11 +1588,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1200,13 +1601,9 @@ class TelemetryControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1227,7 +1624,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1267,7 +1663,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> saveEntityAttributesV1({ 
+  Future<Response<String>> saveEntityAttributesV1({
     required String entityType,
     required String entityId,
     required String scope,
@@ -1280,12 +1676,40 @@ class TelemetryControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/{scope}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/{scope}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'scope'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            scope,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1293,11 +1717,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1309,13 +1730,9 @@ class TelemetryControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1336,7 +1753,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1376,7 +1792,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> saveEntityAttributesV2({ 
+  Future<Response<String>> saveEntityAttributesV2({
     required String entityType,
     required String entityId,
     required String scope,
@@ -1389,12 +1805,41 @@ class TelemetryControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/attributes/{scope}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/attributes/{scope}'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'scope'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                scope,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1402,11 +1847,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1418,13 +1860,9 @@ class TelemetryControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1445,7 +1883,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1485,7 +1922,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> saveEntityTelemetry({ 
+  Future<Response<String>> saveEntityTelemetry({
     required String entityType,
     required String entityId,
     required String scope,
@@ -1498,12 +1935,41 @@ class TelemetryControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/timeseries/{scope}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString());
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/timeseries/{scope}'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'scope'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                scope,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1511,11 +1977,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1527,13 +1990,9 @@ class TelemetryControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1554,7 +2013,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1595,7 +2053,7 @@ class TelemetryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> saveEntityTelemetryWithTTL({ 
+  Future<Response<String>> saveEntityTelemetryWithTTL({
     required String entityType,
     required String entityId,
     required String scope,
@@ -1609,12 +2067,51 @@ class TelemetryControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/plugins/telemetry/{entityType}/{entityId}/timeseries/{scope}/{ttl}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'scope' '}', encodeQueryParameter(_serializers, scope, const FullType(String)).toString()).replaceAll('{' r'ttl' '}', encodeQueryParameter(_serializers, ttl, const FullType(int)).toString());
+    final _path =
+        r'/api/plugins/telemetry/{entityType}/{entityId}/timeseries/{scope}/{ttl}'
+            .replaceAll(
+              '{'
+              r'entityType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'entityId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'scope'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                scope,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'ttl'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                ttl,
+                const FullType(int),
+              ).toString(),
+            );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1622,11 +2119,8 @@ class TelemetryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1638,13 +2132,9 @@ class TelemetryControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1665,7 +2155,6 @@ class TelemetryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1687,5 +2176,4 @@ class TelemetryControllerApi {
       extra: _response.extra,
     );
   }
-
 }

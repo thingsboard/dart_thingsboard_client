@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/notification_template.dart';
 import 'package:thingsboard_client/src/model/page_data_notification_template.dart';
 import 'package:thingsboard_client/src/model/slack_conversation.dart';
 import 'package:thingsboard_client/src/model/slack_conversation_type.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class NotificationTemplateControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -34,7 +31,7 @@ class NotificationTemplateControllerApi {
   /// Deletes notification template by its id.  This template cannot be referenced by existing scheduled notification requests or any notification rules.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -44,7 +41,7 @@ class NotificationTemplateControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteNotificationTemplateById({ 
+  Future<Response<void>> deleteNotificationTemplateById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,15 @@ class NotificationTemplateControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/notification/template/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/notification/template/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +67,8 @@ class NotificationTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -93,7 +90,7 @@ class NotificationTemplateControllerApi {
   /// Fetches notification template by id.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -103,7 +100,7 @@ class NotificationTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [NotificationTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<NotificationTemplate>> getNotificationTemplateById({ 
+  Future<Response<NotificationTemplate>> getNotificationTemplateById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -112,13 +109,17 @@ class NotificationTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationTemplate);
-    final _path = r'/api/notification/template/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerNotificationTemplate);
+    final _path = r'/api/notification/template/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -126,11 +127,8 @@ class NotificationTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -149,11 +147,13 @@ class NotificationTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(NotificationTemplate),
-      ) as NotificationTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(NotificationTemplate),
+                )
+                as NotificationTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -195,7 +195,7 @@ class NotificationTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataNotificationTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataNotificationTemplate>> getNotificationTemplates({ 
+  Future<Response<PageDataNotificationTemplate>> getNotificationTemplates({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -209,13 +209,13 @@ class NotificationTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndPageDataNotificationTemplate);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfStringAndPageDataNotificationTemplate);
     final _path = r'/api/notification/templates';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -223,11 +223,8 @@ class NotificationTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -235,12 +232,37 @@ class NotificationTemplateControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (notificationTypes != null) r'notificationTypes': encodeCollectionQueryParameter<String>(_serializers, notificationTypes, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (notificationTypes != null)
+        r'notificationTypes': encodeCollectionQueryParameter<String>(
+          _serializers,
+          notificationTypes,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -256,11 +278,13 @@ class NotificationTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataNotificationTemplate),
-      ) as PageDataNotificationTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataNotificationTemplate),
+                )
+                as PageDataNotificationTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -287,7 +311,7 @@ class NotificationTemplateControllerApi {
   /// List available Slack conversations by type.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [type] 
+  /// * [type]
   /// * [token] - Slack bot token. If absent - system Slack settings will be used
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -298,7 +322,7 @@ class NotificationTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<SlackConversation>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<SlackConversation>>> listSlackConversations({ 
+  Future<Response<BuiltList<SlackConversation>>> listSlackConversations({
     required SlackConversationType type,
     String? token,
     CancelToken? cancelToken,
@@ -308,13 +332,12 @@ class NotificationTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfSlackConversation);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfSlackConversation);
     final _path = r'/api/notification/slack/conversations';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -322,11 +345,8 @@ class NotificationTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -334,8 +354,17 @@ class NotificationTemplateControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'type': encodeQueryParameter(_serializers, type, const FullType(SlackConversationType)),
-      if (token != null) r'token': encodeQueryParameter(_serializers, token, const FullType(String)),
+      r'type': encodeQueryParameter(
+        _serializers,
+        type,
+        const FullType(SlackConversationType),
+      ),
+      if (token != null)
+        r'token': encodeQueryParameter(
+          _serializers,
+          token,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -351,11 +380,15 @@ class NotificationTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(SlackConversation)]),
-      ) as BuiltList<SlackConversation>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(SlackConversation),
+                  ]),
+                )
+                as BuiltList<SlackConversation>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -382,7 +415,7 @@ class NotificationTemplateControllerApi {
   /// Creates or updates notification template.  Here is an example of template to send notification via Web, SMS and Slack: &#x60;&#x60;&#x60;json {   \&quot;name\&quot;: \&quot;Greetings\&quot;,   \&quot;notificationType\&quot;: \&quot;GENERAL\&quot;,   \&quot;configuration\&quot;: {     \&quot;deliveryMethodsTemplates\&quot;: {       \&quot;WEB\&quot;: {         \&quot;enabled\&quot;: true,         \&quot;subject\&quot;: \&quot;Greetings\&quot;,         \&quot;body\&quot;: \&quot;Hi there, ${recipientTitle}\&quot;,         \&quot;additionalConfig\&quot;: {           \&quot;icon\&quot;: {             \&quot;enabled\&quot;: true,             \&quot;icon\&quot;: \&quot;back_hand\&quot;,             \&quot;color\&quot;: \&quot;#757575\&quot;           },           \&quot;actionButtonConfig\&quot;: {             \&quot;enabled\&quot;: false           }         },         \&quot;method\&quot;: \&quot;WEB\&quot;       },       \&quot;SMS\&quot;: {         \&quot;enabled\&quot;: true,         \&quot;body\&quot;: \&quot;Hi there, ${recipientTitle}\&quot;,         \&quot;method\&quot;: \&quot;SMS\&quot;       },       \&quot;SLACK\&quot;: {         \&quot;enabled\&quot;: true,         \&quot;body\&quot;: \&quot;Hi there, @${recipientTitle}\&quot;,         \&quot;method\&quot;: \&quot;SLACK\&quot;       }     }   } } &#x60;&#x60;&#x60;  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [notificationTemplate] 
+  /// * [notificationTemplate]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -392,7 +425,7 @@ class NotificationTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [NotificationTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<NotificationTemplate>> saveNotificationTemplate({ 
+  Future<Response<NotificationTemplate>> saveNotificationTemplate({
     required NotificationTemplate notificationTemplate,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -401,13 +434,12 @@ class NotificationTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationTemplate);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerNotificationTemplate);
     final _path = r'/api/notification/template';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -415,11 +447,8 @@ class NotificationTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -431,14 +460,13 @@ class NotificationTemplateControllerApi {
 
     try {
       const _type = FullType(NotificationTemplate);
-      _bodyData = _serializers.serialize(notificationTemplate, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        notificationTemplate,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -458,11 +486,13 @@ class NotificationTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(NotificationTemplate),
-      ) as NotificationTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(NotificationTemplate),
+                )
+                as NotificationTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -484,5 +514,4 @@ class NotificationTemplateControllerApi {
       extra: _response.extra,
     );
   }
-
 }

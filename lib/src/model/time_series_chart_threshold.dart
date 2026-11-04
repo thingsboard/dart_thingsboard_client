@@ -21,32 +21,34 @@ part 'time_series_chart_threshold.g.dart';
 /// TimeSeriesChartThreshold
 ///
 /// Properties:
-/// * [type] 
-/// * [value] 
-/// * [latestKeyType] 
-/// * [latestKey] 
-/// * [entityKeyType] 
-/// * [entityAlias] 
-/// * [entityKey] 
-/// * [yAxisId] 
-/// * [units] 
-/// * [decimals] 
-/// * [lineColor] 
-/// * [lineType] 
-/// * [lineWidth] 
-/// * [startSymbol] 
-/// * [startSymbolSize] 
-/// * [endSymbol] 
-/// * [endSymbolSize] 
-/// * [showLabel] 
-/// * [labelPosition] 
-/// * [labelFont] 
-/// * [labelColor] 
-/// * [enableLabelBackground] 
-/// * [labelBackground] 
-/// * [yaxisId] 
+/// * [type]
+/// * [value]
+/// * [latestKeyType]
+/// * [latestKey]
+/// * [entityKeyType]
+/// * [entityAlias]
+/// * [entityKey]
+/// * [yAxisId]
+/// * [units]
+/// * [decimals]
+/// * [lineColor]
+/// * [lineType]
+/// * [lineWidth]
+/// * [startSymbol]
+/// * [startSymbolSize]
+/// * [endSymbol]
+/// * [endSymbolSize]
+/// * [showLabel]
+/// * [labelPosition]
+/// * [labelFont]
+/// * [labelColor]
+/// * [enableLabelBackground]
+/// * [labelBackground]
+/// * [yaxisId]
 @BuiltValue()
-abstract class TimeSeriesChartThreshold implements Built<TimeSeriesChartThreshold, TimeSeriesChartThresholdBuilder> {
+abstract class TimeSeriesChartThreshold
+    implements
+        Built<TimeSeriesChartThreshold, TimeSeriesChartThresholdBuilder> {
   @BuiltValueField(wireName: r'type')
   ValueSourceType? get type;
   // enum typeEnum {  constant,  latestKey,  entity,  };
@@ -126,18 +128,25 @@ abstract class TimeSeriesChartThreshold implements Built<TimeSeriesChartThreshol
 
   TimeSeriesChartThreshold._();
 
-  factory TimeSeriesChartThreshold([void updates(TimeSeriesChartThresholdBuilder b)]) = _$TimeSeriesChartThreshold;
+  factory TimeSeriesChartThreshold([
+    void updates(TimeSeriesChartThresholdBuilder b),
+  ]) = _$TimeSeriesChartThreshold;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesChartThresholdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartThreshold> get serializer => _$TimeSeriesChartThresholdSerializer();
+  static Serializer<TimeSeriesChartThreshold> get serializer =>
+      _$TimeSeriesChartThresholdSerializer();
 }
 
-class _$TimeSeriesChartThresholdSerializer implements PrimitiveSerializer<TimeSeriesChartThreshold> {
+class _$TimeSeriesChartThresholdSerializer
+    implements PrimitiveSerializer<TimeSeriesChartThreshold> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartThreshold, _$TimeSeriesChartThreshold];
+  final Iterable<Type> types = const [
+    TimeSeriesChartThreshold,
+    _$TimeSeriesChartThreshold,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartThreshold';
@@ -323,7 +332,11 @@ class _$TimeSeriesChartThresholdSerializer implements PrimitiveSerializer<TimeSe
     TimeSeriesChartThreshold object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -339,194 +352,244 @@ class _$TimeSeriesChartThresholdSerializer implements PrimitiveSerializer<TimeSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ValueSourceType),
-          ) as ValueSourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ValueSourceType),
+                  )
+                  as ValueSourceType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'latestKeyType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestKeyType = valueDes;
           break;
         case r'latestKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestKey = valueDes;
           break;
         case r'entityKeyType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityKeyType = valueDes;
           break;
         case r'entityAlias':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityAlias = valueDes;
           break;
         case r'entityKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityKey = valueDes;
           break;
         case r'yAxisId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.yAxisId = valueDes;
           break;
         case r'units':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.units = valueDes;
           break;
         case r'decimals':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.decimals = valueDes;
           break;
         case r'lineColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.lineColor = valueDes;
           break;
         case r'lineType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartLineType),
-          ) as ChartLineType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartLineType),
+                  )
+                  as ChartLineType?;
           if (valueDes == null) continue;
           result.lineType = valueDes;
           break;
         case r'lineWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.lineWidth = valueDes;
           break;
         case r'startSymbol':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartShape),
-          ) as ChartShape?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartShape),
+                  )
+                  as ChartShape?;
           if (valueDes == null) continue;
           result.startSymbol = valueDes;
           break;
         case r'startSymbolSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.startSymbolSize = valueDes;
           break;
         case r'endSymbol':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartShape),
-          ) as ChartShape?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartShape),
+                  )
+                  as ChartShape?;
           if (valueDes == null) continue;
           result.endSymbol = valueDes;
           break;
         case r'endSymbolSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.endSymbolSize = valueDes;
           break;
         case r'showLabel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showLabel = valueDes;
           break;
         case r'labelPosition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ThresholdLabelPosition),
-          ) as ThresholdLabelPosition?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ThresholdLabelPosition,
+                    ),
+                  )
+                  as ThresholdLabelPosition?;
           if (valueDes == null) continue;
           result.labelPosition = valueDes;
           break;
         case r'labelFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.labelFont.replace(valueDes);
           break;
         case r'labelColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.labelColor = valueDes;
           break;
         case r'enableLabelBackground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enableLabelBackground = valueDes;
           break;
         case r'labelBackground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.labelBackground = valueDes;
           break;
         case r'yaxisId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.yaxisId = valueDes;
           break;
@@ -558,5 +621,3 @@ class _$TimeSeriesChartThresholdSerializer implements PrimitiveSerializer<TimeSe
     return result.build();
   }
 }
-
-

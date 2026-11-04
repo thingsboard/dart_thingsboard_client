@@ -17,23 +17,36 @@ part 'current_owner_dynamic_source_configuration.g.dart';
 /// CurrentOwnerDynamicSourceConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class CurrentOwnerDynamicSourceConfiguration implements CfArgumentDynamicSourceConfiguration, Built<CurrentOwnerDynamicSourceConfiguration, CurrentOwnerDynamicSourceConfigurationBuilder> {
+abstract class CurrentOwnerDynamicSourceConfiguration
+    implements
+        CfArgumentDynamicSourceConfiguration,
+        Built<
+          CurrentOwnerDynamicSourceConfiguration,
+          CurrentOwnerDynamicSourceConfigurationBuilder
+        > {
   CurrentOwnerDynamicSourceConfiguration._();
 
-  factory CurrentOwnerDynamicSourceConfiguration([void updates(CurrentOwnerDynamicSourceConfigurationBuilder b)]) = _$CurrentOwnerDynamicSourceConfiguration;
+  factory CurrentOwnerDynamicSourceConfiguration([
+    void updates(CurrentOwnerDynamicSourceConfigurationBuilder b),
+  ]) = _$CurrentOwnerDynamicSourceConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CurrentOwnerDynamicSourceConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CurrentOwnerDynamicSourceConfiguration> get serializer => _$CurrentOwnerDynamicSourceConfigurationSerializer();
+  static Serializer<CurrentOwnerDynamicSourceConfiguration> get serializer =>
+      _$CurrentOwnerDynamicSourceConfigurationSerializer();
 }
 
-class _$CurrentOwnerDynamicSourceConfigurationSerializer implements PrimitiveSerializer<CurrentOwnerDynamicSourceConfiguration> {
+class _$CurrentOwnerDynamicSourceConfigurationSerializer
+    implements PrimitiveSerializer<CurrentOwnerDynamicSourceConfiguration> {
   @override
-  final Iterable<Type> types = const [CurrentOwnerDynamicSourceConfiguration, _$CurrentOwnerDynamicSourceConfiguration];
+  final Iterable<Type> types = const [
+    CurrentOwnerDynamicSourceConfiguration,
+    _$CurrentOwnerDynamicSourceConfiguration,
+  ];
 
   @override
   final String wireName = r'CurrentOwnerDynamicSourceConfiguration';
@@ -56,7 +69,11 @@ class _$CurrentOwnerDynamicSourceConfigurationSerializer implements PrimitiveSer
     CurrentOwnerDynamicSourceConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$CurrentOwnerDynamicSourceConfigurationSerializer implements PrimitiveSer
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$CurrentOwnerDynamicSourceConfigurationSerializer implements PrimitiveSer
     return result.build();
   }
 }
-
-

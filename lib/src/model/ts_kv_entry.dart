@@ -18,17 +18,17 @@ part 'ts_kv_entry.g.dart';
 /// TsKvEntry
 ///
 /// Properties:
-/// * [ts] 
-/// * [value] 
-/// * [key] 
-/// * [doubleValue] 
-/// * [longValue] 
-/// * [booleanValue] 
-/// * [valueAsString] 
-/// * [dataType] 
-/// * [jsonValue] 
-/// * [strValue] 
-/// * [version] 
+/// * [ts]
+/// * [value]
+/// * [key]
+/// * [doubleValue]
+/// * [longValue]
+/// * [booleanValue]
+/// * [valueAsString]
+/// * [dataType]
+/// * [jsonValue]
+/// * [strValue]
+/// * [version]
 @BuiltValue()
 abstract class TsKvEntry implements Built<TsKvEntry, TsKvEntryBuilder> {
   @BuiltValueField(wireName: r'ts')
@@ -173,7 +173,11 @@ class _$TsKvEntrySerializer implements PrimitiveSerializer<TsKvEntry> {
     TsKvEntry object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -189,90 +193,112 @@ class _$TsKvEntrySerializer implements PrimitiveSerializer<TsKvEntry> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'ts':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.ts = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'doubleValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.doubleValue = valueDes;
           break;
         case r'longValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.longValue = valueDes;
           break;
         case r'booleanValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.booleanValue = valueDes;
           break;
         case r'valueAsString':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.valueAsString = valueDes;
           break;
         case r'dataType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DataType),
-          ) as DataType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DataType),
+                  )
+                  as DataType?;
           if (valueDes == null) continue;
           result.dataType = valueDes;
           break;
         case r'jsonValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.jsonValue = valueDes;
           break;
         case r'strValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.strValue = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
@@ -304,5 +330,3 @@ class _$TsKvEntrySerializer implements PrimitiveSerializer<TsKvEntry> {
     return result.build();
   }
 }
-
-

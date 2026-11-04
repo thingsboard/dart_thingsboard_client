@@ -19,13 +19,18 @@ part 'sign_up_self_registration_params.g.dart';
 /// SignUpSelfRegistrationParams
 ///
 /// Properties:
-/// * [title] 
-/// * [captcha] 
-/// * [fields] 
-/// * [showPrivacyPolicy] 
-/// * [showTermsOfUse] 
+/// * [title]
+/// * [captcha]
+/// * [fields]
+/// * [showPrivacyPolicy]
+/// * [showTermsOfUse]
 @BuiltValue()
-abstract class SignUpSelfRegistrationParams implements Built<SignUpSelfRegistrationParams, SignUpSelfRegistrationParamsBuilder> {
+abstract class SignUpSelfRegistrationParams
+    implements
+        Built<
+          SignUpSelfRegistrationParams,
+          SignUpSelfRegistrationParamsBuilder
+        > {
   @BuiltValueField(wireName: r'title')
   String? get title;
 
@@ -43,18 +48,25 @@ abstract class SignUpSelfRegistrationParams implements Built<SignUpSelfRegistrat
 
   SignUpSelfRegistrationParams._();
 
-  factory SignUpSelfRegistrationParams([void updates(SignUpSelfRegistrationParamsBuilder b)]) = _$SignUpSelfRegistrationParams;
+  factory SignUpSelfRegistrationParams([
+    void updates(SignUpSelfRegistrationParamsBuilder b),
+  ]) = _$SignUpSelfRegistrationParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SignUpSelfRegistrationParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SignUpSelfRegistrationParams> get serializer => _$SignUpSelfRegistrationParamsSerializer();
+  static Serializer<SignUpSelfRegistrationParams> get serializer =>
+      _$SignUpSelfRegistrationParamsSerializer();
 }
 
-class _$SignUpSelfRegistrationParamsSerializer implements PrimitiveSerializer<SignUpSelfRegistrationParams> {
+class _$SignUpSelfRegistrationParamsSerializer
+    implements PrimitiveSerializer<SignUpSelfRegistrationParams> {
   @override
-  final Iterable<Type> types = const [SignUpSelfRegistrationParams, _$SignUpSelfRegistrationParams];
+  final Iterable<Type> types = const [
+    SignUpSelfRegistrationParams,
+    _$SignUpSelfRegistrationParams,
+  ];
 
   @override
   final String wireName = r'SignUpSelfRegistrationParams';
@@ -107,7 +119,11 @@ class _$SignUpSelfRegistrationParamsSerializer implements PrimitiveSerializer<Si
     SignUpSelfRegistrationParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -123,42 +139,54 @@ class _$SignUpSelfRegistrationParamsSerializer implements PrimitiveSerializer<Si
       final value = serializedList[i + 1];
       switch (key) {
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'captcha':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CaptchaParams),
-          ) as CaptchaParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CaptchaParams),
+                  )
+                  as CaptchaParams?;
           if (valueDes == null) continue;
           result.captcha = valueDes;
           break;
         case r'fields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SignUpField)]),
-          ) as BuiltList<SignUpField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SignUpField),
+                    ]),
+                  )
+                  as BuiltList<SignUpField>?;
           if (valueDes == null) continue;
           result.fields.replace(valueDes);
           break;
         case r'showPrivacyPolicy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showPrivacyPolicy = valueDes;
           break;
         case r'showTermsOfUse':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTermsOfUse = valueDes;
           break;
@@ -190,5 +218,3 @@ class _$SignUpSelfRegistrationParamsSerializer implements PrimitiveSerializer<Si
     return result.build();
   }
 }
-
-

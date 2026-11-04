@@ -21,14 +21,20 @@ part 'geofencing_calculated_field_configuration.g.dart';
 /// GeofencingCalculatedFieldConfiguration
 ///
 /// Properties:
-/// * [output] 
-/// * [type] 
-/// * [entityCoordinates] 
-/// * [zoneGroups] 
-/// * [scheduledUpdateEnabled] 
-/// * [scheduledUpdateInterval] 
+/// * [output]
+/// * [type]
+/// * [entityCoordinates]
+/// * [zoneGroups]
+/// * [scheduledUpdateEnabled]
+/// * [scheduledUpdateInterval]
 @BuiltValue()
-abstract class GeofencingCalculatedFieldConfiguration implements CalculatedFieldConfiguration, Built<GeofencingCalculatedFieldConfiguration, GeofencingCalculatedFieldConfigurationBuilder> {
+abstract class GeofencingCalculatedFieldConfiguration
+    implements
+        CalculatedFieldConfiguration,
+        Built<
+          GeofencingCalculatedFieldConfiguration,
+          GeofencingCalculatedFieldConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'entityCoordinates')
   EntityCoordinates get entityCoordinates;
 
@@ -43,18 +49,25 @@ abstract class GeofencingCalculatedFieldConfiguration implements CalculatedField
 
   GeofencingCalculatedFieldConfiguration._();
 
-  factory GeofencingCalculatedFieldConfiguration([void updates(GeofencingCalculatedFieldConfigurationBuilder b)]) = _$GeofencingCalculatedFieldConfiguration;
+  factory GeofencingCalculatedFieldConfiguration([
+    void updates(GeofencingCalculatedFieldConfigurationBuilder b),
+  ]) = _$GeofencingCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GeofencingCalculatedFieldConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GeofencingCalculatedFieldConfiguration> get serializer => _$GeofencingCalculatedFieldConfigurationSerializer();
+  static Serializer<GeofencingCalculatedFieldConfiguration> get serializer =>
+      _$GeofencingCalculatedFieldConfigurationSerializer();
 }
 
-class _$GeofencingCalculatedFieldConfigurationSerializer implements PrimitiveSerializer<GeofencingCalculatedFieldConfiguration> {
+class _$GeofencingCalculatedFieldConfigurationSerializer
+    implements PrimitiveSerializer<GeofencingCalculatedFieldConfiguration> {
   @override
-  final Iterable<Type> types = const [GeofencingCalculatedFieldConfiguration, _$GeofencingCalculatedFieldConfiguration];
+  final Iterable<Type> types = const [
+    GeofencingCalculatedFieldConfiguration,
+    _$GeofencingCalculatedFieldConfiguration,
+  ];
 
   @override
   final String wireName = r'GeofencingCalculatedFieldConfiguration';
@@ -98,7 +111,10 @@ class _$GeofencingCalculatedFieldConfigurationSerializer implements PrimitiveSer
     yield r'zoneGroups';
     yield serializers.serialize(
       object.zoneGroups,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(ZoneGroupConfiguration)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(ZoneGroupConfiguration),
+      ]),
     );
   }
 
@@ -108,7 +124,11 @@ class _$GeofencingCalculatedFieldConfigurationSerializer implements PrimitiveSer
     GeofencingCalculatedFieldConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -124,48 +144,63 @@ class _$GeofencingCalculatedFieldConfigurationSerializer implements PrimitiveSer
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityCoordinates':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityCoordinates),
-          ) as EntityCoordinates;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityCoordinates),
+                  )
+                  as EntityCoordinates;
           result.entityCoordinates.replace(valueDes);
           break;
         case r'output':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Output),
-          ) as Output?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Output),
+                  )
+                  as Output?;
           if (valueDes == null) continue;
           result.output = valueDes;
           break;
         case r'scheduledUpdateEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.scheduledUpdateEnabled = valueDes;
           break;
         case r'scheduledUpdateInterval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.scheduledUpdateInterval = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'zoneGroups':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(ZoneGroupConfiguration)]),
-          ) as BuiltMap<String, ZoneGroupConfiguration>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(ZoneGroupConfiguration),
+                    ]),
+                  )
+                  as BuiltMap<String, ZoneGroupConfiguration>;
           result.zoneGroups.replace(valueDes);
           break;
         default:
@@ -196,5 +231,3 @@ class _$GeofencingCalculatedFieldConfigurationSerializer implements PrimitiveSer
     return result.build();
   }
 }
-
-

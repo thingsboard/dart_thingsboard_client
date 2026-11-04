@@ -16,26 +16,38 @@ part 'google_ai_gemini_provider_config.g.dart';
 /// GoogleAiGeminiProviderConfig
 ///
 /// Properties:
-/// * [apiKey] 
+/// * [apiKey]
 @BuiltValue()
-abstract class GoogleAiGeminiProviderConfig implements Built<GoogleAiGeminiProviderConfig, GoogleAiGeminiProviderConfigBuilder> {
+abstract class GoogleAiGeminiProviderConfig
+    implements
+        Built<
+          GoogleAiGeminiProviderConfig,
+          GoogleAiGeminiProviderConfigBuilder
+        > {
   @BuiltValueField(wireName: r'apiKey')
   String get apiKey;
 
   GoogleAiGeminiProviderConfig._();
 
-  factory GoogleAiGeminiProviderConfig([void updates(GoogleAiGeminiProviderConfigBuilder b)]) = _$GoogleAiGeminiProviderConfig;
+  factory GoogleAiGeminiProviderConfig([
+    void updates(GoogleAiGeminiProviderConfigBuilder b),
+  ]) = _$GoogleAiGeminiProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GoogleAiGeminiProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GoogleAiGeminiProviderConfig> get serializer => _$GoogleAiGeminiProviderConfigSerializer();
+  static Serializer<GoogleAiGeminiProviderConfig> get serializer =>
+      _$GoogleAiGeminiProviderConfigSerializer();
 }
 
-class _$GoogleAiGeminiProviderConfigSerializer implements PrimitiveSerializer<GoogleAiGeminiProviderConfig> {
+class _$GoogleAiGeminiProviderConfigSerializer
+    implements PrimitiveSerializer<GoogleAiGeminiProviderConfig> {
   @override
-  final Iterable<Type> types = const [GoogleAiGeminiProviderConfig, _$GoogleAiGeminiProviderConfig];
+  final Iterable<Type> types = const [
+    GoogleAiGeminiProviderConfig,
+    _$GoogleAiGeminiProviderConfig,
+  ];
 
   @override
   final String wireName = r'GoogleAiGeminiProviderConfig';
@@ -58,7 +70,11 @@ class _$GoogleAiGeminiProviderConfigSerializer implements PrimitiveSerializer<Go
     GoogleAiGeminiProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -74,10 +90,12 @@ class _$GoogleAiGeminiProviderConfigSerializer implements PrimitiveSerializer<Go
       final value = serializedList[i + 1];
       switch (key) {
         case r'apiKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.apiKey = valueDes;
           break;
         default:
@@ -108,5 +126,3 @@ class _$GoogleAiGeminiProviderConfigSerializer implements PrimitiveSerializer<Go
     return result.build();
   }
 }
-
-

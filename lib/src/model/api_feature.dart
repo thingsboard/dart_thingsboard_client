@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'api_feature.g.dart';
 
 class ApiFeature extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'TRANSPORT')
   static const ApiFeature TRANSPORT = _$TRANSPORT;
   @BuiltValueEnumConst(wireName: r'DB')
@@ -41,7 +40,7 @@ class ApiFeature extends EnumClass {
 
   static Serializer<ApiFeature> get serializer => _$apiFeatureSerializer;
 
-  const ApiFeature._(String name): super(name);
+  const ApiFeature._(String name) : super(name);
 
   static BuiltSet<ApiFeature> get values => _$values;
   static ApiFeature valueOf(String name) => _$valueOf(name);
@@ -54,4 +53,3 @@ class ApiFeature extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ApiFeatureMixin = Object with _$ApiFeatureMixin;
-

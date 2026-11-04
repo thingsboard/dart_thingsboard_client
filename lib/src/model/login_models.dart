@@ -12,10 +12,7 @@ class LoginRequest {
   LoginRequest({required this.userName, required this.password});
 
   Map<String, dynamic> toJson() {
-    return {
-      'username': userName,
-      'password': password,
-    };
+    return {'username': userName, 'password': password};
   }
 }
 
@@ -27,9 +24,9 @@ class LoginResponse {
   LoginResponse({required this.token, this.refreshToken, this.scope});
 
   LoginResponse.fromJson(Map<String, dynamic> json)
-      : token = json['token'],
-        refreshToken = json['refreshToken'],
-        scope = json['scope'] != null ? authorityFromString(json['scope']) : null;
+    : token = json['token'],
+      refreshToken = json['refreshToken'],
+      scope = json['scope'] != null ? authorityFromString(json['scope']) : null;
 }
 
 class RefreshTokenRequest {

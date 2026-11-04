@@ -9,21 +9,18 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/page_data_widget_type_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/widget_type.dart';
 import 'package:thingsboard_client/src/model/widget_type_details.dart';
 import 'package:thingsboard_client/src/model/widget_type_info.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class WidgetTypeControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -44,7 +41,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteWidgetType({ 
+  Future<Response<void>> deleteWidgetType({
     required String widgetTypeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,19 @@ class WidgetTypeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/widgetType/{widgetTypeId}'.replaceAll('{' r'widgetTypeId' '}', encodeQueryParameter(_serializers, widgetTypeId, const FullType(String)).toString());
+    final _path = r'/api/widgetType/{widgetTypeId}'.replaceAll(
+      '{'
+      r'widgetTypeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        widgetTypeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +71,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -103,7 +104,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<String>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<String>>> getBundleWidgetTypeFqns({ 
+  Future<Response<BuiltList<String>>> getBundleWidgetTypeFqns({
     required String widgetsBundleId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -112,13 +113,12 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
     final _path = r'/api/widgetTypeFqns';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -126,11 +126,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -138,7 +135,11 @@ class WidgetTypeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'widgetsBundleId': encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)),
+      r'widgetsBundleId': encodeQueryParameter(
+        _serializers,
+        widgetsBundleId,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -154,11 +155,13 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(String)]),
-      ) as BuiltList<String>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(String)]),
+                )
+                as BuiltList<String>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -195,7 +198,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<WidgetType>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<WidgetType>>> getBundleWidgetTypes({ 
+  Future<Response<BuiltList<WidgetType>>> getBundleWidgetTypes({
     required String widgetsBundleId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -204,13 +207,22 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfWidgetType);
-    final _path = r'/api/widgetsBundle/{widgetsBundleId}/widgetTypes'.replaceAll('{' r'widgetsBundleId' '}', encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfWidgetType);
+    final _path = r'/api/widgetsBundle/{widgetsBundleId}/widgetTypes'
+        .replaceAll(
+          '{'
+          r'widgetsBundleId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            widgetsBundleId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -218,11 +230,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -241,11 +250,15 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(WidgetType)]),
-      ) as BuiltList<WidgetType>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(WidgetType),
+                  ]),
+                )
+                as BuiltList<WidgetType>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -283,7 +296,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<WidgetTypeDetails>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<WidgetTypeDetails>>> getBundleWidgetTypesDetails({ 
+  Future<Response<BuiltList<WidgetTypeDetails>>> getBundleWidgetTypesDetails({
     required String widgetsBundleId,
     bool? includeResources,
     CancelToken? cancelToken,
@@ -293,13 +306,12 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfWidgetTypeDetails);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfWidgetTypeDetails);
     final _path = r'/api/widgetTypesDetails';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -307,11 +319,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -319,8 +328,17 @@ class WidgetTypeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'widgetsBundleId': encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)),
-      if (includeResources != null) r'includeResources': encodeQueryParameter(_serializers, includeResources, const FullType(bool)),
+      r'widgetsBundleId': encodeQueryParameter(
+        _serializers,
+        widgetsBundleId,
+        const FullType(String),
+      ),
+      if (includeResources != null)
+        r'includeResources': encodeQueryParameter(
+          _serializers,
+          includeResources,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -336,11 +354,15 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(WidgetTypeDetails)]),
-      ) as BuiltList<WidgetTypeDetails>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(WidgetTypeDetails),
+                  ]),
+                )
+                as BuiltList<WidgetTypeDetails>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -364,7 +386,7 @@ class WidgetTypeControllerApi {
   }
 
   /// Get Widget Type Info objects (getBundleWidgetTypesInfos)
-  /// Get the Widget Type Info objects based on the provided parameters. Widget Type Info is a lightweight object that represents Widget Type but does not contain the heavyweight widget descriptor JSON  Available for any authorized user. 
+  /// Get the Widget Type Info objects based on the provided parameters. Widget Type Info is a lightweight object that represents Widget Type but does not contain the heavyweight widget descriptor JSON  Available for any authorized user.
   ///
   /// Parameters:
   /// * [widgetsBundleId] - Widget Bundle Id
@@ -385,7 +407,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataWidgetTypeInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataWidgetTypeInfo>> getBundleWidgetTypesInfos({ 
+  Future<Response<PageDataWidgetTypeInfo>> getBundleWidgetTypesInfos({
     required String widgetsBundleId,
     required int pageSize,
     required int page,
@@ -402,13 +424,12 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataWidgetTypeInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataWidgetTypeInfo);
     final _path = r'/api/widgetTypesInfos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -416,11 +437,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -428,15 +446,54 @@ class WidgetTypeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'widgetsBundleId': encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'widgetsBundleId': encodeQueryParameter(
+        _serializers,
+        widgetsBundleId,
+        const FullType(String),
+      ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (fullSearch != null) r'fullSearch': encodeQueryParameter(_serializers, fullSearch, const FullType(bool)),
-      if (deprecatedFilter != null) r'deprecatedFilter': encodeQueryParameter(_serializers, deprecatedFilter, const FullType(String)),
-      if (widgetTypeList != null) r'widgetTypeList': encodeCollectionQueryParameter<String>(_serializers, widgetTypeList, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (fullSearch != null)
+        r'fullSearch': encodeQueryParameter(
+          _serializers,
+          fullSearch,
+          const FullType(bool),
+        ),
+      if (deprecatedFilter != null)
+        r'deprecatedFilter': encodeQueryParameter(
+          _serializers,
+          deprecatedFilter,
+          const FullType(String),
+        ),
+      if (widgetTypeList != null)
+        r'widgetTypeList': encodeCollectionQueryParameter<String>(
+          _serializers,
+          widgetTypeList,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -452,11 +509,13 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataWidgetTypeInfo),
-      ) as PageDataWidgetTypeInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataWidgetTypeInfo),
+                )
+                as PageDataWidgetTypeInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -480,7 +539,7 @@ class WidgetTypeControllerApi {
   }
 
   /// Get Widget Type (getWidgetType)
-  /// Get the Widget Type by FQN. Widget Type represents the template for widget creation. Widget Type and Widget are similar to class and object in OOP theory.  Available for any authorized user. 
+  /// Get the Widget Type by FQN. Widget Type represents the template for widget creation. Widget Type and Widget are similar to class and object in OOP theory.  Available for any authorized user.
   ///
   /// Parameters:
   /// * [fqn] - Widget Type fqn
@@ -493,7 +552,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WidgetType] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WidgetType>> getWidgetType({ 
+  Future<Response<WidgetType>> getWidgetType({
     required String fqn,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -502,13 +561,12 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWidgetType);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWidgetType);
     final _path = r'/api/widgetType';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -516,11 +574,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -544,11 +599,13 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WidgetType),
-      ) as WidgetType;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WidgetType),
+                )
+                as WidgetType;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -586,7 +643,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WidgetTypeDetails] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WidgetTypeDetails>> getWidgetTypeById({ 
+  Future<Response<WidgetTypeDetails>> getWidgetTypeById({
     required String widgetTypeId,
     bool? includeResources,
     CancelToken? cancelToken,
@@ -596,13 +653,21 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWidgetTypeDetails);
-    final _path = r'/api/widgetType/{widgetTypeId}'.replaceAll('{' r'widgetTypeId' '}', encodeQueryParameter(_serializers, widgetTypeId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWidgetTypeDetails);
+    final _path = r'/api/widgetType/{widgetTypeId}'.replaceAll(
+      '{'
+      r'widgetTypeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        widgetTypeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -610,11 +675,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -622,7 +684,12 @@ class WidgetTypeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (includeResources != null) r'includeResources': encodeQueryParameter(_serializers, includeResources, const FullType(bool)),
+      if (includeResources != null)
+        r'includeResources': encodeQueryParameter(
+          _serializers,
+          includeResources,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -638,11 +705,13 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WidgetTypeDetails),
-      ) as WidgetTypeDetails;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WidgetTypeDetails),
+                )
+                as WidgetTypeDetails;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -679,7 +748,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WidgetTypeInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WidgetTypeInfo>> getWidgetTypeInfoById({ 
+  Future<Response<WidgetTypeInfo>> getWidgetTypeInfoById({
     required String widgetTypeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -688,13 +757,21 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWidgetTypeInfo);
-    final _path = r'/api/widgetTypeInfo/{widgetTypeId}'.replaceAll('{' r'widgetTypeId' '}', encodeQueryParameter(_serializers, widgetTypeId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWidgetTypeInfo);
+    final _path = r'/api/widgetTypeInfo/{widgetTypeId}'.replaceAll(
+      '{'
+      r'widgetTypeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        widgetTypeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -702,11 +779,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -725,11 +799,13 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WidgetTypeInfo),
-      ) as WidgetTypeInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WidgetTypeInfo),
+                )
+                as WidgetTypeInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -753,7 +829,7 @@ class WidgetTypeControllerApi {
   }
 
   /// Get Widget Types (getWidgetTypes)
-  /// Returns a page of Widget Type objects available for current user. Widget Type represents the template for widget creation. Widget Type and Widget are similar to class and object in OOP theory. You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.   Available for any authorized user. 
+  /// Returns a page of Widget Type objects available for current user. Widget Type represents the template for widget creation. Widget Type and Widget are similar to class and object in OOP theory. You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.   Available for any authorized user.
   ///
   /// Parameters:
   /// * [pageSize] - Maximum amount of entities in a one page
@@ -775,7 +851,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataWidgetTypeInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataWidgetTypeInfo>> getWidgetTypes({ 
+  Future<Response<PageDataWidgetTypeInfo>> getWidgetTypes({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -793,13 +869,12 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataWidgetTypeInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataWidgetTypeInfo);
     final _path = r'/api/widgetTypes';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -807,11 +882,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -819,16 +891,61 @@ class WidgetTypeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (tenantOnly != null) r'tenantOnly': encodeQueryParameter(_serializers, tenantOnly, const FullType(bool)),
-      if (fullSearch != null) r'fullSearch': encodeQueryParameter(_serializers, fullSearch, const FullType(bool)),
-      if (deprecatedFilter != null) r'deprecatedFilter': encodeQueryParameter(_serializers, deprecatedFilter, const FullType(String)),
-      if (widgetTypeList != null) r'widgetTypeList': encodeCollectionQueryParameter<String>(_serializers, widgetTypeList, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (scadaFirst != null) r'scadaFirst': encodeQueryParameter(_serializers, scadaFirst, const FullType(bool)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (tenantOnly != null)
+        r'tenantOnly': encodeQueryParameter(
+          _serializers,
+          tenantOnly,
+          const FullType(bool),
+        ),
+      if (fullSearch != null)
+        r'fullSearch': encodeQueryParameter(
+          _serializers,
+          fullSearch,
+          const FullType(bool),
+        ),
+      if (deprecatedFilter != null)
+        r'deprecatedFilter': encodeQueryParameter(
+          _serializers,
+          deprecatedFilter,
+          const FullType(String),
+        ),
+      if (widgetTypeList != null)
+        r'widgetTypeList': encodeCollectionQueryParameter<String>(
+          _serializers,
+          widgetTypeList,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (scadaFirst != null)
+        r'scadaFirst': encodeQueryParameter(
+          _serializers,
+          scadaFirst,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -844,11 +961,13 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataWidgetTypeInfo),
-      ) as PageDataWidgetTypeInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataWidgetTypeInfo),
+                )
+                as PageDataWidgetTypeInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -875,7 +994,7 @@ class WidgetTypeControllerApi {
   /// Create or update the Widget Type. Widget Type represents the template for widget creation. Widget Type and Widget are similar to class and object in OOP theory. When creating the Widget Type, platform generates Widget Type Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Widget Type Id will be present in the response. Specify existing Widget Type id to update the Widget Type. Referencing non-existing Widget Type Id will cause &#39;Not Found&#39; error.  Widget Type fqn is unique in the scope of System or Tenant. Special Tenant Id &#39;13814000-1dd2-11b2-8080-808080808080&#39; is automatically used if the create request is sent by user with &#39;SYS_ADMIN&#39; authority.Remove &#39;id&#39;, &#39;tenantId&#39; rom the request body example (below) to create new Widget Type entity.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [widgetTypeDetails] 
+  /// * [widgetTypeDetails]
   /// * [updateExistingByFqn] - Optional boolean parameter indicating whether to update existing widget type by FQN if present instead of creating new one
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -886,7 +1005,7 @@ class WidgetTypeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WidgetTypeDetails] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WidgetTypeDetails>> saveWidgetType({ 
+  Future<Response<WidgetTypeDetails>> saveWidgetType({
     required WidgetTypeDetails widgetTypeDetails,
     bool? updateExistingByFqn,
     CancelToken? cancelToken,
@@ -896,13 +1015,12 @@ class WidgetTypeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWidgetTypeDetails);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWidgetTypeDetails);
     final _path = r'/api/widgetType';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -910,11 +1028,8 @@ class WidgetTypeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -923,18 +1038,25 @@ class WidgetTypeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (updateExistingByFqn != null) r'updateExistingByFqn': encodeQueryParameter(_serializers, updateExistingByFqn, const FullType(bool)),
+      if (updateExistingByFqn != null)
+        r'updateExistingByFqn': encodeQueryParameter(
+          _serializers,
+          updateExistingByFqn,
+          const FullType(bool),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       const _type = FullType(WidgetTypeDetails);
-      _bodyData = _serializers.serialize(widgetTypeDetails, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        widgetTypeDetails,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -959,11 +1081,13 @@ class WidgetTypeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WidgetTypeDetails),
-      ) as WidgetTypeDetails;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WidgetTypeDetails),
+                )
+                as WidgetTypeDetails;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -985,5 +1109,4 @@ class WidgetTypeControllerApi {
       extra: _response.extra,
     );
   }
-
 }

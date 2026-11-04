@@ -18,22 +18,26 @@ part 'mobile_app_bundle_id.g.dart';
 /// MobileAppBundleId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class MobileAppBundleId implements EntityId, Built<MobileAppBundleId, MobileAppBundleIdBuilder> {
+abstract class MobileAppBundleId
+    implements EntityId, Built<MobileAppBundleId, MobileAppBundleIdBuilder> {
   MobileAppBundleId._();
 
-  factory MobileAppBundleId([void updates(MobileAppBundleIdBuilder b)]) = _$MobileAppBundleId;
+  factory MobileAppBundleId([void updates(MobileAppBundleIdBuilder b)]) =
+      _$MobileAppBundleId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileAppBundleIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileAppBundleId> get serializer => _$MobileAppBundleIdSerializer();
+  static Serializer<MobileAppBundleId> get serializer =>
+      _$MobileAppBundleIdSerializer();
 }
 
-class _$MobileAppBundleIdSerializer implements PrimitiveSerializer<MobileAppBundleId> {
+class _$MobileAppBundleIdSerializer
+    implements PrimitiveSerializer<MobileAppBundleId> {
   @override
   final Iterable<Type> types = const [MobileAppBundleId, _$MobileAppBundleId];
 
@@ -63,7 +67,11 @@ class _$MobileAppBundleIdSerializer implements PrimitiveSerializer<MobileAppBund
     MobileAppBundleId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$MobileAppBundleIdSerializer implements PrimitiveSerializer<MobileAppBund
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$MobileAppBundleIdSerializer implements PrimitiveSerializer<MobileAppBund
     return result.build();
   }
 }
-
-

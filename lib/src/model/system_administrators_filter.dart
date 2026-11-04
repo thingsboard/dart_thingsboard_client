@@ -17,23 +17,33 @@ part 'system_administrators_filter.g.dart';
 /// SystemAdministratorsFilter
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class SystemAdministratorsFilter implements UsersFilter, Built<SystemAdministratorsFilter, SystemAdministratorsFilterBuilder> {
+abstract class SystemAdministratorsFilter
+    implements
+        UsersFilter,
+        Built<SystemAdministratorsFilter, SystemAdministratorsFilterBuilder> {
   SystemAdministratorsFilter._();
 
-  factory SystemAdministratorsFilter([void updates(SystemAdministratorsFilterBuilder b)]) = _$SystemAdministratorsFilter;
+  factory SystemAdministratorsFilter([
+    void updates(SystemAdministratorsFilterBuilder b),
+  ]) = _$SystemAdministratorsFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SystemAdministratorsFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SystemAdministratorsFilter> get serializer => _$SystemAdministratorsFilterSerializer();
+  static Serializer<SystemAdministratorsFilter> get serializer =>
+      _$SystemAdministratorsFilterSerializer();
 }
 
-class _$SystemAdministratorsFilterSerializer implements PrimitiveSerializer<SystemAdministratorsFilter> {
+class _$SystemAdministratorsFilterSerializer
+    implements PrimitiveSerializer<SystemAdministratorsFilter> {
   @override
-  final Iterable<Type> types = const [SystemAdministratorsFilter, _$SystemAdministratorsFilter];
+  final Iterable<Type> types = const [
+    SystemAdministratorsFilter,
+    _$SystemAdministratorsFilter,
+  ];
 
   @override
   final String wireName = r'SystemAdministratorsFilter';
@@ -56,7 +66,11 @@ class _$SystemAdministratorsFilterSerializer implements PrimitiveSerializer<Syst
     SystemAdministratorsFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +86,12 @@ class _$SystemAdministratorsFilterSerializer implements PrimitiveSerializer<Syst
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +122,3 @@ class _$SystemAdministratorsFilterSerializer implements PrimitiveSerializer<Syst
     return result.build();
   }
 }
-
-

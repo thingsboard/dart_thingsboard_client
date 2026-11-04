@@ -18,9 +18,9 @@ part 'transport_payload_type_configuration.g.dart';
 /// Configuration for transport payload type
 ///
 /// Properties:
-/// * [transportPayloadType] 
+/// * [transportPayloadType]
 @BuiltValue(instantiable: false)
-abstract class TransportPayloadTypeConfiguration  {
+abstract class TransportPayloadTypeConfiguration {
   @BuiltValueField(wireName: r'transportPayloadType')
   String get transportPayloadType;
 
@@ -32,33 +32,38 @@ abstract class TransportPayloadTypeConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TransportPayloadTypeConfiguration> get serializer => _$TransportPayloadTypeConfigurationSerializer();
+  static Serializer<TransportPayloadTypeConfiguration> get serializer =>
+      _$TransportPayloadTypeConfigurationSerializer();
 }
 
-extension TransportPayloadTypeConfigurationDiscriminatorExt on TransportPayloadTypeConfiguration {
-    String? get discriminatorValue {
-        if (this is JsonTransportPayloadConfiguration) {
-            return r'JSON';
-        }
-        if (this is ProtoTransportPayloadConfiguration) {
-            return r'PROTOBUF';
-        }
-        return null;
+extension TransportPayloadTypeConfigurationDiscriminatorExt
+    on TransportPayloadTypeConfiguration {
+  String? get discriminatorValue {
+    if (this is JsonTransportPayloadConfiguration) {
+      return r'JSON';
     }
-}
-extension TransportPayloadTypeConfigurationBuilderDiscriminatorExt on TransportPayloadTypeConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is JsonTransportPayloadConfigurationBuilder) {
-            return r'JSON';
-        }
-        if (this is ProtoTransportPayloadConfigurationBuilder) {
-            return r'PROTOBUF';
-        }
-        return null;
+    if (this is ProtoTransportPayloadConfiguration) {
+      return r'PROTOBUF';
     }
+    return null;
+  }
 }
 
-class _$TransportPayloadTypeConfigurationSerializer implements PrimitiveSerializer<TransportPayloadTypeConfiguration> {
+extension TransportPayloadTypeConfigurationBuilderDiscriminatorExt
+    on TransportPayloadTypeConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is JsonTransportPayloadConfigurationBuilder) {
+      return r'JSON';
+    }
+    if (this is ProtoTransportPayloadConfigurationBuilder) {
+      return r'PROTOBUF';
+    }
+    return null;
+  }
+}
+
+class _$TransportPayloadTypeConfigurationSerializer
+    implements PrimitiveSerializer<TransportPayloadTypeConfiguration> {
   @override
   final Iterable<Type> types = const [TransportPayloadTypeConfiguration];
 
@@ -84,12 +89,22 @@ class _$TransportPayloadTypeConfigurationSerializer implements PrimitiveSerializ
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is JsonTransportPayloadConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(JsonTransportPayloadConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(JsonTransportPayloadConfiguration),
+      )!;
     }
     if (object is ProtoTransportPayloadConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(ProtoTransportPayloadConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ProtoTransportPayloadConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -99,37 +114,70 @@ class _$TransportPayloadTypeConfigurationSerializer implements PrimitiveSerializ
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(TransportPayloadTypeConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          TransportPayloadTypeConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'JSON':
-        return serializers.deserialize(serialized, specifiedType: FullType(JsonTransportPayloadConfiguration)) as JsonTransportPayloadConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(JsonTransportPayloadConfiguration),
+            )
+            as JsonTransportPayloadConfiguration;
       case r'PROTOBUF':
-        return serializers.deserialize(serialized, specifiedType: FullType(ProtoTransportPayloadConfiguration)) as ProtoTransportPayloadConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ProtoTransportPayloadConfiguration),
+            )
+            as ProtoTransportPayloadConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($TransportPayloadTypeConfiguration)) as $TransportPayloadTypeConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($TransportPayloadTypeConfiguration),
+            )
+            as $TransportPayloadTypeConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [TransportPayloadTypeConfiguration], since [TransportPayloadTypeConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $TransportPayloadTypeConfiguration implements TransportPayloadTypeConfiguration, Built<$TransportPayloadTypeConfiguration, $TransportPayloadTypeConfigurationBuilder> {
+abstract class $TransportPayloadTypeConfiguration
+    implements
+        TransportPayloadTypeConfiguration,
+        Built<
+          $TransportPayloadTypeConfiguration,
+          $TransportPayloadTypeConfigurationBuilder
+        > {
   $TransportPayloadTypeConfiguration._();
 
-  factory $TransportPayloadTypeConfiguration([void Function($TransportPayloadTypeConfigurationBuilder)? updates]) = _$$TransportPayloadTypeConfiguration;
+  factory $TransportPayloadTypeConfiguration([
+    void Function($TransportPayloadTypeConfigurationBuilder)? updates,
+  ]) = _$$TransportPayloadTypeConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($TransportPayloadTypeConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$TransportPayloadTypeConfiguration> get serializer => _$$TransportPayloadTypeConfigurationSerializer();
+  static Serializer<$TransportPayloadTypeConfiguration> get serializer =>
+      _$$TransportPayloadTypeConfigurationSerializer();
 }
 
-class _$$TransportPayloadTypeConfigurationSerializer implements PrimitiveSerializer<$TransportPayloadTypeConfiguration> {
+class _$$TransportPayloadTypeConfigurationSerializer
+    implements PrimitiveSerializer<$TransportPayloadTypeConfiguration> {
   @override
-  final Iterable<Type> types = const [$TransportPayloadTypeConfiguration, _$$TransportPayloadTypeConfiguration];
+  final Iterable<Type> types = const [
+    $TransportPayloadTypeConfiguration,
+    _$$TransportPayloadTypeConfiguration,
+  ];
 
   @override
   final String wireName = r'$TransportPayloadTypeConfiguration';
@@ -140,7 +188,10 @@ class _$$TransportPayloadTypeConfigurationSerializer implements PrimitiveSeriali
     $TransportPayloadTypeConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(TransportPayloadTypeConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(TransportPayloadTypeConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -156,10 +207,12 @@ class _$$TransportPayloadTypeConfigurationSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'transportPayloadType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.transportPayloadType = valueDes;
           break;
         default:
@@ -190,4 +243,3 @@ class _$$TransportPayloadTypeConfigurationSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-

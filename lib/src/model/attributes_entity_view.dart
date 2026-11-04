@@ -21,7 +21,8 @@ part 'attributes_entity_view.g.dart';
 /// * [ss] - List of server-side attribute keys to expose
 /// * [sh] - List of shared attribute keys to expose
 @BuiltValue()
-abstract class AttributesEntityView implements Built<AttributesEntityView, AttributesEntityViewBuilder> {
+abstract class AttributesEntityView
+    implements Built<AttributesEntityView, AttributesEntityViewBuilder> {
   /// List of client-side attribute keys to expose
   @BuiltValueField(wireName: r'cs')
   BuiltList<String> get cs;
@@ -36,18 +37,24 @@ abstract class AttributesEntityView implements Built<AttributesEntityView, Attri
 
   AttributesEntityView._();
 
-  factory AttributesEntityView([void updates(AttributesEntityViewBuilder b)]) = _$AttributesEntityView;
+  factory AttributesEntityView([void updates(AttributesEntityViewBuilder b)]) =
+      _$AttributesEntityView;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AttributesEntityViewBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AttributesEntityView> get serializer => _$AttributesEntityViewSerializer();
+  static Serializer<AttributesEntityView> get serializer =>
+      _$AttributesEntityViewSerializer();
 }
 
-class _$AttributesEntityViewSerializer implements PrimitiveSerializer<AttributesEntityView> {
+class _$AttributesEntityViewSerializer
+    implements PrimitiveSerializer<AttributesEntityView> {
   @override
-  final Iterable<Type> types = const [AttributesEntityView, _$AttributesEntityView];
+  final Iterable<Type> types = const [
+    AttributesEntityView,
+    _$AttributesEntityView,
+  ];
 
   @override
   final String wireName = r'AttributesEntityView';
@@ -80,7 +87,11 @@ class _$AttributesEntityViewSerializer implements PrimitiveSerializer<Attributes
     AttributesEntityView object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -96,24 +107,36 @@ class _$AttributesEntityViewSerializer implements PrimitiveSerializer<Attributes
       final value = serializedList[i + 1];
       switch (key) {
         case r'cs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.cs.replace(valueDes);
           break;
         case r'ss':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.ss.replace(valueDes);
           break;
         case r'sh':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.sh.replace(valueDes);
           break;
         default:
@@ -144,5 +167,3 @@ class _$AttributesEntityViewSerializer implements PrimitiveSerializer<Attributes
     return result.build();
   }
 }
-
-

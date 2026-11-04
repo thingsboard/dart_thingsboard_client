@@ -18,10 +18,10 @@ part 'font.g.dart';
 /// Font
 ///
 /// Properties:
-/// * [size] 
-/// * [weight] 
-/// * [style] 
-/// * [family] 
+/// * [size]
+/// * [weight]
+/// * [style]
+/// * [family]
 @BuiltValue()
 abstract class Font implements Built<Font, FontBuilder> {
   @BuiltValueField(wireName: r'size')
@@ -97,7 +97,11 @@ class _$FontSerializer implements PrimitiveSerializer<Font> {
     Font object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,34 +117,42 @@ class _$FontSerializer implements PrimitiveSerializer<Font> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'size':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.size = valueDes;
           break;
         case r'weight':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(FontWeight),
-          ) as FontWeight?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(FontWeight),
+                  )
+                  as FontWeight?;
           if (valueDes == null) continue;
           result.weight = valueDes;
           break;
         case r'style':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(FontStyle),
-          ) as FontStyle?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(FontStyle),
+                  )
+                  as FontStyle?;
           if (valueDes == null) continue;
           result.style = valueDes;
           break;
         case r'family':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.family = valueDes;
           break;
@@ -172,5 +184,3 @@ class _$FontSerializer implements PrimitiveSerializer<Font> {
     return result.build();
   }
 }
-
-

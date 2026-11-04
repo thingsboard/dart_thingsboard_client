@@ -20,12 +20,18 @@ part 'entity_type_version_load_request.g.dart';
 /// EntityTypeVersionLoadRequest
 ///
 /// Properties:
-/// * [versionId] 
+/// * [versionId]
 /// * [type] - Type of the version to load
-/// * [entityTypes] 
-/// * [rollbackOnError] 
+/// * [entityTypes]
+/// * [rollbackOnError]
 @BuiltValue()
-abstract class EntityTypeVersionLoadRequest implements VersionLoadRequest, Built<EntityTypeVersionLoadRequest, EntityTypeVersionLoadRequestBuilder> {
+abstract class EntityTypeVersionLoadRequest
+    implements
+        VersionLoadRequest,
+        Built<
+          EntityTypeVersionLoadRequest,
+          EntityTypeVersionLoadRequestBuilder
+        > {
   @BuiltValueField(wireName: r'rollbackOnError')
   bool? get rollbackOnError;
 
@@ -34,18 +40,25 @@ abstract class EntityTypeVersionLoadRequest implements VersionLoadRequest, Built
 
   EntityTypeVersionLoadRequest._();
 
-  factory EntityTypeVersionLoadRequest([void updates(EntityTypeVersionLoadRequestBuilder b)]) = _$EntityTypeVersionLoadRequest;
+  factory EntityTypeVersionLoadRequest([
+    void updates(EntityTypeVersionLoadRequestBuilder b),
+  ]) = _$EntityTypeVersionLoadRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityTypeVersionLoadRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityTypeVersionLoadRequest> get serializer => _$EntityTypeVersionLoadRequestSerializer();
+  static Serializer<EntityTypeVersionLoadRequest> get serializer =>
+      _$EntityTypeVersionLoadRequestSerializer();
 }
 
-class _$EntityTypeVersionLoadRequestSerializer implements PrimitiveSerializer<EntityTypeVersionLoadRequest> {
+class _$EntityTypeVersionLoadRequestSerializer
+    implements PrimitiveSerializer<EntityTypeVersionLoadRequest> {
   @override
-  final Iterable<Type> types = const [EntityTypeVersionLoadRequest, _$EntityTypeVersionLoadRequest];
+  final Iterable<Type> types = const [
+    EntityTypeVersionLoadRequest,
+    _$EntityTypeVersionLoadRequest,
+  ];
 
   @override
   final String wireName = r'EntityTypeVersionLoadRequest';
@@ -59,7 +72,10 @@ class _$EntityTypeVersionLoadRequestSerializer implements PrimitiveSerializer<En
       yield r'entityTypes';
       yield serializers.serialize(
         object.entityTypes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(EntityTypeVersionLoadConfig)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(EntityTypeVersionLoadConfig),
+        ]),
       );
     }
     if (object.versionId != null) {
@@ -89,7 +105,11 @@ class _$EntityTypeVersionLoadRequestSerializer implements PrimitiveSerializer<En
     EntityTypeVersionLoadRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -105,33 +125,44 @@ class _$EntityTypeVersionLoadRequestSerializer implements PrimitiveSerializer<En
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(EntityTypeVersionLoadConfig)]),
-          ) as BuiltMap<String, EntityTypeVersionLoadConfig>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(EntityTypeVersionLoadConfig),
+                    ]),
+                  )
+                  as BuiltMap<String, EntityTypeVersionLoadConfig>?;
           if (valueDes == null) continue;
           result.entityTypes.replace(valueDes);
           break;
         case r'versionId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.versionId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(VersionLoadRequestType),
-          ) as VersionLoadRequestType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(VersionLoadRequestType),
+                  )
+                  as VersionLoadRequestType;
           result.type = valueDes;
           break;
         case r'rollbackOnError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.rollbackOnError = valueDes;
           break;
@@ -163,5 +194,3 @@ class _$EntityTypeVersionLoadRequestSerializer implements PrimitiveSerializer<En
     return result.build();
   }
 }
-
-

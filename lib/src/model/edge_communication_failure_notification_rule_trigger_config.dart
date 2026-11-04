@@ -19,30 +19,52 @@ part 'edge_communication_failure_notification_rule_trigger_config.g.dart';
 /// EdgeCommunicationFailureNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [edges] 
+/// * [triggerType]
+/// * [edges]
 @BuiltValue()
-abstract class EdgeCommunicationFailureNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<EdgeCommunicationFailureNotificationRuleTriggerConfig, EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder> {
+abstract class EdgeCommunicationFailureNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          EdgeCommunicationFailureNotificationRuleTriggerConfig,
+          EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'edges')
   BuiltSet<String>? get edges;
 
   EdgeCommunicationFailureNotificationRuleTriggerConfig._();
 
-  factory EdgeCommunicationFailureNotificationRuleTriggerConfig([void updates(EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder b)]) = _$EdgeCommunicationFailureNotificationRuleTriggerConfig;
+  factory EdgeCommunicationFailureNotificationRuleTriggerConfig([
+    void updates(
+      EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder b,
+    ),
+  ]) = _$EdgeCommunicationFailureNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(
+    EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdgeCommunicationFailureNotificationRuleTriggerConfig> get serializer => _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer();
+  static Serializer<EdgeCommunicationFailureNotificationRuleTriggerConfig>
+  get serializer =>
+      _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer();
 }
 
-class _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<EdgeCommunicationFailureNotificationRuleTriggerConfig> {
+class _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<
+          EdgeCommunicationFailureNotificationRuleTriggerConfig
+        > {
   @override
-  final Iterable<Type> types = const [EdgeCommunicationFailureNotificationRuleTriggerConfig, _$EdgeCommunicationFailureNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    EdgeCommunicationFailureNotificationRuleTriggerConfig,
+    _$EdgeCommunicationFailureNotificationRuleTriggerConfig,
+  ];
 
   @override
-  final String wireName = r'EdgeCommunicationFailureNotificationRuleTriggerConfig';
+  final String wireName =
+      r'EdgeCommunicationFailureNotificationRuleTriggerConfig';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
@@ -69,7 +91,11 @@ class _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer implemen
     EdgeCommunicationFailureNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -77,7 +103,8 @@ class _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer implemen
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder result,
+    required EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder
+    result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -85,18 +112,24 @@ class _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer implemen
       final value = serializedList[i + 1];
       switch (key) {
         case r'edges':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.edges.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         default:
@@ -113,7 +146,8 @@ class _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer implemen
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder();
+    final result =
+        EdgeCommunicationFailureNotificationRuleTriggerConfigBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(
@@ -127,5 +161,3 @@ class _$EdgeCommunicationFailureNotificationRuleTriggerConfigSerializer implemen
     return result.build();
   }
 }
-
-

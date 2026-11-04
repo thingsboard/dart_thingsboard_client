@@ -21,7 +21,8 @@ part 'telemetry_entity_view.g.dart';
 /// * [timeseries] - List of time-series data keys to expose
 /// * [attributes] - JSON object with attributes to expose
 @BuiltValue()
-abstract class TelemetryEntityView implements Built<TelemetryEntityView, TelemetryEntityViewBuilder> {
+abstract class TelemetryEntityView
+    implements Built<TelemetryEntityView, TelemetryEntityViewBuilder> {
   /// List of time-series data keys to expose
   @BuiltValueField(wireName: r'timeseries')
   BuiltList<String> get timeseries;
@@ -32,18 +33,24 @@ abstract class TelemetryEntityView implements Built<TelemetryEntityView, Telemet
 
   TelemetryEntityView._();
 
-  factory TelemetryEntityView([void updates(TelemetryEntityViewBuilder b)]) = _$TelemetryEntityView;
+  factory TelemetryEntityView([void updates(TelemetryEntityViewBuilder b)]) =
+      _$TelemetryEntityView;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TelemetryEntityViewBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TelemetryEntityView> get serializer => _$TelemetryEntityViewSerializer();
+  static Serializer<TelemetryEntityView> get serializer =>
+      _$TelemetryEntityViewSerializer();
 }
 
-class _$TelemetryEntityViewSerializer implements PrimitiveSerializer<TelemetryEntityView> {
+class _$TelemetryEntityViewSerializer
+    implements PrimitiveSerializer<TelemetryEntityView> {
   @override
-  final Iterable<Type> types = const [TelemetryEntityView, _$TelemetryEntityView];
+  final Iterable<Type> types = const [
+    TelemetryEntityView,
+    _$TelemetryEntityView,
+  ];
 
   @override
   final String wireName = r'TelemetryEntityView';
@@ -71,7 +78,11 @@ class _$TelemetryEntityViewSerializer implements PrimitiveSerializer<TelemetryEn
     TelemetryEntityView object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,17 +98,23 @@ class _$TelemetryEntityViewSerializer implements PrimitiveSerializer<TelemetryEn
       final value = serializedList[i + 1];
       switch (key) {
         case r'timeseries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.timeseries.replace(valueDes);
           break;
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AttributesEntityView),
-          ) as AttributesEntityView;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AttributesEntityView),
+                  )
+                  as AttributesEntityView;
           result.attributes.replace(valueDes);
           break;
         default:
@@ -128,5 +145,3 @@ class _$TelemetryEntityViewSerializer implements PrimitiveSerializer<TelemetryEn
     return result.build();
   }
 }
-
-

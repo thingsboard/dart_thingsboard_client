@@ -25,7 +25,8 @@ part 'system_info_data.g.dart';
 /// * [discUsage] - Disk usage, in percent.
 /// * [totalDiscSpace] - Total disc space in bytes.
 @BuiltValue()
-abstract class SystemInfoData implements Built<SystemInfoData, SystemInfoDataBuilder> {
+abstract class SystemInfoData
+    implements Built<SystemInfoData, SystemInfoDataBuilder> {
   /// Service Id.
   @BuiltValueField(wireName: r'serviceId')
   String? get serviceId;
@@ -60,16 +61,19 @@ abstract class SystemInfoData implements Built<SystemInfoData, SystemInfoDataBui
 
   SystemInfoData._();
 
-  factory SystemInfoData([void updates(SystemInfoDataBuilder b)]) = _$SystemInfoData;
+  factory SystemInfoData([void updates(SystemInfoDataBuilder b)]) =
+      _$SystemInfoData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SystemInfoDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SystemInfoData> get serializer => _$SystemInfoDataSerializer();
+  static Serializer<SystemInfoData> get serializer =>
+      _$SystemInfoDataSerializer();
 }
 
-class _$SystemInfoDataSerializer implements PrimitiveSerializer<SystemInfoData> {
+class _$SystemInfoDataSerializer
+    implements PrimitiveSerializer<SystemInfoData> {
   @override
   final Iterable<Type> types = const [SystemInfoData, _$SystemInfoData];
 
@@ -145,7 +149,11 @@ class _$SystemInfoDataSerializer implements PrimitiveSerializer<SystemInfoData> 
     SystemInfoData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -161,66 +169,82 @@ class _$SystemInfoDataSerializer implements PrimitiveSerializer<SystemInfoData> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'serviceId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serviceId = valueDes;
           break;
         case r'serviceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serviceType = valueDes;
           break;
         case r'cpuUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.cpuUsage = valueDes;
           break;
         case r'cpuCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.cpuCount = valueDes;
           break;
         case r'memoryUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.memoryUsage = valueDes;
           break;
         case r'totalMemory':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalMemory = valueDes;
           break;
         case r'discUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.discUsage = valueDes;
           break;
         case r'totalDiscSpace':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalDiscSpace = valueDes;
           break;
@@ -252,5 +276,3 @@ class _$SystemInfoDataSerializer implements PrimitiveSerializer<SystemInfoData> 
     return result.build();
   }
 }
-
-

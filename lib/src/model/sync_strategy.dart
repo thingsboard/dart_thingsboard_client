@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'sync_strategy.g.dart';
 
 class SyncStrategy extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'MERGE')
   static const SyncStrategy MERGE = _$MERGE;
   @BuiltValueEnumConst(wireName: r'OVERWRITE')
@@ -25,7 +24,7 @@ class SyncStrategy extends EnumClass {
 
   static Serializer<SyncStrategy> get serializer => _$syncStrategySerializer;
 
-  const SyncStrategy._(String name): super(name);
+  const SyncStrategy._(String name) : super(name);
 
   static BuiltSet<SyncStrategy> get values => _$values;
   static SyncStrategy valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class SyncStrategy extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class SyncStrategyMixin = Object with _$SyncStrategyMixin;
-

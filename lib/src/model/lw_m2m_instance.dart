@@ -21,7 +21,8 @@ part 'lw_m2m_instance.g.dart';
 /// * [id] - LwM2M Instance id.
 /// * [resources] - LwM2M Resource observe.
 @BuiltValue()
-abstract class LwM2mInstance implements Built<LwM2mInstance, LwM2mInstanceBuilder> {
+abstract class LwM2mInstance
+    implements Built<LwM2mInstance, LwM2mInstanceBuilder> {
   /// LwM2M Instance id.
   @BuiltValueField(wireName: r'id')
   int? get id;
@@ -32,13 +33,15 @@ abstract class LwM2mInstance implements Built<LwM2mInstance, LwM2mInstanceBuilde
 
   LwM2mInstance._();
 
-  factory LwM2mInstance([void updates(LwM2mInstanceBuilder b)]) = _$LwM2mInstance;
+  factory LwM2mInstance([void updates(LwM2mInstanceBuilder b)]) =
+      _$LwM2mInstance;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LwM2mInstanceBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LwM2mInstance> get serializer => _$LwM2mInstanceSerializer();
+  static Serializer<LwM2mInstance> get serializer =>
+      _$LwM2mInstanceSerializer();
 }
 
 class _$LwM2mInstanceSerializer implements PrimitiveSerializer<LwM2mInstance> {
@@ -64,7 +67,9 @@ class _$LwM2mInstanceSerializer implements PrimitiveSerializer<LwM2mInstance> {
       yield r'resources';
       yield serializers.serialize(
         object.resources,
-        specifiedType: const FullType(BuiltList, [FullType(LwM2mResourceObserve)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(LwM2mResourceObserve),
+        ]),
       );
     }
   }
@@ -75,7 +80,11 @@ class _$LwM2mInstanceSerializer implements PrimitiveSerializer<LwM2mInstance> {
     LwM2mInstance object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +100,24 @@ class _$LwM2mInstanceSerializer implements PrimitiveSerializer<LwM2mInstance> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'resources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(LwM2mResourceObserve)]),
-          ) as BuiltList<LwM2mResourceObserve>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(LwM2mResourceObserve),
+                    ]),
+                  )
+                  as BuiltList<LwM2mResourceObserve>?;
           if (valueDes == null) continue;
           result.resources.replace(valueDes);
           break;
@@ -134,5 +149,3 @@ class _$LwM2mInstanceSerializer implements PrimitiveSerializer<LwM2mInstance> {
     return result.build();
   }
 }
-
-

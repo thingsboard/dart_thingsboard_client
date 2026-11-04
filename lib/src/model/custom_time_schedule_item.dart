@@ -16,12 +16,13 @@ part 'custom_time_schedule_item.g.dart';
 /// CustomTimeScheduleItem
 ///
 /// Properties:
-/// * [enabled] 
-/// * [dayOfWeek] 
-/// * [startsOn] 
-/// * [endsOn] 
+/// * [enabled]
+/// * [dayOfWeek]
+/// * [startsOn]
+/// * [endsOn]
 @BuiltValue()
-abstract class CustomTimeScheduleItem implements Built<CustomTimeScheduleItem, CustomTimeScheduleItemBuilder> {
+abstract class CustomTimeScheduleItem
+    implements Built<CustomTimeScheduleItem, CustomTimeScheduleItemBuilder> {
   @BuiltValueField(wireName: r'enabled')
   bool? get enabled;
 
@@ -36,18 +37,25 @@ abstract class CustomTimeScheduleItem implements Built<CustomTimeScheduleItem, C
 
   CustomTimeScheduleItem._();
 
-  factory CustomTimeScheduleItem([void updates(CustomTimeScheduleItemBuilder b)]) = _$CustomTimeScheduleItem;
+  factory CustomTimeScheduleItem([
+    void updates(CustomTimeScheduleItemBuilder b),
+  ]) = _$CustomTimeScheduleItem;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CustomTimeScheduleItemBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CustomTimeScheduleItem> get serializer => _$CustomTimeScheduleItemSerializer();
+  static Serializer<CustomTimeScheduleItem> get serializer =>
+      _$CustomTimeScheduleItemSerializer();
 }
 
-class _$CustomTimeScheduleItemSerializer implements PrimitiveSerializer<CustomTimeScheduleItem> {
+class _$CustomTimeScheduleItemSerializer
+    implements PrimitiveSerializer<CustomTimeScheduleItem> {
   @override
-  final Iterable<Type> types = const [CustomTimeScheduleItem, _$CustomTimeScheduleItem];
+  final Iterable<Type> types = const [
+    CustomTimeScheduleItem,
+    _$CustomTimeScheduleItem,
+  ];
 
   @override
   final String wireName = r'CustomTimeScheduleItem';
@@ -93,7 +101,11 @@ class _$CustomTimeScheduleItemSerializer implements PrimitiveSerializer<CustomTi
     CustomTimeScheduleItem object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,34 +121,42 @@ class _$CustomTimeScheduleItemSerializer implements PrimitiveSerializer<CustomTi
       final value = serializedList[i + 1];
       switch (key) {
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'dayOfWeek':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.dayOfWeek = valueDes;
           break;
         case r'startsOn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startsOn = valueDes;
           break;
         case r'endsOn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endsOn = valueDes;
           break;
@@ -168,5 +188,3 @@ class _$CustomTimeScheduleItemSerializer implements PrimitiveSerializer<CustomTi
     return result.build();
   }
 }
-
-

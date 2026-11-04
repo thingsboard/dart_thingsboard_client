@@ -22,7 +22,8 @@ part 'entity_view_search_query.g.dart';
 /// * [relationType] - Type of the relation between root entity and device (e.g. 'Contains' or 'Manages').
 /// * [entityViewTypes] - Array of entity view types to filter the related entities (e.g. 'Temperature Sensor', 'Smoke Sensor').
 @BuiltValue()
-abstract class EntityViewSearchQuery implements Built<EntityViewSearchQuery, EntityViewSearchQueryBuilder> {
+abstract class EntityViewSearchQuery
+    implements Built<EntityViewSearchQuery, EntityViewSearchQueryBuilder> {
   /// Main search parameters.
   @BuiltValueField(wireName: r'parameters')
   RelationsSearchParameters? get parameters;
@@ -37,18 +38,25 @@ abstract class EntityViewSearchQuery implements Built<EntityViewSearchQuery, Ent
 
   EntityViewSearchQuery._();
 
-  factory EntityViewSearchQuery([void updates(EntityViewSearchQueryBuilder b)]) = _$EntityViewSearchQuery;
+  factory EntityViewSearchQuery([
+    void updates(EntityViewSearchQueryBuilder b),
+  ]) = _$EntityViewSearchQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityViewSearchQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityViewSearchQuery> get serializer => _$EntityViewSearchQuerySerializer();
+  static Serializer<EntityViewSearchQuery> get serializer =>
+      _$EntityViewSearchQuerySerializer();
 }
 
-class _$EntityViewSearchQuerySerializer implements PrimitiveSerializer<EntityViewSearchQuery> {
+class _$EntityViewSearchQuerySerializer
+    implements PrimitiveSerializer<EntityViewSearchQuery> {
   @override
-  final Iterable<Type> types = const [EntityViewSearchQuery, _$EntityViewSearchQuery];
+  final Iterable<Type> types = const [
+    EntityViewSearchQuery,
+    _$EntityViewSearchQuery,
+  ];
 
   @override
   final String wireName = r'EntityViewSearchQuery';
@@ -87,7 +95,11 @@ class _$EntityViewSearchQuerySerializer implements PrimitiveSerializer<EntityVie
     EntityViewSearchQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,26 +115,36 @@ class _$EntityViewSearchQuerySerializer implements PrimitiveSerializer<EntityVie
       final value = serializedList[i + 1];
       switch (key) {
         case r'parameters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RelationsSearchParameters),
-          ) as RelationsSearchParameters?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RelationsSearchParameters,
+                    ),
+                  )
+                  as RelationsSearchParameters?;
           if (valueDes == null) continue;
           result.parameters.replace(valueDes);
           break;
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'entityViewTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.entityViewTypes.replace(valueDes);
           break;
@@ -154,5 +176,3 @@ class _$EntityViewSearchQuerySerializer implements PrimitiveSerializer<EntityVie
     return result.build();
   }
 }
-
-

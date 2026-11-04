@@ -23,7 +23,8 @@ part 'page_data_converter.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataConverter implements Built<PageDataConverter, PageDataConverterBuilder> {
+abstract class PageDataConverter
+    implements Built<PageDataConverter, PageDataConverterBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<Converter>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataConverter implements Built<PageDataConverter, PageDataCon
 
   PageDataConverter._();
 
-  factory PageDataConverter([void updates(PageDataConverterBuilder b)]) = _$PageDataConverter;
+  factory PageDataConverter([void updates(PageDataConverterBuilder b)]) =
+      _$PageDataConverter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataConverterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataConverter> get serializer => _$PageDataConverterSerializer();
+  static Serializer<PageDataConverter> get serializer =>
+      _$PageDataConverterSerializer();
 }
 
-class _$PageDataConverterSerializer implements PrimitiveSerializer<PageDataConverter> {
+class _$PageDataConverterSerializer
+    implements PrimitiveSerializer<PageDataConverter> {
   @override
   final Iterable<Type> types = const [PageDataConverter, _$PageDataConverter];
 
@@ -99,7 +103,11 @@ class _$PageDataConverterSerializer implements PrimitiveSerializer<PageDataConve
     PageDataConverter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataConverterSerializer implements PrimitiveSerializer<PageDataConve
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(Converter)]),
-          ) as BuiltList<Converter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(Converter),
+                    ]),
+                  )
+                  as BuiltList<Converter>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataConverterSerializer implements PrimitiveSerializer<PageDataConve
     return result.build();
   }
 }
-
-

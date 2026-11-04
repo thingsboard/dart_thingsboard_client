@@ -19,27 +19,37 @@ part 'backup_volumes_step_state.g.dart';
 /// BackupVolumesStepState
 ///
 /// Properties:
-/// * [type] 
-/// * [backupVolumes] 
+/// * [type]
+/// * [backupVolumes]
 @BuiltValue()
-abstract class BackupVolumesStepState implements AgentAppStepState, Built<BackupVolumesStepState, BackupVolumesStepStateBuilder> {
+abstract class BackupVolumesStepState
+    implements
+        AgentAppStepState,
+        Built<BackupVolumesStepState, BackupVolumesStepStateBuilder> {
   @BuiltValueField(wireName: r'backupVolumes')
   StepFieldListString? get backupVolumes;
 
   BackupVolumesStepState._();
 
-  factory BackupVolumesStepState([void updates(BackupVolumesStepStateBuilder b)]) = _$BackupVolumesStepState;
+  factory BackupVolumesStepState([
+    void updates(BackupVolumesStepStateBuilder b),
+  ]) = _$BackupVolumesStepState;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BackupVolumesStepStateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BackupVolumesStepState> get serializer => _$BackupVolumesStepStateSerializer();
+  static Serializer<BackupVolumesStepState> get serializer =>
+      _$BackupVolumesStepStateSerializer();
 }
 
-class _$BackupVolumesStepStateSerializer implements PrimitiveSerializer<BackupVolumesStepState> {
+class _$BackupVolumesStepStateSerializer
+    implements PrimitiveSerializer<BackupVolumesStepState> {
   @override
-  final Iterable<Type> types = const [BackupVolumesStepState, _$BackupVolumesStepState];
+  final Iterable<Type> types = const [
+    BackupVolumesStepState,
+    _$BackupVolumesStepState,
+  ];
 
   @override
   final String wireName = r'BackupVolumesStepState';
@@ -71,7 +81,11 @@ class _$BackupVolumesStepStateSerializer implements PrimitiveSerializer<BackupVo
     BackupVolumesStepState object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +101,22 @@ class _$BackupVolumesStepStateSerializer implements PrimitiveSerializer<BackupVo
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'backupVolumes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.backupVolumes.replace(valueDes);
           break;
@@ -130,5 +148,3 @@ class _$BackupVolumesStepStateSerializer implements PrimitiveSerializer<BackupVo
     return result.build();
   }
 }
-
-

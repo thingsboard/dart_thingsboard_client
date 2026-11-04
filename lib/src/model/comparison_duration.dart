@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'comparison_duration.g.dart';
 
 class ComparisonDuration extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'previousInterval')
   static const ComparisonDuration previousInterval = _$previousInterval;
   @BuiltValueEnumConst(wireName: r'days')
@@ -29,11 +28,13 @@ class ComparisonDuration extends EnumClass {
   @BuiltValueEnumConst(wireName: r'customInterval')
   static const ComparisonDuration customInterval = _$customInterval;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ComparisonDuration unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ComparisonDuration unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ComparisonDuration> get serializer => _$comparisonDurationSerializer;
+  static Serializer<ComparisonDuration> get serializer =>
+      _$comparisonDurationSerializer;
 
-  const ComparisonDuration._(String name): super(name);
+  const ComparisonDuration._(String name) : super(name);
 
   static BuiltSet<ComparisonDuration> get values => _$values;
   static ComparisonDuration valueOf(String name) => _$valueOf(name);
@@ -46,4 +47,3 @@ class ComparisonDuration extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ComparisonDurationMixin = Object with _$ComparisonDurationMixin;
-

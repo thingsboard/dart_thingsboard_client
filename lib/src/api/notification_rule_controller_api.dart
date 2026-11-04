@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -17,11 +16,9 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/notification_rule.dart';
 import 'package:thingsboard_client/src/model/notification_rule_info.dart';
 import 'package:thingsboard_client/src/model/page_data_notification_rule_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class NotificationRuleControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -32,7 +29,7 @@ class NotificationRuleControllerApi {
   /// Deletes notification rule by id. Cancels all related scheduled notification requests (e.g. due to escalation table)  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -42,7 +39,7 @@ class NotificationRuleControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteNotificationRule({ 
+  Future<Response<void>> deleteNotificationRule({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -52,12 +49,15 @@ class NotificationRuleControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/notification/rule/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/notification/rule/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -65,11 +65,8 @@ class NotificationRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -91,7 +88,7 @@ class NotificationRuleControllerApi {
   /// Fetches notification rule info by rule&#39;s id. In addition to regular notification rule fields, there are &#x60;templateName&#x60; and &#x60;deliveryMethods&#x60; in the response.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -101,7 +98,7 @@ class NotificationRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [NotificationRuleInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<NotificationRuleInfo>> getNotificationRuleById({ 
+  Future<Response<NotificationRuleInfo>> getNotificationRuleById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -110,13 +107,17 @@ class NotificationRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationRuleInfo);
-    final _path = r'/api/notification/rule/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerNotificationRuleInfo);
+    final _path = r'/api/notification/rule/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -124,11 +125,8 @@ class NotificationRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -147,11 +145,13 @@ class NotificationRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(NotificationRuleInfo),
-      ) as NotificationRuleInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(NotificationRuleInfo),
+                )
+                as NotificationRuleInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -192,7 +192,7 @@ class NotificationRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataNotificationRuleInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataNotificationRuleInfo>> getNotificationRules({ 
+  Future<Response<PageDataNotificationRuleInfo>> getNotificationRules({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -205,13 +205,13 @@ class NotificationRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataNotificationRuleInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerPageDataNotificationRuleInfo);
     final _path = r'/api/notification/rules';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -219,11 +219,8 @@ class NotificationRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -231,11 +228,30 @@ class NotificationRuleControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -251,11 +267,13 @@ class NotificationRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataNotificationRuleInfo),
-      ) as PageDataNotificationRuleInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataNotificationRuleInfo),
+                )
+                as PageDataNotificationRuleInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -282,7 +300,7 @@ class NotificationRuleControllerApi {
   /// Creates or updates notification rule.   Mandatory properties are &#x60;name&#x60;, &#x60;templateId&#x60; (of a template with &#x60;notificationType&#x60; matching to rule&#39;s &#x60;triggerType&#x60;), &#x60;triggerType&#x60;, &#x60;triggerConfig&#x60; and &#x60;recipientConfig&#x60;. Additionally, you may specify rule &#x60;description&#x60; inside of &#x60;additionalConfig&#x60;.  Trigger type of the rule cannot be changed. Available trigger types for tenant: &#x60;ENTITY_ACTION&#x60;, &#x60;ALARM&#x60;, &#x60;ALARM_COMMENT&#x60;, &#x60;ALARM_ASSIGNMENT&#x60;, &#x60;DEVICE_ACTIVITY&#x60;, &#x60;RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT&#x60;. For sysadmin, there are following trigger types available: &#x60;ENTITIES_LIMIT&#x60;, &#x60;API_USAGE_LIMIT&#x60;, &#x60;NEW_PLATFORM_VERSION&#x60;.  Here is an example of notification rule to send notification when a device, asset or customer is created or deleted: &#x60;&#x60;&#x60;json {   \&quot;name\&quot;: \&quot;Entity action\&quot;,   \&quot;templateId\&quot;: {     \&quot;entityType\&quot;: \&quot;NOTIFICATION_TEMPLATE\&quot;,     \&quot;id\&quot;: \&quot;32117320-d785-11ed-a06c-21dd57dd88ca\&quot;   },   \&quot;triggerType\&quot;: \&quot;ENTITY_ACTION\&quot;,   \&quot;triggerConfig\&quot;: {     \&quot;entityTypes\&quot;: [       \&quot;CUSTOMER\&quot;,       \&quot;DEVICE\&quot;,       \&quot;ASSET\&quot;     ],     \&quot;created\&quot;: true,     \&quot;updated\&quot;: false,     \&quot;deleted\&quot;: true,     \&quot;triggerType\&quot;: \&quot;ENTITY_ACTION\&quot;   },   \&quot;recipientsConfig\&quot;: {     \&quot;targets\&quot;: [       \&quot;320f2930-d785-11ed-a06c-21dd57dd88ca\&quot;     ],     \&quot;triggerType\&quot;: \&quot;ENTITY_ACTION\&quot;   },   \&quot;additionalConfig\&quot;: {     \&quot;description\&quot;: \&quot;Send notification to tenant admins or customer users when a device, asset or customer is created\&quot;   },   \&quot;templateName\&quot;: \&quot;Entity action notification\&quot;,   \&quot;deliveryMethods\&quot;: [     \&quot;WEB\&quot;   ] } &#x60;&#x60;&#x60;  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [notificationRule] 
+  /// * [notificationRule]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -292,7 +310,7 @@ class NotificationRuleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [NotificationRule] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<NotificationRule>> saveNotificationRule({ 
+  Future<Response<NotificationRule>> saveNotificationRule({
     required NotificationRule notificationRule,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -301,13 +319,12 @@ class NotificationRuleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationRule);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerNotificationRule);
     final _path = r'/api/notification/rule';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -315,11 +332,8 @@ class NotificationRuleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -331,14 +345,13 @@ class NotificationRuleControllerApi {
 
     try {
       const _type = FullType(NotificationRule);
-      _bodyData = _serializers.serialize(notificationRule, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        notificationRule,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -358,11 +371,13 @@ class NotificationRuleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(NotificationRule),
-      ) as NotificationRule;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(NotificationRule),
+                )
+                as NotificationRule;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -384,5 +399,4 @@ class NotificationRuleControllerApi {
       extra: _response.extra,
     );
   }
-
 }

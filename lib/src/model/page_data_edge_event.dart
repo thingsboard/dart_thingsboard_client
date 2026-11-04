@@ -23,7 +23,8 @@ part 'page_data_edge_event.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataEdgeEvent implements Built<PageDataEdgeEvent, PageDataEdgeEventBuilder> {
+abstract class PageDataEdgeEvent
+    implements Built<PageDataEdgeEvent, PageDataEdgeEventBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<EdgeEvent>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataEdgeEvent implements Built<PageDataEdgeEvent, PageDataEdg
 
   PageDataEdgeEvent._();
 
-  factory PageDataEdgeEvent([void updates(PageDataEdgeEventBuilder b)]) = _$PageDataEdgeEvent;
+  factory PageDataEdgeEvent([void updates(PageDataEdgeEventBuilder b)]) =
+      _$PageDataEdgeEvent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataEdgeEventBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataEdgeEvent> get serializer => _$PageDataEdgeEventSerializer();
+  static Serializer<PageDataEdgeEvent> get serializer =>
+      _$PageDataEdgeEventSerializer();
 }
 
-class _$PageDataEdgeEventSerializer implements PrimitiveSerializer<PageDataEdgeEvent> {
+class _$PageDataEdgeEventSerializer
+    implements PrimitiveSerializer<PageDataEdgeEvent> {
   @override
   final Iterable<Type> types = const [PageDataEdgeEvent, _$PageDataEdgeEvent];
 
@@ -99,7 +103,11 @@ class _$PageDataEdgeEventSerializer implements PrimitiveSerializer<PageDataEdgeE
     PageDataEdgeEvent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataEdgeEventSerializer implements PrimitiveSerializer<PageDataEdgeE
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EdgeEvent)]),
-          ) as BuiltList<EdgeEvent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EdgeEvent),
+                    ]),
+                  )
+                  as BuiltList<EdgeEvent>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataEdgeEventSerializer implements PrimitiveSerializer<PageDataEdgeE
     return result.build();
   }
 }
-
-

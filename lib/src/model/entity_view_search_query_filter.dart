@@ -20,17 +20,20 @@ part 'entity_view_search_query_filter.g.dart';
 /// EntityViewSearchQueryFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [rootEntity] 
-/// * [relationType] 
-/// * [direction] 
-/// * [maxLevel] 
-/// * [fetchLastLevelOnly] 
-/// * [rootStateEntity] 
-/// * [defaultStateEntity] 
-/// * [entityViewTypes] 
+/// * [type]
+/// * [rootEntity]
+/// * [relationType]
+/// * [direction]
+/// * [maxLevel]
+/// * [fetchLastLevelOnly]
+/// * [rootStateEntity]
+/// * [defaultStateEntity]
+/// * [entityViewTypes]
 @BuiltValue()
-abstract class EntityViewSearchQueryFilter implements EntityFilter, Built<EntityViewSearchQueryFilter, EntityViewSearchQueryFilterBuilder> {
+abstract class EntityViewSearchQueryFilter
+    implements
+        EntityFilter,
+        Built<EntityViewSearchQueryFilter, EntityViewSearchQueryFilterBuilder> {
   @BuiltValueField(wireName: r'relationType')
   String? get relationType;
 
@@ -58,18 +61,25 @@ abstract class EntityViewSearchQueryFilter implements EntityFilter, Built<Entity
 
   EntityViewSearchQueryFilter._();
 
-  factory EntityViewSearchQueryFilter([void updates(EntityViewSearchQueryFilterBuilder b)]) = _$EntityViewSearchQueryFilter;
+  factory EntityViewSearchQueryFilter([
+    void updates(EntityViewSearchQueryFilterBuilder b),
+  ]) = _$EntityViewSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityViewSearchQueryFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityViewSearchQueryFilter> get serializer => _$EntityViewSearchQueryFilterSerializer();
+  static Serializer<EntityViewSearchQueryFilter> get serializer =>
+      _$EntityViewSearchQueryFilterSerializer();
 }
 
-class _$EntityViewSearchQueryFilterSerializer implements PrimitiveSerializer<EntityViewSearchQueryFilter> {
+class _$EntityViewSearchQueryFilterSerializer
+    implements PrimitiveSerializer<EntityViewSearchQueryFilter> {
   @override
-  final Iterable<Type> types = const [EntityViewSearchQueryFilter, _$EntityViewSearchQueryFilter];
+  final Iterable<Type> types = const [
+    EntityViewSearchQueryFilter,
+    _$EntityViewSearchQueryFilter,
+  ];
 
   @override
   final String wireName = r'EntityViewSearchQueryFilter';
@@ -148,7 +158,11 @@ class _$EntityViewSearchQueryFilterSerializer implements PrimitiveSerializer<Ent
     EntityViewSearchQueryFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -164,73 +178,95 @@ class _$EntityViewSearchQueryFilterSerializer implements PrimitiveSerializer<Ent
       final value = serializedList[i + 1];
       switch (key) {
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'maxLevel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxLevel = valueDes;
           break;
         case r'fetchLastLevelOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.fetchLastLevelOnly = valueDes;
           break;
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
         case r'entityViewTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.entityViewTypes.replace(valueDes);
           break;
         case r'rootStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.rootStateEntity = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'rootEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.rootEntity.replace(valueDes);
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntitySearchDirection),
-          ) as EntitySearchDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntitySearchDirection,
+                    ),
+                  )
+                  as EntitySearchDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -262,5 +298,3 @@ class _$EntityViewSearchQueryFilterSerializer implements PrimitiveSerializer<Ent
     return result.build();
   }
 }
-
-

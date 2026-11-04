@@ -19,12 +19,13 @@ part 'error_event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 /// * [server] - String value representing the server name, identifier or ip address where the platform is running
 /// * [method] - String value representing the method name when the error happened
 /// * [errorStr] - The case insensitive 'contains' filter based on error message
 @BuiltValue()
-abstract class ErrorEventFilter implements EventFilter, Built<ErrorEventFilter, ErrorEventFilterBuilder> {
+abstract class ErrorEventFilter
+    implements EventFilter, Built<ErrorEventFilter, ErrorEventFilterBuilder> {
   /// String value representing the server name, identifier or ip address where the platform is running
   @BuiltValueField(wireName: r'server')
   String? get server;
@@ -39,16 +40,19 @@ abstract class ErrorEventFilter implements EventFilter, Built<ErrorEventFilter, 
 
   ErrorEventFilter._();
 
-  factory ErrorEventFilter([void updates(ErrorEventFilterBuilder b)]) = _$ErrorEventFilter;
+  factory ErrorEventFilter([void updates(ErrorEventFilterBuilder b)]) =
+      _$ErrorEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ErrorEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ErrorEventFilter> get serializer => _$ErrorEventFilterSerializer();
+  static Serializer<ErrorEventFilter> get serializer =>
+      _$ErrorEventFilterSerializer();
 }
 
-class _$ErrorEventFilterSerializer implements PrimitiveSerializer<ErrorEventFilter> {
+class _$ErrorEventFilterSerializer
+    implements PrimitiveSerializer<ErrorEventFilter> {
   @override
   final Iterable<Type> types = const [ErrorEventFilter, _$ErrorEventFilter];
 
@@ -101,7 +105,11 @@ class _$ErrorEventFilterSerializer implements PrimitiveSerializer<ErrorEventFilt
     ErrorEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -117,41 +125,51 @@ class _$ErrorEventFilterSerializer implements PrimitiveSerializer<ErrorEventFilt
       final value = serializedList[i + 1];
       switch (key) {
         case r'server':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.server = valueDes;
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.method = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
         case r'errorStr':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorStr = valueDes;
           break;
@@ -183,5 +201,3 @@ class _$ErrorEventFilterSerializer implements PrimitiveSerializer<ErrorEventFilt
     return result.build();
   }
 }
-
-

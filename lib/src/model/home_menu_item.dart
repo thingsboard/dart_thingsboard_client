@@ -22,7 +22,7 @@ part 'home_menu_item.g.dart';
 ///
 /// Properties:
 /// * [type] - Menu item type
-/// * [visible] 
+/// * [visible]
 /// * [id] - Unique identifier for predefined menu items
 /// * [name] - Name of the menu item
 /// * [icon] - URL of the menu item icon. Overrides 'materialIcon'
@@ -31,7 +31,8 @@ part 'home_menu_item.g.dart';
 /// * [dashboardId] - Id of the Dashboard to open, when user clicks the menu item
 /// * [hideDashboardToolbar] - Hide the dashboard toolbar
 @BuiltValue()
-abstract class HomeMenuItem implements MenuItem, Built<HomeMenuItem, HomeMenuItemBuilder> {
+abstract class HomeMenuItem
+    implements MenuItem, Built<HomeMenuItem, HomeMenuItemBuilder> {
   /// List of child menu items
   @BuiltValueField(wireName: r'pages')
   BuiltList<DefaultMenuItem>? get pages;
@@ -153,7 +154,11 @@ class _$HomeMenuItemSerializer implements PrimitiveSerializer<HomeMenuItem> {
     HomeMenuItem object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -169,74 +174,94 @@ class _$HomeMenuItemSerializer implements PrimitiveSerializer<HomeMenuItem> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'pages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DefaultMenuItem)]),
-          ) as BuiltList<DefaultMenuItem>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DefaultMenuItem),
+                    ]),
+                  )
+                  as BuiltList<DefaultMenuItem>?;
           if (valueDes == null) continue;
           result.pages.replace(valueDes);
           break;
         case r'visible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.visible = valueDes;
           break;
         case r'dashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.dashboardId = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'icon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.icon = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'hideDashboardToolbar':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hideDashboardToolbar = valueDes;
           break;
         case r'homeType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(HomeMenuItemType),
-          ) as HomeMenuItemType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(HomeMenuItemType),
+                  )
+                  as HomeMenuItemType?;
           if (valueDes == null) continue;
           result.homeType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MenuItemType),
-          ) as MenuItemType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MenuItemType),
+                  )
+                  as MenuItemType;
           result.type = valueDes;
           break;
         default:
@@ -267,5 +292,3 @@ class _$HomeMenuItemSerializer implements PrimitiveSerializer<HomeMenuItem> {
     return result.build();
   }
 }
-
-

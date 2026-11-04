@@ -20,7 +20,8 @@ part 'failure.g.dart';
 /// * [status] - Indicates whether the request was successful or not
 /// * [errorDetails] - A string containing details about the failure
 @BuiltValue()
-abstract class Failure implements TbChatResponse, Built<Failure, FailureBuilder> {
+abstract class Failure
+    implements TbChatResponse, Built<Failure, FailureBuilder> {
   /// A string containing details about the failure
   @BuiltValueField(wireName: r'errorDetails')
   String? get errorDetails;
@@ -68,7 +69,11 @@ class _$FailureSerializer implements PrimitiveSerializer<Failure> {
     Failure object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -84,18 +89,22 @@ class _$FailureSerializer implements PrimitiveSerializer<Failure> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'errorDetails':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorDetails = valueDes;
           break;
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.status = valueDes;
           break;
         default:
@@ -126,5 +135,3 @@ class _$FailureSerializer implements PrimitiveSerializer<Failure> {
     return result.build();
   }
 }
-
-

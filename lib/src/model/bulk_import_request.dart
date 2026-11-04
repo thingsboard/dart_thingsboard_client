@@ -18,12 +18,13 @@ part 'bulk_import_request.g.dart';
 /// BulkImportRequest
 ///
 /// Properties:
-/// * [file] 
-/// * [mapping] 
-/// * [customerId] 
-/// * [entityGroupId] 
+/// * [file]
+/// * [mapping]
+/// * [customerId]
+/// * [entityGroupId]
 @BuiltValue()
-abstract class BulkImportRequest implements Built<BulkImportRequest, BulkImportRequestBuilder> {
+abstract class BulkImportRequest
+    implements Built<BulkImportRequest, BulkImportRequestBuilder> {
   @BuiltValueField(wireName: r'file')
   String? get file;
 
@@ -38,16 +39,19 @@ abstract class BulkImportRequest implements Built<BulkImportRequest, BulkImportR
 
   BulkImportRequest._();
 
-  factory BulkImportRequest([void updates(BulkImportRequestBuilder b)]) = _$BulkImportRequest;
+  factory BulkImportRequest([void updates(BulkImportRequestBuilder b)]) =
+      _$BulkImportRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BulkImportRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BulkImportRequest> get serializer => _$BulkImportRequestSerializer();
+  static Serializer<BulkImportRequest> get serializer =>
+      _$BulkImportRequestSerializer();
 }
 
-class _$BulkImportRequestSerializer implements PrimitiveSerializer<BulkImportRequest> {
+class _$BulkImportRequestSerializer
+    implements PrimitiveSerializer<BulkImportRequest> {
   @override
   final Iterable<Type> types = const [BulkImportRequest, _$BulkImportRequest];
 
@@ -95,7 +99,11 @@ class _$BulkImportRequestSerializer implements PrimitiveSerializer<BulkImportReq
     BulkImportRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -111,34 +119,42 @@ class _$BulkImportRequestSerializer implements PrimitiveSerializer<BulkImportReq
       final value = serializedList[i + 1];
       switch (key) {
         case r'file':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.file = valueDes;
           break;
         case r'mapping':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Mapping),
-          ) as Mapping?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Mapping),
+                  )
+                  as Mapping?;
           if (valueDes == null) continue;
           result.mapping.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'entityGroupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityGroupId = valueDes;
           break;
@@ -170,5 +186,3 @@ class _$BulkImportRequestSerializer implements PrimitiveSerializer<BulkImportReq
     return result.build();
   }
 }
-
-

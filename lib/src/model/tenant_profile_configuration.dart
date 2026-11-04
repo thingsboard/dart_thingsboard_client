@@ -17,9 +17,9 @@ part 'tenant_profile_configuration.g.dart';
 /// TenantProfileConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class TenantProfileConfiguration  {
+abstract class TenantProfileConfiguration {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -30,27 +30,32 @@ abstract class TenantProfileConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TenantProfileConfiguration> get serializer => _$TenantProfileConfigurationSerializer();
+  static Serializer<TenantProfileConfiguration> get serializer =>
+      _$TenantProfileConfigurationSerializer();
 }
 
-extension TenantProfileConfigurationDiscriminatorExt on TenantProfileConfiguration {
-    String? get discriminatorValue {
-        if (this is DefaultTenantProfileConfiguration) {
-            return r'DEFAULT';
-        }
-        return null;
+extension TenantProfileConfigurationDiscriminatorExt
+    on TenantProfileConfiguration {
+  String? get discriminatorValue {
+    if (this is DefaultTenantProfileConfiguration) {
+      return r'DEFAULT';
     }
-}
-extension TenantProfileConfigurationBuilderDiscriminatorExt on TenantProfileConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is DefaultTenantProfileConfigurationBuilder) {
-            return r'DEFAULT';
-        }
-        return null;
-    }
+    return null;
+  }
 }
 
-class _$TenantProfileConfigurationSerializer implements PrimitiveSerializer<TenantProfileConfiguration> {
+extension TenantProfileConfigurationBuilderDiscriminatorExt
+    on TenantProfileConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is DefaultTenantProfileConfigurationBuilder) {
+      return r'DEFAULT';
+    }
+    return null;
+  }
+}
+
+class _$TenantProfileConfigurationSerializer
+    implements PrimitiveSerializer<TenantProfileConfiguration> {
   @override
   final Iterable<Type> types = const [TenantProfileConfiguration];
 
@@ -76,9 +81,16 @@ class _$TenantProfileConfigurationSerializer implements PrimitiveSerializer<Tena
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is DefaultTenantProfileConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(DefaultTenantProfileConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DefaultTenantProfileConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -88,35 +100,61 @@ class _$TenantProfileConfigurationSerializer implements PrimitiveSerializer<Tena
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(TenantProfileConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          TenantProfileConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'DEFAULT':
-        return serializers.deserialize(serialized, specifiedType: FullType(DefaultTenantProfileConfiguration)) as DefaultTenantProfileConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DefaultTenantProfileConfiguration),
+            )
+            as DefaultTenantProfileConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($TenantProfileConfiguration)) as $TenantProfileConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($TenantProfileConfiguration),
+            )
+            as $TenantProfileConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [TenantProfileConfiguration], since [TenantProfileConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $TenantProfileConfiguration implements TenantProfileConfiguration, Built<$TenantProfileConfiguration, $TenantProfileConfigurationBuilder> {
+abstract class $TenantProfileConfiguration
+    implements
+        TenantProfileConfiguration,
+        Built<$TenantProfileConfiguration, $TenantProfileConfigurationBuilder> {
   $TenantProfileConfiguration._();
 
-  factory $TenantProfileConfiguration([void Function($TenantProfileConfigurationBuilder)? updates]) = _$$TenantProfileConfiguration;
+  factory $TenantProfileConfiguration([
+    void Function($TenantProfileConfigurationBuilder)? updates,
+  ]) = _$$TenantProfileConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($TenantProfileConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$TenantProfileConfiguration> get serializer => _$$TenantProfileConfigurationSerializer();
+  static Serializer<$TenantProfileConfiguration> get serializer =>
+      _$$TenantProfileConfigurationSerializer();
 }
 
-class _$$TenantProfileConfigurationSerializer implements PrimitiveSerializer<$TenantProfileConfiguration> {
+class _$$TenantProfileConfigurationSerializer
+    implements PrimitiveSerializer<$TenantProfileConfiguration> {
   @override
-  final Iterable<Type> types = const [$TenantProfileConfiguration, _$$TenantProfileConfiguration];
+  final Iterable<Type> types = const [
+    $TenantProfileConfiguration,
+    _$$TenantProfileConfiguration,
+  ];
 
   @override
   final String wireName = r'$TenantProfileConfiguration';
@@ -127,7 +165,10 @@ class _$$TenantProfileConfigurationSerializer implements PrimitiveSerializer<$Te
     $TenantProfileConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(TenantProfileConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(TenantProfileConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -143,10 +184,12 @@ class _$$TenantProfileConfigurationSerializer implements PrimitiveSerializer<$Te
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -177,4 +220,3 @@ class _$$TenantProfileConfigurationSerializer implements PrimitiveSerializer<$Te
     return result.build();
   }
 }
-

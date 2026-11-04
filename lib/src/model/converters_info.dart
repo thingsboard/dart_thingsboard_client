@@ -17,11 +17,12 @@ part 'converters_info.g.dart';
 /// ConvertersInfo
 ///
 /// Properties:
-/// * [library_] 
-/// * [existing] 
-/// * [keys] 
+/// * [library_]
+/// * [existing]
+/// * [keys]
 @BuiltValue()
-abstract class ConvertersInfo implements Built<ConvertersInfo, ConvertersInfoBuilder> {
+abstract class ConvertersInfo
+    implements Built<ConvertersInfo, ConvertersInfoBuilder> {
   @BuiltValueField(wireName: r'library')
   bool? get library_;
 
@@ -33,16 +34,19 @@ abstract class ConvertersInfo implements Built<ConvertersInfo, ConvertersInfoBui
 
   ConvertersInfo._();
 
-  factory ConvertersInfo([void updates(ConvertersInfoBuilder b)]) = _$ConvertersInfo;
+  factory ConvertersInfo([void updates(ConvertersInfoBuilder b)]) =
+      _$ConvertersInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ConvertersInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ConvertersInfo> get serializer => _$ConvertersInfoSerializer();
+  static Serializer<ConvertersInfo> get serializer =>
+      _$ConvertersInfoSerializer();
 }
 
-class _$ConvertersInfoSerializer implements PrimitiveSerializer<ConvertersInfo> {
+class _$ConvertersInfoSerializer
+    implements PrimitiveSerializer<ConvertersInfo> {
   @override
   final Iterable<Type> types = const [ConvertersInfo, _$ConvertersInfo];
 
@@ -83,7 +87,11 @@ class _$ConvertersInfoSerializer implements PrimitiveSerializer<ConvertersInfo> 
     ConvertersInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,26 +107,34 @@ class _$ConvertersInfoSerializer implements PrimitiveSerializer<ConvertersInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'library':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.library_ = valueDes;
           break;
         case r'existing':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.existing = valueDes;
           break;
         case r'keys':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.keys.replace(valueDes);
           break;
@@ -150,5 +166,3 @@ class _$ConvertersInfoSerializer implements PrimitiveSerializer<ConvertersInfo> 
     return result.build();
   }
 }
-
-

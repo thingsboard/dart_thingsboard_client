@@ -44,7 +44,9 @@ part 'login_white_labeling_params.g.dart';
 /// * [adminSettingsId] - Id of the settings object that store this parameters
 /// * [showNameBottom] - Show platform name and version on login page
 @BuiltValue()
-abstract class LoginWhiteLabelingParams implements Built<LoginWhiteLabelingParams, LoginWhiteLabelingParamsBuilder> {
+abstract class LoginWhiteLabelingParams
+    implements
+        Built<LoginWhiteLabelingParams, LoginWhiteLabelingParamsBuilder> {
   /// Logo image URL
   @BuiltValueField(wireName: r'logoImageUrl')
   String? get logoImageUrl;
@@ -143,18 +145,25 @@ abstract class LoginWhiteLabelingParams implements Built<LoginWhiteLabelingParam
 
   LoginWhiteLabelingParams._();
 
-  factory LoginWhiteLabelingParams([void updates(LoginWhiteLabelingParamsBuilder b)]) = _$LoginWhiteLabelingParams;
+  factory LoginWhiteLabelingParams([
+    void updates(LoginWhiteLabelingParamsBuilder b),
+  ]) = _$LoginWhiteLabelingParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LoginWhiteLabelingParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LoginWhiteLabelingParams> get serializer => _$LoginWhiteLabelingParamsSerializer();
+  static Serializer<LoginWhiteLabelingParams> get serializer =>
+      _$LoginWhiteLabelingParamsSerializer();
 }
 
-class _$LoginWhiteLabelingParamsSerializer implements PrimitiveSerializer<LoginWhiteLabelingParams> {
+class _$LoginWhiteLabelingParamsSerializer
+    implements PrimitiveSerializer<LoginWhiteLabelingParams> {
   @override
-  final Iterable<Type> types = const [LoginWhiteLabelingParams, _$LoginWhiteLabelingParams];
+  final Iterable<Type> types = const [
+    LoginWhiteLabelingParams,
+    _$LoginWhiteLabelingParams,
+  ];
 
   @override
   final String wireName = r'LoginWhiteLabelingParams';
@@ -340,7 +349,11 @@ class _$LoginWhiteLabelingParamsSerializer implements PrimitiveSerializer<LoginW
     LoginWhiteLabelingParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -356,194 +369,242 @@ class _$LoginWhiteLabelingParamsSerializer implements PrimitiveSerializer<LoginW
       final value = serializedList[i + 1];
       switch (key) {
         case r'logoImageUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.logoImageUrl = valueDes;
           break;
         case r'logoImageHeight':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.logoImageHeight = valueDes;
           break;
         case r'collapsedLogoImageUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.collapsedLogoImageUrl = valueDes;
           break;
         case r'appTitle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.appTitle = valueDes;
           break;
         case r'favicon':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Favicon),
-          ) as Favicon?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Favicon),
+                  )
+                  as Favicon?;
           if (valueDes == null) continue;
           result.favicon.replace(valueDes);
           break;
         case r'paletteSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PaletteSettings),
-          ) as PaletteSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PaletteSettings),
+                  )
+                  as PaletteSettings?;
           if (valueDes == null) continue;
           result.paletteSettings.replace(valueDes);
           break;
         case r'primaryColorPanels':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.primaryColorPanels = valueDes;
           break;
         case r'helpLinkBaseUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.helpLinkBaseUrl = valueDes;
           break;
         case r'uiHelpBaseUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.uiHelpBaseUrl = valueDes;
           break;
         case r'enableHelpLinks':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enableHelpLinks = valueDes;
           break;
         case r'whiteLabelingEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.whiteLabelingEnabled = valueDes;
           break;
         case r'showNameVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showNameVersion = valueDes;
           break;
         case r'platformName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.platformName = valueDes;
           break;
         case r'platformVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.platformVersion = valueDes;
           break;
         case r'customCss':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.customCss = valueDes;
           break;
         case r'hideConnectivityDialog':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hideConnectivityDialog = valueDes;
           break;
         case r'overrideTrendzName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.overrideTrendzName = valueDes;
           break;
         case r'pageBackgroundColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.pageBackgroundColor = valueDes;
           break;
         case r'darkForeground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.darkForeground = valueDes;
           break;
         case r'domainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DomainId),
-          ) as DomainId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DomainId),
+                  )
+                  as DomainId?;
           if (valueDes == null) continue;
           result.domainId.replace(valueDes);
           break;
         case r'baseUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.baseUrl = valueDes;
           break;
         case r'prohibitDifferentUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.prohibitDifferentUrl = valueDes;
           break;
         case r'adminSettingsId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.adminSettingsId = valueDes;
           break;
         case r'showNameBottom':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showNameBottom = valueDes;
           break;
@@ -575,5 +636,3 @@ class _$LoginWhiteLabelingParamsSerializer implements PrimitiveSerializer<LoginW
     return result.build();
   }
 }
-
-

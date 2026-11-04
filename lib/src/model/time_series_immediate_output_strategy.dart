@@ -17,14 +17,20 @@ part 'time_series_immediate_output_strategy.g.dart';
 /// TimeSeriesImmediateOutputStrategy
 ///
 /// Properties:
-/// * [type] 
-/// * [ttl] 
-/// * [saveTimeSeries] 
-/// * [saveLatest] 
-/// * [sendWsUpdate] 
-/// * [processCfs] 
+/// * [type]
+/// * [ttl]
+/// * [saveTimeSeries]
+/// * [saveLatest]
+/// * [sendWsUpdate]
+/// * [processCfs]
 @BuiltValue()
-abstract class TimeSeriesImmediateOutputStrategy implements TimeSeriesOutputStrategy, Built<TimeSeriesImmediateOutputStrategy, TimeSeriesImmediateOutputStrategyBuilder> {
+abstract class TimeSeriesImmediateOutputStrategy
+    implements
+        TimeSeriesOutputStrategy,
+        Built<
+          TimeSeriesImmediateOutputStrategy,
+          TimeSeriesImmediateOutputStrategyBuilder
+        > {
   @BuiltValueField(wireName: r'sendWsUpdate')
   bool? get sendWsUpdate;
 
@@ -42,18 +48,25 @@ abstract class TimeSeriesImmediateOutputStrategy implements TimeSeriesOutputStra
 
   TimeSeriesImmediateOutputStrategy._();
 
-  factory TimeSeriesImmediateOutputStrategy([void updates(TimeSeriesImmediateOutputStrategyBuilder b)]) = _$TimeSeriesImmediateOutputStrategy;
+  factory TimeSeriesImmediateOutputStrategy([
+    void updates(TimeSeriesImmediateOutputStrategyBuilder b),
+  ]) = _$TimeSeriesImmediateOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesImmediateOutputStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesImmediateOutputStrategy> get serializer => _$TimeSeriesImmediateOutputStrategySerializer();
+  static Serializer<TimeSeriesImmediateOutputStrategy> get serializer =>
+      _$TimeSeriesImmediateOutputStrategySerializer();
 }
 
-class _$TimeSeriesImmediateOutputStrategySerializer implements PrimitiveSerializer<TimeSeriesImmediateOutputStrategy> {
+class _$TimeSeriesImmediateOutputStrategySerializer
+    implements PrimitiveSerializer<TimeSeriesImmediateOutputStrategy> {
   @override
-  final Iterable<Type> types = const [TimeSeriesImmediateOutputStrategy, _$TimeSeriesImmediateOutputStrategy];
+  final Iterable<Type> types = const [
+    TimeSeriesImmediateOutputStrategy,
+    _$TimeSeriesImmediateOutputStrategy,
+  ];
 
   @override
   final String wireName = r'TimeSeriesImmediateOutputStrategy';
@@ -111,7 +124,11 @@ class _$TimeSeriesImmediateOutputStrategySerializer implements PrimitiveSerializ
     TimeSeriesImmediateOutputStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -127,49 +144,61 @@ class _$TimeSeriesImmediateOutputStrategySerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'processCfs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.processCfs = valueDes;
           break;
         case r'saveTimeSeries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveTimeSeries = valueDes;
           break;
         case r'sendWsUpdate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.sendWsUpdate = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'ttl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.ttl = valueDes;
           break;
         case r'saveLatest':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveLatest = valueDes;
           break;
@@ -201,5 +230,3 @@ class _$TimeSeriesImmediateOutputStrategySerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

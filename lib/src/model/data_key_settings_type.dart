@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'data_key_settings_type.g.dart';
 
 class DataKeySettingsType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'COLUMN')
   static const DataKeySettingsType COLUMN = _$COLUMN;
   @BuiltValueEnumConst(wireName: r'TIME_SERIES_CHART')
@@ -23,11 +22,13 @@ class DataKeySettingsType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'DEFAULT')
   static const DataKeySettingsType DEFAULT = _$DEFAULT;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const DataKeySettingsType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const DataKeySettingsType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<DataKeySettingsType> get serializer => _$dataKeySettingsTypeSerializer;
+  static Serializer<DataKeySettingsType> get serializer =>
+      _$dataKeySettingsTypeSerializer;
 
-  const DataKeySettingsType._(String name): super(name);
+  const DataKeySettingsType._(String name) : super(name);
 
   static BuiltSet<DataKeySettingsType> get values => _$values;
   static DataKeySettingsType valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class DataKeySettingsType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class DataKeySettingsTypeMixin = Object with _$DataKeySettingsTypeMixin;
-
+abstract class DataKeySettingsTypeMixin = Object
+    with _$DataKeySettingsTypeMixin;

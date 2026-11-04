@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/ota_package.dart';
 import 'package:thingsboard_client/src/model/ota_package_info.dart';
 import 'package:thingsboard_client/src/model/page_data_ota_package_info.dart';
 import 'package:thingsboard_client/src/model/save_ota_package_info_request.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class OtaPackageControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -44,7 +41,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteOtaPackage({ 
+  Future<Response<void>> deleteOtaPackage({
     required String otaPackageId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,19 @@ class OtaPackageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/otaPackage/{otaPackageId}'.replaceAll('{' r'otaPackageId' '}', encodeQueryParameter(_serializers, otaPackageId, const FullType(String)).toString());
+    final _path = r'/api/otaPackage/{otaPackageId}'.replaceAll(
+      '{'
+      r'otaPackageId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        otaPackageId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +71,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -103,7 +104,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadOtaPackage({ 
+  Future<Response<Uint8List>> downloadOtaPackage({
     required String otaPackageId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -113,13 +114,20 @@ class OtaPackageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/otaPackage/{otaPackageId}/download'.replaceAll('{' r'otaPackageId' '}', encodeQueryParameter(_serializers, otaPackageId, const FullType(String)).toString());
+    final _path = r'/api/otaPackage/{otaPackageId}/download'.replaceAll(
+      '{'
+      r'otaPackageId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        otaPackageId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -127,11 +135,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -151,7 +156,6 @@ class OtaPackageControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -194,7 +198,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataOtaPackageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataOtaPackageInfo>> getGroupOtaPackages({ 
+  Future<Response<PageDataOtaPackageInfo>> getGroupOtaPackages({
     required String groupId,
     required String type,
     required int pageSize,
@@ -209,13 +213,32 @@ class OtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataOtaPackageInfo);
-    final _path = r'/api/otaPackages/group/{groupId}/{type}'.replaceAll('{' r'groupId' '}', encodeQueryParameter(_serializers, groupId, const FullType(String)).toString()).replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataOtaPackageInfo);
+    final _path = r'/api/otaPackages/group/{groupId}/{type}'
+        .replaceAll(
+          '{'
+          r'groupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -223,11 +246,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -235,11 +255,30 @@ class OtaPackageControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -255,11 +294,13 @@ class OtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataOtaPackageInfo),
-      ) as PageDataOtaPackageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataOtaPackageInfo),
+                )
+                as PageDataOtaPackageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -296,7 +337,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OtaPackage] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<OtaPackage>> getOtaPackageById({ 
+  Future<Response<OtaPackage>> getOtaPackageById({
     required String otaPackageId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -305,13 +346,21 @@ class OtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerOtaPackage);
-    final _path = r'/api/otaPackage/{otaPackageId}'.replaceAll('{' r'otaPackageId' '}', encodeQueryParameter(_serializers, otaPackageId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerOtaPackage);
+    final _path = r'/api/otaPackage/{otaPackageId}'.replaceAll(
+      '{'
+      r'otaPackageId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        otaPackageId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -319,11 +368,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -342,11 +388,13 @@ class OtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(OtaPackage),
-      ) as OtaPackage;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(OtaPackage),
+                )
+                as OtaPackage;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -383,7 +431,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OtaPackageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<OtaPackageInfo>> getOtaPackageInfoById({ 
+  Future<Response<OtaPackageInfo>> getOtaPackageInfoById({
     required String otaPackageId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -392,13 +440,21 @@ class OtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerOtaPackageInfo);
-    final _path = r'/api/otaPackage/info/{otaPackageId}'.replaceAll('{' r'otaPackageId' '}', encodeQueryParameter(_serializers, otaPackageId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerOtaPackageInfo);
+    final _path = r'/api/otaPackage/info/{otaPackageId}'.replaceAll(
+      '{'
+      r'otaPackageId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        otaPackageId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -406,11 +462,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -429,11 +482,13 @@ class OtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(OtaPackageInfo),
-      ) as OtaPackageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(OtaPackageInfo),
+                )
+                as OtaPackageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -474,7 +529,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataOtaPackageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataOtaPackageInfo>> getOtaPackages({ 
+  Future<Response<PageDataOtaPackageInfo>> getOtaPackages({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -487,13 +542,12 @@ class OtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataOtaPackageInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataOtaPackageInfo);
     final _path = r'/api/otaPackages';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -501,11 +555,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -513,11 +564,30 @@ class OtaPackageControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -533,11 +603,13 @@ class OtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataOtaPackageInfo),
-      ) as PageDataOtaPackageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataOtaPackageInfo),
+                )
+                as PageDataOtaPackageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -580,7 +652,8 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataOtaPackageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataOtaPackageInfo>> getOtaPackagesByDeviceProfileAndType({ 
+  Future<Response<PageDataOtaPackageInfo>>
+  getOtaPackagesByDeviceProfileAndType({
     required String deviceProfileId,
     required String type,
     required int pageSize,
@@ -595,13 +668,32 @@ class OtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataOtaPackageInfo);
-    final _path = r'/api/otaPackages/{deviceProfileId}/{type}'.replaceAll('{' r'deviceProfileId' '}', encodeQueryParameter(_serializers, deviceProfileId, const FullType(String)).toString()).replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataOtaPackageInfo);
+    final _path = r'/api/otaPackages/{deviceProfileId}/{type}'
+        .replaceAll(
+          '{'
+          r'deviceProfileId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            deviceProfileId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -609,11 +701,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -621,11 +710,30 @@ class OtaPackageControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -641,11 +749,13 @@ class OtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataOtaPackageInfo),
-      ) as PageDataOtaPackageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataOtaPackageInfo),
+                )
+                as PageDataOtaPackageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -685,7 +795,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OtaPackageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<OtaPackageInfo>> saveOtaPackageData({ 
+  Future<Response<OtaPackageInfo>> saveOtaPackageData({
     required String otaPackageId,
     required String checksumAlgorithm,
     required MultipartFile file,
@@ -697,13 +807,21 @@ class OtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerOtaPackageInfo);
-    final _path = r'/api/otaPackage/{otaPackageId}'.replaceAll('{' r'otaPackageId' '}', encodeQueryParameter(_serializers, otaPackageId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerOtaPackageInfo);
+    final _path = r'/api/otaPackage/{otaPackageId}'.replaceAll(
+      '{'
+      r'otaPackageId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        otaPackageId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -711,11 +829,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -724,20 +839,26 @@ class OtaPackageControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (checksum != null) r'checksum': encodeQueryParameter(_serializers, checksum, const FullType(String)),
-      r'checksumAlgorithm': encodeQueryParameter(_serializers, checksumAlgorithm, const FullType(String)),
+      if (checksum != null)
+        r'checksum': encodeQueryParameter(
+          _serializers,
+          checksum,
+          const FullType(String),
+        ),
+      r'checksumAlgorithm': encodeQueryParameter(
+        _serializers,
+        checksumAlgorithm,
+        const FullType(String),
+      ),
     };
 
     dynamic _bodyData;
 
     try {
-      _bodyData = FormData.fromMap(<String, dynamic>{
-        r'file': file,
-      });
-
-    } catch(error, stackTrace) {
+      _bodyData = FormData.fromMap(<String, dynamic>{r'file': file});
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -762,11 +883,13 @@ class OtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(OtaPackageInfo),
-      ) as OtaPackageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(OtaPackageInfo),
+                )
+                as OtaPackageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -793,7 +916,7 @@ class OtaPackageControllerApi {
   /// Create or update the OTA Package Info. When creating OTA Package Info, platform generates OTA Package id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created OTA Package id will be present in the response. Specify existing OTA Package id to update the OTA Package Info. Referencing non-existing OTA Package Id will cause &#39;Not Found&#39; error.   OTA Package combination of the title with the version is unique in the scope of tenant.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [saveOtaPackageInfoRequest] 
+  /// * [saveOtaPackageInfoRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -803,7 +926,7 @@ class OtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OtaPackageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<OtaPackageInfo>> saveOtaPackageInfo({ 
+  Future<Response<OtaPackageInfo>> saveOtaPackageInfo({
     required SaveOtaPackageInfoRequest saveOtaPackageInfoRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -812,13 +935,13 @@ class OtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerOtaPackageInfoAndSaveOtaPackageInfoRequest);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerOtaPackageInfoAndSaveOtaPackageInfoRequest);
     final _path = r'/api/otaPackage';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -826,11 +949,8 @@ class OtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -842,14 +962,13 @@ class OtaPackageControllerApi {
 
     try {
       const _type = FullType(SaveOtaPackageInfoRequest);
-      _bodyData = _serializers.serialize(saveOtaPackageInfoRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        saveOtaPackageInfoRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -869,11 +988,13 @@ class OtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(OtaPackageInfo),
-      ) as OtaPackageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(OtaPackageInfo),
+                )
+                as OtaPackageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -895,5 +1016,4 @@ class OtaPackageControllerApi {
       extra: _response.extra,
     );
   }
-
 }

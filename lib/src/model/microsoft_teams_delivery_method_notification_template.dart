@@ -18,14 +18,20 @@ part 'microsoft_teams_delivery_method_notification_template.g.dart';
 /// MicrosoftTeamsDeliveryMethodNotificationTemplate
 ///
 /// Properties:
-/// * [enabled] 
-/// * [body] 
-/// * [method] 
-/// * [subject] 
-/// * [themeColor] 
-/// * [button] 
+/// * [enabled]
+/// * [body]
+/// * [method]
+/// * [subject]
+/// * [themeColor]
+/// * [button]
 @BuiltValue()
-abstract class MicrosoftTeamsDeliveryMethodNotificationTemplate implements DeliveryMethodNotificationTemplate, Built<MicrosoftTeamsDeliveryMethodNotificationTemplate, MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder> {
+abstract class MicrosoftTeamsDeliveryMethodNotificationTemplate
+    implements
+        DeliveryMethodNotificationTemplate,
+        Built<
+          MicrosoftTeamsDeliveryMethodNotificationTemplate,
+          MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder
+        > {
   @BuiltValueField(wireName: r'button')
   Button? get button;
 
@@ -37,18 +43,29 @@ abstract class MicrosoftTeamsDeliveryMethodNotificationTemplate implements Deliv
 
   MicrosoftTeamsDeliveryMethodNotificationTemplate._();
 
-  factory MicrosoftTeamsDeliveryMethodNotificationTemplate([void updates(MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder b)]) = _$MicrosoftTeamsDeliveryMethodNotificationTemplate;
+  factory MicrosoftTeamsDeliveryMethodNotificationTemplate([
+    void updates(MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder b),
+  ]) = _$MicrosoftTeamsDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder b) => b;
+  static void _defaults(
+    MicrosoftTeamsDeliveryMethodNotificationTemplateBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MicrosoftTeamsDeliveryMethodNotificationTemplate> get serializer => _$MicrosoftTeamsDeliveryMethodNotificationTemplateSerializer();
+  static Serializer<MicrosoftTeamsDeliveryMethodNotificationTemplate>
+  get serializer =>
+      _$MicrosoftTeamsDeliveryMethodNotificationTemplateSerializer();
 }
 
-class _$MicrosoftTeamsDeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<MicrosoftTeamsDeliveryMethodNotificationTemplate> {
+class _$MicrosoftTeamsDeliveryMethodNotificationTemplateSerializer
+    implements
+        PrimitiveSerializer<MicrosoftTeamsDeliveryMethodNotificationTemplate> {
   @override
-  final Iterable<Type> types = const [MicrosoftTeamsDeliveryMethodNotificationTemplate, _$MicrosoftTeamsDeliveryMethodNotificationTemplate];
+  final Iterable<Type> types = const [
+    MicrosoftTeamsDeliveryMethodNotificationTemplate,
+    _$MicrosoftTeamsDeliveryMethodNotificationTemplate,
+  ];
 
   @override
   final String wireName = r'MicrosoftTeamsDeliveryMethodNotificationTemplate';
@@ -104,7 +121,11 @@ class _$MicrosoftTeamsDeliveryMethodNotificationTemplateSerializer implements Pr
     MicrosoftTeamsDeliveryMethodNotificationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -120,48 +141,60 @@ class _$MicrosoftTeamsDeliveryMethodNotificationTemplateSerializer implements Pr
       final value = serializedList[i + 1];
       switch (key) {
         case r'button':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Button),
-          ) as Button?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Button),
+                  )
+                  as Button?;
           if (valueDes == null) continue;
           result.button.replace(valueDes);
           break;
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.body = valueDes;
           break;
         case r'themeColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.themeColor = valueDes;
           break;
         case r'subject':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.subject = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
@@ -193,5 +226,3 @@ class _$MicrosoftTeamsDeliveryMethodNotificationTemplateSerializer implements Pr
     return result.build();
   }
 }
-
-

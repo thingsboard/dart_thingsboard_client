@@ -8,7 +8,8 @@ import 'entity_filter_type.dart';
 
 class EntityViewTypeFilter extends EntityFilter {
   @Deprecated(
-      "will be replaced by [entityViewTypes]. This value will be appended to [entityViewTypes] array")
+    "will be replaced by [entityViewTypes]. This value will be appended to [entityViewTypes] array",
+  )
   String? entityViewType;
   List<String> entityViewTypes;
   String? entityViewNameFilter;

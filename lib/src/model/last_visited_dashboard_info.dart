@@ -21,7 +21,9 @@ part 'last_visited_dashboard_info.g.dart';
 /// * [starred] - Starred flag
 /// * [lastVisited] - Last visit timestamp
 @BuiltValue()
-abstract class LastVisitedDashboardInfo implements Built<LastVisitedDashboardInfo, LastVisitedDashboardInfoBuilder> {
+abstract class LastVisitedDashboardInfo
+    implements
+        Built<LastVisitedDashboardInfo, LastVisitedDashboardInfoBuilder> {
   /// JSON object with Dashboard id.
   @BuiltValueField(wireName: r'id')
   String? get id;
@@ -40,18 +42,25 @@ abstract class LastVisitedDashboardInfo implements Built<LastVisitedDashboardInf
 
   LastVisitedDashboardInfo._();
 
-  factory LastVisitedDashboardInfo([void updates(LastVisitedDashboardInfoBuilder b)]) = _$LastVisitedDashboardInfo;
+  factory LastVisitedDashboardInfo([
+    void updates(LastVisitedDashboardInfoBuilder b),
+  ]) = _$LastVisitedDashboardInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LastVisitedDashboardInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LastVisitedDashboardInfo> get serializer => _$LastVisitedDashboardInfoSerializer();
+  static Serializer<LastVisitedDashboardInfo> get serializer =>
+      _$LastVisitedDashboardInfoSerializer();
 }
 
-class _$LastVisitedDashboardInfoSerializer implements PrimitiveSerializer<LastVisitedDashboardInfo> {
+class _$LastVisitedDashboardInfoSerializer
+    implements PrimitiveSerializer<LastVisitedDashboardInfo> {
   @override
-  final Iterable<Type> types = const [LastVisitedDashboardInfo, _$LastVisitedDashboardInfo];
+  final Iterable<Type> types = const [
+    LastVisitedDashboardInfo,
+    _$LastVisitedDashboardInfo,
+  ];
 
   @override
   final String wireName = r'LastVisitedDashboardInfo';
@@ -97,7 +106,11 @@ class _$LastVisitedDashboardInfoSerializer implements PrimitiveSerializer<LastVi
     LastVisitedDashboardInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,34 +126,42 @@ class _$LastVisitedDashboardInfoSerializer implements PrimitiveSerializer<LastVi
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'starred':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.starred = valueDes;
           break;
         case r'lastVisited':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.lastVisited = valueDes;
           break;
@@ -172,5 +193,3 @@ class _$LastVisitedDashboardInfoSerializer implements PrimitiveSerializer<LastVi
     return result.build();
   }
 }
-
-

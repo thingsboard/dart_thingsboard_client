@@ -21,7 +21,12 @@ part 'merged_group_type_permission_info.g.dart';
 /// * [entityGroupIds] - List of Entity Groups in case of group roles are assigned to the user (user group)
 /// * [hasGenericRead] - Indicates if generic permission assigned to the user group.
 @BuiltValue()
-abstract class MergedGroupTypePermissionInfo implements Built<MergedGroupTypePermissionInfo, MergedGroupTypePermissionInfoBuilder> {
+abstract class MergedGroupTypePermissionInfo
+    implements
+        Built<
+          MergedGroupTypePermissionInfo,
+          MergedGroupTypePermissionInfoBuilder
+        > {
   /// List of Entity Groups in case of group roles are assigned to the user (user group)
   @BuiltValueField(wireName: r'entityGroupIds')
   BuiltList<EntityGroupId>? get entityGroupIds;
@@ -32,18 +37,25 @@ abstract class MergedGroupTypePermissionInfo implements Built<MergedGroupTypePer
 
   MergedGroupTypePermissionInfo._();
 
-  factory MergedGroupTypePermissionInfo([void updates(MergedGroupTypePermissionInfoBuilder b)]) = _$MergedGroupTypePermissionInfo;
+  factory MergedGroupTypePermissionInfo([
+    void updates(MergedGroupTypePermissionInfoBuilder b),
+  ]) = _$MergedGroupTypePermissionInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MergedGroupTypePermissionInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MergedGroupTypePermissionInfo> get serializer => _$MergedGroupTypePermissionInfoSerializer();
+  static Serializer<MergedGroupTypePermissionInfo> get serializer =>
+      _$MergedGroupTypePermissionInfoSerializer();
 }
 
-class _$MergedGroupTypePermissionInfoSerializer implements PrimitiveSerializer<MergedGroupTypePermissionInfo> {
+class _$MergedGroupTypePermissionInfoSerializer
+    implements PrimitiveSerializer<MergedGroupTypePermissionInfo> {
   @override
-  final Iterable<Type> types = const [MergedGroupTypePermissionInfo, _$MergedGroupTypePermissionInfo];
+  final Iterable<Type> types = const [
+    MergedGroupTypePermissionInfo,
+    _$MergedGroupTypePermissionInfo,
+  ];
 
   @override
   final String wireName = r'MergedGroupTypePermissionInfo';
@@ -75,7 +87,11 @@ class _$MergedGroupTypePermissionInfoSerializer implements PrimitiveSerializer<M
     MergedGroupTypePermissionInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +107,24 @@ class _$MergedGroupTypePermissionInfoSerializer implements PrimitiveSerializer<M
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityGroupIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityGroupId)]),
-          ) as BuiltList<EntityGroupId>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityGroupId),
+                    ]),
+                  )
+                  as BuiltList<EntityGroupId>?;
           if (valueDes == null) continue;
           result.entityGroupIds.replace(valueDes);
           break;
         case r'hasGenericRead':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasGenericRead = valueDes;
           break;
@@ -134,5 +156,3 @@ class _$MergedGroupTypePermissionInfoSerializer implements PrimitiveSerializer<M
     return result.build();
   }
 }
-
-

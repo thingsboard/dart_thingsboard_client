@@ -20,13 +20,13 @@ part 'output.g.dart';
 /// Output
 ///
 /// Properties:
-/// * [decimalsByDefault] 
-/// * [name] 
-/// * [scope] 
-/// * [strategy] 
-/// * [type] 
+/// * [decimalsByDefault]
+/// * [name]
+/// * [scope]
+/// * [strategy]
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class Output  {
+abstract class Output {
   @BuiltValueField(wireName: r'decimalsByDefault')
   int? get decimalsByDefault;
 
@@ -55,26 +55,27 @@ abstract class Output  {
 }
 
 extension OutputDiscriminatorExt on Output {
-    String? get discriminatorValue {
-        if (this is AttributesOutput) {
-            return r'ATTRIBUTES';
-        }
-        if (this is TimeSeriesOutput) {
-            return r'TIME_SERIES';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AttributesOutput) {
+      return r'ATTRIBUTES';
     }
+    if (this is TimeSeriesOutput) {
+      return r'TIME_SERIES';
+    }
+    return null;
+  }
 }
+
 extension OutputBuilderDiscriminatorExt on OutputBuilder {
-    String? get discriminatorValue {
-        if (this is AttributesOutputBuilder) {
-            return r'ATTRIBUTES';
-        }
-        if (this is TimeSeriesOutputBuilder) {
-            return r'TIME_SERIES';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AttributesOutputBuilder) {
+      return r'ATTRIBUTES';
     }
+    if (this is TimeSeriesOutputBuilder) {
+      return r'TIME_SERIES';
+    }
+    return null;
+  }
 }
 
 class _$OutputSerializer implements PrimitiveSerializer<Output> {
@@ -131,12 +132,22 @@ class _$OutputSerializer implements PrimitiveSerializer<Output> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AttributesOutput) {
-      return serializers.serialize(object, specifiedType: FullType(AttributesOutput))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AttributesOutput),
+      )!;
     }
     if (object is TimeSeriesOutput) {
-      return serializers.serialize(object, specifiedType: FullType(TimeSeriesOutput))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TimeSeriesOutput),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -147,18 +158,34 @@ class _$OutputSerializer implements PrimitiveSerializer<Output> {
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
     final discIndex = serializedList.indexOf(Output.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'ATTRIBUTES':
-        return serializers.deserialize(serialized, specifiedType: FullType(AttributesOutput)) as AttributesOutput;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AttributesOutput),
+            )
+            as AttributesOutput;
       case r'TIME_SERIES':
-        return serializers.deserialize(serialized, specifiedType: FullType(TimeSeriesOutput)) as TimeSeriesOutput;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TimeSeriesOutput),
+            )
+            as TimeSeriesOutput;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($Output)) as $Output;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($Output),
+            )
+            as $Output;
     }
   }
 }
-
 
 /// a concrete implementation of [Output], since [Output] is not instantiable
 @BuiltValue(instantiable: true)
@@ -203,42 +230,52 @@ class _$$OutputSerializer implements PrimitiveSerializer<$Output> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'decimalsByDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.decimalsByDefault = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AttributeScope),
-          ) as AttributeScope?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AttributeScope),
+                  )
+                  as AttributeScope?;
           if (valueDes == null) continue;
           result.scope = valueDes;
           break;
         case r'strategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.strategy = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -269,4 +306,3 @@ class _$$OutputSerializer implements PrimitiveSerializer<$Output> {
     return result.build();
   }
 }
-

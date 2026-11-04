@@ -17,11 +17,12 @@ part 'month_interval.g.dart';
 /// MonthInterval
 ///
 /// Properties:
-/// * [type] 
-/// * [tz] 
-/// * [offsetSec] 
+/// * [type]
+/// * [tz]
+/// * [offsetSec]
 @BuiltValue()
-abstract class MonthInterval implements AggInterval, Built<MonthInterval, MonthIntervalBuilder> {
+abstract class MonthInterval
+    implements AggInterval, Built<MonthInterval, MonthIntervalBuilder> {
   @BuiltValueField(wireName: r'tz')
   String get tz;
 
@@ -30,13 +31,15 @@ abstract class MonthInterval implements AggInterval, Built<MonthInterval, MonthI
 
   MonthInterval._();
 
-  factory MonthInterval([void updates(MonthIntervalBuilder b)]) = _$MonthInterval;
+  factory MonthInterval([void updates(MonthIntervalBuilder b)]) =
+      _$MonthInterval;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MonthIntervalBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MonthInterval> get serializer => _$MonthIntervalSerializer();
+  static Serializer<MonthInterval> get serializer =>
+      _$MonthIntervalSerializer();
 }
 
 class _$MonthIntervalSerializer implements PrimitiveSerializer<MonthInterval> {
@@ -76,7 +79,11 @@ class _$MonthIntervalSerializer implements PrimitiveSerializer<MonthInterval> {
     MonthInterval object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,25 +99,31 @@ class _$MonthIntervalSerializer implements PrimitiveSerializer<MonthInterval> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'offsetSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.offsetSec = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'tz':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tz = valueDes;
           break;
         default:
@@ -141,5 +154,3 @@ class _$MonthIntervalSerializer implements PrimitiveSerializer<MonthInterval> {
     return result.build();
   }
 }
-
-

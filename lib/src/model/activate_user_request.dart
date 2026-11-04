@@ -19,7 +19,8 @@ part 'activate_user_request.g.dart';
 /// * [activateToken] - The activate token to verify
 /// * [password] - The new password to set
 @BuiltValue()
-abstract class ActivateUserRequest implements Built<ActivateUserRequest, ActivateUserRequestBuilder> {
+abstract class ActivateUserRequest
+    implements Built<ActivateUserRequest, ActivateUserRequestBuilder> {
   /// The activate token to verify
   @BuiltValueField(wireName: r'activateToken')
   String? get activateToken;
@@ -30,18 +31,24 @@ abstract class ActivateUserRequest implements Built<ActivateUserRequest, Activat
 
   ActivateUserRequest._();
 
-  factory ActivateUserRequest([void updates(ActivateUserRequestBuilder b)]) = _$ActivateUserRequest;
+  factory ActivateUserRequest([void updates(ActivateUserRequestBuilder b)]) =
+      _$ActivateUserRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ActivateUserRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ActivateUserRequest> get serializer => _$ActivateUserRequestSerializer();
+  static Serializer<ActivateUserRequest> get serializer =>
+      _$ActivateUserRequestSerializer();
 }
 
-class _$ActivateUserRequestSerializer implements PrimitiveSerializer<ActivateUserRequest> {
+class _$ActivateUserRequestSerializer
+    implements PrimitiveSerializer<ActivateUserRequest> {
   @override
-  final Iterable<Type> types = const [ActivateUserRequest, _$ActivateUserRequest];
+  final Iterable<Type> types = const [
+    ActivateUserRequest,
+    _$ActivateUserRequest,
+  ];
 
   @override
   final String wireName = r'ActivateUserRequest';
@@ -73,7 +80,11 @@ class _$ActivateUserRequestSerializer implements PrimitiveSerializer<ActivateUse
     ActivateUserRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +100,22 @@ class _$ActivateUserRequestSerializer implements PrimitiveSerializer<ActivateUse
       final value = serializedList[i + 1];
       switch (key) {
         case r'activateToken':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.activateToken = valueDes;
           break;
         case r'password':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.password = valueDes;
           break;
@@ -132,5 +147,3 @@ class _$ActivateUserRequestSerializer implements PrimitiveSerializer<ActivateUse
     return result.build();
   }
 }
-
-

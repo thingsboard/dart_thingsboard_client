@@ -18,12 +18,13 @@ part 'aggregation_params.g.dart';
 /// AggregationParams
 ///
 /// Properties:
-/// * [aggregation] 
-/// * [intervalType] 
-/// * [tzId] 
-/// * [interval] 
+/// * [aggregation]
+/// * [intervalType]
+/// * [tzId]
+/// * [interval]
 @BuiltValue()
-abstract class AggregationParams implements Built<AggregationParams, AggregationParamsBuilder> {
+abstract class AggregationParams
+    implements Built<AggregationParams, AggregationParamsBuilder> {
   @BuiltValueField(wireName: r'aggregation')
   Aggregation? get aggregation;
   // enum aggregationEnum {  MIN,  MAX,  AVG,  SUM,  COUNT,  NONE,  };
@@ -40,16 +41,19 @@ abstract class AggregationParams implements Built<AggregationParams, Aggregation
 
   AggregationParams._();
 
-  factory AggregationParams([void updates(AggregationParamsBuilder b)]) = _$AggregationParams;
+  factory AggregationParams([void updates(AggregationParamsBuilder b)]) =
+      _$AggregationParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AggregationParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AggregationParams> get serializer => _$AggregationParamsSerializer();
+  static Serializer<AggregationParams> get serializer =>
+      _$AggregationParamsSerializer();
 }
 
-class _$AggregationParamsSerializer implements PrimitiveSerializer<AggregationParams> {
+class _$AggregationParamsSerializer
+    implements PrimitiveSerializer<AggregationParams> {
   @override
   final Iterable<Type> types = const [AggregationParams, _$AggregationParams];
 
@@ -97,7 +101,11 @@ class _$AggregationParamsSerializer implements PrimitiveSerializer<AggregationPa
     AggregationParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,34 +121,42 @@ class _$AggregationParamsSerializer implements PrimitiveSerializer<AggregationPa
       final value = serializedList[i + 1];
       switch (key) {
         case r'aggregation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Aggregation),
-          ) as Aggregation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Aggregation),
+                  )
+                  as Aggregation?;
           if (valueDes == null) continue;
           result.aggregation = valueDes;
           break;
         case r'intervalType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(IntervalType),
-          ) as IntervalType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(IntervalType),
+                  )
+                  as IntervalType?;
           if (valueDes == null) continue;
           result.intervalType = valueDes;
           break;
         case r'tzId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tzId = valueDes;
           break;
         case r'interval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.interval = valueDes;
           break;
@@ -172,5 +188,3 @@ class _$AggregationParamsSerializer implements PrimitiveSerializer<AggregationPa
     return result.build();
   }
 }
-
-

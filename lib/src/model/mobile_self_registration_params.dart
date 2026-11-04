@@ -28,25 +28,31 @@ part 'mobile_self_registration_params.g.dart';
 /// MobileSelfRegistrationParams
 ///
 /// Properties:
-/// * [type] 
-/// * [enabled] 
-/// * [title] 
-/// * [captcha] 
-/// * [permissions] 
-/// * [notificationRecipient] 
-/// * [signUpFields] 
-/// * [customerTitlePrefix] 
-/// * [showPrivacyPolicy] 
-/// * [showTermsOfUse] 
-/// * [defaultDashboard] 
-/// * [homeDashboard] 
-/// * [customerGroupId] 
-/// * [customMenuId] 
+/// * [type]
+/// * [enabled]
+/// * [title]
+/// * [captcha]
+/// * [permissions]
+/// * [notificationRecipient]
+/// * [signUpFields]
+/// * [customerTitlePrefix]
+/// * [showPrivacyPolicy]
+/// * [showTermsOfUse]
+/// * [defaultDashboard]
+/// * [homeDashboard]
+/// * [customerGroupId]
+/// * [customMenuId]
 /// * [privacyPolicy] - Privacy policy text. Supports HTML.
 /// * [redirect] - Mobile redirect params.
 /// * [termsOfUse] - Terms of User text. Supports HTML.
 @BuiltValue()
-abstract class MobileSelfRegistrationParams implements SelfRegistrationParams, Built<MobileSelfRegistrationParams, MobileSelfRegistrationParamsBuilder> {
+abstract class MobileSelfRegistrationParams
+    implements
+        SelfRegistrationParams,
+        Built<
+          MobileSelfRegistrationParams,
+          MobileSelfRegistrationParamsBuilder
+        > {
   /// Mobile redirect params.
   @BuiltValueField(wireName: r'redirect')
   MobileRedirectParams get redirect;
@@ -61,18 +67,25 @@ abstract class MobileSelfRegistrationParams implements SelfRegistrationParams, B
 
   MobileSelfRegistrationParams._();
 
-  factory MobileSelfRegistrationParams([void updates(MobileSelfRegistrationParamsBuilder b)]) = _$MobileSelfRegistrationParams;
+  factory MobileSelfRegistrationParams([
+    void updates(MobileSelfRegistrationParamsBuilder b),
+  ]) = _$MobileSelfRegistrationParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileSelfRegistrationParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileSelfRegistrationParams> get serializer => _$MobileSelfRegistrationParamsSerializer();
+  static Serializer<MobileSelfRegistrationParams> get serializer =>
+      _$MobileSelfRegistrationParamsSerializer();
 }
 
-class _$MobileSelfRegistrationParamsSerializer implements PrimitiveSerializer<MobileSelfRegistrationParams> {
+class _$MobileSelfRegistrationParamsSerializer
+    implements PrimitiveSerializer<MobileSelfRegistrationParams> {
   @override
-  final Iterable<Type> types = const [MobileSelfRegistrationParams, _$MobileSelfRegistrationParams];
+  final Iterable<Type> types = const [
+    MobileSelfRegistrationParams,
+    _$MobileSelfRegistrationParams,
+  ];
 
   @override
   final String wireName = r'MobileSelfRegistrationParams';
@@ -205,7 +218,11 @@ class _$MobileSelfRegistrationParamsSerializer implements PrimitiveSerializer<Mo
     MobileSelfRegistrationParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -221,136 +238,178 @@ class _$MobileSelfRegistrationParamsSerializer implements PrimitiveSerializer<Mo
       final value = serializedList[i + 1];
       switch (key) {
         case r'redirect':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MobileRedirectParams),
-          ) as MobileRedirectParams;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MobileRedirectParams),
+                  )
+                  as MobileRedirectParams;
           result.redirect.replace(valueDes);
           break;
         case r'customerGroupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityGroupId),
-          ) as EntityGroupId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityGroupId),
+                  )
+                  as EntityGroupId?;
           if (valueDes == null) continue;
           result.customerGroupId.replace(valueDes);
           break;
         case r'customMenuId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomMenuId),
-          ) as CustomMenuId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomMenuId),
+                  )
+                  as CustomMenuId?;
           if (valueDes == null) continue;
           result.customMenuId.replace(valueDes);
           break;
         case r'privacyPolicy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.privacyPolicy = valueDes;
           break;
         case r'signUpFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SignUpField)]),
-          ) as BuiltList<SignUpField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SignUpField),
+                    ]),
+                  )
+                  as BuiltList<SignUpField>?;
           if (valueDes == null) continue;
           result.signUpFields.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SelfRegistrationType),
-          ) as SelfRegistrationType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SelfRegistrationType),
+                  )
+                  as SelfRegistrationType;
           result.type = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'defaultDashboard':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DefaultDashboardParams),
-          ) as DefaultDashboardParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DefaultDashboardParams,
+                    ),
+                  )
+                  as DefaultDashboardParams?;
           if (valueDes == null) continue;
           result.defaultDashboard.replace(valueDes);
           break;
         case r'homeDashboard':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(HomeDashboardParams),
-          ) as HomeDashboardParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(HomeDashboardParams),
+                  )
+                  as HomeDashboardParams?;
           if (valueDes == null) continue;
           result.homeDashboard.replace(valueDes);
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'notificationRecipient':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationTargetId),
-          ) as NotificationTargetId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationTargetId,
+                    ),
+                  )
+                  as NotificationTargetId?;
           if (valueDes == null) continue;
           result.notificationRecipient.replace(valueDes);
           break;
         case r'termsOfUse':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.termsOfUse = valueDes;
           break;
         case r'captcha':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CaptchaParams),
-          ) as CaptchaParams?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CaptchaParams),
+                  )
+                  as CaptchaParams?;
           if (valueDes == null) continue;
           result.captcha = valueDes;
           break;
         case r'showPrivacyPolicy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showPrivacyPolicy = valueDes;
           break;
         case r'permissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(GroupPermission)]),
-          ) as BuiltList<GroupPermission>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(GroupPermission),
+                    ]),
+                  )
+                  as BuiltList<GroupPermission>?;
           if (valueDes == null) continue;
           result.permissions.replace(valueDes);
           break;
         case r'showTermsOfUse':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTermsOfUse = valueDes;
           break;
         case r'customerTitlePrefix':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.customerTitlePrefix = valueDes;
           break;
@@ -382,5 +441,3 @@ class _$MobileSelfRegistrationParamsSerializer implements PrimitiveSerializer<Mo
     return result.build();
   }
 }
-
-

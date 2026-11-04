@@ -9,19 +9,16 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/page_data_widgets_bundle.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/widgets_bundle.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class WidgetsBundleControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +39,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteWidgetsBundle({ 
+  Future<Response<void>> deleteWidgetsBundle({
     required String widgetsBundleId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -52,12 +49,19 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/widgetsBundle/{widgetsBundleId}'.replaceAll('{' r'widgetsBundleId' '}', encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)).toString());
+    final _path = r'/api/widgetsBundle/{widgetsBundleId}'.replaceAll(
+      '{'
+      r'widgetsBundleId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        widgetsBundleId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -65,11 +69,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -88,7 +89,7 @@ class WidgetsBundleControllerApi {
   }
 
   /// Get all Widget Bundles (getAllWidgetsBundles)
-  /// Returns an array of Widget Bundle objects that are available for current user.Widget Bundle represents a group(bundle) of widgets. Widgets are grouped into bundle by type or use case.    Available for any authorized user. 
+  /// Returns an array of Widget Bundle objects that are available for current user.Widget Bundle represents a group(bundle) of widgets. Widgets are grouped into bundle by type or use case.    Available for any authorized user.
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -100,7 +101,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<WidgetsBundle>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<WidgetsBundle>>> getAllWidgetsBundles({ 
+  Future<Response<BuiltList<WidgetsBundle>>> getAllWidgetsBundles({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -108,13 +109,12 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfWidgetsBundle);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfWidgetsBundle);
     final _path = r'/api/widgetsBundles/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -122,11 +122,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -145,11 +142,15 @@ class WidgetsBundleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(WidgetsBundle)]),
-      ) as BuiltList<WidgetsBundle>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(WidgetsBundle),
+                  ]),
+                )
+                as BuiltList<WidgetsBundle>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -173,7 +174,7 @@ class WidgetsBundleControllerApi {
   }
 
   /// Get Widget Bundle (getWidgetsBundleById)
-  /// Get the Widget Bundle based on the provided Widget Bundle Id. Widget Bundle represents a group(bundle) of widgets. Widgets are grouped into bundle by type or use case.   Available for any authorized user. 
+  /// Get the Widget Bundle based on the provided Widget Bundle Id. Widget Bundle represents a group(bundle) of widgets. Widgets are grouped into bundle by type or use case.   Available for any authorized user.
   ///
   /// Parameters:
   /// * [widgetsBundleId] - A string value representing the widget bundle id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
@@ -187,7 +188,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WidgetsBundle] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WidgetsBundle>> getWidgetsBundleById({ 
+  Future<Response<WidgetsBundle>> getWidgetsBundleById({
     required String widgetsBundleId,
     bool? inlineImages,
     CancelToken? cancelToken,
@@ -197,13 +198,21 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWidgetsBundle);
-    final _path = r'/api/widgetsBundle/{widgetsBundleId}'.replaceAll('{' r'widgetsBundleId' '}', encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWidgetsBundle);
+    final _path = r'/api/widgetsBundle/{widgetsBundleId}'.replaceAll(
+      '{'
+      r'widgetsBundleId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        widgetsBundleId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -211,11 +220,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -223,7 +229,12 @@ class WidgetsBundleControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (inlineImages != null) r'inlineImages': encodeQueryParameter(_serializers, inlineImages, const FullType(bool)),
+      if (inlineImages != null)
+        r'inlineImages': encodeQueryParameter(
+          _serializers,
+          inlineImages,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -239,11 +250,13 @@ class WidgetsBundleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WidgetsBundle),
-      ) as WidgetsBundle;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WidgetsBundle),
+                )
+                as WidgetsBundle;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -267,7 +280,7 @@ class WidgetsBundleControllerApi {
   }
 
   /// Get Widget Bundles (getWidgetsBundles)
-  /// Returns a page of Widget Bundle objects available for current user. Widget Bundle represents a group(bundle) of widgets. Widgets are grouped into bundle by type or use case.  You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.   Available for any authorized user. 
+  /// Returns a page of Widget Bundle objects available for current user. Widget Bundle represents a group(bundle) of widgets. Widgets are grouped into bundle by type or use case.  You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.   Available for any authorized user.
   ///
   /// Parameters:
   /// * [pageSize] - Maximum amount of entities in a one page
@@ -287,7 +300,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataWidgetsBundle] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataWidgetsBundle>> getWidgetsBundles({ 
+  Future<Response<PageDataWidgetsBundle>> getWidgetsBundles({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -303,13 +316,12 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataWidgetsBundle);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataWidgetsBundle);
     final _path = r'/api/widgetsBundles';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -317,11 +329,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -329,14 +338,48 @@ class WidgetsBundleControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (tenantOnly != null) r'tenantOnly': encodeQueryParameter(_serializers, tenantOnly, const FullType(bool)),
-      if (fullSearch != null) r'fullSearch': encodeQueryParameter(_serializers, fullSearch, const FullType(bool)),
-      if (scadaFirst != null) r'scadaFirst': encodeQueryParameter(_serializers, scadaFirst, const FullType(bool)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (tenantOnly != null)
+        r'tenantOnly': encodeQueryParameter(
+          _serializers,
+          tenantOnly,
+          const FullType(bool),
+        ),
+      if (fullSearch != null)
+        r'fullSearch': encodeQueryParameter(
+          _serializers,
+          fullSearch,
+          const FullType(bool),
+        ),
+      if (scadaFirst != null)
+        r'scadaFirst': encodeQueryParameter(
+          _serializers,
+          scadaFirst,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -352,11 +395,13 @@ class WidgetsBundleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataWidgetsBundle),
-      ) as PageDataWidgetsBundle;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataWidgetsBundle),
+                )
+                as PageDataWidgetsBundle;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -393,7 +438,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<WidgetsBundle>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<WidgetsBundle>>> getWidgetsBundlesList({ 
+  Future<Response<BuiltList<WidgetsBundle>>> getWidgetsBundlesList({
     required BuiltList<String> widgetsBundleIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -402,13 +447,13 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndListOfWidgetsBundle);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfStringAndListOfWidgetsBundle);
     final _path = r'/api/widgetsBundles/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -416,11 +461,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -428,7 +470,12 @@ class WidgetsBundleControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'widgetsBundleIds': encodeCollectionQueryParameter<String>(_serializers, widgetsBundleIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'widgetsBundleIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        widgetsBundleIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -444,11 +491,15 @@ class WidgetsBundleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(WidgetsBundle)]),
-      ) as BuiltList<WidgetsBundle>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(WidgetsBundle),
+                  ]),
+                )
+                as BuiltList<WidgetsBundle>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -475,7 +526,7 @@ class WidgetsBundleControllerApi {
   /// Create or update the Widget Bundle. Widget Bundle represents a group(bundle) of widgets. Widgets are grouped into bundle by type or use case.  When creating the bundle, platform generates Widget Bundle Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Widget Bundle Id will be present in the response. Specify existing Widget Bundle id to update the Widget Bundle. Referencing non-existing Widget Bundle Id will cause &#39;Not Found&#39; error.  Widget Bundle alias is unique in the scope of tenant. Special Tenant Id &#39;13814000-1dd2-11b2-8080-808080808080&#39; is automatically used if the create bundle request is sent by user with &#39;SYS_ADMIN&#39; authority.Remove &#39;id&#39;, &#39;tenantId&#39; from the request body example (below) to create new Widgets Bundle entity.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [widgetsBundle] 
+  /// * [widgetsBundle]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -485,7 +536,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WidgetsBundle] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WidgetsBundle>> saveWidgetsBundle({ 
+  Future<Response<WidgetsBundle>> saveWidgetsBundle({
     required WidgetsBundle widgetsBundle,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -494,13 +545,12 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWidgetsBundle);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWidgetsBundle);
     final _path = r'/api/widgetsBundle';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -508,11 +558,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -525,13 +572,9 @@ class WidgetsBundleControllerApi {
     try {
       const _type = FullType(WidgetsBundle);
       _bodyData = _serializers.serialize(widgetsBundle, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -551,11 +594,13 @@ class WidgetsBundleControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WidgetsBundle),
-      ) as WidgetsBundle;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WidgetsBundle),
+                )
+                as WidgetsBundle;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -583,7 +628,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Parameters:
   /// * [widgetsBundleId] - A string value representing the widget bundle id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -593,7 +638,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> updateWidgetsBundleWidgetFqns({ 
+  Future<Response<void>> updateWidgetsBundleWidgetFqns({
     required String widgetsBundleId,
     required BuiltList<String> requestBody,
     CancelToken? cancelToken,
@@ -603,13 +648,22 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/widgetsBundle/{widgetsBundleId}/widgetTypeFqns'.replaceAll('{' r'widgetsBundleId' '}', encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/widgetsBundle/{widgetsBundleId}/widgetTypeFqns'
+        .replaceAll(
+          '{'
+          r'widgetsBundleId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            widgetsBundleId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -617,11 +671,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -634,13 +685,9 @@ class WidgetsBundleControllerApi {
     try {
       const _type = FullType(BuiltList, [FullType(String)]);
       _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -664,7 +711,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Parameters:
   /// * [widgetsBundleId] - A string value representing the widget bundle id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -674,7 +721,7 @@ class WidgetsBundleControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> updateWidgetsBundleWidgetTypes({ 
+  Future<Response<void>> updateWidgetsBundleWidgetTypes({
     required String widgetsBundleId,
     required BuiltList<String> requestBody,
     CancelToken? cancelToken,
@@ -684,13 +731,22 @@ class WidgetsBundleControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/widgetsBundle/{widgetsBundleId}/widgetTypes'.replaceAll('{' r'widgetsBundleId' '}', encodeQueryParameter(_serializers, widgetsBundleId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/widgetsBundle/{widgetsBundleId}/widgetTypes'
+        .replaceAll(
+          '{'
+          r'widgetsBundleId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            widgetsBundleId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -698,11 +754,8 @@ class WidgetsBundleControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -715,13 +768,9 @@ class WidgetsBundleControllerApi {
     try {
       const _type = FullType(BuiltList, [FullType(String)]);
       _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -739,5 +788,4 @@ class WidgetsBundleControllerApi {
 
     return _response;
   }
-
 }

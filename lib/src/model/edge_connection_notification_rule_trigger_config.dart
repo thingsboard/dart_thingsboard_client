@@ -20,11 +20,17 @@ part 'edge_connection_notification_rule_trigger_config.g.dart';
 /// EdgeConnectionNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [edges] 
-/// * [notifyOn] 
+/// * [triggerType]
+/// * [edges]
+/// * [notifyOn]
 @BuiltValue()
-abstract class EdgeConnectionNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<EdgeConnectionNotificationRuleTriggerConfig, EdgeConnectionNotificationRuleTriggerConfigBuilder> {
+abstract class EdgeConnectionNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          EdgeConnectionNotificationRuleTriggerConfig,
+          EdgeConnectionNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'notifyOn')
   BuiltSet<EdgeConnectivityEvent>? get notifyOn;
 
@@ -33,18 +39,27 @@ abstract class EdgeConnectionNotificationRuleTriggerConfig implements Notificati
 
   EdgeConnectionNotificationRuleTriggerConfig._();
 
-  factory EdgeConnectionNotificationRuleTriggerConfig([void updates(EdgeConnectionNotificationRuleTriggerConfigBuilder b)]) = _$EdgeConnectionNotificationRuleTriggerConfig;
+  factory EdgeConnectionNotificationRuleTriggerConfig([
+    void updates(EdgeConnectionNotificationRuleTriggerConfigBuilder b),
+  ]) = _$EdgeConnectionNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(EdgeConnectionNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(EdgeConnectionNotificationRuleTriggerConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdgeConnectionNotificationRuleTriggerConfig> get serializer => _$EdgeConnectionNotificationRuleTriggerConfigSerializer();
+  static Serializer<EdgeConnectionNotificationRuleTriggerConfig>
+  get serializer => _$EdgeConnectionNotificationRuleTriggerConfigSerializer();
 }
 
-class _$EdgeConnectionNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<EdgeConnectionNotificationRuleTriggerConfig> {
+class _$EdgeConnectionNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<EdgeConnectionNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [EdgeConnectionNotificationRuleTriggerConfig, _$EdgeConnectionNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    EdgeConnectionNotificationRuleTriggerConfig,
+    _$EdgeConnectionNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'EdgeConnectionNotificationRuleTriggerConfig';
@@ -65,7 +80,9 @@ class _$EdgeConnectionNotificationRuleTriggerConfigSerializer implements Primiti
       yield r'notifyOn';
       yield serializers.serialize(
         object.notifyOn,
-        specifiedType: const FullType(BuiltSet, [FullType(EdgeConnectivityEvent)]),
+        specifiedType: const FullType(BuiltSet, [
+          FullType(EdgeConnectivityEvent),
+        ]),
       );
     }
     yield r'triggerType';
@@ -81,7 +98,11 @@ class _$EdgeConnectionNotificationRuleTriggerConfigSerializer implements Primiti
     EdgeConnectionNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,26 +118,36 @@ class _$EdgeConnectionNotificationRuleTriggerConfigSerializer implements Primiti
       final value = serializedList[i + 1];
       switch (key) {
         case r'edges':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.edges.replace(valueDes);
           break;
         case r'notifyOn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(EdgeConnectivityEvent)]),
-          ) as BuiltSet<EdgeConnectivityEvent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(EdgeConnectivityEvent),
+                    ]),
+                  )
+                  as BuiltSet<EdgeConnectivityEvent>?;
           if (valueDes == null) continue;
           result.notifyOn.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         default:
@@ -147,5 +178,3 @@ class _$EdgeConnectionNotificationRuleTriggerConfigSerializer implements Primiti
     return result.build();
   }
 }
-
-

@@ -19,12 +19,15 @@ part 'string_filter_predicate.g.dart';
 /// StringFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [operation] 
+/// * [type]
+/// * [operation]
 /// * [value] - The value associated with the filter predicate
-/// * [ignoreCase] 
+/// * [ignoreCase]
 @BuiltValue()
-abstract class StringFilterPredicate implements KeyFilterPredicate, Built<StringFilterPredicate, StringFilterPredicateBuilder> {
+abstract class StringFilterPredicate
+    implements
+        KeyFilterPredicate,
+        Built<StringFilterPredicate, StringFilterPredicateBuilder> {
   @BuiltValueField(wireName: r'ignoreCase')
   bool? get ignoreCase;
 
@@ -38,18 +41,25 @@ abstract class StringFilterPredicate implements KeyFilterPredicate, Built<String
 
   StringFilterPredicate._();
 
-  factory StringFilterPredicate([void updates(StringFilterPredicateBuilder b)]) = _$StringFilterPredicate;
+  factory StringFilterPredicate([
+    void updates(StringFilterPredicateBuilder b),
+  ]) = _$StringFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StringFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StringFilterPredicate> get serializer => _$StringFilterPredicateSerializer();
+  static Serializer<StringFilterPredicate> get serializer =>
+      _$StringFilterPredicateSerializer();
 }
 
-class _$StringFilterPredicateSerializer implements PrimitiveSerializer<StringFilterPredicate> {
+class _$StringFilterPredicateSerializer
+    implements PrimitiveSerializer<StringFilterPredicate> {
   @override
-  final Iterable<Type> types = const [StringFilterPredicate, _$StringFilterPredicate];
+  final Iterable<Type> types = const [
+    StringFilterPredicate,
+    _$StringFilterPredicate,
+  ];
 
   @override
   final String wireName = r'StringFilterPredicate';
@@ -93,7 +103,11 @@ class _$StringFilterPredicateSerializer implements PrimitiveSerializer<StringFil
     StringFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,33 +123,43 @@ class _$StringFilterPredicateSerializer implements PrimitiveSerializer<StringFil
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StringOperation),
-          ) as StringOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StringOperation),
+                  )
+                  as StringOperation?;
           if (valueDes == null) continue;
           result.operation = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(FilterPredicateValueString),
-          ) as FilterPredicateValueString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      FilterPredicateValueString,
+                    ),
+                  )
+                  as FilterPredicateValueString?;
           if (valueDes == null) continue;
           result.value.replace(valueDes);
           break;
         case r'ignoreCase':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.ignoreCase = valueDes;
           break;
@@ -167,5 +191,3 @@ class _$StringFilterPredicateSerializer implements PrimitiveSerializer<StringFil
     return result.build();
   }
 }
-
-

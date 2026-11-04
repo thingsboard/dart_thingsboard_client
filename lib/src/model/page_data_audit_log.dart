@@ -23,7 +23,8 @@ part 'page_data_audit_log.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataAuditLog implements Built<PageDataAuditLog, PageDataAuditLogBuilder> {
+abstract class PageDataAuditLog
+    implements Built<PageDataAuditLog, PageDataAuditLogBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<AuditLog>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataAuditLog implements Built<PageDataAuditLog, PageDataAudit
 
   PageDataAuditLog._();
 
-  factory PageDataAuditLog([void updates(PageDataAuditLogBuilder b)]) = _$PageDataAuditLog;
+  factory PageDataAuditLog([void updates(PageDataAuditLogBuilder b)]) =
+      _$PageDataAuditLog;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataAuditLogBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataAuditLog> get serializer => _$PageDataAuditLogSerializer();
+  static Serializer<PageDataAuditLog> get serializer =>
+      _$PageDataAuditLogSerializer();
 }
 
-class _$PageDataAuditLogSerializer implements PrimitiveSerializer<PageDataAuditLog> {
+class _$PageDataAuditLogSerializer
+    implements PrimitiveSerializer<PageDataAuditLog> {
   @override
   final Iterable<Type> types = const [PageDataAuditLog, _$PageDataAuditLog];
 
@@ -99,7 +103,11 @@ class _$PageDataAuditLogSerializer implements PrimitiveSerializer<PageDataAuditL
     PageDataAuditLog object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataAuditLogSerializer implements PrimitiveSerializer<PageDataAuditL
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AuditLog)]),
-          ) as BuiltList<AuditLog>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AuditLog),
+                    ]),
+                  )
+                  as BuiltList<AuditLog>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataAuditLogSerializer implements PrimitiveSerializer<PageDataAuditL
     return result.build();
   }
 }
-
-

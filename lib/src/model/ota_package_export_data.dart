@@ -23,27 +23,36 @@ part 'ota_package_export_data.g.dart';
 /// OtaPackageExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class OtaPackageExportData implements EntityExportData, Built<OtaPackageExportData, OtaPackageExportDataBuilder> {
+abstract class OtaPackageExportData
+    implements
+        EntityExportData,
+        Built<OtaPackageExportData, OtaPackageExportDataBuilder> {
   OtaPackageExportData._();
 
-  factory OtaPackageExportData([void updates(OtaPackageExportDataBuilder b)]) = _$OtaPackageExportData;
+  factory OtaPackageExportData([void updates(OtaPackageExportDataBuilder b)]) =
+      _$OtaPackageExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OtaPackageExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OtaPackageExportData> get serializer => _$OtaPackageExportDataSerializer();
+  static Serializer<OtaPackageExportData> get serializer =>
+      _$OtaPackageExportDataSerializer();
 }
 
-class _$OtaPackageExportDataSerializer implements PrimitiveSerializer<OtaPackageExportData> {
+class _$OtaPackageExportDataSerializer
+    implements PrimitiveSerializer<OtaPackageExportData> {
   @override
-  final Iterable<Type> types = const [OtaPackageExportData, _$OtaPackageExportData];
+  final Iterable<Type> types = const [
+    OtaPackageExportData,
+    _$OtaPackageExportData,
+  ];
 
   @override
   final String wireName = r'OtaPackageExportData';
@@ -57,7 +66,10 @@ class _$OtaPackageExportDataSerializer implements PrimitiveSerializer<OtaPackage
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +106,11 @@ class _$OtaPackageExportDataSerializer implements PrimitiveSerializer<OtaPackage
     OtaPackageExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +126,58 @@ class _$OtaPackageExportDataSerializer implements PrimitiveSerializer<OtaPackage
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +209,3 @@ class _$OtaPackageExportDataSerializer implements PrimitiveSerializer<OtaPackage
     return result.build();
   }
 }
-
-

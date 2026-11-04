@@ -18,25 +18,37 @@ part 'default_rule_chain_create_request.g.dart';
 /// Properties:
 /// * [name] - Name of the new rule chain
 @BuiltValue()
-abstract class DefaultRuleChainCreateRequest implements Built<DefaultRuleChainCreateRequest, DefaultRuleChainCreateRequestBuilder> {
+abstract class DefaultRuleChainCreateRequest
+    implements
+        Built<
+          DefaultRuleChainCreateRequest,
+          DefaultRuleChainCreateRequestBuilder
+        > {
   /// Name of the new rule chain
   @BuiltValueField(wireName: r'name')
   String get name;
 
   DefaultRuleChainCreateRequest._();
 
-  factory DefaultRuleChainCreateRequest([void updates(DefaultRuleChainCreateRequestBuilder b)]) = _$DefaultRuleChainCreateRequest;
+  factory DefaultRuleChainCreateRequest([
+    void updates(DefaultRuleChainCreateRequestBuilder b),
+  ]) = _$DefaultRuleChainCreateRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultRuleChainCreateRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultRuleChainCreateRequest> get serializer => _$DefaultRuleChainCreateRequestSerializer();
+  static Serializer<DefaultRuleChainCreateRequest> get serializer =>
+      _$DefaultRuleChainCreateRequestSerializer();
 }
 
-class _$DefaultRuleChainCreateRequestSerializer implements PrimitiveSerializer<DefaultRuleChainCreateRequest> {
+class _$DefaultRuleChainCreateRequestSerializer
+    implements PrimitiveSerializer<DefaultRuleChainCreateRequest> {
   @override
-  final Iterable<Type> types = const [DefaultRuleChainCreateRequest, _$DefaultRuleChainCreateRequest];
+  final Iterable<Type> types = const [
+    DefaultRuleChainCreateRequest,
+    _$DefaultRuleChainCreateRequest,
+  ];
 
   @override
   final String wireName = r'DefaultRuleChainCreateRequest';
@@ -59,7 +71,11 @@ class _$DefaultRuleChainCreateRequestSerializer implements PrimitiveSerializer<D
     DefaultRuleChainCreateRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +91,12 @@ class _$DefaultRuleChainCreateRequestSerializer implements PrimitiveSerializer<D
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         default:
@@ -109,5 +127,3 @@ class _$DefaultRuleChainCreateRequestSerializer implements PrimitiveSerializer<D
     return result.build();
   }
 }
-
-

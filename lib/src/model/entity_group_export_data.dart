@@ -25,17 +25,20 @@ part 'entity_group_export_data.g.dart';
 /// EntityGroupExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 /// * [permissions] - Group permissions to apply to this group on import. Meaningful only for USER groups; ignored for groups of any other type. Each entry's userGroupId, roleId, and entityGroupId may use the external IDs of other entities in this payload or the IDs of entities that already exist on the target tenant; the importer resolves them against the target tenant. System-tenant roles are not allowed and will be rejected. Leave null to skip permission management for this group.
 /// * [groupOtaPackages] - OTA package assignments to apply to this group on import. Meaningful only for DEVICE groups; ignored for groups of any other type. Each entry's otaPackageId and groupId may reference external IDs of entities in this payload or IDs of entities that already exist on the target tenant. Leave null to skip OTA assignment management for this group.
 /// * [groupEntities] - Marker indicating that the group's member entities are intended to be transported alongside this payload. Used by flows that convey members through a side channel (notably the version control flow, which stores members in a separate git index). The solution import API does not consume this flag and does not require it to be set. Safe to leave false (default).
 /// * [memberIds] - External IDs of the entities that should be members of this group after import. Each ID is resolved against the target tenant — by other entity in this payload, by external ID, or by existing internal ID — and the matching entities are added to the group. The import fails if any listed member cannot be resolved. Must be null for the special 'All' group (whose membership is implicit and managed by the platform). Leave null to skip membership wiring; existing membership on the target tenant is left untouched.
 @BuiltValue()
-abstract class EntityGroupExportData implements EntityExportData, Built<EntityGroupExportData, EntityGroupExportDataBuilder> {
+abstract class EntityGroupExportData
+    implements
+        EntityExportData,
+        Built<EntityGroupExportData, EntityGroupExportDataBuilder> {
   /// OTA package assignments to apply to this group on import. Meaningful only for DEVICE groups; ignored for groups of any other type. Each entry's otaPackageId and groupId may reference external IDs of entities in this payload or IDs of entities that already exist on the target tenant. Leave null to skip OTA assignment management for this group.
   @BuiltValueField(wireName: r'groupOtaPackages')
   BuiltList<DeviceGroupOtaPackage>? get groupOtaPackages;
@@ -54,18 +57,25 @@ abstract class EntityGroupExportData implements EntityExportData, Built<EntityGr
 
   EntityGroupExportData._();
 
-  factory EntityGroupExportData([void updates(EntityGroupExportDataBuilder b)]) = _$EntityGroupExportData;
+  factory EntityGroupExportData([
+    void updates(EntityGroupExportDataBuilder b),
+  ]) = _$EntityGroupExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityGroupExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityGroupExportData> get serializer => _$EntityGroupExportDataSerializer();
+  static Serializer<EntityGroupExportData> get serializer =>
+      _$EntityGroupExportDataSerializer();
 }
 
-class _$EntityGroupExportDataSerializer implements PrimitiveSerializer<EntityGroupExportData> {
+class _$EntityGroupExportDataSerializer
+    implements PrimitiveSerializer<EntityGroupExportData> {
   @override
-  final Iterable<Type> types = const [EntityGroupExportData, _$EntityGroupExportData];
+  final Iterable<Type> types = const [
+    EntityGroupExportData,
+    _$EntityGroupExportData,
+  ];
 
   @override
   final String wireName = r'EntityGroupExportData';
@@ -79,7 +89,9 @@ class _$EntityGroupExportDataSerializer implements PrimitiveSerializer<EntityGro
       yield r'groupOtaPackages';
       yield serializers.serialize(
         object.groupOtaPackages,
-        specifiedType: const FullType(BuiltList, [FullType(DeviceGroupOtaPackage)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(DeviceGroupOtaPackage),
+        ]),
       );
     }
     if (object.permissions != null) {
@@ -98,7 +110,10 @@ class _$EntityGroupExportDataSerializer implements PrimitiveSerializer<EntityGro
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.groupEntities != null) {
@@ -144,7 +159,11 @@ class _$EntityGroupExportDataSerializer implements PrimitiveSerializer<EntityGro
     EntityGroupExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -160,73 +179,104 @@ class _$EntityGroupExportDataSerializer implements PrimitiveSerializer<EntityGro
       final value = serializedList[i + 1];
       switch (key) {
         case r'groupOtaPackages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DeviceGroupOtaPackage)]),
-          ) as BuiltList<DeviceGroupOtaPackage>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DeviceGroupOtaPackage),
+                    ]),
+                  )
+                  as BuiltList<DeviceGroupOtaPackage>?;
           if (valueDes == null) continue;
           result.groupOtaPackages.replace(valueDes);
           break;
         case r'permissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(GroupPermission)]),
-          ) as BuiltList<GroupPermission>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(GroupPermission),
+                    ]),
+                  )
+                  as BuiltList<GroupPermission>?;
           if (valueDes == null) continue;
           result.permissions.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'groupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.groupEntities = valueDes;
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'memberIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.memberIds.replace(valueDes);
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -258,5 +308,3 @@ class _$EntityGroupExportDataSerializer implements PrimitiveSerializer<EntityGro
     return result.build();
   }
 }
-
-

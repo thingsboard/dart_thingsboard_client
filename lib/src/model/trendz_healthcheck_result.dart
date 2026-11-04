@@ -18,12 +18,13 @@ part 'trendz_healthcheck_result.g.dart';
 /// TrendzHealthcheckResult
 ///
 /// Properties:
-/// * [version] 
-/// * [type] 
-/// * [status] 
-/// * [message] 
+/// * [version]
+/// * [type]
+/// * [status]
+/// * [message]
 @BuiltValue()
-abstract class TrendzHealthcheckResult implements Built<TrendzHealthcheckResult, TrendzHealthcheckResultBuilder> {
+abstract class TrendzHealthcheckResult
+    implements Built<TrendzHealthcheckResult, TrendzHealthcheckResultBuilder> {
   @BuiltValueField(wireName: r'version')
   String? get version;
 
@@ -40,18 +41,25 @@ abstract class TrendzHealthcheckResult implements Built<TrendzHealthcheckResult,
 
   TrendzHealthcheckResult._();
 
-  factory TrendzHealthcheckResult([void updates(TrendzHealthcheckResultBuilder b)]) = _$TrendzHealthcheckResult;
+  factory TrendzHealthcheckResult([
+    void updates(TrendzHealthcheckResultBuilder b),
+  ]) = _$TrendzHealthcheckResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TrendzHealthcheckResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TrendzHealthcheckResult> get serializer => _$TrendzHealthcheckResultSerializer();
+  static Serializer<TrendzHealthcheckResult> get serializer =>
+      _$TrendzHealthcheckResultSerializer();
 }
 
-class _$TrendzHealthcheckResultSerializer implements PrimitiveSerializer<TrendzHealthcheckResult> {
+class _$TrendzHealthcheckResultSerializer
+    implements PrimitiveSerializer<TrendzHealthcheckResult> {
   @override
-  final Iterable<Type> types = const [TrendzHealthcheckResult, _$TrendzHealthcheckResult];
+  final Iterable<Type> types = const [
+    TrendzHealthcheckResult,
+    _$TrendzHealthcheckResult,
+  ];
 
   @override
   final String wireName = r'TrendzHealthcheckResult';
@@ -97,7 +105,11 @@ class _$TrendzHealthcheckResultSerializer implements PrimitiveSerializer<TrendzH
     TrendzHealthcheckResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,34 +125,46 @@ class _$TrendzHealthcheckResultSerializer implements PrimitiveSerializer<TrendzH
       final value = serializedList[i + 1];
       switch (key) {
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TrendzSynchronizationResultType),
-          ) as TrendzSynchronizationResultType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TrendzSynchronizationResultType,
+                    ),
+                  )
+                  as TrendzSynchronizationResultType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TrendzSynchronizationStatus),
-          ) as TrendzSynchronizationStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TrendzSynchronizationStatus,
+                    ),
+                  )
+                  as TrendzSynchronizationStatus?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
@@ -172,5 +196,3 @@ class _$TrendzHealthcheckResultSerializer implements PrimitiveSerializer<TrendzH
     return result.build();
   }
 }
-
-

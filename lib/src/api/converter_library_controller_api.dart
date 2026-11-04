@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -17,12 +16,10 @@ import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/integration_type.dart';
 import 'package:thingsboard_client/src/model/model.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/vendor.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class ConverterLibraryControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -33,9 +30,9 @@ class ConverterLibraryControllerApi {
   /// Returns downlink converter body for the vendor, integration type and model
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [vendorName] 
-  /// * [model] 
+  /// * [integrationType]
+  /// * [vendorName]
+  /// * [model]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -45,7 +42,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getDownlinkConverter({ 
+  Future<Response<String>> getDownlinkConverter({
     required IntegrationType integrationType,
     required String vendorName,
     required String model,
@@ -56,13 +53,43 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/{vendorName}/{model}/downlink'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString()).replaceAll('{' r'vendorName' '}', encodeQueryParameter(_serializers, vendorName, const FullType(String)).toString()).replaceAll('{' r'model' '}', encodeQueryParameter(_serializers, model, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerIntegrationType);
+    final _path =
+        r'/api/converter/library/{integrationType}/{vendorName}/{model}/downlink'
+            .replaceAll(
+              '{'
+              r'integrationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                integrationType,
+                const FullType(IntegrationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'vendorName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                vendorName,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'model'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                model,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -70,11 +97,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -94,7 +118,6 @@ class ConverterLibraryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -121,9 +144,9 @@ class ConverterLibraryControllerApi {
   /// Returns downlink converter metadata for the vendor, integration type and model
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [vendorName] 
-  /// * [model] 
+  /// * [integrationType]
+  /// * [vendorName]
+  /// * [model]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -133,7 +156,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getDownlinkConverterMetadata({ 
+  Future<Response<String>> getDownlinkConverterMetadata({
     required IntegrationType integrationType,
     required String vendorName,
     required String model,
@@ -144,13 +167,43 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/{vendorName}/{model}/downlink/metadata'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString()).replaceAll('{' r'vendorName' '}', encodeQueryParameter(_serializers, vendorName, const FullType(String)).toString()).replaceAll('{' r'model' '}', encodeQueryParameter(_serializers, model, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerIntegrationType);
+    final _path =
+        r'/api/converter/library/{integrationType}/{vendorName}/{model}/downlink/metadata'
+            .replaceAll(
+              '{'
+              r'integrationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                integrationType,
+                const FullType(IntegrationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'vendorName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                vendorName,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'model'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                model,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -158,11 +211,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -182,7 +232,6 @@ class ConverterLibraryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -209,9 +258,9 @@ class ConverterLibraryControllerApi {
   /// Returns payload example for the downlink converter for the vendor, integration type and model
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [vendorName] 
-  /// * [model] 
+  /// * [integrationType]
+  /// * [vendorName]
+  /// * [model]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -221,7 +270,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getDownlinkPayload({ 
+  Future<Response<String>> getDownlinkPayload({
     required IntegrationType integrationType,
     required String vendorName,
     required String model,
@@ -232,13 +281,43 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/{vendorName}/{model}/downlink/payload'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString()).replaceAll('{' r'vendorName' '}', encodeQueryParameter(_serializers, vendorName, const FullType(String)).toString()).replaceAll('{' r'model' '}', encodeQueryParameter(_serializers, model, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerIntegrationType);
+    final _path =
+        r'/api/converter/library/{integrationType}/{vendorName}/{model}/downlink/payload'
+            .replaceAll(
+              '{'
+              r'integrationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                integrationType,
+                const FullType(IntegrationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'vendorName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                vendorName,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'model'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                model,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -246,11 +325,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -270,7 +346,6 @@ class ConverterLibraryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -297,9 +372,9 @@ class ConverterLibraryControllerApi {
   /// Returns uplink converter body for the vendor, integration type and model
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [vendorName] 
-  /// * [model] 
+  /// * [integrationType]
+  /// * [vendorName]
+  /// * [model]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -309,7 +384,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getUplinkConverter({ 
+  Future<Response<String>> getUplinkConverter({
     required IntegrationType integrationType,
     required String vendorName,
     required String model,
@@ -320,13 +395,43 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/{vendorName}/{model}/uplink'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString()).replaceAll('{' r'vendorName' '}', encodeQueryParameter(_serializers, vendorName, const FullType(String)).toString()).replaceAll('{' r'model' '}', encodeQueryParameter(_serializers, model, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerIntegrationType);
+    final _path =
+        r'/api/converter/library/{integrationType}/{vendorName}/{model}/uplink'
+            .replaceAll(
+              '{'
+              r'integrationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                integrationType,
+                const FullType(IntegrationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'vendorName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                vendorName,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'model'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                model,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -334,11 +439,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -358,7 +460,6 @@ class ConverterLibraryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -385,9 +486,9 @@ class ConverterLibraryControllerApi {
   /// Returns uplink converter metadata for the vendor, integration type and model
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [vendorName] 
-  /// * [model] 
+  /// * [integrationType]
+  /// * [vendorName]
+  /// * [model]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -397,7 +498,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getUplinkConverterMetadata({ 
+  Future<Response<String>> getUplinkConverterMetadata({
     required IntegrationType integrationType,
     required String vendorName,
     required String model,
@@ -408,13 +509,43 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/{vendorName}/{model}/uplink/metadata'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString()).replaceAll('{' r'vendorName' '}', encodeQueryParameter(_serializers, vendorName, const FullType(String)).toString()).replaceAll('{' r'model' '}', encodeQueryParameter(_serializers, model, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerIntegrationType);
+    final _path =
+        r'/api/converter/library/{integrationType}/{vendorName}/{model}/uplink/metadata'
+            .replaceAll(
+              '{'
+              r'integrationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                integrationType,
+                const FullType(IntegrationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'vendorName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                vendorName,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'model'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                model,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -422,11 +553,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -446,7 +574,6 @@ class ConverterLibraryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -473,9 +600,9 @@ class ConverterLibraryControllerApi {
   /// Returns payload example for the uplink converter for the vendor, integration type and model
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [vendorName] 
-  /// * [model] 
+  /// * [integrationType]
+  /// * [vendorName]
+  /// * [model]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -485,7 +612,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getUplinkPayload({ 
+  Future<Response<String>> getUplinkPayload({
     required IntegrationType integrationType,
     required String vendorName,
     required String model,
@@ -496,13 +623,43 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/{vendorName}/{model}/uplink/payload'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString()).replaceAll('{' r'vendorName' '}', encodeQueryParameter(_serializers, vendorName, const FullType(String)).toString()).replaceAll('{' r'model' '}', encodeQueryParameter(_serializers, model, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerIntegrationType);
+    final _path =
+        r'/api/converter/library/{integrationType}/{vendorName}/{model}/uplink/payload'
+            .replaceAll(
+              '{'
+              r'integrationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                integrationType,
+                const FullType(IntegrationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'vendorName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                vendorName,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'model'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                model,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -510,11 +667,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -534,7 +688,6 @@ class ConverterLibraryControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -561,12 +714,12 @@ class ConverterLibraryControllerApi {
   /// Returns a list of models for the vendor, integration type and converter type
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [vendorName] 
-  /// * [converterType] 
-  /// * [page] 
-  /// * [pageSize] 
-  /// * [loadImages] 
+  /// * [integrationType]
+  /// * [vendorName]
+  /// * [converterType]
+  /// * [page]
+  /// * [pageSize]
+  /// * [loadImages]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -576,7 +729,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Model>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Model>>> getVendorModels({ 
+  Future<Response<BuiltList<Model>>> getVendorModels({
     required IntegrationType integrationType,
     required String vendorName,
     String? converterType,
@@ -590,13 +743,34 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfModelAndIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/{vendorName}/models'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString()).replaceAll('{' r'vendorName' '}', encodeQueryParameter(_serializers, vendorName, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfModelAndIntegrationType);
+    final _path =
+        r'/api/converter/library/{integrationType}/{vendorName}/models'
+            .replaceAll(
+              '{'
+              r'integrationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                integrationType,
+                const FullType(IntegrationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'vendorName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                vendorName,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -604,11 +778,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -616,10 +787,26 @@ class ConverterLibraryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (converterType != null) r'converterType': encodeQueryParameter(_serializers, converterType, const FullType(String)),
-      if (page != null) r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (pageSize != null) r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
-      if (loadImages != null) r'loadImages': encodeQueryParameter(_serializers, loadImages, const FullType(bool)),
+      if (converterType != null)
+        r'converterType': encodeQueryParameter(
+          _serializers,
+          converterType,
+          const FullType(String),
+        ),
+      if (page != null)
+        r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
+      if (pageSize != null)
+        r'pageSize': encodeQueryParameter(
+          _serializers,
+          pageSize,
+          const FullType(int),
+        ),
+      if (loadImages != null)
+        r'loadImages': encodeQueryParameter(
+          _serializers,
+          loadImages,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -635,11 +822,13 @@ class ConverterLibraryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Model)]),
-      ) as BuiltList<Model>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(Model)]),
+                )
+                as BuiltList<Model>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -666,11 +855,11 @@ class ConverterLibraryControllerApi {
   /// Returns a list of vendors for the integration type
   ///
   /// Parameters:
-  /// * [integrationType] 
-  /// * [converterType] 
-  /// * [page] 
-  /// * [pageSize] 
-  /// * [loadImages] 
+  /// * [integrationType]
+  /// * [converterType]
+  /// * [page]
+  /// * [pageSize]
+  /// * [loadImages]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -680,7 +869,7 @@ class ConverterLibraryControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Vendor>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Vendor>>> getVendors({ 
+  Future<Response<BuiltList<Vendor>>> getVendors({
     required IntegrationType integrationType,
     String? converterType,
     int? page = 0,
@@ -693,13 +882,23 @@ class ConverterLibraryControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfVendorAndIntegrationType);
-    final _path = r'/api/converter/library/{integrationType}/vendors'.replaceAll('{' r'integrationType' '}', encodeQueryParameter(_serializers, integrationType, const FullType(IntegrationType)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfVendorAndIntegrationType);
+    final _path = r'/api/converter/library/{integrationType}/vendors'
+        .replaceAll(
+          '{'
+          r'integrationType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            integrationType,
+            const FullType(IntegrationType),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -707,11 +906,8 @@ class ConverterLibraryControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -719,10 +915,26 @@ class ConverterLibraryControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (converterType != null) r'converterType': encodeQueryParameter(_serializers, converterType, const FullType(String)),
-      if (page != null) r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (pageSize != null) r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
-      if (loadImages != null) r'loadImages': encodeQueryParameter(_serializers, loadImages, const FullType(bool)),
+      if (converterType != null)
+        r'converterType': encodeQueryParameter(
+          _serializers,
+          converterType,
+          const FullType(String),
+        ),
+      if (page != null)
+        r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
+      if (pageSize != null)
+        r'pageSize': encodeQueryParameter(
+          _serializers,
+          pageSize,
+          const FullType(int),
+        ),
+      if (loadImages != null)
+        r'loadImages': encodeQueryParameter(
+          _serializers,
+          loadImages,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -738,11 +950,13 @@ class ConverterLibraryControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Vendor)]),
-      ) as BuiltList<Vendor>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(Vendor)]),
+                )
+                as BuiltList<Vendor>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -764,5 +978,4 @@ class ConverterLibraryControllerApi {
       extra: _response.extra,
     );
   }
-
 }

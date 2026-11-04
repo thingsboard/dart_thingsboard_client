@@ -18,25 +18,29 @@ part 'user_role_filter.g.dart';
 /// UserRoleFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [rolesIds] 
+/// * [type]
+/// * [rolesIds]
 @BuiltValue()
-abstract class UserRoleFilter implements UsersFilter, Built<UserRoleFilter, UserRoleFilterBuilder> {
+abstract class UserRoleFilter
+    implements UsersFilter, Built<UserRoleFilter, UserRoleFilterBuilder> {
   @BuiltValueField(wireName: r'rolesIds')
   BuiltList<String> get rolesIds;
 
   UserRoleFilter._();
 
-  factory UserRoleFilter([void updates(UserRoleFilterBuilder b)]) = _$UserRoleFilter;
+  factory UserRoleFilter([void updates(UserRoleFilterBuilder b)]) =
+      _$UserRoleFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserRoleFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserRoleFilter> get serializer => _$UserRoleFilterSerializer();
+  static Serializer<UserRoleFilter> get serializer =>
+      _$UserRoleFilterSerializer();
 }
 
-class _$UserRoleFilterSerializer implements PrimitiveSerializer<UserRoleFilter> {
+class _$UserRoleFilterSerializer
+    implements PrimitiveSerializer<UserRoleFilter> {
   @override
   final Iterable<Type> types = const [UserRoleFilter, _$UserRoleFilter];
 
@@ -66,7 +70,11 @@ class _$UserRoleFilterSerializer implements PrimitiveSerializer<UserRoleFilter> 
     UserRoleFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -82,17 +90,23 @@ class _$UserRoleFilterSerializer implements PrimitiveSerializer<UserRoleFilter> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'rolesIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.rolesIds.replace(valueDes);
           break;
         default:
@@ -123,5 +137,3 @@ class _$UserRoleFilterSerializer implements PrimitiveSerializer<UserRoleFilter> 
     return result.build();
   }
 }
-
-

@@ -18,11 +18,12 @@ part 'trendz_view_config.g.dart';
 /// TrendzViewConfig
 ///
 /// Properties:
-/// * [id] 
-/// * [name] 
-/// * [runtimeFilters] 
+/// * [id]
+/// * [name]
+/// * [runtimeFilters]
 @BuiltValue()
-abstract class TrendzViewConfig implements Built<TrendzViewConfig, TrendzViewConfigBuilder> {
+abstract class TrendzViewConfig
+    implements Built<TrendzViewConfig, TrendzViewConfigBuilder> {
   @BuiltValueField(wireName: r'id')
   String? get id;
 
@@ -34,16 +35,19 @@ abstract class TrendzViewConfig implements Built<TrendzViewConfig, TrendzViewCon
 
   TrendzViewConfig._();
 
-  factory TrendzViewConfig([void updates(TrendzViewConfigBuilder b)]) = _$TrendzViewConfig;
+  factory TrendzViewConfig([void updates(TrendzViewConfigBuilder b)]) =
+      _$TrendzViewConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TrendzViewConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TrendzViewConfig> get serializer => _$TrendzViewConfigSerializer();
+  static Serializer<TrendzViewConfig> get serializer =>
+      _$TrendzViewConfigSerializer();
 }
 
-class _$TrendzViewConfigSerializer implements PrimitiveSerializer<TrendzViewConfig> {
+class _$TrendzViewConfigSerializer
+    implements PrimitiveSerializer<TrendzViewConfig> {
   @override
   final Iterable<Type> types = const [TrendzViewConfig, _$TrendzViewConfig];
 
@@ -73,7 +77,9 @@ class _$TrendzViewConfigSerializer implements PrimitiveSerializer<TrendzViewConf
       yield r'runtimeFilters';
       yield serializers.serialize(
         object.runtimeFilters,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
   }
@@ -84,7 +90,11 @@ class _$TrendzViewConfigSerializer implements PrimitiveSerializer<TrendzViewConf
     TrendzViewConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -100,26 +110,34 @@ class _$TrendzViewConfigSerializer implements PrimitiveSerializer<TrendzViewConf
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'runtimeFilters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.runtimeFilters.replace(valueDes);
           break;
@@ -151,5 +169,3 @@ class _$TrendzViewConfigSerializer implements PrimitiveSerializer<TrendzViewConf
     return result.build();
   }
 }
-
-

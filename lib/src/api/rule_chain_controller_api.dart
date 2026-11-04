@@ -14,7 +14,6 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/default_rule_chain_create_request.dart';
 import 'package:thingsboard_client/src/model/page_data_rule_chain.dart';
@@ -24,11 +23,9 @@ import 'package:thingsboard_client/src/model/rule_chain_import_result.dart';
 import 'package:thingsboard_client/src/model/rule_chain_meta_data.dart';
 import 'package:thingsboard_client/src/model/rule_chain_output_labels_usage.dart';
 import 'package:thingsboard_client/src/model/script_language.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class RuleChainControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -39,8 +36,8 @@ class RuleChainControllerApi {
   /// Creates assignment of an existing rule chain to an instance of The Edge. Assignment works in async way - first, notification event pushed to edge service queue on platform. Second, remote edge service will receive a copy of assignment rule chain (Edge will receive this instantly, if it&#39;s currently connected, or once it&#39;s going to be connected to platform). Third, once rule chain will be delivered to edge service, it&#39;s going to start processing messages locally.   Only rule chain with type &#39;EDGE&#39; can be assigned to edge.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [edgeId] 
-  /// * [ruleChainId] 
+  /// * [edgeId]
+  /// * [ruleChainId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -50,7 +47,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> assignRuleChainToEdge({ 
+  Future<Response<RuleChain>> assignRuleChainToEdge({
     required String edgeId,
     required String ruleChainId,
     CancelToken? cancelToken,
@@ -61,12 +58,30 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRuleChain);
-    final _path = r'/api/edge/{edgeId}/ruleChain/{ruleChainId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/edge/{edgeId}/ruleChain/{ruleChainId}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ruleChainId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ruleChainId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -74,11 +89,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -97,11 +109,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -138,7 +152,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteRuleChain({ 
+  Future<Response<void>> deleteRuleChain({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -148,12 +162,19 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ruleChain/{ruleChainId}'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/ruleChain/{ruleChainId}'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -161,11 +182,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -197,7 +215,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChainData] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChainData>> exportRuleChains({ 
+  Future<Response<RuleChainData>> exportRuleChains({
     required int limit,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -206,13 +224,12 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerRuleChainData);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerRuleChainData);
     final _path = r'/api/ruleChains/export';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -220,11 +237,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -248,11 +262,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChainData),
-      ) as RuleChainData;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChainData),
+                )
+                as RuleChainData;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -288,7 +304,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<RuleChain>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<RuleChain>>> getAutoAssignToEdgeRuleChains({ 
+  Future<Response<BuiltList<RuleChain>>> getAutoAssignToEdgeRuleChains({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -296,13 +312,12 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfRuleChain);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfRuleChain);
     final _path = r'/api/ruleChain/autoAssignToEdgeRuleChains';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -310,11 +325,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -333,11 +345,15 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(RuleChain)]),
-      ) as BuiltList<RuleChain>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(RuleChain),
+                  ]),
+                )
+                as BuiltList<RuleChain>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -379,7 +395,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataRuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataRuleChain>> getEdgeRuleChains({ 
+  Future<Response<PageDataRuleChain>> getEdgeRuleChains({
     required String edgeId,
     required int pageSize,
     required int page,
@@ -393,13 +409,21 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataRuleChain);
-    final _path = r'/api/edge/{edgeId}/ruleChains'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataRuleChain);
+    final _path = r'/api/edge/{edgeId}/ruleChains'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -407,11 +431,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -419,11 +440,30 @@ class RuleChainControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -439,11 +479,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataRuleChain),
-      ) as PageDataRuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataRuleChain),
+                )
+                as PageDataRuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -480,7 +522,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getLatestRuleNodeDebugInput({ 
+  Future<Response<JsonObject>> getLatestRuleNodeDebugInput({
     required String ruleNodeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -490,12 +532,19 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ruleNode/{ruleNodeId}/debugIn'.replaceAll('{' r'ruleNodeId' '}', encodeQueryParameter(_serializers, ruleNodeId, const FullType(String)).toString());
+    final _path = r'/api/ruleNode/{ruleNodeId}/debugIn'.replaceAll(
+      '{'
+      r'ruleNodeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleNodeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -503,11 +552,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -526,11 +572,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -567,7 +615,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> getRuleChainById({ 
+  Future<Response<RuleChain>> getRuleChainById({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -577,12 +625,19 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRuleChain);
-    final _path = r'/api/ruleChain/{ruleChainId}'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/ruleChain/{ruleChainId}'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -590,11 +645,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -613,11 +665,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -654,7 +708,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChainMetaData] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChainMetaData>> getRuleChainMetaData({ 
+  Future<Response<RuleChainMetaData>> getRuleChainMetaData({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -663,13 +717,21 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerRuleChainMetaData);
-    final _path = r'/api/ruleChain/{ruleChainId}/metadata'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerRuleChainMetaData);
+    final _path = r'/api/ruleChain/{ruleChainId}/metadata'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -677,11 +739,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -700,11 +759,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChainMetaData),
-      ) as RuleChainMetaData;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChainMetaData),
+                )
+                as RuleChainMetaData;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -741,7 +802,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltSet<String>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltSet<String>>> getRuleChainOutputLabels({ 
+  Future<Response<BuiltSet<String>>> getRuleChainOutputLabels({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -750,13 +811,21 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSetOfString);
-    final _path = r'/api/ruleChain/{ruleChainId}/output/labels'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSetOfString);
+    final _path = r'/api/ruleChain/{ruleChainId}/output/labels'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -764,11 +833,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -787,11 +853,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltSet, [FullType(String)]),
-      ) as BuiltSet<String>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltSet, [FullType(String)]),
+                )
+                as BuiltSet<String>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -828,7 +896,8 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<RuleChainOutputLabelsUsage>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<RuleChainOutputLabelsUsage>>> getRuleChainOutputLabelsUsage({ 
+  Future<Response<BuiltList<RuleChainOutputLabelsUsage>>>
+  getRuleChainOutputLabelsUsage({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -837,13 +906,23 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfRuleChainOutputLabelsUsage);
-    final _path = r'/api/ruleChain/{ruleChainId}/output/labels/usage'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfRuleChainOutputLabelsUsage);
+    final _path = r'/api/ruleChain/{ruleChainId}/output/labels/usage'
+        .replaceAll(
+          '{'
+          r'ruleChainId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ruleChainId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -851,11 +930,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -874,11 +950,15 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(RuleChainOutputLabelsUsage)]),
-      ) as BuiltList<RuleChainOutputLabelsUsage>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(RuleChainOutputLabelsUsage),
+                  ]),
+                )
+                as BuiltList<RuleChainOutputLabelsUsage>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -920,7 +1000,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataRuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataRuleChain>> getRuleChains({ 
+  Future<Response<PageDataRuleChain>> getRuleChains({
     required int pageSize,
     required int page,
     String? type,
@@ -934,13 +1014,12 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataRuleChain);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataRuleChain);
     final _path = r'/api/ruleChains';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -948,11 +1027,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -960,12 +1036,36 @@ class RuleChainControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -981,11 +1081,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataRuleChain),
-      ) as PageDataRuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataRuleChain),
+                )
+                as PageDataRuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1022,7 +1124,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<RuleChain>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<RuleChain>>> getRuleChainsByIds({ 
+  Future<Response<BuiltList<RuleChain>>> getRuleChainsByIds({
     required BuiltList<String> ruleChainIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1031,13 +1133,13 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfRuleChainAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfRuleChainAndListOfString);
     final _path = r'/api/ruleChains/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1045,11 +1147,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1057,7 +1156,12 @@ class RuleChainControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'ruleChainIds': encodeCollectionQueryParameter<String>(_serializers, ruleChainIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'ruleChainIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        ruleChainIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1073,11 +1177,15 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(RuleChain)]),
-      ) as BuiltList<RuleChain>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(RuleChain),
+                  ]),
+                )
+                as BuiltList<RuleChain>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1104,7 +1212,7 @@ class RuleChainControllerApi {
   /// Imports all tenant rule chains as one JSON.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [ruleChainData] 
+  /// * [ruleChainData]
   /// * [overwrite] - Enables overwrite for existing rule chains with the same name.
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -1115,7 +1223,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<RuleChainImportResult>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<RuleChainImportResult>>> importRuleChains({ 
+  Future<Response<BuiltList<RuleChainImportResult>>> importRuleChains({
     required RuleChainData ruleChainData,
     bool? overwrite = false,
     CancelToken? cancelToken,
@@ -1125,13 +1233,13 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfRuleChainImportResultAndRuleChainData);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfRuleChainImportResultAndRuleChainData);
     final _path = r'/api/ruleChains/import';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1139,11 +1247,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1152,7 +1257,12 @@ class RuleChainControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (overwrite != null) r'overwrite': encodeQueryParameter(_serializers, overwrite, const FullType(bool)),
+      if (overwrite != null)
+        r'overwrite': encodeQueryParameter(
+          _serializers,
+          overwrite,
+          const FullType(bool),
+        ),
     };
 
     dynamic _bodyData;
@@ -1160,10 +1270,9 @@ class RuleChainControllerApi {
     try {
       const _type = FullType(RuleChainData);
       _bodyData = _serializers.serialize(ruleChainData, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1188,11 +1297,15 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(RuleChainImportResult)]),
-      ) as BuiltList<RuleChainImportResult>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(RuleChainImportResult),
+                  ]),
+                )
+                as BuiltList<RuleChainImportResult>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1228,7 +1341,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> isTbelEnabled({ 
+  Future<Response<bool>> isTbelEnabled({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1239,9 +1352,7 @@ class RuleChainControllerApi {
     final _path = r'/api/ruleChain/tbelEnabled';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1249,11 +1360,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1273,7 +1381,6 @@ class RuleChainControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1300,7 +1407,7 @@ class RuleChainControllerApi {
   /// Create or update the Rule Chain. When creating Rule Chain, platform generates Rule Chain Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Rule Chain Id will be present in the response. Specify existing Rule Chain id to update the rule chain. Referencing non-existing rule chain Id will cause &#39;Not Found&#39; error.  The rule chain object is lightweight and contains general information about the rule chain. List of rule nodes and their connection is stored in a separate &#39;metadata&#39; object.Remove &#39;id&#39;, &#39;tenantId&#39; from the request body example (below) to create new Rule Chain entity.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [ruleChain] 
+  /// * [ruleChain]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1310,7 +1417,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> saveRuleChain({ 
+  Future<Response<RuleChain>> saveRuleChain({
     required RuleChain ruleChain,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1323,9 +1430,7 @@ class RuleChainControllerApi {
     final _path = r'/api/ruleChain';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1333,11 +1438,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1350,13 +1452,9 @@ class RuleChainControllerApi {
     try {
       const _type = FullType(RuleChain);
       _bodyData = _serializers.serialize(ruleChain, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1376,11 +1474,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1407,7 +1507,7 @@ class RuleChainControllerApi {
   /// Updates the rule chain metadata. The metadata object contains information about the rule nodes and their connections.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [ruleChainMetaData] 
+  /// * [ruleChainMetaData]
   /// * [updateRelated] - Update related rule nodes.
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -1418,7 +1518,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChainMetaData] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChainMetaData>> saveRuleChainMetaData({ 
+  Future<Response<RuleChainMetaData>> saveRuleChainMetaData({
     required RuleChainMetaData ruleChainMetaData,
     bool? updateRelated = true,
     CancelToken? cancelToken,
@@ -1428,13 +1528,12 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerRuleChainMetaData);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerRuleChainMetaData);
     final _path = r'/api/ruleChain/metadata';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1442,11 +1541,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1455,18 +1551,25 @@ class RuleChainControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (updateRelated != null) r'updateRelated': encodeQueryParameter(_serializers, updateRelated, const FullType(bool)),
+      if (updateRelated != null)
+        r'updateRelated': encodeQueryParameter(
+          _serializers,
+          updateRelated,
+          const FullType(bool),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       const _type = FullType(RuleChainMetaData);
-      _bodyData = _serializers.serialize(ruleChainMetaData, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        ruleChainMetaData,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1491,11 +1594,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChainMetaData),
-      ) as RuleChainMetaData;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChainMetaData),
+                )
+                as RuleChainMetaData;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1532,7 +1637,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> setAutoAssignToEdgeRuleChain({ 
+  Future<Response<RuleChain>> setAutoAssignToEdgeRuleChain({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1542,12 +1647,19 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRuleChain);
-    final _path = r'/api/ruleChain/{ruleChainId}/autoAssignToEdge'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/ruleChain/{ruleChainId}/autoAssignToEdge'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1555,11 +1667,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1578,11 +1687,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1609,7 +1720,7 @@ class RuleChainControllerApi {
   /// Create rule chain from template, based on the specified name in the request. Creates the rule chain based on the template that is used to create root rule chain.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [defaultRuleChainCreateRequest] 
+  /// * [defaultRuleChainCreateRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1619,7 +1730,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> setDeviceDefaultRuleChain({ 
+  Future<Response<RuleChain>> setDeviceDefaultRuleChain({
     required DefaultRuleChainCreateRequest defaultRuleChainCreateRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1628,13 +1739,13 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerDefaultRuleChainCreateRequestAndRuleChain);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerDefaultRuleChainCreateRequestAndRuleChain);
     final _path = r'/api/ruleChain/device/default';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1642,11 +1753,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1658,14 +1766,13 @@ class RuleChainControllerApi {
 
     try {
       const _type = FullType(DefaultRuleChainCreateRequest);
-      _bodyData = _serializers.serialize(defaultRuleChainCreateRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        defaultRuleChainCreateRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1685,11 +1792,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1726,7 +1835,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> setEdgeTemplateRootRuleChain({ 
+  Future<Response<RuleChain>> setEdgeTemplateRootRuleChain({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1736,12 +1845,19 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRuleChain);
-    final _path = r'/api/ruleChain/{ruleChainId}/edgeTemplateRoot'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/ruleChain/{ruleChainId}/edgeTemplateRoot'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1749,11 +1865,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1772,11 +1885,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1813,7 +1928,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> setRootRuleChain({ 
+  Future<Response<RuleChain>> setRootRuleChain({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1823,12 +1938,19 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRuleChain);
-    final _path = r'/api/ruleChain/{ruleChainId}/root'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/ruleChain/{ruleChainId}/root'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1836,11 +1958,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1859,11 +1978,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1901,7 +2022,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> testRuleChainScript({ 
+  Future<Response<JsonObject>> testRuleChainScript({
     JsonObject? body,
     ScriptLanguage? scriptLang,
     CancelToken? cancelToken,
@@ -1911,13 +2032,12 @@ class RuleChainControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerScriptLanguage);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerScriptLanguage);
     final _path = r'/api/ruleChain/testScript';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1925,11 +2045,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1938,17 +2055,21 @@ class RuleChainControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (scriptLang != null) r'scriptLang': encodeQueryParameter(_serializers, scriptLang, const FullType(ScriptLanguage)),
+      if (scriptLang != null)
+        r'scriptLang': encodeQueryParameter(
+          _serializers,
+          scriptLang,
+          const FullType(ScriptLanguage),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1973,11 +2094,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2004,8 +2127,8 @@ class RuleChainControllerApi {
   /// Clears assignment of the rule chain to the edge. Unassignment works in async way - first, &#39;unassign&#39; notification event pushed to edge queue on platform. Second, remote edge service will receive an &#39;unassign&#39; command to remove rule chain (Edge will receive this instantly, if it&#39;s currently connected, or once it&#39;s going to be connected to platform). Third, once &#39;unassign&#39; command will be delivered to edge service, it&#39;s going to remove rule chain locally.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [edgeId] 
-  /// * [ruleChainId] 
+  /// * [edgeId]
+  /// * [ruleChainId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -2015,7 +2138,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> unassignRuleChainFromEdge({ 
+  Future<Response<RuleChain>> unassignRuleChainFromEdge({
     required String edgeId,
     required String ruleChainId,
     CancelToken? cancelToken,
@@ -2026,12 +2149,30 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRuleChain);
-    final _path = r'/api/edge/{edgeId}/ruleChain/{ruleChainId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/edge/{edgeId}/ruleChain/{ruleChainId}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ruleChainId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ruleChainId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2039,11 +2180,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2062,11 +2200,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2103,7 +2243,7 @@ class RuleChainControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RuleChain] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RuleChain>> unsetAutoAssignToEdgeRuleChain({ 
+  Future<Response<RuleChain>> unsetAutoAssignToEdgeRuleChain({
     required String ruleChainId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2113,12 +2253,19 @@ class RuleChainControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRuleChain);
-    final _path = r'/api/ruleChain/{ruleChainId}/autoAssignToEdge'.replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/ruleChain/{ruleChainId}/autoAssignToEdge'.replaceAll(
+      '{'
+      r'ruleChainId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        ruleChainId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2126,11 +2273,8 @@ class RuleChainControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2149,11 +2293,13 @@ class RuleChainControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RuleChain),
-      ) as RuleChain;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RuleChain),
+                )
+                as RuleChain;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2175,5 +2321,4 @@ class RuleChainControllerApi {
       extra: _response.extra,
     );
   }
-
 }

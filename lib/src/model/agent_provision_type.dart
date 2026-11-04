@@ -15,21 +15,24 @@ import 'package:built_value/serializer.dart';
 part 'agent_provision_type.g.dart';
 
 class AgentProvisionType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DISABLED')
   static const AgentProvisionType DISABLED = _$DISABLED;
   @BuiltValueEnumConst(wireName: r'NO_AUTO_INSTALL')
   static const AgentProvisionType NO_AUTO_INSTALL = _$NO_AUTO_INSTALL;
   @BuiltValueEnumConst(wireName: r'AUTO_INSTALL_PER_APP_TYPE')
-  static const AgentProvisionType AUTO_INSTALL_PER_APP_TYPE = _$AUTO_INSTALL_PER_APP_TYPE;
+  static const AgentProvisionType AUTO_INSTALL_PER_APP_TYPE =
+      _$AUTO_INSTALL_PER_APP_TYPE;
   @BuiltValueEnumConst(wireName: r'AUTO_INSTALL_PER_APP_PROFILE')
-  static const AgentProvisionType AUTO_INSTALL_PER_APP_PROFILE = _$AUTO_INSTALL_PER_APP_PROFILE;
+  static const AgentProvisionType AUTO_INSTALL_PER_APP_PROFILE =
+      _$AUTO_INSTALL_PER_APP_PROFILE;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentProvisionType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentProvisionType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentProvisionType> get serializer => _$agentProvisionTypeSerializer;
+  static Serializer<AgentProvisionType> get serializer =>
+      _$agentProvisionTypeSerializer;
 
-  const AgentProvisionType._(String name): super(name);
+  const AgentProvisionType._(String name) : super(name);
 
   static BuiltSet<AgentProvisionType> get values => _$values;
   static AgentProvisionType valueOf(String name) => _$valueOf(name);
@@ -42,4 +45,3 @@ class AgentProvisionType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AgentProvisionTypeMixin = Object with _$AgentProvisionTypeMixin;
-

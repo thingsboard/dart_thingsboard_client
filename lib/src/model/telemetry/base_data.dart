@@ -13,9 +13,9 @@ abstract class BaseData<T extends HasUuid> extends IdBased<T> {
 
   BaseData();
 
-  BaseData.fromJson(Map<String, dynamic> json, [FromIdFunction<T>? fromId])
-      : createdTime = json['createdTime'],
-        super.fromJson(json, fromId);
+  BaseData.fromJson(super.json, [super.fromId])
+    : createdTime = json['createdTime'],
+      super.fromJson();
 
   @override
   Map<String, dynamic> toJson() {
@@ -40,6 +40,6 @@ abstract class BaseData<T extends HasUuid> extends IdBased<T> {
   }
 
   String baseDataString([String? toStringBody]) {
-    return '${idBasedString()}, createdTime: $createdTime${toStringBody != null ? ', ' + toStringBody : ''}';
+    return '${idBasedString()}, createdTime: $createdTime${toStringBody != null ? ', $toStringBody' : ''}';
   }
 }

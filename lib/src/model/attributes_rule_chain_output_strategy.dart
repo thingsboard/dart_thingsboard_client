@@ -17,23 +17,36 @@ part 'attributes_rule_chain_output_strategy.g.dart';
 /// AttributesRuleChainOutputStrategy
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class AttributesRuleChainOutputStrategy implements AttributesOutputStrategy, Built<AttributesRuleChainOutputStrategy, AttributesRuleChainOutputStrategyBuilder> {
+abstract class AttributesRuleChainOutputStrategy
+    implements
+        AttributesOutputStrategy,
+        Built<
+          AttributesRuleChainOutputStrategy,
+          AttributesRuleChainOutputStrategyBuilder
+        > {
   AttributesRuleChainOutputStrategy._();
 
-  factory AttributesRuleChainOutputStrategy([void updates(AttributesRuleChainOutputStrategyBuilder b)]) = _$AttributesRuleChainOutputStrategy;
+  factory AttributesRuleChainOutputStrategy([
+    void updates(AttributesRuleChainOutputStrategyBuilder b),
+  ]) = _$AttributesRuleChainOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AttributesRuleChainOutputStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AttributesRuleChainOutputStrategy> get serializer => _$AttributesRuleChainOutputStrategySerializer();
+  static Serializer<AttributesRuleChainOutputStrategy> get serializer =>
+      _$AttributesRuleChainOutputStrategySerializer();
 }
 
-class _$AttributesRuleChainOutputStrategySerializer implements PrimitiveSerializer<AttributesRuleChainOutputStrategy> {
+class _$AttributesRuleChainOutputStrategySerializer
+    implements PrimitiveSerializer<AttributesRuleChainOutputStrategy> {
   @override
-  final Iterable<Type> types = const [AttributesRuleChainOutputStrategy, _$AttributesRuleChainOutputStrategy];
+  final Iterable<Type> types = const [
+    AttributesRuleChainOutputStrategy,
+    _$AttributesRuleChainOutputStrategy,
+  ];
 
   @override
   final String wireName = r'AttributesRuleChainOutputStrategy';
@@ -56,7 +69,11 @@ class _$AttributesRuleChainOutputStrategySerializer implements PrimitiveSerializ
     AttributesRuleChainOutputStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$AttributesRuleChainOutputStrategySerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$AttributesRuleChainOutputStrategySerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

@@ -16,10 +16,11 @@ part 'entity_coordinates.g.dart';
 /// EntityCoordinates
 ///
 /// Properties:
-/// * [latitudeKeyName] 
-/// * [longitudeKeyName] 
+/// * [latitudeKeyName]
+/// * [longitudeKeyName]
 @BuiltValue()
-abstract class EntityCoordinates implements Built<EntityCoordinates, EntityCoordinatesBuilder> {
+abstract class EntityCoordinates
+    implements Built<EntityCoordinates, EntityCoordinatesBuilder> {
   @BuiltValueField(wireName: r'latitudeKeyName')
   String get latitudeKeyName;
 
@@ -28,16 +29,19 @@ abstract class EntityCoordinates implements Built<EntityCoordinates, EntityCoord
 
   EntityCoordinates._();
 
-  factory EntityCoordinates([void updates(EntityCoordinatesBuilder b)]) = _$EntityCoordinates;
+  factory EntityCoordinates([void updates(EntityCoordinatesBuilder b)]) =
+      _$EntityCoordinates;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityCoordinatesBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityCoordinates> get serializer => _$EntityCoordinatesSerializer();
+  static Serializer<EntityCoordinates> get serializer =>
+      _$EntityCoordinatesSerializer();
 }
 
-class _$EntityCoordinatesSerializer implements PrimitiveSerializer<EntityCoordinates> {
+class _$EntityCoordinatesSerializer
+    implements PrimitiveSerializer<EntityCoordinates> {
   @override
   final Iterable<Type> types = const [EntityCoordinates, _$EntityCoordinates];
 
@@ -67,7 +71,11 @@ class _$EntityCoordinatesSerializer implements PrimitiveSerializer<EntityCoordin
     EntityCoordinates object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -83,17 +91,21 @@ class _$EntityCoordinatesSerializer implements PrimitiveSerializer<EntityCoordin
       final value = serializedList[i + 1];
       switch (key) {
         case r'latitudeKeyName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.latitudeKeyName = valueDes;
           break;
         case r'longitudeKeyName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.longitudeKeyName = valueDes;
           break;
         default:
@@ -124,5 +136,3 @@ class _$EntityCoordinatesSerializer implements PrimitiveSerializer<EntityCoordin
     return result.build();
   }
 }
-
-

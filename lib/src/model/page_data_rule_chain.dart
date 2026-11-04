@@ -23,7 +23,8 @@ part 'page_data_rule_chain.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataRuleChain implements Built<PageDataRuleChain, PageDataRuleChainBuilder> {
+abstract class PageDataRuleChain
+    implements Built<PageDataRuleChain, PageDataRuleChainBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<RuleChain>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataRuleChain implements Built<PageDataRuleChain, PageDataRul
 
   PageDataRuleChain._();
 
-  factory PageDataRuleChain([void updates(PageDataRuleChainBuilder b)]) = _$PageDataRuleChain;
+  factory PageDataRuleChain([void updates(PageDataRuleChainBuilder b)]) =
+      _$PageDataRuleChain;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataRuleChainBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataRuleChain> get serializer => _$PageDataRuleChainSerializer();
+  static Serializer<PageDataRuleChain> get serializer =>
+      _$PageDataRuleChainSerializer();
 }
 
-class _$PageDataRuleChainSerializer implements PrimitiveSerializer<PageDataRuleChain> {
+class _$PageDataRuleChainSerializer
+    implements PrimitiveSerializer<PageDataRuleChain> {
   @override
   final Iterable<Type> types = const [PageDataRuleChain, _$PageDataRuleChain];
 
@@ -99,7 +103,11 @@ class _$PageDataRuleChainSerializer implements PrimitiveSerializer<PageDataRuleC
     PageDataRuleChain object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataRuleChainSerializer implements PrimitiveSerializer<PageDataRuleC
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(RuleChain)]),
-          ) as BuiltList<RuleChain>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(RuleChain),
+                    ]),
+                  )
+                  as BuiltList<RuleChain>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataRuleChainSerializer implements PrimitiveSerializer<PageDataRuleC
     return result.build();
   }
 }
-
-

@@ -20,12 +20,13 @@ part 'entity_count_query.g.dart';
 /// A JSON value representing the entity count query. See API call notes above for more details.
 ///
 /// Properties:
-/// * [entityFilter] 
-/// * [keyFilters] 
-/// * [keyFiltersOperation] 
-/// * [keyFiltersOperationOrDefault] 
+/// * [entityFilter]
+/// * [keyFilters]
+/// * [keyFiltersOperation]
+/// * [keyFiltersOperationOrDefault]
 @BuiltValue()
-abstract class EntityCountQuery implements Built<EntityCountQuery, EntityCountQueryBuilder> {
+abstract class EntityCountQuery
+    implements Built<EntityCountQuery, EntityCountQueryBuilder> {
   @BuiltValueField(wireName: r'entityFilter')
   EntityFilter? get entityFilter;
 
@@ -42,16 +43,19 @@ abstract class EntityCountQuery implements Built<EntityCountQuery, EntityCountQu
 
   EntityCountQuery._();
 
-  factory EntityCountQuery([void updates(EntityCountQueryBuilder b)]) = _$EntityCountQuery;
+  factory EntityCountQuery([void updates(EntityCountQueryBuilder b)]) =
+      _$EntityCountQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityCountQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityCountQuery> get serializer => _$EntityCountQuerySerializer();
+  static Serializer<EntityCountQuery> get serializer =>
+      _$EntityCountQuerySerializer();
 }
 
-class _$EntityCountQuerySerializer implements PrimitiveSerializer<EntityCountQuery> {
+class _$EntityCountQuerySerializer
+    implements PrimitiveSerializer<EntityCountQuery> {
   @override
   final Iterable<Type> types = const [EntityCountQuery, _$EntityCountQuery];
 
@@ -99,7 +103,11 @@ class _$EntityCountQuerySerializer implements PrimitiveSerializer<EntityCountQue
     EntityCountQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,48 @@ class _$EntityCountQuerySerializer implements PrimitiveSerializer<EntityCountQue
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityFilter),
-          ) as EntityFilter?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityFilter),
+                  )
+                  as EntityFilter?;
           if (valueDes == null) continue;
           result.entityFilter = valueDes;
           break;
         case r'keyFilters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(KeyFilter)]),
-          ) as BuiltList<KeyFilter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(KeyFilter),
+                    ]),
+                  )
+                  as BuiltList<KeyFilter>?;
           if (valueDes == null) continue;
           result.keyFilters.replace(valueDes);
           break;
         case r'keyFiltersOperation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.keyFiltersOperation = valueDes;
           break;
         case r'keyFiltersOperationOrDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.keyFiltersOperationOrDefault = valueDes;
           break;
@@ -174,5 +196,3 @@ class _$EntityCountQuerySerializer implements PrimitiveSerializer<EntityCountQue
     return result.build();
   }
 }
-
-

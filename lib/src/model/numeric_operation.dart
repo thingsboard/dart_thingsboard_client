@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'numeric_operation.g.dart';
 
 class NumericOperation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'EQUAL')
   static const NumericOperation EQUAL = _$EQUAL;
   @BuiltValueEnumConst(wireName: r'NOT_EQUAL')
@@ -31,9 +30,10 @@ class NumericOperation extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const NumericOperation unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<NumericOperation> get serializer => _$numericOperationSerializer;
+  static Serializer<NumericOperation> get serializer =>
+      _$numericOperationSerializer;
 
-  const NumericOperation._(String name): super(name);
+  const NumericOperation._(String name) : super(name);
 
   static BuiltSet<NumericOperation> get values => _$values;
   static NumericOperation valueOf(String name) => _$valueOf(name);
@@ -46,4 +46,3 @@ class NumericOperation extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class NumericOperationMixin = Object with _$NumericOperationMixin;
-

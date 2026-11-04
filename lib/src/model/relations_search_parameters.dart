@@ -26,7 +26,9 @@ part 'relations_search_parameters.g.dart';
 /// * [maxLevel] - Maximum level of the search depth.
 /// * [fetchLastLevelOnly] - Fetch entities that match the last level of search. Useful to find Devices that are strictly 'maxLevel' relations away from the root entity.
 @BuiltValue()
-abstract class RelationsSearchParameters implements Built<RelationsSearchParameters, RelationsSearchParametersBuilder> {
+abstract class RelationsSearchParameters
+    implements
+        Built<RelationsSearchParameters, RelationsSearchParametersBuilder> {
   /// Root entity id to start search from.
   @BuiltValueField(wireName: r'rootId')
   String? get rootId;
@@ -56,18 +58,25 @@ abstract class RelationsSearchParameters implements Built<RelationsSearchParamet
 
   RelationsSearchParameters._();
 
-  factory RelationsSearchParameters([void updates(RelationsSearchParametersBuilder b)]) = _$RelationsSearchParameters;
+  factory RelationsSearchParameters([
+    void updates(RelationsSearchParametersBuilder b),
+  ]) = _$RelationsSearchParameters;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RelationsSearchParametersBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RelationsSearchParameters> get serializer => _$RelationsSearchParametersSerializer();
+  static Serializer<RelationsSearchParameters> get serializer =>
+      _$RelationsSearchParametersSerializer();
 }
 
-class _$RelationsSearchParametersSerializer implements PrimitiveSerializer<RelationsSearchParameters> {
+class _$RelationsSearchParametersSerializer
+    implements PrimitiveSerializer<RelationsSearchParameters> {
   @override
-  final Iterable<Type> types = const [RelationsSearchParameters, _$RelationsSearchParameters];
+  final Iterable<Type> types = const [
+    RelationsSearchParameters,
+    _$RelationsSearchParameters,
+  ];
 
   @override
   final String wireName = r'RelationsSearchParameters';
@@ -127,7 +136,11 @@ class _$RelationsSearchParametersSerializer implements PrimitiveSerializer<Relat
     RelationsSearchParameters object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -143,50 +156,64 @@ class _$RelationsSearchParametersSerializer implements PrimitiveSerializer<Relat
       final value = serializedList[i + 1];
       switch (key) {
         case r'rootId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.rootId = valueDes;
           break;
         case r'rootType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.rootType = valueDes;
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntitySearchDirection),
-          ) as EntitySearchDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntitySearchDirection,
+                    ),
+                  )
+                  as EntitySearchDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
         case r'relationTypeGroup':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RelationTypeGroup),
-          ) as RelationTypeGroup?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RelationTypeGroup),
+                  )
+                  as RelationTypeGroup?;
           if (valueDes == null) continue;
           result.relationTypeGroup = valueDes;
           break;
         case r'maxLevel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxLevel = valueDes;
           break;
         case r'fetchLastLevelOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.fetchLastLevelOnly = valueDes;
           break;
@@ -218,5 +245,3 @@ class _$RelationsSearchParametersSerializer implements PrimitiveSerializer<Relat
     return result.build();
   }
 }
-
-

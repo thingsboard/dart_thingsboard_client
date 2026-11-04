@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -18,11 +17,9 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/agent_app_config_type.dart';
 import 'package:thingsboard_client/src/model/agent_app_template.dart';
 import 'package:thingsboard_client/src/model/agent_application_type.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AgentAppTemplateControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -45,7 +42,7 @@ class AgentAppTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AgentAppTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AgentAppTemplate>> getAgentAppTemplateByCurrentVersion({ 
+  Future<Response<AgentAppTemplate>> getAgentAppTemplateByCurrentVersion({
     required AgentApplicationType appType,
     required AgentAppConfigType configType,
     required String currentVersion,
@@ -56,13 +53,43 @@ class AgentAppTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAgentAppTemplate);
-    final _path = r'/api/agent/app/template/{appType}/{configType}/version/{currentVersion}'.replaceAll('{' r'appType' '}', encodeQueryParameter(_serializers, appType, const FullType(AgentApplicationType)).toString()).replaceAll('{' r'configType' '}', encodeQueryParameter(_serializers, configType, const FullType(AgentAppConfigType)).toString()).replaceAll('{' r'currentVersion' '}', encodeQueryParameter(_serializers, currentVersion, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAgentAppTemplate);
+    final _path =
+        r'/api/agent/app/template/{appType}/{configType}/version/{currentVersion}'
+            .replaceAll(
+              '{'
+              r'appType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                appType,
+                const FullType(AgentApplicationType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'configType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                configType,
+                const FullType(AgentAppConfigType),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'currentVersion'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                currentVersion,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -70,11 +97,8 @@ class AgentAppTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -93,11 +117,13 @@ class AgentAppTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AgentAppTemplate),
-      ) as AgentAppTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AgentAppTemplate),
+                )
+                as AgentAppTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -133,7 +159,7 @@ class AgentAppTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<AgentAppTemplate>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<AgentAppTemplate>>> getAgentAppTemplates({ 
+  Future<Response<BuiltList<AgentAppTemplate>>> getAgentAppTemplates({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -141,13 +167,12 @@ class AgentAppTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfAgentAppTemplate);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfAgentAppTemplate);
     final _path = r'/api/agent/app/templates';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -155,11 +180,8 @@ class AgentAppTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -178,11 +200,15 @@ class AgentAppTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(AgentAppTemplate)]),
-      ) as BuiltList<AgentAppTemplate>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(AgentAppTemplate),
+                  ]),
+                )
+                as BuiltList<AgentAppTemplate>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -220,7 +246,7 @@ class AgentAppTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<AgentAppTemplate>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<AgentAppTemplate>>> getAgentAppTemplatesByAppType({ 
+  Future<Response<BuiltList<AgentAppTemplate>>> getAgentAppTemplatesByAppType({
     required AgentApplicationType appType,
     required AgentAppConfigType configType,
     CancelToken? cancelToken,
@@ -230,13 +256,32 @@ class AgentAppTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfAgentAppTemplate);
-    final _path = r'/api/agent/app/templates/{appType}/{configType}'.replaceAll('{' r'appType' '}', encodeQueryParameter(_serializers, appType, const FullType(AgentApplicationType)).toString()).replaceAll('{' r'configType' '}', encodeQueryParameter(_serializers, configType, const FullType(AgentAppConfigType)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfAgentAppTemplate);
+    final _path = r'/api/agent/app/templates/{appType}/{configType}'
+        .replaceAll(
+          '{'
+          r'appType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            appType,
+            const FullType(AgentApplicationType),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'configType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            configType,
+            const FullType(AgentAppConfigType),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -244,11 +289,8 @@ class AgentAppTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -267,11 +309,15 @@ class AgentAppTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(AgentAppTemplate)]),
-      ) as BuiltList<AgentAppTemplate>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(AgentAppTemplate),
+                  ]),
+                )
+                as BuiltList<AgentAppTemplate>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -309,7 +355,8 @@ class AgentAppTemplateControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AgentAppTemplate] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AgentAppTemplate>> getLatestAgentAppTemplateByAppTypeAndConfigType({ 
+  Future<Response<AgentAppTemplate>>
+  getLatestAgentAppTemplateByAppTypeAndConfigType({
     required AgentApplicationType appType,
     required AgentAppConfigType configType,
     CancelToken? cancelToken,
@@ -319,13 +366,32 @@ class AgentAppTemplateControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAgentAppTemplate);
-    final _path = r'/api/agent/app/template/{appType}/{configType}/latest'.replaceAll('{' r'appType' '}', encodeQueryParameter(_serializers, appType, const FullType(AgentApplicationType)).toString()).replaceAll('{' r'configType' '}', encodeQueryParameter(_serializers, configType, const FullType(AgentAppConfigType)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAgentAppTemplate);
+    final _path = r'/api/agent/app/template/{appType}/{configType}/latest'
+        .replaceAll(
+          '{'
+          r'appType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            appType,
+            const FullType(AgentApplicationType),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'configType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            configType,
+            const FullType(AgentAppConfigType),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -333,11 +399,8 @@ class AgentAppTemplateControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -356,11 +419,13 @@ class AgentAppTemplateControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AgentAppTemplate),
-      ) as AgentAppTemplate;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AgentAppTemplate),
+                )
+                as AgentAppTemplate;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -382,5 +447,4 @@ class AgentAppTemplateControllerApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -24,15 +24,18 @@ part 'widgets_bundle_export_data.g.dart';
 /// WidgetsBundleExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 /// * [widgets] - List of widgets in the bundle
-/// * [fqns] 
+/// * [fqns]
 @BuiltValue()
-abstract class WidgetsBundleExportData implements EntityExportData, Built<WidgetsBundleExportData, WidgetsBundleExportDataBuilder> {
+abstract class WidgetsBundleExportData
+    implements
+        EntityExportData,
+        Built<WidgetsBundleExportData, WidgetsBundleExportDataBuilder> {
   @BuiltValueField(wireName: r'fqns')
   BuiltList<String>? get fqns;
 
@@ -42,18 +45,25 @@ abstract class WidgetsBundleExportData implements EntityExportData, Built<Widget
 
   WidgetsBundleExportData._();
 
-  factory WidgetsBundleExportData([void updates(WidgetsBundleExportDataBuilder b)]) = _$WidgetsBundleExportData;
+  factory WidgetsBundleExportData([
+    void updates(WidgetsBundleExportDataBuilder b),
+  ]) = _$WidgetsBundleExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WidgetsBundleExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WidgetsBundleExportData> get serializer => _$WidgetsBundleExportDataSerializer();
+  static Serializer<WidgetsBundleExportData> get serializer =>
+      _$WidgetsBundleExportDataSerializer();
 }
 
-class _$WidgetsBundleExportDataSerializer implements PrimitiveSerializer<WidgetsBundleExportData> {
+class _$WidgetsBundleExportDataSerializer
+    implements PrimitiveSerializer<WidgetsBundleExportData> {
   @override
-  final Iterable<Type> types = const [WidgetsBundleExportData, _$WidgetsBundleExportData];
+  final Iterable<Type> types = const [
+    WidgetsBundleExportData,
+    _$WidgetsBundleExportData,
+  ];
 
   @override
   final String wireName = r'WidgetsBundleExportData';
@@ -79,14 +89,19 @@ class _$WidgetsBundleExportDataSerializer implements PrimitiveSerializer<Widgets
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.widgets != null) {
       yield r'widgets';
       yield serializers.serialize(
         object.widgets,
-        specifiedType: const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType.nullable(JsonObject),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -118,7 +133,11 @@ class _$WidgetsBundleExportDataSerializer implements PrimitiveSerializer<Widgets
     WidgetsBundleExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -134,57 +153,82 @@ class _$WidgetsBundleExportDataSerializer implements PrimitiveSerializer<Widgets
       final value = serializedList[i + 1];
       switch (key) {
         case r'fqns':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.fqns.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'widgets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType.nullable(JsonObject)]),
-          ) as BuiltList<JsonObject?>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType.nullable(JsonObject),
+                    ]),
+                  )
+                  as BuiltList<JsonObject?>?;
           if (valueDes == null) continue;
           result.widgets.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -216,5 +260,3 @@ class _$WidgetsBundleExportDataSerializer implements PrimitiveSerializer<Widgets
     return result.build();
   }
 }
-
-

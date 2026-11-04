@@ -19,19 +19,22 @@ part 'ollama_chat_model_config.g.dart';
 /// OllamaChatModelConfig
 ///
 /// Properties:
-/// * [provider] 
-/// * [providerConfig] 
-/// * [modelId] 
-/// * [temperature] 
-/// * [topP] 
-/// * [topK] 
-/// * [contextLength] 
-/// * [maxOutputTokens] 
-/// * [timeoutSeconds] 
-/// * [maxRetries] 
-/// * [modelType] 
+/// * [provider]
+/// * [providerConfig]
+/// * [modelId]
+/// * [temperature]
+/// * [topP]
+/// * [topK]
+/// * [contextLength]
+/// * [maxOutputTokens]
+/// * [timeoutSeconds]
+/// * [maxRetries]
+/// * [modelType]
 @BuiltValue()
-abstract class OllamaChatModelConfig implements AiModelConfig, Built<OllamaChatModelConfig, OllamaChatModelConfigBuilder> {
+abstract class OllamaChatModelConfig
+    implements
+        AiModelConfig,
+        Built<OllamaChatModelConfig, OllamaChatModelConfigBuilder> {
   @BuiltValueField(wireName: r'topK')
   int? get topK;
 
@@ -65,18 +68,25 @@ abstract class OllamaChatModelConfig implements AiModelConfig, Built<OllamaChatM
 
   OllamaChatModelConfig._();
 
-  factory OllamaChatModelConfig([void updates(OllamaChatModelConfigBuilder b)]) = _$OllamaChatModelConfig;
+  factory OllamaChatModelConfig([
+    void updates(OllamaChatModelConfigBuilder b),
+  ]) = _$OllamaChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OllamaChatModelConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OllamaChatModelConfig> get serializer => _$OllamaChatModelConfigSerializer();
+  static Serializer<OllamaChatModelConfig> get serializer =>
+      _$OllamaChatModelConfigSerializer();
 }
 
-class _$OllamaChatModelConfigSerializer implements PrimitiveSerializer<OllamaChatModelConfig> {
+class _$OllamaChatModelConfigSerializer
+    implements PrimitiveSerializer<OllamaChatModelConfig> {
   @override
-  final Iterable<Type> types = const [OllamaChatModelConfig, _$OllamaChatModelConfig];
+  final Iterable<Type> types = const [
+    OllamaChatModelConfig,
+    _$OllamaChatModelConfig,
+  ];
 
   @override
   final String wireName = r'OllamaChatModelConfig';
@@ -165,7 +175,11 @@ class _$OllamaChatModelConfigSerializer implements PrimitiveSerializer<OllamaCha
     OllamaChatModelConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -181,87 +195,109 @@ class _$OllamaChatModelConfigSerializer implements PrimitiveSerializer<OllamaCha
       final value = serializedList[i + 1];
       switch (key) {
         case r'topK':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.topK = valueDes;
           break;
         case r'maxRetries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRetries = valueDes;
           break;
         case r'contextLength':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.contextLength = valueDes;
           break;
         case r'modelId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.modelId = valueDes;
           break;
         case r'provider':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.provider = valueDes;
           break;
         case r'temperature':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.temperature = valueDes;
           break;
         case r'timeoutSeconds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeoutSeconds = valueDes;
           break;
         case r'modelType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelType),
-          ) as AiModelType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelType),
+                  )
+                  as AiModelType?;
           if (valueDes == null) continue;
           result.modelType = valueDes;
           break;
         case r'providerConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(OllamaProviderConfig),
-          ) as OllamaProviderConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(OllamaProviderConfig),
+                  )
+                  as OllamaProviderConfig;
           result.providerConfig.replace(valueDes);
           break;
         case r'topP':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.topP = valueDes;
           break;
         case r'maxOutputTokens':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxOutputTokens = valueDes;
           break;
@@ -293,5 +329,3 @@ class _$OllamaChatModelConfigSerializer implements PrimitiveSerializer<OllamaCha
     return result.build();
   }
 }
-
-

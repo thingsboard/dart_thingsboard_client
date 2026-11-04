@@ -18,22 +18,26 @@ part 'scheduler_event_id.g.dart';
 /// SchedulerEventId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class SchedulerEventId implements EntityId, Built<SchedulerEventId, SchedulerEventIdBuilder> {
+abstract class SchedulerEventId
+    implements EntityId, Built<SchedulerEventId, SchedulerEventIdBuilder> {
   SchedulerEventId._();
 
-  factory SchedulerEventId([void updates(SchedulerEventIdBuilder b)]) = _$SchedulerEventId;
+  factory SchedulerEventId([void updates(SchedulerEventIdBuilder b)]) =
+      _$SchedulerEventId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SchedulerEventIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SchedulerEventId> get serializer => _$SchedulerEventIdSerializer();
+  static Serializer<SchedulerEventId> get serializer =>
+      _$SchedulerEventIdSerializer();
 }
 
-class _$SchedulerEventIdSerializer implements PrimitiveSerializer<SchedulerEventId> {
+class _$SchedulerEventIdSerializer
+    implements PrimitiveSerializer<SchedulerEventId> {
   @override
   final Iterable<Type> types = const [SchedulerEventId, _$SchedulerEventId];
 
@@ -63,7 +67,11 @@ class _$SchedulerEventIdSerializer implements PrimitiveSerializer<SchedulerEvent
     SchedulerEventId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$SchedulerEventIdSerializer implements PrimitiveSerializer<SchedulerEvent
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$SchedulerEventIdSerializer implements PrimitiveSerializer<SchedulerEvent
     return result.build();
   }
 }
-
-

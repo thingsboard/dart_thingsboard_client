@@ -19,12 +19,12 @@ part 'heading.g.dart';
 /// Heading
 ///
 /// Properties:
-/// * [text] 
-/// * [font] 
-/// * [color] 
-/// * [textAlignment] 
-/// * [verticalAlignment] 
-/// * [height] 
+/// * [text]
+/// * [font]
+/// * [color]
+/// * [textAlignment]
+/// * [verticalAlignment]
+/// * [height]
 @BuiltValue()
 abstract class Heading implements Built<Heading, HeadingBuilder> {
   @BuiltValueField(wireName: r'text')
@@ -120,7 +120,11 @@ class _$HeadingSerializer implements PrimitiveSerializer<Heading> {
     Heading object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -136,50 +140,62 @@ class _$HeadingSerializer implements PrimitiveSerializer<Heading> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'text':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.text = valueDes;
           break;
         case r'font':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.font.replace(valueDes);
           break;
         case r'color':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.color = valueDes;
           break;
         case r'textAlignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TextAlignment),
-          ) as TextAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TextAlignment),
+                  )
+                  as TextAlignment?;
           if (valueDes == null) continue;
           result.textAlignment = valueDes;
           break;
         case r'verticalAlignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(VerticalAlignment),
-          ) as VerticalAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(VerticalAlignment),
+                  )
+                  as VerticalAlignment?;
           if (valueDes == null) continue;
           result.verticalAlignment = valueDes;
           break;
         case r'height':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.height = valueDes;
           break;
@@ -211,5 +227,3 @@ class _$HeadingSerializer implements PrimitiveSerializer<Heading> {
     return result.build();
   }
 }
-
-

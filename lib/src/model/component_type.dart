@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'component_type.g.dart';
 
 class ComponentType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ENRICHMENT')
   static const ComponentType ENRICHMENT = _$ENRICHMENT;
   @BuiltValueEnumConst(wireName: r'FILTER')
@@ -35,7 +34,7 @@ class ComponentType extends EnumClass {
 
   static Serializer<ComponentType> get serializer => _$componentTypeSerializer;
 
-  const ComponentType._(String name): super(name);
+  const ComponentType._(String name) : super(name);
 
   static BuiltSet<ComponentType> get values => _$values;
   static ComponentType valueOf(String name) => _$valueOf(name);
@@ -48,4 +47,3 @@ class ComponentType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ComponentTypeMixin = Object with _$ComponentTypeMixin;
-

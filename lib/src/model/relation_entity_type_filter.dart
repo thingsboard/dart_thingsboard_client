@@ -22,7 +22,9 @@ part 'relation_entity_type_filter.g.dart';
 /// * [entityTypes] - Array of entity types to filter the related entities (e.g. 'DEVICE', 'ASSET').
 /// * [negate] - Negate relation type between root entity and other entity.
 @BuiltValue()
-abstract class RelationEntityTypeFilter implements Built<RelationEntityTypeFilter, RelationEntityTypeFilterBuilder> {
+abstract class RelationEntityTypeFilter
+    implements
+        Built<RelationEntityTypeFilter, RelationEntityTypeFilterBuilder> {
   /// Type of the relation between root entity and other entity (e.g. 'Contains' or 'Manages').
   @BuiltValueField(wireName: r'relationType')
   String? get relationType;
@@ -37,18 +39,25 @@ abstract class RelationEntityTypeFilter implements Built<RelationEntityTypeFilte
 
   RelationEntityTypeFilter._();
 
-  factory RelationEntityTypeFilter([void updates(RelationEntityTypeFilterBuilder b)]) = _$RelationEntityTypeFilter;
+  factory RelationEntityTypeFilter([
+    void updates(RelationEntityTypeFilterBuilder b),
+  ]) = _$RelationEntityTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RelationEntityTypeFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RelationEntityTypeFilter> get serializer => _$RelationEntityTypeFilterSerializer();
+  static Serializer<RelationEntityTypeFilter> get serializer =>
+      _$RelationEntityTypeFilterSerializer();
 }
 
-class _$RelationEntityTypeFilterSerializer implements PrimitiveSerializer<RelationEntityTypeFilter> {
+class _$RelationEntityTypeFilterSerializer
+    implements PrimitiveSerializer<RelationEntityTypeFilter> {
   @override
-  final Iterable<Type> types = const [RelationEntityTypeFilter, _$RelationEntityTypeFilter];
+  final Iterable<Type> types = const [
+    RelationEntityTypeFilter,
+    _$RelationEntityTypeFilter,
+  ];
 
   @override
   final String wireName = r'RelationEntityTypeFilter';
@@ -87,7 +96,11 @@ class _$RelationEntityTypeFilterSerializer implements PrimitiveSerializer<Relati
     RelationEntityTypeFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,26 +116,34 @@ class _$RelationEntityTypeFilterSerializer implements PrimitiveSerializer<Relati
       final value = serializedList[i + 1];
       switch (key) {
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'entityTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityType)]),
-          ) as BuiltList<EntityType>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityType),
+                    ]),
+                  )
+                  as BuiltList<EntityType>?;
           if (valueDes == null) continue;
           result.entityTypes.replace(valueDes);
           break;
         case r'negate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.negate = valueDes;
           break;
@@ -154,5 +175,3 @@ class _$RelationEntityTypeFilterSerializer implements PrimitiveSerializer<Relati
     return result.build();
   }
 }
-
-

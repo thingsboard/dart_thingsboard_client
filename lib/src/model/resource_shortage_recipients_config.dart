@@ -19,27 +19,40 @@ part 'resource_shortage_recipients_config.g.dart';
 /// ResourceShortageRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class ResourceShortageRecipientsConfig implements NotificationRuleRecipientsConfig, Built<ResourceShortageRecipientsConfig, ResourceShortageRecipientsConfigBuilder> {
+abstract class ResourceShortageRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          ResourceShortageRecipientsConfig,
+          ResourceShortageRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   ResourceShortageRecipientsConfig._();
 
-  factory ResourceShortageRecipientsConfig([void updates(ResourceShortageRecipientsConfigBuilder b)]) = _$ResourceShortageRecipientsConfig;
+  factory ResourceShortageRecipientsConfig([
+    void updates(ResourceShortageRecipientsConfigBuilder b),
+  ]) = _$ResourceShortageRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ResourceShortageRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ResourceShortageRecipientsConfig> get serializer => _$ResourceShortageRecipientsConfigSerializer();
+  static Serializer<ResourceShortageRecipientsConfig> get serializer =>
+      _$ResourceShortageRecipientsConfigSerializer();
 }
 
-class _$ResourceShortageRecipientsConfigSerializer implements PrimitiveSerializer<ResourceShortageRecipientsConfig> {
+class _$ResourceShortageRecipientsConfigSerializer
+    implements PrimitiveSerializer<ResourceShortageRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [ResourceShortageRecipientsConfig, _$ResourceShortageRecipientsConfig];
+  final Iterable<Type> types = const [
+    ResourceShortageRecipientsConfig,
+    _$ResourceShortageRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'ResourceShortageRecipientsConfig';
@@ -69,7 +82,11 @@ class _$ResourceShortageRecipientsConfigSerializer implements PrimitiveSerialize
     ResourceShortageRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$ResourceShortageRecipientsConfigSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$ResourceShortageRecipientsConfigSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

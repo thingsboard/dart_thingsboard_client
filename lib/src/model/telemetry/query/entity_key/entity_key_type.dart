@@ -10,12 +10,13 @@ enum EntityKeyType {
   SERVER_ATTRIBUTE,
   TIME_SERIES,
   ENTITY_FIELD,
-  ALARM_FIELD
+  ALARM_FIELD,
 }
 
 EntityKeyType entityKeyTypeFromString(String value) {
   return EntityKeyType.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension EntityKeyTypeToString on EntityKeyType {

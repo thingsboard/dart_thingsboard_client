@@ -18,23 +18,27 @@ part 'agent_instructions.g.dart';
 /// Properties:
 /// * [instructions] - Resolved install/provision instructions for the selected method
 @BuiltValue()
-abstract class AgentInstructions implements Built<AgentInstructions, AgentInstructionsBuilder> {
+abstract class AgentInstructions
+    implements Built<AgentInstructions, AgentInstructionsBuilder> {
   /// Resolved install/provision instructions for the selected method
   @BuiltValueField(wireName: r'instructions')
   String? get instructions;
 
   AgentInstructions._();
 
-  factory AgentInstructions([void updates(AgentInstructionsBuilder b)]) = _$AgentInstructions;
+  factory AgentInstructions([void updates(AgentInstructionsBuilder b)]) =
+      _$AgentInstructions;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentInstructionsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentInstructions> get serializer => _$AgentInstructionsSerializer();
+  static Serializer<AgentInstructions> get serializer =>
+      _$AgentInstructionsSerializer();
 }
 
-class _$AgentInstructionsSerializer implements PrimitiveSerializer<AgentInstructions> {
+class _$AgentInstructionsSerializer
+    implements PrimitiveSerializer<AgentInstructions> {
   @override
   final Iterable<Type> types = const [AgentInstructions, _$AgentInstructions];
 
@@ -61,7 +65,11 @@ class _$AgentInstructionsSerializer implements PrimitiveSerializer<AgentInstruct
     AgentInstructions object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -77,10 +85,12 @@ class _$AgentInstructionsSerializer implements PrimitiveSerializer<AgentInstruct
       final value = serializedList[i + 1];
       switch (key) {
         case r'instructions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.instructions = valueDes;
           break;
@@ -112,5 +122,3 @@ class _$AgentInstructionsSerializer implements PrimitiveSerializer<AgentInstruct
     return result.build();
   }
 }
-
-

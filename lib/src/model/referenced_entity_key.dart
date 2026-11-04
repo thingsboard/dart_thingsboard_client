@@ -18,11 +18,12 @@ part 'referenced_entity_key.g.dart';
 /// ReferencedEntityKey
 ///
 /// Properties:
-/// * [key] 
-/// * [type] 
-/// * [scope] 
+/// * [key]
+/// * [type]
+/// * [scope]
 @BuiltValue()
-abstract class ReferencedEntityKey implements Built<ReferencedEntityKey, ReferencedEntityKeyBuilder> {
+abstract class ReferencedEntityKey
+    implements Built<ReferencedEntityKey, ReferencedEntityKeyBuilder> {
   @BuiltValueField(wireName: r'key')
   String? get key;
 
@@ -36,18 +37,24 @@ abstract class ReferencedEntityKey implements Built<ReferencedEntityKey, Referen
 
   ReferencedEntityKey._();
 
-  factory ReferencedEntityKey([void updates(ReferencedEntityKeyBuilder b)]) = _$ReferencedEntityKey;
+  factory ReferencedEntityKey([void updates(ReferencedEntityKeyBuilder b)]) =
+      _$ReferencedEntityKey;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ReferencedEntityKeyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReferencedEntityKey> get serializer => _$ReferencedEntityKeySerializer();
+  static Serializer<ReferencedEntityKey> get serializer =>
+      _$ReferencedEntityKeySerializer();
 }
 
-class _$ReferencedEntityKeySerializer implements PrimitiveSerializer<ReferencedEntityKey> {
+class _$ReferencedEntityKeySerializer
+    implements PrimitiveSerializer<ReferencedEntityKey> {
   @override
-  final Iterable<Type> types = const [ReferencedEntityKey, _$ReferencedEntityKey];
+  final Iterable<Type> types = const [
+    ReferencedEntityKey,
+    _$ReferencedEntityKey,
+  ];
 
   @override
   final String wireName = r'ReferencedEntityKey';
@@ -86,7 +93,11 @@ class _$ReferencedEntityKeySerializer implements PrimitiveSerializer<ReferencedE
     ReferencedEntityKey object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +113,32 @@ class _$ReferencedEntityKeySerializer implements PrimitiveSerializer<ReferencedE
       final value = serializedList[i + 1];
       switch (key) {
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ArgumentType),
-          ) as ArgumentType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ArgumentType),
+                  )
+                  as ArgumentType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AttributeScope),
-          ) as AttributeScope?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AttributeScope),
+                  )
+                  as AttributeScope?;
           if (valueDes == null) continue;
           result.scope = valueDes;
           break;
@@ -153,5 +170,3 @@ class _$ReferencedEntityKeySerializer implements PrimitiveSerializer<ReferencedE
     return result.build();
   }
 }
-
-

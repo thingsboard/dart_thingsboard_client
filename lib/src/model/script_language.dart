@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'script_language.g.dart';
 
 class ScriptLanguage extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'JS')
   static const ScriptLanguage JS = _$JS;
   @BuiltValueEnumConst(wireName: r'TBEL')
@@ -23,9 +22,10 @@ class ScriptLanguage extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ScriptLanguage unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<ScriptLanguage> get serializer => _$scriptLanguageSerializer;
+  static Serializer<ScriptLanguage> get serializer =>
+      _$scriptLanguageSerializer;
 
-  const ScriptLanguage._(String name): super(name);
+  const ScriptLanguage._(String name) : super(name);
 
   static BuiltSet<ScriptLanguage> get values => _$values;
   static ScriptLanguage valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class ScriptLanguage extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ScriptLanguageMixin = Object with _$ScriptLanguageMixin;
-

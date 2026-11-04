@@ -16,7 +16,6 @@ part 'thingsboard_error_code.g.dart';
 
 /// Platform error code
 class ThingsboardErrorCode extends EnumClass {
-
   @BuiltValueEnumConst(wireNumber: 2)
   static const ThingsboardErrorCode number2 = _$number2;
   @BuiltValueEnumConst(wireNumber: 10)
@@ -50,11 +49,13 @@ class ThingsboardErrorCode extends EnumClass {
   @BuiltValueEnumConst(wireNumber: 47)
   static const ThingsboardErrorCode number47 = _$number47;
   @BuiltValueEnumConst(wireNumber: 11184809, fallback: true)
-  static const ThingsboardErrorCode unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ThingsboardErrorCode unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ThingsboardErrorCode> get serializer => _$thingsboardErrorCodeSerializer;
+  static Serializer<ThingsboardErrorCode> get serializer =>
+      _$thingsboardErrorCodeSerializer;
 
-  const ThingsboardErrorCode._(String name): super(name);
+  const ThingsboardErrorCode._(String name) : super(name);
 
   static BuiltSet<ThingsboardErrorCode> get values => _$values;
   static ThingsboardErrorCode valueOf(String name) => _$valueOf(name);
@@ -66,5 +67,5 @@ class ThingsboardErrorCode extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class ThingsboardErrorCodeMixin = Object with _$ThingsboardErrorCodeMixin;
-
+abstract class ThingsboardErrorCodeMixin = Object
+    with _$ThingsboardErrorCodeMixin;

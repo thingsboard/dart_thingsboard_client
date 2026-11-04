@@ -17,12 +17,18 @@ part 'twilio_sms_provider_configuration.g.dart';
 /// TwilioSmsProviderConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 /// * [accountSid] - Twilio account Sid.
 /// * [accountToken] - Twilio account Token.
 /// * [numberFrom] - The number/id of a sender.
 @BuiltValue()
-abstract class TwilioSmsProviderConfiguration implements SmsProviderConfiguration, Built<TwilioSmsProviderConfiguration, TwilioSmsProviderConfigurationBuilder> {
+abstract class TwilioSmsProviderConfiguration
+    implements
+        SmsProviderConfiguration,
+        Built<
+          TwilioSmsProviderConfiguration,
+          TwilioSmsProviderConfigurationBuilder
+        > {
   /// The number/id of a sender.
   @BuiltValueField(wireName: r'numberFrom')
   String? get numberFrom;
@@ -37,18 +43,25 @@ abstract class TwilioSmsProviderConfiguration implements SmsProviderConfiguratio
 
   TwilioSmsProviderConfiguration._();
 
-  factory TwilioSmsProviderConfiguration([void updates(TwilioSmsProviderConfigurationBuilder b)]) = _$TwilioSmsProviderConfiguration;
+  factory TwilioSmsProviderConfiguration([
+    void updates(TwilioSmsProviderConfigurationBuilder b),
+  ]) = _$TwilioSmsProviderConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TwilioSmsProviderConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TwilioSmsProviderConfiguration> get serializer => _$TwilioSmsProviderConfigurationSerializer();
+  static Serializer<TwilioSmsProviderConfiguration> get serializer =>
+      _$TwilioSmsProviderConfigurationSerializer();
 }
 
-class _$TwilioSmsProviderConfigurationSerializer implements PrimitiveSerializer<TwilioSmsProviderConfiguration> {
+class _$TwilioSmsProviderConfigurationSerializer
+    implements PrimitiveSerializer<TwilioSmsProviderConfiguration> {
   @override
-  final Iterable<Type> types = const [TwilioSmsProviderConfiguration, _$TwilioSmsProviderConfiguration];
+  final Iterable<Type> types = const [
+    TwilioSmsProviderConfiguration,
+    _$TwilioSmsProviderConfiguration,
+  ];
 
   @override
   final String wireName = r'TwilioSmsProviderConfiguration';
@@ -92,7 +105,11 @@ class _$TwilioSmsProviderConfigurationSerializer implements PrimitiveSerializer<
     TwilioSmsProviderConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -108,34 +125,42 @@ class _$TwilioSmsProviderConfigurationSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'numberFrom':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.numberFrom = valueDes;
           break;
         case r'accountSid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.accountSid = valueDes;
           break;
         case r'accountToken':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.accountToken = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -166,5 +191,3 @@ class _$TwilioSmsProviderConfigurationSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

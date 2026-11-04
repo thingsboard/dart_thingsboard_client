@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -27,12 +26,10 @@ import 'package:thingsboard_client/src/model/security_settings.dart';
 import 'package:thingsboard_client/src/model/subscription_info.dart';
 import 'package:thingsboard_client/src/model/system_info.dart';
 import 'package:thingsboard_client/src/model/test_sms_request.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/update_message.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AdminControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -52,7 +49,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> autoCommitSettingsExists({ 
+  Future<Response<bool>> autoCommitSettingsExists({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -63,9 +60,7 @@ class AdminControllerApi {
     final _path = r'/api/admin/autoCommitSettings/exists';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -73,11 +68,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -97,7 +89,6 @@ class AdminControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -124,7 +115,7 @@ class AdminControllerApi {
   /// Attempts to check repository access.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [repositorySettings] 
+  /// * [repositorySettings]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -134,7 +125,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> checkRepositoryAccess({ 
+  Future<Response<void>> checkRepositoryAccess({
     required RepositorySettings repositorySettings,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -143,13 +134,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerRepositorySettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerRepositorySettings);
     final _path = r'/api/admin/repositorySettings/checkAccess';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -157,11 +147,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -173,14 +160,13 @@ class AdminControllerApi {
 
     try {
       const _type = FullType(RepositorySettings);
-      _bodyData = _serializers.serialize(repositorySettings, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        repositorySettings,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -212,7 +198,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [UpdateMessage] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<UpdateMessage>> checkUpdates({ 
+  Future<Response<UpdateMessage>> checkUpdates({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -220,13 +206,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerUpdateMessage);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerUpdateMessage);
     final _path = r'/api/admin/updates';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -234,11 +219,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -257,11 +239,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(UpdateMessage),
-      ) as UpdateMessage;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(UpdateMessage),
+                )
+                as UpdateMessage;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -297,7 +281,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteAutoCommitSettings({ 
+  Future<Response<void>> deleteAutoCommitSettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -308,9 +292,7 @@ class AdminControllerApi {
     final _path = r'/api/admin/autoCommitSettings';
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -318,11 +300,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -353,7 +332,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteRepositorySettings({ 
+  Future<Response<void>> deleteRepositorySettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -364,9 +343,7 @@ class AdminControllerApi {
     final _path = r'/api/admin/repositorySettings';
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -374,11 +351,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -411,7 +385,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AdminSettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AdminSettings>> getAdminSettings({ 
+  Future<Response<AdminSettings>> getAdminSettings({
     required String key,
     bool? systemByDefault = false,
     CancelToken? cancelToken,
@@ -421,13 +395,21 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAdminSettings);
-    final _path = r'/api/admin/settings/{key}'.replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAdminSettings);
+    final _path = r'/api/admin/settings/{key}'.replaceAll(
+      '{'
+      r'key'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        key,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -435,11 +417,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -447,7 +426,12 @@ class AdminControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (systemByDefault != null) r'systemByDefault': encodeQueryParameter(_serializers, systemByDefault, const FullType(bool)),
+      if (systemByDefault != null)
+        r'systemByDefault': encodeQueryParameter(
+          _serializers,
+          systemByDefault,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -463,11 +447,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AdminSettings),
-      ) as AdminSettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AdminSettings),
+                )
+                as AdminSettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -503,7 +489,8 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltMap<String, AutoVersionCreateConfig>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, AutoVersionCreateConfig>>> getAutoCommitSettings({ 
+  Future<Response<BuiltMap<String, AutoVersionCreateConfig>>>
+  getAutoCommitSettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -511,13 +498,13 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerMapOfStringToAutoVersionCreateConfig);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerMapOfStringToAutoVersionCreateConfig);
     final _path = r'/api/admin/autoCommitSettings';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -525,11 +512,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -548,11 +532,16 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AutoVersionCreateConfig)]),
-      ) as BuiltMap<String, AutoVersionCreateConfig>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltMap, [
+                    FullType(String),
+                    FullType(AutoVersionCreateConfig),
+                  ]),
+                )
+                as BuiltMap<String, AutoVersionCreateConfig>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -588,7 +577,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [FeaturesInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<FeaturesInfo>> getFeaturesInfo({ 
+  Future<Response<FeaturesInfo>> getFeaturesInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -596,13 +585,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerFeaturesInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerFeaturesInfo);
     final _path = r'/api/admin/featuresInfo';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -610,11 +598,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -633,11 +618,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(FeaturesInfo),
-      ) as FeaturesInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(FeaturesInfo),
+                )
+                as FeaturesInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -673,7 +660,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtSettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtSettings>> getJwtSettings({ 
+  Future<Response<JwtSettings>> getJwtSettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -681,13 +668,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerJwtSettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerJwtSettings);
     final _path = r'/api/admin/jwtSettings';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -695,11 +681,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -718,11 +701,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtSettings),
-      ) as JwtSettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtSettings),
+                )
+                as JwtSettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -758,7 +743,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LicenseUsageInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LicenseUsageInfo>> getLicenseUsageInfo({ 
+  Future<Response<LicenseUsageInfo>> getLicenseUsageInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -766,13 +751,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLicenseUsageInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerLicenseUsageInfo);
     final _path = r'/api/admin/licenseUsageInfo';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -780,11 +764,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -803,11 +784,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LicenseUsageInfo),
-      ) as LicenseUsageInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LicenseUsageInfo),
+                )
+                as LicenseUsageInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -830,7 +813,7 @@ class AdminControllerApi {
     );
   }
 
-  /// Redirect user to mail provider login page. 
+  /// Redirect user to mail provider login page.
   /// After user logged in and provided accessprovider sends authorization code to specified redirect uri.)
   ///
   /// Parameters:
@@ -843,7 +826,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getMailOAuth2AuthorizationUrl({ 
+  Future<Response<String>> getMailOAuth2AuthorizationUrl({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -854,9 +837,7 @@ class AdminControllerApi {
     final _path = r'/api/admin/mail/oauth2/authorize';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -864,11 +845,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -888,7 +866,6 @@ class AdminControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -924,7 +901,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getMailProcessingUrl({ 
+  Future<Response<String>> getMailProcessingUrl({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -935,9 +912,7 @@ class AdminControllerApi {
     final _path = r'/api/admin/mail/oauth2/loginProcessingUrl';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -945,11 +920,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -969,7 +941,6 @@ class AdminControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1005,7 +976,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RepositorySettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RepositorySettings>> getRepositorySettings({ 
+  Future<Response<RepositorySettings>> getRepositorySettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1013,13 +984,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerRepositorySettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerRepositorySettings);
     final _path = r'/api/admin/repositorySettings';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1027,11 +997,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1050,11 +1017,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RepositorySettings),
-      ) as RepositorySettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RepositorySettings),
+                )
+                as RepositorySettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1078,7 +1047,7 @@ class AdminControllerApi {
   }
 
   /// getRepositorySettingsInfo
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -1090,7 +1059,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RepositorySettingsInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RepositorySettingsInfo>> getRepositorySettingsInfo({ 
+  Future<Response<RepositorySettingsInfo>> getRepositorySettingsInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1098,13 +1067,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerRepositorySettingsInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerRepositorySettingsInfo);
     final _path = r'/api/admin/repositorySettings/info';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1112,11 +1080,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1135,11 +1100,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RepositorySettingsInfo),
-      ) as RepositorySettingsInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RepositorySettingsInfo),
+                )
+                as RepositorySettingsInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1175,7 +1142,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SecuritySettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SecuritySettings>> getSecuritySettings({ 
+  Future<Response<SecuritySettings>> getSecuritySettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1183,13 +1150,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSecuritySettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSecuritySettings);
     final _path = r'/api/admin/securitySettings';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1197,11 +1163,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1220,11 +1183,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SecuritySettings),
-      ) as SecuritySettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SecuritySettings),
+                )
+                as SecuritySettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1260,7 +1225,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SubscriptionInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SubscriptionInfo>> getSubscriptionInfo({ 
+  Future<Response<SubscriptionInfo>> getSubscriptionInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1268,13 +1233,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSubscriptionInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSubscriptionInfo);
     final _path = r'/api/admin/subscriptionInfo';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1282,11 +1246,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1305,11 +1266,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SubscriptionInfo),
-      ) as SubscriptionInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SubscriptionInfo),
+                )
+                as SubscriptionInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1345,7 +1308,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SystemInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SystemInfo>> getSystemInfo({ 
+  Future<Response<SystemInfo>> getSystemInfo({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1353,13 +1316,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSystemInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSystemInfo);
     final _path = r'/api/admin/systemInfo';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1367,11 +1329,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1390,11 +1349,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SystemInfo),
-      ) as SystemInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SystemInfo),
+                )
+                as SystemInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1418,11 +1379,11 @@ class AdminControllerApi {
   }
 
   /// handleMailOAuth2Callback
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [code] 
-  /// * [state] 
+  /// * [code]
+  /// * [state]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1432,7 +1393,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> handleMailOAuth2Callback({ 
+  Future<Response<void>> handleMailOAuth2Callback({
     required String code,
     required String state,
     CancelToken? cancelToken,
@@ -1446,9 +1407,7 @@ class AdminControllerApi {
     final _path = r'/api/admin/mail/oauth2/code';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1456,11 +1415,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1469,7 +1425,11 @@ class AdminControllerApi {
 
     final _queryParameters = <String, dynamic>{
       r'code': encodeQueryParameter(_serializers, code, const FullType(String)),
-      r'state': encodeQueryParameter(_serializers, state, const FullType(String)),
+      r'state': encodeQueryParameter(
+        _serializers,
+        state,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1497,7 +1457,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SubscriptionInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SubscriptionInfo>> refreshLicense({ 
+  Future<Response<SubscriptionInfo>> refreshLicense({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1505,13 +1465,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSubscriptionInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSubscriptionInfo);
     final _path = r'/api/admin/refreshLicense';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1519,11 +1478,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1542,11 +1498,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SubscriptionInfo),
-      ) as SubscriptionInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SubscriptionInfo),
+                )
+                as SubscriptionInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1582,7 +1540,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> repositorySettingsExists({ 
+  Future<Response<bool>> repositorySettingsExists({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1593,9 +1551,7 @@ class AdminControllerApi {
     final _path = r'/api/admin/repositorySettings/exists';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1603,11 +1559,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1627,7 +1580,6 @@ class AdminControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1664,7 +1616,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AdminSettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AdminSettings>> saveAdminSettings({ 
+  Future<Response<AdminSettings>> saveAdminSettings({
     required AdminSettings adminSettings,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1673,13 +1625,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAdminSettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAdminSettings);
     final _path = r'/api/admin/settings';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1687,11 +1638,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1704,13 +1652,9 @@ class AdminControllerApi {
     try {
       const _type = FullType(AdminSettings);
       _bodyData = _serializers.serialize(adminSettings, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1730,11 +1674,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AdminSettings),
-      ) as AdminSettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AdminSettings),
+                )
+                as AdminSettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1761,7 +1707,7 @@ class AdminControllerApi {
   /// Creates or Updates the auto commit settings object.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1771,7 +1717,8 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltMap<String, AutoVersionCreateConfig>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltMap<String, AutoVersionCreateConfig>>> saveAutoCommitSettings({ 
+  Future<Response<BuiltMap<String, AutoVersionCreateConfig>>>
+  saveAutoCommitSettings({
     required BuiltMap<String, AutoVersionCreateConfig> requestBody,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1780,13 +1727,13 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerMapOfStringToAutoVersionCreateConfig);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerMapOfStringToAutoVersionCreateConfig);
     final _path = r'/api/admin/autoCommitSettings';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1794,11 +1741,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1809,15 +1753,14 @@ class AdminControllerApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(BuiltMap, [FullType(String), FullType(AutoVersionCreateConfig)]);
+      const _type = FullType(BuiltMap, [
+        FullType(String),
+        FullType(AutoVersionCreateConfig),
+      ]);
       _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1837,11 +1780,16 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AutoVersionCreateConfig)]),
-      ) as BuiltMap<String, AutoVersionCreateConfig>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltMap, [
+                    FullType(String),
+                    FullType(AutoVersionCreateConfig),
+                  ]),
+                )
+                as BuiltMap<String, AutoVersionCreateConfig>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1868,7 +1816,7 @@ class AdminControllerApi {
   /// Updates the JWT Settings object that contains JWT token policy, etc. The tokenSigningKey field is a Base64 encoded string.  Available for users with &#39;SYS_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [jwtSettings] 
+  /// * [jwtSettings]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1878,7 +1826,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> saveJwtSettings({ 
+  Future<Response<JwtPair>> saveJwtSettings({
     required JwtSettings jwtSettings,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1887,13 +1835,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerJwtPairAndJwtSettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerJwtPairAndJwtSettings);
     final _path = r'/api/admin/jwtSettings';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1901,11 +1848,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1918,13 +1862,9 @@ class AdminControllerApi {
     try {
       const _type = FullType(JwtSettings);
       _bodyData = _serializers.serialize(jwtSettings, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1944,11 +1884,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1975,7 +1917,7 @@ class AdminControllerApi {
   /// Creates or Updates the repository settings object.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [repositorySettings] 
+  /// * [repositorySettings]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1985,7 +1927,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [RepositorySettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<RepositorySettings>> saveRepositorySettings({ 
+  Future<Response<RepositorySettings>> saveRepositorySettings({
     required RepositorySettings repositorySettings,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1994,13 +1936,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerRepositorySettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerRepositorySettings);
     final _path = r'/api/admin/repositorySettings';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2008,11 +1949,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2024,14 +1962,13 @@ class AdminControllerApi {
 
     try {
       const _type = FullType(RepositorySettings);
-      _bodyData = _serializers.serialize(repositorySettings, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        repositorySettings,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -2051,11 +1988,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(RepositorySettings),
-      ) as RepositorySettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(RepositorySettings),
+                )
+                as RepositorySettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2082,7 +2021,7 @@ class AdminControllerApi {
   /// Updates the Security Settings object that contains password policy, etc.  Available for users with &#39;SYS_ADMIN&#39; authority.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the &#39;ADMIN_SETTINGS&#39; (for &#39;SYS_ADMIN&#39; authority) or &#39;WHITE_LABELING&#39; (for &#39;TENANT_ADMIN&#39; authority) resource.
   ///
   /// Parameters:
-  /// * [securitySettings] 
+  /// * [securitySettings]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -2092,7 +2031,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SecuritySettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SecuritySettings>> saveSecuritySettings({ 
+  Future<Response<SecuritySettings>> saveSecuritySettings({
     required SecuritySettings securitySettings,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2101,13 +2040,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSecuritySettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSecuritySettings);
     final _path = r'/api/admin/securitySettings';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2115,11 +2053,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2131,14 +2066,13 @@ class AdminControllerApi {
 
     try {
       const _type = FullType(SecuritySettings);
-      _bodyData = _serializers.serialize(securitySettings, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        securitySettings,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -2158,11 +2092,13 @@ class AdminControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SecuritySettings),
-      ) as SecuritySettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SecuritySettings),
+                )
+                as SecuritySettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2189,7 +2125,7 @@ class AdminControllerApi {
   /// Attempts to send test email using Mail Settings provided as a parameter. Email is sent to the address specified in the profile of user who is performing the requestYou may change the &#39;To&#39; email in the user profile of the System/Tenant Administrator.   Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.  Security check is performed to verify that the user has &#39;READ&#39; permission for the &#39;ADMIN_SETTINGS&#39; (for &#39;SYS_ADMIN&#39; authority) or &#39;WHITE_LABELING&#39; (for &#39;TENANT_ADMIN&#39; authority) resource.
   ///
   /// Parameters:
-  /// * [adminSettings] 
+  /// * [adminSettings]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -2199,7 +2135,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> sendTestMail({ 
+  Future<Response<void>> sendTestMail({
     required AdminSettings adminSettings,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2208,13 +2144,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAdminSettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAdminSettings);
     final _path = r'/api/admin/settings/testMail';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2222,11 +2157,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2239,13 +2171,9 @@ class AdminControllerApi {
     try {
       const _type = FullType(AdminSettings);
       _bodyData = _serializers.serialize(adminSettings, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -2268,7 +2196,7 @@ class AdminControllerApi {
   /// Attempts to send test sms to the System Administrator User using SMS Settings and phone number provided as a parameters of the request.   Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.  Security check is performed to verify that the user has &#39;READ&#39; permission for the &#39;ADMIN_SETTINGS&#39; (for &#39;SYS_ADMIN&#39; authority) or &#39;WHITE_LABELING&#39; (for &#39;TENANT_ADMIN&#39; authority) resource.
   ///
   /// Parameters:
-  /// * [testSmsRequest] 
+  /// * [testSmsRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -2278,7 +2206,7 @@ class AdminControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> sendTestSms({ 
+  Future<Response<void>> sendTestSms({
     required TestSmsRequest testSmsRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2287,13 +2215,12 @@ class AdminControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTestSmsRequest);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTestSmsRequest);
     final _path = r'/api/admin/settings/testSms';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2301,11 +2228,8 @@ class AdminControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2318,13 +2242,9 @@ class AdminControllerApi {
     try {
       const _type = FullType(TestSmsRequest);
       _bodyData = _serializers.serialize(testSmsRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -2342,5 +2262,4 @@ class AdminControllerApi {
 
     return _response;
   }
-
 }

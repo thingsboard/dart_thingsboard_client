@@ -1072,7 +1072,8 @@ part 'serializers.g.dart';
   AgentAppArgumentFormat,
   AgentAppArgumentSource,
   AgentAppArgumentValueType,
-  AgentAppConfig,$AgentAppConfig,
+  AgentAppConfig,
+  $AgentAppConfig,
   AgentAppConfigType,
   AgentAppEvent,
   AgentAppEventActionType,
@@ -1085,8 +1086,10 @@ part 'serializers.g.dart';
   AgentAppProfileId,
   AgentAppProfileInfo,
   AgentAppProfileRelationInfo,
-  AgentAppStep,$AgentAppStep,
-  AgentAppStepState,$AgentAppStepState,
+  AgentAppStep,
+  $AgentAppStep,
+  AgentAppStepState,
+  $AgentAppStepState,
   AgentAppStepType,
   AgentAppTemplate,
   AgentAppTemplateStartStepsInner,
@@ -1115,8 +1118,10 @@ part 'serializers.g.dart';
   AgentUpgradeRequest,
   AggFunction,
   AggFunctionInput,
-  AggInput,$AggInput,
-  AggInterval,$AggInterval,
+  AggInput,
+  $AggInput,
+  AggInterval,
+  $AggInterval,
   AggKeyInput,
   AggMetric,
   Aggregation,
@@ -1124,7 +1129,8 @@ part 'serializers.g.dart';
   AggregationParams,
   AiChatModelConfig,
   AiModel,
-  AiModelConfig,$AiModelConfig,
+  AiModelConfig,
+  $AiModelConfig,
   AiModelExportData,
   AiModelId,
   AiModelType,
@@ -1140,8 +1146,10 @@ part 'serializers.g.dart';
   AlarmCommentNotificationRuleTriggerConfig,
   AlarmCommentRecipientsConfig,
   AlarmCommentType,
-  AlarmCondition,$AlarmCondition,
-  AlarmConditionExpression,$AlarmConditionExpression,
+  AlarmCondition,
+  $AlarmCondition,
+  AlarmConditionExpression,
+  $AlarmConditionExpression,
   AlarmConditionFilter,
   AlarmConditionValueAlarmSchedule,
   AlarmConditionValueBoolean,
@@ -1164,12 +1172,14 @@ part 'serializers.g.dart';
   AlarmRuleComplexOperation,
   AlarmRuleDefinition,
   AlarmRuleDefinitionInfo,
-  AlarmRuleKeyFilterPredicate,$AlarmRuleKeyFilterPredicate,
+  AlarmRuleKeyFilterPredicate,
+  $AlarmRuleKeyFilterPredicate,
   AlarmRuleNumericFilterPredicate,
   AlarmRuleNumericOperation,
   AlarmRuleStringFilterPredicate,
   AlarmRuleStringOperation,
-  AlarmSchedule,$AlarmSchedule,
+  AlarmSchedule,
+  $AlarmSchedule,
   AlarmSearchStatus,
   AlarmSeverity,
   AlarmStatus,
@@ -1212,7 +1222,8 @@ part 'serializers.g.dart';
   AttributesEntityView,
   AttributesImmediateOutputStrategy,
   AttributesOutput,
-  AttributesOutputStrategy,$AttributesOutputStrategy,
+  AttributesOutputStrategy,
+  $AttributesOutputStrategy,
   AttributesRuleChainOutputStrategy,
   AuditLog,
   AuditLogId,
@@ -1255,14 +1266,17 @@ part 'serializers.g.dart';
   CMItemType,
   CMScope,
   CalculatedField,
-  CalculatedFieldConfiguration,$CalculatedFieldConfiguration,
+  CalculatedFieldConfiguration,
+  $CalculatedFieldConfiguration,
   CalculatedFieldDebugEventFilter,
   CalculatedFieldId,
   CalculatedFieldInfo,
   CalculatedFieldType,
-  CaptchaParams,$CaptchaParams,
+  CaptchaParams,
+  $CaptchaParams,
   CellSettings,
-  CfArgumentDynamicSourceConfiguration,$CfArgumentDynamicSourceConfiguration,
+  CfArgumentDynamicSourceConfiguration,
+  $CfArgumentDynamicSourceConfiguration,
   CfReprocessingJobConfiguration,
   CfReprocessingJobResult,
   CfReprocessingTaskFailure,
@@ -1282,7 +1296,8 @@ part 'serializers.g.dart';
   ClientAttributesQueryingSnmpCommunicationConfig,
   CoapDeviceProfileTransportConfiguration,
   CoapDeviceTransportConfiguration,
-  CoapDeviceTypeConfiguration,$CoapDeviceTypeConfiguration,
+  CoapDeviceTypeConfiguration,
+  $CoapDeviceTypeConfiguration,
   ColorRange,
   ColumnMapping,
   ColumnSettings,
@@ -1336,7 +1351,8 @@ part 'serializers.g.dart';
   DashboardReportConfig,
   DataKey,
   DataKeyComparisonSettings,
-  DataKeySettings,$DataKeySettings,
+  DataKeySettings,
+  $DataKeySettings,
   DataKeySettingsType,
   DataSource,
   DataSourceType,
@@ -1357,11 +1373,13 @@ part 'serializers.g.dart';
   DefaultPageId,
   DefaultRuleChainCreateRequest,
   DefaultTenantProfileConfiguration,
-  DeliveryMethodNotificationTemplate,$DeliveryMethodNotificationTemplate,
+  DeliveryMethodNotificationTemplate,
+  $DeliveryMethodNotificationTemplate,
   Device,
   DeviceActivityNotificationRuleTriggerConfig,
   DeviceActivityRecipientsConfig,
-  DeviceConfiguration,$DeviceConfiguration,
+  DeviceConfiguration,
+  $DeviceConfiguration,
   DeviceCredentials,
   DeviceCredentialsId,
   DeviceCredentialsType,
@@ -1372,18 +1390,22 @@ part 'serializers.g.dart';
   DeviceId,
   DeviceInfo,
   DeviceProfile,
-  DeviceProfileConfiguration,$DeviceProfileConfiguration,
+  DeviceProfileConfiguration,
+  $DeviceProfileConfiguration,
   DeviceProfileData,
   DeviceProfileExportData,
   DeviceProfileId,
   DeviceProfileInfo,
-  DeviceProfileProvisionConfiguration,$DeviceProfileProvisionConfiguration,
+  DeviceProfileProvisionConfiguration,
+  $DeviceProfileProvisionConfiguration,
   DeviceProfileProvisionType,
-  DeviceProfileTransportConfiguration,$DeviceProfileTransportConfiguration,
+  DeviceProfileTransportConfiguration,
+  $DeviceProfileTransportConfiguration,
   DeviceProfileType,
   DeviceSearchQuery,
   DeviceSearchQueryFilter,
-  DeviceTransportConfiguration,$DeviceTransportConfiguration,
+  DeviceTransportConfiguration,
+  $DeviceTransportConfiguration,
   DeviceTransportType,
   DeviceTypeFilter,
   Direction,
@@ -1444,9 +1466,11 @@ part 'serializers.g.dart';
   EntityDataPageLink,
   EntityDataQuery,
   EntityDataSortOrder,
-  EntityExportData,$EntityExportData,
+  EntityExportData,
+  $EntityExportData,
   EntityExportSettings,
-  EntityFilter,$EntityFilter,
+  EntityFilter,
+  $EntityFilter,
   EntityGroup,
   EntityGroupExportData,
   EntityGroupFilter,
@@ -1454,7 +1478,8 @@ part 'serializers.g.dart';
   EntityGroupInfo,
   EntityGroupListFilter,
   EntityGroupNameFilter,
-  EntityId,$EntityId,
+  EntityId,
+  $EntityId,
   EntityInfo,
   EntityKey,
   EntityKeyType,
@@ -1488,7 +1513,8 @@ part 'serializers.g.dart';
   ErrorComponentAllOfExceptionCauseStackTrace,
   ErrorEventFilter,
   EscalatedNotificationRuleRecipientsConfig,
-  EventFilter,$EventFilter,
+  EventFilter,
+  $EventFilter,
   EventId,
   EventInfo,
   EventType,
@@ -1543,16 +1569,19 @@ part 'serializers.g.dart';
   Interval,
   IntervalType,
   Job,
-  JobConfiguration,$JobConfiguration,
+  JobConfiguration,
+  $JobConfiguration,
   JobId,
-  JobResult,$JobResult,
+  JobResult,
+  $JobResult,
   JobStatus,
   JobType,
   JsonTransportPayloadConfiguration,
   JwtPair,
   JwtSettings,
   KeyFilter,
-  KeyFilterPredicate,$KeyFilterPredicate,
+  KeyFilterPredicate,
+  $KeyFilterPredicate,
   KeyInfo,
   KeySample,
   LastVisitedDashboardInfo,
@@ -1576,7 +1605,8 @@ part 'serializers.g.dart';
   LoginRequest,
   LoginResponse,
   LoginWhiteLabelingParams,
-  LwM2MBootstrapServerCredential,$LwM2MBootstrapServerCredential,
+  LwM2MBootstrapServerCredential,
+  $LwM2MBootstrapServerCredential,
   LwM2MServerSecurityConfigDefault,
   LwM2mInstance,
   LwM2mObject,
@@ -1586,7 +1616,8 @@ part 'serializers.g.dart';
   Lwm2mDeviceTransportConfiguration,
   MapperType,
   Mapping,
-  MenuItem,$MenuItem,
+  MenuItem,
+  $MenuItem,
   MenuItemType,
   MergedGroupPermissionInfo,
   MergedGroupTypePermissionInfo,
@@ -1605,7 +1636,8 @@ part 'serializers.g.dart';
   MobileAppStatus,
   MobileAppVersionInfo,
   MobileLayoutConfig,
-  MobilePage,$MobilePage,
+  MobilePage,
+  $MobilePage,
   MobilePageType,
   MobileRedirectParams,
   MobileSelfRegistrationParams,
@@ -1623,7 +1655,8 @@ part 'serializers.g.dart';
   None,
   Notification,
   NotificationDeliveryMethod,
-  NotificationDeliveryMethodConfig,$NotificationDeliveryMethodConfig,
+  NotificationDeliveryMethodConfig,
+  $NotificationDeliveryMethodConfig,
   NotificationId,
   NotificationInfo,
   NotificationPref,
@@ -1639,13 +1672,16 @@ part 'serializers.g.dart';
   NotificationRuleExportData,
   NotificationRuleId,
   NotificationRuleInfo,
-  NotificationRuleRecipientsConfig,$NotificationRuleRecipientsConfig,
-  NotificationRuleTriggerConfig,$NotificationRuleTriggerConfig,
+  NotificationRuleRecipientsConfig,
+  $NotificationRuleRecipientsConfig,
+  NotificationRuleTriggerConfig,
+  $NotificationRuleTriggerConfig,
   NotificationRuleTriggerType,
   NotificationSettings,
   NotificationStatus,
   NotificationTarget,
-  NotificationTargetConfig,$NotificationTargetConfig,
+  NotificationTargetConfig,
+  $NotificationTargetConfig,
   NotificationTargetExportData,
   NotificationTargetId,
   NotificationTemplate,
@@ -1666,7 +1702,8 @@ part 'serializers.g.dart';
   OAuth2MapperConfig,
   ObjectAttributes,
   ObjectType,
-  OllamaAuth,$OllamaAuth,
+  OllamaAuth,
+  $OllamaAuth,
   OllamaChatModelConfig,
   OllamaProviderConfig,
   OpenAiChatModelConfig,
@@ -1679,7 +1716,8 @@ part 'serializers.g.dart';
   OtaPackageInfo,
   OtaPackageType,
   OtherConfiguration,
-  Output,$Output,
+  Output,
+  $Output,
   PSKLwM2MBootstrapServerCredential,
   PageBreakComponent,
   PageDataAgent,
@@ -1808,7 +1846,8 @@ part 'serializers.g.dart';
   Report,
   ReportBarChartSettings,
   ReportBarChartWithLabelsSettings,
-  ReportComponent,$ReportComponent,
+  ReportComponent,
+  $ReportComponent,
   ReportComponentSubType,
   ReportComponentType,
   ReportDoughnutChartSettings,
@@ -1816,18 +1855,21 @@ part 'serializers.g.dart';
   ReportInfo,
   ReportJobConfiguration,
   ReportJobResult,
-  ReportLatestChartSettings,$ReportLatestChartSettings,
+  ReportLatestChartSettings,
+  $ReportLatestChartSettings,
   ReportPieChartSettings,
   ReportRangeChartSettings,
   ReportRequest,
   ReportTaskResult,
   ReportTemplate,
-  ReportTemplateConfig,$ReportTemplateConfig,
+  ReportTemplateConfig,
+  $ReportTemplateConfig,
   ReportTemplateExportData,
   ReportTemplateId,
   ReportTemplateInfo,
   ReportTemplateType,
-  ReportTimeSeriesChartSettings,$ReportTimeSeriesChartSettings,
+  ReportTimeSeriesChartSettings,
+  $ReportTimeSeriesChartSettings,
   RepositoryAuthMethod,
   RepositorySettings,
   RepositorySettingsInfo,
@@ -1883,7 +1925,8 @@ part 'serializers.g.dart';
   SecretInfo,
   SecretType,
   SecuritySettings,
-  SelfRegistrationParams,$SelfRegistrationParams,
+  SelfRegistrationParams,
+  $SelfRegistrationParams,
   SelfRegistrationType,
   SetupInfo,
   ShareGroupRequest,
@@ -1913,10 +1956,12 @@ part 'serializers.g.dart';
   SmppBindType,
   SmppSmsProviderConfiguration,
   SmsDeliveryMethodNotificationTemplate,
-  SmsProviderConfiguration,$SmsProviderConfiguration,
+  SmsProviderConfiguration,
+  $SmsProviderConfiguration,
   SmsTwoFaAccountConfig,
   SmsTwoFaProviderConfig,
-  SnmpCommunicationConfig,$SnmpCommunicationConfig,
+  SnmpCommunicationConfig,
+  $SnmpCommunicationConfig,
   SnmpCommunicationSpec,
   SnmpDeviceProfileTransportConfiguration,
   SnmpDeviceTransportConfiguration,
@@ -1959,10 +2004,13 @@ part 'serializers.g.dart';
   TableSortOrder,
   TaskProcessingFailureNotificationRuleTriggerConfig,
   TaskProcessingFailureRecipientsConfig,
-  TaskResult,$TaskResult,
+  TaskResult,
+  $TaskResult,
   TbChatRequest,
-  TbChatResponse,$TbChatResponse,
-  TbContent,$TbContent,
+  TbChatResponse,
+  $TbChatResponse,
+  TbContent,
+  $TbContent,
   TbImageDeleteResult,
   TbReportFormat,
   TbResource,
@@ -1984,7 +2032,8 @@ part 'serializers.g.dart';
   TenantInfo,
   TenantNameStrategyType,
   TenantProfile,
-  TenantProfileConfiguration,$TenantProfileConfiguration,
+  TenantProfileConfiguration,
+  $TenantProfileConfiguration,
   TenantProfileData,
   TenantProfileId,
   TenantProfileQueueConfiguration,
@@ -2008,7 +2057,8 @@ part 'serializers.g.dart';
   TimeSeriesChartYAxisSettings,
   TimeSeriesImmediateOutputStrategy,
   TimeSeriesOutput,
-  TimeSeriesOutputStrategy,$TimeSeriesOutputStrategy,
+  TimeSeriesOutputStrategy,
+  $TimeSeriesOutputStrategy,
   TimeSeriesRuleChainOutputStrategy,
   TimeUnit,
   TimeWindowConfiguration,
@@ -2021,7 +2071,8 @@ part 'serializers.g.dart';
   TotpTwoFaAccountConfig,
   TotpTwoFaProviderConfig,
   TranslationInfo,
-  TransportPayloadTypeConfiguration,$TransportPayloadTypeConfiguration,
+  TransportPayloadTypeConfiguration,
+  $TransportPayloadTypeConfiguration,
   TrendzConfiguration,
   TrendzHealthcheckResult,
   TrendzSummary,
@@ -2035,9 +2086,11 @@ part 'serializers.g.dart';
   TsKvEntry,
   TsValue,
   TwilioSmsProviderConfiguration,
-  TwoFaAccountConfig,$TwoFaAccountConfig,
+  TwoFaAccountConfig,
+  $TwoFaAccountConfig,
   TwoFaAccountConfigUpdateRequest,
-  TwoFaProviderConfig,$TwoFaProviderConfig,
+  TwoFaProviderConfig,
+  $TwoFaProviderConfig,
   TwoFaProviderInfo,
   TwoFaProviderType,
   UniquifyStrategy,
@@ -2056,17 +2109,20 @@ part 'serializers.g.dart';
   UserNotificationSettings,
   UserPasswordPolicy,
   UserRoleFilter,
-  UsersFilter,$UsersFilter,
+  UsersFilter,
+  $UsersFilter,
   V2CaptchaParams,
   V3CaptchaParams,
   ValueSourceType,
   Vendor,
   VersionCreateConfig,
-  VersionCreateRequest,$VersionCreateRequest,
+  VersionCreateRequest,
+  $VersionCreateRequest,
   VersionCreateRequestType,
   VersionCreationResult,
   VersionLoadConfig,
-  VersionLoadRequest,$VersionLoadRequest,
+  VersionLoadRequest,
+  $VersionLoadRequest,
   VersionLoadRequestType,
   VersionLoadResult,
   VersionedEntityInfo,
@@ -2094,1000 +2150,1095 @@ part 'serializers.g.dart';
   YearInterval,
   ZoneGroupConfiguration,
 ])
-Serializers serializers = (_$serializers.toBuilder()
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TsValue)]),
-        () => ListBuilder<TsValue>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(PlatformType)]),
-        () => ListBuilder<PlatformType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(AlarmSeverity)]),
-        () => SetBuilder<AlarmSeverity>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(DeliveryMethodNotificationTemplate)]),
-        () => MapBuilder<String, DeliveryMethodNotificationTemplate>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(KeyFilterPredicate)]),
-        () => ListBuilder<KeyFilterPredicate>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(MobileAppBundleInfo)]),
-        () => ListBuilder<MobileAppBundleInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityType)]),
-        () => ListBuilder<EntityType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(AggMetric)]),
-        () => MapBuilder<String, AggMetric>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(MenuItem)]),
-        () => ListBuilder<MenuItem>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Integration)]),
-        () => ListBuilder<Integration>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(UserInfo)]),
-        () => ListBuilder<UserInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(NotificationDeliveryMethodConfig)]),
-        () => MapBuilder<String, NotificationDeliveryMethodConfig>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AuditLog)]),
-        () => ListBuilder<AuditLog>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
-        () => MapBuilder<String, TsValue>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(WidgetType)]),
-        () => ListBuilder<WidgetType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList)]),
-        () => MapBuilder<String, BuiltList>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]),
-        () => MapBuilder<String, AgentAppEventStepStatesValue>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TimeSeriesChartThreshold)]),
-        () => ListBuilder<TimeSeriesChartThreshold>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TbContent)]),
-        () => ListBuilder<TbContent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DashboardInfo)]),
-        () => ListBuilder<DashboardInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EdgeEvent)]),
-        () => ListBuilder<EdgeEvent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmCommentInfo)]),
-        () => ListBuilder<AlarmCommentInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(Action)]),
-        () => SetBuilder<Action>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(ResourceType)]),
-        () => SetBuilder<ResourceType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(MobileApp)]),
-        () => ListBuilder<MobileApp>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RuleChainImportResult)]),
-        () => ListBuilder<RuleChainImportResult>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(ComparisonTsValue)]),
-        () => MapBuilder<String, ComparisonTsValue>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(EntityTypeVersionCreateConfig)]),
-        () => MapBuilder<String, EntityTypeVersionCreateConfig>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Job)]),
-        () => ListBuilder<Job>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentInfo)]),
-        () => ListBuilder<AgentInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TenantProfileQueueConfiguration)]),
-        () => ListBuilder<TenantProfileQueueConfiguration>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCause)]),
-        () => ListBuilder<ErrorComponentAllOfExceptionCause>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentProfile)]),
-        () => ListBuilder<AgentProfile>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SkippedApp)]),
-        () => ListBuilder<SkippedApp>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NotificationRuleInfo)]),
-        () => ListBuilder<NotificationRuleInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EdgeInfo)]),
-        () => ListBuilder<EdgeInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityExportData)]),
-        () => ListBuilder<EntityExportData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(OAuth2ClientLoginInfo)]),
-        () => ListBuilder<OAuth2ClientLoginInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CustomMenuInfo)]),
-        () => ListBuilder<CustomMenuInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(DeviceEvent)]),
-        () => SetBuilder<DeviceEvent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Notification)]),
-        () => ListBuilder<Notification>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(WhiteLabeling)]),
-        () => ListBuilder<WhiteLabeling>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(KeyInfo)])]),
-        () => MapBuilder<String, BuiltList<KeyInfo>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AttributeData)]),
-        () => ListBuilder<AttributeData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TbResourceInfo)]),
-        () => ListBuilder<TbResourceInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DomainInfo)]),
-        () => ListBuilder<DomainInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(WidgetBundleInfo)]),
-        () => ListBuilder<WidgetBundleInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityVersion)]),
-        () => ListBuilder<EntityVersion>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(AlarmAction)]),
-        () => SetBuilder<AlarmAction>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AssetProfile)]),
-        () => ListBuilder<AssetProfile>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DataKey)]),
-        () => ListBuilder<DataKey>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Dashboard)]),
-        () => ListBuilder<Dashboard>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AssetInfo)]),
-        () => ListBuilder<AssetInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]),
-        () => ListBuilder<SchedulerEventWithCustomerInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentProfileInfo)]),
-        () => ListBuilder<AgentProfileInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppTemplate)]),
-        () => ListBuilder<AgentAppTemplate>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RuleNode)]),
-        () => ListBuilder<RuleNode>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCauseStackTrace)]),
-        () => ListBuilder<ErrorComponentAllOfExceptionCauseStackTrace>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(TimeSeriesChartYAxisSettings)]),
-        () => MapBuilder<String, TimeSeriesChartYAxisSettings>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityTypeLoadResult)]),
-        () => ListBuilder<EntityTypeLoadResult>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityData)]),
-        () => ListBuilder<EntityData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(GroupPermission)]),
-        () => ListBuilder<GroupPermission>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CalculatedFieldInfo)]),
-        () => ListBuilder<CalculatedFieldInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(EdgeConnectivityEvent)]),
-        () => SetBuilder<EdgeConnectivityEvent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ComponentDescriptor)]),
-        () => ListBuilder<ComponentDescriptor>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DeviceProfile)]),
-        () => ListBuilder<DeviceProfile>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NotificationRequest)]),
-        () => ListBuilder<NotificationRequest>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityGroupId)]),
-        () => ListBuilder<EntityGroupId>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ContactBasedObject)]),
-        () => ListBuilder<ContactBasedObject>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
-        () => MapBuilder<String, Argument>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ReportComponent)]),
-        () => ListBuilder<ReportComponent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityGroupInfo)]),
-        () => ListBuilder<EntityGroupInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ResourceExportData)]),
-        () => ListBuilder<ResourceExportData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(AlarmSearchStatus)]),
-        () => SetBuilder<AlarmSearchStatus>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Asset)]),
-        () => ListBuilder<Asset>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(TsValue)])]),
-        () => MapBuilder<String, BuiltList<TsValue>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
-        () => ListBuilder<AgentAppTemplateStartStepsInner>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AttributeExportData)]),
-        () => ListBuilder<AttributeExportData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DataSource)]),
-        () => ListBuilder<DataSource>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ColorRange)]),
-        () => ListBuilder<ColorRange>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityKey)]),
-        () => ListBuilder<EntityKey>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Agent)]),
-        () => ListBuilder<Agent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Report)]),
-        () => ListBuilder<Report>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TwoFaProviderConfig)]),
-        () => ListBuilder<TwoFaProviderConfig>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(LimitedApi)]),
-        () => SetBuilder<LimitedApi>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(BaseReadTsKvQuery)]),
-        () => ListBuilder<BaseReadTsKvQuery>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SystemInfoData)]),
-        () => ListBuilder<SystemInfoData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmSeverity)]),
-        () => ListBuilder<AlarmSeverity>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppUnit)]),
-        () => ListBuilder<AgentAppUnit>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(EntityId)]),
-        () => SetBuilder<EntityId>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(MergedGroupPermissionInfo)]),
-        () => MapBuilder<String, MergedGroupPermissionInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(BranchInfo)]),
-        () => ListBuilder<BranchInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(int)]),
-        () => MapBuilder<String, int>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(ZoneGroupConfiguration)]),
-        () => MapBuilder<String, ZoneGroupConfiguration>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Filter)]),
-        () => ListBuilder<Filter>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmInfo)]),
-        () => ListBuilder<AlarmInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(BlobEntityWithCustomerInfo)]),
-        () => ListBuilder<BlobEntityWithCustomerInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(IntegrationType)]),
-        () => SetBuilder<IntegrationType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(MobilePage)]),
-        () => ListBuilder<MobilePage>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ApiKeyInfo)]),
-        () => ListBuilder<ApiKeyInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmSearchStatus)]),
-        () => ListBuilder<AlarmSearchStatus>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentApplicationInfo)]),
-        () => ListBuilder<AgentApplicationInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DeviceGroupOtaPackage)]),
-        () => ListBuilder<DeviceGroupOtaPackage>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityInfo)])]),
-        () => MapBuilder<String, BuiltList<EntityInfo>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityRelation)]),
-        () => ListBuilder<EntityRelation>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltSet, [FullType(Operation)])]),
-        () => MapBuilder<String, BuiltSet<Operation>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(QueueStats)]),
-        () => ListBuilder<QueueStats>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(WidgetsBundle)]),
-        () => ListBuilder<WidgetsBundle>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(WidgetTypeDetails)]),
-        () => ListBuilder<WidgetTypeDetails>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RuleChainConnectionInfo)]),
-        () => ListBuilder<RuleChainConnectionInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(ObjectAttributes)]),
-        () => MapBuilder<String, ObjectAttributes>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(HasIdObject)]),
-        () => ListBuilder<HasIdObject>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CustomerInfo)]),
-        () => ListBuilder<CustomerInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ShortEntityView)]),
-        () => ListBuilder<ShortEntityView>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TimeSeriesChartStateSettings)]),
-        () => ListBuilder<TimeSeriesChartStateSettings>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TranslationInfo)]),
-        () => ListBuilder<TranslationInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(BlobEntityInfo)]),
-        () => ListBuilder<BlobEntityInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Role)]),
-        () => ListBuilder<Role>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(Resource)]),
-        () => SetBuilder<Resource>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmRuleKeyFilterPredicate)]),
-        () => ListBuilder<AlarmRuleKeyFilterPredicate>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppEvent)]),
-        () => ListBuilder<AgentAppEvent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(IntegrationInfo)]),
-        () => ListBuilder<IntegrationInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(Operation)]),
-        () => SetBuilder<Operation>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(WidgetTypeInfo)]),
-        () => ListBuilder<WidgetTypeInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Queue)]),
-        () => ListBuilder<Queue>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NotificationTemplate)]),
-        () => ListBuilder<NotificationTemplate>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntitySubtype)]),
-        () => ListBuilder<EntitySubtype>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppProfileRelationInfo)]),
-        () => ListBuilder<AgentAppProfileRelationInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(String)])]),
-        () => MapBuilder<String, BuiltList<String>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(KeyFilter)]),
-        () => ListBuilder<KeyFilter>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SignUpField)]),
-        () => ListBuilder<SignUpField>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(LwM2mObject)]),
-        () => ListBuilder<LwM2mObject>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
-        () => MapBuilder<String, MergedGroupTypePermissionInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ReportTemplateInfo)]),
-        () => ListBuilder<ReportTemplateInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TrendzViewConfigLite)]),
-        () => ListBuilder<TrendzViewConfigLite>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(ApiFeature)]),
-        () => SetBuilder<ApiFeature>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CalculatedField)]),
-        () => ListBuilder<CalculatedField>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(String)]),
-        () => MapBuilder<String, String>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Device)]),
-        () => ListBuilder<Device>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AssetProfileInfo)]),
-        () => ListBuilder<AssetProfileInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(NotificationPref)]),
-        () => MapBuilder<String, NotificationPref>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppEventInfo)]),
-        () => ListBuilder<AgentAppEventInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TwoFaProviderType)]),
-        () => ListBuilder<TwoFaProviderType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Model)]),
-        () => ListBuilder<Model>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppProfile)]),
-        () => ListBuilder<AgentAppProfile>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RoleId)]),
-        () => ListBuilder<RoleId>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SchedulerEventInfo)]),
-        () => ListBuilder<SchedulerEventInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(CalculatedFieldType)]),
-        () => SetBuilder<CalculatedFieldType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentBulkAction)]),
-        () => ListBuilder<AgentBulkAction>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RelationEntityTypeFilter)]),
-        () => ListBuilder<RelationEntityTypeFilter>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SnmpCommunicationConfig)]),
-        () => ListBuilder<SnmpCommunicationConfig>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(LwM2mInstance)]),
-        () => ListBuilder<LwM2mInstance>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RuleChainOutputLabelsUsage)]),
-        () => ListBuilder<RuleChainOutputLabelsUsage>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(JsonObject)]),
-        () => ListBuilder<JsonObject>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityRelationInfo)]),
-        () => ListBuilder<EntityRelationInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ScheduledReportInfo)]),
-        () => ListBuilder<ScheduledReportInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmConditionFilter)]),
-        () => ListBuilder<AlarmConditionFilter>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(StarredDashboardInfo)]),
-        () => ListBuilder<StarredDashboardInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType.nullable(JsonObject)]),
-        () => MapBuilder<String, JsonObject?>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(ObjectType)]),
-        () => SetBuilder<ObjectType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(GroupPermissionInfo)]),
-        () => ListBuilder<GroupPermissionInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(String)]),
-        () => ListBuilder<String>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(LwM2MBootstrapServerCredential)]),
-        () => ListBuilder<LwM2MBootstrapServerCredential>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Vendor)]),
-        () => ListBuilder<Vendor>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(ShortCustomerInfo)]),
-        () => SetBuilder<ShortCustomerInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SlackConversation)]),
-        () => ListBuilder<SlackConversation>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DeviceInfo)]),
-        () => ListBuilder<DeviceInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NotificationRequestInfo)]),
-        () => ListBuilder<NotificationRequestInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityAlias)]),
-        () => ListBuilder<EntityAlias>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(LastVisitedDashboardInfo)]),
-        () => ListBuilder<LastVisitedDashboardInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityView)]),
-        () => ListBuilder<EntityView>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(TwoFaAccountConfig)]),
-        () => MapBuilder<String, TwoFaAccountConfig>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmRuleDefinitionInfo)]),
-        () => ListBuilder<AlarmRuleDefinitionInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityInfo)]),
-        () => ListBuilder<EntityInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(AutoVersionCreateConfig)]),
-        () => MapBuilder<String, AutoVersionCreateConfig>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Converter)]),
-        () => ListBuilder<Converter>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(GetManagedRelatedEntityIds200ResponseInner)]),
-        () => ListBuilder<GetManagedRelatedEntityIds200ResponseInner>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppProfileInfo)]),
-        () => ListBuilder<AgentAppProfileInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(EntityTypeVersionLoadConfig)]),
-        () => MapBuilder<String, EntityTypeVersionLoadConfig>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]),
-        () => SetBuilder<ComponentLifecycleEvent>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NodeConnectionInfo)]),
-        () => ListBuilder<NodeConnectionInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(User)]),
-        () => ListBuilder<User>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TaskResult)]),
-        () => ListBuilder<TaskResult>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(String)]),
-        () => SetBuilder<String>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AgentAppArgument)]),
-        () => ListBuilder<AgentAppArgument>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TsKvEntry)]),
-        () => ListBuilder<TsKvEntry>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EventInfo)]),
-        () => ListBuilder<EventInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RuleChainNote)]),
-        () => ListBuilder<RuleChainNote>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType.nullable(JsonObject)]),
-        () => ListBuilder<JsonObject>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RuleChainMetaData)]),
-        () => ListBuilder<RuleChainMetaData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(KeyInfo)]),
-        () => ListBuilder<KeyInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RuleChain)]),
-        () => ListBuilder<RuleChain>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(int)]),
-        () => SetBuilder<int>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(EntityViewInfo)]),
-        () => ListBuilder<EntityViewInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DeviceProfileInfo)]),
-        () => ListBuilder<DeviceProfileInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(HasIdObject)])]),
-        () => MapBuilder<String, BuiltList<HasIdObject>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(VersionedEntityInfo)]),
-        () => ListBuilder<VersionedEntityInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(TsValue)])]),
-        () => MapBuilder<String, BuiltMap<String, TsValue>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TwoFaProviderInfo)]),
-        () => ListBuilder<TwoFaProviderInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(OtaPackageInfo)]),
-        () => ListBuilder<OtaPackageInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityExportData)])]),
-        () => MapBuilder<String, BuiltList<EntityExportData>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(OAuth2ClientInfo)]),
-        () => ListBuilder<OAuth2ClientInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(DefaultMenuItem)]),
-        () => ListBuilder<DefaultMenuItem>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ReportId)]),
-        () => ListBuilder<ReportId>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(OAuth2ClientRegistrationTemplate)]),
-        () => ListBuilder<OAuth2ClientRegistrationTemplate>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ReadTsKvQueryResult)]),
-        () => ListBuilder<ReadTsKvQueryResult>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-        () => MapBuilder<String, BuiltList<AttributeExportData>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(String)])]),
-        () => MapBuilder<String, BuiltMap<String, String>>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(UserEmailInfo)]),
-        () => ListBuilder<UserEmailInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ReportInfo)]),
-        () => ListBuilder<ReportInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SnmpMapping)]),
-        () => ListBuilder<SnmpMapping>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AiModel)]),
-        () => ListBuilder<AiModel>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmData)]),
-        () => ListBuilder<AlarmData>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NotificationDeliveryMethod)]),
-        () => ListBuilder<NotificationDeliveryMethod>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(EntityType)]),
-        () => SetBuilder<EntityType>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltSet, [FullType(ApiUsageStateValue)]),
-        () => SetBuilder<ApiUsageStateValue>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(RelationPathLevel)]),
-        () => ListBuilder<RelationPathLevel>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(AlarmRuleDefinition)]),
-        () => ListBuilder<AlarmRuleDefinition>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(NotificationTarget)]),
-        () => ListBuilder<NotificationTarget>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CustomTimeScheduleItem)]),
-        () => ListBuilder<CustomTimeScheduleItem>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Edge)]),
-        () => ListBuilder<Edge>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(IntegrationConvertersInfo)]),
-        () => MapBuilder<String, IntegrationConvertersInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(LwM2mResourceObserve)]),
-        () => ListBuilder<LwM2mResourceObserve>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Customer)]),
-        () => ListBuilder<Customer>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(CustomMenuItem)]),
-        () => ListBuilder<CustomMenuItem>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(SecretInfo)]),
-        () => ListBuilder<SecretInfo>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(ColumnMapping)]),
-        () => ListBuilder<ColumnMapping>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(Tenant)]),
-        () => ListBuilder<Tenant>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(int)]),
-        () => ListBuilder<int>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TenantProfile)]),
-        () => ListBuilder<TenantProfile>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(AlarmRule)]),
-        () => MapBuilder<String, AlarmRule>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltMap, [FullType(String), FullType(bool)]),
-        () => MapBuilder<String, bool>(),
-      )
-      ..addBuilderFactory(
-        const FullType(BuiltList, [FullType(TenantInfo)]),
-        () => ListBuilder<TenantInfo>(),
-      )
-      ..add(AgentAppConfig.serializer)
-      ..add(AgentAppStep.serializer)
-      ..add(AgentAppStepState.serializer)
-      ..add(AggInput.serializer)
-      ..add(AggInterval.serializer)
-      ..add(AiModelConfig.serializer)
-      ..add(AlarmCondition.serializer)
-      ..add(AlarmConditionExpression.serializer)
-      ..add(AlarmRuleKeyFilterPredicate.serializer)
-      ..add(AlarmSchedule.serializer)
-      ..add(AttributesOutputStrategy.serializer)
-      ..add(CalculatedFieldConfiguration.serializer)
-      ..add(CaptchaParams.serializer)
-      ..add(CfArgumentDynamicSourceConfiguration.serializer)
-      ..add(CoapDeviceTypeConfiguration.serializer)
-      ..add(DataKeySettings.serializer)
-      ..add(DeliveryMethodNotificationTemplate.serializer)
-      ..add(DeviceConfiguration.serializer)
-      ..add(DeviceProfileConfiguration.serializer)
-      ..add(DeviceProfileProvisionConfiguration.serializer)
-      ..add(DeviceProfileTransportConfiguration.serializer)
-      ..add(DeviceTransportConfiguration.serializer)
-      ..add(EntityExportData.serializer)
-      ..add(EntityFilter.serializer)
-      ..add(EntityId.serializer)
-      ..add(EventFilter.serializer)
-      ..add(JobConfiguration.serializer)
-      ..add(JobResult.serializer)
-      ..add(KeyFilterPredicate.serializer)
-      ..add(LwM2MBootstrapServerCredential.serializer)
-      ..add(MenuItem.serializer)
-      ..add(MobilePage.serializer)
-      ..add(NotificationDeliveryMethodConfig.serializer)
-      ..add(NotificationRuleRecipientsConfig.serializer)
-      ..add(NotificationRuleTriggerConfig.serializer)
-      ..add(NotificationTargetConfig.serializer)
-      ..add(OllamaAuth.serializer)
-      ..add(Output.serializer)
-      ..add(ReportComponent.serializer)
-      ..add(ReportLatestChartSettings.serializer)
-      ..add(ReportTemplateConfig.serializer)
-      ..add(ReportTimeSeriesChartSettings.serializer)
-      ..add(SelfRegistrationParams.serializer)
-      ..add(SmsProviderConfiguration.serializer)
-      ..add(SnmpCommunicationConfig.serializer)
-      ..add(TaskResult.serializer)
-      ..add(TbChatResponse.serializer)
-      ..add(TbContent.serializer)
-      ..add(TenantProfileConfiguration.serializer)
-      ..add(TimeSeriesOutputStrategy.serializer)
-      ..add(TransportPayloadTypeConfiguration.serializer)
-      ..add(TwoFaAccountConfig.serializer)
-      ..add(TwoFaProviderConfig.serializer)
-      ..add(UsersFilter.serializer)
-      ..add(VersionCreateRequest.serializer)
-      ..add(VersionLoadRequest.serializer)
-      ..add(const OneOfSerializer())
-      ..add(const AnyOfSerializer())
-      ..add(const DateSerializer())
-      ..add(Iso8601DateTimeSerializer())
-    ).build();
+Serializers serializers =
+    (_$serializers.toBuilder()
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TsValue)]),
+            () => ListBuilder<TsValue>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(PlatformType)]),
+            () => ListBuilder<PlatformType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(AlarmSeverity)]),
+            () => SetBuilder<AlarmSeverity>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(DeliveryMethodNotificationTemplate),
+            ]),
+            () => MapBuilder<String, DeliveryMethodNotificationTemplate>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(KeyFilterPredicate)]),
+            () => ListBuilder<KeyFilterPredicate>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(MobileAppBundleInfo)]),
+            () => ListBuilder<MobileAppBundleInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityType)]),
+            () => ListBuilder<EntityType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(AggMetric)]),
+            () => MapBuilder<String, AggMetric>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(MenuItem)]),
+            () => ListBuilder<MenuItem>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Integration)]),
+            () => ListBuilder<Integration>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(UserInfo)]),
+            () => ListBuilder<UserInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(NotificationDeliveryMethodConfig),
+            ]),
+            () => MapBuilder<String, NotificationDeliveryMethodConfig>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AuditLog)]),
+            () => ListBuilder<AuditLog>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
+            () => MapBuilder<String, TsValue>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(WidgetType)]),
+            () => ListBuilder<WidgetType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(BuiltList)]),
+            () => MapBuilder<String, BuiltList>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(AgentAppEventStepStatesValue),
+            ]),
+            () => MapBuilder<String, AgentAppEventStepStatesValue>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TimeSeriesChartThreshold)]),
+            () => ListBuilder<TimeSeriesChartThreshold>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TbContent)]),
+            () => ListBuilder<TbContent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DashboardInfo)]),
+            () => ListBuilder<DashboardInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EdgeEvent)]),
+            () => ListBuilder<EdgeEvent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmCommentInfo)]),
+            () => ListBuilder<AlarmCommentInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(Action)]),
+            () => SetBuilder<Action>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(ResourceType)]),
+            () => SetBuilder<ResourceType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(MobileApp)]),
+            () => ListBuilder<MobileApp>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RuleChainImportResult)]),
+            () => ListBuilder<RuleChainImportResult>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(ComparisonTsValue),
+            ]),
+            () => MapBuilder<String, ComparisonTsValue>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(EntityTypeVersionCreateConfig),
+            ]),
+            () => MapBuilder<String, EntityTypeVersionCreateConfig>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Job)]),
+            () => ListBuilder<Job>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentInfo)]),
+            () => ListBuilder<AgentInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(TenantProfileQueueConfiguration),
+            ]),
+            () => ListBuilder<TenantProfileQueueConfiguration>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(ErrorComponentAllOfExceptionCause),
+            ]),
+            () => ListBuilder<ErrorComponentAllOfExceptionCause>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentProfile)]),
+            () => ListBuilder<AgentProfile>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SkippedApp)]),
+            () => ListBuilder<SkippedApp>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(NotificationRuleInfo)]),
+            () => ListBuilder<NotificationRuleInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EdgeInfo)]),
+            () => ListBuilder<EdgeInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityExportData)]),
+            () => ListBuilder<EntityExportData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(OAuth2ClientLoginInfo)]),
+            () => ListBuilder<OAuth2ClientLoginInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(CustomMenuInfo)]),
+            () => ListBuilder<CustomMenuInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(DeviceEvent)]),
+            () => SetBuilder<DeviceEvent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Notification)]),
+            () => ListBuilder<Notification>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(WhiteLabeling)]),
+            () => ListBuilder<WhiteLabeling>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltList, [FullType(KeyInfo)]),
+            ]),
+            () => MapBuilder<String, BuiltList<KeyInfo>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AttributeData)]),
+            () => ListBuilder<AttributeData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TbResourceInfo)]),
+            () => ListBuilder<TbResourceInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DomainInfo)]),
+            () => ListBuilder<DomainInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(WidgetBundleInfo)]),
+            () => ListBuilder<WidgetBundleInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityVersion)]),
+            () => ListBuilder<EntityVersion>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(AlarmAction)]),
+            () => SetBuilder<AlarmAction>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AssetProfile)]),
+            () => ListBuilder<AssetProfile>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DataKey)]),
+            () => ListBuilder<DataKey>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Dashboard)]),
+            () => ListBuilder<Dashboard>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AssetInfo)]),
+            () => ListBuilder<AssetInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(SchedulerEventWithCustomerInfo),
+            ]),
+            () => ListBuilder<SchedulerEventWithCustomerInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentProfileInfo)]),
+            () => ListBuilder<AgentProfileInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppTemplate)]),
+            () => ListBuilder<AgentAppTemplate>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RuleNode)]),
+            () => ListBuilder<RuleNode>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(ErrorComponentAllOfExceptionCauseStackTrace),
+            ]),
+            () => ListBuilder<ErrorComponentAllOfExceptionCauseStackTrace>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(TimeSeriesChartYAxisSettings),
+            ]),
+            () => MapBuilder<String, TimeSeriesChartYAxisSettings>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityTypeLoadResult)]),
+            () => ListBuilder<EntityTypeLoadResult>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityData)]),
+            () => ListBuilder<EntityData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(GroupPermission)]),
+            () => ListBuilder<GroupPermission>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(CalculatedFieldInfo)]),
+            () => ListBuilder<CalculatedFieldInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(EdgeConnectivityEvent)]),
+            () => SetBuilder<EdgeConnectivityEvent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ComponentDescriptor)]),
+            () => ListBuilder<ComponentDescriptor>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DeviceProfile)]),
+            () => ListBuilder<DeviceProfile>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(NotificationRequest)]),
+            () => ListBuilder<NotificationRequest>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityGroupId)]),
+            () => ListBuilder<EntityGroupId>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ContactBasedObject)]),
+            () => ListBuilder<ContactBasedObject>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
+            () => MapBuilder<String, Argument>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ReportComponent)]),
+            () => ListBuilder<ReportComponent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityGroupInfo)]),
+            () => ListBuilder<EntityGroupInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ResourceExportData)]),
+            () => ListBuilder<ResourceExportData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(AlarmSearchStatus)]),
+            () => SetBuilder<AlarmSearchStatus>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Asset)]),
+            () => ListBuilder<Asset>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltList, [FullType(TsValue)]),
+            ]),
+            () => MapBuilder<String, BuiltList<TsValue>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(AgentAppTemplateStartStepsInner),
+            ]),
+            () => ListBuilder<AgentAppTemplateStartStepsInner>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AttributeExportData)]),
+            () => ListBuilder<AttributeExportData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DataSource)]),
+            () => ListBuilder<DataSource>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ColorRange)]),
+            () => ListBuilder<ColorRange>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityKey)]),
+            () => ListBuilder<EntityKey>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Agent)]),
+            () => ListBuilder<Agent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Report)]),
+            () => ListBuilder<Report>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TwoFaProviderConfig)]),
+            () => ListBuilder<TwoFaProviderConfig>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(LimitedApi)]),
+            () => SetBuilder<LimitedApi>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(BaseReadTsKvQuery)]),
+            () => ListBuilder<BaseReadTsKvQuery>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SystemInfoData)]),
+            () => ListBuilder<SystemInfoData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmSeverity)]),
+            () => ListBuilder<AlarmSeverity>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppUnit)]),
+            () => ListBuilder<AgentAppUnit>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(EntityId)]),
+            () => SetBuilder<EntityId>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(MergedGroupPermissionInfo),
+            ]),
+            () => MapBuilder<String, MergedGroupPermissionInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(BranchInfo)]),
+            () => ListBuilder<BranchInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(int)]),
+            () => MapBuilder<String, int>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(ZoneGroupConfiguration),
+            ]),
+            () => MapBuilder<String, ZoneGroupConfiguration>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Filter)]),
+            () => ListBuilder<Filter>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmInfo)]),
+            () => ListBuilder<AlarmInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(BlobEntityWithCustomerInfo)]),
+            () => ListBuilder<BlobEntityWithCustomerInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(IntegrationType)]),
+            () => SetBuilder<IntegrationType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(MobilePage)]),
+            () => ListBuilder<MobilePage>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ApiKeyInfo)]),
+            () => ListBuilder<ApiKeyInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmSearchStatus)]),
+            () => ListBuilder<AlarmSearchStatus>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentApplicationInfo)]),
+            () => ListBuilder<AgentApplicationInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DeviceGroupOtaPackage)]),
+            () => ListBuilder<DeviceGroupOtaPackage>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltList, [FullType(EntityInfo)]),
+            ]),
+            () => MapBuilder<String, BuiltList<EntityInfo>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityRelation)]),
+            () => ListBuilder<EntityRelation>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltSet, [FullType(Operation)]),
+            ]),
+            () => MapBuilder<String, BuiltSet<Operation>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(QueueStats)]),
+            () => ListBuilder<QueueStats>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(WidgetsBundle)]),
+            () => ListBuilder<WidgetsBundle>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(WidgetTypeDetails)]),
+            () => ListBuilder<WidgetTypeDetails>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RuleChainConnectionInfo)]),
+            () => ListBuilder<RuleChainConnectionInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(ObjectAttributes),
+            ]),
+            () => MapBuilder<String, ObjectAttributes>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(HasIdObject)]),
+            () => ListBuilder<HasIdObject>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(CustomerInfo)]),
+            () => ListBuilder<CustomerInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ShortEntityView)]),
+            () => ListBuilder<ShortEntityView>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TimeSeriesChartStateSettings)]),
+            () => ListBuilder<TimeSeriesChartStateSettings>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TranslationInfo)]),
+            () => ListBuilder<TranslationInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(BlobEntityInfo)]),
+            () => ListBuilder<BlobEntityInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Role)]),
+            () => ListBuilder<Role>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(Resource)]),
+            () => SetBuilder<Resource>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmRuleKeyFilterPredicate)]),
+            () => ListBuilder<AlarmRuleKeyFilterPredicate>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppEvent)]),
+            () => ListBuilder<AgentAppEvent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(IntegrationInfo)]),
+            () => ListBuilder<IntegrationInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(Operation)]),
+            () => SetBuilder<Operation>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(WidgetTypeInfo)]),
+            () => ListBuilder<WidgetTypeInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Queue)]),
+            () => ListBuilder<Queue>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(NotificationTemplate)]),
+            () => ListBuilder<NotificationTemplate>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntitySubtype)]),
+            () => ListBuilder<EntitySubtype>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppProfileRelationInfo)]),
+            () => ListBuilder<AgentAppProfileRelationInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltList, [FullType(String)]),
+            ]),
+            () => MapBuilder<String, BuiltList<String>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(KeyFilter)]),
+            () => ListBuilder<KeyFilter>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SignUpField)]),
+            () => ListBuilder<SignUpField>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(LwM2mObject)]),
+            () => ListBuilder<LwM2mObject>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(MergedGroupTypePermissionInfo),
+            ]),
+            () => MapBuilder<String, MergedGroupTypePermissionInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ReportTemplateInfo)]),
+            () => ListBuilder<ReportTemplateInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TrendzViewConfigLite)]),
+            () => ListBuilder<TrendzViewConfigLite>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(ApiFeature)]),
+            () => SetBuilder<ApiFeature>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(CalculatedField)]),
+            () => ListBuilder<CalculatedField>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(String)]),
+            () => MapBuilder<String, String>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Device)]),
+            () => ListBuilder<Device>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AssetProfileInfo)]),
+            () => ListBuilder<AssetProfileInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(NotificationPref),
+            ]),
+            () => MapBuilder<String, NotificationPref>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppEventInfo)]),
+            () => ListBuilder<AgentAppEventInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TwoFaProviderType)]),
+            () => ListBuilder<TwoFaProviderType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Model)]),
+            () => ListBuilder<Model>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppProfile)]),
+            () => ListBuilder<AgentAppProfile>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RoleId)]),
+            () => ListBuilder<RoleId>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SchedulerEventInfo)]),
+            () => ListBuilder<SchedulerEventInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(CalculatedFieldType)]),
+            () => SetBuilder<CalculatedFieldType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentBulkAction)]),
+            () => ListBuilder<AgentBulkAction>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RelationEntityTypeFilter)]),
+            () => ListBuilder<RelationEntityTypeFilter>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SnmpCommunicationConfig)]),
+            () => ListBuilder<SnmpCommunicationConfig>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(LwM2mInstance)]),
+            () => ListBuilder<LwM2mInstance>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RuleChainOutputLabelsUsage)]),
+            () => ListBuilder<RuleChainOutputLabelsUsage>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(JsonObject)]),
+            () => ListBuilder<JsonObject>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityRelationInfo)]),
+            () => ListBuilder<EntityRelationInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ScheduledReportInfo)]),
+            () => ListBuilder<ScheduledReportInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmConditionFilter)]),
+            () => ListBuilder<AlarmConditionFilter>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(StarredDashboardInfo)]),
+            () => ListBuilder<StarredDashboardInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType.nullable(JsonObject),
+            ]),
+            () => MapBuilder<String, JsonObject?>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(ObjectType)]),
+            () => SetBuilder<ObjectType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(GroupPermissionInfo)]),
+            () => ListBuilder<GroupPermissionInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(String)]),
+            () => ListBuilder<String>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(LwM2MBootstrapServerCredential),
+            ]),
+            () => ListBuilder<LwM2MBootstrapServerCredential>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Vendor)]),
+            () => ListBuilder<Vendor>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(ShortCustomerInfo)]),
+            () => SetBuilder<ShortCustomerInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SlackConversation)]),
+            () => ListBuilder<SlackConversation>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DeviceInfo)]),
+            () => ListBuilder<DeviceInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(NotificationRequestInfo)]),
+            () => ListBuilder<NotificationRequestInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityAlias)]),
+            () => ListBuilder<EntityAlias>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(LastVisitedDashboardInfo)]),
+            () => ListBuilder<LastVisitedDashboardInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityView)]),
+            () => ListBuilder<EntityView>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(TwoFaAccountConfig),
+            ]),
+            () => MapBuilder<String, TwoFaAccountConfig>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmRuleDefinitionInfo)]),
+            () => ListBuilder<AlarmRuleDefinitionInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityInfo)]),
+            () => ListBuilder<EntityInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(AutoVersionCreateConfig),
+            ]),
+            () => MapBuilder<String, AutoVersionCreateConfig>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Converter)]),
+            () => ListBuilder<Converter>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(GetManagedRelatedEntityIds200ResponseInner),
+            ]),
+            () => ListBuilder<GetManagedRelatedEntityIds200ResponseInner>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppProfileInfo)]),
+            () => ListBuilder<AgentAppProfileInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(EntityTypeVersionLoadConfig),
+            ]),
+            () => MapBuilder<String, EntityTypeVersionLoadConfig>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]),
+            () => SetBuilder<ComponentLifecycleEvent>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(NodeConnectionInfo)]),
+            () => ListBuilder<NodeConnectionInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(User)]),
+            () => ListBuilder<User>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TaskResult)]),
+            () => ListBuilder<TaskResult>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(String)]),
+            () => SetBuilder<String>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AgentAppArgument)]),
+            () => ListBuilder<AgentAppArgument>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TsKvEntry)]),
+            () => ListBuilder<TsKvEntry>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EventInfo)]),
+            () => ListBuilder<EventInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RuleChainNote)]),
+            () => ListBuilder<RuleChainNote>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+            () => ListBuilder<JsonObject>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RuleChainMetaData)]),
+            () => ListBuilder<RuleChainMetaData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(KeyInfo)]),
+            () => ListBuilder<KeyInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RuleChain)]),
+            () => ListBuilder<RuleChain>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(int)]),
+            () => SetBuilder<int>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(EntityViewInfo)]),
+            () => ListBuilder<EntityViewInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DeviceProfileInfo)]),
+            () => ListBuilder<DeviceProfileInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltList, [FullType(HasIdObject)]),
+            ]),
+            () => MapBuilder<String, BuiltList<HasIdObject>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(VersionedEntityInfo)]),
+            () => ListBuilder<VersionedEntityInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
+            ]),
+            () => MapBuilder<String, BuiltMap<String, TsValue>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TwoFaProviderInfo)]),
+            () => ListBuilder<TwoFaProviderInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(OtaPackageInfo)]),
+            () => ListBuilder<OtaPackageInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltList, [FullType(EntityExportData)]),
+            ]),
+            () => MapBuilder<String, BuiltList<EntityExportData>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(OAuth2ClientInfo)]),
+            () => ListBuilder<OAuth2ClientInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(DefaultMenuItem)]),
+            () => ListBuilder<DefaultMenuItem>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ReportId)]),
+            () => ListBuilder<ReportId>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [
+              FullType(OAuth2ClientRegistrationTemplate),
+            ]),
+            () => ListBuilder<OAuth2ClientRegistrationTemplate>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ReadTsKvQueryResult)]),
+            () => ListBuilder<ReadTsKvQueryResult>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltList, [FullType(AttributeExportData)]),
+            ]),
+            () => MapBuilder<String, BuiltList<AttributeExportData>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(BuiltMap, [FullType(String), FullType(String)]),
+            ]),
+            () => MapBuilder<String, BuiltMap<String, String>>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(UserEmailInfo)]),
+            () => ListBuilder<UserEmailInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ReportInfo)]),
+            () => ListBuilder<ReportInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SnmpMapping)]),
+            () => ListBuilder<SnmpMapping>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AiModel)]),
+            () => ListBuilder<AiModel>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmData)]),
+            () => ListBuilder<AlarmData>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(NotificationDeliveryMethod)]),
+            () => ListBuilder<NotificationDeliveryMethod>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(EntityType)]),
+            () => SetBuilder<EntityType>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltSet, [FullType(ApiUsageStateValue)]),
+            () => SetBuilder<ApiUsageStateValue>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(RelationPathLevel)]),
+            () => ListBuilder<RelationPathLevel>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AlarmRuleDefinition)]),
+            () => ListBuilder<AlarmRuleDefinition>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(NotificationTarget)]),
+            () => ListBuilder<NotificationTarget>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(CustomTimeScheduleItem)]),
+            () => ListBuilder<CustomTimeScheduleItem>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Edge)]),
+            () => ListBuilder<Edge>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [
+              FullType(String),
+              FullType(IntegrationConvertersInfo),
+            ]),
+            () => MapBuilder<String, IntegrationConvertersInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(LwM2mResourceObserve)]),
+            () => ListBuilder<LwM2mResourceObserve>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Customer)]),
+            () => ListBuilder<Customer>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(CustomMenuItem)]),
+            () => ListBuilder<CustomMenuItem>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(SecretInfo)]),
+            () => ListBuilder<SecretInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(ColumnMapping)]),
+            () => ListBuilder<ColumnMapping>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Tenant)]),
+            () => ListBuilder<Tenant>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(int)]),
+            () => ListBuilder<int>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TenantProfile)]),
+            () => ListBuilder<TenantProfile>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(AlarmRule)]),
+            () => MapBuilder<String, AlarmRule>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltMap, [FullType(String), FullType(bool)]),
+            () => MapBuilder<String, bool>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(TenantInfo)]),
+            () => ListBuilder<TenantInfo>(),
+          )
+          ..add(AgentAppConfig.serializer)
+          ..add(AgentAppStep.serializer)
+          ..add(AgentAppStepState.serializer)
+          ..add(AggInput.serializer)
+          ..add(AggInterval.serializer)
+          ..add(AiModelConfig.serializer)
+          ..add(AlarmCondition.serializer)
+          ..add(AlarmConditionExpression.serializer)
+          ..add(AlarmRuleKeyFilterPredicate.serializer)
+          ..add(AlarmSchedule.serializer)
+          ..add(AttributesOutputStrategy.serializer)
+          ..add(CalculatedFieldConfiguration.serializer)
+          ..add(CaptchaParams.serializer)
+          ..add(CfArgumentDynamicSourceConfiguration.serializer)
+          ..add(CoapDeviceTypeConfiguration.serializer)
+          ..add(DataKeySettings.serializer)
+          ..add(DeliveryMethodNotificationTemplate.serializer)
+          ..add(DeviceConfiguration.serializer)
+          ..add(DeviceProfileConfiguration.serializer)
+          ..add(DeviceProfileProvisionConfiguration.serializer)
+          ..add(DeviceProfileTransportConfiguration.serializer)
+          ..add(DeviceTransportConfiguration.serializer)
+          ..add(EntityExportData.serializer)
+          ..add(EntityFilter.serializer)
+          ..add(EntityId.serializer)
+          ..add(EventFilter.serializer)
+          ..add(JobConfiguration.serializer)
+          ..add(JobResult.serializer)
+          ..add(KeyFilterPredicate.serializer)
+          ..add(LwM2MBootstrapServerCredential.serializer)
+          ..add(MenuItem.serializer)
+          ..add(MobilePage.serializer)
+          ..add(NotificationDeliveryMethodConfig.serializer)
+          ..add(NotificationRuleRecipientsConfig.serializer)
+          ..add(NotificationRuleTriggerConfig.serializer)
+          ..add(NotificationTargetConfig.serializer)
+          ..add(OllamaAuth.serializer)
+          ..add(Output.serializer)
+          ..add(ReportComponent.serializer)
+          ..add(ReportLatestChartSettings.serializer)
+          ..add(ReportTemplateConfig.serializer)
+          ..add(ReportTimeSeriesChartSettings.serializer)
+          ..add(SelfRegistrationParams.serializer)
+          ..add(SmsProviderConfiguration.serializer)
+          ..add(SnmpCommunicationConfig.serializer)
+          ..add(TaskResult.serializer)
+          ..add(TbChatResponse.serializer)
+          ..add(TbContent.serializer)
+          ..add(TenantProfileConfiguration.serializer)
+          ..add(TimeSeriesOutputStrategy.serializer)
+          ..add(TransportPayloadTypeConfiguration.serializer)
+          ..add(TwoFaAccountConfig.serializer)
+          ..add(TwoFaProviderConfig.serializer)
+          ..add(UsersFilter.serializer)
+          ..add(VersionCreateRequest.serializer)
+          ..add(VersionLoadRequest.serializer)
+          ..add(const OneOfSerializer())
+          ..add(const AnyOfSerializer())
+          ..add(const DateSerializer())
+          ..add(Iso8601DateTimeSerializer()))
+        .build();
 
 Serializers standardSerializers =
     (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

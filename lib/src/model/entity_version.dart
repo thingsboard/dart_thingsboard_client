@@ -16,12 +16,13 @@ part 'entity_version.g.dart';
 /// EntityVersion
 ///
 /// Properties:
-/// * [timestamp] 
-/// * [id] 
-/// * [name] 
-/// * [author] 
+/// * [timestamp]
+/// * [id]
+/// * [name]
+/// * [author]
 @BuiltValue()
-abstract class EntityVersion implements Built<EntityVersion, EntityVersionBuilder> {
+abstract class EntityVersion
+    implements Built<EntityVersion, EntityVersionBuilder> {
   @BuiltValueField(wireName: r'timestamp')
   int? get timestamp;
 
@@ -36,13 +37,15 @@ abstract class EntityVersion implements Built<EntityVersion, EntityVersionBuilde
 
   EntityVersion._();
 
-  factory EntityVersion([void updates(EntityVersionBuilder b)]) = _$EntityVersion;
+  factory EntityVersion([void updates(EntityVersionBuilder b)]) =
+      _$EntityVersion;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityVersionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityVersion> get serializer => _$EntityVersionSerializer();
+  static Serializer<EntityVersion> get serializer =>
+      _$EntityVersionSerializer();
 }
 
 class _$EntityVersionSerializer implements PrimitiveSerializer<EntityVersion> {
@@ -93,7 +96,11 @@ class _$EntityVersionSerializer implements PrimitiveSerializer<EntityVersion> {
     EntityVersion object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,34 +116,42 @@ class _$EntityVersionSerializer implements PrimitiveSerializer<EntityVersion> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'timestamp':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timestamp = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'author':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.author = valueDes;
           break;
@@ -168,5 +183,3 @@ class _$EntityVersionSerializer implements PrimitiveSerializer<EntityVersion> {
     return result.build();
   }
 }
-
-

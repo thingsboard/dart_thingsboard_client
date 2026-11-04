@@ -16,10 +16,15 @@ part 'time_series_chart_bar_width_settings.g.dart';
 /// TimeSeriesChartBarWidthSettings
 ///
 /// Properties:
-/// * [barGap] 
-/// * [intervalGap] 
+/// * [barGap]
+/// * [intervalGap]
 @BuiltValue()
-abstract class TimeSeriesChartBarWidthSettings implements Built<TimeSeriesChartBarWidthSettings, TimeSeriesChartBarWidthSettingsBuilder> {
+abstract class TimeSeriesChartBarWidthSettings
+    implements
+        Built<
+          TimeSeriesChartBarWidthSettings,
+          TimeSeriesChartBarWidthSettingsBuilder
+        > {
   @BuiltValueField(wireName: r'barGap')
   double? get barGap;
 
@@ -28,18 +33,25 @@ abstract class TimeSeriesChartBarWidthSettings implements Built<TimeSeriesChartB
 
   TimeSeriesChartBarWidthSettings._();
 
-  factory TimeSeriesChartBarWidthSettings([void updates(TimeSeriesChartBarWidthSettingsBuilder b)]) = _$TimeSeriesChartBarWidthSettings;
+  factory TimeSeriesChartBarWidthSettings([
+    void updates(TimeSeriesChartBarWidthSettingsBuilder b),
+  ]) = _$TimeSeriesChartBarWidthSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesChartBarWidthSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartBarWidthSettings> get serializer => _$TimeSeriesChartBarWidthSettingsSerializer();
+  static Serializer<TimeSeriesChartBarWidthSettings> get serializer =>
+      _$TimeSeriesChartBarWidthSettingsSerializer();
 }
 
-class _$TimeSeriesChartBarWidthSettingsSerializer implements PrimitiveSerializer<TimeSeriesChartBarWidthSettings> {
+class _$TimeSeriesChartBarWidthSettingsSerializer
+    implements PrimitiveSerializer<TimeSeriesChartBarWidthSettings> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartBarWidthSettings, _$TimeSeriesChartBarWidthSettings];
+  final Iterable<Type> types = const [
+    TimeSeriesChartBarWidthSettings,
+    _$TimeSeriesChartBarWidthSettings,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartBarWidthSettings';
@@ -71,7 +83,11 @@ class _$TimeSeriesChartBarWidthSettingsSerializer implements PrimitiveSerializer
     TimeSeriesChartBarWidthSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +103,22 @@ class _$TimeSeriesChartBarWidthSettingsSerializer implements PrimitiveSerializer
       final value = serializedList[i + 1];
       switch (key) {
         case r'barGap':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.barGap = valueDes;
           break;
         case r'intervalGap':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.intervalGap = valueDes;
           break;
@@ -130,5 +150,3 @@ class _$TimeSeriesChartBarWidthSettingsSerializer implements PrimitiveSerializer
     return result.build();
   }
 }
-
-

@@ -19,27 +19,40 @@ part 'task_processing_failure_recipients_config.g.dart';
 /// TaskProcessingFailureRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class TaskProcessingFailureRecipientsConfig implements NotificationRuleRecipientsConfig, Built<TaskProcessingFailureRecipientsConfig, TaskProcessingFailureRecipientsConfigBuilder> {
+abstract class TaskProcessingFailureRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          TaskProcessingFailureRecipientsConfig,
+          TaskProcessingFailureRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   TaskProcessingFailureRecipientsConfig._();
 
-  factory TaskProcessingFailureRecipientsConfig([void updates(TaskProcessingFailureRecipientsConfigBuilder b)]) = _$TaskProcessingFailureRecipientsConfig;
+  factory TaskProcessingFailureRecipientsConfig([
+    void updates(TaskProcessingFailureRecipientsConfigBuilder b),
+  ]) = _$TaskProcessingFailureRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TaskProcessingFailureRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TaskProcessingFailureRecipientsConfig> get serializer => _$TaskProcessingFailureRecipientsConfigSerializer();
+  static Serializer<TaskProcessingFailureRecipientsConfig> get serializer =>
+      _$TaskProcessingFailureRecipientsConfigSerializer();
 }
 
-class _$TaskProcessingFailureRecipientsConfigSerializer implements PrimitiveSerializer<TaskProcessingFailureRecipientsConfig> {
+class _$TaskProcessingFailureRecipientsConfigSerializer
+    implements PrimitiveSerializer<TaskProcessingFailureRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [TaskProcessingFailureRecipientsConfig, _$TaskProcessingFailureRecipientsConfig];
+  final Iterable<Type> types = const [
+    TaskProcessingFailureRecipientsConfig,
+    _$TaskProcessingFailureRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'TaskProcessingFailureRecipientsConfig';
@@ -69,7 +82,11 @@ class _$TaskProcessingFailureRecipientsConfigSerializer implements PrimitiveSeri
     TaskProcessingFailureRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$TaskProcessingFailureRecipientsConfigSerializer implements PrimitiveSeri
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$TaskProcessingFailureRecipientsConfigSerializer implements PrimitiveSeri
     return result.build();
   }
 }
-
-

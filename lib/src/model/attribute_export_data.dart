@@ -16,15 +16,16 @@ part 'attribute_export_data.g.dart';
 /// AttributeExportData
 ///
 /// Properties:
-/// * [key] 
-/// * [lastUpdateTs] 
-/// * [booleanValue] 
-/// * [strValue] 
-/// * [longValue] 
-/// * [doubleValue] 
-/// * [jsonValue] 
+/// * [key]
+/// * [lastUpdateTs]
+/// * [booleanValue]
+/// * [strValue]
+/// * [longValue]
+/// * [doubleValue]
+/// * [jsonValue]
 @BuiltValue()
-abstract class AttributeExportData implements Built<AttributeExportData, AttributeExportDataBuilder> {
+abstract class AttributeExportData
+    implements Built<AttributeExportData, AttributeExportDataBuilder> {
   @BuiltValueField(wireName: r'key')
   String? get key;
 
@@ -48,18 +49,24 @@ abstract class AttributeExportData implements Built<AttributeExportData, Attribu
 
   AttributeExportData._();
 
-  factory AttributeExportData([void updates(AttributeExportDataBuilder b)]) = _$AttributeExportData;
+  factory AttributeExportData([void updates(AttributeExportDataBuilder b)]) =
+      _$AttributeExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AttributeExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AttributeExportData> get serializer => _$AttributeExportDataSerializer();
+  static Serializer<AttributeExportData> get serializer =>
+      _$AttributeExportDataSerializer();
 }
 
-class _$AttributeExportDataSerializer implements PrimitiveSerializer<AttributeExportData> {
+class _$AttributeExportDataSerializer
+    implements PrimitiveSerializer<AttributeExportData> {
   @override
-  final Iterable<Type> types = const [AttributeExportData, _$AttributeExportData];
+  final Iterable<Type> types = const [
+    AttributeExportData,
+    _$AttributeExportData,
+  ];
 
   @override
   final String wireName = r'AttributeExportData';
@@ -126,7 +133,11 @@ class _$AttributeExportDataSerializer implements PrimitiveSerializer<AttributeEx
     AttributeExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -142,58 +153,72 @@ class _$AttributeExportDataSerializer implements PrimitiveSerializer<AttributeEx
       final value = serializedList[i + 1];
       switch (key) {
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'lastUpdateTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.lastUpdateTs = valueDes;
           break;
         case r'booleanValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.booleanValue = valueDes;
           break;
         case r'strValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.strValue = valueDes;
           break;
         case r'longValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.longValue = valueDes;
           break;
         case r'doubleValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.doubleValue = valueDes;
           break;
         case r'jsonValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.jsonValue = valueDes;
           break;
@@ -225,5 +250,3 @@ class _$AttributeExportDataSerializer implements PrimitiveSerializer<AttributeEx
     return result.build();
   }
 }
-
-

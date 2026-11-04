@@ -16,14 +16,15 @@ part 'entity_data_info.g.dart';
 /// EntityDataInfo
 ///
 /// Properties:
-/// * [hasRelations] 
-/// * [hasAttributes] 
-/// * [hasCredentials] 
-/// * [hasCalculatedFields] 
-/// * [hasPermissions] 
-/// * [hasGroupEntities] 
+/// * [hasRelations]
+/// * [hasAttributes]
+/// * [hasCredentials]
+/// * [hasCalculatedFields]
+/// * [hasPermissions]
+/// * [hasGroupEntities]
 @BuiltValue()
-abstract class EntityDataInfo implements Built<EntityDataInfo, EntityDataInfoBuilder> {
+abstract class EntityDataInfo
+    implements Built<EntityDataInfo, EntityDataInfoBuilder> {
   @BuiltValueField(wireName: r'hasRelations')
   bool? get hasRelations;
 
@@ -44,16 +45,19 @@ abstract class EntityDataInfo implements Built<EntityDataInfo, EntityDataInfoBui
 
   EntityDataInfo._();
 
-  factory EntityDataInfo([void updates(EntityDataInfoBuilder b)]) = _$EntityDataInfo;
+  factory EntityDataInfo([void updates(EntityDataInfoBuilder b)]) =
+      _$EntityDataInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityDataInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityDataInfo> get serializer => _$EntityDataInfoSerializer();
+  static Serializer<EntityDataInfo> get serializer =>
+      _$EntityDataInfoSerializer();
 }
 
-class _$EntityDataInfoSerializer implements PrimitiveSerializer<EntityDataInfo> {
+class _$EntityDataInfoSerializer
+    implements PrimitiveSerializer<EntityDataInfo> {
   @override
   final Iterable<Type> types = const [EntityDataInfo, _$EntityDataInfo];
 
@@ -115,7 +119,11 @@ class _$EntityDataInfoSerializer implements PrimitiveSerializer<EntityDataInfo> 
     EntityDataInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -131,50 +139,62 @@ class _$EntityDataInfoSerializer implements PrimitiveSerializer<EntityDataInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'hasRelations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasRelations = valueDes;
           break;
         case r'hasAttributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasAttributes = valueDes;
           break;
         case r'hasCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasCredentials = valueDes;
           break;
         case r'hasCalculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasCalculatedFields = valueDes;
           break;
         case r'hasPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasPermissions = valueDes;
           break;
         case r'hasGroupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasGroupEntities = valueDes;
           break;
@@ -206,5 +226,3 @@ class _$EntityDataInfoSerializer implements PrimitiveSerializer<EntityDataInfo> 
     return result.build();
   }
 }
-
-

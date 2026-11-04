@@ -19,13 +19,14 @@ part 'notification_target.g.dart';
 /// NotificationTarget
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
-/// * [tenantId] 
-/// * [name] 
-/// * [configuration] 
+/// * [tenantId]
+/// * [name]
+/// * [configuration]
 @BuiltValue()
-abstract class NotificationTarget implements Built<NotificationTarget, NotificationTargetBuilder> {
+abstract class NotificationTarget
+    implements Built<NotificationTarget, NotificationTargetBuilder> {
   @BuiltValueField(wireName: r'id')
   NotificationTargetId? get id;
 
@@ -44,16 +45,19 @@ abstract class NotificationTarget implements Built<NotificationTarget, Notificat
 
   NotificationTarget._();
 
-  factory NotificationTarget([void updates(NotificationTargetBuilder b)]) = _$NotificationTarget;
+  factory NotificationTarget([void updates(NotificationTargetBuilder b)]) =
+      _$NotificationTarget;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationTargetBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationTarget> get serializer => _$NotificationTargetSerializer();
+  static Serializer<NotificationTarget> get serializer =>
+      _$NotificationTargetSerializer();
 }
 
-class _$NotificationTargetSerializer implements PrimitiveSerializer<NotificationTarget> {
+class _$NotificationTargetSerializer
+    implements PrimitiveSerializer<NotificationTarget> {
   @override
   final Iterable<Type> types = const [NotificationTarget, _$NotificationTarget];
 
@@ -104,7 +108,11 @@ class _$NotificationTargetSerializer implements PrimitiveSerializer<Notification
     NotificationTarget object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -120,41 +128,53 @@ class _$NotificationTargetSerializer implements PrimitiveSerializer<Notification
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationTargetId),
-          ) as NotificationTargetId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationTargetId,
+                    ),
+                  )
+                  as NotificationTargetId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationTargetConfig),
-          ) as NotificationTargetConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationTargetConfig),
+                  )
+                  as NotificationTargetConfig;
           result.configuration = valueDes;
           break;
         default:
@@ -185,5 +205,3 @@ class _$NotificationTargetSerializer implements PrimitiveSerializer<Notification
     return result.build();
   }
 }
-
-

@@ -22,7 +22,8 @@ part 'asset_search_query.g.dart';
 /// * [relationType] - Type of the relation between root entity and asset (e.g. 'Contains' or 'Manages').
 /// * [assetTypes] - Array of asset types to filter the related entities (e.g. 'Building', 'Vehicle').
 @BuiltValue()
-abstract class AssetSearchQuery implements Built<AssetSearchQuery, AssetSearchQueryBuilder> {
+abstract class AssetSearchQuery
+    implements Built<AssetSearchQuery, AssetSearchQueryBuilder> {
   /// Main search parameters.
   @BuiltValueField(wireName: r'parameters')
   RelationsSearchParameters? get parameters;
@@ -37,16 +38,19 @@ abstract class AssetSearchQuery implements Built<AssetSearchQuery, AssetSearchQu
 
   AssetSearchQuery._();
 
-  factory AssetSearchQuery([void updates(AssetSearchQueryBuilder b)]) = _$AssetSearchQuery;
+  factory AssetSearchQuery([void updates(AssetSearchQueryBuilder b)]) =
+      _$AssetSearchQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AssetSearchQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AssetSearchQuery> get serializer => _$AssetSearchQuerySerializer();
+  static Serializer<AssetSearchQuery> get serializer =>
+      _$AssetSearchQuerySerializer();
 }
 
-class _$AssetSearchQuerySerializer implements PrimitiveSerializer<AssetSearchQuery> {
+class _$AssetSearchQuerySerializer
+    implements PrimitiveSerializer<AssetSearchQuery> {
   @override
   final Iterable<Type> types = const [AssetSearchQuery, _$AssetSearchQuery];
 
@@ -87,7 +91,11 @@ class _$AssetSearchQuerySerializer implements PrimitiveSerializer<AssetSearchQue
     AssetSearchQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,26 +111,36 @@ class _$AssetSearchQuerySerializer implements PrimitiveSerializer<AssetSearchQue
       final value = serializedList[i + 1];
       switch (key) {
         case r'parameters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RelationsSearchParameters),
-          ) as RelationsSearchParameters?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RelationsSearchParameters,
+                    ),
+                  )
+                  as RelationsSearchParameters?;
           if (valueDes == null) continue;
           result.parameters.replace(valueDes);
           break;
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'assetTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.assetTypes.replace(valueDes);
           break;
@@ -154,5 +172,3 @@ class _$AssetSearchQuerySerializer implements PrimitiveSerializer<AssetSearchQue
     return result.build();
   }
 }
-
-

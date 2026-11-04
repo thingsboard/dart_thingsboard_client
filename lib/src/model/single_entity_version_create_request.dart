@@ -20,13 +20,19 @@ part 'single_entity_version_create_request.g.dart';
 /// SingleEntityVersionCreateRequest
 ///
 /// Properties:
-/// * [versionName] 
-/// * [branch] 
+/// * [versionName]
+/// * [branch]
 /// * [type] - Type of the version to create
-/// * [entityId] 
-/// * [config] 
+/// * [entityId]
+/// * [config]
 @BuiltValue()
-abstract class SingleEntityVersionCreateRequest implements VersionCreateRequest, Built<SingleEntityVersionCreateRequest, SingleEntityVersionCreateRequestBuilder> {
+abstract class SingleEntityVersionCreateRequest
+    implements
+        VersionCreateRequest,
+        Built<
+          SingleEntityVersionCreateRequest,
+          SingleEntityVersionCreateRequestBuilder
+        > {
   @BuiltValueField(wireName: r'entityId')
   EntityId? get entityId;
 
@@ -35,18 +41,25 @@ abstract class SingleEntityVersionCreateRequest implements VersionCreateRequest,
 
   SingleEntityVersionCreateRequest._();
 
-  factory SingleEntityVersionCreateRequest([void updates(SingleEntityVersionCreateRequestBuilder b)]) = _$SingleEntityVersionCreateRequest;
+  factory SingleEntityVersionCreateRequest([
+    void updates(SingleEntityVersionCreateRequestBuilder b),
+  ]) = _$SingleEntityVersionCreateRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SingleEntityVersionCreateRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SingleEntityVersionCreateRequest> get serializer => _$SingleEntityVersionCreateRequestSerializer();
+  static Serializer<SingleEntityVersionCreateRequest> get serializer =>
+      _$SingleEntityVersionCreateRequestSerializer();
 }
 
-class _$SingleEntityVersionCreateRequestSerializer implements PrimitiveSerializer<SingleEntityVersionCreateRequest> {
+class _$SingleEntityVersionCreateRequestSerializer
+    implements PrimitiveSerializer<SingleEntityVersionCreateRequest> {
   @override
-  final Iterable<Type> types = const [SingleEntityVersionCreateRequest, _$SingleEntityVersionCreateRequest];
+  final Iterable<Type> types = const [
+    SingleEntityVersionCreateRequest,
+    _$SingleEntityVersionCreateRequest,
+  ];
 
   @override
   final String wireName = r'SingleEntityVersionCreateRequest';
@@ -97,7 +110,11 @@ class _$SingleEntityVersionCreateRequestSerializer implements PrimitiveSerialize
     SingleEntityVersionCreateRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,41 +130,51 @@ class _$SingleEntityVersionCreateRequestSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.entityId = valueDes;
           break;
         case r'versionName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.versionName = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(VersionCreateRequestType),
-          ) as VersionCreateRequestType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(VersionCreateRequestType),
+                  )
+                  as VersionCreateRequestType;
           result.type = valueDes;
           break;
         case r'config':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(VersionCreateConfig),
-          ) as VersionCreateConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(VersionCreateConfig),
+                  )
+                  as VersionCreateConfig?;
           if (valueDes == null) continue;
           result.config.replace(valueDes);
           break;
         case r'branch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.branch = valueDes;
           break;
@@ -179,5 +206,3 @@ class _$SingleEntityVersionCreateRequestSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

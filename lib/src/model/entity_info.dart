@@ -17,11 +17,11 @@ part 'entity_info.g.dart';
 /// EntityInfo
 ///
 /// Properties:
-/// * [id] - JSON object with the entity Id. 
+/// * [id] - JSON object with the entity Id.
 /// * [name] - Entity Name
 @BuiltValue()
 abstract class EntityInfo implements Built<EntityInfo, EntityInfoBuilder> {
-  /// JSON object with the entity Id. 
+  /// JSON object with the entity Id.
   @BuiltValueField(wireName: r'id')
   EntityId? get id;
 
@@ -74,7 +74,11 @@ class _$EntityInfoSerializer implements PrimitiveSerializer<EntityInfo> {
     EntityInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,18 +94,22 @@ class _$EntityInfoSerializer implements PrimitiveSerializer<EntityInfo> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -133,5 +141,3 @@ class _$EntityInfoSerializer implements PrimitiveSerializer<EntityInfo> {
     return result.build();
   }
 }
-
-

@@ -19,27 +19,37 @@ part 'rate_limits_recipients_config.g.dart';
 /// RateLimitsRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class RateLimitsRecipientsConfig implements NotificationRuleRecipientsConfig, Built<RateLimitsRecipientsConfig, RateLimitsRecipientsConfigBuilder> {
+abstract class RateLimitsRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<RateLimitsRecipientsConfig, RateLimitsRecipientsConfigBuilder> {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   RateLimitsRecipientsConfig._();
 
-  factory RateLimitsRecipientsConfig([void updates(RateLimitsRecipientsConfigBuilder b)]) = _$RateLimitsRecipientsConfig;
+  factory RateLimitsRecipientsConfig([
+    void updates(RateLimitsRecipientsConfigBuilder b),
+  ]) = _$RateLimitsRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RateLimitsRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RateLimitsRecipientsConfig> get serializer => _$RateLimitsRecipientsConfigSerializer();
+  static Serializer<RateLimitsRecipientsConfig> get serializer =>
+      _$RateLimitsRecipientsConfigSerializer();
 }
 
-class _$RateLimitsRecipientsConfigSerializer implements PrimitiveSerializer<RateLimitsRecipientsConfig> {
+class _$RateLimitsRecipientsConfigSerializer
+    implements PrimitiveSerializer<RateLimitsRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [RateLimitsRecipientsConfig, _$RateLimitsRecipientsConfig];
+  final Iterable<Type> types = const [
+    RateLimitsRecipientsConfig,
+    _$RateLimitsRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'RateLimitsRecipientsConfig';
@@ -69,7 +79,11 @@ class _$RateLimitsRecipientsConfigSerializer implements PrimitiveSerializer<Rate
     RateLimitsRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +99,25 @@ class _$RateLimitsRecipientsConfigSerializer implements PrimitiveSerializer<Rate
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +149,3 @@ class _$RateLimitsRecipientsConfigSerializer implements PrimitiveSerializer<Rate
     return result.build();
   }
 }
-
-

@@ -19,14 +19,15 @@ part 'o_auth2_client_info.g.dart';
 /// OAuth2ClientInfo
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
 /// * [title] - Oauth2 client registration title (e.g. My google)
 /// * [providerName] - Oauth2 client provider name (e.g. Google)
 /// * [platforms] - List of platforms for which usage of the OAuth2 client is allowed (empty for all allowed)
-/// * [name] 
+/// * [name]
 @BuiltValue()
-abstract class OAuth2ClientInfo implements Built<OAuth2ClientInfo, OAuth2ClientInfoBuilder> {
+abstract class OAuth2ClientInfo
+    implements Built<OAuth2ClientInfo, OAuth2ClientInfoBuilder> {
   @BuiltValueField(wireName: r'id')
   OAuth2ClientId? get id;
 
@@ -51,16 +52,19 @@ abstract class OAuth2ClientInfo implements Built<OAuth2ClientInfo, OAuth2ClientI
 
   OAuth2ClientInfo._();
 
-  factory OAuth2ClientInfo([void updates(OAuth2ClientInfoBuilder b)]) = _$OAuth2ClientInfo;
+  factory OAuth2ClientInfo([void updates(OAuth2ClientInfoBuilder b)]) =
+      _$OAuth2ClientInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OAuth2ClientInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OAuth2ClientInfo> get serializer => _$OAuth2ClientInfoSerializer();
+  static Serializer<OAuth2ClientInfo> get serializer =>
+      _$OAuth2ClientInfoSerializer();
 }
 
-class _$OAuth2ClientInfoSerializer implements PrimitiveSerializer<OAuth2ClientInfo> {
+class _$OAuth2ClientInfoSerializer
+    implements PrimitiveSerializer<OAuth2ClientInfo> {
   @override
   final Iterable<Type> types = const [OAuth2ClientInfo, _$OAuth2ClientInfo];
 
@@ -122,7 +126,11 @@ class _$OAuth2ClientInfoSerializer implements PrimitiveSerializer<OAuth2ClientIn
     OAuth2ClientInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -138,50 +146,64 @@ class _$OAuth2ClientInfoSerializer implements PrimitiveSerializer<OAuth2ClientIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OAuth2ClientId),
-          ) as OAuth2ClientId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(OAuth2ClientId),
+                  )
+                  as OAuth2ClientId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'providerName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.providerName = valueDes;
           break;
         case r'platforms':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(PlatformType)]),
-          ) as BuiltList<PlatformType>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(PlatformType),
+                    ]),
+                  )
+                  as BuiltList<PlatformType>?;
           if (valueDes == null) continue;
           result.platforms.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -213,5 +235,3 @@ class _$OAuth2ClientInfoSerializer implements PrimitiveSerializer<OAuth2ClientIn
     return result.build();
   }
 }
-
-

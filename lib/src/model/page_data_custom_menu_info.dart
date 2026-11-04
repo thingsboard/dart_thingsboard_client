@@ -23,7 +23,8 @@ part 'page_data_custom_menu_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataCustomMenuInfo implements Built<PageDataCustomMenuInfo, PageDataCustomMenuInfoBuilder> {
+abstract class PageDataCustomMenuInfo
+    implements Built<PageDataCustomMenuInfo, PageDataCustomMenuInfoBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<CustomMenuInfo>? get data;
@@ -42,18 +43,25 @@ abstract class PageDataCustomMenuInfo implements Built<PageDataCustomMenuInfo, P
 
   PageDataCustomMenuInfo._();
 
-  factory PageDataCustomMenuInfo([void updates(PageDataCustomMenuInfoBuilder b)]) = _$PageDataCustomMenuInfo;
+  factory PageDataCustomMenuInfo([
+    void updates(PageDataCustomMenuInfoBuilder b),
+  ]) = _$PageDataCustomMenuInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataCustomMenuInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataCustomMenuInfo> get serializer => _$PageDataCustomMenuInfoSerializer();
+  static Serializer<PageDataCustomMenuInfo> get serializer =>
+      _$PageDataCustomMenuInfoSerializer();
 }
 
-class _$PageDataCustomMenuInfoSerializer implements PrimitiveSerializer<PageDataCustomMenuInfo> {
+class _$PageDataCustomMenuInfoSerializer
+    implements PrimitiveSerializer<PageDataCustomMenuInfo> {
   @override
-  final Iterable<Type> types = const [PageDataCustomMenuInfo, _$PageDataCustomMenuInfo];
+  final Iterable<Type> types = const [
+    PageDataCustomMenuInfo,
+    _$PageDataCustomMenuInfo,
+  ];
 
   @override
   final String wireName = r'PageDataCustomMenuInfo';
@@ -99,7 +107,11 @@ class _$PageDataCustomMenuInfoSerializer implements PrimitiveSerializer<PageData
     PageDataCustomMenuInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +127,44 @@ class _$PageDataCustomMenuInfoSerializer implements PrimitiveSerializer<PageData
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CustomMenuInfo)]),
-          ) as BuiltList<CustomMenuInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CustomMenuInfo),
+                    ]),
+                  )
+                  as BuiltList<CustomMenuInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +196,3 @@ class _$PageDataCustomMenuInfoSerializer implements PrimitiveSerializer<PageData
     return result.build();
   }
 }
-
-

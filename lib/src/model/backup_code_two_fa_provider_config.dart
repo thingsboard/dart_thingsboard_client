@@ -17,27 +17,40 @@ part 'backup_code_two_fa_provider_config.g.dart';
 /// BackupCodeTwoFaProviderConfig
 ///
 /// Properties:
-/// * [providerType] 
-/// * [codesQuantity] 
+/// * [providerType]
+/// * [codesQuantity]
 @BuiltValue()
-abstract class BackupCodeTwoFaProviderConfig implements TwoFaProviderConfig, Built<BackupCodeTwoFaProviderConfig, BackupCodeTwoFaProviderConfigBuilder> {
+abstract class BackupCodeTwoFaProviderConfig
+    implements
+        TwoFaProviderConfig,
+        Built<
+          BackupCodeTwoFaProviderConfig,
+          BackupCodeTwoFaProviderConfigBuilder
+        > {
   @BuiltValueField(wireName: r'codesQuantity')
   int? get codesQuantity;
 
   BackupCodeTwoFaProviderConfig._();
 
-  factory BackupCodeTwoFaProviderConfig([void updates(BackupCodeTwoFaProviderConfigBuilder b)]) = _$BackupCodeTwoFaProviderConfig;
+  factory BackupCodeTwoFaProviderConfig([
+    void updates(BackupCodeTwoFaProviderConfigBuilder b),
+  ]) = _$BackupCodeTwoFaProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BackupCodeTwoFaProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BackupCodeTwoFaProviderConfig> get serializer => _$BackupCodeTwoFaProviderConfigSerializer();
+  static Serializer<BackupCodeTwoFaProviderConfig> get serializer =>
+      _$BackupCodeTwoFaProviderConfigSerializer();
 }
 
-class _$BackupCodeTwoFaProviderConfigSerializer implements PrimitiveSerializer<BackupCodeTwoFaProviderConfig> {
+class _$BackupCodeTwoFaProviderConfigSerializer
+    implements PrimitiveSerializer<BackupCodeTwoFaProviderConfig> {
   @override
-  final Iterable<Type> types = const [BackupCodeTwoFaProviderConfig, _$BackupCodeTwoFaProviderConfig];
+  final Iterable<Type> types = const [
+    BackupCodeTwoFaProviderConfig,
+    _$BackupCodeTwoFaProviderConfig,
+  ];
 
   @override
   final String wireName = r'BackupCodeTwoFaProviderConfig';
@@ -67,7 +80,11 @@ class _$BackupCodeTwoFaProviderConfigSerializer implements PrimitiveSerializer<B
     BackupCodeTwoFaProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -83,17 +100,21 @@ class _$BackupCodeTwoFaProviderConfigSerializer implements PrimitiveSerializer<B
       final value = serializedList[i + 1];
       switch (key) {
         case r'providerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerType = valueDes;
           break;
         case r'codesQuantity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.codesQuantity = valueDes;
           break;
@@ -125,5 +146,3 @@ class _$BackupCodeTwoFaProviderConfigSerializer implements PrimitiveSerializer<B
     return result.build();
   }
 }
-
-

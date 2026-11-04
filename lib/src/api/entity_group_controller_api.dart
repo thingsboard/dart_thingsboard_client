@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -25,11 +24,9 @@ import 'package:thingsboard_client/src/model/page_data_entity_info.dart';
 import 'package:thingsboard_client/src/model/page_data_short_entity_view.dart';
 import 'package:thingsboard_client/src/model/share_group_request.dart';
 import 'package:thingsboard_client/src/model/short_entity_view.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class EntityGroupControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -41,7 +38,7 @@ class EntityGroupControllerApi {
   ///
   /// Parameters:
   /// * [entityGroupId] - A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -51,7 +48,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> addEntitiesToEntityGroup({ 
+  Future<Response<void>> addEntitiesToEntityGroup({
     required String entityGroupId,
     required BuiltList<String> requestBody,
     CancelToken? cancelToken,
@@ -61,13 +58,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/entityGroup/{entityGroupId}/addEntities'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/entityGroup/{entityGroupId}/addEntities'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -75,11 +80,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -92,13 +94,9 @@ class EntityGroupControllerApi {
     try {
       const _type = FullType(BuiltList, [FullType(String)]);
       _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -133,7 +131,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityGroup] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityGroup>> assignEntityGroupToEdge({ 
+  Future<Response<EntityGroup>> assignEntityGroupToEdge({
     required String edgeId,
     required String groupType,
     required String entityGroupId,
@@ -144,13 +142,42 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityGroup);
-    final _path = r'/api/edge/{edgeId}/entityGroup/{entityGroupId}/{groupType}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString()).replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityGroup);
+    final _path = r'/api/edge/{edgeId}/entityGroup/{entityGroupId}/{groupType}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityGroupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityGroupId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -158,11 +185,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -181,11 +205,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityGroup),
-      ) as EntityGroup;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityGroup),
+                )
+                as EntityGroup;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -222,7 +248,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteEntityGroup({ 
+  Future<Response<void>> deleteEntityGroup({
     required String entityGroupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -232,12 +258,19 @@ class EntityGroupControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/entityGroup/{entityGroupId}'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _path = r'/api/entityGroup/{entityGroupId}'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -245,11 +278,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -282,7 +312,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityGroupInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityGroupInfo>>> getAllEdgeEntityGroups({ 
+  Future<Response<BuiltList<EntityGroupInfo>>> getAllEdgeEntityGroups({
     required String edgeId,
     required String groupType,
     CancelToken? cancelToken,
@@ -292,13 +322,32 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
-    final _path = r'/api/allEntityGroups/edge/{edgeId}/{groupType}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
+    final _path = r'/api/allEntityGroups/edge/{edgeId}/{groupType}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -306,11 +355,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -329,11 +375,15 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityGroupInfo)]),
-      ) as BuiltList<EntityGroupInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityGroupInfo),
+                  ]),
+                )
+                as BuiltList<EntityGroupInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -372,7 +422,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityGroupInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityGroupInfo>>> getAllEntityGroupsByOwnerAndType({ 
+  Future<Response<BuiltList<EntityGroupInfo>>>
+  getAllEntityGroupsByOwnerAndType({
     required String ownerType,
     required String ownerId,
     required String groupType,
@@ -383,13 +434,42 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
-    final _path = r'/api/entityGroups/{ownerType}/{ownerId}/{groupType}/all'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
+    final _path = r'/api/entityGroups/{ownerType}/{ownerId}/{groupType}/all'
+        .replaceAll(
+          '{'
+          r'ownerType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ownerId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -397,11 +477,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -420,11 +497,15 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityGroupInfo)]),
-      ) as BuiltList<EntityGroupInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityGroupInfo),
+                  ]),
+                )
+                as BuiltList<EntityGroupInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -462,7 +543,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityGroupInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityGroupInfo>>> getAllEntityGroupsByType({ 
+  Future<Response<BuiltList<EntityGroupInfo>>> getAllEntityGroupsByType({
     required String groupType,
     bool? includeShared,
     CancelToken? cancelToken,
@@ -472,13 +553,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
-    final _path = r'/api/entityGroups/{groupType}/all'.replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
+    final _path = r'/api/entityGroups/{groupType}/all'.replaceAll(
+      '{'
+      r'groupType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupType,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -486,11 +575,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -498,7 +584,12 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (includeShared != null) r'includeShared': encodeQueryParameter(_serializers, includeShared, const FullType(bool)),
+      if (includeShared != null)
+        r'includeShared': encodeQueryParameter(
+          _serializers,
+          includeShared,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -514,11 +605,15 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityGroupInfo)]),
-      ) as BuiltList<EntityGroupInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityGroupInfo),
+                  ]),
+                )
+                as BuiltList<EntityGroupInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -555,7 +650,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityGroupInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityGroupInfo>>> getAllSharedEntityGroups({ 
+  Future<Response<BuiltList<EntityGroupInfo>>> getAllSharedEntityGroups({
     required String groupType,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -564,13 +659,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
-    final _path = r'/api/entityGroups/{groupType}/shared/all'.replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityGroupInfo);
+    final _path = r'/api/entityGroups/{groupType}/shared/all'.replaceAll(
+      '{'
+      r'groupType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupType,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -578,11 +681,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -601,11 +701,15 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityGroupInfo)]),
-      ) as BuiltList<EntityGroupInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityGroupInfo),
+                  ]),
+                )
+                as BuiltList<EntityGroupInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -648,7 +752,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityGroupInfo>> getEdgeEntityGroups({ 
+  Future<Response<PageDataEntityGroupInfo>> getEdgeEntityGroups({
     required String edgeId,
     required String groupType,
     required String pageSize,
@@ -663,13 +767,32 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
-    final _path = r'/api/entityGroups/edge/{edgeId}/{groupType}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
+    final _path = r'/api/entityGroups/edge/{edgeId}/{groupType}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -677,11 +800,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -689,11 +809,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -709,11 +848,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityGroupInfo),
-      ) as PageDataEntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityGroupInfo),
+                )
+                as PageDataEntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -755,7 +896,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataShortEntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataShortEntityView>> getEntities({ 
+  Future<Response<PageDataShortEntityView>> getEntities({
     required String entityGroupId,
     required String pageSize,
     required String page,
@@ -769,13 +910,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataShortEntityView);
-    final _path = r'/api/entityGroup/{entityGroupId}/entities'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataShortEntityView);
+    final _path = r'/api/entityGroup/{entityGroupId}/entities'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -783,11 +932,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -795,11 +941,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -815,11 +980,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataShortEntityView),
-      ) as PageDataShortEntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataShortEntityView),
+                )
+                as PageDataShortEntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -858,7 +1025,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityGroupInfo>> getEntityGroupAllByOwnerAndType({ 
+  Future<Response<EntityGroupInfo>> getEntityGroupAllByOwnerAndType({
     required String ownerType,
     required String ownerId,
     required String groupType,
@@ -869,13 +1036,42 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityGroupInfo);
-    final _path = r'/api/entityGroup/all/{ownerType}/{ownerId}/{groupType}'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityGroupInfo);
+    final _path = r'/api/entityGroup/all/{ownerType}/{ownerId}/{groupType}'
+        .replaceAll(
+          '{'
+          r'ownerType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ownerId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -883,11 +1079,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -906,11 +1099,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityGroupInfo),
-      ) as EntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityGroupInfo),
+                )
+                as EntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -947,7 +1142,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityGroupInfo>> getEntityGroupById({ 
+  Future<Response<EntityGroupInfo>> getEntityGroupById({
     required String entityGroupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -956,13 +1151,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityGroupInfo);
-    final _path = r'/api/entityGroup/{entityGroupId}'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityGroupInfo);
+    final _path = r'/api/entityGroup/{entityGroupId}'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -970,11 +1173,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -993,11 +1193,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityGroupInfo),
-      ) as EntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityGroupInfo),
+                )
+                as EntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1037,7 +1239,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityGroupInfo>> getEntityGroupByOwnerAndNameAndType({ 
+  Future<Response<EntityGroupInfo>> getEntityGroupByOwnerAndNameAndType({
     required String ownerType,
     required String ownerId,
     required String groupType,
@@ -1049,13 +1251,53 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityGroupInfo);
-    final _path = r'/api/entityGroup/{ownerType}/{ownerId}/{groupType}/{groupName}'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString()).replaceAll('{' r'groupName' '}', encodeQueryParameter(_serializers, groupName, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityGroupInfo);
+    final _path =
+        r'/api/entityGroup/{ownerType}/{ownerId}/{groupType}/{groupName}'
+            .replaceAll(
+              '{'
+              r'ownerType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                ownerType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'ownerId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                ownerId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'groupType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                groupType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'groupName'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                groupName,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1063,11 +1305,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1086,11 +1325,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityGroupInfo),
-      ) as EntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityGroupInfo),
+                )
+                as EntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1127,7 +1368,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityInfo>> getEntityGroupEntityInfoById({ 
+  Future<Response<EntityInfo>> getEntityGroupEntityInfoById({
     required String entityGroupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1136,13 +1377,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityInfo);
-    final _path = r'/api/entityGroupInfo/{entityGroupId}'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityInfo);
+    final _path = r'/api/entityGroupInfo/{entityGroupId}'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1150,11 +1399,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1173,11 +1419,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityInfo),
-      ) as EntityInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityInfo),
+                )
+                as EntityInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1214,7 +1462,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityInfo>>> getEntityGroupEntityInfosByIds({ 
+  Future<Response<BuiltList<EntityInfo>>> getEntityGroupEntityInfosByIds({
     required BuiltList<String> entityGroupIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1223,13 +1471,13 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfEntityInfoAndListOfString);
     final _path = r'/api/entityGroupInfos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1237,11 +1485,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1249,7 +1494,12 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'entityGroupIds': encodeCollectionQueryParameter<String>(_serializers, entityGroupIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'entityGroupIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        entityGroupIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1265,11 +1515,15 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityInfo)]),
-      ) as BuiltList<EntityInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityInfo),
+                  ]),
+                )
+                as BuiltList<EntityInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1313,7 +1567,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityInfo>> getEntityGroupEntityInfosByOwnerAndTypeAndPageLink({ 
+  Future<Response<PageDataEntityInfo>>
+  getEntityGroupEntityInfosByOwnerAndTypeAndPageLink({
     required String ownerType,
     required String ownerId,
     required String groupType,
@@ -1329,13 +1584,42 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityInfo);
-    final _path = r'/api/entityGroupInfos/{ownerType}/{ownerId}/{groupType}'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityInfo);
+    final _path = r'/api/entityGroupInfos/{ownerType}/{ownerId}/{groupType}'
+        .replaceAll(
+          '{'
+          r'ownerType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ownerId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1343,11 +1627,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1355,11 +1636,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1375,11 +1675,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityInfo),
-      ) as PageDataEntityInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityInfo),
+                )
+                as PageDataEntityInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1422,7 +1724,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityInfo>> getEntityGroupEntityInfosByTypeAndPageLink({ 
+  Future<Response<PageDataEntityInfo>>
+  getEntityGroupEntityInfosByTypeAndPageLink({
     required String groupType,
     required String pageSize,
     required String page,
@@ -1437,13 +1740,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityInfo);
-    final _path = r'/api/entityGroupInfos/{groupType}'.replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityInfo);
+    final _path = r'/api/entityGroupInfos/{groupType}'.replaceAll(
+      '{'
+      r'groupType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupType,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1451,11 +1762,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1463,12 +1771,36 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (includeShared != null) r'includeShared': encodeQueryParameter(_serializers, includeShared, const FullType(bool)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      if (includeShared != null)
+        r'includeShared': encodeQueryParameter(
+          _serializers,
+          includeShared,
+          const FullType(bool),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1484,11 +1816,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityInfo),
-      ) as PageDataEntityInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityInfo),
+                )
+                as PageDataEntityInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1532,7 +1866,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityInfo>> getEntityGroupEntityInfosHierarchyByOwnerAndTypeAndPageLink({ 
+  Future<Response<PageDataEntityInfo>>
+  getEntityGroupEntityInfosHierarchyByOwnerAndTypeAndPageLink({
     required String ownerType,
     required String ownerId,
     required String groupType,
@@ -1548,13 +1883,43 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityInfo);
-    final _path = r'/api/entityGroupInfosHierarchy/{ownerType}/{ownerId}/{groupType}'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityInfo);
+    final _path =
+        r'/api/entityGroupInfosHierarchy/{ownerType}/{ownerId}/{groupType}'
+            .replaceAll(
+              '{'
+              r'ownerType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                ownerType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'ownerId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                ownerId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'groupType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                groupType,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1562,11 +1927,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1574,11 +1936,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1594,11 +1975,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityInfo),
-      ) as PageDataEntityInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityInfo),
+                )
+                as PageDataEntityInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1635,7 +2018,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityGroupInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityGroupInfo>>> getEntityGroupsByIds({ 
+  Future<Response<BuiltList<EntityGroupInfo>>> getEntityGroupsByIds({
     required BuiltList<String> entityGroupIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1644,13 +2027,13 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityGroupInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfEntityGroupInfoAndListOfString);
     final _path = r'/api/entityGroups/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1658,11 +2041,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1670,7 +2050,12 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'entityGroupIds': encodeCollectionQueryParameter<String>(_serializers, entityGroupIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'entityGroupIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        entityGroupIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1686,11 +2071,15 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityGroupInfo)]),
-      ) as BuiltList<EntityGroupInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityGroupInfo),
+                  ]),
+                )
+                as BuiltList<EntityGroupInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1734,7 +2123,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityGroupInfo>> getEntityGroupsByOwnerAndTypeAndPageLink({ 
+  Future<Response<PageDataEntityGroupInfo>>
+  getEntityGroupsByOwnerAndTypeAndPageLink({
     required String ownerType,
     required String ownerId,
     required String groupType,
@@ -1750,13 +2140,42 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
-    final _path = r'/api/entityGroups/{ownerType}/{ownerId}/{groupType}'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
+    final _path = r'/api/entityGroups/{ownerType}/{ownerId}/{groupType}'
+        .replaceAll(
+          '{'
+          r'ownerType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ownerId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1764,11 +2183,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1776,11 +2192,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1796,11 +2231,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityGroupInfo),
-      ) as PageDataEntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityGroupInfo),
+                )
+                as PageDataEntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1843,7 +2280,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityGroupInfo>> getEntityGroupsByTypeAndPageLink({ 
+  Future<Response<PageDataEntityGroupInfo>> getEntityGroupsByTypeAndPageLink({
     required String groupType,
     required String pageSize,
     required String page,
@@ -1858,13 +2295,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
-    final _path = r'/api/entityGroups/{groupType}'.replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
+    final _path = r'/api/entityGroups/{groupType}'.replaceAll(
+      '{'
+      r'groupType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupType,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1872,11 +2317,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1884,12 +2326,36 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (includeShared != null) r'includeShared': encodeQueryParameter(_serializers, includeShared, const FullType(bool)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      if (includeShared != null)
+        r'includeShared': encodeQueryParameter(
+          _serializers,
+          includeShared,
+          const FullType(bool),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1905,11 +2371,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityGroupInfo),
-      ) as PageDataEntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityGroupInfo),
+                )
+                as PageDataEntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1947,7 +2415,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityGroupId>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityGroupId>>> getEntityGroupsForEntity({ 
+  Future<Response<BuiltList<EntityGroupId>>> getEntityGroupsForEntity({
     required String entityType,
     required String entityId,
     CancelToken? cancelToken,
@@ -1957,13 +2425,32 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityGroupId);
-    final _path = r'/api/entityGroups/{entityType}/{entityId}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityGroupId);
+    final _path = r'/api/entityGroups/{entityType}/{entityId}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1971,11 +2458,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1994,11 +2478,15 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityGroupId)]),
-      ) as BuiltList<EntityGroupId>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityGroupId),
+                  ]),
+                )
+                as BuiltList<EntityGroupId>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2042,7 +2530,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityGroupInfo>> getEntityGroupsHierarchyByOwnerAndTypeAndPageLink({ 
+  Future<Response<PageDataEntityGroupInfo>>
+  getEntityGroupsHierarchyByOwnerAndTypeAndPageLink({
     required String ownerType,
     required String ownerId,
     required String groupType,
@@ -2058,13 +2547,43 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
-    final _path = r'/api/entityGroupsHierarchy/{ownerType}/{ownerId}/{groupType}'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
+    final _path =
+        r'/api/entityGroupsHierarchy/{ownerType}/{ownerId}/{groupType}'
+            .replaceAll(
+              '{'
+              r'ownerType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                ownerType,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'ownerId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                ownerId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'groupType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                groupType,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2072,11 +2591,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2084,11 +2600,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -2104,11 +2639,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityGroupInfo),
-      ) as PageDataEntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityGroupInfo),
+                )
+                as PageDataEntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2146,7 +2683,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ShortEntityView] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ShortEntityView>> getGroupEntity({ 
+  Future<Response<ShortEntityView>> getGroupEntity({
     required String entityGroupId,
     required String entityId,
     CancelToken? cancelToken,
@@ -2156,13 +2693,32 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerShortEntityView);
-    final _path = r'/api/entityGroup/{entityGroupId}/{entityId}'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerShortEntityView);
+    final _path = r'/api/entityGroup/{entityGroupId}/{entityId}'
+        .replaceAll(
+          '{'
+          r'entityGroupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityGroupId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2170,11 +2726,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2193,11 +2746,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ShortEntityView),
-      ) as ShortEntityView;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ShortEntityView),
+                )
+                as ShortEntityView;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2235,7 +2790,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityInfo>> getOwnerInfo({ 
+  Future<Response<EntityInfo>> getOwnerInfo({
     required String ownerType,
     required String ownerId,
     CancelToken? cancelToken,
@@ -2245,13 +2800,32 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityInfo);
-    final _path = r'/api/ownerInfo/{ownerType}/{ownerId}'.replaceAll('{' r'ownerType' '}', encodeQueryParameter(_serializers, ownerType, const FullType(String)).toString()).replaceAll('{' r'ownerId' '}', encodeQueryParameter(_serializers, ownerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityInfo);
+    final _path = r'/api/ownerInfo/{ownerType}/{ownerId}'
+        .replaceAll(
+          '{'
+          r'ownerType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ownerId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ownerId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2259,11 +2833,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2282,11 +2853,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityInfo),
-      ) as EntityInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityInfo),
+                )
+                as EntityInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2327,7 +2900,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityInfo>> getOwnerInfos({ 
+  Future<Response<PageDataEntityInfo>> getOwnerInfos({
     required String pageSize,
     required String page,
     String? textSearch,
@@ -2340,13 +2913,12 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityInfo);
     final _path = r'/api/ownerInfos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2354,11 +2926,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2366,11 +2935,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -2386,11 +2974,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityInfo),
-      ) as PageDataEntityInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityInfo),
+                )
+                as PageDataEntityInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2431,7 +3021,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataContactBasedObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataContactBasedObject>> getOwners({ 
+  Future<Response<PageDataContactBasedObject>> getOwners({
     required String pageSize,
     required String page,
     String? textSearch,
@@ -2444,13 +3034,12 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataContactBasedObject);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataContactBasedObject);
     final _path = r'/api/owners';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2458,11 +3047,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2470,11 +3056,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -2490,11 +3095,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataContactBasedObject),
-      ) as PageDataContactBasedObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataContactBasedObject),
+                )
+                as PageDataContactBasedObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2536,7 +3143,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityInfo>> getSharedEntityGroupEntityInfosByTypeAndPageLink({ 
+  Future<Response<PageDataEntityInfo>>
+  getSharedEntityGroupEntityInfosByTypeAndPageLink({
     required String groupType,
     required String pageSize,
     required String page,
@@ -2550,13 +3158,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityInfo);
-    final _path = r'/api/entityGroupInfos/{groupType}/shared'.replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityInfo);
+    final _path = r'/api/entityGroupInfos/{groupType}/shared'.replaceAll(
+      '{'
+      r'groupType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupType,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2564,11 +3180,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2576,11 +3189,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -2596,11 +3228,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityInfo),
-      ) as PageDataEntityInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityInfo),
+                )
+                as PageDataEntityInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2642,7 +3276,8 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEntityGroupInfo>> getSharedEntityGroupsByTypeAndPageLink({ 
+  Future<Response<PageDataEntityGroupInfo>>
+  getSharedEntityGroupsByTypeAndPageLink({
     required String groupType,
     required String pageSize,
     required String page,
@@ -2656,13 +3291,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
-    final _path = r'/api/entityGroups/{groupType}/shared'.replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEntityGroupInfo);
+    final _path = r'/api/entityGroups/{groupType}/shared'.replaceAll(
+      '{'
+      r'groupType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        groupType,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2670,11 +3313,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2682,11 +3322,30 @@ class EntityGroupControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -2702,11 +3361,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEntityGroupInfo),
-      ) as PageDataEntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEntityGroupInfo),
+                )
+                as PageDataEntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2743,7 +3404,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> makeEntityGroupPrivate({ 
+  Future<Response<void>> makeEntityGroupPrivate({
     required String entityGroupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2753,12 +3414,19 @@ class EntityGroupControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/entityGroup/{entityGroupId}/makePrivate'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _path = r'/api/entityGroup/{entityGroupId}/makePrivate'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2766,11 +3434,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2802,7 +3467,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> makeEntityGroupPublic({ 
+  Future<Response<void>> makeEntityGroupPublic({
     required String entityGroupId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2812,12 +3477,19 @@ class EntityGroupControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/entityGroup/{entityGroupId}/makePublic'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _path = r'/api/entityGroup/{entityGroupId}/makePublic'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2825,11 +3497,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2852,7 +3521,7 @@ class EntityGroupControllerApi {
   ///
   /// Parameters:
   /// * [entityGroupId] - A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [requestBody] 
+  /// * [requestBody]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -2862,7 +3531,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> removeEntitiesFromEntityGroup({ 
+  Future<Response<void>> removeEntitiesFromEntityGroup({
     required String entityGroupId,
     required BuiltList<String> requestBody,
     CancelToken? cancelToken,
@@ -2872,13 +3541,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
-    final _path = r'/api/entityGroup/{entityGroupId}/deleteEntities'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
+    final _path = r'/api/entityGroup/{entityGroupId}/deleteEntities'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2886,11 +3563,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2903,13 +3577,9 @@ class EntityGroupControllerApi {
     try {
       const _type = FullType(BuiltList, [FullType(String)]);
       _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -2932,7 +3602,7 @@ class EntityGroupControllerApi {
   /// Create or update the Entity Group. When creating Entity Group, platform generates Entity Group Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Entity Group Id will be present in the response. Specify existing Entity Group Id to update the group. Referencing non-existing Entity Group Id will cause &#39;Not Found&#39; error.Remove &#39;id&#39;, &#39;tenantId&#39; and optionally &#39;ownerId&#39; from the request body example (below) to create new Entity Group entity. When &#39;ownerId&#39; is not set (or null), it defaults to the current user&#39;s owner (Tenant for tenant admins, Customer for customer users).   Entity group name is unique in the scope of owner and entity type. For example, you can&#39;t create two tenant device groups called &#39;Water meters&#39;. However, you may create device and asset group with the same name. And also you may create groups with the same name for two different customers of the same tenant.   Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority. Security check is performed to verify that the user has &#39;WRITE&#39; permission for specified group.
   ///
   /// Parameters:
-  /// * [entityGroup] 
+  /// * [entityGroup]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -2942,7 +3612,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityGroupInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityGroupInfo>> saveEntityGroup({ 
+  Future<Response<EntityGroupInfo>> saveEntityGroup({
     required EntityGroup entityGroup,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2951,13 +3621,13 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityGroupAndEntityGroupInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerEntityGroupAndEntityGroupInfo);
     final _path = r'/api/entityGroup';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2965,11 +3635,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2982,13 +3649,9 @@ class EntityGroupControllerApi {
     try {
       const _type = FullType(EntityGroup);
       _bodyData = _serializers.serialize(entityGroup, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -3008,11 +3671,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityGroupInfo),
-      ) as EntityGroupInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityGroupInfo),
+                )
+                as EntityGroupInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -3040,7 +3705,7 @@ class EntityGroupControllerApi {
   ///
   /// Parameters:
   /// * [entityGroupId] - A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [shareGroupRequest] 
+  /// * [shareGroupRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -3050,7 +3715,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> shareEntityGroup({ 
+  Future<Response<void>> shareEntityGroup({
     required String entityGroupId,
     required ShareGroupRequest shareGroupRequest,
     CancelToken? cancelToken,
@@ -3060,13 +3725,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerShareGroupRequest);
-    final _path = r'/api/entityGroup/{entityGroupId}/share'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerShareGroupRequest);
+    final _path = r'/api/entityGroup/{entityGroupId}/share'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -3074,11 +3747,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -3090,14 +3760,13 @@ class EntityGroupControllerApi {
 
     try {
       const _type = FullType(ShareGroupRequest);
-      _bodyData = _serializers.serialize(shareGroupRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        shareGroupRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -3132,7 +3801,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> shareEntityGroupToChildOwnerUserGroup({ 
+  Future<Response<void>> shareEntityGroupToChildOwnerUserGroup({
     required String entityGroupId,
     required String userGroupId,
     required String roleId,
@@ -3144,12 +3813,41 @@ class EntityGroupControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/entityGroup/{entityGroupId}/{userGroupId}/{roleId}/share'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString()).replaceAll('{' r'userGroupId' '}', encodeQueryParameter(_serializers, userGroupId, const FullType(String)).toString()).replaceAll('{' r'roleId' '}', encodeQueryParameter(_serializers, roleId, const FullType(String)).toString());
+    final _path =
+        r'/api/entityGroup/{entityGroupId}/{userGroupId}/{roleId}/share'
+            .replaceAll(
+              '{'
+              r'entityGroupId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                entityGroupId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'userGroupId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                userGroupId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'roleId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                roleId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -3157,11 +3855,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -3184,7 +3879,7 @@ class EntityGroupControllerApi {
   ///
   /// Parameters:
   /// * [entityGroupId] - A uuid value representing the Entity Group Id that you would like to share. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [shareGroupRequest] 
+  /// * [shareGroupRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -3194,7 +3889,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> shareEntityGroupToChildOwnerUserGroupV2({ 
+  Future<Response<void>> shareEntityGroupToChildOwnerUserGroupV2({
     required String entityGroupId,
     required ShareGroupRequest shareGroupRequest,
     CancelToken? cancelToken,
@@ -3204,13 +3899,21 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerShareGroupRequest);
-    final _path = r'/api/v2/entityGroup/{entityGroupId}/share'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerShareGroupRequest);
+    final _path = r'/api/v2/entityGroup/{entityGroupId}/share'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -3218,11 +3921,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -3234,14 +3934,13 @@ class EntityGroupControllerApi {
 
     try {
       const _type = FullType(ShareGroupRequest);
-      _bodyData = _serializers.serialize(shareGroupRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        shareGroupRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -3276,7 +3975,7 @@ class EntityGroupControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityGroup] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityGroup>> unassignEntityGroupFromEdge({ 
+  Future<Response<EntityGroup>> unassignEntityGroupFromEdge({
     required String edgeId,
     required String groupType,
     required String entityGroupId,
@@ -3287,13 +3986,42 @@ class EntityGroupControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityGroup);
-    final _path = r'/api/edge/{edgeId}/entityGroup/{entityGroupId}/{groupType}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'groupType' '}', encodeQueryParameter(_serializers, groupType, const FullType(String)).toString()).replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityGroup);
+    final _path = r'/api/edge/{edgeId}/entityGroup/{entityGroupId}/{groupType}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'groupType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityGroupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityGroupId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -3301,11 +4029,8 @@ class EntityGroupControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -3324,11 +4049,13 @@ class EntityGroupControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityGroup),
-      ) as EntityGroup;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityGroup),
+                )
+                as EntityGroup;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -3350,5 +4077,4 @@ class EntityGroupControllerApi {
       extra: _response.extra,
     );
   }
-
 }

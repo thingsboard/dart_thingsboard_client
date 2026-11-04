@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'rpc_status.g.dart';
 
 class RpcStatus extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'QUEUED')
   static const RpcStatus QUEUED = _$QUEUED;
   @BuiltValueEnumConst(wireName: r'SENT')
@@ -37,7 +36,7 @@ class RpcStatus extends EnumClass {
 
   static Serializer<RpcStatus> get serializer => _$rpcStatusSerializer;
 
-  const RpcStatus._(String name): super(name);
+  const RpcStatus._(String name) : super(name);
 
   static BuiltSet<RpcStatus> get values => _$values;
   static RpcStatus valueOf(String name) => _$valueOf(name);
@@ -50,4 +49,3 @@ class RpcStatus extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class RpcStatusMixin = Object with _$RpcStatusMixin;
-

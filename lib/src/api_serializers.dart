@@ -1071,773 +1071,1726 @@ class ApiSerializersRegistry {
 
 // Register functions used by the API operations.
 
-void registerAccountTwoFaSettings(ApiSerializersRegistry r) { _accountTwoFaSettings(r); }
-
-void registerAccountTwoFaSettingsAndTwoFaAccountConfigUpdateRequestAndTwoFaProviderType(ApiSerializersRegistry r) { _accountTwoFaSettings(r); _twoFaAccountConfigUpdateRequest(r); _twoFaProviderType(r); }
-
-void registerAccountTwoFaSettingsAndTwoFaProviderType(ApiSerializersRegistry r) { _accountTwoFaSettings(r); _twoFaProviderType(r); }
-
-void registerActivateUserRequestAndJwtPair(ApiSerializersRegistry r) { _activateUserRequest(r); _jwtPair(r); }
-
-void registerAdminSettings(ApiSerializersRegistry r) { _adminSettings(r); }
-
-void registerAgent(ApiSerializersRegistry r) { _agent(r); }
-
-void registerAgentAppEvent(ApiSerializersRegistry r) { _agentAppEvent(r); }
-
-void registerAgentAppEventActionTypeAndAgentAppProfile(ApiSerializersRegistry r) { _agentAppEventActionType(r); _agentAppProfile(r); }
-
-void registerAgentAppEventActionTypeAndAgentApplication(ApiSerializersRegistry r) { _agentAppEventActionType(r); _agentApplication(r); }
-
-void registerAgentAppEventAndAgentAppEventRequest(ApiSerializersRegistry r) { _agentAppEvent(r); _agentAppEventRequest(r); }
-
-void registerAgentAppEventAndAgentUpgradeRequest(ApiSerializersRegistry r) { _agentAppEvent(r); _agentUpgradeRequest(r); }
-
-void registerAgentAppEventRequestAndAgentAppInstallResponse(ApiSerializersRegistry r) { _agentAppEventRequest(r); _agentAppInstallResponse(r); }
-
-void registerAgentAppProfile(ApiSerializersRegistry r) { _agentAppProfile(r); }
-
-void registerAgentAppProfileInfo(ApiSerializersRegistry r) { _agentAppProfileInfo(r); }
-
-void registerAgentAppTemplate(ApiSerializersRegistry r) { _agentAppTemplate(r); }
-
-void registerAgentApplication(ApiSerializersRegistry r) { _agentApplication(r); }
-
-void registerAgentApplicationInfo(ApiSerializersRegistry r) { _agentApplicationInfo(r); }
-
-void registerAgentBulkAction(ApiSerializersRegistry r) { _agentBulkAction(r); }
-
-void registerAgentBulkActionAndBulkOperationRequest(ApiSerializersRegistry r) { _agentBulkAction(r); _bulkOperationRequest(r); }
-
-void registerAgentBulkActionEventStats(ApiSerializersRegistry r) { _agentBulkActionEventStats(r); }
-
-void registerAgentInfo(ApiSerializersRegistry r) { _agentInfo(r); }
-
-void registerAgentInstructions(ApiSerializersRegistry r) { _agentInstructions(r); }
-
-void registerAgentProfile(ApiSerializersRegistry r) { _agentProfile(r); }
-
-void registerAgentProfileInfo(ApiSerializersRegistry r) { _agentProfileInfo(r); }
-
-void registerAiModel(ApiSerializersRegistry r) { _aiModel(r); }
-
-void registerAlarm(ApiSerializersRegistry r) { _alarm(r); }
-
-void registerAlarmComment(ApiSerializersRegistry r) { _alarmComment(r); }
-
-void registerAlarmCountQuery(ApiSerializersRegistry r) { _alarmCountQuery(r); }
-
-void registerAlarmDataQueryAndPageDataAlarmData(ApiSerializersRegistry r) { _alarmDataQuery(r); _pageDataAlarmData(r); }
-
-void registerAlarmInfo(ApiSerializersRegistry r) { _alarmInfo(r); }
-
-void registerAlarmRuleDefinition(ApiSerializersRegistry r) { _alarmRuleDefinition(r); }
-
-void registerAlarmSeverity(ApiSerializersRegistry r) { _alarmSeverity(r); }
-
-void registerAllowedPermissionsInfo(ApiSerializersRegistry r) { _allowedPermissionsInfo(r); }
-
-void registerApiKeyAndApiKeyInfo(ApiSerializersRegistry r) { _apiKey(r); _apiKeyInfo(r); }
-
-void registerApiKeyInfo(ApiSerializersRegistry r) { _apiKeyInfo(r); }
-
-void registerAsset(ApiSerializersRegistry r) { _asset(r); }
-
-void registerAssetInfo(ApiSerializersRegistry r) { _assetInfo(r); }
-
-void registerAssetProfile(ApiSerializersRegistry r) { _assetProfile(r); }
-
-void registerAssetProfileInfo(ApiSerializersRegistry r) { _assetProfileInfo(r); }
-
-void registerAvailableEntityKeysAndEntityDataQuery(ApiSerializersRegistry r) { _availableEntityKeys(r); _entityDataQuery(r); }
-
-void registerAvailableEntityKeysV2AndEntityDataQuery(ApiSerializersRegistry r) { _availableEntityKeysV2(r); _entityDataQuery(r); }
-
-void registerBlobEntityWithCustomerInfo(ApiSerializersRegistry r) { _blobEntityWithCustomerInfo(r); }
-
-void registerBulkImportRequestAndBulkImportResultAsset(ApiSerializersRegistry r) { _bulkImportRequest(r); _bulkImportResultAsset(r); }
-
-void registerBulkImportRequestAndBulkImportResultDevice(ApiSerializersRegistry r) { _bulkImportRequest(r); _bulkImportResultDevice(r); }
-
-void registerBulkImportRequestAndBulkImportResultEdge(ApiSerializersRegistry r) { _bulkImportRequest(r); _bulkImportResultEdge(r); }
-
-void registerBulkOperationPreviewAndBulkOperationRequest(ApiSerializersRegistry r) { _bulkOperationPreview(r); _bulkOperationRequest(r); }
-
-void registerCalculatedField(ApiSerializersRegistry r) { _calculatedField(r); }
-
-void registerCalculatedFieldTypeAndPageDataString(ApiSerializersRegistry r) { _calculatedFieldType(r); _pageDataString(r); }
-
-void registerCfReprocessingValidationResult(ApiSerializersRegistry r) { _cfReprocessingValidationResult(r); }
-
-void registerChangePasswordRequestAndJwtPair(ApiSerializersRegistry r) { _changePasswordRequest(r); _jwtPair(r); }
-
-void registerClaimRequest(ApiSerializersRegistry r) { _claimRequest(r); }
-
-void registerComponentDescriptor(ApiSerializersRegistry r) { _componentDescriptor(r); }
-
-void registerConverter(ApiSerializersRegistry r) { _converter(r); }
-
-void registerCreateReportRequestAndReport(ApiSerializersRegistry r) { _createReportRequest(r); _report(r); }
-
-void registerCustomMenu(ApiSerializersRegistry r) { _customMenu(r); }
-
-void registerCustomMenuAndCustomMenuInfo(ApiSerializersRegistry r) { _customMenu(r); _customMenuInfo(r); }
-
-void registerCustomMenuConfig(ApiSerializersRegistry r) { _customMenuConfig(r); }
-
-void registerCustomMenuDeleteResult(ApiSerializersRegistry r) { _customMenuDeleteResult(r); }
-
-void registerCustomMenuInfo(ApiSerializersRegistry r) { _customMenuInfo(r); }
-
-void registerCustomer(ApiSerializersRegistry r) { _customer(r); }
-
-void registerCustomerInfo(ApiSerializersRegistry r) { _customerInfo(r); }
-
-void registerDashboard(ApiSerializersRegistry r) { _dashboard(r); }
-
-void registerDashboardInfo(ApiSerializersRegistry r) { _dashboardInfo(r); }
-
-void registerDashboardReportConfig(ApiSerializersRegistry r) { _dashboardReportConfig(r); }
-
-void registerDefaultRuleChainCreateRequestAndRuleChain(ApiSerializersRegistry r) { _defaultRuleChainCreateRequest(r); _ruleChain(r); }
-
-void registerDevice(ApiSerializersRegistry r) { _device(r); }
-
-void registerDeviceCredentials(ApiSerializersRegistry r) { _deviceCredentials(r); }
-
-void registerDeviceGroupOtaPackage(ApiSerializersRegistry r) { _deviceGroupOtaPackage(r); }
-
-void registerDeviceInfo(ApiSerializersRegistry r) { _deviceInfo(r); }
-
-void registerDeviceProfile(ApiSerializersRegistry r) { _deviceProfile(r); }
-
-void registerDeviceProfileInfo(ApiSerializersRegistry r) { _deviceProfileInfo(r); }
-
-void registerDomainInfo(ApiSerializersRegistry r) { _domainInfo(r); }
-
-void registerEdge(ApiSerializersRegistry r) { _edge(r); }
-
-void registerEdgeInfo(ApiSerializersRegistry r) { _edgeInfo(r); }
-
-void registerEdgeInstructions(ApiSerializersRegistry r) { _edgeInstructions(r); }
-
-void registerEdqsState(ApiSerializersRegistry r) { _edqsState(r); }
-
-void registerEntityCountQuery(ApiSerializersRegistry r) { _entityCountQuery(r); }
-
-void registerEntityDataDiff(ApiSerializersRegistry r) { _entityDataDiff(r); }
-
-void registerEntityDataInfoAndEntityType(ApiSerializersRegistry r) { _entityDataInfo(r); _entityType(r); }
-
-void registerEntityDataQueryAndPageDataEntityData(ApiSerializersRegistry r) { _entityDataQuery(r); _pageDataEntityData(r); }
-
-void registerEntityGroup(ApiSerializersRegistry r) { _entityGroup(r); }
-
-void registerEntityGroupAndEntityGroupInfo(ApiSerializersRegistry r) { _entityGroup(r); _entityGroupInfo(r); }
-
-void registerEntityGroupInfo(ApiSerializersRegistry r) { _entityGroupInfo(r); }
-
-void registerEntityInfo(ApiSerializersRegistry r) { _entityInfo(r); }
-
-void registerEntityRelation(ApiSerializersRegistry r) { _entityRelation(r); }
-
-void registerEntityTypeAndPageDataEntityVersion(ApiSerializersRegistry r) { _entityType(r); _pageDataEntityVersion(r); }
-
-void registerEntityView(ApiSerializersRegistry r) { _entityView(r); }
-
-void registerEntityViewAndNameConflictPolicyAndUniquifyStrategy(ApiSerializersRegistry r) { _entityView(r); _nameConflictPolicy(r); _uniquifyStrategy(r); }
-
-void registerEntityViewInfo(ApiSerializersRegistry r) { _entityViewInfo(r); }
-
-void registerEventFilter(ApiSerializersRegistry r) { _eventFilter(r); }
-
-void registerEventFilterAndPageDataEventInfo(ApiSerializersRegistry r) { _eventFilter(r); _pageDataEventInfo(r); }
-
-void registerFeaturesInfo(ApiSerializersRegistry r) { _featuresInfo(r); }
-
-void registerGroupPermission(ApiSerializersRegistry r) { _groupPermission(r); }
-
-void registerGroupPermissionInfo(ApiSerializersRegistry r) { _groupPermissionInfo(r); }
-
-void registerHomeDashboard(ApiSerializersRegistry r) { _homeDashboard(r); }
-
-void registerHomeDashboardInfo(ApiSerializersRegistry r) { _homeDashboardInfo(r); }
-
-void registerIntegration(ApiSerializersRegistry r) { _integration(r); }
-
-void registerIntegrationType(ApiSerializersRegistry r) { _integrationType(r); }
-
-void registerJob(ApiSerializersRegistry r) { _job(r); }
-
-void registerJobAndReportRequest(ApiSerializersRegistry r) { _job(r); _reportRequest(r); }
-
-void registerJwtPair(ApiSerializersRegistry r) { _jwtPair(r); }
-
-void registerJwtPairAndJwtSettings(ApiSerializersRegistry r) { _jwtPair(r); _jwtSettings(r); }
-
-void registerJwtPairAndTwoFaProviderType(ApiSerializersRegistry r) { _jwtPair(r); _twoFaProviderType(r); }
-
-void registerJwtSettings(ApiSerializersRegistry r) { _jwtSettings(r); }
-
-void registerLicenseChangeResultAndLicenseKeyRequest(ApiSerializersRegistry r) { _licenseChangeResult(r); _licenseKeyRequest(r); }
-
-void registerLicenseClaimInfo(ApiSerializersRegistry r) { _licenseClaimInfo(r); }
-
-void registerLicenseClaimResult(ApiSerializersRegistry r) { _licenseClaimResult(r); }
-
-void registerLicenseKeyRequestAndSetupInfo(ApiSerializersRegistry r) { _licenseKeyRequest(r); _setupInfo(r); }
-
-void registerLicenseKeyRequestAndSubscriptionInfo(ApiSerializersRegistry r) { _licenseKeyRequest(r); _subscriptionInfo(r); }
-
-void registerLicenseUsageInfo(ApiSerializersRegistry r) { _licenseUsageInfo(r); }
-
-void registerListOfAgentAppProfileAndListOfString(ApiSerializersRegistry r) { _listOfAgentAppProfile(r); _listOfString(r); }
-
-void registerListOfAgentAppProfileInfo(ApiSerializersRegistry r) { _listOfAgentAppProfileInfo(r); }
-
-void registerListOfAgentAppProfileRelationInfo(ApiSerializersRegistry r) { _listOfAgentAppProfileRelationInfo(r); }
-
-void registerListOfAgentAppTemplate(ApiSerializersRegistry r) { _listOfAgentAppTemplate(r); }
-
-void registerListOfAgentInfoAndListOfString(ApiSerializersRegistry r) { _listOfAgentInfo(r); _listOfString(r); }
-
-void registerListOfAssetAndAssetSearchQuery(ApiSerializersRegistry r) { _listOfAsset(r); _assetSearchQuery(r); }
-
-void registerListOfAssetAndListOfString(ApiSerializersRegistry r) { _listOfAsset(r); _listOfString(r); }
-
-void registerListOfAssetProfileInfoAndListOfString(ApiSerializersRegistry r) { _listOfAssetProfileInfo(r); _listOfString(r); }
-
-void registerListOfAttributeDataAndListOfString(ApiSerializersRegistry r) { _listOfAttributeData(r); _listOfString(r); }
-
-void registerListOfBaseReadTsKvQueryAndListOfReadTsKvQueryResult(ApiSerializersRegistry r) { _listOfBaseReadTsKvQuery(r); _listOfReadTsKvQueryResult(r); }
-
-void registerListOfBlobEntityInfoAndListOfString(ApiSerializersRegistry r) { _listOfBlobEntityInfo(r); _listOfString(r); }
-
-void registerListOfBranchInfo(ApiSerializersRegistry r) { _listOfBranchInfo(r); }
-
-void registerListOfComponentDescriptor(ApiSerializersRegistry r) { _listOfComponentDescriptor(r); }
-
-void registerListOfComponentDescriptorAndListOfString(ApiSerializersRegistry r) { _listOfComponentDescriptor(r); _listOfString(r); }
-
-void registerListOfConverterAndListOfString(ApiSerializersRegistry r) { _listOfConverter(r); _listOfString(r); }
-
-void registerListOfCustomerAndListOfString(ApiSerializersRegistry r) { _listOfCustomer(r); _listOfString(r); }
-
-void registerListOfDashboard(ApiSerializersRegistry r) { _listOfDashboard(r); }
-
-void registerListOfDashboardInfoAndListOfString(ApiSerializersRegistry r) { _listOfDashboardInfo(r); _listOfString(r); }
-
-void registerListOfDeviceAndDeviceSearchQuery(ApiSerializersRegistry r) { _listOfDevice(r); _deviceSearchQuery(r); }
-
-void registerListOfDeviceAndListOfString(ApiSerializersRegistry r) { _listOfDevice(r); _listOfString(r); }
-
-void registerListOfDeviceProfileInfoAndListOfString(ApiSerializersRegistry r) { _listOfDeviceProfileInfo(r); _listOfString(r); }
-
-void registerListOfEdgeAndEdgeSearchQuery(ApiSerializersRegistry r) { _listOfEdge(r); _edgeSearchQuery(r); }
-
-void registerListOfEdgeAndListOfString(ApiSerializersRegistry r) { _listOfEdge(r); _listOfString(r); }
-
-void registerListOfEntityGroupId(ApiSerializersRegistry r) { _listOfEntityGroupId(r); }
-
-void registerListOfEntityGroupInfo(ApiSerializersRegistry r) { _listOfEntityGroupInfo(r); }
-
-void registerListOfEntityGroupInfoAndListOfString(ApiSerializersRegistry r) { _listOfEntityGroupInfo(r); _listOfString(r); }
-
-void registerListOfEntityInfo(ApiSerializersRegistry r) { _listOfEntityInfo(r); }
-
-void registerListOfEntityInfoAndListOfString(ApiSerializersRegistry r) { _listOfEntityInfo(r); _listOfString(r); }
-
-void registerListOfEntityRelation(ApiSerializersRegistry r) { _listOfEntityRelation(r); }
-
-void registerListOfEntityRelationAndEntityRelationsQuery(ApiSerializersRegistry r) { _listOfEntityRelation(r); _entityRelationsQuery(r); }
-
-void registerListOfEntityRelationInfo(ApiSerializersRegistry r) { _listOfEntityRelationInfo(r); }
-
-void registerListOfEntityRelationInfoAndEntityRelationsQuery(ApiSerializersRegistry r) { _listOfEntityRelationInfo(r); _entityRelationsQuery(r); }
-
-void registerListOfEntitySubtype(ApiSerializersRegistry r) { _listOfEntitySubtype(r); }
-
-void registerListOfEntityView(ApiSerializersRegistry r) { _listOfEntityView(r); }
-
-void registerListOfEntityViewAndEntityViewSearchQuery(ApiSerializersRegistry r) { _listOfEntityView(r); _entityViewSearchQuery(r); }
-
-void registerListOfGetManagedRelatedEntityIds200ResponseInner(ApiSerializersRegistry r) { _listOfGetManagedRelatedEntityIds200ResponseInner(r); }
-
-void registerListOfGroupPermissionAndListOfGroupPermissionInfo(ApiSerializersRegistry r) { _listOfGroupPermission(r); _listOfGroupPermissionInfo(r); }
-
-void registerListOfGroupPermissionInfo(ApiSerializersRegistry r) { _listOfGroupPermissionInfo(r); }
-
-void registerListOfIntegrationAndListOfString(ApiSerializersRegistry r) { _listOfIntegration(r); _listOfString(r); }
-
-void registerListOfJsonObject(ApiSerializersRegistry r) { _listOfJsonObject(r); }
-
-void registerListOfLwM2mObject(ApiSerializersRegistry r) { _listOfLwM2mObject(r); }
-
-void registerListOfLwM2mObjectAndListOfString(ApiSerializersRegistry r) { _listOfLwM2mObject(r); _listOfString(r); }
-
-void registerListOfModelAndIntegrationType(ApiSerializersRegistry r) { _listOfModel(r); _integrationType(r); }
-
-void registerListOfNotificationDeliveryMethod(ApiSerializersRegistry r) { _listOfNotificationDeliveryMethod(r); }
-
-void registerListOfNotificationTarget(ApiSerializersRegistry r) { _listOfNotificationTarget(r); }
-
-void registerListOfOAuth2ClientInfoAndListOfString(ApiSerializersRegistry r) { _listOfOAuth2ClientInfo(r); _listOfString(r); }
-
-void registerListOfOAuth2ClientLoginInfo(ApiSerializersRegistry r) { _listOfOAuth2ClientLoginInfo(r); }
-
-void registerListOfOAuth2ClientRegistrationTemplate(ApiSerializersRegistry r) { _listOfOAuth2ClientRegistrationTemplate(r); }
-
-void registerListOfQueueStatsAndListOfString(ApiSerializersRegistry r) { _listOfQueueStats(r); _listOfString(r); }
-
-void registerListOfReportInfoAndListOfString(ApiSerializersRegistry r) { _listOfReportInfo(r); _listOfString(r); }
-
-void registerListOfReportTemplateInfoAndListOfString(ApiSerializersRegistry r) { _listOfReportTemplateInfo(r); _listOfString(r); }
-
-void registerListOfRoleAndListOfString(ApiSerializersRegistry r) { _listOfRole(r); _listOfString(r); }
-
-void registerListOfRuleChain(ApiSerializersRegistry r) { _listOfRuleChain(r); }
-
-void registerListOfRuleChainAndListOfString(ApiSerializersRegistry r) { _listOfRuleChain(r); _listOfString(r); }
-
-void registerListOfRuleChainImportResultAndRuleChainData(ApiSerializersRegistry r) { _listOfRuleChainImportResult(r); _ruleChainData(r); }
-
-void registerListOfRuleChainOutputLabelsUsage(ApiSerializersRegistry r) { _listOfRuleChainOutputLabelsUsage(r); }
-
-void registerListOfSchedulerEventInfo(ApiSerializersRegistry r) { _listOfSchedulerEventInfo(r); }
-
-void registerListOfSchedulerEventInfoAndListOfString(ApiSerializersRegistry r) { _listOfSchedulerEventInfo(r); _listOfString(r); }
-
-void registerListOfSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) { _listOfSchedulerEventWithCustomerInfo(r); }
-
-void registerListOfSlackConversation(ApiSerializersRegistry r) { _listOfSlackConversation(r); }
-
-void registerListOfString(ApiSerializersRegistry r) { _listOfString(r); }
-
-void registerListOfStringAndAgent(ApiSerializersRegistry r) { _listOfString(r); _agent(r); }
-
-void registerListOfStringAndAgentProfile(ApiSerializersRegistry r) { _listOfString(r); _agentProfile(r); }
-
-void registerListOfStringAndAssetAndNameConflictPolicyAnd1More(ApiSerializersRegistry r) { _listOfString(r); _asset(r); _nameConflictPolicy(r); _uniquifyStrategy(r); }
-
-void registerListOfStringAndCMAssigneeType(ApiSerializersRegistry r) { _listOfString(r); _cMAssigneeType(r); }
-
-void registerListOfStringAndCustomerAndNameConflictPolicyAnd1More(ApiSerializersRegistry r) { _listOfString(r); _customer(r); _nameConflictPolicy(r); _uniquifyStrategy(r); }
-
-void registerListOfStringAndDashboard(ApiSerializersRegistry r) { _listOfString(r); _dashboard(r); }
-
-void registerListOfStringAndDeviceAndNameConflictPolicyAnd1More(ApiSerializersRegistry r) { _listOfString(r); _device(r); _nameConflictPolicy(r); _uniquifyStrategy(r); }
-
-void registerListOfStringAndDomain(ApiSerializersRegistry r) { _listOfString(r); _domain(r); }
-
-void registerListOfStringAndEdge(ApiSerializersRegistry r) { _listOfString(r); _edge(r); }
-
-void registerListOfStringAndListOfTbResourceInfo(ApiSerializersRegistry r) { _listOfString(r); _listOfTbResourceInfo(r); }
-
-void registerListOfStringAndListOfTenant(ApiSerializersRegistry r) { _listOfString(r); _listOfTenant(r); }
-
-void registerListOfStringAndListOfTenantProfile(ApiSerializersRegistry r) { _listOfString(r); _listOfTenantProfile(r); }
-
-void registerListOfStringAndListOfUser(ApiSerializersRegistry r) { _listOfString(r); _listOfUser(r); }
-
-void registerListOfStringAndListOfWidgetsBundle(ApiSerializersRegistry r) { _listOfString(r); _listOfWidgetsBundle(r); }
-
-void registerListOfStringAndMapOfStringToList(ApiSerializersRegistry r) { _listOfString(r); _mapOfStringToList(r); }
-
-void registerListOfStringAndMobileAppBundle(ApiSerializersRegistry r) { _listOfString(r); _mobileAppBundle(r); }
-
-void registerListOfStringAndNameConflictPolicyAndSaveDeviceWithCredentialsRequestAnd1More(ApiSerializersRegistry r) { _listOfString(r); _nameConflictPolicy(r); _saveDeviceWithCredentialsRequest(r); _uniquifyStrategy(r); }
-
-void registerListOfStringAndPageDataNotificationTemplate(ApiSerializersRegistry r) { _listOfString(r); _pageDataNotificationTemplate(r); }
-
-void registerListOfStringAndPageDataReportTemplateInfo(ApiSerializersRegistry r) { _listOfString(r); _pageDataReportTemplateInfo(r); }
-
-void registerListOfStringAndUser(ApiSerializersRegistry r) { _listOfString(r); _user(r); }
-
-void registerListOfTranslationInfo(ApiSerializersRegistry r) { _listOfTranslationInfo(r); }
-
-void registerListOfTwoFaProviderInfo(ApiSerializersRegistry r) { _listOfTwoFaProviderInfo(r); }
-
-void registerListOfTwoFaProviderType(ApiSerializersRegistry r) { _listOfTwoFaProviderType(r); }
-
-void registerListOfVendorAndIntegrationType(ApiSerializersRegistry r) { _listOfVendor(r); _integrationType(r); }
-
-void registerListOfVersionedEntityInfo(ApiSerializersRegistry r) { _listOfVersionedEntityInfo(r); }
-
-void registerListOfWidgetType(ApiSerializersRegistry r) { _listOfWidgetType(r); }
-
-void registerListOfWidgetTypeDetails(ApiSerializersRegistry r) { _listOfWidgetTypeDetails(r); }
-
-void registerListOfWidgetsBundle(ApiSerializersRegistry r) { _listOfWidgetsBundle(r); }
-
-void registerLoginMobileInfo(ApiSerializersRegistry r) { _loginMobileInfo(r); }
-
-void registerLoginRequestAndLoginResponse(ApiSerializersRegistry r) { _loginRequest(r); _loginResponse(r); }
-
-void registerLoginResponseAndRefreshTokenRequest(ApiSerializersRegistry r) { _loginResponse(r); _refreshTokenRequest(r); }
-
-void registerLoginWhiteLabelingParams(ApiSerializersRegistry r) { _loginWhiteLabelingParams(r); }
-
-void registerLwM2MServerSecurityConfigDefault(ApiSerializersRegistry r) { _lwM2MServerSecurityConfigDefault(r); }
-
-void registerMapOfStringToAutoVersionCreateConfig(ApiSerializersRegistry r) { _mapOfStringToAutoVersionCreateConfig(r); }
-
-void registerMapOfStringToIntegrationConvertersInfo(ApiSerializersRegistry r) { _mapOfStringToIntegrationConvertersInfo(r); }
-
-void registerMapOfStringToJsonObjectAndDevice(ApiSerializersRegistry r) { _mapOfStringToJsonObject(r); _device(r); }
-
-void registerMobileApp(ApiSerializersRegistry r) { _mobileApp(r); }
-
-void registerMobileAppBundleInfo(ApiSerializersRegistry r) { _mobileAppBundleInfo(r); }
-
-void registerMobileSessionInfo(ApiSerializersRegistry r) { _mobileSessionInfo(r); }
-
-void registerNotificationRequest(ApiSerializersRegistry r) { _notificationRequest(r); }
-
-void registerNotificationRequestAndNotificationRequestPreview(ApiSerializersRegistry r) { _notificationRequest(r); _notificationRequestPreview(r); }
-
-void registerNotificationRequestInfo(ApiSerializersRegistry r) { _notificationRequestInfo(r); }
-
-void registerNotificationRule(ApiSerializersRegistry r) { _notificationRule(r); }
-
-void registerNotificationRuleInfo(ApiSerializersRegistry r) { _notificationRuleInfo(r); }
-
-void registerNotificationSettings(ApiSerializersRegistry r) { _notificationSettings(r); }
-
-void registerNotificationTarget(ApiSerializersRegistry r) { _notificationTarget(r); }
-
-void registerNotificationTargetAndPageDataUser(ApiSerializersRegistry r) { _notificationTarget(r); _pageDataUser(r); }
-
-void registerNotificationTemplate(ApiSerializersRegistry r) { _notificationTemplate(r); }
-
-void registerNotificationTypeAndPageDataNotificationTarget(ApiSerializersRegistry r) { _notificationType(r); _pageDataNotificationTarget(r); }
-
-void registerOAuth2Client(ApiSerializersRegistry r) { _oAuth2Client(r); }
-
-void registerOAuth2ClientRegistrationTemplate(ApiSerializersRegistry r) { _oAuth2ClientRegistrationTemplate(r); }
-
-void registerOtaPackage(ApiSerializersRegistry r) { _otaPackage(r); }
-
-void registerOtaPackageInfo(ApiSerializersRegistry r) { _otaPackageInfo(r); }
-
-void registerOtaPackageInfoAndSaveOtaPackageInfoRequest(ApiSerializersRegistry r) { _otaPackageInfo(r); _saveOtaPackageInfoRequest(r); }
-
-void registerPageDataAgent(ApiSerializersRegistry r) { _pageDataAgent(r); }
-
-void registerPageDataAgentAppEvent(ApiSerializersRegistry r) { _pageDataAgentAppEvent(r); }
-
-void registerPageDataAgentAppEventInfo(ApiSerializersRegistry r) { _pageDataAgentAppEventInfo(r); }
-
-void registerPageDataAgentAppProfile(ApiSerializersRegistry r) { _pageDataAgentAppProfile(r); }
-
-void registerPageDataAgentAppUnit(ApiSerializersRegistry r) { _pageDataAgentAppUnit(r); }
-
-void registerPageDataAgentApplicationInfo(ApiSerializersRegistry r) { _pageDataAgentApplicationInfo(r); }
-
-void registerPageDataAgentBulkAction(ApiSerializersRegistry r) { _pageDataAgentBulkAction(r); }
-
-void registerPageDataAgentInfo(ApiSerializersRegistry r) { _pageDataAgentInfo(r); }
-
-void registerPageDataAgentProfile(ApiSerializersRegistry r) { _pageDataAgentProfile(r); }
-
-void registerPageDataAgentProfileInfo(ApiSerializersRegistry r) { _pageDataAgentProfileInfo(r); }
-
-void registerPageDataAiModel(ApiSerializersRegistry r) { _pageDataAiModel(r); }
-
-void registerPageDataAlarmCommentInfo(ApiSerializersRegistry r) { _pageDataAlarmCommentInfo(r); }
-
-void registerPageDataAlarmInfo(ApiSerializersRegistry r) { _pageDataAlarmInfo(r); }
-
-void registerPageDataAlarmRuleDefinition(ApiSerializersRegistry r) { _pageDataAlarmRuleDefinition(r); }
-
-void registerPageDataApiKeyInfo(ApiSerializersRegistry r) { _pageDataApiKeyInfo(r); }
-
-void registerPageDataAsset(ApiSerializersRegistry r) { _pageDataAsset(r); }
-
-void registerPageDataAssetInfo(ApiSerializersRegistry r) { _pageDataAssetInfo(r); }
-
-void registerPageDataAssetProfile(ApiSerializersRegistry r) { _pageDataAssetProfile(r); }
-
-void registerPageDataAssetProfileInfo(ApiSerializersRegistry r) { _pageDataAssetProfileInfo(r); }
-
-void registerPageDataAuditLog(ApiSerializersRegistry r) { _pageDataAuditLog(r); }
-
-void registerPageDataBlobEntityWithCustomerInfo(ApiSerializersRegistry r) { _pageDataBlobEntityWithCustomerInfo(r); }
-
-void registerPageDataCalculatedField(ApiSerializersRegistry r) { _pageDataCalculatedField(r); }
-
-void registerPageDataContactBasedObject(ApiSerializersRegistry r) { _pageDataContactBasedObject(r); }
-
-void registerPageDataConverter(ApiSerializersRegistry r) { _pageDataConverter(r); }
-
-void registerPageDataCustomMenuInfo(ApiSerializersRegistry r) { _pageDataCustomMenuInfo(r); }
-
-void registerPageDataCustomer(ApiSerializersRegistry r) { _pageDataCustomer(r); }
-
-void registerPageDataCustomerInfo(ApiSerializersRegistry r) { _pageDataCustomerInfo(r); }
-
-void registerPageDataDashboardInfo(ApiSerializersRegistry r) { _pageDataDashboardInfo(r); }
-
-void registerPageDataDevice(ApiSerializersRegistry r) { _pageDataDevice(r); }
-
-void registerPageDataDeviceInfo(ApiSerializersRegistry r) { _pageDataDeviceInfo(r); }
-
-void registerPageDataDeviceProfile(ApiSerializersRegistry r) { _pageDataDeviceProfile(r); }
-
-void registerPageDataDeviceProfileInfo(ApiSerializersRegistry r) { _pageDataDeviceProfileInfo(r); }
-
-void registerPageDataDomainInfo(ApiSerializersRegistry r) { _pageDataDomainInfo(r); }
-
-void registerPageDataEdge(ApiSerializersRegistry r) { _pageDataEdge(r); }
-
-void registerPageDataEdgeEvent(ApiSerializersRegistry r) { _pageDataEdgeEvent(r); }
-
-void registerPageDataEdgeInfo(ApiSerializersRegistry r) { _pageDataEdgeInfo(r); }
-
-void registerPageDataEntityGroupInfo(ApiSerializersRegistry r) { _pageDataEntityGroupInfo(r); }
-
-void registerPageDataEntityInfo(ApiSerializersRegistry r) { _pageDataEntityInfo(r); }
-
-void registerPageDataEntitySubtype(ApiSerializersRegistry r) { _pageDataEntitySubtype(r); }
-
-void registerPageDataEntityVersion(ApiSerializersRegistry r) { _pageDataEntityVersion(r); }
-
-void registerPageDataEntityView(ApiSerializersRegistry r) { _pageDataEntityView(r); }
-
-void registerPageDataEntityViewInfo(ApiSerializersRegistry r) { _pageDataEntityViewInfo(r); }
-
-void registerPageDataEventInfo(ApiSerializersRegistry r) { _pageDataEventInfo(r); }
-
-void registerPageDataIntegration(ApiSerializersRegistry r) { _pageDataIntegration(r); }
-
-void registerPageDataIntegrationInfo(ApiSerializersRegistry r) { _pageDataIntegrationInfo(r); }
-
-void registerPageDataJob(ApiSerializersRegistry r) { _pageDataJob(r); }
-
-void registerPageDataMobileApp(ApiSerializersRegistry r) { _pageDataMobileApp(r); }
-
-void registerPageDataMobileAppBundleInfo(ApiSerializersRegistry r) { _pageDataMobileAppBundleInfo(r); }
-
-void registerPageDataNotification(ApiSerializersRegistry r) { _pageDataNotification(r); }
-
-void registerPageDataNotificationRequestInfo(ApiSerializersRegistry r) { _pageDataNotificationRequestInfo(r); }
-
-void registerPageDataNotificationRuleInfo(ApiSerializersRegistry r) { _pageDataNotificationRuleInfo(r); }
-
-void registerPageDataNotificationTarget(ApiSerializersRegistry r) { _pageDataNotificationTarget(r); }
-
-void registerPageDataOAuth2ClientInfo(ApiSerializersRegistry r) { _pageDataOAuth2ClientInfo(r); }
-
-void registerPageDataOtaPackageInfo(ApiSerializersRegistry r) { _pageDataOtaPackageInfo(r); }
-
-void registerPageDataQueue(ApiSerializersRegistry r) { _pageDataQueue(r); }
-
-void registerPageDataQueueStats(ApiSerializersRegistry r) { _pageDataQueueStats(r); }
-
-void registerPageDataReport(ApiSerializersRegistry r) { _pageDataReport(r); }
-
-void registerPageDataReportInfo(ApiSerializersRegistry r) { _pageDataReportInfo(r); }
-
-void registerPageDataRole(ApiSerializersRegistry r) { _pageDataRole(r); }
-
-void registerPageDataRuleChain(ApiSerializersRegistry r) { _pageDataRuleChain(r); }
-
-void registerPageDataScheduledReportInfo(ApiSerializersRegistry r) { _pageDataScheduledReportInfo(r); }
-
-void registerPageDataSchedulerEventInfo(ApiSerializersRegistry r) { _pageDataSchedulerEventInfo(r); }
-
-void registerPageDataSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) { _pageDataSchedulerEventWithCustomerInfo(r); }
-
-void registerPageDataSecretInfo(ApiSerializersRegistry r) { _pageDataSecretInfo(r); }
-
-void registerPageDataShortEntityView(ApiSerializersRegistry r) { _pageDataShortEntityView(r); }
-
-void registerPageDataString(ApiSerializersRegistry r) { _pageDataString(r); }
-
-void registerPageDataTbResourceInfo(ApiSerializersRegistry r) { _pageDataTbResourceInfo(r); }
-
-void registerPageDataTenant(ApiSerializersRegistry r) { _pageDataTenant(r); }
-
-void registerPageDataTenantInfo(ApiSerializersRegistry r) { _pageDataTenantInfo(r); }
-
-void registerPageDataTenantProfile(ApiSerializersRegistry r) { _pageDataTenantProfile(r); }
-
-void registerPageDataTrendzViewConfigLite(ApiSerializersRegistry r) { _pageDataTrendzViewConfigLite(r); }
-
-void registerPageDataUser(ApiSerializersRegistry r) { _pageDataUser(r); }
-
-void registerPageDataUserEmailInfo(ApiSerializersRegistry r) { _pageDataUserEmailInfo(r); }
-
-void registerPageDataUserInfo(ApiSerializersRegistry r) { _pageDataUserInfo(r); }
-
-void registerPageDataWidgetTypeInfo(ApiSerializersRegistry r) { _pageDataWidgetTypeInfo(r); }
-
-void registerPageDataWidgetsBundle(ApiSerializersRegistry r) { _pageDataWidgetsBundle(r); }
-
-void registerPlatformTwoFaSettings(ApiSerializersRegistry r) { _platformTwoFaSettings(r); }
-
-void registerPlatformType(ApiSerializersRegistry r) { _platformType(r); }
-
-void registerQrCodeSettings(ApiSerializersRegistry r) { _qrCodeSettings(r); }
-
-void registerQueue(ApiSerializersRegistry r) { _queue(r); }
-
-void registerQueueStats(ApiSerializersRegistry r) { _queueStats(r); }
-
-void registerReport(ApiSerializersRegistry r) { _report(r); }
-
-void registerReportRequest(ApiSerializersRegistry r) { _reportRequest(r); }
-
-void registerReportTemplate(ApiSerializersRegistry r) { _reportTemplate(r); }
-
-void registerReportTemplateInfo(ApiSerializersRegistry r) { _reportTemplateInfo(r); }
-
-void registerRepositorySettings(ApiSerializersRegistry r) { _repositorySettings(r); }
-
-void registerRepositorySettingsInfo(ApiSerializersRegistry r) { _repositorySettingsInfo(r); }
-
-void registerResetPasswordEmailRequest(ApiSerializersRegistry r) { _resetPasswordEmailRequest(r); }
-
-void registerResetPasswordRequest(ApiSerializersRegistry r) { _resetPasswordRequest(r); }
-
-void registerResourceExportData(ApiSerializersRegistry r) { _resourceExportData(r); }
-
-void registerResourceExportDataAndTbResourceInfo(ApiSerializersRegistry r) { _resourceExportData(r); _tbResourceInfo(r); }
-
-void registerRole(ApiSerializersRegistry r) { _role(r); }
-
-void registerRpc(ApiSerializersRegistry r) { _rpc(r); }
-
-void registerRuleChain(ApiSerializersRegistry r) { _ruleChain(r); }
-
-void registerRuleChainData(ApiSerializersRegistry r) { _ruleChainData(r); }
-
-void registerRuleChainMetaData(ApiSerializersRegistry r) { _ruleChainMetaData(r); }
-
-void registerSchedulerEvent(ApiSerializersRegistry r) { _schedulerEvent(r); }
-
-void registerSchedulerEventInfo(ApiSerializersRegistry r) { _schedulerEventInfo(r); }
-
-void registerSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) { _schedulerEventWithCustomerInfo(r); }
-
-void registerScriptLanguage(ApiSerializersRegistry r) { _scriptLanguage(r); }
-
-void registerSecretAndSecretInfo(ApiSerializersRegistry r) { _secret(r); _secretInfo(r); }
-
-void registerSecretInfo(ApiSerializersRegistry r) { _secretInfo(r); }
-
-void registerSecuritySettings(ApiSerializersRegistry r) { _securitySettings(r); }
-
-void registerSelfRegistrationParams(ApiSerializersRegistry r) { _selfRegistrationParams(r); }
-
-void registerSetOfCalculatedFieldTypeAndSetOfStringAndPageDataCalculatedFieldInfo(ApiSerializersRegistry r) { _setOfCalculatedFieldType(r); _setOfString(r); _pageDataCalculatedFieldInfo(r); }
-
-void registerSetOfResourceTypeAndPageDataTbResourceInfo(ApiSerializersRegistry r) { _setOfResourceType(r); _pageDataTbResourceInfo(r); }
-
-void registerSetOfString(ApiSerializersRegistry r) { _setOfString(r); }
-
-void registerSetOfStringAndPageDataAlarmRuleDefinitionInfo(ApiSerializersRegistry r) { _setOfString(r); _pageDataAlarmRuleDefinitionInfo(r); }
-
-void registerSetupInfo(ApiSerializersRegistry r) { _setupInfo(r); }
-
-void registerShareGroupRequest(ApiSerializersRegistry r) { _shareGroupRequest(r); }
-
-void registerShortEntityView(ApiSerializersRegistry r) { _shortEntityView(r); }
-
-void registerSignUpRequestAndSignUpResult(ApiSerializersRegistry r) { _signUpRequest(r); _signUpResult(r); }
-
-void registerSignUpSelfRegistrationParams(ApiSerializersRegistry r) { _signUpSelfRegistrationParams(r); }
-
-void registerSolutionDataAndSolutionImportResult(ApiSerializersRegistry r) { _solutionData(r); _solutionImportResult(r); }
-
-void registerSolutionDataAndSolutionValidationResult(ApiSerializersRegistry r) { _solutionData(r); _solutionValidationResult(r); }
-
-void registerSolutionExportRequestAndSolutionExportResponse(ApiSerializersRegistry r) { _solutionExportRequest(r); _solutionExportResponse(r); }
-
-void registerSolutionStep(ApiSerializersRegistry r) { _solutionStep(r); }
-
-void registerSubscriptionInfo(ApiSerializersRegistry r) { _subscriptionInfo(r); }
-
-void registerSystemInfo(ApiSerializersRegistry r) { _systemInfo(r); }
-
-void registerSystemSetupRequest(ApiSerializersRegistry r) { _systemSetupRequest(r); }
-
-void registerTbChatRequestAndTbChatResponse(ApiSerializersRegistry r) { _tbChatRequest(r); _tbChatResponse(r); }
-
-void registerTbImageDeleteResult(ApiSerializersRegistry r) { _tbImageDeleteResult(r); }
-
-void registerTbResource(ApiSerializersRegistry r) { _tbResource(r); }
-
-void registerTbResourceAndTbResourceInfo(ApiSerializersRegistry r) { _tbResource(r); _tbResourceInfo(r); }
-
-void registerTbResourceDeleteResult(ApiSerializersRegistry r) { _tbResourceDeleteResult(r); }
-
-void registerTbResourceInfo(ApiSerializersRegistry r) { _tbResourceInfo(r); }
-
-void registerTbSecretDeleteResult(ApiSerializersRegistry r) { _tbSecretDeleteResult(r); }
-
-void registerTenant(ApiSerializersRegistry r) { _tenant(r); }
-
-void registerTenantInfo(ApiSerializersRegistry r) { _tenantInfo(r); }
-
-void registerTenantProfile(ApiSerializersRegistry r) { _tenantProfile(r); }
-
-void registerTestSmsRequest(ApiSerializersRegistry r) { _testSmsRequest(r); }
-
-void registerToCoreEdqsRequest(ApiSerializersRegistry r) { _toCoreEdqsRequest(r); }
-
-void registerTrendzConfiguration(ApiSerializersRegistry r) { _trendzConfiguration(r); }
-
-void registerTrendzHealthcheckResult(ApiSerializersRegistry r) { _trendzHealthcheckResult(r); }
-
-void registerTrendzSummary(ApiSerializersRegistry r) { _trendzSummary(r); }
-
-void registerTrendzSynchronizationResult(ApiSerializersRegistry r) { _trendzSynchronizationResult(r); }
-
-void registerTrendzUsage(ApiSerializersRegistry r) { _trendzUsage(r); }
-
-void registerTrendzViewConfig(ApiSerializersRegistry r) { _trendzViewConfig(r); }
-
-void registerTwoFaAccountConfig(ApiSerializersRegistry r) { _twoFaAccountConfig(r); }
-
-void registerTwoFaProviderType(ApiSerializersRegistry r) { _twoFaProviderType(r); }
-
-void registerUpdateMessage(ApiSerializersRegistry r) { _updateMessage(r); }
-
-void registerUsageInfo(ApiSerializersRegistry r) { _usageInfo(r); }
-
-void registerUser(ApiSerializersRegistry r) { _user(r); }
-
-void registerUserActivationLink(ApiSerializersRegistry r) { _userActivationLink(r); }
-
-void registerUserDashboardsInfo(ApiSerializersRegistry r) { _userDashboardsInfo(r); }
-
-void registerUserInfo(ApiSerializersRegistry r) { _userInfo(r); }
-
-void registerUserMobileInfo(ApiSerializersRegistry r) { _userMobileInfo(r); }
-
-void registerUserNotificationSettings(ApiSerializersRegistry r) { _userNotificationSettings(r); }
-
-void registerUserPasswordPolicy(ApiSerializersRegistry r) { _userPasswordPolicy(r); }
-
-void registerVersionCreateRequest(ApiSerializersRegistry r) { _versionCreateRequest(r); }
-
-void registerVersionCreationResult(ApiSerializersRegistry r) { _versionCreationResult(r); }
-
-void registerVersionLoadRequest(ApiSerializersRegistry r) { _versionLoadRequest(r); }
-
-void registerVersionLoadResult(ApiSerializersRegistry r) { _versionLoadResult(r); }
-
-void registerWebSelfRegistrationParams(ApiSerializersRegistry r) { _webSelfRegistrationParams(r); }
-
-void registerWhiteLabelingParams(ApiSerializersRegistry r) { _whiteLabelingParams(r); }
-
-void registerWidgetType(ApiSerializersRegistry r) { _widgetType(r); }
-
-void registerWidgetTypeDetails(ApiSerializersRegistry r) { _widgetTypeDetails(r); }
-
-void registerWidgetTypeInfo(ApiSerializersRegistry r) { _widgetTypeInfo(r); }
-
-void registerWidgetsBundle(ApiSerializersRegistry r) { _widgetsBundle(r); }
+void registerAccountTwoFaSettings(ApiSerializersRegistry r) {
+  _accountTwoFaSettings(r);
+}
+
+void
+registerAccountTwoFaSettingsAndTwoFaAccountConfigUpdateRequestAndTwoFaProviderType(
+  ApiSerializersRegistry r,
+) {
+  _accountTwoFaSettings(r);
+  _twoFaAccountConfigUpdateRequest(r);
+  _twoFaProviderType(r);
+}
+
+void registerAccountTwoFaSettingsAndTwoFaProviderType(
+  ApiSerializersRegistry r,
+) {
+  _accountTwoFaSettings(r);
+  _twoFaProviderType(r);
+}
+
+void registerActivateUserRequestAndJwtPair(ApiSerializersRegistry r) {
+  _activateUserRequest(r);
+  _jwtPair(r);
+}
+
+void registerAdminSettings(ApiSerializersRegistry r) {
+  _adminSettings(r);
+}
+
+void registerAgent(ApiSerializersRegistry r) {
+  _agent(r);
+}
+
+void registerAgentAppEvent(ApiSerializersRegistry r) {
+  _agentAppEvent(r);
+}
+
+void registerAgentAppEventActionTypeAndAgentAppProfile(
+  ApiSerializersRegistry r,
+) {
+  _agentAppEventActionType(r);
+  _agentAppProfile(r);
+}
+
+void registerAgentAppEventActionTypeAndAgentApplication(
+  ApiSerializersRegistry r,
+) {
+  _agentAppEventActionType(r);
+  _agentApplication(r);
+}
+
+void registerAgentAppEventAndAgentAppEventRequest(ApiSerializersRegistry r) {
+  _agentAppEvent(r);
+  _agentAppEventRequest(r);
+}
+
+void registerAgentAppEventAndAgentUpgradeRequest(ApiSerializersRegistry r) {
+  _agentAppEvent(r);
+  _agentUpgradeRequest(r);
+}
+
+void registerAgentAppEventRequestAndAgentAppInstallResponse(
+  ApiSerializersRegistry r,
+) {
+  _agentAppEventRequest(r);
+  _agentAppInstallResponse(r);
+}
+
+void registerAgentAppProfile(ApiSerializersRegistry r) {
+  _agentAppProfile(r);
+}
+
+void registerAgentAppProfileInfo(ApiSerializersRegistry r) {
+  _agentAppProfileInfo(r);
+}
+
+void registerAgentAppTemplate(ApiSerializersRegistry r) {
+  _agentAppTemplate(r);
+}
+
+void registerAgentApplication(ApiSerializersRegistry r) {
+  _agentApplication(r);
+}
+
+void registerAgentApplicationInfo(ApiSerializersRegistry r) {
+  _agentApplicationInfo(r);
+}
+
+void registerAgentBulkAction(ApiSerializersRegistry r) {
+  _agentBulkAction(r);
+}
+
+void registerAgentBulkActionAndBulkOperationRequest(ApiSerializersRegistry r) {
+  _agentBulkAction(r);
+  _bulkOperationRequest(r);
+}
+
+void registerAgentBulkActionEventStats(ApiSerializersRegistry r) {
+  _agentBulkActionEventStats(r);
+}
+
+void registerAgentInfo(ApiSerializersRegistry r) {
+  _agentInfo(r);
+}
+
+void registerAgentInstructions(ApiSerializersRegistry r) {
+  _agentInstructions(r);
+}
+
+void registerAgentProfile(ApiSerializersRegistry r) {
+  _agentProfile(r);
+}
+
+void registerAgentProfileInfo(ApiSerializersRegistry r) {
+  _agentProfileInfo(r);
+}
+
+void registerAiModel(ApiSerializersRegistry r) {
+  _aiModel(r);
+}
+
+void registerAlarm(ApiSerializersRegistry r) {
+  _alarm(r);
+}
+
+void registerAlarmComment(ApiSerializersRegistry r) {
+  _alarmComment(r);
+}
+
+void registerAlarmCountQuery(ApiSerializersRegistry r) {
+  _alarmCountQuery(r);
+}
+
+void registerAlarmDataQueryAndPageDataAlarmData(ApiSerializersRegistry r) {
+  _alarmDataQuery(r);
+  _pageDataAlarmData(r);
+}
+
+void registerAlarmInfo(ApiSerializersRegistry r) {
+  _alarmInfo(r);
+}
+
+void registerAlarmRuleDefinition(ApiSerializersRegistry r) {
+  _alarmRuleDefinition(r);
+}
+
+void registerAlarmSeverity(ApiSerializersRegistry r) {
+  _alarmSeverity(r);
+}
+
+void registerAllowedPermissionsInfo(ApiSerializersRegistry r) {
+  _allowedPermissionsInfo(r);
+}
+
+void registerApiKeyAndApiKeyInfo(ApiSerializersRegistry r) {
+  _apiKey(r);
+  _apiKeyInfo(r);
+}
+
+void registerApiKeyInfo(ApiSerializersRegistry r) {
+  _apiKeyInfo(r);
+}
+
+void registerAsset(ApiSerializersRegistry r) {
+  _asset(r);
+}
+
+void registerAssetInfo(ApiSerializersRegistry r) {
+  _assetInfo(r);
+}
+
+void registerAssetProfile(ApiSerializersRegistry r) {
+  _assetProfile(r);
+}
+
+void registerAssetProfileInfo(ApiSerializersRegistry r) {
+  _assetProfileInfo(r);
+}
+
+void registerAvailableEntityKeysAndEntityDataQuery(ApiSerializersRegistry r) {
+  _availableEntityKeys(r);
+  _entityDataQuery(r);
+}
+
+void registerAvailableEntityKeysV2AndEntityDataQuery(ApiSerializersRegistry r) {
+  _availableEntityKeysV2(r);
+  _entityDataQuery(r);
+}
+
+void registerBlobEntityWithCustomerInfo(ApiSerializersRegistry r) {
+  _blobEntityWithCustomerInfo(r);
+}
+
+void registerBulkImportRequestAndBulkImportResultAsset(
+  ApiSerializersRegistry r,
+) {
+  _bulkImportRequest(r);
+  _bulkImportResultAsset(r);
+}
+
+void registerBulkImportRequestAndBulkImportResultDevice(
+  ApiSerializersRegistry r,
+) {
+  _bulkImportRequest(r);
+  _bulkImportResultDevice(r);
+}
+
+void registerBulkImportRequestAndBulkImportResultEdge(
+  ApiSerializersRegistry r,
+) {
+  _bulkImportRequest(r);
+  _bulkImportResultEdge(r);
+}
+
+void registerBulkOperationPreviewAndBulkOperationRequest(
+  ApiSerializersRegistry r,
+) {
+  _bulkOperationPreview(r);
+  _bulkOperationRequest(r);
+}
+
+void registerCalculatedField(ApiSerializersRegistry r) {
+  _calculatedField(r);
+}
+
+void registerCalculatedFieldTypeAndPageDataString(ApiSerializersRegistry r) {
+  _calculatedFieldType(r);
+  _pageDataString(r);
+}
+
+void registerCfReprocessingValidationResult(ApiSerializersRegistry r) {
+  _cfReprocessingValidationResult(r);
+}
+
+void registerChangePasswordRequestAndJwtPair(ApiSerializersRegistry r) {
+  _changePasswordRequest(r);
+  _jwtPair(r);
+}
+
+void registerClaimRequest(ApiSerializersRegistry r) {
+  _claimRequest(r);
+}
+
+void registerComponentDescriptor(ApiSerializersRegistry r) {
+  _componentDescriptor(r);
+}
+
+void registerConverter(ApiSerializersRegistry r) {
+  _converter(r);
+}
+
+void registerCreateReportRequestAndReport(ApiSerializersRegistry r) {
+  _createReportRequest(r);
+  _report(r);
+}
+
+void registerCustomMenu(ApiSerializersRegistry r) {
+  _customMenu(r);
+}
+
+void registerCustomMenuAndCustomMenuInfo(ApiSerializersRegistry r) {
+  _customMenu(r);
+  _customMenuInfo(r);
+}
+
+void registerCustomMenuConfig(ApiSerializersRegistry r) {
+  _customMenuConfig(r);
+}
+
+void registerCustomMenuDeleteResult(ApiSerializersRegistry r) {
+  _customMenuDeleteResult(r);
+}
+
+void registerCustomMenuInfo(ApiSerializersRegistry r) {
+  _customMenuInfo(r);
+}
+
+void registerCustomer(ApiSerializersRegistry r) {
+  _customer(r);
+}
+
+void registerCustomerInfo(ApiSerializersRegistry r) {
+  _customerInfo(r);
+}
+
+void registerDashboard(ApiSerializersRegistry r) {
+  _dashboard(r);
+}
+
+void registerDashboardInfo(ApiSerializersRegistry r) {
+  _dashboardInfo(r);
+}
+
+void registerDashboardReportConfig(ApiSerializersRegistry r) {
+  _dashboardReportConfig(r);
+}
+
+void registerDefaultRuleChainCreateRequestAndRuleChain(
+  ApiSerializersRegistry r,
+) {
+  _defaultRuleChainCreateRequest(r);
+  _ruleChain(r);
+}
+
+void registerDevice(ApiSerializersRegistry r) {
+  _device(r);
+}
+
+void registerDeviceCredentials(ApiSerializersRegistry r) {
+  _deviceCredentials(r);
+}
+
+void registerDeviceGroupOtaPackage(ApiSerializersRegistry r) {
+  _deviceGroupOtaPackage(r);
+}
+
+void registerDeviceInfo(ApiSerializersRegistry r) {
+  _deviceInfo(r);
+}
+
+void registerDeviceProfile(ApiSerializersRegistry r) {
+  _deviceProfile(r);
+}
+
+void registerDeviceProfileInfo(ApiSerializersRegistry r) {
+  _deviceProfileInfo(r);
+}
+
+void registerDomainInfo(ApiSerializersRegistry r) {
+  _domainInfo(r);
+}
+
+void registerEdge(ApiSerializersRegistry r) {
+  _edge(r);
+}
+
+void registerEdgeInfo(ApiSerializersRegistry r) {
+  _edgeInfo(r);
+}
+
+void registerEdgeInstructions(ApiSerializersRegistry r) {
+  _edgeInstructions(r);
+}
+
+void registerEdqsState(ApiSerializersRegistry r) {
+  _edqsState(r);
+}
+
+void registerEntityCountQuery(ApiSerializersRegistry r) {
+  _entityCountQuery(r);
+}
+
+void registerEntityDataDiff(ApiSerializersRegistry r) {
+  _entityDataDiff(r);
+}
+
+void registerEntityDataInfoAndEntityType(ApiSerializersRegistry r) {
+  _entityDataInfo(r);
+  _entityType(r);
+}
+
+void registerEntityDataQueryAndPageDataEntityData(ApiSerializersRegistry r) {
+  _entityDataQuery(r);
+  _pageDataEntityData(r);
+}
+
+void registerEntityGroup(ApiSerializersRegistry r) {
+  _entityGroup(r);
+}
+
+void registerEntityGroupAndEntityGroupInfo(ApiSerializersRegistry r) {
+  _entityGroup(r);
+  _entityGroupInfo(r);
+}
+
+void registerEntityGroupInfo(ApiSerializersRegistry r) {
+  _entityGroupInfo(r);
+}
+
+void registerEntityInfo(ApiSerializersRegistry r) {
+  _entityInfo(r);
+}
+
+void registerEntityRelation(ApiSerializersRegistry r) {
+  _entityRelation(r);
+}
+
+void registerEntityTypeAndPageDataEntityVersion(ApiSerializersRegistry r) {
+  _entityType(r);
+  _pageDataEntityVersion(r);
+}
+
+void registerEntityView(ApiSerializersRegistry r) {
+  _entityView(r);
+}
+
+void registerEntityViewAndNameConflictPolicyAndUniquifyStrategy(
+  ApiSerializersRegistry r,
+) {
+  _entityView(r);
+  _nameConflictPolicy(r);
+  _uniquifyStrategy(r);
+}
+
+void registerEntityViewInfo(ApiSerializersRegistry r) {
+  _entityViewInfo(r);
+}
+
+void registerEventFilter(ApiSerializersRegistry r) {
+  _eventFilter(r);
+}
+
+void registerEventFilterAndPageDataEventInfo(ApiSerializersRegistry r) {
+  _eventFilter(r);
+  _pageDataEventInfo(r);
+}
+
+void registerFeaturesInfo(ApiSerializersRegistry r) {
+  _featuresInfo(r);
+}
+
+void registerGroupPermission(ApiSerializersRegistry r) {
+  _groupPermission(r);
+}
+
+void registerGroupPermissionInfo(ApiSerializersRegistry r) {
+  _groupPermissionInfo(r);
+}
+
+void registerHomeDashboard(ApiSerializersRegistry r) {
+  _homeDashboard(r);
+}
+
+void registerHomeDashboardInfo(ApiSerializersRegistry r) {
+  _homeDashboardInfo(r);
+}
+
+void registerIntegration(ApiSerializersRegistry r) {
+  _integration(r);
+}
+
+void registerIntegrationType(ApiSerializersRegistry r) {
+  _integrationType(r);
+}
+
+void registerJob(ApiSerializersRegistry r) {
+  _job(r);
+}
+
+void registerJobAndReportRequest(ApiSerializersRegistry r) {
+  _job(r);
+  _reportRequest(r);
+}
+
+void registerJwtPair(ApiSerializersRegistry r) {
+  _jwtPair(r);
+}
+
+void registerJwtPairAndJwtSettings(ApiSerializersRegistry r) {
+  _jwtPair(r);
+  _jwtSettings(r);
+}
+
+void registerJwtPairAndTwoFaProviderType(ApiSerializersRegistry r) {
+  _jwtPair(r);
+  _twoFaProviderType(r);
+}
+
+void registerJwtSettings(ApiSerializersRegistry r) {
+  _jwtSettings(r);
+}
+
+void registerLicenseChangeResultAndLicenseKeyRequest(ApiSerializersRegistry r) {
+  _licenseChangeResult(r);
+  _licenseKeyRequest(r);
+}
+
+void registerLicenseClaimInfo(ApiSerializersRegistry r) {
+  _licenseClaimInfo(r);
+}
+
+void registerLicenseClaimResult(ApiSerializersRegistry r) {
+  _licenseClaimResult(r);
+}
+
+void registerLicenseKeyRequestAndSetupInfo(ApiSerializersRegistry r) {
+  _licenseKeyRequest(r);
+  _setupInfo(r);
+}
+
+void registerLicenseKeyRequestAndSubscriptionInfo(ApiSerializersRegistry r) {
+  _licenseKeyRequest(r);
+  _subscriptionInfo(r);
+}
+
+void registerLicenseUsageInfo(ApiSerializersRegistry r) {
+  _licenseUsageInfo(r);
+}
+
+void registerListOfAgentAppProfileAndListOfString(ApiSerializersRegistry r) {
+  _listOfAgentAppProfile(r);
+  _listOfString(r);
+}
+
+void registerListOfAgentAppProfileInfo(ApiSerializersRegistry r) {
+  _listOfAgentAppProfileInfo(r);
+}
+
+void registerListOfAgentAppProfileRelationInfo(ApiSerializersRegistry r) {
+  _listOfAgentAppProfileRelationInfo(r);
+}
+
+void registerListOfAgentAppTemplate(ApiSerializersRegistry r) {
+  _listOfAgentAppTemplate(r);
+}
+
+void registerListOfAgentInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfAgentInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfAssetAndAssetSearchQuery(ApiSerializersRegistry r) {
+  _listOfAsset(r);
+  _assetSearchQuery(r);
+}
+
+void registerListOfAssetAndListOfString(ApiSerializersRegistry r) {
+  _listOfAsset(r);
+  _listOfString(r);
+}
+
+void registerListOfAssetProfileInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfAssetProfileInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfAttributeDataAndListOfString(ApiSerializersRegistry r) {
+  _listOfAttributeData(r);
+  _listOfString(r);
+}
+
+void registerListOfBaseReadTsKvQueryAndListOfReadTsKvQueryResult(
+  ApiSerializersRegistry r,
+) {
+  _listOfBaseReadTsKvQuery(r);
+  _listOfReadTsKvQueryResult(r);
+}
+
+void registerListOfBlobEntityInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfBlobEntityInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfBranchInfo(ApiSerializersRegistry r) {
+  _listOfBranchInfo(r);
+}
+
+void registerListOfComponentDescriptor(ApiSerializersRegistry r) {
+  _listOfComponentDescriptor(r);
+}
+
+void registerListOfComponentDescriptorAndListOfString(
+  ApiSerializersRegistry r,
+) {
+  _listOfComponentDescriptor(r);
+  _listOfString(r);
+}
+
+void registerListOfConverterAndListOfString(ApiSerializersRegistry r) {
+  _listOfConverter(r);
+  _listOfString(r);
+}
+
+void registerListOfCustomerAndListOfString(ApiSerializersRegistry r) {
+  _listOfCustomer(r);
+  _listOfString(r);
+}
+
+void registerListOfDashboard(ApiSerializersRegistry r) {
+  _listOfDashboard(r);
+}
+
+void registerListOfDashboardInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfDashboardInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfDeviceAndDeviceSearchQuery(ApiSerializersRegistry r) {
+  _listOfDevice(r);
+  _deviceSearchQuery(r);
+}
+
+void registerListOfDeviceAndListOfString(ApiSerializersRegistry r) {
+  _listOfDevice(r);
+  _listOfString(r);
+}
+
+void registerListOfDeviceProfileInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfDeviceProfileInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfEdgeAndEdgeSearchQuery(ApiSerializersRegistry r) {
+  _listOfEdge(r);
+  _edgeSearchQuery(r);
+}
+
+void registerListOfEdgeAndListOfString(ApiSerializersRegistry r) {
+  _listOfEdge(r);
+  _listOfString(r);
+}
+
+void registerListOfEntityGroupId(ApiSerializersRegistry r) {
+  _listOfEntityGroupId(r);
+}
+
+void registerListOfEntityGroupInfo(ApiSerializersRegistry r) {
+  _listOfEntityGroupInfo(r);
+}
+
+void registerListOfEntityGroupInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfEntityGroupInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfEntityInfo(ApiSerializersRegistry r) {
+  _listOfEntityInfo(r);
+}
+
+void registerListOfEntityInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfEntityInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfEntityRelation(ApiSerializersRegistry r) {
+  _listOfEntityRelation(r);
+}
+
+void registerListOfEntityRelationAndEntityRelationsQuery(
+  ApiSerializersRegistry r,
+) {
+  _listOfEntityRelation(r);
+  _entityRelationsQuery(r);
+}
+
+void registerListOfEntityRelationInfo(ApiSerializersRegistry r) {
+  _listOfEntityRelationInfo(r);
+}
+
+void registerListOfEntityRelationInfoAndEntityRelationsQuery(
+  ApiSerializersRegistry r,
+) {
+  _listOfEntityRelationInfo(r);
+  _entityRelationsQuery(r);
+}
+
+void registerListOfEntitySubtype(ApiSerializersRegistry r) {
+  _listOfEntitySubtype(r);
+}
+
+void registerListOfEntityView(ApiSerializersRegistry r) {
+  _listOfEntityView(r);
+}
+
+void registerListOfEntityViewAndEntityViewSearchQuery(
+  ApiSerializersRegistry r,
+) {
+  _listOfEntityView(r);
+  _entityViewSearchQuery(r);
+}
+
+void registerListOfGetManagedRelatedEntityIds200ResponseInner(
+  ApiSerializersRegistry r,
+) {
+  _listOfGetManagedRelatedEntityIds200ResponseInner(r);
+}
+
+void registerListOfGroupPermissionAndListOfGroupPermissionInfo(
+  ApiSerializersRegistry r,
+) {
+  _listOfGroupPermission(r);
+  _listOfGroupPermissionInfo(r);
+}
+
+void registerListOfGroupPermissionInfo(ApiSerializersRegistry r) {
+  _listOfGroupPermissionInfo(r);
+}
+
+void registerListOfIntegrationAndListOfString(ApiSerializersRegistry r) {
+  _listOfIntegration(r);
+  _listOfString(r);
+}
+
+void registerListOfJsonObject(ApiSerializersRegistry r) {
+  _listOfJsonObject(r);
+}
+
+void registerListOfLwM2mObject(ApiSerializersRegistry r) {
+  _listOfLwM2mObject(r);
+}
+
+void registerListOfLwM2mObjectAndListOfString(ApiSerializersRegistry r) {
+  _listOfLwM2mObject(r);
+  _listOfString(r);
+}
+
+void registerListOfModelAndIntegrationType(ApiSerializersRegistry r) {
+  _listOfModel(r);
+  _integrationType(r);
+}
+
+void registerListOfNotificationDeliveryMethod(ApiSerializersRegistry r) {
+  _listOfNotificationDeliveryMethod(r);
+}
+
+void registerListOfNotificationTarget(ApiSerializersRegistry r) {
+  _listOfNotificationTarget(r);
+}
+
+void registerListOfOAuth2ClientInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfOAuth2ClientInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfOAuth2ClientLoginInfo(ApiSerializersRegistry r) {
+  _listOfOAuth2ClientLoginInfo(r);
+}
+
+void registerListOfOAuth2ClientRegistrationTemplate(ApiSerializersRegistry r) {
+  _listOfOAuth2ClientRegistrationTemplate(r);
+}
+
+void registerListOfQueueStatsAndListOfString(ApiSerializersRegistry r) {
+  _listOfQueueStats(r);
+  _listOfString(r);
+}
+
+void registerListOfReportInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfReportInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfReportTemplateInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfReportTemplateInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfRoleAndListOfString(ApiSerializersRegistry r) {
+  _listOfRole(r);
+  _listOfString(r);
+}
+
+void registerListOfRuleChain(ApiSerializersRegistry r) {
+  _listOfRuleChain(r);
+}
+
+void registerListOfRuleChainAndListOfString(ApiSerializersRegistry r) {
+  _listOfRuleChain(r);
+  _listOfString(r);
+}
+
+void registerListOfRuleChainImportResultAndRuleChainData(
+  ApiSerializersRegistry r,
+) {
+  _listOfRuleChainImportResult(r);
+  _ruleChainData(r);
+}
+
+void registerListOfRuleChainOutputLabelsUsage(ApiSerializersRegistry r) {
+  _listOfRuleChainOutputLabelsUsage(r);
+}
+
+void registerListOfSchedulerEventInfo(ApiSerializersRegistry r) {
+  _listOfSchedulerEventInfo(r);
+}
+
+void registerListOfSchedulerEventInfoAndListOfString(ApiSerializersRegistry r) {
+  _listOfSchedulerEventInfo(r);
+  _listOfString(r);
+}
+
+void registerListOfSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) {
+  _listOfSchedulerEventWithCustomerInfo(r);
+}
+
+void registerListOfSlackConversation(ApiSerializersRegistry r) {
+  _listOfSlackConversation(r);
+}
+
+void registerListOfString(ApiSerializersRegistry r) {
+  _listOfString(r);
+}
+
+void registerListOfStringAndAgent(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _agent(r);
+}
+
+void registerListOfStringAndAgentProfile(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _agentProfile(r);
+}
+
+void registerListOfStringAndAssetAndNameConflictPolicyAnd1More(
+  ApiSerializersRegistry r,
+) {
+  _listOfString(r);
+  _asset(r);
+  _nameConflictPolicy(r);
+  _uniquifyStrategy(r);
+}
+
+void registerListOfStringAndCMAssigneeType(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _cMAssigneeType(r);
+}
+
+void registerListOfStringAndCustomerAndNameConflictPolicyAnd1More(
+  ApiSerializersRegistry r,
+) {
+  _listOfString(r);
+  _customer(r);
+  _nameConflictPolicy(r);
+  _uniquifyStrategy(r);
+}
+
+void registerListOfStringAndDashboard(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _dashboard(r);
+}
+
+void registerListOfStringAndDeviceAndNameConflictPolicyAnd1More(
+  ApiSerializersRegistry r,
+) {
+  _listOfString(r);
+  _device(r);
+  _nameConflictPolicy(r);
+  _uniquifyStrategy(r);
+}
+
+void registerListOfStringAndDomain(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _domain(r);
+}
+
+void registerListOfStringAndEdge(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _edge(r);
+}
+
+void registerListOfStringAndListOfTbResourceInfo(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _listOfTbResourceInfo(r);
+}
+
+void registerListOfStringAndListOfTenant(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _listOfTenant(r);
+}
+
+void registerListOfStringAndListOfTenantProfile(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _listOfTenantProfile(r);
+}
+
+void registerListOfStringAndListOfUser(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _listOfUser(r);
+}
+
+void registerListOfStringAndListOfWidgetsBundle(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _listOfWidgetsBundle(r);
+}
+
+void registerListOfStringAndMapOfStringToList(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _mapOfStringToList(r);
+}
+
+void registerListOfStringAndMobileAppBundle(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _mobileAppBundle(r);
+}
+
+void
+registerListOfStringAndNameConflictPolicyAndSaveDeviceWithCredentialsRequestAnd1More(
+  ApiSerializersRegistry r,
+) {
+  _listOfString(r);
+  _nameConflictPolicy(r);
+  _saveDeviceWithCredentialsRequest(r);
+  _uniquifyStrategy(r);
+}
+
+void registerListOfStringAndPageDataNotificationTemplate(
+  ApiSerializersRegistry r,
+) {
+  _listOfString(r);
+  _pageDataNotificationTemplate(r);
+}
+
+void registerListOfStringAndPageDataReportTemplateInfo(
+  ApiSerializersRegistry r,
+) {
+  _listOfString(r);
+  _pageDataReportTemplateInfo(r);
+}
+
+void registerListOfStringAndUser(ApiSerializersRegistry r) {
+  _listOfString(r);
+  _user(r);
+}
+
+void registerListOfTranslationInfo(ApiSerializersRegistry r) {
+  _listOfTranslationInfo(r);
+}
+
+void registerListOfTwoFaProviderInfo(ApiSerializersRegistry r) {
+  _listOfTwoFaProviderInfo(r);
+}
+
+void registerListOfTwoFaProviderType(ApiSerializersRegistry r) {
+  _listOfTwoFaProviderType(r);
+}
+
+void registerListOfVendorAndIntegrationType(ApiSerializersRegistry r) {
+  _listOfVendor(r);
+  _integrationType(r);
+}
+
+void registerListOfVersionedEntityInfo(ApiSerializersRegistry r) {
+  _listOfVersionedEntityInfo(r);
+}
+
+void registerListOfWidgetType(ApiSerializersRegistry r) {
+  _listOfWidgetType(r);
+}
+
+void registerListOfWidgetTypeDetails(ApiSerializersRegistry r) {
+  _listOfWidgetTypeDetails(r);
+}
+
+void registerListOfWidgetsBundle(ApiSerializersRegistry r) {
+  _listOfWidgetsBundle(r);
+}
+
+void registerLoginMobileInfo(ApiSerializersRegistry r) {
+  _loginMobileInfo(r);
+}
+
+void registerLoginRequestAndLoginResponse(ApiSerializersRegistry r) {
+  _loginRequest(r);
+  _loginResponse(r);
+}
+
+void registerLoginResponseAndRefreshTokenRequest(ApiSerializersRegistry r) {
+  _loginResponse(r);
+  _refreshTokenRequest(r);
+}
+
+void registerLoginWhiteLabelingParams(ApiSerializersRegistry r) {
+  _loginWhiteLabelingParams(r);
+}
+
+void registerLwM2MServerSecurityConfigDefault(ApiSerializersRegistry r) {
+  _lwM2MServerSecurityConfigDefault(r);
+}
+
+void registerMapOfStringToAutoVersionCreateConfig(ApiSerializersRegistry r) {
+  _mapOfStringToAutoVersionCreateConfig(r);
+}
+
+void registerMapOfStringToIntegrationConvertersInfo(ApiSerializersRegistry r) {
+  _mapOfStringToIntegrationConvertersInfo(r);
+}
+
+void registerMapOfStringToJsonObjectAndDevice(ApiSerializersRegistry r) {
+  _mapOfStringToJsonObject(r);
+  _device(r);
+}
+
+void registerMobileApp(ApiSerializersRegistry r) {
+  _mobileApp(r);
+}
+
+void registerMobileAppBundleInfo(ApiSerializersRegistry r) {
+  _mobileAppBundleInfo(r);
+}
+
+void registerMobileSessionInfo(ApiSerializersRegistry r) {
+  _mobileSessionInfo(r);
+}
+
+void registerNotificationRequest(ApiSerializersRegistry r) {
+  _notificationRequest(r);
+}
+
+void registerNotificationRequestAndNotificationRequestPreview(
+  ApiSerializersRegistry r,
+) {
+  _notificationRequest(r);
+  _notificationRequestPreview(r);
+}
+
+void registerNotificationRequestInfo(ApiSerializersRegistry r) {
+  _notificationRequestInfo(r);
+}
+
+void registerNotificationRule(ApiSerializersRegistry r) {
+  _notificationRule(r);
+}
+
+void registerNotificationRuleInfo(ApiSerializersRegistry r) {
+  _notificationRuleInfo(r);
+}
+
+void registerNotificationSettings(ApiSerializersRegistry r) {
+  _notificationSettings(r);
+}
+
+void registerNotificationTarget(ApiSerializersRegistry r) {
+  _notificationTarget(r);
+}
+
+void registerNotificationTargetAndPageDataUser(ApiSerializersRegistry r) {
+  _notificationTarget(r);
+  _pageDataUser(r);
+}
+
+void registerNotificationTemplate(ApiSerializersRegistry r) {
+  _notificationTemplate(r);
+}
+
+void registerNotificationTypeAndPageDataNotificationTarget(
+  ApiSerializersRegistry r,
+) {
+  _notificationType(r);
+  _pageDataNotificationTarget(r);
+}
+
+void registerOAuth2Client(ApiSerializersRegistry r) {
+  _oAuth2Client(r);
+}
+
+void registerOAuth2ClientRegistrationTemplate(ApiSerializersRegistry r) {
+  _oAuth2ClientRegistrationTemplate(r);
+}
+
+void registerOtaPackage(ApiSerializersRegistry r) {
+  _otaPackage(r);
+}
+
+void registerOtaPackageInfo(ApiSerializersRegistry r) {
+  _otaPackageInfo(r);
+}
+
+void registerOtaPackageInfoAndSaveOtaPackageInfoRequest(
+  ApiSerializersRegistry r,
+) {
+  _otaPackageInfo(r);
+  _saveOtaPackageInfoRequest(r);
+}
+
+void registerPageDataAgent(ApiSerializersRegistry r) {
+  _pageDataAgent(r);
+}
+
+void registerPageDataAgentAppEvent(ApiSerializersRegistry r) {
+  _pageDataAgentAppEvent(r);
+}
+
+void registerPageDataAgentAppEventInfo(ApiSerializersRegistry r) {
+  _pageDataAgentAppEventInfo(r);
+}
+
+void registerPageDataAgentAppProfile(ApiSerializersRegistry r) {
+  _pageDataAgentAppProfile(r);
+}
+
+void registerPageDataAgentAppUnit(ApiSerializersRegistry r) {
+  _pageDataAgentAppUnit(r);
+}
+
+void registerPageDataAgentApplicationInfo(ApiSerializersRegistry r) {
+  _pageDataAgentApplicationInfo(r);
+}
+
+void registerPageDataAgentBulkAction(ApiSerializersRegistry r) {
+  _pageDataAgentBulkAction(r);
+}
+
+void registerPageDataAgentInfo(ApiSerializersRegistry r) {
+  _pageDataAgentInfo(r);
+}
+
+void registerPageDataAgentProfile(ApiSerializersRegistry r) {
+  _pageDataAgentProfile(r);
+}
+
+void registerPageDataAgentProfileInfo(ApiSerializersRegistry r) {
+  _pageDataAgentProfileInfo(r);
+}
+
+void registerPageDataAiModel(ApiSerializersRegistry r) {
+  _pageDataAiModel(r);
+}
+
+void registerPageDataAlarmCommentInfo(ApiSerializersRegistry r) {
+  _pageDataAlarmCommentInfo(r);
+}
+
+void registerPageDataAlarmInfo(ApiSerializersRegistry r) {
+  _pageDataAlarmInfo(r);
+}
+
+void registerPageDataAlarmRuleDefinition(ApiSerializersRegistry r) {
+  _pageDataAlarmRuleDefinition(r);
+}
+
+void registerPageDataApiKeyInfo(ApiSerializersRegistry r) {
+  _pageDataApiKeyInfo(r);
+}
+
+void registerPageDataAsset(ApiSerializersRegistry r) {
+  _pageDataAsset(r);
+}
+
+void registerPageDataAssetInfo(ApiSerializersRegistry r) {
+  _pageDataAssetInfo(r);
+}
+
+void registerPageDataAssetProfile(ApiSerializersRegistry r) {
+  _pageDataAssetProfile(r);
+}
+
+void registerPageDataAssetProfileInfo(ApiSerializersRegistry r) {
+  _pageDataAssetProfileInfo(r);
+}
+
+void registerPageDataAuditLog(ApiSerializersRegistry r) {
+  _pageDataAuditLog(r);
+}
+
+void registerPageDataBlobEntityWithCustomerInfo(ApiSerializersRegistry r) {
+  _pageDataBlobEntityWithCustomerInfo(r);
+}
+
+void registerPageDataCalculatedField(ApiSerializersRegistry r) {
+  _pageDataCalculatedField(r);
+}
+
+void registerPageDataContactBasedObject(ApiSerializersRegistry r) {
+  _pageDataContactBasedObject(r);
+}
+
+void registerPageDataConverter(ApiSerializersRegistry r) {
+  _pageDataConverter(r);
+}
+
+void registerPageDataCustomMenuInfo(ApiSerializersRegistry r) {
+  _pageDataCustomMenuInfo(r);
+}
+
+void registerPageDataCustomer(ApiSerializersRegistry r) {
+  _pageDataCustomer(r);
+}
+
+void registerPageDataCustomerInfo(ApiSerializersRegistry r) {
+  _pageDataCustomerInfo(r);
+}
+
+void registerPageDataDashboardInfo(ApiSerializersRegistry r) {
+  _pageDataDashboardInfo(r);
+}
+
+void registerPageDataDevice(ApiSerializersRegistry r) {
+  _pageDataDevice(r);
+}
+
+void registerPageDataDeviceInfo(ApiSerializersRegistry r) {
+  _pageDataDeviceInfo(r);
+}
+
+void registerPageDataDeviceProfile(ApiSerializersRegistry r) {
+  _pageDataDeviceProfile(r);
+}
+
+void registerPageDataDeviceProfileInfo(ApiSerializersRegistry r) {
+  _pageDataDeviceProfileInfo(r);
+}
+
+void registerPageDataDomainInfo(ApiSerializersRegistry r) {
+  _pageDataDomainInfo(r);
+}
+
+void registerPageDataEdge(ApiSerializersRegistry r) {
+  _pageDataEdge(r);
+}
+
+void registerPageDataEdgeEvent(ApiSerializersRegistry r) {
+  _pageDataEdgeEvent(r);
+}
+
+void registerPageDataEdgeInfo(ApiSerializersRegistry r) {
+  _pageDataEdgeInfo(r);
+}
+
+void registerPageDataEntityGroupInfo(ApiSerializersRegistry r) {
+  _pageDataEntityGroupInfo(r);
+}
+
+void registerPageDataEntityInfo(ApiSerializersRegistry r) {
+  _pageDataEntityInfo(r);
+}
+
+void registerPageDataEntitySubtype(ApiSerializersRegistry r) {
+  _pageDataEntitySubtype(r);
+}
+
+void registerPageDataEntityVersion(ApiSerializersRegistry r) {
+  _pageDataEntityVersion(r);
+}
+
+void registerPageDataEntityView(ApiSerializersRegistry r) {
+  _pageDataEntityView(r);
+}
+
+void registerPageDataEntityViewInfo(ApiSerializersRegistry r) {
+  _pageDataEntityViewInfo(r);
+}
+
+void registerPageDataEventInfo(ApiSerializersRegistry r) {
+  _pageDataEventInfo(r);
+}
+
+void registerPageDataIntegration(ApiSerializersRegistry r) {
+  _pageDataIntegration(r);
+}
+
+void registerPageDataIntegrationInfo(ApiSerializersRegistry r) {
+  _pageDataIntegrationInfo(r);
+}
+
+void registerPageDataJob(ApiSerializersRegistry r) {
+  _pageDataJob(r);
+}
+
+void registerPageDataMobileApp(ApiSerializersRegistry r) {
+  _pageDataMobileApp(r);
+}
+
+void registerPageDataMobileAppBundleInfo(ApiSerializersRegistry r) {
+  _pageDataMobileAppBundleInfo(r);
+}
+
+void registerPageDataNotification(ApiSerializersRegistry r) {
+  _pageDataNotification(r);
+}
+
+void registerPageDataNotificationRequestInfo(ApiSerializersRegistry r) {
+  _pageDataNotificationRequestInfo(r);
+}
+
+void registerPageDataNotificationRuleInfo(ApiSerializersRegistry r) {
+  _pageDataNotificationRuleInfo(r);
+}
+
+void registerPageDataNotificationTarget(ApiSerializersRegistry r) {
+  _pageDataNotificationTarget(r);
+}
+
+void registerPageDataOAuth2ClientInfo(ApiSerializersRegistry r) {
+  _pageDataOAuth2ClientInfo(r);
+}
+
+void registerPageDataOtaPackageInfo(ApiSerializersRegistry r) {
+  _pageDataOtaPackageInfo(r);
+}
+
+void registerPageDataQueue(ApiSerializersRegistry r) {
+  _pageDataQueue(r);
+}
+
+void registerPageDataQueueStats(ApiSerializersRegistry r) {
+  _pageDataQueueStats(r);
+}
+
+void registerPageDataReport(ApiSerializersRegistry r) {
+  _pageDataReport(r);
+}
+
+void registerPageDataReportInfo(ApiSerializersRegistry r) {
+  _pageDataReportInfo(r);
+}
+
+void registerPageDataRole(ApiSerializersRegistry r) {
+  _pageDataRole(r);
+}
+
+void registerPageDataRuleChain(ApiSerializersRegistry r) {
+  _pageDataRuleChain(r);
+}
+
+void registerPageDataScheduledReportInfo(ApiSerializersRegistry r) {
+  _pageDataScheduledReportInfo(r);
+}
+
+void registerPageDataSchedulerEventInfo(ApiSerializersRegistry r) {
+  _pageDataSchedulerEventInfo(r);
+}
+
+void registerPageDataSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) {
+  _pageDataSchedulerEventWithCustomerInfo(r);
+}
+
+void registerPageDataSecretInfo(ApiSerializersRegistry r) {
+  _pageDataSecretInfo(r);
+}
+
+void registerPageDataShortEntityView(ApiSerializersRegistry r) {
+  _pageDataShortEntityView(r);
+}
+
+void registerPageDataString(ApiSerializersRegistry r) {
+  _pageDataString(r);
+}
+
+void registerPageDataTbResourceInfo(ApiSerializersRegistry r) {
+  _pageDataTbResourceInfo(r);
+}
+
+void registerPageDataTenant(ApiSerializersRegistry r) {
+  _pageDataTenant(r);
+}
+
+void registerPageDataTenantInfo(ApiSerializersRegistry r) {
+  _pageDataTenantInfo(r);
+}
+
+void registerPageDataTenantProfile(ApiSerializersRegistry r) {
+  _pageDataTenantProfile(r);
+}
+
+void registerPageDataTrendzViewConfigLite(ApiSerializersRegistry r) {
+  _pageDataTrendzViewConfigLite(r);
+}
+
+void registerPageDataUser(ApiSerializersRegistry r) {
+  _pageDataUser(r);
+}
+
+void registerPageDataUserEmailInfo(ApiSerializersRegistry r) {
+  _pageDataUserEmailInfo(r);
+}
+
+void registerPageDataUserInfo(ApiSerializersRegistry r) {
+  _pageDataUserInfo(r);
+}
+
+void registerPageDataWidgetTypeInfo(ApiSerializersRegistry r) {
+  _pageDataWidgetTypeInfo(r);
+}
+
+void registerPageDataWidgetsBundle(ApiSerializersRegistry r) {
+  _pageDataWidgetsBundle(r);
+}
+
+void registerPlatformTwoFaSettings(ApiSerializersRegistry r) {
+  _platformTwoFaSettings(r);
+}
+
+void registerPlatformType(ApiSerializersRegistry r) {
+  _platformType(r);
+}
+
+void registerQrCodeSettings(ApiSerializersRegistry r) {
+  _qrCodeSettings(r);
+}
+
+void registerQueue(ApiSerializersRegistry r) {
+  _queue(r);
+}
+
+void registerQueueStats(ApiSerializersRegistry r) {
+  _queueStats(r);
+}
+
+void registerReport(ApiSerializersRegistry r) {
+  _report(r);
+}
+
+void registerReportRequest(ApiSerializersRegistry r) {
+  _reportRequest(r);
+}
+
+void registerReportTemplate(ApiSerializersRegistry r) {
+  _reportTemplate(r);
+}
+
+void registerReportTemplateInfo(ApiSerializersRegistry r) {
+  _reportTemplateInfo(r);
+}
+
+void registerRepositorySettings(ApiSerializersRegistry r) {
+  _repositorySettings(r);
+}
+
+void registerRepositorySettingsInfo(ApiSerializersRegistry r) {
+  _repositorySettingsInfo(r);
+}
+
+void registerResetPasswordEmailRequest(ApiSerializersRegistry r) {
+  _resetPasswordEmailRequest(r);
+}
+
+void registerResetPasswordRequest(ApiSerializersRegistry r) {
+  _resetPasswordRequest(r);
+}
+
+void registerResourceExportData(ApiSerializersRegistry r) {
+  _resourceExportData(r);
+}
+
+void registerResourceExportDataAndTbResourceInfo(ApiSerializersRegistry r) {
+  _resourceExportData(r);
+  _tbResourceInfo(r);
+}
+
+void registerRole(ApiSerializersRegistry r) {
+  _role(r);
+}
+
+void registerRpc(ApiSerializersRegistry r) {
+  _rpc(r);
+}
+
+void registerRuleChain(ApiSerializersRegistry r) {
+  _ruleChain(r);
+}
+
+void registerRuleChainData(ApiSerializersRegistry r) {
+  _ruleChainData(r);
+}
+
+void registerRuleChainMetaData(ApiSerializersRegistry r) {
+  _ruleChainMetaData(r);
+}
+
+void registerSchedulerEvent(ApiSerializersRegistry r) {
+  _schedulerEvent(r);
+}
+
+void registerSchedulerEventInfo(ApiSerializersRegistry r) {
+  _schedulerEventInfo(r);
+}
+
+void registerSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) {
+  _schedulerEventWithCustomerInfo(r);
+}
+
+void registerScriptLanguage(ApiSerializersRegistry r) {
+  _scriptLanguage(r);
+}
+
+void registerSecretAndSecretInfo(ApiSerializersRegistry r) {
+  _secret(r);
+  _secretInfo(r);
+}
+
+void registerSecretInfo(ApiSerializersRegistry r) {
+  _secretInfo(r);
+}
+
+void registerSecuritySettings(ApiSerializersRegistry r) {
+  _securitySettings(r);
+}
+
+void registerSelfRegistrationParams(ApiSerializersRegistry r) {
+  _selfRegistrationParams(r);
+}
+
+void
+registerSetOfCalculatedFieldTypeAndSetOfStringAndPageDataCalculatedFieldInfo(
+  ApiSerializersRegistry r,
+) {
+  _setOfCalculatedFieldType(r);
+  _setOfString(r);
+  _pageDataCalculatedFieldInfo(r);
+}
+
+void registerSetOfResourceTypeAndPageDataTbResourceInfo(
+  ApiSerializersRegistry r,
+) {
+  _setOfResourceType(r);
+  _pageDataTbResourceInfo(r);
+}
+
+void registerSetOfString(ApiSerializersRegistry r) {
+  _setOfString(r);
+}
+
+void registerSetOfStringAndPageDataAlarmRuleDefinitionInfo(
+  ApiSerializersRegistry r,
+) {
+  _setOfString(r);
+  _pageDataAlarmRuleDefinitionInfo(r);
+}
+
+void registerSetupInfo(ApiSerializersRegistry r) {
+  _setupInfo(r);
+}
+
+void registerShareGroupRequest(ApiSerializersRegistry r) {
+  _shareGroupRequest(r);
+}
+
+void registerShortEntityView(ApiSerializersRegistry r) {
+  _shortEntityView(r);
+}
+
+void registerSignUpRequestAndSignUpResult(ApiSerializersRegistry r) {
+  _signUpRequest(r);
+  _signUpResult(r);
+}
+
+void registerSignUpSelfRegistrationParams(ApiSerializersRegistry r) {
+  _signUpSelfRegistrationParams(r);
+}
+
+void registerSolutionDataAndSolutionImportResult(ApiSerializersRegistry r) {
+  _solutionData(r);
+  _solutionImportResult(r);
+}
+
+void registerSolutionDataAndSolutionValidationResult(ApiSerializersRegistry r) {
+  _solutionData(r);
+  _solutionValidationResult(r);
+}
+
+void registerSolutionExportRequestAndSolutionExportResponse(
+  ApiSerializersRegistry r,
+) {
+  _solutionExportRequest(r);
+  _solutionExportResponse(r);
+}
+
+void registerSolutionStep(ApiSerializersRegistry r) {
+  _solutionStep(r);
+}
+
+void registerSubscriptionInfo(ApiSerializersRegistry r) {
+  _subscriptionInfo(r);
+}
+
+void registerSystemInfo(ApiSerializersRegistry r) {
+  _systemInfo(r);
+}
+
+void registerSystemSetupRequest(ApiSerializersRegistry r) {
+  _systemSetupRequest(r);
+}
+
+void registerTbChatRequestAndTbChatResponse(ApiSerializersRegistry r) {
+  _tbChatRequest(r);
+  _tbChatResponse(r);
+}
+
+void registerTbImageDeleteResult(ApiSerializersRegistry r) {
+  _tbImageDeleteResult(r);
+}
+
+void registerTbResource(ApiSerializersRegistry r) {
+  _tbResource(r);
+}
+
+void registerTbResourceAndTbResourceInfo(ApiSerializersRegistry r) {
+  _tbResource(r);
+  _tbResourceInfo(r);
+}
+
+void registerTbResourceDeleteResult(ApiSerializersRegistry r) {
+  _tbResourceDeleteResult(r);
+}
+
+void registerTbResourceInfo(ApiSerializersRegistry r) {
+  _tbResourceInfo(r);
+}
+
+void registerTbSecretDeleteResult(ApiSerializersRegistry r) {
+  _tbSecretDeleteResult(r);
+}
+
+void registerTenant(ApiSerializersRegistry r) {
+  _tenant(r);
+}
+
+void registerTenantInfo(ApiSerializersRegistry r) {
+  _tenantInfo(r);
+}
+
+void registerTenantProfile(ApiSerializersRegistry r) {
+  _tenantProfile(r);
+}
+
+void registerTestSmsRequest(ApiSerializersRegistry r) {
+  _testSmsRequest(r);
+}
+
+void registerToCoreEdqsRequest(ApiSerializersRegistry r) {
+  _toCoreEdqsRequest(r);
+}
+
+void registerTrendzConfiguration(ApiSerializersRegistry r) {
+  _trendzConfiguration(r);
+}
+
+void registerTrendzHealthcheckResult(ApiSerializersRegistry r) {
+  _trendzHealthcheckResult(r);
+}
+
+void registerTrendzSummary(ApiSerializersRegistry r) {
+  _trendzSummary(r);
+}
+
+void registerTrendzSynchronizationResult(ApiSerializersRegistry r) {
+  _trendzSynchronizationResult(r);
+}
+
+void registerTrendzUsage(ApiSerializersRegistry r) {
+  _trendzUsage(r);
+}
+
+void registerTrendzViewConfig(ApiSerializersRegistry r) {
+  _trendzViewConfig(r);
+}
+
+void registerTwoFaAccountConfig(ApiSerializersRegistry r) {
+  _twoFaAccountConfig(r);
+}
+
+void registerTwoFaProviderType(ApiSerializersRegistry r) {
+  _twoFaProviderType(r);
+}
+
+void registerUpdateMessage(ApiSerializersRegistry r) {
+  _updateMessage(r);
+}
+
+void registerUsageInfo(ApiSerializersRegistry r) {
+  _usageInfo(r);
+}
+
+void registerUser(ApiSerializersRegistry r) {
+  _user(r);
+}
+
+void registerUserActivationLink(ApiSerializersRegistry r) {
+  _userActivationLink(r);
+}
+
+void registerUserDashboardsInfo(ApiSerializersRegistry r) {
+  _userDashboardsInfo(r);
+}
+
+void registerUserInfo(ApiSerializersRegistry r) {
+  _userInfo(r);
+}
+
+void registerUserMobileInfo(ApiSerializersRegistry r) {
+  _userMobileInfo(r);
+}
+
+void registerUserNotificationSettings(ApiSerializersRegistry r) {
+  _userNotificationSettings(r);
+}
+
+void registerUserPasswordPolicy(ApiSerializersRegistry r) {
+  _userPasswordPolicy(r);
+}
+
+void registerVersionCreateRequest(ApiSerializersRegistry r) {
+  _versionCreateRequest(r);
+}
+
+void registerVersionCreationResult(ApiSerializersRegistry r) {
+  _versionCreationResult(r);
+}
+
+void registerVersionLoadRequest(ApiSerializersRegistry r) {
+  _versionLoadRequest(r);
+}
+
+void registerVersionLoadResult(ApiSerializersRegistry r) {
+  _versionLoadResult(r);
+}
+
+void registerWebSelfRegistrationParams(ApiSerializersRegistry r) {
+  _webSelfRegistrationParams(r);
+}
+
+void registerWhiteLabelingParams(ApiSerializersRegistry r) {
+  _whiteLabelingParams(r);
+}
+
+void registerWidgetType(ApiSerializersRegistry r) {
+  _widgetType(r);
+}
+
+void registerWidgetTypeDetails(ApiSerializersRegistry r) {
+  _widgetTypeDetails(r);
+}
+
+void registerWidgetTypeInfo(ApiSerializersRegistry r) {
+  _widgetTypeInfo(r);
+}
+
+void registerWidgetsBundle(ApiSerializersRegistry r) {
+  _widgetsBundle(r);
+}
 
 // One register function per model file and per parameterised collection type.
 
@@ -2695,9 +3648,13 @@ void _allUsersFilter(ApiSerializersRegistry r) {
   r._builder.add(AllUsersFilter.serializer);
 }
 
-void _allowCreateNewDevicesDeviceProfileProvisionConfiguration(ApiSerializersRegistry r) {
+void _allowCreateNewDevicesDeviceProfileProvisionConfiguration(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(114)) return;
-  r._builder.add(AllowCreateNewDevicesDeviceProfileProvisionConfiguration.serializer);
+  r._builder.add(
+    AllowCreateNewDevicesDeviceProfileProvisionConfiguration.serializer,
+  );
 }
 
 void _allowedPermissionsInfo(ApiSerializersRegistry r) {
@@ -3325,9 +4282,13 @@ void _chartShape(ApiSerializersRegistry r) {
   r._builder.add(ChartShape.serializer);
 }
 
-void _checkPreProvisionedDevicesDeviceProfileProvisionConfiguration(ApiSerializersRegistry r) {
+void _checkPreProvisionedDevicesDeviceProfileProvisionConfiguration(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(209)) return;
-  r._builder.add(CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration.serializer);
+  r._builder.add(
+    CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration.serializer,
+  );
 }
 
 void _checksumAlgorithm(ApiSerializersRegistry r) {
@@ -3346,7 +4307,9 @@ void _clearRule(ApiSerializersRegistry r) {
   _setOfAlarmSearchStatus(r);
 }
 
-void _clientAttributesQueryingSnmpCommunicationConfig(ApiSerializersRegistry r) {
+void _clientAttributesQueryingSnmpCommunicationConfig(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(213)) return;
   r._builder.add(ClientAttributesQueryingSnmpCommunicationConfig.serializer);
   _listOfSnmpMapping(r);
@@ -4224,9 +5187,13 @@ void _edge(ApiSerializersRegistry r) {
   _tenantId(r);
 }
 
-void _edgeCommunicationFailureNotificationRuleTriggerConfig(ApiSerializersRegistry r) {
+void _edgeCommunicationFailureNotificationRuleTriggerConfig(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(336)) return;
-  r._builder.add(EdgeCommunicationFailureNotificationRuleTriggerConfig.serializer);
+  r._builder.add(
+    EdgeCommunicationFailureNotificationRuleTriggerConfig.serializer,
+  );
   _notificationRuleTriggerType(r);
   _setOfString(r);
 }
@@ -5282,9 +6249,13 @@ void _integrationInfo(ApiSerializersRegistry r) {
   _tenantId(r);
 }
 
-void _integrationLifecycleEventNotificationRuleTriggerConfig(ApiSerializersRegistry r) {
+void _integrationLifecycleEventNotificationRuleTriggerConfig(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(469)) return;
-  r._builder.add(IntegrationLifecycleEventNotificationRuleTriggerConfig.serializer);
+  r._builder.add(
+    IntegrationLifecycleEventNotificationRuleTriggerConfig.serializer,
+  );
   _notificationRuleTriggerType(r);
   _setOfComponentLifecycleEvent(r);
   _setOfIntegrationType(r);
@@ -5633,7 +6604,9 @@ void _mergedUserPermissions(ApiSerializersRegistry r) {
   _mapOfStringToSetOfOperation(r);
 }
 
-void _microsoftTeamsDeliveryMethodNotificationTemplate(ApiSerializersRegistry r) {
+void _microsoftTeamsDeliveryMethodNotificationTemplate(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(522)) return;
   r._builder.add(MicrosoftTeamsDeliveryMethodNotificationTemplate.serializer);
   _button(r);
@@ -5794,7 +6767,9 @@ void _nameConflictPolicy(ApiSerializersRegistry r) {
   r._builder.add(NameConflictPolicy.serializer);
 }
 
-void _newPlatformVersionNotificationRuleTriggerConfig(ApiSerializersRegistry r) {
+void _newPlatformVersionNotificationRuleTriggerConfig(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(546)) return;
   r._builder.add(NewPlatformVersionNotificationRuleTriggerConfig.serializer);
   _notificationRuleTriggerType(r);
@@ -7003,9 +7978,13 @@ void _refreshTokenRequest(ApiSerializersRegistry r) {
   r._builder.add(RefreshTokenRequest.serializer);
 }
 
-void _relatedEntitiesAggregationCalculatedFieldConfiguration(ApiSerializersRegistry r) {
+void _relatedEntitiesAggregationCalculatedFieldConfiguration(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(727)) return;
-  r._builder.add(RelatedEntitiesAggregationCalculatedFieldConfiguration.serializer);
+  r._builder.add(
+    RelatedEntitiesAggregationCalculatedFieldConfiguration.serializer,
+  );
   _mapOfStringToAggMetric(r);
   _mapOfStringToArgument(r);
   _output(r);
@@ -7458,15 +8437,21 @@ void _ruleChainType(ApiSerializersRegistry r) {
   r._builder.add(RuleChainType.serializer);
 }
 
-void _ruleEngineComponentLifecycleEventNotificationRuleTriggerConfig(ApiSerializersRegistry r) {
+void _ruleEngineComponentLifecycleEventNotificationRuleTriggerConfig(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(785)) return;
-  r._builder.add(RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig.serializer);
+  r._builder.add(
+    RuleEngineComponentLifecycleEventNotificationRuleTriggerConfig.serializer,
+  );
   _notificationRuleTriggerType(r);
   _setOfComponentLifecycleEvent(r);
   _setOfString(r);
 }
 
-void _ruleEngineComponentLifecycleEventRecipientsConfig(ApiSerializersRegistry r) {
+void _ruleEngineComponentLifecycleEventRecipientsConfig(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(786)) return;
   r._builder.add(RuleEngineComponentLifecycleEventRecipientsConfig.serializer);
   _listOfString(r);
@@ -8087,7 +9072,9 @@ void _tableSortOrder(ApiSerializersRegistry r) {
   _tableSortDirection(r);
 }
 
-void _taskProcessingFailureNotificationRuleTriggerConfig(ApiSerializersRegistry r) {
+void _taskProcessingFailureNotificationRuleTriggerConfig(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(880)) return;
   r._builder.add(TaskProcessingFailureNotificationRuleTriggerConfig.serializer);
   _notificationRuleTriggerType(r);
@@ -8960,1386 +9947,2158 @@ void _zoneGroupConfiguration(ApiSerializersRegistry r) {
 
 void _listOfAgent(ApiSerializersRegistry r) {
   if (!r._visit(1009)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Agent)]), () => ListBuilder<Agent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Agent)]),
+    () => ListBuilder<Agent>(),
+  );
   _agent(r);
 }
 
 void _listOfAgentAppArgument(ApiSerializersRegistry r) {
   if (!r._visit(1010)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppArgument)]), () => ListBuilder<AgentAppArgument>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppArgument)]),
+    () => ListBuilder<AgentAppArgument>(),
+  );
   _agentAppArgument(r);
 }
 
 void _listOfAgentAppEvent(ApiSerializersRegistry r) {
   if (!r._visit(1011)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppEvent)]), () => ListBuilder<AgentAppEvent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppEvent)]),
+    () => ListBuilder<AgentAppEvent>(),
+  );
   _agentAppEvent(r);
 }
 
 void _listOfAgentAppEventInfo(ApiSerializersRegistry r) {
   if (!r._visit(1012)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppEventInfo)]), () => ListBuilder<AgentAppEventInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppEventInfo)]),
+    () => ListBuilder<AgentAppEventInfo>(),
+  );
   _agentAppEventInfo(r);
 }
 
 void _listOfAgentAppProfile(ApiSerializersRegistry r) {
   if (!r._visit(1013)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppProfile)]), () => ListBuilder<AgentAppProfile>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppProfile)]),
+    () => ListBuilder<AgentAppProfile>(),
+  );
   _agentAppProfile(r);
 }
 
 void _listOfAgentAppProfileInfo(ApiSerializersRegistry r) {
   if (!r._visit(1014)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppProfileInfo)]), () => ListBuilder<AgentAppProfileInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppProfileInfo)]),
+    () => ListBuilder<AgentAppProfileInfo>(),
+  );
   _agentAppProfileInfo(r);
 }
 
 void _listOfAgentAppProfileRelationInfo(ApiSerializersRegistry r) {
   if (!r._visit(1015)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppProfileRelationInfo)]), () => ListBuilder<AgentAppProfileRelationInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppProfileRelationInfo)]),
+    () => ListBuilder<AgentAppProfileRelationInfo>(),
+  );
   _agentAppProfileRelationInfo(r);
 }
 
 void _listOfAgentAppTemplate(ApiSerializersRegistry r) {
   if (!r._visit(1016)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppTemplate)]), () => ListBuilder<AgentAppTemplate>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppTemplate)]),
+    () => ListBuilder<AgentAppTemplate>(),
+  );
   _agentAppTemplate(r);
 }
 
 void _listOfAgentAppTemplateStartStepsInner(ApiSerializersRegistry r) {
   if (!r._visit(1017)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]), () => ListBuilder<AgentAppTemplateStartStepsInner>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
+    () => ListBuilder<AgentAppTemplateStartStepsInner>(),
+  );
   _agentAppTemplateStartStepsInner(r);
 }
 
 void _listOfAgentAppUnit(ApiSerializersRegistry r) {
   if (!r._visit(1018)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentAppUnit)]), () => ListBuilder<AgentAppUnit>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentAppUnit)]),
+    () => ListBuilder<AgentAppUnit>(),
+  );
   _agentAppUnit(r);
 }
 
 void _listOfAgentApplicationInfo(ApiSerializersRegistry r) {
   if (!r._visit(1019)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentApplicationInfo)]), () => ListBuilder<AgentApplicationInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentApplicationInfo)]),
+    () => ListBuilder<AgentApplicationInfo>(),
+  );
   _agentApplicationInfo(r);
 }
 
 void _listOfAgentBulkAction(ApiSerializersRegistry r) {
   if (!r._visit(1020)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentBulkAction)]), () => ListBuilder<AgentBulkAction>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentBulkAction)]),
+    () => ListBuilder<AgentBulkAction>(),
+  );
   _agentBulkAction(r);
 }
 
 void _listOfAgentInfo(ApiSerializersRegistry r) {
   if (!r._visit(1021)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentInfo)]), () => ListBuilder<AgentInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentInfo)]),
+    () => ListBuilder<AgentInfo>(),
+  );
   _agentInfo(r);
 }
 
 void _listOfAgentProfile(ApiSerializersRegistry r) {
   if (!r._visit(1022)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentProfile)]), () => ListBuilder<AgentProfile>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentProfile)]),
+    () => ListBuilder<AgentProfile>(),
+  );
   _agentProfile(r);
 }
 
 void _listOfAgentProfileInfo(ApiSerializersRegistry r) {
   if (!r._visit(1023)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AgentProfileInfo)]), () => ListBuilder<AgentProfileInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AgentProfileInfo)]),
+    () => ListBuilder<AgentProfileInfo>(),
+  );
   _agentProfileInfo(r);
 }
 
 void _listOfAiModel(ApiSerializersRegistry r) {
   if (!r._visit(1024)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AiModel)]), () => ListBuilder<AiModel>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AiModel)]),
+    () => ListBuilder<AiModel>(),
+  );
   _aiModel(r);
 }
 
 void _listOfAlarmCommentInfo(ApiSerializersRegistry r) {
   if (!r._visit(1025)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmCommentInfo)]), () => ListBuilder<AlarmCommentInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmCommentInfo)]),
+    () => ListBuilder<AlarmCommentInfo>(),
+  );
   _alarmCommentInfo(r);
 }
 
 void _listOfAlarmConditionFilter(ApiSerializersRegistry r) {
   if (!r._visit(1026)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmConditionFilter)]), () => ListBuilder<AlarmConditionFilter>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmConditionFilter)]),
+    () => ListBuilder<AlarmConditionFilter>(),
+  );
   _alarmConditionFilter(r);
 }
 
 void _listOfAlarmData(ApiSerializersRegistry r) {
   if (!r._visit(1027)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmData)]), () => ListBuilder<AlarmData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmData)]),
+    () => ListBuilder<AlarmData>(),
+  );
   _alarmData(r);
 }
 
 void _listOfAlarmInfo(ApiSerializersRegistry r) {
   if (!r._visit(1028)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmInfo)]), () => ListBuilder<AlarmInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmInfo)]),
+    () => ListBuilder<AlarmInfo>(),
+  );
   _alarmInfo(r);
 }
 
 void _listOfAlarmRuleDefinition(ApiSerializersRegistry r) {
   if (!r._visit(1029)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmRuleDefinition)]), () => ListBuilder<AlarmRuleDefinition>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmRuleDefinition)]),
+    () => ListBuilder<AlarmRuleDefinition>(),
+  );
   _alarmRuleDefinition(r);
 }
 
 void _listOfAlarmRuleDefinitionInfo(ApiSerializersRegistry r) {
   if (!r._visit(1030)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmRuleDefinitionInfo)]), () => ListBuilder<AlarmRuleDefinitionInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmRuleDefinitionInfo)]),
+    () => ListBuilder<AlarmRuleDefinitionInfo>(),
+  );
   _alarmRuleDefinitionInfo(r);
 }
 
 void _listOfAlarmRuleKeyFilterPredicate(ApiSerializersRegistry r) {
   if (!r._visit(1031)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmRuleKeyFilterPredicate)]), () => ListBuilder<AlarmRuleKeyFilterPredicate>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmRuleKeyFilterPredicate)]),
+    () => ListBuilder<AlarmRuleKeyFilterPredicate>(),
+  );
   _alarmRuleKeyFilterPredicate(r);
 }
 
 void _listOfAlarmSearchStatus(ApiSerializersRegistry r) {
   if (!r._visit(1032)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmSearchStatus)]), () => ListBuilder<AlarmSearchStatus>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmSearchStatus)]),
+    () => ListBuilder<AlarmSearchStatus>(),
+  );
   _alarmSearchStatus(r);
 }
 
 void _listOfAlarmSeverity(ApiSerializersRegistry r) {
   if (!r._visit(1033)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AlarmSeverity)]), () => ListBuilder<AlarmSeverity>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AlarmSeverity)]),
+    () => ListBuilder<AlarmSeverity>(),
+  );
   _alarmSeverity(r);
 }
 
 void _listOfApiKeyInfo(ApiSerializersRegistry r) {
   if (!r._visit(1034)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ApiKeyInfo)]), () => ListBuilder<ApiKeyInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ApiKeyInfo)]),
+    () => ListBuilder<ApiKeyInfo>(),
+  );
   _apiKeyInfo(r);
 }
 
 void _listOfAsset(ApiSerializersRegistry r) {
   if (!r._visit(1035)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Asset)]), () => ListBuilder<Asset>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Asset)]),
+    () => ListBuilder<Asset>(),
+  );
   _asset(r);
 }
 
 void _listOfAssetInfo(ApiSerializersRegistry r) {
   if (!r._visit(1036)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AssetInfo)]), () => ListBuilder<AssetInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AssetInfo)]),
+    () => ListBuilder<AssetInfo>(),
+  );
   _assetInfo(r);
 }
 
 void _listOfAssetProfile(ApiSerializersRegistry r) {
   if (!r._visit(1037)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AssetProfile)]), () => ListBuilder<AssetProfile>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AssetProfile)]),
+    () => ListBuilder<AssetProfile>(),
+  );
   _assetProfile(r);
 }
 
 void _listOfAssetProfileInfo(ApiSerializersRegistry r) {
   if (!r._visit(1038)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AssetProfileInfo)]), () => ListBuilder<AssetProfileInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AssetProfileInfo)]),
+    () => ListBuilder<AssetProfileInfo>(),
+  );
   _assetProfileInfo(r);
 }
 
 void _listOfAttributeData(ApiSerializersRegistry r) {
   if (!r._visit(1039)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AttributeData)]), () => ListBuilder<AttributeData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AttributeData)]),
+    () => ListBuilder<AttributeData>(),
+  );
   _attributeData(r);
 }
 
 void _listOfAttributeExportData(ApiSerializersRegistry r) {
   if (!r._visit(1040)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AttributeExportData)]), () => ListBuilder<AttributeExportData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AttributeExportData)]),
+    () => ListBuilder<AttributeExportData>(),
+  );
   _attributeExportData(r);
 }
 
 void _listOfAuditLog(ApiSerializersRegistry r) {
   if (!r._visit(1041)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(AuditLog)]), () => ListBuilder<AuditLog>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(AuditLog)]),
+    () => ListBuilder<AuditLog>(),
+  );
   _auditLog(r);
 }
 
 void _listOfBaseReadTsKvQuery(ApiSerializersRegistry r) {
   if (!r._visit(1042)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(BaseReadTsKvQuery)]), () => ListBuilder<BaseReadTsKvQuery>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(BaseReadTsKvQuery)]),
+    () => ListBuilder<BaseReadTsKvQuery>(),
+  );
   _baseReadTsKvQuery(r);
 }
 
 void _listOfBlobEntityInfo(ApiSerializersRegistry r) {
   if (!r._visit(1043)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(BlobEntityInfo)]), () => ListBuilder<BlobEntityInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(BlobEntityInfo)]),
+    () => ListBuilder<BlobEntityInfo>(),
+  );
   _blobEntityInfo(r);
 }
 
 void _listOfBlobEntityWithCustomerInfo(ApiSerializersRegistry r) {
   if (!r._visit(1044)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(BlobEntityWithCustomerInfo)]), () => ListBuilder<BlobEntityWithCustomerInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(BlobEntityWithCustomerInfo)]),
+    () => ListBuilder<BlobEntityWithCustomerInfo>(),
+  );
   _blobEntityWithCustomerInfo(r);
 }
 
 void _listOfBranchInfo(ApiSerializersRegistry r) {
   if (!r._visit(1045)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(BranchInfo)]), () => ListBuilder<BranchInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(BranchInfo)]),
+    () => ListBuilder<BranchInfo>(),
+  );
   _branchInfo(r);
 }
 
 void _listOfCalculatedField(ApiSerializersRegistry r) {
   if (!r._visit(1046)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(CalculatedField)]), () => ListBuilder<CalculatedField>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(CalculatedField)]),
+    () => ListBuilder<CalculatedField>(),
+  );
   _calculatedField(r);
 }
 
 void _listOfCalculatedFieldInfo(ApiSerializersRegistry r) {
   if (!r._visit(1047)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(CalculatedFieldInfo)]), () => ListBuilder<CalculatedFieldInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(CalculatedFieldInfo)]),
+    () => ListBuilder<CalculatedFieldInfo>(),
+  );
   _calculatedFieldInfo(r);
 }
 
 void _listOfColumnMapping(ApiSerializersRegistry r) {
   if (!r._visit(1048)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ColumnMapping)]), () => ListBuilder<ColumnMapping>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ColumnMapping)]),
+    () => ListBuilder<ColumnMapping>(),
+  );
   _columnMapping(r);
 }
 
 void _listOfComponentDescriptor(ApiSerializersRegistry r) {
   if (!r._visit(1049)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ComponentDescriptor)]), () => ListBuilder<ComponentDescriptor>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ComponentDescriptor)]),
+    () => ListBuilder<ComponentDescriptor>(),
+  );
   _componentDescriptor(r);
 }
 
 void _listOfContactBasedObject(ApiSerializersRegistry r) {
   if (!r._visit(1050)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ContactBasedObject)]), () => ListBuilder<ContactBasedObject>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ContactBasedObject)]),
+    () => ListBuilder<ContactBasedObject>(),
+  );
   _contactBasedObject(r);
 }
 
 void _listOfConverter(ApiSerializersRegistry r) {
   if (!r._visit(1051)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Converter)]), () => ListBuilder<Converter>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Converter)]),
+    () => ListBuilder<Converter>(),
+  );
   _converter(r);
 }
 
 void _listOfCustomMenuInfo(ApiSerializersRegistry r) {
   if (!r._visit(1052)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(CustomMenuInfo)]), () => ListBuilder<CustomMenuInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(CustomMenuInfo)]),
+    () => ListBuilder<CustomMenuInfo>(),
+  );
   _customMenuInfo(r);
 }
 
 void _listOfCustomMenuItem(ApiSerializersRegistry r) {
   if (!r._visit(1053)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(CustomMenuItem)]), () => ListBuilder<CustomMenuItem>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(CustomMenuItem)]),
+    () => ListBuilder<CustomMenuItem>(),
+  );
   _customMenuItem(r);
 }
 
 void _listOfCustomTimeScheduleItem(ApiSerializersRegistry r) {
   if (!r._visit(1054)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(CustomTimeScheduleItem)]), () => ListBuilder<CustomTimeScheduleItem>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(CustomTimeScheduleItem)]),
+    () => ListBuilder<CustomTimeScheduleItem>(),
+  );
   _customTimeScheduleItem(r);
 }
 
 void _listOfCustomer(ApiSerializersRegistry r) {
   if (!r._visit(1055)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Customer)]), () => ListBuilder<Customer>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Customer)]),
+    () => ListBuilder<Customer>(),
+  );
   _customer(r);
 }
 
 void _listOfCustomerInfo(ApiSerializersRegistry r) {
   if (!r._visit(1056)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(CustomerInfo)]), () => ListBuilder<CustomerInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(CustomerInfo)]),
+    () => ListBuilder<CustomerInfo>(),
+  );
   _customerInfo(r);
 }
 
 void _listOfDashboard(ApiSerializersRegistry r) {
   if (!r._visit(1057)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Dashboard)]), () => ListBuilder<Dashboard>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Dashboard)]),
+    () => ListBuilder<Dashboard>(),
+  );
   _dashboard(r);
 }
 
 void _listOfDashboardInfo(ApiSerializersRegistry r) {
   if (!r._visit(1058)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DashboardInfo)]), () => ListBuilder<DashboardInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DashboardInfo)]),
+    () => ListBuilder<DashboardInfo>(),
+  );
   _dashboardInfo(r);
 }
 
 void _listOfDataKey(ApiSerializersRegistry r) {
   if (!r._visit(1059)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DataKey)]), () => ListBuilder<DataKey>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DataKey)]),
+    () => ListBuilder<DataKey>(),
+  );
   _dataKey(r);
 }
 
 void _listOfDataSource(ApiSerializersRegistry r) {
   if (!r._visit(1060)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DataSource)]), () => ListBuilder<DataSource>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DataSource)]),
+    () => ListBuilder<DataSource>(),
+  );
   _dataSource(r);
 }
 
 void _listOfDefaultMenuItem(ApiSerializersRegistry r) {
   if (!r._visit(1061)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DefaultMenuItem)]), () => ListBuilder<DefaultMenuItem>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DefaultMenuItem)]),
+    () => ListBuilder<DefaultMenuItem>(),
+  );
   _defaultMenuItem(r);
 }
 
 void _listOfDevice(ApiSerializersRegistry r) {
   if (!r._visit(1062)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Device)]), () => ListBuilder<Device>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Device)]),
+    () => ListBuilder<Device>(),
+  );
   _device(r);
 }
 
 void _listOfDeviceGroupOtaPackage(ApiSerializersRegistry r) {
   if (!r._visit(1063)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DeviceGroupOtaPackage)]), () => ListBuilder<DeviceGroupOtaPackage>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DeviceGroupOtaPackage)]),
+    () => ListBuilder<DeviceGroupOtaPackage>(),
+  );
   _deviceGroupOtaPackage(r);
 }
 
 void _listOfDeviceInfo(ApiSerializersRegistry r) {
   if (!r._visit(1064)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DeviceInfo)]), () => ListBuilder<DeviceInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DeviceInfo)]),
+    () => ListBuilder<DeviceInfo>(),
+  );
   _deviceInfo(r);
 }
 
 void _listOfDeviceProfile(ApiSerializersRegistry r) {
   if (!r._visit(1065)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DeviceProfile)]), () => ListBuilder<DeviceProfile>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DeviceProfile)]),
+    () => ListBuilder<DeviceProfile>(),
+  );
   _deviceProfile(r);
 }
 
 void _listOfDeviceProfileInfo(ApiSerializersRegistry r) {
   if (!r._visit(1066)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DeviceProfileInfo)]), () => ListBuilder<DeviceProfileInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DeviceProfileInfo)]),
+    () => ListBuilder<DeviceProfileInfo>(),
+  );
   _deviceProfileInfo(r);
 }
 
 void _listOfDomainInfo(ApiSerializersRegistry r) {
   if (!r._visit(1067)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(DomainInfo)]), () => ListBuilder<DomainInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(DomainInfo)]),
+    () => ListBuilder<DomainInfo>(),
+  );
   _domainInfo(r);
 }
 
 void _listOfEdge(ApiSerializersRegistry r) {
   if (!r._visit(1068)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Edge)]), () => ListBuilder<Edge>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Edge)]),
+    () => ListBuilder<Edge>(),
+  );
   _edge(r);
 }
 
 void _listOfEdgeEvent(ApiSerializersRegistry r) {
   if (!r._visit(1069)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EdgeEvent)]), () => ListBuilder<EdgeEvent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EdgeEvent)]),
+    () => ListBuilder<EdgeEvent>(),
+  );
   _edgeEvent(r);
 }
 
 void _listOfEdgeInfo(ApiSerializersRegistry r) {
   if (!r._visit(1070)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EdgeInfo)]), () => ListBuilder<EdgeInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EdgeInfo)]),
+    () => ListBuilder<EdgeInfo>(),
+  );
   _edgeInfo(r);
 }
 
 void _listOfEntityAlias(ApiSerializersRegistry r) {
   if (!r._visit(1071)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityAlias)]), () => ListBuilder<EntityAlias>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityAlias)]),
+    () => ListBuilder<EntityAlias>(),
+  );
   _entityAlias(r);
 }
 
 void _listOfEntityData(ApiSerializersRegistry r) {
   if (!r._visit(1072)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityData)]), () => ListBuilder<EntityData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityData)]),
+    () => ListBuilder<EntityData>(),
+  );
   _entityData(r);
 }
 
 void _listOfEntityExportData(ApiSerializersRegistry r) {
   if (!r._visit(1073)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityExportData)]), () => ListBuilder<EntityExportData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityExportData)]),
+    () => ListBuilder<EntityExportData>(),
+  );
   _entityExportData(r);
 }
 
 void _listOfEntityGroupId(ApiSerializersRegistry r) {
   if (!r._visit(1074)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityGroupId)]), () => ListBuilder<EntityGroupId>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityGroupId)]),
+    () => ListBuilder<EntityGroupId>(),
+  );
   _entityGroupId(r);
 }
 
 void _listOfEntityGroupInfo(ApiSerializersRegistry r) {
   if (!r._visit(1075)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityGroupInfo)]), () => ListBuilder<EntityGroupInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityGroupInfo)]),
+    () => ListBuilder<EntityGroupInfo>(),
+  );
   _entityGroupInfo(r);
 }
 
 void _listOfEntityInfo(ApiSerializersRegistry r) {
   if (!r._visit(1076)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityInfo)]), () => ListBuilder<EntityInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityInfo)]),
+    () => ListBuilder<EntityInfo>(),
+  );
   _entityInfo(r);
 }
 
 void _listOfEntityKey(ApiSerializersRegistry r) {
   if (!r._visit(1077)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityKey)]), () => ListBuilder<EntityKey>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityKey)]),
+    () => ListBuilder<EntityKey>(),
+  );
   _entityKey(r);
 }
 
 void _listOfEntityRelation(ApiSerializersRegistry r) {
   if (!r._visit(1078)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityRelation)]), () => ListBuilder<EntityRelation>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityRelation)]),
+    () => ListBuilder<EntityRelation>(),
+  );
   _entityRelation(r);
 }
 
 void _listOfEntityRelationInfo(ApiSerializersRegistry r) {
   if (!r._visit(1079)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityRelationInfo)]), () => ListBuilder<EntityRelationInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityRelationInfo)]),
+    () => ListBuilder<EntityRelationInfo>(),
+  );
   _entityRelationInfo(r);
 }
 
 void _listOfEntitySubtype(ApiSerializersRegistry r) {
   if (!r._visit(1080)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntitySubtype)]), () => ListBuilder<EntitySubtype>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntitySubtype)]),
+    () => ListBuilder<EntitySubtype>(),
+  );
   _entitySubtype(r);
 }
 
 void _listOfEntityType(ApiSerializersRegistry r) {
   if (!r._visit(1081)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityType)]), () => ListBuilder<EntityType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityType)]),
+    () => ListBuilder<EntityType>(),
+  );
   _entityType(r);
 }
 
 void _listOfEntityTypeLoadResult(ApiSerializersRegistry r) {
   if (!r._visit(1082)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityTypeLoadResult)]), () => ListBuilder<EntityTypeLoadResult>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityTypeLoadResult)]),
+    () => ListBuilder<EntityTypeLoadResult>(),
+  );
   _entityTypeLoadResult(r);
 }
 
 void _listOfEntityVersion(ApiSerializersRegistry r) {
   if (!r._visit(1083)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityVersion)]), () => ListBuilder<EntityVersion>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityVersion)]),
+    () => ListBuilder<EntityVersion>(),
+  );
   _entityVersion(r);
 }
 
 void _listOfEntityView(ApiSerializersRegistry r) {
   if (!r._visit(1084)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityView)]), () => ListBuilder<EntityView>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityView)]),
+    () => ListBuilder<EntityView>(),
+  );
   _entityView(r);
 }
 
 void _listOfEntityViewInfo(ApiSerializersRegistry r) {
   if (!r._visit(1085)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EntityViewInfo)]), () => ListBuilder<EntityViewInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EntityViewInfo)]),
+    () => ListBuilder<EntityViewInfo>(),
+  );
   _entityViewInfo(r);
 }
 
 void _listOfErrorComponentAllOfExceptionCause(ApiSerializersRegistry r) {
   if (!r._visit(1086)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCause)]), () => ListBuilder<ErrorComponentAllOfExceptionCause>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCause)]),
+    () => ListBuilder<ErrorComponentAllOfExceptionCause>(),
+  );
   _errorComponentAllOfExceptionCause(r);
 }
 
-void _listOfErrorComponentAllOfExceptionCauseStackTrace(ApiSerializersRegistry r) {
+void _listOfErrorComponentAllOfExceptionCauseStackTrace(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(1087)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCauseStackTrace)]), () => ListBuilder<ErrorComponentAllOfExceptionCauseStackTrace>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [
+      FullType(ErrorComponentAllOfExceptionCauseStackTrace),
+    ]),
+    () => ListBuilder<ErrorComponentAllOfExceptionCauseStackTrace>(),
+  );
   _errorComponentAllOfExceptionCauseStackTrace(r);
 }
 
 void _listOfEventInfo(ApiSerializersRegistry r) {
   if (!r._visit(1088)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(EventInfo)]), () => ListBuilder<EventInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(EventInfo)]),
+    () => ListBuilder<EventInfo>(),
+  );
   _eventInfo(r);
 }
 
 void _listOfFilter(ApiSerializersRegistry r) {
   if (!r._visit(1089)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Filter)]), () => ListBuilder<Filter>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Filter)]),
+    () => ListBuilder<Filter>(),
+  );
   _filter(r);
 }
 
-void _listOfGetManagedRelatedEntityIds200ResponseInner(ApiSerializersRegistry r) {
+void _listOfGetManagedRelatedEntityIds200ResponseInner(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(1090)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(GetManagedRelatedEntityIds200ResponseInner)]), () => ListBuilder<GetManagedRelatedEntityIds200ResponseInner>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [
+      FullType(GetManagedRelatedEntityIds200ResponseInner),
+    ]),
+    () => ListBuilder<GetManagedRelatedEntityIds200ResponseInner>(),
+  );
   _getManagedRelatedEntityIds200ResponseInner(r);
 }
 
 void _listOfGroupPermission(ApiSerializersRegistry r) {
   if (!r._visit(1091)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(GroupPermission)]), () => ListBuilder<GroupPermission>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(GroupPermission)]),
+    () => ListBuilder<GroupPermission>(),
+  );
   _groupPermission(r);
 }
 
 void _listOfGroupPermissionInfo(ApiSerializersRegistry r) {
   if (!r._visit(1092)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(GroupPermissionInfo)]), () => ListBuilder<GroupPermissionInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(GroupPermissionInfo)]),
+    () => ListBuilder<GroupPermissionInfo>(),
+  );
   _groupPermissionInfo(r);
 }
 
 void _listOfHasIdObject(ApiSerializersRegistry r) {
   if (!r._visit(1093)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(HasIdObject)]), () => ListBuilder<HasIdObject>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(HasIdObject)]),
+    () => ListBuilder<HasIdObject>(),
+  );
   _hasIdObject(r);
 }
 
 void _listOfIntegration(ApiSerializersRegistry r) {
   if (!r._visit(1094)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Integration)]), () => ListBuilder<Integration>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Integration)]),
+    () => ListBuilder<Integration>(),
+  );
   _integration(r);
 }
 
 void _listOfIntegrationInfo(ApiSerializersRegistry r) {
   if (!r._visit(1095)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(IntegrationInfo)]), () => ListBuilder<IntegrationInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(IntegrationInfo)]),
+    () => ListBuilder<IntegrationInfo>(),
+  );
   _integrationInfo(r);
 }
 
 void _listOfJob(ApiSerializersRegistry r) {
   if (!r._visit(1096)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Job)]), () => ListBuilder<Job>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Job)]),
+    () => ListBuilder<Job>(),
+  );
   _job(r);
 }
 
 void _listOfJsonObject(ApiSerializersRegistry r) {
   if (!r._visit(1097)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(JsonObject)]), () => ListBuilder<JsonObject>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(JsonObject)]),
+    () => ListBuilder<JsonObject>(),
+  );
 }
 
 void _listOfKeyFilter(ApiSerializersRegistry r) {
   if (!r._visit(1098)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(KeyFilter)]), () => ListBuilder<KeyFilter>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(KeyFilter)]),
+    () => ListBuilder<KeyFilter>(),
+  );
   _keyFilter(r);
 }
 
 void _listOfKeyFilterPredicate(ApiSerializersRegistry r) {
   if (!r._visit(1099)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(KeyFilterPredicate)]), () => ListBuilder<KeyFilterPredicate>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(KeyFilterPredicate)]),
+    () => ListBuilder<KeyFilterPredicate>(),
+  );
   _keyFilterPredicate(r);
 }
 
 void _listOfKeyInfo(ApiSerializersRegistry r) {
   if (!r._visit(1100)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(KeyInfo)]), () => ListBuilder<KeyInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(KeyInfo)]),
+    () => ListBuilder<KeyInfo>(),
+  );
   _keyInfo(r);
 }
 
 void _listOfLastVisitedDashboardInfo(ApiSerializersRegistry r) {
   if (!r._visit(1101)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(LastVisitedDashboardInfo)]), () => ListBuilder<LastVisitedDashboardInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(LastVisitedDashboardInfo)]),
+    () => ListBuilder<LastVisitedDashboardInfo>(),
+  );
   _lastVisitedDashboardInfo(r);
 }
 
 void _listOfLwM2MBootstrapServerCredential(ApiSerializersRegistry r) {
   if (!r._visit(1102)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(LwM2MBootstrapServerCredential)]), () => ListBuilder<LwM2MBootstrapServerCredential>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(LwM2MBootstrapServerCredential)]),
+    () => ListBuilder<LwM2MBootstrapServerCredential>(),
+  );
   _lwM2MBootstrapServerCredential(r);
 }
 
 void _listOfLwM2mInstance(ApiSerializersRegistry r) {
   if (!r._visit(1103)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(LwM2mInstance)]), () => ListBuilder<LwM2mInstance>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(LwM2mInstance)]),
+    () => ListBuilder<LwM2mInstance>(),
+  );
   _lwM2mInstance(r);
 }
 
 void _listOfLwM2mObject(ApiSerializersRegistry r) {
   if (!r._visit(1104)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(LwM2mObject)]), () => ListBuilder<LwM2mObject>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(LwM2mObject)]),
+    () => ListBuilder<LwM2mObject>(),
+  );
   _lwM2mObject(r);
 }
 
 void _listOfLwM2mResourceObserve(ApiSerializersRegistry r) {
   if (!r._visit(1105)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(LwM2mResourceObserve)]), () => ListBuilder<LwM2mResourceObserve>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(LwM2mResourceObserve)]),
+    () => ListBuilder<LwM2mResourceObserve>(),
+  );
   _lwM2mResourceObserve(r);
 }
 
 void _listOfMenuItem(ApiSerializersRegistry r) {
   if (!r._visit(1106)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(MenuItem)]), () => ListBuilder<MenuItem>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(MenuItem)]),
+    () => ListBuilder<MenuItem>(),
+  );
   _menuItem(r);
 }
 
 void _listOfMobileApp(ApiSerializersRegistry r) {
   if (!r._visit(1107)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(MobileApp)]), () => ListBuilder<MobileApp>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(MobileApp)]),
+    () => ListBuilder<MobileApp>(),
+  );
   _mobileApp(r);
 }
 
 void _listOfMobileAppBundleInfo(ApiSerializersRegistry r) {
   if (!r._visit(1108)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(MobileAppBundleInfo)]), () => ListBuilder<MobileAppBundleInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(MobileAppBundleInfo)]),
+    () => ListBuilder<MobileAppBundleInfo>(),
+  );
   _mobileAppBundleInfo(r);
 }
 
 void _listOfMobilePage(ApiSerializersRegistry r) {
   if (!r._visit(1109)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(MobilePage)]), () => ListBuilder<MobilePage>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(MobilePage)]),
+    () => ListBuilder<MobilePage>(),
+  );
   _mobilePage(r);
 }
 
 void _listOfModel(ApiSerializersRegistry r) {
   if (!r._visit(1110)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Model)]), () => ListBuilder<Model>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Model)]),
+    () => ListBuilder<Model>(),
+  );
   _model(r);
 }
 
 void _listOfNodeConnectionInfo(ApiSerializersRegistry r) {
   if (!r._visit(1111)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(NodeConnectionInfo)]), () => ListBuilder<NodeConnectionInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(NodeConnectionInfo)]),
+    () => ListBuilder<NodeConnectionInfo>(),
+  );
   _nodeConnectionInfo(r);
 }
 
 void _listOfNotification(ApiSerializersRegistry r) {
   if (!r._visit(1112)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Notification)]), () => ListBuilder<Notification>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Notification)]),
+    () => ListBuilder<Notification>(),
+  );
   _notification(r);
 }
 
 void _listOfNotificationDeliveryMethod(ApiSerializersRegistry r) {
   if (!r._visit(1113)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(NotificationDeliveryMethod)]), () => ListBuilder<NotificationDeliveryMethod>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(NotificationDeliveryMethod)]),
+    () => ListBuilder<NotificationDeliveryMethod>(),
+  );
   _notificationDeliveryMethod(r);
 }
 
 void _listOfNotificationRequest(ApiSerializersRegistry r) {
   if (!r._visit(1114)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(NotificationRequest)]), () => ListBuilder<NotificationRequest>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(NotificationRequest)]),
+    () => ListBuilder<NotificationRequest>(),
+  );
   _notificationRequest(r);
 }
 
 void _listOfNotificationRequestInfo(ApiSerializersRegistry r) {
   if (!r._visit(1115)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(NotificationRequestInfo)]), () => ListBuilder<NotificationRequestInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(NotificationRequestInfo)]),
+    () => ListBuilder<NotificationRequestInfo>(),
+  );
   _notificationRequestInfo(r);
 }
 
 void _listOfNotificationRuleInfo(ApiSerializersRegistry r) {
   if (!r._visit(1116)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(NotificationRuleInfo)]), () => ListBuilder<NotificationRuleInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(NotificationRuleInfo)]),
+    () => ListBuilder<NotificationRuleInfo>(),
+  );
   _notificationRuleInfo(r);
 }
 
 void _listOfNotificationTarget(ApiSerializersRegistry r) {
   if (!r._visit(1117)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(NotificationTarget)]), () => ListBuilder<NotificationTarget>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(NotificationTarget)]),
+    () => ListBuilder<NotificationTarget>(),
+  );
   _notificationTarget(r);
 }
 
 void _listOfNotificationTemplate(ApiSerializersRegistry r) {
   if (!r._visit(1118)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(NotificationTemplate)]), () => ListBuilder<NotificationTemplate>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(NotificationTemplate)]),
+    () => ListBuilder<NotificationTemplate>(),
+  );
   _notificationTemplate(r);
 }
 
 void _listOfNullableJsonObject(ApiSerializersRegistry r) {
   if (!r._visit(1119)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType.nullable(JsonObject)]), () => ListBuilder<JsonObject?>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType.nullable(JsonObject)]),
+    () => ListBuilder<JsonObject?>(),
+  );
 }
 
 void _listOfOAuth2ClientInfo(ApiSerializersRegistry r) {
   if (!r._visit(1120)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(OAuth2ClientInfo)]), () => ListBuilder<OAuth2ClientInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(OAuth2ClientInfo)]),
+    () => ListBuilder<OAuth2ClientInfo>(),
+  );
   _oAuth2ClientInfo(r);
 }
 
 void _listOfOAuth2ClientLoginInfo(ApiSerializersRegistry r) {
   if (!r._visit(1121)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(OAuth2ClientLoginInfo)]), () => ListBuilder<OAuth2ClientLoginInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(OAuth2ClientLoginInfo)]),
+    () => ListBuilder<OAuth2ClientLoginInfo>(),
+  );
   _oAuth2ClientLoginInfo(r);
 }
 
 void _listOfOAuth2ClientRegistrationTemplate(ApiSerializersRegistry r) {
   if (!r._visit(1122)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(OAuth2ClientRegistrationTemplate)]), () => ListBuilder<OAuth2ClientRegistrationTemplate>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(OAuth2ClientRegistrationTemplate)]),
+    () => ListBuilder<OAuth2ClientRegistrationTemplate>(),
+  );
   _oAuth2ClientRegistrationTemplate(r);
 }
 
 void _listOfOtaPackageInfo(ApiSerializersRegistry r) {
   if (!r._visit(1123)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(OtaPackageInfo)]), () => ListBuilder<OtaPackageInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(OtaPackageInfo)]),
+    () => ListBuilder<OtaPackageInfo>(),
+  );
   _otaPackageInfo(r);
 }
 
 void _listOfPlatformType(ApiSerializersRegistry r) {
   if (!r._visit(1124)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(PlatformType)]), () => ListBuilder<PlatformType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(PlatformType)]),
+    () => ListBuilder<PlatformType>(),
+  );
   _platformType(r);
 }
 
 void _listOfQueue(ApiSerializersRegistry r) {
   if (!r._visit(1125)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Queue)]), () => ListBuilder<Queue>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Queue)]),
+    () => ListBuilder<Queue>(),
+  );
   _queue(r);
 }
 
 void _listOfQueueStats(ApiSerializersRegistry r) {
   if (!r._visit(1126)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(QueueStats)]), () => ListBuilder<QueueStats>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(QueueStats)]),
+    () => ListBuilder<QueueStats>(),
+  );
   _queueStats(r);
 }
 
 void _listOfReadTsKvQueryResult(ApiSerializersRegistry r) {
   if (!r._visit(1127)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ReadTsKvQueryResult)]), () => ListBuilder<ReadTsKvQueryResult>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ReadTsKvQueryResult)]),
+    () => ListBuilder<ReadTsKvQueryResult>(),
+  );
   _readTsKvQueryResult(r);
 }
 
 void _listOfRelationEntityTypeFilter(ApiSerializersRegistry r) {
   if (!r._visit(1128)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RelationEntityTypeFilter)]), () => ListBuilder<RelationEntityTypeFilter>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RelationEntityTypeFilter)]),
+    () => ListBuilder<RelationEntityTypeFilter>(),
+  );
   _relationEntityTypeFilter(r);
 }
 
 void _listOfRelationPathLevel(ApiSerializersRegistry r) {
   if (!r._visit(1129)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RelationPathLevel)]), () => ListBuilder<RelationPathLevel>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RelationPathLevel)]),
+    () => ListBuilder<RelationPathLevel>(),
+  );
   _relationPathLevel(r);
 }
 
 void _listOfReport(ApiSerializersRegistry r) {
   if (!r._visit(1130)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Report)]), () => ListBuilder<Report>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Report)]),
+    () => ListBuilder<Report>(),
+  );
   _report(r);
 }
 
 void _listOfReportComponent(ApiSerializersRegistry r) {
   if (!r._visit(1131)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ReportComponent)]), () => ListBuilder<ReportComponent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ReportComponent)]),
+    () => ListBuilder<ReportComponent>(),
+  );
   _reportComponent(r);
 }
 
 void _listOfReportId(ApiSerializersRegistry r) {
   if (!r._visit(1132)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ReportId)]), () => ListBuilder<ReportId>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ReportId)]),
+    () => ListBuilder<ReportId>(),
+  );
   _reportId(r);
 }
 
 void _listOfReportInfo(ApiSerializersRegistry r) {
   if (!r._visit(1133)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ReportInfo)]), () => ListBuilder<ReportInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ReportInfo)]),
+    () => ListBuilder<ReportInfo>(),
+  );
   _reportInfo(r);
 }
 
 void _listOfReportTemplateInfo(ApiSerializersRegistry r) {
   if (!r._visit(1134)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ReportTemplateInfo)]), () => ListBuilder<ReportTemplateInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ReportTemplateInfo)]),
+    () => ListBuilder<ReportTemplateInfo>(),
+  );
   _reportTemplateInfo(r);
 }
 
 void _listOfResourceExportData(ApiSerializersRegistry r) {
   if (!r._visit(1135)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ResourceExportData)]), () => ListBuilder<ResourceExportData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ResourceExportData)]),
+    () => ListBuilder<ResourceExportData>(),
+  );
   _resourceExportData(r);
 }
 
 void _listOfRole(ApiSerializersRegistry r) {
   if (!r._visit(1136)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Role)]), () => ListBuilder<Role>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Role)]),
+    () => ListBuilder<Role>(),
+  );
   _role(r);
 }
 
 void _listOfRoleId(ApiSerializersRegistry r) {
   if (!r._visit(1137)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RoleId)]), () => ListBuilder<RoleId>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RoleId)]),
+    () => ListBuilder<RoleId>(),
+  );
   _roleId(r);
 }
 
 void _listOfRuleChain(ApiSerializersRegistry r) {
   if (!r._visit(1138)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RuleChain)]), () => ListBuilder<RuleChain>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RuleChain)]),
+    () => ListBuilder<RuleChain>(),
+  );
   _ruleChain(r);
 }
 
 void _listOfRuleChainConnectionInfo(ApiSerializersRegistry r) {
   if (!r._visit(1139)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RuleChainConnectionInfo)]), () => ListBuilder<RuleChainConnectionInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RuleChainConnectionInfo)]),
+    () => ListBuilder<RuleChainConnectionInfo>(),
+  );
   _ruleChainConnectionInfo(r);
 }
 
 void _listOfRuleChainImportResult(ApiSerializersRegistry r) {
   if (!r._visit(1140)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RuleChainImportResult)]), () => ListBuilder<RuleChainImportResult>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RuleChainImportResult)]),
+    () => ListBuilder<RuleChainImportResult>(),
+  );
   _ruleChainImportResult(r);
 }
 
 void _listOfRuleChainMetaData(ApiSerializersRegistry r) {
   if (!r._visit(1141)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RuleChainMetaData)]), () => ListBuilder<RuleChainMetaData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RuleChainMetaData)]),
+    () => ListBuilder<RuleChainMetaData>(),
+  );
   _ruleChainMetaData(r);
 }
 
 void _listOfRuleChainNote(ApiSerializersRegistry r) {
   if (!r._visit(1142)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RuleChainNote)]), () => ListBuilder<RuleChainNote>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RuleChainNote)]),
+    () => ListBuilder<RuleChainNote>(),
+  );
   _ruleChainNote(r);
 }
 
 void _listOfRuleChainOutputLabelsUsage(ApiSerializersRegistry r) {
   if (!r._visit(1143)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RuleChainOutputLabelsUsage)]), () => ListBuilder<RuleChainOutputLabelsUsage>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RuleChainOutputLabelsUsage)]),
+    () => ListBuilder<RuleChainOutputLabelsUsage>(),
+  );
   _ruleChainOutputLabelsUsage(r);
 }
 
 void _listOfRuleNode(ApiSerializersRegistry r) {
   if (!r._visit(1144)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(RuleNode)]), () => ListBuilder<RuleNode>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(RuleNode)]),
+    () => ListBuilder<RuleNode>(),
+  );
   _ruleNode(r);
 }
 
 void _listOfScheduledReportInfo(ApiSerializersRegistry r) {
   if (!r._visit(1145)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ScheduledReportInfo)]), () => ListBuilder<ScheduledReportInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ScheduledReportInfo)]),
+    () => ListBuilder<ScheduledReportInfo>(),
+  );
   _scheduledReportInfo(r);
 }
 
 void _listOfSchedulerEventInfo(ApiSerializersRegistry r) {
   if (!r._visit(1146)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SchedulerEventInfo)]), () => ListBuilder<SchedulerEventInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SchedulerEventInfo)]),
+    () => ListBuilder<SchedulerEventInfo>(),
+  );
   _schedulerEventInfo(r);
 }
 
 void _listOfSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) {
   if (!r._visit(1147)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]), () => ListBuilder<SchedulerEventWithCustomerInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]),
+    () => ListBuilder<SchedulerEventWithCustomerInfo>(),
+  );
   _schedulerEventWithCustomerInfo(r);
 }
 
 void _listOfSecretInfo(ApiSerializersRegistry r) {
   if (!r._visit(1148)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SecretInfo)]), () => ListBuilder<SecretInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SecretInfo)]),
+    () => ListBuilder<SecretInfo>(),
+  );
   _secretInfo(r);
 }
 
 void _listOfShortEntityView(ApiSerializersRegistry r) {
   if (!r._visit(1149)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(ShortEntityView)]), () => ListBuilder<ShortEntityView>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(ShortEntityView)]),
+    () => ListBuilder<ShortEntityView>(),
+  );
   _shortEntityView(r);
 }
 
 void _listOfSignUpField(ApiSerializersRegistry r) {
   if (!r._visit(1150)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SignUpField)]), () => ListBuilder<SignUpField>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SignUpField)]),
+    () => ListBuilder<SignUpField>(),
+  );
   _signUpField(r);
 }
 
 void _listOfSkippedApp(ApiSerializersRegistry r) {
   if (!r._visit(1151)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SkippedApp)]), () => ListBuilder<SkippedApp>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SkippedApp)]),
+    () => ListBuilder<SkippedApp>(),
+  );
   _skippedApp(r);
 }
 
 void _listOfSlackConversation(ApiSerializersRegistry r) {
   if (!r._visit(1152)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SlackConversation)]), () => ListBuilder<SlackConversation>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SlackConversation)]),
+    () => ListBuilder<SlackConversation>(),
+  );
   _slackConversation(r);
 }
 
 void _listOfSnmpCommunicationConfig(ApiSerializersRegistry r) {
   if (!r._visit(1153)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SnmpCommunicationConfig)]), () => ListBuilder<SnmpCommunicationConfig>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SnmpCommunicationConfig)]),
+    () => ListBuilder<SnmpCommunicationConfig>(),
+  );
   _snmpCommunicationConfig(r);
 }
 
 void _listOfSnmpMapping(ApiSerializersRegistry r) {
   if (!r._visit(1154)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SnmpMapping)]), () => ListBuilder<SnmpMapping>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SnmpMapping)]),
+    () => ListBuilder<SnmpMapping>(),
+  );
   _snmpMapping(r);
 }
 
 void _listOfStarredDashboardInfo(ApiSerializersRegistry r) {
   if (!r._visit(1155)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(StarredDashboardInfo)]), () => ListBuilder<StarredDashboardInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(StarredDashboardInfo)]),
+    () => ListBuilder<StarredDashboardInfo>(),
+  );
   _starredDashboardInfo(r);
 }
 
 void _listOfString(ApiSerializersRegistry r) {
   if (!r._visit(1156)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(String)]), () => ListBuilder<String>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(String)]),
+    () => ListBuilder<String>(),
+  );
 }
 
 void _listOfSystemInfoData(ApiSerializersRegistry r) {
   if (!r._visit(1157)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(SystemInfoData)]), () => ListBuilder<SystemInfoData>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(SystemInfoData)]),
+    () => ListBuilder<SystemInfoData>(),
+  );
   _systemInfoData(r);
 }
 
 void _listOfTaskResult(ApiSerializersRegistry r) {
   if (!r._visit(1158)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TaskResult)]), () => ListBuilder<TaskResult>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TaskResult)]),
+    () => ListBuilder<TaskResult>(),
+  );
   _taskResult(r);
 }
 
 void _listOfTbContent(ApiSerializersRegistry r) {
   if (!r._visit(1159)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TbContent)]), () => ListBuilder<TbContent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TbContent)]),
+    () => ListBuilder<TbContent>(),
+  );
   _tbContent(r);
 }
 
 void _listOfTbResourceInfo(ApiSerializersRegistry r) {
   if (!r._visit(1160)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TbResourceInfo)]), () => ListBuilder<TbResourceInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TbResourceInfo)]),
+    () => ListBuilder<TbResourceInfo>(),
+  );
   _tbResourceInfo(r);
 }
 
 void _listOfTenant(ApiSerializersRegistry r) {
   if (!r._visit(1161)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Tenant)]), () => ListBuilder<Tenant>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Tenant)]),
+    () => ListBuilder<Tenant>(),
+  );
   _tenant(r);
 }
 
 void _listOfTenantInfo(ApiSerializersRegistry r) {
   if (!r._visit(1162)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TenantInfo)]), () => ListBuilder<TenantInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TenantInfo)]),
+    () => ListBuilder<TenantInfo>(),
+  );
   _tenantInfo(r);
 }
 
 void _listOfTenantProfile(ApiSerializersRegistry r) {
   if (!r._visit(1163)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TenantProfile)]), () => ListBuilder<TenantProfile>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TenantProfile)]),
+    () => ListBuilder<TenantProfile>(),
+  );
   _tenantProfile(r);
 }
 
 void _listOfTenantProfileQueueConfiguration(ApiSerializersRegistry r) {
   if (!r._visit(1164)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TenantProfileQueueConfiguration)]), () => ListBuilder<TenantProfileQueueConfiguration>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TenantProfileQueueConfiguration)]),
+    () => ListBuilder<TenantProfileQueueConfiguration>(),
+  );
   _tenantProfileQueueConfiguration(r);
 }
 
 void _listOfTimeSeriesChartStateSettings(ApiSerializersRegistry r) {
   if (!r._visit(1165)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TimeSeriesChartStateSettings)]), () => ListBuilder<TimeSeriesChartStateSettings>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TimeSeriesChartStateSettings)]),
+    () => ListBuilder<TimeSeriesChartStateSettings>(),
+  );
   _timeSeriesChartStateSettings(r);
 }
 
 void _listOfTimeSeriesChartThreshold(ApiSerializersRegistry r) {
   if (!r._visit(1166)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TimeSeriesChartThreshold)]), () => ListBuilder<TimeSeriesChartThreshold>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TimeSeriesChartThreshold)]),
+    () => ListBuilder<TimeSeriesChartThreshold>(),
+  );
   _timeSeriesChartThreshold(r);
 }
 
 void _listOfTranslationInfo(ApiSerializersRegistry r) {
   if (!r._visit(1167)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TranslationInfo)]), () => ListBuilder<TranslationInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TranslationInfo)]),
+    () => ListBuilder<TranslationInfo>(),
+  );
   _translationInfo(r);
 }
 
 void _listOfTrendzViewConfigLite(ApiSerializersRegistry r) {
   if (!r._visit(1168)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TrendzViewConfigLite)]), () => ListBuilder<TrendzViewConfigLite>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TrendzViewConfigLite)]),
+    () => ListBuilder<TrendzViewConfigLite>(),
+  );
   _trendzViewConfigLite(r);
 }
 
 void _listOfTsKvEntry(ApiSerializersRegistry r) {
   if (!r._visit(1169)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TsKvEntry)]), () => ListBuilder<TsKvEntry>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TsKvEntry)]),
+    () => ListBuilder<TsKvEntry>(),
+  );
   _tsKvEntry(r);
 }
 
 void _listOfTsValue(ApiSerializersRegistry r) {
   if (!r._visit(1170)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TsValue)]), () => ListBuilder<TsValue>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TsValue)]),
+    () => ListBuilder<TsValue>(),
+  );
   _tsValue(r);
 }
 
 void _listOfTwoFaProviderConfig(ApiSerializersRegistry r) {
   if (!r._visit(1171)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TwoFaProviderConfig)]), () => ListBuilder<TwoFaProviderConfig>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TwoFaProviderConfig)]),
+    () => ListBuilder<TwoFaProviderConfig>(),
+  );
   _twoFaProviderConfig(r);
 }
 
 void _listOfTwoFaProviderInfo(ApiSerializersRegistry r) {
   if (!r._visit(1172)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TwoFaProviderInfo)]), () => ListBuilder<TwoFaProviderInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TwoFaProviderInfo)]),
+    () => ListBuilder<TwoFaProviderInfo>(),
+  );
   _twoFaProviderInfo(r);
 }
 
 void _listOfTwoFaProviderType(ApiSerializersRegistry r) {
   if (!r._visit(1173)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(TwoFaProviderType)]), () => ListBuilder<TwoFaProviderType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(TwoFaProviderType)]),
+    () => ListBuilder<TwoFaProviderType>(),
+  );
   _twoFaProviderType(r);
 }
 
 void _listOfUser(ApiSerializersRegistry r) {
   if (!r._visit(1174)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(User)]), () => ListBuilder<User>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(User)]),
+    () => ListBuilder<User>(),
+  );
   _user(r);
 }
 
 void _listOfUserEmailInfo(ApiSerializersRegistry r) {
   if (!r._visit(1175)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(UserEmailInfo)]), () => ListBuilder<UserEmailInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(UserEmailInfo)]),
+    () => ListBuilder<UserEmailInfo>(),
+  );
   _userEmailInfo(r);
 }
 
 void _listOfUserInfo(ApiSerializersRegistry r) {
   if (!r._visit(1176)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(UserInfo)]), () => ListBuilder<UserInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(UserInfo)]),
+    () => ListBuilder<UserInfo>(),
+  );
   _userInfo(r);
 }
 
 void _listOfVendor(ApiSerializersRegistry r) {
   if (!r._visit(1177)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(Vendor)]), () => ListBuilder<Vendor>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(Vendor)]),
+    () => ListBuilder<Vendor>(),
+  );
   _vendor(r);
 }
 
 void _listOfVersionedEntityInfo(ApiSerializersRegistry r) {
   if (!r._visit(1178)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(VersionedEntityInfo)]), () => ListBuilder<VersionedEntityInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(VersionedEntityInfo)]),
+    () => ListBuilder<VersionedEntityInfo>(),
+  );
   _versionedEntityInfo(r);
 }
 
 void _listOfWhiteLabeling(ApiSerializersRegistry r) {
   if (!r._visit(1179)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(WhiteLabeling)]), () => ListBuilder<WhiteLabeling>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(WhiteLabeling)]),
+    () => ListBuilder<WhiteLabeling>(),
+  );
   _whiteLabeling(r);
 }
 
 void _listOfWidgetBundleInfo(ApiSerializersRegistry r) {
   if (!r._visit(1180)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(WidgetBundleInfo)]), () => ListBuilder<WidgetBundleInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(WidgetBundleInfo)]),
+    () => ListBuilder<WidgetBundleInfo>(),
+  );
   _widgetBundleInfo(r);
 }
 
 void _listOfWidgetType(ApiSerializersRegistry r) {
   if (!r._visit(1181)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(WidgetType)]), () => ListBuilder<WidgetType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(WidgetType)]),
+    () => ListBuilder<WidgetType>(),
+  );
   _widgetType(r);
 }
 
 void _listOfWidgetTypeDetails(ApiSerializersRegistry r) {
   if (!r._visit(1182)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(WidgetTypeDetails)]), () => ListBuilder<WidgetTypeDetails>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(WidgetTypeDetails)]),
+    () => ListBuilder<WidgetTypeDetails>(),
+  );
   _widgetTypeDetails(r);
 }
 
 void _listOfWidgetTypeInfo(ApiSerializersRegistry r) {
   if (!r._visit(1183)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(WidgetTypeInfo)]), () => ListBuilder<WidgetTypeInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(WidgetTypeInfo)]),
+    () => ListBuilder<WidgetTypeInfo>(),
+  );
   _widgetTypeInfo(r);
 }
 
 void _listOfWidgetsBundle(ApiSerializersRegistry r) {
   if (!r._visit(1184)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(WidgetsBundle)]), () => ListBuilder<WidgetsBundle>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(WidgetsBundle)]),
+    () => ListBuilder<WidgetsBundle>(),
+  );
   _widgetsBundle(r);
 }
 
 void _listOfint(ApiSerializersRegistry r) {
   if (!r._visit(1185)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltList, [FullType(int)]), () => ListBuilder<int>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltList, [FullType(int)]),
+    () => ListBuilder<int>(),
+  );
 }
 
 void _mapOfStringToAgentAppEventStepStatesValue(ApiSerializersRegistry r) {
   if (!r._visit(1186)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]), () => MapBuilder<String, AgentAppEventStepStatesValue>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(AgentAppEventStepStatesValue),
+    ]),
+    () => MapBuilder<String, AgentAppEventStepStatesValue>(),
+  );
   _agentAppEventStepStatesValue(r);
 }
 
 void _mapOfStringToAggMetric(ApiSerializersRegistry r) {
   if (!r._visit(1187)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(AggMetric)]), () => MapBuilder<String, AggMetric>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(AggMetric)]),
+    () => MapBuilder<String, AggMetric>(),
+  );
   _aggMetric(r);
 }
 
 void _mapOfStringToAlarmRule(ApiSerializersRegistry r) {
   if (!r._visit(1188)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(AlarmRule)]), () => MapBuilder<String, AlarmRule>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(AlarmRule)]),
+    () => MapBuilder<String, AlarmRule>(),
+  );
   _alarmRule(r);
 }
 
 void _mapOfStringToArgument(ApiSerializersRegistry r) {
   if (!r._visit(1189)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(Argument)]), () => MapBuilder<String, Argument>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
+    () => MapBuilder<String, Argument>(),
+  );
   _argument(r);
 }
 
 void _mapOfStringToAutoVersionCreateConfig(ApiSerializersRegistry r) {
   if (!r._visit(1190)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(AutoVersionCreateConfig)]), () => MapBuilder<String, AutoVersionCreateConfig>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(AutoVersionCreateConfig),
+    ]),
+    () => MapBuilder<String, AutoVersionCreateConfig>(),
+  );
   _autoVersionCreateConfig(r);
 }
 
 void _mapOfStringToComparisonTsValue(ApiSerializersRegistry r) {
   if (!r._visit(1191)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(ComparisonTsValue)]), () => MapBuilder<String, ComparisonTsValue>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(ComparisonTsValue)]),
+    () => MapBuilder<String, ComparisonTsValue>(),
+  );
   _comparisonTsValue(r);
 }
 
-void _mapOfStringToDeliveryMethodNotificationTemplate(ApiSerializersRegistry r) {
+void _mapOfStringToDeliveryMethodNotificationTemplate(
+  ApiSerializersRegistry r,
+) {
   if (!r._visit(1192)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(DeliveryMethodNotificationTemplate)]), () => MapBuilder<String, DeliveryMethodNotificationTemplate>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(DeliveryMethodNotificationTemplate),
+    ]),
+    () => MapBuilder<String, DeliveryMethodNotificationTemplate>(),
+  );
   _deliveryMethodNotificationTemplate(r);
 }
 
 void _mapOfStringToEntityTypeVersionCreateConfig(ApiSerializersRegistry r) {
   if (!r._visit(1193)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(EntityTypeVersionCreateConfig)]), () => MapBuilder<String, EntityTypeVersionCreateConfig>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(EntityTypeVersionCreateConfig),
+    ]),
+    () => MapBuilder<String, EntityTypeVersionCreateConfig>(),
+  );
   _entityTypeVersionCreateConfig(r);
 }
 
 void _mapOfStringToEntityTypeVersionLoadConfig(ApiSerializersRegistry r) {
   if (!r._visit(1194)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(EntityTypeVersionLoadConfig)]), () => MapBuilder<String, EntityTypeVersionLoadConfig>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(EntityTypeVersionLoadConfig),
+    ]),
+    () => MapBuilder<String, EntityTypeVersionLoadConfig>(),
+  );
   _entityTypeVersionLoadConfig(r);
 }
 
 void _mapOfStringToIntegrationConvertersInfo(ApiSerializersRegistry r) {
   if (!r._visit(1195)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(IntegrationConvertersInfo)]), () => MapBuilder<String, IntegrationConvertersInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(IntegrationConvertersInfo),
+    ]),
+    () => MapBuilder<String, IntegrationConvertersInfo>(),
+  );
   _integrationConvertersInfo(r);
 }
 
 void _mapOfStringToJsonObject(ApiSerializersRegistry r) {
   if (!r._visit(1196)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(JsonObject)]), () => MapBuilder<String, JsonObject>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(JsonObject)]),
+    () => MapBuilder<String, JsonObject>(),
+  );
 }
 
 void _mapOfStringToList(ApiSerializersRegistry r) {
   if (!r._visit(1197)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList)]), () => MapBuilder<String, BuiltList>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(BuiltList)]),
+    () => MapBuilder<String, BuiltList>(),
+  );
 }
 
 void _mapOfStringToListOfAttributeExportData(ApiSerializersRegistry r) {
   if (!r._visit(1198)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]), () => MapBuilder<String, BuiltList<AttributeExportData>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltList, [FullType(AttributeExportData)]),
+    ]),
+    () => MapBuilder<String, BuiltList<AttributeExportData>>(),
+  );
   _listOfAttributeExportData(r);
 }
 
 void _mapOfStringToListOfEntityExportData(ApiSerializersRegistry r) {
   if (!r._visit(1199)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityExportData)])]), () => MapBuilder<String, BuiltList<EntityExportData>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltList, [FullType(EntityExportData)]),
+    ]),
+    () => MapBuilder<String, BuiltList<EntityExportData>>(),
+  );
   _listOfEntityExportData(r);
 }
 
 void _mapOfStringToListOfEntityInfo(ApiSerializersRegistry r) {
   if (!r._visit(1200)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityInfo)])]), () => MapBuilder<String, BuiltList<EntityInfo>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltList, [FullType(EntityInfo)]),
+    ]),
+    () => MapBuilder<String, BuiltList<EntityInfo>>(),
+  );
   _listOfEntityInfo(r);
 }
 
 void _mapOfStringToListOfHasIdObject(ApiSerializersRegistry r) {
   if (!r._visit(1201)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(HasIdObject)])]), () => MapBuilder<String, BuiltList<HasIdObject>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltList, [FullType(HasIdObject)]),
+    ]),
+    () => MapBuilder<String, BuiltList<HasIdObject>>(),
+  );
   _listOfHasIdObject(r);
 }
 
 void _mapOfStringToListOfKeyInfo(ApiSerializersRegistry r) {
   if (!r._visit(1202)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(KeyInfo)])]), () => MapBuilder<String, BuiltList<KeyInfo>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltList, [FullType(KeyInfo)]),
+    ]),
+    () => MapBuilder<String, BuiltList<KeyInfo>>(),
+  );
   _listOfKeyInfo(r);
 }
 
 void _mapOfStringToListOfString(ApiSerializersRegistry r) {
   if (!r._visit(1203)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(String)])]), () => MapBuilder<String, BuiltList<String>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltList, [FullType(String)]),
+    ]),
+    () => MapBuilder<String, BuiltList<String>>(),
+  );
   _listOfString(r);
 }
 
 void _mapOfStringToListOfTsValue(ApiSerializersRegistry r) {
   if (!r._visit(1204)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(TsValue)])]), () => MapBuilder<String, BuiltList<TsValue>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltList, [FullType(TsValue)]),
+    ]),
+    () => MapBuilder<String, BuiltList<TsValue>>(),
+  );
   _listOfTsValue(r);
 }
 
 void _mapOfStringToMapOfStringToString(ApiSerializersRegistry r) {
   if (!r._visit(1205)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(String)])]), () => MapBuilder<String, BuiltMap<String, String>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltMap, [FullType(String), FullType(String)]),
+    ]),
+    () => MapBuilder<String, BuiltMap<String, String>>(),
+  );
   _mapOfStringToString(r);
 }
 
 void _mapOfStringToMapOfStringToTsValue(ApiSerializersRegistry r) {
   if (!r._visit(1206)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(TsValue)])]), () => MapBuilder<String, BuiltMap<String, TsValue>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
+    ]),
+    () => MapBuilder<String, BuiltMap<String, TsValue>>(),
+  );
   _mapOfStringToTsValue(r);
 }
 
 void _mapOfStringToMergedGroupPermissionInfo(ApiSerializersRegistry r) {
   if (!r._visit(1207)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(MergedGroupPermissionInfo)]), () => MapBuilder<String, MergedGroupPermissionInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(MergedGroupPermissionInfo),
+    ]),
+    () => MapBuilder<String, MergedGroupPermissionInfo>(),
+  );
   _mergedGroupPermissionInfo(r);
 }
 
 void _mapOfStringToMergedGroupTypePermissionInfo(ApiSerializersRegistry r) {
   if (!r._visit(1208)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]), () => MapBuilder<String, MergedGroupTypePermissionInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(MergedGroupTypePermissionInfo),
+    ]),
+    () => MapBuilder<String, MergedGroupTypePermissionInfo>(),
+  );
   _mergedGroupTypePermissionInfo(r);
 }
 
 void _mapOfStringToNotificationDeliveryMethodConfig(ApiSerializersRegistry r) {
   if (!r._visit(1209)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(NotificationDeliveryMethodConfig)]), () => MapBuilder<String, NotificationDeliveryMethodConfig>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(NotificationDeliveryMethodConfig),
+    ]),
+    () => MapBuilder<String, NotificationDeliveryMethodConfig>(),
+  );
   _notificationDeliveryMethodConfig(r);
 }
 
 void _mapOfStringToNotificationPref(ApiSerializersRegistry r) {
   if (!r._visit(1210)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(NotificationPref)]), () => MapBuilder<String, NotificationPref>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(NotificationPref)]),
+    () => MapBuilder<String, NotificationPref>(),
+  );
   _notificationPref(r);
 }
 
 void _mapOfStringToNullableJsonObject(ApiSerializersRegistry r) {
   if (!r._visit(1211)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType.nullable(JsonObject)]), () => MapBuilder<String, JsonObject?>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType.nullable(JsonObject)]),
+    () => MapBuilder<String, JsonObject?>(),
+  );
 }
 
 void _mapOfStringToObjectAttributes(ApiSerializersRegistry r) {
   if (!r._visit(1212)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(ObjectAttributes)]), () => MapBuilder<String, ObjectAttributes>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(ObjectAttributes)]),
+    () => MapBuilder<String, ObjectAttributes>(),
+  );
   _objectAttributes(r);
 }
 
 void _mapOfStringToSetOfOperation(ApiSerializersRegistry r) {
   if (!r._visit(1213)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(BuiltSet, [FullType(Operation)])]), () => MapBuilder<String, BuiltSet<Operation>>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(BuiltSet, [FullType(Operation)]),
+    ]),
+    () => MapBuilder<String, BuiltSet<Operation>>(),
+  );
   _setOfOperation(r);
 }
 
 void _mapOfStringToString(ApiSerializersRegistry r) {
   if (!r._visit(1214)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(String)]), () => MapBuilder<String, String>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(String)]),
+    () => MapBuilder<String, String>(),
+  );
 }
 
 void _mapOfStringToTimeSeriesChartYAxisSettings(ApiSerializersRegistry r) {
   if (!r._visit(1215)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(TimeSeriesChartYAxisSettings)]), () => MapBuilder<String, TimeSeriesChartYAxisSettings>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(TimeSeriesChartYAxisSettings),
+    ]),
+    () => MapBuilder<String, TimeSeriesChartYAxisSettings>(),
+  );
   _timeSeriesChartYAxisSettings(r);
 }
 
 void _mapOfStringToTsValue(ApiSerializersRegistry r) {
   if (!r._visit(1216)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(TsValue)]), () => MapBuilder<String, TsValue>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
+    () => MapBuilder<String, TsValue>(),
+  );
   _tsValue(r);
 }
 
 void _mapOfStringToTwoFaAccountConfig(ApiSerializersRegistry r) {
   if (!r._visit(1217)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(TwoFaAccountConfig)]), () => MapBuilder<String, TwoFaAccountConfig>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(TwoFaAccountConfig)]),
+    () => MapBuilder<String, TwoFaAccountConfig>(),
+  );
   _twoFaAccountConfig(r);
 }
 
 void _mapOfStringToZoneGroupConfiguration(ApiSerializersRegistry r) {
   if (!r._visit(1218)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(ZoneGroupConfiguration)]), () => MapBuilder<String, ZoneGroupConfiguration>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [
+      FullType(String),
+      FullType(ZoneGroupConfiguration),
+    ]),
+    () => MapBuilder<String, ZoneGroupConfiguration>(),
+  );
   _zoneGroupConfiguration(r);
 }
 
 void _mapOfStringTobool(ApiSerializersRegistry r) {
   if (!r._visit(1219)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(bool)]), () => MapBuilder<String, bool>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(bool)]),
+    () => MapBuilder<String, bool>(),
+  );
 }
 
 void _mapOfStringToint(ApiSerializersRegistry r) {
   if (!r._visit(1220)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltMap, [FullType(String), FullType(int)]), () => MapBuilder<String, int>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltMap, [FullType(String), FullType(int)]),
+    () => MapBuilder<String, int>(),
+  );
 }
 
 void _setOfAction(ApiSerializersRegistry r) {
   if (!r._visit(1221)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(Action)]), () => SetBuilder<Action>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(Action)]),
+    () => SetBuilder<Action>(),
+  );
   _action(r);
 }
 
 void _setOfAlarmAction(ApiSerializersRegistry r) {
   if (!r._visit(1222)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(AlarmAction)]), () => SetBuilder<AlarmAction>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(AlarmAction)]),
+    () => SetBuilder<AlarmAction>(),
+  );
   _alarmAction(r);
 }
 
 void _setOfAlarmSearchStatus(ApiSerializersRegistry r) {
   if (!r._visit(1223)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(AlarmSearchStatus)]), () => SetBuilder<AlarmSearchStatus>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(AlarmSearchStatus)]),
+    () => SetBuilder<AlarmSearchStatus>(),
+  );
   _alarmSearchStatus(r);
 }
 
 void _setOfAlarmSeverity(ApiSerializersRegistry r) {
   if (!r._visit(1224)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(AlarmSeverity)]), () => SetBuilder<AlarmSeverity>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(AlarmSeverity)]),
+    () => SetBuilder<AlarmSeverity>(),
+  );
   _alarmSeverity(r);
 }
 
 void _setOfApiFeature(ApiSerializersRegistry r) {
   if (!r._visit(1225)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(ApiFeature)]), () => SetBuilder<ApiFeature>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(ApiFeature)]),
+    () => SetBuilder<ApiFeature>(),
+  );
   _apiFeature(r);
 }
 
 void _setOfApiUsageStateValue(ApiSerializersRegistry r) {
   if (!r._visit(1226)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(ApiUsageStateValue)]), () => SetBuilder<ApiUsageStateValue>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(ApiUsageStateValue)]),
+    () => SetBuilder<ApiUsageStateValue>(),
+  );
   _apiUsageStateValue(r);
 }
 
 void _setOfCalculatedFieldType(ApiSerializersRegistry r) {
   if (!r._visit(1227)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(CalculatedFieldType)]), () => SetBuilder<CalculatedFieldType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(CalculatedFieldType)]),
+    () => SetBuilder<CalculatedFieldType>(),
+  );
   _calculatedFieldType(r);
 }
 
 void _setOfComponentLifecycleEvent(ApiSerializersRegistry r) {
   if (!r._visit(1228)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]), () => SetBuilder<ComponentLifecycleEvent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]),
+    () => SetBuilder<ComponentLifecycleEvent>(),
+  );
   _componentLifecycleEvent(r);
 }
 
 void _setOfDeviceEvent(ApiSerializersRegistry r) {
   if (!r._visit(1229)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(DeviceEvent)]), () => SetBuilder<DeviceEvent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(DeviceEvent)]),
+    () => SetBuilder<DeviceEvent>(),
+  );
   _deviceEvent(r);
 }
 
 void _setOfEdgeConnectivityEvent(ApiSerializersRegistry r) {
   if (!r._visit(1230)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(EdgeConnectivityEvent)]), () => SetBuilder<EdgeConnectivityEvent>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(EdgeConnectivityEvent)]),
+    () => SetBuilder<EdgeConnectivityEvent>(),
+  );
   _edgeConnectivityEvent(r);
 }
 
 void _setOfEntityId(ApiSerializersRegistry r) {
   if (!r._visit(1231)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(EntityId)]), () => SetBuilder<EntityId>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(EntityId)]),
+    () => SetBuilder<EntityId>(),
+  );
   _entityId(r);
 }
 
 void _setOfEntityType(ApiSerializersRegistry r) {
   if (!r._visit(1232)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(EntityType)]), () => SetBuilder<EntityType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(EntityType)]),
+    () => SetBuilder<EntityType>(),
+  );
   _entityType(r);
 }
 
 void _setOfIntegrationType(ApiSerializersRegistry r) {
   if (!r._visit(1233)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(IntegrationType)]), () => SetBuilder<IntegrationType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(IntegrationType)]),
+    () => SetBuilder<IntegrationType>(),
+  );
   _integrationType(r);
 }
 
 void _setOfLimitedApi(ApiSerializersRegistry r) {
   if (!r._visit(1234)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(LimitedApi)]), () => SetBuilder<LimitedApi>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(LimitedApi)]),
+    () => SetBuilder<LimitedApi>(),
+  );
   _limitedApi(r);
 }
 
 void _setOfObjectType(ApiSerializersRegistry r) {
   if (!r._visit(1235)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(ObjectType)]), () => SetBuilder<ObjectType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(ObjectType)]),
+    () => SetBuilder<ObjectType>(),
+  );
   _objectType(r);
 }
 
 void _setOfOperation(ApiSerializersRegistry r) {
   if (!r._visit(1236)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(Operation)]), () => SetBuilder<Operation>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(Operation)]),
+    () => SetBuilder<Operation>(),
+  );
   _operation(r);
 }
 
 void _setOfResource(ApiSerializersRegistry r) {
   if (!r._visit(1237)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(Resource)]), () => SetBuilder<Resource>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(Resource)]),
+    () => SetBuilder<Resource>(),
+  );
   _resource(r);
 }
 
 void _setOfResourceType(ApiSerializersRegistry r) {
   if (!r._visit(1238)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(ResourceType)]), () => SetBuilder<ResourceType>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(ResourceType)]),
+    () => SetBuilder<ResourceType>(),
+  );
   _resourceType(r);
 }
 
 void _setOfShortCustomerInfo(ApiSerializersRegistry r) {
   if (!r._visit(1239)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(ShortCustomerInfo)]), () => SetBuilder<ShortCustomerInfo>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(ShortCustomerInfo)]),
+    () => SetBuilder<ShortCustomerInfo>(),
+  );
   _shortCustomerInfo(r);
 }
 
 void _setOfString(ApiSerializersRegistry r) {
   if (!r._visit(1240)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(String)]), () => SetBuilder<String>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(String)]),
+    () => SetBuilder<String>(),
+  );
 }
 
 void _setOfint(ApiSerializersRegistry r) {
   if (!r._visit(1241)) return;
-  r._builder.addBuilderFactory(const FullType(BuiltSet, [FullType(int)]), () => SetBuilder<int>());
+  r._builder.addBuilderFactory(
+    const FullType(BuiltSet, [FullType(int)]),
+    () => SetBuilder<int>(),
+  );
 }

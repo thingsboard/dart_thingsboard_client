@@ -17,10 +17,11 @@ part 'submit_strategy.g.dart';
 /// SubmitStrategy
 ///
 /// Properties:
-/// * [type] 
-/// * [batchSize] 
+/// * [type]
+/// * [batchSize]
 @BuiltValue()
-abstract class SubmitStrategy implements Built<SubmitStrategy, SubmitStrategyBuilder> {
+abstract class SubmitStrategy
+    implements Built<SubmitStrategy, SubmitStrategyBuilder> {
   @BuiltValueField(wireName: r'type')
   SubmitStrategyType? get type;
   // enum typeEnum {  BURST,  BATCH,  SEQUENTIAL_BY_ORIGINATOR,  SEQUENTIAL_BY_TENANT,  SEQUENTIAL,  };
@@ -30,16 +31,19 @@ abstract class SubmitStrategy implements Built<SubmitStrategy, SubmitStrategyBui
 
   SubmitStrategy._();
 
-  factory SubmitStrategy([void updates(SubmitStrategyBuilder b)]) = _$SubmitStrategy;
+  factory SubmitStrategy([void updates(SubmitStrategyBuilder b)]) =
+      _$SubmitStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SubmitStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SubmitStrategy> get serializer => _$SubmitStrategySerializer();
+  static Serializer<SubmitStrategy> get serializer =>
+      _$SubmitStrategySerializer();
 }
 
-class _$SubmitStrategySerializer implements PrimitiveSerializer<SubmitStrategy> {
+class _$SubmitStrategySerializer
+    implements PrimitiveSerializer<SubmitStrategy> {
   @override
   final Iterable<Type> types = const [SubmitStrategy, _$SubmitStrategy];
 
@@ -73,7 +77,11 @@ class _$SubmitStrategySerializer implements PrimitiveSerializer<SubmitStrategy> 
     SubmitStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +97,22 @@ class _$SubmitStrategySerializer implements PrimitiveSerializer<SubmitStrategy> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SubmitStrategyType),
-          ) as SubmitStrategyType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SubmitStrategyType),
+                  )
+                  as SubmitStrategyType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'batchSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.batchSize = valueDes;
           break;
@@ -132,5 +144,3 @@ class _$SubmitStrategySerializer implements PrimitiveSerializer<SubmitStrategy> 
     return result.build();
   }
 }
-
-

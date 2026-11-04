@@ -23,7 +23,8 @@ part 'page_data_api_key_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataApiKeyInfo implements Built<PageDataApiKeyInfo, PageDataApiKeyInfoBuilder> {
+abstract class PageDataApiKeyInfo
+    implements Built<PageDataApiKeyInfo, PageDataApiKeyInfoBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<ApiKeyInfo>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataApiKeyInfo implements Built<PageDataApiKeyInfo, PageDataA
 
   PageDataApiKeyInfo._();
 
-  factory PageDataApiKeyInfo([void updates(PageDataApiKeyInfoBuilder b)]) = _$PageDataApiKeyInfo;
+  factory PageDataApiKeyInfo([void updates(PageDataApiKeyInfoBuilder b)]) =
+      _$PageDataApiKeyInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataApiKeyInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataApiKeyInfo> get serializer => _$PageDataApiKeyInfoSerializer();
+  static Serializer<PageDataApiKeyInfo> get serializer =>
+      _$PageDataApiKeyInfoSerializer();
 }
 
-class _$PageDataApiKeyInfoSerializer implements PrimitiveSerializer<PageDataApiKeyInfo> {
+class _$PageDataApiKeyInfoSerializer
+    implements PrimitiveSerializer<PageDataApiKeyInfo> {
   @override
   final Iterable<Type> types = const [PageDataApiKeyInfo, _$PageDataApiKeyInfo];
 
@@ -99,7 +103,11 @@ class _$PageDataApiKeyInfoSerializer implements PrimitiveSerializer<PageDataApiK
     PageDataApiKeyInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataApiKeyInfoSerializer implements PrimitiveSerializer<PageDataApiK
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ApiKeyInfo)]),
-          ) as BuiltList<ApiKeyInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ApiKeyInfo),
+                    ]),
+                  )
+                  as BuiltList<ApiKeyInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataApiKeyInfoSerializer implements PrimitiveSerializer<PageDataApiK
     return result.build();
   }
 }
-
-

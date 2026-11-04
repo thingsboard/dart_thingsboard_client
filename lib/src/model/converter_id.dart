@@ -18,10 +18,11 @@ part 'converter_id.g.dart';
 /// ConverterId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class ConverterId implements EntityId, Built<ConverterId, ConverterIdBuilder> {
+abstract class ConverterId
+    implements EntityId, Built<ConverterId, ConverterIdBuilder> {
   ConverterId._();
 
   factory ConverterId([void updates(ConverterIdBuilder b)]) = _$ConverterId;
@@ -63,7 +64,11 @@ class _$ConverterIdSerializer implements PrimitiveSerializer<ConverterId> {
     ConverterId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +84,21 @@ class _$ConverterIdSerializer implements PrimitiveSerializer<ConverterId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +129,3 @@ class _$ConverterIdSerializer implements PrimitiveSerializer<ConverterId> {
     return result.build();
   }
 }
-
-

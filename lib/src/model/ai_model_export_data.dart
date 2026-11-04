@@ -23,25 +23,31 @@ part 'ai_model_export_data.g.dart';
 /// AiModelExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class AiModelExportData implements EntityExportData, Built<AiModelExportData, AiModelExportDataBuilder> {
+abstract class AiModelExportData
+    implements
+        EntityExportData,
+        Built<AiModelExportData, AiModelExportDataBuilder> {
   AiModelExportData._();
 
-  factory AiModelExportData([void updates(AiModelExportDataBuilder b)]) = _$AiModelExportData;
+  factory AiModelExportData([void updates(AiModelExportDataBuilder b)]) =
+      _$AiModelExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AiModelExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AiModelExportData> get serializer => _$AiModelExportDataSerializer();
+  static Serializer<AiModelExportData> get serializer =>
+      _$AiModelExportDataSerializer();
 }
 
-class _$AiModelExportDataSerializer implements PrimitiveSerializer<AiModelExportData> {
+class _$AiModelExportDataSerializer
+    implements PrimitiveSerializer<AiModelExportData> {
   @override
   final Iterable<Type> types = const [AiModelExportData, _$AiModelExportData];
 
@@ -57,7 +63,10 @@ class _$AiModelExportDataSerializer implements PrimitiveSerializer<AiModelExport
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +103,11 @@ class _$AiModelExportDataSerializer implements PrimitiveSerializer<AiModelExport
     AiModelExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +123,58 @@ class _$AiModelExportDataSerializer implements PrimitiveSerializer<AiModelExport
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +206,3 @@ class _$AiModelExportDataSerializer implements PrimitiveSerializer<AiModelExport
     return result.build();
   }
 }
-
-

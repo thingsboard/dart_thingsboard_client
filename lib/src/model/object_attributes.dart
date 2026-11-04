@@ -18,20 +18,21 @@ part 'object_attributes.g.dart';
 /// ObjectAttributes
 ///
 /// Properties:
-/// * [dim] 
-/// * [ssid] 
-/// * [uri] 
-/// * [ver] 
-/// * [lwm2m] 
-/// * [pmin] 
-/// * [pmax] 
-/// * [gt] 
-/// * [lt] 
-/// * [st] 
-/// * [epmin] 
-/// * [epmax] 
+/// * [dim]
+/// * [ssid]
+/// * [uri]
+/// * [ver]
+/// * [lwm2m]
+/// * [pmin]
+/// * [pmax]
+/// * [gt]
+/// * [lt]
+/// * [st]
+/// * [epmin]
+/// * [epmax]
 @BuiltValue()
-abstract class ObjectAttributes implements Built<ObjectAttributes, ObjectAttributesBuilder> {
+abstract class ObjectAttributes
+    implements Built<ObjectAttributes, ObjectAttributesBuilder> {
   @BuiltValueField(wireName: r'dim')
   int? get dim;
 
@@ -70,16 +71,19 @@ abstract class ObjectAttributes implements Built<ObjectAttributes, ObjectAttribu
 
   ObjectAttributes._();
 
-  factory ObjectAttributes([void updates(ObjectAttributesBuilder b)]) = _$ObjectAttributes;
+  factory ObjectAttributes([void updates(ObjectAttributesBuilder b)]) =
+      _$ObjectAttributes;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ObjectAttributesBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ObjectAttributes> get serializer => _$ObjectAttributesSerializer();
+  static Serializer<ObjectAttributes> get serializer =>
+      _$ObjectAttributesSerializer();
 }
 
-class _$ObjectAttributesSerializer implements PrimitiveSerializer<ObjectAttributes> {
+class _$ObjectAttributesSerializer
+    implements PrimitiveSerializer<ObjectAttributes> {
   @override
   final Iterable<Type> types = const [ObjectAttributes, _$ObjectAttributes];
 
@@ -183,7 +187,11 @@ class _$ObjectAttributesSerializer implements PrimitiveSerializer<ObjectAttribut
     ObjectAttributes object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -199,98 +207,122 @@ class _$ObjectAttributesSerializer implements PrimitiveSerializer<ObjectAttribut
       final value = serializedList[i + 1];
       switch (key) {
         case r'dim':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.dim = valueDes;
           break;
         case r'ssid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.ssid = valueDes;
           break;
         case r'uri':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.uri = valueDes;
           break;
         case r'ver':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.ver = valueDes;
           break;
         case r'lwm2m':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LwM2mVersion),
-          ) as LwM2mVersion?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LwM2mVersion),
+                  )
+                  as LwM2mVersion?;
           if (valueDes == null) continue;
           result.lwm2m.replace(valueDes);
           break;
         case r'pmin':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pmin = valueDes;
           break;
         case r'pmax':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pmax = valueDes;
           break;
         case r'gt':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.gt = valueDes;
           break;
         case r'lt':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.lt = valueDes;
           break;
         case r'st':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.st = valueDes;
           break;
         case r'epmin':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.epmin = valueDes;
           break;
         case r'epmax':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.epmax = valueDes;
           break;
@@ -322,5 +354,3 @@ class _$ObjectAttributesSerializer implements PrimitiveSerializer<ObjectAttribut
     return result.build();
   }
 }
-
-

@@ -16,12 +16,17 @@ part 'google_vertex_ai_gemini_provider_config.g.dart';
 /// GoogleVertexAiGeminiProviderConfig
 ///
 /// Properties:
-/// * [fileName] 
-/// * [projectId] 
-/// * [location] 
-/// * [serviceAccountKey] 
+/// * [fileName]
+/// * [projectId]
+/// * [location]
+/// * [serviceAccountKey]
 @BuiltValue()
-abstract class GoogleVertexAiGeminiProviderConfig implements Built<GoogleVertexAiGeminiProviderConfig, GoogleVertexAiGeminiProviderConfigBuilder> {
+abstract class GoogleVertexAiGeminiProviderConfig
+    implements
+        Built<
+          GoogleVertexAiGeminiProviderConfig,
+          GoogleVertexAiGeminiProviderConfigBuilder
+        > {
   @BuiltValueField(wireName: r'fileName')
   String? get fileName;
 
@@ -36,18 +41,25 @@ abstract class GoogleVertexAiGeminiProviderConfig implements Built<GoogleVertexA
 
   GoogleVertexAiGeminiProviderConfig._();
 
-  factory GoogleVertexAiGeminiProviderConfig([void updates(GoogleVertexAiGeminiProviderConfigBuilder b)]) = _$GoogleVertexAiGeminiProviderConfig;
+  factory GoogleVertexAiGeminiProviderConfig([
+    void updates(GoogleVertexAiGeminiProviderConfigBuilder b),
+  ]) = _$GoogleVertexAiGeminiProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GoogleVertexAiGeminiProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GoogleVertexAiGeminiProviderConfig> get serializer => _$GoogleVertexAiGeminiProviderConfigSerializer();
+  static Serializer<GoogleVertexAiGeminiProviderConfig> get serializer =>
+      _$GoogleVertexAiGeminiProviderConfigSerializer();
 }
 
-class _$GoogleVertexAiGeminiProviderConfigSerializer implements PrimitiveSerializer<GoogleVertexAiGeminiProviderConfig> {
+class _$GoogleVertexAiGeminiProviderConfigSerializer
+    implements PrimitiveSerializer<GoogleVertexAiGeminiProviderConfig> {
   @override
-  final Iterable<Type> types = const [GoogleVertexAiGeminiProviderConfig, _$GoogleVertexAiGeminiProviderConfig];
+  final Iterable<Type> types = const [
+    GoogleVertexAiGeminiProviderConfig,
+    _$GoogleVertexAiGeminiProviderConfig,
+  ];
 
   @override
   final String wireName = r'GoogleVertexAiGeminiProviderConfig';
@@ -87,7 +99,11 @@ class _$GoogleVertexAiGeminiProviderConfigSerializer implements PrimitiveSeriali
     GoogleVertexAiGeminiProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,32 +119,40 @@ class _$GoogleVertexAiGeminiProviderConfigSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'fileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fileName = valueDes;
           break;
         case r'projectId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.projectId = valueDes;
           break;
         case r'location':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.location = valueDes;
           break;
         case r'serviceAccountKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.serviceAccountKey = valueDes;
           break;
         default:
@@ -159,5 +183,3 @@ class _$GoogleVertexAiGeminiProviderConfigSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

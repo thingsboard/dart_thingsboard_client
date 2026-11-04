@@ -22,7 +22,8 @@ part 'tenant_profile_data.g.dart';
 /// * [configuration] - Complex JSON object that contains profile settings: max devices, max assets, rate limits, etc.
 /// * [queueConfiguration] - JSON array of queue configuration per tenant profile
 @BuiltValue()
-abstract class TenantProfileData implements Built<TenantProfileData, TenantProfileDataBuilder> {
+abstract class TenantProfileData
+    implements Built<TenantProfileData, TenantProfileDataBuilder> {
   /// Complex JSON object that contains profile settings: max devices, max assets, rate limits, etc.
   @BuiltValueField(wireName: r'configuration')
   TenantProfileConfiguration? get configuration;
@@ -33,16 +34,19 @@ abstract class TenantProfileData implements Built<TenantProfileData, TenantProfi
 
   TenantProfileData._();
 
-  factory TenantProfileData([void updates(TenantProfileDataBuilder b)]) = _$TenantProfileData;
+  factory TenantProfileData([void updates(TenantProfileDataBuilder b)]) =
+      _$TenantProfileData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TenantProfileDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TenantProfileData> get serializer => _$TenantProfileDataSerializer();
+  static Serializer<TenantProfileData> get serializer =>
+      _$TenantProfileDataSerializer();
 }
 
-class _$TenantProfileDataSerializer implements PrimitiveSerializer<TenantProfileData> {
+class _$TenantProfileDataSerializer
+    implements PrimitiveSerializer<TenantProfileData> {
   @override
   final Iterable<Type> types = const [TenantProfileData, _$TenantProfileData];
 
@@ -65,7 +69,9 @@ class _$TenantProfileDataSerializer implements PrimitiveSerializer<TenantProfile
       yield r'queueConfiguration';
       yield serializers.serialize(
         object.queueConfiguration,
-        specifiedType: const FullType(BuiltList, [FullType(TenantProfileQueueConfiguration)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(TenantProfileQueueConfiguration),
+        ]),
       );
     }
   }
@@ -76,7 +82,11 @@ class _$TenantProfileDataSerializer implements PrimitiveSerializer<TenantProfile
     TenantProfileData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,18 +102,26 @@ class _$TenantProfileDataSerializer implements PrimitiveSerializer<TenantProfile
       final value = serializedList[i + 1];
       switch (key) {
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantProfileConfiguration),
-          ) as TenantProfileConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TenantProfileConfiguration,
+                    ),
+                  )
+                  as TenantProfileConfiguration?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
         case r'queueConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TenantProfileQueueConfiguration)]),
-          ) as BuiltList<TenantProfileQueueConfiguration>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TenantProfileQueueConfiguration),
+                    ]),
+                  )
+                  as BuiltList<TenantProfileQueueConfiguration>?;
           if (valueDes == null) continue;
           result.queueConfiguration.replace(valueDes);
           break;
@@ -135,5 +153,3 @@ class _$TenantProfileDataSerializer implements PrimitiveSerializer<TenantProfile
     return result.build();
   }
 }
-
-

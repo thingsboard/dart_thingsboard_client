@@ -21,7 +21,12 @@ part 'save_device_with_credentials_request.g.dart';
 /// * [device] - The JSON with device entity.
 /// * [credentials] - The JSON with credentials entity.
 @BuiltValue()
-abstract class SaveDeviceWithCredentialsRequest implements Built<SaveDeviceWithCredentialsRequest, SaveDeviceWithCredentialsRequestBuilder> {
+abstract class SaveDeviceWithCredentialsRequest
+    implements
+        Built<
+          SaveDeviceWithCredentialsRequest,
+          SaveDeviceWithCredentialsRequestBuilder
+        > {
   /// The JSON with device entity.
   @BuiltValueField(wireName: r'device')
   Device get device;
@@ -32,18 +37,25 @@ abstract class SaveDeviceWithCredentialsRequest implements Built<SaveDeviceWithC
 
   SaveDeviceWithCredentialsRequest._();
 
-  factory SaveDeviceWithCredentialsRequest([void updates(SaveDeviceWithCredentialsRequestBuilder b)]) = _$SaveDeviceWithCredentialsRequest;
+  factory SaveDeviceWithCredentialsRequest([
+    void updates(SaveDeviceWithCredentialsRequestBuilder b),
+  ]) = _$SaveDeviceWithCredentialsRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SaveDeviceWithCredentialsRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SaveDeviceWithCredentialsRequest> get serializer => _$SaveDeviceWithCredentialsRequestSerializer();
+  static Serializer<SaveDeviceWithCredentialsRequest> get serializer =>
+      _$SaveDeviceWithCredentialsRequestSerializer();
 }
 
-class _$SaveDeviceWithCredentialsRequestSerializer implements PrimitiveSerializer<SaveDeviceWithCredentialsRequest> {
+class _$SaveDeviceWithCredentialsRequestSerializer
+    implements PrimitiveSerializer<SaveDeviceWithCredentialsRequest> {
   @override
-  final Iterable<Type> types = const [SaveDeviceWithCredentialsRequest, _$SaveDeviceWithCredentialsRequest];
+  final Iterable<Type> types = const [
+    SaveDeviceWithCredentialsRequest,
+    _$SaveDeviceWithCredentialsRequest,
+  ];
 
   @override
   final String wireName = r'SaveDeviceWithCredentialsRequest';
@@ -71,7 +83,11 @@ class _$SaveDeviceWithCredentialsRequestSerializer implements PrimitiveSerialize
     SaveDeviceWithCredentialsRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,17 +103,21 @@ class _$SaveDeviceWithCredentialsRequestSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'device':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(Device),
-          ) as Device;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(Device),
+                  )
+                  as Device;
           result.device.replace(valueDes);
           break;
         case r'credentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DeviceCredentials),
-          ) as DeviceCredentials;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DeviceCredentials),
+                  )
+                  as DeviceCredentials;
           result.credentials.replace(valueDes);
           break;
         default:
@@ -128,5 +148,3 @@ class _$SaveDeviceWithCredentialsRequestSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'cm_scope.g.dart';
 
 class CMScope extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SYSTEM')
   static const CMScope SYSTEM = _$SYSTEM;
   @BuiltValueEnumConst(wireName: r'TENANT')
@@ -27,7 +26,7 @@ class CMScope extends EnumClass {
 
   static Serializer<CMScope> get serializer => _$cMScopeSerializer;
 
-  const CMScope._(String name): super(name);
+  const CMScope._(String name) : super(name);
 
   static BuiltSet<CMScope> get values => _$values;
   static CMScope valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class CMScope extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class CMScopeMixin = Object with _$CMScopeMixin;
-

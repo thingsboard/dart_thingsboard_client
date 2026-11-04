@@ -14,7 +14,6 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/calculated_field.dart';
 import 'package:thingsboard_client/src/model/calculated_field_type.dart';
@@ -24,11 +23,9 @@ import 'package:thingsboard_client/src/model/job.dart';
 import 'package:thingsboard_client/src/model/page_data_calculated_field.dart';
 import 'package:thingsboard_client/src/model/page_data_calculated_field_info.dart';
 import 'package:thingsboard_client/src/model/page_data_string.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class CalculatedFieldControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -39,7 +36,7 @@ class CalculatedFieldControllerApi {
   /// Deletes the calculated field. Referencing non-existing Calculated Field Id will cause an error.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [calculatedFieldId] 
+  /// * [calculatedFieldId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -49,7 +46,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteCalculatedField({ 
+  Future<Response<void>> deleteCalculatedField({
     required String calculatedFieldId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -59,12 +56,19 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/calculatedField/{calculatedFieldId}'.replaceAll('{' r'calculatedFieldId' '}', encodeQueryParameter(_serializers, calculatedFieldId, const FullType(String)).toString());
+    final _path = r'/api/calculatedField/{calculatedFieldId}'.replaceAll(
+      '{'
+      r'calculatedFieldId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        calculatedFieldId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -72,11 +76,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -98,7 +99,7 @@ class CalculatedFieldControllerApi {
   /// Fetch the Calculated Field object based on the provided Calculated Field Id.
   ///
   /// Parameters:
-  /// * [calculatedFieldId] 
+  /// * [calculatedFieldId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -108,7 +109,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CalculatedField] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CalculatedField>> getCalculatedFieldById({ 
+  Future<Response<CalculatedField>> getCalculatedFieldById({
     required String calculatedFieldId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -117,13 +118,21 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCalculatedField);
-    final _path = r'/api/calculatedField/{calculatedFieldId}'.replaceAll('{' r'calculatedFieldId' '}', encodeQueryParameter(_serializers, calculatedFieldId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerCalculatedField);
+    final _path = r'/api/calculatedField/{calculatedFieldId}'.replaceAll(
+      '{'
+      r'calculatedFieldId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        calculatedFieldId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -131,11 +140,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -154,11 +160,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CalculatedField),
-      ) as CalculatedField;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CalculatedField),
+                )
+                as CalculatedField;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -199,7 +207,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataString] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataString>> getCalculatedFieldNames({ 
+  Future<Response<PageDataString>> getCalculatedFieldNames({
     required CalculatedFieldType type,
     required int pageSize,
     required int page,
@@ -212,13 +220,13 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCalculatedFieldTypeAndPageDataString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerCalculatedFieldTypeAndPageDataString);
     final _path = r'/api/calculatedFields/names';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -226,11 +234,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -238,11 +243,29 @@ class CalculatedFieldControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'type': encodeQueryParameter(_serializers, type, const FullType(CalculatedFieldType)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'type': encodeQueryParameter(
+        _serializers,
+        type,
+        const FullType(CalculatedFieldType),
+      ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -258,11 +281,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataString),
-      ) as PageDataString;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataString),
+                )
+                as PageDataString;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -307,7 +332,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataCalculatedFieldInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataCalculatedFieldInfo>> getCalculatedFields({ 
+  Future<Response<PageDataCalculatedFieldInfo>> getCalculatedFields({
     required int pageSize,
     required int page,
     BuiltSet<CalculatedFieldType>? types,
@@ -324,13 +349,15 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSetOfCalculatedFieldTypeAndSetOfStringAndPageDataCalculatedFieldInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(
+          registerSetOfCalculatedFieldTypeAndSetOfStringAndPageDataCalculatedFieldInfo,
+        );
     final _path = r'/api/calculatedFields';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -338,11 +365,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -350,15 +374,57 @@ class CalculatedFieldControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (types != null) r'types': encodeCollectionQueryParameter<CalculatedFieldType>(_serializers, types, const FullType(BuiltSet, [FullType(CalculatedFieldType)]), format: ListFormat.multi,),
-      if (entityType != null) r'entityType': encodeQueryParameter(_serializers, entityType, const FullType(EntityType)),
-      if (entities != null) r'entities': encodeCollectionQueryParameter<String>(_serializers, entities, const FullType(BuiltSet, [FullType(String)]), format: ListFormat.multi,),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (name != null) r'name': encodeCollectionQueryParameter<String>(_serializers, name, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (types != null)
+        r'types': encodeCollectionQueryParameter<CalculatedFieldType>(
+          _serializers,
+          types,
+          const FullType(BuiltSet, [FullType(CalculatedFieldType)]),
+          format: ListFormat.multi,
+        ),
+      if (entityType != null)
+        r'entityType': encodeQueryParameter(
+          _serializers,
+          entityType,
+          const FullType(EntityType),
+        ),
+      if (entities != null)
+        r'entities': encodeCollectionQueryParameter<String>(
+          _serializers,
+          entities,
+          const FullType(BuiltSet, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (name != null)
+        r'name': encodeCollectionQueryParameter<String>(
+          _serializers,
+          name,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -374,11 +440,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataCalculatedFieldInfo),
-      ) as PageDataCalculatedFieldInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataCalculatedFieldInfo),
+                )
+                as PageDataCalculatedFieldInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -422,7 +490,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataCalculatedField] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataCalculatedField>> getCalculatedFieldsByEntityId({ 
+  Future<Response<PageDataCalculatedField>> getCalculatedFieldsByEntityId({
     required String entityType,
     required String entityId,
     required int pageSize,
@@ -438,13 +506,32 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataCalculatedField);
-    final _path = r'/api/calculatedField/{entityType}/{entityId}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataCalculatedField);
+    final _path = r'/api/calculatedField/{entityType}/{entityId}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -452,11 +539,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -464,12 +548,36 @@ class CalculatedFieldControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(CalculatedFieldType)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(CalculatedFieldType),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -485,11 +593,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataCalculatedField),
-      ) as PageDataCalculatedField;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataCalculatedField),
+                )
+                as PageDataCalculatedField;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -513,10 +623,10 @@ class CalculatedFieldControllerApi {
   }
 
   /// getLastCalculatedFieldReprocessingJob
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [calculatedFieldId] 
+  /// * [calculatedFieldId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -526,7 +636,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Job] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Job>> getLastCalculatedFieldReprocessingJob({ 
+  Future<Response<Job>> getLastCalculatedFieldReprocessingJob({
     required String calculatedFieldId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -536,12 +646,20 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerJob);
-    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocess/job'.replaceAll('{' r'calculatedFieldId' '}', encodeQueryParameter(_serializers, calculatedFieldId, const FullType(String)).toString());
+    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocess/job'
+        .replaceAll(
+          '{'
+          r'calculatedFieldId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            calculatedFieldId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -549,11 +667,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -572,11 +687,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Job),
-      ) as Job;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Job),
+                )
+                as Job;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -603,7 +720,7 @@ class CalculatedFieldControllerApi {
   /// Gets latest calculated field debug event for specified calculated field id. Referencing non-existing calculated field id will cause an error.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [calculatedFieldId] 
+  /// * [calculatedFieldId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -613,7 +730,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getLatestCalculatedFieldDebugEvent({ 
+  Future<Response<JsonObject>> getLatestCalculatedFieldDebugEvent({
     required String calculatedFieldId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -623,12 +740,19 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/calculatedField/{calculatedFieldId}/debug'.replaceAll('{' r'calculatedFieldId' '}', encodeQueryParameter(_serializers, calculatedFieldId, const FullType(String)).toString());
+    final _path = r'/api/calculatedField/{calculatedFieldId}/debug'.replaceAll(
+      '{'
+      r'calculatedFieldId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        calculatedFieldId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -636,11 +760,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -659,11 +780,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -690,9 +813,9 @@ class CalculatedFieldControllerApi {
   /// Reprocesses the calculated field.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [calculatedFieldId] 
-  /// * [startTs] 
-  /// * [endTs] 
+  /// * [calculatedFieldId]
+  /// * [startTs]
+  /// * [endTs]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -702,7 +825,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Job] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Job>> reprocessCalculatedField({ 
+  Future<Response<Job>> reprocessCalculatedField({
     required String calculatedFieldId,
     required int startTs,
     required int endTs,
@@ -714,12 +837,20 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerJob);
-    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocess'.replaceAll('{' r'calculatedFieldId' '}', encodeQueryParameter(_serializers, calculatedFieldId, const FullType(String)).toString());
+    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocess'
+        .replaceAll(
+          '{'
+          r'calculatedFieldId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            calculatedFieldId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -727,11 +858,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -739,7 +867,11 @@ class CalculatedFieldControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'startTs': encodeQueryParameter(_serializers, startTs, const FullType(int)),
+      r'startTs': encodeQueryParameter(
+        _serializers,
+        startTs,
+        const FullType(int),
+      ),
       r'endTs': encodeQueryParameter(_serializers, endTs, const FullType(int)),
     };
 
@@ -756,11 +888,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Job),
-      ) as Job;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Job),
+                )
+                as Job;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -787,9 +921,9 @@ class CalculatedFieldControllerApi {
   /// Reprocesses the calculated field and waits until the job completes or fails.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [calculatedFieldId] 
-  /// * [startTs] 
-  /// * [endTs] 
+  /// * [calculatedFieldId]
+  /// * [startTs]
+  /// * [endTs]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -799,7 +933,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> reprocessCalculatedFieldAndWait({ 
+  Future<Response<void>> reprocessCalculatedFieldAndWait({
     required String calculatedFieldId,
     required int startTs,
     required int endTs,
@@ -811,12 +945,20 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocessAndWait'.replaceAll('{' r'calculatedFieldId' '}', encodeQueryParameter(_serializers, calculatedFieldId, const FullType(String)).toString());
+    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocessAndWait'
+        .replaceAll(
+          '{'
+          r'calculatedFieldId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            calculatedFieldId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -824,11 +966,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -836,7 +975,11 @@ class CalculatedFieldControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'startTs': encodeQueryParameter(_serializers, startTs, const FullType(int)),
+      r'startTs': encodeQueryParameter(
+        _serializers,
+        startTs,
+        const FullType(int),
+      ),
       r'endTs': encodeQueryParameter(_serializers, endTs, const FullType(int)),
     };
 
@@ -866,7 +1009,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CalculatedField] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CalculatedField>> saveCalculatedField({ 
+  Future<Response<CalculatedField>> saveCalculatedField({
     required CalculatedField calculatedField,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -875,13 +1018,12 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCalculatedField);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerCalculatedField);
     final _path = r'/api/calculatedField';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -889,11 +1031,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -906,13 +1045,9 @@ class CalculatedFieldControllerApi {
     try {
       const _type = FullType(CalculatedField);
       _bodyData = _serializers.serialize(calculatedField, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -932,11 +1067,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CalculatedField),
-      ) as CalculatedField;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CalculatedField),
+                )
+                as CalculatedField;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -973,7 +1110,7 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> testCalculatedFieldScript({ 
+  Future<Response<JsonObject>> testCalculatedFieldScript({
     JsonObject? body,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -986,9 +1123,7 @@ class CalculatedFieldControllerApi {
     final _path = r'/api/calculatedField/testScript';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -996,11 +1131,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1012,13 +1144,9 @@ class CalculatedFieldControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1038,11 +1166,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1069,7 +1199,7 @@ class CalculatedFieldControllerApi {
   /// Checks whether the specified calculated field can be reprocessed. Returns a validation result indicating if reprocessing is allowed and, if not, provides a reason.   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [calculatedFieldId] 
+  /// * [calculatedFieldId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1079,7 +1209,8 @@ class CalculatedFieldControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [CfReprocessingValidationResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<CfReprocessingValidationResult>> validateCalculatedFieldReprocessing({ 
+  Future<Response<CfReprocessingValidationResult>>
+  validateCalculatedFieldReprocessing({
     required String calculatedFieldId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1088,13 +1219,23 @@ class CalculatedFieldControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerCfReprocessingValidationResult);
-    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocess/validate'.replaceAll('{' r'calculatedFieldId' '}', encodeQueryParameter(_serializers, calculatedFieldId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerCfReprocessingValidationResult);
+    final _path = r'/api/calculatedField/{calculatedFieldId}/reprocess/validate'
+        .replaceAll(
+          '{'
+          r'calculatedFieldId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            calculatedFieldId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1102,11 +1243,8 @@ class CalculatedFieldControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1125,11 +1263,13 @@ class CalculatedFieldControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(CfReprocessingValidationResult),
-      ) as CfReprocessingValidationResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(CfReprocessingValidationResult),
+                )
+                as CfReprocessingValidationResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1151,5 +1291,4 @@ class CalculatedFieldControllerApi {
       extra: _response.extra,
     );
   }
-
 }

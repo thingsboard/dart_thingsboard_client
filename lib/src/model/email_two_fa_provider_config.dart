@@ -17,27 +17,37 @@ part 'email_two_fa_provider_config.g.dart';
 /// EmailTwoFaProviderConfig
 ///
 /// Properties:
-/// * [providerType] 
-/// * [verificationCodeLifetime] 
+/// * [providerType]
+/// * [verificationCodeLifetime]
 @BuiltValue()
-abstract class EmailTwoFaProviderConfig implements TwoFaProviderConfig, Built<EmailTwoFaProviderConfig, EmailTwoFaProviderConfigBuilder> {
+abstract class EmailTwoFaProviderConfig
+    implements
+        TwoFaProviderConfig,
+        Built<EmailTwoFaProviderConfig, EmailTwoFaProviderConfigBuilder> {
   @BuiltValueField(wireName: r'verificationCodeLifetime')
   int? get verificationCodeLifetime;
 
   EmailTwoFaProviderConfig._();
 
-  factory EmailTwoFaProviderConfig([void updates(EmailTwoFaProviderConfigBuilder b)]) = _$EmailTwoFaProviderConfig;
+  factory EmailTwoFaProviderConfig([
+    void updates(EmailTwoFaProviderConfigBuilder b),
+  ]) = _$EmailTwoFaProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EmailTwoFaProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EmailTwoFaProviderConfig> get serializer => _$EmailTwoFaProviderConfigSerializer();
+  static Serializer<EmailTwoFaProviderConfig> get serializer =>
+      _$EmailTwoFaProviderConfigSerializer();
 }
 
-class _$EmailTwoFaProviderConfigSerializer implements PrimitiveSerializer<EmailTwoFaProviderConfig> {
+class _$EmailTwoFaProviderConfigSerializer
+    implements PrimitiveSerializer<EmailTwoFaProviderConfig> {
   @override
-  final Iterable<Type> types = const [EmailTwoFaProviderConfig, _$EmailTwoFaProviderConfig];
+  final Iterable<Type> types = const [
+    EmailTwoFaProviderConfig,
+    _$EmailTwoFaProviderConfig,
+  ];
 
   @override
   final String wireName = r'EmailTwoFaProviderConfig';
@@ -67,7 +77,11 @@ class _$EmailTwoFaProviderConfigSerializer implements PrimitiveSerializer<EmailT
     EmailTwoFaProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -83,18 +97,22 @@ class _$EmailTwoFaProviderConfigSerializer implements PrimitiveSerializer<EmailT
       final value = serializedList[i + 1];
       switch (key) {
         case r'verificationCodeLifetime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.verificationCodeLifetime = valueDes;
           break;
         case r'providerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerType = valueDes;
           break;
         default:
@@ -125,5 +143,3 @@ class _$EmailTwoFaProviderConfigSerializer implements PrimitiveSerializer<EmailT
     return result.build();
   }
 }
-
-

@@ -74,11 +74,11 @@ class LocalFileStorage implements TbStorage {
   }
 
   Future<void> _readFile() async {
-    var _file = await _getFile();
-    final length = await _file.length();
-    _file = await _file.setPosition(0);
+    var file = await _getFile();
+    final length = await file.length();
+    file = await file.setPosition(0);
     final buffer = Uint8List(length);
-    await _file.readInto(buffer);
+    await file.readInto(buffer);
     final contentText = utf8.decode(buffer);
 
     _data = json.decode(contentText) as Map<String, dynamic>;
@@ -89,8 +89,8 @@ class LocalFileStorage implements TbStorage {
       return _file!;
     }
 
-    final _path = path ?? _getDocumentDir().path;
-    final file = File('$_path/$fileName');
+    final dirPath = path ?? _getDocumentDir().path;
+    final file = File('$dirPath/$fileName');
 
     if (await file.exists()) {
       _file = await file.open(mode: FileMode.append);

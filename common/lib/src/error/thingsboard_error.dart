@@ -26,7 +26,11 @@ enum ThingsBoardErrorCode {
 
   const ThingsBoardErrorCode(this.value);
   final int value;
-  static ThingsBoardErrorCode fromInt(int value) => ThingsBoardErrorCode.values.firstWhere((e) => e.value == value, orElse: () => ThingsBoardErrorCode.general,);
+  static ThingsBoardErrorCode fromInt(int value) =>
+      ThingsBoardErrorCode.values.firstWhere(
+        (e) => e.value == value,
+        orElse: () => ThingsBoardErrorCode.general,
+      );
 }
 
 class ThingsboardError implements Exception {
@@ -36,19 +40,20 @@ class ThingsboardError implements Exception {
   int? status;
   dynamic error;
 
-  ThingsboardError(
-      {this.message,
-      this.errorCode,
-      this.status,
-      this.refreshTokenPending,
-      this.error});
+  ThingsboardError({
+    this.message,
+    this.errorCode,
+    this.status,
+    this.refreshTokenPending,
+    this.error,
+  });
 
   ThingsboardError.fromJson(Map<String, dynamic> json)
-      : message = ThingsboardError.parseMessage(json),
-        status = json['status'],
-        errorCode = json['errorCode'] != null
-            ? ThingsBoardErrorCode.fromInt(json['errorCode'])
-            : null;
+    : message = ThingsboardError.parseMessage(json),
+      status = json['status'],
+      errorCode = json['errorCode'] != null
+          ? ThingsBoardErrorCode.fromInt(json['errorCode'])
+          : null;
 
   /// Whether the server rejected the request's credentials (HTTP 401).
   ///
@@ -65,7 +70,7 @@ class ThingsboardError implements Exception {
     if (message == null) {
       if (json['error'] != null) {
         if (json['path'] != null) {
-          message = "Path '" + json['path'] + "': " + json["error"];
+          message = "Path '${json['path']}': ${json['error']}";
         } else {
           message = json['error'];
         }

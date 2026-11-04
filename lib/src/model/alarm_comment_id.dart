@@ -18,23 +18,27 @@ part 'alarm_comment_id.g.dart';
 /// Properties:
 /// * [id] - string
 @BuiltValue()
-abstract class AlarmCommentId implements Built<AlarmCommentId, AlarmCommentIdBuilder> {
+abstract class AlarmCommentId
+    implements Built<AlarmCommentId, AlarmCommentIdBuilder> {
   /// string
   @BuiltValueField(wireName: r'id')
   String get id;
 
   AlarmCommentId._();
 
-  factory AlarmCommentId([void updates(AlarmCommentIdBuilder b)]) = _$AlarmCommentId;
+  factory AlarmCommentId([void updates(AlarmCommentIdBuilder b)]) =
+      _$AlarmCommentId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmCommentIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmCommentId> get serializer => _$AlarmCommentIdSerializer();
+  static Serializer<AlarmCommentId> get serializer =>
+      _$AlarmCommentIdSerializer();
 }
 
-class _$AlarmCommentIdSerializer implements PrimitiveSerializer<AlarmCommentId> {
+class _$AlarmCommentIdSerializer
+    implements PrimitiveSerializer<AlarmCommentId> {
   @override
   final Iterable<Type> types = const [AlarmCommentId, _$AlarmCommentId];
 
@@ -59,7 +63,11 @@ class _$AlarmCommentIdSerializer implements PrimitiveSerializer<AlarmCommentId> 
     AlarmCommentId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +83,12 @@ class _$AlarmCommentIdSerializer implements PrimitiveSerializer<AlarmCommentId> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -109,5 +119,3 @@ class _$AlarmCommentIdSerializer implements PrimitiveSerializer<AlarmCommentId> 
     return result.build();
   }
 }
-
-

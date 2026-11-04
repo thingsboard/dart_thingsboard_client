@@ -18,7 +18,7 @@ part 'api_key_id.g.dart';
 /// ApiKeyId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
 abstract class ApiKeyId implements EntityId, Built<ApiKeyId, ApiKeyIdBuilder> {
@@ -63,7 +63,11 @@ class _$ApiKeyIdSerializer implements PrimitiveSerializer<ApiKeyId> {
     ApiKeyId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +83,21 @@ class _$ApiKeyIdSerializer implements PrimitiveSerializer<ApiKeyId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +128,3 @@ class _$ApiKeyIdSerializer implements PrimitiveSerializer<ApiKeyId> {
     return result.build();
   }
 }
-
-

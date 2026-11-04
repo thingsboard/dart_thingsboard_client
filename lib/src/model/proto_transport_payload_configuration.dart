@@ -17,15 +17,21 @@ part 'proto_transport_payload_configuration.g.dart';
 /// ProtoTransportPayloadConfiguration
 ///
 /// Properties:
-/// * [transportPayloadType] 
-/// * [deviceTelemetryProtoSchema] 
-/// * [deviceAttributesProtoSchema] 
-/// * [deviceRpcRequestProtoSchema] 
-/// * [deviceRpcResponseProtoSchema] 
-/// * [enableCompatibilityWithJsonPayloadFormat] 
-/// * [useJsonPayloadFormatForDefaultDownlinkTopics] 
+/// * [transportPayloadType]
+/// * [deviceTelemetryProtoSchema]
+/// * [deviceAttributesProtoSchema]
+/// * [deviceRpcRequestProtoSchema]
+/// * [deviceRpcResponseProtoSchema]
+/// * [enableCompatibilityWithJsonPayloadFormat]
+/// * [useJsonPayloadFormatForDefaultDownlinkTopics]
 @BuiltValue()
-abstract class ProtoTransportPayloadConfiguration implements TransportPayloadTypeConfiguration, Built<ProtoTransportPayloadConfiguration, ProtoTransportPayloadConfigurationBuilder> {
+abstract class ProtoTransportPayloadConfiguration
+    implements
+        TransportPayloadTypeConfiguration,
+        Built<
+          ProtoTransportPayloadConfiguration,
+          ProtoTransportPayloadConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'enableCompatibilityWithJsonPayloadFormat')
   bool? get enableCompatibilityWithJsonPayloadFormat;
 
@@ -46,18 +52,25 @@ abstract class ProtoTransportPayloadConfiguration implements TransportPayloadTyp
 
   ProtoTransportPayloadConfiguration._();
 
-  factory ProtoTransportPayloadConfiguration([void updates(ProtoTransportPayloadConfigurationBuilder b)]) = _$ProtoTransportPayloadConfiguration;
+  factory ProtoTransportPayloadConfiguration([
+    void updates(ProtoTransportPayloadConfigurationBuilder b),
+  ]) = _$ProtoTransportPayloadConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ProtoTransportPayloadConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ProtoTransportPayloadConfiguration> get serializer => _$ProtoTransportPayloadConfigurationSerializer();
+  static Serializer<ProtoTransportPayloadConfiguration> get serializer =>
+      _$ProtoTransportPayloadConfigurationSerializer();
 }
 
-class _$ProtoTransportPayloadConfigurationSerializer implements PrimitiveSerializer<ProtoTransportPayloadConfiguration> {
+class _$ProtoTransportPayloadConfigurationSerializer
+    implements PrimitiveSerializer<ProtoTransportPayloadConfiguration> {
   @override
-  final Iterable<Type> types = const [ProtoTransportPayloadConfiguration, _$ProtoTransportPayloadConfiguration];
+  final Iterable<Type> types = const [
+    ProtoTransportPayloadConfiguration,
+    _$ProtoTransportPayloadConfiguration,
+  ];
 
   @override
   final String wireName = r'ProtoTransportPayloadConfiguration';
@@ -122,7 +135,11 @@ class _$ProtoTransportPayloadConfigurationSerializer implements PrimitiveSeriali
     ProtoTransportPayloadConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -138,57 +155,71 @@ class _$ProtoTransportPayloadConfigurationSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'enableCompatibilityWithJsonPayloadFormat':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enableCompatibilityWithJsonPayloadFormat = valueDes;
           break;
         case r'deviceAttributesProtoSchema':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceAttributesProtoSchema = valueDes;
           break;
         case r'deviceRpcRequestProtoSchema':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceRpcRequestProtoSchema = valueDes;
           break;
         case r'deviceRpcResponseProtoSchema':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceRpcResponseProtoSchema = valueDes;
           break;
         case r'transportPayloadType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.transportPayloadType = valueDes;
           break;
         case r'useJsonPayloadFormatForDefaultDownlinkTopics':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useJsonPayloadFormatForDefaultDownlinkTopics = valueDes;
           break;
         case r'deviceTelemetryProtoSchema':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.deviceTelemetryProtoSchema = valueDes;
           break;
@@ -220,5 +251,3 @@ class _$ProtoTransportPayloadConfigurationSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

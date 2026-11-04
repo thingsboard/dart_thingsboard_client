@@ -18,9 +18,9 @@ part 'cf_argument_dynamic_source_configuration.g.dart';
 /// CfArgumentDynamicSourceConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class CfArgumentDynamicSourceConfiguration  {
+abstract class CfArgumentDynamicSourceConfiguration {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -32,33 +32,38 @@ abstract class CfArgumentDynamicSourceConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CfArgumentDynamicSourceConfiguration> get serializer => _$CfArgumentDynamicSourceConfigurationSerializer();
+  static Serializer<CfArgumentDynamicSourceConfiguration> get serializer =>
+      _$CfArgumentDynamicSourceConfigurationSerializer();
 }
 
-extension CfArgumentDynamicSourceConfigurationDiscriminatorExt on CfArgumentDynamicSourceConfiguration {
-    String? get discriminatorValue {
-        if (this is CurrentOwnerDynamicSourceConfiguration) {
-            return r'CURRENT_OWNER';
-        }
-        if (this is RelationPathQueryDynamicSourceConfiguration) {
-            return r'RELATION_PATH_QUERY';
-        }
-        return null;
+extension CfArgumentDynamicSourceConfigurationDiscriminatorExt
+    on CfArgumentDynamicSourceConfiguration {
+  String? get discriminatorValue {
+    if (this is CurrentOwnerDynamicSourceConfiguration) {
+      return r'CURRENT_OWNER';
     }
-}
-extension CfArgumentDynamicSourceConfigurationBuilderDiscriminatorExt on CfArgumentDynamicSourceConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is CurrentOwnerDynamicSourceConfigurationBuilder) {
-            return r'CURRENT_OWNER';
-        }
-        if (this is RelationPathQueryDynamicSourceConfigurationBuilder) {
-            return r'RELATION_PATH_QUERY';
-        }
-        return null;
+    if (this is RelationPathQueryDynamicSourceConfiguration) {
+      return r'RELATION_PATH_QUERY';
     }
+    return null;
+  }
 }
 
-class _$CfArgumentDynamicSourceConfigurationSerializer implements PrimitiveSerializer<CfArgumentDynamicSourceConfiguration> {
+extension CfArgumentDynamicSourceConfigurationBuilderDiscriminatorExt
+    on CfArgumentDynamicSourceConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is CurrentOwnerDynamicSourceConfigurationBuilder) {
+      return r'CURRENT_OWNER';
+    }
+    if (this is RelationPathQueryDynamicSourceConfigurationBuilder) {
+      return r'RELATION_PATH_QUERY';
+    }
+    return null;
+  }
+}
+
+class _$CfArgumentDynamicSourceConfigurationSerializer
+    implements PrimitiveSerializer<CfArgumentDynamicSourceConfiguration> {
   @override
   final Iterable<Type> types = const [CfArgumentDynamicSourceConfiguration];
 
@@ -84,12 +89,22 @@ class _$CfArgumentDynamicSourceConfigurationSerializer implements PrimitiveSeria
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CurrentOwnerDynamicSourceConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(CurrentOwnerDynamicSourceConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CurrentOwnerDynamicSourceConfiguration),
+      )!;
     }
     if (object is RelationPathQueryDynamicSourceConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(RelationPathQueryDynamicSourceConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RelationPathQueryDynamicSourceConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -99,37 +114,72 @@ class _$CfArgumentDynamicSourceConfigurationSerializer implements PrimitiveSeria
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(CfArgumentDynamicSourceConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          CfArgumentDynamicSourceConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CURRENT_OWNER':
-        return serializers.deserialize(serialized, specifiedType: FullType(CurrentOwnerDynamicSourceConfiguration)) as CurrentOwnerDynamicSourceConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CurrentOwnerDynamicSourceConfiguration),
+            )
+            as CurrentOwnerDynamicSourceConfiguration;
       case r'RELATION_PATH_QUERY':
-        return serializers.deserialize(serialized, specifiedType: FullType(RelationPathQueryDynamicSourceConfiguration)) as RelationPathQueryDynamicSourceConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                RelationPathQueryDynamicSourceConfiguration,
+              ),
+            )
+            as RelationPathQueryDynamicSourceConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($CfArgumentDynamicSourceConfiguration)) as $CfArgumentDynamicSourceConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($CfArgumentDynamicSourceConfiguration),
+            )
+            as $CfArgumentDynamicSourceConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [CfArgumentDynamicSourceConfiguration], since [CfArgumentDynamicSourceConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $CfArgumentDynamicSourceConfiguration implements CfArgumentDynamicSourceConfiguration, Built<$CfArgumentDynamicSourceConfiguration, $CfArgumentDynamicSourceConfigurationBuilder> {
+abstract class $CfArgumentDynamicSourceConfiguration
+    implements
+        CfArgumentDynamicSourceConfiguration,
+        Built<
+          $CfArgumentDynamicSourceConfiguration,
+          $CfArgumentDynamicSourceConfigurationBuilder
+        > {
   $CfArgumentDynamicSourceConfiguration._();
 
-  factory $CfArgumentDynamicSourceConfiguration([void Function($CfArgumentDynamicSourceConfigurationBuilder)? updates]) = _$$CfArgumentDynamicSourceConfiguration;
+  factory $CfArgumentDynamicSourceConfiguration([
+    void Function($CfArgumentDynamicSourceConfigurationBuilder)? updates,
+  ]) = _$$CfArgumentDynamicSourceConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($CfArgumentDynamicSourceConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$CfArgumentDynamicSourceConfiguration> get serializer => _$$CfArgumentDynamicSourceConfigurationSerializer();
+  static Serializer<$CfArgumentDynamicSourceConfiguration> get serializer =>
+      _$$CfArgumentDynamicSourceConfigurationSerializer();
 }
 
-class _$$CfArgumentDynamicSourceConfigurationSerializer implements PrimitiveSerializer<$CfArgumentDynamicSourceConfiguration> {
+class _$$CfArgumentDynamicSourceConfigurationSerializer
+    implements PrimitiveSerializer<$CfArgumentDynamicSourceConfiguration> {
   @override
-  final Iterable<Type> types = const [$CfArgumentDynamicSourceConfiguration, _$$CfArgumentDynamicSourceConfiguration];
+  final Iterable<Type> types = const [
+    $CfArgumentDynamicSourceConfiguration,
+    _$$CfArgumentDynamicSourceConfiguration,
+  ];
 
   @override
   final String wireName = r'$CfArgumentDynamicSourceConfiguration';
@@ -140,7 +190,10 @@ class _$$CfArgumentDynamicSourceConfigurationSerializer implements PrimitiveSeri
     $CfArgumentDynamicSourceConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(CfArgumentDynamicSourceConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(CfArgumentDynamicSourceConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -156,10 +209,12 @@ class _$$CfArgumentDynamicSourceConfigurationSerializer implements PrimitiveSeri
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -190,4 +245,3 @@ class _$$CfArgumentDynamicSourceConfigurationSerializer implements PrimitiveSeri
     return result.build();
   }
 }
-

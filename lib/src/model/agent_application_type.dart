@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agent_application_type.g.dart';
 
 class AgentApplicationType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'GENERIC')
   static const AgentApplicationType GENERIC = _$GENERIC;
   @BuiltValueEnumConst(wireName: r'EDGE')
@@ -23,11 +22,13 @@ class AgentApplicationType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'GATEWAY')
   static const AgentApplicationType GATEWAY = _$GATEWAY;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentApplicationType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentApplicationType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentApplicationType> get serializer => _$agentApplicationTypeSerializer;
+  static Serializer<AgentApplicationType> get serializer =>
+      _$agentApplicationTypeSerializer;
 
-  const AgentApplicationType._(String name): super(name);
+  const AgentApplicationType._(String name) : super(name);
 
   static BuiltSet<AgentApplicationType> get values => _$values;
   static AgentApplicationType valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class AgentApplicationType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AgentApplicationTypeMixin = Object with _$AgentApplicationTypeMixin;
-
+abstract class AgentApplicationTypeMixin = Object
+    with _$AgentApplicationTypeMixin;

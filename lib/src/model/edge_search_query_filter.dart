@@ -20,17 +20,20 @@ part 'edge_search_query_filter.g.dart';
 /// EdgeSearchQueryFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [rootEntity] 
-/// * [relationType] 
-/// * [direction] 
-/// * [maxLevel] 
-/// * [fetchLastLevelOnly] 
-/// * [rootStateEntity] 
-/// * [defaultStateEntity] 
-/// * [edgeTypes] 
+/// * [type]
+/// * [rootEntity]
+/// * [relationType]
+/// * [direction]
+/// * [maxLevel]
+/// * [fetchLastLevelOnly]
+/// * [rootStateEntity]
+/// * [defaultStateEntity]
+/// * [edgeTypes]
 @BuiltValue()
-abstract class EdgeSearchQueryFilter implements EntityFilter, Built<EdgeSearchQueryFilter, EdgeSearchQueryFilterBuilder> {
+abstract class EdgeSearchQueryFilter
+    implements
+        EntityFilter,
+        Built<EdgeSearchQueryFilter, EdgeSearchQueryFilterBuilder> {
   @BuiltValueField(wireName: r'relationType')
   String? get relationType;
 
@@ -58,18 +61,25 @@ abstract class EdgeSearchQueryFilter implements EntityFilter, Built<EdgeSearchQu
 
   EdgeSearchQueryFilter._();
 
-  factory EdgeSearchQueryFilter([void updates(EdgeSearchQueryFilterBuilder b)]) = _$EdgeSearchQueryFilter;
+  factory EdgeSearchQueryFilter([
+    void updates(EdgeSearchQueryFilterBuilder b),
+  ]) = _$EdgeSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EdgeSearchQueryFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdgeSearchQueryFilter> get serializer => _$EdgeSearchQueryFilterSerializer();
+  static Serializer<EdgeSearchQueryFilter> get serializer =>
+      _$EdgeSearchQueryFilterSerializer();
 }
 
-class _$EdgeSearchQueryFilterSerializer implements PrimitiveSerializer<EdgeSearchQueryFilter> {
+class _$EdgeSearchQueryFilterSerializer
+    implements PrimitiveSerializer<EdgeSearchQueryFilter> {
   @override
-  final Iterable<Type> types = const [EdgeSearchQueryFilter, _$EdgeSearchQueryFilter];
+  final Iterable<Type> types = const [
+    EdgeSearchQueryFilter,
+    _$EdgeSearchQueryFilter,
+  ];
 
   @override
   final String wireName = r'EdgeSearchQueryFilter';
@@ -148,7 +158,11 @@ class _$EdgeSearchQueryFilterSerializer implements PrimitiveSerializer<EdgeSearc
     EdgeSearchQueryFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -164,73 +178,95 @@ class _$EdgeSearchQueryFilterSerializer implements PrimitiveSerializer<EdgeSearc
       final value = serializedList[i + 1];
       switch (key) {
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'maxLevel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxLevel = valueDes;
           break;
         case r'fetchLastLevelOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.fetchLastLevelOnly = valueDes;
           break;
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
         case r'edgeTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.edgeTypes.replace(valueDes);
           break;
         case r'rootStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.rootStateEntity = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'rootEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.rootEntity.replace(valueDes);
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntitySearchDirection),
-          ) as EntitySearchDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntitySearchDirection,
+                    ),
+                  )
+                  as EntitySearchDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -262,5 +298,3 @@ class _$EdgeSearchQueryFilterSerializer implements PrimitiveSerializer<EdgeSearc
     return result.build();
   }
 }
-
-

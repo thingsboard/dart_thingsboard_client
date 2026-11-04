@@ -18,27 +18,36 @@ part 'api_usage_state_filter.g.dart';
 /// ApiUsageStateFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [customerId] 
+/// * [type]
+/// * [customerId]
 @BuiltValue()
-abstract class ApiUsageStateFilter implements EntityFilter, Built<ApiUsageStateFilter, ApiUsageStateFilterBuilder> {
+abstract class ApiUsageStateFilter
+    implements
+        EntityFilter,
+        Built<ApiUsageStateFilter, ApiUsageStateFilterBuilder> {
   @BuiltValueField(wireName: r'customerId')
   CustomerId? get customerId;
 
   ApiUsageStateFilter._();
 
-  factory ApiUsageStateFilter([void updates(ApiUsageStateFilterBuilder b)]) = _$ApiUsageStateFilter;
+  factory ApiUsageStateFilter([void updates(ApiUsageStateFilterBuilder b)]) =
+      _$ApiUsageStateFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ApiUsageStateFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiUsageStateFilter> get serializer => _$ApiUsageStateFilterSerializer();
+  static Serializer<ApiUsageStateFilter> get serializer =>
+      _$ApiUsageStateFilterSerializer();
 }
 
-class _$ApiUsageStateFilterSerializer implements PrimitiveSerializer<ApiUsageStateFilter> {
+class _$ApiUsageStateFilterSerializer
+    implements PrimitiveSerializer<ApiUsageStateFilter> {
   @override
-  final Iterable<Type> types = const [ApiUsageStateFilter, _$ApiUsageStateFilter];
+  final Iterable<Type> types = const [
+    ApiUsageStateFilter,
+    _$ApiUsageStateFilter,
+  ];
 
   @override
   final String wireName = r'ApiUsageStateFilter';
@@ -68,7 +77,11 @@ class _$ApiUsageStateFilterSerializer implements PrimitiveSerializer<ApiUsageSta
     ApiUsageStateFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -84,18 +97,22 @@ class _$ApiUsageStateFilterSerializer implements PrimitiveSerializer<ApiUsageSta
       final value = serializedList[i + 1];
       switch (key) {
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -126,5 +143,3 @@ class _$ApiUsageStateFilterSerializer implements PrimitiveSerializer<ApiUsageSta
     return result.build();
   }
 }
-
-

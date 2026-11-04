@@ -16,10 +16,11 @@ part 'user_activation_link.g.dart';
 /// UserActivationLink
 ///
 /// Properties:
-/// * [value] 
-/// * [ttlMs] 
+/// * [value]
+/// * [ttlMs]
 @BuiltValue()
-abstract class UserActivationLink implements Built<UserActivationLink, UserActivationLinkBuilder> {
+abstract class UserActivationLink
+    implements Built<UserActivationLink, UserActivationLinkBuilder> {
   @BuiltValueField(wireName: r'value')
   String? get value;
 
@@ -28,16 +29,19 @@ abstract class UserActivationLink implements Built<UserActivationLink, UserActiv
 
   UserActivationLink._();
 
-  factory UserActivationLink([void updates(UserActivationLinkBuilder b)]) = _$UserActivationLink;
+  factory UserActivationLink([void updates(UserActivationLinkBuilder b)]) =
+      _$UserActivationLink;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserActivationLinkBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserActivationLink> get serializer => _$UserActivationLinkSerializer();
+  static Serializer<UserActivationLink> get serializer =>
+      _$UserActivationLinkSerializer();
 }
 
-class _$UserActivationLinkSerializer implements PrimitiveSerializer<UserActivationLink> {
+class _$UserActivationLinkSerializer
+    implements PrimitiveSerializer<UserActivationLink> {
   @override
   final Iterable<Type> types = const [UserActivationLink, _$UserActivationLink];
 
@@ -71,7 +75,11 @@ class _$UserActivationLinkSerializer implements PrimitiveSerializer<UserActivati
     UserActivationLink object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +95,22 @@ class _$UserActivationLinkSerializer implements PrimitiveSerializer<UserActivati
       final value = serializedList[i + 1];
       switch (key) {
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'ttlMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.ttlMs = valueDes;
           break;
@@ -130,5 +142,3 @@ class _$UserActivationLinkSerializer implements PrimitiveSerializer<UserActivati
     return result.build();
   }
 }
-
-

@@ -18,13 +18,13 @@ part 'trendz_usage.g.dart';
 /// TrendzUsage
 ///
 /// Properties:
-/// * [used] 
-/// * [anomalyUsage] 
-/// * [predictionUsage] 
-/// * [calculationUsage] 
-/// * [viewUsage] 
-/// * [metricUsage] 
-/// * [chatUsage] 
+/// * [used]
+/// * [anomalyUsage]
+/// * [predictionUsage]
+/// * [calculationUsage]
+/// * [viewUsage]
+/// * [metricUsage]
+/// * [chatUsage]
 @BuiltValue()
 abstract class TrendzUsage implements Built<TrendzUsage, TrendzUsageBuilder> {
   @BuiltValueField(wireName: r'used')
@@ -128,7 +128,11 @@ class _$TrendzUsageSerializer implements PrimitiveSerializer<TrendzUsage> {
     TrendzUsage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -144,58 +148,72 @@ class _$TrendzUsageSerializer implements PrimitiveSerializer<TrendzUsage> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'used':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.used = valueDes;
           break;
         case r'anomalyUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Entity),
-          ) as Entity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Entity),
+                  )
+                  as Entity?;
           if (valueDes == null) continue;
           result.anomalyUsage.replace(valueDes);
           break;
         case r'predictionUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Entity),
-          ) as Entity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Entity),
+                  )
+                  as Entity?;
           if (valueDes == null) continue;
           result.predictionUsage.replace(valueDes);
           break;
         case r'calculationUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Entity),
-          ) as Entity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Entity),
+                  )
+                  as Entity?;
           if (valueDes == null) continue;
           result.calculationUsage.replace(valueDes);
           break;
         case r'viewUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SimpleEntity),
-          ) as SimpleEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SimpleEntity),
+                  )
+                  as SimpleEntity?;
           if (valueDes == null) continue;
           result.viewUsage.replace(valueDes);
           break;
         case r'metricUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SimpleEntity),
-          ) as SimpleEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SimpleEntity),
+                  )
+                  as SimpleEntity?;
           if (valueDes == null) continue;
           result.metricUsage.replace(valueDes);
           break;
         case r'chatUsage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SimpleEntity),
-          ) as SimpleEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SimpleEntity),
+                  )
+                  as SimpleEntity?;
           if (valueDes == null) continue;
           result.chatUsage.replace(valueDes);
           break;
@@ -227,5 +245,3 @@ class _$TrendzUsageSerializer implements PrimitiveSerializer<TrendzUsage> {
     return result.build();
   }
 }
-
-

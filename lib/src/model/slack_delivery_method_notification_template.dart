@@ -17,25 +17,38 @@ part 'slack_delivery_method_notification_template.g.dart';
 /// SlackDeliveryMethodNotificationTemplate
 ///
 /// Properties:
-/// * [enabled] 
-/// * [body] 
-/// * [method] 
+/// * [enabled]
+/// * [body]
+/// * [method]
 @BuiltValue()
-abstract class SlackDeliveryMethodNotificationTemplate implements DeliveryMethodNotificationTemplate, Built<SlackDeliveryMethodNotificationTemplate, SlackDeliveryMethodNotificationTemplateBuilder> {
+abstract class SlackDeliveryMethodNotificationTemplate
+    implements
+        DeliveryMethodNotificationTemplate,
+        Built<
+          SlackDeliveryMethodNotificationTemplate,
+          SlackDeliveryMethodNotificationTemplateBuilder
+        > {
   SlackDeliveryMethodNotificationTemplate._();
 
-  factory SlackDeliveryMethodNotificationTemplate([void updates(SlackDeliveryMethodNotificationTemplateBuilder b)]) = _$SlackDeliveryMethodNotificationTemplate;
+  factory SlackDeliveryMethodNotificationTemplate([
+    void updates(SlackDeliveryMethodNotificationTemplateBuilder b),
+  ]) = _$SlackDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SlackDeliveryMethodNotificationTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SlackDeliveryMethodNotificationTemplate> get serializer => _$SlackDeliveryMethodNotificationTemplateSerializer();
+  static Serializer<SlackDeliveryMethodNotificationTemplate> get serializer =>
+      _$SlackDeliveryMethodNotificationTemplateSerializer();
 }
 
-class _$SlackDeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<SlackDeliveryMethodNotificationTemplate> {
+class _$SlackDeliveryMethodNotificationTemplateSerializer
+    implements PrimitiveSerializer<SlackDeliveryMethodNotificationTemplate> {
   @override
-  final Iterable<Type> types = const [SlackDeliveryMethodNotificationTemplate, _$SlackDeliveryMethodNotificationTemplate];
+  final Iterable<Type> types = const [
+    SlackDeliveryMethodNotificationTemplate,
+    _$SlackDeliveryMethodNotificationTemplate,
+  ];
 
   @override
   final String wireName = r'SlackDeliveryMethodNotificationTemplate';
@@ -70,7 +83,11 @@ class _$SlackDeliveryMethodNotificationTemplateSerializer implements PrimitiveSe
     SlackDeliveryMethodNotificationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,24 +103,30 @@ class _$SlackDeliveryMethodNotificationTemplateSerializer implements PrimitiveSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.body = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
@@ -135,5 +158,3 @@ class _$SlackDeliveryMethodNotificationTemplateSerializer implements PrimitiveSe
     return result.build();
   }
 }
-
-

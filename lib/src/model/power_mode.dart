@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'power_mode.g.dart';
 
 class PowerMode extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'PSM')
   static const PowerMode PSM = _$PSM;
   @BuiltValueEnumConst(wireName: r'DRX')
@@ -27,7 +26,7 @@ class PowerMode extends EnumClass {
 
   static Serializer<PowerMode> get serializer => _$powerModeSerializer;
 
-  const PowerMode._(String name): super(name);
+  const PowerMode._(String name) : super(name);
 
   static BuiltSet<PowerMode> get values => _$values;
   static PowerMode valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class PowerMode extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class PowerModeMixin = Object with _$PowerModeMixin;
-

@@ -16,10 +16,12 @@ part 'chart_fill_settings_gradient.g.dart';
 /// ChartFillSettingsGradient
 ///
 /// Properties:
-/// * [start] 
-/// * [end] 
+/// * [start]
+/// * [end]
 @BuiltValue()
-abstract class ChartFillSettingsGradient implements Built<ChartFillSettingsGradient, ChartFillSettingsGradientBuilder> {
+abstract class ChartFillSettingsGradient
+    implements
+        Built<ChartFillSettingsGradient, ChartFillSettingsGradientBuilder> {
   @BuiltValueField(wireName: r'start')
   double? get start;
 
@@ -28,18 +30,25 @@ abstract class ChartFillSettingsGradient implements Built<ChartFillSettingsGradi
 
   ChartFillSettingsGradient._();
 
-  factory ChartFillSettingsGradient([void updates(ChartFillSettingsGradientBuilder b)]) = _$ChartFillSettingsGradient;
+  factory ChartFillSettingsGradient([
+    void updates(ChartFillSettingsGradientBuilder b),
+  ]) = _$ChartFillSettingsGradient;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ChartFillSettingsGradientBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ChartFillSettingsGradient> get serializer => _$ChartFillSettingsGradientSerializer();
+  static Serializer<ChartFillSettingsGradient> get serializer =>
+      _$ChartFillSettingsGradientSerializer();
 }
 
-class _$ChartFillSettingsGradientSerializer implements PrimitiveSerializer<ChartFillSettingsGradient> {
+class _$ChartFillSettingsGradientSerializer
+    implements PrimitiveSerializer<ChartFillSettingsGradient> {
   @override
-  final Iterable<Type> types = const [ChartFillSettingsGradient, _$ChartFillSettingsGradient];
+  final Iterable<Type> types = const [
+    ChartFillSettingsGradient,
+    _$ChartFillSettingsGradient,
+  ];
 
   @override
   final String wireName = r'ChartFillSettingsGradient';
@@ -71,7 +80,11 @@ class _$ChartFillSettingsGradientSerializer implements PrimitiveSerializer<Chart
     ChartFillSettingsGradient object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +100,22 @@ class _$ChartFillSettingsGradientSerializer implements PrimitiveSerializer<Chart
       final value = serializedList[i + 1];
       switch (key) {
         case r'start':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.start = valueDes;
           break;
         case r'end':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.end = valueDes;
           break;
@@ -130,5 +147,3 @@ class _$ChartFillSettingsGradientSerializer implements PrimitiveSerializer<Chart
     return result.build();
   }
 }
-
-

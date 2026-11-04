@@ -34,18 +34,25 @@ class TimePageLink extends PageLink {
   int? startTime;
   int? endTime;
 
-  TimePageLink(int pageSize,
-      [int page = 0,
-      String? textSearch,
-      SortOrder? sortOrder,
-      this.startTime,
-      this.endTime])
-      : super(pageSize, page, textSearch, sortOrder);
+  TimePageLink(
+    super.pageSize, [
+    super.page,
+    super.textSearch,
+    super.sortOrder,
+    this.startTime,
+    this.endTime,
+  ]);
 
   @override
   TimePageLink nextPageLink() {
     return TimePageLink(
-        pageSize, page + 1, textSearch, sortOrder, startTime, endTime);
+      pageSize,
+      page + 1,
+      textSearch,
+      sortOrder,
+      startTime,
+      endTime,
+    );
   }
 
   @override

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'chart_fill_type.g.dart';
 
 class ChartFillType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'none')
   static const ChartFillType none = _$none;
   @BuiltValueEnumConst(wireName: r'opacity')
@@ -27,7 +26,7 @@ class ChartFillType extends EnumClass {
 
   static Serializer<ChartFillType> get serializer => _$chartFillTypeSerializer;
 
-  const ChartFillType._(String name): super(name);
+  const ChartFillType._(String name) : super(name);
 
   static BuiltSet<ChartFillType> get values => _$values;
   static ChartFillType valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class ChartFillType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ChartFillTypeMixin = Object with _$ChartFillTypeMixin;
-

@@ -14,15 +14,12 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/device.dart';
 import 'package:thingsboard_client/src/model/lw_m2_m_server_security_config_default.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class Lwm2mControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -33,7 +30,7 @@ class Lwm2mControllerApi {
   /// Get the Lwm2m Bootstrap SecurityInfo object (of the current server) based on the provided isBootstrapServer parameter. If isBootstrapServer &#x3D;&#x3D; true, get the parameters of the current Bootstrap Server. If isBootstrapServer &#x3D;&#x3D; false, get the parameters of the current Lwm2m Server. Used for client settings when starting the client in Bootstrap mode.   Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [isBootstrapServer] - A Boolean value representing the Server SecurityInfo for future Bootstrap client mode settings. Values: 'true' for Bootstrap Server; 'false' for Lwm2m Server. 
+  /// * [isBootstrapServer] - A Boolean value representing the Server SecurityInfo for future Bootstrap client mode settings. Values: 'true' for Bootstrap Server; 'false' for Lwm2m Server.
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -43,7 +40,8 @@ class Lwm2mControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LwM2MServerSecurityConfigDefault] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LwM2MServerSecurityConfigDefault>> getLwm2mBootstrapSecurityInfo({ 
+  Future<Response<LwM2MServerSecurityConfigDefault>>
+  getLwm2mBootstrapSecurityInfo({
     required bool isBootstrapServer,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -52,13 +50,23 @@ class Lwm2mControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLwM2MServerSecurityConfigDefault);
-    final _path = r'/api/lwm2m/deviceProfile/bootstrap/{isBootstrapServer}'.replaceAll('{' r'isBootstrapServer' '}', encodeQueryParameter(_serializers, isBootstrapServer, const FullType(bool)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerLwM2MServerSecurityConfigDefault);
+    final _path = r'/api/lwm2m/deviceProfile/bootstrap/{isBootstrapServer}'
+        .replaceAll(
+          '{'
+          r'isBootstrapServer'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            isBootstrapServer,
+            const FullType(bool),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -66,11 +74,8 @@ class Lwm2mControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -89,11 +94,15 @@ class Lwm2mControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LwM2MServerSecurityConfigDefault),
-      ) as LwM2MServerSecurityConfigDefault;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(
+                    LwM2MServerSecurityConfigDefault,
+                  ),
+                )
+                as LwM2MServerSecurityConfigDefault;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -120,8 +129,8 @@ class Lwm2mControllerApi {
   /// Deprecated.
   ///
   /// Parameters:
-  /// * [requestBody] 
-  /// * [entityGroupId] 
+  /// * [requestBody]
+  /// * [entityGroupId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -131,7 +140,7 @@ class Lwm2mControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Device] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Device>> saveLwm2mDeviceWithCredentials({ 
+  Future<Response<Device>> saveLwm2mDeviceWithCredentials({
     required BuiltMap<String, JsonObject?> requestBody,
     String? entityGroupId,
     CancelToken? cancelToken,
@@ -141,13 +150,13 @@ class Lwm2mControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerMapOfStringToJsonObjectAndDevice);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerMapOfStringToJsonObjectAndDevice);
     final _path = r'/api/lwm2m/device-credentials';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -155,11 +164,8 @@ class Lwm2mControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -168,18 +174,25 @@ class Lwm2mControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (entityGroupId != null) r'entityGroupId': encodeQueryParameter(_serializers, entityGroupId, const FullType(String)),
+      if (entityGroupId != null)
+        r'entityGroupId': encodeQueryParameter(
+          _serializers,
+          entityGroupId,
+          const FullType(String),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
-      const _type = FullType(BuiltMap, [FullType(String), FullType(JsonObject)]);
+      const _type = FullType(BuiltMap, [
+        FullType(String),
+        FullType(JsonObject),
+      ]);
       _bodyData = _serializers.serialize(requestBody, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -204,11 +217,13 @@ class Lwm2mControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Device),
-      ) as Device;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Device),
+                )
+                as Device;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -230,5 +245,4 @@ class Lwm2mControllerApi {
       extra: _response.extra,
     );
   }
-
 }

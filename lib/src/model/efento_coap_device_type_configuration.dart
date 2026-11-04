@@ -17,23 +17,36 @@ part 'efento_coap_device_type_configuration.g.dart';
 /// EfentoCoapDeviceTypeConfiguration
 ///
 /// Properties:
-/// * [coapDeviceType] 
+/// * [coapDeviceType]
 @BuiltValue()
-abstract class EfentoCoapDeviceTypeConfiguration implements CoapDeviceTypeConfiguration, Built<EfentoCoapDeviceTypeConfiguration, EfentoCoapDeviceTypeConfigurationBuilder> {
+abstract class EfentoCoapDeviceTypeConfiguration
+    implements
+        CoapDeviceTypeConfiguration,
+        Built<
+          EfentoCoapDeviceTypeConfiguration,
+          EfentoCoapDeviceTypeConfigurationBuilder
+        > {
   EfentoCoapDeviceTypeConfiguration._();
 
-  factory EfentoCoapDeviceTypeConfiguration([void updates(EfentoCoapDeviceTypeConfigurationBuilder b)]) = _$EfentoCoapDeviceTypeConfiguration;
+  factory EfentoCoapDeviceTypeConfiguration([
+    void updates(EfentoCoapDeviceTypeConfigurationBuilder b),
+  ]) = _$EfentoCoapDeviceTypeConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EfentoCoapDeviceTypeConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EfentoCoapDeviceTypeConfiguration> get serializer => _$EfentoCoapDeviceTypeConfigurationSerializer();
+  static Serializer<EfentoCoapDeviceTypeConfiguration> get serializer =>
+      _$EfentoCoapDeviceTypeConfigurationSerializer();
 }
 
-class _$EfentoCoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<EfentoCoapDeviceTypeConfiguration> {
+class _$EfentoCoapDeviceTypeConfigurationSerializer
+    implements PrimitiveSerializer<EfentoCoapDeviceTypeConfiguration> {
   @override
-  final Iterable<Type> types = const [EfentoCoapDeviceTypeConfiguration, _$EfentoCoapDeviceTypeConfiguration];
+  final Iterable<Type> types = const [
+    EfentoCoapDeviceTypeConfiguration,
+    _$EfentoCoapDeviceTypeConfiguration,
+  ];
 
   @override
   final String wireName = r'EfentoCoapDeviceTypeConfiguration';
@@ -56,7 +69,11 @@ class _$EfentoCoapDeviceTypeConfigurationSerializer implements PrimitiveSerializ
     EfentoCoapDeviceTypeConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$EfentoCoapDeviceTypeConfigurationSerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'coapDeviceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.coapDeviceType = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$EfentoCoapDeviceTypeConfigurationSerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

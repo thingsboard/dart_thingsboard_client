@@ -9,18 +9,15 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/component_descriptor.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class ComponentDescriptorControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -41,7 +38,7 @@ class ComponentDescriptorControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ComponentDescriptor] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ComponentDescriptor>> getComponentDescriptorByClazz({ 
+  Future<Response<ComponentDescriptor>> getComponentDescriptorByClazz({
     required String componentDescriptorClazz,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -50,13 +47,21 @@ class ComponentDescriptorControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerComponentDescriptor);
-    final _path = r'/api/component/{componentDescriptorClazz}'.replaceAll('{' r'componentDescriptorClazz' '}', encodeQueryParameter(_serializers, componentDescriptorClazz, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerComponentDescriptor);
+    final _path = r'/api/component/{componentDescriptorClazz}'.replaceAll(
+      '{'
+      r'componentDescriptorClazz'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        componentDescriptorClazz,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -64,11 +69,8 @@ class ComponentDescriptorControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -87,11 +89,13 @@ class ComponentDescriptorControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ComponentDescriptor),
-      ) as ComponentDescriptor;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ComponentDescriptor),
+                )
+                as ComponentDescriptor;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -129,7 +133,8 @@ class ComponentDescriptorControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<ComponentDescriptor>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<ComponentDescriptor>>> getComponentDescriptorsByType({ 
+  Future<Response<BuiltList<ComponentDescriptor>>>
+  getComponentDescriptorsByType({
     required String componentType,
     String? ruleChainType,
     CancelToken? cancelToken,
@@ -139,13 +144,21 @@ class ComponentDescriptorControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfComponentDescriptor);
-    final _path = r'/api/components/{componentType}'.replaceAll('{' r'componentType' '}', encodeQueryParameter(_serializers, componentType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfComponentDescriptor);
+    final _path = r'/api/components/{componentType}'.replaceAll(
+      '{'
+      r'componentType'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        componentType,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -153,11 +166,8 @@ class ComponentDescriptorControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -165,7 +175,12 @@ class ComponentDescriptorControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (ruleChainType != null) r'ruleChainType': encodeQueryParameter(_serializers, ruleChainType, const FullType(String)),
+      if (ruleChainType != null)
+        r'ruleChainType': encodeQueryParameter(
+          _serializers,
+          ruleChainType,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -181,11 +196,15 @@ class ComponentDescriptorControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(ComponentDescriptor)]),
-      ) as BuiltList<ComponentDescriptor>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(ComponentDescriptor),
+                  ]),
+                )
+                as BuiltList<ComponentDescriptor>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -223,7 +242,8 @@ class ComponentDescriptorControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<ComponentDescriptor>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<ComponentDescriptor>>> getComponentDescriptorsByTypes({ 
+  Future<Response<BuiltList<ComponentDescriptor>>>
+  getComponentDescriptorsByTypes({
     required BuiltList<String> componentTypes,
     String? ruleChainType,
     CancelToken? cancelToken,
@@ -233,13 +253,13 @@ class ComponentDescriptorControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfComponentDescriptorAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfComponentDescriptorAndListOfString);
     final _path = r'/api/components';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -247,11 +267,8 @@ class ComponentDescriptorControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -259,8 +276,18 @@ class ComponentDescriptorControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'componentTypes': encodeCollectionQueryParameter<String>(_serializers, componentTypes, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
-      if (ruleChainType != null) r'ruleChainType': encodeQueryParameter(_serializers, ruleChainType, const FullType(String)),
+      r'componentTypes': encodeCollectionQueryParameter<String>(
+        _serializers,
+        componentTypes,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
+      if (ruleChainType != null)
+        r'ruleChainType': encodeQueryParameter(
+          _serializers,
+          ruleChainType,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -276,11 +303,15 @@ class ComponentDescriptorControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(ComponentDescriptor)]),
-      ) as BuiltList<ComponentDescriptor>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(ComponentDescriptor),
+                  ]),
+                )
+                as BuiltList<ComponentDescriptor>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -302,5 +333,4 @@ class ComponentDescriptorControllerApi {
       extra: _response.extra,
     );
   }
-
 }

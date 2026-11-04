@@ -22,15 +22,16 @@ part 'entity_data_query.g.dart';
 /// Entity data query to find entities. Page size is capped at 100.
 ///
 /// Properties:
-/// * [entityFilter] 
-/// * [keyFilters] 
-/// * [keyFiltersOperation] 
-/// * [pageLink] 
-/// * [entityFields] 
-/// * [latestValues] 
-/// * [keyFiltersOperationOrDefault] 
+/// * [entityFilter]
+/// * [keyFilters]
+/// * [keyFiltersOperation]
+/// * [pageLink]
+/// * [entityFields]
+/// * [latestValues]
+/// * [keyFiltersOperationOrDefault]
 @BuiltValue()
-abstract class EntityDataQuery implements Built<EntityDataQuery, EntityDataQueryBuilder> {
+abstract class EntityDataQuery
+    implements Built<EntityDataQuery, EntityDataQueryBuilder> {
   @BuiltValueField(wireName: r'entityFilter')
   EntityFilter? get entityFilter;
 
@@ -56,16 +57,19 @@ abstract class EntityDataQuery implements Built<EntityDataQuery, EntityDataQuery
 
   EntityDataQuery._();
 
-  factory EntityDataQuery([void updates(EntityDataQueryBuilder b)]) = _$EntityDataQuery;
+  factory EntityDataQuery([void updates(EntityDataQueryBuilder b)]) =
+      _$EntityDataQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityDataQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityDataQuery> get serializer => _$EntityDataQuerySerializer();
+  static Serializer<EntityDataQuery> get serializer =>
+      _$EntityDataQuerySerializer();
 }
 
-class _$EntityDataQuerySerializer implements PrimitiveSerializer<EntityDataQuery> {
+class _$EntityDataQuerySerializer
+    implements PrimitiveSerializer<EntityDataQuery> {
   @override
   final Iterable<Type> types = const [EntityDataQuery, _$EntityDataQuery];
 
@@ -134,7 +138,11 @@ class _$EntityDataQuerySerializer implements PrimitiveSerializer<EntityDataQuery
     EntityDataQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -150,58 +158,82 @@ class _$EntityDataQuerySerializer implements PrimitiveSerializer<EntityDataQuery
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityFilter),
-          ) as EntityFilter?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityFilter),
+                  )
+                  as EntityFilter?;
           if (valueDes == null) continue;
           result.entityFilter = valueDes;
           break;
         case r'keyFilters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(KeyFilter)]),
-          ) as BuiltList<KeyFilter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(KeyFilter),
+                    ]),
+                  )
+                  as BuiltList<KeyFilter>?;
           if (valueDes == null) continue;
           result.keyFilters.replace(valueDes);
           break;
         case r'keyFiltersOperation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.keyFiltersOperation = valueDes;
           break;
         case r'pageLink':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityDataPageLink),
-          ) as EntityDataPageLink?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityDataPageLink),
+                  )
+                  as EntityDataPageLink?;
           if (valueDes == null) continue;
           result.pageLink.replace(valueDes);
           break;
         case r'entityFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityKey)]),
-          ) as BuiltList<EntityKey>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityKey),
+                    ]),
+                  )
+                  as BuiltList<EntityKey>?;
           if (valueDes == null) continue;
           result.entityFields.replace(valueDes);
           break;
         case r'latestValues':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityKey)]),
-          ) as BuiltList<EntityKey>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityKey),
+                    ]),
+                  )
+                  as BuiltList<EntityKey>?;
           if (valueDes == null) continue;
           result.latestValues.replace(valueDes);
           break;
         case r'keyFiltersOperationOrDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.keyFiltersOperationOrDefault = valueDes;
           break;
@@ -233,5 +265,3 @@ class _$EntityDataQuerySerializer implements PrimitiveSerializer<EntityDataQuery
     return result.build();
   }
 }
-
-

@@ -9,17 +9,14 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/device_group_ota_package.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class DeviceGroupOtaPackageControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -27,10 +24,10 @@ class DeviceGroupOtaPackageControllerApi {
   const DeviceGroupOtaPackageControllerApi(this._dio, [this._serializers]);
 
   /// deleteDeviceGroupOtaPackage
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -40,7 +37,7 @@ class DeviceGroupOtaPackageControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteDeviceGroupOtaPackage({ 
+  Future<Response<void>> deleteDeviceGroupOtaPackage({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -50,12 +47,15 @@ class DeviceGroupOtaPackageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/deviceGroupOtaPackage/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/deviceGroupOtaPackage/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -63,11 +63,8 @@ class DeviceGroupOtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -86,11 +83,11 @@ class DeviceGroupOtaPackageControllerApi {
   }
 
   /// getFirmwareById
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [groupId] 
-  /// * [firmwareType] 
+  /// * [groupId]
+  /// * [firmwareType]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -100,7 +97,7 @@ class DeviceGroupOtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [DeviceGroupOtaPackage] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<DeviceGroupOtaPackage>> getFirmwareById({ 
+  Future<Response<DeviceGroupOtaPackage>> getFirmwareById({
     required String groupId,
     required String firmwareType,
     CancelToken? cancelToken,
@@ -110,13 +107,32 @@ class DeviceGroupOtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerDeviceGroupOtaPackage);
-    final _path = r'/api/deviceGroupOtaPackage/{groupId}/{firmwareType}'.replaceAll('{' r'groupId' '}', encodeQueryParameter(_serializers, groupId, const FullType(String)).toString()).replaceAll('{' r'firmwareType' '}', encodeQueryParameter(_serializers, firmwareType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerDeviceGroupOtaPackage);
+    final _path = r'/api/deviceGroupOtaPackage/{groupId}/{firmwareType}'
+        .replaceAll(
+          '{'
+          r'groupId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            groupId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'firmwareType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            firmwareType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -124,11 +140,8 @@ class DeviceGroupOtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -147,11 +160,13 @@ class DeviceGroupOtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(DeviceGroupOtaPackage),
-      ) as DeviceGroupOtaPackage;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(DeviceGroupOtaPackage),
+                )
+                as DeviceGroupOtaPackage;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -175,10 +190,10 @@ class DeviceGroupOtaPackageControllerApi {
   }
 
   /// saveDeviceGroupOtaPackage
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [deviceGroupOtaPackage] 
+  /// * [deviceGroupOtaPackage]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -188,7 +203,7 @@ class DeviceGroupOtaPackageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [DeviceGroupOtaPackage] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<DeviceGroupOtaPackage>> saveDeviceGroupOtaPackage({ 
+  Future<Response<DeviceGroupOtaPackage>> saveDeviceGroupOtaPackage({
     required DeviceGroupOtaPackage deviceGroupOtaPackage,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -197,13 +212,12 @@ class DeviceGroupOtaPackageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerDeviceGroupOtaPackage);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerDeviceGroupOtaPackage);
     final _path = r'/api/deviceGroupOtaPackage';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -211,11 +225,8 @@ class DeviceGroupOtaPackageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -227,14 +238,13 @@ class DeviceGroupOtaPackageControllerApi {
 
     try {
       const _type = FullType(DeviceGroupOtaPackage);
-      _bodyData = _serializers.serialize(deviceGroupOtaPackage, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        deviceGroupOtaPackage,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -254,11 +264,13 @@ class DeviceGroupOtaPackageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(DeviceGroupOtaPackage),
-      ) as DeviceGroupOtaPackage;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(DeviceGroupOtaPackage),
+                )
+                as DeviceGroupOtaPackage;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -280,5 +292,4 @@ class DeviceGroupOtaPackageControllerApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -24,17 +24,18 @@ part 'alarm_rule_definition.g.dart';
 /// Properties:
 /// * [id] - JSON object with the Alarm Rule Id. Referencing non-existing Alarm Rule Id will cause error.
 /// * [createdTime] - Timestamp of the alarm rule creation, in milliseconds
-/// * [tenantId] 
-/// * [entityId] 
+/// * [tenantId]
+/// * [entityId]
 /// * [name] - User defined name of the alarm rule.
 /// * [debugSettings] - Debug settings object.
 /// * [configurationVersion] - Version of alarm rule configuration.
-/// * [configuration] 
-/// * [version] 
+/// * [configuration]
+/// * [version]
 /// * [additionalInfo] - Additional parameters of the alarm rule. May include: 'description' (string).
-/// * [debugMode] 
+/// * [debugMode]
 @BuiltValue()
-abstract class AlarmRuleDefinition implements Built<AlarmRuleDefinition, AlarmRuleDefinitionBuilder> {
+abstract class AlarmRuleDefinition
+    implements Built<AlarmRuleDefinition, AlarmRuleDefinitionBuilder> {
   /// JSON object with the Alarm Rule Id. Referencing non-existing Alarm Rule Id will cause error.
   @BuiltValueField(wireName: r'id')
   CalculatedFieldId? get id;
@@ -77,18 +78,24 @@ abstract class AlarmRuleDefinition implements Built<AlarmRuleDefinition, AlarmRu
 
   AlarmRuleDefinition._();
 
-  factory AlarmRuleDefinition([void updates(AlarmRuleDefinitionBuilder b)]) = _$AlarmRuleDefinition;
+  factory AlarmRuleDefinition([void updates(AlarmRuleDefinitionBuilder b)]) =
+      _$AlarmRuleDefinition;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmRuleDefinitionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmRuleDefinition> get serializer => _$AlarmRuleDefinitionSerializer();
+  static Serializer<AlarmRuleDefinition> get serializer =>
+      _$AlarmRuleDefinitionSerializer();
 }
 
-class _$AlarmRuleDefinitionSerializer implements PrimitiveSerializer<AlarmRuleDefinition> {
+class _$AlarmRuleDefinitionSerializer
+    implements PrimitiveSerializer<AlarmRuleDefinition> {
   @override
-  final Iterable<Type> types = const [AlarmRuleDefinition, _$AlarmRuleDefinition];
+  final Iterable<Type> types = const [
+    AlarmRuleDefinition,
+    _$AlarmRuleDefinition,
+  ];
 
   @override
   final String wireName = r'AlarmRuleDefinition';
@@ -181,7 +188,11 @@ class _$AlarmRuleDefinitionSerializer implements PrimitiveSerializer<AlarmRuleDe
     AlarmRuleDefinition object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -197,89 +208,113 @@ class _$AlarmRuleDefinitionSerializer implements PrimitiveSerializer<AlarmRuleDe
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CalculatedFieldId),
-          ) as CalculatedFieldId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CalculatedFieldId),
+                  )
+                  as CalculatedFieldId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.entityId = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'debugSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DebugSettings),
-          ) as DebugSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DebugSettings),
+                  )
+                  as DebugSettings?;
           if (valueDes == null) continue;
           result.debugSettings.replace(valueDes);
           break;
         case r'configurationVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.configurationVersion = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmCalculatedFieldConfiguration),
-          ) as AlarmCalculatedFieldConfiguration;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(
+                      AlarmCalculatedFieldConfiguration,
+                    ),
+                  )
+                  as AlarmCalculatedFieldConfiguration;
           result.configuration.replace(valueDes);
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'debugMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.debugMode = valueDes;
           break;
@@ -311,5 +346,3 @@ class _$AlarmRuleDefinitionSerializer implements PrimitiveSerializer<AlarmRuleDe
     return result.build();
   }
 }
-
-

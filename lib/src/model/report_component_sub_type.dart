@@ -15,11 +15,11 @@ import 'package:built_value/serializer.dart';
 part 'report_component_sub_type.g.dart';
 
 class ReportComponentSubType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'doughnutChart')
   static const ReportComponentSubType doughnutChart = _$doughnutChart;
   @BuiltValueEnumConst(wireName: r'horizontalDoughnutChart')
-  static const ReportComponentSubType horizontalDoughnutChart = _$horizontalDoughnutChart;
+  static const ReportComponentSubType horizontalDoughnutChart =
+      _$horizontalDoughnutChart;
   @BuiltValueEnumConst(wireName: r'pointChart')
   static const ReportComponentSubType pointChart = _$pointChart;
   @BuiltValueEnumConst(wireName: r'barChart')
@@ -39,11 +39,13 @@ class ReportComponentSubType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'default')
   static const ReportComponentSubType default_ = _$default_;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ReportComponentSubType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ReportComponentSubType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ReportComponentSubType> get serializer => _$reportComponentSubTypeSerializer;
+  static Serializer<ReportComponentSubType> get serializer =>
+      _$reportComponentSubTypeSerializer;
 
-  const ReportComponentSubType._(String name): super(name);
+  const ReportComponentSubType._(String name) : super(name);
 
   static BuiltSet<ReportComponentSubType> get values => _$values;
   static ReportComponentSubType valueOf(String name) => _$valueOf(name);
@@ -55,5 +57,5 @@ class ReportComponentSubType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class ReportComponentSubTypeMixin = Object with _$ReportComponentSubTypeMixin;
-
+abstract class ReportComponentSubTypeMixin = Object
+    with _$ReportComponentSubTypeMixin;

@@ -17,8 +17,8 @@ part 'entity_key.g.dart';
 /// EntityKey
 ///
 /// Properties:
-/// * [type] 
-/// * [key] 
+/// * [type]
+/// * [key]
 @BuiltValue()
 abstract class EntityKey implements Built<EntityKey, EntityKeyBuilder> {
   @BuiltValueField(wireName: r'type')
@@ -73,7 +73,11 @@ class _$EntityKeySerializer implements PrimitiveSerializer<EntityKey> {
     EntityKey object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +93,22 @@ class _$EntityKeySerializer implements PrimitiveSerializer<EntityKey> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityKeyType),
-          ) as EntityKeyType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityKeyType),
+                  )
+                  as EntityKeyType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
@@ -132,5 +140,3 @@ class _$EntityKeySerializer implements PrimitiveSerializer<EntityKey> {
     return result.build();
   }
 }
-
-

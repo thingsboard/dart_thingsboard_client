@@ -13,14 +13,11 @@ import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/solution_step.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AiSolutionControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -28,12 +25,12 @@ class AiSolutionControllerApi {
   const AiSolutionControllerApi(this._dio, [this._serializers]);
 
   /// chat
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
-  /// * [step] 
-  /// * [body] 
+  /// * [solutionId]
+  /// * [step]
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -43,7 +40,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> chat({ 
+  Future<Response<JsonObject>> chat({
     required String solutionId,
     required SolutionStep step,
     required String body,
@@ -54,13 +51,32 @@ class AiSolutionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSolutionStep);
-    final _path = r'/api/ai/solution/{solutionId}/{step}/chat'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString()).replaceAll('{' r'step' '}', encodeQueryParameter(_serializers, step, const FullType(SolutionStep)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSolutionStep);
+    final _path = r'/api/ai/solution/{solutionId}/{step}/chat'
+        .replaceAll(
+          '{'
+          r'solutionId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            solutionId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'step'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            step,
+            const FullType(SolutionStep),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -68,11 +84,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -84,13 +97,9 @@ class AiSolutionControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -110,11 +119,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -138,11 +149,11 @@ class AiSolutionControllerApi {
   }
 
   /// clearStep
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
-  /// * [step] 
+  /// * [solutionId]
+  /// * [step]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -152,7 +163,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> clearStep({ 
+  Future<Response<void>> clearStep({
     required String solutionId,
     required SolutionStep step,
     CancelToken? cancelToken,
@@ -162,13 +173,32 @@ class AiSolutionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSolutionStep);
-    final _path = r'/api/ai/solution/{solutionId}/{step}/clear'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString()).replaceAll('{' r'step' '}', encodeQueryParameter(_serializers, step, const FullType(SolutionStep)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSolutionStep);
+    final _path = r'/api/ai/solution/{solutionId}/{step}/clear'
+        .replaceAll(
+          '{'
+          r'solutionId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            solutionId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'step'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            step,
+            const FullType(SolutionStep),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -176,11 +206,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -199,10 +226,10 @@ class AiSolutionControllerApi {
   }
 
   /// createSolution
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
+  /// * [solutionId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -212,7 +239,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> createSolution({ 
+  Future<Response<JsonObject>> createSolution({
     required String solutionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -222,12 +249,19 @@ class AiSolutionControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/solution/{solutionId}/create'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString());
+    final _path = r'/api/ai/solution/{solutionId}/create'.replaceAll(
+      '{'
+      r'solutionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        solutionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -235,11 +269,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -258,11 +289,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -286,10 +319,10 @@ class AiSolutionControllerApi {
   }
 
   /// deleteSolution
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
+  /// * [solutionId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -299,7 +332,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteSolution({ 
+  Future<Response<void>> deleteSolution({
     required String solutionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -309,12 +342,19 @@ class AiSolutionControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/solution/{solutionId}'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString());
+    final _path = r'/api/ai/solution/{solutionId}'.replaceAll(
+      '{'
+      r'solutionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        solutionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -322,11 +362,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -345,10 +382,10 @@ class AiSolutionControllerApi {
   }
 
   /// getSolution
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
+  /// * [solutionId]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -358,7 +395,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getSolution({ 
+  Future<Response<JsonObject>> getSolution({
     required String solutionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -368,12 +405,19 @@ class AiSolutionControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/solution/{solutionId}'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString());
+    final _path = r'/api/ai/solution/{solutionId}'.replaceAll(
+      '{'
+      r'solutionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        solutionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -381,11 +425,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -404,11 +445,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -432,7 +475,7 @@ class AiSolutionControllerApi {
   }
 
   /// getSolutions
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -444,7 +487,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getSolutions({ 
+  Future<Response<JsonObject>> getSolutions({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -456,9 +499,7 @@ class AiSolutionControllerApi {
     final _path = r'/api/ai/solution/infos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -466,11 +507,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -489,11 +527,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -517,11 +557,11 @@ class AiSolutionControllerApi {
   }
 
   /// installSolution
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
-  /// * [xAuthorization] 
+  /// * [solutionId]
+  /// * [xAuthorization]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -531,7 +571,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> installSolution({ 
+  Future<Response<JsonObject>> installSolution({
     required String solutionId,
     required String xAuthorization,
     CancelToken? cancelToken,
@@ -542,7 +582,16 @@ class AiSolutionControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/solution/{solutionId}/install'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString());
+    final _path = r'/api/ai/solution/{solutionId}/install'.replaceAll(
+      '{'
+      r'solutionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        solutionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -556,11 +605,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -579,11 +625,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -607,7 +655,7 @@ class AiSolutionControllerApi {
   }
 
   /// startNew
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -619,7 +667,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> startNew({ 
+  Future<Response<JsonObject>> startNew({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -631,9 +679,7 @@ class AiSolutionControllerApi {
     final _path = r'/api/ai/solution/start';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -641,11 +687,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -664,11 +707,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -692,11 +737,11 @@ class AiSolutionControllerApi {
   }
 
   /// uninstallSolution
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
-  /// * [xAuthorization] 
+  /// * [solutionId]
+  /// * [xAuthorization]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -706,7 +751,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> uninstallSolution({ 
+  Future<Response<JsonObject>> uninstallSolution({
     required String solutionId,
     required String xAuthorization,
     CancelToken? cancelToken,
@@ -717,7 +762,16 @@ class AiSolutionControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/solution/{solutionId}/uninstall'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString());
+    final _path = r'/api/ai/solution/{solutionId}/uninstall'.replaceAll(
+      '{'
+      r'solutionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        solutionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
       headers: <String, dynamic>{
@@ -731,11 +785,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -754,11 +805,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -782,12 +835,12 @@ class AiSolutionControllerApi {
   }
 
   /// updateData
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [solutionId] 
-  /// * [dataKey] 
-  /// * [body] 
+  /// * [solutionId]
+  /// * [dataKey]
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -797,7 +850,7 @@ class AiSolutionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> updateData({ 
+  Future<Response<JsonObject>> updateData({
     required String solutionId,
     required String dataKey,
     JsonObject? body,
@@ -809,12 +862,30 @@ class AiSolutionControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/ai/solution/{solutionId}/{dataKey}'.replaceAll('{' r'solutionId' '}', encodeQueryParameter(_serializers, solutionId, const FullType(String)).toString()).replaceAll('{' r'dataKey' '}', encodeQueryParameter(_serializers, dataKey, const FullType(String)).toString());
+    final _path = r'/api/ai/solution/{solutionId}/{dataKey}'
+        .replaceAll(
+          '{'
+          r'solutionId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            solutionId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'dataKey'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            dataKey,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -822,11 +893,8 @@ class AiSolutionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -838,13 +906,9 @@ class AiSolutionControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -864,11 +928,13 @@ class AiSolutionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -890,5 +956,4 @@ class AiSolutionControllerApi {
       extra: _response.extra,
     );
   }
-
 }

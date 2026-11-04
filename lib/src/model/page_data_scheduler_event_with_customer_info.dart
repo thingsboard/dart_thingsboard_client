@@ -23,7 +23,12 @@ part 'page_data_scheduler_event_with_customer_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataSchedulerEventWithCustomerInfo implements Built<PageDataSchedulerEventWithCustomerInfo, PageDataSchedulerEventWithCustomerInfoBuilder> {
+abstract class PageDataSchedulerEventWithCustomerInfo
+    implements
+        Built<
+          PageDataSchedulerEventWithCustomerInfo,
+          PageDataSchedulerEventWithCustomerInfoBuilder
+        > {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<SchedulerEventWithCustomerInfo>? get data;
@@ -42,18 +47,25 @@ abstract class PageDataSchedulerEventWithCustomerInfo implements Built<PageDataS
 
   PageDataSchedulerEventWithCustomerInfo._();
 
-  factory PageDataSchedulerEventWithCustomerInfo([void updates(PageDataSchedulerEventWithCustomerInfoBuilder b)]) = _$PageDataSchedulerEventWithCustomerInfo;
+  factory PageDataSchedulerEventWithCustomerInfo([
+    void updates(PageDataSchedulerEventWithCustomerInfoBuilder b),
+  ]) = _$PageDataSchedulerEventWithCustomerInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataSchedulerEventWithCustomerInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataSchedulerEventWithCustomerInfo> get serializer => _$PageDataSchedulerEventWithCustomerInfoSerializer();
+  static Serializer<PageDataSchedulerEventWithCustomerInfo> get serializer =>
+      _$PageDataSchedulerEventWithCustomerInfoSerializer();
 }
 
-class _$PageDataSchedulerEventWithCustomerInfoSerializer implements PrimitiveSerializer<PageDataSchedulerEventWithCustomerInfo> {
+class _$PageDataSchedulerEventWithCustomerInfoSerializer
+    implements PrimitiveSerializer<PageDataSchedulerEventWithCustomerInfo> {
   @override
-  final Iterable<Type> types = const [PageDataSchedulerEventWithCustomerInfo, _$PageDataSchedulerEventWithCustomerInfo];
+  final Iterable<Type> types = const [
+    PageDataSchedulerEventWithCustomerInfo,
+    _$PageDataSchedulerEventWithCustomerInfo,
+  ];
 
   @override
   final String wireName = r'PageDataSchedulerEventWithCustomerInfo';
@@ -67,7 +79,9 @@ class _$PageDataSchedulerEventWithCustomerInfoSerializer implements PrimitiveSer
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(SchedulerEventWithCustomerInfo),
+        ]),
       );
     }
     if (object.totalPages != null) {
@@ -99,7 +113,11 @@ class _$PageDataSchedulerEventWithCustomerInfoSerializer implements PrimitiveSer
     PageDataSchedulerEventWithCustomerInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +133,44 @@ class _$PageDataSchedulerEventWithCustomerInfoSerializer implements PrimitiveSer
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]),
-          ) as BuiltList<SchedulerEventWithCustomerInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SchedulerEventWithCustomerInfo),
+                    ]),
+                  )
+                  as BuiltList<SchedulerEventWithCustomerInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +202,3 @@ class _$PageDataSchedulerEventWithCustomerInfoSerializer implements PrimitiveSer
     return result.build();
   }
 }
-
-

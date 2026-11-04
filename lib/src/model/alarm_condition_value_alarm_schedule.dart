@@ -17,10 +17,15 @@ part 'alarm_condition_value_alarm_schedule.g.dart';
 /// AlarmConditionValueAlarmSchedule
 ///
 /// Properties:
-/// * [staticValue] 
-/// * [dynamicValueArgument] 
+/// * [staticValue]
+/// * [dynamicValueArgument]
 @BuiltValue()
-abstract class AlarmConditionValueAlarmSchedule implements Built<AlarmConditionValueAlarmSchedule, AlarmConditionValueAlarmScheduleBuilder> {
+abstract class AlarmConditionValueAlarmSchedule
+    implements
+        Built<
+          AlarmConditionValueAlarmSchedule,
+          AlarmConditionValueAlarmScheduleBuilder
+        > {
   @BuiltValueField(wireName: r'staticValue')
   AlarmSchedule? get staticValue;
 
@@ -29,18 +34,25 @@ abstract class AlarmConditionValueAlarmSchedule implements Built<AlarmConditionV
 
   AlarmConditionValueAlarmSchedule._();
 
-  factory AlarmConditionValueAlarmSchedule([void updates(AlarmConditionValueAlarmScheduleBuilder b)]) = _$AlarmConditionValueAlarmSchedule;
+  factory AlarmConditionValueAlarmSchedule([
+    void updates(AlarmConditionValueAlarmScheduleBuilder b),
+  ]) = _$AlarmConditionValueAlarmSchedule;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmConditionValueAlarmScheduleBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmConditionValueAlarmSchedule> get serializer => _$AlarmConditionValueAlarmScheduleSerializer();
+  static Serializer<AlarmConditionValueAlarmSchedule> get serializer =>
+      _$AlarmConditionValueAlarmScheduleSerializer();
 }
 
-class _$AlarmConditionValueAlarmScheduleSerializer implements PrimitiveSerializer<AlarmConditionValueAlarmSchedule> {
+class _$AlarmConditionValueAlarmScheduleSerializer
+    implements PrimitiveSerializer<AlarmConditionValueAlarmSchedule> {
   @override
-  final Iterable<Type> types = const [AlarmConditionValueAlarmSchedule, _$AlarmConditionValueAlarmSchedule];
+  final Iterable<Type> types = const [
+    AlarmConditionValueAlarmSchedule,
+    _$AlarmConditionValueAlarmSchedule,
+  ];
 
   @override
   final String wireName = r'AlarmConditionValueAlarmSchedule';
@@ -72,7 +84,11 @@ class _$AlarmConditionValueAlarmScheduleSerializer implements PrimitiveSerialize
     AlarmConditionValueAlarmSchedule object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +104,22 @@ class _$AlarmConditionValueAlarmScheduleSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'staticValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmSchedule),
-          ) as AlarmSchedule?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AlarmSchedule),
+                  )
+                  as AlarmSchedule?;
           if (valueDes == null) continue;
           result.staticValue = valueDes;
           break;
         case r'dynamicValueArgument':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.dynamicValueArgument = valueDes;
           break;
@@ -131,5 +151,3 @@ class _$AlarmConditionValueAlarmScheduleSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

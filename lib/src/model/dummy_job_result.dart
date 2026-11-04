@@ -23,26 +23,30 @@ part 'dummy_job_result.g.dart';
 /// * [failedCount] - Count of failed tasks
 /// * [discardedCount] - Count of discarded tasks
 /// * [totalCount] - Total number of tasks, set when all tasks are submitted
-/// * [results] 
+/// * [results]
 /// * [generalError] - General error message if the job failed
 /// * [startTs] - Timestamp of the job start, in milliseconds
 /// * [finishTs] - Timestamp of the job finish, in milliseconds
 /// * [cancellationTs] - Timestamp of the job cancellation, in milliseconds
-/// * [jobType] 
+/// * [jobType]
 @BuiltValue()
-abstract class DummyJobResult implements JobResult, Built<DummyJobResult, DummyJobResultBuilder> {
+abstract class DummyJobResult
+    implements JobResult, Built<DummyJobResult, DummyJobResultBuilder> {
   DummyJobResult._();
 
-  factory DummyJobResult([void updates(DummyJobResultBuilder b)]) = _$DummyJobResult;
+  factory DummyJobResult([void updates(DummyJobResultBuilder b)]) =
+      _$DummyJobResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DummyJobResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DummyJobResult> get serializer => _$DummyJobResultSerializer();
+  static Serializer<DummyJobResult> get serializer =>
+      _$DummyJobResultSerializer();
 }
 
-class _$DummyJobResultSerializer implements PrimitiveSerializer<DummyJobResult> {
+class _$DummyJobResultSerializer
+    implements PrimitiveSerializer<DummyJobResult> {
   @override
   final Iterable<Type> types = const [DummyJobResult, _$DummyJobResult];
 
@@ -130,7 +134,11 @@ class _$DummyJobResultSerializer implements PrimitiveSerializer<DummyJobResult> 
     DummyJobResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -146,81 +154,103 @@ class _$DummyJobResultSerializer implements PrimitiveSerializer<DummyJobResult> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'cancellationTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.cancellationTs = valueDes;
           break;
         case r'discardedCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.discardedCount = valueDes;
           break;
         case r'generalError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.generalError = valueDes;
           break;
         case r'failedCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.failedCount = valueDes;
           break;
         case r'successfulCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.successfulCount = valueDes;
           break;
         case r'startTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startTs = valueDes;
           break;
         case r'finishTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.finishTs = valueDes;
           break;
         case r'totalCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalCount = valueDes;
           break;
         case r'jobType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.jobType = valueDes;
           break;
         case r'results':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TaskResult)]),
-          ) as BuiltList<TaskResult>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TaskResult),
+                    ]),
+                  )
+                  as BuiltList<TaskResult>?;
           if (valueDes == null) continue;
           result.results.replace(valueDes);
           break;
@@ -252,5 +282,3 @@ class _$DummyJobResultSerializer implements PrimitiveSerializer<DummyJobResult> 
     return result.build();
   }
 }
-
-

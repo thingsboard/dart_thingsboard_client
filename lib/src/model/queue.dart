@@ -21,18 +21,18 @@ part 'queue.g.dart';
 /// A JSON value representing the queue.
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
 /// * [additionalInfo] - A value representing the any type (object or primitive)
-/// * [tenantId] 
-/// * [name] 
-/// * [topic] 
-/// * [pollInterval] 
-/// * [partitions] 
-/// * [consumerPerPartition] 
-/// * [packProcessingTimeout] 
-/// * [submitStrategy] 
-/// * [processingStrategy] 
+/// * [tenantId]
+/// * [name]
+/// * [topic]
+/// * [pollInterval]
+/// * [partitions]
+/// * [consumerPerPartition]
+/// * [packProcessingTimeout]
+/// * [submitStrategy]
+/// * [processingStrategy]
 @BuiltValue()
 abstract class Queue implements Built<Queue, QueueBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -188,7 +188,11 @@ class _$QueueSerializer implements PrimitiveSerializer<Queue> {
     Queue object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -204,98 +208,122 @@ class _$QueueSerializer implements PrimitiveSerializer<Queue> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(QueueId),
-          ) as QueueId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(QueueId),
+                  )
+                  as QueueId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'topic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.topic = valueDes;
           break;
         case r'pollInterval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pollInterval = valueDes;
           break;
         case r'partitions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.partitions = valueDes;
           break;
         case r'consumerPerPartition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.consumerPerPartition = valueDes;
           break;
         case r'packProcessingTimeout':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.packProcessingTimeout = valueDes;
           break;
         case r'submitStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SubmitStrategy),
-          ) as SubmitStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SubmitStrategy),
+                  )
+                  as SubmitStrategy?;
           if (valueDes == null) continue;
           result.submitStrategy.replace(valueDes);
           break;
         case r'processingStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ProcessingStrategy),
-          ) as ProcessingStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ProcessingStrategy),
+                  )
+                  as ProcessingStrategy?;
           if (valueDes == null) continue;
           result.processingStrategy.replace(valueDes);
           break;
@@ -327,5 +355,3 @@ class _$QueueSerializer implements PrimitiveSerializer<Queue> {
     return result.build();
   }
 }
-
-

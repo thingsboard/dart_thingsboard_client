@@ -25,22 +25,25 @@ part 'latest_chart_component.g.dart';
 /// LatestChartComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [dataSources] 
-/// * [margins] 
-/// * [paddings] 
-/// * [background] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [borderColor] 
-/// * [widthType] 
-/// * [customWidth] 
-/// * [alignment] 
-/// * [height] 
-/// * [latestChartSettings] 
+/// * [subType]
+/// * [type]
+/// * [dataSources]
+/// * [margins]
+/// * [paddings]
+/// * [background]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [borderColor]
+/// * [widthType]
+/// * [customWidth]
+/// * [alignment]
+/// * [height]
+/// * [latestChartSettings]
 @BuiltValue()
-abstract class LatestChartComponent implements ReportComponent, Built<LatestChartComponent, LatestChartComponentBuilder> {
+abstract class LatestChartComponent
+    implements
+        ReportComponent,
+        Built<LatestChartComponent, LatestChartComponentBuilder> {
   @BuiltValueField(wireName: r'margins')
   Insets? get margins;
 
@@ -81,18 +84,24 @@ abstract class LatestChartComponent implements ReportComponent, Built<LatestChar
 
   LatestChartComponent._();
 
-  factory LatestChartComponent([void updates(LatestChartComponentBuilder b)]) = _$LatestChartComponent;
+  factory LatestChartComponent([void updates(LatestChartComponentBuilder b)]) =
+      _$LatestChartComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LatestChartComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LatestChartComponent> get serializer => _$LatestChartComponentSerializer();
+  static Serializer<LatestChartComponent> get serializer =>
+      _$LatestChartComponentSerializer();
 }
 
-class _$LatestChartComponentSerializer implements PrimitiveSerializer<LatestChartComponent> {
+class _$LatestChartComponentSerializer
+    implements PrimitiveSerializer<LatestChartComponent> {
   @override
-  final Iterable<Type> types = const [LatestChartComponent, _$LatestChartComponent];
+  final Iterable<Type> types = const [
+    LatestChartComponent,
+    _$LatestChartComponent,
+  ];
 
   @override
   final String wireName = r'LatestChartComponent';
@@ -204,7 +213,11 @@ class _$LatestChartComponentSerializer implements PrimitiveSerializer<LatestChar
     LatestChartComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -220,112 +233,144 @@ class _$LatestChartComponentSerializer implements PrimitiveSerializer<LatestChar
       final value = serializedList[i + 1];
       switch (key) {
         case r'margins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.margins.replace(valueDes);
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'customWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.customWidth = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'widthType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ImageWidthType),
-          ) as ImageWidthType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ImageWidthType),
+                  )
+                  as ImageWidthType?;
           if (valueDes == null) continue;
           result.widthType = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'latestChartSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportLatestChartSettings),
-          ) as ReportLatestChartSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ReportLatestChartSettings,
+                    ),
+                  )
+                  as ReportLatestChartSettings?;
           if (valueDes == null) continue;
           result.latestChartSettings = valueDes;
           break;
         case r'paddings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.paddings.replace(valueDes);
           break;
         case r'background':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.background = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'alignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ImageAlignment),
-          ) as ImageAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ImageAlignment),
+                  )
+                  as ImageAlignment?;
           if (valueDes == null) continue;
           result.alignment = valueDes;
           break;
         case r'dataSources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DataSource)]),
-          ) as BuiltList<DataSource>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DataSource),
+                    ]),
+                  )
+                  as BuiltList<DataSource>?;
           if (valueDes == null) continue;
           result.dataSources.replace(valueDes);
           break;
         case r'height':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.height = valueDes;
           break;
@@ -357,5 +402,3 @@ class _$LatestChartComponentSerializer implements PrimitiveSerializer<LatestChar
     return result.build();
   }
 }
-
-

@@ -20,13 +20,19 @@ part 'single_entity_version_load_request.g.dart';
 /// SingleEntityVersionLoadRequest
 ///
 /// Properties:
-/// * [versionId] 
+/// * [versionId]
 /// * [type] - Type of the version to load
-/// * [internalEntityId] 
-/// * [externalEntityId] 
-/// * [config] 
+/// * [internalEntityId]
+/// * [externalEntityId]
+/// * [config]
 @BuiltValue()
-abstract class SingleEntityVersionLoadRequest implements VersionLoadRequest, Built<SingleEntityVersionLoadRequest, SingleEntityVersionLoadRequestBuilder> {
+abstract class SingleEntityVersionLoadRequest
+    implements
+        VersionLoadRequest,
+        Built<
+          SingleEntityVersionLoadRequest,
+          SingleEntityVersionLoadRequestBuilder
+        > {
   @BuiltValueField(wireName: r'externalEntityId')
   EntityId? get externalEntityId;
 
@@ -38,18 +44,25 @@ abstract class SingleEntityVersionLoadRequest implements VersionLoadRequest, Bui
 
   SingleEntityVersionLoadRequest._();
 
-  factory SingleEntityVersionLoadRequest([void updates(SingleEntityVersionLoadRequestBuilder b)]) = _$SingleEntityVersionLoadRequest;
+  factory SingleEntityVersionLoadRequest([
+    void updates(SingleEntityVersionLoadRequestBuilder b),
+  ]) = _$SingleEntityVersionLoadRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SingleEntityVersionLoadRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SingleEntityVersionLoadRequest> get serializer => _$SingleEntityVersionLoadRequestSerializer();
+  static Serializer<SingleEntityVersionLoadRequest> get serializer =>
+      _$SingleEntityVersionLoadRequestSerializer();
 }
 
-class _$SingleEntityVersionLoadRequestSerializer implements PrimitiveSerializer<SingleEntityVersionLoadRequest> {
+class _$SingleEntityVersionLoadRequestSerializer
+    implements PrimitiveSerializer<SingleEntityVersionLoadRequest> {
   @override
-  final Iterable<Type> types = const [SingleEntityVersionLoadRequest, _$SingleEntityVersionLoadRequest];
+  final Iterable<Type> types = const [
+    SingleEntityVersionLoadRequest,
+    _$SingleEntityVersionLoadRequest,
+  ];
 
   @override
   final String wireName = r'SingleEntityVersionLoadRequest';
@@ -100,7 +113,11 @@ class _$SingleEntityVersionLoadRequestSerializer implements PrimitiveSerializer<
     SingleEntityVersionLoadRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -116,41 +133,51 @@ class _$SingleEntityVersionLoadRequestSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'externalEntityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.externalEntityId = valueDes;
           break;
         case r'versionId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.versionId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(VersionLoadRequestType),
-          ) as VersionLoadRequestType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(VersionLoadRequestType),
+                  )
+                  as VersionLoadRequestType;
           result.type = valueDes;
           break;
         case r'internalEntityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.internalEntityId = valueDes;
           break;
         case r'config':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(VersionLoadConfig),
-          ) as VersionLoadConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(VersionLoadConfig),
+                  )
+                  as VersionLoadConfig?;
           if (valueDes == null) continue;
           result.config.replace(valueDes);
           break;
@@ -182,5 +209,3 @@ class _$SingleEntityVersionLoadRequestSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

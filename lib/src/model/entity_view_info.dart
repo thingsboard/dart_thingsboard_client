@@ -35,12 +35,13 @@ part 'entity_view_info.g.dart';
 /// * [keys] - Set of telemetry and attribute keys to expose via Entity View.
 /// * [startTimeMs] - Represents the start time of the interval that is used to limit access to target device telemetry. Customer will not be able to see entity telemetry that is outside the specified interval;
 /// * [endTimeMs] - Represents the end time of the interval that is used to limit access to target device telemetry. Customer will not be able to see entity telemetry that is outside the specified interval;
-/// * [version] 
+/// * [version]
 /// * [ownerName] - Owner name
 /// * [groups] - Groups
 /// * [ownerId] - JSON object with Customer or Tenant Id
 @BuiltValue()
-abstract class EntityViewInfo implements Built<EntityViewInfo, EntityViewInfoBuilder> {
+abstract class EntityViewInfo
+    implements Built<EntityViewInfo, EntityViewInfoBuilder> {
   /// JSON object with the Entity View Id. Specify this field to update the Entity View. Referencing non-existing Entity View Id will cause error. Omit this field to create new Entity View.
   @BuiltValueField(wireName: r'id')
   EntityViewId? get id;
@@ -102,16 +103,19 @@ abstract class EntityViewInfo implements Built<EntityViewInfo, EntityViewInfoBui
 
   EntityViewInfo._();
 
-  factory EntityViewInfo([void updates(EntityViewInfoBuilder b)]) = _$EntityViewInfo;
+  factory EntityViewInfo([void updates(EntityViewInfoBuilder b)]) =
+      _$EntityViewInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityViewInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityViewInfo> get serializer => _$EntityViewInfoSerializer();
+  static Serializer<EntityViewInfo> get serializer =>
+      _$EntityViewInfoSerializer();
 }
 
-class _$EntityViewInfoSerializer implements PrimitiveSerializer<EntityViewInfo> {
+class _$EntityViewInfoSerializer
+    implements PrimitiveSerializer<EntityViewInfo> {
   @override
   final Iterable<Type> types = const [EntityViewInfo, _$EntityViewInfo];
 
@@ -230,7 +234,11 @@ class _$EntityViewInfoSerializer implements PrimitiveSerializer<EntityViewInfo> 
     EntityViewInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -246,119 +254,151 @@ class _$EntityViewInfoSerializer implements PrimitiveSerializer<EntityViewInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityViewId),
-          ) as EntityViewId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityViewId),
+                  )
+                  as EntityViewId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityId),
-          ) as EntityId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityId),
+                  )
+                  as EntityId;
           result.entityId = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'keys':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TelemetryEntityView),
-          ) as TelemetryEntityView?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TelemetryEntityView),
+                  )
+                  as TelemetryEntityView?;
           if (valueDes == null) continue;
           result.keys.replace(valueDes);
           break;
         case r'startTimeMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startTimeMs = valueDes;
           break;
         case r'endTimeMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endTimeMs = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'ownerName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.ownerName = valueDes;
           break;
         case r'groups':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityInfo)]),
-          ) as BuiltList<EntityInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityInfo),
+                    ]),
+                  )
+                  as BuiltList<EntityInfo>?;
           if (valueDes == null) continue;
           result.groups.replace(valueDes);
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
@@ -390,5 +430,3 @@ class _$EntityViewInfoSerializer implements PrimitiveSerializer<EntityViewInfo> 
     return result.build();
   }
 }
-
-

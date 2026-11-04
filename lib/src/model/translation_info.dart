@@ -22,7 +22,8 @@ part 'translation_info.g.dart';
 /// * [progress] - Number representing translation percentage progress. For example, 40 that means 40% of all keys are translated.
 /// * [customized] - Boolean representing if current language has customization.
 @BuiltValue()
-abstract class TranslationInfo implements Built<TranslationInfo, TranslationInfoBuilder> {
+abstract class TranslationInfo
+    implements Built<TranslationInfo, TranslationInfoBuilder> {
   /// Locale code formed by combining the ISO 639-1 language code and the ISO 3166-1 region code. For example, \"en_US\"
   @BuiltValueField(wireName: r'localeCode')
   String? get localeCode;
@@ -45,16 +46,19 @@ abstract class TranslationInfo implements Built<TranslationInfo, TranslationInfo
 
   TranslationInfo._();
 
-  factory TranslationInfo([void updates(TranslationInfoBuilder b)]) = _$TranslationInfo;
+  factory TranslationInfo([void updates(TranslationInfoBuilder b)]) =
+      _$TranslationInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TranslationInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TranslationInfo> get serializer => _$TranslationInfoSerializer();
+  static Serializer<TranslationInfo> get serializer =>
+      _$TranslationInfoSerializer();
 }
 
-class _$TranslationInfoSerializer implements PrimitiveSerializer<TranslationInfo> {
+class _$TranslationInfoSerializer
+    implements PrimitiveSerializer<TranslationInfo> {
   @override
   final Iterable<Type> types = const [TranslationInfo, _$TranslationInfo];
 
@@ -109,7 +113,11 @@ class _$TranslationInfoSerializer implements PrimitiveSerializer<TranslationInfo
     TranslationInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -125,42 +133,52 @@ class _$TranslationInfoSerializer implements PrimitiveSerializer<TranslationInfo
       final value = serializedList[i + 1];
       switch (key) {
         case r'localeCode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.localeCode = valueDes;
           break;
         case r'language':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.language = valueDes;
           break;
         case r'country':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.country = valueDes;
           break;
         case r'progress':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.progress = valueDes;
           break;
         case r'customized':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.customized = valueDes;
           break;
@@ -192,5 +210,3 @@ class _$TranslationInfoSerializer implements PrimitiveSerializer<TranslationInfo
     return result.build();
   }
 }
-
-

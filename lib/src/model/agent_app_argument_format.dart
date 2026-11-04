@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'agent_app_argument_format.g.dart';
 
 class AgentAppArgumentFormat extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'STRING')
   static const AgentAppArgumentFormat STRING = _$STRING;
   @BuiltValueEnumConst(wireName: r'JSON')
   static const AgentAppArgumentFormat JSON = _$JSON;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentAppArgumentFormat unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentAppArgumentFormat unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentAppArgumentFormat> get serializer => _$agentAppArgumentFormatSerializer;
+  static Serializer<AgentAppArgumentFormat> get serializer =>
+      _$agentAppArgumentFormatSerializer;
 
-  const AgentAppArgumentFormat._(String name): super(name);
+  const AgentAppArgumentFormat._(String name) : super(name);
 
   static BuiltSet<AgentAppArgumentFormat> get values => _$values;
   static AgentAppArgumentFormat valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class AgentAppArgumentFormat extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AgentAppArgumentFormatMixin = Object with _$AgentAppArgumentFormatMixin;
-
+abstract class AgentAppArgumentFormatMixin = Object
+    with _$AgentAppArgumentFormatMixin;

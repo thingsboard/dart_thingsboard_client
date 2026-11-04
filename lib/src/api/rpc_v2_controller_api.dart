@@ -9,17 +9,14 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/rpc.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class RpcV2ControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -40,7 +37,7 @@ class RpcV2ControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteRpc({ 
+  Future<Response<void>> deleteRpc({
     required String rpcId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -50,12 +47,19 @@ class RpcV2ControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/rpc/persistent/{rpcId}'.replaceAll('{' r'rpcId' '}', encodeQueryParameter(_serializers, rpcId, const FullType(String)).toString());
+    final _path = r'/api/rpc/persistent/{rpcId}'.replaceAll(
+      '{'
+      r'rpcId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        rpcId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -63,11 +67,8 @@ class RpcV2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -99,7 +100,7 @@ class RpcV2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Rpc] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Rpc>> getPersistedRpc({ 
+  Future<Response<Rpc>> getPersistedRpc({
     required String rpcId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -109,12 +110,19 @@ class RpcV2ControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerRpc);
-    final _path = r'/api/rpc/persistent/{rpcId}'.replaceAll('{' r'rpcId' '}', encodeQueryParameter(_serializers, rpcId, const FullType(String)).toString());
+    final _path = r'/api/rpc/persistent/{rpcId}'.replaceAll(
+      '{'
+      r'rpcId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        rpcId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -122,11 +130,8 @@ class RpcV2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -145,11 +150,13 @@ class RpcV2ControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Rpc),
-      ) as Rpc;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Rpc),
+                )
+                as Rpc;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -192,7 +199,7 @@ class RpcV2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getPersistedRpcByDevice({ 
+  Future<Response<String>> getPersistedRpcByDevice({
     required String deviceId,
     required int pageSize,
     required int page,
@@ -208,12 +215,19 @@ class RpcV2ControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/rpc/persistent/device/{deviceId}'.replaceAll('{' r'deviceId' '}', encodeQueryParameter(_serializers, deviceId, const FullType(String)).toString());
+    final _path = r'/api/rpc/persistent/device/{deviceId}'.replaceAll(
+      '{'
+      r'deviceId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        deviceId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -221,11 +235,8 @@ class RpcV2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -233,12 +244,36 @@ class RpcV2ControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (rpcStatus != null) r'rpcStatus': encodeQueryParameter(_serializers, rpcStatus, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (rpcStatus != null)
+        r'rpcStatus': encodeQueryParameter(
+          _serializers,
+          rpcStatus,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -255,7 +290,6 @@ class RpcV2ControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -293,7 +327,7 @@ class RpcV2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> handleOneWayDeviceRPCRequestV2({ 
+  Future<Response<String>> handleOneWayDeviceRPCRequestV2({
     required String deviceId,
     required String body,
     CancelToken? cancelToken,
@@ -304,12 +338,19 @@ class RpcV2ControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/rpc/oneway/{deviceId}'.replaceAll('{' r'deviceId' '}', encodeQueryParameter(_serializers, deviceId, const FullType(String)).toString());
+    final _path = r'/api/rpc/oneway/{deviceId}'.replaceAll(
+      '{'
+      r'deviceId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        deviceId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -317,11 +358,8 @@ class RpcV2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -333,13 +371,9 @@ class RpcV2ControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -360,7 +394,6 @@ class RpcV2ControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -398,7 +431,7 @@ class RpcV2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> handleTwoWayDeviceRPCRequestV2({ 
+  Future<Response<String>> handleTwoWayDeviceRPCRequestV2({
     required String deviceId,
     required String body,
     CancelToken? cancelToken,
@@ -409,12 +442,19 @@ class RpcV2ControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/rpc/twoway/{deviceId}'.replaceAll('{' r'deviceId' '}', encodeQueryParameter(_serializers, deviceId, const FullType(String)).toString());
+    final _path = r'/api/rpc/twoway/{deviceId}'.replaceAll(
+      '{'
+      r'deviceId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        deviceId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -422,11 +462,8 @@ class RpcV2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -438,13 +475,9 @@ class RpcV2ControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -465,7 +498,6 @@ class RpcV2ControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -487,5 +519,4 @@ class RpcV2ControllerApi {
       extra: _response.extra,
     );
   }
-
 }

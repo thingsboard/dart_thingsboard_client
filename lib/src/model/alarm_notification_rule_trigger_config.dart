@@ -22,13 +22,19 @@ part 'alarm_notification_rule_trigger_config.g.dart';
 /// AlarmNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [alarmTypes] 
-/// * [alarmSeverities] 
-/// * [notifyOn] 
-/// * [clearRule] 
+/// * [triggerType]
+/// * [alarmTypes]
+/// * [alarmSeverities]
+/// * [notifyOn]
+/// * [clearRule]
 @BuiltValue()
-abstract class AlarmNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<AlarmNotificationRuleTriggerConfig, AlarmNotificationRuleTriggerConfigBuilder> {
+abstract class AlarmNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          AlarmNotificationRuleTriggerConfig,
+          AlarmNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'notifyOn')
   BuiltSet<AlarmAction> get notifyOn;
 
@@ -43,18 +49,25 @@ abstract class AlarmNotificationRuleTriggerConfig implements NotificationRuleTri
 
   AlarmNotificationRuleTriggerConfig._();
 
-  factory AlarmNotificationRuleTriggerConfig([void updates(AlarmNotificationRuleTriggerConfigBuilder b)]) = _$AlarmNotificationRuleTriggerConfig;
+  factory AlarmNotificationRuleTriggerConfig([
+    void updates(AlarmNotificationRuleTriggerConfigBuilder b),
+  ]) = _$AlarmNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmNotificationRuleTriggerConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmNotificationRuleTriggerConfig> get serializer => _$AlarmNotificationRuleTriggerConfigSerializer();
+  static Serializer<AlarmNotificationRuleTriggerConfig> get serializer =>
+      _$AlarmNotificationRuleTriggerConfigSerializer();
 }
 
-class _$AlarmNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<AlarmNotificationRuleTriggerConfig> {
+class _$AlarmNotificationRuleTriggerConfigSerializer
+    implements PrimitiveSerializer<AlarmNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [AlarmNotificationRuleTriggerConfig, _$AlarmNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    AlarmNotificationRuleTriggerConfig,
+    _$AlarmNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'AlarmNotificationRuleTriggerConfig';
@@ -103,7 +116,11 @@ class _$AlarmNotificationRuleTriggerConfigSerializer implements PrimitiveSeriali
     AlarmNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -119,40 +136,56 @@ class _$AlarmNotificationRuleTriggerConfigSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'alarmTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.alarmTypes.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'notifyOn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(AlarmAction)]),
-          ) as BuiltSet<AlarmAction>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltSet, [
+                      FullType(AlarmAction),
+                    ]),
+                  )
+                  as BuiltSet<AlarmAction>;
           result.notifyOn.replace(valueDes);
           break;
         case r'alarmSeverities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(AlarmSeverity)]),
-          ) as BuiltSet<AlarmSeverity>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(AlarmSeverity),
+                    ]),
+                  )
+                  as BuiltSet<AlarmSeverity>?;
           if (valueDes == null) continue;
           result.alarmSeverities.replace(valueDes);
           break;
         case r'clearRule':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ClearRule),
-          ) as ClearRule?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ClearRule),
+                  )
+                  as ClearRule?;
           if (valueDes == null) continue;
           result.clearRule.replace(valueDes);
           break;
@@ -184,5 +217,3 @@ class _$AlarmNotificationRuleTriggerConfigSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

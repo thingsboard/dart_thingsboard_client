@@ -18,24 +18,28 @@ part 'custom_menu_config.g.dart';
 /// CustomMenuConfig
 ///
 /// Properties:
-/// * [items] 
+/// * [items]
 @BuiltValue()
-abstract class CustomMenuConfig implements Built<CustomMenuConfig, CustomMenuConfigBuilder> {
+abstract class CustomMenuConfig
+    implements Built<CustomMenuConfig, CustomMenuConfigBuilder> {
   @BuiltValueField(wireName: r'items')
   BuiltList<MenuItem>? get items;
 
   CustomMenuConfig._();
 
-  factory CustomMenuConfig([void updates(CustomMenuConfigBuilder b)]) = _$CustomMenuConfig;
+  factory CustomMenuConfig([void updates(CustomMenuConfigBuilder b)]) =
+      _$CustomMenuConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CustomMenuConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CustomMenuConfig> get serializer => _$CustomMenuConfigSerializer();
+  static Serializer<CustomMenuConfig> get serializer =>
+      _$CustomMenuConfigSerializer();
 }
 
-class _$CustomMenuConfigSerializer implements PrimitiveSerializer<CustomMenuConfig> {
+class _$CustomMenuConfigSerializer
+    implements PrimitiveSerializer<CustomMenuConfig> {
   @override
   final Iterable<Type> types = const [CustomMenuConfig, _$CustomMenuConfig];
 
@@ -62,7 +66,11 @@ class _$CustomMenuConfigSerializer implements PrimitiveSerializer<CustomMenuConf
     CustomMenuConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +86,14 @@ class _$CustomMenuConfigSerializer implements PrimitiveSerializer<CustomMenuConf
       final value = serializedList[i + 1];
       switch (key) {
         case r'items':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(MenuItem)]),
-          ) as BuiltList<MenuItem>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(MenuItem),
+                    ]),
+                  )
+                  as BuiltList<MenuItem>?;
           if (valueDes == null) continue;
           result.items.replace(valueDes);
           break;
@@ -113,5 +125,3 @@ class _$CustomMenuConfigSerializer implements PrimitiveSerializer<CustomMenuConf
     return result.build();
   }
 }
-
-

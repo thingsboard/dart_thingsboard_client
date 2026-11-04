@@ -20,17 +20,20 @@ part 'device_search_query_filter.g.dart';
 /// DeviceSearchQueryFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [rootEntity] 
-/// * [relationType] 
-/// * [direction] 
-/// * [maxLevel] 
-/// * [fetchLastLevelOnly] 
-/// * [rootStateEntity] 
-/// * [defaultStateEntity] 
-/// * [deviceTypes] 
+/// * [type]
+/// * [rootEntity]
+/// * [relationType]
+/// * [direction]
+/// * [maxLevel]
+/// * [fetchLastLevelOnly]
+/// * [rootStateEntity]
+/// * [defaultStateEntity]
+/// * [deviceTypes]
 @BuiltValue()
-abstract class DeviceSearchQueryFilter implements EntityFilter, Built<DeviceSearchQueryFilter, DeviceSearchQueryFilterBuilder> {
+abstract class DeviceSearchQueryFilter
+    implements
+        EntityFilter,
+        Built<DeviceSearchQueryFilter, DeviceSearchQueryFilterBuilder> {
   @BuiltValueField(wireName: r'relationType')
   String? get relationType;
 
@@ -58,18 +61,25 @@ abstract class DeviceSearchQueryFilter implements EntityFilter, Built<DeviceSear
 
   DeviceSearchQueryFilter._();
 
-  factory DeviceSearchQueryFilter([void updates(DeviceSearchQueryFilterBuilder b)]) = _$DeviceSearchQueryFilter;
+  factory DeviceSearchQueryFilter([
+    void updates(DeviceSearchQueryFilterBuilder b),
+  ]) = _$DeviceSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceSearchQueryFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceSearchQueryFilter> get serializer => _$DeviceSearchQueryFilterSerializer();
+  static Serializer<DeviceSearchQueryFilter> get serializer =>
+      _$DeviceSearchQueryFilterSerializer();
 }
 
-class _$DeviceSearchQueryFilterSerializer implements PrimitiveSerializer<DeviceSearchQueryFilter> {
+class _$DeviceSearchQueryFilterSerializer
+    implements PrimitiveSerializer<DeviceSearchQueryFilter> {
   @override
-  final Iterable<Type> types = const [DeviceSearchQueryFilter, _$DeviceSearchQueryFilter];
+  final Iterable<Type> types = const [
+    DeviceSearchQueryFilter,
+    _$DeviceSearchQueryFilter,
+  ];
 
   @override
   final String wireName = r'DeviceSearchQueryFilter';
@@ -148,7 +158,11 @@ class _$DeviceSearchQueryFilterSerializer implements PrimitiveSerializer<DeviceS
     DeviceSearchQueryFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -164,73 +178,95 @@ class _$DeviceSearchQueryFilterSerializer implements PrimitiveSerializer<DeviceS
       final value = serializedList[i + 1];
       switch (key) {
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'maxLevel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxLevel = valueDes;
           break;
         case r'fetchLastLevelOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.fetchLastLevelOnly = valueDes;
           break;
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
         case r'deviceTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.deviceTypes.replace(valueDes);
           break;
         case r'rootStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.rootStateEntity = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'rootEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.rootEntity.replace(valueDes);
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntitySearchDirection),
-          ) as EntitySearchDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntitySearchDirection,
+                    ),
+                  )
+                  as EntitySearchDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -262,5 +298,3 @@ class _$DeviceSearchQueryFilterSerializer implements PrimitiveSerializer<DeviceS
     return result.build();
   }
 }
-
-

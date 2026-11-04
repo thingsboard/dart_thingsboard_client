@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/page_data_tenant.dart';
 import 'package:thingsboard_client/src/model/page_data_tenant_info.dart';
 import 'package:thingsboard_client/src/model/tenant.dart';
 import 'package:thingsboard_client/src/model/tenant_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class TenantControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -44,7 +41,7 @@ class TenantControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteTenant({ 
+  Future<Response<void>> deleteTenant({
     required String tenantId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,19 @@ class TenantControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/tenant/{tenantId}'.replaceAll('{' r'tenantId' '}', encodeQueryParameter(_serializers, tenantId, const FullType(String)).toString());
+    final _path = r'/api/tenant/{tenantId}'.replaceAll(
+      '{'
+      r'tenantId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        tenantId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +71,8 @@ class TenantControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -103,7 +104,7 @@ class TenantControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Tenant] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Tenant>> getTenantById({ 
+  Future<Response<Tenant>> getTenantById({
     required String tenantId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -113,12 +114,19 @@ class TenantControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerTenant);
-    final _path = r'/api/tenant/{tenantId}'.replaceAll('{' r'tenantId' '}', encodeQueryParameter(_serializers, tenantId, const FullType(String)).toString());
+    final _path = r'/api/tenant/{tenantId}'.replaceAll(
+      '{'
+      r'tenantId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        tenantId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -126,11 +134,8 @@ class TenantControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -149,11 +154,13 @@ class TenantControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Tenant),
-      ) as Tenant;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Tenant),
+                )
+                as Tenant;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -190,7 +197,7 @@ class TenantControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TenantInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TenantInfo>> getTenantInfoById({ 
+  Future<Response<TenantInfo>> getTenantInfoById({
     required String tenantId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -199,13 +206,21 @@ class TenantControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTenantInfo);
-    final _path = r'/api/tenant/info/{tenantId}'.replaceAll('{' r'tenantId' '}', encodeQueryParameter(_serializers, tenantId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTenantInfo);
+    final _path = r'/api/tenant/info/{tenantId}'.replaceAll(
+      '{'
+      r'tenantId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        tenantId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -213,11 +228,8 @@ class TenantControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -236,11 +248,13 @@ class TenantControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TenantInfo),
-      ) as TenantInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TenantInfo),
+                )
+                as TenantInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -281,7 +295,7 @@ class TenantControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataTenantInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataTenantInfo>> getTenantInfos({ 
+  Future<Response<PageDataTenantInfo>> getTenantInfos({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -294,13 +308,12 @@ class TenantControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataTenantInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataTenantInfo);
     final _path = r'/api/tenantInfos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -308,11 +321,8 @@ class TenantControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -320,11 +330,30 @@ class TenantControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -340,11 +369,13 @@ class TenantControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataTenantInfo),
-      ) as PageDataTenantInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataTenantInfo),
+                )
+                as PageDataTenantInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -385,7 +416,7 @@ class TenantControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataTenant] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataTenant>> getTenants({ 
+  Future<Response<PageDataTenant>> getTenants({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -398,13 +429,12 @@ class TenantControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataTenant);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataTenant);
     final _path = r'/api/tenants';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -412,11 +442,8 @@ class TenantControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -424,11 +451,30 @@ class TenantControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -444,11 +490,13 @@ class TenantControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataTenant),
-      ) as PageDataTenant;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataTenant),
+                )
+                as PageDataTenant;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -485,7 +533,7 @@ class TenantControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Tenant>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Tenant>>> getTenantsByIds({ 
+  Future<Response<BuiltList<Tenant>>> getTenantsByIds({
     required BuiltList<String> tenantIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -494,13 +542,13 @@ class TenantControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndListOfTenant);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfStringAndListOfTenant);
     final _path = r'/api/tenants/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -508,11 +556,8 @@ class TenantControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -520,7 +565,12 @@ class TenantControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'tenantIds': encodeCollectionQueryParameter<String>(_serializers, tenantIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'tenantIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        tenantIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -536,11 +586,13 @@ class TenantControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Tenant)]),
-      ) as BuiltList<Tenant>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(Tenant)]),
+                )
+                as BuiltList<Tenant>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -567,7 +619,7 @@ class TenantControllerApi {
   /// Create or update the Tenant. When creating tenant, platform generates Tenant Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). Default Rule Chain and Device profile are also generated for the new tenants automatically. The newly created Tenant Id will be present in the response. Specify existing Tenant Id id to update the Tenant. Referencing non-existing Tenant Id will cause &#39;Not Found&#39; error.Remove &#39;id&#39;, &#39;tenantId&#39; from the request body example (below) to create new Tenant entity.  Available for users with &#39;SYS_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [tenant] 
+  /// * [tenant]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -577,7 +629,7 @@ class TenantControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Tenant] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Tenant>> saveTenant({ 
+  Future<Response<Tenant>> saveTenant({
     required Tenant tenant,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -590,9 +642,7 @@ class TenantControllerApi {
     final _path = r'/api/tenant';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -600,11 +650,8 @@ class TenantControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -617,13 +664,9 @@ class TenantControllerApi {
     try {
       const _type = FullType(Tenant);
       _bodyData = _serializers.serialize(tenant, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -643,11 +686,13 @@ class TenantControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Tenant),
-      ) as Tenant;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Tenant),
+                )
+                as Tenant;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -669,5 +714,4 @@ class TenantControllerApi {
       extra: _response.extra,
     );
   }
-
 }

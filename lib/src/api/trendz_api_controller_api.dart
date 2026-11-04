@@ -9,20 +9,17 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/page_data_trendz_view_config_lite.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/trendz_summary.dart';
 import 'package:thingsboard_client/src/model/trendz_usage.dart';
 import 'package:thingsboard_client/src/model/trendz_view_config.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class TrendzApiControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +39,7 @@ class TrendzApiControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TrendzSummary] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TrendzSummary>> getTrendzSummary({ 
+  Future<Response<TrendzSummary>> getTrendzSummary({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -50,13 +47,12 @@ class TrendzApiControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTrendzSummary);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTrendzSummary);
     final _path = r'/api/trendz/summary';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -64,11 +60,8 @@ class TrendzApiControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -87,11 +80,13 @@ class TrendzApiControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TrendzSummary),
-      ) as TrendzSummary;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TrendzSummary),
+                )
+                as TrendzSummary;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -127,7 +122,7 @@ class TrendzApiControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TrendzUsage] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TrendzUsage>> getTrendzUsage({ 
+  Future<Response<TrendzUsage>> getTrendzUsage({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -135,13 +130,12 @@ class TrendzApiControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTrendzUsage);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTrendzUsage);
     final _path = r'/api/trendz/usage';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -149,11 +143,8 @@ class TrendzApiControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -172,11 +163,13 @@ class TrendzApiControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TrendzUsage),
-      ) as TrendzUsage;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TrendzUsage),
+                )
+                as TrendzUsage;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -213,7 +206,7 @@ class TrendzApiControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TrendzViewConfig] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TrendzViewConfig>> getTrendzViewById({ 
+  Future<Response<TrendzViewConfig>> getTrendzViewById({
     required String viewId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -222,13 +215,21 @@ class TrendzApiControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTrendzViewConfig);
-    final _path = r'/api/trendz/view/{viewId}'.replaceAll('{' r'viewId' '}', encodeQueryParameter(_serializers, viewId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTrendzViewConfig);
+    final _path = r'/api/trendz/view/{viewId}'.replaceAll(
+      '{'
+      r'viewId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        viewId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -236,11 +237,8 @@ class TrendzApiControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -259,11 +257,13 @@ class TrendzApiControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TrendzViewConfig),
-      ) as TrendzViewConfig;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TrendzViewConfig),
+                )
+                as TrendzViewConfig;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -304,7 +304,7 @@ class TrendzApiControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataTrendzViewConfigLite] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataTrendzViewConfigLite>> getTrendzViews({ 
+  Future<Response<PageDataTrendzViewConfigLite>> getTrendzViews({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -317,13 +317,13 @@ class TrendzApiControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataTrendzViewConfigLite);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerPageDataTrendzViewConfigLite);
     final _path = r'/api/trendz/view/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -331,11 +331,8 @@ class TrendzApiControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -343,11 +340,30 @@ class TrendzApiControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -363,11 +379,13 @@ class TrendzApiControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataTrendzViewConfigLite),
-      ) as PageDataTrendzViewConfigLite;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataTrendzViewConfigLite),
+                )
+                as PageDataTrendzViewConfigLite;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -389,5 +407,4 @@ class TrendzApiControllerApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -21,9 +21,9 @@ part 'device_profile_transport_configuration.g.dart';
 /// Configuration for device profile transport
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class DeviceProfileTransportConfiguration  {
+abstract class DeviceProfileTransportConfiguration {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -38,51 +38,56 @@ abstract class DeviceProfileTransportConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceProfileTransportConfiguration> get serializer => _$DeviceProfileTransportConfigurationSerializer();
+  static Serializer<DeviceProfileTransportConfiguration> get serializer =>
+      _$DeviceProfileTransportConfigurationSerializer();
 }
 
-extension DeviceProfileTransportConfigurationDiscriminatorExt on DeviceProfileTransportConfiguration {
-    String? get discriminatorValue {
-        if (this is CoapDeviceProfileTransportConfiguration) {
-            return r'COAP';
-        }
-        if (this is DefaultDeviceProfileTransportConfiguration) {
-            return r'DEFAULT';
-        }
-        if (this is Lwm2mDeviceProfileTransportConfiguration) {
-            return r'LWM2M';
-        }
-        if (this is MqttDeviceProfileTransportConfiguration) {
-            return r'MQTT';
-        }
-        if (this is SnmpDeviceProfileTransportConfiguration) {
-            return r'SNMP';
-        }
-        return null;
+extension DeviceProfileTransportConfigurationDiscriminatorExt
+    on DeviceProfileTransportConfiguration {
+  String? get discriminatorValue {
+    if (this is CoapDeviceProfileTransportConfiguration) {
+      return r'COAP';
     }
-}
-extension DeviceProfileTransportConfigurationBuilderDiscriminatorExt on DeviceProfileTransportConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is CoapDeviceProfileTransportConfigurationBuilder) {
-            return r'COAP';
-        }
-        if (this is DefaultDeviceProfileTransportConfigurationBuilder) {
-            return r'DEFAULT';
-        }
-        if (this is Lwm2mDeviceProfileTransportConfigurationBuilder) {
-            return r'LWM2M';
-        }
-        if (this is MqttDeviceProfileTransportConfigurationBuilder) {
-            return r'MQTT';
-        }
-        if (this is SnmpDeviceProfileTransportConfigurationBuilder) {
-            return r'SNMP';
-        }
-        return null;
+    if (this is DefaultDeviceProfileTransportConfiguration) {
+      return r'DEFAULT';
     }
+    if (this is Lwm2mDeviceProfileTransportConfiguration) {
+      return r'LWM2M';
+    }
+    if (this is MqttDeviceProfileTransportConfiguration) {
+      return r'MQTT';
+    }
+    if (this is SnmpDeviceProfileTransportConfiguration) {
+      return r'SNMP';
+    }
+    return null;
+  }
 }
 
-class _$DeviceProfileTransportConfigurationSerializer implements PrimitiveSerializer<DeviceProfileTransportConfiguration> {
+extension DeviceProfileTransportConfigurationBuilderDiscriminatorExt
+    on DeviceProfileTransportConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is CoapDeviceProfileTransportConfigurationBuilder) {
+      return r'COAP';
+    }
+    if (this is DefaultDeviceProfileTransportConfigurationBuilder) {
+      return r'DEFAULT';
+    }
+    if (this is Lwm2mDeviceProfileTransportConfigurationBuilder) {
+      return r'LWM2M';
+    }
+    if (this is MqttDeviceProfileTransportConfigurationBuilder) {
+      return r'MQTT';
+    }
+    if (this is SnmpDeviceProfileTransportConfigurationBuilder) {
+      return r'SNMP';
+    }
+    return null;
+  }
+}
+
+class _$DeviceProfileTransportConfigurationSerializer
+    implements PrimitiveSerializer<DeviceProfileTransportConfiguration> {
   @override
   final Iterable<Type> types = const [DeviceProfileTransportConfiguration];
 
@@ -108,21 +113,40 @@ class _$DeviceProfileTransportConfigurationSerializer implements PrimitiveSerial
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CoapDeviceProfileTransportConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(CoapDeviceProfileTransportConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CoapDeviceProfileTransportConfiguration),
+      )!;
     }
     if (object is DefaultDeviceProfileTransportConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(DefaultDeviceProfileTransportConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DefaultDeviceProfileTransportConfiguration),
+      )!;
     }
     if (object is Lwm2mDeviceProfileTransportConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(Lwm2mDeviceProfileTransportConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(Lwm2mDeviceProfileTransportConfiguration),
+      )!;
     }
     if (object is MqttDeviceProfileTransportConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(MqttDeviceProfileTransportConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(MqttDeviceProfileTransportConfiguration),
+      )!;
     }
     if (object is SnmpDeviceProfileTransportConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(SnmpDeviceProfileTransportConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SnmpDeviceProfileTransportConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -132,43 +156,90 @@ class _$DeviceProfileTransportConfigurationSerializer implements PrimitiveSerial
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(DeviceProfileTransportConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          DeviceProfileTransportConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'COAP':
-        return serializers.deserialize(serialized, specifiedType: FullType(CoapDeviceProfileTransportConfiguration)) as CoapDeviceProfileTransportConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CoapDeviceProfileTransportConfiguration),
+            )
+            as CoapDeviceProfileTransportConfiguration;
       case r'DEFAULT':
-        return serializers.deserialize(serialized, specifiedType: FullType(DefaultDeviceProfileTransportConfiguration)) as DefaultDeviceProfileTransportConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                DefaultDeviceProfileTransportConfiguration,
+              ),
+            )
+            as DefaultDeviceProfileTransportConfiguration;
       case r'LWM2M':
-        return serializers.deserialize(serialized, specifiedType: FullType(Lwm2mDeviceProfileTransportConfiguration)) as Lwm2mDeviceProfileTransportConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(Lwm2mDeviceProfileTransportConfiguration),
+            )
+            as Lwm2mDeviceProfileTransportConfiguration;
       case r'MQTT':
-        return serializers.deserialize(serialized, specifiedType: FullType(MqttDeviceProfileTransportConfiguration)) as MqttDeviceProfileTransportConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(MqttDeviceProfileTransportConfiguration),
+            )
+            as MqttDeviceProfileTransportConfiguration;
       case r'SNMP':
-        return serializers.deserialize(serialized, specifiedType: FullType(SnmpDeviceProfileTransportConfiguration)) as SnmpDeviceProfileTransportConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SnmpDeviceProfileTransportConfiguration),
+            )
+            as SnmpDeviceProfileTransportConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($DeviceProfileTransportConfiguration)) as $DeviceProfileTransportConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($DeviceProfileTransportConfiguration),
+            )
+            as $DeviceProfileTransportConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [DeviceProfileTransportConfiguration], since [DeviceProfileTransportConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $DeviceProfileTransportConfiguration implements DeviceProfileTransportConfiguration, Built<$DeviceProfileTransportConfiguration, $DeviceProfileTransportConfigurationBuilder> {
+abstract class $DeviceProfileTransportConfiguration
+    implements
+        DeviceProfileTransportConfiguration,
+        Built<
+          $DeviceProfileTransportConfiguration,
+          $DeviceProfileTransportConfigurationBuilder
+        > {
   $DeviceProfileTransportConfiguration._();
 
-  factory $DeviceProfileTransportConfiguration([void Function($DeviceProfileTransportConfigurationBuilder)? updates]) = _$$DeviceProfileTransportConfiguration;
+  factory $DeviceProfileTransportConfiguration([
+    void Function($DeviceProfileTransportConfigurationBuilder)? updates,
+  ]) = _$$DeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($DeviceProfileTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$DeviceProfileTransportConfiguration> get serializer => _$$DeviceProfileTransportConfigurationSerializer();
+  static Serializer<$DeviceProfileTransportConfiguration> get serializer =>
+      _$$DeviceProfileTransportConfigurationSerializer();
 }
 
-class _$$DeviceProfileTransportConfigurationSerializer implements PrimitiveSerializer<$DeviceProfileTransportConfiguration> {
+class _$$DeviceProfileTransportConfigurationSerializer
+    implements PrimitiveSerializer<$DeviceProfileTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [$DeviceProfileTransportConfiguration, _$$DeviceProfileTransportConfiguration];
+  final Iterable<Type> types = const [
+    $DeviceProfileTransportConfiguration,
+    _$$DeviceProfileTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'$DeviceProfileTransportConfiguration';
@@ -179,7 +250,10 @@ class _$$DeviceProfileTransportConfigurationSerializer implements PrimitiveSeria
     $DeviceProfileTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(DeviceProfileTransportConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(DeviceProfileTransportConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -195,10 +269,12 @@ class _$$DeviceProfileTransportConfigurationSerializer implements PrimitiveSeria
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -229,4 +305,3 @@ class _$$DeviceProfileTransportConfigurationSerializer implements PrimitiveSeria
     return result.build();
   }
 }
-

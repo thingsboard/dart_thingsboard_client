@@ -20,11 +20,14 @@ part 'compose_down_step_state.g.dart';
 /// ComposeDownStepState
 ///
 /// Properties:
-/// * [type] 
-/// * [serviceImageRegexPatterns] 
-/// * [removeVolumes] 
+/// * [type]
+/// * [serviceImageRegexPatterns]
+/// * [removeVolumes]
 @BuiltValue()
-abstract class ComposeDownStepState implements AgentAppStepState, Built<ComposeDownStepState, ComposeDownStepStateBuilder> {
+abstract class ComposeDownStepState
+    implements
+        AgentAppStepState,
+        Built<ComposeDownStepState, ComposeDownStepStateBuilder> {
   @BuiltValueField(wireName: r'removeVolumes')
   StepFieldBoolean? get removeVolumes;
 
@@ -33,18 +36,24 @@ abstract class ComposeDownStepState implements AgentAppStepState, Built<ComposeD
 
   ComposeDownStepState._();
 
-  factory ComposeDownStepState([void updates(ComposeDownStepStateBuilder b)]) = _$ComposeDownStepState;
+  factory ComposeDownStepState([void updates(ComposeDownStepStateBuilder b)]) =
+      _$ComposeDownStepState;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ComposeDownStepStateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ComposeDownStepState> get serializer => _$ComposeDownStepStateSerializer();
+  static Serializer<ComposeDownStepState> get serializer =>
+      _$ComposeDownStepStateSerializer();
 }
 
-class _$ComposeDownStepStateSerializer implements PrimitiveSerializer<ComposeDownStepState> {
+class _$ComposeDownStepStateSerializer
+    implements PrimitiveSerializer<ComposeDownStepState> {
   @override
-  final Iterable<Type> types = const [ComposeDownStepState, _$ComposeDownStepState];
+  final Iterable<Type> types = const [
+    ComposeDownStepState,
+    _$ComposeDownStepState,
+  ];
 
   @override
   final String wireName = r'ComposeDownStepState';
@@ -83,7 +92,11 @@ class _$ComposeDownStepStateSerializer implements PrimitiveSerializer<ComposeDow
     ComposeDownStepState object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,26 +112,32 @@ class _$ComposeDownStepStateSerializer implements PrimitiveSerializer<ComposeDow
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'removeVolumes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldBoolean),
-          ) as StepFieldBoolean?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldBoolean),
+                  )
+                  as StepFieldBoolean?;
           if (valueDes == null) continue;
           result.removeVolumes.replace(valueDes);
           break;
         case r'serviceImageRegexPatterns':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.serviceImageRegexPatterns.replace(valueDes);
           break;
@@ -150,5 +169,3 @@ class _$ComposeDownStepStateSerializer implements PrimitiveSerializer<ComposeDow
     return result.build();
   }
 }
-
-

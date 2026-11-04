@@ -22,20 +22,23 @@ part 'relations_query_filter.g.dart';
 /// RelationsQueryFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [rootEntity] 
-/// * [multiRoot] 
-/// * [multiRootEntitiesType] 
-/// * [multiRootEntityIds] 
-/// * [direction] 
-/// * [filters] 
-/// * [maxLevel] 
-/// * [fetchLastLevelOnly] 
-/// * [negate] 
-/// * [rootStateEntity] 
-/// * [defaultStateEntity] 
+/// * [type]
+/// * [rootEntity]
+/// * [multiRoot]
+/// * [multiRootEntitiesType]
+/// * [multiRootEntityIds]
+/// * [direction]
+/// * [filters]
+/// * [maxLevel]
+/// * [fetchLastLevelOnly]
+/// * [negate]
+/// * [rootStateEntity]
+/// * [defaultStateEntity]
 @BuiltValue()
-abstract class RelationsQueryFilter implements EntityFilter, Built<RelationsQueryFilter, RelationsQueryFilterBuilder> {
+abstract class RelationsQueryFilter
+    implements
+        EntityFilter,
+        Built<RelationsQueryFilter, RelationsQueryFilterBuilder> {
   @BuiltValueField(wireName: r'multiRootEntityIds')
   BuiltSet<String>? get multiRootEntityIds;
 
@@ -73,18 +76,24 @@ abstract class RelationsQueryFilter implements EntityFilter, Built<RelationsQuer
 
   RelationsQueryFilter._();
 
-  factory RelationsQueryFilter([void updates(RelationsQueryFilterBuilder b)]) = _$RelationsQueryFilter;
+  factory RelationsQueryFilter([void updates(RelationsQueryFilterBuilder b)]) =
+      _$RelationsQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RelationsQueryFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RelationsQueryFilter> get serializer => _$RelationsQueryFilterSerializer();
+  static Serializer<RelationsQueryFilter> get serializer =>
+      _$RelationsQueryFilterSerializer();
 }
 
-class _$RelationsQueryFilterSerializer implements PrimitiveSerializer<RelationsQueryFilter> {
+class _$RelationsQueryFilterSerializer
+    implements PrimitiveSerializer<RelationsQueryFilter> {
   @override
-  final Iterable<Type> types = const [RelationsQueryFilter, _$RelationsQueryFilter];
+  final Iterable<Type> types = const [
+    RelationsQueryFilter,
+    _$RelationsQueryFilter,
+  ];
 
   @override
   final String wireName = r'RelationsQueryFilter';
@@ -154,7 +163,9 @@ class _$RelationsQueryFilterSerializer implements PrimitiveSerializer<RelationsQ
       yield r'filters';
       yield serializers.serialize(
         object.filters,
-        specifiedType: const FullType(BuiltList, [FullType(RelationEntityTypeFilter)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(RelationEntityTypeFilter),
+        ]),
       );
     }
     yield r'type';
@@ -184,7 +195,11 @@ class _$RelationsQueryFilterSerializer implements PrimitiveSerializer<RelationsQ
     RelationsQueryFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -200,97 +215,127 @@ class _$RelationsQueryFilterSerializer implements PrimitiveSerializer<RelationsQ
       final value = serializedList[i + 1];
       switch (key) {
         case r'multiRootEntityIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.multiRootEntityIds.replace(valueDes);
           break;
         case r'maxLevel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxLevel = valueDes;
           break;
         case r'fetchLastLevelOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.fetchLastLevelOnly = valueDes;
           break;
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
         case r'multiRoot':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.multiRoot = valueDes;
           break;
         case r'multiRootEntitiesType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.multiRootEntitiesType = valueDes;
           break;
         case r'negate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.negate = valueDes;
           break;
         case r'rootStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.rootStateEntity = valueDes;
           break;
         case r'filters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(RelationEntityTypeFilter)]),
-          ) as BuiltList<RelationEntityTypeFilter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(RelationEntityTypeFilter),
+                    ]),
+                  )
+                  as BuiltList<RelationEntityTypeFilter>?;
           if (valueDes == null) continue;
           result.filters.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'rootEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.rootEntity.replace(valueDes);
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntitySearchDirection),
-          ) as EntitySearchDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntitySearchDirection,
+                    ),
+                  )
+                  as EntitySearchDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -322,5 +367,3 @@ class _$RelationsQueryFilterSerializer implements PrimitiveSerializer<RelationsQ
     return result.build();
   }
 }
-
-

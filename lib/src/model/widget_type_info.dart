@@ -27,14 +27,15 @@ part 'widget_type_info.g.dart';
 /// * [name] - Widget name used in search and UI
 /// * [deprecated] - Whether widget type is deprecated.
 /// * [scada] - Whether widget type is SCADA symbol.
-/// * [version] 
+/// * [version]
 /// * [image] - Base64 encoded widget thumbnail
 /// * [description] - Description of the widget type
 /// * [tags] - Tags of the widget type
 /// * [widgetType] - Type of the widget (timeseries, latest, control, alarm or static)
 /// * [bundles] - Bundles
 @BuiltValue()
-abstract class WidgetTypeInfo implements Built<WidgetTypeInfo, WidgetTypeInfoBuilder> {
+abstract class WidgetTypeInfo
+    implements Built<WidgetTypeInfo, WidgetTypeInfoBuilder> {
   /// JSON object with the Widget Type Id. Specify this field to update the Widget Type. Referencing non-existing Widget Type Id will cause error. Omit this field to create new Widget Type.
   @BuiltValueField(wireName: r'id')
   WidgetTypeId? get id;
@@ -88,16 +89,19 @@ abstract class WidgetTypeInfo implements Built<WidgetTypeInfo, WidgetTypeInfoBui
 
   WidgetTypeInfo._();
 
-  factory WidgetTypeInfo([void updates(WidgetTypeInfoBuilder b)]) = _$WidgetTypeInfo;
+  factory WidgetTypeInfo([void updates(WidgetTypeInfoBuilder b)]) =
+      _$WidgetTypeInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WidgetTypeInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WidgetTypeInfo> get serializer => _$WidgetTypeInfoSerializer();
+  static Serializer<WidgetTypeInfo> get serializer =>
+      _$WidgetTypeInfoSerializer();
 }
 
-class _$WidgetTypeInfoSerializer implements PrimitiveSerializer<WidgetTypeInfo> {
+class _$WidgetTypeInfoSerializer
+    implements PrimitiveSerializer<WidgetTypeInfo> {
   @override
   final Iterable<Type> types = const [WidgetTypeInfo, _$WidgetTypeInfo];
 
@@ -208,7 +212,11 @@ class _$WidgetTypeInfoSerializer implements PrimitiveSerializer<WidgetTypeInfo> 
     WidgetTypeInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -224,106 +232,136 @@ class _$WidgetTypeInfoSerializer implements PrimitiveSerializer<WidgetTypeInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(WidgetTypeId),
-          ) as WidgetTypeId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(WidgetTypeId),
+                  )
+                  as WidgetTypeId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'fqn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fqn = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'deprecated':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.deprecated = valueDes;
           break;
         case r'scada':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.scada = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'image':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.image = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'tags':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.tags.replace(valueDes);
           break;
         case r'widgetType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.widgetType = valueDes;
           break;
         case r'bundles':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(WidgetBundleInfo)]),
-          ) as BuiltList<WidgetBundleInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(WidgetBundleInfo),
+                    ]),
+                  )
+                  as BuiltList<WidgetBundleInfo>?;
           if (valueDes == null) continue;
           result.bundles.replace(valueDes);
           break;
@@ -355,5 +393,3 @@ class _$WidgetTypeInfoSerializer implements PrimitiveSerializer<WidgetTypeInfo> 
     return result.build();
   }
 }
-
-

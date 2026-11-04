@@ -19,7 +19,8 @@ part 'default_dashboard_params.g.dart';
 /// * [id] - Default dashboard Id to assign for the new user.
 /// * [fullscreen] - Set default dashboard to full screen mode.
 @BuiltValue()
-abstract class DefaultDashboardParams implements Built<DefaultDashboardParams, DefaultDashboardParamsBuilder> {
+abstract class DefaultDashboardParams
+    implements Built<DefaultDashboardParams, DefaultDashboardParamsBuilder> {
   /// Default dashboard Id to assign for the new user.
   @BuiltValueField(wireName: r'id')
   String? get id;
@@ -30,18 +31,25 @@ abstract class DefaultDashboardParams implements Built<DefaultDashboardParams, D
 
   DefaultDashboardParams._();
 
-  factory DefaultDashboardParams([void updates(DefaultDashboardParamsBuilder b)]) = _$DefaultDashboardParams;
+  factory DefaultDashboardParams([
+    void updates(DefaultDashboardParamsBuilder b),
+  ]) = _$DefaultDashboardParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultDashboardParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultDashboardParams> get serializer => _$DefaultDashboardParamsSerializer();
+  static Serializer<DefaultDashboardParams> get serializer =>
+      _$DefaultDashboardParamsSerializer();
 }
 
-class _$DefaultDashboardParamsSerializer implements PrimitiveSerializer<DefaultDashboardParams> {
+class _$DefaultDashboardParamsSerializer
+    implements PrimitiveSerializer<DefaultDashboardParams> {
   @override
-  final Iterable<Type> types = const [DefaultDashboardParams, _$DefaultDashboardParams];
+  final Iterable<Type> types = const [
+    DefaultDashboardParams,
+    _$DefaultDashboardParams,
+  ];
 
   @override
   final String wireName = r'DefaultDashboardParams';
@@ -73,7 +81,11 @@ class _$DefaultDashboardParamsSerializer implements PrimitiveSerializer<DefaultD
     DefaultDashboardParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +101,22 @@ class _$DefaultDashboardParamsSerializer implements PrimitiveSerializer<DefaultD
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'fullscreen':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.fullscreen = valueDes;
           break;
@@ -132,5 +148,3 @@ class _$DefaultDashboardParamsSerializer implements PrimitiveSerializer<DefaultD
     return result.build();
   }
 }
-
-

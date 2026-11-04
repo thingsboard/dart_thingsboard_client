@@ -23,15 +23,18 @@ part 'time_series_chart_key_settings.g.dart';
 ///
 /// Properties:
 /// * [type] - Data key settings type
-/// * [yAxisId] 
-/// * [showInLegend] 
-/// * [seriesType] 
-/// * [lineSettings] 
-/// * [barSettings] 
-/// * [comparisonSettings] 
-/// * [yaxisId] 
+/// * [yAxisId]
+/// * [showInLegend]
+/// * [seriesType]
+/// * [lineSettings]
+/// * [barSettings]
+/// * [comparisonSettings]
+/// * [yaxisId]
 @BuiltValue()
-abstract class TimeSeriesChartKeySettings implements DataKeySettings, Built<TimeSeriesChartKeySettings, TimeSeriesChartKeySettingsBuilder> {
+abstract class TimeSeriesChartKeySettings
+    implements
+        DataKeySettings,
+        Built<TimeSeriesChartKeySettings, TimeSeriesChartKeySettingsBuilder> {
   @BuiltValueField(wireName: r'barSettings')
   BarSeriesSettings? get barSettings;
 
@@ -56,18 +59,25 @@ abstract class TimeSeriesChartKeySettings implements DataKeySettings, Built<Time
 
   TimeSeriesChartKeySettings._();
 
-  factory TimeSeriesChartKeySettings([void updates(TimeSeriesChartKeySettingsBuilder b)]) = _$TimeSeriesChartKeySettings;
+  factory TimeSeriesChartKeySettings([
+    void updates(TimeSeriesChartKeySettingsBuilder b),
+  ]) = _$TimeSeriesChartKeySettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesChartKeySettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartKeySettings> get serializer => _$TimeSeriesChartKeySettingsSerializer();
+  static Serializer<TimeSeriesChartKeySettings> get serializer =>
+      _$TimeSeriesChartKeySettingsSerializer();
 }
 
-class _$TimeSeriesChartKeySettingsSerializer implements PrimitiveSerializer<TimeSeriesChartKeySettings> {
+class _$TimeSeriesChartKeySettingsSerializer
+    implements PrimitiveSerializer<TimeSeriesChartKeySettings> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartKeySettings, _$TimeSeriesChartKeySettings];
+  final Iterable<Type> types = const [
+    TimeSeriesChartKeySettings,
+    _$TimeSeriesChartKeySettings,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartKeySettings';
@@ -139,7 +149,11 @@ class _$TimeSeriesChartKeySettingsSerializer implements PrimitiveSerializer<Time
     TimeSeriesChartKeySettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -155,65 +169,85 @@ class _$TimeSeriesChartKeySettingsSerializer implements PrimitiveSerializer<Time
       final value = serializedList[i + 1];
       switch (key) {
         case r'barSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BarSeriesSettings),
-          ) as BarSeriesSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BarSeriesSettings),
+                  )
+                  as BarSeriesSettings?;
           if (valueDes == null) continue;
           result.barSettings.replace(valueDes);
           break;
         case r'yaxisId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.yaxisId = valueDes;
           break;
         case r'seriesType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeSeriesChartSeriesType),
-          ) as TimeSeriesChartSeriesType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeSeriesChartSeriesType,
+                    ),
+                  )
+                  as TimeSeriesChartSeriesType?;
           if (valueDes == null) continue;
           result.seriesType = valueDes;
           break;
         case r'yAxisId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.yAxisId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DataKeySettingsType),
-          ) as DataKeySettingsType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DataKeySettingsType),
+                  )
+                  as DataKeySettingsType;
           result.type = valueDes;
           break;
         case r'lineSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LineSeriesSettings),
-          ) as LineSeriesSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LineSeriesSettings),
+                  )
+                  as LineSeriesSettings?;
           if (valueDes == null) continue;
           result.lineSettings.replace(valueDes);
           break;
         case r'showInLegend':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showInLegend = valueDes;
           break;
         case r'comparisonSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DataKeyComparisonSettings),
-          ) as DataKeyComparisonSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DataKeyComparisonSettings,
+                    ),
+                  )
+                  as DataKeyComparisonSettings?;
           if (valueDes == null) continue;
           result.comparisonSettings.replace(valueDes);
           break;
@@ -245,5 +279,3 @@ class _$TimeSeriesChartKeySettingsSerializer implements PrimitiveSerializer<Time
     return result.build();
   }
 }
-
-

@@ -17,7 +17,7 @@ part 'setup_info.g.dart';
 /// SetupInfo
 ///
 /// Properties:
-/// * [status] 
+/// * [status]
 @BuiltValue()
 abstract class SetupInfo implements Built<SetupInfo, SetupInfoBuilder> {
   @BuiltValueField(wireName: r'status')
@@ -62,7 +62,11 @@ class _$SetupInfoSerializer implements PrimitiveSerializer<SetupInfo> {
     SetupInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +82,12 @@ class _$SetupInfoSerializer implements PrimitiveSerializer<SetupInfo> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SystemSetupState),
-          ) as SystemSetupState?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SystemSetupState),
+                  )
+                  as SystemSetupState?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
@@ -113,5 +119,3 @@ class _$SetupInfoSerializer implements PrimitiveSerializer<SetupInfo> {
     return result.build();
   }
 }
-
-

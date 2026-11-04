@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'tenant_name_strategy_type.g.dart';
 
 class TenantNameStrategyType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DOMAIN')
   static const TenantNameStrategyType DOMAIN = _$DOMAIN;
   @BuiltValueEnumConst(wireName: r'EMAIL')
@@ -23,11 +22,13 @@ class TenantNameStrategyType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'CUSTOM')
   static const TenantNameStrategyType CUSTOM = _$CUSTOM;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const TenantNameStrategyType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const TenantNameStrategyType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<TenantNameStrategyType> get serializer => _$tenantNameStrategyTypeSerializer;
+  static Serializer<TenantNameStrategyType> get serializer =>
+      _$tenantNameStrategyTypeSerializer;
 
-  const TenantNameStrategyType._(String name): super(name);
+  const TenantNameStrategyType._(String name) : super(name);
 
   static BuiltSet<TenantNameStrategyType> get values => _$values;
   static TenantNameStrategyType valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class TenantNameStrategyType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class TenantNameStrategyTypeMixin = Object with _$TenantNameStrategyTypeMixin;
-
+abstract class TenantNameStrategyTypeMixin = Object
+    with _$TenantNameStrategyTypeMixin;

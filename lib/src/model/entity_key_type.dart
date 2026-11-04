@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'entity_key_type.g.dart';
 
 class EntityKeyType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ATTRIBUTE')
   static const EntityKeyType ATTRIBUTE = _$ATTRIBUTE;
   @BuiltValueEnumConst(wireName: r'CLIENT_ATTRIBUTE')
@@ -35,7 +34,7 @@ class EntityKeyType extends EnumClass {
 
   static Serializer<EntityKeyType> get serializer => _$entityKeyTypeSerializer;
 
-  const EntityKeyType._(String name): super(name);
+  const EntityKeyType._(String name) : super(name);
 
   static BuiltSet<EntityKeyType> get values => _$values;
   static EntityKeyType valueOf(String name) => _$valueOf(name);
@@ -48,4 +47,3 @@ class EntityKeyType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class EntityKeyTypeMixin = Object with _$EntityKeyTypeMixin;
-

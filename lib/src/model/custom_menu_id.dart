@@ -18,7 +18,8 @@ part 'custom_menu_id.g.dart';
 /// Properties:
 /// * [id] - string
 @BuiltValue()
-abstract class CustomMenuId implements Built<CustomMenuId, CustomMenuIdBuilder> {
+abstract class CustomMenuId
+    implements Built<CustomMenuId, CustomMenuIdBuilder> {
   /// string
   @BuiltValueField(wireName: r'id')
   String get id;
@@ -59,7 +60,11 @@ class _$CustomMenuIdSerializer implements PrimitiveSerializer<CustomMenuId> {
     CustomMenuId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +80,12 @@ class _$CustomMenuIdSerializer implements PrimitiveSerializer<CustomMenuId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -109,5 +116,3 @@ class _$CustomMenuIdSerializer implements PrimitiveSerializer<CustomMenuId> {
     return result.build();
   }
 }
-
-

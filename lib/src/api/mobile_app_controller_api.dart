@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -18,12 +17,10 @@ import 'package:thingsboard_client/src/model/login_mobile_info.dart';
 import 'package:thingsboard_client/src/model/mobile_app.dart';
 import 'package:thingsboard_client/src/model/page_data_mobile_app.dart';
 import 'package:thingsboard_client/src/model/platform_type.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/user_mobile_info.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class MobileAppControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -34,7 +31,7 @@ class MobileAppControllerApi {
   /// Deletes Mobile App by ID. Referencing non-existing mobile app Id will cause an error.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -44,7 +41,7 @@ class MobileAppControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteMobileApp({ 
+  Future<Response<void>> deleteMobileApp({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,15 @@ class MobileAppControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/mobile/app/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/mobile/app/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +67,8 @@ class MobileAppControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -90,7 +87,7 @@ class MobileAppControllerApi {
   }
 
   /// Get mobile app login info (getLoginMobileInfo)
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [pkgName] - Mobile application package name
@@ -104,7 +101,7 @@ class MobileAppControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [LoginMobileInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<LoginMobileInfo>> getLoginMobileInfo({ 
+  Future<Response<LoginMobileInfo>> getLoginMobileInfo({
     required String pkgName,
     required String platform,
     CancelToken? cancelToken,
@@ -114,23 +111,27 @@ class MobileAppControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerLoginMobileInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerLoginMobileInfo);
     final _path = r'/api/noauth/mobile';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      r'platform': encodeQueryParameter(_serializers, platform, const FullType(String)),
+      r'pkgName': encodeQueryParameter(
+        _serializers,
+        pkgName,
+        const FullType(String),
+      ),
+      r'platform': encodeQueryParameter(
+        _serializers,
+        platform,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -146,11 +147,13 @@ class MobileAppControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(LoginMobileInfo),
-      ) as LoginMobileInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(LoginMobileInfo),
+                )
+                as LoginMobileInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -177,7 +180,7 @@ class MobileAppControllerApi {
   ///   Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -187,7 +190,7 @@ class MobileAppControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [MobileApp] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<MobileApp>> getMobileAppById({ 
+  Future<Response<MobileApp>> getMobileAppById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -197,12 +200,15 @@ class MobileAppControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerMobileApp);
-    final _path = r'/api/mobile/app/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/mobile/app/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -210,11 +216,8 @@ class MobileAppControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -233,11 +236,13 @@ class MobileAppControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(MobileApp),
-      ) as MobileApp;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(MobileApp),
+                )
+                as MobileApp;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -279,7 +284,7 @@ class MobileAppControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataMobileApp] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataMobileApp>> getTenantMobileApps({ 
+  Future<Response<PageDataMobileApp>> getTenantMobileApps({
     required int pageSize,
     required int page,
     PlatformType? platformType,
@@ -293,13 +298,12 @@ class MobileAppControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataMobileApp);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataMobileApp);
     final _path = r'/api/mobile/app';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -307,11 +311,8 @@ class MobileAppControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -319,12 +320,36 @@ class MobileAppControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (platformType != null) r'platformType': encodeQueryParameter(_serializers, platformType, const FullType(PlatformType)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      if (platformType != null)
+        r'platformType': encodeQueryParameter(
+          _serializers,
+          platformType,
+          const FullType(PlatformType),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -340,11 +365,13 @@ class MobileAppControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataMobileApp),
-      ) as PageDataMobileApp;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataMobileApp),
+                )
+                as PageDataMobileApp;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -368,7 +395,7 @@ class MobileAppControllerApi {
   }
 
   /// Get user mobile app basic info (getUserMobileInfo)
-  ///   Available for any authorized user. 
+  ///   Available for any authorized user.
   ///
   /// Parameters:
   /// * [pkgName] - Mobile application package name
@@ -382,7 +409,7 @@ class MobileAppControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [UserMobileInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<UserMobileInfo>> getUserMobileInfo({ 
+  Future<Response<UserMobileInfo>> getUserMobileInfo({
     required String pkgName,
     required String platform,
     CancelToken? cancelToken,
@@ -392,13 +419,12 @@ class MobileAppControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerUserMobileInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerUserMobileInfo);
     final _path = r'/api/mobile';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -406,11 +432,8 @@ class MobileAppControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -418,8 +441,16 @@ class MobileAppControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      r'platform': encodeQueryParameter(_serializers, platform, const FullType(String)),
+      r'pkgName': encodeQueryParameter(
+        _serializers,
+        pkgName,
+        const FullType(String),
+      ),
+      r'platform': encodeQueryParameter(
+        _serializers,
+        platform,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -435,11 +466,13 @@ class MobileAppControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(UserMobileInfo),
-      ) as UserMobileInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(UserMobileInfo),
+                )
+                as UserMobileInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -466,7 +499,7 @@ class MobileAppControllerApi {
   /// Create or update the Mobile app. When creating mobile app, platform generates Mobile App Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Mobile App Id will be present in the response. Specify existing Mobile App Id to update the mobile app. Referencing non-existing Mobile App Id will cause &#39;Not Found&#39; error.  The pair of mobile app package name and platform type is unique for entire platform setup.    Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [mobileApp] 
+  /// * [mobileApp]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -476,7 +509,7 @@ class MobileAppControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [MobileApp] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<MobileApp>> saveMobileApp({ 
+  Future<Response<MobileApp>> saveMobileApp({
     required MobileApp mobileApp,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -489,9 +522,7 @@ class MobileAppControllerApi {
     final _path = r'/api/mobile/app';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -499,11 +530,8 @@ class MobileAppControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -516,13 +544,9 @@ class MobileAppControllerApi {
     try {
       const _type = FullType(MobileApp);
       _bodyData = _serializers.serialize(mobileApp, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -542,11 +566,13 @@ class MobileAppControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(MobileApp),
-      ) as MobileApp;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(MobileApp),
+                )
+                as MobileApp;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -568,5 +594,4 @@ class MobileAppControllerApi {
       extra: _response.extra,
     );
   }
-
 }

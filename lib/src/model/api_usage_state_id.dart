@@ -18,22 +18,26 @@ part 'api_usage_state_id.g.dart';
 /// ApiUsageStateId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class ApiUsageStateId implements EntityId, Built<ApiUsageStateId, ApiUsageStateIdBuilder> {
+abstract class ApiUsageStateId
+    implements EntityId, Built<ApiUsageStateId, ApiUsageStateIdBuilder> {
   ApiUsageStateId._();
 
-  factory ApiUsageStateId([void updates(ApiUsageStateIdBuilder b)]) = _$ApiUsageStateId;
+  factory ApiUsageStateId([void updates(ApiUsageStateIdBuilder b)]) =
+      _$ApiUsageStateId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ApiUsageStateIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiUsageStateId> get serializer => _$ApiUsageStateIdSerializer();
+  static Serializer<ApiUsageStateId> get serializer =>
+      _$ApiUsageStateIdSerializer();
 }
 
-class _$ApiUsageStateIdSerializer implements PrimitiveSerializer<ApiUsageStateId> {
+class _$ApiUsageStateIdSerializer
+    implements PrimitiveSerializer<ApiUsageStateId> {
   @override
   final Iterable<Type> types = const [ApiUsageStateId, _$ApiUsageStateId];
 
@@ -63,7 +67,11 @@ class _$ApiUsageStateIdSerializer implements PrimitiveSerializer<ApiUsageStateId
     ApiUsageStateId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$ApiUsageStateIdSerializer implements PrimitiveSerializer<ApiUsageStateId
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$ApiUsageStateIdSerializer implements PrimitiveSerializer<ApiUsageStateId
     return result.build();
   }
 }
-
-

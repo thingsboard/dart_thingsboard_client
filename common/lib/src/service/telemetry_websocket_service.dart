@@ -52,14 +52,22 @@ class TelemetryWebsocketService implements TelemetryService {
   late WebSocketSink _sink;
 
   factory TelemetryWebsocketService(
-      ThingsboardClientBase tbClient, String apiEndpoint,
-      {WebSocketChannelFactory? channelFactory}) {
-    return TelemetryWebsocketService._internal(tbClient, apiEndpoint,
-        channelFactory: channelFactory);
+    ThingsboardClientBase tbClient,
+    String apiEndpoint, {
+    WebSocketChannelFactory? channelFactory,
+  }) {
+    return TelemetryWebsocketService._internal(
+      tbClient,
+      apiEndpoint,
+      channelFactory: channelFactory,
+    );
   }
 
-  TelemetryWebsocketService._internal(this._tbClient, String apiEndpoint,
-      {WebSocketChannelFactory? channelFactory}) {
+  TelemetryWebsocketService._internal(
+    this._tbClient,
+    String apiEndpoint, {
+    WebSocketChannelFactory? channelFactory,
+  }) {
     var apiEndpointUri = Uri.parse(apiEndpoint);
     var scheme = apiEndpointUri.scheme == 'https' ? 'wss' : 'ws';
     _telemetryUri = apiEndpointUri.replace(scheme: scheme, path: '/api/ws');
@@ -69,15 +77,15 @@ class TelemetryWebsocketService implements TelemetryService {
   @override
   void subscribe(TelemetrySubscriber subscriber) {
     _isActive = true;
-    subscriber.subscriptionCommands.forEach((subscriptionCommand) {
+    for (var subscriptionCommand in subscriber.subscriptionCommands) {
       var cmdId = _nextCmdId();
-      if (!(subscriptionCommand is MarkAsReadCmd) &&
-          !(subscriptionCommand is MarkAllAsReadCmd)) {
+      if (subscriptionCommand is! MarkAsReadCmd &&
+          subscriptionCommand is! MarkAllAsReadCmd) {
         _subscribersMap[cmdId] = subscriber;
       }
       subscriptionCommand.cmdId = cmdId;
       _cmdsWrapper.cmds.add(subscriptionCommand);
-    });
+    }
     _subscribersCount++;
     _publishCommands();
   }
@@ -85,13 +93,13 @@ class TelemetryWebsocketService implements TelemetryService {
   @override
   void update(TelemetrySubscriber subscriber) {
     if (!_isReconnect) {
-      subscriber.subscriptionCommands.forEach((subscriptionCommand) {
+      for (var subscriptionCommand in subscriber.subscriptionCommands) {
         if (subscriptionCommand.cmdId != null &&
             (subscriptionCommand is EntityDataCmd ||
                 subscriptionCommand is UnreadSubCmd)) {
           _cmdsWrapper.cmds.add(subscriptionCommand);
         }
-      });
+      }
       _publishCommands();
     }
   }
@@ -105,33 +113,37 @@ class TelemetryWebsocketService implements TelemetryService {
       return;
     }
     if (_isActive) {
-      subscriber.subscriptionCommands.forEach((subscriptionCommand) {
+      for (var subscriptionCommand in subscriber.subscriptionCommands) {
         if (subscriptionCommand is SubscriptionCmd) {
           subscriptionCommand.unsubscribe = true;
           _cmdsWrapper.cmds.add(subscriptionCommand);
         } else if (subscriptionCommand is EntityDataCmd) {
-          var entityDataUnsubscribeCmd =
-              EntityDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          var entityDataUnsubscribeCmd = EntityDataUnsubscribeCmd(
+            cmdId: subscriptionCommand.cmdId,
+          );
           _cmdsWrapper.cmds.add(entityDataUnsubscribeCmd);
         } else if (subscriptionCommand is AlarmDataCmd) {
-          var alarmDataUnsubscribeCmd =
-              AlarmDataUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          var alarmDataUnsubscribeCmd = AlarmDataUnsubscribeCmd(
+            cmdId: subscriptionCommand.cmdId,
+          );
           _cmdsWrapper.cmds.add(alarmDataUnsubscribeCmd);
         } else if (subscriptionCommand is EntityCountCmd) {
-          var entityCountUnsubscribeCmd =
-              EntityCountUnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          var entityCountUnsubscribeCmd = EntityCountUnsubscribeCmd(
+            cmdId: subscriptionCommand.cmdId,
+          );
           _cmdsWrapper.cmds.add(entityCountUnsubscribeCmd);
         } else if (subscriptionCommand is UnreadCountSubCmd ||
             subscriptionCommand is UnreadSubCmd) {
-          var unreadCountUnsubscribeCmd =
-              UnsubscribeCmd(cmdId: subscriptionCommand.cmdId);
+          var unreadCountUnsubscribeCmd = UnsubscribeCmd(
+            cmdId: subscriptionCommand.cmdId,
+          );
           _cmdsWrapper.cmds.add(unreadCountUnsubscribeCmd);
         }
         var cmdId = subscriptionCommand.cmdId;
         if (cmdId != null) {
           _subscribersMap.remove(cmdId);
         }
-      });
+      }
       if (_subscribersCount > 0) {
         _subscribersCount--;
       }
@@ -149,7 +161,8 @@ class TelemetryWebsocketService implements TelemetryService {
       String? message;
       try {
         message = jsonEncode(
-            _cmdsWrapper.preparePublishCommands(MAX_PUBLISH_COMMANDS));
+          _cmdsWrapper.preparePublishCommands(MAX_PUBLISH_COMMANDS),
+        );
       } catch (e) {
         print('Failed to prepare publish commands: $e');
       }
@@ -163,8 +176,10 @@ class TelemetryWebsocketService implements TelemetryService {
 
   void _checkToClose() {
     if (_subscribersCount == 0 && _isOpened) {
-      _socketCloseTimer ??=
-          Timer(Duration(milliseconds: WS_IDLE_TIMEOUT), () => _closeSocket());
+      _socketCloseTimer ??= Timer(
+        Duration(milliseconds: WS_IDLE_TIMEOUT),
+        () => _closeSocket(),
+      );
     }
   }
 
@@ -214,22 +229,25 @@ class TelemetryWebsocketService implements TelemetryService {
         } else if (_tbClient.isJwtTokenValid()) {
           _openSocket(token: _tbClient.getJwtToken()!);
         } else {
-          _tbClient.refreshJwtToken().then((value) {
-            var token = _tbClient.getJwtToken();
-            if (_isActive && token != null) {
-              _openSocket(token: token);
-            } else {
+          _tbClient.refreshJwtToken().then(
+            (value) {
+              var token = _tbClient.getJwtToken();
+              if (_isActive && token != null) {
+                _openSocket(token: token);
+              } else {
+                _isOpening = false;
+              }
+            },
+            onError: (e) {
               _isOpening = false;
-            }
-          }, onError: (e) {
-            _isOpening = false;
-            // A rejected refresh token has already cleared the session (which
-            // resets this service); otherwise the server was unreachable, so
-            // retry like any other failed connection attempt.
-            if (_tbClient.isAuthenticated()) {
-              _onClose();
-            }
-          });
+              // A rejected refresh token has already cleared the session (which
+              // resets this service); otherwise the server was unreachable, so
+              // retry like any other failed connection attempt.
+              if (_tbClient.isAuthenticated()) {
+                _onClose();
+              }
+            },
+          );
         }
       }
       if (_socketCloseTimer != null) {
@@ -245,18 +263,24 @@ class TelemetryWebsocketService implements TelemetryService {
     try {
       var channel = _channelFactory(_telemetryUri);
       _sink = channel.sink;
-      channel.ready.then((value) => _onOpen(token: token, apiKey: apiKey),
-          onError: ((e, stackTrace) {
-        _onError(e);
-        _onClose(channel);
-      }));
-      channel.stream.listen((event) {
-        _onMessage(event);
-      }, onDone: () {
-        _onClose(channel);
-      }, onError: (e) {
-        _onError(e);
-      });
+      channel.ready.then(
+        (value) => _onOpen(token: token, apiKey: apiKey),
+        onError: ((e, stackTrace) {
+          _onError(e);
+          _onClose(channel);
+        }),
+      );
+      channel.stream.listen(
+        (event) {
+          _onMessage(event);
+        },
+        onDone: () {
+          _onClose(channel);
+        },
+        onError: (e) {
+          _onError(e);
+        },
+      );
     } catch (e) {
       _onError(e);
       _onClose();
@@ -278,10 +302,10 @@ class TelemetryWebsocketService implements TelemetryService {
     }
     if (_isReconnect) {
       _isReconnect = false;
-      _reconnectSubscribers.forEach((reconnectSubscriber) {
+      for (var reconnectSubscriber in _reconnectSubscribers) {
         reconnectSubscriber.onReconnected();
         subscribe(reconnectSubscriber);
-      });
+      }
       _reconnectSubscribers.clear();
     }
     // Subscribers added during the backoff queued commands of their own.
@@ -290,8 +314,10 @@ class TelemetryWebsocketService implements TelemetryService {
 
   void _onMessage(dynamic rawMessage) async {
     try {
-      var message =
-          await _tbClient.compute(parseWebsocketDataMessage, rawMessage);
+      var message = await _tbClient.compute(
+        parseWebsocketDataMessage,
+        rawMessage,
+      );
       if (message is SubscriptionUpdate) {
         if (message.errorCode != null && message.errorCode! != 0) {
           _onWsError(message.errorCode!, message.errorMsg);
@@ -308,7 +334,7 @@ class TelemetryWebsocketService implements TelemetryService {
         }
       }
     } catch (e) {
-      print('Failed to process websocket message: ' + e.toString());
+      print('Failed to process websocket message: $e');
     }
     _checkToClose();
   }
@@ -355,7 +381,9 @@ class TelemetryWebsocketService implements TelemetryService {
         _reconnectTimer!.cancel();
       }
       _reconnectTimer = Timer(
-          Duration(milliseconds: _nextReconnectDelay()), () => _tryOpenSocket());
+        Duration(milliseconds: _nextReconnectDelay()),
+        () => _tryOpenSocket(),
+      );
     }
   }
 

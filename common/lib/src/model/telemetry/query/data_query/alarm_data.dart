@@ -12,16 +12,19 @@ class AlarmData extends AlarmInfo {
   final EntityId entityId;
   final Map<EntityKeyType, Map<String, TsValue>> latest;
 
-  AlarmData.fromJson(Map<String, dynamic> json)
-      : entityId = EntityId.fromJson(json['entityId']),
-        latest = json['latest'] != null
-            ? (json['latest'] as Map<String, dynamic>).map((key, value) =>
-                MapEntry(
-                    entityKeyTypeFromString(key),
-                    (value as Map<String, dynamic>).map((key, value) =>
-                        MapEntry(key, TsValue.fromJson(value)))))
-            : {},
-        super.fromJson(json);
+  AlarmData.fromJson(super.json)
+    : entityId = EntityId.fromJson(json['entityId']),
+      latest = json['latest'] != null
+          ? (json['latest'] as Map<String, dynamic>).map(
+              (key, value) => MapEntry(
+                entityKeyTypeFromString(key),
+                (value as Map<String, dynamic>).map(
+                  (key, value) => MapEntry(key, TsValue.fromJson(value)),
+                ),
+              ),
+            )
+          : {},
+      super.fromJson();
 
   @override
   String toString() {

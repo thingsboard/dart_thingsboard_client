@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'badge_position.g.dart';
 
 class BadgePosition extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'RIGHT')
   static const BadgePosition RIGHT = _$RIGHT;
   @BuiltValueEnumConst(wireName: r'LEFT')
@@ -25,7 +24,7 @@ class BadgePosition extends EnumClass {
 
   static Serializer<BadgePosition> get serializer => _$badgePositionSerializer;
 
-  const BadgePosition._(String name): super(name);
+  const BadgePosition._(String name) : super(name);
 
   static BuiltSet<BadgePosition> get values => _$values;
   static BadgePosition valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class BadgePosition extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class BadgePositionMixin = Object with _$BadgePositionMixin;
-

@@ -21,14 +21,20 @@ part 'propagation_calculated_field_configuration.g.dart';
 /// PropagationCalculatedFieldConfiguration
 ///
 /// Properties:
-/// * [output] 
-/// * [type] 
-/// * [arguments] 
-/// * [expression] 
-/// * [relation] 
-/// * [applyExpressionToResolvedArguments] 
+/// * [output]
+/// * [type]
+/// * [arguments]
+/// * [expression]
+/// * [relation]
+/// * [applyExpressionToResolvedArguments]
 @BuiltValue()
-abstract class PropagationCalculatedFieldConfiguration implements CalculatedFieldConfiguration, Built<PropagationCalculatedFieldConfiguration, PropagationCalculatedFieldConfigurationBuilder> {
+abstract class PropagationCalculatedFieldConfiguration
+    implements
+        CalculatedFieldConfiguration,
+        Built<
+          PropagationCalculatedFieldConfiguration,
+          PropagationCalculatedFieldConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'expression')
   String? get expression;
 
@@ -43,18 +49,25 @@ abstract class PropagationCalculatedFieldConfiguration implements CalculatedFiel
 
   PropagationCalculatedFieldConfiguration._();
 
-  factory PropagationCalculatedFieldConfiguration([void updates(PropagationCalculatedFieldConfigurationBuilder b)]) = _$PropagationCalculatedFieldConfiguration;
+  factory PropagationCalculatedFieldConfiguration([
+    void updates(PropagationCalculatedFieldConfigurationBuilder b),
+  ]) = _$PropagationCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PropagationCalculatedFieldConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PropagationCalculatedFieldConfiguration> get serializer => _$PropagationCalculatedFieldConfigurationSerializer();
+  static Serializer<PropagationCalculatedFieldConfiguration> get serializer =>
+      _$PropagationCalculatedFieldConfigurationSerializer();
 }
 
-class _$PropagationCalculatedFieldConfigurationSerializer implements PrimitiveSerializer<PropagationCalculatedFieldConfiguration> {
+class _$PropagationCalculatedFieldConfigurationSerializer
+    implements PrimitiveSerializer<PropagationCalculatedFieldConfiguration> {
   @override
-  final Iterable<Type> types = const [PropagationCalculatedFieldConfiguration, _$PropagationCalculatedFieldConfiguration];
+  final Iterable<Type> types = const [
+    PropagationCalculatedFieldConfiguration,
+    _$PropagationCalculatedFieldConfiguration,
+  ];
 
   @override
   final String wireName = r'PropagationCalculatedFieldConfiguration';
@@ -74,7 +87,10 @@ class _$PropagationCalculatedFieldConfigurationSerializer implements PrimitiveSe
     yield r'arguments';
     yield serializers.serialize(
       object.arguments,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(Argument),
+      ]),
     );
     if (object.applyExpressionToResolvedArguments != null) {
       yield r'applyExpressionToResolvedArguments';
@@ -108,7 +124,11 @@ class _$PropagationCalculatedFieldConfigurationSerializer implements PrimitiveSe
     PropagationCalculatedFieldConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -124,48 +144,63 @@ class _$PropagationCalculatedFieldConfigurationSerializer implements PrimitiveSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'output':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Output),
-          ) as Output?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Output),
+                  )
+                  as Output?;
           if (valueDes == null) continue;
           result.output = valueDes;
           break;
         case r'arguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
-          ) as BuiltMap<String, Argument>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(Argument),
+                    ]),
+                  )
+                  as BuiltMap<String, Argument>;
           result.arguments.replace(valueDes);
           break;
         case r'applyExpressionToResolvedArguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.applyExpressionToResolvedArguments = valueDes;
           break;
         case r'expression':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.expression = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'relation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RelationPathLevel),
-          ) as RelationPathLevel;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RelationPathLevel),
+                  )
+                  as RelationPathLevel;
           result.relation.replace(valueDes);
           break;
         default:
@@ -196,5 +231,3 @@ class _$PropagationCalculatedFieldConfigurationSerializer implements PrimitiveSe
     return result.build();
   }
 }
-
-

@@ -7,12 +7,13 @@ enum DynamicValueSourceType {
   CURRENT_TENANT,
   CURRENT_CUSTOMER,
   CURRENT_USER,
-  CURRENT_DEVICE
+  CURRENT_DEVICE,
 }
 
 DynamicValueSourceType dynamicValueSourceTypeFromString(String value) {
   return DynamicValueSourceType.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension DynamicValueSourceTypeToString on DynamicValueSourceType {

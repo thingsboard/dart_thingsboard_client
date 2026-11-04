@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'menu_item_type.g.dart';
 
 class MenuItemType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'HOME')
   static const MenuItemType HOME = _$HOME;
   @BuiltValueEnumConst(wireName: r'DEFAULT')
@@ -27,7 +26,7 @@ class MenuItemType extends EnumClass {
 
   static Serializer<MenuItemType> get serializer => _$menuItemTypeSerializer;
 
-  const MenuItemType._(String name): super(name);
+  const MenuItemType._(String name) : super(name);
 
   static BuiltSet<MenuItemType> get values => _$values;
   static MenuItemType valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class MenuItemType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class MenuItemTypeMixin = Object with _$MenuItemTypeMixin;
-

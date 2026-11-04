@@ -16,10 +16,11 @@ part 'fixed_time_window.g.dart';
 /// FixedTimeWindow
 ///
 /// Properties:
-/// * [startTimeMs] 
-/// * [endTimeMs] 
+/// * [startTimeMs]
+/// * [endTimeMs]
 @BuiltValue()
-abstract class FixedTimeWindow implements Built<FixedTimeWindow, FixedTimeWindowBuilder> {
+abstract class FixedTimeWindow
+    implements Built<FixedTimeWindow, FixedTimeWindowBuilder> {
   @BuiltValueField(wireName: r'startTimeMs')
   int? get startTimeMs;
 
@@ -28,16 +29,19 @@ abstract class FixedTimeWindow implements Built<FixedTimeWindow, FixedTimeWindow
 
   FixedTimeWindow._();
 
-  factory FixedTimeWindow([void updates(FixedTimeWindowBuilder b)]) = _$FixedTimeWindow;
+  factory FixedTimeWindow([void updates(FixedTimeWindowBuilder b)]) =
+      _$FixedTimeWindow;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(FixedTimeWindowBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<FixedTimeWindow> get serializer => _$FixedTimeWindowSerializer();
+  static Serializer<FixedTimeWindow> get serializer =>
+      _$FixedTimeWindowSerializer();
 }
 
-class _$FixedTimeWindowSerializer implements PrimitiveSerializer<FixedTimeWindow> {
+class _$FixedTimeWindowSerializer
+    implements PrimitiveSerializer<FixedTimeWindow> {
   @override
   final Iterable<Type> types = const [FixedTimeWindow, _$FixedTimeWindow];
 
@@ -71,7 +75,11 @@ class _$FixedTimeWindowSerializer implements PrimitiveSerializer<FixedTimeWindow
     FixedTimeWindow object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +95,22 @@ class _$FixedTimeWindowSerializer implements PrimitiveSerializer<FixedTimeWindow
       final value = serializedList[i + 1];
       switch (key) {
         case r'startTimeMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startTimeMs = valueDes;
           break;
         case r'endTimeMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endTimeMs = valueDes;
           break;
@@ -130,5 +142,3 @@ class _$FixedTimeWindowSerializer implements PrimitiveSerializer<FixedTimeWindow
     return result.build();
   }
 }
-
-

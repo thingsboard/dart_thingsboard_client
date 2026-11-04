@@ -10,7 +10,6 @@
 // ignore_for_file: unused_element
 import 'package:thingsboard_client/src/model/output.dart';
 import 'package:thingsboard_client/src/model/attribute_scope.dart';
-import 'package:thingsboard_client/src/model/attributes_output_strategy.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -20,25 +19,29 @@ part 'attributes_output.g.dart';
 /// AttributesOutput
 ///
 /// Properties:
-/// * [decimalsByDefault] 
-/// * [name] 
-/// * [scope] 
-/// * [strategy] 
-/// * [type] 
+/// * [decimalsByDefault]
+/// * [name]
+/// * [scope]
+/// * [strategy]
+/// * [type]
 @BuiltValue()
-abstract class AttributesOutput implements Output, Built<AttributesOutput, AttributesOutputBuilder> {
+abstract class AttributesOutput
+    implements Output, Built<AttributesOutput, AttributesOutputBuilder> {
   AttributesOutput._();
 
-  factory AttributesOutput([void updates(AttributesOutputBuilder b)]) = _$AttributesOutput;
+  factory AttributesOutput([void updates(AttributesOutputBuilder b)]) =
+      _$AttributesOutput;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AttributesOutputBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AttributesOutput> get serializer => _$AttributesOutputSerializer();
+  static Serializer<AttributesOutput> get serializer =>
+      _$AttributesOutputSerializer();
 }
 
-class _$AttributesOutputSerializer implements PrimitiveSerializer<AttributesOutput> {
+class _$AttributesOutputSerializer
+    implements PrimitiveSerializer<AttributesOutput> {
   @override
   final Iterable<Type> types = const [AttributesOutput, _$AttributesOutput];
 
@@ -91,7 +94,11 @@ class _$AttributesOutputSerializer implements PrimitiveSerializer<AttributesOutp
     AttributesOutput object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,41 +114,51 @@ class _$AttributesOutputSerializer implements PrimitiveSerializer<AttributesOutp
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'decimalsByDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.decimalsByDefault = valueDes;
           break;
         case r'strategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.strategy = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AttributeScope),
-          ) as AttributeScope?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AttributeScope),
+                  )
+                  as AttributeScope?;
           if (valueDes == null) continue;
           result.scope = valueDes;
           break;
@@ -173,5 +190,3 @@ class _$AttributesOutputSerializer implements PrimitiveSerializer<AttributesOutp
     return result.build();
   }
 }
-
-

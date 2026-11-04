@@ -21,7 +21,8 @@ part 'agent_app_install_response.g.dart';
 /// * [application] - The newly created agent application.
 /// * [event] - The INSTALL event created alongside the application.
 @BuiltValue()
-abstract class AgentAppInstallResponse implements Built<AgentAppInstallResponse, AgentAppInstallResponseBuilder> {
+abstract class AgentAppInstallResponse
+    implements Built<AgentAppInstallResponse, AgentAppInstallResponseBuilder> {
   /// The newly created agent application.
   @BuiltValueField(wireName: r'application')
   AgentApplication? get application;
@@ -32,18 +33,25 @@ abstract class AgentAppInstallResponse implements Built<AgentAppInstallResponse,
 
   AgentAppInstallResponse._();
 
-  factory AgentAppInstallResponse([void updates(AgentAppInstallResponseBuilder b)]) = _$AgentAppInstallResponse;
+  factory AgentAppInstallResponse([
+    void updates(AgentAppInstallResponseBuilder b),
+  ]) = _$AgentAppInstallResponse;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentAppInstallResponseBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentAppInstallResponse> get serializer => _$AgentAppInstallResponseSerializer();
+  static Serializer<AgentAppInstallResponse> get serializer =>
+      _$AgentAppInstallResponseSerializer();
 }
 
-class _$AgentAppInstallResponseSerializer implements PrimitiveSerializer<AgentAppInstallResponse> {
+class _$AgentAppInstallResponseSerializer
+    implements PrimitiveSerializer<AgentAppInstallResponse> {
   @override
-  final Iterable<Type> types = const [AgentAppInstallResponse, _$AgentAppInstallResponse];
+  final Iterable<Type> types = const [
+    AgentAppInstallResponse,
+    _$AgentAppInstallResponse,
+  ];
 
   @override
   final String wireName = r'AgentAppInstallResponse';
@@ -75,7 +83,11 @@ class _$AgentAppInstallResponseSerializer implements PrimitiveSerializer<AgentAp
     AgentAppInstallResponse object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +103,22 @@ class _$AgentAppInstallResponseSerializer implements PrimitiveSerializer<AgentAp
       final value = serializedList[i + 1];
       switch (key) {
         case r'application':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentApplication),
-          ) as AgentApplication?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentApplication),
+                  )
+                  as AgentApplication?;
           if (valueDes == null) continue;
           result.application.replace(valueDes);
           break;
         case r'event':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppEvent),
-          ) as AgentAppEvent?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppEvent),
+                  )
+                  as AgentAppEvent?;
           if (valueDes == null) continue;
           result.event.replace(valueDes);
           break;
@@ -134,5 +150,3 @@ class _$AgentAppInstallResponseSerializer implements PrimitiveSerializer<AgentAp
     return result.build();
   }
 }
-
-

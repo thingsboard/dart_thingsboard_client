@@ -20,7 +20,8 @@ part 'short_entity_view.g.dart';
 /// * [id] - Entity Id object
 /// * [name] - Name of the entity
 @BuiltValue()
-abstract class ShortEntityView implements Built<ShortEntityView, ShortEntityViewBuilder> {
+abstract class ShortEntityView
+    implements Built<ShortEntityView, ShortEntityViewBuilder> {
   /// Entity Id object
   @BuiltValueField(wireName: r'id')
   EntityId get id;
@@ -31,16 +32,19 @@ abstract class ShortEntityView implements Built<ShortEntityView, ShortEntityView
 
   ShortEntityView._();
 
-  factory ShortEntityView([void updates(ShortEntityViewBuilder b)]) = _$ShortEntityView;
+  factory ShortEntityView([void updates(ShortEntityViewBuilder b)]) =
+      _$ShortEntityView;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ShortEntityViewBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ShortEntityView> get serializer => _$ShortEntityViewSerializer();
+  static Serializer<ShortEntityView> get serializer =>
+      _$ShortEntityViewSerializer();
 }
 
-class _$ShortEntityViewSerializer implements PrimitiveSerializer<ShortEntityView> {
+class _$ShortEntityViewSerializer
+    implements PrimitiveSerializer<ShortEntityView> {
   @override
   final Iterable<Type> types = const [ShortEntityView, _$ShortEntityView];
 
@@ -70,7 +74,11 @@ class _$ShortEntityViewSerializer implements PrimitiveSerializer<ShortEntityView
     ShortEntityView object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,17 +94,21 @@ class _$ShortEntityViewSerializer implements PrimitiveSerializer<ShortEntityView
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityId),
-          ) as EntityId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityId),
+                  )
+                  as EntityId;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         default:
@@ -127,5 +139,3 @@ class _$ShortEntityViewSerializer implements PrimitiveSerializer<ShortEntityView
     return result.build();
   }
 }
-
-

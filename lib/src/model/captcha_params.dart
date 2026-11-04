@@ -19,9 +19,9 @@ part 'captcha_params.g.dart';
 /// CaptchaParams
 ///
 /// Properties:
-/// * [version] 
+/// * [version]
 @BuiltValue(instantiable: false)
-abstract class CaptchaParams  {
+abstract class CaptchaParams {
   @BuiltValueField(wireName: r'version')
   String get version;
 
@@ -34,36 +34,38 @@ abstract class CaptchaParams  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CaptchaParams> get serializer => _$CaptchaParamsSerializer();
+  static Serializer<CaptchaParams> get serializer =>
+      _$CaptchaParamsSerializer();
 }
 
 extension CaptchaParamsDiscriminatorExt on CaptchaParams {
-    String? get discriminatorValue {
-        if (this is EnterpriseCaptchaParams) {
-            return r'enterprise';
-        }
-        if (this is V2CaptchaParams) {
-            return r'v2';
-        }
-        if (this is V3CaptchaParams) {
-            return r'v3';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is EnterpriseCaptchaParams) {
+      return r'enterprise';
     }
+    if (this is V2CaptchaParams) {
+      return r'v2';
+    }
+    if (this is V3CaptchaParams) {
+      return r'v3';
+    }
+    return null;
+  }
 }
+
 extension CaptchaParamsBuilderDiscriminatorExt on CaptchaParamsBuilder {
-    String? get discriminatorValue {
-        if (this is EnterpriseCaptchaParamsBuilder) {
-            return r'enterprise';
-        }
-        if (this is V2CaptchaParamsBuilder) {
-            return r'v2';
-        }
-        if (this is V3CaptchaParamsBuilder) {
-            return r'v3';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is EnterpriseCaptchaParamsBuilder) {
+      return r'enterprise';
     }
+    if (this is V2CaptchaParamsBuilder) {
+      return r'v2';
+    }
+    if (this is V3CaptchaParamsBuilder) {
+      return r'v3';
+    }
+    return null;
+  }
 }
 
 class _$CaptchaParamsSerializer implements PrimitiveSerializer<CaptchaParams> {
@@ -92,15 +94,28 @@ class _$CaptchaParamsSerializer implements PrimitiveSerializer<CaptchaParams> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is EnterpriseCaptchaParams) {
-      return serializers.serialize(object, specifiedType: FullType(EnterpriseCaptchaParams))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EnterpriseCaptchaParams),
+      )!;
     }
     if (object is V2CaptchaParams) {
-      return serializers.serialize(object, specifiedType: FullType(V2CaptchaParams))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(V2CaptchaParams),
+      )!;
     }
     if (object is V3CaptchaParams) {
-      return serializers.serialize(object, specifiedType: FullType(V3CaptchaParams))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(V3CaptchaParams),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -110,37 +125,62 @@ class _$CaptchaParamsSerializer implements PrimitiveSerializer<CaptchaParams> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(CaptchaParams.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(CaptchaParams.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'enterprise':
-        return serializers.deserialize(serialized, specifiedType: FullType(EnterpriseCaptchaParams)) as EnterpriseCaptchaParams;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EnterpriseCaptchaParams),
+            )
+            as EnterpriseCaptchaParams;
       case r'v2':
-        return serializers.deserialize(serialized, specifiedType: FullType(V2CaptchaParams)) as V2CaptchaParams;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(V2CaptchaParams),
+            )
+            as V2CaptchaParams;
       case r'v3':
-        return serializers.deserialize(serialized, specifiedType: FullType(V3CaptchaParams)) as V3CaptchaParams;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(V3CaptchaParams),
+            )
+            as V3CaptchaParams;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($CaptchaParams)) as $CaptchaParams;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($CaptchaParams),
+            )
+            as $CaptchaParams;
     }
   }
 }
 
-
 /// a concrete implementation of [CaptchaParams], since [CaptchaParams] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $CaptchaParams implements CaptchaParams, Built<$CaptchaParams, $CaptchaParamsBuilder> {
+abstract class $CaptchaParams
+    implements CaptchaParams, Built<$CaptchaParams, $CaptchaParamsBuilder> {
   $CaptchaParams._();
 
-  factory $CaptchaParams([void Function($CaptchaParamsBuilder)? updates]) = _$$CaptchaParams;
+  factory $CaptchaParams([void Function($CaptchaParamsBuilder)? updates]) =
+      _$$CaptchaParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($CaptchaParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$CaptchaParams> get serializer => _$$CaptchaParamsSerializer();
+  static Serializer<$CaptchaParams> get serializer =>
+      _$$CaptchaParamsSerializer();
 }
 
-class _$$CaptchaParamsSerializer implements PrimitiveSerializer<$CaptchaParams> {
+class _$$CaptchaParamsSerializer
+    implements PrimitiveSerializer<$CaptchaParams> {
   @override
   final Iterable<Type> types = const [$CaptchaParams, _$$CaptchaParams];
 
@@ -153,7 +193,10 @@ class _$$CaptchaParamsSerializer implements PrimitiveSerializer<$CaptchaParams> 
     $CaptchaParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(CaptchaParams))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(CaptchaParams),
+    )!;
   }
 
   void _deserializeProperties(
@@ -169,10 +212,12 @@ class _$$CaptchaParamsSerializer implements PrimitiveSerializer<$CaptchaParams> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.version = valueDes;
           break;
         default:
@@ -203,4 +248,3 @@ class _$$CaptchaParamsSerializer implements PrimitiveSerializer<$CaptchaParams> 
     return result.build();
   }
 }
-

@@ -22,24 +22,25 @@ part 'line_series_settings.g.dart';
 /// LineSeriesSettings
 ///
 /// Properties:
-/// * [showLine] 
-/// * [step] 
-/// * [stepType] 
-/// * [smooth] 
-/// * [lineType] 
-/// * [lineWidth] 
-/// * [showPoints] 
-/// * [showPointLabel] 
-/// * [pointLabelPosition] 
-/// * [pointLabelFont] 
-/// * [pointLabelColor] 
-/// * [enablePointLabelBackground] 
-/// * [pointLabelBackground] 
-/// * [pointShape] 
-/// * [pointSize] 
-/// * [fillAreaSettings] 
+/// * [showLine]
+/// * [step]
+/// * [stepType]
+/// * [smooth]
+/// * [lineType]
+/// * [lineWidth]
+/// * [showPoints]
+/// * [showPointLabel]
+/// * [pointLabelPosition]
+/// * [pointLabelFont]
+/// * [pointLabelColor]
+/// * [enablePointLabelBackground]
+/// * [pointLabelBackground]
+/// * [pointShape]
+/// * [pointSize]
+/// * [fillAreaSettings]
 @BuiltValue()
-abstract class LineSeriesSettings implements Built<LineSeriesSettings, LineSeriesSettingsBuilder> {
+abstract class LineSeriesSettings
+    implements Built<LineSeriesSettings, LineSeriesSettingsBuilder> {
   @BuiltValueField(wireName: r'showLine')
   bool? get showLine;
 
@@ -94,16 +95,19 @@ abstract class LineSeriesSettings implements Built<LineSeriesSettings, LineSerie
 
   LineSeriesSettings._();
 
-  factory LineSeriesSettings([void updates(LineSeriesSettingsBuilder b)]) = _$LineSeriesSettings;
+  factory LineSeriesSettings([void updates(LineSeriesSettingsBuilder b)]) =
+      _$LineSeriesSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LineSeriesSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LineSeriesSettings> get serializer => _$LineSeriesSettingsSerializer();
+  static Serializer<LineSeriesSettings> get serializer =>
+      _$LineSeriesSettingsSerializer();
 }
 
-class _$LineSeriesSettingsSerializer implements PrimitiveSerializer<LineSeriesSettings> {
+class _$LineSeriesSettingsSerializer
+    implements PrimitiveSerializer<LineSeriesSettings> {
   @override
   final Iterable<Type> types = const [LineSeriesSettings, _$LineSeriesSettings];
 
@@ -235,7 +239,11 @@ class _$LineSeriesSettingsSerializer implements PrimitiveSerializer<LineSeriesSe
     LineSeriesSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -251,130 +259,162 @@ class _$LineSeriesSettingsSerializer implements PrimitiveSerializer<LineSeriesSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'showLine':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showLine = valueDes;
           break;
         case r'step':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.step = valueDes;
           break;
         case r'stepType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LineSeriesStepType),
-          ) as LineSeriesStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LineSeriesStepType),
+                  )
+                  as LineSeriesStepType?;
           if (valueDes == null) continue;
           result.stepType = valueDes;
           break;
         case r'smooth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.smooth = valueDes;
           break;
         case r'lineType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartLineType),
-          ) as ChartLineType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartLineType),
+                  )
+                  as ChartLineType?;
           if (valueDes == null) continue;
           result.lineType = valueDes;
           break;
         case r'lineWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.lineWidth = valueDes;
           break;
         case r'showPoints':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showPoints = valueDes;
           break;
         case r'showPointLabel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showPointLabel = valueDes;
           break;
         case r'pointLabelPosition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartLabelPosition),
-          ) as ChartLabelPosition?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartLabelPosition),
+                  )
+                  as ChartLabelPosition?;
           if (valueDes == null) continue;
           result.pointLabelPosition = valueDes;
           break;
         case r'pointLabelFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.pointLabelFont.replace(valueDes);
           break;
         case r'pointLabelColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.pointLabelColor = valueDes;
           break;
         case r'enablePointLabelBackground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enablePointLabelBackground = valueDes;
           break;
         case r'pointLabelBackground':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.pointLabelBackground = valueDes;
           break;
         case r'pointShape':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartShape),
-          ) as ChartShape?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartShape),
+                  )
+                  as ChartShape?;
           if (valueDes == null) continue;
           result.pointShape = valueDes;
           break;
         case r'pointSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.pointSize = valueDes;
           break;
         case r'fillAreaSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ChartFillSettings),
-          ) as ChartFillSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ChartFillSettings),
+                  )
+                  as ChartFillSettings?;
           if (valueDes == null) continue;
           result.fillAreaSettings.replace(valueDes);
           break;
@@ -406,5 +446,3 @@ class _$LineSeriesSettingsSerializer implements PrimitiveSerializer<LineSeriesSe
     return result.build();
   }
 }
-
-

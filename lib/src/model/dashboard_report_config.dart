@@ -28,7 +28,8 @@ part 'dashboard_report_config.g.dart';
 /// * [useCurrentUserCredentials] - If set, credentials of user created this dashboard report configuration will be used to open dashboard UI during dashboard report generation.
 /// * [userId] - A string value representing the user id.
 @BuiltValue()
-abstract class DashboardReportConfig implements Built<DashboardReportConfig, DashboardReportConfigBuilder> {
+abstract class DashboardReportConfig
+    implements Built<DashboardReportConfig, DashboardReportConfigBuilder> {
   /// Base URL of ThingsBoard UI that should be accessible by Web Report Server.
   @BuiltValueField(wireName: r'baseUrl')
   String get baseUrl;
@@ -71,18 +72,25 @@ abstract class DashboardReportConfig implements Built<DashboardReportConfig, Das
 
   DashboardReportConfig._();
 
-  factory DashboardReportConfig([void updates(DashboardReportConfigBuilder b)]) = _$DashboardReportConfig;
+  factory DashboardReportConfig([
+    void updates(DashboardReportConfigBuilder b),
+  ]) = _$DashboardReportConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DashboardReportConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DashboardReportConfig> get serializer => _$DashboardReportConfigSerializer();
+  static Serializer<DashboardReportConfig> get serializer =>
+      _$DashboardReportConfigSerializer();
 }
 
-class _$DashboardReportConfigSerializer implements PrimitiveSerializer<DashboardReportConfig> {
+class _$DashboardReportConfigSerializer
+    implements PrimitiveSerializer<DashboardReportConfig> {
   @override
-  final Iterable<Type> types = const [DashboardReportConfig, _$DashboardReportConfig];
+  final Iterable<Type> types = const [
+    DashboardReportConfig,
+    _$DashboardReportConfig,
+  ];
 
   @override
   final String wireName = r'DashboardReportConfig';
@@ -160,7 +168,11 @@ class _$DashboardReportConfigSerializer implements PrimitiveSerializer<Dashboard
     DashboardReportConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -176,78 +188,98 @@ class _$DashboardReportConfigSerializer implements PrimitiveSerializer<Dashboard
       final value = serializedList[i + 1];
       switch (key) {
         case r'baseUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.baseUrl = valueDes;
           break;
         case r'dashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.dashboardId = valueDes;
           break;
         case r'state':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.state = valueDes;
           break;
         case r'timezone':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.timezone = valueDes;
           break;
         case r'useDashboardTimewindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useDashboardTimewindow = valueDes;
           break;
         case r'timewindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.timewindow = valueDes;
           break;
         case r'namePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.namePattern = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'useCurrentUserCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useCurrentUserCredentials = valueDes;
           break;
         case r'userId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.userId = valueDes;
           break;
         default:
@@ -278,5 +310,3 @@ class _$DashboardReportConfigSerializer implements PrimitiveSerializer<Dashboard
     return result.build();
   }
 }
-
-

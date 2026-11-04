@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/page_data_secret_info.dart';
 import 'package:thingsboard_client/src/model/secret.dart';
 import 'package:thingsboard_client/src/model/secret_info.dart';
 import 'package:thingsboard_client/src/model/tb_secret_delete_result.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class SecretControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -34,7 +31,7 @@ class SecretControllerApi {
   /// Deletes the secret. Referencing non-existing Secret Id will cause an error.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -44,7 +41,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbSecretDeleteResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbSecretDeleteResult>> deleteSecret({ 
+  Future<Response<TbSecretDeleteResult>> deleteSecret({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -53,13 +50,17 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTbSecretDeleteResult);
-    final _path = r'/api/secret/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTbSecretDeleteResult);
+    final _path = r'/api/secret/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +68,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -90,11 +88,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbSecretDeleteResult),
-      ) as TbSecretDeleteResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbSecretDeleteResult),
+                )
+                as TbSecretDeleteResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -121,7 +121,7 @@ class SecretControllerApi {
   ///   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -131,7 +131,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SecretInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SecretInfo>> getSecretInfoById({ 
+  Future<Response<SecretInfo>> getSecretInfoById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -140,13 +140,17 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSecretInfo);
-    final _path = r'/api/secret/{id}/info'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSecretInfo);
+    final _path = r'/api/secret/{id}/info'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -154,11 +158,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -177,11 +178,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SecretInfo),
-      ) as SecretInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SecretInfo),
+                )
+                as SecretInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -208,7 +211,7 @@ class SecretControllerApi {
   ///   Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [name] 
+  /// * [name]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -218,7 +221,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SecretInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SecretInfo>> getSecretInfoByName({ 
+  Future<Response<SecretInfo>> getSecretInfoByName({
     required String name,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -227,13 +230,12 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSecretInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSecretInfo);
     final _path = r'/api/secret';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -241,11 +243,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -269,11 +268,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SecretInfo),
-      ) as SecretInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SecretInfo),
+                )
+                as SecretInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -314,7 +315,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataSecretInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataSecretInfo>> getSecretInfos({ 
+  Future<Response<PageDataSecretInfo>> getSecretInfos({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -327,13 +328,12 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataSecretInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataSecretInfo);
     final _path = r'/api/secrets';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -341,11 +341,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -353,11 +350,30 @@ class SecretControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -373,11 +389,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataSecretInfo),
-      ) as PageDataSecretInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataSecretInfo),
+                )
+                as PageDataSecretInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -413,7 +431,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<String>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<String>>> getSecretNames({ 
+  Future<Response<BuiltList<String>>> getSecretNames({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -421,13 +439,12 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfString);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfString);
     final _path = r'/api/secret/names';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -435,11 +452,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -458,11 +472,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(String)]),
-      ) as BuiltList<String>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(String)]),
+                )
+                as BuiltList<String>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -489,7 +505,7 @@ class SecretControllerApi {
   /// Create or update the Secret. When creating secret, platform generates Secret Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Secret Id will be present in the response. Specify existing Secret Id to update the secret. Secret name is not updatable, only value could be changed. Referencing non-existing Secret Id will cause &#39;Not Found&#39; error.  Secret name is unique in the scope of tenant.
   ///
   /// Parameters:
-  /// * [secret] 
+  /// * [secret]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -499,7 +515,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SecretInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SecretInfo>> saveSecret({ 
+  Future<Response<SecretInfo>> saveSecret({
     required Secret secret,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -508,13 +524,12 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSecretAndSecretInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSecretAndSecretInfo);
     final _path = r'/api/secret';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -522,11 +537,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -539,13 +551,9 @@ class SecretControllerApi {
     try {
       const _type = FullType(Secret);
       _bodyData = _serializers.serialize(secret, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -565,11 +573,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SecretInfo),
-      ) as SecretInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SecretInfo),
+                )
+                as SecretInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -597,7 +607,7 @@ class SecretControllerApi {
   ///
   /// Parameters:
   /// * [id] - Unique identifier of the Secret to update
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -607,7 +617,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SecretInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SecretInfo>> updateSecretDescription({ 
+  Future<Response<SecretInfo>> updateSecretDescription({
     required String id,
     String? body,
     CancelToken? cancelToken,
@@ -617,13 +627,17 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSecretInfo);
-    final _path = r'/api/secret/{id}/description'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSecretInfo);
+    final _path = r'/api/secret/{id}/description'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -631,11 +645,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -647,13 +658,9 @@ class SecretControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -673,11 +680,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SecretInfo),
-      ) as SecretInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SecretInfo),
+                )
+                as SecretInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -705,7 +714,7 @@ class SecretControllerApi {
   ///
   /// Parameters:
   /// * [id] - Unique identifier of the Secret to update
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -715,7 +724,7 @@ class SecretControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SecretInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SecretInfo>> updateSecretValue({ 
+  Future<Response<SecretInfo>> updateSecretValue({
     required String id,
     required String body,
     CancelToken? cancelToken,
@@ -725,13 +734,17 @@ class SecretControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSecretInfo);
-    final _path = r'/api/secret/{id}/value'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSecretInfo);
+    final _path = r'/api/secret/{id}/value'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -739,11 +752,8 @@ class SecretControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -755,13 +765,9 @@ class SecretControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -781,11 +787,13 @@ class SecretControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SecretInfo),
-      ) as SecretInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SecretInfo),
+                )
+                as SecretInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -807,5 +815,4 @@ class SecretControllerApi {
       extra: _response.extra,
     );
   }
-
 }

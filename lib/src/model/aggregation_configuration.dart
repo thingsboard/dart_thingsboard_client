@@ -17,10 +17,12 @@ part 'aggregation_configuration.g.dart';
 /// AggregationConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [limit] 
+/// * [type]
+/// * [limit]
 @BuiltValue()
-abstract class AggregationConfiguration implements Built<AggregationConfiguration, AggregationConfigurationBuilder> {
+abstract class AggregationConfiguration
+    implements
+        Built<AggregationConfiguration, AggregationConfigurationBuilder> {
   @BuiltValueField(wireName: r'type')
   Aggregation? get type;
   // enum typeEnum {  MIN,  MAX,  AVG,  SUM,  COUNT,  NONE,  };
@@ -30,18 +32,25 @@ abstract class AggregationConfiguration implements Built<AggregationConfiguratio
 
   AggregationConfiguration._();
 
-  factory AggregationConfiguration([void updates(AggregationConfigurationBuilder b)]) = _$AggregationConfiguration;
+  factory AggregationConfiguration([
+    void updates(AggregationConfigurationBuilder b),
+  ]) = _$AggregationConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AggregationConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AggregationConfiguration> get serializer => _$AggregationConfigurationSerializer();
+  static Serializer<AggregationConfiguration> get serializer =>
+      _$AggregationConfigurationSerializer();
 }
 
-class _$AggregationConfigurationSerializer implements PrimitiveSerializer<AggregationConfiguration> {
+class _$AggregationConfigurationSerializer
+    implements PrimitiveSerializer<AggregationConfiguration> {
   @override
-  final Iterable<Type> types = const [AggregationConfiguration, _$AggregationConfiguration];
+  final Iterable<Type> types = const [
+    AggregationConfiguration,
+    _$AggregationConfiguration,
+  ];
 
   @override
   final String wireName = r'AggregationConfiguration';
@@ -73,7 +82,11 @@ class _$AggregationConfigurationSerializer implements PrimitiveSerializer<Aggreg
     AggregationConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +102,22 @@ class _$AggregationConfigurationSerializer implements PrimitiveSerializer<Aggreg
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Aggregation),
-          ) as Aggregation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Aggregation),
+                  )
+                  as Aggregation?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'limit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.limit = valueDes;
           break;
@@ -132,5 +149,3 @@ class _$AggregationConfigurationSerializer implements PrimitiveSerializer<Aggreg
     return result.build();
   }
 }
-
-

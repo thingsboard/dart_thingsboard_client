@@ -18,11 +18,12 @@ part 'notification_info.g.dart';
 /// NotificationInfo
 ///
 /// Properties:
-/// * [dashboardId] 
-/// * [stateEntityId] 
-/// * [type] 
+/// * [dashboardId]
+/// * [stateEntityId]
+/// * [type]
 @BuiltValue()
-abstract class NotificationInfo implements Built<NotificationInfo, NotificationInfoBuilder> {
+abstract class NotificationInfo
+    implements Built<NotificationInfo, NotificationInfoBuilder> {
   @BuiltValueField(wireName: r'dashboardId')
   DashboardId? get dashboardId;
 
@@ -34,16 +35,19 @@ abstract class NotificationInfo implements Built<NotificationInfo, NotificationI
 
   NotificationInfo._();
 
-  factory NotificationInfo([void updates(NotificationInfoBuilder b)]) = _$NotificationInfo;
+  factory NotificationInfo([void updates(NotificationInfoBuilder b)]) =
+      _$NotificationInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationInfo> get serializer => _$NotificationInfoSerializer();
+  static Serializer<NotificationInfo> get serializer =>
+      _$NotificationInfoSerializer();
 }
 
-class _$NotificationInfoSerializer implements PrimitiveSerializer<NotificationInfo> {
+class _$NotificationInfoSerializer
+    implements PrimitiveSerializer<NotificationInfo> {
   @override
   final Iterable<Type> types = const [NotificationInfo, _$NotificationInfo];
 
@@ -82,7 +86,11 @@ class _$NotificationInfoSerializer implements PrimitiveSerializer<NotificationIn
     NotificationInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +106,32 @@ class _$NotificationInfoSerializer implements PrimitiveSerializer<NotificationIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'dashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DashboardId),
-          ) as DashboardId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DashboardId),
+                  )
+                  as DashboardId?;
           if (valueDes == null) continue;
           result.dashboardId.replace(valueDes);
           break;
         case r'stateEntityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.stateEntityId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -148,5 +162,3 @@ class _$NotificationInfoSerializer implements PrimitiveSerializer<NotificationIn
     return result.build();
   }
 }
-
-

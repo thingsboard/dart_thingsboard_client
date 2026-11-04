@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'white_labeling_type.g.dart';
 
 class WhiteLabelingType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'LOGIN')
   static const WhiteLabelingType LOGIN = _$LOGIN;
   @BuiltValueEnumConst(wireName: r'GENERAL')
@@ -29,11 +28,13 @@ class WhiteLabelingType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'PRIVACY_POLICY')
   static const WhiteLabelingType PRIVACY_POLICY = _$PRIVACY_POLICY;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const WhiteLabelingType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const WhiteLabelingType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<WhiteLabelingType> get serializer => _$whiteLabelingTypeSerializer;
+  static Serializer<WhiteLabelingType> get serializer =>
+      _$whiteLabelingTypeSerializer;
 
-  const WhiteLabelingType._(String name): super(name);
+  const WhiteLabelingType._(String name) : super(name);
 
   static BuiltSet<WhiteLabelingType> get values => _$values;
   static WhiteLabelingType valueOf(String name) => _$valueOf(name);
@@ -46,4 +47,3 @@ class WhiteLabelingType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class WhiteLabelingTypeMixin = Object with _$WhiteLabelingTypeMixin;
-

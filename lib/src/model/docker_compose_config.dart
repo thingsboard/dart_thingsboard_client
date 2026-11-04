@@ -21,13 +21,16 @@ part 'docker_compose_config.g.dart';
 /// DockerComposeConfig
 ///
 /// Properties:
-/// * [arguments] 
-/// * [edgeRoutingKey] 
-/// * [type] 
+/// * [arguments]
+/// * [edgeRoutingKey]
+/// * [type]
 /// * [compose] - A value representing the any type (object or primitive)
-/// * [composeType] 
+/// * [composeType]
 @BuiltValue()
-abstract class DockerComposeConfig implements AgentAppConfig, Built<DockerComposeConfig, DockerComposeConfigBuilder> {
+abstract class DockerComposeConfig
+    implements
+        AgentAppConfig,
+        Built<DockerComposeConfig, DockerComposeConfigBuilder> {
   @BuiltValueField(wireName: r'composeType')
   String? get composeType;
 
@@ -37,18 +40,24 @@ abstract class DockerComposeConfig implements AgentAppConfig, Built<DockerCompos
 
   DockerComposeConfig._();
 
-  factory DockerComposeConfig([void updates(DockerComposeConfigBuilder b)]) = _$DockerComposeConfig;
+  factory DockerComposeConfig([void updates(DockerComposeConfigBuilder b)]) =
+      _$DockerComposeConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DockerComposeConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DockerComposeConfig> get serializer => _$DockerComposeConfigSerializer();
+  static Serializer<DockerComposeConfig> get serializer =>
+      _$DockerComposeConfigSerializer();
 }
 
-class _$DockerComposeConfigSerializer implements PrimitiveSerializer<DockerComposeConfig> {
+class _$DockerComposeConfigSerializer
+    implements PrimitiveSerializer<DockerComposeConfig> {
   @override
-  final Iterable<Type> types = const [DockerComposeConfig, _$DockerComposeConfig];
+  final Iterable<Type> types = const [
+    DockerComposeConfig,
+    _$DockerComposeConfig,
+  ];
 
   @override
   final String wireName = r'DockerComposeConfig';
@@ -101,7 +110,11 @@ class _$DockerComposeConfigSerializer implements PrimitiveSerializer<DockerCompo
     DockerComposeConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -117,42 +130,54 @@ class _$DockerComposeConfigSerializer implements PrimitiveSerializer<DockerCompo
       final value = serializedList[i + 1];
       switch (key) {
         case r'arguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentAppArgument)]),
-          ) as BuiltList<AgentAppArgument>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentAppArgument),
+                    ]),
+                  )
+                  as BuiltList<AgentAppArgument>?;
           if (valueDes == null) continue;
           result.arguments.replace(valueDes);
           break;
         case r'edgeRoutingKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeRoutingKey = valueDes;
           break;
         case r'composeType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.composeType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppConfigType),
-          ) as AgentAppConfigType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppConfigType),
+                  )
+                  as AgentAppConfigType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'compose':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.compose = valueDes;
           break;
@@ -184,5 +209,3 @@ class _$DockerComposeConfigSerializer implements PrimitiveSerializer<DockerCompo
     return result.build();
   }
 }
-
-

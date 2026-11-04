@@ -19,7 +19,8 @@ part 'mobile_redirect_params.g.dart';
 /// * [scheme] - Mobile application verification settings. Used for callback to mobile application once user is registered.
 /// * [host] - Mobile application verification settings. Used for callback to mobile application once user is registered.
 @BuiltValue()
-abstract class MobileRedirectParams implements Built<MobileRedirectParams, MobileRedirectParamsBuilder> {
+abstract class MobileRedirectParams
+    implements Built<MobileRedirectParams, MobileRedirectParamsBuilder> {
   /// Mobile application verification settings. Used for callback to mobile application once user is registered.
   @BuiltValueField(wireName: r'scheme')
   String? get scheme;
@@ -30,18 +31,24 @@ abstract class MobileRedirectParams implements Built<MobileRedirectParams, Mobil
 
   MobileRedirectParams._();
 
-  factory MobileRedirectParams([void updates(MobileRedirectParamsBuilder b)]) = _$MobileRedirectParams;
+  factory MobileRedirectParams([void updates(MobileRedirectParamsBuilder b)]) =
+      _$MobileRedirectParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileRedirectParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileRedirectParams> get serializer => _$MobileRedirectParamsSerializer();
+  static Serializer<MobileRedirectParams> get serializer =>
+      _$MobileRedirectParamsSerializer();
 }
 
-class _$MobileRedirectParamsSerializer implements PrimitiveSerializer<MobileRedirectParams> {
+class _$MobileRedirectParamsSerializer
+    implements PrimitiveSerializer<MobileRedirectParams> {
   @override
-  final Iterable<Type> types = const [MobileRedirectParams, _$MobileRedirectParams];
+  final Iterable<Type> types = const [
+    MobileRedirectParams,
+    _$MobileRedirectParams,
+  ];
 
   @override
   final String wireName = r'MobileRedirectParams';
@@ -73,7 +80,11 @@ class _$MobileRedirectParamsSerializer implements PrimitiveSerializer<MobileRedi
     MobileRedirectParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +100,22 @@ class _$MobileRedirectParamsSerializer implements PrimitiveSerializer<MobileRedi
       final value = serializedList[i + 1];
       switch (key) {
         case r'scheme':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.scheme = valueDes;
           break;
         case r'host':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.host = valueDes;
           break;
@@ -132,5 +147,3 @@ class _$MobileRedirectParamsSerializer implements PrimitiveSerializer<MobileRedi
     return result.build();
   }
 }
-
-

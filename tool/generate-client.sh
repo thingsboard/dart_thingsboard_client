@@ -473,6 +473,15 @@ if 'stream_channel:' not in content:
 if 'fake_async:' not in content:
     content = re.sub(r"(^  stream_channel: .*)$", r"\1\n  fake_async: ^1.3.1", content, flags=re.MULTILINE)
 
+# Add lints (analysis_options.yaml includes package:lints) if not present
+if '  lints:' not in content:
+    content = re.sub(r"(^  fake_async: .*)$", r"\1\n  lints: ^6.0.0", content, flags=re.MULTILINE)
+
+# The generator's dev dependency bounds (test ^1.16.0, build_runner any) let
+# `dart pub downgrade` resolve versions that do not compile on Dart 3.
+content = re.sub(r"^  test: .*$", "  test: ^1.25.0", content, flags=re.MULTILINE)
+content = re.sub(r"^  build_runner: .*$", "  build_runner: ^2.4.0", content, flags=re.MULTILINE)
+
 # Ensure file ends with newline
 if not content.endswith('\n'):
     content += '\n'
@@ -528,35 +537,22 @@ generate_service_accessors() {
   cat > "$output_file" << DART
 $(printf '%b' "$imports")
 import 'thingsboard_client_base.dart';
-import 'storage/tb_storage.dart';
 
 class ${class_name} extends ThingsboardClientBase {
 $(printf '%b' "$fields")
   ${class_name}(
-    String apiEndpoint, {
-    TbStorage? storage,
-    String? apiKey,
-    UserLoadedCallback? onUserLoaded,
-    MfaAuthCallback? onMfaAuth,
-    MfaAuthCallback? onMfaForce,
-    ErrorCallback? onError,
-    LoadStartedCallback? onLoadStarted,
-    LoadFinishedCallback? onLoadFinished,
-    TbCompute? computeFunc,
-    bool debugMode = false,
-  }) : super.create(
-          apiEndpoint,
-          storage: storage,
-          apiKey: apiKey,
-          onUserLoaded: onUserLoaded,
-          onMfaAuth: onMfaAuth,
-          onMfaForce: onMfaForce,
-          onError: onError,
-          onLoadStarted: onLoadStarted,
-          onLoadFinished: onLoadFinished,
-          computeFunc: computeFunc,
-          debugMode: debugMode,
-        );
+    super.apiEndpoint, {
+    super.storage,
+    super.apiKey,
+    super.onUserLoaded,
+    super.onMfaAuth,
+    super.onMfaForce,
+    super.onError,
+    super.onLoadStarted,
+    super.onLoadFinished,
+    super.computeFunc,
+    super.debugMode,
+  }) : super.create();
 
 $(printf '%b' "$accessors")}
 DART
@@ -780,14 +776,25 @@ generate() {
   echo "=== [$edition] Step 5: Writing analysis_options.yaml ==="
   {
     cat << 'YAML'
-# Generated analysis options — excludes generated code from lint
-# Overwritten by tool/generate-client.sh on each regeneration
+# Generated analysis options — overwritten by tool/generate-client.sh on each
+# regeneration.
+#
+# The recommended lints apply to the handwritten code: the facade copied from
+# common/ into lib/src/ (outside lib/src/model/*.dart), the public libraries in
+# lib/, test/ and example/. The generated code is excluded.
+include: package:lints/recommended.yaml
+
 analyzer:
   exclude:
     - lib/src/api/**
-    - lib/src/model/**
+    - lib/src/auth/**
+    - lib/src/model/*.dart
     - lib/src/**/*.g.dart
-    - test/*.dart
+    - lib/src/api.dart
+    - lib/src/api_serializers.dart
+    - lib/src/api_util.dart
+    - lib/src/date_serializer.dart
+    - lib/src/serializers.dart
 YAML
     # common/ is a generator input whose files are copied into lib/src/;
     # cloud/ is a separate package.
@@ -795,6 +802,15 @@ YAML
       echo "    - common/**"
       echo "    - cloud/**"
     fi
+    cat << 'YAML'
+
+linter:
+  rules:
+    # Public constants of the facade (LatestTelemetry.LATEST_TELEMETRY,
+    # EntityKeyType.ENTITY_FIELD, ...) mirror the server's names; renaming
+    # them would break client code.
+    constant_identifier_names: false
+YAML
   } > "$output_dir/analysis_options.yaml"
   echo "analysis_options.yaml written."
 
@@ -905,11 +921,48 @@ YAML
   append_common_exports "$edition"
 
   # -------------------------------------------------------------------------
+  # Step 7e2: Remove unused and duplicate imports from the generated code
+  #
+  # The dart-dio templates import json_object.dart twice and
+  # thingsboard_error_response.dart (and some models) without using them,
+  # which leaves ~200 analyzer warnings in lib/src/api and lib/src/model.
+  # dart fix applies only to analyzed files, so it runs with analysis options
+  # that exclude nothing; the generated ones are restored afterwards.
+  # -------------------------------------------------------------------------
+  echo ""
+  echo "=== [$edition] Step 7e2: Removing unused and duplicate imports ==="
+  (
+    cd "$output_dir"
+    cp analysis_options.yaml analysis_options.yaml.generated
+    printf 'analyzer:\n  exclude:\n    - cloud/**\n    - common/**\n' > analysis_options.yaml
+    dart fix --apply --code=unused_import --code=duplicate_import lib | tail -1
+    mv analysis_options.yaml.generated analysis_options.yaml
+  )
+
+  # -------------------------------------------------------------------------
   # Step 7f: Format license headers on all .dart files
   # -------------------------------------------------------------------------
   echo ""
   echo "=== [$edition] Step 7f: Formatting license headers ==="
   apply_license_headers "$REPO_ROOT/common/lib" "$output_dir/lib" "$output_dir/test"
+
+  # -------------------------------------------------------------------------
+  # Step 7g: Format the Dart code (dart format, the language version's style)
+  # -------------------------------------------------------------------------
+  echo ""
+  echo "=== [$edition] Step 7g: Formatting Dart code ==="
+  (
+    cd "$output_dir"
+    local dirs=(lib test example)
+    if [ "$output_dir" = "$REPO_ROOT" ]; then
+      dirs+=(common)
+    fi
+    local d existing=()
+    for d in "${dirs[@]}"; do
+      [ -d "$d" ] && existing+=("$d")
+    done
+    dart format "${existing[@]}" | tail -1
+  )
 
   # -------------------------------------------------------------------------
   # Step 8: Stage generated output with git

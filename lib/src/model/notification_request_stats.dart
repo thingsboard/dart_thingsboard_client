@@ -17,13 +17,15 @@ part 'notification_request_stats.g.dart';
 /// Notification request processing statistics
 ///
 /// Properties:
-/// * [sent] 
-/// * [errors] 
-/// * [totalErrors] 
-/// * [error] 
-/// * [totalSent] 
+/// * [sent]
+/// * [errors]
+/// * [totalErrors]
+/// * [error]
+/// * [totalSent]
 @BuiltValue()
-abstract class NotificationRequestStats implements Built<NotificationRequestStats, NotificationRequestStatsBuilder> {
+abstract class NotificationRequestStats
+    implements
+        Built<NotificationRequestStats, NotificationRequestStatsBuilder> {
   @BuiltValueField(wireName: r'sent')
   BuiltMap<String, int>? get sent;
 
@@ -41,18 +43,25 @@ abstract class NotificationRequestStats implements Built<NotificationRequestStat
 
   NotificationRequestStats._();
 
-  factory NotificationRequestStats([void updates(NotificationRequestStatsBuilder b)]) = _$NotificationRequestStats;
+  factory NotificationRequestStats([
+    void updates(NotificationRequestStatsBuilder b),
+  ]) = _$NotificationRequestStats;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationRequestStatsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationRequestStats> get serializer => _$NotificationRequestStatsSerializer();
+  static Serializer<NotificationRequestStats> get serializer =>
+      _$NotificationRequestStatsSerializer();
 }
 
-class _$NotificationRequestStatsSerializer implements PrimitiveSerializer<NotificationRequestStats> {
+class _$NotificationRequestStatsSerializer
+    implements PrimitiveSerializer<NotificationRequestStats> {
   @override
-  final Iterable<Type> types = const [NotificationRequestStats, _$NotificationRequestStats];
+  final Iterable<Type> types = const [
+    NotificationRequestStats,
+    _$NotificationRequestStats,
+  ];
 
   @override
   final String wireName = r'NotificationRequestStats';
@@ -66,14 +75,20 @@ class _$NotificationRequestStatsSerializer implements PrimitiveSerializer<Notifi
       yield r'sent';
       yield serializers.serialize(
         object.sent,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(int),
+        ]),
       );
     }
     if (object.errors != null) {
       yield r'errors';
       yield serializers.serialize(
         object.errors,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(String)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltMap, [FullType(String), FullType(String)]),
+        ]),
       );
     }
     if (object.totalErrors != null) {
@@ -105,7 +120,11 @@ class _$NotificationRequestStatsSerializer implements PrimitiveSerializer<Notifi
     NotificationRequestStats object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -121,42 +140,58 @@ class _$NotificationRequestStatsSerializer implements PrimitiveSerializer<Notifi
       final value = serializedList[i + 1];
       switch (key) {
         case r'sent':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(int)]),
-          ) as BuiltMap<String, int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltMap<String, int>?;
           if (valueDes == null) continue;
           result.sent.replace(valueDes);
           break;
         case r'errors':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(String)])]),
-          ) as BuiltMap<String, BuiltMap<String, String>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltMap, [FullType(String), FullType(String)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltMap<String, String>>?;
           if (valueDes == null) continue;
           result.errors.replace(valueDes);
           break;
         case r'totalErrors':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalErrors = valueDes;
           break;
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
         case r'totalSent':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalSent = valueDes;
           break;
@@ -188,5 +223,3 @@ class _$NotificationRequestStatsSerializer implements PrimitiveSerializer<Notifi
     return result.build();
   }
 }
-
-

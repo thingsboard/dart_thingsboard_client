@@ -16,11 +16,13 @@ part 'azure_open_ai_provider_config.g.dart';
 /// AzureOpenAiProviderConfig
 ///
 /// Properties:
-/// * [endpoint] 
-/// * [serviceVersion] 
-/// * [apiKey] 
+/// * [endpoint]
+/// * [serviceVersion]
+/// * [apiKey]
 @BuiltValue()
-abstract class AzureOpenAiProviderConfig implements Built<AzureOpenAiProviderConfig, AzureOpenAiProviderConfigBuilder> {
+abstract class AzureOpenAiProviderConfig
+    implements
+        Built<AzureOpenAiProviderConfig, AzureOpenAiProviderConfigBuilder> {
   @BuiltValueField(wireName: r'endpoint')
   String get endpoint;
 
@@ -32,18 +34,25 @@ abstract class AzureOpenAiProviderConfig implements Built<AzureOpenAiProviderCon
 
   AzureOpenAiProviderConfig._();
 
-  factory AzureOpenAiProviderConfig([void updates(AzureOpenAiProviderConfigBuilder b)]) = _$AzureOpenAiProviderConfig;
+  factory AzureOpenAiProviderConfig([
+    void updates(AzureOpenAiProviderConfigBuilder b),
+  ]) = _$AzureOpenAiProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AzureOpenAiProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AzureOpenAiProviderConfig> get serializer => _$AzureOpenAiProviderConfigSerializer();
+  static Serializer<AzureOpenAiProviderConfig> get serializer =>
+      _$AzureOpenAiProviderConfigSerializer();
 }
 
-class _$AzureOpenAiProviderConfigSerializer implements PrimitiveSerializer<AzureOpenAiProviderConfig> {
+class _$AzureOpenAiProviderConfigSerializer
+    implements PrimitiveSerializer<AzureOpenAiProviderConfig> {
   @override
-  final Iterable<Type> types = const [AzureOpenAiProviderConfig, _$AzureOpenAiProviderConfig];
+  final Iterable<Type> types = const [
+    AzureOpenAiProviderConfig,
+    _$AzureOpenAiProviderConfig,
+  ];
 
   @override
   final String wireName = r'AzureOpenAiProviderConfig';
@@ -78,7 +87,11 @@ class _$AzureOpenAiProviderConfigSerializer implements PrimitiveSerializer<Azure
     AzureOpenAiProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -94,25 +107,31 @@ class _$AzureOpenAiProviderConfigSerializer implements PrimitiveSerializer<Azure
       final value = serializedList[i + 1];
       switch (key) {
         case r'endpoint':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.endpoint = valueDes;
           break;
         case r'serviceVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serviceVersion = valueDes;
           break;
         case r'apiKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.apiKey = valueDes;
           break;
         default:
@@ -143,5 +162,3 @@ class _$AzureOpenAiProviderConfigSerializer implements PrimitiveSerializer<Azure
     return result.build();
   }
 }
-
-

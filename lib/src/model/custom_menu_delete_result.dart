@@ -19,11 +19,12 @@ part 'custom_menu_delete_result.g.dart';
 /// CustomMenuDeleteResult
 ///
 /// Properties:
-/// * [success] 
-/// * [assigneeType] 
-/// * [assigneeList] 
+/// * [success]
+/// * [assigneeType]
+/// * [assigneeList]
 @BuiltValue()
-abstract class CustomMenuDeleteResult implements Built<CustomMenuDeleteResult, CustomMenuDeleteResultBuilder> {
+abstract class CustomMenuDeleteResult
+    implements Built<CustomMenuDeleteResult, CustomMenuDeleteResultBuilder> {
   @BuiltValueField(wireName: r'success')
   bool? get success;
 
@@ -36,18 +37,25 @@ abstract class CustomMenuDeleteResult implements Built<CustomMenuDeleteResult, C
 
   CustomMenuDeleteResult._();
 
-  factory CustomMenuDeleteResult([void updates(CustomMenuDeleteResultBuilder b)]) = _$CustomMenuDeleteResult;
+  factory CustomMenuDeleteResult([
+    void updates(CustomMenuDeleteResultBuilder b),
+  ]) = _$CustomMenuDeleteResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CustomMenuDeleteResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CustomMenuDeleteResult> get serializer => _$CustomMenuDeleteResultSerializer();
+  static Serializer<CustomMenuDeleteResult> get serializer =>
+      _$CustomMenuDeleteResultSerializer();
 }
 
-class _$CustomMenuDeleteResultSerializer implements PrimitiveSerializer<CustomMenuDeleteResult> {
+class _$CustomMenuDeleteResultSerializer
+    implements PrimitiveSerializer<CustomMenuDeleteResult> {
   @override
-  final Iterable<Type> types = const [CustomMenuDeleteResult, _$CustomMenuDeleteResult];
+  final Iterable<Type> types = const [
+    CustomMenuDeleteResult,
+    _$CustomMenuDeleteResult,
+  ];
 
   @override
   final String wireName = r'CustomMenuDeleteResult';
@@ -86,7 +94,11 @@ class _$CustomMenuDeleteResultSerializer implements PrimitiveSerializer<CustomMe
     CustomMenuDeleteResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +114,34 @@ class _$CustomMenuDeleteResultSerializer implements PrimitiveSerializer<CustomMe
       final value = serializedList[i + 1];
       switch (key) {
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'assigneeType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CMAssigneeType),
-          ) as CMAssigneeType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CMAssigneeType),
+                  )
+                  as CMAssigneeType?;
           if (valueDes == null) continue;
           result.assigneeType = valueDes;
           break;
         case r'assigneeList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityInfo)]),
-          ) as BuiltList<EntityInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityInfo),
+                    ]),
+                  )
+                  as BuiltList<EntityInfo>?;
           if (valueDes == null) continue;
           result.assigneeList.replace(valueDes);
           break;
@@ -153,5 +173,3 @@ class _$CustomMenuDeleteResultSerializer implements PrimitiveSerializer<CustomMe
     return result.build();
   }
 }
-
-

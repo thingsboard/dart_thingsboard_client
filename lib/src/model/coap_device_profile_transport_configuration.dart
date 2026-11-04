@@ -19,11 +19,17 @@ part 'coap_device_profile_transport_configuration.g.dart';
 /// CoapDeviceProfileTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [coapDeviceTypeConfiguration] 
-/// * [clientSettings] 
+/// * [type]
+/// * [coapDeviceTypeConfiguration]
+/// * [clientSettings]
 @BuiltValue()
-abstract class CoapDeviceProfileTransportConfiguration implements DeviceProfileTransportConfiguration, Built<CoapDeviceProfileTransportConfiguration, CoapDeviceProfileTransportConfigurationBuilder> {
+abstract class CoapDeviceProfileTransportConfiguration
+    implements
+        DeviceProfileTransportConfiguration,
+        Built<
+          CoapDeviceProfileTransportConfiguration,
+          CoapDeviceProfileTransportConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'coapDeviceTypeConfiguration')
   CoapDeviceTypeConfiguration? get coapDeviceTypeConfiguration;
 
@@ -32,18 +38,25 @@ abstract class CoapDeviceProfileTransportConfiguration implements DeviceProfileT
 
   CoapDeviceProfileTransportConfiguration._();
 
-  factory CoapDeviceProfileTransportConfiguration([void updates(CoapDeviceProfileTransportConfigurationBuilder b)]) = _$CoapDeviceProfileTransportConfiguration;
+  factory CoapDeviceProfileTransportConfiguration([
+    void updates(CoapDeviceProfileTransportConfigurationBuilder b),
+  ]) = _$CoapDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CoapDeviceProfileTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CoapDeviceProfileTransportConfiguration> get serializer => _$CoapDeviceProfileTransportConfigurationSerializer();
+  static Serializer<CoapDeviceProfileTransportConfiguration> get serializer =>
+      _$CoapDeviceProfileTransportConfigurationSerializer();
 }
 
-class _$CoapDeviceProfileTransportConfigurationSerializer implements PrimitiveSerializer<CoapDeviceProfileTransportConfiguration> {
+class _$CoapDeviceProfileTransportConfigurationSerializer
+    implements PrimitiveSerializer<CoapDeviceProfileTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [CoapDeviceProfileTransportConfiguration, _$CoapDeviceProfileTransportConfiguration];
+  final Iterable<Type> types = const [
+    CoapDeviceProfileTransportConfiguration,
+    _$CoapDeviceProfileTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'CoapDeviceProfileTransportConfiguration';
@@ -80,7 +93,11 @@ class _$CoapDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
     CoapDeviceProfileTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -96,25 +113,35 @@ class _$CoapDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'coapDeviceTypeConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CoapDeviceTypeConfiguration),
-          ) as CoapDeviceTypeConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      CoapDeviceTypeConfiguration,
+                    ),
+                  )
+                  as CoapDeviceTypeConfiguration?;
           if (valueDes == null) continue;
           result.coapDeviceTypeConfiguration = valueDes;
           break;
         case r'clientSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PowerSavingConfiguration),
-          ) as PowerSavingConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      PowerSavingConfiguration,
+                    ),
+                  )
+                  as PowerSavingConfiguration?;
           if (valueDes == null) continue;
           result.clientSettings.replace(valueDes);
           break;
@@ -146,5 +173,3 @@ class _$CoapDeviceProfileTransportConfigurationSerializer implements PrimitiveSe
     return result.build();
   }
 }
-
-

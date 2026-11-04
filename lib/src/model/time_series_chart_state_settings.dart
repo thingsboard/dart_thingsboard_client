@@ -18,14 +18,19 @@ part 'time_series_chart_state_settings.g.dart';
 /// TimeSeriesChartStateSettings
 ///
 /// Properties:
-/// * [label] 
-/// * [value] 
-/// * [sourceType] 
+/// * [label]
+/// * [value]
+/// * [sourceType]
 /// * [sourceValue] - A value representing the any type (object or primitive)
-/// * [sourceRangeFrom] 
-/// * [sourceRangeTo] 
+/// * [sourceRangeFrom]
+/// * [sourceRangeTo]
 @BuiltValue()
-abstract class TimeSeriesChartStateSettings implements Built<TimeSeriesChartStateSettings, TimeSeriesChartStateSettingsBuilder> {
+abstract class TimeSeriesChartStateSettings
+    implements
+        Built<
+          TimeSeriesChartStateSettings,
+          TimeSeriesChartStateSettingsBuilder
+        > {
   @BuiltValueField(wireName: r'label')
   String? get label;
 
@@ -48,18 +53,25 @@ abstract class TimeSeriesChartStateSettings implements Built<TimeSeriesChartStat
 
   TimeSeriesChartStateSettings._();
 
-  factory TimeSeriesChartStateSettings([void updates(TimeSeriesChartStateSettingsBuilder b)]) = _$TimeSeriesChartStateSettings;
+  factory TimeSeriesChartStateSettings([
+    void updates(TimeSeriesChartStateSettingsBuilder b),
+  ]) = _$TimeSeriesChartStateSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesChartStateSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartStateSettings> get serializer => _$TimeSeriesChartStateSettingsSerializer();
+  static Serializer<TimeSeriesChartStateSettings> get serializer =>
+      _$TimeSeriesChartStateSettingsSerializer();
 }
 
-class _$TimeSeriesChartStateSettingsSerializer implements PrimitiveSerializer<TimeSeriesChartStateSettings> {
+class _$TimeSeriesChartStateSettingsSerializer
+    implements PrimitiveSerializer<TimeSeriesChartStateSettings> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartStateSettings, _$TimeSeriesChartStateSettings];
+  final Iterable<Type> types = const [
+    TimeSeriesChartStateSettings,
+    _$TimeSeriesChartStateSettings,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartStateSettings';
@@ -119,7 +131,11 @@ class _$TimeSeriesChartStateSettingsSerializer implements PrimitiveSerializer<Ti
     TimeSeriesChartStateSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -135,50 +151,64 @@ class _$TimeSeriesChartStateSettingsSerializer implements PrimitiveSerializer<Ti
       final value = serializedList[i + 1];
       switch (key) {
         case r'label':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.label = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'sourceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeSeriesChartStateSourceType),
-          ) as TimeSeriesChartStateSourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeSeriesChartStateSourceType,
+                    ),
+                  )
+                  as TimeSeriesChartStateSourceType?;
           if (valueDes == null) continue;
           result.sourceType = valueDes;
           break;
         case r'sourceValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.sourceValue = valueDes;
           break;
         case r'sourceRangeFrom':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.sourceRangeFrom = valueDes;
           break;
         case r'sourceRangeTo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.sourceRangeTo = valueDes;
           break;
@@ -210,5 +240,3 @@ class _$TimeSeriesChartStateSettingsSerializer implements PrimitiveSerializer<Ti
     return result.build();
   }
 }
-
-

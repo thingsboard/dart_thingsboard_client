@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/notification_target.dart';
 import 'package:thingsboard_client/src/model/notification_type.dart';
 import 'package:thingsboard_client/src/model/page_data_notification_target.dart';
 import 'package:thingsboard_client/src/model/page_data_user.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class NotificationTargetControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -34,7 +31,7 @@ class NotificationTargetControllerApi {
   /// Deletes notification target by its id.  This target cannot be referenced by existing scheduled notification requests or any notification rules.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -44,7 +41,7 @@ class NotificationTargetControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteNotificationTargetById({ 
+  Future<Response<void>> deleteNotificationTargetById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,15 @@ class NotificationTargetControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/notification/target/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/notification/target/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +67,8 @@ class NotificationTargetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -93,7 +90,7 @@ class NotificationTargetControllerApi {
   /// Fetches notification target by id.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -103,7 +100,7 @@ class NotificationTargetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [NotificationTarget] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<NotificationTarget>> getNotificationTargetById({ 
+  Future<Response<NotificationTarget>> getNotificationTargetById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -112,13 +109,17 @@ class NotificationTargetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationTarget);
-    final _path = r'/api/notification/target/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerNotificationTarget);
+    final _path = r'/api/notification/target/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -126,11 +127,8 @@ class NotificationTargetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -149,11 +147,13 @@ class NotificationTargetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(NotificationTarget),
-      ) as NotificationTarget;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(NotificationTarget),
+                )
+                as NotificationTarget;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -194,7 +194,7 @@ class NotificationTargetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataNotificationTarget] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataNotificationTarget>> getNotificationTargets({ 
+  Future<Response<PageDataNotificationTarget>> getNotificationTargets({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -207,13 +207,12 @@ class NotificationTargetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataNotificationTarget);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataNotificationTarget);
     final _path = r'/api/notification/targets';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -221,11 +220,8 @@ class NotificationTargetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -233,11 +229,30 @@ class NotificationTargetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -253,11 +268,13 @@ class NotificationTargetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataNotificationTarget),
-      ) as PageDataNotificationTarget;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataNotificationTarget),
+                )
+                as PageDataNotificationTarget;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -294,7 +311,7 @@ class NotificationTargetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<NotificationTarget>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<NotificationTarget>>> getNotificationTargetsByIds({ 
+  Future<Response<BuiltList<NotificationTarget>>> getNotificationTargetsByIds({
     required BuiltList<String> ids,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -303,13 +320,12 @@ class NotificationTargetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfNotificationTarget);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfNotificationTarget);
     final _path = r'/api/notification/targets/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -317,11 +333,8 @@ class NotificationTargetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -329,7 +342,12 @@ class NotificationTargetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'ids': encodeCollectionQueryParameter<String>(_serializers, ids, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'ids': encodeCollectionQueryParameter<String>(
+        _serializers,
+        ids,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -345,11 +363,15 @@ class NotificationTargetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(NotificationTarget)]),
-      ) as BuiltList<NotificationTarget>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(NotificationTarget),
+                  ]),
+                )
+                as BuiltList<NotificationTarget>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -391,7 +413,8 @@ class NotificationTargetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataNotificationTarget] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataNotificationTarget>> getNotificationTargetsBySupportedNotificationType({ 
+  Future<Response<PageDataNotificationTarget>>
+  getNotificationTargetsBySupportedNotificationType({
     required NotificationType notificationType,
     required int pageSize,
     required int page,
@@ -405,13 +428,24 @@ class NotificationTargetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationTypeAndPageDataNotificationTarget);
-    final _path = r'/api/notification/targets/notificationType/{notificationType}'.replaceAll('{' r'notificationType' '}', encodeQueryParameter(_serializers, notificationType, const FullType(NotificationType)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerNotificationTypeAndPageDataNotificationTarget);
+    final _path =
+        r'/api/notification/targets/notificationType/{notificationType}'
+            .replaceAll(
+              '{'
+              r'notificationType'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                notificationType,
+                const FullType(NotificationType),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -419,11 +453,8 @@ class NotificationTargetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -431,11 +462,30 @@ class NotificationTargetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -451,11 +501,13 @@ class NotificationTargetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataNotificationTarget),
-      ) as PageDataNotificationTarget;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataNotificationTarget),
+                )
+                as PageDataNotificationTarget;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -484,7 +536,7 @@ class NotificationTargetControllerApi {
   /// Parameters:
   /// * [pageSize] - Maximum amount of entities in a one page
   /// * [page] - Sequence number of page starting from 0
-  /// * [notificationTarget] 
+  /// * [notificationTarget]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -494,7 +546,7 @@ class NotificationTargetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataUser] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataUser>> getRecipientsForNotificationTargetConfig({ 
+  Future<Response<PageDataUser>> getRecipientsForNotificationTargetConfig({
     required int pageSize,
     required int page,
     required NotificationTarget notificationTarget,
@@ -505,13 +557,13 @@ class NotificationTargetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationTargetAndPageDataUser);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerNotificationTargetAndPageDataUser);
     final _path = r'/api/notification/target/recipients';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -519,11 +571,8 @@ class NotificationTargetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -532,7 +581,11 @@ class NotificationTargetControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
     };
 
@@ -540,11 +593,13 @@ class NotificationTargetControllerApi {
 
     try {
       const _type = FullType(NotificationTarget);
-      _bodyData = _serializers.serialize(notificationTarget, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        notificationTarget,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -569,11 +624,13 @@ class NotificationTargetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataUser),
-      ) as PageDataUser;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataUser),
+                )
+                as PageDataUser;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -600,7 +657,7 @@ class NotificationTargetControllerApi {
   /// Creates or updates notification target.  Available &#x60;configuration&#x60; types are &#x60;PLATFORM_USERS&#x60; and &#x60;SLACK&#x60;. For &#x60;PLATFORM_USERS&#x60; the &#x60;usersFilter&#x60; must be specified. For tenant, there are following users filter types available: &#x60;USER_LIST&#x60;, &#x60;CUSTOMER_USERS&#x60;, &#x60;USER_GROUP_LIST&#x60;, &#x60;TENANT_ADMINISTRATORS&#x60;, &#x60;USER_ROLE&#x60;, &#x60;ALL_USERS&#x60;, &#x60;ORIGINATOR_ENTITY_OWNER_USERS&#x60;, &#x60;AFFECTED_USER&#x60;. For sysadmin: &#x60;TENANT_ADMINISTRATORS&#x60;, &#x60;AFFECTED_TENANT_ADMINISTRATORS&#x60;, &#x60;SYSTEM_ADMINISTRATORS&#x60;, &#x60;ALL_USERS&#x60;.  Here is an example of tenant-level notification target to send notification to customer&#39;s users: &#x60;&#x60;&#x60;json {   \&quot;name\&quot;: \&quot;Users of Customer A\&quot;,   \&quot;configuration\&quot;: {     \&quot;type\&quot;: \&quot;PLATFORM_USERS\&quot;,     \&quot;usersFilter\&quot;: {       \&quot;type\&quot;: \&quot;CUSTOMER_USERS\&quot;,       \&quot;customerId\&quot;: \&quot;32499a20-d785-11ed-a06c-21dd57dd88ca\&quot;     },     \&quot;description\&quot;: \&quot;Users of Customer A\&quot;   } } &#x60;&#x60;&#x60;  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [notificationTarget] 
+  /// * [notificationTarget]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -610,7 +667,7 @@ class NotificationTargetControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [NotificationTarget] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<NotificationTarget>> saveNotificationTarget({ 
+  Future<Response<NotificationTarget>> saveNotificationTarget({
     required NotificationTarget notificationTarget,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -619,13 +676,12 @@ class NotificationTargetControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerNotificationTarget);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerNotificationTarget);
     final _path = r'/api/notification/target';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -633,11 +689,8 @@ class NotificationTargetControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -649,14 +702,13 @@ class NotificationTargetControllerApi {
 
     try {
       const _type = FullType(NotificationTarget);
-      _bodyData = _serializers.serialize(notificationTarget, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        notificationTarget,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -676,11 +728,13 @@ class NotificationTargetControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(NotificationTarget),
-      ) as NotificationTarget;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(NotificationTarget),
+                )
+                as NotificationTarget;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -702,5 +756,4 @@ class NotificationTargetControllerApi {
       extra: _response.extra,
     );
   }
-
 }

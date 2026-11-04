@@ -21,26 +21,40 @@ part 'to_server_rpc_request_snmp_communication_config.g.dart';
 ///
 /// Properties:
 /// * [spec] - Specification of the SNMP communication
-/// * [mappings] 
+/// * [mappings]
 @BuiltValue()
-abstract class ToServerRpcRequestSnmpCommunicationConfig implements SnmpCommunicationConfig, Built<ToServerRpcRequestSnmpCommunicationConfig, ToServerRpcRequestSnmpCommunicationConfigBuilder> {
+abstract class ToServerRpcRequestSnmpCommunicationConfig
+    implements
+        SnmpCommunicationConfig,
+        Built<
+          ToServerRpcRequestSnmpCommunicationConfig,
+          ToServerRpcRequestSnmpCommunicationConfigBuilder
+        > {
   @BuiltValueField(wireName: r'mappings')
   BuiltList<SnmpMapping>? get mappings;
 
   ToServerRpcRequestSnmpCommunicationConfig._();
 
-  factory ToServerRpcRequestSnmpCommunicationConfig([void updates(ToServerRpcRequestSnmpCommunicationConfigBuilder b)]) = _$ToServerRpcRequestSnmpCommunicationConfig;
+  factory ToServerRpcRequestSnmpCommunicationConfig([
+    void updates(ToServerRpcRequestSnmpCommunicationConfigBuilder b),
+  ]) = _$ToServerRpcRequestSnmpCommunicationConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ToServerRpcRequestSnmpCommunicationConfigBuilder b) => b;
+  static void _defaults(ToServerRpcRequestSnmpCommunicationConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ToServerRpcRequestSnmpCommunicationConfig> get serializer => _$ToServerRpcRequestSnmpCommunicationConfigSerializer();
+  static Serializer<ToServerRpcRequestSnmpCommunicationConfig> get serializer =>
+      _$ToServerRpcRequestSnmpCommunicationConfigSerializer();
 }
 
-class _$ToServerRpcRequestSnmpCommunicationConfigSerializer implements PrimitiveSerializer<ToServerRpcRequestSnmpCommunicationConfig> {
+class _$ToServerRpcRequestSnmpCommunicationConfigSerializer
+    implements PrimitiveSerializer<ToServerRpcRequestSnmpCommunicationConfig> {
   @override
-  final Iterable<Type> types = const [ToServerRpcRequestSnmpCommunicationConfig, _$ToServerRpcRequestSnmpCommunicationConfig];
+  final Iterable<Type> types = const [
+    ToServerRpcRequestSnmpCommunicationConfig,
+    _$ToServerRpcRequestSnmpCommunicationConfig,
+  ];
 
   @override
   final String wireName = r'ToServerRpcRequestSnmpCommunicationConfig';
@@ -70,7 +84,11 @@ class _$ToServerRpcRequestSnmpCommunicationConfigSerializer implements Primitive
     ToServerRpcRequestSnmpCommunicationConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,18 +104,24 @@ class _$ToServerRpcRequestSnmpCommunicationConfigSerializer implements Primitive
       final value = serializedList[i + 1];
       switch (key) {
         case r'mappings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SnmpMapping)]),
-          ) as BuiltList<SnmpMapping>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SnmpMapping),
+                    ]),
+                  )
+                  as BuiltList<SnmpMapping>?;
           if (valueDes == null) continue;
           result.mappings.replace(valueDes);
           break;
         case r'spec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SnmpCommunicationSpec),
-          ) as SnmpCommunicationSpec;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SnmpCommunicationSpec),
+                  )
+                  as SnmpCommunicationSpec;
           result.spec = valueDes;
           break;
         default:
@@ -128,5 +152,3 @@ class _$ToServerRpcRequestSnmpCommunicationConfigSerializer implements Primitive
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'license_claim_mode.g.dart';
 
 class LicenseClaimMode extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ONLINE')
   static const LicenseClaimMode ONLINE = _$ONLINE;
   @BuiltValueEnumConst(wireName: r'OFFLINE')
@@ -23,9 +22,10 @@ class LicenseClaimMode extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const LicenseClaimMode unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<LicenseClaimMode> get serializer => _$licenseClaimModeSerializer;
+  static Serializer<LicenseClaimMode> get serializer =>
+      _$licenseClaimModeSerializer;
 
-  const LicenseClaimMode._(String name): super(name);
+  const LicenseClaimMode._(String name) : super(name);
 
   static BuiltSet<LicenseClaimMode> get values => _$values;
   static LicenseClaimMode valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class LicenseClaimMode extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class LicenseClaimModeMixin = Object with _$LicenseClaimModeMixin;
-

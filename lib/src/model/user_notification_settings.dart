@@ -18,26 +18,35 @@ part 'user_notification_settings.g.dart';
 /// UserNotificationSettings
 ///
 /// Properties:
-/// * [prefs] 
+/// * [prefs]
 @BuiltValue()
-abstract class UserNotificationSettings implements Built<UserNotificationSettings, UserNotificationSettingsBuilder> {
+abstract class UserNotificationSettings
+    implements
+        Built<UserNotificationSettings, UserNotificationSettingsBuilder> {
   @BuiltValueField(wireName: r'prefs')
   BuiltMap<String, NotificationPref> get prefs;
 
   UserNotificationSettings._();
 
-  factory UserNotificationSettings([void updates(UserNotificationSettingsBuilder b)]) = _$UserNotificationSettings;
+  factory UserNotificationSettings([
+    void updates(UserNotificationSettingsBuilder b),
+  ]) = _$UserNotificationSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserNotificationSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserNotificationSettings> get serializer => _$UserNotificationSettingsSerializer();
+  static Serializer<UserNotificationSettings> get serializer =>
+      _$UserNotificationSettingsSerializer();
 }
 
-class _$UserNotificationSettingsSerializer implements PrimitiveSerializer<UserNotificationSettings> {
+class _$UserNotificationSettingsSerializer
+    implements PrimitiveSerializer<UserNotificationSettings> {
   @override
-  final Iterable<Type> types = const [UserNotificationSettings, _$UserNotificationSettings];
+  final Iterable<Type> types = const [
+    UserNotificationSettings,
+    _$UserNotificationSettings,
+  ];
 
   @override
   final String wireName = r'UserNotificationSettings';
@@ -50,7 +59,10 @@ class _$UserNotificationSettingsSerializer implements PrimitiveSerializer<UserNo
     yield r'prefs';
     yield serializers.serialize(
       object.prefs,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(NotificationPref)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(NotificationPref),
+      ]),
     );
   }
 
@@ -60,7 +72,11 @@ class _$UserNotificationSettingsSerializer implements PrimitiveSerializer<UserNo
     UserNotificationSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +92,15 @@ class _$UserNotificationSettingsSerializer implements PrimitiveSerializer<UserNo
       final value = serializedList[i + 1];
       switch (key) {
         case r'prefs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(NotificationPref)]),
-          ) as BuiltMap<String, NotificationPref>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(NotificationPref),
+                    ]),
+                  )
+                  as BuiltMap<String, NotificationPref>;
           result.prefs.replace(valueDes);
           break;
         default:
@@ -110,5 +131,3 @@ class _$UserNotificationSettingsSerializer implements PrimitiveSerializer<UserNo
     return result.build();
   }
 }
-
-

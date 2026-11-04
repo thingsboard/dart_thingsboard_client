@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'report_component_type.g.dart';
 
 class ReportComponentType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'HEADING')
   static const ReportComponentType HEADING = _$HEADING;
   @BuiltValueEnumConst(wireName: r'RICH_TEXT')
@@ -45,11 +44,13 @@ class ReportComponentType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'SPLIT_VIEW')
   static const ReportComponentType SPLIT_VIEW = _$SPLIT_VIEW;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ReportComponentType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ReportComponentType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ReportComponentType> get serializer => _$reportComponentTypeSerializer;
+  static Serializer<ReportComponentType> get serializer =>
+      _$reportComponentTypeSerializer;
 
-  const ReportComponentType._(String name): super(name);
+  const ReportComponentType._(String name) : super(name);
 
   static BuiltSet<ReportComponentType> get values => _$values;
   static ReportComponentType valueOf(String name) => _$valueOf(name);
@@ -61,5 +62,5 @@ class ReportComponentType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class ReportComponentTypeMixin = Object with _$ReportComponentTypeMixin;
-
+abstract class ReportComponentTypeMixin = Object
+    with _$ReportComponentTypeMixin;

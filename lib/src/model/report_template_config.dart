@@ -23,14 +23,14 @@ part 'report_template_config.g.dart';
 /// ReportTemplateConfig
 ///
 /// Properties:
-/// * [namePattern] 
-/// * [timeDataPattern] 
+/// * [namePattern]
+/// * [timeDataPattern]
 /// * [format] - Report format
-/// * [entityAliases] 
-/// * [filters] 
-/// * [components] 
+/// * [entityAliases]
+/// * [filters]
+/// * [components]
 @BuiltValue(instantiable: false)
-abstract class ReportTemplateConfig  {
+abstract class ReportTemplateConfig {
   @BuiltValueField(wireName: r'namePattern')
   String? get namePattern;
 
@@ -59,33 +59,37 @@ abstract class ReportTemplateConfig  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReportTemplateConfig> get serializer => _$ReportTemplateConfigSerializer();
+  static Serializer<ReportTemplateConfig> get serializer =>
+      _$ReportTemplateConfigSerializer();
 }
 
 extension ReportTemplateConfigDiscriminatorExt on ReportTemplateConfig {
-    String? get discriminatorValue {
-        if (this is CsvReportTemplateConfig) {
-            return r'CSV';
-        }
-        if (this is PdfReportTemplateConfig) {
-            return r'PDF';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CsvReportTemplateConfig) {
+      return r'CSV';
     }
-}
-extension ReportTemplateConfigBuilderDiscriminatorExt on ReportTemplateConfigBuilder {
-    String? get discriminatorValue {
-        if (this is CsvReportTemplateConfigBuilder) {
-            return r'CSV';
-        }
-        if (this is PdfReportTemplateConfigBuilder) {
-            return r'PDF';
-        }
-        return null;
+    if (this is PdfReportTemplateConfig) {
+      return r'PDF';
     }
+    return null;
+  }
 }
 
-class _$ReportTemplateConfigSerializer implements PrimitiveSerializer<ReportTemplateConfig> {
+extension ReportTemplateConfigBuilderDiscriminatorExt
+    on ReportTemplateConfigBuilder {
+  String? get discriminatorValue {
+    if (this is CsvReportTemplateConfigBuilder) {
+      return r'CSV';
+    }
+    if (this is PdfReportTemplateConfigBuilder) {
+      return r'PDF';
+    }
+    return null;
+  }
+}
+
+class _$ReportTemplateConfigSerializer
+    implements PrimitiveSerializer<ReportTemplateConfig> {
   @override
   final Iterable<Type> types = const [ReportTemplateConfig];
 
@@ -146,12 +150,22 @@ class _$ReportTemplateConfigSerializer implements PrimitiveSerializer<ReportTemp
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CsvReportTemplateConfig) {
-      return serializers.serialize(object, specifiedType: FullType(CsvReportTemplateConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CsvReportTemplateConfig),
+      )!;
     }
     if (object is PdfReportTemplateConfig) {
-      return serializers.serialize(object, specifiedType: FullType(PdfReportTemplateConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(PdfReportTemplateConfig),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -161,37 +175,64 @@ class _$ReportTemplateConfigSerializer implements PrimitiveSerializer<ReportTemp
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(ReportTemplateConfig.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(ReportTemplateConfig.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CSV':
-        return serializers.deserialize(serialized, specifiedType: FullType(CsvReportTemplateConfig)) as CsvReportTemplateConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CsvReportTemplateConfig),
+            )
+            as CsvReportTemplateConfig;
       case r'PDF':
-        return serializers.deserialize(serialized, specifiedType: FullType(PdfReportTemplateConfig)) as PdfReportTemplateConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(PdfReportTemplateConfig),
+            )
+            as PdfReportTemplateConfig;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($ReportTemplateConfig)) as $ReportTemplateConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($ReportTemplateConfig),
+            )
+            as $ReportTemplateConfig;
     }
   }
 }
 
-
 /// a concrete implementation of [ReportTemplateConfig], since [ReportTemplateConfig] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $ReportTemplateConfig implements ReportTemplateConfig, Built<$ReportTemplateConfig, $ReportTemplateConfigBuilder> {
+abstract class $ReportTemplateConfig
+    implements
+        ReportTemplateConfig,
+        Built<$ReportTemplateConfig, $ReportTemplateConfigBuilder> {
   $ReportTemplateConfig._();
 
-  factory $ReportTemplateConfig([void Function($ReportTemplateConfigBuilder)? updates]) = _$$ReportTemplateConfig;
+  factory $ReportTemplateConfig([
+    void Function($ReportTemplateConfigBuilder)? updates,
+  ]) = _$$ReportTemplateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($ReportTemplateConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$ReportTemplateConfig> get serializer => _$$ReportTemplateConfigSerializer();
+  static Serializer<$ReportTemplateConfig> get serializer =>
+      _$$ReportTemplateConfigSerializer();
 }
 
-class _$$ReportTemplateConfigSerializer implements PrimitiveSerializer<$ReportTemplateConfig> {
+class _$$ReportTemplateConfigSerializer
+    implements PrimitiveSerializer<$ReportTemplateConfig> {
   @override
-  final Iterable<Type> types = const [$ReportTemplateConfig, _$$ReportTemplateConfig];
+  final Iterable<Type> types = const [
+    $ReportTemplateConfig,
+    _$$ReportTemplateConfig,
+  ];
 
   @override
   final String wireName = r'$ReportTemplateConfig';
@@ -202,7 +243,10 @@ class _$$ReportTemplateConfigSerializer implements PrimitiveSerializer<$ReportTe
     $ReportTemplateConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(ReportTemplateConfig))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(ReportTemplateConfig),
+    )!;
   }
 
   void _deserializeProperties(
@@ -218,49 +262,67 @@ class _$$ReportTemplateConfigSerializer implements PrimitiveSerializer<$ReportTe
       final value = serializedList[i + 1];
       switch (key) {
         case r'namePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.namePattern = valueDes;
           break;
         case r'timeDataPattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.timeDataPattern = valueDes;
           break;
         case r'format':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TbReportFormat),
-          ) as TbReportFormat;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TbReportFormat),
+                  )
+                  as TbReportFormat;
           result.format = valueDes;
           break;
         case r'entityAliases':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityAlias)]),
-          ) as BuiltList<EntityAlias>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityAlias),
+                    ]),
+                  )
+                  as BuiltList<EntityAlias>?;
           if (valueDes == null) continue;
           result.entityAliases.replace(valueDes);
           break;
         case r'filters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(Filter)]),
-          ) as BuiltList<Filter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(Filter),
+                    ]),
+                  )
+                  as BuiltList<Filter>?;
           if (valueDes == null) continue;
           result.filters.replace(valueDes);
           break;
         case r'components':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ReportComponent)]),
-          ) as BuiltList<ReportComponent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ReportComponent),
+                    ]),
+                  )
+                  as BuiltList<ReportComponent>?;
           if (valueDes == null) continue;
           result.components.replace(valueDes);
           break;
@@ -292,4 +354,3 @@ class _$$ReportTemplateConfigSerializer implements PrimitiveSerializer<$ReportTe
     return result.build();
   }
 }
-

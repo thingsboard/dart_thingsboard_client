@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'alarm_rule_numeric_operation.g.dart';
 
 class AlarmRuleNumericOperation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'EQUAL')
   static const AlarmRuleNumericOperation EQUAL = _$EQUAL;
   @BuiltValueEnumConst(wireName: r'NOT_EQUAL')
@@ -29,11 +28,13 @@ class AlarmRuleNumericOperation extends EnumClass {
   @BuiltValueEnumConst(wireName: r'LESS_OR_EQUAL')
   static const AlarmRuleNumericOperation LESS_OR_EQUAL = _$LESS_OR_EQUAL;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AlarmRuleNumericOperation unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AlarmRuleNumericOperation unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AlarmRuleNumericOperation> get serializer => _$alarmRuleNumericOperationSerializer;
+  static Serializer<AlarmRuleNumericOperation> get serializer =>
+      _$alarmRuleNumericOperationSerializer;
 
-  const AlarmRuleNumericOperation._(String name): super(name);
+  const AlarmRuleNumericOperation._(String name) : super(name);
 
   static BuiltSet<AlarmRuleNumericOperation> get values => _$values;
   static AlarmRuleNumericOperation valueOf(String name) => _$valueOf(name);
@@ -45,5 +46,5 @@ class AlarmRuleNumericOperation extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AlarmRuleNumericOperationMixin = Object with _$AlarmRuleNumericOperationMixin;
-
+abstract class AlarmRuleNumericOperationMixin = Object
+    with _$AlarmRuleNumericOperationMixin;

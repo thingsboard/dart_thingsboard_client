@@ -6,7 +6,6 @@
 // Smoke test: import generated package, construct one model instance
 // Covers GEN-03 — typed model classes with fromJson/toJson compile correctly
 import 'package:test/test.dart';
-import 'package:thingsboard_client/thingsboard_client.dart';
 
 void main() {
   group('Model compilation smoke test', () {

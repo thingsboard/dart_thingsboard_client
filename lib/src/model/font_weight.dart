@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'font_weight.g.dart';
 
 class FontWeight extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'normal')
   static const FontWeight normal = _$normal;
   @BuiltValueEnumConst(wireName: r'bold')
@@ -27,7 +26,7 @@ class FontWeight extends EnumClass {
 
   static Serializer<FontWeight> get serializer => _$fontWeightSerializer;
 
-  const FontWeight._(String name): super(name);
+  const FontWeight._(String name) : super(name);
 
   static BuiltSet<FontWeight> get values => _$values;
   static FontWeight valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class FontWeight extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class FontWeightMixin = Object with _$FontWeightMixin;
-

@@ -17,9 +17,9 @@ part 'device_profile_configuration.g.dart';
 /// Device profile configuration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class DeviceProfileConfiguration  {
+abstract class DeviceProfileConfiguration {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -30,27 +30,32 @@ abstract class DeviceProfileConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceProfileConfiguration> get serializer => _$DeviceProfileConfigurationSerializer();
+  static Serializer<DeviceProfileConfiguration> get serializer =>
+      _$DeviceProfileConfigurationSerializer();
 }
 
-extension DeviceProfileConfigurationDiscriminatorExt on DeviceProfileConfiguration {
-    String? get discriminatorValue {
-        if (this is DefaultDeviceProfileConfiguration) {
-            return r'DEFAULT';
-        }
-        return null;
+extension DeviceProfileConfigurationDiscriminatorExt
+    on DeviceProfileConfiguration {
+  String? get discriminatorValue {
+    if (this is DefaultDeviceProfileConfiguration) {
+      return r'DEFAULT';
     }
-}
-extension DeviceProfileConfigurationBuilderDiscriminatorExt on DeviceProfileConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is DefaultDeviceProfileConfigurationBuilder) {
-            return r'DEFAULT';
-        }
-        return null;
-    }
+    return null;
+  }
 }
 
-class _$DeviceProfileConfigurationSerializer implements PrimitiveSerializer<DeviceProfileConfiguration> {
+extension DeviceProfileConfigurationBuilderDiscriminatorExt
+    on DeviceProfileConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is DefaultDeviceProfileConfigurationBuilder) {
+      return r'DEFAULT';
+    }
+    return null;
+  }
+}
+
+class _$DeviceProfileConfigurationSerializer
+    implements PrimitiveSerializer<DeviceProfileConfiguration> {
   @override
   final Iterable<Type> types = const [DeviceProfileConfiguration];
 
@@ -76,9 +81,16 @@ class _$DeviceProfileConfigurationSerializer implements PrimitiveSerializer<Devi
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is DefaultDeviceProfileConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(DefaultDeviceProfileConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DefaultDeviceProfileConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -88,35 +100,61 @@ class _$DeviceProfileConfigurationSerializer implements PrimitiveSerializer<Devi
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(DeviceProfileConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          DeviceProfileConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'DEFAULT':
-        return serializers.deserialize(serialized, specifiedType: FullType(DefaultDeviceProfileConfiguration)) as DefaultDeviceProfileConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DefaultDeviceProfileConfiguration),
+            )
+            as DefaultDeviceProfileConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($DeviceProfileConfiguration)) as $DeviceProfileConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($DeviceProfileConfiguration),
+            )
+            as $DeviceProfileConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [DeviceProfileConfiguration], since [DeviceProfileConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $DeviceProfileConfiguration implements DeviceProfileConfiguration, Built<$DeviceProfileConfiguration, $DeviceProfileConfigurationBuilder> {
+abstract class $DeviceProfileConfiguration
+    implements
+        DeviceProfileConfiguration,
+        Built<$DeviceProfileConfiguration, $DeviceProfileConfigurationBuilder> {
   $DeviceProfileConfiguration._();
 
-  factory $DeviceProfileConfiguration([void Function($DeviceProfileConfigurationBuilder)? updates]) = _$$DeviceProfileConfiguration;
+  factory $DeviceProfileConfiguration([
+    void Function($DeviceProfileConfigurationBuilder)? updates,
+  ]) = _$$DeviceProfileConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($DeviceProfileConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$DeviceProfileConfiguration> get serializer => _$$DeviceProfileConfigurationSerializer();
+  static Serializer<$DeviceProfileConfiguration> get serializer =>
+      _$$DeviceProfileConfigurationSerializer();
 }
 
-class _$$DeviceProfileConfigurationSerializer implements PrimitiveSerializer<$DeviceProfileConfiguration> {
+class _$$DeviceProfileConfigurationSerializer
+    implements PrimitiveSerializer<$DeviceProfileConfiguration> {
   @override
-  final Iterable<Type> types = const [$DeviceProfileConfiguration, _$$DeviceProfileConfiguration];
+  final Iterable<Type> types = const [
+    $DeviceProfileConfiguration,
+    _$$DeviceProfileConfiguration,
+  ];
 
   @override
   final String wireName = r'$DeviceProfileConfiguration';
@@ -127,7 +165,10 @@ class _$$DeviceProfileConfigurationSerializer implements PrimitiveSerializer<$De
     $DeviceProfileConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(DeviceProfileConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(DeviceProfileConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -143,10 +184,12 @@ class _$$DeviceProfileConfigurationSerializer implements PrimitiveSerializer<$De
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -177,4 +220,3 @@ class _$$DeviceProfileConfigurationSerializer implements PrimitiveSerializer<$De
     return result.build();
   }
 }
-

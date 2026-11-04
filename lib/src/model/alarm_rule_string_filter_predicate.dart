@@ -19,12 +19,18 @@ part 'alarm_rule_string_filter_predicate.g.dart';
 /// AlarmRuleStringFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [operation] 
-/// * [value] 
-/// * [ignoreCase] 
+/// * [type]
+/// * [operation]
+/// * [value]
+/// * [ignoreCase]
 @BuiltValue()
-abstract class AlarmRuleStringFilterPredicate implements AlarmRuleKeyFilterPredicate, Built<AlarmRuleStringFilterPredicate, AlarmRuleStringFilterPredicateBuilder> {
+abstract class AlarmRuleStringFilterPredicate
+    implements
+        AlarmRuleKeyFilterPredicate,
+        Built<
+          AlarmRuleStringFilterPredicate,
+          AlarmRuleStringFilterPredicateBuilder
+        > {
   @BuiltValueField(wireName: r'ignoreCase')
   bool? get ignoreCase;
 
@@ -37,18 +43,25 @@ abstract class AlarmRuleStringFilterPredicate implements AlarmRuleKeyFilterPredi
 
   AlarmRuleStringFilterPredicate._();
 
-  factory AlarmRuleStringFilterPredicate([void updates(AlarmRuleStringFilterPredicateBuilder b)]) = _$AlarmRuleStringFilterPredicate;
+  factory AlarmRuleStringFilterPredicate([
+    void updates(AlarmRuleStringFilterPredicateBuilder b),
+  ]) = _$AlarmRuleStringFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmRuleStringFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmRuleStringFilterPredicate> get serializer => _$AlarmRuleStringFilterPredicateSerializer();
+  static Serializer<AlarmRuleStringFilterPredicate> get serializer =>
+      _$AlarmRuleStringFilterPredicateSerializer();
 }
 
-class _$AlarmRuleStringFilterPredicateSerializer implements PrimitiveSerializer<AlarmRuleStringFilterPredicate> {
+class _$AlarmRuleStringFilterPredicateSerializer
+    implements PrimitiveSerializer<AlarmRuleStringFilterPredicate> {
   @override
-  final Iterable<Type> types = const [AlarmRuleStringFilterPredicate, _$AlarmRuleStringFilterPredicate];
+  final Iterable<Type> types = const [
+    AlarmRuleStringFilterPredicate,
+    _$AlarmRuleStringFilterPredicate,
+  ];
 
   @override
   final String wireName = r'AlarmRuleStringFilterPredicate';
@@ -88,7 +101,11 @@ class _$AlarmRuleStringFilterPredicateSerializer implements PrimitiveSerializer<
     AlarmRuleStringFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -104,31 +121,39 @@ class _$AlarmRuleStringFilterPredicateSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'operation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmRuleStringOperation),
-          ) as AlarmRuleStringOperation;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmRuleStringOperation),
+                  )
+                  as AlarmRuleStringOperation;
           result.operation = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionValueString),
-          ) as AlarmConditionValueString;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionValueString),
+                  )
+                  as AlarmConditionValueString;
           result.value.replace(valueDes);
           break;
         case r'ignoreCase':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.ignoreCase = valueDes;
           break;
@@ -160,5 +185,3 @@ class _$AlarmRuleStringFilterPredicateSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

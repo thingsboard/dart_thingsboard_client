@@ -17,12 +17,13 @@ part 'dynamic_value_double.g.dart';
 /// DynamicValueDouble
 ///
 /// Properties:
-/// * [resolvedValue] 
-/// * [sourceType] 
-/// * [sourceAttribute] 
-/// * [inherit] 
+/// * [resolvedValue]
+/// * [sourceType]
+/// * [sourceAttribute]
+/// * [inherit]
 @BuiltValue()
-abstract class DynamicValueDouble implements Built<DynamicValueDouble, DynamicValueDoubleBuilder> {
+abstract class DynamicValueDouble
+    implements Built<DynamicValueDouble, DynamicValueDoubleBuilder> {
   @BuiltValueField(wireName: r'resolvedValue')
   double? get resolvedValue;
 
@@ -38,16 +39,19 @@ abstract class DynamicValueDouble implements Built<DynamicValueDouble, DynamicVa
 
   DynamicValueDouble._();
 
-  factory DynamicValueDouble([void updates(DynamicValueDoubleBuilder b)]) = _$DynamicValueDouble;
+  factory DynamicValueDouble([void updates(DynamicValueDoubleBuilder b)]) =
+      _$DynamicValueDouble;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DynamicValueDoubleBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DynamicValueDouble> get serializer => _$DynamicValueDoubleSerializer();
+  static Serializer<DynamicValueDouble> get serializer =>
+      _$DynamicValueDoubleSerializer();
 }
 
-class _$DynamicValueDoubleSerializer implements PrimitiveSerializer<DynamicValueDouble> {
+class _$DynamicValueDoubleSerializer
+    implements PrimitiveSerializer<DynamicValueDouble> {
   @override
   final Iterable<Type> types = const [DynamicValueDouble, _$DynamicValueDouble];
 
@@ -95,7 +99,11 @@ class _$DynamicValueDoubleSerializer implements PrimitiveSerializer<DynamicValue
     DynamicValueDouble object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -111,34 +119,44 @@ class _$DynamicValueDoubleSerializer implements PrimitiveSerializer<DynamicValue
       final value = serializedList[i + 1];
       switch (key) {
         case r'resolvedValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.resolvedValue = valueDes;
           break;
         case r'sourceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DynamicValueSourceType),
-          ) as DynamicValueSourceType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DynamicValueSourceType,
+                    ),
+                  )
+                  as DynamicValueSourceType?;
           if (valueDes == null) continue;
           result.sourceType = valueDes;
           break;
         case r'sourceAttribute':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.sourceAttribute = valueDes;
           break;
         case r'inherit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.inherit = valueDes;
           break;
@@ -170,5 +188,3 @@ class _$DynamicValueDoubleSerializer implements PrimitiveSerializer<DynamicValue
     return result.build();
   }
 }
-
-

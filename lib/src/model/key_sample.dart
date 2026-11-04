@@ -53,15 +53,14 @@ class _$KeySampleSerializer implements PrimitiveSerializer<KeySample> {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
     yield r'ts';
-    yield serializers.serialize(
-      object.ts,
-      specifiedType: const FullType(int),
-    );
+    yield serializers.serialize(object.ts, specifiedType: const FullType(int));
     yield r'value';
-    yield object.value == null ? null : serializers.serialize(
-      object.value,
-      specifiedType: const FullType.nullable(JsonObject),
-    );
+    yield object.value == null
+        ? null
+        : serializers.serialize(
+            object.value,
+            specifiedType: const FullType.nullable(JsonObject),
+          );
   }
 
   @override
@@ -70,7 +69,11 @@ class _$KeySampleSerializer implements PrimitiveSerializer<KeySample> {
     KeySample object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,17 +89,18 @@ class _$KeySampleSerializer implements PrimitiveSerializer<KeySample> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'ts':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.ts = valueDes;
           break;
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
@@ -128,5 +132,3 @@ class _$KeySampleSerializer implements PrimitiveSerializer<KeySample> {
     return result.build();
   }
 }
-
-

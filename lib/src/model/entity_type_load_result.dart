@@ -17,15 +17,16 @@ part 'entity_type_load_result.g.dart';
 /// EntityTypeLoadResult
 ///
 /// Properties:
-/// * [entityType] 
-/// * [created] 
-/// * [updated] 
-/// * [deleted] 
-/// * [groupsCreated] 
-/// * [groupsUpdated] 
-/// * [groupsDeleted] 
+/// * [entityType]
+/// * [created]
+/// * [updated]
+/// * [deleted]
+/// * [groupsCreated]
+/// * [groupsUpdated]
+/// * [groupsDeleted]
 @BuiltValue()
-abstract class EntityTypeLoadResult implements Built<EntityTypeLoadResult, EntityTypeLoadResultBuilder> {
+abstract class EntityTypeLoadResult
+    implements Built<EntityTypeLoadResult, EntityTypeLoadResultBuilder> {
   @BuiltValueField(wireName: r'entityType')
   EntityType? get entityType;
   // enum entityTypeEnum {  TENANT,  CUSTOMER,  USER,  DASHBOARD,  ASSET,  DEVICE,  ALARM,  ENTITY_GROUP,  CONVERTER,  INTEGRATION,  RULE_CHAIN,  RULE_NODE,  SCHEDULER_EVENT,  BLOB_ENTITY,  REPORT_TEMPLATE,  REPORT,  ENTITY_VIEW,  WIDGETS_BUNDLE,  WIDGET_TYPE,  ROLE,  GROUP_PERMISSION,  TENANT_PROFILE,  DEVICE_PROFILE,  ASSET_PROFILE,  API_USAGE_STATE,  TB_RESOURCE,  OTA_PACKAGE,  EDGE,  RPC,  QUEUE,  NOTIFICATION_TARGET,  NOTIFICATION_TEMPLATE,  NOTIFICATION_REQUEST,  NOTIFICATION,  NOTIFICATION_RULE,  QUEUE_STATS,  OAUTH2_CLIENT,  DOMAIN,  MOBILE_APP,  MOBILE_APP_BUNDLE,  CALCULATED_FIELD,  JOB,  SECRET,  ADMIN_SETTINGS,  AI_MODEL,  API_KEY,  AGENT,  AGENT_APPLICATION,  AGENT_APP_EVENT,  AGENT_APP_UNIT,  AGENT_APP_PROFILE,  AGENT_PROFILE,  AGENT_BULK_ACTION,  };
@@ -50,18 +51,24 @@ abstract class EntityTypeLoadResult implements Built<EntityTypeLoadResult, Entit
 
   EntityTypeLoadResult._();
 
-  factory EntityTypeLoadResult([void updates(EntityTypeLoadResultBuilder b)]) = _$EntityTypeLoadResult;
+  factory EntityTypeLoadResult([void updates(EntityTypeLoadResultBuilder b)]) =
+      _$EntityTypeLoadResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityTypeLoadResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityTypeLoadResult> get serializer => _$EntityTypeLoadResultSerializer();
+  static Serializer<EntityTypeLoadResult> get serializer =>
+      _$EntityTypeLoadResultSerializer();
 }
 
-class _$EntityTypeLoadResultSerializer implements PrimitiveSerializer<EntityTypeLoadResult> {
+class _$EntityTypeLoadResultSerializer
+    implements PrimitiveSerializer<EntityTypeLoadResult> {
   @override
-  final Iterable<Type> types = const [EntityTypeLoadResult, _$EntityTypeLoadResult];
+  final Iterable<Type> types = const [
+    EntityTypeLoadResult,
+    _$EntityTypeLoadResult,
+  ];
 
   @override
   final String wireName = r'EntityTypeLoadResult';
@@ -128,7 +135,11 @@ class _$EntityTypeLoadResultSerializer implements PrimitiveSerializer<EntityType
     EntityTypeLoadResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -144,58 +155,72 @@ class _$EntityTypeLoadResultSerializer implements PrimitiveSerializer<EntityType
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.entityType = valueDes;
           break;
         case r'created':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.created = valueDes;
           break;
         case r'updated':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.updated = valueDes;
           break;
         case r'deleted':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.deleted = valueDes;
           break;
         case r'groupsCreated':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.groupsCreated = valueDes;
           break;
         case r'groupsUpdated':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.groupsUpdated = valueDes;
           break;
         case r'groupsDeleted':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.groupsDeleted = valueDes;
           break;
@@ -227,5 +252,3 @@ class _$EntityTypeLoadResultSerializer implements PrimitiveSerializer<EntityType
     return result.build();
   }
 }
-
-

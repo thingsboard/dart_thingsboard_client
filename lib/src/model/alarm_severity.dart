@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'alarm_severity.g.dart';
 
 class AlarmSeverity extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CRITICAL')
   static const AlarmSeverity CRITICAL = _$CRITICAL;
   @BuiltValueEnumConst(wireName: r'MAJOR')
@@ -31,7 +30,7 @@ class AlarmSeverity extends EnumClass {
 
   static Serializer<AlarmSeverity> get serializer => _$alarmSeveritySerializer;
 
-  const AlarmSeverity._(String name): super(name);
+  const AlarmSeverity._(String name) : super(name);
 
   static BuiltSet<AlarmSeverity> get values => _$values;
   static AlarmSeverity valueOf(String name) => _$valueOf(name);
@@ -44,4 +43,3 @@ class AlarmSeverity extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AlarmSeverityMixin = Object with _$AlarmSeverityMixin;
-

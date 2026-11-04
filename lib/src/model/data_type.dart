@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'data_type.g.dart';
 
 class DataType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'BOOLEAN')
   static const DataType BOOLEAN = _$BOOLEAN;
   @BuiltValueEnumConst(wireName: r'LONG')
@@ -31,7 +30,7 @@ class DataType extends EnumClass {
 
   static Serializer<DataType> get serializer => _$dataTypeSerializer;
 
-  const DataType._(String name): super(name);
+  const DataType._(String name) : super(name);
 
   static BuiltSet<DataType> get values => _$values;
   static DataType valueOf(String name) => _$valueOf(name);
@@ -44,4 +43,3 @@ class DataType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class DataTypeMixin = Object with _$DataTypeMixin;
-

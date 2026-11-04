@@ -16,11 +16,12 @@ part 'dummy_task_failure.g.dart';
 /// DummyTaskFailure
 ///
 /// Properties:
-/// * [error] 
-/// * [number] 
-/// * [failAlways] 
+/// * [error]
+/// * [number]
+/// * [failAlways]
 @BuiltValue()
-abstract class DummyTaskFailure implements Built<DummyTaskFailure, DummyTaskFailureBuilder> {
+abstract class DummyTaskFailure
+    implements Built<DummyTaskFailure, DummyTaskFailureBuilder> {
   @BuiltValueField(wireName: r'error')
   String? get error;
 
@@ -32,16 +33,19 @@ abstract class DummyTaskFailure implements Built<DummyTaskFailure, DummyTaskFail
 
   DummyTaskFailure._();
 
-  factory DummyTaskFailure([void updates(DummyTaskFailureBuilder b)]) = _$DummyTaskFailure;
+  factory DummyTaskFailure([void updates(DummyTaskFailureBuilder b)]) =
+      _$DummyTaskFailure;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DummyTaskFailureBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DummyTaskFailure> get serializer => _$DummyTaskFailureSerializer();
+  static Serializer<DummyTaskFailure> get serializer =>
+      _$DummyTaskFailureSerializer();
 }
 
-class _$DummyTaskFailureSerializer implements PrimitiveSerializer<DummyTaskFailure> {
+class _$DummyTaskFailureSerializer
+    implements PrimitiveSerializer<DummyTaskFailure> {
   @override
   final Iterable<Type> types = const [DummyTaskFailure, _$DummyTaskFailure];
 
@@ -82,7 +86,11 @@ class _$DummyTaskFailureSerializer implements PrimitiveSerializer<DummyTaskFailu
     DummyTaskFailure object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +106,32 @@ class _$DummyTaskFailureSerializer implements PrimitiveSerializer<DummyTaskFailu
       final value = serializedList[i + 1];
       switch (key) {
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
         case r'number':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.number = valueDes;
           break;
         case r'failAlways':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.failAlways = valueDes;
           break;
@@ -149,5 +163,3 @@ class _$DummyTaskFailureSerializer implements PrimitiveSerializer<DummyTaskFailu
     return result.build();
   }
 }
-
-

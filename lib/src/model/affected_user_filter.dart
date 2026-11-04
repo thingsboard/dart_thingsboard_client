@@ -17,21 +17,27 @@ part 'affected_user_filter.g.dart';
 /// AffectedUserFilter
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class AffectedUserFilter implements UsersFilter, Built<AffectedUserFilter, AffectedUserFilterBuilder> {
+abstract class AffectedUserFilter
+    implements
+        UsersFilter,
+        Built<AffectedUserFilter, AffectedUserFilterBuilder> {
   AffectedUserFilter._();
 
-  factory AffectedUserFilter([void updates(AffectedUserFilterBuilder b)]) = _$AffectedUserFilter;
+  factory AffectedUserFilter([void updates(AffectedUserFilterBuilder b)]) =
+      _$AffectedUserFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AffectedUserFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AffectedUserFilter> get serializer => _$AffectedUserFilterSerializer();
+  static Serializer<AffectedUserFilter> get serializer =>
+      _$AffectedUserFilterSerializer();
 }
 
-class _$AffectedUserFilterSerializer implements PrimitiveSerializer<AffectedUserFilter> {
+class _$AffectedUserFilterSerializer
+    implements PrimitiveSerializer<AffectedUserFilter> {
   @override
   final Iterable<Type> types = const [AffectedUserFilter, _$AffectedUserFilter];
 
@@ -56,7 +62,11 @@ class _$AffectedUserFilterSerializer implements PrimitiveSerializer<AffectedUser
     AffectedUserFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +82,12 @@ class _$AffectedUserFilterSerializer implements PrimitiveSerializer<AffectedUser
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +118,3 @@ class _$AffectedUserFilterSerializer implements PrimitiveSerializer<AffectedUser
     return result.build();
   }
 }
-
-

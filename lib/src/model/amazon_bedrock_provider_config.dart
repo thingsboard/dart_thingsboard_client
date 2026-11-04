@@ -16,11 +16,13 @@ part 'amazon_bedrock_provider_config.g.dart';
 /// AmazonBedrockProviderConfig
 ///
 /// Properties:
-/// * [region] 
-/// * [accessKeyId] 
-/// * [secretAccessKey] 
+/// * [region]
+/// * [accessKeyId]
+/// * [secretAccessKey]
 @BuiltValue()
-abstract class AmazonBedrockProviderConfig implements Built<AmazonBedrockProviderConfig, AmazonBedrockProviderConfigBuilder> {
+abstract class AmazonBedrockProviderConfig
+    implements
+        Built<AmazonBedrockProviderConfig, AmazonBedrockProviderConfigBuilder> {
   @BuiltValueField(wireName: r'region')
   String get region;
 
@@ -32,18 +34,25 @@ abstract class AmazonBedrockProviderConfig implements Built<AmazonBedrockProvide
 
   AmazonBedrockProviderConfig._();
 
-  factory AmazonBedrockProviderConfig([void updates(AmazonBedrockProviderConfigBuilder b)]) = _$AmazonBedrockProviderConfig;
+  factory AmazonBedrockProviderConfig([
+    void updates(AmazonBedrockProviderConfigBuilder b),
+  ]) = _$AmazonBedrockProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AmazonBedrockProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AmazonBedrockProviderConfig> get serializer => _$AmazonBedrockProviderConfigSerializer();
+  static Serializer<AmazonBedrockProviderConfig> get serializer =>
+      _$AmazonBedrockProviderConfigSerializer();
 }
 
-class _$AmazonBedrockProviderConfigSerializer implements PrimitiveSerializer<AmazonBedrockProviderConfig> {
+class _$AmazonBedrockProviderConfigSerializer
+    implements PrimitiveSerializer<AmazonBedrockProviderConfig> {
   @override
-  final Iterable<Type> types = const [AmazonBedrockProviderConfig, _$AmazonBedrockProviderConfig];
+  final Iterable<Type> types = const [
+    AmazonBedrockProviderConfig,
+    _$AmazonBedrockProviderConfig,
+  ];
 
   @override
   final String wireName = r'AmazonBedrockProviderConfig';
@@ -76,7 +85,11 @@ class _$AmazonBedrockProviderConfigSerializer implements PrimitiveSerializer<Ama
     AmazonBedrockProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,24 +105,30 @@ class _$AmazonBedrockProviderConfigSerializer implements PrimitiveSerializer<Ama
       final value = serializedList[i + 1];
       switch (key) {
         case r'region':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.region = valueDes;
           break;
         case r'accessKeyId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.accessKeyId = valueDes;
           break;
         case r'secretAccessKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.secretAccessKey = valueDes;
           break;
         default:
@@ -140,5 +159,3 @@ class _$AmazonBedrockProviderConfigSerializer implements PrimitiveSerializer<Ama
     return result.build();
   }
 }
-
-

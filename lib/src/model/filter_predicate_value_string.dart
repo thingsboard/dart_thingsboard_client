@@ -17,11 +17,13 @@ part 'filter_predicate_value_string.g.dart';
 /// FilterPredicateValueString
 ///
 /// Properties:
-/// * [defaultValue] 
-/// * [userValue] 
-/// * [dynamicValue] 
+/// * [defaultValue]
+/// * [userValue]
+/// * [dynamicValue]
 @BuiltValue()
-abstract class FilterPredicateValueString implements Built<FilterPredicateValueString, FilterPredicateValueStringBuilder> {
+abstract class FilterPredicateValueString
+    implements
+        Built<FilterPredicateValueString, FilterPredicateValueStringBuilder> {
   @BuiltValueField(wireName: r'defaultValue')
   String? get defaultValue;
 
@@ -33,18 +35,25 @@ abstract class FilterPredicateValueString implements Built<FilterPredicateValueS
 
   FilterPredicateValueString._();
 
-  factory FilterPredicateValueString([void updates(FilterPredicateValueStringBuilder b)]) = _$FilterPredicateValueString;
+  factory FilterPredicateValueString([
+    void updates(FilterPredicateValueStringBuilder b),
+  ]) = _$FilterPredicateValueString;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(FilterPredicateValueStringBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<FilterPredicateValueString> get serializer => _$FilterPredicateValueStringSerializer();
+  static Serializer<FilterPredicateValueString> get serializer =>
+      _$FilterPredicateValueStringSerializer();
 }
 
-class _$FilterPredicateValueStringSerializer implements PrimitiveSerializer<FilterPredicateValueString> {
+class _$FilterPredicateValueStringSerializer
+    implements PrimitiveSerializer<FilterPredicateValueString> {
   @override
-  final Iterable<Type> types = const [FilterPredicateValueString, _$FilterPredicateValueString];
+  final Iterable<Type> types = const [
+    FilterPredicateValueString,
+    _$FilterPredicateValueString,
+  ];
 
   @override
   final String wireName = r'FilterPredicateValueString';
@@ -83,7 +92,11 @@ class _$FilterPredicateValueStringSerializer implements PrimitiveSerializer<Filt
     FilterPredicateValueString object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,26 +112,32 @@ class _$FilterPredicateValueStringSerializer implements PrimitiveSerializer<Filt
       final value = serializedList[i + 1];
       switch (key) {
         case r'defaultValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultValue = valueDes;
           break;
         case r'userValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.userValue = valueDes;
           break;
         case r'dynamicValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DynamicValueString),
-          ) as DynamicValueString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DynamicValueString),
+                  )
+                  as DynamicValueString?;
           if (valueDes == null) continue;
           result.dynamicValue.replace(valueDes);
           break;
@@ -150,5 +169,3 @@ class _$FilterPredicateValueStringSerializer implements PrimitiveSerializer<Filt
     return result.build();
   }
 }
-
-

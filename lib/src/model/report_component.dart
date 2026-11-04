@@ -32,10 +32,10 @@ part 'report_component.g.dart';
 /// ReportComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
+/// * [subType]
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class ReportComponent  {
+abstract class ReportComponent {
   @BuiltValueField(wireName: r'subType')
   ReportComponentSubType get subType;
   // enum subTypeEnum {  doughnutChart,  horizontalDoughnutChart,  pointChart,  barChart,  pieChart,  lineChart,  latestBarChart,  rangeChart,  barChartWithLabels,  stateChart,  default,  };
@@ -64,105 +64,108 @@ abstract class ReportComponent  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReportComponent> get serializer => _$ReportComponentSerializer();
+  static Serializer<ReportComponent> get serializer =>
+      _$ReportComponentSerializer();
 }
 
 extension ReportComponentDiscriminatorExt on ReportComponent {
-    String? get discriminatorValue {
-        if (this is AlarmTableComponent) {
-            return r'ALARM_TABLE';
-        }
-        if (this is DashboardComponent) {
-            return r'DASHBOARD';
-        }
-        if (this is DividerComponent) {
-            return r'DIVIDER';
-        }
-        if (this is EntityTableComponent) {
-            return r'ENTITY_TABLE';
-        }
-        if (this is ErrorComponent) {
-            return r'ERROR';
-        }
-        if (this is HeadingComponent) {
-            return r'HEADING';
-        }
-        if (this is ImageComponent) {
-            return r'IMAGE';
-        }
-        if (this is LatestChartComponent) {
-            return r'LATEST_CHART';
-        }
-        if (this is PageBreakComponent) {
-            return r'PAGE_BREAK';
-        }
-        if (this is RichTextComponent) {
-            return r'RICH_TEXT';
-        }
-        if (this is SplitViewComponent) {
-            return r'SPLIT_VIEW';
-        }
-        if (this is SubReportComponent) {
-            return r'SUB_REPORT';
-        }
-        if (this is TimeseriesChartComponent) {
-            return r'TIME_SERIES_CHART';
-        }
-        if (this is TimeseriesTableComponent) {
-            return r'TIME_SERIES_TABLE';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AlarmTableComponent) {
+      return r'ALARM_TABLE';
     }
-}
-extension ReportComponentBuilderDiscriminatorExt on ReportComponentBuilder {
-    String? get discriminatorValue {
-        if (this is AlarmTableComponentBuilder) {
-            return r'ALARM_TABLE';
-        }
-        if (this is DashboardComponentBuilder) {
-            return r'DASHBOARD';
-        }
-        if (this is DividerComponentBuilder) {
-            return r'DIVIDER';
-        }
-        if (this is EntityTableComponentBuilder) {
-            return r'ENTITY_TABLE';
-        }
-        if (this is ErrorComponentBuilder) {
-            return r'ERROR';
-        }
-        if (this is HeadingComponentBuilder) {
-            return r'HEADING';
-        }
-        if (this is ImageComponentBuilder) {
-            return r'IMAGE';
-        }
-        if (this is LatestChartComponentBuilder) {
-            return r'LATEST_CHART';
-        }
-        if (this is PageBreakComponentBuilder) {
-            return r'PAGE_BREAK';
-        }
-        if (this is RichTextComponentBuilder) {
-            return r'RICH_TEXT';
-        }
-        if (this is SplitViewComponentBuilder) {
-            return r'SPLIT_VIEW';
-        }
-        if (this is SubReportComponentBuilder) {
-            return r'SUB_REPORT';
-        }
-        if (this is TimeseriesChartComponentBuilder) {
-            return r'TIME_SERIES_CHART';
-        }
-        if (this is TimeseriesTableComponentBuilder) {
-            return r'TIME_SERIES_TABLE';
-        }
-        return null;
+    if (this is DashboardComponent) {
+      return r'DASHBOARD';
     }
+    if (this is DividerComponent) {
+      return r'DIVIDER';
+    }
+    if (this is EntityTableComponent) {
+      return r'ENTITY_TABLE';
+    }
+    if (this is ErrorComponent) {
+      return r'ERROR';
+    }
+    if (this is HeadingComponent) {
+      return r'HEADING';
+    }
+    if (this is ImageComponent) {
+      return r'IMAGE';
+    }
+    if (this is LatestChartComponent) {
+      return r'LATEST_CHART';
+    }
+    if (this is PageBreakComponent) {
+      return r'PAGE_BREAK';
+    }
+    if (this is RichTextComponent) {
+      return r'RICH_TEXT';
+    }
+    if (this is SplitViewComponent) {
+      return r'SPLIT_VIEW';
+    }
+    if (this is SubReportComponent) {
+      return r'SUB_REPORT';
+    }
+    if (this is TimeseriesChartComponent) {
+      return r'TIME_SERIES_CHART';
+    }
+    if (this is TimeseriesTableComponent) {
+      return r'TIME_SERIES_TABLE';
+    }
+    return null;
+  }
 }
 
-class _$ReportComponentSerializer implements PrimitiveSerializer<ReportComponent> {
+extension ReportComponentBuilderDiscriminatorExt on ReportComponentBuilder {
+  String? get discriminatorValue {
+    if (this is AlarmTableComponentBuilder) {
+      return r'ALARM_TABLE';
+    }
+    if (this is DashboardComponentBuilder) {
+      return r'DASHBOARD';
+    }
+    if (this is DividerComponentBuilder) {
+      return r'DIVIDER';
+    }
+    if (this is EntityTableComponentBuilder) {
+      return r'ENTITY_TABLE';
+    }
+    if (this is ErrorComponentBuilder) {
+      return r'ERROR';
+    }
+    if (this is HeadingComponentBuilder) {
+      return r'HEADING';
+    }
+    if (this is ImageComponentBuilder) {
+      return r'IMAGE';
+    }
+    if (this is LatestChartComponentBuilder) {
+      return r'LATEST_CHART';
+    }
+    if (this is PageBreakComponentBuilder) {
+      return r'PAGE_BREAK';
+    }
+    if (this is RichTextComponentBuilder) {
+      return r'RICH_TEXT';
+    }
+    if (this is SplitViewComponentBuilder) {
+      return r'SPLIT_VIEW';
+    }
+    if (this is SubReportComponentBuilder) {
+      return r'SUB_REPORT';
+    }
+    if (this is TimeseriesChartComponentBuilder) {
+      return r'TIME_SERIES_CHART';
+    }
+    if (this is TimeseriesTableComponentBuilder) {
+      return r'TIME_SERIES_TABLE';
+    }
+    return null;
+  }
+}
+
+class _$ReportComponentSerializer
+    implements PrimitiveSerializer<ReportComponent> {
   @override
   final Iterable<Type> types = const [ReportComponent];
 
@@ -193,48 +196,94 @@ class _$ReportComponentSerializer implements PrimitiveSerializer<ReportComponent
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AlarmTableComponent) {
-      return serializers.serialize(object, specifiedType: FullType(AlarmTableComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AlarmTableComponent),
+      )!;
     }
     if (object is DashboardComponent) {
-      return serializers.serialize(object, specifiedType: FullType(DashboardComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DashboardComponent),
+      )!;
     }
     if (object is DividerComponent) {
-      return serializers.serialize(object, specifiedType: FullType(DividerComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DividerComponent),
+      )!;
     }
     if (object is EntityTableComponent) {
-      return serializers.serialize(object, specifiedType: FullType(EntityTableComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityTableComponent),
+      )!;
     }
     if (object is ErrorComponent) {
-      return serializers.serialize(object, specifiedType: FullType(ErrorComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ErrorComponent),
+      )!;
     }
     if (object is HeadingComponent) {
-      return serializers.serialize(object, specifiedType: FullType(HeadingComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(HeadingComponent),
+      )!;
     }
     if (object is ImageComponent) {
-      return serializers.serialize(object, specifiedType: FullType(ImageComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ImageComponent),
+      )!;
     }
     if (object is LatestChartComponent) {
-      return serializers.serialize(object, specifiedType: FullType(LatestChartComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(LatestChartComponent),
+      )!;
     }
     if (object is PageBreakComponent) {
-      return serializers.serialize(object, specifiedType: FullType(PageBreakComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(PageBreakComponent),
+      )!;
     }
     if (object is RichTextComponent) {
-      return serializers.serialize(object, specifiedType: FullType(RichTextComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RichTextComponent),
+      )!;
     }
     if (object is SplitViewComponent) {
-      return serializers.serialize(object, specifiedType: FullType(SplitViewComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SplitViewComponent),
+      )!;
     }
     if (object is SubReportComponent) {
-      return serializers.serialize(object, specifiedType: FullType(SubReportComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SubReportComponent),
+      )!;
     }
     if (object is TimeseriesChartComponent) {
-      return serializers.serialize(object, specifiedType: FullType(TimeseriesChartComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TimeseriesChartComponent),
+      )!;
     }
     if (object is TimeseriesTableComponent) {
-      return serializers.serialize(object, specifiedType: FullType(TimeseriesTableComponent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TimeseriesTableComponent),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -244,59 +293,130 @@ class _$ReportComponentSerializer implements PrimitiveSerializer<ReportComponent
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(ReportComponent.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(ReportComponent.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'ALARM_TABLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(AlarmTableComponent)) as AlarmTableComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AlarmTableComponent),
+            )
+            as AlarmTableComponent;
       case r'DASHBOARD':
-        return serializers.deserialize(serialized, specifiedType: FullType(DashboardComponent)) as DashboardComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DashboardComponent),
+            )
+            as DashboardComponent;
       case r'DIVIDER':
-        return serializers.deserialize(serialized, specifiedType: FullType(DividerComponent)) as DividerComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DividerComponent),
+            )
+            as DividerComponent;
       case r'ENTITY_TABLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityTableComponent)) as EntityTableComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityTableComponent),
+            )
+            as EntityTableComponent;
       case r'ERROR':
-        return serializers.deserialize(serialized, specifiedType: FullType(ErrorComponent)) as ErrorComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ErrorComponent),
+            )
+            as ErrorComponent;
       case r'HEADING':
-        return serializers.deserialize(serialized, specifiedType: FullType(HeadingComponent)) as HeadingComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(HeadingComponent),
+            )
+            as HeadingComponent;
       case r'IMAGE':
-        return serializers.deserialize(serialized, specifiedType: FullType(ImageComponent)) as ImageComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ImageComponent),
+            )
+            as ImageComponent;
       case r'LATEST_CHART':
-        return serializers.deserialize(serialized, specifiedType: FullType(LatestChartComponent)) as LatestChartComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(LatestChartComponent),
+            )
+            as LatestChartComponent;
       case r'PAGE_BREAK':
-        return serializers.deserialize(serialized, specifiedType: FullType(PageBreakComponent)) as PageBreakComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(PageBreakComponent),
+            )
+            as PageBreakComponent;
       case r'RICH_TEXT':
-        return serializers.deserialize(serialized, specifiedType: FullType(RichTextComponent)) as RichTextComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RichTextComponent),
+            )
+            as RichTextComponent;
       case r'SPLIT_VIEW':
-        return serializers.deserialize(serialized, specifiedType: FullType(SplitViewComponent)) as SplitViewComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SplitViewComponent),
+            )
+            as SplitViewComponent;
       case r'SUB_REPORT':
-        return serializers.deserialize(serialized, specifiedType: FullType(SubReportComponent)) as SubReportComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SubReportComponent),
+            )
+            as SubReportComponent;
       case r'TIME_SERIES_CHART':
-        return serializers.deserialize(serialized, specifiedType: FullType(TimeseriesChartComponent)) as TimeseriesChartComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TimeseriesChartComponent),
+            )
+            as TimeseriesChartComponent;
       case r'TIME_SERIES_TABLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(TimeseriesTableComponent)) as TimeseriesTableComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TimeseriesTableComponent),
+            )
+            as TimeseriesTableComponent;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($ReportComponent)) as $ReportComponent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($ReportComponent),
+            )
+            as $ReportComponent;
     }
   }
 }
 
-
 /// a concrete implementation of [ReportComponent], since [ReportComponent] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $ReportComponent implements ReportComponent, Built<$ReportComponent, $ReportComponentBuilder> {
+abstract class $ReportComponent
+    implements
+        ReportComponent,
+        Built<$ReportComponent, $ReportComponentBuilder> {
   $ReportComponent._();
 
-  factory $ReportComponent([void Function($ReportComponentBuilder)? updates]) = _$$ReportComponent;
+  factory $ReportComponent([void Function($ReportComponentBuilder)? updates]) =
+      _$$ReportComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($ReportComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$ReportComponent> get serializer => _$$ReportComponentSerializer();
+  static Serializer<$ReportComponent> get serializer =>
+      _$$ReportComponentSerializer();
 }
 
-class _$$ReportComponentSerializer implements PrimitiveSerializer<$ReportComponent> {
+class _$$ReportComponentSerializer
+    implements PrimitiveSerializer<$ReportComponent> {
   @override
   final Iterable<Type> types = const [$ReportComponent, _$$ReportComponent];
 
@@ -309,7 +429,10 @@ class _$$ReportComponentSerializer implements PrimitiveSerializer<$ReportCompone
     $ReportComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(ReportComponent))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(ReportComponent),
+    )!;
   }
 
   void _deserializeProperties(
@@ -325,17 +448,21 @@ class _$$ReportComponentSerializer implements PrimitiveSerializer<$ReportCompone
       final value = serializedList[i + 1];
       switch (key) {
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         default:
@@ -366,4 +493,3 @@ class _$$ReportComponentSerializer implements PrimitiveSerializer<$ReportCompone
     return result.build();
   }
 }
-

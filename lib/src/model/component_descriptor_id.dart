@@ -18,25 +18,33 @@ part 'component_descriptor_id.g.dart';
 /// Properties:
 /// * [id] - string
 @BuiltValue()
-abstract class ComponentDescriptorId implements Built<ComponentDescriptorId, ComponentDescriptorIdBuilder> {
+abstract class ComponentDescriptorId
+    implements Built<ComponentDescriptorId, ComponentDescriptorIdBuilder> {
   /// string
   @BuiltValueField(wireName: r'id')
   String get id;
 
   ComponentDescriptorId._();
 
-  factory ComponentDescriptorId([void updates(ComponentDescriptorIdBuilder b)]) = _$ComponentDescriptorId;
+  factory ComponentDescriptorId([
+    void updates(ComponentDescriptorIdBuilder b),
+  ]) = _$ComponentDescriptorId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ComponentDescriptorIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ComponentDescriptorId> get serializer => _$ComponentDescriptorIdSerializer();
+  static Serializer<ComponentDescriptorId> get serializer =>
+      _$ComponentDescriptorIdSerializer();
 }
 
-class _$ComponentDescriptorIdSerializer implements PrimitiveSerializer<ComponentDescriptorId> {
+class _$ComponentDescriptorIdSerializer
+    implements PrimitiveSerializer<ComponentDescriptorId> {
   @override
-  final Iterable<Type> types = const [ComponentDescriptorId, _$ComponentDescriptorId];
+  final Iterable<Type> types = const [
+    ComponentDescriptorId,
+    _$ComponentDescriptorId,
+  ];
 
   @override
   final String wireName = r'ComponentDescriptorId';
@@ -59,7 +67,11 @@ class _$ComponentDescriptorIdSerializer implements PrimitiveSerializer<Component
     ComponentDescriptorId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +87,12 @@ class _$ComponentDescriptorIdSerializer implements PrimitiveSerializer<Component
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -109,5 +123,3 @@ class _$ComponentDescriptorIdSerializer implements PrimitiveSerializer<Component
     return result.build();
   }
 }
-
-

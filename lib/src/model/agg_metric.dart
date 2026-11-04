@@ -18,10 +18,10 @@ part 'agg_metric.g.dart';
 /// AggMetric
 ///
 /// Properties:
-/// * [function_] 
-/// * [filter] 
-/// * [input] 
-/// * [defaultValue] 
+/// * [function_]
+/// * [filter]
+/// * [input]
+/// * [defaultValue]
 @BuiltValue()
 abstract class AggMetric implements Built<AggMetric, AggMetricBuilder> {
   @BuiltValueField(wireName: r'function')
@@ -96,7 +96,11 @@ class _$AggMetricSerializer implements PrimitiveSerializer<AggMetric> {
     AggMetric object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -112,34 +116,42 @@ class _$AggMetricSerializer implements PrimitiveSerializer<AggMetric> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'function':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AggFunction),
-          ) as AggFunction?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AggFunction),
+                  )
+                  as AggFunction?;
           if (valueDes == null) continue;
           result.function_ = valueDes;
           break;
         case r'filter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.filter = valueDes;
           break;
         case r'input':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AggInput),
-          ) as AggInput?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AggInput),
+                  )
+                  as AggInput?;
           if (valueDes == null) continue;
           result.input = valueDes;
           break;
         case r'defaultValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.defaultValue = valueDes;
           break;
@@ -171,5 +183,3 @@ class _$AggMetricSerializer implements PrimitiveSerializer<AggMetric> {
     return result.build();
   }
 }
-
-

@@ -17,11 +17,14 @@ part 'sms_two_fa_provider_config.g.dart';
 /// SmsTwoFaProviderConfig
 ///
 /// Properties:
-/// * [providerType] 
-/// * [verificationCodeLifetime] 
-/// * [smsVerificationMessageTemplate] 
+/// * [providerType]
+/// * [verificationCodeLifetime]
+/// * [smsVerificationMessageTemplate]
 @BuiltValue()
-abstract class SmsTwoFaProviderConfig implements TwoFaProviderConfig, Built<SmsTwoFaProviderConfig, SmsTwoFaProviderConfigBuilder> {
+abstract class SmsTwoFaProviderConfig
+    implements
+        TwoFaProviderConfig,
+        Built<SmsTwoFaProviderConfig, SmsTwoFaProviderConfigBuilder> {
   @BuiltValueField(wireName: r'verificationCodeLifetime')
   int? get verificationCodeLifetime;
 
@@ -30,18 +33,25 @@ abstract class SmsTwoFaProviderConfig implements TwoFaProviderConfig, Built<SmsT
 
   SmsTwoFaProviderConfig._();
 
-  factory SmsTwoFaProviderConfig([void updates(SmsTwoFaProviderConfigBuilder b)]) = _$SmsTwoFaProviderConfig;
+  factory SmsTwoFaProviderConfig([
+    void updates(SmsTwoFaProviderConfigBuilder b),
+  ]) = _$SmsTwoFaProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SmsTwoFaProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SmsTwoFaProviderConfig> get serializer => _$SmsTwoFaProviderConfigSerializer();
+  static Serializer<SmsTwoFaProviderConfig> get serializer =>
+      _$SmsTwoFaProviderConfigSerializer();
 }
 
-class _$SmsTwoFaProviderConfigSerializer implements PrimitiveSerializer<SmsTwoFaProviderConfig> {
+class _$SmsTwoFaProviderConfigSerializer
+    implements PrimitiveSerializer<SmsTwoFaProviderConfig> {
   @override
-  final Iterable<Type> types = const [SmsTwoFaProviderConfig, _$SmsTwoFaProviderConfig];
+  final Iterable<Type> types = const [
+    SmsTwoFaProviderConfig,
+    _$SmsTwoFaProviderConfig,
+  ];
 
   @override
   final String wireName = r'SmsTwoFaProviderConfig';
@@ -76,7 +86,11 @@ class _$SmsTwoFaProviderConfigSerializer implements PrimitiveSerializer<SmsTwoFa
     SmsTwoFaProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,25 +106,31 @@ class _$SmsTwoFaProviderConfigSerializer implements PrimitiveSerializer<SmsTwoFa
       final value = serializedList[i + 1];
       switch (key) {
         case r'verificationCodeLifetime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.verificationCodeLifetime = valueDes;
           break;
         case r'smsVerificationMessageTemplate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.smsVerificationMessageTemplate = valueDes;
           break;
         case r'providerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerType = valueDes;
           break;
         default:
@@ -141,5 +161,3 @@ class _$SmsTwoFaProviderConfigSerializer implements PrimitiveSerializer<SmsTwoFa
     return result.build();
   }
 }
-
-

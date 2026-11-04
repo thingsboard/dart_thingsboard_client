@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agent_application_origin.g.dart';
 
 class AgentApplicationOrigin extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'INSTALLED')
   static const AgentApplicationOrigin INSTALLED = _$INSTALLED;
   @BuiltValueEnumConst(wireName: r'DISCOVERED')
@@ -23,11 +22,13 @@ class AgentApplicationOrigin extends EnumClass {
   @BuiltValueEnumConst(wireName: r'AUTO_PROVISIONED')
   static const AgentApplicationOrigin AUTO_PROVISIONED = _$AUTO_PROVISIONED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AgentApplicationOrigin unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AgentApplicationOrigin unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AgentApplicationOrigin> get serializer => _$agentApplicationOriginSerializer;
+  static Serializer<AgentApplicationOrigin> get serializer =>
+      _$agentApplicationOriginSerializer;
 
-  const AgentApplicationOrigin._(String name): super(name);
+  const AgentApplicationOrigin._(String name) : super(name);
 
   static BuiltSet<AgentApplicationOrigin> get values => _$values;
   static AgentApplicationOrigin valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class AgentApplicationOrigin extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AgentApplicationOriginMixin = Object with _$AgentApplicationOriginMixin;
-
+abstract class AgentApplicationOriginMixin = Object
+    with _$AgentApplicationOriginMixin;

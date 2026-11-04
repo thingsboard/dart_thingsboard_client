@@ -15,21 +15,22 @@ import 'package:built_value/serializer.dart';
 part 'system_setup_state.g.dart';
 
 class SystemSetupState extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'LICENSE_REQUIRED')
   static const SystemSetupState LICENSE_REQUIRED = _$LICENSE_REQUIRED;
   @BuiltValueEnumConst(wireName: r'ACCOUNT_REQUIRED')
   static const SystemSetupState ACCOUNT_REQUIRED = _$ACCOUNT_REQUIRED;
   @BuiltValueEnumConst(wireName: r'NON_PRODUCTION_CONFIRMATION_REQUIRED')
-  static const SystemSetupState NON_PRODUCTION_CONFIRMATION_REQUIRED = _$NON_PRODUCTION_CONFIRMATION_REQUIRED;
+  static const SystemSetupState NON_PRODUCTION_CONFIRMATION_REQUIRED =
+      _$NON_PRODUCTION_CONFIRMATION_REQUIRED;
   @BuiltValueEnumConst(wireName: r'READY')
   static const SystemSetupState READY = _$READY;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const SystemSetupState unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<SystemSetupState> get serializer => _$systemSetupStateSerializer;
+  static Serializer<SystemSetupState> get serializer =>
+      _$systemSetupStateSerializer;
 
-  const SystemSetupState._(String name): super(name);
+  const SystemSetupState._(String name) : super(name);
 
   static BuiltSet<SystemSetupState> get values => _$values;
   static SystemSetupState valueOf(String name) => _$valueOf(name);
@@ -42,4 +43,3 @@ class SystemSetupState extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class SystemSetupStateMixin = Object with _$SystemSetupStateMixin;
-

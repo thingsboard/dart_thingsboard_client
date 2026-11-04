@@ -17,11 +17,13 @@ part 'filter_predicate_value_boolean.g.dart';
 /// FilterPredicateValueBoolean
 ///
 /// Properties:
-/// * [defaultValue] 
-/// * [userValue] 
-/// * [dynamicValue] 
+/// * [defaultValue]
+/// * [userValue]
+/// * [dynamicValue]
 @BuiltValue()
-abstract class FilterPredicateValueBoolean implements Built<FilterPredicateValueBoolean, FilterPredicateValueBooleanBuilder> {
+abstract class FilterPredicateValueBoolean
+    implements
+        Built<FilterPredicateValueBoolean, FilterPredicateValueBooleanBuilder> {
   @BuiltValueField(wireName: r'defaultValue')
   bool? get defaultValue;
 
@@ -33,18 +35,25 @@ abstract class FilterPredicateValueBoolean implements Built<FilterPredicateValue
 
   FilterPredicateValueBoolean._();
 
-  factory FilterPredicateValueBoolean([void updates(FilterPredicateValueBooleanBuilder b)]) = _$FilterPredicateValueBoolean;
+  factory FilterPredicateValueBoolean([
+    void updates(FilterPredicateValueBooleanBuilder b),
+  ]) = _$FilterPredicateValueBoolean;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(FilterPredicateValueBooleanBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<FilterPredicateValueBoolean> get serializer => _$FilterPredicateValueBooleanSerializer();
+  static Serializer<FilterPredicateValueBoolean> get serializer =>
+      _$FilterPredicateValueBooleanSerializer();
 }
 
-class _$FilterPredicateValueBooleanSerializer implements PrimitiveSerializer<FilterPredicateValueBoolean> {
+class _$FilterPredicateValueBooleanSerializer
+    implements PrimitiveSerializer<FilterPredicateValueBoolean> {
   @override
-  final Iterable<Type> types = const [FilterPredicateValueBoolean, _$FilterPredicateValueBoolean];
+  final Iterable<Type> types = const [
+    FilterPredicateValueBoolean,
+    _$FilterPredicateValueBoolean,
+  ];
 
   @override
   final String wireName = r'FilterPredicateValueBoolean';
@@ -83,7 +92,11 @@ class _$FilterPredicateValueBooleanSerializer implements PrimitiveSerializer<Fil
     FilterPredicateValueBoolean object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,26 +112,32 @@ class _$FilterPredicateValueBooleanSerializer implements PrimitiveSerializer<Fil
       final value = serializedList[i + 1];
       switch (key) {
         case r'defaultValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.defaultValue = valueDes;
           break;
         case r'userValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.userValue = valueDes;
           break;
         case r'dynamicValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DynamicValueBoolean),
-          ) as DynamicValueBoolean?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DynamicValueBoolean),
+                  )
+                  as DynamicValueBoolean?;
           if (valueDes == null) continue;
           result.dynamicValue.replace(valueDes);
           break;
@@ -150,5 +169,3 @@ class _$FilterPredicateValueBooleanSerializer implements PrimitiveSerializer<Fil
     return result.build();
   }
 }
-
-

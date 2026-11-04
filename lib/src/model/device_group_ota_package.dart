@@ -19,13 +19,14 @@ part 'device_group_ota_package.g.dart';
 /// DeviceGroupOtaPackage
 ///
 /// Properties:
-/// * [id] 
-/// * [groupId] 
-/// * [otaPackageType] 
-/// * [otaPackageId] 
-/// * [otaPackageUpdateTime] 
+/// * [id]
+/// * [groupId]
+/// * [otaPackageType]
+/// * [otaPackageId]
+/// * [otaPackageUpdateTime]
 @BuiltValue()
-abstract class DeviceGroupOtaPackage implements Built<DeviceGroupOtaPackage, DeviceGroupOtaPackageBuilder> {
+abstract class DeviceGroupOtaPackage
+    implements Built<DeviceGroupOtaPackage, DeviceGroupOtaPackageBuilder> {
   @BuiltValueField(wireName: r'id')
   String? get id;
 
@@ -44,18 +45,25 @@ abstract class DeviceGroupOtaPackage implements Built<DeviceGroupOtaPackage, Dev
 
   DeviceGroupOtaPackage._();
 
-  factory DeviceGroupOtaPackage([void updates(DeviceGroupOtaPackageBuilder b)]) = _$DeviceGroupOtaPackage;
+  factory DeviceGroupOtaPackage([
+    void updates(DeviceGroupOtaPackageBuilder b),
+  ]) = _$DeviceGroupOtaPackage;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceGroupOtaPackageBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceGroupOtaPackage> get serializer => _$DeviceGroupOtaPackageSerializer();
+  static Serializer<DeviceGroupOtaPackage> get serializer =>
+      _$DeviceGroupOtaPackageSerializer();
 }
 
-class _$DeviceGroupOtaPackageSerializer implements PrimitiveSerializer<DeviceGroupOtaPackage> {
+class _$DeviceGroupOtaPackageSerializer
+    implements PrimitiveSerializer<DeviceGroupOtaPackage> {
   @override
-  final Iterable<Type> types = const [DeviceGroupOtaPackage, _$DeviceGroupOtaPackage];
+  final Iterable<Type> types = const [
+    DeviceGroupOtaPackage,
+    _$DeviceGroupOtaPackage,
+  ];
 
   @override
   final String wireName = r'DeviceGroupOtaPackage';
@@ -108,7 +116,11 @@ class _$DeviceGroupOtaPackageSerializer implements PrimitiveSerializer<DeviceGro
     DeviceGroupOtaPackage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -124,42 +136,52 @@ class _$DeviceGroupOtaPackageSerializer implements PrimitiveSerializer<DeviceGro
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'groupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityGroupId),
-          ) as EntityGroupId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityGroupId),
+                  )
+                  as EntityGroupId?;
           if (valueDes == null) continue;
           result.groupId.replace(valueDes);
           break;
         case r'otaPackageType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OtaPackageType),
-          ) as OtaPackageType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(OtaPackageType),
+                  )
+                  as OtaPackageType?;
           if (valueDes == null) continue;
           result.otaPackageType = valueDes;
           break;
         case r'otaPackageId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(OtaPackageId),
-          ) as OtaPackageId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(OtaPackageId),
+                  )
+                  as OtaPackageId?;
           if (valueDes == null) continue;
           result.otaPackageId.replace(valueDes);
           break;
         case r'otaPackageUpdateTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.otaPackageUpdateTime = valueDes;
           break;
@@ -191,5 +213,3 @@ class _$DeviceGroupOtaPackageSerializer implements PrimitiveSerializer<DeviceGro
     return result.build();
   }
 }
-
-

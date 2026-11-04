@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -17,11 +16,9 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/jwt_pair.dart';
 import 'package:thingsboard_client/src/model/sign_up_request.dart';
 import 'package:thingsboard_client/src/model/sign_up_result.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class SignUpControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -41,7 +38,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> acceptPrivacyPolicy({ 
+  Future<Response<JwtPair>> acceptPrivacyPolicy({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -53,9 +50,7 @@ class SignUpControllerApi {
     final _path = r'/api/signup/acceptPrivacyPolicy';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -63,11 +58,8 @@ class SignUpControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -86,11 +78,13 @@ class SignUpControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -126,7 +120,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> acceptTermsOfUse({ 
+  Future<Response<JwtPair>> acceptTermsOfUse({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -138,9 +132,7 @@ class SignUpControllerApi {
     final _path = r'/api/signup/acceptTermsOfUse';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -148,11 +140,8 @@ class SignUpControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -171,11 +160,13 @@ class SignUpControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -214,7 +205,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> activateEmail({ 
+  Future<Response<String>> activateEmail({
     required String emailCode,
     String? pkgName,
     String? platform,
@@ -229,20 +220,29 @@ class SignUpControllerApi {
     final _path = r'/api/noauth/activateEmail';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      r'emailCode': encodeQueryParameter(_serializers, emailCode, const FullType(String)),
-      if (pkgName != null) r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      if (platform != null) r'platform': encodeQueryParameter(_serializers, platform, const FullType(String)),
+      r'emailCode': encodeQueryParameter(
+        _serializers,
+        emailCode,
+        const FullType(String),
+      ),
+      if (pkgName != null)
+        r'pkgName': encodeQueryParameter(
+          _serializers,
+          pkgName,
+          const FullType(String),
+        ),
+      if (platform != null)
+        r'platform': encodeQueryParameter(
+          _serializers,
+          platform,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -259,7 +259,6 @@ class SignUpControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -298,7 +297,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> activateUserByEmailCode({ 
+  Future<Response<JwtPair>> activateUserByEmailCode({
     required String emailCode,
     String? pkgName,
     String? platform,
@@ -313,20 +312,29 @@ class SignUpControllerApi {
     final _path = r'/api/noauth/activateByEmailCode';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      r'emailCode': encodeQueryParameter(_serializers, emailCode, const FullType(String)),
-      if (pkgName != null) r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      if (platform != null) r'platform': encodeQueryParameter(_serializers, platform, const FullType(String)),
+      r'emailCode': encodeQueryParameter(
+        _serializers,
+        emailCode,
+        const FullType(String),
+      ),
+      if (pkgName != null)
+        r'pkgName': encodeQueryParameter(
+          _serializers,
+          pkgName,
+          const FullType(String),
+        ),
+      if (platform != null)
+        r'platform': encodeQueryParameter(
+          _serializers,
+          platform,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -342,11 +350,13 @@ class SignUpControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -384,7 +394,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> mobileLogin({ 
+  Future<Response<String>> mobileLogin({
     required String pkgName,
     required String platform,
     CancelToken? cancelToken,
@@ -398,19 +408,22 @@ class SignUpControllerApi {
     final _path = r'/api/noauth/login';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      r'platform': encodeQueryParameter(_serializers, platform, const FullType(String)),
+      r'pkgName': encodeQueryParameter(
+        _serializers,
+        pkgName,
+        const FullType(String),
+      ),
+      r'platform': encodeQueryParameter(
+        _serializers,
+        platform,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -427,7 +440,6 @@ class SignUpControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -463,7 +475,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> privacyPolicyAccepted({ 
+  Future<Response<bool>> privacyPolicyAccepted({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -474,9 +486,7 @@ class SignUpControllerApi {
     final _path = r'/api/signup/privacyPolicyAccepted';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -484,11 +494,8 @@ class SignUpControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -508,7 +515,6 @@ class SignUpControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -547,7 +553,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> resendEmailActivation({ 
+  Future<Response<void>> resendEmailActivation({
     required String email,
     String? pkgName,
     String? platform,
@@ -562,20 +568,29 @@ class SignUpControllerApi {
     final _path = r'/api/noauth/resendEmailActivation';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      r'email': encodeQueryParameter(_serializers, email, const FullType(String)),
-      if (pkgName != null) r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      if (platform != null) r'platform': encodeQueryParameter(_serializers, platform, const FullType(String)),
+      r'email': encodeQueryParameter(
+        _serializers,
+        email,
+        const FullType(String),
+      ),
+      if (pkgName != null)
+        r'pkgName': encodeQueryParameter(
+          _serializers,
+          pkgName,
+          const FullType(String),
+        ),
+      if (platform != null)
+        r'platform': encodeQueryParameter(
+          _serializers,
+          platform,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -594,7 +609,7 @@ class SignUpControllerApi {
   /// Process user sign up request. Creates the Customer and corresponding User based on self Registration parameters for the domain. See [Self Registration Controller](/swagger-ui.html#/self-registration-controller) for more details.  The result is either &#39;SUCCESS&#39; or &#39;INACTIVE_USER_EXISTS&#39;. If Success, the user will receive an email with instruction to activate the account. The content of the email is customizable via the mail templates.
   ///
   /// Parameters:
-  /// * [signUpRequest] 
+  /// * [signUpRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -604,7 +619,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SignUpResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SignUpResult>> signUp({ 
+  Future<Response<SignUpResult>> signUp({
     required SignUpRequest signUpRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -613,17 +628,14 @@ class SignUpControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSignUpRequestAndSignUpResult);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerSignUpRequestAndSignUpResult);
     final _path = r'/api/noauth/signup';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
@@ -633,13 +645,9 @@ class SignUpControllerApi {
     try {
       const _type = FullType(SignUpRequest);
       _bodyData = _serializers.serialize(signUpRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -659,11 +667,13 @@ class SignUpControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SignUpResult),
-      ) as SignUpResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SignUpResult),
+                )
+                as SignUpResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -699,7 +709,7 @@ class SignUpControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> termsOfUseAccepted({ 
+  Future<Response<bool>> termsOfUseAccepted({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -710,9 +720,7 @@ class SignUpControllerApi {
     final _path = r'/api/signup/termsOfUseAccepted';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -720,11 +728,8 @@ class SignUpControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -744,7 +749,6 @@ class SignUpControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -766,5 +770,4 @@ class SignUpControllerApi {
       extra: _response.extra,
     );
   }
-
 }

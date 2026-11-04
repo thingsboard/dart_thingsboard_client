@@ -22,7 +22,8 @@ part 'available_entity_keys.g.dart';
 /// * [timeseries] - List of unique time series key names available on the matched entities.
 /// * [attribute] - List of unique attribute key names available on the matched entities.
 @BuiltValue()
-abstract class AvailableEntityKeys implements Built<AvailableEntityKeys, AvailableEntityKeysBuilder> {
+abstract class AvailableEntityKeys
+    implements Built<AvailableEntityKeys, AvailableEntityKeysBuilder> {
   /// Set of entity types found among the matched entities.
   @BuiltValueField(wireName: r'entityTypes')
   BuiltSet<EntityType> get entityTypes;
@@ -37,18 +38,24 @@ abstract class AvailableEntityKeys implements Built<AvailableEntityKeys, Availab
 
   AvailableEntityKeys._();
 
-  factory AvailableEntityKeys([void updates(AvailableEntityKeysBuilder b)]) = _$AvailableEntityKeys;
+  factory AvailableEntityKeys([void updates(AvailableEntityKeysBuilder b)]) =
+      _$AvailableEntityKeys;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AvailableEntityKeysBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AvailableEntityKeys> get serializer => _$AvailableEntityKeysSerializer();
+  static Serializer<AvailableEntityKeys> get serializer =>
+      _$AvailableEntityKeysSerializer();
 }
 
-class _$AvailableEntityKeysSerializer implements PrimitiveSerializer<AvailableEntityKeys> {
+class _$AvailableEntityKeysSerializer
+    implements PrimitiveSerializer<AvailableEntityKeys> {
   @override
-  final Iterable<Type> types = const [AvailableEntityKeys, _$AvailableEntityKeys];
+  final Iterable<Type> types = const [
+    AvailableEntityKeys,
+    _$AvailableEntityKeys,
+  ];
 
   @override
   final String wireName = r'AvailableEntityKeys';
@@ -81,7 +88,11 @@ class _$AvailableEntityKeysSerializer implements PrimitiveSerializer<AvailableEn
     AvailableEntityKeys object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,24 +108,32 @@ class _$AvailableEntityKeysSerializer implements PrimitiveSerializer<AvailableEn
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(EntityType)]),
-          ) as BuiltSet<EntityType>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltSet, [
+                      FullType(EntityType),
+                    ]),
+                  )
+                  as BuiltSet<EntityType>;
           result.entityTypes.replace(valueDes);
           break;
         case r'timeseries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltSet, [FullType(String)]),
+                  )
+                  as BuiltSet<String>;
           result.timeseries.replace(valueDes);
           break;
         case r'attribute':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltSet, [FullType(String)]),
+                  )
+                  as BuiltSet<String>;
           result.attribute.replace(valueDes);
           break;
         default:
@@ -145,5 +164,3 @@ class _$AvailableEntityKeysSerializer implements PrimitiveSerializer<AvailableEn
     return result.build();
   }
 }
-
-

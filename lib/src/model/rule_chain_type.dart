@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'rule_chain_type.g.dart';
 
 class RuleChainType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CORE')
   static const RuleChainType CORE = _$CORE;
   @BuiltValueEnumConst(wireName: r'EDGE')
@@ -25,7 +24,7 @@ class RuleChainType extends EnumClass {
 
   static Serializer<RuleChainType> get serializer => _$ruleChainTypeSerializer;
 
-  const RuleChainType._(String name): super(name);
+  const RuleChainType._(String name) : super(name);
 
   static BuiltSet<RuleChainType> get values => _$values;
   static RuleChainType valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class RuleChainType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class RuleChainTypeMixin = Object with _$RuleChainTypeMixin;
-

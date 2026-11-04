@@ -17,13 +17,13 @@ part 'button.g.dart';
 /// Button
 ///
 /// Properties:
-/// * [enabled] 
-/// * [text] 
-/// * [linkType] 
-/// * [link] 
-/// * [dashboardId] 
-/// * [dashboardState] 
-/// * [setEntityIdInState] 
+/// * [enabled]
+/// * [text]
+/// * [linkType]
+/// * [link]
+/// * [dashboardId]
+/// * [dashboardState]
+/// * [setEntityIdInState]
 @BuiltValue()
 abstract class Button implements Built<Button, ButtonBuilder> {
   @BuiltValueField(wireName: r'enabled')
@@ -128,7 +128,11 @@ class _$ButtonSerializer implements PrimitiveSerializer<Button> {
     Button object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -144,58 +148,72 @@ class _$ButtonSerializer implements PrimitiveSerializer<Button> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'text':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.text = valueDes;
           break;
         case r'linkType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LinkType),
-          ) as LinkType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(LinkType),
+                  )
+                  as LinkType?;
           if (valueDes == null) continue;
           result.linkType = valueDes;
           break;
         case r'link':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.link = valueDes;
           break;
         case r'dashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.dashboardId = valueDes;
           break;
         case r'dashboardState':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.dashboardState = valueDes;
           break;
         case r'setEntityIdInState':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.setEntityIdInState = valueDes;
           break;
@@ -227,5 +245,3 @@ class _$ButtonSerializer implements PrimitiveSerializer<Button> {
     return result.build();
   }
 }
-
-

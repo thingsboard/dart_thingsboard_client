@@ -20,17 +20,20 @@ part 'asset_search_query_filter.g.dart';
 /// AssetSearchQueryFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [rootEntity] 
-/// * [relationType] 
-/// * [direction] 
-/// * [maxLevel] 
-/// * [fetchLastLevelOnly] 
-/// * [rootStateEntity] 
-/// * [defaultStateEntity] 
-/// * [assetTypes] 
+/// * [type]
+/// * [rootEntity]
+/// * [relationType]
+/// * [direction]
+/// * [maxLevel]
+/// * [fetchLastLevelOnly]
+/// * [rootStateEntity]
+/// * [defaultStateEntity]
+/// * [assetTypes]
 @BuiltValue()
-abstract class AssetSearchQueryFilter implements EntityFilter, Built<AssetSearchQueryFilter, AssetSearchQueryFilterBuilder> {
+abstract class AssetSearchQueryFilter
+    implements
+        EntityFilter,
+        Built<AssetSearchQueryFilter, AssetSearchQueryFilterBuilder> {
   @BuiltValueField(wireName: r'relationType')
   String? get relationType;
 
@@ -58,18 +61,25 @@ abstract class AssetSearchQueryFilter implements EntityFilter, Built<AssetSearch
 
   AssetSearchQueryFilter._();
 
-  factory AssetSearchQueryFilter([void updates(AssetSearchQueryFilterBuilder b)]) = _$AssetSearchQueryFilter;
+  factory AssetSearchQueryFilter([
+    void updates(AssetSearchQueryFilterBuilder b),
+  ]) = _$AssetSearchQueryFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AssetSearchQueryFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AssetSearchQueryFilter> get serializer => _$AssetSearchQueryFilterSerializer();
+  static Serializer<AssetSearchQueryFilter> get serializer =>
+      _$AssetSearchQueryFilterSerializer();
 }
 
-class _$AssetSearchQueryFilterSerializer implements PrimitiveSerializer<AssetSearchQueryFilter> {
+class _$AssetSearchQueryFilterSerializer
+    implements PrimitiveSerializer<AssetSearchQueryFilter> {
   @override
-  final Iterable<Type> types = const [AssetSearchQueryFilter, _$AssetSearchQueryFilter];
+  final Iterable<Type> types = const [
+    AssetSearchQueryFilter,
+    _$AssetSearchQueryFilter,
+  ];
 
   @override
   final String wireName = r'AssetSearchQueryFilter';
@@ -148,7 +158,11 @@ class _$AssetSearchQueryFilterSerializer implements PrimitiveSerializer<AssetSea
     AssetSearchQueryFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -164,73 +178,95 @@ class _$AssetSearchQueryFilterSerializer implements PrimitiveSerializer<AssetSea
       final value = serializedList[i + 1];
       switch (key) {
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'maxLevel':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxLevel = valueDes;
           break;
         case r'assetTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.assetTypes.replace(valueDes);
           break;
         case r'fetchLastLevelOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.fetchLastLevelOnly = valueDes;
           break;
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
         case r'rootStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.rootStateEntity = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'rootEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.rootEntity.replace(valueDes);
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntitySearchDirection),
-          ) as EntitySearchDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntitySearchDirection,
+                    ),
+                  )
+                  as EntitySearchDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -262,5 +298,3 @@ class _$AssetSearchQueryFilterSerializer implements PrimitiveSerializer<AssetSea
     return result.build();
   }
 }
-
-

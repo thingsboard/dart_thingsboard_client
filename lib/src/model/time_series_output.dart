@@ -9,7 +9,6 @@
 
 // ignore_for_file: unused_element
 import 'package:thingsboard_client/src/model/output.dart';
-import 'package:thingsboard_client/src/model/time_series_output_strategy.dart';
 import 'package:thingsboard_client/src/model/attribute_scope.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/built_value.dart';
@@ -20,25 +19,29 @@ part 'time_series_output.g.dart';
 /// TimeSeriesOutput
 ///
 /// Properties:
-/// * [decimalsByDefault] 
-/// * [name] 
-/// * [scope] 
-/// * [strategy] 
-/// * [type] 
+/// * [decimalsByDefault]
+/// * [name]
+/// * [scope]
+/// * [strategy]
+/// * [type]
 @BuiltValue()
-abstract class TimeSeriesOutput implements Output, Built<TimeSeriesOutput, TimeSeriesOutputBuilder> {
+abstract class TimeSeriesOutput
+    implements Output, Built<TimeSeriesOutput, TimeSeriesOutputBuilder> {
   TimeSeriesOutput._();
 
-  factory TimeSeriesOutput([void updates(TimeSeriesOutputBuilder b)]) = _$TimeSeriesOutput;
+  factory TimeSeriesOutput([void updates(TimeSeriesOutputBuilder b)]) =
+      _$TimeSeriesOutput;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesOutputBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesOutput> get serializer => _$TimeSeriesOutputSerializer();
+  static Serializer<TimeSeriesOutput> get serializer =>
+      _$TimeSeriesOutputSerializer();
 }
 
-class _$TimeSeriesOutputSerializer implements PrimitiveSerializer<TimeSeriesOutput> {
+class _$TimeSeriesOutputSerializer
+    implements PrimitiveSerializer<TimeSeriesOutput> {
   @override
   final Iterable<Type> types = const [TimeSeriesOutput, _$TimeSeriesOutput];
 
@@ -91,7 +94,11 @@ class _$TimeSeriesOutputSerializer implements PrimitiveSerializer<TimeSeriesOutp
     TimeSeriesOutput object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,41 +114,51 @@ class _$TimeSeriesOutputSerializer implements PrimitiveSerializer<TimeSeriesOutp
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'decimalsByDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.decimalsByDefault = valueDes;
           break;
         case r'strategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.strategy = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AttributeScope),
-          ) as AttributeScope?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AttributeScope),
+                  )
+                  as AttributeScope?;
           if (valueDes == null) continue;
           result.scope = valueDes;
           break;
@@ -173,5 +190,3 @@ class _$TimeSeriesOutputSerializer implements PrimitiveSerializer<TimeSeriesOutp
     return result.build();
   }
 }
-
-

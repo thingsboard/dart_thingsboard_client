@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'vertical_alignment.g.dart';
 
 class VerticalAlignment extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'bottom')
   static const VerticalAlignment bottom = _$bottom;
   @BuiltValueEnumConst(wireName: r'top')
@@ -23,11 +22,13 @@ class VerticalAlignment extends EnumClass {
   @BuiltValueEnumConst(wireName: r'middle')
   static const VerticalAlignment middle = _$middle;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const VerticalAlignment unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const VerticalAlignment unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<VerticalAlignment> get serializer => _$verticalAlignmentSerializer;
+  static Serializer<VerticalAlignment> get serializer =>
+      _$verticalAlignmentSerializer;
 
-  const VerticalAlignment._(String name): super(name);
+  const VerticalAlignment._(String name) : super(name);
 
   static BuiltSet<VerticalAlignment> get values => _$values;
   static VerticalAlignment valueOf(String name) => _$valueOf(name);
@@ -40,4 +41,3 @@ class VerticalAlignment extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class VerticalAlignmentMixin = Object with _$VerticalAlignmentMixin;
-

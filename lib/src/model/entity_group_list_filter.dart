@@ -19,11 +19,14 @@ part 'entity_group_list_filter.g.dart';
 /// EntityGroupListFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [groupType] 
-/// * [entityGroupList] 
+/// * [type]
+/// * [groupType]
+/// * [entityGroupList]
 @BuiltValue()
-abstract class EntityGroupListFilter implements EntityFilter, Built<EntityGroupListFilter, EntityGroupListFilterBuilder> {
+abstract class EntityGroupListFilter
+    implements
+        EntityFilter,
+        Built<EntityGroupListFilter, EntityGroupListFilterBuilder> {
   @BuiltValueField(wireName: r'entityGroupList')
   BuiltList<String>? get entityGroupList;
 
@@ -33,18 +36,25 @@ abstract class EntityGroupListFilter implements EntityFilter, Built<EntityGroupL
 
   EntityGroupListFilter._();
 
-  factory EntityGroupListFilter([void updates(EntityGroupListFilterBuilder b)]) = _$EntityGroupListFilter;
+  factory EntityGroupListFilter([
+    void updates(EntityGroupListFilterBuilder b),
+  ]) = _$EntityGroupListFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityGroupListFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityGroupListFilter> get serializer => _$EntityGroupListFilterSerializer();
+  static Serializer<EntityGroupListFilter> get serializer =>
+      _$EntityGroupListFilterSerializer();
 }
 
-class _$EntityGroupListFilterSerializer implements PrimitiveSerializer<EntityGroupListFilter> {
+class _$EntityGroupListFilterSerializer
+    implements PrimitiveSerializer<EntityGroupListFilter> {
   @override
-  final Iterable<Type> types = const [EntityGroupListFilter, _$EntityGroupListFilter];
+  final Iterable<Type> types = const [
+    EntityGroupListFilter,
+    _$EntityGroupListFilter,
+  ];
 
   @override
   final String wireName = r'EntityGroupListFilter';
@@ -81,7 +91,11 @@ class _$EntityGroupListFilterSerializer implements PrimitiveSerializer<EntityGro
     EntityGroupListFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,25 +111,33 @@ class _$EntityGroupListFilterSerializer implements PrimitiveSerializer<EntityGro
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityGroupList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.entityGroupList.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'groupType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityType),
-          ) as EntityType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityType),
+                  )
+                  as EntityType?;
           if (valueDes == null) continue;
           result.groupType = valueDes;
           break;
@@ -147,5 +169,3 @@ class _$EntityGroupListFilterSerializer implements PrimitiveSerializer<EntityGro
     return result.build();
   }
 }
-
-

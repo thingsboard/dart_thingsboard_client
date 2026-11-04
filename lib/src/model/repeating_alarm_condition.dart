@@ -20,29 +20,39 @@ part 'repeating_alarm_condition.g.dart';
 /// RepeatingAlarmCondition
 ///
 /// Properties:
-/// * [expression] 
-/// * [schedule] 
-/// * [type] 
-/// * [count] 
+/// * [expression]
+/// * [schedule]
+/// * [type]
+/// * [count]
 @BuiltValue()
-abstract class RepeatingAlarmCondition implements AlarmCondition, Built<RepeatingAlarmCondition, RepeatingAlarmConditionBuilder> {
+abstract class RepeatingAlarmCondition
+    implements
+        AlarmCondition,
+        Built<RepeatingAlarmCondition, RepeatingAlarmConditionBuilder> {
   @BuiltValueField(wireName: r'count')
   AlarmConditionValueInteger get count;
 
   RepeatingAlarmCondition._();
 
-  factory RepeatingAlarmCondition([void updates(RepeatingAlarmConditionBuilder b)]) = _$RepeatingAlarmCondition;
+  factory RepeatingAlarmCondition([
+    void updates(RepeatingAlarmConditionBuilder b),
+  ]) = _$RepeatingAlarmCondition;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RepeatingAlarmConditionBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RepeatingAlarmCondition> get serializer => _$RepeatingAlarmConditionSerializer();
+  static Serializer<RepeatingAlarmCondition> get serializer =>
+      _$RepeatingAlarmConditionSerializer();
 }
 
-class _$RepeatingAlarmConditionSerializer implements PrimitiveSerializer<RepeatingAlarmCondition> {
+class _$RepeatingAlarmConditionSerializer
+    implements PrimitiveSerializer<RepeatingAlarmCondition> {
   @override
-  final Iterable<Type> types = const [RepeatingAlarmCondition, _$RepeatingAlarmCondition];
+  final Iterable<Type> types = const [
+    RepeatingAlarmCondition,
+    _$RepeatingAlarmCondition,
+  ];
 
   @override
   final String wireName = r'RepeatingAlarmCondition';
@@ -82,7 +92,11 @@ class _$RepeatingAlarmConditionSerializer implements PrimitiveSerializer<Repeati
     RepeatingAlarmCondition object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,32 +112,42 @@ class _$RepeatingAlarmConditionSerializer implements PrimitiveSerializer<Repeati
       final value = serializedList[i + 1];
       switch (key) {
         case r'count':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionValueInteger),
-          ) as AlarmConditionValueInteger;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionValueInteger),
+                  )
+                  as AlarmConditionValueInteger;
           result.count.replace(valueDes);
           break;
         case r'schedule':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmConditionValueAlarmSchedule),
-          ) as AlarmConditionValueAlarmSchedule?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmConditionValueAlarmSchedule,
+                    ),
+                  )
+                  as AlarmConditionValueAlarmSchedule?;
           if (valueDes == null) continue;
           result.schedule.replace(valueDes);
           break;
         case r'expression':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionExpression),
-          ) as AlarmConditionExpression;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionExpression),
+                  )
+                  as AlarmConditionExpression;
           result.expression = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -154,5 +178,3 @@ class _$RepeatingAlarmConditionSerializer implements PrimitiveSerializer<Repeati
     return result.build();
   }
 }
-
-

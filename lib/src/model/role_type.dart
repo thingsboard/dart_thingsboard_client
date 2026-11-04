@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'role_type.g.dart';
 
 class RoleType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'GENERIC')
   static const RoleType GENERIC = _$GENERIC;
   @BuiltValueEnumConst(wireName: r'GROUP')
@@ -25,7 +24,7 @@ class RoleType extends EnumClass {
 
   static Serializer<RoleType> get serializer => _$roleTypeSerializer;
 
-  const RoleType._(String name): super(name);
+  const RoleType._(String name) : super(name);
 
   static BuiltSet<RoleType> get values => _$values;
   static RoleType valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class RoleType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class RoleTypeMixin = Object with _$RoleTypeMixin;
-

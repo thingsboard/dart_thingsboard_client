@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'entity_search_direction.g.dart';
 
 class EntitySearchDirection extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'FROM')
   static const EntitySearchDirection FROM = _$FROM;
   @BuiltValueEnumConst(wireName: r'TO')
   static const EntitySearchDirection TO = _$TO;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const EntitySearchDirection unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const EntitySearchDirection unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<EntitySearchDirection> get serializer => _$entitySearchDirectionSerializer;
+  static Serializer<EntitySearchDirection> get serializer =>
+      _$entitySearchDirectionSerializer;
 
-  const EntitySearchDirection._(String name): super(name);
+  const EntitySearchDirection._(String name) : super(name);
 
   static BuiltSet<EntitySearchDirection> get values => _$values;
   static EntitySearchDirection valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class EntitySearchDirection extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class EntitySearchDirectionMixin = Object with _$EntitySearchDirectionMixin;
-
+abstract class EntitySearchDirectionMixin = Object
+    with _$EntitySearchDirectionMixin;

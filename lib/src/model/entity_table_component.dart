@@ -24,20 +24,23 @@ part 'entity_table_component.g.dart';
 /// EntityTableComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [dataSources] 
-/// * [margins] 
-/// * [paddings] 
-/// * [background] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [borderColor] 
-/// * [showTableHeading] 
-/// * [tableHeading] 
-/// * [tableSortOrder] 
+/// * [subType]
+/// * [type]
+/// * [dataSources]
+/// * [margins]
+/// * [paddings]
+/// * [background]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [borderColor]
+/// * [showTableHeading]
+/// * [tableHeading]
+/// * [tableSortOrder]
 @BuiltValue()
-abstract class EntityTableComponent implements ReportComponent, Built<EntityTableComponent, EntityTableComponentBuilder> {
+abstract class EntityTableComponent
+    implements
+        ReportComponent,
+        Built<EntityTableComponent, EntityTableComponentBuilder> {
   @BuiltValueField(wireName: r'showTableHeading')
   bool? get showTableHeading;
 
@@ -70,18 +73,24 @@ abstract class EntityTableComponent implements ReportComponent, Built<EntityTabl
 
   EntityTableComponent._();
 
-  factory EntityTableComponent([void updates(EntityTableComponentBuilder b)]) = _$EntityTableComponent;
+  factory EntityTableComponent([void updates(EntityTableComponentBuilder b)]) =
+      _$EntityTableComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntityTableComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityTableComponent> get serializer => _$EntityTableComponentSerializer();
+  static Serializer<EntityTableComponent> get serializer =>
+      _$EntityTableComponentSerializer();
 }
 
-class _$EntityTableComponentSerializer implements PrimitiveSerializer<EntityTableComponent> {
+class _$EntityTableComponentSerializer
+    implements PrimitiveSerializer<EntityTableComponent> {
   @override
-  final Iterable<Type> types = const [EntityTableComponent, _$EntityTableComponent];
+  final Iterable<Type> types = const [
+    EntityTableComponent,
+    _$EntityTableComponent,
+  ];
 
   @override
   final String wireName = r'EntityTableComponent';
@@ -179,7 +188,11 @@ class _$EntityTableComponentSerializer implements PrimitiveSerializer<EntityTabl
     EntityTableComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -195,96 +208,122 @@ class _$EntityTableComponentSerializer implements PrimitiveSerializer<EntityTabl
       final value = serializedList[i + 1];
       switch (key) {
         case r'showTableHeading':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTableHeading = valueDes;
           break;
         case r'margins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.margins.replace(valueDes);
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'paddings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.paddings.replace(valueDes);
           break;
         case r'background':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.background = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'tableSortOrder':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TableSortOrder),
-          ) as TableSortOrder?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TableSortOrder),
+                  )
+                  as TableSortOrder?;
           if (valueDes == null) continue;
           result.tableSortOrder.replace(valueDes);
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'dataSources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(DataSource)]),
-          ) as BuiltList<DataSource>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(DataSource),
+                    ]),
+                  )
+                  as BuiltList<DataSource>?;
           if (valueDes == null) continue;
           result.dataSources.replace(valueDes);
           break;
         case r'tableHeading':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Heading),
-          ) as Heading?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Heading),
+                  )
+                  as Heading?;
           if (valueDes == null) continue;
           result.tableHeading.replace(valueDes);
           break;
@@ -316,5 +355,3 @@ class _$EntityTableComponentSerializer implements PrimitiveSerializer<EntityTabl
     return result.build();
   }
 }
-
-

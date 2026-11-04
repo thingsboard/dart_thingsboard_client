@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -26,11 +25,9 @@ import 'package:thingsboard_client/src/model/page_data_agent.dart';
 import 'package:thingsboard_client/src/model/page_data_agent_app_event.dart';
 import 'package:thingsboard_client/src/model/page_data_agent_app_event_info.dart';
 import 'package:thingsboard_client/src/model/page_data_agent_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AgentControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -51,7 +48,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteAgent({ 
+  Future<Response<void>> deleteAgent({
     required String agentId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -61,12 +58,19 @@ class AgentControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/agent/{agentId}'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _path = r'/api/agent/{agentId}'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -74,11 +78,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -117,7 +118,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAgentAppEventInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAgentAppEventInfo>> getAgentAppEventInfosByAgentId({ 
+  Future<Response<PageDataAgentAppEventInfo>> getAgentAppEventInfosByAgentId({
     required String agentId,
     required int pageSize,
     required int page,
@@ -133,13 +134,21 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAgentAppEventInfo);
-    final _path = r'/api/agent/{agentId}/eventInfos'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAgentAppEventInfo);
+    final _path = r'/api/agent/{agentId}/eventInfos'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -147,11 +156,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -159,13 +165,42 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (actionType != null) r'actionType': encodeQueryParameter(_serializers, actionType, const FullType(AgentAppEventActionType)),
-      if (processingStatus != null) r'processingStatus': encodeQueryParameter(_serializers, processingStatus, const FullType(AgentProcessingStatus)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (actionType != null)
+        r'actionType': encodeQueryParameter(
+          _serializers,
+          actionType,
+          const FullType(AgentAppEventActionType),
+        ),
+      if (processingStatus != null)
+        r'processingStatus': encodeQueryParameter(
+          _serializers,
+          processingStatus,
+          const FullType(AgentProcessingStatus),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -181,11 +216,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAgentAppEventInfo),
-      ) as PageDataAgentAppEventInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAgentAppEventInfo),
+                )
+                as PageDataAgentAppEventInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -227,7 +264,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAgentAppEvent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAgentAppEvent>> getAgentAppEventsByAgentId({ 
+  Future<Response<PageDataAgentAppEvent>> getAgentAppEventsByAgentId({
     required String agentId,
     required int pageSize,
     required int page,
@@ -241,13 +278,21 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAgentAppEvent);
-    final _path = r'/api/agent/{agentId}/events'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAgentAppEvent);
+    final _path = r'/api/agent/{agentId}/events'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -255,11 +300,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -267,11 +309,30 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -287,11 +348,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAgentAppEvent),
-      ) as PageDataAgentAppEvent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAgentAppEvent),
+                )
+                as PageDataAgentAppEvent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -328,7 +391,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Agent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Agent>> getAgentById({ 
+  Future<Response<Agent>> getAgentById({
     required String agentId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -338,12 +401,19 @@ class AgentControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerAgent);
-    final _path = r'/api/agent/{agentId}'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _path = r'/api/agent/{agentId}'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -351,11 +421,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -374,11 +441,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Agent),
-      ) as Agent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Agent),
+                )
+                as Agent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -415,7 +484,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AgentInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AgentInfo>> getAgentInfoById({ 
+  Future<Response<AgentInfo>> getAgentInfoById({
     required String agentId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -425,12 +494,19 @@ class AgentControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerAgentInfo);
-    final _path = r'/api/agent/info/{agentId}'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _path = r'/api/agent/info/{agentId}'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -438,11 +514,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -461,11 +534,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AgentInfo),
-      ) as AgentInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AgentInfo),
+                )
+                as AgentInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -502,7 +577,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<AgentInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<AgentInfo>>> getAgentInfosByIds({ 
+  Future<Response<BuiltList<AgentInfo>>> getAgentInfosByIds({
     required BuiltList<String> agentIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -511,13 +586,13 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfAgentInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfAgentInfoAndListOfString);
     final _path = r'/api/agentInfos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -525,11 +600,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -537,7 +609,12 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'agentIds': encodeCollectionQueryParameter<String>(_serializers, agentIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'agentIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        agentIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -553,11 +630,15 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(AgentInfo)]),
-      ) as BuiltList<AgentInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(AgentInfo),
+                  ]),
+                )
+                as BuiltList<AgentInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -595,7 +676,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AgentInstructions] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AgentInstructions>> getAgentInstallInstructions({ 
+  Future<Response<AgentInstructions>> getAgentInstallInstructions({
     required String agentId,
     required String method,
     CancelToken? cancelToken,
@@ -605,13 +686,32 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAgentInstructions);
-    final _path = r'/api/agent/instructions/install/{agentId}/{method}'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString()).replaceAll('{' r'method' '}', encodeQueryParameter(_serializers, method, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAgentInstructions);
+    final _path = r'/api/agent/instructions/install/{agentId}/{method}'
+        .replaceAll(
+          '{'
+          r'agentId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            agentId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'method'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            method,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -619,11 +719,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -642,11 +739,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AgentInstructions),
-      ) as AgentInstructions;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AgentInstructions),
+                )
+                as AgentInstructions;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -683,7 +782,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getAgentUpgradeTarget({ 
+  Future<Response<String>> getAgentUpgradeTarget({
     required String agentId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -693,12 +792,19 @@ class AgentControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/agent/{agentId}/upgrade/target'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _path = r'/api/agent/{agentId}/upgrade/target'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -706,11 +812,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -730,7 +833,6 @@ class AgentControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -772,7 +874,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAgentInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAgentInfo>> getCustomerAgentInfos({ 
+  Future<Response<PageDataAgentInfo>> getCustomerAgentInfos({
     required String customerId,
     required int pageSize,
     required int page,
@@ -786,13 +888,21 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAgentInfo);
-    final _path = r'/api/customer/{customerId}/agentInfos'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAgentInfo);
+    final _path = r'/api/customer/{customerId}/agentInfos'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -800,11 +910,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -812,11 +919,30 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -832,11 +958,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAgentInfo),
-      ) as PageDataAgentInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAgentInfo),
+                )
+                as PageDataAgentInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -878,7 +1006,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAgent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAgent>> getCustomerAgents({ 
+  Future<Response<PageDataAgent>> getCustomerAgents({
     required String customerId,
     required int pageSize,
     required int page,
@@ -892,13 +1020,21 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAgent);
-    final _path = r'/api/customer/{customerId}/agents'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAgent);
+    final _path = r'/api/customer/{customerId}/agents'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -906,11 +1042,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -918,11 +1051,30 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -938,11 +1090,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAgent),
-      ) as PageDataAgent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAgent),
+                )
+                as PageDataAgent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -978,7 +1132,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getLatestAgentImageRef({ 
+  Future<Response<String>> getLatestAgentImageRef({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -989,9 +1143,7 @@ class AgentControllerApi {
     final _path = r'/api/agent/upgrade/latest';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -999,11 +1151,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1023,7 +1172,6 @@ class AgentControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1064,7 +1212,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAgentInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAgentInfo>> getTenantAgentInfos({ 
+  Future<Response<PageDataAgentInfo>> getTenantAgentInfos({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -1077,13 +1225,12 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAgentInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAgentInfo);
     final _path = r'/api/tenant/agentInfos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1091,11 +1238,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1103,11 +1247,30 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1123,11 +1286,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAgentInfo),
-      ) as PageDataAgentInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAgentInfo),
+                )
+                as PageDataAgentInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1168,7 +1333,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAgent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAgent>> getTenantAgents({ 
+  Future<Response<PageDataAgent>> getTenantAgents({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -1181,13 +1346,12 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAgent);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAgent);
     final _path = r'/api/tenant/agents';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1195,11 +1359,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1207,11 +1368,30 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1227,11 +1407,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAgent),
-      ) as PageDataAgent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAgent),
+                )
+                as PageDataAgent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1268,7 +1450,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> isAgentUpgradeAvailable({ 
+  Future<Response<bool>> isAgentUpgradeAvailable({
     required String agentId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1278,12 +1460,19 @@ class AgentControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/agent/{agentId}/upgrade/available'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _path = r'/api/agent/{agentId}/upgrade/available'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1291,11 +1480,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1315,7 +1501,6 @@ class AgentControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1343,7 +1528,7 @@ class AgentControllerApi {
   ///
   /// Parameters:
   /// * [agent] - A JSON value representing the agent.
-  /// * [entityGroupId] 
+  /// * [entityGroupId]
   /// * [entityGroupIds] - A list of entity group ids, separated by comma ','
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -1354,7 +1539,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Agent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Agent>> saveAgent({ 
+  Future<Response<Agent>> saveAgent({
     required Agent agent,
     String? entityGroupId,
     BuiltList<String>? entityGroupIds,
@@ -1365,13 +1550,12 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndAgent);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfStringAndAgent);
     final _path = r'/api/agent';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1379,11 +1563,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1392,8 +1573,19 @@ class AgentControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (entityGroupId != null) r'entityGroupId': encodeQueryParameter(_serializers, entityGroupId, const FullType(String)),
-      if (entityGroupIds != null) r'entityGroupIds': encodeCollectionQueryParameter<String>(_serializers, entityGroupIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (entityGroupId != null)
+        r'entityGroupId': encodeQueryParameter(
+          _serializers,
+          entityGroupId,
+          const FullType(String),
+        ),
+      if (entityGroupIds != null)
+        r'entityGroupIds': encodeCollectionQueryParameter<String>(
+          _serializers,
+          entityGroupIds,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     dynamic _bodyData;
@@ -1401,10 +1593,9 @@ class AgentControllerApi {
     try {
       const _type = FullType(Agent);
       _bodyData = _serializers.serialize(agent, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -1429,11 +1620,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Agent),
-      ) as Agent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Agent),
+                )
+                as Agent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1461,7 +1654,7 @@ class AgentControllerApi {
   ///
   /// Parameters:
   /// * [agentId] - A string value representing the agent id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-  /// * [agentUpgradeRequest] 
+  /// * [agentUpgradeRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1471,7 +1664,7 @@ class AgentControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AgentAppEvent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AgentAppEvent>> upgradeAgent({ 
+  Future<Response<AgentAppEvent>> upgradeAgent({
     required String agentId,
     required AgentUpgradeRequest agentUpgradeRequest,
     CancelToken? cancelToken,
@@ -1481,13 +1674,22 @@ class AgentControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAgentAppEventAndAgentUpgradeRequest);
-    final _path = r'/api/agent/{agentId}/upgrade'.replaceAll('{' r'agentId' '}', encodeQueryParameter(_serializers, agentId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerAgentAppEventAndAgentUpgradeRequest);
+    final _path = r'/api/agent/{agentId}/upgrade'.replaceAll(
+      '{'
+      r'agentId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        agentId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1495,11 +1697,8 @@ class AgentControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1511,14 +1710,13 @@ class AgentControllerApi {
 
     try {
       const _type = FullType(AgentUpgradeRequest);
-      _bodyData = _serializers.serialize(agentUpgradeRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        agentUpgradeRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1538,11 +1736,13 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AgentAppEvent),
-      ) as AgentAppEvent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AgentAppEvent),
+                )
+                as AgentAppEvent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1564,5 +1764,4 @@ class AgentControllerApi {
       extra: _response.extra,
     );
   }
-
 }

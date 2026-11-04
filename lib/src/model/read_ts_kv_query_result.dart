@@ -18,11 +18,12 @@ part 'read_ts_kv_query_result.g.dart';
 /// ReadTsKvQueryResult
 ///
 /// Properties:
-/// * [queryId] 
-/// * [data] 
-/// * [lastEntryTs] 
+/// * [queryId]
+/// * [data]
+/// * [lastEntryTs]
 @BuiltValue()
-abstract class ReadTsKvQueryResult implements Built<ReadTsKvQueryResult, ReadTsKvQueryResultBuilder> {
+abstract class ReadTsKvQueryResult
+    implements Built<ReadTsKvQueryResult, ReadTsKvQueryResultBuilder> {
   @BuiltValueField(wireName: r'queryId')
   int? get queryId;
 
@@ -34,18 +35,24 @@ abstract class ReadTsKvQueryResult implements Built<ReadTsKvQueryResult, ReadTsK
 
   ReadTsKvQueryResult._();
 
-  factory ReadTsKvQueryResult([void updates(ReadTsKvQueryResultBuilder b)]) = _$ReadTsKvQueryResult;
+  factory ReadTsKvQueryResult([void updates(ReadTsKvQueryResultBuilder b)]) =
+      _$ReadTsKvQueryResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ReadTsKvQueryResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReadTsKvQueryResult> get serializer => _$ReadTsKvQueryResultSerializer();
+  static Serializer<ReadTsKvQueryResult> get serializer =>
+      _$ReadTsKvQueryResultSerializer();
 }
 
-class _$ReadTsKvQueryResultSerializer implements PrimitiveSerializer<ReadTsKvQueryResult> {
+class _$ReadTsKvQueryResultSerializer
+    implements PrimitiveSerializer<ReadTsKvQueryResult> {
   @override
-  final Iterable<Type> types = const [ReadTsKvQueryResult, _$ReadTsKvQueryResult];
+  final Iterable<Type> types = const [
+    ReadTsKvQueryResult,
+    _$ReadTsKvQueryResult,
+  ];
 
   @override
   final String wireName = r'ReadTsKvQueryResult';
@@ -84,7 +91,11 @@ class _$ReadTsKvQueryResultSerializer implements PrimitiveSerializer<ReadTsKvQue
     ReadTsKvQueryResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -100,26 +111,34 @@ class _$ReadTsKvQueryResultSerializer implements PrimitiveSerializer<ReadTsKvQue
       final value = serializedList[i + 1];
       switch (key) {
         case r'queryId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.queryId = valueDes;
           break;
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TsKvEntry)]),
-          ) as BuiltList<TsKvEntry>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TsKvEntry),
+                    ]),
+                  )
+                  as BuiltList<TsKvEntry>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'lastEntryTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.lastEntryTs = valueDes;
           break;
@@ -151,5 +170,3 @@ class _$ReadTsKvQueryResultSerializer implements PrimitiveSerializer<ReadTsKvQue
     return result.build();
   }
 }
-
-

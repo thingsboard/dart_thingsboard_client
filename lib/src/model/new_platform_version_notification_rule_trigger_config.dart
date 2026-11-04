@@ -18,23 +18,40 @@ part 'new_platform_version_notification_rule_trigger_config.g.dart';
 /// NewPlatformVersionNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
+/// * [triggerType]
 @BuiltValue()
-abstract class NewPlatformVersionNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<NewPlatformVersionNotificationRuleTriggerConfig, NewPlatformVersionNotificationRuleTriggerConfigBuilder> {
+abstract class NewPlatformVersionNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          NewPlatformVersionNotificationRuleTriggerConfig,
+          NewPlatformVersionNotificationRuleTriggerConfigBuilder
+        > {
   NewPlatformVersionNotificationRuleTriggerConfig._();
 
-  factory NewPlatformVersionNotificationRuleTriggerConfig([void updates(NewPlatformVersionNotificationRuleTriggerConfigBuilder b)]) = _$NewPlatformVersionNotificationRuleTriggerConfig;
+  factory NewPlatformVersionNotificationRuleTriggerConfig([
+    void updates(NewPlatformVersionNotificationRuleTriggerConfigBuilder b),
+  ]) = _$NewPlatformVersionNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(NewPlatformVersionNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(
+    NewPlatformVersionNotificationRuleTriggerConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NewPlatformVersionNotificationRuleTriggerConfig> get serializer => _$NewPlatformVersionNotificationRuleTriggerConfigSerializer();
+  static Serializer<NewPlatformVersionNotificationRuleTriggerConfig>
+  get serializer =>
+      _$NewPlatformVersionNotificationRuleTriggerConfigSerializer();
 }
 
-class _$NewPlatformVersionNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<NewPlatformVersionNotificationRuleTriggerConfig> {
+class _$NewPlatformVersionNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<NewPlatformVersionNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [NewPlatformVersionNotificationRuleTriggerConfig, _$NewPlatformVersionNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    NewPlatformVersionNotificationRuleTriggerConfig,
+    _$NewPlatformVersionNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'NewPlatformVersionNotificationRuleTriggerConfig';
@@ -57,7 +74,11 @@ class _$NewPlatformVersionNotificationRuleTriggerConfigSerializer implements Pri
     NewPlatformVersionNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -73,10 +94,12 @@ class _$NewPlatformVersionNotificationRuleTriggerConfigSerializer implements Pri
       final value = serializedList[i + 1];
       switch (key) {
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         default:
@@ -107,5 +130,3 @@ class _$NewPlatformVersionNotificationRuleTriggerConfigSerializer implements Pri
     return result.build();
   }
 }
-
-

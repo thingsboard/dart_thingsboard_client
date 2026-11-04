@@ -96,7 +96,6 @@ import 'package:thingsboard_client/src/api/white_labeling_controller_api.dart';
 import 'package:thingsboard_client/src/api/widget_type_controller_api.dart';
 import 'package:thingsboard_client/src/api/widgets_bundle_controller_api.dart';
 import 'thingsboard_client_base.dart';
-import 'storage/tb_storage.dart';
 
 class ThingsboardClient extends ThingsboardClientBase {
   AdminControllerApi? _adminControllerApi;
@@ -192,30 +191,18 @@ class ThingsboardClient extends ThingsboardClientBase {
   WidgetTypeControllerApi? _widgetTypeControllerApi;
   WidgetsBundleControllerApi? _widgetsBundleControllerApi;
   ThingsboardClient(
-    String apiEndpoint, {
-    TbStorage? storage,
-    String? apiKey,
-    UserLoadedCallback? onUserLoaded,
-    MfaAuthCallback? onMfaAuth,
-    MfaAuthCallback? onMfaForce,
-    ErrorCallback? onError,
-    LoadStartedCallback? onLoadStarted,
-    LoadFinishedCallback? onLoadFinished,
-    TbCompute? computeFunc,
-    bool debugMode = false,
-  }) : super.create(
-          apiEndpoint,
-          storage: storage,
-          apiKey: apiKey,
-          onUserLoaded: onUserLoaded,
-          onMfaAuth: onMfaAuth,
-          onMfaForce: onMfaForce,
-          onError: onError,
-          onLoadStarted: onLoadStarted,
-          onLoadFinished: onLoadFinished,
-          computeFunc: computeFunc,
-          debugMode: debugMode,
-        );
+    super.apiEndpoint, {
+    super.storage,
+    super.apiKey,
+    super.onUserLoaded,
+    super.onMfaAuth,
+    super.onMfaForce,
+    super.onError,
+    super.onLoadStarted,
+    super.onLoadFinished,
+    super.computeFunc,
+    super.debugMode,
+  }) : super.create();
 
   AdminControllerApi getAdminControllerApi() {
     _adminControllerApi ??= AdminControllerApi(dio);
@@ -378,7 +365,9 @@ class ThingsboardClient extends ThingsboardClientBase {
   }
 
   DeviceGroupOtaPackageControllerApi getDeviceGroupOtaPackageControllerApi() {
-    _deviceGroupOtaPackageControllerApi ??= DeviceGroupOtaPackageControllerApi(dio);
+    _deviceGroupOtaPackageControllerApi ??= DeviceGroupOtaPackageControllerApi(
+      dio,
+    );
     return _deviceGroupOtaPackageControllerApi!;
   }
 
@@ -403,7 +392,8 @@ class ThingsboardClient extends ThingsboardClientBase {
   }
 
   EntitiesVersionControlControllerApi getEntitiesVersionControlControllerApi() {
-    _entitiesVersionControlControllerApi ??= EntitiesVersionControlControllerApi(dio);
+    _entitiesVersionControlControllerApi ??=
+        EntitiesVersionControlControllerApi(dio);
     return _entitiesVersionControlControllerApi!;
   }
 
@@ -493,12 +483,16 @@ class ThingsboardClient extends ThingsboardClientBase {
   }
 
   NotificationTemplateControllerApi getNotificationTemplateControllerApi() {
-    _notificationTemplateControllerApi ??= NotificationTemplateControllerApi(dio);
+    _notificationTemplateControllerApi ??= NotificationTemplateControllerApi(
+      dio,
+    );
     return _notificationTemplateControllerApi!;
   }
 
   OAuth2ConfigTemplateControllerApi getOAuth2ConfigTemplateControllerApi() {
-    _oAuth2ConfigTemplateControllerApi ??= OAuth2ConfigTemplateControllerApi(dio);
+    _oAuth2ConfigTemplateControllerApi ??= OAuth2ConfigTemplateControllerApi(
+      dio,
+    );
     return _oAuth2ConfigTemplateControllerApi!;
   }
 
@@ -588,7 +582,9 @@ class ThingsboardClient extends ThingsboardClientBase {
   }
 
   SolutionExportImportControllerApi getSolutionExportImportControllerApi() {
-    _solutionExportImportControllerApi ??= SolutionExportImportControllerApi(dio);
+    _solutionExportImportControllerApi ??= SolutionExportImportControllerApi(
+      dio,
+    );
     return _solutionExportImportControllerApi!;
   }
 
@@ -675,4 +671,5 @@ class ThingsboardClient extends ThingsboardClientBase {
   WidgetsBundleControllerApi getWidgetsBundleControllerApi() {
     _widgetsBundleControllerApi ??= WidgetsBundleControllerApi(dio);
     return _widgetsBundleControllerApi!;
-  }}
+  }
+}

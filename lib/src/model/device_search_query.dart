@@ -22,7 +22,8 @@ part 'device_search_query.g.dart';
 /// * [relationType] - Type of the relation between root entity and device (e.g. 'Contains' or 'Manages').
 /// * [deviceTypes] - Array of device types to filter the related entities (e.g. 'Temperature Sensor', 'Smoke Sensor').
 @BuiltValue()
-abstract class DeviceSearchQuery implements Built<DeviceSearchQuery, DeviceSearchQueryBuilder> {
+abstract class DeviceSearchQuery
+    implements Built<DeviceSearchQuery, DeviceSearchQueryBuilder> {
   /// Main search parameters.
   @BuiltValueField(wireName: r'parameters')
   RelationsSearchParameters? get parameters;
@@ -37,16 +38,19 @@ abstract class DeviceSearchQuery implements Built<DeviceSearchQuery, DeviceSearc
 
   DeviceSearchQuery._();
 
-  factory DeviceSearchQuery([void updates(DeviceSearchQueryBuilder b)]) = _$DeviceSearchQuery;
+  factory DeviceSearchQuery([void updates(DeviceSearchQueryBuilder b)]) =
+      _$DeviceSearchQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceSearchQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceSearchQuery> get serializer => _$DeviceSearchQuerySerializer();
+  static Serializer<DeviceSearchQuery> get serializer =>
+      _$DeviceSearchQuerySerializer();
 }
 
-class _$DeviceSearchQuerySerializer implements PrimitiveSerializer<DeviceSearchQuery> {
+class _$DeviceSearchQuerySerializer
+    implements PrimitiveSerializer<DeviceSearchQuery> {
   @override
   final Iterable<Type> types = const [DeviceSearchQuery, _$DeviceSearchQuery];
 
@@ -87,7 +91,11 @@ class _$DeviceSearchQuerySerializer implements PrimitiveSerializer<DeviceSearchQ
     DeviceSearchQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,26 +111,36 @@ class _$DeviceSearchQuerySerializer implements PrimitiveSerializer<DeviceSearchQ
       final value = serializedList[i + 1];
       switch (key) {
         case r'parameters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RelationsSearchParameters),
-          ) as RelationsSearchParameters?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RelationsSearchParameters,
+                    ),
+                  )
+                  as RelationsSearchParameters?;
           if (valueDes == null) continue;
           result.parameters.replace(valueDes);
           break;
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'deviceTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.deviceTypes.replace(valueDes);
           break;
@@ -154,5 +172,3 @@ class _$DeviceSearchQuerySerializer implements PrimitiveSerializer<DeviceSearchQ
     return result.build();
   }
 }
-
-

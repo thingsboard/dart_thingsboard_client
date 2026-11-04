@@ -23,27 +23,36 @@ part 'converter_export_data.g.dart';
 /// ConverterExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class ConverterExportData implements EntityExportData, Built<ConverterExportData, ConverterExportDataBuilder> {
+abstract class ConverterExportData
+    implements
+        EntityExportData,
+        Built<ConverterExportData, ConverterExportDataBuilder> {
   ConverterExportData._();
 
-  factory ConverterExportData([void updates(ConverterExportDataBuilder b)]) = _$ConverterExportData;
+  factory ConverterExportData([void updates(ConverterExportDataBuilder b)]) =
+      _$ConverterExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ConverterExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ConverterExportData> get serializer => _$ConverterExportDataSerializer();
+  static Serializer<ConverterExportData> get serializer =>
+      _$ConverterExportDataSerializer();
 }
 
-class _$ConverterExportDataSerializer implements PrimitiveSerializer<ConverterExportData> {
+class _$ConverterExportDataSerializer
+    implements PrimitiveSerializer<ConverterExportData> {
   @override
-  final Iterable<Type> types = const [ConverterExportData, _$ConverterExportData];
+  final Iterable<Type> types = const [
+    ConverterExportData,
+    _$ConverterExportData,
+  ];
 
   @override
   final String wireName = r'ConverterExportData';
@@ -57,7 +66,10 @@ class _$ConverterExportDataSerializer implements PrimitiveSerializer<ConverterEx
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +106,11 @@ class _$ConverterExportDataSerializer implements PrimitiveSerializer<ConverterEx
     ConverterExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +126,58 @@ class _$ConverterExportDataSerializer implements PrimitiveSerializer<ConverterEx
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +209,3 @@ class _$ConverterExportDataSerializer implements PrimitiveSerializer<ConverterEx
     return result.build();
   }
 }
-
-

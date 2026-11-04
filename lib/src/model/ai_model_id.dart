@@ -18,10 +18,11 @@ part 'ai_model_id.g.dart';
 /// AiModelId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class AiModelId implements EntityId, Built<AiModelId, AiModelIdBuilder> {
+abstract class AiModelId
+    implements EntityId, Built<AiModelId, AiModelIdBuilder> {
   AiModelId._();
 
   factory AiModelId([void updates(AiModelIdBuilder b)]) = _$AiModelId;
@@ -63,7 +64,11 @@ class _$AiModelIdSerializer implements PrimitiveSerializer<AiModelId> {
     AiModelId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +84,21 @@ class _$AiModelIdSerializer implements PrimitiveSerializer<AiModelId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +129,3 @@ class _$AiModelIdSerializer implements PrimitiveSerializer<AiModelId> {
     return result.build();
   }
 }
-
-

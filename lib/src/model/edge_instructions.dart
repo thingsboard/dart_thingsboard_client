@@ -18,23 +18,27 @@ part 'edge_instructions.g.dart';
 /// Properties:
 /// * [instructions] - Markdown with install/upgrade instructions
 @BuiltValue()
-abstract class EdgeInstructions implements Built<EdgeInstructions, EdgeInstructionsBuilder> {
+abstract class EdgeInstructions
+    implements Built<EdgeInstructions, EdgeInstructionsBuilder> {
   /// Markdown with install/upgrade instructions
   @BuiltValueField(wireName: r'instructions')
   String? get instructions;
 
   EdgeInstructions._();
 
-  factory EdgeInstructions([void updates(EdgeInstructionsBuilder b)]) = _$EdgeInstructions;
+  factory EdgeInstructions([void updates(EdgeInstructionsBuilder b)]) =
+      _$EdgeInstructions;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EdgeInstructionsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdgeInstructions> get serializer => _$EdgeInstructionsSerializer();
+  static Serializer<EdgeInstructions> get serializer =>
+      _$EdgeInstructionsSerializer();
 }
 
-class _$EdgeInstructionsSerializer implements PrimitiveSerializer<EdgeInstructions> {
+class _$EdgeInstructionsSerializer
+    implements PrimitiveSerializer<EdgeInstructions> {
   @override
   final Iterable<Type> types = const [EdgeInstructions, _$EdgeInstructions];
 
@@ -61,7 +65,11 @@ class _$EdgeInstructionsSerializer implements PrimitiveSerializer<EdgeInstructio
     EdgeInstructions object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -77,10 +85,12 @@ class _$EdgeInstructionsSerializer implements PrimitiveSerializer<EdgeInstructio
       final value = serializedList[i + 1];
       switch (key) {
         case r'instructions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.instructions = valueDes;
           break;
@@ -112,5 +122,3 @@ class _$EdgeInstructionsSerializer implements PrimitiveSerializer<EdgeInstructio
     return result.build();
   }
 }
-
-

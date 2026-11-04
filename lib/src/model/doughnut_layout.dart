@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'doughnut_layout.g.dart';
 
 class DoughnutLayout extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'default')
   static const DoughnutLayout default_ = _$default_;
   @BuiltValueEnumConst(wireName: r'with_total')
@@ -23,9 +22,10 @@ class DoughnutLayout extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const DoughnutLayout unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<DoughnutLayout> get serializer => _$doughnutLayoutSerializer;
+  static Serializer<DoughnutLayout> get serializer =>
+      _$doughnutLayoutSerializer;
 
-  const DoughnutLayout._(String name): super(name);
+  const DoughnutLayout._(String name) : super(name);
 
   static BuiltSet<DoughnutLayout> get values => _$values;
   static DoughnutLayout valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class DoughnutLayout extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class DoughnutLayoutMixin = Object with _$DoughnutLayoutMixin;
-

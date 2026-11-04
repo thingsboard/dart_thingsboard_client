@@ -19,10 +19,10 @@ part 'version_load_request.g.dart';
 /// Request for loading a version
 ///
 /// Properties:
-/// * [versionId] 
+/// * [versionId]
 /// * [type] - Type of the version to load
 @BuiltValue(instantiable: false)
-abstract class VersionLoadRequest  {
+abstract class VersionLoadRequest {
   @BuiltValueField(wireName: r'versionId')
   String? get versionId;
 
@@ -39,33 +39,37 @@ abstract class VersionLoadRequest  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<VersionLoadRequest> get serializer => _$VersionLoadRequestSerializer();
+  static Serializer<VersionLoadRequest> get serializer =>
+      _$VersionLoadRequestSerializer();
 }
 
 extension VersionLoadRequestDiscriminatorExt on VersionLoadRequest {
-    String? get discriminatorValue {
-        if (this is EntityTypeVersionLoadRequest) {
-            return r'ENTITY_TYPE';
-        }
-        if (this is SingleEntityVersionLoadRequest) {
-            return r'SINGLE_ENTITY';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is EntityTypeVersionLoadRequest) {
+      return r'ENTITY_TYPE';
     }
-}
-extension VersionLoadRequestBuilderDiscriminatorExt on VersionLoadRequestBuilder {
-    String? get discriminatorValue {
-        if (this is EntityTypeVersionLoadRequestBuilder) {
-            return r'ENTITY_TYPE';
-        }
-        if (this is SingleEntityVersionLoadRequestBuilder) {
-            return r'SINGLE_ENTITY';
-        }
-        return null;
+    if (this is SingleEntityVersionLoadRequest) {
+      return r'SINGLE_ENTITY';
     }
+    return null;
+  }
 }
 
-class _$VersionLoadRequestSerializer implements PrimitiveSerializer<VersionLoadRequest> {
+extension VersionLoadRequestBuilderDiscriminatorExt
+    on VersionLoadRequestBuilder {
+  String? get discriminatorValue {
+    if (this is EntityTypeVersionLoadRequestBuilder) {
+      return r'ENTITY_TYPE';
+    }
+    if (this is SingleEntityVersionLoadRequestBuilder) {
+      return r'SINGLE_ENTITY';
+    }
+    return null;
+  }
+}
+
+class _$VersionLoadRequestSerializer
+    implements PrimitiveSerializer<VersionLoadRequest> {
   @override
   final Iterable<Type> types = const [VersionLoadRequest];
 
@@ -98,12 +102,22 @@ class _$VersionLoadRequestSerializer implements PrimitiveSerializer<VersionLoadR
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is EntityTypeVersionLoadRequest) {
-      return serializers.serialize(object, specifiedType: FullType(EntityTypeVersionLoadRequest))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityTypeVersionLoadRequest),
+      )!;
     }
     if (object is SingleEntityVersionLoadRequest) {
-      return serializers.serialize(object, specifiedType: FullType(SingleEntityVersionLoadRequest))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SingleEntityVersionLoadRequest),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -113,37 +127,64 @@ class _$VersionLoadRequestSerializer implements PrimitiveSerializer<VersionLoadR
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(VersionLoadRequest.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(VersionLoadRequest.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'ENTITY_TYPE':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityTypeVersionLoadRequest)) as EntityTypeVersionLoadRequest;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityTypeVersionLoadRequest),
+            )
+            as EntityTypeVersionLoadRequest;
       case r'SINGLE_ENTITY':
-        return serializers.deserialize(serialized, specifiedType: FullType(SingleEntityVersionLoadRequest)) as SingleEntityVersionLoadRequest;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SingleEntityVersionLoadRequest),
+            )
+            as SingleEntityVersionLoadRequest;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($VersionLoadRequest)) as $VersionLoadRequest;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($VersionLoadRequest),
+            )
+            as $VersionLoadRequest;
     }
   }
 }
 
-
 /// a concrete implementation of [VersionLoadRequest], since [VersionLoadRequest] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $VersionLoadRequest implements VersionLoadRequest, Built<$VersionLoadRequest, $VersionLoadRequestBuilder> {
+abstract class $VersionLoadRequest
+    implements
+        VersionLoadRequest,
+        Built<$VersionLoadRequest, $VersionLoadRequestBuilder> {
   $VersionLoadRequest._();
 
-  factory $VersionLoadRequest([void Function($VersionLoadRequestBuilder)? updates]) = _$$VersionLoadRequest;
+  factory $VersionLoadRequest([
+    void Function($VersionLoadRequestBuilder)? updates,
+  ]) = _$$VersionLoadRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($VersionLoadRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$VersionLoadRequest> get serializer => _$$VersionLoadRequestSerializer();
+  static Serializer<$VersionLoadRequest> get serializer =>
+      _$$VersionLoadRequestSerializer();
 }
 
-class _$$VersionLoadRequestSerializer implements PrimitiveSerializer<$VersionLoadRequest> {
+class _$$VersionLoadRequestSerializer
+    implements PrimitiveSerializer<$VersionLoadRequest> {
   @override
-  final Iterable<Type> types = const [$VersionLoadRequest, _$$VersionLoadRequest];
+  final Iterable<Type> types = const [
+    $VersionLoadRequest,
+    _$$VersionLoadRequest,
+  ];
 
   @override
   final String wireName = r'$VersionLoadRequest';
@@ -154,7 +195,10 @@ class _$$VersionLoadRequestSerializer implements PrimitiveSerializer<$VersionLoa
     $VersionLoadRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(VersionLoadRequest))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(VersionLoadRequest),
+    )!;
   }
 
   void _deserializeProperties(
@@ -170,18 +214,22 @@ class _$$VersionLoadRequestSerializer implements PrimitiveSerializer<$VersionLoa
       final value = serializedList[i + 1];
       switch (key) {
         case r'versionId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.versionId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(VersionLoadRequestType),
-          ) as VersionLoadRequestType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(VersionLoadRequestType),
+                  )
+                  as VersionLoadRequestType;
           result.type = valueDes;
           break;
         default:
@@ -212,4 +260,3 @@ class _$$VersionLoadRequestSerializer implements PrimitiveSerializer<$VersionLoa
     return result.build();
   }
 }
-

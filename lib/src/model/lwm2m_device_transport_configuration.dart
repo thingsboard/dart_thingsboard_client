@@ -18,13 +18,19 @@ part 'lwm2m_device_transport_configuration.g.dart';
 /// Lwm2mDeviceTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [powerMode] 
-/// * [psmActivityTimer] 
-/// * [edrxCycle] 
-/// * [pagingTransmissionWindow] 
+/// * [type]
+/// * [powerMode]
+/// * [psmActivityTimer]
+/// * [edrxCycle]
+/// * [pagingTransmissionWindow]
 @BuiltValue()
-abstract class Lwm2mDeviceTransportConfiguration implements DeviceTransportConfiguration, Built<Lwm2mDeviceTransportConfiguration, Lwm2mDeviceTransportConfigurationBuilder> {
+abstract class Lwm2mDeviceTransportConfiguration
+    implements
+        DeviceTransportConfiguration,
+        Built<
+          Lwm2mDeviceTransportConfiguration,
+          Lwm2mDeviceTransportConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'pagingTransmissionWindow')
   int? get pagingTransmissionWindow;
 
@@ -40,18 +46,25 @@ abstract class Lwm2mDeviceTransportConfiguration implements DeviceTransportConfi
 
   Lwm2mDeviceTransportConfiguration._();
 
-  factory Lwm2mDeviceTransportConfiguration([void updates(Lwm2mDeviceTransportConfigurationBuilder b)]) = _$Lwm2mDeviceTransportConfiguration;
+  factory Lwm2mDeviceTransportConfiguration([
+    void updates(Lwm2mDeviceTransportConfigurationBuilder b),
+  ]) = _$Lwm2mDeviceTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(Lwm2mDeviceTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<Lwm2mDeviceTransportConfiguration> get serializer => _$Lwm2mDeviceTransportConfigurationSerializer();
+  static Serializer<Lwm2mDeviceTransportConfiguration> get serializer =>
+      _$Lwm2mDeviceTransportConfigurationSerializer();
 }
 
-class _$Lwm2mDeviceTransportConfigurationSerializer implements PrimitiveSerializer<Lwm2mDeviceTransportConfiguration> {
+class _$Lwm2mDeviceTransportConfigurationSerializer
+    implements PrimitiveSerializer<Lwm2mDeviceTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [Lwm2mDeviceTransportConfiguration, _$Lwm2mDeviceTransportConfiguration];
+  final Iterable<Type> types = const [
+    Lwm2mDeviceTransportConfiguration,
+    _$Lwm2mDeviceTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'Lwm2mDeviceTransportConfiguration';
@@ -102,7 +115,11 @@ class _$Lwm2mDeviceTransportConfigurationSerializer implements PrimitiveSerializ
     Lwm2mDeviceTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -118,41 +135,51 @@ class _$Lwm2mDeviceTransportConfigurationSerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'pagingTransmissionWindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pagingTransmissionWindow = valueDes;
           break;
         case r'edrxCycle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.edrxCycle = valueDes;
           break;
         case r'psmActivityTimer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.psmActivityTimer = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'powerMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PowerMode),
-          ) as PowerMode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PowerMode),
+                  )
+                  as PowerMode?;
           if (valueDes == null) continue;
           result.powerMode = valueDes;
           break;
@@ -184,5 +211,3 @@ class _$Lwm2mDeviceTransportConfigurationSerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

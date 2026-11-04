@@ -17,10 +17,11 @@ part 'ollama_provider_config.g.dart';
 /// OllamaProviderConfig
 ///
 /// Properties:
-/// * [baseUrl] 
-/// * [auth] 
+/// * [baseUrl]
+/// * [auth]
 @BuiltValue()
-abstract class OllamaProviderConfig implements Built<OllamaProviderConfig, OllamaProviderConfigBuilder> {
+abstract class OllamaProviderConfig
+    implements Built<OllamaProviderConfig, OllamaProviderConfigBuilder> {
   @BuiltValueField(wireName: r'baseUrl')
   String get baseUrl;
 
@@ -29,18 +30,24 @@ abstract class OllamaProviderConfig implements Built<OllamaProviderConfig, Ollam
 
   OllamaProviderConfig._();
 
-  factory OllamaProviderConfig([void updates(OllamaProviderConfigBuilder b)]) = _$OllamaProviderConfig;
+  factory OllamaProviderConfig([void updates(OllamaProviderConfigBuilder b)]) =
+      _$OllamaProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OllamaProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OllamaProviderConfig> get serializer => _$OllamaProviderConfigSerializer();
+  static Serializer<OllamaProviderConfig> get serializer =>
+      _$OllamaProviderConfigSerializer();
 }
 
-class _$OllamaProviderConfigSerializer implements PrimitiveSerializer<OllamaProviderConfig> {
+class _$OllamaProviderConfigSerializer
+    implements PrimitiveSerializer<OllamaProviderConfig> {
   @override
-  final Iterable<Type> types = const [OllamaProviderConfig, _$OllamaProviderConfig];
+  final Iterable<Type> types = const [
+    OllamaProviderConfig,
+    _$OllamaProviderConfig,
+  ];
 
   @override
   final String wireName = r'OllamaProviderConfig';
@@ -68,7 +75,11 @@ class _$OllamaProviderConfigSerializer implements PrimitiveSerializer<OllamaProv
     OllamaProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -84,17 +95,21 @@ class _$OllamaProviderConfigSerializer implements PrimitiveSerializer<OllamaProv
       final value = serializedList[i + 1];
       switch (key) {
         case r'baseUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.baseUrl = valueDes;
           break;
         case r'auth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(OllamaAuth),
-          ) as OllamaAuth;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(OllamaAuth),
+                  )
+                  as OllamaAuth;
           result.auth = valueDes;
           break;
         default:
@@ -125,5 +140,3 @@ class _$OllamaProviderConfigSerializer implements PrimitiveSerializer<OllamaProv
     return result.build();
   }
 }
-
-

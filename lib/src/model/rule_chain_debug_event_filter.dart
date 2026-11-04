@@ -20,13 +20,16 @@ part 'rule_chain_debug_event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 /// * [server] - String value representing the server name, identifier or ip address where the platform is running
 /// * [isError] - Boolean value to filter the errors
 /// * [errorStr] - The case insensitive 'contains' filter based on error message
 /// * [message] - String value representing the message
 @BuiltValue()
-abstract class RuleChainDebugEventFilter implements EventFilter, Built<RuleChainDebugEventFilter, RuleChainDebugEventFilterBuilder> {
+abstract class RuleChainDebugEventFilter
+    implements
+        EventFilter,
+        Built<RuleChainDebugEventFilter, RuleChainDebugEventFilterBuilder> {
   /// String value representing the server name, identifier or ip address where the platform is running
   @BuiltValueField(wireName: r'server')
   String? get server;
@@ -46,18 +49,25 @@ abstract class RuleChainDebugEventFilter implements EventFilter, Built<RuleChain
 
   RuleChainDebugEventFilter._();
 
-  factory RuleChainDebugEventFilter([void updates(RuleChainDebugEventFilterBuilder b)]) = _$RuleChainDebugEventFilter;
+  factory RuleChainDebugEventFilter([
+    void updates(RuleChainDebugEventFilterBuilder b),
+  ]) = _$RuleChainDebugEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainDebugEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainDebugEventFilter> get serializer => _$RuleChainDebugEventFilterSerializer();
+  static Serializer<RuleChainDebugEventFilter> get serializer =>
+      _$RuleChainDebugEventFilterSerializer();
 }
 
-class _$RuleChainDebugEventFilterSerializer implements PrimitiveSerializer<RuleChainDebugEventFilter> {
+class _$RuleChainDebugEventFilterSerializer
+    implements PrimitiveSerializer<RuleChainDebugEventFilter> {
   @override
-  final Iterable<Type> types = const [RuleChainDebugEventFilter, _$RuleChainDebugEventFilter];
+  final Iterable<Type> types = const [
+    RuleChainDebugEventFilter,
+    _$RuleChainDebugEventFilter,
+  ];
 
   @override
   final String wireName = r'RuleChainDebugEventFilter';
@@ -115,7 +125,11 @@ class _$RuleChainDebugEventFilterSerializer implements PrimitiveSerializer<RuleC
     RuleChainDebugEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -131,49 +145,63 @@ class _$RuleChainDebugEventFilterSerializer implements PrimitiveSerializer<RuleC
       final value = serializedList[i + 1];
       switch (key) {
         case r'server':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.server = valueDes;
           break;
         case r'isError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleChainDebugEventFilterIsErrorEnum),
-          ) as RuleChainDebugEventFilterIsErrorEnum?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RuleChainDebugEventFilterIsErrorEnum,
+                    ),
+                  )
+                  as RuleChainDebugEventFilterIsErrorEnum?;
           if (valueDes == null) continue;
           result.isError = valueDes;
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
         case r'errorStr':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorStr = valueDes;
           break;
@@ -206,22 +234,25 @@ class _$RuleChainDebugEventFilterSerializer implements PrimitiveSerializer<RuleC
   }
 }
 
-
 /// Boolean value to filter the errors
 class RuleChainDebugEventFilterIsErrorEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'false')
-  static const RuleChainDebugEventFilterIsErrorEnum false_ = _$ruleChainDebugEventFilterIsErrorEnum_false_;
+  static const RuleChainDebugEventFilterIsErrorEnum false_ =
+      _$ruleChainDebugEventFilterIsErrorEnum_false_;
   @BuiltValueEnumConst(wireName: r'true')
-  static const RuleChainDebugEventFilterIsErrorEnum true_ = _$ruleChainDebugEventFilterIsErrorEnum_true_;
+  static const RuleChainDebugEventFilterIsErrorEnum true_ =
+      _$ruleChainDebugEventFilterIsErrorEnum_true_;
   @BuiltValueEnumConst(wireName: r'11184809', fallback: true)
-  static const RuleChainDebugEventFilterIsErrorEnum unknownDefaultOpenApi = _$ruleChainDebugEventFilterIsErrorEnum_unknownDefaultOpenApi;
+  static const RuleChainDebugEventFilterIsErrorEnum unknownDefaultOpenApi =
+      _$ruleChainDebugEventFilterIsErrorEnum_unknownDefaultOpenApi;
 
-  static Serializer<RuleChainDebugEventFilterIsErrorEnum> get serializer => _$ruleChainDebugEventFilterIsErrorEnumSerializer;
+  static Serializer<RuleChainDebugEventFilterIsErrorEnum> get serializer =>
+      _$ruleChainDebugEventFilterIsErrorEnumSerializer;
 
-  const RuleChainDebugEventFilterIsErrorEnum._(String name): super(name);
+  const RuleChainDebugEventFilterIsErrorEnum._(String name) : super(name);
 
-  static BuiltSet<RuleChainDebugEventFilterIsErrorEnum> get values => _$ruleChainDebugEventFilterIsErrorEnumValues;
-  static RuleChainDebugEventFilterIsErrorEnum valueOf(String name) => _$ruleChainDebugEventFilterIsErrorEnumValueOf(name);
+  static BuiltSet<RuleChainDebugEventFilterIsErrorEnum> get values =>
+      _$ruleChainDebugEventFilterIsErrorEnumValues;
+  static RuleChainDebugEventFilterIsErrorEnum valueOf(String name) =>
+      _$ruleChainDebugEventFilterIsErrorEnumValueOf(name);
 }
-

@@ -17,12 +17,14 @@ part 'power_saving_configuration.g.dart';
 /// PowerSavingConfiguration
 ///
 /// Properties:
-/// * [powerMode] 
-/// * [psmActivityTimer] 
-/// * [edrxCycle] 
-/// * [pagingTransmissionWindow] 
+/// * [powerMode]
+/// * [psmActivityTimer]
+/// * [edrxCycle]
+/// * [pagingTransmissionWindow]
 @BuiltValue()
-abstract class PowerSavingConfiguration implements Built<PowerSavingConfiguration, PowerSavingConfigurationBuilder> {
+abstract class PowerSavingConfiguration
+    implements
+        Built<PowerSavingConfiguration, PowerSavingConfigurationBuilder> {
   @BuiltValueField(wireName: r'powerMode')
   PowerMode? get powerMode;
   // enum powerModeEnum {  PSM,  DRX,  E_DRX,  };
@@ -38,18 +40,25 @@ abstract class PowerSavingConfiguration implements Built<PowerSavingConfiguratio
 
   PowerSavingConfiguration._();
 
-  factory PowerSavingConfiguration([void updates(PowerSavingConfigurationBuilder b)]) = _$PowerSavingConfiguration;
+  factory PowerSavingConfiguration([
+    void updates(PowerSavingConfigurationBuilder b),
+  ]) = _$PowerSavingConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PowerSavingConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PowerSavingConfiguration> get serializer => _$PowerSavingConfigurationSerializer();
+  static Serializer<PowerSavingConfiguration> get serializer =>
+      _$PowerSavingConfigurationSerializer();
 }
 
-class _$PowerSavingConfigurationSerializer implements PrimitiveSerializer<PowerSavingConfiguration> {
+class _$PowerSavingConfigurationSerializer
+    implements PrimitiveSerializer<PowerSavingConfiguration> {
   @override
-  final Iterable<Type> types = const [PowerSavingConfiguration, _$PowerSavingConfiguration];
+  final Iterable<Type> types = const [
+    PowerSavingConfiguration,
+    _$PowerSavingConfiguration,
+  ];
 
   @override
   final String wireName = r'PowerSavingConfiguration';
@@ -95,7 +104,11 @@ class _$PowerSavingConfigurationSerializer implements PrimitiveSerializer<PowerS
     PowerSavingConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -111,34 +124,42 @@ class _$PowerSavingConfigurationSerializer implements PrimitiveSerializer<PowerS
       final value = serializedList[i + 1];
       switch (key) {
         case r'powerMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PowerMode),
-          ) as PowerMode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PowerMode),
+                  )
+                  as PowerMode?;
           if (valueDes == null) continue;
           result.powerMode = valueDes;
           break;
         case r'psmActivityTimer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.psmActivityTimer = valueDes;
           break;
         case r'edrxCycle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.edrxCycle = valueDes;
           break;
         case r'pagingTransmissionWindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pagingTransmissionWindow = valueDes;
           break;
@@ -170,5 +191,3 @@ class _$PowerSavingConfigurationSerializer implements PrimitiveSerializer<PowerS
     return result.build();
   }
 }
-
-

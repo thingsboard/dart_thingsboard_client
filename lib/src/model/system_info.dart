@@ -75,7 +75,11 @@ class _$SystemInfoSerializer implements PrimitiveSerializer<SystemInfo> {
     SystemInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +95,24 @@ class _$SystemInfoSerializer implements PrimitiveSerializer<SystemInfo> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'monolith':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.monolith = valueDes;
           break;
         case r'systemData':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SystemInfoData)]),
-          ) as BuiltList<SystemInfoData>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SystemInfoData),
+                    ]),
+                  )
+                  as BuiltList<SystemInfoData>?;
           if (valueDes == null) continue;
           result.systemData.replace(valueDes);
           break;
@@ -134,5 +144,3 @@ class _$SystemInfoSerializer implements PrimitiveSerializer<SystemInfo> {
     return result.build();
   }
 }
-
-

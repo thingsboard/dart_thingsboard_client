@@ -17,14 +17,20 @@ part 'attributes_immediate_output_strategy.g.dart';
 /// AttributesImmediateOutputStrategy
 ///
 /// Properties:
-/// * [type] 
-/// * [sendAttributesUpdatedNotification] 
-/// * [updateAttributesOnlyOnValueChange] 
-/// * [saveAttribute] 
-/// * [sendWsUpdate] 
-/// * [processCfs] 
+/// * [type]
+/// * [sendAttributesUpdatedNotification]
+/// * [updateAttributesOnlyOnValueChange]
+/// * [saveAttribute]
+/// * [sendWsUpdate]
+/// * [processCfs]
 @BuiltValue()
-abstract class AttributesImmediateOutputStrategy implements AttributesOutputStrategy, Built<AttributesImmediateOutputStrategy, AttributesImmediateOutputStrategyBuilder> {
+abstract class AttributesImmediateOutputStrategy
+    implements
+        AttributesOutputStrategy,
+        Built<
+          AttributesImmediateOutputStrategy,
+          AttributesImmediateOutputStrategyBuilder
+        > {
   @BuiltValueField(wireName: r'sendWsUpdate')
   bool? get sendWsUpdate;
 
@@ -42,18 +48,25 @@ abstract class AttributesImmediateOutputStrategy implements AttributesOutputStra
 
   AttributesImmediateOutputStrategy._();
 
-  factory AttributesImmediateOutputStrategy([void updates(AttributesImmediateOutputStrategyBuilder b)]) = _$AttributesImmediateOutputStrategy;
+  factory AttributesImmediateOutputStrategy([
+    void updates(AttributesImmediateOutputStrategyBuilder b),
+  ]) = _$AttributesImmediateOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AttributesImmediateOutputStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AttributesImmediateOutputStrategy> get serializer => _$AttributesImmediateOutputStrategySerializer();
+  static Serializer<AttributesImmediateOutputStrategy> get serializer =>
+      _$AttributesImmediateOutputStrategySerializer();
 }
 
-class _$AttributesImmediateOutputStrategySerializer implements PrimitiveSerializer<AttributesImmediateOutputStrategy> {
+class _$AttributesImmediateOutputStrategySerializer
+    implements PrimitiveSerializer<AttributesImmediateOutputStrategy> {
   @override
-  final Iterable<Type> types = const [AttributesImmediateOutputStrategy, _$AttributesImmediateOutputStrategy];
+  final Iterable<Type> types = const [
+    AttributesImmediateOutputStrategy,
+    _$AttributesImmediateOutputStrategy,
+  ];
 
   @override
   final String wireName = r'AttributesImmediateOutputStrategy';
@@ -111,7 +124,11 @@ class _$AttributesImmediateOutputStrategySerializer implements PrimitiveSerializ
     AttributesImmediateOutputStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -127,49 +144,61 @@ class _$AttributesImmediateOutputStrategySerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'processCfs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.processCfs = valueDes;
           break;
         case r'sendAttributesUpdatedNotification':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.sendAttributesUpdatedNotification = valueDes;
           break;
         case r'sendWsUpdate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.sendWsUpdate = valueDes;
           break;
         case r'updateAttributesOnlyOnValueChange':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.updateAttributesOnlyOnValueChange = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'saveAttribute':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveAttribute = valueDes;
           break;
@@ -201,5 +230,3 @@ class _$AttributesImmediateOutputStrategySerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

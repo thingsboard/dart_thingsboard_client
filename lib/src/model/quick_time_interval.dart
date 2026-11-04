@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'quick_time_interval.g.dart';
 
 class QuickTimeInterval extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'YESTERDAY')
   static const QuickTimeInterval YESTERDAY = _$YESTERDAY;
   @BuiltValueEnumConst(wireName: r'DAY_BEFORE_YESTERDAY')
@@ -47,7 +46,8 @@ class QuickTimeInterval extends EnumClass {
   @BuiltValueEnumConst(wireName: r'CURRENT_WEEK_SO_FAR')
   static const QuickTimeInterval CURRENT_WEEK_SO_FAR = _$CURRENT_WEEK_SO_FAR;
   @BuiltValueEnumConst(wireName: r'CURRENT_WEEK_ISO_SO_FAR')
-  static const QuickTimeInterval CURRENT_WEEK_ISO_SO_FAR = _$CURRENT_WEEK_ISO_SO_FAR;
+  static const QuickTimeInterval CURRENT_WEEK_ISO_SO_FAR =
+      _$CURRENT_WEEK_ISO_SO_FAR;
   @BuiltValueEnumConst(wireName: r'CURRENT_MONTH')
   static const QuickTimeInterval CURRENT_MONTH = _$CURRENT_MONTH;
   @BuiltValueEnumConst(wireName: r'CURRENT_MONTH_SO_FAR')
@@ -55,21 +55,25 @@ class QuickTimeInterval extends EnumClass {
   @BuiltValueEnumConst(wireName: r'CURRENT_QUARTER')
   static const QuickTimeInterval CURRENT_QUARTER = _$CURRENT_QUARTER;
   @BuiltValueEnumConst(wireName: r'CURRENT_QUARTER_SO_FAR')
-  static const QuickTimeInterval CURRENT_QUARTER_SO_FAR = _$CURRENT_QUARTER_SO_FAR;
+  static const QuickTimeInterval CURRENT_QUARTER_SO_FAR =
+      _$CURRENT_QUARTER_SO_FAR;
   @BuiltValueEnumConst(wireName: r'CURRENT_HALF_YEAR')
   static const QuickTimeInterval CURRENT_HALF_YEAR = _$CURRENT_HALF_YEAR;
   @BuiltValueEnumConst(wireName: r'CURRENT_HALF_YEAR_SO_FAR')
-  static const QuickTimeInterval CURRENT_HALF_YEAR_SO_FAR = _$CURRENT_HALF_YEAR_SO_FAR;
+  static const QuickTimeInterval CURRENT_HALF_YEAR_SO_FAR =
+      _$CURRENT_HALF_YEAR_SO_FAR;
   @BuiltValueEnumConst(wireName: r'CURRENT_YEAR')
   static const QuickTimeInterval CURRENT_YEAR = _$CURRENT_YEAR;
   @BuiltValueEnumConst(wireName: r'CURRENT_YEAR_SO_FAR')
   static const QuickTimeInterval CURRENT_YEAR_SO_FAR = _$CURRENT_YEAR_SO_FAR;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const QuickTimeInterval unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const QuickTimeInterval unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<QuickTimeInterval> get serializer => _$quickTimeIntervalSerializer;
+  static Serializer<QuickTimeInterval> get serializer =>
+      _$quickTimeIntervalSerializer;
 
-  const QuickTimeInterval._(String name): super(name);
+  const QuickTimeInterval._(String name) : super(name);
 
   static BuiltSet<QuickTimeInterval> get values => _$values;
   static QuickTimeInterval valueOf(String name) => _$valueOf(name);
@@ -82,4 +86,3 @@ class QuickTimeInterval extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class QuickTimeIntervalMixin = Object with _$QuickTimeIntervalMixin;
-

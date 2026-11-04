@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'axis_position.g.dart';
 
 class AxisPosition extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'left')
   static const AxisPosition left = _$left;
   @BuiltValueEnumConst(wireName: r'right')
@@ -29,7 +28,7 @@ class AxisPosition extends EnumClass {
 
   static Serializer<AxisPosition> get serializer => _$axisPositionSerializer;
 
-  const AxisPosition._(String name): super(name);
+  const AxisPosition._(String name) : super(name);
 
   static BuiltSet<AxisPosition> get values => _$values;
   static AxisPosition valueOf(String name) => _$valueOf(name);
@@ -42,4 +41,3 @@ class AxisPosition extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AxisPositionMixin = Object with _$AxisPositionMixin;
-

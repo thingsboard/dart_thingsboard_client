@@ -23,7 +23,9 @@ part 'page_data_mobile_app_bundle_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataMobileAppBundleInfo implements Built<PageDataMobileAppBundleInfo, PageDataMobileAppBundleInfoBuilder> {
+abstract class PageDataMobileAppBundleInfo
+    implements
+        Built<PageDataMobileAppBundleInfo, PageDataMobileAppBundleInfoBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<MobileAppBundleInfo>? get data;
@@ -42,18 +44,25 @@ abstract class PageDataMobileAppBundleInfo implements Built<PageDataMobileAppBun
 
   PageDataMobileAppBundleInfo._();
 
-  factory PageDataMobileAppBundleInfo([void updates(PageDataMobileAppBundleInfoBuilder b)]) = _$PageDataMobileAppBundleInfo;
+  factory PageDataMobileAppBundleInfo([
+    void updates(PageDataMobileAppBundleInfoBuilder b),
+  ]) = _$PageDataMobileAppBundleInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataMobileAppBundleInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataMobileAppBundleInfo> get serializer => _$PageDataMobileAppBundleInfoSerializer();
+  static Serializer<PageDataMobileAppBundleInfo> get serializer =>
+      _$PageDataMobileAppBundleInfoSerializer();
 }
 
-class _$PageDataMobileAppBundleInfoSerializer implements PrimitiveSerializer<PageDataMobileAppBundleInfo> {
+class _$PageDataMobileAppBundleInfoSerializer
+    implements PrimitiveSerializer<PageDataMobileAppBundleInfo> {
   @override
-  final Iterable<Type> types = const [PageDataMobileAppBundleInfo, _$PageDataMobileAppBundleInfo];
+  final Iterable<Type> types = const [
+    PageDataMobileAppBundleInfo,
+    _$PageDataMobileAppBundleInfo,
+  ];
 
   @override
   final String wireName = r'PageDataMobileAppBundleInfo';
@@ -67,7 +76,9 @@ class _$PageDataMobileAppBundleInfoSerializer implements PrimitiveSerializer<Pag
       yield r'data';
       yield serializers.serialize(
         object.data,
-        specifiedType: const FullType(BuiltList, [FullType(MobileAppBundleInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(MobileAppBundleInfo),
+        ]),
       );
     }
     if (object.totalPages != null) {
@@ -99,7 +110,11 @@ class _$PageDataMobileAppBundleInfoSerializer implements PrimitiveSerializer<Pag
     PageDataMobileAppBundleInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +130,44 @@ class _$PageDataMobileAppBundleInfoSerializer implements PrimitiveSerializer<Pag
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(MobileAppBundleInfo)]),
-          ) as BuiltList<MobileAppBundleInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(MobileAppBundleInfo),
+                    ]),
+                  )
+                  as BuiltList<MobileAppBundleInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +199,3 @@ class _$PageDataMobileAppBundleInfoSerializer implements PrimitiveSerializer<Pag
     return result.build();
   }
 }
-
-

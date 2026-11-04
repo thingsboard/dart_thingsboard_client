@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'table_sort_direction.g.dart';
 
 class TableSortDirection extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ASC')
   static const TableSortDirection ASC = _$ASC;
   @BuiltValueEnumConst(wireName: r'DESC')
   static const TableSortDirection DESC = _$DESC;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const TableSortDirection unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const TableSortDirection unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<TableSortDirection> get serializer => _$tableSortDirectionSerializer;
+  static Serializer<TableSortDirection> get serializer =>
+      _$tableSortDirectionSerializer;
 
-  const TableSortDirection._(String name): super(name);
+  const TableSortDirection._(String name) : super(name);
 
   static BuiltSet<TableSortDirection> get values => _$values;
   static TableSortDirection valueOf(String name) => _$valueOf(name);
@@ -38,4 +39,3 @@ class TableSortDirection extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class TableSortDirectionMixin = Object with _$TableSortDirectionMixin;
-

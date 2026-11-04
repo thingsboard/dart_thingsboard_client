@@ -30,7 +30,8 @@ part 'rule_chain_meta_data.g.dart';
 /// * [ruleChainConnections] - List of JSON objects that represent connections between rule nodes and other rule chains.
 /// * [notes] - List of sticky notes placed on the rule chain canvas
 @BuiltValue()
-abstract class RuleChainMetaData implements Built<RuleChainMetaData, RuleChainMetaDataBuilder> {
+abstract class RuleChainMetaData
+    implements Built<RuleChainMetaData, RuleChainMetaDataBuilder> {
   /// JSON object with Rule Chain Id.
   @BuiltValueField(wireName: r'ruleChainId')
   RuleChainId get ruleChainId;
@@ -61,16 +62,19 @@ abstract class RuleChainMetaData implements Built<RuleChainMetaData, RuleChainMe
 
   RuleChainMetaData._();
 
-  factory RuleChainMetaData([void updates(RuleChainMetaDataBuilder b)]) = _$RuleChainMetaData;
+  factory RuleChainMetaData([void updates(RuleChainMetaDataBuilder b)]) =
+      _$RuleChainMetaData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainMetaDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainMetaData> get serializer => _$RuleChainMetaDataSerializer();
+  static Serializer<RuleChainMetaData> get serializer =>
+      _$RuleChainMetaDataSerializer();
 }
 
-class _$RuleChainMetaDataSerializer implements PrimitiveSerializer<RuleChainMetaData> {
+class _$RuleChainMetaDataSerializer
+    implements PrimitiveSerializer<RuleChainMetaData> {
   @override
   final Iterable<Type> types = const [RuleChainMetaData, _$RuleChainMetaData];
 
@@ -112,7 +116,9 @@ class _$RuleChainMetaDataSerializer implements PrimitiveSerializer<RuleChainMeta
     yield r'ruleChainConnections';
     yield serializers.serialize(
       object.ruleChainConnections,
-      specifiedType: const FullType(BuiltList, [FullType(RuleChainConnectionInfo)]),
+      specifiedType: const FullType(BuiltList, [
+        FullType(RuleChainConnectionInfo),
+      ]),
     );
     if (object.notes != null) {
       yield r'notes';
@@ -129,7 +135,11 @@ class _$RuleChainMetaDataSerializer implements PrimitiveSerializer<RuleChainMeta
     RuleChainMetaData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -145,53 +155,72 @@ class _$RuleChainMetaDataSerializer implements PrimitiveSerializer<RuleChainMeta
       final value = serializedList[i + 1];
       switch (key) {
         case r'ruleChainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RuleChainId),
-          ) as RuleChainId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RuleChainId),
+                  )
+                  as RuleChainId;
           result.ruleChainId.replace(valueDes);
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'firstNodeIndex':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.firstNodeIndex = valueDes;
           break;
         case r'nodes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(RuleNode)]),
-          ) as BuiltList<RuleNode>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(RuleNode),
+                    ]),
+                  )
+                  as BuiltList<RuleNode>;
           result.nodes.replace(valueDes);
           break;
         case r'connections':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(NodeConnectionInfo)]),
-          ) as BuiltList<NodeConnectionInfo>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(NodeConnectionInfo),
+                    ]),
+                  )
+                  as BuiltList<NodeConnectionInfo>;
           result.connections.replace(valueDes);
           break;
         case r'ruleChainConnections':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(RuleChainConnectionInfo)]),
-          ) as BuiltList<RuleChainConnectionInfo>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(RuleChainConnectionInfo),
+                    ]),
+                  )
+                  as BuiltList<RuleChainConnectionInfo>;
           result.ruleChainConnections.replace(valueDes);
           break;
         case r'notes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(RuleChainNote)]),
-          ) as BuiltList<RuleChainNote>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(RuleChainNote),
+                    ]),
+                  )
+                  as BuiltList<RuleChainNote>?;
           if (valueDes == null) continue;
           result.notes.replace(valueDes);
           break;
@@ -223,5 +252,3 @@ class _$RuleChainMetaDataSerializer implements PrimitiveSerializer<RuleChainMeta
     return result.build();
   }
 }
-
-

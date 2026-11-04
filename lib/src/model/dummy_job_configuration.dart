@@ -19,20 +19,23 @@ part 'dummy_job_configuration.g.dart';
 /// Dummy job configuration
 ///
 /// Properties:
-/// * [tasksKey] 
-/// * [toReprocess] 
-/// * [type] 
-/// * [taskProcessingTimeMs] 
-/// * [successfulTasksCount] 
-/// * [failedTasksCount] 
-/// * [permanentlyFailedTasksCount] 
-/// * [errors] 
-/// * [retries] 
-/// * [taskProcessingTimeoutMs] 
-/// * [generalError] 
-/// * [submittedTasksBeforeGeneralError] 
+/// * [tasksKey]
+/// * [toReprocess]
+/// * [type]
+/// * [taskProcessingTimeMs]
+/// * [successfulTasksCount]
+/// * [failedTasksCount]
+/// * [permanentlyFailedTasksCount]
+/// * [errors]
+/// * [retries]
+/// * [taskProcessingTimeoutMs]
+/// * [generalError]
+/// * [submittedTasksBeforeGeneralError]
 @BuiltValue()
-abstract class DummyJobConfiguration implements JobConfiguration, Built<DummyJobConfiguration, DummyJobConfigurationBuilder> {
+abstract class DummyJobConfiguration
+    implements
+        JobConfiguration,
+        Built<DummyJobConfiguration, DummyJobConfigurationBuilder> {
   @BuiltValueField(wireName: r'retries')
   int? get retries;
 
@@ -62,18 +65,25 @@ abstract class DummyJobConfiguration implements JobConfiguration, Built<DummyJob
 
   DummyJobConfiguration._();
 
-  factory DummyJobConfiguration([void updates(DummyJobConfigurationBuilder b)]) = _$DummyJobConfiguration;
+  factory DummyJobConfiguration([
+    void updates(DummyJobConfigurationBuilder b),
+  ]) = _$DummyJobConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DummyJobConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DummyJobConfiguration> get serializer => _$DummyJobConfigurationSerializer();
+  static Serializer<DummyJobConfiguration> get serializer =>
+      _$DummyJobConfigurationSerializer();
 }
 
-class _$DummyJobConfigurationSerializer implements PrimitiveSerializer<DummyJobConfiguration> {
+class _$DummyJobConfigurationSerializer
+    implements PrimitiveSerializer<DummyJobConfiguration> {
   @override
-  final Iterable<Type> types = const [DummyJobConfiguration, _$DummyJobConfiguration];
+  final Iterable<Type> types = const [
+    DummyJobConfiguration,
+    _$DummyJobConfiguration,
+  ];
 
   @override
   final String wireName = r'DummyJobConfiguration';
@@ -171,7 +181,11 @@ class _$DummyJobConfigurationSerializer implements PrimitiveSerializer<DummyJobC
     DummyJobConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -187,96 +201,124 @@ class _$DummyJobConfigurationSerializer implements PrimitiveSerializer<DummyJobC
       final value = serializedList[i + 1];
       switch (key) {
         case r'retries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.retries = valueDes;
           break;
         case r'generalError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.generalError = valueDes;
           break;
         case r'permanentlyFailedTasksCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.permanentlyFailedTasksCount = valueDes;
           break;
         case r'submittedTasksBeforeGeneralError':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.submittedTasksBeforeGeneralError = valueDes;
           break;
         case r'taskProcessingTimeMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.taskProcessingTimeMs = valueDes;
           break;
         case r'failedTasksCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.failedTasksCount = valueDes;
           break;
         case r'toReprocess':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TaskResult)]),
-          ) as BuiltList<TaskResult>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TaskResult),
+                    ]),
+                  )
+                  as BuiltList<TaskResult>?;
           if (valueDes == null) continue;
           result.toReprocess.replace(valueDes);
           break;
         case r'taskProcessingTimeoutMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.taskProcessingTimeoutMs = valueDes;
           break;
         case r'tasksKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tasksKey = valueDes;
           break;
         case r'successfulTasksCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.successfulTasksCount = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'errors':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.errors.replace(valueDes);
           break;
@@ -308,5 +350,3 @@ class _$DummyJobConfigurationSerializer implements PrimitiveSerializer<DummyJobC
     return result.build();
   }
 }
-
-

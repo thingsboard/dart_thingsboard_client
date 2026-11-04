@@ -17,10 +17,11 @@ part 'to_core_edqs_request.g.dart';
 /// ToCoreEdqsRequest
 ///
 /// Properties:
-/// * [syncRequest] 
-/// * [apiEnabled] 
+/// * [syncRequest]
+/// * [apiEnabled]
 @BuiltValue()
-abstract class ToCoreEdqsRequest implements Built<ToCoreEdqsRequest, ToCoreEdqsRequestBuilder> {
+abstract class ToCoreEdqsRequest
+    implements Built<ToCoreEdqsRequest, ToCoreEdqsRequestBuilder> {
   @BuiltValueField(wireName: r'syncRequest')
   EdqsSyncRequest? get syncRequest;
 
@@ -29,16 +30,19 @@ abstract class ToCoreEdqsRequest implements Built<ToCoreEdqsRequest, ToCoreEdqsR
 
   ToCoreEdqsRequest._();
 
-  factory ToCoreEdqsRequest([void updates(ToCoreEdqsRequestBuilder b)]) = _$ToCoreEdqsRequest;
+  factory ToCoreEdqsRequest([void updates(ToCoreEdqsRequestBuilder b)]) =
+      _$ToCoreEdqsRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ToCoreEdqsRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ToCoreEdqsRequest> get serializer => _$ToCoreEdqsRequestSerializer();
+  static Serializer<ToCoreEdqsRequest> get serializer =>
+      _$ToCoreEdqsRequestSerializer();
 }
 
-class _$ToCoreEdqsRequestSerializer implements PrimitiveSerializer<ToCoreEdqsRequest> {
+class _$ToCoreEdqsRequestSerializer
+    implements PrimitiveSerializer<ToCoreEdqsRequest> {
   @override
   final Iterable<Type> types = const [ToCoreEdqsRequest, _$ToCoreEdqsRequest];
 
@@ -72,7 +76,11 @@ class _$ToCoreEdqsRequestSerializer implements PrimitiveSerializer<ToCoreEdqsReq
     ToCoreEdqsRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +96,22 @@ class _$ToCoreEdqsRequestSerializer implements PrimitiveSerializer<ToCoreEdqsReq
       final value = serializedList[i + 1];
       switch (key) {
         case r'syncRequest':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EdqsSyncRequest),
-          ) as EdqsSyncRequest?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EdqsSyncRequest),
+                  )
+                  as EdqsSyncRequest?;
           if (valueDes == null) continue;
           result.syncRequest.replace(valueDes);
           break;
         case r'apiEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.apiEnabled = valueDes;
           break;
@@ -131,5 +143,3 @@ class _$ToCoreEdqsRequestSerializer implements PrimitiveSerializer<ToCoreEdqsReq
     return result.build();
   }
 }
-
-

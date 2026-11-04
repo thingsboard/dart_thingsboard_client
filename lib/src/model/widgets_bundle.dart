@@ -27,10 +27,11 @@ part 'widgets_bundle.g.dart';
 /// * [scada] - Whether widgets bundle contains SCADA symbol widget types.
 /// * [description] - Description
 /// * [order] - Order
-/// * [version] 
+/// * [version]
 /// * [name] - Same as title of the Widget Bundle. Read-only field. Update the 'title' to change the 'name' of the Widget Bundle.
 @BuiltValue()
-abstract class WidgetsBundle implements Built<WidgetsBundle, WidgetsBundleBuilder> {
+abstract class WidgetsBundle
+    implements Built<WidgetsBundle, WidgetsBundleBuilder> {
   /// JSON object with the Widget Bundle Id. Specify this field to update the Widget Bundle. Referencing non-existing Widget Bundle Id will cause error. Omit this field to create new Widget Bundle.
   @BuiltValueField(wireName: r'id')
   WidgetsBundleId? get id;
@@ -76,13 +77,15 @@ abstract class WidgetsBundle implements Built<WidgetsBundle, WidgetsBundleBuilde
 
   WidgetsBundle._();
 
-  factory WidgetsBundle([void updates(WidgetsBundleBuilder b)]) = _$WidgetsBundle;
+  factory WidgetsBundle([void updates(WidgetsBundleBuilder b)]) =
+      _$WidgetsBundle;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WidgetsBundleBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WidgetsBundle> get serializer => _$WidgetsBundleSerializer();
+  static Serializer<WidgetsBundle> get serializer =>
+      _$WidgetsBundleSerializer();
 }
 
 class _$WidgetsBundleSerializer implements PrimitiveSerializer<WidgetsBundle> {
@@ -182,7 +185,11 @@ class _$WidgetsBundleSerializer implements PrimitiveSerializer<WidgetsBundle> {
     WidgetsBundle object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -198,90 +205,112 @@ class _$WidgetsBundleSerializer implements PrimitiveSerializer<WidgetsBundle> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(WidgetsBundleId),
-          ) as WidgetsBundleId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(WidgetsBundleId),
+                  )
+                  as WidgetsBundleId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'alias':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.alias = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'image':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.image = valueDes;
           break;
         case r'scada':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.scada = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'order':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.order = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -313,5 +342,3 @@ class _$WidgetsBundleSerializer implements PrimitiveSerializer<WidgetsBundle> {
     return result.build();
   }
 }
-
-

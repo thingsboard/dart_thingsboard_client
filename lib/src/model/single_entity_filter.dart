@@ -18,25 +18,31 @@ part 'single_entity_filter.g.dart';
 /// SingleEntityFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [singleEntity] 
+/// * [type]
+/// * [singleEntity]
 @BuiltValue()
-abstract class SingleEntityFilter implements EntityFilter, Built<SingleEntityFilter, SingleEntityFilterBuilder> {
+abstract class SingleEntityFilter
+    implements
+        EntityFilter,
+        Built<SingleEntityFilter, SingleEntityFilterBuilder> {
   @BuiltValueField(wireName: r'singleEntity')
   AliasEntityId? get singleEntity;
 
   SingleEntityFilter._();
 
-  factory SingleEntityFilter([void updates(SingleEntityFilterBuilder b)]) = _$SingleEntityFilter;
+  factory SingleEntityFilter([void updates(SingleEntityFilterBuilder b)]) =
+      _$SingleEntityFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SingleEntityFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SingleEntityFilter> get serializer => _$SingleEntityFilterSerializer();
+  static Serializer<SingleEntityFilter> get serializer =>
+      _$SingleEntityFilterSerializer();
 }
 
-class _$SingleEntityFilterSerializer implements PrimitiveSerializer<SingleEntityFilter> {
+class _$SingleEntityFilterSerializer
+    implements PrimitiveSerializer<SingleEntityFilter> {
   @override
   final Iterable<Type> types = const [SingleEntityFilter, _$SingleEntityFilter];
 
@@ -68,7 +74,11 @@ class _$SingleEntityFilterSerializer implements PrimitiveSerializer<SingleEntity
     SingleEntityFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -84,17 +94,21 @@ class _$SingleEntityFilterSerializer implements PrimitiveSerializer<SingleEntity
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'singleEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.singleEntity.replace(valueDes);
           break;
@@ -126,5 +140,3 @@ class _$SingleEntityFilterSerializer implements PrimitiveSerializer<SingleEntity
     return result.build();
   }
 }
-
-

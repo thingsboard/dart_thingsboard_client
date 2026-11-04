@@ -17,9 +17,9 @@ part 'snmp_mapping.g.dart';
 /// SnmpMapping
 ///
 /// Properties:
-/// * [oid] 
-/// * [key] 
-/// * [dataType] 
+/// * [oid]
+/// * [key]
+/// * [dataType]
 @BuiltValue()
 abstract class SnmpMapping implements Built<SnmpMapping, SnmpMappingBuilder> {
   @BuiltValueField(wireName: r'oid')
@@ -84,7 +84,11 @@ class _$SnmpMappingSerializer implements PrimitiveSerializer<SnmpMapping> {
     SnmpMapping object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -100,26 +104,32 @@ class _$SnmpMappingSerializer implements PrimitiveSerializer<SnmpMapping> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'oid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.oid = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'dataType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DataType),
-          ) as DataType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DataType),
+                  )
+                  as DataType?;
           if (valueDes == null) continue;
           result.dataType = valueDes;
           break;
@@ -151,5 +161,3 @@ class _$SnmpMappingSerializer implements PrimitiveSerializer<SnmpMapping> {
     return result.build();
   }
 }
-
-

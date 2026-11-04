@@ -23,7 +23,8 @@ part 'update_message.g.dart';
 /// * [currentVersionReleaseNotesUrl] - Current ThingsBoard version release notes URL.
 /// * [latestVersionReleaseNotesUrl] - Latest ThingsBoard version release notes URL.
 @BuiltValue()
-abstract class UpdateMessage implements Built<UpdateMessage, UpdateMessageBuilder> {
+abstract class UpdateMessage
+    implements Built<UpdateMessage, UpdateMessageBuilder> {
   /// 'True' if new platform update is available.
   @BuiltValueField(wireName: r'updateAvailable')
   bool? get updateAvailable;
@@ -50,13 +51,15 @@ abstract class UpdateMessage implements Built<UpdateMessage, UpdateMessageBuilde
 
   UpdateMessage._();
 
-  factory UpdateMessage([void updates(UpdateMessageBuilder b)]) = _$UpdateMessage;
+  factory UpdateMessage([void updates(UpdateMessageBuilder b)]) =
+      _$UpdateMessage;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UpdateMessageBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UpdateMessage> get serializer => _$UpdateMessageSerializer();
+  static Serializer<UpdateMessage> get serializer =>
+      _$UpdateMessageSerializer();
 }
 
 class _$UpdateMessageSerializer implements PrimitiveSerializer<UpdateMessage> {
@@ -121,7 +124,11 @@ class _$UpdateMessageSerializer implements PrimitiveSerializer<UpdateMessage> {
     UpdateMessage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -137,50 +144,62 @@ class _$UpdateMessageSerializer implements PrimitiveSerializer<UpdateMessage> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'updateAvailable':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.updateAvailable = valueDes;
           break;
         case r'currentVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.currentVersion = valueDes;
           break;
         case r'latestVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestVersion = valueDes;
           break;
         case r'upgradeInstructionsUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.upgradeInstructionsUrl = valueDes;
           break;
         case r'currentVersionReleaseNotesUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.currentVersionReleaseNotesUrl = valueDes;
           break;
         case r'latestVersionReleaseNotesUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestVersionReleaseNotesUrl = valueDes;
           break;
@@ -212,5 +231,3 @@ class _$UpdateMessageSerializer implements PrimitiveSerializer<UpdateMessage> {
     return result.build();
   }
 }
-
-

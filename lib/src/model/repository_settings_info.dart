@@ -16,10 +16,11 @@ part 'repository_settings_info.g.dart';
 /// RepositorySettingsInfo
 ///
 /// Properties:
-/// * [configured] 
-/// * [readOnly] 
+/// * [configured]
+/// * [readOnly]
 @BuiltValue()
-abstract class RepositorySettingsInfo implements Built<RepositorySettingsInfo, RepositorySettingsInfoBuilder> {
+abstract class RepositorySettingsInfo
+    implements Built<RepositorySettingsInfo, RepositorySettingsInfoBuilder> {
   @BuiltValueField(wireName: r'configured')
   bool? get configured;
 
@@ -28,18 +29,25 @@ abstract class RepositorySettingsInfo implements Built<RepositorySettingsInfo, R
 
   RepositorySettingsInfo._();
 
-  factory RepositorySettingsInfo([void updates(RepositorySettingsInfoBuilder b)]) = _$RepositorySettingsInfo;
+  factory RepositorySettingsInfo([
+    void updates(RepositorySettingsInfoBuilder b),
+  ]) = _$RepositorySettingsInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RepositorySettingsInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RepositorySettingsInfo> get serializer => _$RepositorySettingsInfoSerializer();
+  static Serializer<RepositorySettingsInfo> get serializer =>
+      _$RepositorySettingsInfoSerializer();
 }
 
-class _$RepositorySettingsInfoSerializer implements PrimitiveSerializer<RepositorySettingsInfo> {
+class _$RepositorySettingsInfoSerializer
+    implements PrimitiveSerializer<RepositorySettingsInfo> {
   @override
-  final Iterable<Type> types = const [RepositorySettingsInfo, _$RepositorySettingsInfo];
+  final Iterable<Type> types = const [
+    RepositorySettingsInfo,
+    _$RepositorySettingsInfo,
+  ];
 
   @override
   final String wireName = r'RepositorySettingsInfo';
@@ -71,7 +79,11 @@ class _$RepositorySettingsInfoSerializer implements PrimitiveSerializer<Reposito
     RepositorySettingsInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +99,22 @@ class _$RepositorySettingsInfoSerializer implements PrimitiveSerializer<Reposito
       final value = serializedList[i + 1];
       switch (key) {
         case r'configured':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.configured = valueDes;
           break;
         case r'readOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.readOnly = valueDes;
           break;
@@ -130,5 +146,3 @@ class _$RepositorySettingsInfoSerializer implements PrimitiveSerializer<Reposito
     return result.build();
   }
 }
-
-

@@ -18,32 +18,42 @@ part 'cf_reprocessing_task_result.g.dart';
 /// CfReprocessingTaskResult
 ///
 /// Properties:
-/// * [key] 
-/// * [success] 
-/// * [discarded] 
-/// * [finishTs] 
-/// * [error] 
-/// * [jobType] 
-/// * [failure] 
+/// * [key]
+/// * [success]
+/// * [discarded]
+/// * [finishTs]
+/// * [error]
+/// * [jobType]
+/// * [failure]
 @BuiltValue()
-abstract class CfReprocessingTaskResult implements TaskResult, Built<CfReprocessingTaskResult, CfReprocessingTaskResultBuilder> {
+abstract class CfReprocessingTaskResult
+    implements
+        TaskResult,
+        Built<CfReprocessingTaskResult, CfReprocessingTaskResultBuilder> {
   @BuiltValueField(wireName: r'failure')
   CfReprocessingTaskFailure? get failure;
 
   CfReprocessingTaskResult._();
 
-  factory CfReprocessingTaskResult([void updates(CfReprocessingTaskResultBuilder b)]) = _$CfReprocessingTaskResult;
+  factory CfReprocessingTaskResult([
+    void updates(CfReprocessingTaskResultBuilder b),
+  ]) = _$CfReprocessingTaskResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CfReprocessingTaskResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CfReprocessingTaskResult> get serializer => _$CfReprocessingTaskResultSerializer();
+  static Serializer<CfReprocessingTaskResult> get serializer =>
+      _$CfReprocessingTaskResultSerializer();
 }
 
-class _$CfReprocessingTaskResultSerializer implements PrimitiveSerializer<CfReprocessingTaskResult> {
+class _$CfReprocessingTaskResultSerializer
+    implements PrimitiveSerializer<CfReprocessingTaskResult> {
   @override
-  final Iterable<Type> types = const [CfReprocessingTaskResult, _$CfReprocessingTaskResult];
+  final Iterable<Type> types = const [
+    CfReprocessingTaskResult,
+    _$CfReprocessingTaskResult,
+  ];
 
   @override
   final String wireName = r'CfReprocessingTaskResult';
@@ -108,7 +118,11 @@ class _$CfReprocessingTaskResultSerializer implements PrimitiveSerializer<CfRepr
     CfReprocessingTaskResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -124,57 +138,73 @@ class _$CfReprocessingTaskResultSerializer implements PrimitiveSerializer<CfRepr
       final value = serializedList[i + 1];
       switch (key) {
         case r'discarded':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.discarded = valueDes;
           break;
         case r'failure':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CfReprocessingTaskFailure),
-          ) as CfReprocessingTaskFailure?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      CfReprocessingTaskFailure,
+                    ),
+                  )
+                  as CfReprocessingTaskFailure?;
           if (valueDes == null) continue;
           result.failure.replace(valueDes);
           break;
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'finishTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.finishTs = valueDes;
           break;
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
         case r'jobType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.jobType = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
@@ -206,5 +236,3 @@ class _$CfReprocessingTaskResultSerializer implements PrimitiveSerializer<CfRepr
     return result.build();
   }
 }
-
-

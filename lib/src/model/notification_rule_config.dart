@@ -16,26 +16,34 @@ part 'notification_rule_config.g.dart';
 /// NotificationRuleConfig
 ///
 /// Properties:
-/// * [description] 
+/// * [description]
 @BuiltValue()
-abstract class NotificationRuleConfig implements Built<NotificationRuleConfig, NotificationRuleConfigBuilder> {
+abstract class NotificationRuleConfig
+    implements Built<NotificationRuleConfig, NotificationRuleConfigBuilder> {
   @BuiltValueField(wireName: r'description')
   String? get description;
 
   NotificationRuleConfig._();
 
-  factory NotificationRuleConfig([void updates(NotificationRuleConfigBuilder b)]) = _$NotificationRuleConfig;
+  factory NotificationRuleConfig([
+    void updates(NotificationRuleConfigBuilder b),
+  ]) = _$NotificationRuleConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationRuleConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationRuleConfig> get serializer => _$NotificationRuleConfigSerializer();
+  static Serializer<NotificationRuleConfig> get serializer =>
+      _$NotificationRuleConfigSerializer();
 }
 
-class _$NotificationRuleConfigSerializer implements PrimitiveSerializer<NotificationRuleConfig> {
+class _$NotificationRuleConfigSerializer
+    implements PrimitiveSerializer<NotificationRuleConfig> {
   @override
-  final Iterable<Type> types = const [NotificationRuleConfig, _$NotificationRuleConfig];
+  final Iterable<Type> types = const [
+    NotificationRuleConfig,
+    _$NotificationRuleConfig,
+  ];
 
   @override
   final String wireName = r'NotificationRuleConfig';
@@ -60,7 +68,11 @@ class _$NotificationRuleConfigSerializer implements PrimitiveSerializer<Notifica
     NotificationRuleConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +88,12 @@ class _$NotificationRuleConfigSerializer implements PrimitiveSerializer<Notifica
       final value = serializedList[i + 1];
       switch (key) {
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
@@ -111,5 +125,3 @@ class _$NotificationRuleConfigSerializer implements PrimitiveSerializer<Notifica
     return result.build();
   }
 }
-
-

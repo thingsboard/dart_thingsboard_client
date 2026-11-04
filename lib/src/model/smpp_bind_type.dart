@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'smpp_bind_type.g.dart';
 
 class SmppBindType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'TX')
   static const SmppBindType TX = _$TX;
   @BuiltValueEnumConst(wireName: r'RX')
@@ -27,7 +26,7 @@ class SmppBindType extends EnumClass {
 
   static Serializer<SmppBindType> get serializer => _$smppBindTypeSerializer;
 
-  const SmppBindType._(String name): super(name);
+  const SmppBindType._(String name) : super(name);
 
   static BuiltSet<SmppBindType> get values => _$values;
   static SmppBindType valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class SmppBindType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class SmppBindTypeMixin = Object with _$SmppBindTypeMixin;
-

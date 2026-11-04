@@ -15,19 +15,26 @@ import 'package:built_value/serializer.dart';
 part 'geofencing_report_strategy.g.dart';
 
 class GeofencingReportStrategy extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'REPORT_TRANSITION_EVENTS_ONLY')
-  static const GeofencingReportStrategy REPORT_TRANSITION_EVENTS_ONLY = _$REPORT_TRANSITION_EVENTS_ONLY;
+  static const GeofencingReportStrategy REPORT_TRANSITION_EVENTS_ONLY =
+      _$REPORT_TRANSITION_EVENTS_ONLY;
   @BuiltValueEnumConst(wireName: r'REPORT_PRESENCE_STATUS_ONLY')
-  static const GeofencingReportStrategy REPORT_PRESENCE_STATUS_ONLY = _$REPORT_PRESENCE_STATUS_ONLY;
-  @BuiltValueEnumConst(wireName: r'REPORT_TRANSITION_EVENTS_AND_PRESENCE_STATUS')
-  static const GeofencingReportStrategy REPORT_TRANSITION_EVENTS_AND_PRESENCE_STATUS = _$REPORT_TRANSITION_EVENTS_AND_PRESENCE_STATUS;
+  static const GeofencingReportStrategy REPORT_PRESENCE_STATUS_ONLY =
+      _$REPORT_PRESENCE_STATUS_ONLY;
+  @BuiltValueEnumConst(
+    wireName: r'REPORT_TRANSITION_EVENTS_AND_PRESENCE_STATUS',
+  )
+  static const GeofencingReportStrategy
+  REPORT_TRANSITION_EVENTS_AND_PRESENCE_STATUS =
+      _$REPORT_TRANSITION_EVENTS_AND_PRESENCE_STATUS;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const GeofencingReportStrategy unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const GeofencingReportStrategy unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<GeofencingReportStrategy> get serializer => _$geofencingReportStrategySerializer;
+  static Serializer<GeofencingReportStrategy> get serializer =>
+      _$geofencingReportStrategySerializer;
 
-  const GeofencingReportStrategy._(String name): super(name);
+  const GeofencingReportStrategy._(String name) : super(name);
 
   static BuiltSet<GeofencingReportStrategy> get values => _$values;
   static GeofencingReportStrategy valueOf(String name) => _$valueOf(name);
@@ -39,5 +46,5 @@ class GeofencingReportStrategy extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class GeofencingReportStrategyMixin = Object with _$GeofencingReportStrategyMixin;
-
+abstract class GeofencingReportStrategyMixin = Object
+    with _$GeofencingReportStrategyMixin;

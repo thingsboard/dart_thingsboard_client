@@ -83,7 +83,11 @@ class _$SignUpFieldSerializer implements PrimitiveSerializer<SignUpField> {
     SignUpField object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -99,24 +103,30 @@ class _$SignUpFieldSerializer implements PrimitiveSerializer<SignUpField> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SignUpFieldId),
-          ) as SignUpFieldId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SignUpFieldId),
+                  )
+                  as SignUpFieldId;
           result.id = valueDes;
           break;
         case r'label':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.label = valueDes;
           break;
         case r'required':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.required_ = valueDes;
           break;
@@ -148,5 +158,3 @@ class _$SignUpFieldSerializer implements PrimitiveSerializer<SignUpField> {
     return result.build();
   }
 }
-
-

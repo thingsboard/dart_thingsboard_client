@@ -22,28 +22,38 @@ part 'csv_report_template_config.g.dart';
 /// CsvReportTemplateConfig
 ///
 /// Properties:
-/// * [namePattern] 
-/// * [timeDataPattern] 
+/// * [namePattern]
+/// * [timeDataPattern]
 /// * [format] - Report format
-/// * [entityAliases] 
-/// * [filters] 
-/// * [components] 
+/// * [entityAliases]
+/// * [filters]
+/// * [components]
 @BuiltValue()
-abstract class CsvReportTemplateConfig implements ReportTemplateConfig, Built<CsvReportTemplateConfig, CsvReportTemplateConfigBuilder> {
+abstract class CsvReportTemplateConfig
+    implements
+        ReportTemplateConfig,
+        Built<CsvReportTemplateConfig, CsvReportTemplateConfigBuilder> {
   CsvReportTemplateConfig._();
 
-  factory CsvReportTemplateConfig([void updates(CsvReportTemplateConfigBuilder b)]) = _$CsvReportTemplateConfig;
+  factory CsvReportTemplateConfig([
+    void updates(CsvReportTemplateConfigBuilder b),
+  ]) = _$CsvReportTemplateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CsvReportTemplateConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CsvReportTemplateConfig> get serializer => _$CsvReportTemplateConfigSerializer();
+  static Serializer<CsvReportTemplateConfig> get serializer =>
+      _$CsvReportTemplateConfigSerializer();
 }
 
-class _$CsvReportTemplateConfigSerializer implements PrimitiveSerializer<CsvReportTemplateConfig> {
+class _$CsvReportTemplateConfigSerializer
+    implements PrimitiveSerializer<CsvReportTemplateConfig> {
   @override
-  final Iterable<Type> types = const [CsvReportTemplateConfig, _$CsvReportTemplateConfig];
+  final Iterable<Type> types = const [
+    CsvReportTemplateConfig,
+    _$CsvReportTemplateConfig,
+  ];
 
   @override
   final String wireName = r'CsvReportTemplateConfig';
@@ -101,7 +111,11 @@ class _$CsvReportTemplateConfigSerializer implements PrimitiveSerializer<CsvRepo
     CsvReportTemplateConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -117,49 +131,67 @@ class _$CsvReportTemplateConfigSerializer implements PrimitiveSerializer<CsvRepo
       final value = serializedList[i + 1];
       switch (key) {
         case r'namePattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.namePattern = valueDes;
           break;
         case r'components':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ReportComponent)]),
-          ) as BuiltList<ReportComponent>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ReportComponent),
+                    ]),
+                  )
+                  as BuiltList<ReportComponent>?;
           if (valueDes == null) continue;
           result.components.replace(valueDes);
           break;
         case r'timeDataPattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.timeDataPattern = valueDes;
           break;
         case r'entityAliases':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityAlias)]),
-          ) as BuiltList<EntityAlias>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityAlias),
+                    ]),
+                  )
+                  as BuiltList<EntityAlias>?;
           if (valueDes == null) continue;
           result.entityAliases.replace(valueDes);
           break;
         case r'format':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TbReportFormat),
-          ) as TbReportFormat;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TbReportFormat),
+                  )
+                  as TbReportFormat;
           result.format = valueDes;
           break;
         case r'filters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(Filter)]),
-          ) as BuiltList<Filter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(Filter),
+                    ]),
+                  )
+                  as BuiltList<Filter>?;
           if (valueDes == null) continue;
           result.filters.replace(valueDes);
           break;
@@ -191,5 +223,3 @@ class _$CsvReportTemplateConfigSerializer implements PrimitiveSerializer<CsvRepo
     return result.build();
   }
 }
-
-

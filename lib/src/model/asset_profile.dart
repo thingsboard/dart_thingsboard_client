@@ -24,16 +24,17 @@ part 'asset_profile.g.dart';
 /// * [createdTime] - Timestamp of the profile creation, in milliseconds
 /// * [tenantId] - JSON object with Tenant Id that owns the profile.
 /// * [name] - Unique Asset Profile Name in scope of Tenant.
-/// * [description] - Asset Profile description. 
-/// * [image] - Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view. 
+/// * [description] - Asset Profile description.
+/// * [image] - Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view.
 /// * [defaultRuleChainId] - Reference to the rule chain. If present, the specified rule chain will be used to process all messages related to asset, including asset updates, telemetry, attribute updates, etc. Otherwise, the root rule chain will be used to process those messages.
 /// * [defaultDashboardId] - Reference to the dashboard. Used in the mobile application to open the default dashboard when user navigates to asset details.
 /// * [defaultQueueName] - Rule engine queue name. If present, the specified queue will be used to store all unprocessed messages related to asset, including asset updates, telemetry, attribute updates, etc. Otherwise, the 'Main' queue will be used to store those messages.
 /// * [defaultEdgeRuleChainId] - Reference to the edge rule chain. If present, the specified edge rule chain will be used on the edge to process all messages related to asset, including asset updates, telemetry, attribute updates, etc. Otherwise, the edge root rule chain will be used to process those messages.
-/// * [version] 
+/// * [version]
 /// * [default_] - Used to mark the default profile. Default profile is used when the asset profile is not specified during asset creation.
 @BuiltValue()
-abstract class AssetProfile implements Built<AssetProfile, AssetProfileBuilder> {
+abstract class AssetProfile
+    implements Built<AssetProfile, AssetProfileBuilder> {
   /// JSON object with the asset profile Id. Specify this field to update the asset profile. Referencing non-existing asset profile Id will cause error. Omit this field to create new asset profile.
   @BuiltValueField(wireName: r'id')
   AssetProfileId? get id;
@@ -50,11 +51,11 @@ abstract class AssetProfile implements Built<AssetProfile, AssetProfileBuilder> 
   @BuiltValueField(wireName: r'name')
   String? get name;
 
-  /// Asset Profile description. 
+  /// Asset Profile description.
   @BuiltValueField(wireName: r'description')
   String? get description;
 
-  /// Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view. 
+  /// Either URL or Base64 data of the icon. Used in the mobile application to visualize set of asset profiles in the grid view.
   @BuiltValueField(wireName: r'image')
   String? get image;
 
@@ -196,7 +197,11 @@ class _$AssetProfileSerializer implements PrimitiveSerializer<AssetProfile> {
     AssetProfile object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -212,98 +217,122 @@ class _$AssetProfileSerializer implements PrimitiveSerializer<AssetProfile> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AssetProfileId),
-          ) as AssetProfileId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AssetProfileId),
+                  )
+                  as AssetProfileId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'image':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.image = valueDes;
           break;
         case r'defaultRuleChainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleChainId),
-          ) as RuleChainId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleChainId),
+                  )
+                  as RuleChainId?;
           if (valueDes == null) continue;
           result.defaultRuleChainId.replace(valueDes);
           break;
         case r'defaultDashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DashboardId),
-          ) as DashboardId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DashboardId),
+                  )
+                  as DashboardId?;
           if (valueDes == null) continue;
           result.defaultDashboardId.replace(valueDes);
           break;
         case r'defaultQueueName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultQueueName = valueDes;
           break;
         case r'defaultEdgeRuleChainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleChainId),
-          ) as RuleChainId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleChainId),
+                  )
+                  as RuleChainId?;
           if (valueDes == null) continue;
           result.defaultEdgeRuleChainId.replace(valueDes);
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'default':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.default_ = valueDes;
           break;
@@ -335,5 +364,3 @@ class _$AssetProfileSerializer implements PrimitiveSerializer<AssetProfile> {
     return result.build();
   }
 }
-
-

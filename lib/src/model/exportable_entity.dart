@@ -18,12 +18,13 @@ part 'exportable_entity.g.dart';
 /// ExportableEntity
 ///
 /// Properties:
-/// * [createdTime] 
-/// * [id] 
-/// * [name] 
-/// * [tenantId] 
+/// * [createdTime]
+/// * [id]
+/// * [name]
+/// * [tenantId]
 @BuiltValue()
-abstract class ExportableEntity implements Built<ExportableEntity, ExportableEntityBuilder> {
+abstract class ExportableEntity
+    implements Built<ExportableEntity, ExportableEntityBuilder> {
   @BuiltValueField(wireName: r'createdTime')
   int? get createdTime;
 
@@ -38,16 +39,19 @@ abstract class ExportableEntity implements Built<ExportableEntity, ExportableEnt
 
   ExportableEntity._();
 
-  factory ExportableEntity([void updates(ExportableEntityBuilder b)]) = _$ExportableEntity;
+  factory ExportableEntity([void updates(ExportableEntityBuilder b)]) =
+      _$ExportableEntity;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ExportableEntityBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ExportableEntity> get serializer => _$ExportableEntitySerializer();
+  static Serializer<ExportableEntity> get serializer =>
+      _$ExportableEntitySerializer();
 }
 
-class _$ExportableEntitySerializer implements PrimitiveSerializer<ExportableEntity> {
+class _$ExportableEntitySerializer
+    implements PrimitiveSerializer<ExportableEntity> {
   @override
   final Iterable<Type> types = const [ExportableEntity, _$ExportableEntity];
 
@@ -95,7 +99,11 @@ class _$ExportableEntitySerializer implements PrimitiveSerializer<ExportableEnti
     ExportableEntity object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -111,34 +119,42 @@ class _$ExportableEntitySerializer implements PrimitiveSerializer<ExportableEnti
       final value = serializedList[i + 1];
       switch (key) {
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
@@ -170,5 +186,3 @@ class _$ExportableEntitySerializer implements PrimitiveSerializer<ExportableEnti
     return result.build();
   }
 }
-
-

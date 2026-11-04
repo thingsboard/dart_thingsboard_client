@@ -23,7 +23,8 @@ part 'page_data_queue.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataQueue implements Built<PageDataQueue, PageDataQueueBuilder> {
+abstract class PageDataQueue
+    implements Built<PageDataQueue, PageDataQueueBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<Queue>? get data;
@@ -42,13 +43,15 @@ abstract class PageDataQueue implements Built<PageDataQueue, PageDataQueueBuilde
 
   PageDataQueue._();
 
-  factory PageDataQueue([void updates(PageDataQueueBuilder b)]) = _$PageDataQueue;
+  factory PageDataQueue([void updates(PageDataQueueBuilder b)]) =
+      _$PageDataQueue;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataQueueBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataQueue> get serializer => _$PageDataQueueSerializer();
+  static Serializer<PageDataQueue> get serializer =>
+      _$PageDataQueueSerializer();
 }
 
 class _$PageDataQueueSerializer implements PrimitiveSerializer<PageDataQueue> {
@@ -99,7 +102,11 @@ class _$PageDataQueueSerializer implements PrimitiveSerializer<PageDataQueue> {
     PageDataQueue object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +122,44 @@ class _$PageDataQueueSerializer implements PrimitiveSerializer<PageDataQueue> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(Queue)]),
-          ) as BuiltList<Queue>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(Queue),
+                    ]),
+                  )
+                  as BuiltList<Queue>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +191,3 @@ class _$PageDataQueueSerializer implements PrimitiveSerializer<PageDataQueue> {
     return result.build();
   }
 }
-
-

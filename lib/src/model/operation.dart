@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'operation.g.dart';
 
 class Operation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ALL')
   static const Operation ALL = _$ALL;
   @BuiltValueEnumConst(wireName: r'CREATE')
@@ -63,7 +62,7 @@ class Operation extends EnumClass {
 
   static Serializer<Operation> get serializer => _$operationSerializer;
 
-  const Operation._(String name): super(name);
+  const Operation._(String name) : super(name);
 
   static BuiltSet<Operation> get values => _$values;
   static Operation valueOf(String name) => _$valueOf(name);
@@ -76,4 +75,3 @@ class Operation extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class OperationMixin = Object with _$OperationMixin;
-

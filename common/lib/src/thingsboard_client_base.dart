@@ -25,8 +25,8 @@ import 'storage/tb_storage.dart';
 
 // Callback typedefs
 typedef TbComputeCallback<Q, R> = FutureOr<R> Function(Q message);
-typedef TbCompute = Future<R> Function<Q, R>(
-    TbComputeCallback<Q, R> callback, Q message);
+typedef TbCompute =
+    Future<R> Function<Q, R>(TbComputeCallback<Q, R> callback, Q message);
 
 typedef UserLoadedCallback = void Function();
 typedef LoadStartedCallback = void Function();
@@ -82,18 +82,19 @@ class ThingsboardClientBase {
     bool debugMode = false,
   }) {
     final tbClient = ThingsboardClientBase._internal(
-        apiEndpoint,
-        _createDio(apiEndpoint),
-        storage,
-        apiKey,
-        onUserLoaded,
-        onMfaAuth,
-        onMfaForce,
-        onError,
-        onLoadStarted,
-        onLoadFinished,
-        computeFunc ?? syncCompute,
-        debugMode);
+      apiEndpoint,
+      _createDio(apiEndpoint),
+      storage,
+      apiKey,
+      onUserLoaded,
+      onMfaAuth,
+      onMfaForce,
+      onError,
+      onLoadStarted,
+      onLoadFinished,
+      computeFunc ?? syncCompute,
+      debugMode,
+    );
     tbClient._installInterceptors();
     return tbClient;
   }
@@ -120,7 +121,7 @@ class ThingsboardClientBase {
   ThingsboardClientBase.create(
     String apiEndpoint, {
     TbStorage? storage,
-    String? apiKey,
+    this.apiKey,
     UserLoadedCallback? onUserLoaded,
     MfaAuthCallback? onMfaAuth,
     MfaAuthCallback? onMfaForce,
@@ -128,24 +129,23 @@ class ThingsboardClientBase {
     LoadStartedCallback? onLoadStarted,
     LoadFinishedCallback? onLoadFinished,
     TbCompute? computeFunc,
-    bool debugMode = false,
-  })  : _apiEndpoint = apiEndpoint,
-        _dio = _createDio(apiEndpoint),
-        apiKey = apiKey,
-        _userLoadedCallback = onUserLoaded,
-        _mfaAuthCallback = onMfaAuth,
-        _mfaForceCallback = onMfaForce,
-        _errorCallback = onError,
-        _loadStartedCallback = onLoadStarted,
-        _loadFinishedCallback = onLoadFinished,
-        _computeFunc = computeFunc ?? syncCompute,
-        debugMode = debugMode,
-        _storage = storage ?? InMemoryStorage() {
+    this.debugMode = false,
+  }) : _apiEndpoint = apiEndpoint,
+       _dio = _createDio(apiEndpoint),
+       _userLoadedCallback = onUserLoaded,
+       _mfaAuthCallback = onMfaAuth,
+       _mfaForceCallback = onMfaForce,
+       _errorCallback = onError,
+       _loadStartedCallback = onLoadStarted,
+       _loadFinishedCallback = onLoadFinished,
+       _computeFunc = computeFunc ?? syncCompute,
+       _storage = storage ?? InMemoryStorage() {
     _installInterceptors();
   }
 
-  static Dio _createDio(String apiEndpoint) => Dio(BaseOptions(
-      baseUrl: apiEndpoint, connectTimeout: _defaultConnectTimeout));
+  static Dio _createDio(String apiEndpoint) => Dio(
+    BaseOptions(baseUrl: apiEndpoint, connectTimeout: _defaultConnectTimeout),
+  );
 
   void _installInterceptors() {
     _dio.interceptors.clear();
@@ -160,13 +160,7 @@ class ThingsboardClientBase {
       );
     }
     _dio.interceptors.add(
-      HttpInterceptor(
-        _dio,
-        this,
-        _loadStarted,
-        _loadFinished,
-        _onError,
-      ),
+      HttpInterceptor(_dio, this, _loadStarted, _loadFinished, _onError),
     );
   }
 
@@ -177,8 +171,10 @@ class ThingsboardClientBase {
   String get apiEndpoint => _apiEndpoint;
 
   TelemetryService getTelemetryService() {
-    _telemetryWebsocketService ??=
-        TelemetryWebsocketService(this, _apiEndpoint);
+    _telemetryWebsocketService ??= TelemetryWebsocketService(
+      this,
+      _apiEndpoint,
+    );
     return _telemetryWebsocketService!;
   }
 
@@ -196,14 +192,11 @@ class ThingsboardClientBase {
 
   bool refreshTokenPending() => _tokenRefreshCompleter != null;
 
-  bool isSystemAdmin() =>
-      _authUser != null && _authUser!.isSystemAdmin();
+  bool isSystemAdmin() => _authUser != null && _authUser!.isSystemAdmin();
 
-  bool isTenantAdmin() =>
-      _authUser != null && _authUser!.isTenantAdmin();
+  bool isTenantAdmin() => _authUser != null && _authUser!.isTenantAdmin();
 
-  bool isCustomerUser() =>
-      _authUser != null && _authUser!.isCustomerUser();
+  bool isCustomerUser() => _authUser != null && _authUser!.isCustomerUser();
 
   bool isPreVerificationToken() =>
       _authUser != null && _authUser!.isPreVerificationToken();
@@ -253,7 +246,8 @@ class ThingsboardClientBase {
       if (currentVersion != null &&
           !isVersionSufficient(currentVersion, tbMinServerVersion)) {
         throw ThingsboardError(
-          message: 'ThingsBoard server version $currentVersion is below '
+          message:
+              'ThingsBoard server version $currentVersion is below '
               'the minimum required version $tbMinServerVersion.',
           errorCode: ThingsBoardErrorCode.general,
         );
@@ -267,14 +261,21 @@ class ThingsboardClientBase {
     }
   }
 
-  Future<LoginResponse> login(LoginRequest loginRequest,
-      {RequestConfig? requestConfig}) async {
-    var response = await post('/api/auth/login',
-        data: jsonEncode(loginRequest),
-        options: defaultHttpOptionsFromConfig(requestConfig));
+  Future<LoginResponse> login(
+    LoginRequest loginRequest, {
+    RequestConfig? requestConfig,
+  }) async {
+    var response = await post(
+      '/api/auth/login',
+      data: jsonEncode(loginRequest),
+      options: defaultHttpOptionsFromConfig(requestConfig),
+    );
     var loginResponse = LoginResponse.fromJson(response.data);
     await _setUserFromJwtToken(
-        loginResponse.token, loginResponse.refreshToken, true);
+      loginResponse.token,
+      loginResponse.refreshToken,
+      true,
+    );
     if (Authority.PRE_VERIFICATION_TOKEN == loginResponse.scope) {
       _mfaAuth();
     }
@@ -284,14 +285,18 @@ class ThingsboardClientBase {
     return loginResponse;
   }
 
-  Future<void> logout(
-      {RequestConfig? requestConfig, bool notifyUser = true}) async {
+  Future<void> logout({
+    RequestConfig? requestConfig,
+    bool notifyUser = true,
+  }) async {
     if (_telemetryWebsocketService != null) {
       _telemetryWebsocketService!.reset(true);
     }
     try {
-      await post('/api/auth/logout',
-          options: defaultHttpOptionsFromConfig(requestConfig));
+      await post(
+        '/api/auth/logout',
+        options: defaultHttpOptionsFromConfig(requestConfig),
+      );
       await _clearJwtToken(notifyUser: notifyUser);
     } catch (e) {
       await _clearJwtToken(notifyUser: notifyUser);
@@ -305,11 +310,12 @@ class ThingsboardClientBase {
   /// Throws when the refresh fails. The session is cleared only when the
   /// server rejects the refresh token (HTTP 401); a transport failure keeps it
   /// so a later attempt can still recover.
-  Future<void> refreshJwtToken(
-      {String? refreshToken,
-      bool? notify,
-      Dio? internalDio,
-      bool interceptRefreshToken = false}) async {
+  Future<void> refreshJwtToken({
+    String? refreshToken,
+    bool? notify,
+    Dio? internalDio,
+    bool interceptRefreshToken = false,
+  }) async {
     // Completer gate: if refresh already in progress, await it
     if (_tokenRefreshCompleter != null) {
       await _tokenRefreshCompleter!.future;
@@ -329,14 +335,19 @@ class ThingsboardClientBase {
         try {
           var targetDio = internalDio ?? _dio;
           var response = await targetDio.post(
-              Constants.entryPoints['tokenRefresh']!,
-              data: jsonEncode(refreshTokenRequest),
-              options: Options(
-                  sendTimeout: _defaultRefreshCallTimeout,
-                  receiveTimeout: _defaultRefreshCallTimeout));
+            Constants.entryPoints['tokenRefresh']!,
+            data: jsonEncode(refreshTokenRequest),
+            options: Options(
+              sendTimeout: _defaultRefreshCallTimeout,
+              receiveTimeout: _defaultRefreshCallTimeout,
+            ),
+          );
           var loginResponse = LoginResponse.fromJson(response.data);
           await _setUserFromJwtToken(
-              loginResponse.token, loginResponse.refreshToken, notify);
+            loginResponse.token,
+            loginResponse.refreshToken,
+            notify,
+          );
         } catch (e) {
           // A 403 is deliberately not treated as a rejected token: the refresh
           // endpoint answers with 401, so a 403 is more likely an intermediary
@@ -350,8 +361,9 @@ class ThingsboardClientBase {
         await _clearJwtToken();
         if (interceptRefreshToken) {
           throw ThingsboardError(
-              message: 'Session expired!',
-              errorCode: ThingsBoardErrorCode.jwtTokenExpired);
+            message: 'Session expired!',
+            errorCode: ThingsBoardErrorCode.jwtTokenExpired,
+          );
         }
       }
       completer.complete();
@@ -364,14 +376,19 @@ class ThingsboardClientBase {
   }
 
   Future<void> setUserFromJwtToken(
-      String? jwtToken, String? refreshToken, bool? notify) async {
+    String? jwtToken,
+    String? refreshToken,
+    bool? notify,
+  ) async {
     await _setUserFromJwtToken(jwtToken, refreshToken, notify);
   }
 
   // ---- Private helpers ----
 
   Future<void> _refreshStoredSession(
-      String? jwtToken, String? refreshToken) async {
+    String? jwtToken,
+    String? refreshToken,
+  ) async {
     try {
       await refreshJwtToken(refreshToken: refreshToken, notify: true);
     } catch (e) {
@@ -396,7 +413,10 @@ class ThingsboardClientBase {
   }
 
   Future<void> _setUserFromJwtToken(
-      String? jwtToken, String? refreshToken, bool? notify) async {
+    String? jwtToken,
+    String? refreshToken,
+    bool? notify,
+  ) async {
     if (jwtToken == null) {
       _token = null;
       _refreshToken = null;
@@ -479,11 +499,13 @@ class ThingsboardClientBase {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      return await _dio.get(path,
-          queryParameters: queryParameters,
-          options: options,
-          cancelToken: cancelToken,
-          onReceiveProgress: onReceiveProgress);
+      return await _dio.get(
+        path,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+      );
     } catch (e) {
       throw toThingsboardError(e);
     }
@@ -499,13 +521,15 @@ class ThingsboardClientBase {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      return await _dio.post(path,
-          data: data,
-          queryParameters: queryParameters,
-          options: options,
-          cancelToken: cancelToken,
-          onSendProgress: onSendProgress,
-          onReceiveProgress: onReceiveProgress);
+      return await _dio.post(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
     } catch (e) {
       throw toThingsboardError(e);
     }
@@ -519,11 +543,13 @@ class ThingsboardClientBase {
     CancelToken? cancelToken,
   }) async {
     try {
-      return await _dio.delete(path,
-          data: data,
-          queryParameters: queryParameters,
-          options: options,
-          cancelToken: cancelToken);
+      return await _dio.delete(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+      );
     } catch (e) {
       throw toThingsboardError(e);
     }
@@ -537,11 +563,13 @@ class ThingsboardClientBase {
     CancelToken? cancelToken,
   }) async {
     try {
-      return await _dio.put(path,
-          data: data,
-          queryParameters: queryParameters,
-          options: options,
-          cancelToken: cancelToken);
+      return await _dio.put(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+      );
     } catch (e) {
       throw toThingsboardError(e);
     }

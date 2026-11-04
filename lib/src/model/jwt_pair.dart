@@ -19,7 +19,7 @@ part 'jwt_pair.g.dart';
 /// Properties:
 /// * [token] - The JWT Access Token. Used to perform API calls.
 /// * [refreshToken] - The JWT Refresh Token. Used to get new JWT Access Token if old one has expired.
-/// * [scope] 
+/// * [scope]
 @BuiltValue()
 abstract class JwtPair implements Built<JwtPair, JwtPairBuilder> {
   /// The JWT Access Token. Used to perform API calls.
@@ -86,7 +86,11 @@ class _$JwtPairSerializer implements PrimitiveSerializer<JwtPair> {
     JwtPair object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -102,26 +106,32 @@ class _$JwtPairSerializer implements PrimitiveSerializer<JwtPair> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'token':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.token = valueDes;
           break;
         case r'refreshToken':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.refreshToken = valueDes;
           break;
         case r'scope':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Authority),
-          ) as Authority?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Authority),
+                  )
+                  as Authority?;
           if (valueDes == null) continue;
           result.scope = valueDes;
           break;
@@ -153,5 +163,3 @@ class _$JwtPairSerializer implements PrimitiveSerializer<JwtPair> {
     return result.build();
   }
 }
-
-

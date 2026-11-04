@@ -20,11 +20,11 @@ part 'agent_app_config.g.dart';
 /// AgentAppConfig
 ///
 /// Properties:
-/// * [arguments] 
-/// * [edgeRoutingKey] 
-/// * [type] 
+/// * [arguments]
+/// * [edgeRoutingKey]
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class AgentAppConfig  {
+abstract class AgentAppConfig {
   @BuiltValueField(wireName: r'arguments')
   BuiltList<AgentAppArgument>? get arguments;
 
@@ -42,27 +42,30 @@ abstract class AgentAppConfig  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentAppConfig> get serializer => _$AgentAppConfigSerializer();
+  static Serializer<AgentAppConfig> get serializer =>
+      _$AgentAppConfigSerializer();
 }
 
 extension AgentAppConfigDiscriminatorExt on AgentAppConfig {
-    String? get discriminatorValue {
-        if (this is DockerComposeConfig) {
-            return r'DockerComposeConfig';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is DockerComposeConfig) {
+      return r'DockerComposeConfig';
     }
-}
-extension AgentAppConfigBuilderDiscriminatorExt on AgentAppConfigBuilder {
-    String? get discriminatorValue {
-        if (this is DockerComposeConfigBuilder) {
-            return r'DockerComposeConfig';
-        }
-        return null;
-    }
+    return null;
+  }
 }
 
-class _$AgentAppConfigSerializer implements PrimitiveSerializer<AgentAppConfig> {
+extension AgentAppConfigBuilderDiscriminatorExt on AgentAppConfigBuilder {
+  String? get discriminatorValue {
+    if (this is DockerComposeConfigBuilder) {
+      return r'DockerComposeConfig';
+    }
+    return null;
+  }
+}
+
+class _$AgentAppConfigSerializer
+    implements PrimitiveSerializer<AgentAppConfig> {
   @override
   final Iterable<Type> types = const [AgentAppConfig];
 
@@ -104,9 +107,16 @@ class _$AgentAppConfigSerializer implements PrimitiveSerializer<AgentAppConfig> 
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is DockerComposeConfig) {
-      return serializers.serialize(object, specifiedType: FullType(DockerComposeConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DockerComposeConfig),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -116,33 +126,50 @@ class _$AgentAppConfigSerializer implements PrimitiveSerializer<AgentAppConfig> 
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(AgentAppConfig.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(AgentAppConfig.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'DockerComposeConfig':
-        return serializers.deserialize(serialized, specifiedType: FullType(DockerComposeConfig)) as DockerComposeConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DockerComposeConfig),
+            )
+            as DockerComposeConfig;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($AgentAppConfig)) as $AgentAppConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($AgentAppConfig),
+            )
+            as $AgentAppConfig;
     }
   }
 }
 
-
 /// a concrete implementation of [AgentAppConfig], since [AgentAppConfig] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $AgentAppConfig implements AgentAppConfig, Built<$AgentAppConfig, $AgentAppConfigBuilder> {
+abstract class $AgentAppConfig
+    implements AgentAppConfig, Built<$AgentAppConfig, $AgentAppConfigBuilder> {
   $AgentAppConfig._();
 
-  factory $AgentAppConfig([void Function($AgentAppConfigBuilder)? updates]) = _$$AgentAppConfig;
+  factory $AgentAppConfig([void Function($AgentAppConfigBuilder)? updates]) =
+      _$$AgentAppConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($AgentAppConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$AgentAppConfig> get serializer => _$$AgentAppConfigSerializer();
+  static Serializer<$AgentAppConfig> get serializer =>
+      _$$AgentAppConfigSerializer();
 }
 
-class _$$AgentAppConfigSerializer implements PrimitiveSerializer<$AgentAppConfig> {
+class _$$AgentAppConfigSerializer
+    implements PrimitiveSerializer<$AgentAppConfig> {
   @override
   final Iterable<Type> types = const [$AgentAppConfig, _$$AgentAppConfig];
 
@@ -155,7 +182,10 @@ class _$$AgentAppConfigSerializer implements PrimitiveSerializer<$AgentAppConfig
     $AgentAppConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(AgentAppConfig))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(AgentAppConfig),
+    )!;
   }
 
   void _deserializeProperties(
@@ -171,26 +201,34 @@ class _$$AgentAppConfigSerializer implements PrimitiveSerializer<$AgentAppConfig
       final value = serializedList[i + 1];
       switch (key) {
         case r'arguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AgentAppArgument)]),
-          ) as BuiltList<AgentAppArgument>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AgentAppArgument),
+                    ]),
+                  )
+                  as BuiltList<AgentAppArgument>?;
           if (valueDes == null) continue;
           result.arguments.replace(valueDes);
           break;
         case r'edgeRoutingKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeRoutingKey = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppConfigType),
-          ) as AgentAppConfigType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppConfigType),
+                  )
+                  as AgentAppConfigType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
@@ -222,4 +260,3 @@ class _$$AgentAppConfigSerializer implements PrimitiveSerializer<$AgentAppConfig
     return result.build();
   }
 }
-

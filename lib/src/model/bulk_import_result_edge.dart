@@ -17,12 +17,13 @@ part 'bulk_import_result_edge.g.dart';
 /// BulkImportResultEdge
 ///
 /// Properties:
-/// * [created] 
-/// * [updated] 
-/// * [errors] 
-/// * [errorsList] 
+/// * [created]
+/// * [updated]
+/// * [errors]
+/// * [errorsList]
 @BuiltValue()
-abstract class BulkImportResultEdge implements Built<BulkImportResultEdge, BulkImportResultEdgeBuilder> {
+abstract class BulkImportResultEdge
+    implements Built<BulkImportResultEdge, BulkImportResultEdgeBuilder> {
   @BuiltValueField(wireName: r'created')
   int? get created;
 
@@ -37,18 +38,24 @@ abstract class BulkImportResultEdge implements Built<BulkImportResultEdge, BulkI
 
   BulkImportResultEdge._();
 
-  factory BulkImportResultEdge([void updates(BulkImportResultEdgeBuilder b)]) = _$BulkImportResultEdge;
+  factory BulkImportResultEdge([void updates(BulkImportResultEdgeBuilder b)]) =
+      _$BulkImportResultEdge;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BulkImportResultEdgeBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BulkImportResultEdge> get serializer => _$BulkImportResultEdgeSerializer();
+  static Serializer<BulkImportResultEdge> get serializer =>
+      _$BulkImportResultEdgeSerializer();
 }
 
-class _$BulkImportResultEdgeSerializer implements PrimitiveSerializer<BulkImportResultEdge> {
+class _$BulkImportResultEdgeSerializer
+    implements PrimitiveSerializer<BulkImportResultEdge> {
   @override
-  final Iterable<Type> types = const [BulkImportResultEdge, _$BulkImportResultEdge];
+  final Iterable<Type> types = const [
+    BulkImportResultEdge,
+    _$BulkImportResultEdge,
+  ];
 
   @override
   final String wireName = r'BulkImportResultEdge';
@@ -94,7 +101,11 @@ class _$BulkImportResultEdgeSerializer implements PrimitiveSerializer<BulkImport
     BulkImportResultEdge object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,34 +121,44 @@ class _$BulkImportResultEdgeSerializer implements PrimitiveSerializer<BulkImport
       final value = serializedList[i + 1];
       switch (key) {
         case r'created':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.created = valueDes;
           break;
         case r'updated':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.updated = valueDes;
           break;
         case r'errors':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.errors = valueDes;
           break;
         case r'errorsList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.errorsList.replace(valueDes);
           break;
@@ -169,5 +190,3 @@ class _$BulkImportResultEdgeSerializer implements PrimitiveSerializer<BulkImport
     return result.build();
   }
 }
-
-

@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -17,11 +16,9 @@ import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/page_data_queue_stats.dart';
 import 'package:thingsboard_client/src/model/queue_stats.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class QueueStatsControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -42,7 +39,7 @@ class QueueStatsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [QueueStats] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<QueueStats>> getQueueStatsById({ 
+  Future<Response<QueueStats>> getQueueStatsById({
     required String queueStatsId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -51,13 +48,21 @@ class QueueStatsControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerQueueStats);
-    final _path = r'/api/queueStats/{queueStatsId}'.replaceAll('{' r'queueStatsId' '}', encodeQueryParameter(_serializers, queueStatsId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerQueueStats);
+    final _path = r'/api/queueStats/{queueStatsId}'.replaceAll(
+      '{'
+      r'queueStatsId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        queueStatsId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -65,11 +70,8 @@ class QueueStatsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -88,11 +90,13 @@ class QueueStatsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(QueueStats),
-      ) as QueueStats;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(QueueStats),
+                )
+                as QueueStats;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -116,7 +120,7 @@ class QueueStatsControllerApi {
   }
 
   /// Get QueueStats By Ids (getQueueStatsByIds)
-  /// Fetch the Queue stats objects based on the provided ids. 
+  /// Fetch the Queue stats objects based on the provided ids.
   ///
   /// Parameters:
   /// * [queueStatsIds] - A list of queue stats ids, separated by comma ','
@@ -129,7 +133,7 @@ class QueueStatsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<QueueStats>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<QueueStats>>> getQueueStatsByIds({ 
+  Future<Response<BuiltList<QueueStats>>> getQueueStatsByIds({
     required BuiltList<String> queueStatsIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -138,13 +142,13 @@ class QueueStatsControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfQueueStatsAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfQueueStatsAndListOfString);
     final _path = r'/api/queueStats/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -152,11 +156,8 @@ class QueueStatsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -164,7 +165,12 @@ class QueueStatsControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'queueStatsIds': encodeCollectionQueryParameter<String>(_serializers, queueStatsIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'queueStatsIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        queueStatsIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -180,11 +186,15 @@ class QueueStatsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(QueueStats)]),
-      ) as BuiltList<QueueStats>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(QueueStats),
+                  ]),
+                )
+                as BuiltList<QueueStats>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -225,7 +235,7 @@ class QueueStatsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataQueueStats] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataQueueStats>> getTenantQueueStats({ 
+  Future<Response<PageDataQueueStats>> getTenantQueueStats({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -238,13 +248,12 @@ class QueueStatsControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataQueueStats);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataQueueStats);
     final _path = r'/api/queueStats';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -252,11 +261,8 @@ class QueueStatsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -264,11 +270,30 @@ class QueueStatsControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -284,11 +309,13 @@ class QueueStatsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataQueueStats),
-      ) as PageDataQueueStats;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataQueueStats),
+                )
+                as PageDataQueueStats;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -310,5 +337,4 @@ class QueueStatsControllerApi {
       extra: _response.extra,
     );
   }
-
 }

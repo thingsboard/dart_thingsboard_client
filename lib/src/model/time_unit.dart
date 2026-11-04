@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'time_unit.g.dart';
 
 class TimeUnit extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'NANOSECONDS')
   static const TimeUnit NANOSECONDS = _$NANOSECONDS;
   @BuiltValueEnumConst(wireName: r'MICROSECONDS')
@@ -35,7 +34,7 @@ class TimeUnit extends EnumClass {
 
   static Serializer<TimeUnit> get serializer => _$timeUnitSerializer;
 
-  const TimeUnit._(String name): super(name);
+  const TimeUnit._(String name) : super(name);
 
   static BuiltSet<TimeUnit> get values => _$values;
   static TimeUnit valueOf(String name) => _$valueOf(name);
@@ -48,4 +47,3 @@ class TimeUnit extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class TimeUnitMixin = Object with _$TimeUnitMixin;
-

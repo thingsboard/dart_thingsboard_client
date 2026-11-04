@@ -24,21 +24,24 @@ part 'alarm_table_component.g.dart';
 /// AlarmTableComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [margins] 
-/// * [paddings] 
-/// * [background] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [borderColor] 
-/// * [showTableHeading] 
-/// * [tableHeading] 
-/// * [tableSortOrder] 
-/// * [alarmSource] 
-/// * [timewindow] 
+/// * [subType]
+/// * [type]
+/// * [margins]
+/// * [paddings]
+/// * [background]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [borderColor]
+/// * [showTableHeading]
+/// * [tableHeading]
+/// * [tableSortOrder]
+/// * [alarmSource]
+/// * [timewindow]
 @BuiltValue()
-abstract class AlarmTableComponent implements ReportComponent, Built<AlarmTableComponent, AlarmTableComponentBuilder> {
+abstract class AlarmTableComponent
+    implements
+        ReportComponent,
+        Built<AlarmTableComponent, AlarmTableComponentBuilder> {
   @BuiltValueField(wireName: r'showTableHeading')
   bool? get showTableHeading;
 
@@ -74,18 +77,24 @@ abstract class AlarmTableComponent implements ReportComponent, Built<AlarmTableC
 
   AlarmTableComponent._();
 
-  factory AlarmTableComponent([void updates(AlarmTableComponentBuilder b)]) = _$AlarmTableComponent;
+  factory AlarmTableComponent([void updates(AlarmTableComponentBuilder b)]) =
+      _$AlarmTableComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmTableComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmTableComponent> get serializer => _$AlarmTableComponentSerializer();
+  static Serializer<AlarmTableComponent> get serializer =>
+      _$AlarmTableComponentSerializer();
 }
 
-class _$AlarmTableComponentSerializer implements PrimitiveSerializer<AlarmTableComponent> {
+class _$AlarmTableComponentSerializer
+    implements PrimitiveSerializer<AlarmTableComponent> {
   @override
-  final Iterable<Type> types = const [AlarmTableComponent, _$AlarmTableComponent];
+  final Iterable<Type> types = const [
+    AlarmTableComponent,
+    _$AlarmTableComponent,
+  ];
 
   @override
   final String wireName = r'AlarmTableComponent';
@@ -190,7 +199,11 @@ class _$AlarmTableComponentSerializer implements PrimitiveSerializer<AlarmTableC
     AlarmTableComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -206,105 +219,133 @@ class _$AlarmTableComponentSerializer implements PrimitiveSerializer<AlarmTableC
       final value = serializedList[i + 1];
       switch (key) {
         case r'margins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.margins.replace(valueDes);
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'timewindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeWindowConfiguration),
-          ) as TimeWindowConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeWindowConfiguration,
+                    ),
+                  )
+                  as TimeWindowConfiguration?;
           if (valueDes == null) continue;
           result.timewindow.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'tableHeading':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Heading),
-          ) as Heading?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Heading),
+                  )
+                  as Heading?;
           if (valueDes == null) continue;
           result.tableHeading.replace(valueDes);
           break;
         case r'showTableHeading':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTableHeading = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'paddings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.paddings.replace(valueDes);
           break;
         case r'background':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.background = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'tableSortOrder':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TableSortOrder),
-          ) as TableSortOrder?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TableSortOrder),
+                  )
+                  as TableSortOrder?;
           if (valueDes == null) continue;
           result.tableSortOrder.replace(valueDes);
           break;
         case r'alarmSource':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DataSource),
-          ) as DataSource?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DataSource),
+                  )
+                  as DataSource?;
           if (valueDes == null) continue;
           result.alarmSource.replace(valueDes);
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         default:
@@ -335,5 +376,3 @@ class _$AlarmTableComponentSerializer implements PrimitiveSerializer<AlarmTableC
     return result.build();
   }
 }
-
-

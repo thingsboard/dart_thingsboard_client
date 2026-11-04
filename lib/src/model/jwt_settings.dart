@@ -97,7 +97,11 @@ class _$JwtSettingsSerializer implements PrimitiveSerializer<JwtSettings> {
     JwtSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,34 +117,42 @@ class _$JwtSettingsSerializer implements PrimitiveSerializer<JwtSettings> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'tokenExpirationTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.tokenExpirationTime = valueDes;
           break;
         case r'refreshTokenExpTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.refreshTokenExpTime = valueDes;
           break;
         case r'tokenIssuer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tokenIssuer = valueDes;
           break;
         case r'tokenSigningKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tokenSigningKey = valueDes;
           break;
@@ -172,5 +184,3 @@ class _$JwtSettingsSerializer implements PrimitiveSerializer<JwtSettings> {
     return result.build();
   }
 }
-
-

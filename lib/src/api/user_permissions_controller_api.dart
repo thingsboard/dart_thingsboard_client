@@ -9,17 +9,14 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/allowed_permissions_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class UserPermissionsControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -39,7 +36,7 @@ class UserPermissionsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AllowedPermissionsInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AllowedPermissionsInfo>> getAllowedPermissions({ 
+  Future<Response<AllowedPermissionsInfo>> getAllowedPermissions({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -47,13 +44,12 @@ class UserPermissionsControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAllowedPermissionsInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAllowedPermissionsInfo);
     final _path = r'/api/permissions/allowedPermissions';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -61,11 +57,8 @@ class UserPermissionsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -84,11 +77,13 @@ class UserPermissionsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AllowedPermissionsInfo),
-      ) as AllowedPermissionsInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AllowedPermissionsInfo),
+                )
+                as AllowedPermissionsInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -112,7 +107,7 @@ class UserPermissionsControllerApi {
   }
 
   /// Check permission for specified entity (hasEntityPermission)
-  /// Returns true if the user has permission to perform the operation, and false otherwise. 
+  /// Returns true if the user has permission to perform the operation, and false otherwise.
   ///
   /// Parameters:
   /// * [entityType] - A string value representing the entity type. For example, 'DEVICE'
@@ -127,7 +122,7 @@ class UserPermissionsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> hasEntityPermission({ 
+  Future<Response<bool>> hasEntityPermission({
     required String entityType,
     required String entityId,
     required String operation,
@@ -139,12 +134,40 @@ class UserPermissionsControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/permission/{entityType}/{entityId}/{operation}'.replaceAll('{' r'entityType' '}', encodeQueryParameter(_serializers, entityType, const FullType(String)).toString()).replaceAll('{' r'entityId' '}', encodeQueryParameter(_serializers, entityId, const FullType(String)).toString()).replaceAll('{' r'operation' '}', encodeQueryParameter(_serializers, operation, const FullType(String)).toString());
+    final _path = r'/api/permission/{entityType}/{entityId}/{operation}'
+        .replaceAll(
+          '{'
+          r'entityType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'entityId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            entityId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'operation'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            operation,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -152,11 +175,8 @@ class UserPermissionsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -176,7 +196,6 @@ class UserPermissionsControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -198,5 +217,4 @@ class UserPermissionsControllerApi {
       extra: _response.extra,
     );
   }
-
 }

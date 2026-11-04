@@ -18,25 +18,32 @@ part 'agent_upgrade_request.g.dart';
 /// Properties:
 /// * [imageRef] - Target agent image reference — a digest-pinned reference in production, or a tag.
 @BuiltValue()
-abstract class AgentUpgradeRequest implements Built<AgentUpgradeRequest, AgentUpgradeRequestBuilder> {
+abstract class AgentUpgradeRequest
+    implements Built<AgentUpgradeRequest, AgentUpgradeRequestBuilder> {
   /// Target agent image reference — a digest-pinned reference in production, or a tag.
   @BuiltValueField(wireName: r'imageRef')
   String get imageRef;
 
   AgentUpgradeRequest._();
 
-  factory AgentUpgradeRequest([void updates(AgentUpgradeRequestBuilder b)]) = _$AgentUpgradeRequest;
+  factory AgentUpgradeRequest([void updates(AgentUpgradeRequestBuilder b)]) =
+      _$AgentUpgradeRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentUpgradeRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentUpgradeRequest> get serializer => _$AgentUpgradeRequestSerializer();
+  static Serializer<AgentUpgradeRequest> get serializer =>
+      _$AgentUpgradeRequestSerializer();
 }
 
-class _$AgentUpgradeRequestSerializer implements PrimitiveSerializer<AgentUpgradeRequest> {
+class _$AgentUpgradeRequestSerializer
+    implements PrimitiveSerializer<AgentUpgradeRequest> {
   @override
-  final Iterable<Type> types = const [AgentUpgradeRequest, _$AgentUpgradeRequest];
+  final Iterable<Type> types = const [
+    AgentUpgradeRequest,
+    _$AgentUpgradeRequest,
+  ];
 
   @override
   final String wireName = r'AgentUpgradeRequest';
@@ -59,7 +66,11 @@ class _$AgentUpgradeRequestSerializer implements PrimitiveSerializer<AgentUpgrad
     AgentUpgradeRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +86,12 @@ class _$AgentUpgradeRequestSerializer implements PrimitiveSerializer<AgentUpgrad
       final value = serializedList[i + 1];
       switch (key) {
         case r'imageRef':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.imageRef = valueDes;
           break;
         default:
@@ -109,5 +122,3 @@ class _$AgentUpgradeRequestSerializer implements PrimitiveSerializer<AgentUpgrad
     return result.build();
   }
 }
-
-

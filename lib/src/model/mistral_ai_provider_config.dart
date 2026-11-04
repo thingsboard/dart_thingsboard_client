@@ -16,26 +16,34 @@ part 'mistral_ai_provider_config.g.dart';
 /// MistralAiProviderConfig
 ///
 /// Properties:
-/// * [apiKey] 
+/// * [apiKey]
 @BuiltValue()
-abstract class MistralAiProviderConfig implements Built<MistralAiProviderConfig, MistralAiProviderConfigBuilder> {
+abstract class MistralAiProviderConfig
+    implements Built<MistralAiProviderConfig, MistralAiProviderConfigBuilder> {
   @BuiltValueField(wireName: r'apiKey')
   String get apiKey;
 
   MistralAiProviderConfig._();
 
-  factory MistralAiProviderConfig([void updates(MistralAiProviderConfigBuilder b)]) = _$MistralAiProviderConfig;
+  factory MistralAiProviderConfig([
+    void updates(MistralAiProviderConfigBuilder b),
+  ]) = _$MistralAiProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MistralAiProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MistralAiProviderConfig> get serializer => _$MistralAiProviderConfigSerializer();
+  static Serializer<MistralAiProviderConfig> get serializer =>
+      _$MistralAiProviderConfigSerializer();
 }
 
-class _$MistralAiProviderConfigSerializer implements PrimitiveSerializer<MistralAiProviderConfig> {
+class _$MistralAiProviderConfigSerializer
+    implements PrimitiveSerializer<MistralAiProviderConfig> {
   @override
-  final Iterable<Type> types = const [MistralAiProviderConfig, _$MistralAiProviderConfig];
+  final Iterable<Type> types = const [
+    MistralAiProviderConfig,
+    _$MistralAiProviderConfig,
+  ];
 
   @override
   final String wireName = r'MistralAiProviderConfig';
@@ -58,7 +66,11 @@ class _$MistralAiProviderConfigSerializer implements PrimitiveSerializer<Mistral
     MistralAiProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -74,10 +86,12 @@ class _$MistralAiProviderConfigSerializer implements PrimitiveSerializer<Mistral
       final value = serializedList[i + 1];
       switch (key) {
         case r'apiKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.apiKey = valueDes;
           break;
         default:
@@ -108,5 +122,3 @@ class _$MistralAiProviderConfigSerializer implements PrimitiveSerializer<Mistral
     return result.build();
   }
 }
-
-

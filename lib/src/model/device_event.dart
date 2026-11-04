@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'device_event.g.dart';
 
 class DeviceEvent extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ACTIVE')
   static const DeviceEvent ACTIVE = _$ACTIVE;
   @BuiltValueEnumConst(wireName: r'INACTIVE')
@@ -25,7 +24,7 @@ class DeviceEvent extends EnumClass {
 
   static Serializer<DeviceEvent> get serializer => _$deviceEventSerializer;
 
-  const DeviceEvent._(String name): super(name);
+  const DeviceEvent._(String name) : super(name);
 
   static BuiltSet<DeviceEvent> get values => _$values;
   static DeviceEvent valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class DeviceEvent extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class DeviceEventMixin = Object with _$DeviceEventMixin;
-

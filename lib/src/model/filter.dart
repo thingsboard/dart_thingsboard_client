@@ -18,9 +18,9 @@ part 'filter.g.dart';
 /// Filter
 ///
 /// Properties:
-/// * [id] 
-/// * [filter] 
-/// * [keyFilters] 
+/// * [id]
+/// * [filter]
+/// * [keyFilters]
 @BuiltValue()
 abstract class Filter implements Built<Filter, FilterBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -84,7 +84,11 @@ class _$FilterSerializer implements PrimitiveSerializer<Filter> {
     Filter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -100,26 +104,34 @@ class _$FilterSerializer implements PrimitiveSerializer<Filter> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'filter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.filter = valueDes;
           break;
         case r'keyFilters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(KeyFilter)]),
-          ) as BuiltList<KeyFilter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(KeyFilter),
+                    ]),
+                  )
+                  as BuiltList<KeyFilter>?;
           if (valueDes == null) continue;
           result.keyFilters.replace(valueDes);
           break;
@@ -151,5 +163,3 @@ class _$FilterSerializer implements PrimitiveSerializer<Filter> {
     return result.build();
   }
 }
-
-

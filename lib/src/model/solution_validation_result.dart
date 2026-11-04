@@ -22,7 +22,9 @@ part 'solution_validation_result.g.dart';
 /// * [conflicts] - List of blocking issues that would prevent import (e.g. unsupported entity types, missing or malformed entity data).
 /// * [warnings] - List of non-blocking warnings (e.g. missing dependency references).
 @BuiltValue()
-abstract class SolutionValidationResult implements Built<SolutionValidationResult, SolutionValidationResultBuilder> {
+abstract class SolutionValidationResult
+    implements
+        Built<SolutionValidationResult, SolutionValidationResultBuilder> {
   /// 'true' if the solution can be imported without errors. 'false' if there are structural issues (empty entities, unsupported types, malformed data).
   @BuiltValueField(wireName: r'valid')
   bool? get valid;
@@ -41,18 +43,25 @@ abstract class SolutionValidationResult implements Built<SolutionValidationResul
 
   SolutionValidationResult._();
 
-  factory SolutionValidationResult([void updates(SolutionValidationResultBuilder b)]) = _$SolutionValidationResult;
+  factory SolutionValidationResult([
+    void updates(SolutionValidationResultBuilder b),
+  ]) = _$SolutionValidationResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SolutionValidationResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SolutionValidationResult> get serializer => _$SolutionValidationResultSerializer();
+  static Serializer<SolutionValidationResult> get serializer =>
+      _$SolutionValidationResultSerializer();
 }
 
-class _$SolutionValidationResultSerializer implements PrimitiveSerializer<SolutionValidationResult> {
+class _$SolutionValidationResultSerializer
+    implements PrimitiveSerializer<SolutionValidationResult> {
   @override
-  final Iterable<Type> types = const [SolutionValidationResult, _$SolutionValidationResult];
+  final Iterable<Type> types = const [
+    SolutionValidationResult,
+    _$SolutionValidationResult,
+  ];
 
   @override
   final String wireName = r'SolutionValidationResult';
@@ -73,7 +82,10 @@ class _$SolutionValidationResultSerializer implements PrimitiveSerializer<Soluti
       yield r'entitySummary';
       yield serializers.serialize(
         object.entitySummary,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(int),
+        ]),
       );
     }
     if (object.conflicts != null) {
@@ -98,7 +110,11 @@ class _$SolutionValidationResultSerializer implements PrimitiveSerializer<Soluti
     SolutionValidationResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -114,34 +130,49 @@ class _$SolutionValidationResultSerializer implements PrimitiveSerializer<Soluti
       final value = serializedList[i + 1];
       switch (key) {
         case r'valid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.valid = valueDes;
           break;
         case r'entitySummary':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(int)]),
-          ) as BuiltMap<String, int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltMap<String, int>?;
           if (valueDes == null) continue;
           result.entitySummary.replace(valueDes);
           break;
         case r'conflicts':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.conflicts.replace(valueDes);
           break;
         case r'warnings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.warnings.replace(valueDes);
           break;
@@ -173,5 +204,3 @@ class _$SolutionValidationResultSerializer implements PrimitiveSerializer<Soluti
     return result.build();
   }
 }
-
-

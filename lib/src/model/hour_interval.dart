@@ -17,11 +17,12 @@ part 'hour_interval.g.dart';
 /// HourInterval
 ///
 /// Properties:
-/// * [type] 
-/// * [tz] 
-/// * [offsetSec] 
+/// * [type]
+/// * [tz]
+/// * [offsetSec]
 @BuiltValue()
-abstract class HourInterval implements AggInterval, Built<HourInterval, HourIntervalBuilder> {
+abstract class HourInterval
+    implements AggInterval, Built<HourInterval, HourIntervalBuilder> {
   @BuiltValueField(wireName: r'tz')
   String get tz;
 
@@ -76,7 +77,11 @@ class _$HourIntervalSerializer implements PrimitiveSerializer<HourInterval> {
     HourInterval object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,25 +97,31 @@ class _$HourIntervalSerializer implements PrimitiveSerializer<HourInterval> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'offsetSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.offsetSec = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'tz':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tz = valueDes;
           break;
         default:
@@ -141,5 +152,3 @@ class _$HourIntervalSerializer implements PrimitiveSerializer<HourInterval> {
     return result.build();
   }
 }
-
-

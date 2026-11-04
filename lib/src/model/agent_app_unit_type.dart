@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agent_app_unit_type.g.dart';
 
 class AgentAppUnitType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CONTAINER')
   static const AgentAppUnitType CONTAINER = _$CONTAINER;
   @BuiltValueEnumConst(wireName: r'VOLUME')
@@ -25,9 +24,10 @@ class AgentAppUnitType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AgentAppUnitType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<AgentAppUnitType> get serializer => _$agentAppUnitTypeSerializer;
+  static Serializer<AgentAppUnitType> get serializer =>
+      _$agentAppUnitTypeSerializer;
 
-  const AgentAppUnitType._(String name): super(name);
+  const AgentAppUnitType._(String name) : super(name);
 
   static BuiltSet<AgentAppUnitType> get values => _$values;
   static AgentAppUnitType valueOf(String name) => _$valueOf(name);
@@ -40,4 +40,3 @@ class AgentAppUnitType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AgentAppUnitTypeMixin = Object with _$AgentAppUnitTypeMixin;
-

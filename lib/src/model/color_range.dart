@@ -16,9 +16,9 @@ part 'color_range.g.dart';
 /// ColorRange
 ///
 /// Properties:
-/// * [from] 
-/// * [to] 
-/// * [color] 
+/// * [from]
+/// * [to]
+/// * [color]
 @BuiltValue()
 abstract class ColorRange implements Built<ColorRange, ColorRangeBuilder> {
   @BuiltValueField(wireName: r'from')
@@ -82,7 +82,11 @@ class _$ColorRangeSerializer implements PrimitiveSerializer<ColorRange> {
     ColorRange object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +102,32 @@ class _$ColorRangeSerializer implements PrimitiveSerializer<ColorRange> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'from':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.from = valueDes;
           break;
         case r'to':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.to = valueDes;
           break;
         case r'color':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.color = valueDes;
           break;
@@ -149,5 +159,3 @@ class _$ColorRangeSerializer implements PrimitiveSerializer<ColorRange> {
     return result.build();
   }
 }
-
-

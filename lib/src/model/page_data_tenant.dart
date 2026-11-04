@@ -23,7 +23,8 @@ part 'page_data_tenant.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataTenant implements Built<PageDataTenant, PageDataTenantBuilder> {
+abstract class PageDataTenant
+    implements Built<PageDataTenant, PageDataTenantBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<Tenant>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataTenant implements Built<PageDataTenant, PageDataTenantBui
 
   PageDataTenant._();
 
-  factory PageDataTenant([void updates(PageDataTenantBuilder b)]) = _$PageDataTenant;
+  factory PageDataTenant([void updates(PageDataTenantBuilder b)]) =
+      _$PageDataTenant;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataTenantBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataTenant> get serializer => _$PageDataTenantSerializer();
+  static Serializer<PageDataTenant> get serializer =>
+      _$PageDataTenantSerializer();
 }
 
-class _$PageDataTenantSerializer implements PrimitiveSerializer<PageDataTenant> {
+class _$PageDataTenantSerializer
+    implements PrimitiveSerializer<PageDataTenant> {
   @override
   final Iterable<Type> types = const [PageDataTenant, _$PageDataTenant];
 
@@ -99,7 +103,11 @@ class _$PageDataTenantSerializer implements PrimitiveSerializer<PageDataTenant> 
     PageDataTenant object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataTenantSerializer implements PrimitiveSerializer<PageDataTenant> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(Tenant)]),
-          ) as BuiltList<Tenant>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(Tenant),
+                    ]),
+                  )
+                  as BuiltList<Tenant>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataTenantSerializer implements PrimitiveSerializer<PageDataTenant> 
     return result.build();
   }
 }
-
-

@@ -23,20 +23,21 @@ part 'alarm_count_query.g.dart';
 /// A JSON value representing the alarm count query.
 ///
 /// Properties:
-/// * [entityFilter] 
-/// * [keyFilters] 
-/// * [keyFiltersOperation] 
-/// * [startTs] 
-/// * [endTs] 
-/// * [timeWindow] 
-/// * [typeList] 
-/// * [statusList] 
-/// * [severityList] 
-/// * [searchPropagatedAlarms] 
-/// * [assigneeId] 
-/// * [keyFiltersOperationOrDefault] 
+/// * [entityFilter]
+/// * [keyFilters]
+/// * [keyFiltersOperation]
+/// * [startTs]
+/// * [endTs]
+/// * [timeWindow]
+/// * [typeList]
+/// * [statusList]
+/// * [severityList]
+/// * [searchPropagatedAlarms]
+/// * [assigneeId]
+/// * [keyFiltersOperationOrDefault]
 @BuiltValue()
-abstract class AlarmCountQuery implements Built<AlarmCountQuery, AlarmCountQueryBuilder> {
+abstract class AlarmCountQuery
+    implements Built<AlarmCountQuery, AlarmCountQueryBuilder> {
   @BuiltValueField(wireName: r'entityFilter')
   EntityFilter? get entityFilter;
 
@@ -77,16 +78,19 @@ abstract class AlarmCountQuery implements Built<AlarmCountQuery, AlarmCountQuery
 
   AlarmCountQuery._();
 
-  factory AlarmCountQuery([void updates(AlarmCountQueryBuilder b)]) = _$AlarmCountQuery;
+  factory AlarmCountQuery([void updates(AlarmCountQueryBuilder b)]) =
+      _$AlarmCountQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmCountQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmCountQuery> get serializer => _$AlarmCountQuerySerializer();
+  static Serializer<AlarmCountQuery> get serializer =>
+      _$AlarmCountQuerySerializer();
 }
 
-class _$AlarmCountQuerySerializer implements PrimitiveSerializer<AlarmCountQuery> {
+class _$AlarmCountQuerySerializer
+    implements PrimitiveSerializer<AlarmCountQuery> {
   @override
   final Iterable<Type> types = const [AlarmCountQuery, _$AlarmCountQuery];
 
@@ -190,7 +194,11 @@ class _$AlarmCountQuerySerializer implements PrimitiveSerializer<AlarmCountQuery
     AlarmCountQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -206,98 +214,134 @@ class _$AlarmCountQuerySerializer implements PrimitiveSerializer<AlarmCountQuery
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityFilter),
-          ) as EntityFilter?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityFilter),
+                  )
+                  as EntityFilter?;
           if (valueDes == null) continue;
           result.entityFilter = valueDes;
           break;
         case r'keyFilters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(KeyFilter)]),
-          ) as BuiltList<KeyFilter>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(KeyFilter),
+                    ]),
+                  )
+                  as BuiltList<KeyFilter>?;
           if (valueDes == null) continue;
           result.keyFilters.replace(valueDes);
           break;
         case r'keyFiltersOperation':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.keyFiltersOperation = valueDes;
           break;
         case r'startTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.startTs = valueDes;
           break;
         case r'endTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.endTs = valueDes;
           break;
         case r'timeWindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeWindow = valueDes;
           break;
         case r'typeList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.typeList.replace(valueDes);
           break;
         case r'statusList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmSearchStatus)]),
-          ) as BuiltList<AlarmSearchStatus>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmSearchStatus),
+                    ]),
+                  )
+                  as BuiltList<AlarmSearchStatus>?;
           if (valueDes == null) continue;
           result.statusList.replace(valueDes);
           break;
         case r'severityList':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(AlarmSeverity)]),
-          ) as BuiltList<AlarmSeverity>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(AlarmSeverity),
+                    ]),
+                  )
+                  as BuiltList<AlarmSeverity>?;
           if (valueDes == null) continue;
           result.severityList.replace(valueDes);
           break;
         case r'searchPropagatedAlarms':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.searchPropagatedAlarms = valueDes;
           break;
         case r'assigneeId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.assigneeId.replace(valueDes);
           break;
         case r'keyFiltersOperationOrDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmRuleComplexOperation),
-          ) as AlarmRuleComplexOperation?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AlarmRuleComplexOperation,
+                    ),
+                  )
+                  as AlarmRuleComplexOperation?;
           if (valueDes == null) continue;
           result.keyFiltersOperationOrDefault = valueDes;
           break;
@@ -329,5 +373,3 @@ class _$AlarmCountQuerySerializer implements PrimitiveSerializer<AlarmCountQuery
     return result.build();
   }
 }
-
-

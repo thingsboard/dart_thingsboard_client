@@ -17,23 +17,26 @@ part 'tb_text_content.g.dart';
 /// Text-based content part of a user's prompt
 ///
 /// Properties:
-/// * [contentType] 
+/// * [contentType]
 /// * [text] - The text content
 @BuiltValue()
-abstract class TbTextContent implements TbContent, Built<TbTextContent, TbTextContentBuilder> {
+abstract class TbTextContent
+    implements TbContent, Built<TbTextContent, TbTextContentBuilder> {
   /// The text content
   @BuiltValueField(wireName: r'text')
   String get text;
 
   TbTextContent._();
 
-  factory TbTextContent([void updates(TbTextContentBuilder b)]) = _$TbTextContent;
+  factory TbTextContent([void updates(TbTextContentBuilder b)]) =
+      _$TbTextContent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbTextContentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbTextContent> get serializer => _$TbTextContentSerializer();
+  static Serializer<TbTextContent> get serializer =>
+      _$TbTextContentSerializer();
 }
 
 class _$TbTextContentSerializer implements PrimitiveSerializer<TbTextContent> {
@@ -66,7 +69,11 @@ class _$TbTextContentSerializer implements PrimitiveSerializer<TbTextContent> {
     TbTextContent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -82,17 +89,21 @@ class _$TbTextContentSerializer implements PrimitiveSerializer<TbTextContent> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'contentType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.contentType = valueDes;
           break;
         case r'text':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.text = valueDes;
           break;
         default:
@@ -123,5 +134,3 @@ class _$TbTextContentSerializer implements PrimitiveSerializer<TbTextContent> {
     return result.build();
   }
 }
-
-

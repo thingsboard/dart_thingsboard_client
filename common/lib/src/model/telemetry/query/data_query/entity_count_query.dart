@@ -15,8 +15,9 @@ class EntityCountQuery {
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};
     json['entityFilter'] = entityFilter.toJson();
-    json['keyFilters'] =
-        keyFilters != null ? keyFilters!.map((e) => e.toJson()).toList() : [];
+    json['keyFilters'] = keyFilters != null
+        ? keyFilters!.map((e) => e.toJson()).toList()
+        : [];
     return json;
   }
 

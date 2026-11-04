@@ -21,7 +21,8 @@ part 'mobile_app_version_info.g.dart';
 /// * [latestVersion] - Latest supported version
 /// * [latestVersionReleaseNotes] - Release notes of latest supported version
 @BuiltValue()
-abstract class MobileAppVersionInfo implements Built<MobileAppVersionInfo, MobileAppVersionInfoBuilder> {
+abstract class MobileAppVersionInfo
+    implements Built<MobileAppVersionInfo, MobileAppVersionInfoBuilder> {
   /// Minimum supported version
   @BuiltValueField(wireName: r'minVersion')
   String? get minVersion;
@@ -40,18 +41,24 @@ abstract class MobileAppVersionInfo implements Built<MobileAppVersionInfo, Mobil
 
   MobileAppVersionInfo._();
 
-  factory MobileAppVersionInfo([void updates(MobileAppVersionInfoBuilder b)]) = _$MobileAppVersionInfo;
+  factory MobileAppVersionInfo([void updates(MobileAppVersionInfoBuilder b)]) =
+      _$MobileAppVersionInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MobileAppVersionInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileAppVersionInfo> get serializer => _$MobileAppVersionInfoSerializer();
+  static Serializer<MobileAppVersionInfo> get serializer =>
+      _$MobileAppVersionInfoSerializer();
 }
 
-class _$MobileAppVersionInfoSerializer implements PrimitiveSerializer<MobileAppVersionInfo> {
+class _$MobileAppVersionInfoSerializer
+    implements PrimitiveSerializer<MobileAppVersionInfo> {
   @override
-  final Iterable<Type> types = const [MobileAppVersionInfo, _$MobileAppVersionInfo];
+  final Iterable<Type> types = const [
+    MobileAppVersionInfo,
+    _$MobileAppVersionInfo,
+  ];
 
   @override
   final String wireName = r'MobileAppVersionInfo';
@@ -97,7 +104,11 @@ class _$MobileAppVersionInfoSerializer implements PrimitiveSerializer<MobileAppV
     MobileAppVersionInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -113,34 +124,42 @@ class _$MobileAppVersionInfoSerializer implements PrimitiveSerializer<MobileAppV
       final value = serializedList[i + 1];
       switch (key) {
         case r'minVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.minVersion = valueDes;
           break;
         case r'minVersionReleaseNotes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.minVersionReleaseNotes = valueDes;
           break;
         case r'latestVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestVersion = valueDes;
           break;
         case r'latestVersionReleaseNotes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.latestVersionReleaseNotes = valueDes;
           break;
@@ -172,5 +191,3 @@ class _$MobileAppVersionInfoSerializer implements PrimitiveSerializer<MobileAppV
     return result.build();
   }
 }
-
-

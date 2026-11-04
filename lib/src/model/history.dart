@@ -19,11 +19,11 @@ part 'history.g.dart';
 /// History
 ///
 /// Properties:
-/// * [historyType] 
-/// * [interval] 
-/// * [timewindowMs] 
-/// * [fixedTimewindow] 
-/// * [quickInterval] 
+/// * [historyType]
+/// * [interval]
+/// * [timewindowMs]
+/// * [fixedTimewindow]
+/// * [quickInterval]
 @BuiltValue()
 abstract class History implements Built<History, HistoryBuilder> {
   @BuiltValueField(wireName: r'historyType')
@@ -108,7 +108,11 @@ class _$HistorySerializer implements PrimitiveSerializer<History> {
     History object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -124,42 +128,52 @@ class _$HistorySerializer implements PrimitiveSerializer<History> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'historyType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.historyType = valueDes;
           break;
         case r'interval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Interval),
-          ) as Interval?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Interval),
+                  )
+                  as Interval?;
           if (valueDes == null) continue;
           result.interval.replace(valueDes);
           break;
         case r'timewindowMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timewindowMs = valueDes;
           break;
         case r'fixedTimewindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(FixedTimeWindow),
-          ) as FixedTimeWindow?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(FixedTimeWindow),
+                  )
+                  as FixedTimeWindow?;
           if (valueDes == null) continue;
           result.fixedTimewindow.replace(valueDes);
           break;
         case r'quickInterval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(QuickTimeInterval),
-          ) as QuickTimeInterval?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(QuickTimeInterval),
+                  )
+                  as QuickTimeInterval?;
           if (valueDes == null) continue;
           result.quickInterval = valueDes;
           break;
@@ -191,5 +205,3 @@ class _$HistorySerializer implements PrimitiveSerializer<History> {
     return result.build();
   }
 }
-
-

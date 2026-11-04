@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'relation_type_group.g.dart';
 
 class RelationTypeGroup extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'COMMON')
   static const RelationTypeGroup COMMON = _$COMMON;
   @BuiltValueEnumConst(wireName: r'DASHBOARD')
@@ -29,15 +28,18 @@ class RelationTypeGroup extends EnumClass {
   @BuiltValueEnumConst(wireName: r'EDGE')
   static const RelationTypeGroup EDGE = _$EDGE;
   @BuiltValueEnumConst(wireName: r'EDGE_AUTO_ASSIGN_RULE_CHAIN')
-  static const RelationTypeGroup EDGE_AUTO_ASSIGN_RULE_CHAIN = _$EDGE_AUTO_ASSIGN_RULE_CHAIN;
+  static const RelationTypeGroup EDGE_AUTO_ASSIGN_RULE_CHAIN =
+      _$EDGE_AUTO_ASSIGN_RULE_CHAIN;
   @BuiltValueEnumConst(wireName: r'AGENT')
   static const RelationTypeGroup AGENT = _$AGENT;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const RelationTypeGroup unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const RelationTypeGroup unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<RelationTypeGroup> get serializer => _$relationTypeGroupSerializer;
+  static Serializer<RelationTypeGroup> get serializer =>
+      _$relationTypeGroupSerializer;
 
-  const RelationTypeGroup._(String name): super(name);
+  const RelationTypeGroup._(String name) : super(name);
 
   static BuiltSet<RelationTypeGroup> get values => _$values;
   static RelationTypeGroup valueOf(String name) => _$valueOf(name);
@@ -50,4 +52,3 @@ class RelationTypeGroup extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class RelationTypeGroupMixin = Object with _$RelationTypeGroupMixin;
-

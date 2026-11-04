@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -18,11 +17,9 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/entity_relation.dart';
 import 'package:thingsboard_client/src/model/entity_relation_info.dart';
 import 'package:thingsboard_client/src/model/entity_relations_query.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class EntityRelationControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -48,7 +45,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityRelation] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityRelation>> deleteRelation({ 
+  Future<Response<EntityRelation>> deleteRelation({
     required String fromId,
     required String fromType,
     required String relationType,
@@ -62,13 +59,12 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityRelation);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityRelation);
     final _path = r'/api/v2/relation';
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -76,11 +72,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -88,12 +81,33 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'fromId': encodeQueryParameter(_serializers, fromId, const FullType(String)),
-      r'fromType': encodeQueryParameter(_serializers, fromType, const FullType(String)),
-      r'relationType': encodeQueryParameter(_serializers, relationType, const FullType(String)),
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      r'fromId': encodeQueryParameter(
+        _serializers,
+        fromId,
+        const FullType(String),
+      ),
+      r'fromType': encodeQueryParameter(
+        _serializers,
+        fromType,
+        const FullType(String),
+      ),
+      r'relationType': encodeQueryParameter(
+        _serializers,
+        relationType,
+        const FullType(String),
+      ),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
       r'toId': encodeQueryParameter(_serializers, toId, const FullType(String)),
-      r'toType': encodeQueryParameter(_serializers, toType, const FullType(String)),
+      r'toType': encodeQueryParameter(
+        _serializers,
+        toType,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -109,11 +123,13 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityRelation),
-      ) as EntityRelation;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityRelation),
+                )
+                as EntityRelation;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -151,7 +167,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteRelations({ 
+  Future<Response<void>> deleteRelations({
     required String entityId,
     required String entityType,
     CancelToken? cancelToken,
@@ -165,9 +181,7 @@ class EntityRelationControllerApi {
     final _path = r'/api/relations';
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -175,11 +189,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -187,8 +198,16 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'entityId': encodeQueryParameter(_serializers, entityId, const FullType(String)),
-      r'entityType': encodeQueryParameter(_serializers, entityType, const FullType(String)),
+      r'entityId': encodeQueryParameter(
+        _serializers,
+        entityId,
+        const FullType(String),
+      ),
+      r'entityType': encodeQueryParameter(
+        _serializers,
+        entityType,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -204,7 +223,7 @@ class EntityRelationControllerApi {
   }
 
   /// Get List of Relation Infos (findEntityRelationInfosByFrom)
-  /// Returns list of relation info objects for the specified entity by the &#39;from&#39; direction.   If the user has the authority of &#39;System Administrator&#39;, the server checks that the entity is owned by the sysadmin. If the user has the authority of &#39;Tenant Administrator&#39;, the server checks that the entity is owned by the same tenant. If the user has the authority of &#39;Customer User&#39;, the server checks that the entity is assigned to the same customer. Relation Info is an extension of the default Relation object that contains information about the &#39;from&#39; and &#39;to&#39; entity names. 
+  /// Returns list of relation info objects for the specified entity by the &#39;from&#39; direction.   If the user has the authority of &#39;System Administrator&#39;, the server checks that the entity is owned by the sysadmin. If the user has the authority of &#39;Tenant Administrator&#39;, the server checks that the entity is owned by the same tenant. If the user has the authority of &#39;Customer User&#39;, the server checks that the entity is assigned to the same customer. Relation Info is an extension of the default Relation object that contains information about the &#39;from&#39; and &#39;to&#39; entity names.
   ///
   /// Parameters:
   /// * [fromType] - A string value representing the entity type. For example, 'DEVICE'
@@ -219,7 +238,8 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelationInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelationInfo>>> findEntityRelationInfosByFrom({ 
+  Future<Response<BuiltList<EntityRelationInfo>>>
+  findEntityRelationInfosByFrom({
     required String fromType,
     required String fromId,
     String? relationTypeGroup,
@@ -230,13 +250,32 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelationInfo);
-    final _path = r'/api/relations/info/from/{fromType}/{fromId}'.replaceAll('{' r'fromType' '}', encodeQueryParameter(_serializers, fromType, const FullType(String)).toString()).replaceAll('{' r'fromId' '}', encodeQueryParameter(_serializers, fromId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityRelationInfo);
+    final _path = r'/api/relations/info/from/{fromType}/{fromId}'
+        .replaceAll(
+          '{'
+          r'fromType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            fromType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'fromId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            fromId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -244,11 +283,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -256,7 +292,12 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -272,11 +313,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelationInfo)]),
-      ) as BuiltList<EntityRelationInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelationInfo),
+                  ]),
+                )
+                as BuiltList<EntityRelationInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -300,10 +345,10 @@ class EntityRelationControllerApi {
   }
 
   /// Find related entity infos (findEntityRelationInfosByQuery)
-  /// Returns all entity infos that are related to the specific entity. The entity id, relation type, entity types, depth of the search, and other query parameters defined using complex &#39;EntityRelationsQuery&#39; object. See &#39;Model&#39; tab of the Parameters for more info. Relation Info is an extension of the default Relation object that contains information about the &#39;from&#39; and &#39;to&#39; entity names. 
+  /// Returns all entity infos that are related to the specific entity. The entity id, relation type, entity types, depth of the search, and other query parameters defined using complex &#39;EntityRelationsQuery&#39; object. See &#39;Model&#39; tab of the Parameters for more info. Relation Info is an extension of the default Relation object that contains information about the &#39;from&#39; and &#39;to&#39; entity names.
   ///
   /// Parameters:
-  /// * [entityRelationsQuery] 
+  /// * [entityRelationsQuery]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -313,7 +358,8 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelationInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelationInfo>>> findEntityRelationInfosByQuery({ 
+  Future<Response<BuiltList<EntityRelationInfo>>>
+  findEntityRelationInfosByQuery({
     required EntityRelationsQuery entityRelationsQuery,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -322,13 +368,13 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelationInfoAndEntityRelationsQuery);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfEntityRelationInfoAndEntityRelationsQuery);
     final _path = r'/api/relations/info';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -336,11 +382,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -352,14 +395,13 @@ class EntityRelationControllerApi {
 
     try {
       const _type = FullType(EntityRelationsQuery);
-      _bodyData = _serializers.serialize(entityRelationsQuery, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        entityRelationsQuery,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -379,11 +421,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelationInfo)]),
-      ) as BuiltList<EntityRelationInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelationInfo),
+                  ]),
+                )
+                as BuiltList<EntityRelationInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -407,7 +453,7 @@ class EntityRelationControllerApi {
   }
 
   /// Get List of Relation Infos (findEntityRelationInfosByTo)
-  /// Returns list of relation info objects for the specified entity by the &#39;to&#39; direction.   If the user has the authority of &#39;System Administrator&#39;, the server checks that the entity is owned by the sysadmin. If the user has the authority of &#39;Tenant Administrator&#39;, the server checks that the entity is owned by the same tenant. If the user has the authority of &#39;Customer User&#39;, the server checks that the entity is assigned to the same customer. Relation Info is an extension of the default Relation object that contains information about the &#39;from&#39; and &#39;to&#39; entity names. 
+  /// Returns list of relation info objects for the specified entity by the &#39;to&#39; direction.   If the user has the authority of &#39;System Administrator&#39;, the server checks that the entity is owned by the sysadmin. If the user has the authority of &#39;Tenant Administrator&#39;, the server checks that the entity is owned by the same tenant. If the user has the authority of &#39;Customer User&#39;, the server checks that the entity is assigned to the same customer. Relation Info is an extension of the default Relation object that contains information about the &#39;from&#39; and &#39;to&#39; entity names.
   ///
   /// Parameters:
   /// * [toType] - A string value representing the entity type. For example, 'DEVICE'
@@ -422,7 +468,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelationInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelationInfo>>> findEntityRelationInfosByTo({ 
+  Future<Response<BuiltList<EntityRelationInfo>>> findEntityRelationInfosByTo({
     required String toType,
     required String toId,
     String? relationTypeGroup,
@@ -433,13 +479,32 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelationInfo);
-    final _path = r'/api/relations/info/to/{toType}/{toId}'.replaceAll('{' r'toType' '}', encodeQueryParameter(_serializers, toType, const FullType(String)).toString()).replaceAll('{' r'toId' '}', encodeQueryParameter(_serializers, toId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityRelationInfo);
+    final _path = r'/api/relations/info/to/{toType}/{toId}'
+        .replaceAll(
+          '{'
+          r'toType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            toType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'toId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            toId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -447,11 +512,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -459,7 +521,12 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -475,11 +542,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelationInfo)]),
-      ) as BuiltList<EntityRelationInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelationInfo),
+                  ]),
+                )
+                as BuiltList<EntityRelationInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -518,7 +589,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelation>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByFrom({ 
+  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByFrom({
     required String fromType,
     required String fromId,
     String? relationTypeGroup,
@@ -529,13 +600,32 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelation);
-    final _path = r'/api/relations/from/{fromType}/{fromId}'.replaceAll('{' r'fromType' '}', encodeQueryParameter(_serializers, fromType, const FullType(String)).toString()).replaceAll('{' r'fromId' '}', encodeQueryParameter(_serializers, fromId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityRelation);
+    final _path = r'/api/relations/from/{fromType}/{fromId}'
+        .replaceAll(
+          '{'
+          r'fromType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            fromType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'fromId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            fromId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -543,11 +633,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -555,7 +642,12 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -571,11 +663,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelation)]),
-      ) as BuiltList<EntityRelation>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelation),
+                  ]),
+                )
+                as BuiltList<EntityRelation>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -615,7 +711,8 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelation>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByFromAndRelationType({ 
+  Future<Response<BuiltList<EntityRelation>>>
+  findEntityRelationsByFromAndRelationType({
     required String fromType,
     required String fromId,
     required String relationType,
@@ -627,13 +724,42 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelation);
-    final _path = r'/api/relations/from/{fromType}/{fromId}/{relationType}'.replaceAll('{' r'fromType' '}', encodeQueryParameter(_serializers, fromType, const FullType(String)).toString()).replaceAll('{' r'fromId' '}', encodeQueryParameter(_serializers, fromId, const FullType(String)).toString()).replaceAll('{' r'relationType' '}', encodeQueryParameter(_serializers, relationType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityRelation);
+    final _path = r'/api/relations/from/{fromType}/{fromId}/{relationType}'
+        .replaceAll(
+          '{'
+          r'fromType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            fromType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'fromId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            fromId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'relationType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            relationType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -641,11 +767,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -653,7 +776,12 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -669,11 +797,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelation)]),
-      ) as BuiltList<EntityRelation>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelation),
+                  ]),
+                )
+                as BuiltList<EntityRelation>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -700,7 +832,7 @@ class EntityRelationControllerApi {
   /// Returns all entities that are related to the specific entity. The entity id, relation type, entity types, depth of the search, and other query parameters defined using complex &#39;EntityRelationsQuery&#39; object. See &#39;Model&#39; tab of the Parameters for more info.
   ///
   /// Parameters:
-  /// * [entityRelationsQuery] 
+  /// * [entityRelationsQuery]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -710,7 +842,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelation>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByQuery({ 
+  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByQuery({
     required EntityRelationsQuery entityRelationsQuery,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -719,13 +851,13 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelationAndEntityRelationsQuery);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfEntityRelationAndEntityRelationsQuery);
     final _path = r'/api/relations';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -733,11 +865,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -749,14 +878,13 @@ class EntityRelationControllerApi {
 
     try {
       const _type = FullType(EntityRelationsQuery);
-      _bodyData = _serializers.serialize(entityRelationsQuery, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        entityRelationsQuery,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -776,11 +904,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelation)]),
-      ) as BuiltList<EntityRelation>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelation),
+                  ]),
+                )
+                as BuiltList<EntityRelation>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -819,7 +951,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelation>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByTo({ 
+  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByTo({
     required String toType,
     required String toId,
     String? relationTypeGroup,
@@ -830,13 +962,32 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelation);
-    final _path = r'/api/relations/to/{toType}/{toId}'.replaceAll('{' r'toType' '}', encodeQueryParameter(_serializers, toType, const FullType(String)).toString()).replaceAll('{' r'toId' '}', encodeQueryParameter(_serializers, toId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityRelation);
+    final _path = r'/api/relations/to/{toType}/{toId}'
+        .replaceAll(
+          '{'
+          r'toType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            toType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'toId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            toId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -844,11 +995,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -856,7 +1004,12 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -872,11 +1025,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelation)]),
-      ) as BuiltList<EntityRelation>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelation),
+                  ]),
+                )
+                as BuiltList<EntityRelation>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -916,7 +1073,8 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntityRelation>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntityRelation>>> findEntityRelationsByToAndRelationType({ 
+  Future<Response<BuiltList<EntityRelation>>>
+  findEntityRelationsByToAndRelationType({
     required String toType,
     required String toId,
     required String relationType,
@@ -928,13 +1086,42 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntityRelation);
-    final _path = r'/api/relations/to/{toType}/{toId}/{relationType}'.replaceAll('{' r'toType' '}', encodeQueryParameter(_serializers, toType, const FullType(String)).toString()).replaceAll('{' r'toId' '}', encodeQueryParameter(_serializers, toId, const FullType(String)).toString()).replaceAll('{' r'relationType' '}', encodeQueryParameter(_serializers, relationType, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntityRelation);
+    final _path = r'/api/relations/to/{toType}/{toId}/{relationType}'
+        .replaceAll(
+          '{'
+          r'toType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            toType,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'toId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            toId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'relationType'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            relationType,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -942,11 +1129,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -954,7 +1138,12 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -970,11 +1159,15 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntityRelation)]),
-      ) as BuiltList<EntityRelation>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntityRelation),
+                  ]),
+                )
+                as BuiltList<EntityRelation>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1016,7 +1209,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityRelation] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityRelation>> getRelation({ 
+  Future<Response<EntityRelation>> getRelation({
     required String fromId,
     required String fromType,
     required String relationType,
@@ -1030,13 +1223,12 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityRelation);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityRelation);
     final _path = r'/api/relation';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1044,11 +1236,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1056,12 +1245,33 @@ class EntityRelationControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'fromId': encodeQueryParameter(_serializers, fromId, const FullType(String)),
-      r'fromType': encodeQueryParameter(_serializers, fromType, const FullType(String)),
-      r'relationType': encodeQueryParameter(_serializers, relationType, const FullType(String)),
-      if (relationTypeGroup != null) r'relationTypeGroup': encodeQueryParameter(_serializers, relationTypeGroup, const FullType(String)),
+      r'fromId': encodeQueryParameter(
+        _serializers,
+        fromId,
+        const FullType(String),
+      ),
+      r'fromType': encodeQueryParameter(
+        _serializers,
+        fromType,
+        const FullType(String),
+      ),
+      r'relationType': encodeQueryParameter(
+        _serializers,
+        relationType,
+        const FullType(String),
+      ),
+      if (relationTypeGroup != null)
+        r'relationTypeGroup': encodeQueryParameter(
+          _serializers,
+          relationTypeGroup,
+          const FullType(String),
+        ),
       r'toId': encodeQueryParameter(_serializers, toId, const FullType(String)),
-      r'toType': encodeQueryParameter(_serializers, toType, const FullType(String)),
+      r'toType': encodeQueryParameter(
+        _serializers,
+        toType,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1077,11 +1287,13 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityRelation),
-      ) as EntityRelation;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityRelation),
+                )
+                as EntityRelation;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1108,7 +1320,7 @@ class EntityRelationControllerApi {
   /// Creates or updates a relation between two entities in the platform. Relations unique key is a combination of from/to entity id and relation type group and relation type.   If the user has the authority of &#39;System Administrator&#39;, the server checks that &#39;from&#39; and &#39;to&#39; entities are owned by the sysadmin. If the user has the authority of &#39;Tenant Administrator&#39;, the server checks that &#39;from&#39; and &#39;to&#39; entities are owned by the same tenant. If the user has the authority of &#39;Customer User&#39;, the server checks that the &#39;from&#39; and &#39;to&#39; entities are assigned to the same customer.
   ///
   /// Parameters:
-  /// * [entityRelation] 
+  /// * [entityRelation]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1118,7 +1330,7 @@ class EntityRelationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EntityRelation] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EntityRelation>> saveRelation({ 
+  Future<Response<EntityRelation>> saveRelation({
     required EntityRelation entityRelation,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1127,13 +1339,12 @@ class EntityRelationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEntityRelation);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEntityRelation);
     final _path = r'/api/v2/relation';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1141,11 +1352,8 @@ class EntityRelationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1158,13 +1366,9 @@ class EntityRelationControllerApi {
     try {
       const _type = FullType(EntityRelation);
       _bodyData = _serializers.serialize(entityRelation, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1184,11 +1388,13 @@ class EntityRelationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EntityRelation),
-      ) as EntityRelation;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EntityRelation),
+                )
+                as EntityRelation;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1210,5 +1416,4 @@ class EntityRelationControllerApi {
       extra: _response.extra,
     );
   }
-
 }

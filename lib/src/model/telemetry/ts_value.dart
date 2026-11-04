@@ -10,12 +10,10 @@ class TsValue {
   TsValue({required this.ts, this.value});
 
   TsValue.fromJson(Map<String, dynamic> json)
-      : ts = json['ts'],
-        value = json['value'];
+    : ts = json['ts'],
+      value = json['value'];
 
-  TsValue.fromJsonList(List<dynamic> json)
-      : ts = json[0],
-        value = json[1];
+  TsValue.fromJsonList(List<dynamic> json) : ts = json[0], value = json[1];
 
   @override
   String toString() {
@@ -30,10 +28,10 @@ class ComparisonTsValue {
   ComparisonTsValue({required this.current, this.previous});
 
   ComparisonTsValue.fromJson(Map<String, dynamic> json)
-      : current = TsValue.fromJson(json['current']),
-        previous = json['previous'] != null
-            ? TsValue.fromJson(json['previous'])
-            : null;
+    : current = TsValue.fromJson(json['current']),
+      previous = json['previous'] != null
+          ? TsValue.fromJson(json['previous'])
+          : null;
 
   @override
   String toString() {

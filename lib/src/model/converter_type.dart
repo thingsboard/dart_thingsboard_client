@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'converter_type.g.dart';
 
 class ConverterType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'UPLINK')
   static const ConverterType UPLINK = _$UPLINK;
   @BuiltValueEnumConst(wireName: r'DOWNLINK')
@@ -25,7 +24,7 @@ class ConverterType extends EnumClass {
 
   static Serializer<ConverterType> get serializer => _$converterTypeSerializer;
 
-  const ConverterType._(String name): super(name);
+  const ConverterType._(String name) : super(name);
 
   static BuiltSet<ConverterType> get values => _$values;
   static ConverterType valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class ConverterType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ConverterTypeMixin = Object with _$ConverterTypeMixin;
-

@@ -16,10 +16,12 @@ part 'alarm_condition_value_integer.g.dart';
 /// AlarmConditionValueInteger
 ///
 /// Properties:
-/// * [staticValue] 
-/// * [dynamicValueArgument] 
+/// * [staticValue]
+/// * [dynamicValueArgument]
 @BuiltValue()
-abstract class AlarmConditionValueInteger implements Built<AlarmConditionValueInteger, AlarmConditionValueIntegerBuilder> {
+abstract class AlarmConditionValueInteger
+    implements
+        Built<AlarmConditionValueInteger, AlarmConditionValueIntegerBuilder> {
   @BuiltValueField(wireName: r'staticValue')
   int? get staticValue;
 
@@ -28,18 +30,25 @@ abstract class AlarmConditionValueInteger implements Built<AlarmConditionValueIn
 
   AlarmConditionValueInteger._();
 
-  factory AlarmConditionValueInteger([void updates(AlarmConditionValueIntegerBuilder b)]) = _$AlarmConditionValueInteger;
+  factory AlarmConditionValueInteger([
+    void updates(AlarmConditionValueIntegerBuilder b),
+  ]) = _$AlarmConditionValueInteger;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AlarmConditionValueIntegerBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmConditionValueInteger> get serializer => _$AlarmConditionValueIntegerSerializer();
+  static Serializer<AlarmConditionValueInteger> get serializer =>
+      _$AlarmConditionValueIntegerSerializer();
 }
 
-class _$AlarmConditionValueIntegerSerializer implements PrimitiveSerializer<AlarmConditionValueInteger> {
+class _$AlarmConditionValueIntegerSerializer
+    implements PrimitiveSerializer<AlarmConditionValueInteger> {
   @override
-  final Iterable<Type> types = const [AlarmConditionValueInteger, _$AlarmConditionValueInteger];
+  final Iterable<Type> types = const [
+    AlarmConditionValueInteger,
+    _$AlarmConditionValueInteger,
+  ];
 
   @override
   final String wireName = r'AlarmConditionValueInteger';
@@ -71,7 +80,11 @@ class _$AlarmConditionValueIntegerSerializer implements PrimitiveSerializer<Alar
     AlarmConditionValueInteger object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +100,22 @@ class _$AlarmConditionValueIntegerSerializer implements PrimitiveSerializer<Alar
       final value = serializedList[i + 1];
       switch (key) {
         case r'staticValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.staticValue = valueDes;
           break;
         case r'dynamicValueArgument':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.dynamicValueArgument = valueDes;
           break;
@@ -130,5 +147,3 @@ class _$AlarmConditionValueIntegerSerializer implements PrimitiveSerializer<Alar
     return result.build();
   }
 }
-
-

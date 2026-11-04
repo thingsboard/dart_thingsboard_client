@@ -26,9 +26,9 @@ part 'users_filter.g.dart';
 /// UsersFilter
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class UsersFilter  {
+abstract class UsersFilter {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -52,74 +52,75 @@ abstract class UsersFilter  {
 }
 
 extension UsersFilterDiscriminatorExt on UsersFilter {
-    String? get discriminatorValue {
-        if (this is AffectedTenantAdministratorsFilter) {
-            return r'AFFECTED_TENANT_ADMINISTRATORS';
-        }
-        if (this is AffectedUserFilter) {
-            return r'AFFECTED_USER';
-        }
-        if (this is AllUsersFilter) {
-            return r'ALL_USERS';
-        }
-        if (this is CustomerUsersFilter) {
-            return r'CUSTOMER_USERS';
-        }
-        if (this is OriginatorEntityOwnerUsersFilter) {
-            return r'ORIGINATOR_ENTITY_OWNER_USERS';
-        }
-        if (this is SystemAdministratorsFilter) {
-            return r'SYSTEM_ADMINISTRATORS';
-        }
-        if (this is TenantAdministratorsFilter) {
-            return r'TENANT_ADMINISTRATORS';
-        }
-        if (this is UserGroupListFilter) {
-            return r'USER_GROUP_LIST';
-        }
-        if (this is UserListFilter) {
-            return r'USER_LIST';
-        }
-        if (this is UserRoleFilter) {
-            return r'USER_ROLE';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AffectedTenantAdministratorsFilter) {
+      return r'AFFECTED_TENANT_ADMINISTRATORS';
     }
+    if (this is AffectedUserFilter) {
+      return r'AFFECTED_USER';
+    }
+    if (this is AllUsersFilter) {
+      return r'ALL_USERS';
+    }
+    if (this is CustomerUsersFilter) {
+      return r'CUSTOMER_USERS';
+    }
+    if (this is OriginatorEntityOwnerUsersFilter) {
+      return r'ORIGINATOR_ENTITY_OWNER_USERS';
+    }
+    if (this is SystemAdministratorsFilter) {
+      return r'SYSTEM_ADMINISTRATORS';
+    }
+    if (this is TenantAdministratorsFilter) {
+      return r'TENANT_ADMINISTRATORS';
+    }
+    if (this is UserGroupListFilter) {
+      return r'USER_GROUP_LIST';
+    }
+    if (this is UserListFilter) {
+      return r'USER_LIST';
+    }
+    if (this is UserRoleFilter) {
+      return r'USER_ROLE';
+    }
+    return null;
+  }
 }
+
 extension UsersFilterBuilderDiscriminatorExt on UsersFilterBuilder {
-    String? get discriminatorValue {
-        if (this is AffectedTenantAdministratorsFilterBuilder) {
-            return r'AFFECTED_TENANT_ADMINISTRATORS';
-        }
-        if (this is AffectedUserFilterBuilder) {
-            return r'AFFECTED_USER';
-        }
-        if (this is AllUsersFilterBuilder) {
-            return r'ALL_USERS';
-        }
-        if (this is CustomerUsersFilterBuilder) {
-            return r'CUSTOMER_USERS';
-        }
-        if (this is OriginatorEntityOwnerUsersFilterBuilder) {
-            return r'ORIGINATOR_ENTITY_OWNER_USERS';
-        }
-        if (this is SystemAdministratorsFilterBuilder) {
-            return r'SYSTEM_ADMINISTRATORS';
-        }
-        if (this is TenantAdministratorsFilterBuilder) {
-            return r'TENANT_ADMINISTRATORS';
-        }
-        if (this is UserGroupListFilterBuilder) {
-            return r'USER_GROUP_LIST';
-        }
-        if (this is UserListFilterBuilder) {
-            return r'USER_LIST';
-        }
-        if (this is UserRoleFilterBuilder) {
-            return r'USER_ROLE';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AffectedTenantAdministratorsFilterBuilder) {
+      return r'AFFECTED_TENANT_ADMINISTRATORS';
     }
+    if (this is AffectedUserFilterBuilder) {
+      return r'AFFECTED_USER';
+    }
+    if (this is AllUsersFilterBuilder) {
+      return r'ALL_USERS';
+    }
+    if (this is CustomerUsersFilterBuilder) {
+      return r'CUSTOMER_USERS';
+    }
+    if (this is OriginatorEntityOwnerUsersFilterBuilder) {
+      return r'ORIGINATOR_ENTITY_OWNER_USERS';
+    }
+    if (this is SystemAdministratorsFilterBuilder) {
+      return r'SYSTEM_ADMINISTRATORS';
+    }
+    if (this is TenantAdministratorsFilterBuilder) {
+      return r'TENANT_ADMINISTRATORS';
+    }
+    if (this is UserGroupListFilterBuilder) {
+      return r'USER_GROUP_LIST';
+    }
+    if (this is UserListFilterBuilder) {
+      return r'USER_LIST';
+    }
+    if (this is UserRoleFilterBuilder) {
+      return r'USER_ROLE';
+    }
+    return null;
+  }
 }
 
 class _$UsersFilterSerializer implements PrimitiveSerializer<UsersFilter> {
@@ -148,36 +149,70 @@ class _$UsersFilterSerializer implements PrimitiveSerializer<UsersFilter> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AffectedTenantAdministratorsFilter) {
-      return serializers.serialize(object, specifiedType: FullType(AffectedTenantAdministratorsFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AffectedTenantAdministratorsFilter),
+      )!;
     }
     if (object is AffectedUserFilter) {
-      return serializers.serialize(object, specifiedType: FullType(AffectedUserFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AffectedUserFilter),
+      )!;
     }
     if (object is AllUsersFilter) {
-      return serializers.serialize(object, specifiedType: FullType(AllUsersFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AllUsersFilter),
+      )!;
     }
     if (object is CustomerUsersFilter) {
-      return serializers.serialize(object, specifiedType: FullType(CustomerUsersFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CustomerUsersFilter),
+      )!;
     }
     if (object is OriginatorEntityOwnerUsersFilter) {
-      return serializers.serialize(object, specifiedType: FullType(OriginatorEntityOwnerUsersFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(OriginatorEntityOwnerUsersFilter),
+      )!;
     }
     if (object is SystemAdministratorsFilter) {
-      return serializers.serialize(object, specifiedType: FullType(SystemAdministratorsFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SystemAdministratorsFilter),
+      )!;
     }
     if (object is TenantAdministratorsFilter) {
-      return serializers.serialize(object, specifiedType: FullType(TenantAdministratorsFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TenantAdministratorsFilter),
+      )!;
     }
     if (object is UserGroupListFilter) {
-      return serializers.serialize(object, specifiedType: FullType(UserGroupListFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(UserGroupListFilter),
+      )!;
     }
     if (object is UserListFilter) {
-      return serializers.serialize(object, specifiedType: FullType(UserListFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(UserListFilter),
+      )!;
     }
     if (object is UserRoleFilter) {
-      return serializers.serialize(object, specifiedType: FullType(UserRoleFilter))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(UserRoleFilter),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -187,42 +222,93 @@ class _$UsersFilterSerializer implements PrimitiveSerializer<UsersFilter> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(UsersFilter.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(UsersFilter.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'AFFECTED_TENANT_ADMINISTRATORS':
-        return serializers.deserialize(serialized, specifiedType: FullType(AffectedTenantAdministratorsFilter)) as AffectedTenantAdministratorsFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AffectedTenantAdministratorsFilter),
+            )
+            as AffectedTenantAdministratorsFilter;
       case r'AFFECTED_USER':
-        return serializers.deserialize(serialized, specifiedType: FullType(AffectedUserFilter)) as AffectedUserFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AffectedUserFilter),
+            )
+            as AffectedUserFilter;
       case r'ALL_USERS':
-        return serializers.deserialize(serialized, specifiedType: FullType(AllUsersFilter)) as AllUsersFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AllUsersFilter),
+            )
+            as AllUsersFilter;
       case r'CUSTOMER_USERS':
-        return serializers.deserialize(serialized, specifiedType: FullType(CustomerUsersFilter)) as CustomerUsersFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CustomerUsersFilter),
+            )
+            as CustomerUsersFilter;
       case r'ORIGINATOR_ENTITY_OWNER_USERS':
-        return serializers.deserialize(serialized, specifiedType: FullType(OriginatorEntityOwnerUsersFilter)) as OriginatorEntityOwnerUsersFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(OriginatorEntityOwnerUsersFilter),
+            )
+            as OriginatorEntityOwnerUsersFilter;
       case r'SYSTEM_ADMINISTRATORS':
-        return serializers.deserialize(serialized, specifiedType: FullType(SystemAdministratorsFilter)) as SystemAdministratorsFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SystemAdministratorsFilter),
+            )
+            as SystemAdministratorsFilter;
       case r'TENANT_ADMINISTRATORS':
-        return serializers.deserialize(serialized, specifiedType: FullType(TenantAdministratorsFilter)) as TenantAdministratorsFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TenantAdministratorsFilter),
+            )
+            as TenantAdministratorsFilter;
       case r'USER_GROUP_LIST':
-        return serializers.deserialize(serialized, specifiedType: FullType(UserGroupListFilter)) as UserGroupListFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(UserGroupListFilter),
+            )
+            as UserGroupListFilter;
       case r'USER_LIST':
-        return serializers.deserialize(serialized, specifiedType: FullType(UserListFilter)) as UserListFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(UserListFilter),
+            )
+            as UserListFilter;
       case r'USER_ROLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(UserRoleFilter)) as UserRoleFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(UserRoleFilter),
+            )
+            as UserRoleFilter;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($UsersFilter)) as $UsersFilter;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($UsersFilter),
+            )
+            as $UsersFilter;
     }
   }
 }
 
-
 /// a concrete implementation of [UsersFilter], since [UsersFilter] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $UsersFilter implements UsersFilter, Built<$UsersFilter, $UsersFilterBuilder> {
+abstract class $UsersFilter
+    implements UsersFilter, Built<$UsersFilter, $UsersFilterBuilder> {
   $UsersFilter._();
 
-  factory $UsersFilter([void Function($UsersFilterBuilder)? updates]) = _$$UsersFilter;
+  factory $UsersFilter([void Function($UsersFilterBuilder)? updates]) =
+      _$$UsersFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($UsersFilterBuilder b) => b;
@@ -260,10 +346,12 @@ class _$$UsersFilterSerializer implements PrimitiveSerializer<$UsersFilter> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -294,4 +382,3 @@ class _$$UsersFilterSerializer implements PrimitiveSerializer<$UsersFilter> {
     return result.build();
   }
 }
-

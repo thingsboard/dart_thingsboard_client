@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'sign_up_field_id.g.dart';
 
 class SignUpFieldId extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'EMAIL')
   static const SignUpFieldId EMAIL = _$EMAIL;
   @BuiltValueEnumConst(wireName: r'PASSWORD')
@@ -45,7 +44,7 @@ class SignUpFieldId extends EnumClass {
 
   static Serializer<SignUpFieldId> get serializer => _$signUpFieldIdSerializer;
 
-  const SignUpFieldId._(String name): super(name);
+  const SignUpFieldId._(String name) : super(name);
 
   static BuiltSet<SignUpFieldId> get values => _$values;
   static SignUpFieldId valueOf(String name) => _$valueOf(name);
@@ -58,4 +57,3 @@ class SignUpFieldId extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class SignUpFieldIdMixin = Object with _$SignUpFieldIdMixin;
-

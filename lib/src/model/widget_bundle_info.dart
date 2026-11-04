@@ -17,11 +17,12 @@ part 'widget_bundle_info.g.dart';
 /// WidgetBundleInfo
 ///
 /// Properties:
-/// * [id] - JSON object with the entity Id. 
+/// * [id] - JSON object with the entity Id.
 /// * [name] - Entity Name
 @BuiltValue()
-abstract class WidgetBundleInfo implements Built<WidgetBundleInfo, WidgetBundleInfoBuilder> {
-  /// JSON object with the entity Id. 
+abstract class WidgetBundleInfo
+    implements Built<WidgetBundleInfo, WidgetBundleInfoBuilder> {
+  /// JSON object with the entity Id.
   @BuiltValueField(wireName: r'id')
   EntityId? get id;
 
@@ -31,16 +32,19 @@ abstract class WidgetBundleInfo implements Built<WidgetBundleInfo, WidgetBundleI
 
   WidgetBundleInfo._();
 
-  factory WidgetBundleInfo([void updates(WidgetBundleInfoBuilder b)]) = _$WidgetBundleInfo;
+  factory WidgetBundleInfo([void updates(WidgetBundleInfoBuilder b)]) =
+      _$WidgetBundleInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(WidgetBundleInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<WidgetBundleInfo> get serializer => _$WidgetBundleInfoSerializer();
+  static Serializer<WidgetBundleInfo> get serializer =>
+      _$WidgetBundleInfoSerializer();
 }
 
-class _$WidgetBundleInfoSerializer implements PrimitiveSerializer<WidgetBundleInfo> {
+class _$WidgetBundleInfoSerializer
+    implements PrimitiveSerializer<WidgetBundleInfo> {
   @override
   final Iterable<Type> types = const [WidgetBundleInfo, _$WidgetBundleInfo];
 
@@ -74,7 +78,11 @@ class _$WidgetBundleInfoSerializer implements PrimitiveSerializer<WidgetBundleIn
     WidgetBundleInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -90,18 +98,22 @@ class _$WidgetBundleInfoSerializer implements PrimitiveSerializer<WidgetBundleIn
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -133,5 +145,3 @@ class _$WidgetBundleInfoSerializer implements PrimitiveSerializer<WidgetBundleIn
     return result.build();
   }
 }
-
-

@@ -27,7 +27,8 @@ part 'agent_app_unit.g.dart';
 /// * [identifier] - Unit identifier
 /// * [type] - Unit type
 @BuiltValue()
-abstract class AgentAppUnit implements Built<AgentAppUnit, AgentAppUnitBuilder> {
+abstract class AgentAppUnit
+    implements Built<AgentAppUnit, AgentAppUnitBuilder> {
   /// JSON object with the Agent App Unit Id.
   @BuiltValueField(wireName: r'id')
   AgentAppUnitId? get id;
@@ -118,7 +119,11 @@ class _$AgentAppUnitSerializer implements PrimitiveSerializer<AgentAppUnit> {
     AgentAppUnit object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -134,47 +139,59 @@ class _$AgentAppUnitSerializer implements PrimitiveSerializer<AgentAppUnit> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppUnitId),
-          ) as AgentAppUnitId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppUnitId),
+                  )
+                  as AgentAppUnitId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TenantId),
-          ) as TenantId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TenantId),
+                  )
+                  as TenantId;
           result.tenantId.replace(valueDes);
           break;
         case r'agentApplicationId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AgentApplicationId),
-          ) as AgentApplicationId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AgentApplicationId),
+                  )
+                  as AgentApplicationId;
           result.agentApplicationId.replace(valueDes);
           break;
         case r'identifier':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.identifier = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AgentAppUnitType),
-          ) as AgentAppUnitType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AgentAppUnitType),
+                  )
+                  as AgentAppUnitType;
           result.type = valueDes;
           break;
         default:
@@ -205,5 +222,3 @@ class _$AgentAppUnitSerializer implements PrimitiveSerializer<AgentAppUnit> {
     return result.build();
   }
 }
-
-

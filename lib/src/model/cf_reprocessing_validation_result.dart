@@ -17,11 +17,16 @@ part 'cf_reprocessing_validation_result.g.dart';
 /// CfReprocessingValidationResult
 ///
 /// Properties:
-/// * [isValid] 
-/// * [message] 
-/// * [lastJobStatus] 
+/// * [isValid]
+/// * [message]
+/// * [lastJobStatus]
 @BuiltValue()
-abstract class CfReprocessingValidationResult implements Built<CfReprocessingValidationResult, CfReprocessingValidationResultBuilder> {
+abstract class CfReprocessingValidationResult
+    implements
+        Built<
+          CfReprocessingValidationResult,
+          CfReprocessingValidationResultBuilder
+        > {
   @BuiltValueField(wireName: r'isValid')
   bool? get isValid;
 
@@ -34,18 +39,25 @@ abstract class CfReprocessingValidationResult implements Built<CfReprocessingVal
 
   CfReprocessingValidationResult._();
 
-  factory CfReprocessingValidationResult([void updates(CfReprocessingValidationResultBuilder b)]) = _$CfReprocessingValidationResult;
+  factory CfReprocessingValidationResult([
+    void updates(CfReprocessingValidationResultBuilder b),
+  ]) = _$CfReprocessingValidationResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CfReprocessingValidationResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CfReprocessingValidationResult> get serializer => _$CfReprocessingValidationResultSerializer();
+  static Serializer<CfReprocessingValidationResult> get serializer =>
+      _$CfReprocessingValidationResultSerializer();
 }
 
-class _$CfReprocessingValidationResultSerializer implements PrimitiveSerializer<CfReprocessingValidationResult> {
+class _$CfReprocessingValidationResultSerializer
+    implements PrimitiveSerializer<CfReprocessingValidationResult> {
   @override
-  final Iterable<Type> types = const [CfReprocessingValidationResult, _$CfReprocessingValidationResult];
+  final Iterable<Type> types = const [
+    CfReprocessingValidationResult,
+    _$CfReprocessingValidationResult,
+  ];
 
   @override
   final String wireName = r'CfReprocessingValidationResult';
@@ -84,7 +96,11 @@ class _$CfReprocessingValidationResultSerializer implements PrimitiveSerializer<
     CfReprocessingValidationResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -100,26 +116,32 @@ class _$CfReprocessingValidationResultSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'isValid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.isValid = valueDes;
           break;
         case r'message':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.message = valueDes;
           break;
         case r'lastJobStatus':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JobStatus),
-          ) as JobStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JobStatus),
+                  )
+                  as JobStatus?;
           if (valueDes == null) continue;
           result.lastJobStatus = valueDes;
           break;
@@ -151,5 +173,3 @@ class _$CfReprocessingValidationResultSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

@@ -21,10 +21,10 @@ part 'mobile_page.g.dart';
 /// Configuration for a mobile page
 ///
 /// Properties:
-/// * [type] 
-/// * [visible] 
+/// * [type]
+/// * [visible]
 @BuiltValue(instantiable: false)
-abstract class MobilePage  {
+abstract class MobilePage {
   @BuiltValueField(wireName: r'type')
   MobilePageType get type;
   // enum typeEnum {  DEFAULT,  DASHBOARD,  WEB_VIEW,  CUSTOM,  };
@@ -46,38 +46,39 @@ abstract class MobilePage  {
 }
 
 extension MobilePageDiscriminatorExt on MobilePage {
-    String? get discriminatorValue {
-        if (this is CustomMobilePage) {
-            return r'CUSTOM';
-        }
-        if (this is DashboardPage) {
-            return r'DASHBOARD';
-        }
-        if (this is DefaultMobilePage) {
-            return r'DEFAULT';
-        }
-        if (this is WebViewPage) {
-            return r'WEB_VIEW';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CustomMobilePage) {
+      return r'CUSTOM';
     }
+    if (this is DashboardPage) {
+      return r'DASHBOARD';
+    }
+    if (this is DefaultMobilePage) {
+      return r'DEFAULT';
+    }
+    if (this is WebViewPage) {
+      return r'WEB_VIEW';
+    }
+    return null;
+  }
 }
+
 extension MobilePageBuilderDiscriminatorExt on MobilePageBuilder {
-    String? get discriminatorValue {
-        if (this is CustomMobilePageBuilder) {
-            return r'CUSTOM';
-        }
-        if (this is DashboardPageBuilder) {
-            return r'DASHBOARD';
-        }
-        if (this is DefaultMobilePageBuilder) {
-            return r'DEFAULT';
-        }
-        if (this is WebViewPageBuilder) {
-            return r'WEB_VIEW';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CustomMobilePageBuilder) {
+      return r'CUSTOM';
     }
+    if (this is DashboardPageBuilder) {
+      return r'DASHBOARD';
+    }
+    if (this is DefaultMobilePageBuilder) {
+      return r'DEFAULT';
+    }
+    if (this is WebViewPageBuilder) {
+      return r'WEB_VIEW';
+    }
+    return null;
+  }
 }
 
 class _$MobilePageSerializer implements PrimitiveSerializer<MobilePage> {
@@ -113,18 +114,34 @@ class _$MobilePageSerializer implements PrimitiveSerializer<MobilePage> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CustomMobilePage) {
-      return serializers.serialize(object, specifiedType: FullType(CustomMobilePage))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CustomMobilePage),
+      )!;
     }
     if (object is DashboardPage) {
-      return serializers.serialize(object, specifiedType: FullType(DashboardPage))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DashboardPage),
+      )!;
     }
     if (object is DefaultMobilePage) {
-      return serializers.serialize(object, specifiedType: FullType(DefaultMobilePage))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DefaultMobilePage),
+      )!;
     }
     if (object is WebViewPage) {
-      return serializers.serialize(object, specifiedType: FullType(WebViewPage))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WebViewPage),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -134,30 +151,57 @@ class _$MobilePageSerializer implements PrimitiveSerializer<MobilePage> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(MobilePage.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(MobilePage.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CUSTOM':
-        return serializers.deserialize(serialized, specifiedType: FullType(CustomMobilePage)) as CustomMobilePage;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CustomMobilePage),
+            )
+            as CustomMobilePage;
       case r'DASHBOARD':
-        return serializers.deserialize(serialized, specifiedType: FullType(DashboardPage)) as DashboardPage;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DashboardPage),
+            )
+            as DashboardPage;
       case r'DEFAULT':
-        return serializers.deserialize(serialized, specifiedType: FullType(DefaultMobilePage)) as DefaultMobilePage;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DefaultMobilePage),
+            )
+            as DefaultMobilePage;
       case r'WEB_VIEW':
-        return serializers.deserialize(serialized, specifiedType: FullType(WebViewPage)) as WebViewPage;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WebViewPage),
+            )
+            as WebViewPage;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($MobilePage)) as $MobilePage;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($MobilePage),
+            )
+            as $MobilePage;
     }
   }
 }
 
-
 /// a concrete implementation of [MobilePage], since [MobilePage] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $MobilePage implements MobilePage, Built<$MobilePage, $MobilePageBuilder> {
+abstract class $MobilePage
+    implements MobilePage, Built<$MobilePage, $MobilePageBuilder> {
   $MobilePage._();
 
-  factory $MobilePage([void Function($MobilePageBuilder)? updates]) = _$$MobilePage;
+  factory $MobilePage([void Function($MobilePageBuilder)? updates]) =
+      _$$MobilePage;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($MobilePageBuilder b) => b;
@@ -195,17 +239,21 @@ class _$$MobilePageSerializer implements PrimitiveSerializer<$MobilePage> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MobilePageType),
-          ) as MobilePageType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MobilePageType),
+                  )
+                  as MobilePageType;
           result.type = valueDes;
           break;
         case r'visible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.visible = valueDes;
           break;
@@ -237,4 +285,3 @@ class _$$MobilePageSerializer implements PrimitiveSerializer<$MobilePage> {
     return result.build();
   }
 }
-

@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -21,11 +20,9 @@ import 'package:thingsboard_client/src/model/page_data_scheduler_event_with_cust
 import 'package:thingsboard_client/src/model/scheduler_event.dart';
 import 'package:thingsboard_client/src/model/scheduler_event_info.dart';
 import 'package:thingsboard_client/src/model/scheduler_event_with_customer_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class SchedulerEventControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -47,7 +44,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SchedulerEventInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SchedulerEventInfo>> assignSchedulerEventToEdge({ 
+  Future<Response<SchedulerEventInfo>> assignSchedulerEventToEdge({
     required String edgeId,
     required String schedulerEventId,
     CancelToken? cancelToken,
@@ -57,13 +54,32 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSchedulerEventInfo);
-    final _path = r'/api/edge/{edgeId}/schedulerEvent/{schedulerEventId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'schedulerEventId' '}', encodeQueryParameter(_serializers, schedulerEventId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSchedulerEventInfo);
+    final _path = r'/api/edge/{edgeId}/schedulerEvent/{schedulerEventId}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'schedulerEventId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            schedulerEventId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -71,11 +87,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -94,11 +107,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SchedulerEventInfo),
-      ) as SchedulerEventInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SchedulerEventInfo),
+                )
+                as SchedulerEventInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -135,7 +150,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteSchedulerEvent({ 
+  Future<Response<void>> deleteSchedulerEvent({
     required String schedulerEventId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -145,12 +160,19 @@ class SchedulerEventControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/schedulerEvent/{schedulerEventId}'.replaceAll('{' r'schedulerEventId' '}', encodeQueryParameter(_serializers, schedulerEventId, const FullType(String)).toString());
+    final _path = r'/api/schedulerEvent/{schedulerEventId}'.replaceAll(
+      '{'
+      r'schedulerEventId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        schedulerEventId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -158,11 +180,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -195,7 +214,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SchedulerEvent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SchedulerEvent>> enableSchedulerEvent({ 
+  Future<Response<SchedulerEvent>> enableSchedulerEvent({
     required String schedulerEventId,
     required bool enabledValue,
     CancelToken? cancelToken,
@@ -205,13 +224,33 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSchedulerEvent);
-    final _path = r'/api/schedulerEvent/{schedulerEventId}/enabled/{enabledValue}'.replaceAll('{' r'schedulerEventId' '}', encodeQueryParameter(_serializers, schedulerEventId, const FullType(String)).toString()).replaceAll('{' r'enabledValue' '}', encodeQueryParameter(_serializers, enabledValue, const FullType(bool)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSchedulerEvent);
+    final _path =
+        r'/api/schedulerEvent/{schedulerEventId}/enabled/{enabledValue}'
+            .replaceAll(
+              '{'
+              r'schedulerEventId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                schedulerEventId,
+                const FullType(String),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'enabledValue'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                enabledValue,
+                const FullType(bool),
+              ).toString(),
+            );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -219,11 +258,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -242,11 +278,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SchedulerEvent),
-      ) as SchedulerEvent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SchedulerEvent),
+                )
+                as SchedulerEvent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -283,7 +321,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<SchedulerEventInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<SchedulerEventInfo>>> getAllEdgeSchedulerEvents({ 
+  Future<Response<BuiltList<SchedulerEventInfo>>> getAllEdgeSchedulerEvents({
     required String edgeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -292,13 +330,21 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfSchedulerEventInfo);
-    final _path = r'/api/edge/{edgeId}/allSchedulerEvents'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfSchedulerEventInfo);
+    final _path = r'/api/edge/{edgeId}/allSchedulerEvents'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -306,11 +352,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -329,11 +372,15 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(SchedulerEventInfo)]),
-      ) as BuiltList<SchedulerEventInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(SchedulerEventInfo),
+                  ]),
+                )
+                as BuiltList<SchedulerEventInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -370,7 +417,8 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<SchedulerEventWithCustomerInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<SchedulerEventWithCustomerInfo>>> getAllSchedulerEvents({ 
+  Future<Response<BuiltList<SchedulerEventWithCustomerInfo>>>
+  getAllSchedulerEvents({
     String? type,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -379,13 +427,13 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfSchedulerEventWithCustomerInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfSchedulerEventWithCustomerInfo);
     final _path = r'/api/schedulerEvents/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -393,11 +441,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -405,7 +450,12 @@ class SchedulerEventControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -421,11 +471,15 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]),
-      ) as BuiltList<SchedulerEventWithCustomerInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(SchedulerEventWithCustomerInfo),
+                  ]),
+                )
+                as BuiltList<SchedulerEventWithCustomerInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -467,7 +521,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataSchedulerEventInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataSchedulerEventInfo>> getEdgeSchedulerEvents({ 
+  Future<Response<PageDataSchedulerEventInfo>> getEdgeSchedulerEvents({
     required String edgeId,
     required String pageSize,
     required String page,
@@ -481,13 +535,21 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataSchedulerEventInfo);
-    final _path = r'/api/edge/{edgeId}/schedulerEvents'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataSchedulerEventInfo);
+    final _path = r'/api/edge/{edgeId}/schedulerEvents'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -495,11 +557,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -507,11 +566,30 @@ class SchedulerEventControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -527,11 +605,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataSchedulerEventInfo),
-      ) as PageDataSchedulerEventInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataSchedulerEventInfo),
+                )
+                as PageDataSchedulerEventInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -575,7 +655,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataScheduledReportInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataScheduledReportInfo>> getScheduledReportEvents({ 
+  Future<Response<PageDataScheduledReportInfo>> getScheduledReportEvents({
     required String pageSize,
     required String page,
     String? reportTemplateId,
@@ -591,13 +671,13 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataScheduledReportInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerPageDataScheduledReportInfo);
     final _path = r'/api/scheduledReports';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -605,11 +685,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -617,14 +694,48 @@ class SchedulerEventControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (reportTemplateId != null) r'reportTemplateId': encodeQueryParameter(_serializers, reportTemplateId, const FullType(String)),
-      if (userId != null) r'userId': encodeQueryParameter(_serializers, userId, const FullType(String)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      if (reportTemplateId != null)
+        r'reportTemplateId': encodeQueryParameter(
+          _serializers,
+          reportTemplateId,
+          const FullType(String),
+        ),
+      if (userId != null)
+        r'userId': encodeQueryParameter(
+          _serializers,
+          userId,
+          const FullType(String),
+        ),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -640,11 +751,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataScheduledReportInfo),
-      ) as PageDataScheduledReportInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataScheduledReportInfo),
+                )
+                as PageDataScheduledReportInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -681,7 +794,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SchedulerEvent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SchedulerEvent>> getSchedulerEventById({ 
+  Future<Response<SchedulerEvent>> getSchedulerEventById({
     required String schedulerEventId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -690,13 +803,21 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSchedulerEvent);
-    final _path = r'/api/schedulerEvent/{schedulerEventId}'.replaceAll('{' r'schedulerEventId' '}', encodeQueryParameter(_serializers, schedulerEventId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSchedulerEvent);
+    final _path = r'/api/schedulerEvent/{schedulerEventId}'.replaceAll(
+      '{'
+      r'schedulerEventId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        schedulerEventId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -704,11 +825,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -727,11 +845,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SchedulerEvent),
-      ) as SchedulerEvent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SchedulerEvent),
+                )
+                as SchedulerEvent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -768,7 +888,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SchedulerEventWithCustomerInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SchedulerEventWithCustomerInfo>> getSchedulerEventInfoById({ 
+  Future<Response<SchedulerEventWithCustomerInfo>> getSchedulerEventInfoById({
     required String schedulerEventId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -777,13 +897,22 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSchedulerEventWithCustomerInfo);
-    final _path = r'/api/schedulerEvent/info/{schedulerEventId}'.replaceAll('{' r'schedulerEventId' '}', encodeQueryParameter(_serializers, schedulerEventId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerSchedulerEventWithCustomerInfo);
+    final _path = r'/api/schedulerEvent/info/{schedulerEventId}'.replaceAll(
+      '{'
+      r'schedulerEventId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        schedulerEventId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -791,11 +920,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -814,11 +940,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SchedulerEventWithCustomerInfo),
-      ) as SchedulerEventWithCustomerInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SchedulerEventWithCustomerInfo),
+                )
+                as SchedulerEventWithCustomerInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -861,7 +989,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataSchedulerEventWithCustomerInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataSchedulerEventWithCustomerInfo>> getSchedulerEvents({ 
+  Future<Response<PageDataSchedulerEventWithCustomerInfo>> getSchedulerEvents({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -876,13 +1004,13 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataSchedulerEventWithCustomerInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerPageDataSchedulerEventWithCustomerInfo);
     final _path = r'/api/schedulerEvents';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -890,11 +1018,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -902,13 +1027,42 @@ class SchedulerEventControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (edgeId != null) r'edgeId': encodeQueryParameter(_serializers, edgeId, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (edgeId != null)
+        r'edgeId': encodeQueryParameter(
+          _serializers,
+          edgeId,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -924,11 +1078,15 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataSchedulerEventWithCustomerInfo),
-      ) as PageDataSchedulerEventWithCustomerInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(
+                    PageDataSchedulerEventWithCustomerInfo,
+                  ),
+                )
+                as PageDataSchedulerEventWithCustomerInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -965,7 +1123,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<SchedulerEventInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<SchedulerEventInfo>>> getSchedulerEventsByIds({ 
+  Future<Response<BuiltList<SchedulerEventInfo>>> getSchedulerEventsByIds({
     required BuiltList<String> schedulerEventIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -974,13 +1132,13 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfSchedulerEventInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfSchedulerEventInfoAndListOfString);
     final _path = r'/api/schedulerEvents/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -988,11 +1146,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1000,7 +1155,12 @@ class SchedulerEventControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'schedulerEventIds': encodeCollectionQueryParameter<String>(_serializers, schedulerEventIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'schedulerEventIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        schedulerEventIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1016,11 +1176,15 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(SchedulerEventInfo)]),
-      ) as BuiltList<SchedulerEventInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(SchedulerEventInfo),
+                  ]),
+                )
+                as BuiltList<SchedulerEventInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1061,7 +1225,8 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<SchedulerEventWithCustomerInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<SchedulerEventWithCustomerInfo>>> getSchedulerEventsByRange({ 
+  Future<Response<BuiltList<SchedulerEventWithCustomerInfo>>>
+  getSchedulerEventsByRange({
     required int startTime,
     required int endTime,
     String? type,
@@ -1074,13 +1239,34 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfSchedulerEventWithCustomerInfo);
-    final _path = r'/api/schedulerEvents/startTime/{startTime}/endTime/{endTime}'.replaceAll('{' r'startTime' '}', encodeQueryParameter(_serializers, startTime, const FullType(int)).toString()).replaceAll('{' r'endTime' '}', encodeQueryParameter(_serializers, endTime, const FullType(int)).toString());
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfSchedulerEventWithCustomerInfo);
+    final _path =
+        r'/api/schedulerEvents/startTime/{startTime}/endTime/{endTime}'
+            .replaceAll(
+              '{'
+              r'startTime'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                startTime,
+                const FullType(int),
+              ).toString(),
+            )
+            .replaceAll(
+              '{'
+              r'endTime'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                endTime,
+                const FullType(int),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1088,11 +1274,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1100,9 +1283,24 @@ class SchedulerEventControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (edgeId != null) r'edgeId': encodeQueryParameter(_serializers, edgeId, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (edgeId != null)
+        r'edgeId': encodeQueryParameter(
+          _serializers,
+          edgeId,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1118,11 +1316,15 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]),
-      ) as BuiltList<SchedulerEventWithCustomerInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(SchedulerEventWithCustomerInfo),
+                  ]),
+                )
+                as BuiltList<SchedulerEventWithCustomerInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1149,7 +1351,7 @@ class SchedulerEventControllerApi {
   /// Creates or Updates scheduler event. Scheduler Event extends Scheduler Event Info object and adds &#39;configuration&#39; - a JSON structure of scheduler event configuration. See the &#39;Model&#39; tab of the Response Class for more details. When creating scheduler event, platform generates scheduler event Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created scheduler event id will be present in the response. Specify existing scheduler event id to update the scheduler event. Referencing non-existing scheduler event Id will cause &#39;Not Found&#39; error. Remove &#39;id&#39;, &#39;tenantId&#39; and optionally &#39;customerId&#39; from the request body example (below) to create new Scheduler Event entity.   Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [schedulerEvent] 
+  /// * [schedulerEvent]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1159,7 +1361,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SchedulerEvent] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SchedulerEvent>> saveSchedulerEvent({ 
+  Future<Response<SchedulerEvent>> saveSchedulerEvent({
     required SchedulerEvent schedulerEvent,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1168,13 +1370,12 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSchedulerEvent);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSchedulerEvent);
     final _path = r'/api/schedulerEvent';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1182,11 +1383,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1199,13 +1397,9 @@ class SchedulerEventControllerApi {
     try {
       const _type = FullType(SchedulerEvent);
       _bodyData = _serializers.serialize(schedulerEvent, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1225,11 +1419,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SchedulerEvent),
-      ) as SchedulerEvent;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SchedulerEvent),
+                )
+                as SchedulerEvent;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1267,7 +1463,7 @@ class SchedulerEventControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SchedulerEventInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SchedulerEventInfo>> unassignSchedulerEventFromEdge({ 
+  Future<Response<SchedulerEventInfo>> unassignSchedulerEventFromEdge({
     required String edgeId,
     required String schedulerEventId,
     CancelToken? cancelToken,
@@ -1277,13 +1473,32 @@ class SchedulerEventControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSchedulerEventInfo);
-    final _path = r'/api/edge/{edgeId}/schedulerEvent/{schedulerEventId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'schedulerEventId' '}', encodeQueryParameter(_serializers, schedulerEventId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSchedulerEventInfo);
+    final _path = r'/api/edge/{edgeId}/schedulerEvent/{schedulerEventId}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'schedulerEventId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            schedulerEventId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1291,11 +1506,8 @@ class SchedulerEventControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1314,11 +1526,13 @@ class SchedulerEventControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SchedulerEventInfo),
-      ) as SchedulerEventInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SchedulerEventInfo),
+                )
+                as SchedulerEventInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1340,5 +1554,4 @@ class SchedulerEventControllerApi {
       extra: _response.extra,
     );
   }
-
 }

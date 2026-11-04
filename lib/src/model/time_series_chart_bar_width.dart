@@ -16,11 +16,12 @@ part 'time_series_chart_bar_width.g.dart';
 /// TimeSeriesChartBarWidth
 ///
 /// Properties:
-/// * [relative] 
-/// * [relativeWidth] 
-/// * [absoluteWidth] 
+/// * [relative]
+/// * [relativeWidth]
+/// * [absoluteWidth]
 @BuiltValue()
-abstract class TimeSeriesChartBarWidth implements Built<TimeSeriesChartBarWidth, TimeSeriesChartBarWidthBuilder> {
+abstract class TimeSeriesChartBarWidth
+    implements Built<TimeSeriesChartBarWidth, TimeSeriesChartBarWidthBuilder> {
   @BuiltValueField(wireName: r'relative')
   bool? get relative;
 
@@ -32,18 +33,25 @@ abstract class TimeSeriesChartBarWidth implements Built<TimeSeriesChartBarWidth,
 
   TimeSeriesChartBarWidth._();
 
-  factory TimeSeriesChartBarWidth([void updates(TimeSeriesChartBarWidthBuilder b)]) = _$TimeSeriesChartBarWidth;
+  factory TimeSeriesChartBarWidth([
+    void updates(TimeSeriesChartBarWidthBuilder b),
+  ]) = _$TimeSeriesChartBarWidth;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesChartBarWidthBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartBarWidth> get serializer => _$TimeSeriesChartBarWidthSerializer();
+  static Serializer<TimeSeriesChartBarWidth> get serializer =>
+      _$TimeSeriesChartBarWidthSerializer();
 }
 
-class _$TimeSeriesChartBarWidthSerializer implements PrimitiveSerializer<TimeSeriesChartBarWidth> {
+class _$TimeSeriesChartBarWidthSerializer
+    implements PrimitiveSerializer<TimeSeriesChartBarWidth> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartBarWidth, _$TimeSeriesChartBarWidth];
+  final Iterable<Type> types = const [
+    TimeSeriesChartBarWidth,
+    _$TimeSeriesChartBarWidth,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartBarWidth';
@@ -82,7 +90,11 @@ class _$TimeSeriesChartBarWidthSerializer implements PrimitiveSerializer<TimeSer
     TimeSeriesChartBarWidth object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +110,32 @@ class _$TimeSeriesChartBarWidthSerializer implements PrimitiveSerializer<TimeSer
       final value = serializedList[i + 1];
       switch (key) {
         case r'relative':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.relative = valueDes;
           break;
         case r'relativeWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.relativeWidth = valueDes;
           break;
         case r'absoluteWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.absoluteWidth = valueDes;
           break;
@@ -149,5 +167,3 @@ class _$TimeSeriesChartBarWidthSerializer implements PrimitiveSerializer<TimeSer
     return result.build();
   }
 }
-
-

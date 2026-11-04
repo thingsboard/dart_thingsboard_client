@@ -19,25 +19,31 @@ part 'roll_back_step_state.g.dart';
 /// RollBackStepState
 ///
 /// Properties:
-/// * [type] 
-/// * [failedEventId] 
+/// * [type]
+/// * [failedEventId]
 @BuiltValue()
-abstract class RollBackStepState implements AgentAppStepState, Built<RollBackStepState, RollBackStepStateBuilder> {
+abstract class RollBackStepState
+    implements
+        AgentAppStepState,
+        Built<RollBackStepState, RollBackStepStateBuilder> {
   @BuiltValueField(wireName: r'failedEventId')
   StepFieldAgentAppEventId? get failedEventId;
 
   RollBackStepState._();
 
-  factory RollBackStepState([void updates(RollBackStepStateBuilder b)]) = _$RollBackStepState;
+  factory RollBackStepState([void updates(RollBackStepStateBuilder b)]) =
+      _$RollBackStepState;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RollBackStepStateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RollBackStepState> get serializer => _$RollBackStepStateSerializer();
+  static Serializer<RollBackStepState> get serializer =>
+      _$RollBackStepStateSerializer();
 }
 
-class _$RollBackStepStateSerializer implements PrimitiveSerializer<RollBackStepState> {
+class _$RollBackStepStateSerializer
+    implements PrimitiveSerializer<RollBackStepState> {
   @override
   final Iterable<Type> types = const [RollBackStepState, _$RollBackStepState];
 
@@ -71,7 +77,11 @@ class _$RollBackStepStateSerializer implements PrimitiveSerializer<RollBackStepS
     RollBackStepState object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +97,24 @@ class _$RollBackStepStateSerializer implements PrimitiveSerializer<RollBackStepS
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'failedEventId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldAgentAppEventId),
-          ) as StepFieldAgentAppEventId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      StepFieldAgentAppEventId,
+                    ),
+                  )
+                  as StepFieldAgentAppEventId?;
           if (valueDes == null) continue;
           result.failedEventId.replace(valueDes);
           break;
@@ -130,5 +146,3 @@ class _$RollBackStepStateSerializer implements PrimitiveSerializer<RollBackStepS
     return result.build();
   }
 }
-
-

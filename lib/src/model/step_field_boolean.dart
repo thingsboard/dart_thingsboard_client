@@ -16,10 +16,11 @@ part 'step_field_boolean.g.dart';
 /// StepFieldBoolean
 ///
 /// Properties:
-/// * [value] 
-/// * [userChoice] 
+/// * [value]
+/// * [userChoice]
 @BuiltValue()
-abstract class StepFieldBoolean implements Built<StepFieldBoolean, StepFieldBooleanBuilder> {
+abstract class StepFieldBoolean
+    implements Built<StepFieldBoolean, StepFieldBooleanBuilder> {
   @BuiltValueField(wireName: r'value')
   bool? get value;
 
@@ -28,16 +29,19 @@ abstract class StepFieldBoolean implements Built<StepFieldBoolean, StepFieldBool
 
   StepFieldBoolean._();
 
-  factory StepFieldBoolean([void updates(StepFieldBooleanBuilder b)]) = _$StepFieldBoolean;
+  factory StepFieldBoolean([void updates(StepFieldBooleanBuilder b)]) =
+      _$StepFieldBoolean;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StepFieldBooleanBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StepFieldBoolean> get serializer => _$StepFieldBooleanSerializer();
+  static Serializer<StepFieldBoolean> get serializer =>
+      _$StepFieldBooleanSerializer();
 }
 
-class _$StepFieldBooleanSerializer implements PrimitiveSerializer<StepFieldBoolean> {
+class _$StepFieldBooleanSerializer
+    implements PrimitiveSerializer<StepFieldBoolean> {
   @override
   final Iterable<Type> types = const [StepFieldBoolean, _$StepFieldBoolean];
 
@@ -71,7 +75,11 @@ class _$StepFieldBooleanSerializer implements PrimitiveSerializer<StepFieldBoole
     StepFieldBoolean object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +95,22 @@ class _$StepFieldBooleanSerializer implements PrimitiveSerializer<StepFieldBoole
       final value = serializedList[i + 1];
       switch (key) {
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.value = valueDes;
           break;
         case r'userChoice':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.userChoice = valueDes;
           break;
@@ -130,5 +142,3 @@ class _$StepFieldBooleanSerializer implements PrimitiveSerializer<StepFieldBoole
     return result.build();
   }
 }
-
-

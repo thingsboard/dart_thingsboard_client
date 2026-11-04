@@ -70,10 +70,10 @@ part 'entity_id.g.dart';
 /// EntityId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue(instantiable: false)
-abstract class EntityId  {
+abstract class EntityId {
   @BuiltValueField(wireName: r'entityType')
   EntityType get entityType;
   // enum entityTypeEnum {  TENANT,  CUSTOMER,  USER,  DASHBOARD,  ASSET,  DEVICE,  ALARM,  ENTITY_GROUP,  CONVERTER,  INTEGRATION,  RULE_CHAIN,  RULE_NODE,  SCHEDULER_EVENT,  BLOB_ENTITY,  REPORT_TEMPLATE,  REPORT,  ENTITY_VIEW,  WIDGETS_BUNDLE,  WIDGET_TYPE,  ROLE,  GROUP_PERMISSION,  TENANT_PROFILE,  DEVICE_PROFILE,  ASSET_PROFILE,  API_USAGE_STATE,  TB_RESOURCE,  OTA_PACKAGE,  EDGE,  RPC,  QUEUE,  NOTIFICATION_TARGET,  NOTIFICATION_TEMPLATE,  NOTIFICATION_REQUEST,  NOTIFICATION,  NOTIFICATION_RULE,  QUEUE_STATS,  OAUTH2_CLIENT,  DOMAIN,  MOBILE_APP,  MOBILE_APP_BUNDLE,  CALCULATED_FIELD,  JOB,  SECRET,  ADMIN_SETTINGS,  AI_MODEL,  API_KEY,  AGENT,  AGENT_APPLICATION,  AGENT_APP_EVENT,  AGENT_APP_UNIT,  AGENT_APP_PROFILE,  AGENT_PROFILE,  AGENT_BULK_ACTION,  };
@@ -145,332 +145,333 @@ abstract class EntityId  {
 }
 
 extension EntityIdDiscriminatorExt on EntityId {
-    String? get discriminatorValue {
-        if (this is AdminSettingsId) {
-            return r'ADMIN_SETTINGS';
-        }
-        if (this is AgentId) {
-            return r'AGENT';
-        }
-        if (this is AgentApplicationId) {
-            return r'AGENT_APPLICATION';
-        }
-        if (this is AgentAppEventId) {
-            return r'AGENT_APP_EVENT';
-        }
-        if (this is AgentAppProfileId) {
-            return r'AGENT_APP_PROFILE';
-        }
-        if (this is AgentAppUnitId) {
-            return r'AGENT_APP_UNIT';
-        }
-        if (this is AgentBulkActionId) {
-            return r'AGENT_BULK_ACTION';
-        }
-        if (this is AgentProfileId) {
-            return r'AGENT_PROFILE';
-        }
-        if (this is AiModelId) {
-            return r'AI_MODEL';
-        }
-        if (this is AlarmId) {
-            return r'ALARM';
-        }
-        if (this is ApiKeyId) {
-            return r'API_KEY';
-        }
-        if (this is ApiUsageStateId) {
-            return r'API_USAGE_STATE';
-        }
-        if (this is AssetId) {
-            return r'ASSET';
-        }
-        if (this is AssetProfileId) {
-            return r'ASSET_PROFILE';
-        }
-        if (this is BlobEntityId) {
-            return r'BLOB_ENTITY';
-        }
-        if (this is CalculatedFieldId) {
-            return r'CALCULATED_FIELD';
-        }
-        if (this is ConverterId) {
-            return r'CONVERTER';
-        }
-        if (this is CustomerId) {
-            return r'CUSTOMER';
-        }
-        if (this is DashboardId) {
-            return r'DASHBOARD';
-        }
-        if (this is DeviceId) {
-            return r'DEVICE';
-        }
-        if (this is DeviceProfileId) {
-            return r'DEVICE_PROFILE';
-        }
-        if (this is DomainId) {
-            return r'DOMAIN';
-        }
-        if (this is EdgeId) {
-            return r'EDGE';
-        }
-        if (this is EntityGroupId) {
-            return r'ENTITY_GROUP';
-        }
-        if (this is EntityViewId) {
-            return r'ENTITY_VIEW';
-        }
-        if (this is GroupPermissionId) {
-            return r'GROUP_PERMISSION';
-        }
-        if (this is IntegrationId) {
-            return r'INTEGRATION';
-        }
-        if (this is JobId) {
-            return r'JOB';
-        }
-        if (this is MobileAppId) {
-            return r'MOBILE_APP';
-        }
-        if (this is MobileAppBundleId) {
-            return r'MOBILE_APP_BUNDLE';
-        }
-        if (this is NotificationId) {
-            return r'NOTIFICATION';
-        }
-        if (this is NotificationRequestId) {
-            return r'NOTIFICATION_REQUEST';
-        }
-        if (this is NotificationRuleId) {
-            return r'NOTIFICATION_RULE';
-        }
-        if (this is NotificationTargetId) {
-            return r'NOTIFICATION_TARGET';
-        }
-        if (this is NotificationTemplateId) {
-            return r'NOTIFICATION_TEMPLATE';
-        }
-        if (this is OAuth2ClientId) {
-            return r'OAUTH2_CLIENT';
-        }
-        if (this is OtaPackageId) {
-            return r'OTA_PACKAGE';
-        }
-        if (this is QueueId) {
-            return r'QUEUE';
-        }
-        if (this is QueueStatsId) {
-            return r'QUEUE_STATS';
-        }
-        if (this is ReportId) {
-            return r'REPORT';
-        }
-        if (this is ReportTemplateId) {
-            return r'REPORT_TEMPLATE';
-        }
-        if (this is RoleId) {
-            return r'ROLE';
-        }
-        if (this is RpcId) {
-            return r'RPC';
-        }
-        if (this is RuleChainId) {
-            return r'RULE_CHAIN';
-        }
-        if (this is RuleNodeId) {
-            return r'RULE_NODE';
-        }
-        if (this is SchedulerEventId) {
-            return r'SCHEDULER_EVENT';
-        }
-        if (this is SecretId) {
-            return r'SECRET';
-        }
-        if (this is TbResourceId) {
-            return r'TB_RESOURCE';
-        }
-        if (this is TenantId) {
-            return r'TENANT';
-        }
-        if (this is TenantProfileId) {
-            return r'TENANT_PROFILE';
-        }
-        if (this is UserId) {
-            return r'USER';
-        }
-        if (this is WidgetsBundleId) {
-            return r'WIDGETS_BUNDLE';
-        }
-        if (this is WidgetTypeId) {
-            return r'WIDGET_TYPE';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AdminSettingsId) {
+      return r'ADMIN_SETTINGS';
     }
+    if (this is AgentId) {
+      return r'AGENT';
+    }
+    if (this is AgentApplicationId) {
+      return r'AGENT_APPLICATION';
+    }
+    if (this is AgentAppEventId) {
+      return r'AGENT_APP_EVENT';
+    }
+    if (this is AgentAppProfileId) {
+      return r'AGENT_APP_PROFILE';
+    }
+    if (this is AgentAppUnitId) {
+      return r'AGENT_APP_UNIT';
+    }
+    if (this is AgentBulkActionId) {
+      return r'AGENT_BULK_ACTION';
+    }
+    if (this is AgentProfileId) {
+      return r'AGENT_PROFILE';
+    }
+    if (this is AiModelId) {
+      return r'AI_MODEL';
+    }
+    if (this is AlarmId) {
+      return r'ALARM';
+    }
+    if (this is ApiKeyId) {
+      return r'API_KEY';
+    }
+    if (this is ApiUsageStateId) {
+      return r'API_USAGE_STATE';
+    }
+    if (this is AssetId) {
+      return r'ASSET';
+    }
+    if (this is AssetProfileId) {
+      return r'ASSET_PROFILE';
+    }
+    if (this is BlobEntityId) {
+      return r'BLOB_ENTITY';
+    }
+    if (this is CalculatedFieldId) {
+      return r'CALCULATED_FIELD';
+    }
+    if (this is ConverterId) {
+      return r'CONVERTER';
+    }
+    if (this is CustomerId) {
+      return r'CUSTOMER';
+    }
+    if (this is DashboardId) {
+      return r'DASHBOARD';
+    }
+    if (this is DeviceId) {
+      return r'DEVICE';
+    }
+    if (this is DeviceProfileId) {
+      return r'DEVICE_PROFILE';
+    }
+    if (this is DomainId) {
+      return r'DOMAIN';
+    }
+    if (this is EdgeId) {
+      return r'EDGE';
+    }
+    if (this is EntityGroupId) {
+      return r'ENTITY_GROUP';
+    }
+    if (this is EntityViewId) {
+      return r'ENTITY_VIEW';
+    }
+    if (this is GroupPermissionId) {
+      return r'GROUP_PERMISSION';
+    }
+    if (this is IntegrationId) {
+      return r'INTEGRATION';
+    }
+    if (this is JobId) {
+      return r'JOB';
+    }
+    if (this is MobileAppId) {
+      return r'MOBILE_APP';
+    }
+    if (this is MobileAppBundleId) {
+      return r'MOBILE_APP_BUNDLE';
+    }
+    if (this is NotificationId) {
+      return r'NOTIFICATION';
+    }
+    if (this is NotificationRequestId) {
+      return r'NOTIFICATION_REQUEST';
+    }
+    if (this is NotificationRuleId) {
+      return r'NOTIFICATION_RULE';
+    }
+    if (this is NotificationTargetId) {
+      return r'NOTIFICATION_TARGET';
+    }
+    if (this is NotificationTemplateId) {
+      return r'NOTIFICATION_TEMPLATE';
+    }
+    if (this is OAuth2ClientId) {
+      return r'OAUTH2_CLIENT';
+    }
+    if (this is OtaPackageId) {
+      return r'OTA_PACKAGE';
+    }
+    if (this is QueueId) {
+      return r'QUEUE';
+    }
+    if (this is QueueStatsId) {
+      return r'QUEUE_STATS';
+    }
+    if (this is ReportId) {
+      return r'REPORT';
+    }
+    if (this is ReportTemplateId) {
+      return r'REPORT_TEMPLATE';
+    }
+    if (this is RoleId) {
+      return r'ROLE';
+    }
+    if (this is RpcId) {
+      return r'RPC';
+    }
+    if (this is RuleChainId) {
+      return r'RULE_CHAIN';
+    }
+    if (this is RuleNodeId) {
+      return r'RULE_NODE';
+    }
+    if (this is SchedulerEventId) {
+      return r'SCHEDULER_EVENT';
+    }
+    if (this is SecretId) {
+      return r'SECRET';
+    }
+    if (this is TbResourceId) {
+      return r'TB_RESOURCE';
+    }
+    if (this is TenantId) {
+      return r'TENANT';
+    }
+    if (this is TenantProfileId) {
+      return r'TENANT_PROFILE';
+    }
+    if (this is UserId) {
+      return r'USER';
+    }
+    if (this is WidgetsBundleId) {
+      return r'WIDGETS_BUNDLE';
+    }
+    if (this is WidgetTypeId) {
+      return r'WIDGET_TYPE';
+    }
+    return null;
+  }
 }
+
 extension EntityIdBuilderDiscriminatorExt on EntityIdBuilder {
-    String? get discriminatorValue {
-        if (this is AdminSettingsIdBuilder) {
-            return r'ADMIN_SETTINGS';
-        }
-        if (this is AgentIdBuilder) {
-            return r'AGENT';
-        }
-        if (this is AgentApplicationIdBuilder) {
-            return r'AGENT_APPLICATION';
-        }
-        if (this is AgentAppEventIdBuilder) {
-            return r'AGENT_APP_EVENT';
-        }
-        if (this is AgentAppProfileIdBuilder) {
-            return r'AGENT_APP_PROFILE';
-        }
-        if (this is AgentAppUnitIdBuilder) {
-            return r'AGENT_APP_UNIT';
-        }
-        if (this is AgentBulkActionIdBuilder) {
-            return r'AGENT_BULK_ACTION';
-        }
-        if (this is AgentProfileIdBuilder) {
-            return r'AGENT_PROFILE';
-        }
-        if (this is AiModelIdBuilder) {
-            return r'AI_MODEL';
-        }
-        if (this is AlarmIdBuilder) {
-            return r'ALARM';
-        }
-        if (this is ApiKeyIdBuilder) {
-            return r'API_KEY';
-        }
-        if (this is ApiUsageStateIdBuilder) {
-            return r'API_USAGE_STATE';
-        }
-        if (this is AssetIdBuilder) {
-            return r'ASSET';
-        }
-        if (this is AssetProfileIdBuilder) {
-            return r'ASSET_PROFILE';
-        }
-        if (this is BlobEntityIdBuilder) {
-            return r'BLOB_ENTITY';
-        }
-        if (this is CalculatedFieldIdBuilder) {
-            return r'CALCULATED_FIELD';
-        }
-        if (this is ConverterIdBuilder) {
-            return r'CONVERTER';
-        }
-        if (this is CustomerIdBuilder) {
-            return r'CUSTOMER';
-        }
-        if (this is DashboardIdBuilder) {
-            return r'DASHBOARD';
-        }
-        if (this is DeviceIdBuilder) {
-            return r'DEVICE';
-        }
-        if (this is DeviceProfileIdBuilder) {
-            return r'DEVICE_PROFILE';
-        }
-        if (this is DomainIdBuilder) {
-            return r'DOMAIN';
-        }
-        if (this is EdgeIdBuilder) {
-            return r'EDGE';
-        }
-        if (this is EntityGroupIdBuilder) {
-            return r'ENTITY_GROUP';
-        }
-        if (this is EntityViewIdBuilder) {
-            return r'ENTITY_VIEW';
-        }
-        if (this is GroupPermissionIdBuilder) {
-            return r'GROUP_PERMISSION';
-        }
-        if (this is IntegrationIdBuilder) {
-            return r'INTEGRATION';
-        }
-        if (this is JobIdBuilder) {
-            return r'JOB';
-        }
-        if (this is MobileAppIdBuilder) {
-            return r'MOBILE_APP';
-        }
-        if (this is MobileAppBundleIdBuilder) {
-            return r'MOBILE_APP_BUNDLE';
-        }
-        if (this is NotificationIdBuilder) {
-            return r'NOTIFICATION';
-        }
-        if (this is NotificationRequestIdBuilder) {
-            return r'NOTIFICATION_REQUEST';
-        }
-        if (this is NotificationRuleIdBuilder) {
-            return r'NOTIFICATION_RULE';
-        }
-        if (this is NotificationTargetIdBuilder) {
-            return r'NOTIFICATION_TARGET';
-        }
-        if (this is NotificationTemplateIdBuilder) {
-            return r'NOTIFICATION_TEMPLATE';
-        }
-        if (this is OAuth2ClientIdBuilder) {
-            return r'OAUTH2_CLIENT';
-        }
-        if (this is OtaPackageIdBuilder) {
-            return r'OTA_PACKAGE';
-        }
-        if (this is QueueIdBuilder) {
-            return r'QUEUE';
-        }
-        if (this is QueueStatsIdBuilder) {
-            return r'QUEUE_STATS';
-        }
-        if (this is ReportIdBuilder) {
-            return r'REPORT';
-        }
-        if (this is ReportTemplateIdBuilder) {
-            return r'REPORT_TEMPLATE';
-        }
-        if (this is RoleIdBuilder) {
-            return r'ROLE';
-        }
-        if (this is RpcIdBuilder) {
-            return r'RPC';
-        }
-        if (this is RuleChainIdBuilder) {
-            return r'RULE_CHAIN';
-        }
-        if (this is RuleNodeIdBuilder) {
-            return r'RULE_NODE';
-        }
-        if (this is SchedulerEventIdBuilder) {
-            return r'SCHEDULER_EVENT';
-        }
-        if (this is SecretIdBuilder) {
-            return r'SECRET';
-        }
-        if (this is TbResourceIdBuilder) {
-            return r'TB_RESOURCE';
-        }
-        if (this is TenantIdBuilder) {
-            return r'TENANT';
-        }
-        if (this is TenantProfileIdBuilder) {
-            return r'TENANT_PROFILE';
-        }
-        if (this is UserIdBuilder) {
-            return r'USER';
-        }
-        if (this is WidgetsBundleIdBuilder) {
-            return r'WIDGETS_BUNDLE';
-        }
-        if (this is WidgetTypeIdBuilder) {
-            return r'WIDGET_TYPE';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AdminSettingsIdBuilder) {
+      return r'ADMIN_SETTINGS';
     }
+    if (this is AgentIdBuilder) {
+      return r'AGENT';
+    }
+    if (this is AgentApplicationIdBuilder) {
+      return r'AGENT_APPLICATION';
+    }
+    if (this is AgentAppEventIdBuilder) {
+      return r'AGENT_APP_EVENT';
+    }
+    if (this is AgentAppProfileIdBuilder) {
+      return r'AGENT_APP_PROFILE';
+    }
+    if (this is AgentAppUnitIdBuilder) {
+      return r'AGENT_APP_UNIT';
+    }
+    if (this is AgentBulkActionIdBuilder) {
+      return r'AGENT_BULK_ACTION';
+    }
+    if (this is AgentProfileIdBuilder) {
+      return r'AGENT_PROFILE';
+    }
+    if (this is AiModelIdBuilder) {
+      return r'AI_MODEL';
+    }
+    if (this is AlarmIdBuilder) {
+      return r'ALARM';
+    }
+    if (this is ApiKeyIdBuilder) {
+      return r'API_KEY';
+    }
+    if (this is ApiUsageStateIdBuilder) {
+      return r'API_USAGE_STATE';
+    }
+    if (this is AssetIdBuilder) {
+      return r'ASSET';
+    }
+    if (this is AssetProfileIdBuilder) {
+      return r'ASSET_PROFILE';
+    }
+    if (this is BlobEntityIdBuilder) {
+      return r'BLOB_ENTITY';
+    }
+    if (this is CalculatedFieldIdBuilder) {
+      return r'CALCULATED_FIELD';
+    }
+    if (this is ConverterIdBuilder) {
+      return r'CONVERTER';
+    }
+    if (this is CustomerIdBuilder) {
+      return r'CUSTOMER';
+    }
+    if (this is DashboardIdBuilder) {
+      return r'DASHBOARD';
+    }
+    if (this is DeviceIdBuilder) {
+      return r'DEVICE';
+    }
+    if (this is DeviceProfileIdBuilder) {
+      return r'DEVICE_PROFILE';
+    }
+    if (this is DomainIdBuilder) {
+      return r'DOMAIN';
+    }
+    if (this is EdgeIdBuilder) {
+      return r'EDGE';
+    }
+    if (this is EntityGroupIdBuilder) {
+      return r'ENTITY_GROUP';
+    }
+    if (this is EntityViewIdBuilder) {
+      return r'ENTITY_VIEW';
+    }
+    if (this is GroupPermissionIdBuilder) {
+      return r'GROUP_PERMISSION';
+    }
+    if (this is IntegrationIdBuilder) {
+      return r'INTEGRATION';
+    }
+    if (this is JobIdBuilder) {
+      return r'JOB';
+    }
+    if (this is MobileAppIdBuilder) {
+      return r'MOBILE_APP';
+    }
+    if (this is MobileAppBundleIdBuilder) {
+      return r'MOBILE_APP_BUNDLE';
+    }
+    if (this is NotificationIdBuilder) {
+      return r'NOTIFICATION';
+    }
+    if (this is NotificationRequestIdBuilder) {
+      return r'NOTIFICATION_REQUEST';
+    }
+    if (this is NotificationRuleIdBuilder) {
+      return r'NOTIFICATION_RULE';
+    }
+    if (this is NotificationTargetIdBuilder) {
+      return r'NOTIFICATION_TARGET';
+    }
+    if (this is NotificationTemplateIdBuilder) {
+      return r'NOTIFICATION_TEMPLATE';
+    }
+    if (this is OAuth2ClientIdBuilder) {
+      return r'OAUTH2_CLIENT';
+    }
+    if (this is OtaPackageIdBuilder) {
+      return r'OTA_PACKAGE';
+    }
+    if (this is QueueIdBuilder) {
+      return r'QUEUE';
+    }
+    if (this is QueueStatsIdBuilder) {
+      return r'QUEUE_STATS';
+    }
+    if (this is ReportIdBuilder) {
+      return r'REPORT';
+    }
+    if (this is ReportTemplateIdBuilder) {
+      return r'REPORT_TEMPLATE';
+    }
+    if (this is RoleIdBuilder) {
+      return r'ROLE';
+    }
+    if (this is RpcIdBuilder) {
+      return r'RPC';
+    }
+    if (this is RuleChainIdBuilder) {
+      return r'RULE_CHAIN';
+    }
+    if (this is RuleNodeIdBuilder) {
+      return r'RULE_NODE';
+    }
+    if (this is SchedulerEventIdBuilder) {
+      return r'SCHEDULER_EVENT';
+    }
+    if (this is SecretIdBuilder) {
+      return r'SECRET';
+    }
+    if (this is TbResourceIdBuilder) {
+      return r'TB_RESOURCE';
+    }
+    if (this is TenantIdBuilder) {
+      return r'TENANT';
+    }
+    if (this is TenantProfileIdBuilder) {
+      return r'TENANT_PROFILE';
+    }
+    if (this is UserIdBuilder) {
+      return r'USER';
+    }
+    if (this is WidgetsBundleIdBuilder) {
+      return r'WIDGETS_BUNDLE';
+    }
+    if (this is WidgetTypeIdBuilder) {
+      return r'WIDGET_TYPE';
+    }
+    return null;
+  }
 }
 
 class _$EntityIdSerializer implements PrimitiveSerializer<EntityId> {
@@ -504,28 +505,49 @@ class _$EntityIdSerializer implements PrimitiveSerializer<EntityId> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AdminSettingsId) {
-      return serializers.serialize(object, specifiedType: FullType(AdminSettingsId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AdminSettingsId),
+      )!;
     }
     if (object is AgentId) {
       return serializers.serialize(object, specifiedType: FullType(AgentId))!;
     }
     if (object is AgentApplicationId) {
-      return serializers.serialize(object, specifiedType: FullType(AgentApplicationId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AgentApplicationId),
+      )!;
     }
     if (object is AgentAppEventId) {
-      return serializers.serialize(object, specifiedType: FullType(AgentAppEventId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AgentAppEventId),
+      )!;
     }
     if (object is AgentAppProfileId) {
-      return serializers.serialize(object, specifiedType: FullType(AgentAppProfileId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AgentAppProfileId),
+      )!;
     }
     if (object is AgentAppUnitId) {
-      return serializers.serialize(object, specifiedType: FullType(AgentAppUnitId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AgentAppUnitId),
+      )!;
     }
     if (object is AgentBulkActionId) {
-      return serializers.serialize(object, specifiedType: FullType(AgentBulkActionId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AgentBulkActionId),
+      )!;
     }
     if (object is AgentProfileId) {
-      return serializers.serialize(object, specifiedType: FullType(AgentProfileId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AgentProfileId),
+      )!;
     }
     if (object is AiModelId) {
       return serializers.serialize(object, specifiedType: FullType(AiModelId))!;
@@ -537,34 +559,58 @@ class _$EntityIdSerializer implements PrimitiveSerializer<EntityId> {
       return serializers.serialize(object, specifiedType: FullType(ApiKeyId))!;
     }
     if (object is ApiUsageStateId) {
-      return serializers.serialize(object, specifiedType: FullType(ApiUsageStateId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ApiUsageStateId),
+      )!;
     }
     if (object is AssetId) {
       return serializers.serialize(object, specifiedType: FullType(AssetId))!;
     }
     if (object is AssetProfileId) {
-      return serializers.serialize(object, specifiedType: FullType(AssetProfileId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AssetProfileId),
+      )!;
     }
     if (object is BlobEntityId) {
-      return serializers.serialize(object, specifiedType: FullType(BlobEntityId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(BlobEntityId),
+      )!;
     }
     if (object is CalculatedFieldId) {
-      return serializers.serialize(object, specifiedType: FullType(CalculatedFieldId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CalculatedFieldId),
+      )!;
     }
     if (object is ConverterId) {
-      return serializers.serialize(object, specifiedType: FullType(ConverterId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ConverterId),
+      )!;
     }
     if (object is CustomerId) {
-      return serializers.serialize(object, specifiedType: FullType(CustomerId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CustomerId),
+      )!;
     }
     if (object is DashboardId) {
-      return serializers.serialize(object, specifiedType: FullType(DashboardId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DashboardId),
+      )!;
     }
     if (object is DeviceId) {
       return serializers.serialize(object, specifiedType: FullType(DeviceId))!;
     }
     if (object is DeviceProfileId) {
-      return serializers.serialize(object, specifiedType: FullType(DeviceProfileId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DeviceProfileId),
+      )!;
     }
     if (object is DomainId) {
       return serializers.serialize(object, specifiedType: FullType(DomainId))!;
@@ -573,58 +619,103 @@ class _$EntityIdSerializer implements PrimitiveSerializer<EntityId> {
       return serializers.serialize(object, specifiedType: FullType(EdgeId))!;
     }
     if (object is EntityGroupId) {
-      return serializers.serialize(object, specifiedType: FullType(EntityGroupId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityGroupId),
+      )!;
     }
     if (object is EntityViewId) {
-      return serializers.serialize(object, specifiedType: FullType(EntityViewId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityViewId),
+      )!;
     }
     if (object is GroupPermissionId) {
-      return serializers.serialize(object, specifiedType: FullType(GroupPermissionId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(GroupPermissionId),
+      )!;
     }
     if (object is IntegrationId) {
-      return serializers.serialize(object, specifiedType: FullType(IntegrationId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(IntegrationId),
+      )!;
     }
     if (object is JobId) {
       return serializers.serialize(object, specifiedType: FullType(JobId))!;
     }
     if (object is MobileAppId) {
-      return serializers.serialize(object, specifiedType: FullType(MobileAppId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(MobileAppId),
+      )!;
     }
     if (object is MobileAppBundleId) {
-      return serializers.serialize(object, specifiedType: FullType(MobileAppBundleId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(MobileAppBundleId),
+      )!;
     }
     if (object is NotificationId) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationId),
+      )!;
     }
     if (object is NotificationRequestId) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationRequestId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationRequestId),
+      )!;
     }
     if (object is NotificationRuleId) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationRuleId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationRuleId),
+      )!;
     }
     if (object is NotificationTargetId) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationTargetId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationTargetId),
+      )!;
     }
     if (object is NotificationTemplateId) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationTemplateId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationTemplateId),
+      )!;
     }
     if (object is OAuth2ClientId) {
-      return serializers.serialize(object, specifiedType: FullType(OAuth2ClientId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(OAuth2ClientId),
+      )!;
     }
     if (object is OtaPackageId) {
-      return serializers.serialize(object, specifiedType: FullType(OtaPackageId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(OtaPackageId),
+      )!;
     }
     if (object is QueueId) {
       return serializers.serialize(object, specifiedType: FullType(QueueId))!;
     }
     if (object is QueueStatsId) {
-      return serializers.serialize(object, specifiedType: FullType(QueueStatsId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(QueueStatsId),
+      )!;
     }
     if (object is ReportId) {
       return serializers.serialize(object, specifiedType: FullType(ReportId))!;
     }
     if (object is ReportTemplateId) {
-      return serializers.serialize(object, specifiedType: FullType(ReportTemplateId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ReportTemplateId),
+      )!;
     }
     if (object is RoleId) {
       return serializers.serialize(object, specifiedType: FullType(RoleId))!;
@@ -633,36 +724,61 @@ class _$EntityIdSerializer implements PrimitiveSerializer<EntityId> {
       return serializers.serialize(object, specifiedType: FullType(RpcId))!;
     }
     if (object is RuleChainId) {
-      return serializers.serialize(object, specifiedType: FullType(RuleChainId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RuleChainId),
+      )!;
     }
     if (object is RuleNodeId) {
-      return serializers.serialize(object, specifiedType: FullType(RuleNodeId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RuleNodeId),
+      )!;
     }
     if (object is SchedulerEventId) {
-      return serializers.serialize(object, specifiedType: FullType(SchedulerEventId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SchedulerEventId),
+      )!;
     }
     if (object is SecretId) {
       return serializers.serialize(object, specifiedType: FullType(SecretId))!;
     }
     if (object is TbResourceId) {
-      return serializers.serialize(object, specifiedType: FullType(TbResourceId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TbResourceId),
+      )!;
     }
     if (object is TenantId) {
       return serializers.serialize(object, specifiedType: FullType(TenantId))!;
     }
     if (object is TenantProfileId) {
-      return serializers.serialize(object, specifiedType: FullType(TenantProfileId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TenantProfileId),
+      )!;
     }
     if (object is UserId) {
       return serializers.serialize(object, specifiedType: FullType(UserId))!;
     }
     if (object is WidgetsBundleId) {
-      return serializers.serialize(object, specifiedType: FullType(WidgetsBundleId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WidgetsBundleId),
+      )!;
     }
     if (object is WidgetTypeId) {
-      return serializers.serialize(object, specifiedType: FullType(WidgetTypeId))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WidgetTypeId),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -672,125 +788,347 @@ class _$EntityIdSerializer implements PrimitiveSerializer<EntityId> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(EntityId.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(EntityId.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'ADMIN_SETTINGS':
-        return serializers.deserialize(serialized, specifiedType: FullType(AdminSettingsId)) as AdminSettingsId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AdminSettingsId),
+            )
+            as AdminSettingsId;
       case r'AGENT':
-        return serializers.deserialize(serialized, specifiedType: FullType(AgentId)) as AgentId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AgentId),
+            )
+            as AgentId;
       case r'AGENT_APPLICATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(AgentApplicationId)) as AgentApplicationId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AgentApplicationId),
+            )
+            as AgentApplicationId;
       case r'AGENT_APP_EVENT':
-        return serializers.deserialize(serialized, specifiedType: FullType(AgentAppEventId)) as AgentAppEventId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AgentAppEventId),
+            )
+            as AgentAppEventId;
       case r'AGENT_APP_PROFILE':
-        return serializers.deserialize(serialized, specifiedType: FullType(AgentAppProfileId)) as AgentAppProfileId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AgentAppProfileId),
+            )
+            as AgentAppProfileId;
       case r'AGENT_APP_UNIT':
-        return serializers.deserialize(serialized, specifiedType: FullType(AgentAppUnitId)) as AgentAppUnitId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AgentAppUnitId),
+            )
+            as AgentAppUnitId;
       case r'AGENT_BULK_ACTION':
-        return serializers.deserialize(serialized, specifiedType: FullType(AgentBulkActionId)) as AgentBulkActionId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AgentBulkActionId),
+            )
+            as AgentBulkActionId;
       case r'AGENT_PROFILE':
-        return serializers.deserialize(serialized, specifiedType: FullType(AgentProfileId)) as AgentProfileId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AgentProfileId),
+            )
+            as AgentProfileId;
       case r'AI_MODEL':
-        return serializers.deserialize(serialized, specifiedType: FullType(AiModelId)) as AiModelId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AiModelId),
+            )
+            as AiModelId;
       case r'ALARM':
-        return serializers.deserialize(serialized, specifiedType: FullType(AlarmId)) as AlarmId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AlarmId),
+            )
+            as AlarmId;
       case r'API_KEY':
-        return serializers.deserialize(serialized, specifiedType: FullType(ApiKeyId)) as ApiKeyId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ApiKeyId),
+            )
+            as ApiKeyId;
       case r'API_USAGE_STATE':
-        return serializers.deserialize(serialized, specifiedType: FullType(ApiUsageStateId)) as ApiUsageStateId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ApiUsageStateId),
+            )
+            as ApiUsageStateId;
       case r'ASSET':
-        return serializers.deserialize(serialized, specifiedType: FullType(AssetId)) as AssetId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AssetId),
+            )
+            as AssetId;
       case r'ASSET_PROFILE':
-        return serializers.deserialize(serialized, specifiedType: FullType(AssetProfileId)) as AssetProfileId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AssetProfileId),
+            )
+            as AssetProfileId;
       case r'BLOB_ENTITY':
-        return serializers.deserialize(serialized, specifiedType: FullType(BlobEntityId)) as BlobEntityId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(BlobEntityId),
+            )
+            as BlobEntityId;
       case r'CALCULATED_FIELD':
-        return serializers.deserialize(serialized, specifiedType: FullType(CalculatedFieldId)) as CalculatedFieldId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CalculatedFieldId),
+            )
+            as CalculatedFieldId;
       case r'CONVERTER':
-        return serializers.deserialize(serialized, specifiedType: FullType(ConverterId)) as ConverterId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ConverterId),
+            )
+            as ConverterId;
       case r'CUSTOMER':
-        return serializers.deserialize(serialized, specifiedType: FullType(CustomerId)) as CustomerId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CustomerId),
+            )
+            as CustomerId;
       case r'DASHBOARD':
-        return serializers.deserialize(serialized, specifiedType: FullType(DashboardId)) as DashboardId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DashboardId),
+            )
+            as DashboardId;
       case r'DEVICE':
-        return serializers.deserialize(serialized, specifiedType: FullType(DeviceId)) as DeviceId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DeviceId),
+            )
+            as DeviceId;
       case r'DEVICE_PROFILE':
-        return serializers.deserialize(serialized, specifiedType: FullType(DeviceProfileId)) as DeviceProfileId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DeviceProfileId),
+            )
+            as DeviceProfileId;
       case r'DOMAIN':
-        return serializers.deserialize(serialized, specifiedType: FullType(DomainId)) as DomainId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DomainId),
+            )
+            as DomainId;
       case r'EDGE':
-        return serializers.deserialize(serialized, specifiedType: FullType(EdgeId)) as EdgeId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EdgeId),
+            )
+            as EdgeId;
       case r'ENTITY_GROUP':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityGroupId)) as EntityGroupId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityGroupId),
+            )
+            as EntityGroupId;
       case r'ENTITY_VIEW':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityViewId)) as EntityViewId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityViewId),
+            )
+            as EntityViewId;
       case r'GROUP_PERMISSION':
-        return serializers.deserialize(serialized, specifiedType: FullType(GroupPermissionId)) as GroupPermissionId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(GroupPermissionId),
+            )
+            as GroupPermissionId;
       case r'INTEGRATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(IntegrationId)) as IntegrationId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(IntegrationId),
+            )
+            as IntegrationId;
       case r'JOB':
-        return serializers.deserialize(serialized, specifiedType: FullType(JobId)) as JobId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(JobId),
+            )
+            as JobId;
       case r'MOBILE_APP':
-        return serializers.deserialize(serialized, specifiedType: FullType(MobileAppId)) as MobileAppId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(MobileAppId),
+            )
+            as MobileAppId;
       case r'MOBILE_APP_BUNDLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(MobileAppBundleId)) as MobileAppBundleId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(MobileAppBundleId),
+            )
+            as MobileAppBundleId;
       case r'NOTIFICATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationId)) as NotificationId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationId),
+            )
+            as NotificationId;
       case r'NOTIFICATION_REQUEST':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationRequestId)) as NotificationRequestId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationRequestId),
+            )
+            as NotificationRequestId;
       case r'NOTIFICATION_RULE':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationRuleId)) as NotificationRuleId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationRuleId),
+            )
+            as NotificationRuleId;
       case r'NOTIFICATION_TARGET':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationTargetId)) as NotificationTargetId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationTargetId),
+            )
+            as NotificationTargetId;
       case r'NOTIFICATION_TEMPLATE':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationTemplateId)) as NotificationTemplateId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationTemplateId),
+            )
+            as NotificationTemplateId;
       case r'OAUTH2_CLIENT':
-        return serializers.deserialize(serialized, specifiedType: FullType(OAuth2ClientId)) as OAuth2ClientId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(OAuth2ClientId),
+            )
+            as OAuth2ClientId;
       case r'OTA_PACKAGE':
-        return serializers.deserialize(serialized, specifiedType: FullType(OtaPackageId)) as OtaPackageId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(OtaPackageId),
+            )
+            as OtaPackageId;
       case r'QUEUE':
-        return serializers.deserialize(serialized, specifiedType: FullType(QueueId)) as QueueId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(QueueId),
+            )
+            as QueueId;
       case r'QUEUE_STATS':
-        return serializers.deserialize(serialized, specifiedType: FullType(QueueStatsId)) as QueueStatsId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(QueueStatsId),
+            )
+            as QueueStatsId;
       case r'REPORT':
-        return serializers.deserialize(serialized, specifiedType: FullType(ReportId)) as ReportId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ReportId),
+            )
+            as ReportId;
       case r'REPORT_TEMPLATE':
-        return serializers.deserialize(serialized, specifiedType: FullType(ReportTemplateId)) as ReportTemplateId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ReportTemplateId),
+            )
+            as ReportTemplateId;
       case r'ROLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(RoleId)) as RoleId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RoleId),
+            )
+            as RoleId;
       case r'RPC':
-        return serializers.deserialize(serialized, specifiedType: FullType(RpcId)) as RpcId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RpcId),
+            )
+            as RpcId;
       case r'RULE_CHAIN':
-        return serializers.deserialize(serialized, specifiedType: FullType(RuleChainId)) as RuleChainId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RuleChainId),
+            )
+            as RuleChainId;
       case r'RULE_NODE':
-        return serializers.deserialize(serialized, specifiedType: FullType(RuleNodeId)) as RuleNodeId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RuleNodeId),
+            )
+            as RuleNodeId;
       case r'SCHEDULER_EVENT':
-        return serializers.deserialize(serialized, specifiedType: FullType(SchedulerEventId)) as SchedulerEventId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SchedulerEventId),
+            )
+            as SchedulerEventId;
       case r'SECRET':
-        return serializers.deserialize(serialized, specifiedType: FullType(SecretId)) as SecretId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SecretId),
+            )
+            as SecretId;
       case r'TB_RESOURCE':
-        return serializers.deserialize(serialized, specifiedType: FullType(TbResourceId)) as TbResourceId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TbResourceId),
+            )
+            as TbResourceId;
       case r'TENANT':
-        return serializers.deserialize(serialized, specifiedType: FullType(TenantId)) as TenantId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TenantId),
+            )
+            as TenantId;
       case r'TENANT_PROFILE':
-        return serializers.deserialize(serialized, specifiedType: FullType(TenantProfileId)) as TenantProfileId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TenantProfileId),
+            )
+            as TenantProfileId;
       case r'USER':
-        return serializers.deserialize(serialized, specifiedType: FullType(UserId)) as UserId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(UserId),
+            )
+            as UserId;
       case r'WIDGETS_BUNDLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(WidgetsBundleId)) as WidgetsBundleId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WidgetsBundleId),
+            )
+            as WidgetsBundleId;
       case r'WIDGET_TYPE':
-        return serializers.deserialize(serialized, specifiedType: FullType(WidgetTypeId)) as WidgetTypeId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WidgetTypeId),
+            )
+            as WidgetTypeId;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($EntityId)) as $EntityId;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($EntityId),
+            )
+            as $EntityId;
     }
   }
 }
 
-
 /// a concrete implementation of [EntityId], since [EntityId] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $EntityId implements EntityId, Built<$EntityId, $EntityIdBuilder> {
+abstract class $EntityId
+    implements EntityId, Built<$EntityId, $EntityIdBuilder> {
   $EntityId._();
 
   factory $EntityId([void Function($EntityIdBuilder)? updates]) = _$$EntityId;
@@ -831,17 +1169,21 @@ class _$$EntityIdSerializer implements PrimitiveSerializer<$EntityId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -872,4 +1214,3 @@ class _$$EntityIdSerializer implements PrimitiveSerializer<$EntityId> {
     return result.build();
   }
 }
-

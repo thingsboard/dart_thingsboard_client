@@ -18,27 +18,40 @@ part 'default_coap_device_type_configuration.g.dart';
 /// DefaultCoapDeviceTypeConfiguration
 ///
 /// Properties:
-/// * [coapDeviceType] 
-/// * [transportPayloadTypeConfiguration] 
+/// * [coapDeviceType]
+/// * [transportPayloadTypeConfiguration]
 @BuiltValue()
-abstract class DefaultCoapDeviceTypeConfiguration implements CoapDeviceTypeConfiguration, Built<DefaultCoapDeviceTypeConfiguration, DefaultCoapDeviceTypeConfigurationBuilder> {
+abstract class DefaultCoapDeviceTypeConfiguration
+    implements
+        CoapDeviceTypeConfiguration,
+        Built<
+          DefaultCoapDeviceTypeConfiguration,
+          DefaultCoapDeviceTypeConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'transportPayloadTypeConfiguration')
   TransportPayloadTypeConfiguration? get transportPayloadTypeConfiguration;
 
   DefaultCoapDeviceTypeConfiguration._();
 
-  factory DefaultCoapDeviceTypeConfiguration([void updates(DefaultCoapDeviceTypeConfigurationBuilder b)]) = _$DefaultCoapDeviceTypeConfiguration;
+  factory DefaultCoapDeviceTypeConfiguration([
+    void updates(DefaultCoapDeviceTypeConfigurationBuilder b),
+  ]) = _$DefaultCoapDeviceTypeConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultCoapDeviceTypeConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultCoapDeviceTypeConfiguration> get serializer => _$DefaultCoapDeviceTypeConfigurationSerializer();
+  static Serializer<DefaultCoapDeviceTypeConfiguration> get serializer =>
+      _$DefaultCoapDeviceTypeConfigurationSerializer();
 }
 
-class _$DefaultCoapDeviceTypeConfigurationSerializer implements PrimitiveSerializer<DefaultCoapDeviceTypeConfiguration> {
+class _$DefaultCoapDeviceTypeConfigurationSerializer
+    implements PrimitiveSerializer<DefaultCoapDeviceTypeConfiguration> {
   @override
-  final Iterable<Type> types = const [DefaultCoapDeviceTypeConfiguration, _$DefaultCoapDeviceTypeConfiguration];
+  final Iterable<Type> types = const [
+    DefaultCoapDeviceTypeConfiguration,
+    _$DefaultCoapDeviceTypeConfiguration,
+  ];
 
   @override
   final String wireName = r'DefaultCoapDeviceTypeConfiguration';
@@ -68,7 +81,11 @@ class _$DefaultCoapDeviceTypeConfigurationSerializer implements PrimitiveSeriali
     DefaultCoapDeviceTypeConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -84,18 +101,24 @@ class _$DefaultCoapDeviceTypeConfigurationSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'transportPayloadTypeConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TransportPayloadTypeConfiguration),
-          ) as TransportPayloadTypeConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TransportPayloadTypeConfiguration,
+                    ),
+                  )
+                  as TransportPayloadTypeConfiguration?;
           if (valueDes == null) continue;
           result.transportPayloadTypeConfiguration = valueDes;
           break;
         case r'coapDeviceType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.coapDeviceType = valueDes;
           break;
         default:
@@ -126,5 +149,3 @@ class _$DefaultCoapDeviceTypeConfigurationSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

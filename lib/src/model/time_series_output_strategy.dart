@@ -18,9 +18,9 @@ part 'time_series_output_strategy.g.dart';
 /// TimeSeriesOutputStrategy
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class TimeSeriesOutputStrategy  {
+abstract class TimeSeriesOutputStrategy {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -32,33 +32,37 @@ abstract class TimeSeriesOutputStrategy  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesOutputStrategy> get serializer => _$TimeSeriesOutputStrategySerializer();
+  static Serializer<TimeSeriesOutputStrategy> get serializer =>
+      _$TimeSeriesOutputStrategySerializer();
 }
 
 extension TimeSeriesOutputStrategyDiscriminatorExt on TimeSeriesOutputStrategy {
-    String? get discriminatorValue {
-        if (this is TimeSeriesImmediateOutputStrategy) {
-            return r'IMMEDIATE';
-        }
-        if (this is TimeSeriesRuleChainOutputStrategy) {
-            return r'RULE_CHAIN';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is TimeSeriesImmediateOutputStrategy) {
+      return r'IMMEDIATE';
     }
-}
-extension TimeSeriesOutputStrategyBuilderDiscriminatorExt on TimeSeriesOutputStrategyBuilder {
-    String? get discriminatorValue {
-        if (this is TimeSeriesImmediateOutputStrategyBuilder) {
-            return r'IMMEDIATE';
-        }
-        if (this is TimeSeriesRuleChainOutputStrategyBuilder) {
-            return r'RULE_CHAIN';
-        }
-        return null;
+    if (this is TimeSeriesRuleChainOutputStrategy) {
+      return r'RULE_CHAIN';
     }
+    return null;
+  }
 }
 
-class _$TimeSeriesOutputStrategySerializer implements PrimitiveSerializer<TimeSeriesOutputStrategy> {
+extension TimeSeriesOutputStrategyBuilderDiscriminatorExt
+    on TimeSeriesOutputStrategyBuilder {
+  String? get discriminatorValue {
+    if (this is TimeSeriesImmediateOutputStrategyBuilder) {
+      return r'IMMEDIATE';
+    }
+    if (this is TimeSeriesRuleChainOutputStrategyBuilder) {
+      return r'RULE_CHAIN';
+    }
+    return null;
+  }
+}
+
+class _$TimeSeriesOutputStrategySerializer
+    implements PrimitiveSerializer<TimeSeriesOutputStrategy> {
   @override
   final Iterable<Type> types = const [TimeSeriesOutputStrategy];
 
@@ -84,12 +88,22 @@ class _$TimeSeriesOutputStrategySerializer implements PrimitiveSerializer<TimeSe
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is TimeSeriesImmediateOutputStrategy) {
-      return serializers.serialize(object, specifiedType: FullType(TimeSeriesImmediateOutputStrategy))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TimeSeriesImmediateOutputStrategy),
+      )!;
     }
     if (object is TimeSeriesRuleChainOutputStrategy) {
-      return serializers.serialize(object, specifiedType: FullType(TimeSeriesRuleChainOutputStrategy))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TimeSeriesRuleChainOutputStrategy),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -99,37 +113,67 @@ class _$TimeSeriesOutputStrategySerializer implements PrimitiveSerializer<TimeSe
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(TimeSeriesOutputStrategy.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          TimeSeriesOutputStrategy.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'IMMEDIATE':
-        return serializers.deserialize(serialized, specifiedType: FullType(TimeSeriesImmediateOutputStrategy)) as TimeSeriesImmediateOutputStrategy;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TimeSeriesImmediateOutputStrategy),
+            )
+            as TimeSeriesImmediateOutputStrategy;
       case r'RULE_CHAIN':
-        return serializers.deserialize(serialized, specifiedType: FullType(TimeSeriesRuleChainOutputStrategy)) as TimeSeriesRuleChainOutputStrategy;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TimeSeriesRuleChainOutputStrategy),
+            )
+            as TimeSeriesRuleChainOutputStrategy;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($TimeSeriesOutputStrategy)) as $TimeSeriesOutputStrategy;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($TimeSeriesOutputStrategy),
+            )
+            as $TimeSeriesOutputStrategy;
     }
   }
 }
 
-
 /// a concrete implementation of [TimeSeriesOutputStrategy], since [TimeSeriesOutputStrategy] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $TimeSeriesOutputStrategy implements TimeSeriesOutputStrategy, Built<$TimeSeriesOutputStrategy, $TimeSeriesOutputStrategyBuilder> {
+abstract class $TimeSeriesOutputStrategy
+    implements
+        TimeSeriesOutputStrategy,
+        Built<$TimeSeriesOutputStrategy, $TimeSeriesOutputStrategyBuilder> {
   $TimeSeriesOutputStrategy._();
 
-  factory $TimeSeriesOutputStrategy([void Function($TimeSeriesOutputStrategyBuilder)? updates]) = _$$TimeSeriesOutputStrategy;
+  factory $TimeSeriesOutputStrategy([
+    void Function($TimeSeriesOutputStrategyBuilder)? updates,
+  ]) = _$$TimeSeriesOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($TimeSeriesOutputStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$TimeSeriesOutputStrategy> get serializer => _$$TimeSeriesOutputStrategySerializer();
+  static Serializer<$TimeSeriesOutputStrategy> get serializer =>
+      _$$TimeSeriesOutputStrategySerializer();
 }
 
-class _$$TimeSeriesOutputStrategySerializer implements PrimitiveSerializer<$TimeSeriesOutputStrategy> {
+class _$$TimeSeriesOutputStrategySerializer
+    implements PrimitiveSerializer<$TimeSeriesOutputStrategy> {
   @override
-  final Iterable<Type> types = const [$TimeSeriesOutputStrategy, _$$TimeSeriesOutputStrategy];
+  final Iterable<Type> types = const [
+    $TimeSeriesOutputStrategy,
+    _$$TimeSeriesOutputStrategy,
+  ];
 
   @override
   final String wireName = r'$TimeSeriesOutputStrategy';
@@ -140,7 +184,10 @@ class _$$TimeSeriesOutputStrategySerializer implements PrimitiveSerializer<$Time
     $TimeSeriesOutputStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(TimeSeriesOutputStrategy))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(TimeSeriesOutputStrategy),
+    )!;
   }
 
   void _deserializeProperties(
@@ -156,10 +203,12 @@ class _$$TimeSeriesOutputStrategySerializer implements PrimitiveSerializer<$Time
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -190,4 +239,3 @@ class _$$TimeSeriesOutputStrategySerializer implements PrimitiveSerializer<$Time
     return result.build();
   }
 }
-

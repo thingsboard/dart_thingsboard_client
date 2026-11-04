@@ -17,19 +17,20 @@ part 'other_configuration.g.dart';
 /// OtherConfiguration
 ///
 /// Properties:
-/// * [powerMode] 
-/// * [psmActivityTimer] 
-/// * [edrxCycle] 
-/// * [pagingTransmissionWindow] 
-/// * [useObject19ForOtaInfo] 
-/// * [fwUpdateStrategy] 
-/// * [swUpdateStrategy] 
-/// * [clientOnlyObserveAfterConnect] 
-/// * [fwUpdateResource] 
-/// * [swUpdateResource] 
-/// * [defaultObjectIDVer] 
+/// * [powerMode]
+/// * [psmActivityTimer]
+/// * [edrxCycle]
+/// * [pagingTransmissionWindow]
+/// * [useObject19ForOtaInfo]
+/// * [fwUpdateStrategy]
+/// * [swUpdateStrategy]
+/// * [clientOnlyObserveAfterConnect]
+/// * [fwUpdateResource]
+/// * [swUpdateResource]
+/// * [defaultObjectIDVer]
 @BuiltValue()
-abstract class OtherConfiguration implements Built<OtherConfiguration, OtherConfigurationBuilder> {
+abstract class OtherConfiguration
+    implements Built<OtherConfiguration, OtherConfigurationBuilder> {
   @BuiltValueField(wireName: r'powerMode')
   PowerMode? get powerMode;
   // enum powerModeEnum {  PSM,  DRX,  E_DRX,  };
@@ -66,16 +67,19 @@ abstract class OtherConfiguration implements Built<OtherConfiguration, OtherConf
 
   OtherConfiguration._();
 
-  factory OtherConfiguration([void updates(OtherConfigurationBuilder b)]) = _$OtherConfiguration;
+  factory OtherConfiguration([void updates(OtherConfigurationBuilder b)]) =
+      _$OtherConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OtherConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OtherConfiguration> get serializer => _$OtherConfigurationSerializer();
+  static Serializer<OtherConfiguration> get serializer =>
+      _$OtherConfigurationSerializer();
 }
 
-class _$OtherConfigurationSerializer implements PrimitiveSerializer<OtherConfiguration> {
+class _$OtherConfigurationSerializer
+    implements PrimitiveSerializer<OtherConfiguration> {
   @override
   final Iterable<Type> types = const [OtherConfiguration, _$OtherConfiguration];
 
@@ -172,7 +176,11 @@ class _$OtherConfigurationSerializer implements PrimitiveSerializer<OtherConfigu
     OtherConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -188,90 +196,112 @@ class _$OtherConfigurationSerializer implements PrimitiveSerializer<OtherConfigu
       final value = serializedList[i + 1];
       switch (key) {
         case r'powerMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PowerMode),
-          ) as PowerMode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PowerMode),
+                  )
+                  as PowerMode?;
           if (valueDes == null) continue;
           result.powerMode = valueDes;
           break;
         case r'psmActivityTimer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.psmActivityTimer = valueDes;
           break;
         case r'edrxCycle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.edrxCycle = valueDes;
           break;
         case r'pagingTransmissionWindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pagingTransmissionWindow = valueDes;
           break;
         case r'useObject19ForOtaInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useObject19ForOtaInfo = valueDes;
           break;
         case r'fwUpdateStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.fwUpdateStrategy = valueDes;
           break;
         case r'swUpdateStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.swUpdateStrategy = valueDes;
           break;
         case r'clientOnlyObserveAfterConnect':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.clientOnlyObserveAfterConnect = valueDes;
           break;
         case r'fwUpdateResource':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.fwUpdateResource = valueDes;
           break;
         case r'swUpdateResource':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.swUpdateResource = valueDes;
           break;
         case r'defaultObjectIDVer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultObjectIDVer = valueDes;
           break;
@@ -303,5 +333,3 @@ class _$OtherConfigurationSerializer implements PrimitiveSerializer<OtherConfigu
     return result.build();
   }
 }
-
-

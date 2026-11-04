@@ -18,25 +18,37 @@ part 'o_auth2_client_registration_template_id.g.dart';
 /// Properties:
 /// * [id] - string
 @BuiltValue()
-abstract class OAuth2ClientRegistrationTemplateId implements Built<OAuth2ClientRegistrationTemplateId, OAuth2ClientRegistrationTemplateIdBuilder> {
+abstract class OAuth2ClientRegistrationTemplateId
+    implements
+        Built<
+          OAuth2ClientRegistrationTemplateId,
+          OAuth2ClientRegistrationTemplateIdBuilder
+        > {
   /// string
   @BuiltValueField(wireName: r'id')
   String get id;
 
   OAuth2ClientRegistrationTemplateId._();
 
-  factory OAuth2ClientRegistrationTemplateId([void updates(OAuth2ClientRegistrationTemplateIdBuilder b)]) = _$OAuth2ClientRegistrationTemplateId;
+  factory OAuth2ClientRegistrationTemplateId([
+    void updates(OAuth2ClientRegistrationTemplateIdBuilder b),
+  ]) = _$OAuth2ClientRegistrationTemplateId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OAuth2ClientRegistrationTemplateIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OAuth2ClientRegistrationTemplateId> get serializer => _$OAuth2ClientRegistrationTemplateIdSerializer();
+  static Serializer<OAuth2ClientRegistrationTemplateId> get serializer =>
+      _$OAuth2ClientRegistrationTemplateIdSerializer();
 }
 
-class _$OAuth2ClientRegistrationTemplateIdSerializer implements PrimitiveSerializer<OAuth2ClientRegistrationTemplateId> {
+class _$OAuth2ClientRegistrationTemplateIdSerializer
+    implements PrimitiveSerializer<OAuth2ClientRegistrationTemplateId> {
   @override
-  final Iterable<Type> types = const [OAuth2ClientRegistrationTemplateId, _$OAuth2ClientRegistrationTemplateId];
+  final Iterable<Type> types = const [
+    OAuth2ClientRegistrationTemplateId,
+    _$OAuth2ClientRegistrationTemplateId,
+  ];
 
   @override
   final String wireName = r'OAuth2ClientRegistrationTemplateId';
@@ -59,7 +71,11 @@ class _$OAuth2ClientRegistrationTemplateIdSerializer implements PrimitiveSeriali
     OAuth2ClientRegistrationTemplateId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +91,12 @@ class _$OAuth2ClientRegistrationTemplateIdSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -109,5 +127,3 @@ class _$OAuth2ClientRegistrationTemplateIdSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

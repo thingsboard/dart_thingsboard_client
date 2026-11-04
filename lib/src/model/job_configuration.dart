@@ -21,11 +21,11 @@ part 'job_configuration.g.dart';
 /// JobConfiguration
 ///
 /// Properties:
-/// * [tasksKey] 
-/// * [toReprocess] 
-/// * [type] 
+/// * [tasksKey]
+/// * [toReprocess]
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class JobConfiguration  {
+abstract class JobConfiguration {
   @BuiltValueField(wireName: r'tasksKey')
   String get tasksKey;
 
@@ -44,39 +44,42 @@ abstract class JobConfiguration  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<JobConfiguration> get serializer => _$JobConfigurationSerializer();
+  static Serializer<JobConfiguration> get serializer =>
+      _$JobConfigurationSerializer();
 }
 
 extension JobConfigurationDiscriminatorExt on JobConfiguration {
-    String? get discriminatorValue {
-        if (this is CfReprocessingJobConfiguration) {
-            return r'CF_REPROCESSING';
-        }
-        if (this is DummyJobConfiguration) {
-            return r'DUMMY';
-        }
-        if (this is ReportJobConfiguration) {
-            return r'REPORT';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CfReprocessingJobConfiguration) {
+      return r'CF_REPROCESSING';
     }
-}
-extension JobConfigurationBuilderDiscriminatorExt on JobConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is CfReprocessingJobConfigurationBuilder) {
-            return r'CF_REPROCESSING';
-        }
-        if (this is DummyJobConfigurationBuilder) {
-            return r'DUMMY';
-        }
-        if (this is ReportJobConfigurationBuilder) {
-            return r'REPORT';
-        }
-        return null;
+    if (this is DummyJobConfiguration) {
+      return r'DUMMY';
     }
+    if (this is ReportJobConfiguration) {
+      return r'REPORT';
+    }
+    return null;
+  }
 }
 
-class _$JobConfigurationSerializer implements PrimitiveSerializer<JobConfiguration> {
+extension JobConfigurationBuilderDiscriminatorExt on JobConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is CfReprocessingJobConfigurationBuilder) {
+      return r'CF_REPROCESSING';
+    }
+    if (this is DummyJobConfigurationBuilder) {
+      return r'DUMMY';
+    }
+    if (this is ReportJobConfigurationBuilder) {
+      return r'REPORT';
+    }
+    return null;
+  }
+}
+
+class _$JobConfigurationSerializer
+    implements PrimitiveSerializer<JobConfiguration> {
   @override
   final Iterable<Type> types = const [JobConfiguration];
 
@@ -114,15 +117,28 @@ class _$JobConfigurationSerializer implements PrimitiveSerializer<JobConfigurati
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CfReprocessingJobConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(CfReprocessingJobConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CfReprocessingJobConfiguration),
+      )!;
     }
     if (object is DummyJobConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(DummyJobConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DummyJobConfiguration),
+      )!;
     }
     if (object is ReportJobConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(ReportJobConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ReportJobConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -132,37 +148,65 @@ class _$JobConfigurationSerializer implements PrimitiveSerializer<JobConfigurati
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(JobConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(JobConfiguration.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CF_REPROCESSING':
-        return serializers.deserialize(serialized, specifiedType: FullType(CfReprocessingJobConfiguration)) as CfReprocessingJobConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CfReprocessingJobConfiguration),
+            )
+            as CfReprocessingJobConfiguration;
       case r'DUMMY':
-        return serializers.deserialize(serialized, specifiedType: FullType(DummyJobConfiguration)) as DummyJobConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DummyJobConfiguration),
+            )
+            as DummyJobConfiguration;
       case r'REPORT':
-        return serializers.deserialize(serialized, specifiedType: FullType(ReportJobConfiguration)) as ReportJobConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ReportJobConfiguration),
+            )
+            as ReportJobConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($JobConfiguration)) as $JobConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($JobConfiguration),
+            )
+            as $JobConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [JobConfiguration], since [JobConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $JobConfiguration implements JobConfiguration, Built<$JobConfiguration, $JobConfigurationBuilder> {
+abstract class $JobConfiguration
+    implements
+        JobConfiguration,
+        Built<$JobConfiguration, $JobConfigurationBuilder> {
   $JobConfiguration._();
 
-  factory $JobConfiguration([void Function($JobConfigurationBuilder)? updates]) = _$$JobConfiguration;
+  factory $JobConfiguration([
+    void Function($JobConfigurationBuilder)? updates,
+  ]) = _$$JobConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($JobConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$JobConfiguration> get serializer => _$$JobConfigurationSerializer();
+  static Serializer<$JobConfiguration> get serializer =>
+      _$$JobConfigurationSerializer();
 }
 
-class _$$JobConfigurationSerializer implements PrimitiveSerializer<$JobConfiguration> {
+class _$$JobConfigurationSerializer
+    implements PrimitiveSerializer<$JobConfiguration> {
   @override
   final Iterable<Type> types = const [$JobConfiguration, _$$JobConfiguration];
 
@@ -175,7 +219,10 @@ class _$$JobConfigurationSerializer implements PrimitiveSerializer<$JobConfigura
     $JobConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(JobConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(JobConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -191,25 +238,33 @@ class _$$JobConfigurationSerializer implements PrimitiveSerializer<$JobConfigura
       final value = serializedList[i + 1];
       switch (key) {
         case r'tasksKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tasksKey = valueDes;
           break;
         case r'toReprocess':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TaskResult)]),
-          ) as BuiltList<TaskResult>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TaskResult),
+                    ]),
+                  )
+                  as BuiltList<TaskResult>?;
           if (valueDes == null) continue;
           result.toReprocess.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -240,4 +295,3 @@ class _$$JobConfigurationSerializer implements PrimitiveSerializer<$JobConfigura
     return result.build();
   }
 }
-

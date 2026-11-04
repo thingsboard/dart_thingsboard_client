@@ -20,12 +20,18 @@ part 'script_calculated_field_configuration.g.dart';
 /// ScriptCalculatedFieldConfiguration
 ///
 /// Properties:
-/// * [output] 
-/// * [type] 
-/// * [arguments] 
-/// * [expression] 
+/// * [output]
+/// * [type]
+/// * [arguments]
+/// * [expression]
 @BuiltValue()
-abstract class ScriptCalculatedFieldConfiguration implements CalculatedFieldConfiguration, Built<ScriptCalculatedFieldConfiguration, ScriptCalculatedFieldConfigurationBuilder> {
+abstract class ScriptCalculatedFieldConfiguration
+    implements
+        CalculatedFieldConfiguration,
+        Built<
+          ScriptCalculatedFieldConfiguration,
+          ScriptCalculatedFieldConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'expression')
   String? get expression;
 
@@ -34,18 +40,25 @@ abstract class ScriptCalculatedFieldConfiguration implements CalculatedFieldConf
 
   ScriptCalculatedFieldConfiguration._();
 
-  factory ScriptCalculatedFieldConfiguration([void updates(ScriptCalculatedFieldConfigurationBuilder b)]) = _$ScriptCalculatedFieldConfiguration;
+  factory ScriptCalculatedFieldConfiguration([
+    void updates(ScriptCalculatedFieldConfigurationBuilder b),
+  ]) = _$ScriptCalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ScriptCalculatedFieldConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ScriptCalculatedFieldConfiguration> get serializer => _$ScriptCalculatedFieldConfigurationSerializer();
+  static Serializer<ScriptCalculatedFieldConfiguration> get serializer =>
+      _$ScriptCalculatedFieldConfigurationSerializer();
 }
 
-class _$ScriptCalculatedFieldConfigurationSerializer implements PrimitiveSerializer<ScriptCalculatedFieldConfiguration> {
+class _$ScriptCalculatedFieldConfigurationSerializer
+    implements PrimitiveSerializer<ScriptCalculatedFieldConfiguration> {
   @override
-  final Iterable<Type> types = const [ScriptCalculatedFieldConfiguration, _$ScriptCalculatedFieldConfiguration];
+  final Iterable<Type> types = const [
+    ScriptCalculatedFieldConfiguration,
+    _$ScriptCalculatedFieldConfiguration,
+  ];
 
   @override
   final String wireName = r'ScriptCalculatedFieldConfiguration';
@@ -65,7 +78,10 @@ class _$ScriptCalculatedFieldConfigurationSerializer implements PrimitiveSeriali
     yield r'arguments';
     yield serializers.serialize(
       object.arguments,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(Argument),
+      ]),
     );
     if (object.expression != null) {
       yield r'expression';
@@ -87,7 +103,11 @@ class _$ScriptCalculatedFieldConfigurationSerializer implements PrimitiveSeriali
     ScriptCalculatedFieldConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,33 +123,44 @@ class _$ScriptCalculatedFieldConfigurationSerializer implements PrimitiveSeriali
       final value = serializedList[i + 1];
       switch (key) {
         case r'output':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Output),
-          ) as Output?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Output),
+                  )
+                  as Output?;
           if (valueDes == null) continue;
           result.output = valueDes;
           break;
         case r'arguments':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
-          ) as BuiltMap<String, Argument>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(Argument),
+                    ]),
+                  )
+                  as BuiltMap<String, Argument>;
           result.arguments.replace(valueDes);
           break;
         case r'expression':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.expression = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -160,5 +191,3 @@ class _$ScriptCalculatedFieldConfigurationSerializer implements PrimitiveSeriali
     return result.build();
   }
 }
-
-

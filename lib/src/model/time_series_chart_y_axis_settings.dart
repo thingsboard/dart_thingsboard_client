@@ -19,30 +19,35 @@ part 'time_series_chart_y_axis_settings.g.dart';
 /// TimeSeriesChartYAxisSettings
 ///
 /// Properties:
-/// * [show_] 
-/// * [label] 
-/// * [labelFont] 
-/// * [labelColor] 
-/// * [position] 
-/// * [showTickLabels] 
-/// * [tickLabelFont] 
-/// * [tickLabelColor] 
-/// * [showTicks] 
-/// * [ticksColor] 
-/// * [showLine] 
-/// * [lineColor] 
-/// * [showSplitLines] 
-/// * [splitLinesColor] 
-/// * [id] 
-/// * [order] 
-/// * [units] 
-/// * [decimals] 
-/// * [interval] 
-/// * [splitNumber] 
-/// * [min] 
-/// * [max] 
+/// * [show_]
+/// * [label]
+/// * [labelFont]
+/// * [labelColor]
+/// * [position]
+/// * [showTickLabels]
+/// * [tickLabelFont]
+/// * [tickLabelColor]
+/// * [showTicks]
+/// * [ticksColor]
+/// * [showLine]
+/// * [lineColor]
+/// * [showSplitLines]
+/// * [splitLinesColor]
+/// * [id]
+/// * [order]
+/// * [units]
+/// * [decimals]
+/// * [interval]
+/// * [splitNumber]
+/// * [min]
+/// * [max]
 @BuiltValue()
-abstract class TimeSeriesChartYAxisSettings implements Built<TimeSeriesChartYAxisSettings, TimeSeriesChartYAxisSettingsBuilder> {
+abstract class TimeSeriesChartYAxisSettings
+    implements
+        Built<
+          TimeSeriesChartYAxisSettings,
+          TimeSeriesChartYAxisSettingsBuilder
+        > {
   @BuiltValueField(wireName: r'show')
   bool? get show_;
 
@@ -112,18 +117,25 @@ abstract class TimeSeriesChartYAxisSettings implements Built<TimeSeriesChartYAxi
 
   TimeSeriesChartYAxisSettings._();
 
-  factory TimeSeriesChartYAxisSettings([void updates(TimeSeriesChartYAxisSettingsBuilder b)]) = _$TimeSeriesChartYAxisSettings;
+  factory TimeSeriesChartYAxisSettings([
+    void updates(TimeSeriesChartYAxisSettingsBuilder b),
+  ]) = _$TimeSeriesChartYAxisSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TimeSeriesChartYAxisSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartYAxisSettings> get serializer => _$TimeSeriesChartYAxisSettingsSerializer();
+  static Serializer<TimeSeriesChartYAxisSettings> get serializer =>
+      _$TimeSeriesChartYAxisSettingsSerializer();
 }
 
-class _$TimeSeriesChartYAxisSettingsSerializer implements PrimitiveSerializer<TimeSeriesChartYAxisSettings> {
+class _$TimeSeriesChartYAxisSettingsSerializer
+    implements PrimitiveSerializer<TimeSeriesChartYAxisSettings> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartYAxisSettings, _$TimeSeriesChartYAxisSettings];
+  final Iterable<Type> types = const [
+    TimeSeriesChartYAxisSettings,
+    _$TimeSeriesChartYAxisSettings,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartYAxisSettings';
@@ -295,7 +307,11 @@ class _$TimeSeriesChartYAxisSettingsSerializer implements PrimitiveSerializer<Ti
     TimeSeriesChartYAxisSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -311,178 +327,226 @@ class _$TimeSeriesChartYAxisSettingsSerializer implements PrimitiveSerializer<Ti
       final value = serializedList[i + 1];
       switch (key) {
         case r'show':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.show_ = valueDes;
           break;
         case r'label':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.label = valueDes;
           break;
         case r'labelFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.labelFont.replace(valueDes);
           break;
         case r'labelColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.labelColor = valueDes;
           break;
         case r'position':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AxisPosition),
-          ) as AxisPosition?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AxisPosition),
+                  )
+                  as AxisPosition?;
           if (valueDes == null) continue;
           result.position = valueDes;
           break;
         case r'showTickLabels':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTickLabels = valueDes;
           break;
         case r'tickLabelFont':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Font),
-          ) as Font?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Font),
+                  )
+                  as Font?;
           if (valueDes == null) continue;
           result.tickLabelFont.replace(valueDes);
           break;
         case r'tickLabelColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tickLabelColor = valueDes;
           break;
         case r'showTicks':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showTicks = valueDes;
           break;
         case r'ticksColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.ticksColor = valueDes;
           break;
         case r'showLine':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showLine = valueDes;
           break;
         case r'lineColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.lineColor = valueDes;
           break;
         case r'showSplitLines':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showSplitLines = valueDes;
           break;
         case r'splitLinesColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.splitLinesColor = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'order':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.order = valueDes;
           break;
         case r'units':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.units = valueDes;
           break;
         case r'decimals':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.decimals = valueDes;
           break;
         case r'interval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.interval = valueDes;
           break;
         case r'splitNumber':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.splitNumber = valueDes;
           break;
         case r'min':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SimpleValueSourceConfig),
-          ) as SimpleValueSourceConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      SimpleValueSourceConfig,
+                    ),
+                  )
+                  as SimpleValueSourceConfig?;
           if (valueDes == null) continue;
           result.min.replace(valueDes);
           break;
         case r'max':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SimpleValueSourceConfig),
-          ) as SimpleValueSourceConfig?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      SimpleValueSourceConfig,
+                    ),
+                  )
+                  as SimpleValueSourceConfig?;
           if (valueDes == null) continue;
           result.max.replace(valueDes);
           break;
@@ -514,5 +578,3 @@ class _$TimeSeriesChartYAxisSettingsSerializer implements PrimitiveSerializer<Ti
     return result.build();
   }
 }
-
-

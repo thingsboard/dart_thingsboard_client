@@ -21,22 +21,25 @@ part 'split_view_component.g.dart';
 /// SplitViewComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [margins] 
-/// * [paddings] 
-/// * [background] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [borderColor] 
-/// * [leftView] 
-/// * [rightView] 
-/// * [splitPosition] 
-/// * [splitGap] 
-/// * [leftVerticalAlignment] 
-/// * [rightVerticalAlignment] 
+/// * [subType]
+/// * [type]
+/// * [margins]
+/// * [paddings]
+/// * [background]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [borderColor]
+/// * [leftView]
+/// * [rightView]
+/// * [splitPosition]
+/// * [splitGap]
+/// * [leftVerticalAlignment]
+/// * [rightVerticalAlignment]
 @BuiltValue()
-abstract class SplitViewComponent implements ReportComponent, Built<SplitViewComponent, SplitViewComponentBuilder> {
+abstract class SplitViewComponent
+    implements
+        ReportComponent,
+        Built<SplitViewComponent, SplitViewComponentBuilder> {
   @BuiltValueField(wireName: r'leftVerticalAlignment')
   VerticalAlignment? get leftVerticalAlignment;
   // enum leftVerticalAlignmentEnum {  bottom,  top,  middle,  };
@@ -77,16 +80,19 @@ abstract class SplitViewComponent implements ReportComponent, Built<SplitViewCom
 
   SplitViewComponent._();
 
-  factory SplitViewComponent([void updates(SplitViewComponentBuilder b)]) = _$SplitViewComponent;
+  factory SplitViewComponent([void updates(SplitViewComponentBuilder b)]) =
+      _$SplitViewComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SplitViewComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SplitViewComponent> get serializer => _$SplitViewComponentSerializer();
+  static Serializer<SplitViewComponent> get serializer =>
+      _$SplitViewComponentSerializer();
 }
 
-class _$SplitViewComponentSerializer implements PrimitiveSerializer<SplitViewComponent> {
+class _$SplitViewComponentSerializer
+    implements PrimitiveSerializer<SplitViewComponent> {
   @override
   final Iterable<Type> types = const [SplitViewComponent, _$SplitViewComponent];
 
@@ -200,7 +206,11 @@ class _$SplitViewComponentSerializer implements PrimitiveSerializer<SplitViewCom
     SplitViewComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -216,112 +226,140 @@ class _$SplitViewComponentSerializer implements PrimitiveSerializer<SplitViewCom
       final value = serializedList[i + 1];
       switch (key) {
         case r'margins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.margins.replace(valueDes);
           break;
         case r'leftView':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportComponent),
-          ) as ReportComponent?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReportComponent),
+                  )
+                  as ReportComponent?;
           if (valueDes == null) continue;
           result.leftView = valueDes;
           break;
         case r'rightVerticalAlignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(VerticalAlignment),
-          ) as VerticalAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(VerticalAlignment),
+                  )
+                  as VerticalAlignment?;
           if (valueDes == null) continue;
           result.rightVerticalAlignment = valueDes;
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'leftVerticalAlignment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(VerticalAlignment),
-          ) as VerticalAlignment?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(VerticalAlignment),
+                  )
+                  as VerticalAlignment?;
           if (valueDes == null) continue;
           result.leftVerticalAlignment = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'paddings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.paddings.replace(valueDes);
           break;
         case r'splitGap':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.splitGap = valueDes;
           break;
         case r'background':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.background = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'rightView':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportComponent),
-          ) as ReportComponent?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReportComponent),
+                  )
+                  as ReportComponent?;
           if (valueDes == null) continue;
           result.rightView = valueDes;
           break;
         case r'splitPosition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.splitPosition = valueDes;
           break;
@@ -353,5 +391,3 @@ class _$SplitViewComponentSerializer implements PrimitiveSerializer<SplitViewCom
     return result.build();
   }
 }
-
-

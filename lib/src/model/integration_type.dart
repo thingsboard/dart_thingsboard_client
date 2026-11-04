@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'integration_type.g.dart';
 
 class IntegrationType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'OCEANCONNECT')
   static const IntegrationType OCEANCONNECT = _$OCEANCONNECT;
   @BuiltValueEnumConst(wireName: r'SIGFOX')
@@ -77,9 +76,10 @@ class IntegrationType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const IntegrationType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<IntegrationType> get serializer => _$integrationTypeSerializer;
+  static Serializer<IntegrationType> get serializer =>
+      _$integrationTypeSerializer;
 
-  const IntegrationType._(String name): super(name);
+  const IntegrationType._(String name) : super(name);
 
   static BuiltSet<IntegrationType> get values => _$values;
   static IntegrationType valueOf(String name) => _$valueOf(name);
@@ -92,4 +92,3 @@ class IntegrationType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class IntegrationTypeMixin = Object with _$IntegrationTypeMixin;
-

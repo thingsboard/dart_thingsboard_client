@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'alarm_comment_type.g.dart';
 
 class AlarmCommentType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SYSTEM')
   static const AlarmCommentType SYSTEM = _$SYSTEM;
   @BuiltValueEnumConst(wireName: r'OTHER')
@@ -23,9 +22,10 @@ class AlarmCommentType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AlarmCommentType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<AlarmCommentType> get serializer => _$alarmCommentTypeSerializer;
+  static Serializer<AlarmCommentType> get serializer =>
+      _$alarmCommentTypeSerializer;
 
-  const AlarmCommentType._(String name): super(name);
+  const AlarmCommentType._(String name) : super(name);
 
   static BuiltSet<AlarmCommentType> get values => _$values;
   static AlarmCommentType valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class AlarmCommentType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AlarmCommentTypeMixin = Object with _$AlarmCommentTypeMixin;
-

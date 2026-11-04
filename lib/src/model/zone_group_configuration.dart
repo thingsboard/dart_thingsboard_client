@@ -20,15 +20,16 @@ part 'zone_group_configuration.g.dart';
 /// ZoneGroupConfiguration
 ///
 /// Properties:
-/// * [refEntityId] 
-/// * [refDynamicSourceConfiguration] 
-/// * [perimeterKeyName] 
-/// * [reportStrategy] 
-/// * [createRelationsWithMatchedZones] 
-/// * [relationType] 
-/// * [direction] 
+/// * [refEntityId]
+/// * [refDynamicSourceConfiguration]
+/// * [perimeterKeyName]
+/// * [reportStrategy]
+/// * [createRelationsWithMatchedZones]
+/// * [relationType]
+/// * [direction]
 @BuiltValue()
-abstract class ZoneGroupConfiguration implements Built<ZoneGroupConfiguration, ZoneGroupConfigurationBuilder> {
+abstract class ZoneGroupConfiguration
+    implements Built<ZoneGroupConfiguration, ZoneGroupConfigurationBuilder> {
   @BuiltValueField(wireName: r'refEntityId')
   EntityId? get refEntityId;
 
@@ -54,18 +55,25 @@ abstract class ZoneGroupConfiguration implements Built<ZoneGroupConfiguration, Z
 
   ZoneGroupConfiguration._();
 
-  factory ZoneGroupConfiguration([void updates(ZoneGroupConfigurationBuilder b)]) = _$ZoneGroupConfiguration;
+  factory ZoneGroupConfiguration([
+    void updates(ZoneGroupConfigurationBuilder b),
+  ]) = _$ZoneGroupConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ZoneGroupConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ZoneGroupConfiguration> get serializer => _$ZoneGroupConfigurationSerializer();
+  static Serializer<ZoneGroupConfiguration> get serializer =>
+      _$ZoneGroupConfigurationSerializer();
 }
 
-class _$ZoneGroupConfigurationSerializer implements PrimitiveSerializer<ZoneGroupConfiguration> {
+class _$ZoneGroupConfigurationSerializer
+    implements PrimitiveSerializer<ZoneGroupConfiguration> {
   @override
-  final Iterable<Type> types = const [ZoneGroupConfiguration, _$ZoneGroupConfiguration];
+  final Iterable<Type> types = const [
+    ZoneGroupConfiguration,
+    _$ZoneGroupConfiguration,
+  ];
 
   @override
   final String wireName = r'ZoneGroupConfiguration';
@@ -128,7 +136,11 @@ class _$ZoneGroupConfigurationSerializer implements PrimitiveSerializer<ZoneGrou
     ZoneGroupConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -144,56 +156,74 @@ class _$ZoneGroupConfigurationSerializer implements PrimitiveSerializer<ZoneGrou
       final value = serializedList[i + 1];
       switch (key) {
         case r'refEntityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.refEntityId = valueDes;
           break;
         case r'refDynamicSourceConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CfArgumentDynamicSourceConfiguration),
-          ) as CfArgumentDynamicSourceConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      CfArgumentDynamicSourceConfiguration,
+                    ),
+                  )
+                  as CfArgumentDynamicSourceConfiguration?;
           if (valueDes == null) continue;
           result.refDynamicSourceConfiguration = valueDes;
           break;
         case r'perimeterKeyName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.perimeterKeyName = valueDes;
           break;
         case r'reportStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(GeofencingReportStrategy),
-          ) as GeofencingReportStrategy;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(GeofencingReportStrategy),
+                  )
+                  as GeofencingReportStrategy;
           result.reportStrategy = valueDes;
           break;
         case r'createRelationsWithMatchedZones':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.createRelationsWithMatchedZones = valueDes;
           break;
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'direction':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntitySearchDirection),
-          ) as EntitySearchDirection?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      EntitySearchDirection,
+                    ),
+                  )
+                  as EntitySearchDirection?;
           if (valueDes == null) continue;
           result.direction = valueDes;
           break;
@@ -225,5 +255,3 @@ class _$ZoneGroupConfigurationSerializer implements PrimitiveSerializer<ZoneGrou
     return result.build();
   }
 }
-
-

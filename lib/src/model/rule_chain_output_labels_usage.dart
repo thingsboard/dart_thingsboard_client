@@ -25,7 +25,9 @@ part 'rule_chain_output_labels_usage.g.dart';
 /// * [ruleNodeName] - Rule Node Name
 /// * [labels] - Output labels
 @BuiltValue()
-abstract class RuleChainOutputLabelsUsage implements Built<RuleChainOutputLabelsUsage, RuleChainOutputLabelsUsageBuilder> {
+abstract class RuleChainOutputLabelsUsage
+    implements
+        Built<RuleChainOutputLabelsUsage, RuleChainOutputLabelsUsageBuilder> {
   /// Rule Chain Id
   @BuiltValueField(wireName: r'ruleChainId')
   RuleChainId get ruleChainId;
@@ -48,18 +50,25 @@ abstract class RuleChainOutputLabelsUsage implements Built<RuleChainOutputLabels
 
   RuleChainOutputLabelsUsage._();
 
-  factory RuleChainOutputLabelsUsage([void updates(RuleChainOutputLabelsUsageBuilder b)]) = _$RuleChainOutputLabelsUsage;
+  factory RuleChainOutputLabelsUsage([
+    void updates(RuleChainOutputLabelsUsageBuilder b),
+  ]) = _$RuleChainOutputLabelsUsage;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainOutputLabelsUsageBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainOutputLabelsUsage> get serializer => _$RuleChainOutputLabelsUsageSerializer();
+  static Serializer<RuleChainOutputLabelsUsage> get serializer =>
+      _$RuleChainOutputLabelsUsageSerializer();
 }
 
-class _$RuleChainOutputLabelsUsageSerializer implements PrimitiveSerializer<RuleChainOutputLabelsUsage> {
+class _$RuleChainOutputLabelsUsageSerializer
+    implements PrimitiveSerializer<RuleChainOutputLabelsUsage> {
   @override
-  final Iterable<Type> types = const [RuleChainOutputLabelsUsage, _$RuleChainOutputLabelsUsage];
+  final Iterable<Type> types = const [
+    RuleChainOutputLabelsUsage,
+    _$RuleChainOutputLabelsUsage,
+  ];
 
   @override
   final String wireName = r'RuleChainOutputLabelsUsage';
@@ -102,7 +111,11 @@ class _$RuleChainOutputLabelsUsageSerializer implements PrimitiveSerializer<Rule
     RuleChainOutputLabelsUsage object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -118,38 +131,48 @@ class _$RuleChainOutputLabelsUsageSerializer implements PrimitiveSerializer<Rule
       final value = serializedList[i + 1];
       switch (key) {
         case r'ruleChainId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RuleChainId),
-          ) as RuleChainId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RuleChainId),
+                  )
+                  as RuleChainId;
           result.ruleChainId.replace(valueDes);
           break;
         case r'ruleNodeId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(RuleNodeId),
-          ) as RuleNodeId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(RuleNodeId),
+                  )
+                  as RuleNodeId;
           result.ruleNodeId.replace(valueDes);
           break;
         case r'ruleChainName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.ruleChainName = valueDes;
           break;
         case r'ruleNodeName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.ruleNodeName = valueDes;
           break;
         case r'labels':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltSet, [FullType(String)]),
+                  )
+                  as BuiltSet<String>;
           result.labels.replace(valueDes);
           break;
         default:
@@ -180,5 +203,3 @@ class _$RuleChainOutputLabelsUsageSerializer implements PrimitiveSerializer<Rule
     return result.build();
   }
 }
-
-

@@ -27,7 +27,8 @@ part 'merged_user_permissions.g.dart';
 /// * [readAttrPermissions] - Map of read entity attributes permissions per resource. Used on the UI to enable/disable certain tabs.
 /// * [readTsPermissions] - Map of read entity time-series permissions per resource. Used on the UI to enable/disable certain tabs.
 @BuiltValue()
-abstract class MergedUserPermissions implements Built<MergedUserPermissions, MergedUserPermissionsBuilder> {
+abstract class MergedUserPermissions
+    implements Built<MergedUserPermissions, MergedUserPermissionsBuilder> {
   /// Map of permissions defined using generic roles ('Customer Administrator', etc)
   @BuiltValueField(wireName: r'genericPermissions')
   BuiltMap<String, BuiltSet<Operation>>? get genericPermissions;
@@ -54,18 +55,25 @@ abstract class MergedUserPermissions implements Built<MergedUserPermissions, Mer
 
   MergedUserPermissions._();
 
-  factory MergedUserPermissions([void updates(MergedUserPermissionsBuilder b)]) = _$MergedUserPermissions;
+  factory MergedUserPermissions([
+    void updates(MergedUserPermissionsBuilder b),
+  ]) = _$MergedUserPermissions;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MergedUserPermissionsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MergedUserPermissions> get serializer => _$MergedUserPermissionsSerializer();
+  static Serializer<MergedUserPermissions> get serializer =>
+      _$MergedUserPermissionsSerializer();
 }
 
-class _$MergedUserPermissionsSerializer implements PrimitiveSerializer<MergedUserPermissions> {
+class _$MergedUserPermissionsSerializer
+    implements PrimitiveSerializer<MergedUserPermissions> {
   @override
-  final Iterable<Type> types = const [MergedUserPermissions, _$MergedUserPermissions];
+  final Iterable<Type> types = const [
+    MergedUserPermissions,
+    _$MergedUserPermissions,
+  ];
 
   @override
   final String wireName = r'MergedUserPermissions';
@@ -79,42 +87,60 @@ class _$MergedUserPermissionsSerializer implements PrimitiveSerializer<MergedUse
       yield r'genericPermissions';
       yield serializers.serialize(
         object.genericPermissions,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltSet, [FullType(Operation)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltSet, [FullType(Operation)]),
+        ]),
       );
     }
     if (object.groupPermissions != null) {
       yield r'groupPermissions';
       yield serializers.serialize(
         object.groupPermissions,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(MergedGroupPermissionInfo)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(MergedGroupPermissionInfo),
+        ]),
       );
     }
     if (object.readGroupPermissions != null) {
       yield r'readGroupPermissions';
       yield serializers.serialize(
         object.readGroupPermissions,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(MergedGroupTypePermissionInfo),
+        ]),
       );
     }
     if (object.readEntityPermissions != null) {
       yield r'readEntityPermissions';
       yield serializers.serialize(
         object.readEntityPermissions,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(MergedGroupTypePermissionInfo),
+        ]),
       );
     }
     if (object.readAttrPermissions != null) {
       yield r'readAttrPermissions';
       yield serializers.serialize(
         object.readAttrPermissions,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(MergedGroupTypePermissionInfo),
+        ]),
       );
     }
     if (object.readTsPermissions != null) {
       yield r'readTsPermissions';
       yield serializers.serialize(
         object.readTsPermissions,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(MergedGroupTypePermissionInfo),
+        ]),
       );
     }
   }
@@ -125,7 +151,11 @@ class _$MergedUserPermissionsSerializer implements PrimitiveSerializer<MergedUse
     MergedUserPermissions object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -141,50 +171,80 @@ class _$MergedUserPermissionsSerializer implements PrimitiveSerializer<MergedUse
       final value = serializedList[i + 1];
       switch (key) {
         case r'genericPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltSet, [FullType(Operation)])]),
-          ) as BuiltMap<String, BuiltSet<Operation>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltSet, [FullType(Operation)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltSet<Operation>>?;
           if (valueDes == null) continue;
           result.genericPermissions.replace(valueDes);
           break;
         case r'groupPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(MergedGroupPermissionInfo)]),
-          ) as BuiltMap<String, MergedGroupPermissionInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(MergedGroupPermissionInfo),
+                    ]),
+                  )
+                  as BuiltMap<String, MergedGroupPermissionInfo>?;
           if (valueDes == null) continue;
           result.groupPermissions.replace(valueDes);
           break;
         case r'readGroupPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
-          ) as BuiltMap<String, MergedGroupTypePermissionInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(MergedGroupTypePermissionInfo),
+                    ]),
+                  )
+                  as BuiltMap<String, MergedGroupTypePermissionInfo>?;
           if (valueDes == null) continue;
           result.readGroupPermissions.replace(valueDes);
           break;
         case r'readEntityPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
-          ) as BuiltMap<String, MergedGroupTypePermissionInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(MergedGroupTypePermissionInfo),
+                    ]),
+                  )
+                  as BuiltMap<String, MergedGroupTypePermissionInfo>?;
           if (valueDes == null) continue;
           result.readEntityPermissions.replace(valueDes);
           break;
         case r'readAttrPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
-          ) as BuiltMap<String, MergedGroupTypePermissionInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(MergedGroupTypePermissionInfo),
+                    ]),
+                  )
+                  as BuiltMap<String, MergedGroupTypePermissionInfo>?;
           if (valueDes == null) continue;
           result.readAttrPermissions.replace(valueDes);
           break;
         case r'readTsPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(MergedGroupTypePermissionInfo)]),
-          ) as BuiltMap<String, MergedGroupTypePermissionInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(MergedGroupTypePermissionInfo),
+                    ]),
+                  )
+                  as BuiltMap<String, MergedGroupTypePermissionInfo>?;
           if (valueDes == null) continue;
           result.readTsPermissions.replace(valueDes);
           break;
@@ -216,5 +276,3 @@ class _$MergedUserPermissionsSerializer implements PrimitiveSerializer<MergedUse
     return result.build();
   }
 }
-
-

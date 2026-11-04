@@ -18,13 +18,19 @@ part 'mobile_app_delivery_method_notification_template.g.dart';
 /// MobileAppDeliveryMethodNotificationTemplate
 ///
 /// Properties:
-/// * [enabled] 
-/// * [body] 
-/// * [method] 
+/// * [enabled]
+/// * [body]
+/// * [method]
 /// * [subject] - Subject line for the mobile notification
 /// * [additionalConfig] - Additional JSON configuration for web buttons/actions
 @BuiltValue()
-abstract class MobileAppDeliveryMethodNotificationTemplate implements DeliveryMethodNotificationTemplate, Built<MobileAppDeliveryMethodNotificationTemplate, MobileAppDeliveryMethodNotificationTemplateBuilder> {
+abstract class MobileAppDeliveryMethodNotificationTemplate
+    implements
+        DeliveryMethodNotificationTemplate,
+        Built<
+          MobileAppDeliveryMethodNotificationTemplate,
+          MobileAppDeliveryMethodNotificationTemplateBuilder
+        > {
   /// Subject line for the mobile notification
   @BuiltValueField(wireName: r'subject')
   String get subject;
@@ -35,18 +41,27 @@ abstract class MobileAppDeliveryMethodNotificationTemplate implements DeliveryMe
 
   MobileAppDeliveryMethodNotificationTemplate._();
 
-  factory MobileAppDeliveryMethodNotificationTemplate([void updates(MobileAppDeliveryMethodNotificationTemplateBuilder b)]) = _$MobileAppDeliveryMethodNotificationTemplate;
+  factory MobileAppDeliveryMethodNotificationTemplate([
+    void updates(MobileAppDeliveryMethodNotificationTemplateBuilder b),
+  ]) = _$MobileAppDeliveryMethodNotificationTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(MobileAppDeliveryMethodNotificationTemplateBuilder b) => b;
+  static void _defaults(MobileAppDeliveryMethodNotificationTemplateBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MobileAppDeliveryMethodNotificationTemplate> get serializer => _$MobileAppDeliveryMethodNotificationTemplateSerializer();
+  static Serializer<MobileAppDeliveryMethodNotificationTemplate>
+  get serializer => _$MobileAppDeliveryMethodNotificationTemplateSerializer();
 }
 
-class _$MobileAppDeliveryMethodNotificationTemplateSerializer implements PrimitiveSerializer<MobileAppDeliveryMethodNotificationTemplate> {
+class _$MobileAppDeliveryMethodNotificationTemplateSerializer
+    implements
+        PrimitiveSerializer<MobileAppDeliveryMethodNotificationTemplate> {
   @override
-  final Iterable<Type> types = const [MobileAppDeliveryMethodNotificationTemplate, _$MobileAppDeliveryMethodNotificationTemplate];
+  final Iterable<Type> types = const [
+    MobileAppDeliveryMethodNotificationTemplate,
+    _$MobileAppDeliveryMethodNotificationTemplate,
+  ];
 
   @override
   final String wireName = r'MobileAppDeliveryMethodNotificationTemplate';
@@ -93,7 +108,11 @@ class _$MobileAppDeliveryMethodNotificationTemplateSerializer implements Primiti
     MobileAppDeliveryMethodNotificationTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -109,39 +128,49 @@ class _$MobileAppDeliveryMethodNotificationTemplateSerializer implements Primiti
       final value = serializedList[i + 1];
       switch (key) {
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.body = valueDes;
           break;
         case r'subject':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.subject = valueDes;
           break;
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'additionalConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalConfig = valueDes;
           break;
@@ -173,5 +202,3 @@ class _$MobileAppDeliveryMethodNotificationTemplateSerializer implements Primiti
     return result.build();
   }
 }
-
-

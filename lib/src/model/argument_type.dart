@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'argument_type.g.dart';
 
 class ArgumentType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'TS_LATEST')
   static const ArgumentType TS_LATEST = _$TS_LATEST;
   @BuiltValueEnumConst(wireName: r'ATTRIBUTE')
@@ -27,7 +26,7 @@ class ArgumentType extends EnumClass {
 
   static Serializer<ArgumentType> get serializer => _$argumentTypeSerializer;
 
-  const ArgumentType._(String name): super(name);
+  const ArgumentType._(String name) : super(name);
 
   static BuiltSet<ArgumentType> get values => _$values;
   static ArgumentType valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class ArgumentType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ArgumentTypeMixin = Object with _$ArgumentTypeMixin;
-

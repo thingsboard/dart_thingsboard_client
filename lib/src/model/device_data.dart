@@ -75,7 +75,11 @@ class _$DeviceDataSerializer implements PrimitiveSerializer<DeviceData> {
     DeviceData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -91,18 +95,24 @@ class _$DeviceDataSerializer implements PrimitiveSerializer<DeviceData> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceConfiguration),
-          ) as DeviceConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DeviceConfiguration),
+                  )
+                  as DeviceConfiguration?;
           if (valueDes == null) continue;
           result.configuration = valueDes;
           break;
         case r'transportConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceTransportConfiguration),
-          ) as DeviceTransportConfiguration?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DeviceTransportConfiguration,
+                    ),
+                  )
+                  as DeviceTransportConfiguration?;
           if (valueDes == null) continue;
           result.transportConfiguration = valueDes;
           break;
@@ -134,5 +144,3 @@ class _$DeviceDataSerializer implements PrimitiveSerializer<DeviceData> {
     return result.build();
   }
 }
-
-

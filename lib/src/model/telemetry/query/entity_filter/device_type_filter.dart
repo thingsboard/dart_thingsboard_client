@@ -8,13 +8,17 @@ import 'entity_filter_type.dart';
 
 class DeviceTypeFilter extends EntityFilter {
   @Deprecated(
-      "will be replaced by [deviceTypes]. This value will be appended to [deviceTypes] array")
+    "will be replaced by [deviceTypes]. This value will be appended to [deviceTypes] array",
+  )
   String? deviceType;
   String? deviceNameFilter;
   List<String> deviceTypes;
 
-  DeviceTypeFilter(
-      {this.deviceType, required this.deviceTypes, this.deviceNameFilter}) {
+  DeviceTypeFilter({
+    this.deviceType,
+    required this.deviceTypes,
+    this.deviceNameFilter,
+  }) {
     if (deviceType != null) {
       deviceTypes.add(deviceType!);
     }

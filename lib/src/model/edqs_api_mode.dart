@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'edqs_api_mode.g.dart';
 
 class EdqsApiMode extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ENABLED')
   static const EdqsApiMode ENABLED = _$ENABLED;
   @BuiltValueEnumConst(wireName: r'AUTO_ENABLED')
@@ -29,7 +28,7 @@ class EdqsApiMode extends EnumClass {
 
   static Serializer<EdqsApiMode> get serializer => _$edqsApiModeSerializer;
 
-  const EdqsApiMode._(String name): super(name);
+  const EdqsApiMode._(String name) : super(name);
 
   static BuiltSet<EdqsApiMode> get values => _$values;
   static EdqsApiMode valueOf(String name) => _$valueOf(name);
@@ -42,4 +41,3 @@ class EdqsApiMode extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class EdqsApiModeMixin = Object with _$EdqsApiModeMixin;
-

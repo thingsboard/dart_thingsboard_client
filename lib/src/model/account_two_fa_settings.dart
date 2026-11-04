@@ -18,26 +18,33 @@ part 'account_two_fa_settings.g.dart';
 /// Account Two-Factor Authentication Settings
 ///
 /// Properties:
-/// * [configs] 
+/// * [configs]
 @BuiltValue()
-abstract class AccountTwoFaSettings implements Built<AccountTwoFaSettings, AccountTwoFaSettingsBuilder> {
+abstract class AccountTwoFaSettings
+    implements Built<AccountTwoFaSettings, AccountTwoFaSettingsBuilder> {
   @BuiltValueField(wireName: r'configs')
   BuiltMap<String, TwoFaAccountConfig>? get configs;
 
   AccountTwoFaSettings._();
 
-  factory AccountTwoFaSettings([void updates(AccountTwoFaSettingsBuilder b)]) = _$AccountTwoFaSettings;
+  factory AccountTwoFaSettings([void updates(AccountTwoFaSettingsBuilder b)]) =
+      _$AccountTwoFaSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AccountTwoFaSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AccountTwoFaSettings> get serializer => _$AccountTwoFaSettingsSerializer();
+  static Serializer<AccountTwoFaSettings> get serializer =>
+      _$AccountTwoFaSettingsSerializer();
 }
 
-class _$AccountTwoFaSettingsSerializer implements PrimitiveSerializer<AccountTwoFaSettings> {
+class _$AccountTwoFaSettingsSerializer
+    implements PrimitiveSerializer<AccountTwoFaSettings> {
   @override
-  final Iterable<Type> types = const [AccountTwoFaSettings, _$AccountTwoFaSettings];
+  final Iterable<Type> types = const [
+    AccountTwoFaSettings,
+    _$AccountTwoFaSettings,
+  ];
 
   @override
   final String wireName = r'AccountTwoFaSettings';
@@ -51,7 +58,10 @@ class _$AccountTwoFaSettingsSerializer implements PrimitiveSerializer<AccountTwo
       yield r'configs';
       yield serializers.serialize(
         object.configs,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(TwoFaAccountConfig)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(TwoFaAccountConfig),
+        ]),
       );
     }
   }
@@ -62,7 +72,11 @@ class _$AccountTwoFaSettingsSerializer implements PrimitiveSerializer<AccountTwo
     AccountTwoFaSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +92,15 @@ class _$AccountTwoFaSettingsSerializer implements PrimitiveSerializer<AccountTwo
       final value = serializedList[i + 1];
       switch (key) {
         case r'configs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(TwoFaAccountConfig)]),
-          ) as BuiltMap<String, TwoFaAccountConfig>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(TwoFaAccountConfig),
+                    ]),
+                  )
+                  as BuiltMap<String, TwoFaAccountConfig>?;
           if (valueDes == null) continue;
           result.configs.replace(valueDes);
           break;
@@ -113,5 +132,3 @@ class _$AccountTwoFaSettingsSerializer implements PrimitiveSerializer<AccountTwo
     return result.build();
   }
 }
-
-

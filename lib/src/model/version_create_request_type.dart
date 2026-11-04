@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'version_create_request_type.g.dart';
 
 class VersionCreateRequestType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SINGLE_ENTITY')
   static const VersionCreateRequestType SINGLE_ENTITY = _$SINGLE_ENTITY;
   @BuiltValueEnumConst(wireName: r'COMPLEX')
   static const VersionCreateRequestType COMPLEX = _$COMPLEX;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const VersionCreateRequestType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const VersionCreateRequestType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<VersionCreateRequestType> get serializer => _$versionCreateRequestTypeSerializer;
+  static Serializer<VersionCreateRequestType> get serializer =>
+      _$versionCreateRequestTypeSerializer;
 
-  const VersionCreateRequestType._(String name): super(name);
+  const VersionCreateRequestType._(String name) : super(name);
 
   static BuiltSet<VersionCreateRequestType> get values => _$values;
   static VersionCreateRequestType valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class VersionCreateRequestType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class VersionCreateRequestTypeMixin = Object with _$VersionCreateRequestTypeMixin;
-
+abstract class VersionCreateRequestTypeMixin = Object
+    with _$VersionCreateRequestTypeMixin;

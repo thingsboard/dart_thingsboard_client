@@ -13,20 +13,17 @@ import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/activate_user_request.dart';
 import 'package:thingsboard_client/src/model/change_password_request.dart';
 import 'package:thingsboard_client/src/model/jwt_pair.dart';
 import 'package:thingsboard_client/src/model/reset_password_email_request.dart';
 import 'package:thingsboard_client/src/model/reset_password_request.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/user.dart';
 import 'package:thingsboard_client/src/model/user_password_policy.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AuthControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -37,8 +34,8 @@ class AuthControllerApi {
   /// Checks the activation token and updates corresponding user password in the database. Now the user may start using his password to login. The response already contains the [JWT](https://jwt.io) activation and refresh tokens, to simplify the user activation flow and avoid asking user to input password again after activation. If token is valid, returns the object that contains [JWT](https://jwt.io/) access and refresh tokens. If token is not valid, returns &#39;400 Bad Request&#39;.
   ///
   /// Parameters:
-  /// * [activateUserRequest] 
-  /// * [sendActivationMail] 
+  /// * [activateUserRequest]
+  /// * [sendActivationMail]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -48,7 +45,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> activateUser({ 
+  Future<Response<JwtPair>> activateUser({
     required ActivateUserRequest activateUserRequest,
     bool? sendActivationMail = true,
     CancelToken? cancelToken,
@@ -58,34 +55,38 @@ class AuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerActivateUserRequestAndJwtPair);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerActivateUserRequestAndJwtPair);
     final _path = r'/api/noauth/activate';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      if (sendActivationMail != null) r'sendActivationMail': encodeQueryParameter(_serializers, sendActivationMail, const FullType(bool)),
+      if (sendActivationMail != null)
+        r'sendActivationMail': encodeQueryParameter(
+          _serializers,
+          sendActivationMail,
+          const FullType(bool),
+        ),
     };
 
     dynamic _bodyData;
 
     try {
       const _type = FullType(ActivateUserRequest);
-      _bodyData = _serializers.serialize(activateUserRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        activateUserRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -110,11 +111,13 @@ class AuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -141,7 +144,7 @@ class AuthControllerApi {
   /// Change the password for the User which credentials are used to perform this REST API call. Be aware that previously generated [JWT](https://jwt.io/) tokens will be still valid until they expire.
   ///
   /// Parameters:
-  /// * [changePasswordRequest] 
+  /// * [changePasswordRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -151,7 +154,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> changePassword({ 
+  Future<Response<JwtPair>> changePassword({
     required ChangePasswordRequest changePasswordRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -160,13 +163,13 @@ class AuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerChangePasswordRequestAndJwtPair);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerChangePasswordRequestAndJwtPair);
     final _path = r'/api/auth/changePassword';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -174,11 +177,8 @@ class AuthControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -190,14 +190,13 @@ class AuthControllerApi {
 
     try {
       const _type = FullType(ChangePasswordRequest);
-      _bodyData = _serializers.serialize(changePasswordRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        changePasswordRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -217,11 +216,13 @@ class AuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -258,7 +259,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> checkActivateToken({ 
+  Future<Response<JsonObject>> checkActivateToken({
     required String activateToken,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -271,18 +272,17 @@ class AuthControllerApi {
     final _path = r'/api/noauth/activate';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      r'activateToken': encodeQueryParameter(_serializers, activateToken, const FullType(String)),
+      r'activateToken': encodeQueryParameter(
+        _serializers,
+        activateToken,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -298,11 +298,13 @@ class AuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -339,7 +341,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> checkResetToken({ 
+  Future<Response<JsonObject>> checkResetToken({
     required String resetToken,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -352,18 +354,17 @@ class AuthControllerApi {
     final _path = r'/api/noauth/resetPassword';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      r'resetToken': encodeQueryParameter(_serializers, resetToken, const FullType(String)),
+      r'resetToken': encodeQueryParameter(
+        _serializers,
+        resetToken,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -379,11 +380,13 @@ class AuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -419,7 +422,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [User] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<User>> getUser({ 
+  Future<Response<User>> getUser({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -431,9 +434,7 @@ class AuthControllerApi {
     final _path = r'/api/auth/user';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -441,11 +442,8 @@ class AuthControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -464,11 +462,13 @@ class AuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(User),
-      ) as User;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(User),
+                )
+                as User;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -504,7 +504,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [UserPasswordPolicy] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<UserPasswordPolicy>> getUserPasswordPolicy({ 
+  Future<Response<UserPasswordPolicy>> getUserPasswordPolicy({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -512,17 +512,13 @@ class AuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerUserPasswordPolicy);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerUserPasswordPolicy);
     final _path = r'/api/noauth/userPasswordPolicy';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -538,11 +534,13 @@ class AuthControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(UserPasswordPolicy),
-      ) as UserPasswordPolicy;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(UserPasswordPolicy),
+                )
+                as UserPasswordPolicy;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -566,7 +564,7 @@ class AuthControllerApi {
   }
 
   /// Logout (logout)
-  /// Special API call to record the &#39;logout&#39; of the user to the Audit Logs. Since platform uses [JWT](https://jwt.io/), the actual logout is the procedure of clearing the [JWT](https://jwt.io/) token on the client side. 
+  /// Special API call to record the &#39;logout&#39; of the user to the Audit Logs. Since platform uses [JWT](https://jwt.io/), the actual logout is the procedure of clearing the [JWT](https://jwt.io/) token on the client side.
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -578,7 +576,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> logout({ 
+  Future<Response<void>> logout({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -589,9 +587,7 @@ class AuthControllerApi {
     final _path = r'/api/auth/logout';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -599,11 +595,8 @@ class AuthControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -625,7 +618,7 @@ class AuthControllerApi {
   /// Request to send the reset password email if the user with specified email address is present in the database. Always return &#39;200 OK&#39; status for security purposes.
   ///
   /// Parameters:
-  /// * [resetPasswordEmailRequest] 
+  /// * [resetPasswordEmailRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -635,7 +628,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> requestResetPasswordByEmail({ 
+  Future<Response<void>> requestResetPasswordByEmail({
     required ResetPasswordEmailRequest resetPasswordEmailRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -644,17 +637,13 @@ class AuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerResetPasswordEmailRequest);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerResetPasswordEmailRequest);
     final _path = r'/api/noauth/resetPasswordByEmail';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
@@ -663,14 +652,13 @@ class AuthControllerApi {
 
     try {
       const _type = FullType(ResetPasswordEmailRequest);
-      _bodyData = _serializers.serialize(resetPasswordEmailRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        resetPasswordEmailRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -693,7 +681,7 @@ class AuthControllerApi {
   /// Checks the password reset token and updates the password. If token is not valid, returns &#39;400 Bad Request&#39;.
   ///
   /// Parameters:
-  /// * [resetPasswordRequest] 
+  /// * [resetPasswordRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -703,7 +691,7 @@ class AuthControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> resetPassword({ 
+  Future<Response<void>> resetPassword({
     required ResetPasswordRequest resetPasswordRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -712,17 +700,13 @@ class AuthControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerResetPasswordRequest);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerResetPasswordRequest);
     final _path = r'/api/noauth/resetPassword';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       contentType: 'application/json',
       validateStatus: validateStatus,
     );
@@ -731,14 +715,13 @@ class AuthControllerApi {
 
     try {
       const _type = FullType(ResetPasswordRequest);
-      _bodyData = _serializers.serialize(resetPasswordRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        resetPasswordRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -756,5 +739,4 @@ class AuthControllerApi {
 
     return _response;
   }
-
 }

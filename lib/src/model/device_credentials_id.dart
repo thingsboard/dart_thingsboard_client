@@ -18,25 +18,32 @@ part 'device_credentials_id.g.dart';
 /// Properties:
 /// * [id] - string
 @BuiltValue()
-abstract class DeviceCredentialsId implements Built<DeviceCredentialsId, DeviceCredentialsIdBuilder> {
+abstract class DeviceCredentialsId
+    implements Built<DeviceCredentialsId, DeviceCredentialsIdBuilder> {
   /// string
   @BuiltValueField(wireName: r'id')
   String get id;
 
   DeviceCredentialsId._();
 
-  factory DeviceCredentialsId([void updates(DeviceCredentialsIdBuilder b)]) = _$DeviceCredentialsId;
+  factory DeviceCredentialsId([void updates(DeviceCredentialsIdBuilder b)]) =
+      _$DeviceCredentialsId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceCredentialsIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceCredentialsId> get serializer => _$DeviceCredentialsIdSerializer();
+  static Serializer<DeviceCredentialsId> get serializer =>
+      _$DeviceCredentialsIdSerializer();
 }
 
-class _$DeviceCredentialsIdSerializer implements PrimitiveSerializer<DeviceCredentialsId> {
+class _$DeviceCredentialsIdSerializer
+    implements PrimitiveSerializer<DeviceCredentialsId> {
   @override
-  final Iterable<Type> types = const [DeviceCredentialsId, _$DeviceCredentialsId];
+  final Iterable<Type> types = const [
+    DeviceCredentialsId,
+    _$DeviceCredentialsId,
+  ];
 
   @override
   final String wireName = r'DeviceCredentialsId';
@@ -59,7 +66,11 @@ class _$DeviceCredentialsIdSerializer implements PrimitiveSerializer<DeviceCrede
     DeviceCredentialsId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -75,10 +86,12 @@ class _$DeviceCredentialsIdSerializer implements PrimitiveSerializer<DeviceCrede
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -109,5 +122,3 @@ class _$DeviceCredentialsIdSerializer implements PrimitiveSerializer<DeviceCrede
     return result.build();
   }
 }
-
-

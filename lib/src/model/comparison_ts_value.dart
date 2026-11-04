@@ -17,10 +17,11 @@ part 'comparison_ts_value.g.dart';
 /// ComparisonTsValue
 ///
 /// Properties:
-/// * [current] 
-/// * [previous] 
+/// * [current]
+/// * [previous]
 @BuiltValue()
-abstract class ComparisonTsValue implements Built<ComparisonTsValue, ComparisonTsValueBuilder> {
+abstract class ComparisonTsValue
+    implements Built<ComparisonTsValue, ComparisonTsValueBuilder> {
   @BuiltValueField(wireName: r'current')
   TsValue? get current;
 
@@ -29,16 +30,19 @@ abstract class ComparisonTsValue implements Built<ComparisonTsValue, ComparisonT
 
   ComparisonTsValue._();
 
-  factory ComparisonTsValue([void updates(ComparisonTsValueBuilder b)]) = _$ComparisonTsValue;
+  factory ComparisonTsValue([void updates(ComparisonTsValueBuilder b)]) =
+      _$ComparisonTsValue;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ComparisonTsValueBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ComparisonTsValue> get serializer => _$ComparisonTsValueSerializer();
+  static Serializer<ComparisonTsValue> get serializer =>
+      _$ComparisonTsValueSerializer();
 }
 
-class _$ComparisonTsValueSerializer implements PrimitiveSerializer<ComparisonTsValue> {
+class _$ComparisonTsValueSerializer
+    implements PrimitiveSerializer<ComparisonTsValue> {
   @override
   final Iterable<Type> types = const [ComparisonTsValue, _$ComparisonTsValue];
 
@@ -72,7 +76,11 @@ class _$ComparisonTsValueSerializer implements PrimitiveSerializer<ComparisonTsV
     ComparisonTsValue object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +96,22 @@ class _$ComparisonTsValueSerializer implements PrimitiveSerializer<ComparisonTsV
       final value = serializedList[i + 1];
       switch (key) {
         case r'current':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TsValue),
-          ) as TsValue?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TsValue),
+                  )
+                  as TsValue?;
           if (valueDes == null) continue;
           result.current.replace(valueDes);
           break;
         case r'previous':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TsValue),
-          ) as TsValue?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TsValue),
+                  )
+                  as TsValue?;
           if (valueDes == null) continue;
           result.previous.replace(valueDes);
           break;
@@ -131,5 +143,3 @@ class _$ComparisonTsValueSerializer implements PrimitiveSerializer<ComparisonTsV
     return result.build();
   }
 }
-
-

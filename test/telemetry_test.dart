@@ -13,7 +13,6 @@ import 'package:fake_async/fake_async.dart';
 import 'package:stream_channel/stream_channel.dart';
 import 'package:test/test.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:thingsboard_client/src/thingsboard_client_base.dart';
 import 'package:thingsboard_client/src/thingsboard_client.dart';
 import 'package:thingsboard_client/src/service/telemetry_websocket_service.dart';
 import 'package:thingsboard_client/src/model/login_models.dart';
@@ -30,61 +29,77 @@ String createTestJwt({
   String tenantId = 'tenant-id',
 }) {
   final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(utf8.encode(jsonEncode({
-    'sub': sub,
-    'scopes': [scope],
-    'exp':
-        DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
-    'iss': 'test',
-    'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-    'firstName': 'Test',
-    'lastName': 'User',
-    'enabled': true,
-    'isPublic': false,
-    'tenantId': tenantId,
-  })));
+  final payload = base64Url.encode(
+    utf8.encode(
+      jsonEncode({
+        'sub': sub,
+        'scopes': [scope],
+        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
+        'iss': 'test',
+        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
+        'firstName': 'Test',
+        'lastName': 'User',
+        'enabled': true,
+        'isPublic': false,
+        'tenantId': tenantId,
+      }),
+    ),
+  );
   return '$header.$payload.fake-signature';
 }
 
 String createExpiredTestJwt() {
   final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(utf8.encode(jsonEncode({
-    'sub': 'user-id',
-    'scopes': ['TENANT_ADMIN'],
-    'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 3600,
-    'iss': 'test',
-    'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 7200,
-    'firstName': 'Test',
-    'lastName': 'User',
-    'enabled': true,
-    'isPublic': false,
-    'tenantId': 'tenant-id',
-  })));
+  final payload = base64Url.encode(
+    utf8.encode(
+      jsonEncode({
+        'sub': 'user-id',
+        'scopes': ['TENANT_ADMIN'],
+        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 3600,
+        'iss': 'test',
+        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 7200,
+        'firstName': 'Test',
+        'lastName': 'User',
+        'enabled': true,
+        'isPublic': false,
+        'tenantId': 'tenant-id',
+      }),
+    ),
+  );
   return '$header.$payload.fake-signature';
 }
 
 class MockHttpClientAdapter implements HttpClientAdapter {
   final Map<String, List<FutureOr<ResponseBody> Function(RequestOptions)>>
-      _handlers = {};
+  _handlers = {};
   final List<String> requestedPaths = [];
 
   void onRoute(
-      String path, FutureOr<ResponseBody> Function(RequestOptions) handler) {
+    String path,
+    FutureOr<ResponseBody> Function(RequestOptions) handler,
+  ) {
     _handlers.putIfAbsent(path, () => []).add(handler);
   }
 
   @override
-  Future<ResponseBody> fetch(RequestOptions options,
-      Stream<Uint8List>? requestStream, Future<void>? cancelFuture) async {
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
     requestedPaths.add(options.path);
     final handlers = _handlers[options.path];
     if (handlers != null && handlers.isNotEmpty) {
-      final handler =
-          handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
+      final handler = handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
       return await handler(options);
     }
-    return ResponseBody.fromString('{"message":"Not found"}', 404,
-        headers: {'content-type': ['application/json']});
+    return ResponseBody.fromString(
+      '{"message":"Not found"}',
+      404,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
   }
 
   @override
@@ -191,10 +206,10 @@ class FakeChannelFactory {
 }
 
 List<Map<String, dynamic>> sentCmds(FakeWebSocketChannel channel) => [
-      for (final msg in channel.sentMessages)
-        ...((jsonDecode(msg as String)['cmds'] as List?) ?? const [])
-            .cast<Map<String, dynamic>>(),
-    ];
+  for (final msg in channel.sentMessages)
+    ...((jsonDecode(msg as String)['cmds'] as List?) ?? const [])
+        .cast<Map<String, dynamic>>(),
+];
 
 /// A WebSocketChannel whose connection attempt fails. Mirrors what
 /// AdapterWebSocketChannel does when the server is unreachable: `ready`
@@ -323,7 +338,9 @@ void main() {
       return ResponseBody.fromString(
         jsonEncode({'token': token, 'refreshToken': refreshToken}),
         200,
-        headers: {'content-type': ['application/json']},
+        headers: {
+          'content-type': ['application/json'],
+        },
       );
     });
     await c.login(LoginRequest(userName: 'u@test.com', password: 'p'));
@@ -334,12 +351,13 @@ void main() {
       EntityId.fromTypeAndUuid(EntityType.DEVICE, id);
 
   TelemetrySubscriber attributesSubscriber(
-          TelemetryService service, String id) =>
-      TelemetrySubscriber.createEntityAttributesSubscription(
-        telemetryService: service,
-        entityId: deviceId(id),
-        attributeScope: 'LATEST_TELEMETRY',
-      );
+    TelemetryService service,
+    String id,
+  ) => TelemetrySubscriber.createEntityAttributesSubscription(
+    telemetryService: service,
+    entityId: deviceId(id),
+    attributeScope: 'LATEST_TELEMETRY',
+  );
 
   group('TelemetryWebsocketService', () {
     group('RT-01: stream routing', () {
@@ -357,10 +375,10 @@ void main() {
 
         final subscriber =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber);
 
         // Allow event loop to run (ready.then fires)
@@ -380,160 +398,187 @@ void main() {
             }
           }
         }
-        expect(foundSubscription, isTrue,
-            reason: 'Expected TIMESERIES subscription command to be sent');
+        expect(
+          foundSubscription,
+          isTrue,
+          reason: 'Expected TIMESERIES subscription command to be sent',
+        );
       });
 
-      test('inject server message is dispatched to subscriber data stream',
-          () async {
-        await loginClient(client);
+      test(
+        'inject server message is dispatched to subscriber data stream',
+        () async {
+          await loginClient(client);
 
-        final fakeChannel = FakeWebSocketChannel();
-        channelFactory.enqueue(fakeChannel);
+          final fakeChannel = FakeWebSocketChannel();
+          channelFactory.enqueue(fakeChannel);
 
-        final service = TelemetryWebsocketService(
-          client,
-          'http://localhost:8080',
-          channelFactory: channelFactory.call,
-        );
+          final service = TelemetryWebsocketService(
+            client,
+            'http://localhost:8080',
+            channelFactory: channelFactory.call,
+          );
 
-        final subscriber =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
-        service.subscribe(subscriber);
+          final subscriber =
+              TelemetrySubscriber.createEntityAttributesSubscription(
+                telemetryService: service,
+                entityId: deviceId('device-1'),
+                attributeScope: 'LATEST_TELEMETRY',
+              );
+          service.subscribe(subscriber);
 
-        // Allow socket open
-        await Future.delayed(Duration(milliseconds: 10));
+          // Allow socket open
+          await Future.delayed(Duration(milliseconds: 10));
 
-        // Find the cmdId assigned
-        int? cmdId;
-        for (final msg in fakeChannel.sentMessages) {
-          final decoded = jsonDecode(msg as String);
-          if (decoded['cmds'] != null) {
-            final cmds = decoded['cmds'] as List;
-            for (final c in cmds) {
-              if (c['type'] == 'TIMESERIES') {
-                cmdId = c['cmdId'] as int;
+          // Find the cmdId assigned
+          int? cmdId;
+          for (final msg in fakeChannel.sentMessages) {
+            final decoded = jsonDecode(msg as String);
+            if (decoded['cmds'] != null) {
+              final cmds = decoded['cmds'] as List;
+              for (final c in cmds) {
+                if (c['type'] == 'TIMESERIES') {
+                  cmdId = c['cmdId'] as int;
+                }
               }
             }
           }
-        }
-        expect(cmdId, isNotNull, reason: 'Expected cmdId to be assigned');
+          expect(cmdId, isNotNull, reason: 'Expected cmdId to be assigned');
 
-        // Capture data stream update
-        final dataCompleter = Completer<SubscriptionUpdate>();
-        subscriber.dataStream.first.then(dataCompleter.complete);
+          // Capture data stream update
+          final dataCompleter = Completer<SubscriptionUpdate>();
+          subscriber.dataStream.first.then(dataCompleter.complete);
 
-        // Inject a server message
-        final serverMsg = jsonEncode({
-          'subscriptionId': cmdId,
-          'data': {
-            'temperature': [
-              [1000, '25.0']
-            ]
-          }
-        });
-        fakeChannel.injectMessage(serverMsg);
+          // Inject a server message
+          final serverMsg = jsonEncode({
+            'subscriptionId': cmdId,
+            'data': {
+              'temperature': [
+                [1000, '25.0'],
+              ],
+            },
+          });
+          fakeChannel.injectMessage(serverMsg);
 
-        final update =
-            await dataCompleter.future.timeout(Duration(seconds: 2));
-        expect(update.subscriptionId, equals(cmdId));
-        expect(update.data.containsKey('temperature'), isTrue);
-      });
+          final update = await dataCompleter.future.timeout(
+            Duration(seconds: 2),
+          );
+          expect(update.subscriptionId, equals(cmdId));
+          expect(update.data.containsKey('temperature'), isTrue);
+        },
+      );
     });
 
     group('RT-02: reconnect', () {
-      test('subscriber stream not closed on disconnect and reconnects',
-          () async {
-        await loginClient(client);
+      test(
+        'subscriber stream not closed on disconnect and reconnects',
+        () async {
+          await loginClient(client);
 
-        final firstChannel = FakeWebSocketChannel();
-        final secondChannel = FakeWebSocketChannel();
-        channelFactory.enqueue(firstChannel);
-        channelFactory.enqueue(secondChannel);
+          final firstChannel = FakeWebSocketChannel();
+          final secondChannel = FakeWebSocketChannel();
+          channelFactory.enqueue(firstChannel);
+          channelFactory.enqueue(secondChannel);
 
-        final service = TelemetryWebsocketService(
-          client,
-          'http://localhost:8080',
-          channelFactory: channelFactory.call,
-        );
+          final service = TelemetryWebsocketService(
+            client,
+            'http://localhost:8080',
+            channelFactory: channelFactory.call,
+          );
 
-        final subscriber =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
-        service.subscribe(subscriber);
+          final subscriber =
+              TelemetrySubscriber.createEntityAttributesSubscription(
+                telemetryService: service,
+                entityId: deviceId('device-1'),
+                attributeScope: 'LATEST_TELEMETRY',
+              );
+          service.subscribe(subscriber);
 
-        // Wait for first channel to open
-        await Future.delayed(Duration(milliseconds: 10));
-        expect(channelFactory.connectCallCount, equals(1));
+          // Wait for first channel to open
+          await Future.delayed(Duration(milliseconds: 10));
+          expect(channelFactory.connectCallCount, equals(1));
 
-        // Capture reconnect signal
-        final reconnectCompleter = Completer<void>();
-        subscriber.reconnectStream.first
-            .then((_) => reconnectCompleter.complete());
+          // Capture reconnect signal
+          final reconnectCompleter = Completer<void>();
+          subscriber.reconnectStream.first.then(
+            (_) => reconnectCompleter.complete(),
+          );
 
-        // Simulate disconnect
-        firstChannel.simulateDisconnect();
+          // Simulate disconnect
+          firstChannel.simulateDisconnect();
 
-        // Wait for reconnect timer (2s) + some margin
-        await Future.delayed(Duration(milliseconds: 2200));
+          // Wait for reconnect timer (2s) + some margin
+          await Future.delayed(Duration(milliseconds: 2200));
 
-        // A second connection should have been opened
-        expect(channelFactory.connectCallCount, equals(2),
+          // A second connection should have been opened
+          expect(
+            channelFactory.connectCallCount,
+            equals(2),
+            reason: 'Expected reconnect to open a new WebSocket connection',
+          );
+
+          // Reconnect event should fire
+          expect(
+            reconnectCompleter.isCompleted,
+            isTrue,
+            reason: 'Expected reconnect stream to emit',
+          );
+        },
+      );
+
+      test(
+        'failed connect retries after RECONNECT_INTERVAL, then backs off',
+        () async {
+          await loginClient(client);
+
+          var connectCount = 0;
+          WebSocketChannel failingFactory(Uri uri) {
+            connectCount++;
+            return _FailedConnectChannel();
+          }
+
+          final service = TelemetryWebsocketService(
+            client,
+            'http://localhost:8080',
+            channelFactory: failingFactory,
+          );
+          final subscriber =
+              TelemetrySubscriber.createEntityAttributesSubscription(
+                telemetryService: service,
+                entityId: deviceId('device-1'),
+                attributeScope: 'LATEST_TELEMETRY',
+              );
+          service.subscribe(subscriber);
+
+          await Future.delayed(Duration(milliseconds: 50));
+          expect(connectCount, equals(1));
+
+          // A failed connect reports both a ready error and a stream done, so
+          // the first retry must still be scheduled at RECONNECT_INTERVAL and
+          // not one backoff step later.
+          await Future.delayed(
+            Duration(milliseconds: RECONNECT_INTERVAL + 100),
+          );
+          expect(
+            connectCount,
+            equals(2),
+            reason: 'Expected the first retry after RECONNECT_INTERVAL',
+          );
+
+          await Future.delayed(
+            Duration(milliseconds: RECONNECT_INTERVAL + 100),
+          );
+          expect(
+            connectCount,
+            equals(2),
             reason:
-                'Expected reconnect to open a new WebSocket connection');
+                'Expected the second retry to back off to '
+                '2 * RECONNECT_INTERVAL',
+          );
 
-        // Reconnect event should fire
-        expect(reconnectCompleter.isCompleted, isTrue,
-            reason: 'Expected reconnect stream to emit');
-      });
-
-      test('failed connect retries after RECONNECT_INTERVAL, then backs off',
-          () async {
-        await loginClient(client);
-
-        var connectCount = 0;
-        WebSocketChannel failingFactory(Uri uri) {
-          connectCount++;
-          return _FailedConnectChannel();
-        }
-
-        final service = TelemetryWebsocketService(
-          client,
-          'http://localhost:8080',
-          channelFactory: failingFactory,
-        );
-        final subscriber =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
-        service.subscribe(subscriber);
-
-        await Future.delayed(Duration(milliseconds: 50));
-        expect(connectCount, equals(1));
-
-        // A failed connect reports both a ready error and a stream done, so
-        // the first retry must still be scheduled at RECONNECT_INTERVAL and
-        // not one backoff step later.
-        await Future.delayed(Duration(milliseconds: RECONNECT_INTERVAL + 100));
-        expect(connectCount, equals(2),
-            reason: 'Expected the first retry after RECONNECT_INTERVAL');
-
-        await Future.delayed(Duration(milliseconds: RECONNECT_INTERVAL + 100));
-        expect(connectCount, equals(2),
-            reason: 'Expected the second retry to back off to '
-                '2 * RECONNECT_INTERVAL');
-
-        service.reset(true);
-      });
+          service.reset(true);
+        },
+      );
     });
 
     group('RT-03: token handling', () {
@@ -551,27 +596,34 @@ void main() {
 
         final subscriber =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber);
 
         await Future.delayed(Duration(milliseconds: 10));
 
         expect(fakeChannel.sentMessages.isNotEmpty, isTrue);
-        final firstMsg =
-            jsonDecode(fakeChannel.sentMessages.first as String);
-        expect(firstMsg['authCmd'], isNotNull,
-            reason: 'First message should contain authCmd');
-        expect(firstMsg['authCmd']['token'], isNotNull,
-            reason: 'authCmd should contain the JWT token');
+        final firstMsg = jsonDecode(fakeChannel.sentMessages.first as String);
+        expect(
+          firstMsg['authCmd'],
+          isNotNull,
+          reason: 'First message should contain authCmd',
+        );
+        expect(
+          firstMsg['authCmd']['token'],
+          isNotNull,
+          reason: 'authCmd should contain the JWT token',
+        );
         expect(firstMsg['authCmd']['type'], equals('AUTH'));
       });
 
       test('authCmd carries the API key of an API key client', () async {
-        final apiKeyClient =
-            ThingsboardClient('http://localhost:8080', apiKey: 'my-api-key');
+        final apiKeyClient = ThingsboardClient(
+          'http://localhost:8080',
+          apiKey: 'my-api-key',
+        );
         apiKeyClient.dio.httpClientAdapter = mockAdapter;
 
         final fakeChannel = FakeWebSocketChannel();
@@ -586,80 +638,94 @@ void main() {
 
         await Future.delayed(Duration(milliseconds: 10));
 
-        expect(channelFactory.connectCallCount, equals(1),
-            reason: 'The socket opens without a JWT or a token refresh');
+        expect(
+          channelFactory.connectCallCount,
+          equals(1),
+          reason: 'The socket opens without a JWT or a token refresh',
+        );
         expect(fakeChannel.sentMessages.isNotEmpty, isTrue);
-        final firstMsg =
-            jsonDecode(fakeChannel.sentMessages.first as String);
+        final firstMsg = jsonDecode(fakeChannel.sentMessages.first as String);
         expect(firstMsg['authCmd']['type'], equals('AUTH'));
         expect(firstMsg['authCmd']['apiKey'], equals('my-api-key'));
         expect(firstMsg['authCmd'].containsKey('token'), isFalse);
       });
 
-      test('expired token triggers refreshJwtToken before socket open',
-          () async {
-        // Login with an expired token
-        final expiredToken = createExpiredTestJwt();
-        final validToken = createTestJwt();
-        final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
+      test(
+        'expired token triggers refreshJwtToken before socket open',
+        () async {
+          // Login with an expired token
+          final expiredToken = createExpiredTestJwt();
+          final validToken = createTestJwt();
+          final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
 
-        // Set up login to give expired token
-        mockAdapter.onRoute('/api/auth/login', (req) {
-          return ResponseBody.fromString(
-            jsonEncode(
-                {'token': expiredToken, 'refreshToken': refreshToken}),
-            200,
-            headers: {'content-type': ['application/json']},
+          // Set up login to give expired token
+          mockAdapter.onRoute('/api/auth/login', (req) {
+            return ResponseBody.fromString(
+              jsonEncode({'token': expiredToken, 'refreshToken': refreshToken}),
+              200,
+              headers: {
+                'content-type': ['application/json'],
+              },
+            );
+          });
+          // Set up token refresh to return valid token
+          mockAdapter.onRoute('/api/auth/token', (req) {
+            return ResponseBody.fromString(
+              jsonEncode({'token': validToken, 'refreshToken': refreshToken}),
+              200,
+              headers: {
+                'content-type': ['application/json'],
+              },
+            );
+          });
+
+          await client.login(
+            LoginRequest(userName: 'u@test.com', password: 'p'),
           );
-        });
-        // Set up token refresh to return valid token
-        mockAdapter.onRoute('/api/auth/token', (req) {
-          return ResponseBody.fromString(
-            jsonEncode({'token': validToken, 'refreshToken': refreshToken}),
-            200,
-            headers: {'content-type': ['application/json']},
+          // At this point, the token is expired
+
+          final fakeChannel = FakeWebSocketChannel();
+          channelFactory.enqueue(fakeChannel);
+
+          final service = TelemetryWebsocketService(
+            client,
+            'http://localhost:8080',
+            channelFactory: channelFactory.call,
           );
-        });
 
-        await client.login(LoginRequest(userName: 'u@test.com', password: 'p'));
-        // At this point, the token is expired
+          final subscriber =
+              TelemetrySubscriber.createEntityAttributesSubscription(
+                telemetryService: service,
+                entityId: deviceId('device-1'),
+                attributeScope: 'LATEST_TELEMETRY',
+              );
+          service.subscribe(subscriber);
 
-        final fakeChannel = FakeWebSocketChannel();
-        channelFactory.enqueue(fakeChannel);
+          // Allow async refresh + socket open
+          await Future.delayed(Duration(milliseconds: 50));
 
-        final service = TelemetryWebsocketService(
-          client,
-          'http://localhost:8080',
-          channelFactory: channelFactory.call,
-        );
+          // Token refresh should have been called
+          expect(
+            mockAdapter.requestedPaths.contains('/api/auth/token'),
+            isTrue,
+            reason: 'Expected token refresh before socket open',
+          );
 
-        final subscriber =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
-        service.subscribe(subscriber);
-
-        // Allow async refresh + socket open
-        await Future.delayed(Duration(milliseconds: 50));
-
-        // Token refresh should have been called
-        expect(mockAdapter.requestedPaths.contains('/api/auth/token'), isTrue,
-            reason: 'Expected token refresh before socket open');
-
-        // Auth cmd should use the refreshed token
-        if (fakeChannel.sentMessages.isNotEmpty) {
-          final firstMsg =
-              jsonDecode(fakeChannel.sentMessages.first as String);
-          if (firstMsg['authCmd'] != null) {
-            expect(firstMsg['authCmd']['token'], equals(validToken));
+          // Auth cmd should use the refreshed token
+          if (fakeChannel.sentMessages.isNotEmpty) {
+            final firstMsg = jsonDecode(
+              fakeChannel.sentMessages.first as String,
+            );
+            if (firstMsg['authCmd'] != null) {
+              expect(firstMsg['authCmd']['token'], equals(validToken));
+            }
           }
-        }
-      });
+        },
+      );
 
-      Future<TelemetryWebsocketService> subscribeWithExpiredToken(
-          {String? refreshToken}) async {
+      Future<TelemetryWebsocketService> subscribeWithExpiredToken({
+        String? refreshToken,
+      }) async {
         mockAdapter.onRoute('/api/auth/login', (req) {
           return ResponseBody.fromString(
             jsonEncode({
@@ -668,7 +734,9 @@ void main() {
                   refreshToken ?? createTestJwt(scope: 'REFRESH_TOKEN'),
             }),
             200,
-            headers: {'content-type': ['application/json']},
+            headers: {
+              'content-type': ['application/json'],
+            },
           );
         });
         await client.login(LoginRequest(userName: 'u@test.com', password: 'p'));
@@ -680,66 +748,92 @@ void main() {
         );
         final subscriber =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 50));
         return service;
       }
 
-      test('unreachable server during refresh keeps the session and retries',
-          () async {
-        mockAdapter.onRoute(
-            '/api/auth/token', (req) => throw SocketException('offline'));
-
-        final service = await subscribeWithExpiredToken();
-
-        expect(client.isAuthenticated(), isTrue);
-        expect(client.getRefreshToken(), isNotNull);
-        expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/logout')));
-        expect(channelFactory.connectCallCount, equals(0));
-
-        await Future.delayed(Duration(milliseconds: RECONNECT_INTERVAL + 100));
-        service.reset(true);
-
-        expect(mockAdapter.requestedPaths.where((p) => p == '/api/auth/token'),
-            hasLength(greaterThanOrEqualTo(2)),
-            reason: 'Expected the refresh to be retried on reconnect');
-      });
-
-      test('rejected refresh token during socket open ends the session once',
-          () async {
-        mockAdapter.onRoute('/api/auth/token', (req) {
-          return ResponseBody.fromString(
-            jsonEncode({
-              'status': 401,
-              'errorCode': 11,
-              'message': 'Token has expired',
-            }),
-            401,
-            headers: {'content-type': ['application/json']},
+      test(
+        'unreachable server during refresh keeps the session and retries',
+        () async {
+          mockAdapter.onRoute(
+            '/api/auth/token',
+            (req) => throw SocketException('offline'),
           );
-        });
 
-        await subscribeWithExpiredToken();
+          final service = await subscribeWithExpiredToken();
 
-        expect(client.isAuthenticated(), isFalse);
-        expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/logout')));
-        expect(channelFactory.connectCallCount, equals(0));
-      });
+          expect(client.isAuthenticated(), isTrue);
+          expect(client.getRefreshToken(), isNotNull);
+          expect(
+            mockAdapter.requestedPaths,
+            isNot(contains('/api/auth/logout')),
+          );
+          expect(channelFactory.connectCallCount, equals(0));
 
-      test('expired refresh token during socket open does not open a socket',
-          () async {
-        await subscribeWithExpiredToken(
-            refreshToken:
-                createTestJwt(scope: 'REFRESH_TOKEN', expInSeconds: -60));
+          await Future.delayed(
+            Duration(milliseconds: RECONNECT_INTERVAL + 100),
+          );
+          service.reset(true);
 
-        expect(client.isAuthenticated(), isFalse);
-        expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/token')));
-        expect(channelFactory.connectCallCount, equals(0));
-      });
+          expect(
+            mockAdapter.requestedPaths.where((p) => p == '/api/auth/token'),
+            hasLength(greaterThanOrEqualTo(2)),
+            reason: 'Expected the refresh to be retried on reconnect',
+          );
+        },
+      );
+
+      test(
+        'rejected refresh token during socket open ends the session once',
+        () async {
+          mockAdapter.onRoute('/api/auth/token', (req) {
+            return ResponseBody.fromString(
+              jsonEncode({
+                'status': 401,
+                'errorCode': 11,
+                'message': 'Token has expired',
+              }),
+              401,
+              headers: {
+                'content-type': ['application/json'],
+              },
+            );
+          });
+
+          await subscribeWithExpiredToken();
+
+          expect(client.isAuthenticated(), isFalse);
+          expect(
+            mockAdapter.requestedPaths,
+            isNot(contains('/api/auth/logout')),
+          );
+          expect(channelFactory.connectCallCount, equals(0));
+        },
+      );
+
+      test(
+        'expired refresh token during socket open does not open a socket',
+        () async {
+          await subscribeWithExpiredToken(
+            refreshToken: createTestJwt(
+              scope: 'REFRESH_TOKEN',
+              expInSeconds: -60,
+            ),
+          );
+
+          expect(client.isAuthenticated(), isFalse);
+          expect(
+            mockAdapter.requestedPaths,
+            isNot(contains('/api/auth/token')),
+          );
+          expect(channelFactory.connectCallCount, equals(0));
+        },
+      );
     });
 
     group('RT-04: unsubscribe', () {
@@ -757,10 +851,10 @@ void main() {
 
         final subscriber =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
@@ -769,8 +863,11 @@ void main() {
         await Future.delayed(Duration(milliseconds: 10));
 
         // Should have more messages after unsubscribe
-        expect(fakeChannel.sentMessages.length, greaterThan(msgCountBefore),
-            reason: 'Expected unsubscribe command to be sent');
+        expect(
+          fakeChannel.sentMessages.length,
+          greaterThan(msgCountBefore),
+          reason: 'Expected unsubscribe command to be sent',
+        );
 
         // Find unsubscribe command
         bool foundUnsubscribe = false;
@@ -785,8 +882,11 @@ void main() {
             }
           }
         }
-        expect(foundUnsubscribe, isTrue,
-            reason: 'Expected unsubscribe=true in TIMESERIES command');
+        expect(
+          foundUnsubscribe,
+          isTrue,
+          reason: 'Expected unsubscribe=true in TIMESERIES command',
+        );
       });
 
       test('unsubscribed subscriber no longer receives messages', () async {
@@ -803,10 +903,10 @@ void main() {
 
         final subscriber =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
@@ -838,10 +938,12 @@ void main() {
         // Inject message with old cmdId — should not arrive at subscriber
         // since it was removed from _subscribersMap
         if (cmdId != null) {
-          fakeChannel.injectMessage(jsonEncode({
-            'subscriptionId': cmdId,
-            'data': {'temp': []}
-          }));
+          fakeChannel.injectMessage(
+            jsonEncode({
+              'subscriptionId': cmdId,
+              'data': {'temp': []},
+            }),
+          );
         }
         await Future.delayed(Duration(milliseconds: 10));
         expect(dataCount, equals(0));
@@ -863,10 +965,10 @@ void main() {
 
         final subscriber =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
@@ -875,9 +977,11 @@ void main() {
         await Future.delayed(Duration(milliseconds: 10));
 
         // Socket should still be open (idle timer fires after 90s, not instantly)
-        expect(fakeChannel.closeCode, isNull,
-            reason:
-                'Socket should not close immediately after last unsubscribe');
+        expect(
+          fakeChannel.closeCode,
+          isNull,
+          reason: 'Socket should not close immediately after last unsubscribe',
+        );
       });
 
       test('new subscription cancels idle timer', () async {
@@ -894,10 +998,10 @@ void main() {
 
         final subscriber1 =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber1);
         await Future.delayed(Duration(milliseconds: 10));
 
@@ -908,55 +1012,65 @@ void main() {
         // Subscribe again before idle timer fires — should cancel the timer
         final subscriber2 =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-2'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-2'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
         service.subscribe(subscriber2);
         await Future.delayed(Duration(milliseconds: 10));
 
         // Socket should still be open
-        expect(fakeChannel.closeCode, isNull,
-            reason: 'Socket should remain open when subscriber re-added');
+        expect(
+          fakeChannel.closeCode,
+          isNull,
+          reason: 'Socket should remain open when subscriber re-added',
+        );
 
         service.unsubscribe(subscriber2);
       });
 
-      test('unsubscribing a subscriber twice does not hide the next one',
-          () async {
-        await loginClient(client);
-        fakeAsync((async) {
-          final fakeChannel = FakeWebSocketChannel();
-          channelFactory.enqueue(fakeChannel);
-          final service = TelemetryWebsocketService(
-            client,
-            'http://localhost:8080',
-            channelFactory: channelFactory.call,
-          );
+      test(
+        'unsubscribing a subscriber twice does not hide the next one',
+        () async {
+          await loginClient(client);
+          fakeAsync((async) {
+            final fakeChannel = FakeWebSocketChannel();
+            channelFactory.enqueue(fakeChannel);
+            final service = TelemetryWebsocketService(
+              client,
+              'http://localhost:8080',
+              channelFactory: channelFactory.call,
+            );
 
-          final first = attributesSubscriber(service, 'device-1');
-          service.subscribe(first);
-          async.flushMicrotasks();
-          service.unsubscribe(first);
-          service.unsubscribe(first);
-          service.subscribe(attributesSubscriber(service, 'device-2'));
-          async.flushMicrotasks();
-          fakeChannel.injectMessage(jsonEncode({
-            'subscriptionId': 2,
-            'data': {
-              'temperature': [
-                [1000, '25.0']
-              ]
-            }
-          }));
-          async.flushMicrotasks();
-          async.elapse(Duration(milliseconds: WS_IDLE_TIMEOUT * 2));
+            final first = attributesSubscriber(service, 'device-1');
+            service.subscribe(first);
+            async.flushMicrotasks();
+            service.unsubscribe(first);
+            service.unsubscribe(first);
+            service.subscribe(attributesSubscriber(service, 'device-2'));
+            async.flushMicrotasks();
+            fakeChannel.injectMessage(
+              jsonEncode({
+                'subscriptionId': 2,
+                'data': {
+                  'temperature': [
+                    [1000, '25.0'],
+                  ],
+                },
+              }),
+            );
+            async.flushMicrotasks();
+            async.elapse(Duration(milliseconds: WS_IDLE_TIMEOUT * 2));
 
-          expect(fakeChannel.closeCode, isNull,
-              reason: 'The socket still has a live subscriber');
-          service.reset(true);
-        });
-      });
+            expect(
+              fakeChannel.closeCode,
+              isNull,
+              reason: 'The socket still has a live subscriber',
+            );
+            service.reset(true);
+          });
+        },
+      );
     });
 
     group('RT-06: command queue', () {
@@ -975,25 +1089,31 @@ void main() {
 
         final subscriber =
             TelemetrySubscriber.createEntityAttributesSubscription(
-          telemetryService: service,
-          entityId: deviceId('device-1'),
-          attributeScope: 'LATEST_TELEMETRY',
-        );
+              telemetryService: service,
+              entityId: deviceId('device-1'),
+              attributeScope: 'LATEST_TELEMETRY',
+            );
 
         // Subscribe — this queues the command before socket is open
         service.subscribe(subscriber);
 
         // Immediately: no messages should be sent yet (socket not open)
-        expect(fakeChannel.sentMessages.isEmpty, isTrue,
-            reason: 'No messages should be sent before socket is ready');
+        expect(
+          fakeChannel.sentMessages.isEmpty,
+          isTrue,
+          reason: 'No messages should be sent before socket is ready',
+        );
 
         // Now open the channel (simulate ready)
         fakeChannel.completeReady();
         await Future.delayed(Duration(milliseconds: 10));
 
         // After opening, queued commands should drain
-        expect(fakeChannel.sentMessages.isNotEmpty, isTrue,
-            reason: 'Queued commands should drain after socket opens');
+        expect(
+          fakeChannel.sentMessages.isNotEmpty,
+          isTrue,
+          reason: 'Queued commands should drain after socket opens',
+        );
       });
     });
 
@@ -1001,11 +1121,13 @@ void main() {
       // Opens a socket for a device-1 subscriber and drops it, leaving the
       // service in its reconnect backoff; the next socket is reconnectChannel.
       Future<
-          ({
-            TelemetryWebsocketService service,
-            TelemetrySubscriber dropped,
-            FakeWebSocketChannel reconnectChannel,
-          })> dropIntoBackoff() async {
+        ({
+          TelemetryWebsocketService service,
+          TelemetrySubscriber dropped,
+          FakeWebSocketChannel reconnectChannel,
+        })
+      >
+      dropIntoBackoff() async {
         await loginClient(client);
         final firstChannel = FakeWebSocketChannel();
         final reconnectChannel = FakeWebSocketChannel();
@@ -1029,8 +1151,7 @@ void main() {
         );
       }
 
-      test(
-          'unsubscribe during reconnect backoff sends nothing for the dropped '
+      test('unsubscribe during reconnect backoff sends nothing for the dropped '
           'connection', () async {
         final (:service, :dropped, :reconnectChannel) = await dropIntoBackoff();
 
@@ -1044,8 +1165,7 @@ void main() {
         service.reset(true);
       });
 
-      test(
-          'a live subscriber keeps the socket open past the idle timeout '
+      test('a live subscriber keeps the socket open past the idle timeout '
           'after a reconnect', () async {
         final (:service, :dropped, :reconnectChannel) = await dropIntoBackoff();
         fakeAsync((async) {
@@ -1053,25 +1173,29 @@ void main() {
           service.subscribe(attributesSubscriber(service, 'device-2'));
           async.flushMicrotasks();
           // Only an incoming message arms the idle close; publishing re-cancels it.
-          reconnectChannel.injectMessage(jsonEncode({
-            'subscriptionId': 1,
-            'data': {
-              'temperature': [
-                [1000, '25.0']
-              ]
-            }
-          }));
+          reconnectChannel.injectMessage(
+            jsonEncode({
+              'subscriptionId': 1,
+              'data': {
+                'temperature': [
+                  [1000, '25.0'],
+                ],
+              },
+            }),
+          );
           async.flushMicrotasks();
           async.elapse(Duration(milliseconds: WS_IDLE_TIMEOUT * 2));
 
-          expect(reconnectChannel.closeCode, isNull,
-              reason: 'The socket still has a live subscriber');
+          expect(
+            reconnectChannel.closeCode,
+            isNull,
+            reason: 'The socket still has a live subscriber',
+          );
           service.reset(true);
         });
       });
 
-      test(
-          'a surviving subscriber and one added during the backoff are both '
+      test('a surviving subscriber and one added during the backoff are both '
           'published on reopen', () async {
         final (:service, :dropped, :reconnectChannel) = await dropIntoBackoff();
         final added = attributesSubscriber(service, 'device-2');
@@ -1084,28 +1208,38 @@ void main() {
         await Future.delayed(Duration(milliseconds: 10));
 
         final cmds = sentCmds(reconnectChannel);
-        expect(cmds.map((c) => c['entityId']),
-            unorderedEquals(['device-1', 'device-2']));
+        expect(
+          cmds.map((c) => c['entityId']),
+          unorderedEquals(['device-1', 'device-2']),
+        );
         expect(cmds.map((c) => c['cmdId']).toSet(), hasLength(2));
         expect(droppedReconnects, equals(1));
-        expect(addedReconnects, equals(0),
-            reason: 'Only a subscriber from the dropped connection reconnects');
+        expect(
+          addedReconnects,
+          equals(0),
+          reason: 'Only a subscriber from the dropped connection reconnects',
+        );
         service.reset(true);
       });
 
-      test('after reset(true) the next subscribe is published on open',
-          () async {
-        final (:service, :dropped, :reconnectChannel) = await dropIntoBackoff();
-        service.unsubscribe(dropped);
+      test(
+        'after reset(true) the next subscribe is published on open',
+        () async {
+          final (:service, :dropped, :reconnectChannel) =
+              await dropIntoBackoff();
+          service.unsubscribe(dropped);
 
-        service.reset(true);
-        service.subscribe(attributesSubscriber(service, 'device-2'));
-        await Future.delayed(Duration(milliseconds: 10));
+          service.reset(true);
+          service.subscribe(attributesSubscriber(service, 'device-2'));
+          await Future.delayed(Duration(milliseconds: 10));
 
-        expect(sentCmds(reconnectChannel).map((c) => c['entityId']),
-            equals(['device-2']));
-        service.reset(true);
-      });
+          expect(
+            sentCmds(reconnectChannel).map((c) => c['entityId']),
+            equals(['device-2']),
+          );
+          service.reset(true);
+        },
+      );
     });
 
     group('getTelemetryService integration', () {

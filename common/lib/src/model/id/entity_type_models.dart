@@ -39,7 +39,7 @@ enum EntityType {
   JOB,
   ADMIN_SETTINGS,
   AI_MODEL,
-  API_KEY
+  API_KEY,
 }
 
 EntityType entityTypeFromString(String value) {

@@ -21,10 +21,16 @@ part 'telemetry_querying_snmp_communication_config.g.dart';
 ///
 /// Properties:
 /// * [spec] - Specification of the SNMP communication
-/// * [mappings] 
-/// * [queryingFrequencyMs] 
+/// * [mappings]
+/// * [queryingFrequencyMs]
 @BuiltValue()
-abstract class TelemetryQueryingSnmpCommunicationConfig implements SnmpCommunicationConfig, Built<TelemetryQueryingSnmpCommunicationConfig, TelemetryQueryingSnmpCommunicationConfigBuilder> {
+abstract class TelemetryQueryingSnmpCommunicationConfig
+    implements
+        SnmpCommunicationConfig,
+        Built<
+          TelemetryQueryingSnmpCommunicationConfig,
+          TelemetryQueryingSnmpCommunicationConfigBuilder
+        > {
   @BuiltValueField(wireName: r'mappings')
   BuiltList<SnmpMapping>? get mappings;
 
@@ -33,18 +39,25 @@ abstract class TelemetryQueryingSnmpCommunicationConfig implements SnmpCommunica
 
   TelemetryQueryingSnmpCommunicationConfig._();
 
-  factory TelemetryQueryingSnmpCommunicationConfig([void updates(TelemetryQueryingSnmpCommunicationConfigBuilder b)]) = _$TelemetryQueryingSnmpCommunicationConfig;
+  factory TelemetryQueryingSnmpCommunicationConfig([
+    void updates(TelemetryQueryingSnmpCommunicationConfigBuilder b),
+  ]) = _$TelemetryQueryingSnmpCommunicationConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TelemetryQueryingSnmpCommunicationConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TelemetryQueryingSnmpCommunicationConfig> get serializer => _$TelemetryQueryingSnmpCommunicationConfigSerializer();
+  static Serializer<TelemetryQueryingSnmpCommunicationConfig> get serializer =>
+      _$TelemetryQueryingSnmpCommunicationConfigSerializer();
 }
 
-class _$TelemetryQueryingSnmpCommunicationConfigSerializer implements PrimitiveSerializer<TelemetryQueryingSnmpCommunicationConfig> {
+class _$TelemetryQueryingSnmpCommunicationConfigSerializer
+    implements PrimitiveSerializer<TelemetryQueryingSnmpCommunicationConfig> {
   @override
-  final Iterable<Type> types = const [TelemetryQueryingSnmpCommunicationConfig, _$TelemetryQueryingSnmpCommunicationConfig];
+  final Iterable<Type> types = const [
+    TelemetryQueryingSnmpCommunicationConfig,
+    _$TelemetryQueryingSnmpCommunicationConfig,
+  ];
 
   @override
   final String wireName = r'TelemetryQueryingSnmpCommunicationConfig';
@@ -81,7 +94,11 @@ class _$TelemetryQueryingSnmpCommunicationConfigSerializer implements PrimitiveS
     TelemetryQueryingSnmpCommunicationConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -97,25 +114,33 @@ class _$TelemetryQueryingSnmpCommunicationConfigSerializer implements PrimitiveS
       final value = serializedList[i + 1];
       switch (key) {
         case r'mappings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SnmpMapping)]),
-          ) as BuiltList<SnmpMapping>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SnmpMapping),
+                    ]),
+                  )
+                  as BuiltList<SnmpMapping>?;
           if (valueDes == null) continue;
           result.mappings.replace(valueDes);
           break;
         case r'spec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(SnmpCommunicationSpec),
-          ) as SnmpCommunicationSpec;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(SnmpCommunicationSpec),
+                  )
+                  as SnmpCommunicationSpec;
           result.spec = valueDes;
           break;
         case r'queryingFrequencyMs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.queryingFrequencyMs = valueDes;
           break;
@@ -147,5 +172,3 @@ class _$TelemetryQueryingSnmpCommunicationConfigSerializer implements PrimitiveS
     return result.build();
   }
 }
-
-

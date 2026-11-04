@@ -21,13 +21,14 @@ part 'user_mobile_info.g.dart';
 /// UserMobileInfo
 ///
 /// Properties:
-/// * [user] 
-/// * [storeInfo] 
-/// * [versionInfo] 
-/// * [homeDashboardInfo] 
+/// * [user]
+/// * [storeInfo]
+/// * [versionInfo]
+/// * [homeDashboardInfo]
 /// * [pages] - A value representing the any type (object or primitive)
 @BuiltValue()
-abstract class UserMobileInfo implements Built<UserMobileInfo, UserMobileInfoBuilder> {
+abstract class UserMobileInfo
+    implements Built<UserMobileInfo, UserMobileInfoBuilder> {
   @BuiltValueField(wireName: r'user')
   User? get user;
 
@@ -46,16 +47,19 @@ abstract class UserMobileInfo implements Built<UserMobileInfo, UserMobileInfoBui
 
   UserMobileInfo._();
 
-  factory UserMobileInfo([void updates(UserMobileInfoBuilder b)]) = _$UserMobileInfo;
+  factory UserMobileInfo([void updates(UserMobileInfoBuilder b)]) =
+      _$UserMobileInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserMobileInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserMobileInfo> get serializer => _$UserMobileInfoSerializer();
+  static Serializer<UserMobileInfo> get serializer =>
+      _$UserMobileInfoSerializer();
 }
 
-class _$UserMobileInfoSerializer implements PrimitiveSerializer<UserMobileInfo> {
+class _$UserMobileInfoSerializer
+    implements PrimitiveSerializer<UserMobileInfo> {
   @override
   final Iterable<Type> types = const [UserMobileInfo, _$UserMobileInfo];
 
@@ -110,7 +114,11 @@ class _$UserMobileInfoSerializer implements PrimitiveSerializer<UserMobileInfo> 
     UserMobileInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -126,42 +134,54 @@ class _$UserMobileInfoSerializer implements PrimitiveSerializer<UserMobileInfo> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'user':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(User),
-          ) as User?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(User),
+                  )
+                  as User?;
           if (valueDes == null) continue;
           result.user.replace(valueDes);
           break;
         case r'storeInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StoreInfo),
-          ) as StoreInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StoreInfo),
+                  )
+                  as StoreInfo?;
           if (valueDes == null) continue;
           result.storeInfo.replace(valueDes);
           break;
         case r'versionInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MobileAppVersionInfo),
-          ) as MobileAppVersionInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      MobileAppVersionInfo,
+                    ),
+                  )
+                  as MobileAppVersionInfo?;
           if (valueDes == null) continue;
           result.versionInfo.replace(valueDes);
           break;
         case r'homeDashboardInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(HomeDashboardInfo),
-          ) as HomeDashboardInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(HomeDashboardInfo),
+                  )
+                  as HomeDashboardInfo?;
           if (valueDes == null) continue;
           result.homeDashboardInfo.replace(valueDes);
           break;
         case r'pages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.pages = valueDes;
           break;
@@ -193,5 +213,3 @@ class _$UserMobileInfoSerializer implements PrimitiveSerializer<UserMobileInfo> 
     return result.build();
   }
 }
-
-

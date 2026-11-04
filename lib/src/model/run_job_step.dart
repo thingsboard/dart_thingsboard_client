@@ -19,16 +19,17 @@ part 'run_job_step.g.dart';
 /// RunJobStep
 ///
 /// Properties:
-/// * [id] 
-/// * [nextId] 
-/// * [title] 
-/// * [templateOnly] 
-/// * [condition] 
-/// * [stateful] 
-/// * [type] 
-/// * [state] 
+/// * [id]
+/// * [nextId]
+/// * [title]
+/// * [templateOnly]
+/// * [condition]
+/// * [stateful]
+/// * [type]
+/// * [state]
 @BuiltValue()
-abstract class RunJobStep implements AgentAppStep, Built<RunJobStep, RunJobStepBuilder> {
+abstract class RunJobStep
+    implements AgentAppStep, Built<RunJobStep, RunJobStepBuilder> {
   @BuiltValueField(wireName: r'state')
   RunJobStepState? get state;
 
@@ -119,7 +120,11 @@ class _$RunJobStepSerializer implements PrimitiveSerializer<RunJobStep> {
     RunJobStep object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -135,66 +140,82 @@ class _$RunJobStepSerializer implements PrimitiveSerializer<RunJobStep> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'nextId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.nextId = valueDes;
           break;
         case r'condition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.condition = valueDes;
           break;
         case r'templateOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.templateOnly = valueDes;
           break;
         case r'state':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RunJobStepState),
-          ) as RunJobStepState?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RunJobStepState),
+                  )
+                  as RunJobStepState?;
           if (valueDes == null) continue;
           result.state.replace(valueDes);
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'stateful':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.stateful = valueDes;
           break;
@@ -226,5 +247,3 @@ class _$RunJobStepSerializer implements PrimitiveSerializer<RunJobStep> {
     return result.build();
   }
 }
-
-

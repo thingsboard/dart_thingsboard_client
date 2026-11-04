@@ -16,26 +16,34 @@ part 'anthropic_provider_config.g.dart';
 /// AnthropicProviderConfig
 ///
 /// Properties:
-/// * [apiKey] 
+/// * [apiKey]
 @BuiltValue()
-abstract class AnthropicProviderConfig implements Built<AnthropicProviderConfig, AnthropicProviderConfigBuilder> {
+abstract class AnthropicProviderConfig
+    implements Built<AnthropicProviderConfig, AnthropicProviderConfigBuilder> {
   @BuiltValueField(wireName: r'apiKey')
   String get apiKey;
 
   AnthropicProviderConfig._();
 
-  factory AnthropicProviderConfig([void updates(AnthropicProviderConfigBuilder b)]) = _$AnthropicProviderConfig;
+  factory AnthropicProviderConfig([
+    void updates(AnthropicProviderConfigBuilder b),
+  ]) = _$AnthropicProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AnthropicProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AnthropicProviderConfig> get serializer => _$AnthropicProviderConfigSerializer();
+  static Serializer<AnthropicProviderConfig> get serializer =>
+      _$AnthropicProviderConfigSerializer();
 }
 
-class _$AnthropicProviderConfigSerializer implements PrimitiveSerializer<AnthropicProviderConfig> {
+class _$AnthropicProviderConfigSerializer
+    implements PrimitiveSerializer<AnthropicProviderConfig> {
   @override
-  final Iterable<Type> types = const [AnthropicProviderConfig, _$AnthropicProviderConfig];
+  final Iterable<Type> types = const [
+    AnthropicProviderConfig,
+    _$AnthropicProviderConfig,
+  ];
 
   @override
   final String wireName = r'AnthropicProviderConfig';
@@ -58,7 +66,11 @@ class _$AnthropicProviderConfigSerializer implements PrimitiveSerializer<Anthrop
     AnthropicProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -74,10 +86,12 @@ class _$AnthropicProviderConfigSerializer implements PrimitiveSerializer<Anthrop
       final value = serializedList[i + 1];
       switch (key) {
         case r'apiKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.apiKey = valueDes;
           break;
         default:
@@ -108,5 +122,3 @@ class _$AnthropicProviderConfigSerializer implements PrimitiveSerializer<Anthrop
     return result.build();
   }
 }
-
-

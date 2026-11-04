@@ -25,7 +25,8 @@ part 'admin_settings.g.dart';
 /// * [key] - The Administration Settings key, (e.g. 'general' or 'mail')
 /// * [jsonValue] - JSON representation of the Administration Settings value
 @BuiltValue()
-abstract class AdminSettings implements Built<AdminSettings, AdminSettingsBuilder> {
+abstract class AdminSettings
+    implements Built<AdminSettings, AdminSettingsBuilder> {
   /// The Id of the Administration Settings, auto-generated, UUID
   @BuiltValueField(wireName: r'id')
   AdminSettingsId? get id;
@@ -48,13 +49,15 @@ abstract class AdminSettings implements Built<AdminSettings, AdminSettingsBuilde
 
   AdminSettings._();
 
-  factory AdminSettings([void updates(AdminSettingsBuilder b)]) = _$AdminSettings;
+  factory AdminSettings([void updates(AdminSettingsBuilder b)]) =
+      _$AdminSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AdminSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AdminSettings> get serializer => _$AdminSettingsSerializer();
+  static Serializer<AdminSettings> get serializer =>
+      _$AdminSettingsSerializer();
 }
 
 class _$AdminSettingsSerializer implements PrimitiveSerializer<AdminSettings> {
@@ -112,7 +115,11 @@ class _$AdminSettingsSerializer implements PrimitiveSerializer<AdminSettings> {
     AdminSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -128,42 +135,52 @@ class _$AdminSettingsSerializer implements PrimitiveSerializer<AdminSettings> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AdminSettingsId),
-          ) as AdminSettingsId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AdminSettingsId),
+                  )
+                  as AdminSettingsId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
         case r'jsonValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.jsonValue = valueDes;
           break;
@@ -195,5 +212,3 @@ class _$AdminSettingsSerializer implements PrimitiveSerializer<AdminSettings> {
     return result.build();
   }
 }
-
-

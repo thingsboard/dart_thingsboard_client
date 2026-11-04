@@ -22,20 +22,23 @@ part 'divider_component.g.dart';
 /// DividerComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
-/// * [margins] 
-/// * [paddings] 
-/// * [background] 
-/// * [borderWidth] 
-/// * [borderRadius] 
-/// * [borderColor] 
-/// * [length] 
-/// * [borderType] 
-/// * [widthPx] 
-/// * [color] 
+/// * [subType]
+/// * [type]
+/// * [margins]
+/// * [paddings]
+/// * [background]
+/// * [borderWidth]
+/// * [borderRadius]
+/// * [borderColor]
+/// * [length]
+/// * [borderType]
+/// * [widthPx]
+/// * [color]
 @BuiltValue()
-abstract class DividerComponent implements ReportComponent, Built<DividerComponent, DividerComponentBuilder> {
+abstract class DividerComponent
+    implements
+        ReportComponent,
+        Built<DividerComponent, DividerComponentBuilder> {
   @BuiltValueField(wireName: r'borderType')
   BorderType? get borderType;
   // enum borderTypeEnum {  solid,  dashed,  dotted,  };
@@ -70,16 +73,19 @@ abstract class DividerComponent implements ReportComponent, Built<DividerCompone
 
   DividerComponent._();
 
-  factory DividerComponent([void updates(DividerComponentBuilder b)]) = _$DividerComponent;
+  factory DividerComponent([void updates(DividerComponentBuilder b)]) =
+      _$DividerComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DividerComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DividerComponent> get serializer => _$DividerComponentSerializer();
+  static Serializer<DividerComponent> get serializer =>
+      _$DividerComponentSerializer();
 }
 
-class _$DividerComponentSerializer implements PrimitiveSerializer<DividerComponent> {
+class _$DividerComponentSerializer
+    implements PrimitiveSerializer<DividerComponent> {
   @override
   final Iterable<Type> types = const [DividerComponent, _$DividerComponent];
 
@@ -179,7 +185,11 @@ class _$DividerComponentSerializer implements PrimitiveSerializer<DividerCompone
     DividerComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -195,97 +205,121 @@ class _$DividerComponentSerializer implements PrimitiveSerializer<DividerCompone
       final value = serializedList[i + 1];
       switch (key) {
         case r'borderType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BorderType),
-          ) as BorderType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BorderType),
+                  )
+                  as BorderType?;
           if (valueDes == null) continue;
           result.borderType = valueDes;
           break;
         case r'margins':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.margins.replace(valueDes);
           break;
         case r'borderColor':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.borderColor = valueDes;
           break;
         case r'borderRadius':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderRadius = valueDes;
           break;
         case r'color':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.color = valueDes;
           break;
         case r'paddings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Insets),
-          ) as Insets?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Insets),
+                  )
+                  as Insets?;
           if (valueDes == null) continue;
           result.paddings.replace(valueDes);
           break;
         case r'background':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.background = valueDes;
           break;
         case r'borderWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.borderWidth = valueDes;
           break;
         case r'widthPx':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.widthPx = valueDes;
           break;
         case r'length':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BorderLength),
-          ) as BorderLength?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BorderLength),
+                  )
+                  as BorderLength?;
           if (valueDes == null) continue;
           result.length = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         default:
@@ -316,5 +350,3 @@ class _$DividerComponentSerializer implements PrimitiveSerializer<DividerCompone
     return result.build();
   }
 }
-
-

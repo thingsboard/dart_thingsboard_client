@@ -20,21 +20,31 @@ part 'default_data_key_settings.g.dart';
 /// Properties:
 /// * [type] - Data key settings type
 @BuiltValue()
-abstract class DefaultDataKeySettings implements DataKeySettings, Built<DefaultDataKeySettings, DefaultDataKeySettingsBuilder> {
+abstract class DefaultDataKeySettings
+    implements
+        DataKeySettings,
+        Built<DefaultDataKeySettings, DefaultDataKeySettingsBuilder> {
   DefaultDataKeySettings._();
 
-  factory DefaultDataKeySettings([void updates(DefaultDataKeySettingsBuilder b)]) = _$DefaultDataKeySettings;
+  factory DefaultDataKeySettings([
+    void updates(DefaultDataKeySettingsBuilder b),
+  ]) = _$DefaultDataKeySettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultDataKeySettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultDataKeySettings> get serializer => _$DefaultDataKeySettingsSerializer();
+  static Serializer<DefaultDataKeySettings> get serializer =>
+      _$DefaultDataKeySettingsSerializer();
 }
 
-class _$DefaultDataKeySettingsSerializer implements PrimitiveSerializer<DefaultDataKeySettings> {
+class _$DefaultDataKeySettingsSerializer
+    implements PrimitiveSerializer<DefaultDataKeySettings> {
   @override
-  final Iterable<Type> types = const [DefaultDataKeySettings, _$DefaultDataKeySettings];
+  final Iterable<Type> types = const [
+    DefaultDataKeySettings,
+    _$DefaultDataKeySettings,
+  ];
 
   @override
   final String wireName = r'DefaultDataKeySettings';
@@ -57,7 +67,11 @@ class _$DefaultDataKeySettingsSerializer implements PrimitiveSerializer<DefaultD
     DefaultDataKeySettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -73,10 +87,12 @@ class _$DefaultDataKeySettingsSerializer implements PrimitiveSerializer<DefaultD
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DataKeySettingsType),
-          ) as DataKeySettingsType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DataKeySettingsType),
+                  )
+                  as DataKeySettingsType;
           result.type = valueDes;
           break;
         default:
@@ -107,5 +123,3 @@ class _$DefaultDataKeySettingsSerializer implements PrimitiveSerializer<DefaultD
     return result.build();
   }
 }
-
-

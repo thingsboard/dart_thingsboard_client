@@ -24,9 +24,9 @@ part 'agg_interval.g.dart';
 /// AggInterval
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class AggInterval  {
+abstract class AggInterval {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -48,62 +48,63 @@ abstract class AggInterval  {
 }
 
 extension AggIntervalDiscriminatorExt on AggInterval {
-    String? get discriminatorValue {
-        if (this is CustomInterval) {
-            return r'CUSTOM';
-        }
-        if (this is DayInterval) {
-            return r'DAY';
-        }
-        if (this is HourInterval) {
-            return r'HOUR';
-        }
-        if (this is MonthInterval) {
-            return r'MONTH';
-        }
-        if (this is QuarterInterval) {
-            return r'QUARTER';
-        }
-        if (this is WeekInterval) {
-            return r'WEEK';
-        }
-        if (this is WeekSunSatInterval) {
-            return r'WEEK_SUN_SAT';
-        }
-        if (this is YearInterval) {
-            return r'YEAR';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CustomInterval) {
+      return r'CUSTOM';
     }
+    if (this is DayInterval) {
+      return r'DAY';
+    }
+    if (this is HourInterval) {
+      return r'HOUR';
+    }
+    if (this is MonthInterval) {
+      return r'MONTH';
+    }
+    if (this is QuarterInterval) {
+      return r'QUARTER';
+    }
+    if (this is WeekInterval) {
+      return r'WEEK';
+    }
+    if (this is WeekSunSatInterval) {
+      return r'WEEK_SUN_SAT';
+    }
+    if (this is YearInterval) {
+      return r'YEAR';
+    }
+    return null;
+  }
 }
+
 extension AggIntervalBuilderDiscriminatorExt on AggIntervalBuilder {
-    String? get discriminatorValue {
-        if (this is CustomIntervalBuilder) {
-            return r'CUSTOM';
-        }
-        if (this is DayIntervalBuilder) {
-            return r'DAY';
-        }
-        if (this is HourIntervalBuilder) {
-            return r'HOUR';
-        }
-        if (this is MonthIntervalBuilder) {
-            return r'MONTH';
-        }
-        if (this is QuarterIntervalBuilder) {
-            return r'QUARTER';
-        }
-        if (this is WeekIntervalBuilder) {
-            return r'WEEK';
-        }
-        if (this is WeekSunSatIntervalBuilder) {
-            return r'WEEK_SUN_SAT';
-        }
-        if (this is YearIntervalBuilder) {
-            return r'YEAR';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CustomIntervalBuilder) {
+      return r'CUSTOM';
     }
+    if (this is DayIntervalBuilder) {
+      return r'DAY';
+    }
+    if (this is HourIntervalBuilder) {
+      return r'HOUR';
+    }
+    if (this is MonthIntervalBuilder) {
+      return r'MONTH';
+    }
+    if (this is QuarterIntervalBuilder) {
+      return r'QUARTER';
+    }
+    if (this is WeekIntervalBuilder) {
+      return r'WEEK';
+    }
+    if (this is WeekSunSatIntervalBuilder) {
+      return r'WEEK_SUN_SAT';
+    }
+    if (this is YearIntervalBuilder) {
+      return r'YEAR';
+    }
+    return null;
+  }
 }
 
 class _$AggIntervalSerializer implements PrimitiveSerializer<AggInterval> {
@@ -132,30 +133,58 @@ class _$AggIntervalSerializer implements PrimitiveSerializer<AggInterval> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CustomInterval) {
-      return serializers.serialize(object, specifiedType: FullType(CustomInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CustomInterval),
+      )!;
     }
     if (object is DayInterval) {
-      return serializers.serialize(object, specifiedType: FullType(DayInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DayInterval),
+      )!;
     }
     if (object is HourInterval) {
-      return serializers.serialize(object, specifiedType: FullType(HourInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(HourInterval),
+      )!;
     }
     if (object is MonthInterval) {
-      return serializers.serialize(object, specifiedType: FullType(MonthInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(MonthInterval),
+      )!;
     }
     if (object is QuarterInterval) {
-      return serializers.serialize(object, specifiedType: FullType(QuarterInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(QuarterInterval),
+      )!;
     }
     if (object is WeekInterval) {
-      return serializers.serialize(object, specifiedType: FullType(WeekInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WeekInterval),
+      )!;
     }
     if (object is WeekSunSatInterval) {
-      return serializers.serialize(object, specifiedType: FullType(WeekSunSatInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WeekSunSatInterval),
+      )!;
     }
     if (object is YearInterval) {
-      return serializers.serialize(object, specifiedType: FullType(YearInterval))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(YearInterval),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -165,38 +194,81 @@ class _$AggIntervalSerializer implements PrimitiveSerializer<AggInterval> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(AggInterval.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(AggInterval.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CUSTOM':
-        return serializers.deserialize(serialized, specifiedType: FullType(CustomInterval)) as CustomInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CustomInterval),
+            )
+            as CustomInterval;
       case r'DAY':
-        return serializers.deserialize(serialized, specifiedType: FullType(DayInterval)) as DayInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DayInterval),
+            )
+            as DayInterval;
       case r'HOUR':
-        return serializers.deserialize(serialized, specifiedType: FullType(HourInterval)) as HourInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(HourInterval),
+            )
+            as HourInterval;
       case r'MONTH':
-        return serializers.deserialize(serialized, specifiedType: FullType(MonthInterval)) as MonthInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(MonthInterval),
+            )
+            as MonthInterval;
       case r'QUARTER':
-        return serializers.deserialize(serialized, specifiedType: FullType(QuarterInterval)) as QuarterInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(QuarterInterval),
+            )
+            as QuarterInterval;
       case r'WEEK':
-        return serializers.deserialize(serialized, specifiedType: FullType(WeekInterval)) as WeekInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WeekInterval),
+            )
+            as WeekInterval;
       case r'WEEK_SUN_SAT':
-        return serializers.deserialize(serialized, specifiedType: FullType(WeekSunSatInterval)) as WeekSunSatInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WeekSunSatInterval),
+            )
+            as WeekSunSatInterval;
       case r'YEAR':
-        return serializers.deserialize(serialized, specifiedType: FullType(YearInterval)) as YearInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(YearInterval),
+            )
+            as YearInterval;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($AggInterval)) as $AggInterval;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($AggInterval),
+            )
+            as $AggInterval;
     }
   }
 }
 
-
 /// a concrete implementation of [AggInterval], since [AggInterval] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $AggInterval implements AggInterval, Built<$AggInterval, $AggIntervalBuilder> {
+abstract class $AggInterval
+    implements AggInterval, Built<$AggInterval, $AggIntervalBuilder> {
   $AggInterval._();
 
-  factory $AggInterval([void Function($AggIntervalBuilder)? updates]) = _$$AggInterval;
+  factory $AggInterval([void Function($AggIntervalBuilder)? updates]) =
+      _$$AggInterval;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($AggIntervalBuilder b) => b;
@@ -234,10 +306,12 @@ class _$$AggIntervalSerializer implements PrimitiveSerializer<$AggInterval> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -268,4 +342,3 @@ class _$$AggIntervalSerializer implements PrimitiveSerializer<$AggInterval> {
     return result.build();
   }
 }
-

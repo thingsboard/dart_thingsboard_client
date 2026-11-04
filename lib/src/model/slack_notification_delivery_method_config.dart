@@ -17,27 +17,40 @@ part 'slack_notification_delivery_method_config.g.dart';
 /// SlackNotificationDeliveryMethodConfig
 ///
 /// Properties:
-/// * [method] 
-/// * [botToken] 
+/// * [method]
+/// * [botToken]
 @BuiltValue()
-abstract class SlackNotificationDeliveryMethodConfig implements NotificationDeliveryMethodConfig, Built<SlackNotificationDeliveryMethodConfig, SlackNotificationDeliveryMethodConfigBuilder> {
+abstract class SlackNotificationDeliveryMethodConfig
+    implements
+        NotificationDeliveryMethodConfig,
+        Built<
+          SlackNotificationDeliveryMethodConfig,
+          SlackNotificationDeliveryMethodConfigBuilder
+        > {
   @BuiltValueField(wireName: r'botToken')
   String get botToken;
 
   SlackNotificationDeliveryMethodConfig._();
 
-  factory SlackNotificationDeliveryMethodConfig([void updates(SlackNotificationDeliveryMethodConfigBuilder b)]) = _$SlackNotificationDeliveryMethodConfig;
+  factory SlackNotificationDeliveryMethodConfig([
+    void updates(SlackNotificationDeliveryMethodConfigBuilder b),
+  ]) = _$SlackNotificationDeliveryMethodConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(SlackNotificationDeliveryMethodConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<SlackNotificationDeliveryMethodConfig> get serializer => _$SlackNotificationDeliveryMethodConfigSerializer();
+  static Serializer<SlackNotificationDeliveryMethodConfig> get serializer =>
+      _$SlackNotificationDeliveryMethodConfigSerializer();
 }
 
-class _$SlackNotificationDeliveryMethodConfigSerializer implements PrimitiveSerializer<SlackNotificationDeliveryMethodConfig> {
+class _$SlackNotificationDeliveryMethodConfigSerializer
+    implements PrimitiveSerializer<SlackNotificationDeliveryMethodConfig> {
   @override
-  final Iterable<Type> types = const [SlackNotificationDeliveryMethodConfig, _$SlackNotificationDeliveryMethodConfig];
+  final Iterable<Type> types = const [
+    SlackNotificationDeliveryMethodConfig,
+    _$SlackNotificationDeliveryMethodConfig,
+  ];
 
   @override
   final String wireName = r'SlackNotificationDeliveryMethodConfig';
@@ -65,7 +78,11 @@ class _$SlackNotificationDeliveryMethodConfigSerializer implements PrimitiveSeri
     SlackNotificationDeliveryMethodConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -81,17 +98,21 @@ class _$SlackNotificationDeliveryMethodConfigSerializer implements PrimitiveSeri
       final value = serializedList[i + 1];
       switch (key) {
         case r'method':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.method = valueDes;
           break;
         case r'botToken':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.botToken = valueDes;
           break;
         default:
@@ -122,5 +143,3 @@ class _$SlackNotificationDeliveryMethodConfigSerializer implements PrimitiveSeri
     return result.build();
   }
 }
-
-

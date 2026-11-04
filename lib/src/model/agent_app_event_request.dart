@@ -28,7 +28,8 @@ part 'agent_app_event_request.g.dart';
 /// * [bulkActionId] - Optional bulk-action correlation id. When the same value is used across multiple application events, duplicates are deduplicated server-side.
 /// * [skipProfileRefetch] - UPDATE-action flag for profile-managed apps. When true, the compose is not re-resolved from the (possibly upgraded) profile — only the credentials carried by `application.config` are applied. Ignored for non-UPDATE actions and for non-profile-managed apps.
 @BuiltValue()
-abstract class AgentAppEventRequest implements Built<AgentAppEventRequest, AgentAppEventRequestBuilder> {
+abstract class AgentAppEventRequest
+    implements Built<AgentAppEventRequest, AgentAppEventRequestBuilder> {
   /// Action to perform against the agent application.
   @BuiltValueField(wireName: r'actionType')
   AgentAppEventActionType? get actionType;
@@ -56,18 +57,24 @@ abstract class AgentAppEventRequest implements Built<AgentAppEventRequest, Agent
 
   AgentAppEventRequest._();
 
-  factory AgentAppEventRequest([void updates(AgentAppEventRequestBuilder b)]) = _$AgentAppEventRequest;
+  factory AgentAppEventRequest([void updates(AgentAppEventRequestBuilder b)]) =
+      _$AgentAppEventRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AgentAppEventRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AgentAppEventRequest> get serializer => _$AgentAppEventRequestSerializer();
+  static Serializer<AgentAppEventRequest> get serializer =>
+      _$AgentAppEventRequestSerializer();
 }
 
-class _$AgentAppEventRequestSerializer implements PrimitiveSerializer<AgentAppEventRequest> {
+class _$AgentAppEventRequestSerializer
+    implements PrimitiveSerializer<AgentAppEventRequest> {
   @override
-  final Iterable<Type> types = const [AgentAppEventRequest, _$AgentAppEventRequest];
+  final Iterable<Type> types = const [
+    AgentAppEventRequest,
+    _$AgentAppEventRequest,
+  ];
 
   @override
   final String wireName = r'AgentAppEventRequest';
@@ -95,7 +102,10 @@ class _$AgentAppEventRequestSerializer implements PrimitiveSerializer<AgentAppEv
       yield r'stepInputs';
       yield serializers.serialize(
         object.stepInputs,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(AgentAppEventStepStatesValue),
+        ]),
       );
     }
     if (object.relatedEntityId != null) {
@@ -127,7 +137,11 @@ class _$AgentAppEventRequestSerializer implements PrimitiveSerializer<AgentAppEv
     AgentAppEventRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -143,50 +157,67 @@ class _$AgentAppEventRequestSerializer implements PrimitiveSerializer<AgentAppEv
       final value = serializedList[i + 1];
       switch (key) {
         case r'actionType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppEventActionType),
-          ) as AgentAppEventActionType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      AgentAppEventActionType,
+                    ),
+                  )
+                  as AgentAppEventActionType?;
           if (valueDes == null) continue;
           result.actionType = valueDes;
           break;
         case r'application':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentApplication),
-          ) as AgentApplication?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentApplication),
+                  )
+                  as AgentApplication?;
           if (valueDes == null) continue;
           result.application.replace(valueDes);
           break;
         case r'stepInputs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(AgentAppEventStepStatesValue)]),
-          ) as BuiltMap<String, AgentAppEventStepStatesValue>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(AgentAppEventStepStatesValue),
+                    ]),
+                  )
+                  as BuiltMap<String, AgentAppEventStepStatesValue>?;
           if (valueDes == null) continue;
           result.stepInputs.replace(valueDes);
           break;
         case r'relatedEntityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.relatedEntityId = valueDes;
           break;
         case r'bulkActionId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.bulkActionId = valueDes;
           break;
         case r'skipProfileRefetch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.skipProfileRefetch = valueDes;
           break;
@@ -218,5 +249,3 @@ class _$AgentAppEventRequestSerializer implements PrimitiveSerializer<AgentAppEv
     return result.build();
   }
 }
-
-

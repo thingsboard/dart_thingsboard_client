@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'entity_key_value_type.g.dart';
 
 class EntityKeyValueType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'STRING')
   static const EntityKeyValueType STRING = _$STRING;
   @BuiltValueEnumConst(wireName: r'NUMERIC')
@@ -25,11 +24,13 @@ class EntityKeyValueType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'DATE_TIME')
   static const EntityKeyValueType DATE_TIME = _$DATE_TIME;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const EntityKeyValueType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const EntityKeyValueType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<EntityKeyValueType> get serializer => _$entityKeyValueTypeSerializer;
+  static Serializer<EntityKeyValueType> get serializer =>
+      _$entityKeyValueTypeSerializer;
 
-  const EntityKeyValueType._(String name): super(name);
+  const EntityKeyValueType._(String name) : super(name);
 
   static BuiltSet<EntityKeyValueType> get values => _$values;
   static EntityKeyValueType valueOf(String name) => _$valueOf(name);
@@ -42,4 +43,3 @@ class EntityKeyValueType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class EntityKeyValueTypeMixin = Object with _$EntityKeyValueTypeMixin;
-

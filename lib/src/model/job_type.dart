@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'job_type.g.dart';
 
 class JobType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CF_REPROCESSING')
   static const JobType CF_REPROCESSING = _$CF_REPROCESSING;
   @BuiltValueEnumConst(wireName: r'REPORT')
@@ -27,7 +26,7 @@ class JobType extends EnumClass {
 
   static Serializer<JobType> get serializer => _$jobTypeSerializer;
 
-  const JobType._(String name): super(name);
+  const JobType._(String name) : super(name);
 
   static BuiltSet<JobType> get values => _$values;
   static JobType valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class JobType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class JobTypeMixin = Object with _$JobTypeMixin;
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'dynamic_value_source_type.g.dart';
 
 class DynamicValueSourceType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'CURRENT_TENANT')
   static const DynamicValueSourceType CURRENT_TENANT = _$CURRENT_TENANT;
   @BuiltValueEnumConst(wireName: r'CURRENT_CUSTOMER')
@@ -25,11 +24,13 @@ class DynamicValueSourceType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'CURRENT_DEVICE')
   static const DynamicValueSourceType CURRENT_DEVICE = _$CURRENT_DEVICE;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const DynamicValueSourceType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const DynamicValueSourceType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<DynamicValueSourceType> get serializer => _$dynamicValueSourceTypeSerializer;
+  static Serializer<DynamicValueSourceType> get serializer =>
+      _$dynamicValueSourceTypeSerializer;
 
-  const DynamicValueSourceType._(String name): super(name);
+  const DynamicValueSourceType._(String name) : super(name);
 
   static BuiltSet<DynamicValueSourceType> get values => _$values;
   static DynamicValueSourceType valueOf(String name) => _$valueOf(name);
@@ -41,5 +42,5 @@ class DynamicValueSourceType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class DynamicValueSourceTypeMixin = Object with _$DynamicValueSourceTypeMixin;
-
+abstract class DynamicValueSourceTypeMixin = Object
+    with _$DynamicValueSourceTypeMixin;

@@ -18,10 +18,11 @@ part 'tb_secret_delete_result.g.dart';
 /// TbSecretDeleteResult
 ///
 /// Properties:
-/// * [success] 
-/// * [references] 
+/// * [success]
+/// * [references]
 @BuiltValue()
-abstract class TbSecretDeleteResult implements Built<TbSecretDeleteResult, TbSecretDeleteResultBuilder> {
+abstract class TbSecretDeleteResult
+    implements Built<TbSecretDeleteResult, TbSecretDeleteResultBuilder> {
   @BuiltValueField(wireName: r'success')
   bool? get success;
 
@@ -30,18 +31,24 @@ abstract class TbSecretDeleteResult implements Built<TbSecretDeleteResult, TbSec
 
   TbSecretDeleteResult._();
 
-  factory TbSecretDeleteResult([void updates(TbSecretDeleteResultBuilder b)]) = _$TbSecretDeleteResult;
+  factory TbSecretDeleteResult([void updates(TbSecretDeleteResultBuilder b)]) =
+      _$TbSecretDeleteResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TbSecretDeleteResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TbSecretDeleteResult> get serializer => _$TbSecretDeleteResultSerializer();
+  static Serializer<TbSecretDeleteResult> get serializer =>
+      _$TbSecretDeleteResultSerializer();
 }
 
-class _$TbSecretDeleteResultSerializer implements PrimitiveSerializer<TbSecretDeleteResult> {
+class _$TbSecretDeleteResultSerializer
+    implements PrimitiveSerializer<TbSecretDeleteResult> {
   @override
-  final Iterable<Type> types = const [TbSecretDeleteResult, _$TbSecretDeleteResult];
+  final Iterable<Type> types = const [
+    TbSecretDeleteResult,
+    _$TbSecretDeleteResult,
+  ];
 
   @override
   final String wireName = r'TbSecretDeleteResult';
@@ -62,7 +69,10 @@ class _$TbSecretDeleteResultSerializer implements PrimitiveSerializer<TbSecretDe
       yield r'references';
       yield serializers.serialize(
         object.references,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityInfo)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(EntityInfo)]),
+        ]),
       );
     }
   }
@@ -73,7 +83,11 @@ class _$TbSecretDeleteResultSerializer implements PrimitiveSerializer<TbSecretDe
     TbSecretDeleteResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +103,25 @@ class _$TbSecretDeleteResultSerializer implements PrimitiveSerializer<TbSecretDe
       final value = serializedList[i + 1];
       switch (key) {
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'references':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(EntityInfo)])]),
-          ) as BuiltMap<String, BuiltList<EntityInfo>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(EntityInfo)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<EntityInfo>>?;
           if (valueDes == null) continue;
           result.references.replace(valueDes);
           break;
@@ -132,5 +153,3 @@ class _$TbSecretDeleteResultSerializer implements PrimitiveSerializer<TbSecretDe
     return result.build();
   }
 }
-
-

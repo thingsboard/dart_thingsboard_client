@@ -17,9 +17,9 @@ part 'tb_content.g.dart';
 /// TbContent
 ///
 /// Properties:
-/// * [contentType] 
+/// * [contentType]
 @BuiltValue(instantiable: false)
-abstract class TbContent  {
+abstract class TbContent {
   @BuiltValueField(wireName: r'contentType')
   String get contentType;
 
@@ -34,20 +34,21 @@ abstract class TbContent  {
 }
 
 extension TbContentDiscriminatorExt on TbContent {
-    String? get discriminatorValue {
-        if (this is TbTextContent) {
-            return r'TEXT';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is TbTextContent) {
+      return r'TEXT';
     }
+    return null;
+  }
 }
+
 extension TbContentBuilderDiscriminatorExt on TbContentBuilder {
-    String? get discriminatorValue {
-        if (this is TbTextContentBuilder) {
-            return r'TEXT';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is TbTextContentBuilder) {
+      return r'TEXT';
     }
+    return null;
+  }
 }
 
 class _$TbContentSerializer implements PrimitiveSerializer<TbContent> {
@@ -76,9 +77,16 @@ class _$TbContentSerializer implements PrimitiveSerializer<TbContent> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is TbTextContent) {
-      return serializers.serialize(object, specifiedType: FullType(TbTextContent))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TbTextContent),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -88,24 +96,39 @@ class _$TbContentSerializer implements PrimitiveSerializer<TbContent> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(TbContent.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(TbContent.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'TEXT':
-        return serializers.deserialize(serialized, specifiedType: FullType(TbTextContent)) as TbTextContent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TbTextContent),
+            )
+            as TbTextContent;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($TbContent)) as $TbContent;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($TbContent),
+            )
+            as $TbContent;
     }
   }
 }
 
-
 /// a concrete implementation of [TbContent], since [TbContent] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $TbContent implements TbContent, Built<$TbContent, $TbContentBuilder> {
+abstract class $TbContent
+    implements TbContent, Built<$TbContent, $TbContentBuilder> {
   $TbContent._();
 
-  factory $TbContent([void Function($TbContentBuilder)? updates]) = _$$TbContent;
+  factory $TbContent([void Function($TbContentBuilder)? updates]) =
+      _$$TbContent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($TbContentBuilder b) => b;
@@ -143,10 +166,12 @@ class _$$TbContentSerializer implements PrimitiveSerializer<$TbContent> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'contentType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.contentType = valueDes;
           break;
         default:
@@ -177,4 +202,3 @@ class _$$TbContentSerializer implements PrimitiveSerializer<$TbContent> {
     return result.build();
   }
 }
-

@@ -19,16 +19,17 @@ part 'device_credentials.g.dart';
 /// A JSON value representing the device credentials.
 ///
 /// Properties:
-/// * [id] - The Id is automatically generated during device creation. Use 'getDeviceCredentialsByDeviceId' to obtain the id based on device id. Use 'updateDeviceCredentials' to update device credentials. 
+/// * [id] - The Id is automatically generated during device creation. Use 'getDeviceCredentialsByDeviceId' to obtain the id based on device id. Use 'updateDeviceCredentials' to update device credentials.
 /// * [createdTime] - Timestamp of the device credentials creation, in milliseconds
 /// * [deviceId] - JSON object with the device Id.
 /// * [credentialsType] - Type of the credentials
 /// * [credentialsId] - Unique Credentials Id per platform instance. Used to lookup credentials from the database. By default, new access token for your device. Depends on the type of the credentials.
 /// * [credentialsValue] - Value of the credentials. Null in case of ACCESS_TOKEN credentials type. Base64 value in case of X509_CERTIFICATE. Complex object in case of MQTT_BASIC and LWM2M_CREDENTIALS
-/// * [version] 
+/// * [version]
 @BuiltValue()
-abstract class DeviceCredentials implements Built<DeviceCredentials, DeviceCredentialsBuilder> {
-  /// The Id is automatically generated during device creation. Use 'getDeviceCredentialsByDeviceId' to obtain the id based on device id. Use 'updateDeviceCredentials' to update device credentials. 
+abstract class DeviceCredentials
+    implements Built<DeviceCredentials, DeviceCredentialsBuilder> {
+  /// The Id is automatically generated during device creation. Use 'getDeviceCredentialsByDeviceId' to obtain the id based on device id. Use 'updateDeviceCredentials' to update device credentials.
   @BuiltValueField(wireName: r'id')
   DeviceCredentialsId get id;
 
@@ -58,16 +59,19 @@ abstract class DeviceCredentials implements Built<DeviceCredentials, DeviceCrede
 
   DeviceCredentials._();
 
-  factory DeviceCredentials([void updates(DeviceCredentialsBuilder b)]) = _$DeviceCredentials;
+  factory DeviceCredentials([void updates(DeviceCredentialsBuilder b)]) =
+      _$DeviceCredentials;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceCredentialsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceCredentials> get serializer => _$DeviceCredentialsSerializer();
+  static Serializer<DeviceCredentials> get serializer =>
+      _$DeviceCredentialsSerializer();
 }
 
-class _$DeviceCredentialsSerializer implements PrimitiveSerializer<DeviceCredentials> {
+class _$DeviceCredentialsSerializer
+    implements PrimitiveSerializer<DeviceCredentials> {
   @override
   final Iterable<Type> types = const [DeviceCredentials, _$DeviceCredentials];
 
@@ -130,7 +134,11 @@ class _$DeviceCredentialsSerializer implements PrimitiveSerializer<DeviceCredent
     DeviceCredentials object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -146,55 +154,71 @@ class _$DeviceCredentialsSerializer implements PrimitiveSerializer<DeviceCredent
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DeviceCredentialsId),
-          ) as DeviceCredentialsId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DeviceCredentialsId),
+                  )
+                  as DeviceCredentialsId;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'deviceId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DeviceId),
-          ) as DeviceId;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DeviceId),
+                  )
+                  as DeviceId;
           result.deviceId.replace(valueDes);
           break;
         case r'credentialsType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DeviceCredentialsType),
-          ) as DeviceCredentialsType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      DeviceCredentialsType,
+                    ),
+                  )
+                  as DeviceCredentialsType?;
           if (valueDes == null) continue;
           result.credentialsType = valueDes;
           break;
         case r'credentialsId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.credentialsId = valueDes;
           break;
         case r'credentialsValue':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.credentialsValue = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
@@ -226,5 +250,3 @@ class _$DeviceCredentialsSerializer implements PrimitiveSerializer<DeviceCredent
     return result.build();
   }
 }
-
-

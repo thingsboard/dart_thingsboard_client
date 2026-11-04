@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'boolean_operation.g.dart';
 
 class BooleanOperation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'EQUAL')
   static const BooleanOperation EQUAL = _$EQUAL;
   @BuiltValueEnumConst(wireName: r'NOT_EQUAL')
@@ -23,9 +22,10 @@ class BooleanOperation extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const BooleanOperation unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<BooleanOperation> get serializer => _$booleanOperationSerializer;
+  static Serializer<BooleanOperation> get serializer =>
+      _$booleanOperationSerializer;
 
-  const BooleanOperation._(String name): super(name);
+  const BooleanOperation._(String name) : super(name);
 
   static BuiltSet<BooleanOperation> get values => _$values;
   static BooleanOperation valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class BooleanOperation extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class BooleanOperationMixin = Object with _$BooleanOperationMixin;
-

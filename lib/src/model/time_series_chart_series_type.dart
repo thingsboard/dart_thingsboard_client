@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'time_series_chart_series_type.g.dart';
 
 class TimeSeriesChartSeriesType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'line')
   static const TimeSeriesChartSeriesType line = _$line;
   @BuiltValueEnumConst(wireName: r'bar')
   static const TimeSeriesChartSeriesType bar = _$bar;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const TimeSeriesChartSeriesType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const TimeSeriesChartSeriesType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<TimeSeriesChartSeriesType> get serializer => _$timeSeriesChartSeriesTypeSerializer;
+  static Serializer<TimeSeriesChartSeriesType> get serializer =>
+      _$timeSeriesChartSeriesTypeSerializer;
 
-  const TimeSeriesChartSeriesType._(String name): super(name);
+  const TimeSeriesChartSeriesType._(String name) : super(name);
 
   static BuiltSet<TimeSeriesChartSeriesType> get values => _$values;
   static TimeSeriesChartSeriesType valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class TimeSeriesChartSeriesType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class TimeSeriesChartSeriesTypeMixin = Object with _$TimeSeriesChartSeriesTypeMixin;
-
+abstract class TimeSeriesChartSeriesTypeMixin = Object
+    with _$TimeSeriesChartSeriesTypeMixin;

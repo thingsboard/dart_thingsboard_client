@@ -22,7 +22,8 @@ part 'edge_search_query.g.dart';
 /// * [relationType] - Type of the relation between root entity and edge (e.g. 'Contains' or 'Manages').
 /// * [edgeTypes] - Array of edge types to filter the related entities (e.g. 'Silos', 'Stores').
 @BuiltValue()
-abstract class EdgeSearchQuery implements Built<EdgeSearchQuery, EdgeSearchQueryBuilder> {
+abstract class EdgeSearchQuery
+    implements Built<EdgeSearchQuery, EdgeSearchQueryBuilder> {
   /// Main search parameters.
   @BuiltValueField(wireName: r'parameters')
   RelationsSearchParameters? get parameters;
@@ -37,16 +38,19 @@ abstract class EdgeSearchQuery implements Built<EdgeSearchQuery, EdgeSearchQuery
 
   EdgeSearchQuery._();
 
-  factory EdgeSearchQuery([void updates(EdgeSearchQueryBuilder b)]) = _$EdgeSearchQuery;
+  factory EdgeSearchQuery([void updates(EdgeSearchQueryBuilder b)]) =
+      _$EdgeSearchQuery;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EdgeSearchQueryBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EdgeSearchQuery> get serializer => _$EdgeSearchQuerySerializer();
+  static Serializer<EdgeSearchQuery> get serializer =>
+      _$EdgeSearchQuerySerializer();
 }
 
-class _$EdgeSearchQuerySerializer implements PrimitiveSerializer<EdgeSearchQuery> {
+class _$EdgeSearchQuerySerializer
+    implements PrimitiveSerializer<EdgeSearchQuery> {
   @override
   final Iterable<Type> types = const [EdgeSearchQuery, _$EdgeSearchQuery];
 
@@ -87,7 +91,11 @@ class _$EdgeSearchQuerySerializer implements PrimitiveSerializer<EdgeSearchQuery
     EdgeSearchQuery object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -103,26 +111,36 @@ class _$EdgeSearchQuerySerializer implements PrimitiveSerializer<EdgeSearchQuery
       final value = serializedList[i + 1];
       switch (key) {
         case r'parameters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RelationsSearchParameters),
-          ) as RelationsSearchParameters?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RelationsSearchParameters,
+                    ),
+                  )
+                  as RelationsSearchParameters?;
           if (valueDes == null) continue;
           result.parameters.replace(valueDes);
           break;
         case r'relationType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.relationType = valueDes;
           break;
         case r'edgeTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.edgeTypes.replace(valueDes);
           break;
@@ -154,5 +172,3 @@ class _$EdgeSearchQuerySerializer implements PrimitiveSerializer<EdgeSearchQuery
     return result.build();
   }
 }
-
-

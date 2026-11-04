@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'edge_event_type.g.dart';
 
 class EdgeEventType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'DASHBOARD')
   static const EdgeEventType DASHBOARD = _$DASHBOARD;
   @BuiltValueEnumConst(wireName: r'ASSET')
@@ -111,7 +110,7 @@ class EdgeEventType extends EnumClass {
 
   static Serializer<EdgeEventType> get serializer => _$edgeEventTypeSerializer;
 
-  const EdgeEventType._(String name): super(name);
+  const EdgeEventType._(String name) : super(name);
 
   static BuiltSet<EdgeEventType> get values => _$values;
   static EdgeEventType valueOf(String name) => _$valueOf(name);
@@ -124,4 +123,3 @@ class EdgeEventType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class EdgeEventTypeMixin = Object with _$EdgeEventTypeMixin;
-

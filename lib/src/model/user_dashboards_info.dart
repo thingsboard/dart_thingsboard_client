@@ -22,7 +22,8 @@ part 'user_dashboards_info.g.dart';
 /// * [last] - List of last visited dashboards.
 /// * [starred] - List of starred dashboards.
 @BuiltValue()
-abstract class UserDashboardsInfo implements Built<UserDashboardsInfo, UserDashboardsInfoBuilder> {
+abstract class UserDashboardsInfo
+    implements Built<UserDashboardsInfo, UserDashboardsInfoBuilder> {
   /// List of last visited dashboards.
   @BuiltValueField(wireName: r'last')
   BuiltList<LastVisitedDashboardInfo>? get last;
@@ -33,16 +34,19 @@ abstract class UserDashboardsInfo implements Built<UserDashboardsInfo, UserDashb
 
   UserDashboardsInfo._();
 
-  factory UserDashboardsInfo([void updates(UserDashboardsInfoBuilder b)]) = _$UserDashboardsInfo;
+  factory UserDashboardsInfo([void updates(UserDashboardsInfoBuilder b)]) =
+      _$UserDashboardsInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserDashboardsInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserDashboardsInfo> get serializer => _$UserDashboardsInfoSerializer();
+  static Serializer<UserDashboardsInfo> get serializer =>
+      _$UserDashboardsInfoSerializer();
 }
 
-class _$UserDashboardsInfoSerializer implements PrimitiveSerializer<UserDashboardsInfo> {
+class _$UserDashboardsInfoSerializer
+    implements PrimitiveSerializer<UserDashboardsInfo> {
   @override
   final Iterable<Type> types = const [UserDashboardsInfo, _$UserDashboardsInfo];
 
@@ -58,14 +62,18 @@ class _$UserDashboardsInfoSerializer implements PrimitiveSerializer<UserDashboar
       yield r'last';
       yield serializers.serialize(
         object.last,
-        specifiedType: const FullType(BuiltList, [FullType(LastVisitedDashboardInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(LastVisitedDashboardInfo),
+        ]),
       );
     }
     if (object.starred != null) {
       yield r'starred';
       yield serializers.serialize(
         object.starred,
-        specifiedType: const FullType(BuiltList, [FullType(StarredDashboardInfo)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(StarredDashboardInfo),
+        ]),
       );
     }
   }
@@ -76,7 +84,11 @@ class _$UserDashboardsInfoSerializer implements PrimitiveSerializer<UserDashboar
     UserDashboardsInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,18 +104,26 @@ class _$UserDashboardsInfoSerializer implements PrimitiveSerializer<UserDashboar
       final value = serializedList[i + 1];
       switch (key) {
         case r'last':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(LastVisitedDashboardInfo)]),
-          ) as BuiltList<LastVisitedDashboardInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(LastVisitedDashboardInfo),
+                    ]),
+                  )
+                  as BuiltList<LastVisitedDashboardInfo>?;
           if (valueDes == null) continue;
           result.last.replace(valueDes);
           break;
         case r'starred':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(StarredDashboardInfo)]),
-          ) as BuiltList<StarredDashboardInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(StarredDashboardInfo),
+                    ]),
+                  )
+                  as BuiltList<StarredDashboardInfo>?;
           if (valueDes == null) continue;
           result.starred.replace(valueDes);
           break;
@@ -135,5 +155,3 @@ class _$UserDashboardsInfoSerializer implements PrimitiveSerializer<UserDashboar
     return result.build();
   }
 }
-
-

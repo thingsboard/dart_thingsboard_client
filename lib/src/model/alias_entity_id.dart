@@ -19,7 +19,8 @@ part 'alias_entity_id.g.dart';
 /// * [entityType] - Entity type: an EntityType value, or an AliasEntityType value resolved for the current user
 /// * [id] - ID of the entity, time-based UUID v1. Required for an entity type; for CURRENT_CUSTOMER, the customer used when the current user does not belong to one
 @BuiltValue()
-abstract class AliasEntityId implements Built<AliasEntityId, AliasEntityIdBuilder> {
+abstract class AliasEntityId
+    implements Built<AliasEntityId, AliasEntityIdBuilder> {
   /// Entity type: an EntityType value, or an AliasEntityType value resolved for the current user
   @BuiltValueField(wireName: r'entityType')
   String get entityType;
@@ -30,13 +31,15 @@ abstract class AliasEntityId implements Built<AliasEntityId, AliasEntityIdBuilde
 
   AliasEntityId._();
 
-  factory AliasEntityId([void updates(AliasEntityIdBuilder b)]) = _$AliasEntityId;
+  factory AliasEntityId([void updates(AliasEntityIdBuilder b)]) =
+      _$AliasEntityId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AliasEntityIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AliasEntityId> get serializer => _$AliasEntityIdSerializer();
+  static Serializer<AliasEntityId> get serializer =>
+      _$AliasEntityIdSerializer();
 }
 
 class _$AliasEntityIdSerializer implements PrimitiveSerializer<AliasEntityId> {
@@ -71,7 +74,11 @@ class _$AliasEntityIdSerializer implements PrimitiveSerializer<AliasEntityId> {
     AliasEntityId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,17 +94,21 @@ class _$AliasEntityIdSerializer implements PrimitiveSerializer<AliasEntityId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
@@ -129,5 +140,3 @@ class _$AliasEntityIdSerializer implements PrimitiveSerializer<AliasEntityId> {
     return result.build();
   }
 }
-
-

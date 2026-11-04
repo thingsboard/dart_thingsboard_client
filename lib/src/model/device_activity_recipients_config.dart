@@ -19,27 +19,40 @@ part 'device_activity_recipients_config.g.dart';
 /// DeviceActivityRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class DeviceActivityRecipientsConfig implements NotificationRuleRecipientsConfig, Built<DeviceActivityRecipientsConfig, DeviceActivityRecipientsConfigBuilder> {
+abstract class DeviceActivityRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          DeviceActivityRecipientsConfig,
+          DeviceActivityRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   DeviceActivityRecipientsConfig._();
 
-  factory DeviceActivityRecipientsConfig([void updates(DeviceActivityRecipientsConfigBuilder b)]) = _$DeviceActivityRecipientsConfig;
+  factory DeviceActivityRecipientsConfig([
+    void updates(DeviceActivityRecipientsConfigBuilder b),
+  ]) = _$DeviceActivityRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceActivityRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceActivityRecipientsConfig> get serializer => _$DeviceActivityRecipientsConfigSerializer();
+  static Serializer<DeviceActivityRecipientsConfig> get serializer =>
+      _$DeviceActivityRecipientsConfigSerializer();
 }
 
-class _$DeviceActivityRecipientsConfigSerializer implements PrimitiveSerializer<DeviceActivityRecipientsConfig> {
+class _$DeviceActivityRecipientsConfigSerializer
+    implements PrimitiveSerializer<DeviceActivityRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [DeviceActivityRecipientsConfig, _$DeviceActivityRecipientsConfig];
+  final Iterable<Type> types = const [
+    DeviceActivityRecipientsConfig,
+    _$DeviceActivityRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'DeviceActivityRecipientsConfig';
@@ -69,7 +82,11 @@ class _$DeviceActivityRecipientsConfigSerializer implements PrimitiveSerializer<
     DeviceActivityRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$DeviceActivityRecipientsConfigSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$DeviceActivityRecipientsConfigSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

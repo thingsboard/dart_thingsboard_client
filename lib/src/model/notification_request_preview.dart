@@ -18,12 +18,14 @@ part 'notification_request_preview.g.dart';
 /// NotificationRequestPreview
 ///
 /// Properties:
-/// * [processedTemplates] 
-/// * [totalRecipientsCount] 
-/// * [recipientsCountByTarget] 
-/// * [recipientsPreview] 
+/// * [processedTemplates]
+/// * [totalRecipientsCount]
+/// * [recipientsCountByTarget]
+/// * [recipientsPreview]
 @BuiltValue()
-abstract class NotificationRequestPreview implements Built<NotificationRequestPreview, NotificationRequestPreviewBuilder> {
+abstract class NotificationRequestPreview
+    implements
+        Built<NotificationRequestPreview, NotificationRequestPreviewBuilder> {
   @BuiltValueField(wireName: r'processedTemplates')
   BuiltMap<String, DeliveryMethodNotificationTemplate>? get processedTemplates;
 
@@ -38,18 +40,25 @@ abstract class NotificationRequestPreview implements Built<NotificationRequestPr
 
   NotificationRequestPreview._();
 
-  factory NotificationRequestPreview([void updates(NotificationRequestPreviewBuilder b)]) = _$NotificationRequestPreview;
+  factory NotificationRequestPreview([
+    void updates(NotificationRequestPreviewBuilder b),
+  ]) = _$NotificationRequestPreview;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationRequestPreviewBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationRequestPreview> get serializer => _$NotificationRequestPreviewSerializer();
+  static Serializer<NotificationRequestPreview> get serializer =>
+      _$NotificationRequestPreviewSerializer();
 }
 
-class _$NotificationRequestPreviewSerializer implements PrimitiveSerializer<NotificationRequestPreview> {
+class _$NotificationRequestPreviewSerializer
+    implements PrimitiveSerializer<NotificationRequestPreview> {
   @override
-  final Iterable<Type> types = const [NotificationRequestPreview, _$NotificationRequestPreview];
+  final Iterable<Type> types = const [
+    NotificationRequestPreview,
+    _$NotificationRequestPreview,
+  ];
 
   @override
   final String wireName = r'NotificationRequestPreview';
@@ -63,7 +72,10 @@ class _$NotificationRequestPreviewSerializer implements PrimitiveSerializer<Noti
       yield r'processedTemplates';
       yield serializers.serialize(
         object.processedTemplates,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(DeliveryMethodNotificationTemplate)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(DeliveryMethodNotificationTemplate),
+        ]),
       );
     }
     if (object.totalRecipientsCount != null) {
@@ -77,7 +89,10 @@ class _$NotificationRequestPreviewSerializer implements PrimitiveSerializer<Noti
       yield r'recipientsCountByTarget';
       yield serializers.serialize(
         object.recipientsCountByTarget,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(int),
+        ]),
       );
     }
     if (object.recipientsPreview != null) {
@@ -95,7 +110,11 @@ class _$NotificationRequestPreviewSerializer implements PrimitiveSerializer<Noti
     NotificationRequestPreview object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -111,34 +130,50 @@ class _$NotificationRequestPreviewSerializer implements PrimitiveSerializer<Noti
       final value = serializedList[i + 1];
       switch (key) {
         case r'processedTemplates':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(DeliveryMethodNotificationTemplate)]),
-          ) as BuiltMap<String, DeliveryMethodNotificationTemplate>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(DeliveryMethodNotificationTemplate),
+                    ]),
+                  )
+                  as BuiltMap<String, DeliveryMethodNotificationTemplate>?;
           if (valueDes == null) continue;
           result.processedTemplates.replace(valueDes);
           break;
         case r'totalRecipientsCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalRecipientsCount = valueDes;
           break;
         case r'recipientsCountByTarget':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(int)]),
-          ) as BuiltMap<String, int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltMap<String, int>?;
           if (valueDes == null) continue;
           result.recipientsCountByTarget.replace(valueDes);
           break;
         case r'recipientsPreview':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.recipientsPreview.replace(valueDes);
           break;
@@ -170,5 +205,3 @@ class _$NotificationRequestPreviewSerializer implements PrimitiveSerializer<Noti
     return result.build();
   }
 }
-
-

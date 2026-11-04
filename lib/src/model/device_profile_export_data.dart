@@ -23,27 +23,37 @@ part 'device_profile_export_data.g.dart';
 /// DeviceProfileExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue()
-abstract class DeviceProfileExportData implements EntityExportData, Built<DeviceProfileExportData, DeviceProfileExportDataBuilder> {
+abstract class DeviceProfileExportData
+    implements
+        EntityExportData,
+        Built<DeviceProfileExportData, DeviceProfileExportDataBuilder> {
   DeviceProfileExportData._();
 
-  factory DeviceProfileExportData([void updates(DeviceProfileExportDataBuilder b)]) = _$DeviceProfileExportData;
+  factory DeviceProfileExportData([
+    void updates(DeviceProfileExportDataBuilder b),
+  ]) = _$DeviceProfileExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DeviceProfileExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceProfileExportData> get serializer => _$DeviceProfileExportDataSerializer();
+  static Serializer<DeviceProfileExportData> get serializer =>
+      _$DeviceProfileExportDataSerializer();
 }
 
-class _$DeviceProfileExportDataSerializer implements PrimitiveSerializer<DeviceProfileExportData> {
+class _$DeviceProfileExportDataSerializer
+    implements PrimitiveSerializer<DeviceProfileExportData> {
   @override
-  final Iterable<Type> types = const [DeviceProfileExportData, _$DeviceProfileExportData];
+  final Iterable<Type> types = const [
+    DeviceProfileExportData,
+    _$DeviceProfileExportData,
+  ];
 
   @override
   final String wireName = r'DeviceProfileExportData';
@@ -57,7 +67,10 @@ class _$DeviceProfileExportDataSerializer implements PrimitiveSerializer<DeviceP
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -94,7 +107,11 @@ class _$DeviceProfileExportDataSerializer implements PrimitiveSerializer<DeviceP
     DeviceProfileExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -110,41 +127,58 @@ class _$DeviceProfileExportDataSerializer implements PrimitiveSerializer<DeviceP
       final value = serializedList[i + 1];
       switch (key) {
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -176,5 +210,3 @@ class _$DeviceProfileExportDataSerializer implements PrimitiveSerializer<DeviceP
     return result.build();
   }
 }
-
-

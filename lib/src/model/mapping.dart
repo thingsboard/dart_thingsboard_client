@@ -18,10 +18,10 @@ part 'mapping.g.dart';
 /// Mapping
 ///
 /// Properties:
-/// * [columns] 
-/// * [delimiter] 
-/// * [updateFlag] 
-/// * [header] 
+/// * [columns]
+/// * [delimiter]
+/// * [updateFlag]
+/// * [header]
 @BuiltValue()
 abstract class Mapping implements Built<Mapping, MappingBuilder> {
   @BuiltValueField(wireName: r'columns')
@@ -95,7 +95,11 @@ class _$MappingSerializer implements PrimitiveSerializer<Mapping> {
     Mapping object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -111,34 +115,44 @@ class _$MappingSerializer implements PrimitiveSerializer<Mapping> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'columns':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(ColumnMapping)]),
-          ) as BuiltList<ColumnMapping>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(ColumnMapping),
+                    ]),
+                  )
+                  as BuiltList<ColumnMapping>?;
           if (valueDes == null) continue;
           result.columns.replace(valueDes);
           break;
         case r'delimiter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.delimiter = valueDes;
           break;
         case r'update':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.updateFlag = valueDes;
           break;
         case r'header':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.header = valueDes;
           break;
@@ -170,5 +184,3 @@ class _$MappingSerializer implements PrimitiveSerializer<Mapping> {
     return result.build();
   }
 }
-
-

@@ -15,14 +15,11 @@ import 'package:dio/dio.dart';
 
 import 'dart:typed_data';
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/translation_info.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class TranslationControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -43,7 +40,7 @@ class TranslationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadFullTranslation({ 
+  Future<Response<Uint8List>> downloadFullTranslation({
     required String localeCode,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -53,13 +50,20 @@ class TranslationControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/translation/full/{localeCode}/download'.replaceAll('{' r'localeCode' '}', encodeQueryParameter(_serializers, localeCode, const FullType(String)).toString());
+    final _path = r'/api/translation/full/{localeCode}/download'.replaceAll(
+      '{'
+      r'localeCode'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        localeCode,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +71,8 @@ class TranslationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -91,7 +92,6 @@ class TranslationControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -127,7 +127,7 @@ class TranslationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getAvailableJavaLocales({ 
+  Future<Response<JsonObject>> getAvailableJavaLocales({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -139,9 +139,7 @@ class TranslationControllerApi {
     final _path = r'/api/translation/availableJavaLocales';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -149,11 +147,8 @@ class TranslationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -172,11 +167,13 @@ class TranslationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -212,7 +209,7 @@ class TranslationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getAvailableLocales({ 
+  Future<Response<JsonObject>> getAvailableLocales({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -224,9 +221,7 @@ class TranslationControllerApi {
     final _path = r'/api/translation/availableLocales';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -234,11 +229,8 @@ class TranslationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -257,11 +249,13 @@ class TranslationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -289,8 +283,8 @@ class TranslationControllerApi {
   ///
   /// Parameters:
   /// * [localeCode] - Locale code (e.g. 'en_US').
-  /// * [ifNoneMatch] 
-  /// * [acceptEncoding] 
+  /// * [ifNoneMatch]
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -300,7 +294,7 @@ class TranslationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getFullTranslation({ 
+  Future<Response<JsonObject>> getFullTranslation({
     required String localeCode,
     String? ifNoneMatch,
     String? acceptEncoding,
@@ -312,7 +306,16 @@ class TranslationControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/translation/full/{localeCode}'.replaceAll('{' r'localeCode' '}', encodeQueryParameter(_serializers, localeCode, const FullType(String)).toString());
+    final _path = r'/api/translation/full/{localeCode}'.replaceAll(
+      '{'
+      r'localeCode'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        localeCode,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -327,11 +330,8 @@ class TranslationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -350,11 +350,13 @@ class TranslationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -382,8 +384,8 @@ class TranslationControllerApi {
   ///
   /// Parameters:
   /// * [localeCode] - Locale code (e.g. 'en_US').
-  /// * [ifNoneMatch] 
-  /// * [acceptEncoding] 
+  /// * [ifNoneMatch]
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -393,7 +395,7 @@ class TranslationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getLoginPageTranslation({ 
+  Future<Response<JsonObject>> getLoginPageTranslation({
     required String localeCode,
     String? ifNoneMatch,
     String? acceptEncoding,
@@ -405,7 +407,16 @@ class TranslationControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/noauth/translation/login/{localeCode}'.replaceAll('{' r'localeCode' '}', encodeQueryParameter(_serializers, localeCode, const FullType(String)).toString());
+    final _path = r'/api/noauth/translation/login/{localeCode}'.replaceAll(
+      '{'
+      r'localeCode'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        localeCode,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -413,10 +424,7 @@ class TranslationControllerApi {
         if (acceptEncoding != null) r'Accept-Encoding': acceptEncoding,
         ...?headers,
       },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -432,11 +440,13 @@ class TranslationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -463,7 +473,7 @@ class TranslationControllerApi {
   /// Fetch the translation info map where value is info object containing key translation, origin translation, translation of parent level, translation status.
   ///
   /// Parameters:
-  /// * [localeCode] 
+  /// * [localeCode]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -473,7 +483,7 @@ class TranslationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getTranslationForBasicEdit({ 
+  Future<Response<JsonObject>> getTranslationForBasicEdit({
     required String localeCode,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -483,12 +493,19 @@ class TranslationControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/translation/edit/basic/{localeCode}'.replaceAll('{' r'localeCode' '}', encodeQueryParameter(_serializers, localeCode, const FullType(String)).toString());
+    final _path = r'/api/translation/edit/basic/{localeCode}'.replaceAll(
+      '{'
+      r'localeCode'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        localeCode,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -496,11 +513,8 @@ class TranslationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -519,11 +533,13 @@ class TranslationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -559,7 +575,7 @@ class TranslationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<TranslationInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<TranslationInfo>>> getTranslationInfos({ 
+  Future<Response<BuiltList<TranslationInfo>>> getTranslationInfos({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -567,13 +583,12 @@ class TranslationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfTranslationInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfTranslationInfo);
     final _path = r'/api/translation/info';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -581,11 +596,8 @@ class TranslationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -604,11 +616,15 @@ class TranslationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(TranslationInfo)]),
-      ) as BuiltList<TranslationInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(TranslationInfo),
+                  ]),
+                )
+                as BuiltList<TranslationInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -630,5 +646,4 @@ class TranslationControllerApi {
       extra: _response.extra,
     );
   }
-
 }

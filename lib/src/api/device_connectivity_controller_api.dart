@@ -14,13 +14,10 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'dart:typed_data';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class DeviceConnectivityControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -41,7 +38,7 @@ class DeviceConnectivityControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadGatewayDockerCompose({ 
+  Future<Response<Uint8List>> downloadGatewayDockerCompose({
     required String deviceId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -51,13 +48,22 @@ class DeviceConnectivityControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/device-connectivity/gateway-launch/{deviceId}/docker-compose/download'.replaceAll('{' r'deviceId' '}', encodeQueryParameter(_serializers, deviceId, const FullType(String)).toString());
+    final _path =
+        r'/api/device-connectivity/gateway-launch/{deviceId}/docker-compose/download'
+            .replaceAll(
+              '{'
+              r'deviceId'
+              '}',
+              encodeQueryParameter(
+                _serializers,
+                deviceId,
+                const FullType(String),
+              ).toString(),
+            );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -65,11 +71,8 @@ class DeviceConnectivityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -89,7 +92,6 @@ class DeviceConnectivityControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -126,7 +128,7 @@ class DeviceConnectivityControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadServerCertificate({ 
+  Future<Response<Uint8List>> downloadServerCertificate({
     required String protocol,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -136,13 +138,21 @@ class DeviceConnectivityControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/device-connectivity/{protocol}/certificate/download'.replaceAll('{' r'protocol' '}', encodeQueryParameter(_serializers, protocol, const FullType(String)).toString());
+    final _path = r'/api/device-connectivity/{protocol}/certificate/download'
+        .replaceAll(
+          '{'
+          r'protocol'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            protocol,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -150,11 +160,8 @@ class DeviceConnectivityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -174,7 +181,6 @@ class DeviceConnectivityControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -211,7 +217,7 @@ class DeviceConnectivityControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getDevicePublishTelemetryCommands({ 
+  Future<Response<JsonObject>> getDevicePublishTelemetryCommands({
     required String deviceId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -221,12 +227,19 @@ class DeviceConnectivityControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/device-connectivity/{deviceId}'.replaceAll('{' r'deviceId' '}', encodeQueryParameter(_serializers, deviceId, const FullType(String)).toString());
+    final _path = r'/api/device-connectivity/{deviceId}'.replaceAll(
+      '{'
+      r'deviceId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        deviceId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -234,11 +247,8 @@ class DeviceConnectivityControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -257,11 +267,13 @@ class DeviceConnectivityControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -283,5 +295,4 @@ class DeviceConnectivityControllerApi {
       extra: _response.extra,
     );
   }
-
 }

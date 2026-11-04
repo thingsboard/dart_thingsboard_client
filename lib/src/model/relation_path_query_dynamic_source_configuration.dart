@@ -19,27 +19,42 @@ part 'relation_path_query_dynamic_source_configuration.g.dart';
 /// RelationPathQueryDynamicSourceConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [levels] 
+/// * [type]
+/// * [levels]
 @BuiltValue()
-abstract class RelationPathQueryDynamicSourceConfiguration implements CfArgumentDynamicSourceConfiguration, Built<RelationPathQueryDynamicSourceConfiguration, RelationPathQueryDynamicSourceConfigurationBuilder> {
+abstract class RelationPathQueryDynamicSourceConfiguration
+    implements
+        CfArgumentDynamicSourceConfiguration,
+        Built<
+          RelationPathQueryDynamicSourceConfiguration,
+          RelationPathQueryDynamicSourceConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'levels')
   BuiltList<RelationPathLevel>? get levels;
 
   RelationPathQueryDynamicSourceConfiguration._();
 
-  factory RelationPathQueryDynamicSourceConfiguration([void updates(RelationPathQueryDynamicSourceConfigurationBuilder b)]) = _$RelationPathQueryDynamicSourceConfiguration;
+  factory RelationPathQueryDynamicSourceConfiguration([
+    void updates(RelationPathQueryDynamicSourceConfigurationBuilder b),
+  ]) = _$RelationPathQueryDynamicSourceConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RelationPathQueryDynamicSourceConfigurationBuilder b) => b;
+  static void _defaults(RelationPathQueryDynamicSourceConfigurationBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RelationPathQueryDynamicSourceConfiguration> get serializer => _$RelationPathQueryDynamicSourceConfigurationSerializer();
+  static Serializer<RelationPathQueryDynamicSourceConfiguration>
+  get serializer => _$RelationPathQueryDynamicSourceConfigurationSerializer();
 }
 
-class _$RelationPathQueryDynamicSourceConfigurationSerializer implements PrimitiveSerializer<RelationPathQueryDynamicSourceConfiguration> {
+class _$RelationPathQueryDynamicSourceConfigurationSerializer
+    implements
+        PrimitiveSerializer<RelationPathQueryDynamicSourceConfiguration> {
   @override
-  final Iterable<Type> types = const [RelationPathQueryDynamicSourceConfiguration, _$RelationPathQueryDynamicSourceConfiguration];
+  final Iterable<Type> types = const [
+    RelationPathQueryDynamicSourceConfiguration,
+    _$RelationPathQueryDynamicSourceConfiguration,
+  ];
 
   @override
   final String wireName = r'RelationPathQueryDynamicSourceConfiguration';
@@ -69,7 +84,11 @@ class _$RelationPathQueryDynamicSourceConfigurationSerializer implements Primiti
     RelationPathQueryDynamicSourceConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +104,23 @@ class _$RelationPathQueryDynamicSourceConfigurationSerializer implements Primiti
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'levels':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(RelationPathLevel)]),
-          ) as BuiltList<RelationPathLevel>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(RelationPathLevel),
+                    ]),
+                  )
+                  as BuiltList<RelationPathLevel>?;
           if (valueDes == null) continue;
           result.levels.replace(valueDes);
           break;
@@ -127,5 +152,3 @@ class _$RelationPathQueryDynamicSourceConfigurationSerializer implements Primiti
     return result.build();
   }
 }
-
-

@@ -10,7 +10,8 @@ enum BooleanOperation { EQUAL, NOT_EQUAL }
 
 BooleanOperation booleanOperationFromString(String value) {
   return BooleanOperation.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension BooleanOperationToString on BooleanOperation {

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'cm_assignee_type.g.dart';
 
 class CMAssigneeType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'NO_ASSIGN')
   static const CMAssigneeType NO_ASSIGN = _$NO_ASSIGN;
   @BuiltValueEnumConst(wireName: r'ALL')
@@ -29,9 +28,10 @@ class CMAssigneeType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const CMAssigneeType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<CMAssigneeType> get serializer => _$cMAssigneeTypeSerializer;
+  static Serializer<CMAssigneeType> get serializer =>
+      _$cMAssigneeTypeSerializer;
 
-  const CMAssigneeType._(String name): super(name);
+  const CMAssigneeType._(String name) : super(name);
 
   static BuiltSet<CMAssigneeType> get values => _$values;
   static CMAssigneeType valueOf(String name) => _$valueOf(name);
@@ -44,4 +44,3 @@ class CMAssigneeType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class CMAssigneeTypeMixin = Object with _$CMAssigneeTypeMixin;
-

@@ -24,10 +24,10 @@ part 'calculated_field_configuration.g.dart';
 /// CalculatedFieldConfiguration
 ///
 /// Properties:
-/// * [output] 
-/// * [type] 
+/// * [output]
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class CalculatedFieldConfiguration  {
+abstract class CalculatedFieldConfiguration {
   @BuiltValueField(wireName: r'output')
   Output? get output;
 
@@ -41,69 +41,75 @@ abstract class CalculatedFieldConfiguration  {
     r'ENTITY_AGGREGATION': EntityAggregationCalculatedFieldConfiguration,
     r'GEOFENCING': GeofencingCalculatedFieldConfiguration,
     r'PROPAGATION': PropagationCalculatedFieldConfiguration,
-    r'RELATED_ENTITIES_AGGREGATION': RelatedEntitiesAggregationCalculatedFieldConfiguration,
+    r'RELATED_ENTITIES_AGGREGATION':
+        RelatedEntitiesAggregationCalculatedFieldConfiguration,
     r'SCRIPT': ScriptCalculatedFieldConfiguration,
     r'SIMPLE': SimpleCalculatedFieldConfiguration,
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CalculatedFieldConfiguration> get serializer => _$CalculatedFieldConfigurationSerializer();
+  static Serializer<CalculatedFieldConfiguration> get serializer =>
+      _$CalculatedFieldConfigurationSerializer();
 }
 
-extension CalculatedFieldConfigurationDiscriminatorExt on CalculatedFieldConfiguration {
-    String? get discriminatorValue {
-        if (this is AlarmCalculatedFieldConfiguration) {
-            return r'ALARM';
-        }
-        if (this is EntityAggregationCalculatedFieldConfiguration) {
-            return r'ENTITY_AGGREGATION';
-        }
-        if (this is GeofencingCalculatedFieldConfiguration) {
-            return r'GEOFENCING';
-        }
-        if (this is PropagationCalculatedFieldConfiguration) {
-            return r'PROPAGATION';
-        }
-        if (this is RelatedEntitiesAggregationCalculatedFieldConfiguration) {
-            return r'RELATED_ENTITIES_AGGREGATION';
-        }
-        if (this is ScriptCalculatedFieldConfiguration) {
-            return r'SCRIPT';
-        }
-        if (this is SimpleCalculatedFieldConfiguration) {
-            return r'SIMPLE';
-        }
-        return null;
+extension CalculatedFieldConfigurationDiscriminatorExt
+    on CalculatedFieldConfiguration {
+  String? get discriminatorValue {
+    if (this is AlarmCalculatedFieldConfiguration) {
+      return r'ALARM';
     }
-}
-extension CalculatedFieldConfigurationBuilderDiscriminatorExt on CalculatedFieldConfigurationBuilder {
-    String? get discriminatorValue {
-        if (this is AlarmCalculatedFieldConfigurationBuilder) {
-            return r'ALARM';
-        }
-        if (this is EntityAggregationCalculatedFieldConfigurationBuilder) {
-            return r'ENTITY_AGGREGATION';
-        }
-        if (this is GeofencingCalculatedFieldConfigurationBuilder) {
-            return r'GEOFENCING';
-        }
-        if (this is PropagationCalculatedFieldConfigurationBuilder) {
-            return r'PROPAGATION';
-        }
-        if (this is RelatedEntitiesAggregationCalculatedFieldConfigurationBuilder) {
-            return r'RELATED_ENTITIES_AGGREGATION';
-        }
-        if (this is ScriptCalculatedFieldConfigurationBuilder) {
-            return r'SCRIPT';
-        }
-        if (this is SimpleCalculatedFieldConfigurationBuilder) {
-            return r'SIMPLE';
-        }
-        return null;
+    if (this is EntityAggregationCalculatedFieldConfiguration) {
+      return r'ENTITY_AGGREGATION';
     }
+    if (this is GeofencingCalculatedFieldConfiguration) {
+      return r'GEOFENCING';
+    }
+    if (this is PropagationCalculatedFieldConfiguration) {
+      return r'PROPAGATION';
+    }
+    if (this is RelatedEntitiesAggregationCalculatedFieldConfiguration) {
+      return r'RELATED_ENTITIES_AGGREGATION';
+    }
+    if (this is ScriptCalculatedFieldConfiguration) {
+      return r'SCRIPT';
+    }
+    if (this is SimpleCalculatedFieldConfiguration) {
+      return r'SIMPLE';
+    }
+    return null;
+  }
 }
 
-class _$CalculatedFieldConfigurationSerializer implements PrimitiveSerializer<CalculatedFieldConfiguration> {
+extension CalculatedFieldConfigurationBuilderDiscriminatorExt
+    on CalculatedFieldConfigurationBuilder {
+  String? get discriminatorValue {
+    if (this is AlarmCalculatedFieldConfigurationBuilder) {
+      return r'ALARM';
+    }
+    if (this is EntityAggregationCalculatedFieldConfigurationBuilder) {
+      return r'ENTITY_AGGREGATION';
+    }
+    if (this is GeofencingCalculatedFieldConfigurationBuilder) {
+      return r'GEOFENCING';
+    }
+    if (this is PropagationCalculatedFieldConfigurationBuilder) {
+      return r'PROPAGATION';
+    }
+    if (this is RelatedEntitiesAggregationCalculatedFieldConfigurationBuilder) {
+      return r'RELATED_ENTITIES_AGGREGATION';
+    }
+    if (this is ScriptCalculatedFieldConfigurationBuilder) {
+      return r'SCRIPT';
+    }
+    if (this is SimpleCalculatedFieldConfigurationBuilder) {
+      return r'SIMPLE';
+    }
+    return null;
+  }
+}
+
+class _$CalculatedFieldConfigurationSerializer
+    implements PrimitiveSerializer<CalculatedFieldConfiguration> {
   @override
   final Iterable<Type> types = const [CalculatedFieldConfiguration];
 
@@ -136,27 +142,54 @@ class _$CalculatedFieldConfigurationSerializer implements PrimitiveSerializer<Ca
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AlarmCalculatedFieldConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(AlarmCalculatedFieldConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AlarmCalculatedFieldConfiguration),
+      )!;
     }
     if (object is EntityAggregationCalculatedFieldConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(EntityAggregationCalculatedFieldConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityAggregationCalculatedFieldConfiguration),
+      )!;
     }
     if (object is GeofencingCalculatedFieldConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(GeofencingCalculatedFieldConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(GeofencingCalculatedFieldConfiguration),
+      )!;
     }
     if (object is PropagationCalculatedFieldConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(PropagationCalculatedFieldConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(PropagationCalculatedFieldConfiguration),
+      )!;
     }
     if (object is RelatedEntitiesAggregationCalculatedFieldConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(RelatedEntitiesAggregationCalculatedFieldConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(
+          RelatedEntitiesAggregationCalculatedFieldConfiguration,
+        ),
+      )!;
     }
     if (object is ScriptCalculatedFieldConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(ScriptCalculatedFieldConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ScriptCalculatedFieldConfiguration),
+      )!;
     }
     if (object is SimpleCalculatedFieldConfiguration) {
-      return serializers.serialize(object, specifiedType: FullType(SimpleCalculatedFieldConfiguration))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SimpleCalculatedFieldConfiguration),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -166,47 +199,104 @@ class _$CalculatedFieldConfigurationSerializer implements PrimitiveSerializer<Ca
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(CalculatedFieldConfiguration.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          CalculatedFieldConfiguration.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'ALARM':
-        return serializers.deserialize(serialized, specifiedType: FullType(AlarmCalculatedFieldConfiguration)) as AlarmCalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AlarmCalculatedFieldConfiguration),
+            )
+            as AlarmCalculatedFieldConfiguration;
       case r'ENTITY_AGGREGATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityAggregationCalculatedFieldConfiguration)) as EntityAggregationCalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                EntityAggregationCalculatedFieldConfiguration,
+              ),
+            )
+            as EntityAggregationCalculatedFieldConfiguration;
       case r'GEOFENCING':
-        return serializers.deserialize(serialized, specifiedType: FullType(GeofencingCalculatedFieldConfiguration)) as GeofencingCalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(GeofencingCalculatedFieldConfiguration),
+            )
+            as GeofencingCalculatedFieldConfiguration;
       case r'PROPAGATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(PropagationCalculatedFieldConfiguration)) as PropagationCalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(PropagationCalculatedFieldConfiguration),
+            )
+            as PropagationCalculatedFieldConfiguration;
       case r'RELATED_ENTITIES_AGGREGATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(RelatedEntitiesAggregationCalculatedFieldConfiguration)) as RelatedEntitiesAggregationCalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(
+                RelatedEntitiesAggregationCalculatedFieldConfiguration,
+              ),
+            )
+            as RelatedEntitiesAggregationCalculatedFieldConfiguration;
       case r'SCRIPT':
-        return serializers.deserialize(serialized, specifiedType: FullType(ScriptCalculatedFieldConfiguration)) as ScriptCalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ScriptCalculatedFieldConfiguration),
+            )
+            as ScriptCalculatedFieldConfiguration;
       case r'SIMPLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(SimpleCalculatedFieldConfiguration)) as SimpleCalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SimpleCalculatedFieldConfiguration),
+            )
+            as SimpleCalculatedFieldConfiguration;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($CalculatedFieldConfiguration)) as $CalculatedFieldConfiguration;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($CalculatedFieldConfiguration),
+            )
+            as $CalculatedFieldConfiguration;
     }
   }
 }
 
-
 /// a concrete implementation of [CalculatedFieldConfiguration], since [CalculatedFieldConfiguration] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $CalculatedFieldConfiguration implements CalculatedFieldConfiguration, Built<$CalculatedFieldConfiguration, $CalculatedFieldConfigurationBuilder> {
+abstract class $CalculatedFieldConfiguration
+    implements
+        CalculatedFieldConfiguration,
+        Built<
+          $CalculatedFieldConfiguration,
+          $CalculatedFieldConfigurationBuilder
+        > {
   $CalculatedFieldConfiguration._();
 
-  factory $CalculatedFieldConfiguration([void Function($CalculatedFieldConfigurationBuilder)? updates]) = _$$CalculatedFieldConfiguration;
+  factory $CalculatedFieldConfiguration([
+    void Function($CalculatedFieldConfigurationBuilder)? updates,
+  ]) = _$$CalculatedFieldConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($CalculatedFieldConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$CalculatedFieldConfiguration> get serializer => _$$CalculatedFieldConfigurationSerializer();
+  static Serializer<$CalculatedFieldConfiguration> get serializer =>
+      _$$CalculatedFieldConfigurationSerializer();
 }
 
-class _$$CalculatedFieldConfigurationSerializer implements PrimitiveSerializer<$CalculatedFieldConfiguration> {
+class _$$CalculatedFieldConfigurationSerializer
+    implements PrimitiveSerializer<$CalculatedFieldConfiguration> {
   @override
-  final Iterable<Type> types = const [$CalculatedFieldConfiguration, _$$CalculatedFieldConfiguration];
+  final Iterable<Type> types = const [
+    $CalculatedFieldConfiguration,
+    _$$CalculatedFieldConfiguration,
+  ];
 
   @override
   final String wireName = r'$CalculatedFieldConfiguration';
@@ -217,7 +307,10 @@ class _$$CalculatedFieldConfigurationSerializer implements PrimitiveSerializer<$
     $CalculatedFieldConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(CalculatedFieldConfiguration))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(CalculatedFieldConfiguration),
+    )!;
   }
 
   void _deserializeProperties(
@@ -233,18 +326,22 @@ class _$$CalculatedFieldConfigurationSerializer implements PrimitiveSerializer<$
       final value = serializedList[i + 1];
       switch (key) {
         case r'output':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(Output),
-          ) as Output?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(Output),
+                  )
+                  as Output?;
           if (valueDes == null) continue;
           result.output = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -275,4 +372,3 @@ class _$$CalculatedFieldConfigurationSerializer implements PrimitiveSerializer<$
     return result.build();
   }
 }
-

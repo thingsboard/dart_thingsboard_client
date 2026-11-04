@@ -31,7 +31,12 @@ part 'lw_m2_m_server_security_config_default.g.dart';
 /// * [securityHost] - Host for 'Security' mode (DTLS)
 /// * [securityPort] - Port for 'Security' mode (DTLS): Lwm2m Server or Bootstrap Server
 @BuiltValue()
-abstract class LwM2MServerSecurityConfigDefault implements Built<LwM2MServerSecurityConfigDefault, LwM2MServerSecurityConfigDefaultBuilder> {
+abstract class LwM2MServerSecurityConfigDefault
+    implements
+        Built<
+          LwM2MServerSecurityConfigDefault,
+          LwM2MServerSecurityConfigDefaultBuilder
+        > {
   /// Server short Id. Used as link to associate server Object Instance. This identifier uniquely identifies each LwM2M Server configured for the LwM2M Client. This Resource MUST be set when the Bootstrap-Server Resource has a value of 'false' and MUST be null when Bootstrap-Server is 'true'. The values 0 and 65535 MUST NOT be used for identifying the LwM2M Server.
   @BuiltValueField(wireName: r'shortServerId')
   int? get shortServerId;
@@ -90,18 +95,25 @@ abstract class LwM2MServerSecurityConfigDefault implements Built<LwM2MServerSecu
 
   LwM2MServerSecurityConfigDefault._();
 
-  factory LwM2MServerSecurityConfigDefault([void updates(LwM2MServerSecurityConfigDefaultBuilder b)]) = _$LwM2MServerSecurityConfigDefault;
+  factory LwM2MServerSecurityConfigDefault([
+    void updates(LwM2MServerSecurityConfigDefaultBuilder b),
+  ]) = _$LwM2MServerSecurityConfigDefault;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LwM2MServerSecurityConfigDefaultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LwM2MServerSecurityConfigDefault> get serializer => _$LwM2MServerSecurityConfigDefaultSerializer();
+  static Serializer<LwM2MServerSecurityConfigDefault> get serializer =>
+      _$LwM2MServerSecurityConfigDefaultSerializer();
 }
 
-class _$LwM2MServerSecurityConfigDefaultSerializer implements PrimitiveSerializer<LwM2MServerSecurityConfigDefault> {
+class _$LwM2MServerSecurityConfigDefaultSerializer
+    implements PrimitiveSerializer<LwM2MServerSecurityConfigDefault> {
   @override
-  final Iterable<Type> types = const [LwM2MServerSecurityConfigDefault, _$LwM2MServerSecurityConfigDefault];
+  final Iterable<Type> types = const [
+    LwM2MServerSecurityConfigDefault,
+    _$LwM2MServerSecurityConfigDefault,
+  ];
 
   @override
   final String wireName = r'LwM2MServerSecurityConfigDefault';
@@ -217,7 +229,11 @@ class _$LwM2MServerSecurityConfigDefaultSerializer implements PrimitiveSerialize
     LwM2MServerSecurityConfigDefault object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -233,114 +249,142 @@ class _$LwM2MServerSecurityConfigDefaultSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'shortServerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.shortServerId = valueDes;
           break;
         case r'bootstrapServerIs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.bootstrapServerIs = valueDes;
           break;
         case r'host':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.host = valueDes;
           break;
         case r'port':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.port = valueDes;
           break;
         case r'clientHoldOffTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.clientHoldOffTime = valueDes;
           break;
         case r'serverPublicKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serverPublicKey = valueDes;
           break;
         case r'serverCertificate':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.serverCertificate = valueDes;
           break;
         case r'bootstrapServerAccountTimeout':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.bootstrapServerAccountTimeout = valueDes;
           break;
         case r'lifetime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.lifetime = valueDes;
           break;
         case r'defaultMinPeriod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.defaultMinPeriod = valueDes;
           break;
         case r'notifIfDisabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notifIfDisabled = valueDes;
           break;
         case r'binding':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.binding = valueDes;
           break;
         case r'securityHost':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.securityHost = valueDes;
           break;
         case r'securityPort':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.securityPort = valueDes;
           break;
@@ -372,5 +416,3 @@ class _$LwM2MServerSecurityConfigDefaultSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

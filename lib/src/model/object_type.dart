@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'object_type.g.dart';
 
 class ObjectType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'TENANT')
   static const ObjectType TENANT = _$TENANT;
   @BuiltValueEnumConst(wireName: r'TENANT_PROFILE')
@@ -119,7 +118,7 @@ class ObjectType extends EnumClass {
 
   static Serializer<ObjectType> get serializer => _$objectTypeSerializer;
 
-  const ObjectType._(String name): super(name);
+  const ObjectType._(String name) : super(name);
 
   static BuiltSet<ObjectType> get values => _$values;
   static ObjectType valueOf(String name) => _$valueOf(name);
@@ -132,4 +131,3 @@ class ObjectType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ObjectTypeMixin = Object with _$ObjectTypeMixin;
-

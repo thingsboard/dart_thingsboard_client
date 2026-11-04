@@ -18,9 +18,9 @@ part 'attributes_output_strategy.g.dart';
 /// AttributesOutputStrategy
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class AttributesOutputStrategy  {
+abstract class AttributesOutputStrategy {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -32,33 +32,37 @@ abstract class AttributesOutputStrategy  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AttributesOutputStrategy> get serializer => _$AttributesOutputStrategySerializer();
+  static Serializer<AttributesOutputStrategy> get serializer =>
+      _$AttributesOutputStrategySerializer();
 }
 
 extension AttributesOutputStrategyDiscriminatorExt on AttributesOutputStrategy {
-    String? get discriminatorValue {
-        if (this is AttributesImmediateOutputStrategy) {
-            return r'IMMEDIATE';
-        }
-        if (this is AttributesRuleChainOutputStrategy) {
-            return r'RULE_CHAIN';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AttributesImmediateOutputStrategy) {
+      return r'IMMEDIATE';
     }
-}
-extension AttributesOutputStrategyBuilderDiscriminatorExt on AttributesOutputStrategyBuilder {
-    String? get discriminatorValue {
-        if (this is AttributesImmediateOutputStrategyBuilder) {
-            return r'IMMEDIATE';
-        }
-        if (this is AttributesRuleChainOutputStrategyBuilder) {
-            return r'RULE_CHAIN';
-        }
-        return null;
+    if (this is AttributesRuleChainOutputStrategy) {
+      return r'RULE_CHAIN';
     }
+    return null;
+  }
 }
 
-class _$AttributesOutputStrategySerializer implements PrimitiveSerializer<AttributesOutputStrategy> {
+extension AttributesOutputStrategyBuilderDiscriminatorExt
+    on AttributesOutputStrategyBuilder {
+  String? get discriminatorValue {
+    if (this is AttributesImmediateOutputStrategyBuilder) {
+      return r'IMMEDIATE';
+    }
+    if (this is AttributesRuleChainOutputStrategyBuilder) {
+      return r'RULE_CHAIN';
+    }
+    return null;
+  }
+}
+
+class _$AttributesOutputStrategySerializer
+    implements PrimitiveSerializer<AttributesOutputStrategy> {
   @override
   final Iterable<Type> types = const [AttributesOutputStrategy];
 
@@ -84,12 +88,22 @@ class _$AttributesOutputStrategySerializer implements PrimitiveSerializer<Attrib
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AttributesImmediateOutputStrategy) {
-      return serializers.serialize(object, specifiedType: FullType(AttributesImmediateOutputStrategy))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AttributesImmediateOutputStrategy),
+      )!;
     }
     if (object is AttributesRuleChainOutputStrategy) {
-      return serializers.serialize(object, specifiedType: FullType(AttributesRuleChainOutputStrategy))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AttributesRuleChainOutputStrategy),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -99,37 +113,67 @@ class _$AttributesOutputStrategySerializer implements PrimitiveSerializer<Attrib
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(AttributesOutputStrategy.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          AttributesOutputStrategy.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'IMMEDIATE':
-        return serializers.deserialize(serialized, specifiedType: FullType(AttributesImmediateOutputStrategy)) as AttributesImmediateOutputStrategy;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AttributesImmediateOutputStrategy),
+            )
+            as AttributesImmediateOutputStrategy;
       case r'RULE_CHAIN':
-        return serializers.deserialize(serialized, specifiedType: FullType(AttributesRuleChainOutputStrategy)) as AttributesRuleChainOutputStrategy;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AttributesRuleChainOutputStrategy),
+            )
+            as AttributesRuleChainOutputStrategy;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($AttributesOutputStrategy)) as $AttributesOutputStrategy;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($AttributesOutputStrategy),
+            )
+            as $AttributesOutputStrategy;
     }
   }
 }
 
-
 /// a concrete implementation of [AttributesOutputStrategy], since [AttributesOutputStrategy] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $AttributesOutputStrategy implements AttributesOutputStrategy, Built<$AttributesOutputStrategy, $AttributesOutputStrategyBuilder> {
+abstract class $AttributesOutputStrategy
+    implements
+        AttributesOutputStrategy,
+        Built<$AttributesOutputStrategy, $AttributesOutputStrategyBuilder> {
   $AttributesOutputStrategy._();
 
-  factory $AttributesOutputStrategy([void Function($AttributesOutputStrategyBuilder)? updates]) = _$$AttributesOutputStrategy;
+  factory $AttributesOutputStrategy([
+    void Function($AttributesOutputStrategyBuilder)? updates,
+  ]) = _$$AttributesOutputStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($AttributesOutputStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$AttributesOutputStrategy> get serializer => _$$AttributesOutputStrategySerializer();
+  static Serializer<$AttributesOutputStrategy> get serializer =>
+      _$$AttributesOutputStrategySerializer();
 }
 
-class _$$AttributesOutputStrategySerializer implements PrimitiveSerializer<$AttributesOutputStrategy> {
+class _$$AttributesOutputStrategySerializer
+    implements PrimitiveSerializer<$AttributesOutputStrategy> {
   @override
-  final Iterable<Type> types = const [$AttributesOutputStrategy, _$$AttributesOutputStrategy];
+  final Iterable<Type> types = const [
+    $AttributesOutputStrategy,
+    _$$AttributesOutputStrategy,
+  ];
 
   @override
   final String wireName = r'$AttributesOutputStrategy';
@@ -140,7 +184,10 @@ class _$$AttributesOutputStrategySerializer implements PrimitiveSerializer<$Attr
     $AttributesOutputStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(AttributesOutputStrategy))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(AttributesOutputStrategy),
+    )!;
   }
 
   void _deserializeProperties(
@@ -156,10 +203,12 @@ class _$$AttributesOutputStrategySerializer implements PrimitiveSerializer<$Attr
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -190,4 +239,3 @@ class _$$AttributesOutputStrategySerializer implements PrimitiveSerializer<$Attr
     return result.build();
   }
 }
-

@@ -18,9 +18,9 @@ part 'alarm_rule.g.dart';
 /// AlarmRule
 ///
 /// Properties:
-/// * [condition] 
-/// * [alarmDetails] 
-/// * [dashboardId] 
+/// * [condition]
+/// * [alarmDetails]
+/// * [dashboardId]
 @BuiltValue()
 abstract class AlarmRule implements Built<AlarmRule, AlarmRuleBuilder> {
   @BuiltValueField(wireName: r'condition')
@@ -82,7 +82,11 @@ class _$AlarmRuleSerializer implements PrimitiveSerializer<AlarmRule> {
     AlarmRule object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,25 +102,31 @@ class _$AlarmRuleSerializer implements PrimitiveSerializer<AlarmRule> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'condition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmCondition),
-          ) as AlarmCondition;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmCondition),
+                  )
+                  as AlarmCondition;
           result.condition = valueDes;
           break;
         case r'alarmDetails':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.alarmDetails = valueDes;
           break;
         case r'dashboardId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DashboardId),
-          ) as DashboardId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DashboardId),
+                  )
+                  as DashboardId?;
           if (valueDes == null) continue;
           result.dashboardId.replace(valueDes);
           break;
@@ -148,5 +158,3 @@ class _$AlarmRuleSerializer implements PrimitiveSerializer<AlarmRule> {
     return result.build();
   }
 }
-
-

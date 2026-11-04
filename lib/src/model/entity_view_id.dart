@@ -18,10 +18,11 @@ part 'entity_view_id.g.dart';
 /// EntityViewId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class EntityViewId implements EntityId, Built<EntityViewId, EntityViewIdBuilder> {
+abstract class EntityViewId
+    implements EntityId, Built<EntityViewId, EntityViewIdBuilder> {
   EntityViewId._();
 
   factory EntityViewId([void updates(EntityViewIdBuilder b)]) = _$EntityViewId;
@@ -63,7 +64,11 @@ class _$EntityViewIdSerializer implements PrimitiveSerializer<EntityViewId> {
     EntityViewId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +84,21 @@ class _$EntityViewIdSerializer implements PrimitiveSerializer<EntityViewId> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +129,3 @@ class _$EntityViewIdSerializer implements PrimitiveSerializer<EntityViewId> {
     return result.build();
   }
 }
-
-

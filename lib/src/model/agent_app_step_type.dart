@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agent_app_step_type.g.dart';
 
 class AgentAppStepType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'COMPOSE_TEMPLATE')
   static const AgentAppStepType COMPOSE_TEMPLATE = _$COMPOSE_TEMPLATE;
   @BuiltValueEnumConst(wireName: r'COMPOSE')
@@ -41,9 +40,10 @@ class AgentAppStepType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const AgentAppStepType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<AgentAppStepType> get serializer => _$agentAppStepTypeSerializer;
+  static Serializer<AgentAppStepType> get serializer =>
+      _$agentAppStepTypeSerializer;
 
-  const AgentAppStepType._(String name): super(name);
+  const AgentAppStepType._(String name) : super(name);
 
   static BuiltSet<AgentAppStepType> get values => _$values;
   static AgentAppStepType valueOf(String name) => _$valueOf(name);
@@ -56,4 +56,3 @@ class AgentAppStepType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AgentAppStepTypeMixin = Object with _$AgentAppStepTypeMixin;
-

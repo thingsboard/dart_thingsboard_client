@@ -17,19 +17,20 @@ part 'repository_settings.g.dart';
 /// A JSON value representing the Repository Settings.
 ///
 /// Properties:
-/// * [repositoryUri] 
-/// * [authMethod] 
-/// * [username] 
-/// * [password] 
-/// * [privateKeyFileName] 
-/// * [privateKey] 
-/// * [privateKeyPassword] 
-/// * [defaultBranch] 
-/// * [readOnly] 
-/// * [showMergeCommits] 
-/// * [localOnly] 
+/// * [repositoryUri]
+/// * [authMethod]
+/// * [username]
+/// * [password]
+/// * [privateKeyFileName]
+/// * [privateKey]
+/// * [privateKeyPassword]
+/// * [defaultBranch]
+/// * [readOnly]
+/// * [showMergeCommits]
+/// * [localOnly]
 @BuiltValue()
-abstract class RepositorySettings implements Built<RepositorySettings, RepositorySettingsBuilder> {
+abstract class RepositorySettings
+    implements Built<RepositorySettings, RepositorySettingsBuilder> {
   @BuiltValueField(wireName: r'repositoryUri')
   String? get repositoryUri;
 
@@ -66,16 +67,19 @@ abstract class RepositorySettings implements Built<RepositorySettings, Repositor
 
   RepositorySettings._();
 
-  factory RepositorySettings([void updates(RepositorySettingsBuilder b)]) = _$RepositorySettings;
+  factory RepositorySettings([void updates(RepositorySettingsBuilder b)]) =
+      _$RepositorySettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RepositorySettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RepositorySettings> get serializer => _$RepositorySettingsSerializer();
+  static Serializer<RepositorySettings> get serializer =>
+      _$RepositorySettingsSerializer();
 }
 
-class _$RepositorySettingsSerializer implements PrimitiveSerializer<RepositorySettings> {
+class _$RepositorySettingsSerializer
+    implements PrimitiveSerializer<RepositorySettings> {
   @override
   final Iterable<Type> types = const [RepositorySettings, _$RepositorySettings];
 
@@ -172,7 +176,11 @@ class _$RepositorySettingsSerializer implements PrimitiveSerializer<RepositorySe
     RepositorySettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -188,90 +196,114 @@ class _$RepositorySettingsSerializer implements PrimitiveSerializer<RepositorySe
       final value = serializedList[i + 1];
       switch (key) {
         case r'repositoryUri':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.repositoryUri = valueDes;
           break;
         case r'authMethod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RepositoryAuthMethod),
-          ) as RepositoryAuthMethod?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      RepositoryAuthMethod,
+                    ),
+                  )
+                  as RepositoryAuthMethod?;
           if (valueDes == null) continue;
           result.authMethod = valueDes;
           break;
         case r'username':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.username = valueDes;
           break;
         case r'password':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.password = valueDes;
           break;
         case r'privateKeyFileName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.privateKeyFileName = valueDes;
           break;
         case r'privateKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.privateKey = valueDes;
           break;
         case r'privateKeyPassword':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.privateKeyPassword = valueDes;
           break;
         case r'defaultBranch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.defaultBranch = valueDes;
           break;
         case r'readOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.readOnly = valueDes;
           break;
         case r'showMergeCommits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.showMergeCommits = valueDes;
           break;
         case r'localOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.localOnly = valueDes;
           break;
@@ -303,5 +335,3 @@ class _$RepositorySettingsSerializer implements PrimitiveSerializer<RepositorySe
     return result.build();
   }
 }
-
-

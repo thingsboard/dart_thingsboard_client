@@ -24,9 +24,10 @@ part 'tenant_profile.g.dart';
 /// * [description] - Description of the tenant profile
 /// * [default_] - Default Tenant profile to be used.
 /// * [isolatedTbRuleEngine] - If enabled, will push all messages related to this tenant and processed by the rule engine into separate queue. Useful for complex microservices deployments, to isolate processing of the data for specific tenants
-/// * [profileData] 
+/// * [profileData]
 @BuiltValue()
-abstract class TenantProfile implements Built<TenantProfile, TenantProfileBuilder> {
+abstract class TenantProfile
+    implements Built<TenantProfile, TenantProfileBuilder> {
   /// JSON object with the tenant profile Id. Specify this field to update the tenant profile. Referencing non-existing tenant profile Id will cause error. Omit this field to create new tenant profile.
   @BuiltValueField(wireName: r'id')
   TenantProfileId? get id;
@@ -56,13 +57,15 @@ abstract class TenantProfile implements Built<TenantProfile, TenantProfileBuilde
 
   TenantProfile._();
 
-  factory TenantProfile([void updates(TenantProfileBuilder b)]) = _$TenantProfile;
+  factory TenantProfile([void updates(TenantProfileBuilder b)]) =
+      _$TenantProfile;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TenantProfileBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TenantProfile> get serializer => _$TenantProfileSerializer();
+  static Serializer<TenantProfile> get serializer =>
+      _$TenantProfileSerializer();
 }
 
 class _$TenantProfileSerializer implements PrimitiveSerializer<TenantProfile> {
@@ -134,7 +137,11 @@ class _$TenantProfileSerializer implements PrimitiveSerializer<TenantProfile> {
     TenantProfile object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -150,58 +157,72 @@ class _$TenantProfileSerializer implements PrimitiveSerializer<TenantProfile> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantProfileId),
-          ) as TenantProfileId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantProfileId),
+                  )
+                  as TenantProfileId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'default':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.default_ = valueDes;
           break;
         case r'isolatedTbRuleEngine':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.isolatedTbRuleEngine = valueDes;
           break;
         case r'profileData':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantProfileData),
-          ) as TenantProfileData?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantProfileData),
+                  )
+                  as TenantProfileData?;
           if (valueDes == null) continue;
           result.profileData.replace(valueDes);
           break;
@@ -233,5 +254,3 @@ class _$TenantProfileSerializer implements PrimitiveSerializer<TenantProfile> {
     return result.build();
   }
 }
-
-

@@ -18,29 +18,39 @@ part 'backup_volumes_remove_step.g.dart';
 /// BackupVolumesRemoveStep
 ///
 /// Properties:
-/// * [id] 
-/// * [nextId] 
-/// * [title] 
-/// * [templateOnly] 
-/// * [condition] 
-/// * [stateful] 
-/// * [type] 
+/// * [id]
+/// * [nextId]
+/// * [title]
+/// * [templateOnly]
+/// * [condition]
+/// * [stateful]
+/// * [type]
 @BuiltValue()
-abstract class BackupVolumesRemoveStep implements AgentAppStep, Built<BackupVolumesRemoveStep, BackupVolumesRemoveStepBuilder> {
+abstract class BackupVolumesRemoveStep
+    implements
+        AgentAppStep,
+        Built<BackupVolumesRemoveStep, BackupVolumesRemoveStepBuilder> {
   BackupVolumesRemoveStep._();
 
-  factory BackupVolumesRemoveStep([void updates(BackupVolumesRemoveStepBuilder b)]) = _$BackupVolumesRemoveStep;
+  factory BackupVolumesRemoveStep([
+    void updates(BackupVolumesRemoveStepBuilder b),
+  ]) = _$BackupVolumesRemoveStep;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BackupVolumesRemoveStepBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BackupVolumesRemoveStep> get serializer => _$BackupVolumesRemoveStepSerializer();
+  static Serializer<BackupVolumesRemoveStep> get serializer =>
+      _$BackupVolumesRemoveStepSerializer();
 }
 
-class _$BackupVolumesRemoveStepSerializer implements PrimitiveSerializer<BackupVolumesRemoveStep> {
+class _$BackupVolumesRemoveStepSerializer
+    implements PrimitiveSerializer<BackupVolumesRemoveStep> {
   @override
-  final Iterable<Type> types = const [BackupVolumesRemoveStep, _$BackupVolumesRemoveStep];
+  final Iterable<Type> types = const [
+    BackupVolumesRemoveStep,
+    _$BackupVolumesRemoveStep,
+  ];
 
   @override
   final String wireName = r'BackupVolumesRemoveStep';
@@ -107,7 +117,11 @@ class _$BackupVolumesRemoveStepSerializer implements PrimitiveSerializer<BackupV
     BackupVolumesRemoveStep object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -123,58 +137,72 @@ class _$BackupVolumesRemoveStepSerializer implements PrimitiveSerializer<BackupV
       final value = serializedList[i + 1];
       switch (key) {
         case r'nextId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.nextId = valueDes;
           break;
         case r'condition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.condition = valueDes;
           break;
         case r'templateOnly':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.templateOnly = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'stateful':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.stateful = valueDes;
           break;
@@ -206,5 +234,3 @@ class _$BackupVolumesRemoveStepSerializer implements PrimitiveSerializer<BackupV
     return result.build();
   }
 }
-
-

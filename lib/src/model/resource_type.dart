@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'resource_type.g.dart';
 
 class ResourceType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'LWM2M_MODEL')
   static const ResourceType LWM2M_MODEL = _$LWM2M_MODEL;
   @BuiltValueEnumConst(wireName: r'JKS')
@@ -35,7 +34,7 @@ class ResourceType extends EnumClass {
 
   static Serializer<ResourceType> get serializer => _$resourceTypeSerializer;
 
-  const ResourceType._(String name): super(name);
+  const ResourceType._(String name) : super(name);
 
   static BuiltSet<ResourceType> get values => _$values;
   static ResourceType valueOf(String name) => _$valueOf(name);
@@ -48,4 +47,3 @@ class ResourceType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ResourceTypeMixin = Object with _$ResourceTypeMixin;
-

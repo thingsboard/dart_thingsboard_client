@@ -8,13 +8,17 @@ import 'entity_filter_type.dart';
 
 class AssetTypeFilter extends EntityFilter {
   @Deprecated(
-      "will be replaced by [assetTypes]. This value will be appended to [assetTypes] array")
+    "will be replaced by [assetTypes]. This value will be appended to [assetTypes] array",
+  )
   String? assetType;
   String? assetNameFilter;
   List<String> assetTypes;
 
-  AssetTypeFilter(
-      {this.assetType, required this.assetTypes, this.assetNameFilter}) {
+  AssetTypeFilter({
+    this.assetType,
+    required this.assetTypes,
+    this.assetNameFilter,
+  }) {
     if (assetType != null) {
       assetTypes.add(assetType!);
     }

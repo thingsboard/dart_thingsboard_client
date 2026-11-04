@@ -20,10 +20,10 @@ part 'two_fa_account_config.g.dart';
 /// Base configuration for two-factor authentication accounts
 ///
 /// Properties:
-/// * [useByDefault] 
-/// * [providerType] 
+/// * [useByDefault]
+/// * [providerType]
 @BuiltValue(instantiable: false)
-abstract class TwoFaAccountConfig  {
+abstract class TwoFaAccountConfig {
   @BuiltValueField(wireName: r'useByDefault')
   bool? get useByDefault;
 
@@ -40,45 +40,49 @@ abstract class TwoFaAccountConfig  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TwoFaAccountConfig> get serializer => _$TwoFaAccountConfigSerializer();
+  static Serializer<TwoFaAccountConfig> get serializer =>
+      _$TwoFaAccountConfigSerializer();
 }
 
 extension TwoFaAccountConfigDiscriminatorExt on TwoFaAccountConfig {
-    String? get discriminatorValue {
-        if (this is BackupCodeTwoFaAccountConfig) {
-            return r'BACKUP_CODE';
-        }
-        if (this is EmailTwoFaAccountConfig) {
-            return r'EMAIL';
-        }
-        if (this is SmsTwoFaAccountConfig) {
-            return r'SMS';
-        }
-        if (this is TotpTwoFaAccountConfig) {
-            return r'TOTP';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is BackupCodeTwoFaAccountConfig) {
+      return r'BACKUP_CODE';
     }
-}
-extension TwoFaAccountConfigBuilderDiscriminatorExt on TwoFaAccountConfigBuilder {
-    String? get discriminatorValue {
-        if (this is BackupCodeTwoFaAccountConfigBuilder) {
-            return r'BACKUP_CODE';
-        }
-        if (this is EmailTwoFaAccountConfigBuilder) {
-            return r'EMAIL';
-        }
-        if (this is SmsTwoFaAccountConfigBuilder) {
-            return r'SMS';
-        }
-        if (this is TotpTwoFaAccountConfigBuilder) {
-            return r'TOTP';
-        }
-        return null;
+    if (this is EmailTwoFaAccountConfig) {
+      return r'EMAIL';
     }
+    if (this is SmsTwoFaAccountConfig) {
+      return r'SMS';
+    }
+    if (this is TotpTwoFaAccountConfig) {
+      return r'TOTP';
+    }
+    return null;
+  }
 }
 
-class _$TwoFaAccountConfigSerializer implements PrimitiveSerializer<TwoFaAccountConfig> {
+extension TwoFaAccountConfigBuilderDiscriminatorExt
+    on TwoFaAccountConfigBuilder {
+  String? get discriminatorValue {
+    if (this is BackupCodeTwoFaAccountConfigBuilder) {
+      return r'BACKUP_CODE';
+    }
+    if (this is EmailTwoFaAccountConfigBuilder) {
+      return r'EMAIL';
+    }
+    if (this is SmsTwoFaAccountConfigBuilder) {
+      return r'SMS';
+    }
+    if (this is TotpTwoFaAccountConfigBuilder) {
+      return r'TOTP';
+    }
+    return null;
+  }
+}
+
+class _$TwoFaAccountConfigSerializer
+    implements PrimitiveSerializer<TwoFaAccountConfig> {
   @override
   final Iterable<Type> types = const [TwoFaAccountConfig];
 
@@ -111,18 +115,34 @@ class _$TwoFaAccountConfigSerializer implements PrimitiveSerializer<TwoFaAccount
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is BackupCodeTwoFaAccountConfig) {
-      return serializers.serialize(object, specifiedType: FullType(BackupCodeTwoFaAccountConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(BackupCodeTwoFaAccountConfig),
+      )!;
     }
     if (object is EmailTwoFaAccountConfig) {
-      return serializers.serialize(object, specifiedType: FullType(EmailTwoFaAccountConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EmailTwoFaAccountConfig),
+      )!;
     }
     if (object is SmsTwoFaAccountConfig) {
-      return serializers.serialize(object, specifiedType: FullType(SmsTwoFaAccountConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SmsTwoFaAccountConfig),
+      )!;
     }
     if (object is TotpTwoFaAccountConfig) {
-      return serializers.serialize(object, specifiedType: FullType(TotpTwoFaAccountConfig))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TotpTwoFaAccountConfig),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -132,41 +152,76 @@ class _$TwoFaAccountConfigSerializer implements PrimitiveSerializer<TwoFaAccount
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(TwoFaAccountConfig.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(TwoFaAccountConfig.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'BACKUP_CODE':
-        return serializers.deserialize(serialized, specifiedType: FullType(BackupCodeTwoFaAccountConfig)) as BackupCodeTwoFaAccountConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(BackupCodeTwoFaAccountConfig),
+            )
+            as BackupCodeTwoFaAccountConfig;
       case r'EMAIL':
-        return serializers.deserialize(serialized, specifiedType: FullType(EmailTwoFaAccountConfig)) as EmailTwoFaAccountConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EmailTwoFaAccountConfig),
+            )
+            as EmailTwoFaAccountConfig;
       case r'SMS':
-        return serializers.deserialize(serialized, specifiedType: FullType(SmsTwoFaAccountConfig)) as SmsTwoFaAccountConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SmsTwoFaAccountConfig),
+            )
+            as SmsTwoFaAccountConfig;
       case r'TOTP':
-        return serializers.deserialize(serialized, specifiedType: FullType(TotpTwoFaAccountConfig)) as TotpTwoFaAccountConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TotpTwoFaAccountConfig),
+            )
+            as TotpTwoFaAccountConfig;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($TwoFaAccountConfig)) as $TwoFaAccountConfig;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($TwoFaAccountConfig),
+            )
+            as $TwoFaAccountConfig;
     }
   }
 }
 
-
 /// a concrete implementation of [TwoFaAccountConfig], since [TwoFaAccountConfig] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $TwoFaAccountConfig implements TwoFaAccountConfig, Built<$TwoFaAccountConfig, $TwoFaAccountConfigBuilder> {
+abstract class $TwoFaAccountConfig
+    implements
+        TwoFaAccountConfig,
+        Built<$TwoFaAccountConfig, $TwoFaAccountConfigBuilder> {
   $TwoFaAccountConfig._();
 
-  factory $TwoFaAccountConfig([void Function($TwoFaAccountConfigBuilder)? updates]) = _$$TwoFaAccountConfig;
+  factory $TwoFaAccountConfig([
+    void Function($TwoFaAccountConfigBuilder)? updates,
+  ]) = _$$TwoFaAccountConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($TwoFaAccountConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$TwoFaAccountConfig> get serializer => _$$TwoFaAccountConfigSerializer();
+  static Serializer<$TwoFaAccountConfig> get serializer =>
+      _$$TwoFaAccountConfigSerializer();
 }
 
-class _$$TwoFaAccountConfigSerializer implements PrimitiveSerializer<$TwoFaAccountConfig> {
+class _$$TwoFaAccountConfigSerializer
+    implements PrimitiveSerializer<$TwoFaAccountConfig> {
   @override
-  final Iterable<Type> types = const [$TwoFaAccountConfig, _$$TwoFaAccountConfig];
+  final Iterable<Type> types = const [
+    $TwoFaAccountConfig,
+    _$$TwoFaAccountConfig,
+  ];
 
   @override
   final String wireName = r'$TwoFaAccountConfig';
@@ -177,7 +232,10 @@ class _$$TwoFaAccountConfigSerializer implements PrimitiveSerializer<$TwoFaAccou
     $TwoFaAccountConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(TwoFaAccountConfig))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(TwoFaAccountConfig),
+    )!;
   }
 
   void _deserializeProperties(
@@ -193,18 +251,22 @@ class _$$TwoFaAccountConfigSerializer implements PrimitiveSerializer<$TwoFaAccou
       final value = serializedList[i + 1];
       switch (key) {
         case r'useByDefault':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useByDefault = valueDes;
           break;
         case r'providerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerType = valueDes;
           break;
         default:
@@ -235,4 +297,3 @@ class _$$TwoFaAccountConfigSerializer implements PrimitiveSerializer<$TwoFaAccou
     return result.build();
   }
 }
-

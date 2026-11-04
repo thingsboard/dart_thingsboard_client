@@ -17,13 +17,14 @@ part 'processing_strategy.g.dart';
 /// ProcessingStrategy
 ///
 /// Properties:
-/// * [type] 
-/// * [retries] 
-/// * [failurePercentage] 
-/// * [pauseBetweenRetries] 
-/// * [maxPauseBetweenRetries] 
+/// * [type]
+/// * [retries]
+/// * [failurePercentage]
+/// * [pauseBetweenRetries]
+/// * [maxPauseBetweenRetries]
 @BuiltValue()
-abstract class ProcessingStrategy implements Built<ProcessingStrategy, ProcessingStrategyBuilder> {
+abstract class ProcessingStrategy
+    implements Built<ProcessingStrategy, ProcessingStrategyBuilder> {
   @BuiltValueField(wireName: r'type')
   ProcessingStrategyType? get type;
   // enum typeEnum {  SKIP_ALL_FAILURES,  SKIP_ALL_FAILURES_AND_TIMED_OUT,  RETRY_ALL,  RETRY_FAILED,  RETRY_TIMED_OUT,  RETRY_FAILED_AND_TIMED_OUT,  };
@@ -42,16 +43,19 @@ abstract class ProcessingStrategy implements Built<ProcessingStrategy, Processin
 
   ProcessingStrategy._();
 
-  factory ProcessingStrategy([void updates(ProcessingStrategyBuilder b)]) = _$ProcessingStrategy;
+  factory ProcessingStrategy([void updates(ProcessingStrategyBuilder b)]) =
+      _$ProcessingStrategy;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ProcessingStrategyBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ProcessingStrategy> get serializer => _$ProcessingStrategySerializer();
+  static Serializer<ProcessingStrategy> get serializer =>
+      _$ProcessingStrategySerializer();
 }
 
-class _$ProcessingStrategySerializer implements PrimitiveSerializer<ProcessingStrategy> {
+class _$ProcessingStrategySerializer
+    implements PrimitiveSerializer<ProcessingStrategy> {
   @override
   final Iterable<Type> types = const [ProcessingStrategy, _$ProcessingStrategy];
 
@@ -106,7 +110,11 @@ class _$ProcessingStrategySerializer implements PrimitiveSerializer<ProcessingSt
     ProcessingStrategy object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -122,42 +130,54 @@ class _$ProcessingStrategySerializer implements PrimitiveSerializer<ProcessingSt
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ProcessingStrategyType),
-          ) as ProcessingStrategyType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      ProcessingStrategyType,
+                    ),
+                  )
+                  as ProcessingStrategyType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'retries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.retries = valueDes;
           break;
         case r'failurePercentage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.failurePercentage = valueDes;
           break;
         case r'pauseBetweenRetries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pauseBetweenRetries = valueDes;
           break;
         case r'maxPauseBetweenRetries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxPauseBetweenRetries = valueDes;
           break;
@@ -189,5 +209,3 @@ class _$ProcessingStrategySerializer implements PrimitiveSerializer<ProcessingSt
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'component_scope.g.dart';
 
 class ComponentScope extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SYSTEM')
   static const ComponentScope SYSTEM = _$SYSTEM;
   @BuiltValueEnumConst(wireName: r'TENANT')
@@ -23,9 +22,10 @@ class ComponentScope extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ComponentScope unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<ComponentScope> get serializer => _$componentScopeSerializer;
+  static Serializer<ComponentScope> get serializer =>
+      _$componentScopeSerializer;
 
-  const ComponentScope._(String name): super(name);
+  const ComponentScope._(String name) : super(name);
 
   static BuiltSet<ComponentScope> get values => _$values;
   static ComponentScope valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class ComponentScope extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ComponentScopeMixin = Object with _$ComponentScopeMixin;
-

@@ -17,12 +17,18 @@ part 'aws_sns_sms_provider_configuration.g.dart';
 /// AwsSnsSmsProviderConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 /// * [accessKeyId] - The AWS SNS Access Key ID.
 /// * [secretAccessKey] - The AWS SNS Access Key.
 /// * [region] - The AWS region.
 @BuiltValue()
-abstract class AwsSnsSmsProviderConfiguration implements SmsProviderConfiguration, Built<AwsSnsSmsProviderConfiguration, AwsSnsSmsProviderConfigurationBuilder> {
+abstract class AwsSnsSmsProviderConfiguration
+    implements
+        SmsProviderConfiguration,
+        Built<
+          AwsSnsSmsProviderConfiguration,
+          AwsSnsSmsProviderConfigurationBuilder
+        > {
   /// The AWS SNS Access Key ID.
   @BuiltValueField(wireName: r'accessKeyId')
   String? get accessKeyId;
@@ -37,18 +43,25 @@ abstract class AwsSnsSmsProviderConfiguration implements SmsProviderConfiguratio
 
   AwsSnsSmsProviderConfiguration._();
 
-  factory AwsSnsSmsProviderConfiguration([void updates(AwsSnsSmsProviderConfigurationBuilder b)]) = _$AwsSnsSmsProviderConfiguration;
+  factory AwsSnsSmsProviderConfiguration([
+    void updates(AwsSnsSmsProviderConfigurationBuilder b),
+  ]) = _$AwsSnsSmsProviderConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AwsSnsSmsProviderConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AwsSnsSmsProviderConfiguration> get serializer => _$AwsSnsSmsProviderConfigurationSerializer();
+  static Serializer<AwsSnsSmsProviderConfiguration> get serializer =>
+      _$AwsSnsSmsProviderConfigurationSerializer();
 }
 
-class _$AwsSnsSmsProviderConfigurationSerializer implements PrimitiveSerializer<AwsSnsSmsProviderConfiguration> {
+class _$AwsSnsSmsProviderConfigurationSerializer
+    implements PrimitiveSerializer<AwsSnsSmsProviderConfiguration> {
   @override
-  final Iterable<Type> types = const [AwsSnsSmsProviderConfiguration, _$AwsSnsSmsProviderConfiguration];
+  final Iterable<Type> types = const [
+    AwsSnsSmsProviderConfiguration,
+    _$AwsSnsSmsProviderConfiguration,
+  ];
 
   @override
   final String wireName = r'AwsSnsSmsProviderConfiguration';
@@ -92,7 +105,11 @@ class _$AwsSnsSmsProviderConfigurationSerializer implements PrimitiveSerializer<
     AwsSnsSmsProviderConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -108,34 +125,42 @@ class _$AwsSnsSmsProviderConfigurationSerializer implements PrimitiveSerializer<
       final value = serializedList[i + 1];
       switch (key) {
         case r'accessKeyId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.accessKeyId = valueDes;
           break;
         case r'secretAccessKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.secretAccessKey = valueDes;
           break;
         case r'region':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.region = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -166,5 +191,3 @@ class _$AwsSnsSmsProviderConfigurationSerializer implements PrimitiveSerializer<
     return result.build();
   }
 }
-
-

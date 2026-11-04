@@ -72,7 +72,11 @@ class _$KeyInfoSerializer implements PrimitiveSerializer<KeyInfo> {
     KeyInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,17 +92,21 @@ class _$KeyInfoSerializer implements PrimitiveSerializer<KeyInfo> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.key = valueDes;
           break;
         case r'sample':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(KeySample),
-          ) as KeySample?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(KeySample),
+                  )
+                  as KeySample?;
           if (valueDes == null) continue;
           result.sample.replace(valueDes);
           break;
@@ -130,5 +138,3 @@ class _$KeyInfoSerializer implements PrimitiveSerializer<KeyInfo> {
     return result.build();
   }
 }
-
-

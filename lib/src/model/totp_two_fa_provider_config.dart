@@ -17,27 +17,37 @@ part 'totp_two_fa_provider_config.g.dart';
 /// TotpTwoFaProviderConfig
 ///
 /// Properties:
-/// * [providerType] 
-/// * [issuerName] 
+/// * [providerType]
+/// * [issuerName]
 @BuiltValue()
-abstract class TotpTwoFaProviderConfig implements TwoFaProviderConfig, Built<TotpTwoFaProviderConfig, TotpTwoFaProviderConfigBuilder> {
+abstract class TotpTwoFaProviderConfig
+    implements
+        TwoFaProviderConfig,
+        Built<TotpTwoFaProviderConfig, TotpTwoFaProviderConfigBuilder> {
   @BuiltValueField(wireName: r'issuerName')
   String get issuerName;
 
   TotpTwoFaProviderConfig._();
 
-  factory TotpTwoFaProviderConfig([void updates(TotpTwoFaProviderConfigBuilder b)]) = _$TotpTwoFaProviderConfig;
+  factory TotpTwoFaProviderConfig([
+    void updates(TotpTwoFaProviderConfigBuilder b),
+  ]) = _$TotpTwoFaProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TotpTwoFaProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TotpTwoFaProviderConfig> get serializer => _$TotpTwoFaProviderConfigSerializer();
+  static Serializer<TotpTwoFaProviderConfig> get serializer =>
+      _$TotpTwoFaProviderConfigSerializer();
 }
 
-class _$TotpTwoFaProviderConfigSerializer implements PrimitiveSerializer<TotpTwoFaProviderConfig> {
+class _$TotpTwoFaProviderConfigSerializer
+    implements PrimitiveSerializer<TotpTwoFaProviderConfig> {
   @override
-  final Iterable<Type> types = const [TotpTwoFaProviderConfig, _$TotpTwoFaProviderConfig];
+  final Iterable<Type> types = const [
+    TotpTwoFaProviderConfig,
+    _$TotpTwoFaProviderConfig,
+  ];
 
   @override
   final String wireName = r'TotpTwoFaProviderConfig';
@@ -65,7 +75,11 @@ class _$TotpTwoFaProviderConfigSerializer implements PrimitiveSerializer<TotpTwo
     TotpTwoFaProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -81,17 +95,21 @@ class _$TotpTwoFaProviderConfigSerializer implements PrimitiveSerializer<TotpTwo
       final value = serializedList[i + 1];
       switch (key) {
         case r'issuerName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.issuerName = valueDes;
           break;
         case r'providerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.providerType = valueDes;
           break;
         default:
@@ -122,5 +140,3 @@ class _$TotpTwoFaProviderConfigSerializer implements PrimitiveSerializer<TotpTwo
     return result.build();
   }
 }
-
-

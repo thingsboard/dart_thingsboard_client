@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'component_clustering_mode.g.dart';
 
 class ComponentClusteringMode extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'USER_PREFERENCE')
   static const ComponentClusteringMode USER_PREFERENCE = _$USER_PREFERENCE;
   @BuiltValueEnumConst(wireName: r'ENABLED')
@@ -23,11 +22,13 @@ class ComponentClusteringMode extends EnumClass {
   @BuiltValueEnumConst(wireName: r'SINGLETON')
   static const ComponentClusteringMode SINGLETON = _$SINGLETON;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const ComponentClusteringMode unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const ComponentClusteringMode unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<ComponentClusteringMode> get serializer => _$componentClusteringModeSerializer;
+  static Serializer<ComponentClusteringMode> get serializer =>
+      _$componentClusteringModeSerializer;
 
-  const ComponentClusteringMode._(String name): super(name);
+  const ComponentClusteringMode._(String name) : super(name);
 
   static BuiltSet<ComponentClusteringMode> get values => _$values;
   static ComponentClusteringMode valueOf(String name) => _$valueOf(name);
@@ -39,5 +40,5 @@ class ComponentClusteringMode extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class ComponentClusteringModeMixin = Object with _$ComponentClusteringModeMixin;
-
+abstract class ComponentClusteringModeMixin = Object
+    with _$ComponentClusteringModeMixin;

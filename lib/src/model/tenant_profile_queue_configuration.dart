@@ -19,17 +19,22 @@ part 'tenant_profile_queue_configuration.g.dart';
 /// TenantProfileQueueConfiguration
 ///
 /// Properties:
-/// * [name] 
-/// * [topic] 
-/// * [pollInterval] 
-/// * [partitions] 
-/// * [consumerPerPartition] 
-/// * [packProcessingTimeout] 
-/// * [submitStrategy] 
-/// * [processingStrategy] 
+/// * [name]
+/// * [topic]
+/// * [pollInterval]
+/// * [partitions]
+/// * [consumerPerPartition]
+/// * [packProcessingTimeout]
+/// * [submitStrategy]
+/// * [processingStrategy]
 /// * [additionalInfo] - A value representing the any type (object or primitive)
 @BuiltValue()
-abstract class TenantProfileQueueConfiguration implements Built<TenantProfileQueueConfiguration, TenantProfileQueueConfigurationBuilder> {
+abstract class TenantProfileQueueConfiguration
+    implements
+        Built<
+          TenantProfileQueueConfiguration,
+          TenantProfileQueueConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'name')
   String? get name;
 
@@ -60,18 +65,25 @@ abstract class TenantProfileQueueConfiguration implements Built<TenantProfileQue
 
   TenantProfileQueueConfiguration._();
 
-  factory TenantProfileQueueConfiguration([void updates(TenantProfileQueueConfigurationBuilder b)]) = _$TenantProfileQueueConfiguration;
+  factory TenantProfileQueueConfiguration([
+    void updates(TenantProfileQueueConfigurationBuilder b),
+  ]) = _$TenantProfileQueueConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(TenantProfileQueueConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TenantProfileQueueConfiguration> get serializer => _$TenantProfileQueueConfigurationSerializer();
+  static Serializer<TenantProfileQueueConfiguration> get serializer =>
+      _$TenantProfileQueueConfigurationSerializer();
 }
 
-class _$TenantProfileQueueConfigurationSerializer implements PrimitiveSerializer<TenantProfileQueueConfiguration> {
+class _$TenantProfileQueueConfigurationSerializer
+    implements PrimitiveSerializer<TenantProfileQueueConfiguration> {
   @override
-  final Iterable<Type> types = const [TenantProfileQueueConfiguration, _$TenantProfileQueueConfiguration];
+  final Iterable<Type> types = const [
+    TenantProfileQueueConfiguration,
+    _$TenantProfileQueueConfiguration,
+  ];
 
   @override
   final String wireName = r'TenantProfileQueueConfiguration';
@@ -152,7 +164,11 @@ class _$TenantProfileQueueConfigurationSerializer implements PrimitiveSerializer
     TenantProfileQueueConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -168,74 +184,92 @@ class _$TenantProfileQueueConfigurationSerializer implements PrimitiveSerializer
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'topic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.topic = valueDes;
           break;
         case r'pollInterval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pollInterval = valueDes;
           break;
         case r'partitions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.partitions = valueDes;
           break;
         case r'consumerPerPartition':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.consumerPerPartition = valueDes;
           break;
         case r'packProcessingTimeout':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.packProcessingTimeout = valueDes;
           break;
         case r'submitStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SubmitStrategy),
-          ) as SubmitStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SubmitStrategy),
+                  )
+                  as SubmitStrategy?;
           if (valueDes == null) continue;
           result.submitStrategy.replace(valueDes);
           break;
         case r'processingStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ProcessingStrategy),
-          ) as ProcessingStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ProcessingStrategy),
+                  )
+                  as ProcessingStrategy?;
           if (valueDes == null) continue;
           result.processingStrategy.replace(valueDes);
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
@@ -267,5 +301,3 @@ class _$TenantProfileQueueConfigurationSerializer implements PrimitiveSerializer
     return result.build();
   }
 }
-
-

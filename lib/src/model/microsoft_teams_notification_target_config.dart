@@ -18,18 +18,24 @@ part 'microsoft_teams_notification_target_config.g.dart';
 /// MicrosoftTeamsNotificationTargetConfig
 ///
 /// Properties:
-/// * [description] 
-/// * [type] 
-/// * [webhookUrl] 
-/// * [channelName] 
-/// * [useOldApi] 
-/// * [email] 
-/// * [firstName] 
-/// * [id] 
-/// * [lastName] 
-/// * [title] 
+/// * [description]
+/// * [type]
+/// * [webhookUrl]
+/// * [channelName]
+/// * [useOldApi]
+/// * [email]
+/// * [firstName]
+/// * [id]
+/// * [lastName]
+/// * [title]
 @BuiltValue()
-abstract class MicrosoftTeamsNotificationTargetConfig implements NotificationTargetConfig, Built<MicrosoftTeamsNotificationTargetConfig, MicrosoftTeamsNotificationTargetConfigBuilder> {
+abstract class MicrosoftTeamsNotificationTargetConfig
+    implements
+        NotificationTargetConfig,
+        Built<
+          MicrosoftTeamsNotificationTargetConfig,
+          MicrosoftTeamsNotificationTargetConfigBuilder
+        > {
   @BuiltValueField(wireName: r'firstName')
   String? get firstName;
 
@@ -56,18 +62,25 @@ abstract class MicrosoftTeamsNotificationTargetConfig implements NotificationTar
 
   MicrosoftTeamsNotificationTargetConfig._();
 
-  factory MicrosoftTeamsNotificationTargetConfig([void updates(MicrosoftTeamsNotificationTargetConfigBuilder b)]) = _$MicrosoftTeamsNotificationTargetConfig;
+  factory MicrosoftTeamsNotificationTargetConfig([
+    void updates(MicrosoftTeamsNotificationTargetConfigBuilder b),
+  ]) = _$MicrosoftTeamsNotificationTargetConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(MicrosoftTeamsNotificationTargetConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<MicrosoftTeamsNotificationTargetConfig> get serializer => _$MicrosoftTeamsNotificationTargetConfigSerializer();
+  static Serializer<MicrosoftTeamsNotificationTargetConfig> get serializer =>
+      _$MicrosoftTeamsNotificationTargetConfigSerializer();
 }
 
-class _$MicrosoftTeamsNotificationTargetConfigSerializer implements PrimitiveSerializer<MicrosoftTeamsNotificationTargetConfig> {
+class _$MicrosoftTeamsNotificationTargetConfigSerializer
+    implements PrimitiveSerializer<MicrosoftTeamsNotificationTargetConfig> {
   @override
-  final Iterable<Type> types = const [MicrosoftTeamsNotificationTargetConfig, _$MicrosoftTeamsNotificationTargetConfig];
+  final Iterable<Type> types = const [
+    MicrosoftTeamsNotificationTargetConfig,
+    _$MicrosoftTeamsNotificationTargetConfig,
+  ];
 
   @override
   final String wireName = r'MicrosoftTeamsNotificationTargetConfig';
@@ -149,7 +162,11 @@ class _$MicrosoftTeamsNotificationTargetConfigSerializer implements PrimitiveSer
     MicrosoftTeamsNotificationTargetConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -165,79 +182,99 @@ class _$MicrosoftTeamsNotificationTargetConfigSerializer implements PrimitiveSer
       final value = serializedList[i + 1];
       switch (key) {
         case r'firstName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.firstName = valueDes;
           break;
         case r'lastName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.lastName = valueDes;
           break;
         case r'useOldApi':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useOldApi = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'channelName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.channelName = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'title':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.title = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'webhookUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.webhookUrl = valueDes;
           break;
         case r'email':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.email = valueDes;
           break;
@@ -269,5 +306,3 @@ class _$MicrosoftTeamsNotificationTargetConfigSerializer implements PrimitiveSer
     return result.build();
   }
 }
-
-

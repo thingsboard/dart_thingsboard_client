@@ -26,23 +26,26 @@ part 'report_job_configuration.g.dart';
 /// ReportJobConfiguration
 ///
 /// Properties:
-/// * [tasksKey] 
-/// * [toReprocess] 
-/// * [type] 
-/// * [reportTemplateId] 
-/// * [userId] 
-/// * [timezone] 
-/// * [makePublic] 
-/// * [targets] 
-/// * [notificationTemplateId] 
-/// * [notificationRequests] 
-/// * [originator] 
-/// * [ruleNode] 
-/// * [outputTbMsgProto] 
-/// * [queueName] 
-/// * [schedulerEventInfo] 
+/// * [tasksKey]
+/// * [toReprocess]
+/// * [type]
+/// * [reportTemplateId]
+/// * [userId]
+/// * [timezone]
+/// * [makePublic]
+/// * [targets]
+/// * [notificationTemplateId]
+/// * [notificationRequests]
+/// * [originator]
+/// * [ruleNode]
+/// * [outputTbMsgProto]
+/// * [queueName]
+/// * [schedulerEventInfo]
 @BuiltValue()
-abstract class ReportJobConfiguration implements JobConfiguration, Built<ReportJobConfiguration, ReportJobConfigurationBuilder> {
+abstract class ReportJobConfiguration
+    implements
+        JobConfiguration,
+        Built<ReportJobConfiguration, ReportJobConfigurationBuilder> {
   @BuiltValueField(wireName: r'ruleNode')
   RuleNode? get ruleNode;
 
@@ -81,18 +84,25 @@ abstract class ReportJobConfiguration implements JobConfiguration, Built<ReportJ
 
   ReportJobConfiguration._();
 
-  factory ReportJobConfiguration([void updates(ReportJobConfigurationBuilder b)]) = _$ReportJobConfiguration;
+  factory ReportJobConfiguration([
+    void updates(ReportJobConfigurationBuilder b),
+  ]) = _$ReportJobConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ReportJobConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReportJobConfiguration> get serializer => _$ReportJobConfigurationSerializer();
+  static Serializer<ReportJobConfiguration> get serializer =>
+      _$ReportJobConfigurationSerializer();
 }
 
-class _$ReportJobConfigurationSerializer implements PrimitiveSerializer<ReportJobConfiguration> {
+class _$ReportJobConfigurationSerializer
+    implements PrimitiveSerializer<ReportJobConfiguration> {
   @override
-  final Iterable<Type> types = const [ReportJobConfiguration, _$ReportJobConfiguration];
+  final Iterable<Type> types = const [
+    ReportJobConfiguration,
+    _$ReportJobConfiguration,
+  ];
 
   @override
   final String wireName = r'ReportJobConfiguration';
@@ -113,7 +123,9 @@ class _$ReportJobConfigurationSerializer implements PrimitiveSerializer<ReportJo
       yield r'notificationRequests';
       yield serializers.serialize(
         object.notificationRequests,
-        specifiedType: const FullType(BuiltList, [FullType(NotificationRequest)]),
+        specifiedType: const FullType(BuiltList, [
+          FullType(NotificationRequest),
+        ]),
       );
     }
     if (object.timezone != null) {
@@ -211,7 +223,11 @@ class _$ReportJobConfigurationSerializer implements PrimitiveSerializer<ReportJo
     ReportJobConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -227,120 +243,158 @@ class _$ReportJobConfigurationSerializer implements PrimitiveSerializer<ReportJo
       final value = serializedList[i + 1];
       switch (key) {
         case r'ruleNode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleNode),
-          ) as RuleNode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleNode),
+                  )
+                  as RuleNode?;
           if (valueDes == null) continue;
           result.ruleNode.replace(valueDes);
           break;
         case r'notificationRequests':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(NotificationRequest)]),
-          ) as BuiltList<NotificationRequest>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(NotificationRequest),
+                    ]),
+                  )
+                  as BuiltList<NotificationRequest>?;
           if (valueDes == null) continue;
           result.notificationRequests.replace(valueDes);
           break;
         case r'timezone':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.timezone = valueDes;
           break;
         case r'toReprocess':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(TaskResult)]),
-          ) as BuiltList<TaskResult>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(TaskResult),
+                    ]),
+                  )
+                  as BuiltList<TaskResult>?;
           if (valueDes == null) continue;
           result.toReprocess.replace(valueDes);
           break;
         case r'tasksKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tasksKey = valueDes;
           break;
         case r'originator':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.originator = valueDes;
           break;
         case r'outputTbMsgProto':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.outputTbMsgProto = valueDes;
           break;
         case r'reportTemplateId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportTemplateId),
-          ) as ReportTemplateId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReportTemplateId),
+                  )
+                  as ReportTemplateId?;
           if (valueDes == null) continue;
           result.reportTemplateId.replace(valueDes);
           break;
         case r'notificationTemplateId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationTemplateId),
-          ) as NotificationTemplateId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationTemplateId,
+                    ),
+                  )
+                  as NotificationTemplateId?;
           if (valueDes == null) continue;
           result.notificationTemplateId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'userId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.userId.replace(valueDes);
           break;
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.targets.replace(valueDes);
           break;
         case r'queueName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.queueName = valueDes;
           break;
         case r'schedulerEventInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityInfo),
-          ) as EntityInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityInfo),
+                  )
+                  as EntityInfo?;
           if (valueDes == null) continue;
           result.schedulerEventInfo.replace(valueDes);
           break;
         case r'makePublic':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.makePublic = valueDes;
           break;
@@ -372,5 +426,3 @@ class _$ReportJobConfigurationSerializer implements PrimitiveSerializer<ReportJo
     return result.build();
   }
 }
-
-

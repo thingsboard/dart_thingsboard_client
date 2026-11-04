@@ -17,23 +17,37 @@ part 'default_device_profile_transport_configuration.g.dart';
 /// DefaultDeviceProfileTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class DefaultDeviceProfileTransportConfiguration implements DeviceProfileTransportConfiguration, Built<DefaultDeviceProfileTransportConfiguration, DefaultDeviceProfileTransportConfigurationBuilder> {
+abstract class DefaultDeviceProfileTransportConfiguration
+    implements
+        DeviceProfileTransportConfiguration,
+        Built<
+          DefaultDeviceProfileTransportConfiguration,
+          DefaultDeviceProfileTransportConfigurationBuilder
+        > {
   DefaultDeviceProfileTransportConfiguration._();
 
-  factory DefaultDeviceProfileTransportConfiguration([void updates(DefaultDeviceProfileTransportConfigurationBuilder b)]) = _$DefaultDeviceProfileTransportConfiguration;
+  factory DefaultDeviceProfileTransportConfiguration([
+    void updates(DefaultDeviceProfileTransportConfigurationBuilder b),
+  ]) = _$DefaultDeviceProfileTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DefaultDeviceProfileTransportConfigurationBuilder b) => b;
+  static void _defaults(DefaultDeviceProfileTransportConfigurationBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultDeviceProfileTransportConfiguration> get serializer => _$DefaultDeviceProfileTransportConfigurationSerializer();
+  static Serializer<DefaultDeviceProfileTransportConfiguration>
+  get serializer => _$DefaultDeviceProfileTransportConfigurationSerializer();
 }
 
-class _$DefaultDeviceProfileTransportConfigurationSerializer implements PrimitiveSerializer<DefaultDeviceProfileTransportConfiguration> {
+class _$DefaultDeviceProfileTransportConfigurationSerializer
+    implements PrimitiveSerializer<DefaultDeviceProfileTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [DefaultDeviceProfileTransportConfiguration, _$DefaultDeviceProfileTransportConfiguration];
+  final Iterable<Type> types = const [
+    DefaultDeviceProfileTransportConfiguration,
+    _$DefaultDeviceProfileTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'DefaultDeviceProfileTransportConfiguration';
@@ -56,7 +70,11 @@ class _$DefaultDeviceProfileTransportConfigurationSerializer implements Primitiv
     DefaultDeviceProfileTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +90,12 @@ class _$DefaultDeviceProfileTransportConfigurationSerializer implements Primitiv
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +126,3 @@ class _$DefaultDeviceProfileTransportConfigurationSerializer implements Primitiv
     return result.build();
   }
 }
-
-

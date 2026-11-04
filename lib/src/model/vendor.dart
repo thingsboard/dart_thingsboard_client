@@ -16,8 +16,8 @@ part 'vendor.g.dart';
 /// Vendor
 ///
 /// Properties:
-/// * [name] 
-/// * [logo] 
+/// * [name]
+/// * [logo]
 @BuiltValue()
 abstract class Vendor implements Built<Vendor, VendorBuilder> {
   @BuiltValueField(wireName: r'name')
@@ -71,7 +71,11 @@ class _$VendorSerializer implements PrimitiveSerializer<Vendor> {
     Vendor object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +91,22 @@ class _$VendorSerializer implements PrimitiveSerializer<Vendor> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'logo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.logo = valueDes;
           break;
@@ -130,5 +138,3 @@ class _$VendorSerializer implements PrimitiveSerializer<Vendor> {
     return result.build();
   }
 }
-
-

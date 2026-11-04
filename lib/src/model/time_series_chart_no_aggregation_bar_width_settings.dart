@@ -18,11 +18,16 @@ part 'time_series_chart_no_aggregation_bar_width_settings.g.dart';
 /// TimeSeriesChartNoAggregationBarWidthSettings
 ///
 /// Properties:
-/// * [strategy] 
-/// * [groupWidth] 
-/// * [barWidth] 
+/// * [strategy]
+/// * [groupWidth]
+/// * [barWidth]
 @BuiltValue()
-abstract class TimeSeriesChartNoAggregationBarWidthSettings implements Built<TimeSeriesChartNoAggregationBarWidthSettings, TimeSeriesChartNoAggregationBarWidthSettingsBuilder> {
+abstract class TimeSeriesChartNoAggregationBarWidthSettings
+    implements
+        Built<
+          TimeSeriesChartNoAggregationBarWidthSettings,
+          TimeSeriesChartNoAggregationBarWidthSettingsBuilder
+        > {
   @BuiltValueField(wireName: r'strategy')
   TimeSeriesChartNoAggregationBarWidthStrategy? get strategy;
   // enum strategyEnum {  group,  separate,  };
@@ -35,18 +40,28 @@ abstract class TimeSeriesChartNoAggregationBarWidthSettings implements Built<Tim
 
   TimeSeriesChartNoAggregationBarWidthSettings._();
 
-  factory TimeSeriesChartNoAggregationBarWidthSettings([void updates(TimeSeriesChartNoAggregationBarWidthSettingsBuilder b)]) = _$TimeSeriesChartNoAggregationBarWidthSettings;
+  factory TimeSeriesChartNoAggregationBarWidthSettings([
+    void updates(TimeSeriesChartNoAggregationBarWidthSettingsBuilder b),
+  ]) = _$TimeSeriesChartNoAggregationBarWidthSettings;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(TimeSeriesChartNoAggregationBarWidthSettingsBuilder b) => b;
+  static void _defaults(
+    TimeSeriesChartNoAggregationBarWidthSettingsBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<TimeSeriesChartNoAggregationBarWidthSettings> get serializer => _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer();
+  static Serializer<TimeSeriesChartNoAggregationBarWidthSettings>
+  get serializer => _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer();
 }
 
-class _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer implements PrimitiveSerializer<TimeSeriesChartNoAggregationBarWidthSettings> {
+class _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer
+    implements
+        PrimitiveSerializer<TimeSeriesChartNoAggregationBarWidthSettings> {
   @override
-  final Iterable<Type> types = const [TimeSeriesChartNoAggregationBarWidthSettings, _$TimeSeriesChartNoAggregationBarWidthSettings];
+  final Iterable<Type> types = const [
+    TimeSeriesChartNoAggregationBarWidthSettings,
+    _$TimeSeriesChartNoAggregationBarWidthSettings,
+  ];
 
   @override
   final String wireName = r'TimeSeriesChartNoAggregationBarWidthSettings';
@@ -60,7 +75,9 @@ class _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer implements Primit
       yield r'strategy';
       yield serializers.serialize(
         object.strategy,
-        specifiedType: const FullType(TimeSeriesChartNoAggregationBarWidthStrategy),
+        specifiedType: const FullType(
+          TimeSeriesChartNoAggregationBarWidthStrategy,
+        ),
       );
     }
     if (object.groupWidth != null) {
@@ -85,7 +102,11 @@ class _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer implements Primit
     TimeSeriesChartNoAggregationBarWidthSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -101,26 +122,38 @@ class _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer implements Primit
       final value = serializedList[i + 1];
       switch (key) {
         case r'strategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeSeriesChartNoAggregationBarWidthStrategy),
-          ) as TimeSeriesChartNoAggregationBarWidthStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeSeriesChartNoAggregationBarWidthStrategy,
+                    ),
+                  )
+                  as TimeSeriesChartNoAggregationBarWidthStrategy?;
           if (valueDes == null) continue;
           result.strategy = valueDes;
           break;
         case r'groupWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeSeriesChartBarWidth),
-          ) as TimeSeriesChartBarWidth?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeSeriesChartBarWidth,
+                    ),
+                  )
+                  as TimeSeriesChartBarWidth?;
           if (valueDes == null) continue;
           result.groupWidth.replace(valueDes);
           break;
         case r'barWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TimeSeriesChartBarWidth),
-          ) as TimeSeriesChartBarWidth?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      TimeSeriesChartBarWidth,
+                    ),
+                  )
+                  as TimeSeriesChartBarWidth?;
           if (valueDes == null) continue;
           result.barWidth.replace(valueDes);
           break;
@@ -152,5 +185,3 @@ class _$TimeSeriesChartNoAggregationBarWidthSettingsSerializer implements Primit
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'calculated_field_type.g.dart';
 
 class CalculatedFieldType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'SIMPLE')
   static const CalculatedFieldType SIMPLE = _$SIMPLE;
   @BuiltValueEnumConst(wireName: r'SCRIPT')
@@ -27,15 +26,18 @@ class CalculatedFieldType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'PROPAGATION')
   static const CalculatedFieldType PROPAGATION = _$PROPAGATION;
   @BuiltValueEnumConst(wireName: r'RELATED_ENTITIES_AGGREGATION')
-  static const CalculatedFieldType RELATED_ENTITIES_AGGREGATION = _$RELATED_ENTITIES_AGGREGATION;
+  static const CalculatedFieldType RELATED_ENTITIES_AGGREGATION =
+      _$RELATED_ENTITIES_AGGREGATION;
   @BuiltValueEnumConst(wireName: r'ENTITY_AGGREGATION')
   static const CalculatedFieldType ENTITY_AGGREGATION = _$ENTITY_AGGREGATION;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const CalculatedFieldType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const CalculatedFieldType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<CalculatedFieldType> get serializer => _$calculatedFieldTypeSerializer;
+  static Serializer<CalculatedFieldType> get serializer =>
+      _$calculatedFieldTypeSerializer;
 
-  const CalculatedFieldType._(String name): super(name);
+  const CalculatedFieldType._(String name) : super(name);
 
   static BuiltSet<CalculatedFieldType> get values => _$values;
   static CalculatedFieldType valueOf(String name) => _$valueOf(name);
@@ -47,5 +49,5 @@ class CalculatedFieldType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class CalculatedFieldTypeMixin = Object with _$CalculatedFieldTypeMixin;
-
+abstract class CalculatedFieldTypeMixin = Object
+    with _$CalculatedFieldTypeMixin;

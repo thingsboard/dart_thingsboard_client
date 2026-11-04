@@ -24,31 +24,40 @@ part 'rule_chain_export_data.g.dart';
 /// RuleChainExportData
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
-/// * [metaData] 
+/// * [calculatedFields]
+/// * [entityType]
+/// * [metaData]
 @BuiltValue()
-abstract class RuleChainExportData implements EntityExportData, Built<RuleChainExportData, RuleChainExportDataBuilder> {
+abstract class RuleChainExportData
+    implements
+        EntityExportData,
+        Built<RuleChainExportData, RuleChainExportDataBuilder> {
   @BuiltValueField(wireName: r'metaData')
   RuleChainMetaData? get metaData;
 
   RuleChainExportData._();
 
-  factory RuleChainExportData([void updates(RuleChainExportDataBuilder b)]) = _$RuleChainExportData;
+  factory RuleChainExportData([void updates(RuleChainExportDataBuilder b)]) =
+      _$RuleChainExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RuleChainExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleChainExportData> get serializer => _$RuleChainExportDataSerializer();
+  static Serializer<RuleChainExportData> get serializer =>
+      _$RuleChainExportDataSerializer();
 }
 
-class _$RuleChainExportDataSerializer implements PrimitiveSerializer<RuleChainExportData> {
+class _$RuleChainExportDataSerializer
+    implements PrimitiveSerializer<RuleChainExportData> {
   @override
-  final Iterable<Type> types = const [RuleChainExportData, _$RuleChainExportData];
+  final Iterable<Type> types = const [
+    RuleChainExportData,
+    _$RuleChainExportData,
+  ];
 
   @override
   final String wireName = r'RuleChainExportData';
@@ -69,7 +78,10 @@ class _$RuleChainExportDataSerializer implements PrimitiveSerializer<RuleChainEx
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.relations != null) {
@@ -106,7 +118,11 @@ class _$RuleChainExportDataSerializer implements PrimitiveSerializer<RuleChainEx
     RuleChainExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -122,49 +138,68 @@ class _$RuleChainExportDataSerializer implements PrimitiveSerializer<RuleChainEx
       final value = serializedList[i + 1];
       switch (key) {
         case r'metaData':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(RuleChainMetaData),
-          ) as RuleChainMetaData?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(RuleChainMetaData),
+                  )
+                  as RuleChainMetaData?;
           if (valueDes == null) continue;
           result.metaData.replace(valueDes);
           break;
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
@@ -196,5 +231,3 @@ class _$RuleChainExportDataSerializer implements PrimitiveSerializer<RuleChainEx
     return result.build();
   }
 }
-
-

@@ -24,19 +24,20 @@ part 'notification.g.dart';
 /// Notification
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
-/// * [requestId] 
-/// * [recipientId] 
-/// * [type] 
-/// * [deliveryMethod] 
-/// * [subject] 
-/// * [text] 
+/// * [requestId]
+/// * [recipientId]
+/// * [type]
+/// * [deliveryMethod]
+/// * [subject]
+/// * [text]
 /// * [additionalConfig] - A value representing the any type (object or primitive)
-/// * [info] 
-/// * [status] 
+/// * [info]
+/// * [status]
 @BuiltValue()
-abstract class Notification implements Built<Notification, NotificationBuilder> {
+abstract class Notification
+    implements Built<Notification, NotificationBuilder> {
   @BuiltValueField(wireName: r'id')
   NotificationId? get id;
 
@@ -183,7 +184,11 @@ class _$NotificationSerializer implements PrimitiveSerializer<Notification> {
     Notification object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -199,90 +204,116 @@ class _$NotificationSerializer implements PrimitiveSerializer<Notification> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationId),
-          ) as NotificationId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(NotificationId),
+                  )
+                  as NotificationId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'requestId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRequestId),
-          ) as NotificationRequestId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRequestId,
+                    ),
+                  )
+                  as NotificationRequestId?;
           if (valueDes == null) continue;
           result.requestId.replace(valueDes);
           break;
         case r'recipientId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.recipientId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationType),
-          ) as NotificationType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(NotificationType),
+                  )
+                  as NotificationType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'deliveryMethod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationDeliveryMethod),
-          ) as NotificationDeliveryMethod?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationDeliveryMethod,
+                    ),
+                  )
+                  as NotificationDeliveryMethod?;
           if (valueDes == null) continue;
           result.deliveryMethod = valueDes;
           break;
         case r'subject':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.subject = valueDes;
           break;
         case r'text':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.text = valueDes;
           break;
         case r'additionalConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalConfig = valueDes;
           break;
         case r'info':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationInfo),
-          ) as NotificationInfo?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(NotificationInfo),
+                  )
+                  as NotificationInfo?;
           if (valueDes == null) continue;
           result.info.replace(valueDes);
           break;
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationStatus),
-          ) as NotificationStatus?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(NotificationStatus),
+                  )
+                  as NotificationStatus?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
@@ -314,5 +345,3 @@ class _$NotificationSerializer implements PrimitiveSerializer<Notification> {
     return result.build();
   }
 }
-
-

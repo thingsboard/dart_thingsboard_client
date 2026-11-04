@@ -18,26 +18,33 @@ part 'notification_settings.g.dart';
 /// NotificationSettings
 ///
 /// Properties:
-/// * [deliveryMethodsConfigs] 
+/// * [deliveryMethodsConfigs]
 @BuiltValue()
-abstract class NotificationSettings implements Built<NotificationSettings, NotificationSettingsBuilder> {
+abstract class NotificationSettings
+    implements Built<NotificationSettings, NotificationSettingsBuilder> {
   @BuiltValueField(wireName: r'deliveryMethodsConfigs')
   BuiltMap<String, NotificationDeliveryMethodConfig> get deliveryMethodsConfigs;
 
   NotificationSettings._();
 
-  factory NotificationSettings([void updates(NotificationSettingsBuilder b)]) = _$NotificationSettings;
+  factory NotificationSettings([void updates(NotificationSettingsBuilder b)]) =
+      _$NotificationSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationSettings> get serializer => _$NotificationSettingsSerializer();
+  static Serializer<NotificationSettings> get serializer =>
+      _$NotificationSettingsSerializer();
 }
 
-class _$NotificationSettingsSerializer implements PrimitiveSerializer<NotificationSettings> {
+class _$NotificationSettingsSerializer
+    implements PrimitiveSerializer<NotificationSettings> {
   @override
-  final Iterable<Type> types = const [NotificationSettings, _$NotificationSettings];
+  final Iterable<Type> types = const [
+    NotificationSettings,
+    _$NotificationSettings,
+  ];
 
   @override
   final String wireName = r'NotificationSettings';
@@ -50,7 +57,10 @@ class _$NotificationSettingsSerializer implements PrimitiveSerializer<Notificati
     yield r'deliveryMethodsConfigs';
     yield serializers.serialize(
       object.deliveryMethodsConfigs,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(NotificationDeliveryMethodConfig)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(NotificationDeliveryMethodConfig),
+      ]),
     );
   }
 
@@ -60,7 +70,11 @@ class _$NotificationSettingsSerializer implements PrimitiveSerializer<Notificati
     NotificationSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -76,10 +90,15 @@ class _$NotificationSettingsSerializer implements PrimitiveSerializer<Notificati
       final value = serializedList[i + 1];
       switch (key) {
         case r'deliveryMethodsConfigs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(NotificationDeliveryMethodConfig)]),
-          ) as BuiltMap<String, NotificationDeliveryMethodConfig>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(NotificationDeliveryMethodConfig),
+                    ]),
+                  )
+                  as BuiltMap<String, NotificationDeliveryMethodConfig>;
           result.deliveryMethodsConfigs.replace(valueDes);
           break;
         default:
@@ -110,5 +129,3 @@ class _$NotificationSettingsSerializer implements PrimitiveSerializer<Notificati
     return result.build();
   }
 }
-
-

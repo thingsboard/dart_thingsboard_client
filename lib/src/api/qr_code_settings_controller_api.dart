@@ -13,15 +13,12 @@ import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/jwt_pair.dart';
 import 'package:thingsboard_client/src/model/qr_code_settings.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class QrCodeSettingsControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -29,10 +26,10 @@ class QrCodeSettingsControllerApi {
   const QrCodeSettingsControllerApi(this._dio, [this._serializers]);
 
   /// getApplicationRedirect
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [userAgent] 
+  /// * [userAgent]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -42,7 +39,7 @@ class QrCodeSettingsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> getApplicationRedirect({ 
+  Future<Response<JsonObject>> getApplicationRedirect({
     required String userAgent,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -55,14 +52,8 @@ class QrCodeSettingsControllerApi {
     final _path = r'/api/noauth/qr';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        r'User-Agent': userAgent,
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{r'User-Agent': userAgent, ...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -78,11 +69,13 @@ class QrCodeSettingsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -106,7 +99,7 @@ class QrCodeSettingsControllerApi {
   }
 
   /// Get QR code configuration for home page (getMergedMobileAppSettings)
-  /// The response payload contains ui configuration of qr code  Available for any authorized user. 
+  /// The response payload contains ui configuration of qr code  Available for any authorized user.
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -118,7 +111,7 @@ class QrCodeSettingsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [QrCodeSettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<QrCodeSettings>> getMergedMobileAppSettings({ 
+  Future<Response<QrCodeSettings>> getMergedMobileAppSettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -126,13 +119,12 @@ class QrCodeSettingsControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerQrCodeSettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerQrCodeSettings);
     final _path = r'/api/mobile/qr/merged';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -140,11 +132,8 @@ class QrCodeSettingsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -163,11 +152,13 @@ class QrCodeSettingsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(QrCodeSettings),
-      ) as QrCodeSettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(QrCodeSettings),
+                )
+                as QrCodeSettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -191,7 +182,7 @@ class QrCodeSettingsControllerApi {
   }
 
   /// Get the deep link to the associated mobile application (getMobileAppDeepLink)
-  /// Fetch the url that takes user to linked mobile application   Available for any authorized user. 
+  /// Fetch the url that takes user to linked mobile application   Available for any authorized user.
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -203,7 +194,7 @@ class QrCodeSettingsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getMobileAppDeepLink({ 
+  Future<Response<String>> getMobileAppDeepLink({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -214,9 +205,7 @@ class QrCodeSettingsControllerApi {
     final _path = r'/api/mobile/qr/deepLink';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -224,11 +213,8 @@ class QrCodeSettingsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -248,7 +234,6 @@ class QrCodeSettingsControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -272,7 +257,7 @@ class QrCodeSettingsControllerApi {
   }
 
   /// Get Mobile application settings (getQrCodeSettings)
-  /// The response payload contains configuration for android/iOS applications and platform qr code widget settings.  Available for any authorized user. 
+  /// The response payload contains configuration for android/iOS applications and platform qr code widget settings.  Available for any authorized user.
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -284,7 +269,7 @@ class QrCodeSettingsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [QrCodeSettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<QrCodeSettings>> getQrCodeSettings({ 
+  Future<Response<QrCodeSettings>> getQrCodeSettings({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -292,13 +277,12 @@ class QrCodeSettingsControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerQrCodeSettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerQrCodeSettings);
     final _path = r'/api/mobile/qr/settings';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -306,11 +290,8 @@ class QrCodeSettingsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -329,11 +310,13 @@ class QrCodeSettingsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(QrCodeSettings),
-      ) as QrCodeSettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(QrCodeSettings),
+                )
+                as QrCodeSettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -370,7 +353,7 @@ class QrCodeSettingsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JwtPair] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JwtPair>> getUserTokenByMobileSecret({ 
+  Future<Response<JwtPair>> getUserTokenByMobileSecret({
     required String secret,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -380,16 +363,20 @@ class QrCodeSettingsControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerJwtPair);
-    final _path = r'/api/noauth/qr/{secret}'.replaceAll('{' r'secret' '}', encodeQueryParameter(_serializers, secret, const FullType(String)).toString());
+    final _path = r'/api/noauth/qr/{secret}'.replaceAll(
+      '{'
+      r'secret'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        secret,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -405,11 +392,13 @@ class QrCodeSettingsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JwtPair),
-      ) as JwtPair;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JwtPair),
+                )
+                as JwtPair;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -436,7 +425,7 @@ class QrCodeSettingsControllerApi {
   /// The request payload contains configuration for android/iOS applications and platform qr code widget settings.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [qrCodeSettings] 
+  /// * [qrCodeSettings]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -446,7 +435,7 @@ class QrCodeSettingsControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [QrCodeSettings] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<QrCodeSettings>> saveQrCodeSettings({ 
+  Future<Response<QrCodeSettings>> saveQrCodeSettings({
     required QrCodeSettings qrCodeSettings,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -455,13 +444,12 @@ class QrCodeSettingsControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerQrCodeSettings);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerQrCodeSettings);
     final _path = r'/api/mobile/qr/settings';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -469,11 +457,8 @@ class QrCodeSettingsControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -486,13 +471,9 @@ class QrCodeSettingsControllerApi {
     try {
       const _type = FullType(QrCodeSettings);
       _bodyData = _serializers.serialize(qrCodeSettings, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -512,11 +493,13 @@ class QrCodeSettingsControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(QrCodeSettings),
-      ) as QrCodeSettings;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(QrCodeSettings),
+                )
+                as QrCodeSettings;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -538,5 +521,4 @@ class QrCodeSettingsControllerApi {
       extra: _response.extra,
     );
   }
-
 }

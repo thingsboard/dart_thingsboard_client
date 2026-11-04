@@ -20,13 +20,16 @@ part 'life_cycle_event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 /// * [server] - String value representing the server name, identifier or ip address where the platform is running
 /// * [event] - String value representing the lifecycle event type
 /// * [status] - String value representing status of the lifecycle event
 /// * [errorStr] - The case insensitive 'contains' filter based on error message
 @BuiltValue()
-abstract class LifeCycleEventFilter implements EventFilter, Built<LifeCycleEventFilter, LifeCycleEventFilterBuilder> {
+abstract class LifeCycleEventFilter
+    implements
+        EventFilter,
+        Built<LifeCycleEventFilter, LifeCycleEventFilterBuilder> {
   /// String value representing the server name, identifier or ip address where the platform is running
   @BuiltValueField(wireName: r'server')
   String? get server;
@@ -46,18 +49,24 @@ abstract class LifeCycleEventFilter implements EventFilter, Built<LifeCycleEvent
 
   LifeCycleEventFilter._();
 
-  factory LifeCycleEventFilter([void updates(LifeCycleEventFilterBuilder b)]) = _$LifeCycleEventFilter;
+  factory LifeCycleEventFilter([void updates(LifeCycleEventFilterBuilder b)]) =
+      _$LifeCycleEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LifeCycleEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LifeCycleEventFilter> get serializer => _$LifeCycleEventFilterSerializer();
+  static Serializer<LifeCycleEventFilter> get serializer =>
+      _$LifeCycleEventFilterSerializer();
 }
 
-class _$LifeCycleEventFilterSerializer implements PrimitiveSerializer<LifeCycleEventFilter> {
+class _$LifeCycleEventFilterSerializer
+    implements PrimitiveSerializer<LifeCycleEventFilter> {
   @override
-  final Iterable<Type> types = const [LifeCycleEventFilter, _$LifeCycleEventFilter];
+  final Iterable<Type> types = const [
+    LifeCycleEventFilter,
+    _$LifeCycleEventFilter,
+  ];
 
   @override
   final String wireName = r'LifeCycleEventFilter';
@@ -115,7 +124,11 @@ class _$LifeCycleEventFilterSerializer implements PrimitiveSerializer<LifeCycleE
     LifeCycleEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -131,49 +144,63 @@ class _$LifeCycleEventFilterSerializer implements PrimitiveSerializer<LifeCycleE
       final value = serializedList[i + 1];
       switch (key) {
         case r'server':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.server = valueDes;
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'event':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.event = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
         case r'status':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(LifeCycleEventFilterStatusEnum),
-          ) as LifeCycleEventFilterStatusEnum?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      LifeCycleEventFilterStatusEnum,
+                    ),
+                  )
+                  as LifeCycleEventFilterStatusEnum?;
           if (valueDes == null) continue;
           result.status = valueDes;
           break;
         case r'errorStr':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.errorStr = valueDes;
           break;
@@ -206,22 +233,25 @@ class _$LifeCycleEventFilterSerializer implements PrimitiveSerializer<LifeCycleE
   }
 }
 
-
 /// String value representing status of the lifecycle event
 class LifeCycleEventFilterStatusEnum extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'Success')
-  static const LifeCycleEventFilterStatusEnum success = _$lifeCycleEventFilterStatusEnum_success;
+  static const LifeCycleEventFilterStatusEnum success =
+      _$lifeCycleEventFilterStatusEnum_success;
   @BuiltValueEnumConst(wireName: r'Failure')
-  static const LifeCycleEventFilterStatusEnum failure = _$lifeCycleEventFilterStatusEnum_failure;
+  static const LifeCycleEventFilterStatusEnum failure =
+      _$lifeCycleEventFilterStatusEnum_failure;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const LifeCycleEventFilterStatusEnum unknownDefaultOpenApi = _$lifeCycleEventFilterStatusEnum_unknownDefaultOpenApi;
+  static const LifeCycleEventFilterStatusEnum unknownDefaultOpenApi =
+      _$lifeCycleEventFilterStatusEnum_unknownDefaultOpenApi;
 
-  static Serializer<LifeCycleEventFilterStatusEnum> get serializer => _$lifeCycleEventFilterStatusEnumSerializer;
+  static Serializer<LifeCycleEventFilterStatusEnum> get serializer =>
+      _$lifeCycleEventFilterStatusEnumSerializer;
 
-  const LifeCycleEventFilterStatusEnum._(String name): super(name);
+  const LifeCycleEventFilterStatusEnum._(String name) : super(name);
 
-  static BuiltSet<LifeCycleEventFilterStatusEnum> get values => _$lifeCycleEventFilterStatusEnumValues;
-  static LifeCycleEventFilterStatusEnum valueOf(String name) => _$lifeCycleEventFilterStatusEnumValueOf(name);
+  static BuiltSet<LifeCycleEventFilterStatusEnum> get values =>
+      _$lifeCycleEventFilterStatusEnumValues;
+  static LifeCycleEventFilterStatusEnum valueOf(String name) =>
+      _$lifeCycleEventFilterStatusEnumValueOf(name);
 }
-

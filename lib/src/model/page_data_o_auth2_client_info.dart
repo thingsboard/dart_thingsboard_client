@@ -23,7 +23,9 @@ part 'page_data_o_auth2_client_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataOAuth2ClientInfo implements Built<PageDataOAuth2ClientInfo, PageDataOAuth2ClientInfoBuilder> {
+abstract class PageDataOAuth2ClientInfo
+    implements
+        Built<PageDataOAuth2ClientInfo, PageDataOAuth2ClientInfoBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<OAuth2ClientInfo>? get data;
@@ -42,18 +44,25 @@ abstract class PageDataOAuth2ClientInfo implements Built<PageDataOAuth2ClientInf
 
   PageDataOAuth2ClientInfo._();
 
-  factory PageDataOAuth2ClientInfo([void updates(PageDataOAuth2ClientInfoBuilder b)]) = _$PageDataOAuth2ClientInfo;
+  factory PageDataOAuth2ClientInfo([
+    void updates(PageDataOAuth2ClientInfoBuilder b),
+  ]) = _$PageDataOAuth2ClientInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataOAuth2ClientInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataOAuth2ClientInfo> get serializer => _$PageDataOAuth2ClientInfoSerializer();
+  static Serializer<PageDataOAuth2ClientInfo> get serializer =>
+      _$PageDataOAuth2ClientInfoSerializer();
 }
 
-class _$PageDataOAuth2ClientInfoSerializer implements PrimitiveSerializer<PageDataOAuth2ClientInfo> {
+class _$PageDataOAuth2ClientInfoSerializer
+    implements PrimitiveSerializer<PageDataOAuth2ClientInfo> {
   @override
-  final Iterable<Type> types = const [PageDataOAuth2ClientInfo, _$PageDataOAuth2ClientInfo];
+  final Iterable<Type> types = const [
+    PageDataOAuth2ClientInfo,
+    _$PageDataOAuth2ClientInfo,
+  ];
 
   @override
   final String wireName = r'PageDataOAuth2ClientInfo';
@@ -99,7 +108,11 @@ class _$PageDataOAuth2ClientInfoSerializer implements PrimitiveSerializer<PageDa
     PageDataOAuth2ClientInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +128,44 @@ class _$PageDataOAuth2ClientInfoSerializer implements PrimitiveSerializer<PageDa
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(OAuth2ClientInfo)]),
-          ) as BuiltList<OAuth2ClientInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(OAuth2ClientInfo),
+                    ]),
+                  )
+                  as BuiltList<OAuth2ClientInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +197,3 @@ class _$PageDataOAuth2ClientInfoSerializer implements PrimitiveSerializer<PageDa
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'alarm_rule_string_operation.g.dart';
 
 class AlarmRuleStringOperation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'EQUAL')
   static const AlarmRuleStringOperation EQUAL = _$EQUAL;
   @BuiltValueEnumConst(wireName: r'NOT_EQUAL')
@@ -33,11 +32,13 @@ class AlarmRuleStringOperation extends EnumClass {
   @BuiltValueEnumConst(wireName: r'NOT_IN')
   static const AlarmRuleStringOperation NOT_IN = _$NOT_IN;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const AlarmRuleStringOperation unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const AlarmRuleStringOperation unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<AlarmRuleStringOperation> get serializer => _$alarmRuleStringOperationSerializer;
+  static Serializer<AlarmRuleStringOperation> get serializer =>
+      _$alarmRuleStringOperationSerializer;
 
-  const AlarmRuleStringOperation._(String name): super(name);
+  const AlarmRuleStringOperation._(String name) : super(name);
 
   static BuiltSet<AlarmRuleStringOperation> get values => _$values;
   static AlarmRuleStringOperation valueOf(String name) => _$valueOf(name);
@@ -49,5 +50,5 @@ class AlarmRuleStringOperation extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class AlarmRuleStringOperationMixin = Object with _$AlarmRuleStringOperationMixin;
-
+abstract class AlarmRuleStringOperationMixin = Object
+    with _$AlarmRuleStringOperationMixin;

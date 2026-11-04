@@ -18,22 +18,26 @@ part 'admin_settings_id.g.dart';
 /// AdminSettingsId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class AdminSettingsId implements EntityId, Built<AdminSettingsId, AdminSettingsIdBuilder> {
+abstract class AdminSettingsId
+    implements EntityId, Built<AdminSettingsId, AdminSettingsIdBuilder> {
   AdminSettingsId._();
 
-  factory AdminSettingsId([void updates(AdminSettingsIdBuilder b)]) = _$AdminSettingsId;
+  factory AdminSettingsId([void updates(AdminSettingsIdBuilder b)]) =
+      _$AdminSettingsId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AdminSettingsIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AdminSettingsId> get serializer => _$AdminSettingsIdSerializer();
+  static Serializer<AdminSettingsId> get serializer =>
+      _$AdminSettingsIdSerializer();
 }
 
-class _$AdminSettingsIdSerializer implements PrimitiveSerializer<AdminSettingsId> {
+class _$AdminSettingsIdSerializer
+    implements PrimitiveSerializer<AdminSettingsId> {
   @override
   final Iterable<Type> types = const [AdminSettingsId, _$AdminSettingsId];
 
@@ -63,7 +67,11 @@ class _$AdminSettingsIdSerializer implements PrimitiveSerializer<AdminSettingsId
     AdminSettingsId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$AdminSettingsIdSerializer implements PrimitiveSerializer<AdminSettingsId
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$AdminSettingsIdSerializer implements PrimitiveSerializer<AdminSettingsId
     return result.build();
   }
 }
-
-

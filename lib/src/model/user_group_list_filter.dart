@@ -18,27 +18,36 @@ part 'user_group_list_filter.g.dart';
 /// UserGroupListFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [groupsIds] 
+/// * [type]
+/// * [groupsIds]
 @BuiltValue()
-abstract class UserGroupListFilter implements UsersFilter, Built<UserGroupListFilter, UserGroupListFilterBuilder> {
+abstract class UserGroupListFilter
+    implements
+        UsersFilter,
+        Built<UserGroupListFilter, UserGroupListFilterBuilder> {
   @BuiltValueField(wireName: r'groupsIds')
   BuiltList<String> get groupsIds;
 
   UserGroupListFilter._();
 
-  factory UserGroupListFilter([void updates(UserGroupListFilterBuilder b)]) = _$UserGroupListFilter;
+  factory UserGroupListFilter([void updates(UserGroupListFilterBuilder b)]) =
+      _$UserGroupListFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserGroupListFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserGroupListFilter> get serializer => _$UserGroupListFilterSerializer();
+  static Serializer<UserGroupListFilter> get serializer =>
+      _$UserGroupListFilterSerializer();
 }
 
-class _$UserGroupListFilterSerializer implements PrimitiveSerializer<UserGroupListFilter> {
+class _$UserGroupListFilterSerializer
+    implements PrimitiveSerializer<UserGroupListFilter> {
   @override
-  final Iterable<Type> types = const [UserGroupListFilter, _$UserGroupListFilter];
+  final Iterable<Type> types = const [
+    UserGroupListFilter,
+    _$UserGroupListFilter,
+  ];
 
   @override
   final String wireName = r'UserGroupListFilter';
@@ -66,7 +75,11 @@ class _$UserGroupListFilterSerializer implements PrimitiveSerializer<UserGroupLi
     UserGroupListFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -82,17 +95,23 @@ class _$UserGroupListFilterSerializer implements PrimitiveSerializer<UserGroupLi
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'groupsIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.groupsIds.replace(valueDes);
           break;
         default:
@@ -123,5 +142,3 @@ class _$UserGroupListFilterSerializer implements PrimitiveSerializer<UserGroupLi
     return result.build();
   }
 }
-
-

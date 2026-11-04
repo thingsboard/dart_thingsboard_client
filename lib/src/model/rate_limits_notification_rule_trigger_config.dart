@@ -20,27 +20,40 @@ part 'rate_limits_notification_rule_trigger_config.g.dart';
 /// RateLimitsNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [apis] 
+/// * [triggerType]
+/// * [apis]
 @BuiltValue()
-abstract class RateLimitsNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<RateLimitsNotificationRuleTriggerConfig, RateLimitsNotificationRuleTriggerConfigBuilder> {
+abstract class RateLimitsNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          RateLimitsNotificationRuleTriggerConfig,
+          RateLimitsNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'apis')
   BuiltSet<LimitedApi>? get apis;
 
   RateLimitsNotificationRuleTriggerConfig._();
 
-  factory RateLimitsNotificationRuleTriggerConfig([void updates(RateLimitsNotificationRuleTriggerConfigBuilder b)]) = _$RateLimitsNotificationRuleTriggerConfig;
+  factory RateLimitsNotificationRuleTriggerConfig([
+    void updates(RateLimitsNotificationRuleTriggerConfigBuilder b),
+  ]) = _$RateLimitsNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RateLimitsNotificationRuleTriggerConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RateLimitsNotificationRuleTriggerConfig> get serializer => _$RateLimitsNotificationRuleTriggerConfigSerializer();
+  static Serializer<RateLimitsNotificationRuleTriggerConfig> get serializer =>
+      _$RateLimitsNotificationRuleTriggerConfigSerializer();
 }
 
-class _$RateLimitsNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<RateLimitsNotificationRuleTriggerConfig> {
+class _$RateLimitsNotificationRuleTriggerConfigSerializer
+    implements PrimitiveSerializer<RateLimitsNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [RateLimitsNotificationRuleTriggerConfig, _$RateLimitsNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    RateLimitsNotificationRuleTriggerConfig,
+    _$RateLimitsNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'RateLimitsNotificationRuleTriggerConfig';
@@ -70,7 +83,11 @@ class _$RateLimitsNotificationRuleTriggerConfigSerializer implements PrimitiveSe
     RateLimitsNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,18 +103,24 @@ class _$RateLimitsNotificationRuleTriggerConfigSerializer implements PrimitiveSe
       final value = serializedList[i + 1];
       switch (key) {
         case r'apis':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(LimitedApi)]),
-          ) as BuiltSet<LimitedApi>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(LimitedApi),
+                    ]),
+                  )
+                  as BuiltSet<LimitedApi>?;
           if (valueDes == null) continue;
           result.apis.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         default:
@@ -128,5 +151,3 @@ class _$RateLimitsNotificationRuleTriggerConfigSerializer implements PrimitiveSe
     return result.build();
   }
 }
-
-

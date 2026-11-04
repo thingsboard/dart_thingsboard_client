@@ -29,7 +29,8 @@ part 'allowed_permissions_info.g.dart';
 /// * [userPermissions] - JSON object with merged permission for all generic and group roles assigned to all user groups the user belongs to
 /// * [userOwnerId] - Owner Id of the user (Tenant or Customer)
 @BuiltValue()
-abstract class AllowedPermissionsInfo implements Built<AllowedPermissionsInfo, AllowedPermissionsInfoBuilder> {
+abstract class AllowedPermissionsInfo
+    implements Built<AllowedPermissionsInfo, AllowedPermissionsInfoBuilder> {
   /// Static map (vocabulary) of allowed operations by resource type
   @BuiltValueField(wireName: r'operationsByResource')
   BuiltMap<String, BuiltSet<Operation>>? get operationsByResource;
@@ -60,18 +61,25 @@ abstract class AllowedPermissionsInfo implements Built<AllowedPermissionsInfo, A
 
   AllowedPermissionsInfo._();
 
-  factory AllowedPermissionsInfo([void updates(AllowedPermissionsInfoBuilder b)]) = _$AllowedPermissionsInfo;
+  factory AllowedPermissionsInfo([
+    void updates(AllowedPermissionsInfoBuilder b),
+  ]) = _$AllowedPermissionsInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AllowedPermissionsInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AllowedPermissionsInfo> get serializer => _$AllowedPermissionsInfoSerializer();
+  static Serializer<AllowedPermissionsInfo> get serializer =>
+      _$AllowedPermissionsInfoSerializer();
 }
 
-class _$AllowedPermissionsInfoSerializer implements PrimitiveSerializer<AllowedPermissionsInfo> {
+class _$AllowedPermissionsInfoSerializer
+    implements PrimitiveSerializer<AllowedPermissionsInfo> {
   @override
-  final Iterable<Type> types = const [AllowedPermissionsInfo, _$AllowedPermissionsInfo];
+  final Iterable<Type> types = const [
+    AllowedPermissionsInfo,
+    _$AllowedPermissionsInfo,
+  ];
 
   @override
   final String wireName = r'AllowedPermissionsInfo';
@@ -85,7 +93,10 @@ class _$AllowedPermissionsInfoSerializer implements PrimitiveSerializer<AllowedP
       yield r'operationsByResource';
       yield serializers.serialize(
         object.operationsByResource,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltSet, [FullType(Operation)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltSet, [FullType(Operation)]),
+        ]),
       );
     }
     if (object.allowedForGroupRoleOperations != null) {
@@ -138,7 +149,11 @@ class _$AllowedPermissionsInfoSerializer implements PrimitiveSerializer<AllowedP
     AllowedPermissionsInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -154,58 +169,85 @@ class _$AllowedPermissionsInfoSerializer implements PrimitiveSerializer<AllowedP
       final value = serializedList[i + 1];
       switch (key) {
         case r'operationsByResource':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltSet, [FullType(Operation)])]),
-          ) as BuiltMap<String, BuiltSet<Operation>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltSet, [FullType(Operation)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltSet<Operation>>?;
           if (valueDes == null) continue;
           result.operationsByResource.replace(valueDes);
           break;
         case r'allowedForGroupRoleOperations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(Operation)]),
-          ) as BuiltSet<Operation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(Operation),
+                    ]),
+                  )
+                  as BuiltSet<Operation>?;
           if (valueDes == null) continue;
           result.allowedForGroupRoleOperations.replace(valueDes);
           break;
         case r'allowedForGroupOwnerOnlyOperations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(Operation)]),
-          ) as BuiltSet<Operation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(Operation),
+                    ]),
+                  )
+                  as BuiltSet<Operation>?;
           if (valueDes == null) continue;
           result.allowedForGroupOwnerOnlyOperations.replace(valueDes);
           break;
         case r'allowedForGroupOwnerOnlyGroupOperations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(Operation)]),
-          ) as BuiltSet<Operation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(Operation),
+                    ]),
+                  )
+                  as BuiltSet<Operation>?;
           if (valueDes == null) continue;
           result.allowedForGroupOwnerOnlyGroupOperations.replace(valueDes);
           break;
         case r'allowedResources':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(Resource)]),
-          ) as BuiltSet<Resource>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(Resource),
+                    ]),
+                  )
+                  as BuiltSet<Resource>?;
           if (valueDes == null) continue;
           result.allowedResources.replace(valueDes);
           break;
         case r'userPermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(MergedUserPermissions),
-          ) as MergedUserPermissions?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      MergedUserPermissions,
+                    ),
+                  )
+                  as MergedUserPermissions?;
           if (valueDes == null) continue;
           result.userPermissions.replace(valueDes);
           break;
         case r'userOwnerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.userOwnerId = valueDes;
           break;
@@ -237,5 +279,3 @@ class _$AllowedPermissionsInfoSerializer implements PrimitiveSerializer<AllowedP
     return result.build();
   }
 }
-
-

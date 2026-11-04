@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'interval_type.g.dart';
 
 class IntervalType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'MILLISECONDS')
   static const IntervalType MILLISECONDS = _$MILLISECONDS;
   @BuiltValueEnumConst(wireName: r'WEEK')
@@ -31,7 +30,7 @@ class IntervalType extends EnumClass {
 
   static Serializer<IntervalType> get serializer => _$intervalTypeSerializer;
 
-  const IntervalType._(String name): super(name);
+  const IntervalType._(String name) : super(name);
 
   static BuiltSet<IntervalType> get values => _$values;
   static IntervalType valueOf(String name) => _$valueOf(name);
@@ -44,4 +43,3 @@ class IntervalType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class IntervalTypeMixin = Object with _$IntervalTypeMixin;
-

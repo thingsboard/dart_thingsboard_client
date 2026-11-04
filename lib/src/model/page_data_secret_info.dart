@@ -23,7 +23,8 @@ part 'page_data_secret_info.g.dart';
 /// * [totalElements] - Total number of elements in all available pages
 /// * [hasNext] - 'false' value indicates the end of the result set
 @BuiltValue()
-abstract class PageDataSecretInfo implements Built<PageDataSecretInfo, PageDataSecretInfoBuilder> {
+abstract class PageDataSecretInfo
+    implements Built<PageDataSecretInfo, PageDataSecretInfoBuilder> {
   /// Array of the entities
   @BuiltValueField(wireName: r'data')
   BuiltList<SecretInfo>? get data;
@@ -42,16 +43,19 @@ abstract class PageDataSecretInfo implements Built<PageDataSecretInfo, PageDataS
 
   PageDataSecretInfo._();
 
-  factory PageDataSecretInfo([void updates(PageDataSecretInfoBuilder b)]) = _$PageDataSecretInfo;
+  factory PageDataSecretInfo([void updates(PageDataSecretInfoBuilder b)]) =
+      _$PageDataSecretInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageDataSecretInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageDataSecretInfo> get serializer => _$PageDataSecretInfoSerializer();
+  static Serializer<PageDataSecretInfo> get serializer =>
+      _$PageDataSecretInfoSerializer();
 }
 
-class _$PageDataSecretInfoSerializer implements PrimitiveSerializer<PageDataSecretInfo> {
+class _$PageDataSecretInfoSerializer
+    implements PrimitiveSerializer<PageDataSecretInfo> {
   @override
   final Iterable<Type> types = const [PageDataSecretInfo, _$PageDataSecretInfo];
 
@@ -99,7 +103,11 @@ class _$PageDataSecretInfoSerializer implements PrimitiveSerializer<PageDataSecr
     PageDataSecretInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +123,44 @@ class _$PageDataSecretInfoSerializer implements PrimitiveSerializer<PageDataSecr
       final value = serializedList[i + 1];
       switch (key) {
         case r'data':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SecretInfo)]),
-          ) as BuiltList<SecretInfo>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SecretInfo),
+                    ]),
+                  )
+                  as BuiltList<SecretInfo>?;
           if (valueDes == null) continue;
           result.data.replace(valueDes);
           break;
         case r'totalPages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalPages = valueDes;
           break;
         case r'totalElements':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalElements = valueDes;
           break;
         case r'hasNext':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hasNext = valueDes;
           break;
@@ -174,5 +192,3 @@ class _$PageDataSecretInfoSerializer implements PrimitiveSerializer<PageDataSecr
     return result.build();
   }
 }
-
-

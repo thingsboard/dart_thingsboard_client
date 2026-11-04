@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'page_orientation.g.dart';
 
 class PageOrientation extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'PORTRAIT')
   static const PageOrientation PORTRAIT = _$PORTRAIT;
   @BuiltValueEnumConst(wireName: r'LANDSCAPE')
@@ -23,9 +22,10 @@ class PageOrientation extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const PageOrientation unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<PageOrientation> get serializer => _$pageOrientationSerializer;
+  static Serializer<PageOrientation> get serializer =>
+      _$pageOrientationSerializer;
 
-  const PageOrientation._(String name): super(name);
+  const PageOrientation._(String name) : super(name);
 
   static BuiltSet<PageOrientation> get values => _$values;
   static PageOrientation valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class PageOrientation extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class PageOrientationMixin = Object with _$PageOrientationMixin;
-

@@ -19,7 +19,8 @@ part 'home_dashboard_params.g.dart';
 /// * [id] - Home dashboard Id to assign for the new user.
 /// * [hideToolbar] - Indicates if hide toolbar should be hidden.
 @BuiltValue()
-abstract class HomeDashboardParams implements Built<HomeDashboardParams, HomeDashboardParamsBuilder> {
+abstract class HomeDashboardParams
+    implements Built<HomeDashboardParams, HomeDashboardParamsBuilder> {
   /// Home dashboard Id to assign for the new user.
   @BuiltValueField(wireName: r'id')
   String? get id;
@@ -30,18 +31,24 @@ abstract class HomeDashboardParams implements Built<HomeDashboardParams, HomeDas
 
   HomeDashboardParams._();
 
-  factory HomeDashboardParams([void updates(HomeDashboardParamsBuilder b)]) = _$HomeDashboardParams;
+  factory HomeDashboardParams([void updates(HomeDashboardParamsBuilder b)]) =
+      _$HomeDashboardParams;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(HomeDashboardParamsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<HomeDashboardParams> get serializer => _$HomeDashboardParamsSerializer();
+  static Serializer<HomeDashboardParams> get serializer =>
+      _$HomeDashboardParamsSerializer();
 }
 
-class _$HomeDashboardParamsSerializer implements PrimitiveSerializer<HomeDashboardParams> {
+class _$HomeDashboardParamsSerializer
+    implements PrimitiveSerializer<HomeDashboardParams> {
   @override
-  final Iterable<Type> types = const [HomeDashboardParams, _$HomeDashboardParams];
+  final Iterable<Type> types = const [
+    HomeDashboardParams,
+    _$HomeDashboardParams,
+  ];
 
   @override
   final String wireName = r'HomeDashboardParams';
@@ -73,7 +80,11 @@ class _$HomeDashboardParamsSerializer implements PrimitiveSerializer<HomeDashboa
     HomeDashboardParams object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -89,18 +100,22 @@ class _$HomeDashboardParamsSerializer implements PrimitiveSerializer<HomeDashboa
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'hideToolbar':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.hideToolbar = valueDes;
           break;
@@ -132,5 +147,3 @@ class _$HomeDashboardParamsSerializer implements PrimitiveSerializer<HomeDashboa
     return result.build();
   }
 }
-
-

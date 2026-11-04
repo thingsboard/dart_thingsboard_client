@@ -21,26 +21,33 @@ class EntityData {
   });
 
   EntityData.fromJson(Map<String, dynamic> json)
-      : entityId = EntityId.fromJson(json['entityId']),
-        latest = json['latest'] != null
-            ? (json['latest'] as Map<String, dynamic>).map((key, value) =>
-                MapEntry(
-                    entityKeyTypeFromString(key),
-                    (value as Map<String, dynamic>).map((key, value) =>
-                        MapEntry(key, TsValue.fromJson(value)))))
-            : {},
-        timeseries = json['timeseries'] != null
-            ? (json['timeseries'] as Map<String, dynamic>).map((key, value) =>
-                MapEntry(
-                    key,
-                    (value as List<dynamic>)
-                        .map((e) => TsValue.fromJson(e))
-                        .toList()))
-            : {},
-        aggLatest = json['aggLatest'] != null
-            ? (json['aggLatest'] as Map<String, dynamic>).map((key, value) =>
-                MapEntry(int.parse(key), ComparisonTsValue.fromJson(value)))
-            : {};
+    : entityId = EntityId.fromJson(json['entityId']),
+      latest = json['latest'] != null
+          ? (json['latest'] as Map<String, dynamic>).map(
+              (key, value) => MapEntry(
+                entityKeyTypeFromString(key),
+                (value as Map<String, dynamic>).map(
+                  (key, value) => MapEntry(key, TsValue.fromJson(value)),
+                ),
+              ),
+            )
+          : {},
+      timeseries = json['timeseries'] != null
+          ? (json['timeseries'] as Map<String, dynamic>).map(
+              (key, value) => MapEntry(
+                key,
+                (value as List<dynamic>)
+                    .map((e) => TsValue.fromJson(e))
+                    .toList(),
+              ),
+            )
+          : {},
+      aggLatest = json['aggLatest'] != null
+          ? (json['aggLatest'] as Map<String, dynamic>).map(
+              (key, value) =>
+                  MapEntry(int.parse(key), ComparisonTsValue.fromJson(value)),
+            )
+          : {};
 
   String? field(String name) {
     return _latest(name, EntityKeyType.ENTITY_FIELD);

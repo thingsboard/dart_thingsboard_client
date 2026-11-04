@@ -21,9 +21,9 @@ part 'menu_item.g.dart';
 ///
 /// Properties:
 /// * [type] - Menu item type
-/// * [visible] 
+/// * [visible]
 @BuiltValue(instantiable: false)
-abstract class MenuItem  {
+abstract class MenuItem {
   /// Menu item type
   @BuiltValueField(wireName: r'type')
   MenuItemType get type;
@@ -45,32 +45,33 @@ abstract class MenuItem  {
 }
 
 extension MenuItemDiscriminatorExt on MenuItem {
-    String? get discriminatorValue {
-        if (this is CustomMenuItem) {
-            return r'CUSTOM';
-        }
-        if (this is DefaultMenuItem) {
-            return r'DEFAULT';
-        }
-        if (this is HomeMenuItem) {
-            return r'HOME';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CustomMenuItem) {
+      return r'CUSTOM';
     }
+    if (this is DefaultMenuItem) {
+      return r'DEFAULT';
+    }
+    if (this is HomeMenuItem) {
+      return r'HOME';
+    }
+    return null;
+  }
 }
+
 extension MenuItemBuilderDiscriminatorExt on MenuItemBuilder {
-    String? get discriminatorValue {
-        if (this is CustomMenuItemBuilder) {
-            return r'CUSTOM';
-        }
-        if (this is DefaultMenuItemBuilder) {
-            return r'DEFAULT';
-        }
-        if (this is HomeMenuItemBuilder) {
-            return r'HOME';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is CustomMenuItemBuilder) {
+      return r'CUSTOM';
     }
+    if (this is DefaultMenuItemBuilder) {
+      return r'DEFAULT';
+    }
+    if (this is HomeMenuItemBuilder) {
+      return r'HOME';
+    }
+    return null;
+  }
 }
 
 class _$MenuItemSerializer implements PrimitiveSerializer<MenuItem> {
@@ -106,15 +107,28 @@ class _$MenuItemSerializer implements PrimitiveSerializer<MenuItem> {
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is CustomMenuItem) {
-      return serializers.serialize(object, specifiedType: FullType(CustomMenuItem))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CustomMenuItem),
+      )!;
     }
     if (object is DefaultMenuItem) {
-      return serializers.serialize(object, specifiedType: FullType(DefaultMenuItem))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DefaultMenuItem),
+      )!;
     }
     if (object is HomeMenuItem) {
-      return serializers.serialize(object, specifiedType: FullType(HomeMenuItem))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(HomeMenuItem),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -124,25 +138,47 @@ class _$MenuItemSerializer implements PrimitiveSerializer<MenuItem> {
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(MenuItem.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(MenuItem.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'CUSTOM':
-        return serializers.deserialize(serialized, specifiedType: FullType(CustomMenuItem)) as CustomMenuItem;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CustomMenuItem),
+            )
+            as CustomMenuItem;
       case r'DEFAULT':
-        return serializers.deserialize(serialized, specifiedType: FullType(DefaultMenuItem)) as DefaultMenuItem;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DefaultMenuItem),
+            )
+            as DefaultMenuItem;
       case r'HOME':
-        return serializers.deserialize(serialized, specifiedType: FullType(HomeMenuItem)) as HomeMenuItem;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(HomeMenuItem),
+            )
+            as HomeMenuItem;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($MenuItem)) as $MenuItem;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($MenuItem),
+            )
+            as $MenuItem;
     }
   }
 }
 
-
 /// a concrete implementation of [MenuItem], since [MenuItem] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $MenuItem implements MenuItem, Built<$MenuItem, $MenuItemBuilder> {
+abstract class $MenuItem
+    implements MenuItem, Built<$MenuItem, $MenuItemBuilder> {
   $MenuItem._();
 
   factory $MenuItem([void Function($MenuItemBuilder)? updates]) = _$$MenuItem;
@@ -183,17 +219,21 @@ class _$$MenuItemSerializer implements PrimitiveSerializer<$MenuItem> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(MenuItemType),
-          ) as MenuItemType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(MenuItemType),
+                  )
+                  as MenuItemType;
           result.type = valueDes;
           break;
         case r'visible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.visible = valueDes;
           break;
@@ -225,4 +265,3 @@ class _$$MenuItemSerializer implements PrimitiveSerializer<$MenuItem> {
     return result.build();
   }
 }
-

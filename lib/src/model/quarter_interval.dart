@@ -17,11 +17,12 @@ part 'quarter_interval.g.dart';
 /// QuarterInterval
 ///
 /// Properties:
-/// * [type] 
-/// * [tz] 
-/// * [offsetSec] 
+/// * [type]
+/// * [tz]
+/// * [offsetSec]
 @BuiltValue()
-abstract class QuarterInterval implements AggInterval, Built<QuarterInterval, QuarterIntervalBuilder> {
+abstract class QuarterInterval
+    implements AggInterval, Built<QuarterInterval, QuarterIntervalBuilder> {
   @BuiltValueField(wireName: r'tz')
   String get tz;
 
@@ -30,16 +31,19 @@ abstract class QuarterInterval implements AggInterval, Built<QuarterInterval, Qu
 
   QuarterInterval._();
 
-  factory QuarterInterval([void updates(QuarterIntervalBuilder b)]) = _$QuarterInterval;
+  factory QuarterInterval([void updates(QuarterIntervalBuilder b)]) =
+      _$QuarterInterval;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(QuarterIntervalBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<QuarterInterval> get serializer => _$QuarterIntervalSerializer();
+  static Serializer<QuarterInterval> get serializer =>
+      _$QuarterIntervalSerializer();
 }
 
-class _$QuarterIntervalSerializer implements PrimitiveSerializer<QuarterInterval> {
+class _$QuarterIntervalSerializer
+    implements PrimitiveSerializer<QuarterInterval> {
   @override
   final Iterable<Type> types = const [QuarterInterval, _$QuarterInterval];
 
@@ -76,7 +80,11 @@ class _$QuarterIntervalSerializer implements PrimitiveSerializer<QuarterInterval
     QuarterInterval object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -92,25 +100,31 @@ class _$QuarterIntervalSerializer implements PrimitiveSerializer<QuarterInterval
       final value = serializedList[i + 1];
       switch (key) {
         case r'offsetSec':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.offsetSec = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'tz':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.tz = valueDes;
           break;
         default:
@@ -141,5 +155,3 @@ class _$QuarterIntervalSerializer implements PrimitiveSerializer<QuarterInterval
     return result.build();
   }
 }
-
-

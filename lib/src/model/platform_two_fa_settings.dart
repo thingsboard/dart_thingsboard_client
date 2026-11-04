@@ -19,16 +19,17 @@ part 'platform_two_fa_settings.g.dart';
 /// Settings value
 ///
 /// Properties:
-/// * [useSystemTwoFactorAuthSettings] 
-/// * [providers] 
-/// * [minVerificationCodeSendPeriod] 
-/// * [verificationCodeCheckRateLimit] 
-/// * [maxVerificationFailuresBeforeUserLockout] 
-/// * [totalAllowedTimeForVerification] 
-/// * [enforceTwoFa] 
-/// * [enforcedUsersFilter] 
+/// * [useSystemTwoFactorAuthSettings]
+/// * [providers]
+/// * [minVerificationCodeSendPeriod]
+/// * [verificationCodeCheckRateLimit]
+/// * [maxVerificationFailuresBeforeUserLockout]
+/// * [totalAllowedTimeForVerification]
+/// * [enforceTwoFa]
+/// * [enforcedUsersFilter]
 @BuiltValue()
-abstract class PlatformTwoFaSettings implements Built<PlatformTwoFaSettings, PlatformTwoFaSettingsBuilder> {
+abstract class PlatformTwoFaSettings
+    implements Built<PlatformTwoFaSettings, PlatformTwoFaSettingsBuilder> {
   @BuiltValueField(wireName: r'useSystemTwoFactorAuthSettings')
   bool? get useSystemTwoFactorAuthSettings;
 
@@ -55,18 +56,25 @@ abstract class PlatformTwoFaSettings implements Built<PlatformTwoFaSettings, Pla
 
   PlatformTwoFaSettings._();
 
-  factory PlatformTwoFaSettings([void updates(PlatformTwoFaSettingsBuilder b)]) = _$PlatformTwoFaSettings;
+  factory PlatformTwoFaSettings([
+    void updates(PlatformTwoFaSettingsBuilder b),
+  ]) = _$PlatformTwoFaSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PlatformTwoFaSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PlatformTwoFaSettings> get serializer => _$PlatformTwoFaSettingsSerializer();
+  static Serializer<PlatformTwoFaSettings> get serializer =>
+      _$PlatformTwoFaSettingsSerializer();
 }
 
-class _$PlatformTwoFaSettingsSerializer implements PrimitiveSerializer<PlatformTwoFaSettings> {
+class _$PlatformTwoFaSettingsSerializer
+    implements PrimitiveSerializer<PlatformTwoFaSettings> {
   @override
-  final Iterable<Type> types = const [PlatformTwoFaSettings, _$PlatformTwoFaSettings];
+  final Iterable<Type> types = const [
+    PlatformTwoFaSettings,
+    _$PlatformTwoFaSettings,
+  ];
 
   @override
   final String wireName = r'PlatformTwoFaSettings';
@@ -134,7 +142,11 @@ class _$PlatformTwoFaSettingsSerializer implements PrimitiveSerializer<PlatformT
     PlatformTwoFaSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -150,63 +162,75 @@ class _$PlatformTwoFaSettingsSerializer implements PrimitiveSerializer<PlatformT
       final value = serializedList[i + 1];
       switch (key) {
         case r'useSystemTwoFactorAuthSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.useSystemTwoFactorAuthSettings = valueDes;
           break;
         case r'providers':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(TwoFaProviderConfig)]),
-          ) as BuiltList<TwoFaProviderConfig>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(TwoFaProviderConfig),
+                    ]),
+                  )
+                  as BuiltList<TwoFaProviderConfig>;
           result.providers.replace(valueDes);
           break;
         case r'minVerificationCodeSendPeriod':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.minVerificationCodeSendPeriod = valueDes;
           break;
         case r'verificationCodeCheckRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.verificationCodeCheckRateLimit = valueDes;
           break;
         case r'maxVerificationFailuresBeforeUserLockout':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxVerificationFailuresBeforeUserLockout = valueDes;
           break;
         case r'totalAllowedTimeForVerification':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(int),
-          ) as int;
+          final valueDes =
+              serializers.deserialize(value, specifiedType: const FullType(int))
+                  as int;
           result.totalAllowedTimeForVerification = valueDes;
           break;
         case r'enforceTwoFa':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enforceTwoFa = valueDes;
           break;
         case r'enforcedUsersFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.enforcedUsersFilter = valueDes;
           break;
@@ -238,5 +262,3 @@ class _$PlatformTwoFaSettingsSerializer implements PrimitiveSerializer<PlatformT
     return result.build();
   }
 }
-
-

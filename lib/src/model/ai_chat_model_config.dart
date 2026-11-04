@@ -17,25 +17,29 @@ part 'ai_chat_model_config.g.dart';
 /// AiChatModelConfig
 ///
 /// Properties:
-/// * [modelType] 
+/// * [modelType]
 @BuiltValue()
-abstract class AiChatModelConfig implements Built<AiChatModelConfig, AiChatModelConfigBuilder> {
+abstract class AiChatModelConfig
+    implements Built<AiChatModelConfig, AiChatModelConfigBuilder> {
   @BuiltValueField(wireName: r'modelType')
   AiModelType? get modelType;
   // enum modelTypeEnum {  CHAT,  };
 
   AiChatModelConfig._();
 
-  factory AiChatModelConfig([void updates(AiChatModelConfigBuilder b)]) = _$AiChatModelConfig;
+  factory AiChatModelConfig([void updates(AiChatModelConfigBuilder b)]) =
+      _$AiChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AiChatModelConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AiChatModelConfig> get serializer => _$AiChatModelConfigSerializer();
+  static Serializer<AiChatModelConfig> get serializer =>
+      _$AiChatModelConfigSerializer();
 }
 
-class _$AiChatModelConfigSerializer implements PrimitiveSerializer<AiChatModelConfig> {
+class _$AiChatModelConfigSerializer
+    implements PrimitiveSerializer<AiChatModelConfig> {
   @override
   final Iterable<Type> types = const [AiChatModelConfig, _$AiChatModelConfig];
 
@@ -62,7 +66,11 @@ class _$AiChatModelConfigSerializer implements PrimitiveSerializer<AiChatModelCo
     AiChatModelConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -78,10 +86,12 @@ class _$AiChatModelConfigSerializer implements PrimitiveSerializer<AiChatModelCo
       final value = serializedList[i + 1];
       switch (key) {
         case r'modelType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelType),
-          ) as AiModelType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelType),
+                  )
+                  as AiModelType?;
           if (valueDes == null) continue;
           result.modelType = valueDes;
           break;
@@ -113,5 +123,3 @@ class _$AiChatModelConfigSerializer implements PrimitiveSerializer<AiChatModelCo
     return result.build();
   }
 }
-
-

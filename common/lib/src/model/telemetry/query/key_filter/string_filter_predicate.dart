@@ -14,12 +14,13 @@ enum StringOperation {
   CONTAINS,
   NOT_CONTAINS,
   IN,
-  NOT_IN
+  NOT_IN,
 }
 
 StringOperation stringOperationFromString(String value) {
   return StringOperation.values.firstWhere(
-      (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase());
+    (e) => e.toString().split('.')[1].toUpperCase() == value.toUpperCase(),
+  );
 }
 
 extension StringOperationToString on StringOperation {
@@ -33,8 +34,11 @@ class StringFilterPredicate extends SimpleKeyFilterPredicate<String> {
   FilterPredicateValue<String> value;
   bool ignoreCase;
 
-  StringFilterPredicate(
-      {required this.operation, required this.value, this.ignoreCase = false});
+  StringFilterPredicate({
+    required this.operation,
+    required this.value,
+    this.ignoreCase = false,
+  });
 
   @override
   FilterPredicateType getType() {

@@ -18,25 +18,29 @@ part 'user_list_filter.g.dart';
 /// UserListFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [usersIds] 
+/// * [type]
+/// * [usersIds]
 @BuiltValue()
-abstract class UserListFilter implements UsersFilter, Built<UserListFilter, UserListFilterBuilder> {
+abstract class UserListFilter
+    implements UsersFilter, Built<UserListFilter, UserListFilterBuilder> {
   @BuiltValueField(wireName: r'usersIds')
   BuiltList<String> get usersIds;
 
   UserListFilter._();
 
-  factory UserListFilter([void updates(UserListFilterBuilder b)]) = _$UserListFilter;
+  factory UserListFilter([void updates(UserListFilterBuilder b)]) =
+      _$UserListFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(UserListFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<UserListFilter> get serializer => _$UserListFilterSerializer();
+  static Serializer<UserListFilter> get serializer =>
+      _$UserListFilterSerializer();
 }
 
-class _$UserListFilterSerializer implements PrimitiveSerializer<UserListFilter> {
+class _$UserListFilterSerializer
+    implements PrimitiveSerializer<UserListFilter> {
   @override
   final Iterable<Type> types = const [UserListFilter, _$UserListFilter];
 
@@ -66,7 +70,11 @@ class _$UserListFilterSerializer implements PrimitiveSerializer<UserListFilter> 
     UserListFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -82,17 +90,23 @@ class _$UserListFilterSerializer implements PrimitiveSerializer<UserListFilter> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'usersIds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.usersIds.replace(valueDes);
           break;
         default:
@@ -123,5 +137,3 @@ class _$UserListFilterSerializer implements PrimitiveSerializer<UserListFilter> 
     return result.build();
   }
 }
-
-

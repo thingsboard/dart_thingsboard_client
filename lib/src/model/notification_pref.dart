@@ -17,10 +17,11 @@ part 'notification_pref.g.dart';
 /// NotificationPref
 ///
 /// Properties:
-/// * [enabled] 
-/// * [enabledDeliveryMethods] 
+/// * [enabled]
+/// * [enabledDeliveryMethods]
 @BuiltValue()
-abstract class NotificationPref implements Built<NotificationPref, NotificationPrefBuilder> {
+abstract class NotificationPref
+    implements Built<NotificationPref, NotificationPrefBuilder> {
   @BuiltValueField(wireName: r'enabled')
   bool? get enabled;
 
@@ -29,16 +30,19 @@ abstract class NotificationPref implements Built<NotificationPref, NotificationP
 
   NotificationPref._();
 
-  factory NotificationPref([void updates(NotificationPrefBuilder b)]) = _$NotificationPref;
+  factory NotificationPref([void updates(NotificationPrefBuilder b)]) =
+      _$NotificationPref;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NotificationPrefBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NotificationPref> get serializer => _$NotificationPrefSerializer();
+  static Serializer<NotificationPref> get serializer =>
+      _$NotificationPrefSerializer();
 }
 
-class _$NotificationPrefSerializer implements PrimitiveSerializer<NotificationPref> {
+class _$NotificationPrefSerializer
+    implements PrimitiveSerializer<NotificationPref> {
   @override
   final Iterable<Type> types = const [NotificationPref, _$NotificationPref];
 
@@ -60,7 +64,10 @@ class _$NotificationPrefSerializer implements PrimitiveSerializer<NotificationPr
     yield r'enabledDeliveryMethods';
     yield serializers.serialize(
       object.enabledDeliveryMethods,
-      specifiedType: const FullType(BuiltMap, [FullType(String), FullType(bool)]),
+      specifiedType: const FullType(BuiltMap, [
+        FullType(String),
+        FullType(bool),
+      ]),
     );
   }
 
@@ -70,7 +77,11 @@ class _$NotificationPrefSerializer implements PrimitiveSerializer<NotificationPr
     NotificationPref object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -86,18 +97,25 @@ class _$NotificationPrefSerializer implements PrimitiveSerializer<NotificationPr
       final value = serializedList[i + 1];
       switch (key) {
         case r'enabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.enabled = valueDes;
           break;
         case r'enabledDeliveryMethods':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltMap, [FullType(String), FullType(bool)]),
-          ) as BuiltMap<String, bool>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltMap, [
+                      FullType(String),
+                      FullType(bool),
+                    ]),
+                  )
+                  as BuiltMap<String, bool>;
           result.enabledDeliveryMethods.replace(valueDes);
           break;
         default:
@@ -128,5 +146,3 @@ class _$NotificationPrefSerializer implements PrimitiveSerializer<NotificationPr
     return result.build();
   }
 }
-
-

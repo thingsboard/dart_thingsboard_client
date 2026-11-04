@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/page_data_tb_resource_info.dart';
 import 'package:thingsboard_client/src/model/resource_export_data.dart';
 import 'package:thingsboard_client/src/model/tb_image_delete_result.dart';
 import 'package:thingsboard_client/src/model/tb_resource_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class ImageControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -31,12 +28,12 @@ class ImageControllerApi {
   const ImageControllerApi(this._dio, [this._serializers]);
 
   /// deleteImage
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [force] 
+  /// * [force]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -46,7 +43,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbImageDeleteResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbImageDeleteResult>> deleteImage({ 
+  Future<Response<TbImageDeleteResult>> deleteImage({
     required String type,
     required String key,
     bool? force,
@@ -57,13 +54,32 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTbImageDeleteResult);
-    final _path = r'/api/images/{type}/{key}'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTbImageDeleteResult);
+    final _path = r'/api/images/{type}/{key}'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -71,11 +87,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -83,7 +96,12 @@ class ImageControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (force != null) r'force': encodeQueryParameter(_serializers, force, const FullType(bool)),
+      if (force != null)
+        r'force': encodeQueryParameter(
+          _serializers,
+          force,
+          const FullType(bool),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -99,11 +117,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbImageDeleteResult),
-      ) as TbImageDeleteResult;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbImageDeleteResult),
+                )
+                as TbImageDeleteResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -127,13 +147,13 @@ class ImageControllerApi {
   }
 
   /// downloadImage
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [ifNoneMatch] 
-  /// * [acceptEncoding] 
+  /// * [ifNoneMatch]
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -143,7 +163,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadImage({ 
+  Future<Response<Uint8List>> downloadImage({
     required String type,
     required String key,
     String? ifNoneMatch,
@@ -156,7 +176,27 @@ class ImageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/images/{type}/{key}'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _path = r'/api/images/{type}/{key}'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
@@ -172,11 +212,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -196,7 +233,6 @@ class ImageControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -220,13 +256,13 @@ class ImageControllerApi {
   }
 
   /// downloadImagePreview
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [ifNoneMatch] 
-  /// * [acceptEncoding] 
+  /// * [ifNoneMatch]
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -236,7 +272,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadImagePreview({ 
+  Future<Response<Uint8List>> downloadImagePreview({
     required String type,
     required String key,
     String? ifNoneMatch,
@@ -249,7 +285,27 @@ class ImageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/images/{type}/{key}/preview'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _path = r'/api/images/{type}/{key}/preview'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
@@ -265,11 +321,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -289,7 +342,6 @@ class ImageControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -313,13 +365,13 @@ class ImageControllerApi {
   }
 
   /// downloadLoginFavicon
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [ifNoneMatch] 
-  /// * [acceptEncoding] 
+  /// * [ifNoneMatch]
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -329,7 +381,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadLoginFavicon({ 
+  Future<Response<Uint8List>> downloadLoginFavicon({
     required String type,
     required String key,
     String? ifNoneMatch,
@@ -342,7 +394,27 @@ class ImageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/noauth/whiteLabel/loginFavicon/{type}/{key}'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _path = r'/api/noauth/whiteLabel/loginFavicon/{type}/{key}'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
@@ -351,10 +423,7 @@ class ImageControllerApi {
         if (acceptEncoding != null) r'Accept-Encoding': acceptEncoding,
         ...?headers,
       },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -371,7 +440,6 @@ class ImageControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -395,13 +463,13 @@ class ImageControllerApi {
   }
 
   /// downloadLoginLogo
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [ifNoneMatch] 
-  /// * [acceptEncoding] 
+  /// * [ifNoneMatch]
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -411,7 +479,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadLoginLogo({ 
+  Future<Response<Uint8List>> downloadLoginLogo({
     required String type,
     required String key,
     String? ifNoneMatch,
@@ -424,7 +492,27 @@ class ImageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/noauth/whiteLabel/loginLogo/{type}/{key}'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _path = r'/api/noauth/whiteLabel/loginLogo/{type}/{key}'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
@@ -433,10 +521,7 @@ class ImageControllerApi {
         if (acceptEncoding != null) r'Accept-Encoding': acceptEncoding,
         ...?headers,
       },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
@@ -453,7 +538,6 @@ class ImageControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -477,12 +561,12 @@ class ImageControllerApi {
   }
 
   /// downloadPublicImage
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [publicResourceKey] 
-  /// * [ifNoneMatch] 
-  /// * [acceptEncoding] 
+  /// * [publicResourceKey]
+  /// * [ifNoneMatch]
+  /// * [acceptEncoding]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -492,7 +576,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Uint8List>> downloadPublicImage({ 
+  Future<Response<Uint8List>> downloadPublicImage({
     required String publicResourceKey,
     String? ifNoneMatch,
     String? acceptEncoding,
@@ -504,7 +588,16 @@ class ImageControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/images/public/{publicResourceKey}'.replaceAll('{' r'publicResourceKey' '}', encodeQueryParameter(_serializers, publicResourceKey, const FullType(String)).toString());
+    final _path = r'/api/images/public/{publicResourceKey}'.replaceAll(
+      '{'
+      r'publicResourceKey'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        publicResourceKey,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
       responseType: ResponseType.bytes,
@@ -520,11 +613,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -544,7 +634,6 @@ class ImageControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as Uint8List;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -568,7 +657,7 @@ class ImageControllerApi {
   }
 
   /// exportImage
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
@@ -582,7 +671,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ResourceExportData] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ResourceExportData>> exportImage({ 
+  Future<Response<ResourceExportData>> exportImage({
     required String type,
     required String key,
     CancelToken? cancelToken,
@@ -592,13 +681,32 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerResourceExportData);
-    final _path = r'/api/images/{type}/{key}/export'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerResourceExportData);
+    final _path = r'/api/images/{type}/{key}/export'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -606,11 +714,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -629,11 +734,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(ResourceExportData),
-      ) as ResourceExportData;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ResourceExportData),
+                )
+                as ResourceExportData;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -657,7 +764,7 @@ class ImageControllerApi {
   }
 
   /// getImageInfo
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
@@ -671,7 +778,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbResourceInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbResourceInfo>> getImageInfo({ 
+  Future<Response<TbResourceInfo>> getImageInfo({
     required String type,
     required String key,
     CancelToken? cancelToken,
@@ -681,13 +788,32 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTbResourceInfo);
-    final _path = r'/api/images/{type}/{key}/info'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTbResourceInfo);
+    final _path = r'/api/images/{type}/{key}/info'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -695,11 +821,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -718,11 +841,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbResourceInfo),
-      ) as TbResourceInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbResourceInfo),
+                )
+                as TbResourceInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -746,7 +871,7 @@ class ImageControllerApi {
   }
 
   /// getImages
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [pageSize] - Maximum amount of entities in a one page
@@ -765,7 +890,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataTbResourceInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataTbResourceInfo>> getImages({ 
+  Future<Response<PageDataTbResourceInfo>> getImages({
     required int pageSize,
     required int page,
     String? imageSubType,
@@ -780,13 +905,12 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataTbResourceInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataTbResourceInfo);
     final _path = r'/api/images';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -794,11 +918,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -806,13 +927,42 @@ class ImageControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (imageSubType != null) r'imageSubType': encodeQueryParameter(_serializers, imageSubType, const FullType(String)),
-      if (includeSystemImages != null) r'includeSystemImages': encodeQueryParameter(_serializers, includeSystemImages, const FullType(bool)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (imageSubType != null)
+        r'imageSubType': encodeQueryParameter(
+          _serializers,
+          imageSubType,
+          const FullType(String),
+        ),
+      if (includeSystemImages != null)
+        r'includeSystemImages': encodeQueryParameter(
+          _serializers,
+          includeSystemImages,
+          const FullType(bool),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -828,11 +978,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataTbResourceInfo),
-      ) as PageDataTbResourceInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataTbResourceInfo),
+                )
+                as PageDataTbResourceInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -856,10 +1008,10 @@ class ImageControllerApi {
   }
 
   /// importImage
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [resourceExportData] 
+  /// * [resourceExportData]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -869,7 +1021,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbResourceInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbResourceInfo>> importImage({ 
+  Future<Response<TbResourceInfo>> importImage({
     required ResourceExportData resourceExportData,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -878,13 +1030,13 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerResourceExportDataAndTbResourceInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerResourceExportDataAndTbResourceInfo);
     final _path = r'/api/image/import';
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -892,11 +1044,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -908,14 +1057,13 @@ class ImageControllerApi {
 
     try {
       const _type = FullType(ResourceExportData);
-      _bodyData = _serializers.serialize(resourceExportData, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        resourceExportData,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -935,11 +1083,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbResourceInfo),
-      ) as TbResourceInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbResourceInfo),
+                )
+                as TbResourceInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -963,12 +1113,12 @@ class ImageControllerApi {
   }
 
   /// updateImage
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [file] 
+  /// * [file]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -978,7 +1128,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbResourceInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbResourceInfo>> updateImage({ 
+  Future<Response<TbResourceInfo>> updateImage({
     required String type,
     required String key,
     required MultipartFile file,
@@ -989,13 +1139,32 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTbResourceInfo);
-    final _path = r'/api/images/{type}/{key}'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTbResourceInfo);
+    final _path = r'/api/images/{type}/{key}'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1003,11 +1172,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1018,16 +1184,10 @@ class ImageControllerApi {
     dynamic _bodyData;
 
     try {
-      _bodyData = FormData.fromMap(<String, dynamic>{
-        r'file': file,
-      });
-
-    } catch(error, stackTrace) {
+      _bodyData = FormData.fromMap(<String, dynamic>{r'file': file});
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1047,11 +1207,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbResourceInfo),
-      ) as TbResourceInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbResourceInfo),
+                )
+                as TbResourceInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1075,12 +1237,12 @@ class ImageControllerApi {
   }
 
   /// updateImageInfo
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [tbResourceInfo] 
+  /// * [tbResourceInfo]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1090,7 +1252,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbResourceInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbResourceInfo>> updateImageInfo({ 
+  Future<Response<TbResourceInfo>> updateImageInfo({
     required String type,
     required String key,
     required TbResourceInfo tbResourceInfo,
@@ -1101,13 +1263,32 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTbResourceInfo);
-    final _path = r'/api/images/{type}/{key}/info'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTbResourceInfo);
+    final _path = r'/api/images/{type}/{key}/info'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1115,11 +1296,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1132,13 +1310,9 @@ class ImageControllerApi {
     try {
       const _type = FullType(TbResourceInfo);
       _bodyData = _serializers.serialize(tbResourceInfo, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1158,11 +1332,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbResourceInfo),
-      ) as TbResourceInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbResourceInfo),
+                )
+                as TbResourceInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1186,12 +1362,12 @@ class ImageControllerApi {
   }
 
   /// updateImagePublicStatus
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [type] - Type of the image: tenant or system
   /// * [key] - Image resource key, for example thermostats_dashboard_background.jpeg
-  /// * [isPublic] 
+  /// * [isPublic]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1201,7 +1377,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbResourceInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbResourceInfo>> updateImagePublicStatus({ 
+  Future<Response<TbResourceInfo>> updateImagePublicStatus({
     required String type,
     required String key,
     required bool isPublic,
@@ -1212,13 +1388,42 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTbResourceInfo);
-    final _path = r'/api/images/{type}/{key}/public/{isPublic}'.replaceAll('{' r'type' '}', encodeQueryParameter(_serializers, type, const FullType(String)).toString()).replaceAll('{' r'key' '}', encodeQueryParameter(_serializers, key, const FullType(String)).toString()).replaceAll('{' r'isPublic' '}', encodeQueryParameter(_serializers, isPublic, const FullType(bool)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTbResourceInfo);
+    final _path = r'/api/images/{type}/{key}/public/{isPublic}'
+        .replaceAll(
+          '{'
+          r'type'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            type,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'key'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            key,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'isPublic'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            isPublic,
+            const FullType(bool),
+          ).toString(),
+        );
     final _options = Options(
       method: r'PUT',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1226,11 +1431,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1249,11 +1451,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbResourceInfo),
-      ) as TbResourceInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbResourceInfo),
+                )
+                as TbResourceInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1277,12 +1481,12 @@ class ImageControllerApi {
   }
 
   /// uploadImage
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [file] 
-  /// * [title] 
-  /// * [imageSubType] 
+  /// * [file]
+  /// * [title]
+  /// * [imageSubType]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1292,7 +1496,7 @@ class ImageControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [TbResourceInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<TbResourceInfo>> uploadImage({ 
+  Future<Response<TbResourceInfo>> uploadImage({
     required MultipartFile file,
     String? title,
     String? imageSubType,
@@ -1303,13 +1507,12 @@ class ImageControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerTbResourceInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerTbResourceInfo);
     final _path = r'/api/image';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1317,11 +1520,8 @@ class ImageControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1334,16 +1534,22 @@ class ImageControllerApi {
     try {
       _bodyData = FormData.fromMap(<String, dynamic>{
         r'file': file,
-        if (title != null) r'title': encodeFormParameter(_serializers, title, const FullType(String)),
-        if (imageSubType != null) r'imageSubType': encodeFormParameter(_serializers, imageSubType, const FullType(String)),
+        if (title != null)
+          r'title': encodeFormParameter(
+            _serializers,
+            title,
+            const FullType(String),
+          ),
+        if (imageSubType != null)
+          r'imageSubType': encodeFormParameter(
+            _serializers,
+            imageSubType,
+            const FullType(String),
+          ),
       });
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -1363,11 +1569,13 @@ class ImageControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(TbResourceInfo),
-      ) as TbResourceInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbResourceInfo),
+                )
+                as TbResourceInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1389,5 +1597,4 @@ class ImageControllerApi {
       extra: _response.extra,
     );
   }
-
 }

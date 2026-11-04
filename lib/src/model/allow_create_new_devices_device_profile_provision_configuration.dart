@@ -18,26 +18,48 @@ part 'allow_create_new_devices_device_profile_provision_configuration.g.dart';
 ///
 /// Properties:
 /// * [provisionDeviceSecret] - Provision device secret
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class AllowCreateNewDevicesDeviceProfileProvisionConfiguration implements DeviceProfileProvisionConfiguration, Built<AllowCreateNewDevicesDeviceProfileProvisionConfiguration, AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder> {
+abstract class AllowCreateNewDevicesDeviceProfileProvisionConfiguration
+    implements
+        DeviceProfileProvisionConfiguration,
+        Built<
+          AllowCreateNewDevicesDeviceProfileProvisionConfiguration,
+          AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder
+        > {
   AllowCreateNewDevicesDeviceProfileProvisionConfiguration._();
 
-  factory AllowCreateNewDevicesDeviceProfileProvisionConfiguration([void updates(AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder b)]) = _$AllowCreateNewDevicesDeviceProfileProvisionConfiguration;
+  factory AllowCreateNewDevicesDeviceProfileProvisionConfiguration([
+    void updates(
+      AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder b,
+    ),
+  ]) = _$AllowCreateNewDevicesDeviceProfileProvisionConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder b) => b;
+  static void _defaults(
+    AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AllowCreateNewDevicesDeviceProfileProvisionConfiguration> get serializer => _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer();
+  static Serializer<AllowCreateNewDevicesDeviceProfileProvisionConfiguration>
+  get serializer =>
+      _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer();
 }
 
-class _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer implements PrimitiveSerializer<AllowCreateNewDevicesDeviceProfileProvisionConfiguration> {
+class _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer
+    implements
+        PrimitiveSerializer<
+          AllowCreateNewDevicesDeviceProfileProvisionConfiguration
+        > {
   @override
-  final Iterable<Type> types = const [AllowCreateNewDevicesDeviceProfileProvisionConfiguration, _$AllowCreateNewDevicesDeviceProfileProvisionConfiguration];
+  final Iterable<Type> types = const [
+    AllowCreateNewDevicesDeviceProfileProvisionConfiguration,
+    _$AllowCreateNewDevicesDeviceProfileProvisionConfiguration,
+  ];
 
   @override
-  final String wireName = r'AllowCreateNewDevicesDeviceProfileProvisionConfiguration';
+  final String wireName =
+      r'AllowCreateNewDevicesDeviceProfileProvisionConfiguration';
 
   Iterable<Object?> _serializeProperties(
     Serializers serializers,
@@ -64,7 +86,11 @@ class _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer imple
     AllowCreateNewDevicesDeviceProfileProvisionConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,7 +98,8 @@ class _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer imple
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
     required List<Object?> serializedList,
-    required AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder result,
+    required AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder
+    result,
     required List<Object?> unhandled,
   }) {
     for (var i = 0; i < serializedList.length; i += 2) {
@@ -80,17 +107,21 @@ class _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer imple
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'provisionDeviceSecret':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.provisionDeviceSecret = valueDes;
           break;
@@ -108,7 +139,8 @@ class _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer imple
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    final result = AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder();
+    final result =
+        AllowCreateNewDevicesDeviceProfileProvisionConfigurationBuilder();
     final serializedList = (serialized as Iterable<Object?>).toList();
     final unhandled = <Object?>[];
     _deserializeProperties(
@@ -122,5 +154,3 @@ class _$AllowCreateNewDevicesDeviceProfileProvisionConfigurationSerializer imple
     return result.build();
   }
 }
-
-

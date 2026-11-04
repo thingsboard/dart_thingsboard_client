@@ -18,22 +18,26 @@ part 'report_template_id.g.dart';
 /// ReportTemplateId
 ///
 /// Properties:
-/// * [entityType] 
+/// * [entityType]
 /// * [id] - ID of the entity, time-based UUID v1
 @BuiltValue()
-abstract class ReportTemplateId implements EntityId, Built<ReportTemplateId, ReportTemplateIdBuilder> {
+abstract class ReportTemplateId
+    implements EntityId, Built<ReportTemplateId, ReportTemplateIdBuilder> {
   ReportTemplateId._();
 
-  factory ReportTemplateId([void updates(ReportTemplateIdBuilder b)]) = _$ReportTemplateId;
+  factory ReportTemplateId([void updates(ReportTemplateIdBuilder b)]) =
+      _$ReportTemplateId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ReportTemplateIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReportTemplateId> get serializer => _$ReportTemplateIdSerializer();
+  static Serializer<ReportTemplateId> get serializer =>
+      _$ReportTemplateIdSerializer();
 }
 
-class _$ReportTemplateIdSerializer implements PrimitiveSerializer<ReportTemplateId> {
+class _$ReportTemplateIdSerializer
+    implements PrimitiveSerializer<ReportTemplateId> {
   @override
   final Iterable<Type> types = const [ReportTemplateId, _$ReportTemplateId];
 
@@ -63,7 +67,11 @@ class _$ReportTemplateIdSerializer implements PrimitiveSerializer<ReportTemplate
     ReportTemplateId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -79,17 +87,21 @@ class _$ReportTemplateIdSerializer implements PrimitiveSerializer<ReportTemplate
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.id = valueDes;
           break;
         default:
@@ -120,5 +132,3 @@ class _$ReportTemplateIdSerializer implements PrimitiveSerializer<ReportTemplate
     return result.build();
   }
 }
-
-

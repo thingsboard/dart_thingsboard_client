@@ -125,7 +125,11 @@ class _$SkippedAppSerializer implements PrimitiveSerializer<SkippedApp> {
     SkippedApp object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -141,50 +145,62 @@ class _$SkippedAppSerializer implements PrimitiveSerializer<SkippedApp> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'agentId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentId),
-          ) as AgentId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentId),
+                  )
+                  as AgentId?;
           if (valueDes == null) continue;
           result.agentId.replace(valueDes);
           break;
         case r'agentName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.agentName = valueDes;
           break;
         case r'applicationId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentApplicationId),
-          ) as AgentApplicationId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentApplicationId),
+                  )
+                  as AgentApplicationId?;
           if (valueDes == null) continue;
           result.applicationId.replace(valueDes);
           break;
         case r'applicationName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.applicationName = valueDes;
           break;
         case r'reason':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SkipReason),
-          ) as SkipReason?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SkipReason),
+                  )
+                  as SkipReason?;
           if (valueDes == null) continue;
           result.reason = valueDes;
           break;
         case r'msg':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.msg = valueDes;
           break;
@@ -216,5 +232,3 @@ class _$SkippedAppSerializer implements PrimitiveSerializer<SkippedApp> {
     return result.build();
   }
 }
-
-

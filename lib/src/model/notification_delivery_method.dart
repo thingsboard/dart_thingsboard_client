@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'notification_delivery_method.g.dart';
 
 class NotificationDeliveryMethod extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'WEB')
   static const NotificationDeliveryMethod WEB = _$WEB;
   @BuiltValueEnumConst(wireName: r'EMAIL')
@@ -29,11 +28,13 @@ class NotificationDeliveryMethod extends EnumClass {
   @BuiltValueEnumConst(wireName: r'MOBILE_APP')
   static const NotificationDeliveryMethod MOBILE_APP = _$MOBILE_APP;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const NotificationDeliveryMethod unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const NotificationDeliveryMethod unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<NotificationDeliveryMethod> get serializer => _$notificationDeliveryMethodSerializer;
+  static Serializer<NotificationDeliveryMethod> get serializer =>
+      _$notificationDeliveryMethodSerializer;
 
-  const NotificationDeliveryMethod._(String name): super(name);
+  const NotificationDeliveryMethod._(String name) : super(name);
 
   static BuiltSet<NotificationDeliveryMethod> get values => _$values;
   static NotificationDeliveryMethod valueOf(String name) => _$valueOf(name);
@@ -45,5 +46,5 @@ class NotificationDeliveryMethod extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class NotificationDeliveryMethodMixin = Object with _$NotificationDeliveryMethodMixin;
-
+abstract class NotificationDeliveryMethodMixin = Object
+    with _$NotificationDeliveryMethodMixin;

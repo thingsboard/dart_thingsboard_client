@@ -18,12 +18,13 @@ part 'asset_type_filter.g.dart';
 /// AssetTypeFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [assetTypes] 
-/// * [assetNameFilter] 
-/// * [assetType] 
+/// * [type]
+/// * [assetTypes]
+/// * [assetNameFilter]
+/// * [assetType]
 @BuiltValue()
-abstract class AssetTypeFilter implements EntityFilter, Built<AssetTypeFilter, AssetTypeFilterBuilder> {
+abstract class AssetTypeFilter
+    implements EntityFilter, Built<AssetTypeFilter, AssetTypeFilterBuilder> {
   @BuiltValueField(wireName: r'assetTypes')
   BuiltList<String>? get assetTypes;
 
@@ -36,16 +37,19 @@ abstract class AssetTypeFilter implements EntityFilter, Built<AssetTypeFilter, A
 
   AssetTypeFilter._();
 
-  factory AssetTypeFilter([void updates(AssetTypeFilterBuilder b)]) = _$AssetTypeFilter;
+  factory AssetTypeFilter([void updates(AssetTypeFilterBuilder b)]) =
+      _$AssetTypeFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AssetTypeFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AssetTypeFilter> get serializer => _$AssetTypeFilterSerializer();
+  static Serializer<AssetTypeFilter> get serializer =>
+      _$AssetTypeFilterSerializer();
 }
 
-class _$AssetTypeFilterSerializer implements PrimitiveSerializer<AssetTypeFilter> {
+class _$AssetTypeFilterSerializer
+    implements PrimitiveSerializer<AssetTypeFilter> {
   @override
   final Iterable<Type> types = const [AssetTypeFilter, _$AssetTypeFilter];
 
@@ -91,7 +95,11 @@ class _$AssetTypeFilterSerializer implements PrimitiveSerializer<AssetTypeFilter
     AssetTypeFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,33 +115,43 @@ class _$AssetTypeFilterSerializer implements PrimitiveSerializer<AssetTypeFilter
       final value = serializedList[i + 1];
       switch (key) {
         case r'assetTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>?;
           if (valueDes == null) continue;
           result.assetTypes.replace(valueDes);
           break;
         case r'assetNameFilter':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.assetNameFilter = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'assetType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.assetType = valueDes;
           break;
@@ -165,5 +183,3 @@ class _$AssetTypeFilterSerializer implements PrimitiveSerializer<AssetTypeFilter
     return result.build();
   }
 }
-
-

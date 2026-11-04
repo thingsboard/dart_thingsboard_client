@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'image_alignment.g.dart';
 
 class ImageAlignment extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'left')
   static const ImageAlignment left = _$left;
   @BuiltValueEnumConst(wireName: r'center')
@@ -25,9 +24,10 @@ class ImageAlignment extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ImageAlignment unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<ImageAlignment> get serializer => _$imageAlignmentSerializer;
+  static Serializer<ImageAlignment> get serializer =>
+      _$imageAlignmentSerializer;
 
-  const ImageAlignment._(String name): super(name);
+  const ImageAlignment._(String name) : super(name);
 
   static BuiltSet<ImageAlignment> get values => _$values;
   static ImageAlignment valueOf(String name) => _$valueOf(name);
@@ -40,4 +40,3 @@ class ImageAlignment extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ImageAlignmentMixin = Object with _$ImageAlignmentMixin;
-

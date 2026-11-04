@@ -12,8 +12,11 @@ class KeyFilter {
   EntityKeyValueType valueType;
   KeyFilterPredicate predicate;
 
-  KeyFilter(
-      {required this.key, required this.valueType, required this.predicate});
+  KeyFilter({
+    required this.key,
+    required this.valueType,
+    required this.predicate,
+  });
 
   Map<String, dynamic> toJson() {
     var json = <String, dynamic>{};

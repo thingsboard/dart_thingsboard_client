@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'self_registration_type.g.dart';
 
 class SelfRegistrationType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'WEB')
   static const SelfRegistrationType WEB = _$WEB;
   @BuiltValueEnumConst(wireName: r'MOBILE')
   static const SelfRegistrationType MOBILE = _$MOBILE;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const SelfRegistrationType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const SelfRegistrationType unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<SelfRegistrationType> get serializer => _$selfRegistrationTypeSerializer;
+  static Serializer<SelfRegistrationType> get serializer =>
+      _$selfRegistrationTypeSerializer;
 
-  const SelfRegistrationType._(String name): super(name);
+  const SelfRegistrationType._(String name) : super(name);
 
   static BuiltSet<SelfRegistrationType> get values => _$values;
   static SelfRegistrationType valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class SelfRegistrationType extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class SelfRegistrationTypeMixin = Object with _$SelfRegistrationTypeMixin;
-
+abstract class SelfRegistrationTypeMixin = Object
+    with _$SelfRegistrationTypeMixin;

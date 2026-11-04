@@ -19,22 +19,28 @@ part 'page_break_component.g.dart';
 /// PageBreakComponent
 ///
 /// Properties:
-/// * [subType] 
-/// * [type] 
+/// * [subType]
+/// * [type]
 @BuiltValue()
-abstract class PageBreakComponent implements ReportComponent, Built<PageBreakComponent, PageBreakComponentBuilder> {
+abstract class PageBreakComponent
+    implements
+        ReportComponent,
+        Built<PageBreakComponent, PageBreakComponentBuilder> {
   PageBreakComponent._();
 
-  factory PageBreakComponent([void updates(PageBreakComponentBuilder b)]) = _$PageBreakComponent;
+  factory PageBreakComponent([void updates(PageBreakComponentBuilder b)]) =
+      _$PageBreakComponent;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(PageBreakComponentBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<PageBreakComponent> get serializer => _$PageBreakComponentSerializer();
+  static Serializer<PageBreakComponent> get serializer =>
+      _$PageBreakComponentSerializer();
 }
 
-class _$PageBreakComponentSerializer implements PrimitiveSerializer<PageBreakComponent> {
+class _$PageBreakComponentSerializer
+    implements PrimitiveSerializer<PageBreakComponent> {
   @override
   final Iterable<Type> types = const [PageBreakComponent, _$PageBreakComponent];
 
@@ -64,7 +70,11 @@ class _$PageBreakComponentSerializer implements PrimitiveSerializer<PageBreakCom
     PageBreakComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -80,17 +90,21 @@ class _$PageBreakComponentSerializer implements PrimitiveSerializer<PageBreakCom
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentType),
-          ) as ReportComponentType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentType),
+                  )
+                  as ReportComponentType;
           result.type = valueDes;
           break;
         case r'subType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportComponentSubType),
-          ) as ReportComponentSubType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportComponentSubType),
+                  )
+                  as ReportComponentSubType;
           result.subType = valueDes;
           break;
         default:
@@ -121,5 +135,3 @@ class _$PageBreakComponentSerializer implements PrimitiveSerializer<PageBreakCom
     return result.build();
   }
 }
-
-

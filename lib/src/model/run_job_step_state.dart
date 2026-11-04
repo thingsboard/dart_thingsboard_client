@@ -22,18 +22,21 @@ part 'run_job_step_state.g.dart';
 /// RunJobStepState
 ///
 /// Properties:
-/// * [type] 
-/// * [image] 
-/// * [entrypoint] 
-/// * [cmd] 
-/// * [env] 
-/// * [binds] 
-/// * [networks] 
-/// * [pullImages] 
-/// * [retries] 
-/// * [networkFromServiceImageRegexPattern] 
+/// * [type]
+/// * [image]
+/// * [entrypoint]
+/// * [cmd]
+/// * [env]
+/// * [binds]
+/// * [networks]
+/// * [pullImages]
+/// * [retries]
+/// * [networkFromServiceImageRegexPattern]
 @BuiltValue()
-abstract class RunJobStepState implements AgentAppStepState, Built<RunJobStepState, RunJobStepStateBuilder> {
+abstract class RunJobStepState
+    implements
+        AgentAppStepState,
+        Built<RunJobStepState, RunJobStepStateBuilder> {
   @BuiltValueField(wireName: r'binds')
   StepFieldListString? get binds;
 
@@ -63,16 +66,19 @@ abstract class RunJobStepState implements AgentAppStepState, Built<RunJobStepSta
 
   RunJobStepState._();
 
-  factory RunJobStepState([void updates(RunJobStepStateBuilder b)]) = _$RunJobStepState;
+  factory RunJobStepState([void updates(RunJobStepStateBuilder b)]) =
+      _$RunJobStepState;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(RunJobStepStateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RunJobStepState> get serializer => _$RunJobStepStateSerializer();
+  static Serializer<RunJobStepState> get serializer =>
+      _$RunJobStepStateSerializer();
 }
 
-class _$RunJobStepStateSerializer implements PrimitiveSerializer<RunJobStepState> {
+class _$RunJobStepStateSerializer
+    implements PrimitiveSerializer<RunJobStepState> {
   @override
   final Iterable<Type> types = const [RunJobStepState, _$RunJobStepState];
 
@@ -162,7 +168,11 @@ class _$RunJobStepStateSerializer implements PrimitiveSerializer<RunJobStepState
     RunJobStepState object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -178,82 +188,102 @@ class _$RunJobStepStateSerializer implements PrimitiveSerializer<RunJobStepState
       final value = serializedList[i + 1];
       switch (key) {
         case r'binds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.binds.replace(valueDes);
           break;
         case r'image':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldString),
-          ) as StepFieldString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldString),
+                  )
+                  as StepFieldString?;
           if (valueDes == null) continue;
           result.image.replace(valueDes);
           break;
         case r'retries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldInteger),
-          ) as StepFieldInteger?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldInteger),
+                  )
+                  as StepFieldInteger?;
           if (valueDes == null) continue;
           result.retries.replace(valueDes);
           break;
         case r'entrypoint':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.entrypoint.replace(valueDes);
           break;
         case r'pullImages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldBoolean),
-          ) as StepFieldBoolean?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldBoolean),
+                  )
+                  as StepFieldBoolean?;
           if (valueDes == null) continue;
           result.pullImages.replace(valueDes);
           break;
         case r'cmd':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.cmd.replace(valueDes);
           break;
         case r'env':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.env.replace(valueDes);
           break;
         case r'networks':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldListString),
-          ) as StepFieldListString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldListString),
+                  )
+                  as StepFieldListString?;
           if (valueDes == null) continue;
           result.networks.replace(valueDes);
           break;
         case r'networkFromServiceImageRegexPattern':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(StepFieldString),
-          ) as StepFieldString?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(StepFieldString),
+                  )
+                  as StepFieldString?;
           if (valueDes == null) continue;
           result.networkFromServiceImageRegexPattern.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppStepType),
-          ) as AgentAppStepType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppStepType),
+                  )
+                  as AgentAppStepType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
@@ -285,5 +315,3 @@ class _$RunJobStepStateSerializer implements PrimitiveSerializer<RunJobStepState
     return result.build();
   }
 }
-
-

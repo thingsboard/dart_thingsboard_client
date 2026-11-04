@@ -29,7 +29,8 @@ part 'alarm_comment.g.dart';
 /// * [comment] - JSON object with text of comment.
 /// * [name] - representing comment text
 @BuiltValue()
-abstract class AlarmComment implements Built<AlarmComment, AlarmCommentBuilder> {
+abstract class AlarmComment
+    implements Built<AlarmComment, AlarmCommentBuilder> {
   /// JSON object with the alarm comment Id. Specify this field to update the alarm comment. Referencing non-existing alarm Id will cause error. Omit this field to create new alarm.
   @BuiltValueField(wireName: r'id')
   AlarmCommentId? get id;
@@ -139,7 +140,11 @@ class _$AlarmCommentSerializer implements PrimitiveSerializer<AlarmComment> {
     AlarmComment object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -155,58 +160,72 @@ class _$AlarmCommentSerializer implements PrimitiveSerializer<AlarmComment> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmCommentId),
-          ) as AlarmCommentId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AlarmCommentId),
+                  )
+                  as AlarmCommentId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'alarmId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmId),
-          ) as AlarmId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AlarmId),
+                  )
+                  as AlarmId?;
           if (valueDes == null) continue;
           result.alarmId.replace(valueDes);
           break;
         case r'userId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(UserId),
-          ) as UserId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(UserId),
+                  )
+                  as UserId?;
           if (valueDes == null) continue;
           result.userId.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AlarmCommentType),
-          ) as AlarmCommentType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AlarmCommentType),
+                  )
+                  as AlarmCommentType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'comment':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.comment = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
@@ -238,5 +257,3 @@ class _$AlarmCommentSerializer implements PrimitiveSerializer<AlarmComment> {
     return result.build();
   }
 }
-
-

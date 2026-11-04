@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'image_width_type.g.dart';
 
 class ImageWidthType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'fitWidth')
   static const ImageWidthType fitWidth = _$fitWidth;
   @BuiltValueEnumConst(wireName: r'original')
@@ -25,9 +24,10 @@ class ImageWidthType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const ImageWidthType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<ImageWidthType> get serializer => _$imageWidthTypeSerializer;
+  static Serializer<ImageWidthType> get serializer =>
+      _$imageWidthTypeSerializer;
 
-  const ImageWidthType._(String name): super(name);
+  const ImageWidthType._(String name) : super(name);
 
   static BuiltSet<ImageWidthType> get values => _$values;
   static ImageWidthType valueOf(String name) => _$valueOf(name);
@@ -40,4 +40,3 @@ class ImageWidthType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class ImageWidthTypeMixin = Object with _$ImageWidthTypeMixin;
-

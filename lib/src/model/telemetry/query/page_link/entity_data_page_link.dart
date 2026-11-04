@@ -36,11 +36,12 @@ class EntityDataPageLink {
 
   EntityDataPageLink nextPageLink() {
     return EntityDataPageLink(
-        pageSize: pageSize,
-        page: page + 1,
-        textSearch: textSearch,
-        sortOrder: sortOrder,
-        isDynamic: isDynamic);
+      pageSize: pageSize,
+      page: page + 1,
+      textSearch: textSearch,
+      sortOrder: sortOrder,
+      isDynamic: isDynamic,
+    );
   }
 
   @override

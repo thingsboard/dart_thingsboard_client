@@ -25,19 +25,20 @@ part 'calculated_field_info.g.dart';
 /// Properties:
 /// * [id] - JSON object with the Calculated Field Id. Referencing non-existing Calculated Field Id will cause error.
 /// * [createdTime] - Timestamp of the calculated field creation, in milliseconds
-/// * [tenantId] 
-/// * [entityId] 
-/// * [type] 
+/// * [tenantId]
+/// * [entityId]
+/// * [type]
 /// * [name] - User defined name of the calculated field.
 /// * [debugSettings] - Debug settings object.
 /// * [configurationVersion] - Version of calculated field configuration.
-/// * [configuration] 
-/// * [version] 
+/// * [configuration]
+/// * [version]
 /// * [additionalInfo] - Additional parameters of the calculated field
-/// * [entityName] 
-/// * [debugMode] 
+/// * [entityName]
+/// * [debugMode]
 @BuiltValue()
-abstract class CalculatedFieldInfo implements Built<CalculatedFieldInfo, CalculatedFieldInfoBuilder> {
+abstract class CalculatedFieldInfo
+    implements Built<CalculatedFieldInfo, CalculatedFieldInfoBuilder> {
   /// JSON object with the Calculated Field Id. Referencing non-existing Calculated Field Id will cause error.
   @BuiltValueField(wireName: r'id')
   CalculatedFieldId? get id;
@@ -87,18 +88,24 @@ abstract class CalculatedFieldInfo implements Built<CalculatedFieldInfo, Calcula
 
   CalculatedFieldInfo._();
 
-  factory CalculatedFieldInfo([void updates(CalculatedFieldInfoBuilder b)]) = _$CalculatedFieldInfo;
+  factory CalculatedFieldInfo([void updates(CalculatedFieldInfoBuilder b)]) =
+      _$CalculatedFieldInfo;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CalculatedFieldInfoBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CalculatedFieldInfo> get serializer => _$CalculatedFieldInfoSerializer();
+  static Serializer<CalculatedFieldInfo> get serializer =>
+      _$CalculatedFieldInfoSerializer();
 }
 
-class _$CalculatedFieldInfoSerializer implements PrimitiveSerializer<CalculatedFieldInfo> {
+class _$CalculatedFieldInfoSerializer
+    implements PrimitiveSerializer<CalculatedFieldInfo> {
   @override
-  final Iterable<Type> types = const [CalculatedFieldInfo, _$CalculatedFieldInfo];
+  final Iterable<Type> types = const [
+    CalculatedFieldInfo,
+    _$CalculatedFieldInfo,
+  ];
 
   @override
   final String wireName = r'CalculatedFieldInfo';
@@ -205,7 +212,11 @@ class _$CalculatedFieldInfoSerializer implements PrimitiveSerializer<CalculatedF
     CalculatedFieldInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -221,105 +232,131 @@ class _$CalculatedFieldInfoSerializer implements PrimitiveSerializer<CalculatedF
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CalculatedFieldId),
-          ) as CalculatedFieldId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CalculatedFieldId),
+                  )
+                  as CalculatedFieldId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.entityId = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CalculatedFieldType),
-          ) as CalculatedFieldType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CalculatedFieldType),
+                  )
+                  as CalculatedFieldType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'debugSettings':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DebugSettings),
-          ) as DebugSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DebugSettings),
+                  )
+                  as DebugSettings?;
           if (valueDes == null) continue;
           result.debugSettings.replace(valueDes);
           break;
         case r'configurationVersion':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.configurationVersion = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(CalculatedFieldConfiguration),
-          ) as CalculatedFieldConfiguration;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(CalculatedFieldConfiguration),
+                  )
+                  as CalculatedFieldConfiguration;
           result.configuration = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'additionalInfo':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.additionalInfo = valueDes;
           break;
         case r'entityName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityName = valueDes;
           break;
         case r'debugMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.debugMode = valueDes;
           break;
@@ -351,5 +388,3 @@ class _$CalculatedFieldInfoSerializer implements PrimitiveSerializer<CalculatedF
     return result.build();
   }
 }
-
-

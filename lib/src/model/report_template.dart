@@ -31,11 +31,12 @@ part 'report_template.g.dart';
 /// * [format] - Report format
 /// * [type] - Report template type
 /// * [description] - Description
-/// * [version] 
+/// * [version]
 /// * [configuration] - a JSON value with report template configuration
 /// * [ownerId] - JSON object with Customer or Tenant Id
 @BuiltValue()
-abstract class ReportTemplate implements Built<ReportTemplate, ReportTemplateBuilder> {
+abstract class ReportTemplate
+    implements Built<ReportTemplate, ReportTemplateBuilder> {
   /// JSON object with the report template Id. Specify this field to update the report. Referencing non-existing report template Id will cause error. Omit this field to create new report template
   @BuiltValueField(wireName: r'id')
   ReportTemplateId? get id;
@@ -83,16 +84,19 @@ abstract class ReportTemplate implements Built<ReportTemplate, ReportTemplateBui
 
   ReportTemplate._();
 
-  factory ReportTemplate([void updates(ReportTemplateBuilder b)]) = _$ReportTemplate;
+  factory ReportTemplate([void updates(ReportTemplateBuilder b)]) =
+      _$ReportTemplate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ReportTemplateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ReportTemplate> get serializer => _$ReportTemplateSerializer();
+  static Serializer<ReportTemplate> get serializer =>
+      _$ReportTemplateSerializer();
 }
 
-class _$ReportTemplateSerializer implements PrimitiveSerializer<ReportTemplate> {
+class _$ReportTemplateSerializer
+    implements PrimitiveSerializer<ReportTemplate> {
   @override
   final Iterable<Type> types = const [ReportTemplate, _$ReportTemplate];
 
@@ -181,7 +185,11 @@ class _$ReportTemplateSerializer implements PrimitiveSerializer<ReportTemplate> 
     ReportTemplate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -197,86 +205,108 @@ class _$ReportTemplateSerializer implements PrimitiveSerializer<ReportTemplate> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ReportTemplateId),
-          ) as ReportTemplateId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ReportTemplateId),
+                  )
+                  as ReportTemplateId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'customerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CustomerId),
-          ) as CustomerId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CustomerId),
+                  )
+                  as CustomerId?;
           if (valueDes == null) continue;
           result.customerId.replace(valueDes);
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.name = valueDes;
           break;
         case r'format':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TbReportFormat),
-          ) as TbReportFormat;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TbReportFormat),
+                  )
+                  as TbReportFormat;
           result.format = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportTemplateType),
-          ) as ReportTemplateType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportTemplateType),
+                  )
+                  as ReportTemplateType;
           result.type = valueDes;
           break;
         case r'description':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.description = valueDes;
           break;
         case r'version':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.version = valueDes;
           break;
         case r'configuration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(ReportTemplateConfig),
-          ) as ReportTemplateConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(ReportTemplateConfig),
+                  )
+                  as ReportTemplateConfig;
           result.configuration = valueDes;
           break;
         case r'ownerId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.ownerId = valueDes;
           break;
@@ -308,5 +338,3 @@ class _$ReportTemplateSerializer implements PrimitiveSerializer<ReportTemplate> 
     return result.build();
   }
 }
-
-

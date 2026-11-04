@@ -21,13 +21,16 @@ part 'complex_version_create_request.g.dart';
 /// ComplexVersionCreateRequest
 ///
 /// Properties:
-/// * [versionName] 
-/// * [branch] 
+/// * [versionName]
+/// * [branch]
 /// * [type] - Type of the version to create
-/// * [syncStrategy] 
-/// * [entityTypes] 
+/// * [syncStrategy]
+/// * [entityTypes]
 @BuiltValue()
-abstract class ComplexVersionCreateRequest implements VersionCreateRequest, Built<ComplexVersionCreateRequest, ComplexVersionCreateRequestBuilder> {
+abstract class ComplexVersionCreateRequest
+    implements
+        VersionCreateRequest,
+        Built<ComplexVersionCreateRequest, ComplexVersionCreateRequestBuilder> {
   @BuiltValueField(wireName: r'entityTypes')
   BuiltMap<String, EntityTypeVersionCreateConfig>? get entityTypes;
 
@@ -37,18 +40,25 @@ abstract class ComplexVersionCreateRequest implements VersionCreateRequest, Buil
 
   ComplexVersionCreateRequest._();
 
-  factory ComplexVersionCreateRequest([void updates(ComplexVersionCreateRequestBuilder b)]) = _$ComplexVersionCreateRequest;
+  factory ComplexVersionCreateRequest([
+    void updates(ComplexVersionCreateRequestBuilder b),
+  ]) = _$ComplexVersionCreateRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ComplexVersionCreateRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ComplexVersionCreateRequest> get serializer => _$ComplexVersionCreateRequestSerializer();
+  static Serializer<ComplexVersionCreateRequest> get serializer =>
+      _$ComplexVersionCreateRequestSerializer();
 }
 
-class _$ComplexVersionCreateRequestSerializer implements PrimitiveSerializer<ComplexVersionCreateRequest> {
+class _$ComplexVersionCreateRequestSerializer
+    implements PrimitiveSerializer<ComplexVersionCreateRequest> {
   @override
-  final Iterable<Type> types = const [ComplexVersionCreateRequest, _$ComplexVersionCreateRequest];
+  final Iterable<Type> types = const [
+    ComplexVersionCreateRequest,
+    _$ComplexVersionCreateRequest,
+  ];
 
   @override
   final String wireName = r'ComplexVersionCreateRequest';
@@ -62,7 +72,10 @@ class _$ComplexVersionCreateRequestSerializer implements PrimitiveSerializer<Com
       yield r'entityTypes';
       yield serializers.serialize(
         object.entityTypes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(EntityTypeVersionCreateConfig)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(EntityTypeVersionCreateConfig),
+        ]),
       );
     }
     if (object.syncStrategy != null) {
@@ -99,7 +112,11 @@ class _$ComplexVersionCreateRequestSerializer implements PrimitiveSerializer<Com
     ComplexVersionCreateRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,41 +132,54 @@ class _$ComplexVersionCreateRequestSerializer implements PrimitiveSerializer<Com
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityTypes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(EntityTypeVersionCreateConfig)]),
-          ) as BuiltMap<String, EntityTypeVersionCreateConfig>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(EntityTypeVersionCreateConfig),
+                    ]),
+                  )
+                  as BuiltMap<String, EntityTypeVersionCreateConfig>?;
           if (valueDes == null) continue;
           result.entityTypes.replace(valueDes);
           break;
         case r'syncStrategy':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(SyncStrategy),
-          ) as SyncStrategy?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(SyncStrategy),
+                  )
+                  as SyncStrategy?;
           if (valueDes == null) continue;
           result.syncStrategy = valueDes;
           break;
         case r'versionName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.versionName = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(VersionCreateRequestType),
-          ) as VersionCreateRequestType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(VersionCreateRequestType),
+                  )
+                  as VersionCreateRequestType;
           result.type = valueDes;
           break;
         case r'branch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.branch = valueDes;
           break;
@@ -181,5 +211,3 @@ class _$ComplexVersionCreateRequestSerializer implements PrimitiveSerializer<Com
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'ota_package_type.g.dart';
 
 class OtaPackageType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'FIRMWARE')
   static const OtaPackageType FIRMWARE = _$FIRMWARE;
   @BuiltValueEnumConst(wireName: r'SOFTWARE')
@@ -23,9 +22,10 @@ class OtaPackageType extends EnumClass {
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const OtaPackageType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<OtaPackageType> get serializer => _$otaPackageTypeSerializer;
+  static Serializer<OtaPackageType> get serializer =>
+      _$otaPackageTypeSerializer;
 
-  const OtaPackageType._(String name): super(name);
+  const OtaPackageType._(String name) : super(name);
 
   static BuiltSet<OtaPackageType> get values => _$values;
   static OtaPackageType valueOf(String name) => _$valueOf(name);
@@ -38,4 +38,3 @@ class OtaPackageType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class OtaPackageTypeMixin = Object with _$OtaPackageTypeMixin;
-

@@ -16,9 +16,9 @@ part 'entity.g.dart';
 /// Entity
 ///
 /// Properties:
-/// * [used] 
-/// * [activeCount] 
-/// * [totalCount] 
+/// * [used]
+/// * [activeCount]
+/// * [totalCount]
 @BuiltValue()
 abstract class Entity implements Built<Entity, EntityBuilder> {
   @BuiltValueField(wireName: r'used')
@@ -82,7 +82,11 @@ class _$EntitySerializer implements PrimitiveSerializer<Entity> {
     Entity object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +102,32 @@ class _$EntitySerializer implements PrimitiveSerializer<Entity> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'used':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.used = valueDes;
           break;
         case r'activeCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.activeCount = valueDes;
           break;
         case r'totalCount':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.totalCount = valueDes;
           break;
@@ -149,5 +159,3 @@ class _$EntitySerializer implements PrimitiveSerializer<Entity> {
     return result.build();
   }
 }
-
-

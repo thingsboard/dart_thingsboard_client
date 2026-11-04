@@ -21,9 +21,9 @@ part 'alarm_rule_key_filter_predicate.g.dart';
 /// Filter predicate for alarm rule key-based filtering
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue(instantiable: false)
-abstract class AlarmRuleKeyFilterPredicate  {
+abstract class AlarmRuleKeyFilterPredicate {
   @BuiltValueField(wireName: r'type')
   String get type;
 
@@ -38,51 +38,56 @@ abstract class AlarmRuleKeyFilterPredicate  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AlarmRuleKeyFilterPredicate> get serializer => _$AlarmRuleKeyFilterPredicateSerializer();
+  static Serializer<AlarmRuleKeyFilterPredicate> get serializer =>
+      _$AlarmRuleKeyFilterPredicateSerializer();
 }
 
-extension AlarmRuleKeyFilterPredicateDiscriminatorExt on AlarmRuleKeyFilterPredicate {
-    String? get discriminatorValue {
-        if (this is AlarmRuleBooleanFilterPredicate) {
-            return r'BOOLEAN';
-        }
-        if (this is AlarmRuleComplexFilterPredicate) {
-            return r'COMPLEX';
-        }
-        if (this is NoDataFilterPredicate) {
-            return r'NO_DATA';
-        }
-        if (this is AlarmRuleNumericFilterPredicate) {
-            return r'NUMERIC';
-        }
-        if (this is AlarmRuleStringFilterPredicate) {
-            return r'STRING';
-        }
-        return null;
+extension AlarmRuleKeyFilterPredicateDiscriminatorExt
+    on AlarmRuleKeyFilterPredicate {
+  String? get discriminatorValue {
+    if (this is AlarmRuleBooleanFilterPredicate) {
+      return r'BOOLEAN';
     }
-}
-extension AlarmRuleKeyFilterPredicateBuilderDiscriminatorExt on AlarmRuleKeyFilterPredicateBuilder {
-    String? get discriminatorValue {
-        if (this is AlarmRuleBooleanFilterPredicateBuilder) {
-            return r'BOOLEAN';
-        }
-        if (this is AlarmRuleComplexFilterPredicateBuilder) {
-            return r'COMPLEX';
-        }
-        if (this is NoDataFilterPredicateBuilder) {
-            return r'NO_DATA';
-        }
-        if (this is AlarmRuleNumericFilterPredicateBuilder) {
-            return r'NUMERIC';
-        }
-        if (this is AlarmRuleStringFilterPredicateBuilder) {
-            return r'STRING';
-        }
-        return null;
+    if (this is AlarmRuleComplexFilterPredicate) {
+      return r'COMPLEX';
     }
+    if (this is NoDataFilterPredicate) {
+      return r'NO_DATA';
+    }
+    if (this is AlarmRuleNumericFilterPredicate) {
+      return r'NUMERIC';
+    }
+    if (this is AlarmRuleStringFilterPredicate) {
+      return r'STRING';
+    }
+    return null;
+  }
 }
 
-class _$AlarmRuleKeyFilterPredicateSerializer implements PrimitiveSerializer<AlarmRuleKeyFilterPredicate> {
+extension AlarmRuleKeyFilterPredicateBuilderDiscriminatorExt
+    on AlarmRuleKeyFilterPredicateBuilder {
+  String? get discriminatorValue {
+    if (this is AlarmRuleBooleanFilterPredicateBuilder) {
+      return r'BOOLEAN';
+    }
+    if (this is AlarmRuleComplexFilterPredicateBuilder) {
+      return r'COMPLEX';
+    }
+    if (this is NoDataFilterPredicateBuilder) {
+      return r'NO_DATA';
+    }
+    if (this is AlarmRuleNumericFilterPredicateBuilder) {
+      return r'NUMERIC';
+    }
+    if (this is AlarmRuleStringFilterPredicateBuilder) {
+      return r'STRING';
+    }
+    return null;
+  }
+}
+
+class _$AlarmRuleKeyFilterPredicateSerializer
+    implements PrimitiveSerializer<AlarmRuleKeyFilterPredicate> {
   @override
   final Iterable<Type> types = const [AlarmRuleKeyFilterPredicate];
 
@@ -108,21 +113,40 @@ class _$AlarmRuleKeyFilterPredicateSerializer implements PrimitiveSerializer<Ala
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AlarmRuleBooleanFilterPredicate) {
-      return serializers.serialize(object, specifiedType: FullType(AlarmRuleBooleanFilterPredicate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AlarmRuleBooleanFilterPredicate),
+      )!;
     }
     if (object is AlarmRuleComplexFilterPredicate) {
-      return serializers.serialize(object, specifiedType: FullType(AlarmRuleComplexFilterPredicate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AlarmRuleComplexFilterPredicate),
+      )!;
     }
     if (object is NoDataFilterPredicate) {
-      return serializers.serialize(object, specifiedType: FullType(NoDataFilterPredicate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NoDataFilterPredicate),
+      )!;
     }
     if (object is AlarmRuleNumericFilterPredicate) {
-      return serializers.serialize(object, specifiedType: FullType(AlarmRuleNumericFilterPredicate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AlarmRuleNumericFilterPredicate),
+      )!;
     }
     if (object is AlarmRuleStringFilterPredicate) {
-      return serializers.serialize(object, specifiedType: FullType(AlarmRuleStringFilterPredicate))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AlarmRuleStringFilterPredicate),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -132,43 +156,88 @@ class _$AlarmRuleKeyFilterPredicateSerializer implements PrimitiveSerializer<Ala
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(AlarmRuleKeyFilterPredicate.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(
+          AlarmRuleKeyFilterPredicate.discriminatorFieldName,
+        ) +
+        1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'BOOLEAN':
-        return serializers.deserialize(serialized, specifiedType: FullType(AlarmRuleBooleanFilterPredicate)) as AlarmRuleBooleanFilterPredicate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AlarmRuleBooleanFilterPredicate),
+            )
+            as AlarmRuleBooleanFilterPredicate;
       case r'COMPLEX':
-        return serializers.deserialize(serialized, specifiedType: FullType(AlarmRuleComplexFilterPredicate)) as AlarmRuleComplexFilterPredicate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AlarmRuleComplexFilterPredicate),
+            )
+            as AlarmRuleComplexFilterPredicate;
       case r'NO_DATA':
-        return serializers.deserialize(serialized, specifiedType: FullType(NoDataFilterPredicate)) as NoDataFilterPredicate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NoDataFilterPredicate),
+            )
+            as NoDataFilterPredicate;
       case r'NUMERIC':
-        return serializers.deserialize(serialized, specifiedType: FullType(AlarmRuleNumericFilterPredicate)) as AlarmRuleNumericFilterPredicate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AlarmRuleNumericFilterPredicate),
+            )
+            as AlarmRuleNumericFilterPredicate;
       case r'STRING':
-        return serializers.deserialize(serialized, specifiedType: FullType(AlarmRuleStringFilterPredicate)) as AlarmRuleStringFilterPredicate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AlarmRuleStringFilterPredicate),
+            )
+            as AlarmRuleStringFilterPredicate;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($AlarmRuleKeyFilterPredicate)) as $AlarmRuleKeyFilterPredicate;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($AlarmRuleKeyFilterPredicate),
+            )
+            as $AlarmRuleKeyFilterPredicate;
     }
   }
 }
 
-
 /// a concrete implementation of [AlarmRuleKeyFilterPredicate], since [AlarmRuleKeyFilterPredicate] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $AlarmRuleKeyFilterPredicate implements AlarmRuleKeyFilterPredicate, Built<$AlarmRuleKeyFilterPredicate, $AlarmRuleKeyFilterPredicateBuilder> {
+abstract class $AlarmRuleKeyFilterPredicate
+    implements
+        AlarmRuleKeyFilterPredicate,
+        Built<
+          $AlarmRuleKeyFilterPredicate,
+          $AlarmRuleKeyFilterPredicateBuilder
+        > {
   $AlarmRuleKeyFilterPredicate._();
 
-  factory $AlarmRuleKeyFilterPredicate([void Function($AlarmRuleKeyFilterPredicateBuilder)? updates]) = _$$AlarmRuleKeyFilterPredicate;
+  factory $AlarmRuleKeyFilterPredicate([
+    void Function($AlarmRuleKeyFilterPredicateBuilder)? updates,
+  ]) = _$$AlarmRuleKeyFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($AlarmRuleKeyFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$AlarmRuleKeyFilterPredicate> get serializer => _$$AlarmRuleKeyFilterPredicateSerializer();
+  static Serializer<$AlarmRuleKeyFilterPredicate> get serializer =>
+      _$$AlarmRuleKeyFilterPredicateSerializer();
 }
 
-class _$$AlarmRuleKeyFilterPredicateSerializer implements PrimitiveSerializer<$AlarmRuleKeyFilterPredicate> {
+class _$$AlarmRuleKeyFilterPredicateSerializer
+    implements PrimitiveSerializer<$AlarmRuleKeyFilterPredicate> {
   @override
-  final Iterable<Type> types = const [$AlarmRuleKeyFilterPredicate, _$$AlarmRuleKeyFilterPredicate];
+  final Iterable<Type> types = const [
+    $AlarmRuleKeyFilterPredicate,
+    _$$AlarmRuleKeyFilterPredicate,
+  ];
 
   @override
   final String wireName = r'$AlarmRuleKeyFilterPredicate';
@@ -179,7 +248,10 @@ class _$$AlarmRuleKeyFilterPredicateSerializer implements PrimitiveSerializer<$A
     $AlarmRuleKeyFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(AlarmRuleKeyFilterPredicate))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(AlarmRuleKeyFilterPredicate),
+    )!;
   }
 
   void _deserializeProperties(
@@ -195,10 +267,12 @@ class _$$AlarmRuleKeyFilterPredicateSerializer implements PrimitiveSerializer<$A
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -229,4 +303,3 @@ class _$$AlarmRuleKeyFilterPredicateSerializer implements PrimitiveSerializer<$A
     return result.build();
   }
 }
-

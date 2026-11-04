@@ -20,11 +20,12 @@ part 'column_settings.g.dart';
 ///
 /// Properties:
 /// * [type] - Data key settings type
-/// * [columnWidth] 
-/// * [header] 
-/// * [cell] 
+/// * [columnWidth]
+/// * [header]
+/// * [cell]
 @BuiltValue()
-abstract class ColumnSettings implements DataKeySettings, Built<ColumnSettings, ColumnSettingsBuilder> {
+abstract class ColumnSettings
+    implements DataKeySettings, Built<ColumnSettings, ColumnSettingsBuilder> {
   @BuiltValueField(wireName: r'columnWidth')
   String? get columnWidth;
 
@@ -36,16 +37,19 @@ abstract class ColumnSettings implements DataKeySettings, Built<ColumnSettings, 
 
   ColumnSettings._();
 
-  factory ColumnSettings([void updates(ColumnSettingsBuilder b)]) = _$ColumnSettings;
+  factory ColumnSettings([void updates(ColumnSettingsBuilder b)]) =
+      _$ColumnSettings;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ColumnSettingsBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ColumnSettings> get serializer => _$ColumnSettingsSerializer();
+  static Serializer<ColumnSettings> get serializer =>
+      _$ColumnSettingsSerializer();
 }
 
-class _$ColumnSettingsSerializer implements PrimitiveSerializer<ColumnSettings> {
+class _$ColumnSettingsSerializer
+    implements PrimitiveSerializer<ColumnSettings> {
   @override
   final Iterable<Type> types = const [ColumnSettings, _$ColumnSettings];
 
@@ -91,7 +95,11 @@ class _$ColumnSettingsSerializer implements PrimitiveSerializer<ColumnSettings> 
     ColumnSettings object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -107,34 +115,42 @@ class _$ColumnSettingsSerializer implements PrimitiveSerializer<ColumnSettings> 
       final value = serializedList[i + 1];
       switch (key) {
         case r'columnWidth':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.columnWidth = valueDes;
           break;
         case r'header':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CellSettings),
-          ) as CellSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CellSettings),
+                  )
+                  as CellSettings?;
           if (valueDes == null) continue;
           result.header.replace(valueDes);
           break;
         case r'cell':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(CellSettings),
-          ) as CellSettings?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(CellSettings),
+                  )
+                  as CellSettings?;
           if (valueDes == null) continue;
           result.cell.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(DataKeySettingsType),
-          ) as DataKeySettingsType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(DataKeySettingsType),
+                  )
+                  as DataKeySettingsType;
           result.type = valueDes;
           break;
         default:
@@ -165,5 +181,3 @@ class _$ColumnSettingsSerializer implements PrimitiveSerializer<ColumnSettings> 
     return result.build();
   }
 }
-
-

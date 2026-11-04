@@ -14,7 +14,6 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:built_collection/built_collection.dart';
-import 'package:built_value/json_object.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/bulk_import_request.dart';
 import 'package:thingsboard_client/src/model/bulk_import_result_edge.dart';
@@ -25,11 +24,9 @@ import 'package:thingsboard_client/src/model/edge_search_query.dart';
 import 'package:thingsboard_client/src/model/entity_subtype.dart';
 import 'package:thingsboard_client/src/model/page_data_edge.dart';
 import 'package:thingsboard_client/src/model/page_data_edge_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class EdgeControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -40,8 +37,8 @@ class EdgeControllerApi {
   /// Activates edge license on license portal.
   ///
   /// Parameters:
-  /// * [licenseSecret] 
-  /// * [releaseDate] 
+  /// * [licenseSecret]
+  /// * [releaseDate]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -51,7 +48,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> activateInstance({ 
+  Future<Response<JsonObject>> activateInstance({
     required String licenseSecret,
     required String releaseDate,
     CancelToken? cancelToken,
@@ -65,9 +62,7 @@ class EdgeControllerApi {
     final _path = r'/api/license/activateInstance';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -75,11 +70,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -87,8 +79,16 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'licenseSecret': encodeQueryParameter(_serializers, licenseSecret, const FullType(String)),
-      r'releaseDate': encodeQueryParameter(_serializers, releaseDate, const FullType(String)),
+      r'licenseSecret': encodeQueryParameter(
+        _serializers,
+        licenseSecret,
+        const FullType(String),
+      ),
+      r'releaseDate': encodeQueryParameter(
+        _serializers,
+        releaseDate,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -104,11 +104,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -135,10 +137,10 @@ class EdgeControllerApi {
   /// Activates edge license (V1/V2) on license portal.
   ///
   /// Parameters:
-  /// * [licenseSecret] 
-  /// * [releaseDate] 
-  /// * [clusterId] 
-  /// * [protocolVersion] 
+  /// * [licenseSecret]
+  /// * [releaseDate]
+  /// * [clusterId]
+  /// * [protocolVersion]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -148,7 +150,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> activateInstanceV2({ 
+  Future<Response<JsonObject>> activateInstanceV2({
     required String licenseSecret,
     required String releaseDate,
     required String clusterId,
@@ -164,9 +166,7 @@ class EdgeControllerApi {
     final _path = r'/api/v2/license/activateInstance';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -174,11 +174,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -186,10 +183,27 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'licenseSecret': encodeQueryParameter(_serializers, licenseSecret, const FullType(String)),
-      r'releaseDate': encodeQueryParameter(_serializers, releaseDate, const FullType(String)),
-      r'clusterId': encodeQueryParameter(_serializers, clusterId, const FullType(String)),
-      if (protocolVersion != null) r'protocolVersion': encodeQueryParameter(_serializers, protocolVersion, const FullType(String)),
+      r'licenseSecret': encodeQueryParameter(
+        _serializers,
+        licenseSecret,
+        const FullType(String),
+      ),
+      r'releaseDate': encodeQueryParameter(
+        _serializers,
+        releaseDate,
+        const FullType(String),
+      ),
+      r'clusterId': encodeQueryParameter(
+        _serializers,
+        clusterId,
+        const FullType(String),
+      ),
+      if (protocolVersion != null)
+        r'protocolVersion': encodeQueryParameter(
+          _serializers,
+          protocolVersion,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -205,11 +219,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -236,7 +252,7 @@ class EdgeControllerApi {
   /// Checks license request from edge service by forwarding request to license portal.
   ///
   /// Parameters:
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -246,7 +262,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> checkInstance({ 
+  Future<Response<JsonObject>> checkInstance({
     JsonObject? body,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -259,9 +275,7 @@ class EdgeControllerApi {
     final _path = r'/api/license/checkInstance';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -269,11 +283,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -285,13 +296,9 @@ class EdgeControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -311,11 +318,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -342,7 +351,7 @@ class EdgeControllerApi {
   /// Checks license request (V1/V2) from edge service by forwarding request to license portal.
   ///
   /// Parameters:
-  /// * [body] 
+  /// * [body]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -352,7 +361,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [JsonObject] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<JsonObject>> checkInstanceV2({ 
+  Future<Response<JsonObject>> checkInstanceV2({
     JsonObject? body,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -365,9 +374,7 @@ class EdgeControllerApi {
     final _path = r'/api/v2/license/checkInstance';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -375,11 +382,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -391,13 +395,9 @@ class EdgeControllerApi {
 
     try {
       _bodyData = body;
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -417,11 +417,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(JsonObject),
-      ) as JsonObject;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(JsonObject),
+                )
+                as JsonObject;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -458,7 +460,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteEdge({ 
+  Future<Response<void>> deleteEdge({
     required String edgeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -468,12 +470,19 @@ class EdgeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/edge/{edgeId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _path = r'/api/edge/{edgeId}'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -481,11 +490,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -507,7 +513,7 @@ class EdgeControllerApi {
   /// Returns all edges that are related to the specific entity. The entity id, relation type, edge types, depth of the search, and other query parameters defined using complex &#39;EdgeSearchQuery&#39; object. See &#39;Model&#39; tab of the Parameters for more info.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [edgeSearchQuery] 
+  /// * [edgeSearchQuery]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -517,7 +523,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Edge>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Edge>>> findEdgesByQuery({ 
+  Future<Response<BuiltList<Edge>>> findEdgesByQuery({
     required EdgeSearchQuery edgeSearchQuery,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -526,13 +532,13 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEdgeAndEdgeSearchQuery);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfEdgeAndEdgeSearchQuery);
     final _path = r'/api/edges';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -540,11 +546,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -557,13 +560,9 @@ class EdgeControllerApi {
     try {
       const _type = FullType(EdgeSearchQuery);
       _bodyData = _serializers.serialize(edgeSearchQuery, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -583,11 +582,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Edge)]),
-      ) as BuiltList<Edge>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(Edge)]),
+                )
+                as BuiltList<Edge>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -624,7 +625,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> findMissingToRelatedRuleChains({ 
+  Future<Response<String>> findMissingToRelatedRuleChains({
     required String edgeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -634,12 +635,19 @@ class EdgeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/edge/missingToRelatedRuleChains/{edgeId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _path = r'/api/edge/missingToRelatedRuleChains/{edgeId}'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -647,11 +655,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -671,7 +676,6 @@ class EdgeControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -714,7 +718,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdgeInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdgeInfo>> getAllEdgeInfos({ 
+  Future<Response<PageDataEdgeInfo>> getAllEdgeInfos({
     required int pageSize,
     required int page,
     bool? includeCustomers,
@@ -729,13 +733,12 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdgeInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdgeInfo);
     final _path = r'/api/edgeInfos/all';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -743,11 +746,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -755,13 +755,42 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -777,11 +806,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdgeInfo),
-      ) as PageDataEdgeInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdgeInfo),
+                )
+                as PageDataEdgeInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -825,7 +856,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdgeInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdgeInfo>> getCustomerEdgeInfos({ 
+  Future<Response<PageDataEdgeInfo>> getCustomerEdgeInfos({
     required String customerId,
     required int pageSize,
     required int page,
@@ -841,13 +872,21 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdgeInfo);
-    final _path = r'/api/customer/{customerId}/edgeInfos'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdgeInfo);
+    final _path = r'/api/customer/{customerId}/edgeInfos'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -855,11 +894,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -867,13 +903,42 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (includeCustomers != null) r'includeCustomers': encodeQueryParameter(_serializers, includeCustomers, const FullType(bool)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (includeCustomers != null)
+        r'includeCustomers': encodeQueryParameter(
+          _serializers,
+          includeCustomers,
+          const FullType(bool),
+        ),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -889,11 +954,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdgeInfo),
-      ) as PageDataEdgeInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdgeInfo),
+                )
+                as PageDataEdgeInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -936,7 +1003,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdge>> getCustomerEdges({ 
+  Future<Response<PageDataEdge>> getCustomerEdges({
     required String customerId,
     required int pageSize,
     required int page,
@@ -951,13 +1018,21 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdge);
-    final _path = r'/api/customer/{customerId}/edges'.replaceAll('{' r'customerId' '}', encodeQueryParameter(_serializers, customerId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdge);
+    final _path = r'/api/customer/{customerId}/edges'.replaceAll(
+      '{'
+      r'customerId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        customerId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -965,11 +1040,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -977,12 +1049,36 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -998,11 +1094,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdge),
-      ) as PageDataEdge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdge),
+                )
+                as PageDataEdge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1039,7 +1137,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Edge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Edge>> getEdgeById({ 
+  Future<Response<Edge>> getEdgeById({
     required String edgeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1049,12 +1147,19 @@ class EdgeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerEdge);
-    final _path = r'/api/edge/{edgeId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _path = r'/api/edge/{edgeId}'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1062,11 +1167,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1085,11 +1187,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Edge),
-      ) as Edge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Edge),
+                )
+                as Edge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1126,7 +1230,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EdgeInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EdgeInfo>> getEdgeInfoById({ 
+  Future<Response<EdgeInfo>> getEdgeInfoById({
     required String edgeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1136,12 +1240,19 @@ class EdgeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerEdgeInfo);
-    final _path = r'/api/edge/info/{edgeId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _path = r'/api/edge/info/{edgeId}'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1149,11 +1260,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1172,11 +1280,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EdgeInfo),
-      ) as EdgeInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EdgeInfo),
+                )
+                as EdgeInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1214,7 +1324,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EdgeInstructions] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EdgeInstructions>> getEdgeInstallInstructions({ 
+  Future<Response<EdgeInstructions>> getEdgeInstallInstructions({
     required String edgeId,
     required String method,
     CancelToken? cancelToken,
@@ -1224,13 +1334,32 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEdgeInstructions);
-    final _path = r'/api/edge/instructions/install/{edgeId}/{method}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'method' '}', encodeQueryParameter(_serializers, method, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEdgeInstructions);
+    final _path = r'/api/edge/instructions/install/{edgeId}/{method}'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'method'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            method,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1238,11 +1367,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1261,11 +1387,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EdgeInstructions),
-      ) as EdgeInstructions;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EdgeInstructions),
+                )
+                as EdgeInstructions;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1302,7 +1430,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<Edge>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<Edge>>> getEdgeList({ 
+  Future<Response<BuiltList<Edge>>> getEdgeList({
     required BuiltList<String> edgeIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1311,13 +1439,12 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEdgeAndListOfString);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEdgeAndListOfString);
     final _path = r'/api/edges/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1325,11 +1452,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1337,7 +1461,12 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'edgeIds': encodeCollectionQueryParameter<String>(_serializers, edgeIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'edgeIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        edgeIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1353,11 +1482,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(Edge)]),
-      ) as BuiltList<Edge>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [FullType(Edge)]),
+                )
+                as BuiltList<Edge>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1393,7 +1524,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<EntitySubtype>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<EntitySubtype>>> getEdgeTypes({ 
+  Future<Response<BuiltList<EntitySubtype>>> getEdgeTypes({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1401,13 +1532,12 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfEntitySubtype);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfEntitySubtype);
     final _path = r'/api/edge/types';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1415,11 +1545,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1438,11 +1565,15 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(EntitySubtype)]),
-      ) as BuiltList<EntitySubtype>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(EntitySubtype),
+                  ]),
+                )
+                as BuiltList<EntitySubtype>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1480,7 +1611,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [EdgeInstructions] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<EdgeInstructions>> getEdgeUpgradeInstructions({ 
+  Future<Response<EdgeInstructions>> getEdgeUpgradeInstructions({
     required String edgeVersion,
     required String method,
     CancelToken? cancelToken,
@@ -1490,13 +1621,32 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerEdgeInstructions);
-    final _path = r'/api/edge/instructions/upgrade/{edgeVersion}/{method}'.replaceAll('{' r'edgeVersion' '}', encodeQueryParameter(_serializers, edgeVersion, const FullType(String)).toString()).replaceAll('{' r'method' '}', encodeQueryParameter(_serializers, method, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerEdgeInstructions);
+    final _path = r'/api/edge/instructions/upgrade/{edgeVersion}/{method}'
+        .replaceAll(
+          '{'
+          r'edgeVersion'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeVersion,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'method'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            method,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1504,11 +1654,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1527,11 +1674,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(EdgeInstructions),
-      ) as EdgeInstructions;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(EdgeInstructions),
+                )
+                as EdgeInstructions;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1572,7 +1721,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdge>> getEdges({ 
+  Future<Response<PageDataEdge>> getEdges({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -1585,13 +1734,12 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdge);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdge);
     final _path = r'/api/edges';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1599,11 +1747,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1611,11 +1756,30 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1631,11 +1795,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdge),
-      ) as PageDataEdge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdge),
+                )
+                as PageDataEdge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1677,7 +1843,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdge>> getEdgesByEntityGroupId({ 
+  Future<Response<PageDataEdge>> getEdgesByEntityGroupId({
     required String entityGroupId,
     required String pageSize,
     required String page,
@@ -1691,13 +1857,21 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdge);
-    final _path = r'/api/entityGroup/{entityGroupId}/edges'.replaceAll('{' r'entityGroupId' '}', encodeQueryParameter(_serializers, entityGroupId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdge);
+    final _path = r'/api/entityGroup/{entityGroupId}/edges'.replaceAll(
+      '{'
+      r'entityGroupId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        entityGroupId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1705,11 +1879,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1717,11 +1888,30 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1737,11 +1927,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdge),
-      ) as PageDataEdge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdge),
+                )
+                as PageDataEdge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1778,7 +1970,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Edge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Edge>> getTenantEdgeByName({ 
+  Future<Response<Edge>> getTenantEdgeByName({
     required String edgeName,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1791,9 +1983,7 @@ class EdgeControllerApi {
     final _path = r'/api/tenant/edge';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1801,11 +1991,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1813,7 +2000,11 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'edgeName': encodeQueryParameter(_serializers, edgeName, const FullType(String)),
+      r'edgeName': encodeQueryParameter(
+        _serializers,
+        edgeName,
+        const FullType(String),
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1829,11 +2020,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Edge),
-      ) as Edge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Edge),
+                )
+                as Edge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1875,7 +2068,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdge>> getTenantEdges({ 
+  Future<Response<PageDataEdge>> getTenantEdges({
     required int pageSize,
     required int page,
     String? type,
@@ -1889,13 +2082,12 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdge);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdge);
     final _path = r'/api/tenant/edges';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -1903,11 +2095,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -1915,12 +2104,36 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -1936,11 +2149,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdge),
-      ) as PageDataEdge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdge),
+                )
+                as PageDataEdge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1982,7 +2197,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataEdge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataEdge>> getUserEdges({ 
+  Future<Response<PageDataEdge>> getUserEdges({
     required String pageSize,
     required String page,
     String? type,
@@ -1996,13 +2211,12 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataEdge);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataEdge);
     final _path = r'/api/user/edges';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2010,11 +2224,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2022,12 +2233,36 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(String)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(String),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
-      if (type != null) r'type': encodeQueryParameter(_serializers, type, const FullType(String)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (type != null)
+        r'type': encodeQueryParameter(
+          _serializers,
+          type,
+          const FullType(String),
+        ),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -2043,11 +2278,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataEdge),
-      ) as PageDataEdge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataEdge),
+                )
+                as PageDataEdge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2084,7 +2321,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> isEdgeUpgradeAvailable({ 
+  Future<Response<bool>> isEdgeUpgradeAvailable({
     required String edgeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2094,12 +2331,19 @@ class EdgeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/edge/{edgeId}/upgrade/available'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _path = r'/api/edge/{edgeId}/upgrade/available'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2107,11 +2351,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2131,7 +2372,6 @@ class EdgeControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2167,7 +2407,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [bool] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<bool>> isEdgesSupportEnabled({ 
+  Future<Response<bool>> isEdgesSupportEnabled({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -2178,9 +2418,7 @@ class EdgeControllerApi {
     final _path = r'/api/edges/enabled';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2188,11 +2426,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2212,7 +2447,6 @@ class EdgeControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as bool;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2239,7 +2473,7 @@ class EdgeControllerApi {
   /// There&#39;s an ability to import the bulk of edges using the only .csv file.  Available for users with &#39;TENANT_ADMIN&#39; authority.
   ///
   /// Parameters:
-  /// * [bulkImportRequest] 
+  /// * [bulkImportRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -2249,7 +2483,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BulkImportResultEdge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BulkImportResultEdge>> processEdgesBulkImport({ 
+  Future<Response<BulkImportResultEdge>> processEdgesBulkImport({
     required BulkImportRequest bulkImportRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2258,13 +2492,13 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerBulkImportRequestAndBulkImportResultEdge);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerBulkImportRequestAndBulkImportResultEdge);
     final _path = r'/api/edge/bulk_import';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2272,11 +2506,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2288,14 +2519,13 @@ class EdgeControllerApi {
 
     try {
       const _type = FullType(BulkImportRequest);
-      _bodyData = _serializers.serialize(bulkImportRequest, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        bulkImportRequest,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -2315,11 +2545,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BulkImportResultEdge),
-      ) as BulkImportResultEdge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BulkImportResultEdge),
+                )
+                as BulkImportResultEdge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2343,11 +2575,11 @@ class EdgeControllerApi {
   }
 
   /// Create Or Update Edge (saveEdge)
-  /// Create or update the Edge. When creating edge, platform generates Edge Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created edge id will be present in the response. Specify existing Edge id to update the edge. Referencing non-existing Edge Id will cause &#39;Not Found&#39; error.  Edge name is unique in the scope of tenant. Use unique identifiers like MAC or IMEI for the edge names and non-unique &#39;label&#39; field for user-friendly visualization purposes.Remove &#39;id&#39;, &#39;tenantId&#39; and optionally &#39;customerId&#39; from the request body example (below) to create new Edge entity. 
+  /// Create or update the Edge. When creating edge, platform generates Edge Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created edge id will be present in the response. Specify existing Edge id to update the edge. Referencing non-existing Edge Id will cause &#39;Not Found&#39; error.  Edge name is unique in the scope of tenant. Use unique identifiers like MAC or IMEI for the edge names and non-unique &#39;label&#39; field for user-friendly visualization purposes.Remove &#39;id&#39;, &#39;tenantId&#39; and optionally &#39;customerId&#39; from the request body example (below) to create new Edge entity.
   ///
   /// Parameters:
-  /// * [edge] 
-  /// * [entityGroupId] 
+  /// * [edge]
+  /// * [entityGroupId]
   /// * [entityGroupIds] - A list of entity group ids, separated by comma ','
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -2358,7 +2590,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Edge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Edge>> saveEdge({ 
+  Future<Response<Edge>> saveEdge({
     required Edge edge,
     String? entityGroupId,
     BuiltList<String>? entityGroupIds,
@@ -2369,13 +2601,12 @@ class EdgeControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfStringAndEdge);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerListOfStringAndEdge);
     final _path = r'/api/edge';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2383,11 +2614,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2396,8 +2624,19 @@ class EdgeControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (entityGroupId != null) r'entityGroupId': encodeQueryParameter(_serializers, entityGroupId, const FullType(String)),
-      if (entityGroupIds != null) r'entityGroupIds': encodeCollectionQueryParameter<String>(_serializers, entityGroupIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      if (entityGroupId != null)
+        r'entityGroupId': encodeQueryParameter(
+          _serializers,
+          entityGroupId,
+          const FullType(String),
+        ),
+      if (entityGroupIds != null)
+        r'entityGroupIds': encodeCollectionQueryParameter<String>(
+          _serializers,
+          entityGroupIds,
+          const FullType(BuiltList, [FullType(String)]),
+          format: ListFormat.multi,
+        ),
     };
 
     dynamic _bodyData;
@@ -2405,10 +2644,9 @@ class EdgeControllerApi {
     try {
       const _type = FullType(Edge);
       _bodyData = _serializers.serialize(edge, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -2433,11 +2671,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Edge),
-      ) as Edge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Edge),
+                )
+                as Edge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2475,7 +2715,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [Edge] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Edge>> setEdgeRootRuleChain({ 
+  Future<Response<Edge>> setEdgeRootRuleChain({
     required String edgeId,
     required String ruleChainId,
     CancelToken? cancelToken,
@@ -2486,12 +2726,30 @@ class EdgeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers(registerEdge);
-    final _path = r'/api/edge/{edgeId}/{ruleChainId}/root'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString()).replaceAll('{' r'ruleChainId' '}', encodeQueryParameter(_serializers, ruleChainId, const FullType(String)).toString());
+    final _path = r'/api/edge/{edgeId}/{ruleChainId}/root'
+        .replaceAll(
+          '{'
+          r'edgeId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            edgeId,
+            const FullType(String),
+          ).toString(),
+        )
+        .replaceAll(
+          '{'
+          r'ruleChainId'
+          '}',
+          encodeQueryParameter(
+            _serializers,
+            ruleChainId,
+            const FullType(String),
+          ).toString(),
+        );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2499,11 +2757,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2522,11 +2777,13 @@ class EdgeControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(Edge),
-      ) as Edge;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(Edge),
+                )
+                as Edge;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2563,7 +2820,7 @@ class EdgeControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> syncEdge({ 
+  Future<Response<String>> syncEdge({
     required String edgeId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -2573,12 +2830,19 @@ class EdgeControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/edge/sync/{edgeId}'.replaceAll('{' r'edgeId' '}', encodeQueryParameter(_serializers, edgeId, const FullType(String)).toString());
+    final _path = r'/api/edge/sync/{edgeId}'.replaceAll(
+      '{'
+      r'edgeId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        edgeId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -2586,11 +2850,8 @@ class EdgeControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -2610,7 +2871,6 @@ class EdgeControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -2632,5 +2892,4 @@ class EdgeControllerApi {
       extra: _response.extra,
     );
   }
-
 }

@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -17,12 +16,10 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/platform_type.dart';
 import 'package:thingsboard_client/src/model/self_registration_params.dart';
 import 'package:thingsboard_client/src/model/sign_up_self_registration_params.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/model/web_self_registration_params.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class SelfRegistrationControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -30,7 +27,7 @@ class SelfRegistrationControllerApi {
   const SelfRegistrationControllerApi(this._dio, [this._serializers]);
 
   /// deleteWebSelfRegistrationParams
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
@@ -42,7 +39,7 @@ class SelfRegistrationControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteWebSelfRegistrationParams({ 
+  Future<Response<void>> deleteWebSelfRegistrationParams({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -53,9 +50,7 @@ class SelfRegistrationControllerApi {
     final _path = r'/api/selfRegistration/selfRegistrationParams';
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -63,11 +58,8 @@ class SelfRegistrationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -86,11 +78,11 @@ class SelfRegistrationControllerApi {
   }
 
   /// Get Privacy Policy for Self Registration form (getPrivacyPolicy)
-  /// Fetch the Privacy Policy based on the domain name from the request. Available for non-authorized users. 
+  /// Fetch the Privacy Policy based on the domain name from the request. Available for non-authorized users.
   ///
   /// Parameters:
-  /// * [pkgName] 
-  /// * [platform] 
+  /// * [pkgName]
+  /// * [platform]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -100,7 +92,7 @@ class SelfRegistrationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getPrivacyPolicy({ 
+  Future<Response<String>> getPrivacyPolicy({
     String? pkgName,
     PlatformType? platform,
     CancelToken? cancelToken,
@@ -110,23 +102,29 @@ class SelfRegistrationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPlatformType);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPlatformType);
     final _path = r'/api/noauth/selfRegistration/privacyPolicy';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      if (pkgName != null) r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      if (platform != null) r'platform': encodeQueryParameter(_serializers, platform, const FullType(PlatformType)),
+      if (pkgName != null)
+        r'pkgName': encodeQueryParameter(
+          _serializers,
+          pkgName,
+          const FullType(String),
+        ),
+      if (platform != null)
+        r'platform': encodeQueryParameter(
+          _serializers,
+          platform,
+          const FullType(PlatformType),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -143,7 +141,6 @@ class SelfRegistrationControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -170,7 +167,7 @@ class SelfRegistrationControllerApi {
   /// Fetch the Self Registration parameters based on the domain name from the request. Available for non-authorized users. Contains the information to customize the sign-up form.
   ///
   /// Parameters:
-  /// * [pkgName] 
+  /// * [pkgName]
   /// * [platformType] - Platform type
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -181,7 +178,8 @@ class SelfRegistrationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SignUpSelfRegistrationParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SignUpSelfRegistrationParams>> getSignUpSelfRegistrationParams({ 
+  Future<Response<SignUpSelfRegistrationParams>>
+  getSignUpSelfRegistrationParams({
     String? pkgName,
     String? platformType,
     CancelToken? cancelToken,
@@ -191,23 +189,30 @@ class SelfRegistrationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSignUpSelfRegistrationParams);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerSignUpSelfRegistrationParams);
     final _path = r'/api/noauth/selfRegistration/signUpSelfRegistrationParams';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      if (pkgName != null) r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      if (platformType != null) r'platformType': encodeQueryParameter(_serializers, platformType, const FullType(String)),
+      if (pkgName != null)
+        r'pkgName': encodeQueryParameter(
+          _serializers,
+          pkgName,
+          const FullType(String),
+        ),
+      if (platformType != null)
+        r'platformType': encodeQueryParameter(
+          _serializers,
+          platformType,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -223,11 +228,13 @@ class SelfRegistrationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SignUpSelfRegistrationParams),
-      ) as SignUpSelfRegistrationParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SignUpSelfRegistrationParams),
+                )
+                as SignUpSelfRegistrationParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -251,11 +258,11 @@ class SelfRegistrationControllerApi {
   }
 
   /// Get Terms of Use for Self Registration form (getTermsOfUse)
-  /// Fetch the Terms of Use based on the domain name from the request. Available for non-authorized users. 
+  /// Fetch the Terms of Use based on the domain name from the request. Available for non-authorized users.
   ///
   /// Parameters:
-  /// * [pkgName] 
-  /// * [platform] 
+  /// * [pkgName]
+  /// * [platform]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -265,7 +272,7 @@ class SelfRegistrationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getTermsOfUse({ 
+  Future<Response<String>> getTermsOfUse({
     String? pkgName,
     PlatformType? platform,
     CancelToken? cancelToken,
@@ -275,23 +282,29 @@ class SelfRegistrationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPlatformType);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPlatformType);
     final _path = r'/api/noauth/selfRegistration/termsOfUse';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      if (pkgName != null) r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      if (platform != null) r'platform': encodeQueryParameter(_serializers, platform, const FullType(PlatformType)),
+      if (pkgName != null)
+        r'pkgName': encodeQueryParameter(
+          _serializers,
+          pkgName,
+          const FullType(String),
+        ),
+      if (platform != null)
+        r'platform': encodeQueryParameter(
+          _serializers,
+          platform,
+          const FullType(PlatformType),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -308,7 +321,6 @@ class SelfRegistrationControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -344,7 +356,7 @@ class SelfRegistrationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [SelfRegistrationParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<SelfRegistrationParams>> getWebSelfRegistrationParams({ 
+  Future<Response<SelfRegistrationParams>> getWebSelfRegistrationParams({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -352,13 +364,12 @@ class SelfRegistrationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerSelfRegistrationParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerSelfRegistrationParams);
     final _path = r'/api/selfRegistration/selfRegistrationParams';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -366,11 +377,8 @@ class SelfRegistrationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -389,11 +397,13 @@ class SelfRegistrationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(SelfRegistrationParams),
-      ) as SelfRegistrationParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(SelfRegistrationParams),
+                )
+                as SelfRegistrationParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -420,7 +430,7 @@ class SelfRegistrationControllerApi {
   /// Creates or Updates the Self Registration parameters. When creating, platform generates Admin Settings Id as [time-based UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_(date-time_and_MAC_address)). The newly created Admin Settings Id will be present in the response. Specify existing Admin Settings Id to update the Self Registration parameters. Referencing non-existing Admin Settings Id will cause &#39;Not Found&#39; error.  Self Registration allows users to signup for using the platform and automatically create a Customer account for them. You may configure default dashboard and user roles that will be assigned for this Customer. This allows you to build out-of-the-box solutions for customers. Ability to white-label the login and main pages helps to brand the platform.  Available for users with &#39;TENANT_ADMIN&#39; authority.  Security check is performed to verify that the user has &#39;WRITE&#39; permission for the white labeling resource.
   ///
   /// Parameters:
-  /// * [webSelfRegistrationParams] 
+  /// * [webSelfRegistrationParams]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -430,7 +440,7 @@ class SelfRegistrationControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [WebSelfRegistrationParams] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<WebSelfRegistrationParams>> saveWebSelfRegistrationParams({ 
+  Future<Response<WebSelfRegistrationParams>> saveWebSelfRegistrationParams({
     required WebSelfRegistrationParams webSelfRegistrationParams,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -439,13 +449,12 @@ class SelfRegistrationControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerWebSelfRegistrationParams);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerWebSelfRegistrationParams);
     final _path = r'/api/selfRegistration/selfRegistrationParams';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -453,11 +462,8 @@ class SelfRegistrationControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -469,14 +475,13 @@ class SelfRegistrationControllerApi {
 
     try {
       const _type = FullType(WebSelfRegistrationParams);
-      _bodyData = _serializers.serialize(webSelfRegistrationParams, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+      _bodyData = _serializers.serialize(
+        webSelfRegistrationParams,
+        specifiedType: _type,
+      );
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -496,11 +501,13 @@ class SelfRegistrationControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(WebSelfRegistrationParams),
-      ) as WebSelfRegistrationParams;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(WebSelfRegistrationParams),
+                )
+                as WebSelfRegistrationParams;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -522,5 +529,4 @@ class SelfRegistrationControllerApi {
       extra: _response.extra,
     );
   }
-
 }

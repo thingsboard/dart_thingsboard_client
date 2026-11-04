@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'agg_function.g.dart';
 
 class AggFunction extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'MIN')
   static const AggFunction MIN = _$MIN;
   @BuiltValueEnumConst(wireName: r'MAX')
@@ -33,7 +32,7 @@ class AggFunction extends EnumClass {
 
   static Serializer<AggFunction> get serializer => _$aggFunctionSerializer;
 
-  const AggFunction._(String name): super(name);
+  const AggFunction._(String name) : super(name);
 
   static BuiltSet<AggFunction> get values => _$values;
   static AggFunction valueOf(String name) => _$valueOf(name);
@@ -46,4 +45,3 @@ class AggFunction extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class AggFunctionMixin = Object with _$AggFunctionMixin;
-

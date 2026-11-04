@@ -19,27 +19,44 @@ part 'rule_engine_component_lifecycle_event_recipients_config.g.dart';
 /// RuleEngineComponentLifecycleEventRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class RuleEngineComponentLifecycleEventRecipientsConfig implements NotificationRuleRecipientsConfig, Built<RuleEngineComponentLifecycleEventRecipientsConfig, RuleEngineComponentLifecycleEventRecipientsConfigBuilder> {
+abstract class RuleEngineComponentLifecycleEventRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          RuleEngineComponentLifecycleEventRecipientsConfig,
+          RuleEngineComponentLifecycleEventRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   RuleEngineComponentLifecycleEventRecipientsConfig._();
 
-  factory RuleEngineComponentLifecycleEventRecipientsConfig([void updates(RuleEngineComponentLifecycleEventRecipientsConfigBuilder b)]) = _$RuleEngineComponentLifecycleEventRecipientsConfig;
+  factory RuleEngineComponentLifecycleEventRecipientsConfig([
+    void updates(RuleEngineComponentLifecycleEventRecipientsConfigBuilder b),
+  ]) = _$RuleEngineComponentLifecycleEventRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(RuleEngineComponentLifecycleEventRecipientsConfigBuilder b) => b;
+  static void _defaults(
+    RuleEngineComponentLifecycleEventRecipientsConfigBuilder b,
+  ) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<RuleEngineComponentLifecycleEventRecipientsConfig> get serializer => _$RuleEngineComponentLifecycleEventRecipientsConfigSerializer();
+  static Serializer<RuleEngineComponentLifecycleEventRecipientsConfig>
+  get serializer =>
+      _$RuleEngineComponentLifecycleEventRecipientsConfigSerializer();
 }
 
-class _$RuleEngineComponentLifecycleEventRecipientsConfigSerializer implements PrimitiveSerializer<RuleEngineComponentLifecycleEventRecipientsConfig> {
+class _$RuleEngineComponentLifecycleEventRecipientsConfigSerializer
+    implements
+        PrimitiveSerializer<RuleEngineComponentLifecycleEventRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [RuleEngineComponentLifecycleEventRecipientsConfig, _$RuleEngineComponentLifecycleEventRecipientsConfig];
+  final Iterable<Type> types = const [
+    RuleEngineComponentLifecycleEventRecipientsConfig,
+    _$RuleEngineComponentLifecycleEventRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'RuleEngineComponentLifecycleEventRecipientsConfig';
@@ -69,7 +86,11 @@ class _$RuleEngineComponentLifecycleEventRecipientsConfigSerializer implements P
     RuleEngineComponentLifecycleEventRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +106,25 @@ class _$RuleEngineComponentLifecycleEventRecipientsConfigSerializer implements P
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +156,3 @@ class _$RuleEngineComponentLifecycleEventRecipientsConfigSerializer implements P
     return result.build();
   }
 }
-
-

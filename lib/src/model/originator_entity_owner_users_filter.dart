@@ -17,23 +17,36 @@ part 'originator_entity_owner_users_filter.g.dart';
 /// OriginatorEntityOwnerUsersFilter
 ///
 /// Properties:
-/// * [type] 
+/// * [type]
 @BuiltValue()
-abstract class OriginatorEntityOwnerUsersFilter implements UsersFilter, Built<OriginatorEntityOwnerUsersFilter, OriginatorEntityOwnerUsersFilterBuilder> {
+abstract class OriginatorEntityOwnerUsersFilter
+    implements
+        UsersFilter,
+        Built<
+          OriginatorEntityOwnerUsersFilter,
+          OriginatorEntityOwnerUsersFilterBuilder
+        > {
   OriginatorEntityOwnerUsersFilter._();
 
-  factory OriginatorEntityOwnerUsersFilter([void updates(OriginatorEntityOwnerUsersFilterBuilder b)]) = _$OriginatorEntityOwnerUsersFilter;
+  factory OriginatorEntityOwnerUsersFilter([
+    void updates(OriginatorEntityOwnerUsersFilterBuilder b),
+  ]) = _$OriginatorEntityOwnerUsersFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OriginatorEntityOwnerUsersFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OriginatorEntityOwnerUsersFilter> get serializer => _$OriginatorEntityOwnerUsersFilterSerializer();
+  static Serializer<OriginatorEntityOwnerUsersFilter> get serializer =>
+      _$OriginatorEntityOwnerUsersFilterSerializer();
 }
 
-class _$OriginatorEntityOwnerUsersFilterSerializer implements PrimitiveSerializer<OriginatorEntityOwnerUsersFilter> {
+class _$OriginatorEntityOwnerUsersFilterSerializer
+    implements PrimitiveSerializer<OriginatorEntityOwnerUsersFilter> {
   @override
-  final Iterable<Type> types = const [OriginatorEntityOwnerUsersFilter, _$OriginatorEntityOwnerUsersFilter];
+  final Iterable<Type> types = const [
+    OriginatorEntityOwnerUsersFilter,
+    _$OriginatorEntityOwnerUsersFilter,
+  ];
 
   @override
   final String wireName = r'OriginatorEntityOwnerUsersFilter';
@@ -56,7 +69,11 @@ class _$OriginatorEntityOwnerUsersFilterSerializer implements PrimitiveSerialize
     OriginatorEntityOwnerUsersFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -72,10 +89,12 @@ class _$OriginatorEntityOwnerUsersFilterSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         default:
@@ -106,5 +125,3 @@ class _$OriginatorEntityOwnerUsersFilterSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

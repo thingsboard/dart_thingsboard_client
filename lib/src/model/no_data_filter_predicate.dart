@@ -19,11 +19,14 @@ part 'no_data_filter_predicate.g.dart';
 /// NoDataFilterPredicate
 ///
 /// Properties:
-/// * [type] 
-/// * [unit] 
-/// * [duration] 
+/// * [type]
+/// * [unit]
+/// * [duration]
 @BuiltValue()
-abstract class NoDataFilterPredicate implements AlarmRuleKeyFilterPredicate, Built<NoDataFilterPredicate, NoDataFilterPredicateBuilder> {
+abstract class NoDataFilterPredicate
+    implements
+        AlarmRuleKeyFilterPredicate,
+        Built<NoDataFilterPredicate, NoDataFilterPredicateBuilder> {
   @BuiltValueField(wireName: r'duration')
   AlarmConditionValueLong get duration;
 
@@ -33,18 +36,25 @@ abstract class NoDataFilterPredicate implements AlarmRuleKeyFilterPredicate, Bui
 
   NoDataFilterPredicate._();
 
-  factory NoDataFilterPredicate([void updates(NoDataFilterPredicateBuilder b)]) = _$NoDataFilterPredicate;
+  factory NoDataFilterPredicate([
+    void updates(NoDataFilterPredicateBuilder b),
+  ]) = _$NoDataFilterPredicate;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(NoDataFilterPredicateBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<NoDataFilterPredicate> get serializer => _$NoDataFilterPredicateSerializer();
+  static Serializer<NoDataFilterPredicate> get serializer =>
+      _$NoDataFilterPredicateSerializer();
 }
 
-class _$NoDataFilterPredicateSerializer implements PrimitiveSerializer<NoDataFilterPredicate> {
+class _$NoDataFilterPredicateSerializer
+    implements PrimitiveSerializer<NoDataFilterPredicate> {
   @override
-  final Iterable<Type> types = const [NoDataFilterPredicate, _$NoDataFilterPredicate];
+  final Iterable<Type> types = const [
+    NoDataFilterPredicate,
+    _$NoDataFilterPredicate,
+  ];
 
   @override
   final String wireName = r'NoDataFilterPredicate';
@@ -77,7 +87,11 @@ class _$NoDataFilterPredicateSerializer implements PrimitiveSerializer<NoDataFil
     NoDataFilterPredicate object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -93,24 +107,30 @@ class _$NoDataFilterPredicateSerializer implements PrimitiveSerializer<NoDataFil
       final value = serializedList[i + 1];
       switch (key) {
         case r'duration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(AlarmConditionValueLong),
-          ) as AlarmConditionValueLong;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AlarmConditionValueLong),
+                  )
+                  as AlarmConditionValueLong;
           result.duration.replace(valueDes);
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'unit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(TimeUnit),
-          ) as TimeUnit;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(TimeUnit),
+                  )
+                  as TimeUnit;
           result.unit = valueDes;
           break;
         default:
@@ -141,5 +161,3 @@ class _$NoDataFilterPredicateSerializer implements PrimitiveSerializer<NoDataFil
     return result.build();
   }
 }
-
-

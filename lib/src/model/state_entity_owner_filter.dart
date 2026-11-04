@@ -18,11 +18,14 @@ part 'state_entity_owner_filter.g.dart';
 /// StateEntityOwnerFilter
 ///
 /// Properties:
-/// * [type] 
-/// * [singleEntity] 
-/// * [defaultStateEntity] 
+/// * [type]
+/// * [singleEntity]
+/// * [defaultStateEntity]
 @BuiltValue()
-abstract class StateEntityOwnerFilter implements EntityFilter, Built<StateEntityOwnerFilter, StateEntityOwnerFilterBuilder> {
+abstract class StateEntityOwnerFilter
+    implements
+        EntityFilter,
+        Built<StateEntityOwnerFilter, StateEntityOwnerFilterBuilder> {
   @BuiltValueField(wireName: r'defaultStateEntity')
   AliasEntityId? get defaultStateEntity;
 
@@ -31,18 +34,25 @@ abstract class StateEntityOwnerFilter implements EntityFilter, Built<StateEntity
 
   StateEntityOwnerFilter._();
 
-  factory StateEntityOwnerFilter([void updates(StateEntityOwnerFilterBuilder b)]) = _$StateEntityOwnerFilter;
+  factory StateEntityOwnerFilter([
+    void updates(StateEntityOwnerFilterBuilder b),
+  ]) = _$StateEntityOwnerFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StateEntityOwnerFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StateEntityOwnerFilter> get serializer => _$StateEntityOwnerFilterSerializer();
+  static Serializer<StateEntityOwnerFilter> get serializer =>
+      _$StateEntityOwnerFilterSerializer();
 }
 
-class _$StateEntityOwnerFilterSerializer implements PrimitiveSerializer<StateEntityOwnerFilter> {
+class _$StateEntityOwnerFilterSerializer
+    implements PrimitiveSerializer<StateEntityOwnerFilter> {
   @override
-  final Iterable<Type> types = const [StateEntityOwnerFilter, _$StateEntityOwnerFilter];
+  final Iterable<Type> types = const [
+    StateEntityOwnerFilter,
+    _$StateEntityOwnerFilter,
+  ];
 
   @override
   final String wireName = r'StateEntityOwnerFilter';
@@ -79,7 +89,11 @@ class _$StateEntityOwnerFilterSerializer implements PrimitiveSerializer<StateEnt
     StateEntityOwnerFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -95,25 +109,31 @@ class _$StateEntityOwnerFilterSerializer implements PrimitiveSerializer<StateEnt
       final value = serializedList[i + 1];
       switch (key) {
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'defaultStateEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.defaultStateEntity.replace(valueDes);
           break;
         case r'singleEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AliasEntityId),
-          ) as AliasEntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AliasEntityId),
+                  )
+                  as AliasEntityId?;
           if (valueDes == null) continue;
           result.singleEntity.replace(valueDes);
           break;
@@ -145,5 +165,3 @@ class _$StateEntityOwnerFilterSerializer implements PrimitiveSerializer<StateEnt
     return result.build();
   }
 }
-
-

@@ -20,12 +20,18 @@ part 'device_activity_notification_rule_trigger_config.g.dart';
 /// DeviceActivityNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [devices] 
-/// * [deviceProfiles] 
-/// * [notifyOn] 
+/// * [triggerType]
+/// * [devices]
+/// * [deviceProfiles]
+/// * [notifyOn]
 @BuiltValue()
-abstract class DeviceActivityNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<DeviceActivityNotificationRuleTriggerConfig, DeviceActivityNotificationRuleTriggerConfigBuilder> {
+abstract class DeviceActivityNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          DeviceActivityNotificationRuleTriggerConfig,
+          DeviceActivityNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'devices')
   BuiltSet<String>? get devices;
 
@@ -37,18 +43,27 @@ abstract class DeviceActivityNotificationRuleTriggerConfig implements Notificati
 
   DeviceActivityNotificationRuleTriggerConfig._();
 
-  factory DeviceActivityNotificationRuleTriggerConfig([void updates(DeviceActivityNotificationRuleTriggerConfigBuilder b)]) = _$DeviceActivityNotificationRuleTriggerConfig;
+  factory DeviceActivityNotificationRuleTriggerConfig([
+    void updates(DeviceActivityNotificationRuleTriggerConfigBuilder b),
+  ]) = _$DeviceActivityNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(DeviceActivityNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(DeviceActivityNotificationRuleTriggerConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DeviceActivityNotificationRuleTriggerConfig> get serializer => _$DeviceActivityNotificationRuleTriggerConfigSerializer();
+  static Serializer<DeviceActivityNotificationRuleTriggerConfig>
+  get serializer => _$DeviceActivityNotificationRuleTriggerConfigSerializer();
 }
 
-class _$DeviceActivityNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<DeviceActivityNotificationRuleTriggerConfig> {
+class _$DeviceActivityNotificationRuleTriggerConfigSerializer
+    implements
+        PrimitiveSerializer<DeviceActivityNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [DeviceActivityNotificationRuleTriggerConfig, _$DeviceActivityNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    DeviceActivityNotificationRuleTriggerConfig,
+    _$DeviceActivityNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'DeviceActivityNotificationRuleTriggerConfig';
@@ -90,7 +105,11 @@ class _$DeviceActivityNotificationRuleTriggerConfigSerializer implements Primiti
     DeviceActivityNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -106,32 +125,46 @@ class _$DeviceActivityNotificationRuleTriggerConfigSerializer implements Primiti
       final value = serializedList[i + 1];
       switch (key) {
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         case r'devices':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.devices.replace(valueDes);
           break;
         case r'notifyOn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltSet, [FullType(DeviceEvent)]),
-          ) as BuiltSet<DeviceEvent>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltSet, [
+                      FullType(DeviceEvent),
+                    ]),
+                  )
+                  as BuiltSet<DeviceEvent>;
           result.notifyOn.replace(valueDes);
           break;
         case r'deviceProfiles':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(String)]),
-          ) as BuiltSet<String>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltSet<String>?;
           if (valueDes == null) continue;
           result.deviceProfiles.replace(valueDes);
           break;
@@ -163,5 +196,3 @@ class _$DeviceActivityNotificationRuleTriggerConfigSerializer implements Primiti
     return result.build();
   }
 }
-
-

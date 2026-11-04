@@ -18,13 +18,19 @@ part 'coap_device_transport_configuration.g.dart';
 /// CoapDeviceTransportConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [powerMode] 
-/// * [psmActivityTimer] 
-/// * [edrxCycle] 
-/// * [pagingTransmissionWindow] 
+/// * [type]
+/// * [powerMode]
+/// * [psmActivityTimer]
+/// * [edrxCycle]
+/// * [pagingTransmissionWindow]
 @BuiltValue()
-abstract class CoapDeviceTransportConfiguration implements DeviceTransportConfiguration, Built<CoapDeviceTransportConfiguration, CoapDeviceTransportConfigurationBuilder> {
+abstract class CoapDeviceTransportConfiguration
+    implements
+        DeviceTransportConfiguration,
+        Built<
+          CoapDeviceTransportConfiguration,
+          CoapDeviceTransportConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'pagingTransmissionWindow')
   int? get pagingTransmissionWindow;
 
@@ -40,18 +46,25 @@ abstract class CoapDeviceTransportConfiguration implements DeviceTransportConfig
 
   CoapDeviceTransportConfiguration._();
 
-  factory CoapDeviceTransportConfiguration([void updates(CoapDeviceTransportConfigurationBuilder b)]) = _$CoapDeviceTransportConfiguration;
+  factory CoapDeviceTransportConfiguration([
+    void updates(CoapDeviceTransportConfigurationBuilder b),
+  ]) = _$CoapDeviceTransportConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(CoapDeviceTransportConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<CoapDeviceTransportConfiguration> get serializer => _$CoapDeviceTransportConfigurationSerializer();
+  static Serializer<CoapDeviceTransportConfiguration> get serializer =>
+      _$CoapDeviceTransportConfigurationSerializer();
 }
 
-class _$CoapDeviceTransportConfigurationSerializer implements PrimitiveSerializer<CoapDeviceTransportConfiguration> {
+class _$CoapDeviceTransportConfigurationSerializer
+    implements PrimitiveSerializer<CoapDeviceTransportConfiguration> {
   @override
-  final Iterable<Type> types = const [CoapDeviceTransportConfiguration, _$CoapDeviceTransportConfiguration];
+  final Iterable<Type> types = const [
+    CoapDeviceTransportConfiguration,
+    _$CoapDeviceTransportConfiguration,
+  ];
 
   @override
   final String wireName = r'CoapDeviceTransportConfiguration';
@@ -102,7 +115,11 @@ class _$CoapDeviceTransportConfigurationSerializer implements PrimitiveSerialize
     CoapDeviceTransportConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -118,41 +135,51 @@ class _$CoapDeviceTransportConfigurationSerializer implements PrimitiveSerialize
       final value = serializedList[i + 1];
       switch (key) {
         case r'pagingTransmissionWindow':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.pagingTransmissionWindow = valueDes;
           break;
         case r'edrxCycle':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.edrxCycle = valueDes;
           break;
         case r'psmActivityTimer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.psmActivityTimer = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'powerMode':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(PowerMode),
-          ) as PowerMode?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(PowerMode),
+                  )
+                  as PowerMode?;
           if (valueDes == null) continue;
           result.powerMode = valueDes;
           break;
@@ -184,5 +211,3 @@ class _$CoapDeviceTransportConfigurationSerializer implements PrimitiveSerialize
     return result.build();
   }
 }
-
-

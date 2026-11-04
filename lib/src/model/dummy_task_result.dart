@@ -18,30 +18,34 @@ part 'dummy_task_result.g.dart';
 /// DummyTaskResult
 ///
 /// Properties:
-/// * [key] 
-/// * [success] 
-/// * [discarded] 
-/// * [finishTs] 
-/// * [error] 
-/// * [jobType] 
-/// * [failure] 
+/// * [key]
+/// * [success]
+/// * [discarded]
+/// * [finishTs]
+/// * [error]
+/// * [jobType]
+/// * [failure]
 @BuiltValue()
-abstract class DummyTaskResult implements TaskResult, Built<DummyTaskResult, DummyTaskResultBuilder> {
+abstract class DummyTaskResult
+    implements TaskResult, Built<DummyTaskResult, DummyTaskResultBuilder> {
   @BuiltValueField(wireName: r'failure')
   DummyTaskFailure? get failure;
 
   DummyTaskResult._();
 
-  factory DummyTaskResult([void updates(DummyTaskResultBuilder b)]) = _$DummyTaskResult;
+  factory DummyTaskResult([void updates(DummyTaskResultBuilder b)]) =
+      _$DummyTaskResult;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DummyTaskResultBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DummyTaskResult> get serializer => _$DummyTaskResultSerializer();
+  static Serializer<DummyTaskResult> get serializer =>
+      _$DummyTaskResultSerializer();
 }
 
-class _$DummyTaskResultSerializer implements PrimitiveSerializer<DummyTaskResult> {
+class _$DummyTaskResultSerializer
+    implements PrimitiveSerializer<DummyTaskResult> {
   @override
   final Iterable<Type> types = const [DummyTaskResult, _$DummyTaskResult];
 
@@ -108,7 +112,11 @@ class _$DummyTaskResultSerializer implements PrimitiveSerializer<DummyTaskResult
     DummyTaskResult object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -124,57 +132,71 @@ class _$DummyTaskResultSerializer implements PrimitiveSerializer<DummyTaskResult
       final value = serializedList[i + 1];
       switch (key) {
         case r'discarded':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.discarded = valueDes;
           break;
         case r'failure':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(DummyTaskFailure),
-          ) as DummyTaskFailure?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(DummyTaskFailure),
+                  )
+                  as DummyTaskFailure?;
           if (valueDes == null) continue;
           result.failure.replace(valueDes);
           break;
         case r'success':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.success = valueDes;
           break;
         case r'finishTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.finishTs = valueDes;
           break;
         case r'error':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.error = valueDes;
           break;
         case r'jobType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.jobType = valueDes;
           break;
         case r'key':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.key = valueDes;
           break;
@@ -206,5 +228,3 @@ class _$DummyTaskResultSerializer implements PrimitiveSerializer<DummyTaskResult
     return result.build();
   }
 }
-
-

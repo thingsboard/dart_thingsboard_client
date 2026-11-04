@@ -16,14 +16,15 @@ part 'features_info.g.dart';
 /// FeaturesInfo
 ///
 /// Properties:
-/// * [whiteLabelingEnabled] 
-/// * [emailEnabled] 
-/// * [smsEnabled] 
-/// * [notificationEnabled] 
-/// * [oauthEnabled] 
-/// * [twoFaEnabled] 
+/// * [whiteLabelingEnabled]
+/// * [emailEnabled]
+/// * [smsEnabled]
+/// * [notificationEnabled]
+/// * [oauthEnabled]
+/// * [twoFaEnabled]
 @BuiltValue()
-abstract class FeaturesInfo implements Built<FeaturesInfo, FeaturesInfoBuilder> {
+abstract class FeaturesInfo
+    implements Built<FeaturesInfo, FeaturesInfoBuilder> {
   @BuiltValueField(wireName: r'whiteLabelingEnabled')
   bool? get whiteLabelingEnabled;
 
@@ -115,7 +116,11 @@ class _$FeaturesInfoSerializer implements PrimitiveSerializer<FeaturesInfo> {
     FeaturesInfo object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -131,50 +136,62 @@ class _$FeaturesInfoSerializer implements PrimitiveSerializer<FeaturesInfo> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'whiteLabelingEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.whiteLabelingEnabled = valueDes;
           break;
         case r'emailEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.emailEnabled = valueDes;
           break;
         case r'smsEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.smsEnabled = valueDes;
           break;
         case r'notificationEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notificationEnabled = valueDes;
           break;
         case r'oauthEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.oauthEnabled = valueDes;
           break;
         case r'twoFaEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.twoFaEnabled = valueDes;
           break;
@@ -206,5 +223,3 @@ class _$FeaturesInfoSerializer implements PrimitiveSerializer<FeaturesInfo> {
     return result.build();
   }
 }
-
-

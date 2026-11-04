@@ -20,12 +20,12 @@ part 'entity_data.g.dart';
 /// EntityData
 ///
 /// Properties:
-/// * [entityId] 
-/// * [readAttrs] 
-/// * [readTs] 
-/// * [latest] 
-/// * [timeseries] 
-/// * [aggLatest] 
+/// * [entityId]
+/// * [readAttrs]
+/// * [readTs]
+/// * [latest]
+/// * [timeseries]
+/// * [aggLatest]
 @BuiltValue()
 abstract class EntityData implements Built<EntityData, EntityDataBuilder> {
   @BuiltValueField(wireName: r'entityId')
@@ -94,21 +94,30 @@ class _$EntityDataSerializer implements PrimitiveSerializer<EntityData> {
       yield r'latest';
       yield serializers.serialize(
         object.latest,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(TsValue)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
+        ]),
       );
     }
     if (object.timeseries != null) {
       yield r'timeseries';
       yield serializers.serialize(
         object.timeseries,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(TsValue)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(TsValue)]),
+        ]),
       );
     }
     if (object.aggLatest != null) {
       yield r'aggLatest';
       yield serializers.serialize(
         object.aggLatest,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(ComparisonTsValue)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(ComparisonTsValue),
+        ]),
       );
     }
   }
@@ -119,7 +128,11 @@ class _$EntityDataSerializer implements PrimitiveSerializer<EntityData> {
     EntityData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -135,50 +148,71 @@ class _$EntityDataSerializer implements PrimitiveSerializer<EntityData> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EntityId),
-          ) as EntityId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EntityId),
+                  )
+                  as EntityId?;
           if (valueDes == null) continue;
           result.entityId = valueDes;
           break;
         case r'readAttrs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.readAttrs = valueDes;
           break;
         case r'readTs':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.readTs = valueDes;
           break;
         case r'latest':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltMap, [FullType(String), FullType(TsValue)])]),
-          ) as BuiltMap<String, BuiltMap<String, TsValue>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltMap<String, TsValue>>?;
           if (valueDes == null) continue;
           result.latest.replace(valueDes);
           break;
         case r'timeseries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(TsValue)])]),
-          ) as BuiltMap<String, BuiltList<TsValue>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(TsValue)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<TsValue>>?;
           if (valueDes == null) continue;
           result.timeseries.replace(valueDes);
           break;
         case r'aggLatest':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(ComparisonTsValue)]),
-          ) as BuiltMap<String, ComparisonTsValue>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(ComparisonTsValue),
+                    ]),
+                  )
+                  as BuiltMap<String, ComparisonTsValue>?;
           if (valueDes == null) continue;
           result.aggLatest.replace(valueDes);
           break;
@@ -210,5 +244,3 @@ class _$EntityDataSerializer implements PrimitiveSerializer<EntityData> {
     return result.build();
   }
 }
-
-

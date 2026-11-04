@@ -15,17 +15,18 @@ import 'package:built_value/serializer.dart';
 part 'subscription_error_code.g.dart';
 
 class SubscriptionErrorCode extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'LIMIT_REACHED')
   static const SubscriptionErrorCode LIMIT_REACHED = _$LIMIT_REACHED;
   @BuiltValueEnumConst(wireName: r'FEATURE_DISABLED')
   static const SubscriptionErrorCode FEATURE_DISABLED = _$FEATURE_DISABLED;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const SubscriptionErrorCode unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const SubscriptionErrorCode unknownDefaultOpenApi =
+      _$unknownDefaultOpenApi;
 
-  static Serializer<SubscriptionErrorCode> get serializer => _$subscriptionErrorCodeSerializer;
+  static Serializer<SubscriptionErrorCode> get serializer =>
+      _$subscriptionErrorCodeSerializer;
 
-  const SubscriptionErrorCode._(String name): super(name);
+  const SubscriptionErrorCode._(String name) : super(name);
 
   static BuiltSet<SubscriptionErrorCode> get values => _$values;
   static SubscriptionErrorCode valueOf(String name) => _$valueOf(name);
@@ -37,5 +38,5 @@ class SubscriptionErrorCode extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class SubscriptionErrorCodeMixin = Object with _$SubscriptionErrorCodeMixin;
-
+abstract class SubscriptionErrorCodeMixin = Object
+    with _$SubscriptionErrorCodeMixin;

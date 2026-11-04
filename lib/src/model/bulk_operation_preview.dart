@@ -23,7 +23,8 @@ part 'bulk_operation_preview.g.dart';
 /// * [skippedCountsByReason] - Skip count per reason for the targeted apps
 /// * [skippedSample] - Sample of skipped apps, capped per reason. Use the run history to inspect the full list.
 @BuiltValue()
-abstract class BulkOperationPreview implements Built<BulkOperationPreview, BulkOperationPreviewBuilder> {
+abstract class BulkOperationPreview
+    implements Built<BulkOperationPreview, BulkOperationPreviewBuilder> {
   /// Total number of apps targeted by the bulk operation
   @BuiltValueField(wireName: r'total')
   int? get total;
@@ -42,18 +43,24 @@ abstract class BulkOperationPreview implements Built<BulkOperationPreview, BulkO
 
   BulkOperationPreview._();
 
-  factory BulkOperationPreview([void updates(BulkOperationPreviewBuilder b)]) = _$BulkOperationPreview;
+  factory BulkOperationPreview([void updates(BulkOperationPreviewBuilder b)]) =
+      _$BulkOperationPreview;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(BulkOperationPreviewBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<BulkOperationPreview> get serializer => _$BulkOperationPreviewSerializer();
+  static Serializer<BulkOperationPreview> get serializer =>
+      _$BulkOperationPreviewSerializer();
 }
 
-class _$BulkOperationPreviewSerializer implements PrimitiveSerializer<BulkOperationPreview> {
+class _$BulkOperationPreviewSerializer
+    implements PrimitiveSerializer<BulkOperationPreview> {
   @override
-  final Iterable<Type> types = const [BulkOperationPreview, _$BulkOperationPreview];
+  final Iterable<Type> types = const [
+    BulkOperationPreview,
+    _$BulkOperationPreview,
+  ];
 
   @override
   final String wireName = r'BulkOperationPreview';
@@ -81,7 +88,10 @@ class _$BulkOperationPreviewSerializer implements PrimitiveSerializer<BulkOperat
       yield r'skippedCountsByReason';
       yield serializers.serialize(
         object.skippedCountsByReason,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(int)]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(int),
+        ]),
       );
     }
     if (object.skippedSample != null) {
@@ -99,7 +109,11 @@ class _$BulkOperationPreviewSerializer implements PrimitiveSerializer<BulkOperat
     BulkOperationPreview object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -115,34 +129,47 @@ class _$BulkOperationPreviewSerializer implements PrimitiveSerializer<BulkOperat
       final value = serializedList[i + 1];
       switch (key) {
         case r'total':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.total = valueDes;
           break;
         case r'eligible':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.eligible = valueDes;
           break;
         case r'skippedCountsByReason':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(int)]),
-          ) as BuiltMap<String, int>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(int),
+                    ]),
+                  )
+                  as BuiltMap<String, int>?;
           if (valueDes == null) continue;
           result.skippedCountsByReason.replace(valueDes);
           break;
         case r'skippedSample':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(SkippedApp)]),
-          ) as BuiltList<SkippedApp>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(SkippedApp),
+                    ]),
+                  )
+                  as BuiltList<SkippedApp>?;
           if (valueDes == null) continue;
           result.skippedSample.replace(valueDes);
           break;
@@ -174,5 +201,3 @@ class _$BulkOperationPreviewSerializer implements PrimitiveSerializer<BulkOperat
     return result.build();
   }
 }
-
-

@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'border_type.g.dart';
 
 class BorderType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'solid')
   static const BorderType solid = _$solid;
   @BuiltValueEnumConst(wireName: r'dashed')
@@ -27,7 +26,7 @@ class BorderType extends EnumClass {
 
   static Serializer<BorderType> get serializer => _$borderTypeSerializer;
 
-  const BorderType._(String name): super(name);
+  const BorderType._(String name) : super(name);
 
   static BuiltSet<BorderType> get values => _$values;
   static BorderType valueOf(String name) => _$valueOf(name);
@@ -40,4 +39,3 @@ class BorderType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class BorderTypeMixin = Object with _$BorderTypeMixin;
-

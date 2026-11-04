@@ -19,19 +19,22 @@ part 'git_hub_models_chat_model_config.g.dart';
 /// GitHubModelsChatModelConfig
 ///
 /// Properties:
-/// * [provider] 
-/// * [providerConfig] 
-/// * [modelId] 
-/// * [temperature] 
-/// * [topP] 
-/// * [frequencyPenalty] 
-/// * [presencePenalty] 
-/// * [maxOutputTokens] 
-/// * [timeoutSeconds] 
-/// * [maxRetries] 
-/// * [modelType] 
+/// * [provider]
+/// * [providerConfig]
+/// * [modelId]
+/// * [temperature]
+/// * [topP]
+/// * [frequencyPenalty]
+/// * [presencePenalty]
+/// * [maxOutputTokens]
+/// * [timeoutSeconds]
+/// * [maxRetries]
+/// * [modelType]
 @BuiltValue()
-abstract class GitHubModelsChatModelConfig implements AiModelConfig, Built<GitHubModelsChatModelConfig, GitHubModelsChatModelConfigBuilder> {
+abstract class GitHubModelsChatModelConfig
+    implements
+        AiModelConfig,
+        Built<GitHubModelsChatModelConfig, GitHubModelsChatModelConfigBuilder> {
   @BuiltValueField(wireName: r'presencePenalty')
   double? get presencePenalty;
 
@@ -65,18 +68,25 @@ abstract class GitHubModelsChatModelConfig implements AiModelConfig, Built<GitHu
 
   GitHubModelsChatModelConfig._();
 
-  factory GitHubModelsChatModelConfig([void updates(GitHubModelsChatModelConfigBuilder b)]) = _$GitHubModelsChatModelConfig;
+  factory GitHubModelsChatModelConfig([
+    void updates(GitHubModelsChatModelConfigBuilder b),
+  ]) = _$GitHubModelsChatModelConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GitHubModelsChatModelConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<GitHubModelsChatModelConfig> get serializer => _$GitHubModelsChatModelConfigSerializer();
+  static Serializer<GitHubModelsChatModelConfig> get serializer =>
+      _$GitHubModelsChatModelConfigSerializer();
 }
 
-class _$GitHubModelsChatModelConfigSerializer implements PrimitiveSerializer<GitHubModelsChatModelConfig> {
+class _$GitHubModelsChatModelConfigSerializer
+    implements PrimitiveSerializer<GitHubModelsChatModelConfig> {
   @override
-  final Iterable<Type> types = const [GitHubModelsChatModelConfig, _$GitHubModelsChatModelConfig];
+  final Iterable<Type> types = const [
+    GitHubModelsChatModelConfig,
+    _$GitHubModelsChatModelConfig,
+  ];
 
   @override
   final String wireName = r'GitHubModelsChatModelConfig';
@@ -165,7 +175,11 @@ class _$GitHubModelsChatModelConfigSerializer implements PrimitiveSerializer<Git
     GitHubModelsChatModelConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -181,87 +195,109 @@ class _$GitHubModelsChatModelConfigSerializer implements PrimitiveSerializer<Git
       final value = serializedList[i + 1];
       switch (key) {
         case r'presencePenalty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.presencePenalty = valueDes;
           break;
         case r'maxRetries':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRetries = valueDes;
           break;
         case r'modelId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.modelId = valueDes;
           break;
         case r'provider':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.provider = valueDes;
           break;
         case r'temperature':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.temperature = valueDes;
           break;
         case r'timeoutSeconds':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.timeoutSeconds = valueDes;
           break;
         case r'modelType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AiModelType),
-          ) as AiModelType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AiModelType),
+                  )
+                  as AiModelType?;
           if (valueDes == null) continue;
           result.modelType = valueDes;
           break;
         case r'providerConfig':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(GitHubModelsProviderConfig),
-          ) as GitHubModelsProviderConfig;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(GitHubModelsProviderConfig),
+                  )
+                  as GitHubModelsProviderConfig;
           result.providerConfig.replace(valueDes);
           break;
         case r'topP':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.topP = valueDes;
           break;
         case r'frequencyPenalty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.frequencyPenalty = valueDes;
           break;
         case r'maxOutputTokens':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxOutputTokens = valueDes;
           break;
@@ -293,5 +329,3 @@ class _$GitHubModelsChatModelConfigSerializer implements PrimitiveSerializer<Git
     return result.build();
   }
 }
-
-

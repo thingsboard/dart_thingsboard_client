@@ -19,14 +19,17 @@ part 'statistics_event_filter.g.dart';
 ///
 /// Properties:
 /// * [eventType] - String value representing the event type
-/// * [notEmpty] 
+/// * [notEmpty]
 /// * [server] - String value representing the server name, identifier or ip address where the platform is running
 /// * [minMessagesProcessed] - The minimum number of successfully processed messages
 /// * [maxMessagesProcessed] - The maximum number of successfully processed messages
 /// * [minErrorsOccurred] - The minimum number of errors occurred during messages processing
 /// * [maxErrorsOccurred] - The maximum number of errors occurred during messages processing
 @BuiltValue()
-abstract class StatisticsEventFilter implements EventFilter, Built<StatisticsEventFilter, StatisticsEventFilterBuilder> {
+abstract class StatisticsEventFilter
+    implements
+        EventFilter,
+        Built<StatisticsEventFilter, StatisticsEventFilterBuilder> {
   /// The minimum number of errors occurred during messages processing
   @BuiltValueField(wireName: r'minErrorsOccurred')
   int? get minErrorsOccurred;
@@ -49,18 +52,25 @@ abstract class StatisticsEventFilter implements EventFilter, Built<StatisticsEve
 
   StatisticsEventFilter._();
 
-  factory StatisticsEventFilter([void updates(StatisticsEventFilterBuilder b)]) = _$StatisticsEventFilter;
+  factory StatisticsEventFilter([
+    void updates(StatisticsEventFilterBuilder b),
+  ]) = _$StatisticsEventFilter;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StatisticsEventFilterBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StatisticsEventFilter> get serializer => _$StatisticsEventFilterSerializer();
+  static Serializer<StatisticsEventFilter> get serializer =>
+      _$StatisticsEventFilterSerializer();
 }
 
-class _$StatisticsEventFilterSerializer implements PrimitiveSerializer<StatisticsEventFilter> {
+class _$StatisticsEventFilterSerializer
+    implements PrimitiveSerializer<StatisticsEventFilter> {
   @override
-  final Iterable<Type> types = const [StatisticsEventFilter, _$StatisticsEventFilter];
+  final Iterable<Type> types = const [
+    StatisticsEventFilter,
+    _$StatisticsEventFilter,
+  ];
 
   @override
   final String wireName = r'StatisticsEventFilter';
@@ -125,7 +135,11 @@ class _$StatisticsEventFilterSerializer implements PrimitiveSerializer<Statistic
     StatisticsEventFilter object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -141,57 +155,71 @@ class _$StatisticsEventFilterSerializer implements PrimitiveSerializer<Statistic
       final value = serializedList[i + 1];
       switch (key) {
         case r'minErrorsOccurred':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minErrorsOccurred = valueDes;
           break;
         case r'server':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.server = valueDes;
           break;
         case r'maxErrorsOccurred':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxErrorsOccurred = valueDes;
           break;
         case r'maxMessagesProcessed':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxMessagesProcessed = valueDes;
           break;
         case r'minMessagesProcessed':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minMessagesProcessed = valueDes;
           break;
         case r'eventType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EventType),
-          ) as EventType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EventType),
+                  )
+                  as EventType;
           result.eventType = valueDes;
           break;
         case r'notEmpty':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.notEmpty = valueDes;
           break;
@@ -223,5 +251,3 @@ class _$StatisticsEventFilterSerializer implements PrimitiveSerializer<Statistic
     return result.build();
   }
 }
-
-

@@ -22,17 +22,17 @@ part 'edge_event.g.dart';
 /// EdgeEvent
 ///
 /// Properties:
-/// * [id] 
+/// * [id]
 /// * [createdTime] - Entity creation timestamp in milliseconds since Unix epoch
-/// * [seqId] 
-/// * [tenantId] 
-/// * [edgeId] 
-/// * [action] 
-/// * [entityId] 
-/// * [uid] 
-/// * [type] 
+/// * [seqId]
+/// * [tenantId]
+/// * [edgeId]
+/// * [action]
+/// * [entityId]
+/// * [uid]
+/// * [type]
 /// * [body] - A value representing the any type (object or primitive)
-/// * [entityGroupId] 
+/// * [entityGroupId]
 @BuiltValue()
 abstract class EdgeEvent implements Built<EdgeEvent, EdgeEventBuilder> {
   @BuiltValueField(wireName: r'id')
@@ -180,7 +180,11 @@ class _$EdgeEventSerializer implements PrimitiveSerializer<EdgeEvent> {
     EdgeEvent object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -196,90 +200,112 @@ class _$EdgeEventSerializer implements PrimitiveSerializer<EdgeEvent> {
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EdgeEventId),
-          ) as EdgeEventId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EdgeEventId),
+                  )
+                  as EdgeEventId?;
           if (valueDes == null) continue;
           result.id.replace(valueDes);
           break;
         case r'createdTime':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.createdTime = valueDes;
           break;
         case r'seqId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.seqId = valueDes;
           break;
         case r'tenantId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(TenantId),
-          ) as TenantId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(TenantId),
+                  )
+                  as TenantId?;
           if (valueDes == null) continue;
           result.tenantId.replace(valueDes);
           break;
         case r'edgeId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EdgeId),
-          ) as EdgeId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EdgeId),
+                  )
+                  as EdgeId?;
           if (valueDes == null) continue;
           result.edgeId.replace(valueDes);
           break;
         case r'action':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EdgeEventActionType),
-          ) as EdgeEventActionType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EdgeEventActionType),
+                  )
+                  as EdgeEventActionType?;
           if (valueDes == null) continue;
           result.action = valueDes;
           break;
         case r'entityId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityId = valueDes;
           break;
         case r'uid':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.uid = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(EdgeEventType),
-          ) as EdgeEventType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(EdgeEventType),
+                  )
+                  as EdgeEventType?;
           if (valueDes == null) continue;
           result.type = valueDes;
           break;
         case r'body':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(JsonObject),
-          ) as JsonObject?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(JsonObject),
+                  )
+                  as JsonObject?;
           if (valueDes == null) continue;
           result.body = valueDes;
           break;
         case r'entityGroupId':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.entityGroupId = valueDes;
           break;
@@ -311,5 +337,3 @@ class _$EdgeEventSerializer implements PrimitiveSerializer<EdgeEvent> {
     return result.build();
   }
 }
-
-

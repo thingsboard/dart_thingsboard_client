@@ -16,10 +16,11 @@ part 'open_ai_provider_config.g.dart';
 /// OpenAiProviderConfig
 ///
 /// Properties:
-/// * [baseUrl] 
-/// * [apiKey] 
+/// * [baseUrl]
+/// * [apiKey]
 @BuiltValue()
-abstract class OpenAiProviderConfig implements Built<OpenAiProviderConfig, OpenAiProviderConfigBuilder> {
+abstract class OpenAiProviderConfig
+    implements Built<OpenAiProviderConfig, OpenAiProviderConfigBuilder> {
   @BuiltValueField(wireName: r'baseUrl')
   String? get baseUrl;
 
@@ -28,18 +29,24 @@ abstract class OpenAiProviderConfig implements Built<OpenAiProviderConfig, OpenA
 
   OpenAiProviderConfig._();
 
-  factory OpenAiProviderConfig([void updates(OpenAiProviderConfigBuilder b)]) = _$OpenAiProviderConfig;
+  factory OpenAiProviderConfig([void updates(OpenAiProviderConfigBuilder b)]) =
+      _$OpenAiProviderConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OpenAiProviderConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<OpenAiProviderConfig> get serializer => _$OpenAiProviderConfigSerializer();
+  static Serializer<OpenAiProviderConfig> get serializer =>
+      _$OpenAiProviderConfigSerializer();
 }
 
-class _$OpenAiProviderConfigSerializer implements PrimitiveSerializer<OpenAiProviderConfig> {
+class _$OpenAiProviderConfigSerializer
+    implements PrimitiveSerializer<OpenAiProviderConfig> {
   @override
-  final Iterable<Type> types = const [OpenAiProviderConfig, _$OpenAiProviderConfig];
+  final Iterable<Type> types = const [
+    OpenAiProviderConfig,
+    _$OpenAiProviderConfig,
+  ];
 
   @override
   final String wireName = r'OpenAiProviderConfig';
@@ -71,7 +78,11 @@ class _$OpenAiProviderConfigSerializer implements PrimitiveSerializer<OpenAiProv
     OpenAiProviderConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -87,18 +98,22 @@ class _$OpenAiProviderConfigSerializer implements PrimitiveSerializer<OpenAiProv
       final value = serializedList[i + 1];
       switch (key) {
         case r'baseUrl':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.baseUrl = valueDes;
           break;
         case r'apiKey':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.apiKey = valueDes;
           break;
@@ -130,5 +145,3 @@ class _$OpenAiProviderConfigSerializer implements PrimitiveSerializer<OpenAiProv
     return result.build();
   }
 }
-
-

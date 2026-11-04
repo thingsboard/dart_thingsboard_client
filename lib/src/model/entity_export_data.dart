@@ -45,13 +45,13 @@ part 'entity_export_data.g.dart';
 /// Base export container for ThingsBoard entities
 ///
 /// Properties:
-/// * [entity] 
-/// * [relations] 
+/// * [entity]
+/// * [relations]
 /// * [attributes] - Map of attributes where key is the scope of attributes and value is the list of attributes for that scope
-/// * [calculatedFields] 
-/// * [entityType] 
+/// * [calculatedFields]
+/// * [entityType]
 @BuiltValue(instantiable: false)
-abstract class EntityExportData  {
+abstract class EntityExportData {
   @BuiltValueField(wireName: r'entity')
   ExportableEntity? get entity;
 
@@ -98,159 +98,162 @@ abstract class EntityExportData  {
   };
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntityExportData> get serializer => _$EntityExportDataSerializer();
+  static Serializer<EntityExportData> get serializer =>
+      _$EntityExportDataSerializer();
 }
 
 extension EntityExportDataDiscriminatorExt on EntityExportData {
-    String? get discriminatorValue {
-        if (this is AiModelExportData) {
-            return r'AI_MODEL';
-        }
-        if (this is AssetExportData) {
-            return r'ASSET';
-        }
-        if (this is AssetProfileExportData) {
-            return r'ASSET_PROFILE';
-        }
-        if (this is ConverterExportData) {
-            return r'CONVERTER';
-        }
-        if (this is CustomerExportData) {
-            return r'CUSTOMER';
-        }
-        if (this is DashboardExportData) {
-            return r'DASHBOARD';
-        }
-        if (this is DeviceExportData) {
-            return r'DEVICE';
-        }
-        if (this is DeviceProfileExportData) {
-            return r'DEVICE_PROFILE';
-        }
-        if (this is EntityGroupExportData) {
-            return r'ENTITY_GROUP';
-        }
-        if (this is EntityViewExportData) {
-            return r'ENTITY_VIEW';
-        }
-        if (this is IntegrationExportData) {
-            return r'INTEGRATION';
-        }
-        if (this is NotificationRuleExportData) {
-            return r'NOTIFICATION_RULE';
-        }
-        if (this is NotificationTargetExportData) {
-            return r'NOTIFICATION_TARGET';
-        }
-        if (this is NotificationTemplateExportData) {
-            return r'NOTIFICATION_TEMPLATE';
-        }
-        if (this is OtaPackageExportData) {
-            return r'OTA_PACKAGE';
-        }
-        if (this is ReportTemplateExportData) {
-            return r'REPORT_TEMPLATE';
-        }
-        if (this is RoleExportData) {
-            return r'ROLE';
-        }
-        if (this is RuleChainExportData) {
-            return r'RULE_CHAIN';
-        }
-        if (this is SchedulerEventExportData) {
-            return r'SCHEDULER_EVENT';
-        }
-        if (this is TbResourceExportData) {
-            return r'TB_RESOURCE';
-        }
-        if (this is UserExportData) {
-            return r'USER';
-        }
-        if (this is WidgetsBundleExportData) {
-            return r'WIDGETS_BUNDLE';
-        }
-        if (this is WidgetTypeExportData) {
-            return r'WIDGET_TYPE';
-        }
-        return null;
+  String? get discriminatorValue {
+    if (this is AiModelExportData) {
+      return r'AI_MODEL';
     }
-}
-extension EntityExportDataBuilderDiscriminatorExt on EntityExportDataBuilder {
-    String? get discriminatorValue {
-        if (this is AiModelExportDataBuilder) {
-            return r'AI_MODEL';
-        }
-        if (this is AssetExportDataBuilder) {
-            return r'ASSET';
-        }
-        if (this is AssetProfileExportDataBuilder) {
-            return r'ASSET_PROFILE';
-        }
-        if (this is ConverterExportDataBuilder) {
-            return r'CONVERTER';
-        }
-        if (this is CustomerExportDataBuilder) {
-            return r'CUSTOMER';
-        }
-        if (this is DashboardExportDataBuilder) {
-            return r'DASHBOARD';
-        }
-        if (this is DeviceExportDataBuilder) {
-            return r'DEVICE';
-        }
-        if (this is DeviceProfileExportDataBuilder) {
-            return r'DEVICE_PROFILE';
-        }
-        if (this is EntityGroupExportDataBuilder) {
-            return r'ENTITY_GROUP';
-        }
-        if (this is EntityViewExportDataBuilder) {
-            return r'ENTITY_VIEW';
-        }
-        if (this is IntegrationExportDataBuilder) {
-            return r'INTEGRATION';
-        }
-        if (this is NotificationRuleExportDataBuilder) {
-            return r'NOTIFICATION_RULE';
-        }
-        if (this is NotificationTargetExportDataBuilder) {
-            return r'NOTIFICATION_TARGET';
-        }
-        if (this is NotificationTemplateExportDataBuilder) {
-            return r'NOTIFICATION_TEMPLATE';
-        }
-        if (this is OtaPackageExportDataBuilder) {
-            return r'OTA_PACKAGE';
-        }
-        if (this is ReportTemplateExportDataBuilder) {
-            return r'REPORT_TEMPLATE';
-        }
-        if (this is RoleExportDataBuilder) {
-            return r'ROLE';
-        }
-        if (this is RuleChainExportDataBuilder) {
-            return r'RULE_CHAIN';
-        }
-        if (this is SchedulerEventExportDataBuilder) {
-            return r'SCHEDULER_EVENT';
-        }
-        if (this is TbResourceExportDataBuilder) {
-            return r'TB_RESOURCE';
-        }
-        if (this is UserExportDataBuilder) {
-            return r'USER';
-        }
-        if (this is WidgetsBundleExportDataBuilder) {
-            return r'WIDGETS_BUNDLE';
-        }
-        if (this is WidgetTypeExportDataBuilder) {
-            return r'WIDGET_TYPE';
-        }
-        return null;
+    if (this is AssetExportData) {
+      return r'ASSET';
     }
+    if (this is AssetProfileExportData) {
+      return r'ASSET_PROFILE';
+    }
+    if (this is ConverterExportData) {
+      return r'CONVERTER';
+    }
+    if (this is CustomerExportData) {
+      return r'CUSTOMER';
+    }
+    if (this is DashboardExportData) {
+      return r'DASHBOARD';
+    }
+    if (this is DeviceExportData) {
+      return r'DEVICE';
+    }
+    if (this is DeviceProfileExportData) {
+      return r'DEVICE_PROFILE';
+    }
+    if (this is EntityGroupExportData) {
+      return r'ENTITY_GROUP';
+    }
+    if (this is EntityViewExportData) {
+      return r'ENTITY_VIEW';
+    }
+    if (this is IntegrationExportData) {
+      return r'INTEGRATION';
+    }
+    if (this is NotificationRuleExportData) {
+      return r'NOTIFICATION_RULE';
+    }
+    if (this is NotificationTargetExportData) {
+      return r'NOTIFICATION_TARGET';
+    }
+    if (this is NotificationTemplateExportData) {
+      return r'NOTIFICATION_TEMPLATE';
+    }
+    if (this is OtaPackageExportData) {
+      return r'OTA_PACKAGE';
+    }
+    if (this is ReportTemplateExportData) {
+      return r'REPORT_TEMPLATE';
+    }
+    if (this is RoleExportData) {
+      return r'ROLE';
+    }
+    if (this is RuleChainExportData) {
+      return r'RULE_CHAIN';
+    }
+    if (this is SchedulerEventExportData) {
+      return r'SCHEDULER_EVENT';
+    }
+    if (this is TbResourceExportData) {
+      return r'TB_RESOURCE';
+    }
+    if (this is UserExportData) {
+      return r'USER';
+    }
+    if (this is WidgetsBundleExportData) {
+      return r'WIDGETS_BUNDLE';
+    }
+    if (this is WidgetTypeExportData) {
+      return r'WIDGET_TYPE';
+    }
+    return null;
+  }
 }
 
-class _$EntityExportDataSerializer implements PrimitiveSerializer<EntityExportData> {
+extension EntityExportDataBuilderDiscriminatorExt on EntityExportDataBuilder {
+  String? get discriminatorValue {
+    if (this is AiModelExportDataBuilder) {
+      return r'AI_MODEL';
+    }
+    if (this is AssetExportDataBuilder) {
+      return r'ASSET';
+    }
+    if (this is AssetProfileExportDataBuilder) {
+      return r'ASSET_PROFILE';
+    }
+    if (this is ConverterExportDataBuilder) {
+      return r'CONVERTER';
+    }
+    if (this is CustomerExportDataBuilder) {
+      return r'CUSTOMER';
+    }
+    if (this is DashboardExportDataBuilder) {
+      return r'DASHBOARD';
+    }
+    if (this is DeviceExportDataBuilder) {
+      return r'DEVICE';
+    }
+    if (this is DeviceProfileExportDataBuilder) {
+      return r'DEVICE_PROFILE';
+    }
+    if (this is EntityGroupExportDataBuilder) {
+      return r'ENTITY_GROUP';
+    }
+    if (this is EntityViewExportDataBuilder) {
+      return r'ENTITY_VIEW';
+    }
+    if (this is IntegrationExportDataBuilder) {
+      return r'INTEGRATION';
+    }
+    if (this is NotificationRuleExportDataBuilder) {
+      return r'NOTIFICATION_RULE';
+    }
+    if (this is NotificationTargetExportDataBuilder) {
+      return r'NOTIFICATION_TARGET';
+    }
+    if (this is NotificationTemplateExportDataBuilder) {
+      return r'NOTIFICATION_TEMPLATE';
+    }
+    if (this is OtaPackageExportDataBuilder) {
+      return r'OTA_PACKAGE';
+    }
+    if (this is ReportTemplateExportDataBuilder) {
+      return r'REPORT_TEMPLATE';
+    }
+    if (this is RoleExportDataBuilder) {
+      return r'ROLE';
+    }
+    if (this is RuleChainExportDataBuilder) {
+      return r'RULE_CHAIN';
+    }
+    if (this is SchedulerEventExportDataBuilder) {
+      return r'SCHEDULER_EVENT';
+    }
+    if (this is TbResourceExportDataBuilder) {
+      return r'TB_RESOURCE';
+    }
+    if (this is UserExportDataBuilder) {
+      return r'USER';
+    }
+    if (this is WidgetsBundleExportDataBuilder) {
+      return r'WIDGETS_BUNDLE';
+    }
+    if (this is WidgetTypeExportDataBuilder) {
+      return r'WIDGET_TYPE';
+    }
+    return null;
+  }
+}
+
+class _$EntityExportDataSerializer
+    implements PrimitiveSerializer<EntityExportData> {
   @override
   final Iterable<Type> types = const [EntityExportData];
 
@@ -280,7 +283,10 @@ class _$EntityExportDataSerializer implements PrimitiveSerializer<EntityExportDa
       yield r'attributes';
       yield serializers.serialize(
         object.attributes,
-        specifiedType: const FullType(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
+        specifiedType: const FullType(BuiltMap, [
+          FullType(String),
+          FullType(BuiltList, [FullType(AttributeExportData)]),
+        ]),
       );
     }
     if (object.calculatedFields != null) {
@@ -304,75 +310,148 @@ class _$EntityExportDataSerializer implements PrimitiveSerializer<EntityExportDa
     FullType specifiedType = FullType.unspecified,
   }) {
     if (object is AiModelExportData) {
-      return serializers.serialize(object, specifiedType: FullType(AiModelExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AiModelExportData),
+      )!;
     }
     if (object is AssetExportData) {
-      return serializers.serialize(object, specifiedType: FullType(AssetExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AssetExportData),
+      )!;
     }
     if (object is AssetProfileExportData) {
-      return serializers.serialize(object, specifiedType: FullType(AssetProfileExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(AssetProfileExportData),
+      )!;
     }
     if (object is ConverterExportData) {
-      return serializers.serialize(object, specifiedType: FullType(ConverterExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ConverterExportData),
+      )!;
     }
     if (object is CustomerExportData) {
-      return serializers.serialize(object, specifiedType: FullType(CustomerExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(CustomerExportData),
+      )!;
     }
     if (object is DashboardExportData) {
-      return serializers.serialize(object, specifiedType: FullType(DashboardExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DashboardExportData),
+      )!;
     }
     if (object is DeviceExportData) {
-      return serializers.serialize(object, specifiedType: FullType(DeviceExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DeviceExportData),
+      )!;
     }
     if (object is DeviceProfileExportData) {
-      return serializers.serialize(object, specifiedType: FullType(DeviceProfileExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(DeviceProfileExportData),
+      )!;
     }
     if (object is EntityGroupExportData) {
-      return serializers.serialize(object, specifiedType: FullType(EntityGroupExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityGroupExportData),
+      )!;
     }
     if (object is EntityViewExportData) {
-      return serializers.serialize(object, specifiedType: FullType(EntityViewExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(EntityViewExportData),
+      )!;
     }
     if (object is IntegrationExportData) {
-      return serializers.serialize(object, specifiedType: FullType(IntegrationExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(IntegrationExportData),
+      )!;
     }
     if (object is NotificationRuleExportData) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationRuleExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationRuleExportData),
+      )!;
     }
     if (object is NotificationTargetExportData) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationTargetExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationTargetExportData),
+      )!;
     }
     if (object is NotificationTemplateExportData) {
-      return serializers.serialize(object, specifiedType: FullType(NotificationTemplateExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(NotificationTemplateExportData),
+      )!;
     }
     if (object is OtaPackageExportData) {
-      return serializers.serialize(object, specifiedType: FullType(OtaPackageExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(OtaPackageExportData),
+      )!;
     }
     if (object is ReportTemplateExportData) {
-      return serializers.serialize(object, specifiedType: FullType(ReportTemplateExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(ReportTemplateExportData),
+      )!;
     }
     if (object is RoleExportData) {
-      return serializers.serialize(object, specifiedType: FullType(RoleExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RoleExportData),
+      )!;
     }
     if (object is RuleChainExportData) {
-      return serializers.serialize(object, specifiedType: FullType(RuleChainExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(RuleChainExportData),
+      )!;
     }
     if (object is SchedulerEventExportData) {
-      return serializers.serialize(object, specifiedType: FullType(SchedulerEventExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(SchedulerEventExportData),
+      )!;
     }
     if (object is TbResourceExportData) {
-      return serializers.serialize(object, specifiedType: FullType(TbResourceExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(TbResourceExportData),
+      )!;
     }
     if (object is UserExportData) {
-      return serializers.serialize(object, specifiedType: FullType(UserExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(UserExportData),
+      )!;
     }
     if (object is WidgetsBundleExportData) {
-      return serializers.serialize(object, specifiedType: FullType(WidgetsBundleExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WidgetsBundleExportData),
+      )!;
     }
     if (object is WidgetTypeExportData) {
-      return serializers.serialize(object, specifiedType: FullType(WidgetTypeExportData))!;
+      return serializers.serialize(
+        object,
+        specifiedType: FullType(WidgetTypeExportData),
+      )!;
     }
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   @override
@@ -382,77 +461,185 @@ class _$EntityExportDataSerializer implements PrimitiveSerializer<EntityExportDa
     FullType specifiedType = FullType.unspecified,
   }) {
     final serializedList = (serialized as Iterable<Object?>).toList();
-    final discIndex = serializedList.indexOf(EntityExportData.discriminatorFieldName) + 1;
-    final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
+    final discIndex =
+        serializedList.indexOf(EntityExportData.discriminatorFieldName) + 1;
+    final discValue =
+        serializers.deserialize(
+              serializedList[discIndex],
+              specifiedType: FullType(String),
+            )
+            as String;
     switch (discValue) {
       case r'AI_MODEL':
-        return serializers.deserialize(serialized, specifiedType: FullType(AiModelExportData)) as AiModelExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AiModelExportData),
+            )
+            as AiModelExportData;
       case r'ASSET':
-        return serializers.deserialize(serialized, specifiedType: FullType(AssetExportData)) as AssetExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AssetExportData),
+            )
+            as AssetExportData;
       case r'ASSET_PROFILE':
-        return serializers.deserialize(serialized, specifiedType: FullType(AssetProfileExportData)) as AssetProfileExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(AssetProfileExportData),
+            )
+            as AssetProfileExportData;
       case r'CONVERTER':
-        return serializers.deserialize(serialized, specifiedType: FullType(ConverterExportData)) as ConverterExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ConverterExportData),
+            )
+            as ConverterExportData;
       case r'CUSTOMER':
-        return serializers.deserialize(serialized, specifiedType: FullType(CustomerExportData)) as CustomerExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(CustomerExportData),
+            )
+            as CustomerExportData;
       case r'DASHBOARD':
-        return serializers.deserialize(serialized, specifiedType: FullType(DashboardExportData)) as DashboardExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DashboardExportData),
+            )
+            as DashboardExportData;
       case r'DEVICE':
-        return serializers.deserialize(serialized, specifiedType: FullType(DeviceExportData)) as DeviceExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DeviceExportData),
+            )
+            as DeviceExportData;
       case r'DEVICE_PROFILE':
-        return serializers.deserialize(serialized, specifiedType: FullType(DeviceProfileExportData)) as DeviceProfileExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(DeviceProfileExportData),
+            )
+            as DeviceProfileExportData;
       case r'ENTITY_GROUP':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityGroupExportData)) as EntityGroupExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityGroupExportData),
+            )
+            as EntityGroupExportData;
       case r'ENTITY_VIEW':
-        return serializers.deserialize(serialized, specifiedType: FullType(EntityViewExportData)) as EntityViewExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(EntityViewExportData),
+            )
+            as EntityViewExportData;
       case r'INTEGRATION':
-        return serializers.deserialize(serialized, specifiedType: FullType(IntegrationExportData)) as IntegrationExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(IntegrationExportData),
+            )
+            as IntegrationExportData;
       case r'NOTIFICATION_RULE':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationRuleExportData)) as NotificationRuleExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationRuleExportData),
+            )
+            as NotificationRuleExportData;
       case r'NOTIFICATION_TARGET':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationTargetExportData)) as NotificationTargetExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationTargetExportData),
+            )
+            as NotificationTargetExportData;
       case r'NOTIFICATION_TEMPLATE':
-        return serializers.deserialize(serialized, specifiedType: FullType(NotificationTemplateExportData)) as NotificationTemplateExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(NotificationTemplateExportData),
+            )
+            as NotificationTemplateExportData;
       case r'OTA_PACKAGE':
-        return serializers.deserialize(serialized, specifiedType: FullType(OtaPackageExportData)) as OtaPackageExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(OtaPackageExportData),
+            )
+            as OtaPackageExportData;
       case r'REPORT_TEMPLATE':
-        return serializers.deserialize(serialized, specifiedType: FullType(ReportTemplateExportData)) as ReportTemplateExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(ReportTemplateExportData),
+            )
+            as ReportTemplateExportData;
       case r'ROLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(RoleExportData)) as RoleExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RoleExportData),
+            )
+            as RoleExportData;
       case r'RULE_CHAIN':
-        return serializers.deserialize(serialized, specifiedType: FullType(RuleChainExportData)) as RuleChainExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(RuleChainExportData),
+            )
+            as RuleChainExportData;
       case r'SCHEDULER_EVENT':
-        return serializers.deserialize(serialized, specifiedType: FullType(SchedulerEventExportData)) as SchedulerEventExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(SchedulerEventExportData),
+            )
+            as SchedulerEventExportData;
       case r'TB_RESOURCE':
-        return serializers.deserialize(serialized, specifiedType: FullType(TbResourceExportData)) as TbResourceExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(TbResourceExportData),
+            )
+            as TbResourceExportData;
       case r'USER':
-        return serializers.deserialize(serialized, specifiedType: FullType(UserExportData)) as UserExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(UserExportData),
+            )
+            as UserExportData;
       case r'WIDGETS_BUNDLE':
-        return serializers.deserialize(serialized, specifiedType: FullType(WidgetsBundleExportData)) as WidgetsBundleExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WidgetsBundleExportData),
+            )
+            as WidgetsBundleExportData;
       case r'WIDGET_TYPE':
-        return serializers.deserialize(serialized, specifiedType: FullType(WidgetTypeExportData)) as WidgetTypeExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType(WidgetTypeExportData),
+            )
+            as WidgetTypeExportData;
       default:
-        return serializers.deserialize(serialized, specifiedType: FullType($EntityExportData)) as $EntityExportData;
+        return serializers.deserialize(
+              serialized,
+              specifiedType: FullType($EntityExportData),
+            )
+            as $EntityExportData;
     }
   }
 }
 
-
 /// a concrete implementation of [EntityExportData], since [EntityExportData] is not instantiable
 @BuiltValue(instantiable: true)
-abstract class $EntityExportData implements EntityExportData, Built<$EntityExportData, $EntityExportDataBuilder> {
+abstract class $EntityExportData
+    implements
+        EntityExportData,
+        Built<$EntityExportData, $EntityExportDataBuilder> {
   $EntityExportData._();
 
-  factory $EntityExportData([void Function($EntityExportDataBuilder)? updates]) = _$$EntityExportData;
+  factory $EntityExportData([
+    void Function($EntityExportDataBuilder)? updates,
+  ]) = _$$EntityExportData;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults($EntityExportDataBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<$EntityExportData> get serializer => _$$EntityExportDataSerializer();
+  static Serializer<$EntityExportData> get serializer =>
+      _$$EntityExportDataSerializer();
 }
 
-class _$$EntityExportDataSerializer implements PrimitiveSerializer<$EntityExportData> {
+class _$$EntityExportDataSerializer
+    implements PrimitiveSerializer<$EntityExportData> {
   @override
   final Iterable<Type> types = const [$EntityExportData, _$$EntityExportData];
 
@@ -465,7 +652,10 @@ class _$$EntityExportDataSerializer implements PrimitiveSerializer<$EntityExport
     $EntityExportData object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return serializers.serialize(object, specifiedType: FullType(EntityExportData))!;
+    return serializers.serialize(
+      object,
+      specifiedType: FullType(EntityExportData),
+    )!;
   }
 
   void _deserializeProperties(
@@ -481,42 +671,59 @@ class _$$EntityExportDataSerializer implements PrimitiveSerializer<$EntityExport
       final value = serializedList[i + 1];
       switch (key) {
         case r'entity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(ExportableEntity),
-          ) as ExportableEntity?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(ExportableEntity),
+                  )
+                  as ExportableEntity?;
           if (valueDes == null) continue;
           result.entity.replace(valueDes);
           break;
         case r'relations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(EntityRelation)]),
-          ) as BuiltList<EntityRelation>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(EntityRelation),
+                    ]),
+                  )
+                  as BuiltList<EntityRelation>?;
           if (valueDes == null) continue;
           result.relations.replace(valueDes);
           break;
         case r'attributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltMap, [FullType(String), FullType(BuiltList, [FullType(AttributeExportData)])]),
-          ) as BuiltMap<String, BuiltList<AttributeExportData>>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltMap, [
+                      FullType(String),
+                      FullType(BuiltList, [FullType(AttributeExportData)]),
+                    ]),
+                  )
+                  as BuiltMap<String, BuiltList<AttributeExportData>>?;
           if (valueDes == null) continue;
           result.attributes.replace(valueDes);
           break;
         case r'calculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltList, [FullType(CalculatedField)]),
-          ) as BuiltList<CalculatedField>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltList, [
+                      FullType(CalculatedField),
+                    ]),
+                  )
+                  as BuiltList<CalculatedField>?;
           if (valueDes == null) continue;
           result.calculatedFields.replace(valueDes);
           break;
         case r'entityType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(EntityType),
-          ) as EntityType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(EntityType),
+                  )
+                  as EntityType;
           result.entityType = valueDes;
           break;
         default:
@@ -547,4 +754,3 @@ class _$$EntityExportDataSerializer implements PrimitiveSerializer<$EntityExport
     return result.build();
   }
 }
-

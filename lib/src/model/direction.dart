@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'direction.g.dart';
 
 class Direction extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ASC')
   static const Direction ASC = _$ASC;
   @BuiltValueEnumConst(wireName: r'DESC')
@@ -25,7 +24,7 @@ class Direction extends EnumClass {
 
   static Serializer<Direction> get serializer => _$directionSerializer;
 
-  const Direction._(String name): super(name);
+  const Direction._(String name) : super(name);
 
   static BuiltSet<Direction> get values => _$values;
   static Direction valueOf(String name) => _$valueOf(name);
@@ -38,4 +37,3 @@ class Direction extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class DirectionMixin = Object with _$DirectionMixin;
-

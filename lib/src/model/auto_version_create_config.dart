@@ -16,15 +16,16 @@ part 'auto_version_create_config.g.dart';
 /// AutoVersionCreateConfig
 ///
 /// Properties:
-/// * [saveRelations] 
-/// * [saveAttributes] 
-/// * [saveCredentials] 
-/// * [saveCalculatedFields] 
-/// * [savePermissions] 
-/// * [saveGroupEntities] 
-/// * [branch] 
+/// * [saveRelations]
+/// * [saveAttributes]
+/// * [saveCredentials]
+/// * [saveCalculatedFields]
+/// * [savePermissions]
+/// * [saveGroupEntities]
+/// * [branch]
 @BuiltValue()
-abstract class AutoVersionCreateConfig implements Built<AutoVersionCreateConfig, AutoVersionCreateConfigBuilder> {
+abstract class AutoVersionCreateConfig
+    implements Built<AutoVersionCreateConfig, AutoVersionCreateConfigBuilder> {
   @BuiltValueField(wireName: r'saveRelations')
   bool? get saveRelations;
 
@@ -48,18 +49,25 @@ abstract class AutoVersionCreateConfig implements Built<AutoVersionCreateConfig,
 
   AutoVersionCreateConfig._();
 
-  factory AutoVersionCreateConfig([void updates(AutoVersionCreateConfigBuilder b)]) = _$AutoVersionCreateConfig;
+  factory AutoVersionCreateConfig([
+    void updates(AutoVersionCreateConfigBuilder b),
+  ]) = _$AutoVersionCreateConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AutoVersionCreateConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<AutoVersionCreateConfig> get serializer => _$AutoVersionCreateConfigSerializer();
+  static Serializer<AutoVersionCreateConfig> get serializer =>
+      _$AutoVersionCreateConfigSerializer();
 }
 
-class _$AutoVersionCreateConfigSerializer implements PrimitiveSerializer<AutoVersionCreateConfig> {
+class _$AutoVersionCreateConfigSerializer
+    implements PrimitiveSerializer<AutoVersionCreateConfig> {
   @override
-  final Iterable<Type> types = const [AutoVersionCreateConfig, _$AutoVersionCreateConfig];
+  final Iterable<Type> types = const [
+    AutoVersionCreateConfig,
+    _$AutoVersionCreateConfig,
+  ];
 
   @override
   final String wireName = r'AutoVersionCreateConfig';
@@ -126,7 +134,11 @@ class _$AutoVersionCreateConfigSerializer implements PrimitiveSerializer<AutoVer
     AutoVersionCreateConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -142,58 +154,72 @@ class _$AutoVersionCreateConfigSerializer implements PrimitiveSerializer<AutoVer
       final value = serializedList[i + 1];
       switch (key) {
         case r'saveRelations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveRelations = valueDes;
           break;
         case r'saveAttributes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveAttributes = valueDes;
           break;
         case r'saveCredentials':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveCredentials = valueDes;
           break;
         case r'saveCalculatedFields':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveCalculatedFields = valueDes;
           break;
         case r'savePermissions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.savePermissions = valueDes;
           break;
         case r'saveGroupEntities':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.saveGroupEntities = valueDes;
           break;
         case r'branch':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.branch = valueDes;
           break;
@@ -225,5 +251,3 @@ class _$AutoVersionCreateConfigSerializer implements PrimitiveSerializer<AutoVer
     return result.build();
   }
 }
-
-

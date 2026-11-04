@@ -15,7 +15,6 @@ import 'package:built_value/serializer.dart';
 part 'event_type.g.dart';
 
 class EventType extends EnumClass {
-
   @BuiltValueEnumConst(wireName: r'ERROR')
   static const EventType ERROR = _$ERROR;
   @BuiltValueEnumConst(wireName: r'LC_EVENT')
@@ -39,7 +38,7 @@ class EventType extends EnumClass {
 
   static Serializer<EventType> get serializer => _$eventTypeSerializer;
 
-  const EventType._(String name): super(name);
+  const EventType._(String name) : super(name);
 
   static BuiltSet<EventType> get values => _$values;
   static EventType valueOf(String name) => _$valueOf(name);
@@ -52,4 +51,3 @@ class EventType extends EnumClass {
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
 abstract class EventTypeMixin = Object with _$EventTypeMixin;
-

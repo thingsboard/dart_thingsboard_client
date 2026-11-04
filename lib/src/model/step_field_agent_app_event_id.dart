@@ -17,10 +17,12 @@ part 'step_field_agent_app_event_id.g.dart';
 /// StepFieldAgentAppEventId
 ///
 /// Properties:
-/// * [value] 
-/// * [userChoice] 
+/// * [value]
+/// * [userChoice]
 @BuiltValue()
-abstract class StepFieldAgentAppEventId implements Built<StepFieldAgentAppEventId, StepFieldAgentAppEventIdBuilder> {
+abstract class StepFieldAgentAppEventId
+    implements
+        Built<StepFieldAgentAppEventId, StepFieldAgentAppEventIdBuilder> {
   @BuiltValueField(wireName: r'value')
   AgentAppEventId? get value;
 
@@ -29,18 +31,25 @@ abstract class StepFieldAgentAppEventId implements Built<StepFieldAgentAppEventI
 
   StepFieldAgentAppEventId._();
 
-  factory StepFieldAgentAppEventId([void updates(StepFieldAgentAppEventIdBuilder b)]) = _$StepFieldAgentAppEventId;
+  factory StepFieldAgentAppEventId([
+    void updates(StepFieldAgentAppEventIdBuilder b),
+  ]) = _$StepFieldAgentAppEventId;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(StepFieldAgentAppEventIdBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<StepFieldAgentAppEventId> get serializer => _$StepFieldAgentAppEventIdSerializer();
+  static Serializer<StepFieldAgentAppEventId> get serializer =>
+      _$StepFieldAgentAppEventIdSerializer();
 }
 
-class _$StepFieldAgentAppEventIdSerializer implements PrimitiveSerializer<StepFieldAgentAppEventId> {
+class _$StepFieldAgentAppEventIdSerializer
+    implements PrimitiveSerializer<StepFieldAgentAppEventId> {
   @override
-  final Iterable<Type> types = const [StepFieldAgentAppEventId, _$StepFieldAgentAppEventId];
+  final Iterable<Type> types = const [
+    StepFieldAgentAppEventId,
+    _$StepFieldAgentAppEventId,
+  ];
 
   @override
   final String wireName = r'StepFieldAgentAppEventId';
@@ -72,7 +81,11 @@ class _$StepFieldAgentAppEventIdSerializer implements PrimitiveSerializer<StepFi
     StepFieldAgentAppEventId object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -88,18 +101,22 @@ class _$StepFieldAgentAppEventIdSerializer implements PrimitiveSerializer<StepFi
       final value = serializedList[i + 1];
       switch (key) {
         case r'value':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(AgentAppEventId),
-          ) as AgentAppEventId?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(AgentAppEventId),
+                  )
+                  as AgentAppEventId?;
           if (valueDes == null) continue;
           result.value.replace(valueDes);
           break;
         case r'userChoice':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.userChoice = valueDes;
           break;
@@ -131,5 +148,3 @@ class _$StepFieldAgentAppEventIdSerializer implements PrimitiveSerializer<StepFi
     return result.build();
   }
 }
-
-

@@ -23,7 +23,8 @@ part 'lw_m2m_resource_observe.g.dart';
 /// * [telemetry] - LwM2M Resource Observe telemetry.
 /// * [keyName] - LwM2M Resource Observe key name.
 @BuiltValue()
-abstract class LwM2mResourceObserve implements Built<LwM2mResourceObserve, LwM2mResourceObserveBuilder> {
+abstract class LwM2mResourceObserve
+    implements Built<LwM2mResourceObserve, LwM2mResourceObserveBuilder> {
   /// LwM2M Resource Observe id.
   @BuiltValueField(wireName: r'id')
   int? get id;
@@ -50,18 +51,24 @@ abstract class LwM2mResourceObserve implements Built<LwM2mResourceObserve, LwM2m
 
   LwM2mResourceObserve._();
 
-  factory LwM2mResourceObserve([void updates(LwM2mResourceObserveBuilder b)]) = _$LwM2mResourceObserve;
+  factory LwM2mResourceObserve([void updates(LwM2mResourceObserveBuilder b)]) =
+      _$LwM2mResourceObserve;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(LwM2mResourceObserveBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<LwM2mResourceObserve> get serializer => _$LwM2mResourceObserveSerializer();
+  static Serializer<LwM2mResourceObserve> get serializer =>
+      _$LwM2mResourceObserveSerializer();
 }
 
-class _$LwM2mResourceObserveSerializer implements PrimitiveSerializer<LwM2mResourceObserve> {
+class _$LwM2mResourceObserveSerializer
+    implements PrimitiveSerializer<LwM2mResourceObserve> {
   @override
-  final Iterable<Type> types = const [LwM2mResourceObserve, _$LwM2mResourceObserve];
+  final Iterable<Type> types = const [
+    LwM2mResourceObserve,
+    _$LwM2mResourceObserve,
+  ];
 
   @override
   final String wireName = r'LwM2mResourceObserve';
@@ -121,7 +128,11 @@ class _$LwM2mResourceObserveSerializer implements PrimitiveSerializer<LwM2mResou
     LwM2mResourceObserve object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -137,50 +148,62 @@ class _$LwM2mResourceObserveSerializer implements PrimitiveSerializer<LwM2mResou
       final value = serializedList[i + 1];
       switch (key) {
         case r'id':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.id = valueDes;
           break;
         case r'name':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.name = valueDes;
           break;
         case r'observe':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.observe = valueDes;
           break;
         case r'attribute':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.attribute = valueDes;
           break;
         case r'telemetry':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.telemetry = valueDes;
           break;
         case r'keyName':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.keyName = valueDes;
           break;
@@ -212,5 +235,3 @@ class _$LwM2mResourceObserveSerializer implements PrimitiveSerializer<LwM2mResou
     return result.build();
   }
 }
-
-

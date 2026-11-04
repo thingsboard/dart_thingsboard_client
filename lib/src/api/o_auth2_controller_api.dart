@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/o_auth2_client.dart';
 import 'package:thingsboard_client/src/model/o_auth2_client_info.dart';
 import 'package:thingsboard_client/src/model/o_auth2_client_login_info.dart';
 import 'package:thingsboard_client/src/model/page_data_o_auth2_client_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class OAuth2ControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -34,7 +31,7 @@ class OAuth2ControllerApi {
   /// Deletes the oauth2 client. Referencing non-existing oauth2 client Id will cause an error.  Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -44,7 +41,7 @@ class OAuth2ControllerApi {
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> deleteOauth2Client({ 
+  Future<Response<void>> deleteOauth2Client({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -54,12 +51,15 @@ class OAuth2ControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers = this._serializers ?? apiSerializers();
-    final _path = r'/api/oauth2/client/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _path = r'/api/oauth2/client/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'DELETE',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +67,8 @@ class OAuth2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -107,7 +104,7 @@ class OAuth2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataOAuth2ClientInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataOAuth2ClientInfo>> findOAuth2ClientInfos({ 
+  Future<Response<PageDataOAuth2ClientInfo>> findOAuth2ClientInfos({
     required int pageSize,
     required int page,
     String? textSearch,
@@ -120,13 +117,12 @@ class OAuth2ControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataOAuth2ClientInfo);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataOAuth2ClientInfo);
     final _path = r'/api/oauth2/client/infos';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -134,11 +130,8 @@ class OAuth2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -146,11 +139,30 @@ class OAuth2ControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -166,11 +178,13 @@ class OAuth2ControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataOAuth2ClientInfo),
-      ) as PageDataOAuth2ClientInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataOAuth2ClientInfo),
+                )
+                as PageDataOAuth2ClientInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -207,7 +221,8 @@ class OAuth2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<OAuth2ClientInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<OAuth2ClientInfo>>> findTenantOAuth2ClientInfosByIds({ 
+  Future<Response<BuiltList<OAuth2ClientInfo>>>
+  findTenantOAuth2ClientInfosByIds({
     required BuiltList<String> clientIds,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -216,13 +231,13 @@ class OAuth2ControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfOAuth2ClientInfoAndListOfString);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfOAuth2ClientInfoAndListOfString);
     final _path = r'/api/oauth2/client/list';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -230,11 +245,8 @@ class OAuth2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -242,7 +254,12 @@ class OAuth2ControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'clientIds': encodeCollectionQueryParameter<String>(_serializers, clientIds, const FullType(BuiltList, [FullType(String)]), format: ListFormat.multi,),
+      r'clientIds': encodeCollectionQueryParameter<String>(
+        _serializers,
+        clientIds,
+        const FullType(BuiltList, [FullType(String)]),
+        format: ListFormat.multi,
+      ),
     };
 
     final _response = await _dio.request<Object>(
@@ -258,11 +275,15 @@ class OAuth2ControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(OAuth2ClientInfo)]),
-      ) as BuiltList<OAuth2ClientInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(OAuth2ClientInfo),
+                  ]),
+                )
+                as BuiltList<OAuth2ClientInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -298,7 +319,7 @@ class OAuth2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [String] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getLoginProcessingUrl({ 
+  Future<Response<String>> getLoginProcessingUrl({
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -309,9 +330,7 @@ class OAuth2ControllerApi {
     final _path = r'/api/oauth2/loginProcessingUrl';
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -319,11 +338,8 @@ class OAuth2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -343,7 +359,6 @@ class OAuth2ControllerApi {
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : rawResponse as String;
-
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -370,7 +385,7 @@ class OAuth2ControllerApi {
   ///   Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -380,7 +395,7 @@ class OAuth2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OAuth2Client] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<OAuth2Client>> getOAuth2ClientById({ 
+  Future<Response<OAuth2Client>> getOAuth2ClientById({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -389,13 +404,17 @@ class OAuth2ControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerOAuth2Client);
-    final _path = r'/api/oauth2/client/{id}'.replaceAll('{' r'id' '}', encodeQueryParameter(_serializers, id, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerOAuth2Client);
+    final _path = r'/api/oauth2/client/{id}'.replaceAll(
+      '{'
+      r'id'
+      '}',
+      encodeQueryParameter(_serializers, id, const FullType(String)).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -403,11 +422,8 @@ class OAuth2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -426,11 +442,13 @@ class OAuth2ControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(OAuth2Client),
-      ) as OAuth2Client;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(OAuth2Client),
+                )
+                as OAuth2Client;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -468,7 +486,7 @@ class OAuth2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [BuiltList<OAuth2ClientLoginInfo>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<BuiltList<OAuth2ClientLoginInfo>>> getOAuth2Clients({ 
+  Future<Response<BuiltList<OAuth2ClientLoginInfo>>> getOAuth2Clients({
     String? pkgName,
     String? platform,
     CancelToken? cancelToken,
@@ -478,23 +496,30 @@ class OAuth2ControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerListOfOAuth2ClientLoginInfo);
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerListOfOAuth2ClientLoginInfo);
     final _path = r'/api/noauth/oauth2Clients';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
-      extra: <String, dynamic>{
-        'secure': <Map<String, String>>[],
-        ...?extra,
-      },
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{'secure': <Map<String, String>>[], ...?extra},
       validateStatus: validateStatus,
     );
 
     final _queryParameters = <String, dynamic>{
-      if (pkgName != null) r'pkgName': encodeQueryParameter(_serializers, pkgName, const FullType(String)),
-      if (platform != null) r'platform': encodeQueryParameter(_serializers, platform, const FullType(String)),
+      if (pkgName != null)
+        r'pkgName': encodeQueryParameter(
+          _serializers,
+          pkgName,
+          const FullType(String),
+        ),
+      if (platform != null)
+        r'platform': encodeQueryParameter(
+          _serializers,
+          platform,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -510,11 +535,15 @@ class OAuth2ControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(BuiltList, [FullType(OAuth2ClientLoginInfo)]),
-      ) as BuiltList<OAuth2ClientLoginInfo>;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(BuiltList, [
+                    FullType(OAuth2ClientLoginInfo),
+                  ]),
+                )
+                as BuiltList<OAuth2ClientLoginInfo>;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -541,7 +570,7 @@ class OAuth2ControllerApi {
   ///   Available for users with &#39;SYS_ADMIN&#39; or &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
   ///
   /// Parameters:
-  /// * [oAuth2Client] 
+  /// * [oAuth2Client]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -551,7 +580,7 @@ class OAuth2ControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OAuth2Client] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<OAuth2Client>> saveOAuth2Client({ 
+  Future<Response<OAuth2Client>> saveOAuth2Client({
     required OAuth2Client oAuth2Client,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -560,13 +589,12 @@ class OAuth2ControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerOAuth2Client);
+    final _serializers =
+        this._serializers ?? apiSerializers(registerOAuth2Client);
     final _path = r'/api/oauth2/client';
     final _options = Options(
       method: r'POST',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -574,11 +602,8 @@ class OAuth2ControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -591,13 +616,9 @@ class OAuth2ControllerApi {
     try {
       const _type = FullType(OAuth2Client);
       _bodyData = _serializers.serialize(oAuth2Client, specifiedType: _type);
-
-    } catch(error, stackTrace) {
+    } catch (error, stackTrace) {
       throw DioException(
-         requestOptions: _options.compose(
-          _dio.options,
-          _path,
-        ),
+        requestOptions: _options.compose(_dio.options, _path),
         type: DioExceptionType.unknown,
         error: error,
         stackTrace: stackTrace,
@@ -617,11 +638,13 @@ class OAuth2ControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(OAuth2Client),
-      ) as OAuth2Client;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(OAuth2Client),
+                )
+                as OAuth2Client;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -643,5 +666,4 @@ class OAuth2ControllerApi {
       extra: _response.extra,
     );
   }
-
 }

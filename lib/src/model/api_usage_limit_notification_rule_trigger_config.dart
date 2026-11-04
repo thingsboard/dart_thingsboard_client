@@ -21,11 +21,17 @@ part 'api_usage_limit_notification_rule_trigger_config.g.dart';
 /// ApiUsageLimitNotificationRuleTriggerConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [apiFeatures] 
-/// * [notifyOn] 
+/// * [triggerType]
+/// * [apiFeatures]
+/// * [notifyOn]
 @BuiltValue()
-abstract class ApiUsageLimitNotificationRuleTriggerConfig implements NotificationRuleTriggerConfig, Built<ApiUsageLimitNotificationRuleTriggerConfig, ApiUsageLimitNotificationRuleTriggerConfigBuilder> {
+abstract class ApiUsageLimitNotificationRuleTriggerConfig
+    implements
+        NotificationRuleTriggerConfig,
+        Built<
+          ApiUsageLimitNotificationRuleTriggerConfig,
+          ApiUsageLimitNotificationRuleTriggerConfigBuilder
+        > {
   @BuiltValueField(wireName: r'apiFeatures')
   BuiltSet<ApiFeature>? get apiFeatures;
 
@@ -34,18 +40,26 @@ abstract class ApiUsageLimitNotificationRuleTriggerConfig implements Notificatio
 
   ApiUsageLimitNotificationRuleTriggerConfig._();
 
-  factory ApiUsageLimitNotificationRuleTriggerConfig([void updates(ApiUsageLimitNotificationRuleTriggerConfigBuilder b)]) = _$ApiUsageLimitNotificationRuleTriggerConfig;
+  factory ApiUsageLimitNotificationRuleTriggerConfig([
+    void updates(ApiUsageLimitNotificationRuleTriggerConfigBuilder b),
+  ]) = _$ApiUsageLimitNotificationRuleTriggerConfig;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(ApiUsageLimitNotificationRuleTriggerConfigBuilder b) => b;
+  static void _defaults(ApiUsageLimitNotificationRuleTriggerConfigBuilder b) =>
+      b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ApiUsageLimitNotificationRuleTriggerConfig> get serializer => _$ApiUsageLimitNotificationRuleTriggerConfigSerializer();
+  static Serializer<ApiUsageLimitNotificationRuleTriggerConfig>
+  get serializer => _$ApiUsageLimitNotificationRuleTriggerConfigSerializer();
 }
 
-class _$ApiUsageLimitNotificationRuleTriggerConfigSerializer implements PrimitiveSerializer<ApiUsageLimitNotificationRuleTriggerConfig> {
+class _$ApiUsageLimitNotificationRuleTriggerConfigSerializer
+    implements PrimitiveSerializer<ApiUsageLimitNotificationRuleTriggerConfig> {
   @override
-  final Iterable<Type> types = const [ApiUsageLimitNotificationRuleTriggerConfig, _$ApiUsageLimitNotificationRuleTriggerConfig];
+  final Iterable<Type> types = const [
+    ApiUsageLimitNotificationRuleTriggerConfig,
+    _$ApiUsageLimitNotificationRuleTriggerConfig,
+  ];
 
   @override
   final String wireName = r'ApiUsageLimitNotificationRuleTriggerConfig';
@@ -82,7 +96,11 @@ class _$ApiUsageLimitNotificationRuleTriggerConfigSerializer implements Primitiv
     ApiUsageLimitNotificationRuleTriggerConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -98,26 +116,36 @@ class _$ApiUsageLimitNotificationRuleTriggerConfigSerializer implements Primitiv
       final value = serializedList[i + 1];
       switch (key) {
         case r'apiFeatures':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(ApiFeature)]),
-          ) as BuiltSet<ApiFeature>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(ApiFeature),
+                    ]),
+                  )
+                  as BuiltSet<ApiFeature>?;
           if (valueDes == null) continue;
           result.apiFeatures.replace(valueDes);
           break;
         case r'notifyOn':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(BuiltSet, [FullType(ApiUsageStateValue)]),
-          ) as BuiltSet<ApiUsageStateValue>?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(ApiUsageStateValue),
+                    ]),
+                  )
+                  as BuiltSet<ApiUsageStateValue>?;
           if (valueDes == null) continue;
           result.notifyOn.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(NotificationRuleTriggerType),
+                  )
+                  as NotificationRuleTriggerType;
           result.triggerType = valueDes;
           break;
         default:
@@ -148,5 +176,3 @@ class _$ApiUsageLimitNotificationRuleTriggerConfigSerializer implements Primitiv
     return result.build();
   }
 }
-
-

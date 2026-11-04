@@ -9,7 +9,6 @@
 
 import 'dart:async';
 
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
@@ -19,11 +18,9 @@ import 'package:thingsboard_client/src/model/agent_bulk_action.dart';
 import 'package:thingsboard_client/src/model/agent_bulk_action_event_stats.dart';
 import 'package:thingsboard_client/src/model/agent_processing_status.dart';
 import 'package:thingsboard_client/src/model/page_data_agent_app_event_info.dart';
-import 'package:thingsboard_client/src/model/thingsboard_error_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
 class AgentBulkActionControllerApi {
-
   final Dio _dio;
 
   final Serializers? _serializers;
@@ -44,7 +41,7 @@ class AgentBulkActionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AgentBulkAction] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AgentBulkAction>> getAgentBulkAction({ 
+  Future<Response<AgentBulkAction>> getAgentBulkAction({
     required String bulkActionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -53,13 +50,21 @@ class AgentBulkActionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAgentBulkAction);
-    final _path = r'/api/agent/bulk/{bulkActionId}'.replaceAll('{' r'bulkActionId' '}', encodeQueryParameter(_serializers, bulkActionId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAgentBulkAction);
+    final _path = r'/api/agent/bulk/{bulkActionId}'.replaceAll(
+      '{'
+      r'bulkActionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        bulkActionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -67,11 +72,8 @@ class AgentBulkActionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -90,11 +92,13 @@ class AgentBulkActionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AgentBulkAction),
-      ) as AgentBulkAction;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AgentBulkAction),
+                )
+                as AgentBulkAction;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -131,7 +135,7 @@ class AgentBulkActionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [AgentBulkActionEventStats] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<AgentBulkActionEventStats>> getAgentBulkActionEventStats({ 
+  Future<Response<AgentBulkActionEventStats>> getAgentBulkActionEventStats({
     required String bulkActionId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -140,13 +144,21 @@ class AgentBulkActionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAgentBulkActionEventStats);
-    final _path = r'/api/agent/bulk/{bulkActionId}/eventStats'.replaceAll('{' r'bulkActionId' '}', encodeQueryParameter(_serializers, bulkActionId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerAgentBulkActionEventStats);
+    final _path = r'/api/agent/bulk/{bulkActionId}/eventStats'.replaceAll(
+      '{'
+      r'bulkActionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        bulkActionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -154,11 +166,8 @@ class AgentBulkActionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -177,11 +186,13 @@ class AgentBulkActionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(AgentBulkActionEventStats),
-      ) as AgentBulkActionEventStats;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(AgentBulkActionEventStats),
+                )
+                as AgentBulkActionEventStats;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -225,7 +236,7 @@ class AgentBulkActionControllerApi {
   ///
   /// Returns a [Future] containing a [Response] with a [PageDataAgentAppEventInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PageDataAgentAppEventInfo>> getAgentBulkActionEvents({ 
+  Future<Response<PageDataAgentAppEventInfo>> getAgentBulkActionEvents({
     required String bulkActionId,
     required int pageSize,
     required int page,
@@ -241,13 +252,21 @@ class AgentBulkActionControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerPageDataAgentAppEventInfo);
-    final _path = r'/api/agent/bulk/{bulkActionId}/events'.replaceAll('{' r'bulkActionId' '}', encodeQueryParameter(_serializers, bulkActionId, const FullType(String)).toString());
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAgentAppEventInfo);
+    final _path = r'/api/agent/bulk/{bulkActionId}/events'.replaceAll(
+      '{'
+      r'bulkActionId'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        bulkActionId,
+        const FullType(String),
+      ).toString(),
+    );
     final _options = Options(
       method: r'GET',
-      headers: <String, dynamic>{
-        ...?headers,
-      },
+      headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
@@ -255,11 +274,8 @@ class AgentBulkActionControllerApi {
             'name': 'ApiKeyForm',
             'keyName': 'X-Authorization',
             'where': 'header',
-          },{
-            'type': 'http',
-            'scheme': 'loginPassword',
-            'name': 'HttpLoginForm',
           },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
         ],
         ...?extra,
       },
@@ -267,13 +283,42 @@ class AgentBulkActionControllerApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      r'pageSize': encodeQueryParameter(_serializers, pageSize, const FullType(int)),
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
       r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
-      if (textSearch != null) r'textSearch': encodeQueryParameter(_serializers, textSearch, const FullType(String)),
-      if (actionType != null) r'actionType': encodeQueryParameter(_serializers, actionType, const FullType(AgentAppEventActionType)),
-      if (processingStatus != null) r'processingStatus': encodeQueryParameter(_serializers, processingStatus, const FullType(AgentProcessingStatus)),
-      if (sortProperty != null) r'sortProperty': encodeQueryParameter(_serializers, sortProperty, const FullType(String)),
-      if (sortOrder != null) r'sortOrder': encodeQueryParameter(_serializers, sortOrder, const FullType(String)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (actionType != null)
+        r'actionType': encodeQueryParameter(
+          _serializers,
+          actionType,
+          const FullType(AgentAppEventActionType),
+        ),
+      if (processingStatus != null)
+        r'processingStatus': encodeQueryParameter(
+          _serializers,
+          processingStatus,
+          const FullType(AgentProcessingStatus),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
     };
 
     final _response = await _dio.request<Object>(
@@ -289,11 +334,13 @@ class AgentBulkActionControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : _serializers.deserialize(
-        rawResponse,
-        specifiedType: const FullType(PageDataAgentAppEventInfo),
-      ) as PageDataAgentAppEventInfo;
-
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAgentAppEventInfo),
+                )
+                as PageDataAgentAppEventInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -315,5 +362,4 @@ class AgentBulkActionControllerApi {
       extra: _response.extra,
     );
   }
-
 }

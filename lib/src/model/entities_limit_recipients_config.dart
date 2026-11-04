@@ -19,27 +19,40 @@ part 'entities_limit_recipients_config.g.dart';
 /// EntitiesLimitRecipientsConfig
 ///
 /// Properties:
-/// * [triggerType] 
-/// * [targets] 
+/// * [triggerType]
+/// * [targets]
 @BuiltValue()
-abstract class EntitiesLimitRecipientsConfig implements NotificationRuleRecipientsConfig, Built<EntitiesLimitRecipientsConfig, EntitiesLimitRecipientsConfigBuilder> {
+abstract class EntitiesLimitRecipientsConfig
+    implements
+        NotificationRuleRecipientsConfig,
+        Built<
+          EntitiesLimitRecipientsConfig,
+          EntitiesLimitRecipientsConfigBuilder
+        > {
   @BuiltValueField(wireName: r'targets')
   BuiltList<String> get targets;
 
   EntitiesLimitRecipientsConfig._();
 
-  factory EntitiesLimitRecipientsConfig([void updates(EntitiesLimitRecipientsConfigBuilder b)]) = _$EntitiesLimitRecipientsConfig;
+  factory EntitiesLimitRecipientsConfig([
+    void updates(EntitiesLimitRecipientsConfigBuilder b),
+  ]) = _$EntitiesLimitRecipientsConfig;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(EntitiesLimitRecipientsConfigBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<EntitiesLimitRecipientsConfig> get serializer => _$EntitiesLimitRecipientsConfigSerializer();
+  static Serializer<EntitiesLimitRecipientsConfig> get serializer =>
+      _$EntitiesLimitRecipientsConfigSerializer();
 }
 
-class _$EntitiesLimitRecipientsConfigSerializer implements PrimitiveSerializer<EntitiesLimitRecipientsConfig> {
+class _$EntitiesLimitRecipientsConfigSerializer
+    implements PrimitiveSerializer<EntitiesLimitRecipientsConfig> {
   @override
-  final Iterable<Type> types = const [EntitiesLimitRecipientsConfig, _$EntitiesLimitRecipientsConfig];
+  final Iterable<Type> types = const [
+    EntitiesLimitRecipientsConfig,
+    _$EntitiesLimitRecipientsConfig,
+  ];
 
   @override
   final String wireName = r'EntitiesLimitRecipientsConfig';
@@ -69,7 +82,11 @@ class _$EntitiesLimitRecipientsConfigSerializer implements PrimitiveSerializer<E
     EntitiesLimitRecipientsConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -85,17 +102,25 @@ class _$EntitiesLimitRecipientsConfigSerializer implements PrimitiveSerializer<E
       final value = serializedList[i + 1];
       switch (key) {
         case r'targets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(BuiltList, [FullType(String)]),
-          ) as BuiltList<String>;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(BuiltList, [
+                      FullType(String),
+                    ]),
+                  )
+                  as BuiltList<String>;
           result.targets.replace(valueDes);
           break;
         case r'triggerType':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(NotificationRuleTriggerType),
-          ) as NotificationRuleTriggerType?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(
+                      NotificationRuleTriggerType,
+                    ),
+                  )
+                  as NotificationRuleTriggerType?;
           if (valueDes == null) continue;
           result.triggerType = valueDes;
           break;
@@ -127,5 +152,3 @@ class _$EntitiesLimitRecipientsConfigSerializer implements PrimitiveSerializer<E
     return result.build();
   }
 }
-
-

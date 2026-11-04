@@ -17,104 +17,110 @@ part 'default_tenant_profile_configuration.g.dart';
 /// DefaultTenantProfileConfiguration
 ///
 /// Properties:
-/// * [type] 
-/// * [maxDevices] 
-/// * [maxAssets] 
-/// * [maxCustomers] 
-/// * [maxUsers] 
-/// * [maxDashboards] 
-/// * [maxRuleChains] 
-/// * [maxEdges] 
-/// * [maxResourcesInBytes] 
-/// * [maxOtaPackagesInBytes] 
-/// * [maxResourceSize] 
-/// * [maxReportSizeInBytes] 
-/// * [maxIntegrations] 
-/// * [maxConverters] 
-/// * [maxSchedulerEvents] 
-/// * [maxAgents] 
-/// * [maxAgentApplications] 
-/// * [transportTenantMsgRateLimit] 
-/// * [transportTenantTelemetryMsgRateLimit] 
-/// * [transportTenantTelemetryDataPointsRateLimit] 
-/// * [transportDeviceMsgRateLimit] 
-/// * [transportDeviceTelemetryMsgRateLimit] 
-/// * [transportDeviceTelemetryDataPointsRateLimit] 
-/// * [transportGatewayMsgRateLimit] 
-/// * [transportGatewayTelemetryMsgRateLimit] 
-/// * [transportGatewayTelemetryDataPointsRateLimit] 
-/// * [transportGatewayDeviceMsgRateLimit] 
-/// * [transportGatewayDeviceTelemetryMsgRateLimit] 
-/// * [transportGatewayDeviceTelemetryDataPointsRateLimit] 
-/// * [integrationMsgsPerTenantRateLimit] 
-/// * [integrationMsgsPerDeviceRateLimit] 
-/// * [integrationMsgsPerAssetRateLimit] 
-/// * [tenantEntityExportRateLimit] 
-/// * [tenantEntityImportRateLimit] 
-/// * [tenantNotificationRequestsRateLimit] 
-/// * [tenantNotificationRequestsPerRuleRateLimit] 
-/// * [maxTransportMessages] 
-/// * [maxTransportDataPoints] 
-/// * [maxREExecutions] 
-/// * [maxJSExecutions] 
-/// * [maxTbelExecutions] 
-/// * [maxDPStorageDays] 
-/// * [maxRuleNodeExecutionsPerMessage] 
-/// * [maxDebugModeDurationMinutes] 
-/// * [maxEmails] 
-/// * [smsEnabled] 
-/// * [maxSms] 
-/// * [maxCreatedAlarms] 
-/// * [maxGeneratedReports] 
-/// * [maxAiCredits] 
-/// * [tenantServerRestLimitsConfiguration] 
-/// * [customerServerRestLimitsConfiguration] 
-/// * [maxWsSessionsPerTenant] 
-/// * [maxWsSessionsPerCustomer] 
-/// * [maxWsSessionsPerRegularUser] 
-/// * [maxWsSessionsPerPublicUser] 
-/// * [wsMsgQueueLimitPerSession] 
-/// * [maxWsSubscriptionsPerTenant] 
-/// * [maxWsSubscriptionsPerCustomer] 
-/// * [maxWsSubscriptionsPerRegularUser] 
-/// * [maxWsSubscriptionsPerPublicUser] 
-/// * [wsUpdatesPerSessionRateLimit] 
-/// * [cassandraReadQueryTenantCoreRateLimits] 
-/// * [cassandraWriteQueryTenantCoreRateLimits] 
-/// * [cassandraReadQueryTenantRuleEngineRateLimits] 
-/// * [cassandraWriteQueryTenantRuleEngineRateLimits] 
-/// * [edgeEventRateLimits] 
-/// * [edgeEventRateLimitsPerEdge] 
-/// * [edgeUplinkMessagesRateLimits] 
-/// * [edgeUplinkMessagesRateLimitsPerEdge] 
-/// * [agentEventRateLimits] 
-/// * [agentEventRateLimitsPerAgent] 
-/// * [agentLogChunkRateLimits] 
-/// * [agentLogChunkRateLimitsPerAgent] 
-/// * [defaultStorageTtlDays] 
-/// * [alarmsTtlDays] 
-/// * [rpcTtlDays] 
-/// * [queueStatsTtlDays] 
-/// * [ruleEngineExceptionsTtlDays] 
-/// * [blobEntityTtlDays] 
-/// * [reportTtlDays] 
-/// * [warnThreshold] 
-/// * [maxCalculatedFieldsPerEntity] 
-/// * [maxArgumentsPerCF] 
-/// * [minAllowedScheduledUpdateIntervalInSecForCF] 
-/// * [maxRelationLevelPerCfArgument] 
-/// * [maxRelatedEntitiesToReturnPerCfArgument] 
-/// * [maxDataPointsPerRollingArg] 
-/// * [maxStateSizeInKBytes] 
-/// * [maxSingleValueArgumentSizeInKBytes] 
-/// * [minAllowedDeduplicationIntervalInSecForCF] 
-/// * [minAllowedAggregationIntervalInSecForCF] 
-/// * [intermediateAggregationIntervalInSecForCF] 
-/// * [cfReevaluationCheckInterval] 
-/// * [alarmsReevaluationInterval] 
-/// * [aiChatRequestsPerTenantRateLimit] 
+/// * [type]
+/// * [maxDevices]
+/// * [maxAssets]
+/// * [maxCustomers]
+/// * [maxUsers]
+/// * [maxDashboards]
+/// * [maxRuleChains]
+/// * [maxEdges]
+/// * [maxResourcesInBytes]
+/// * [maxOtaPackagesInBytes]
+/// * [maxResourceSize]
+/// * [maxReportSizeInBytes]
+/// * [maxIntegrations]
+/// * [maxConverters]
+/// * [maxSchedulerEvents]
+/// * [maxAgents]
+/// * [maxAgentApplications]
+/// * [transportTenantMsgRateLimit]
+/// * [transportTenantTelemetryMsgRateLimit]
+/// * [transportTenantTelemetryDataPointsRateLimit]
+/// * [transportDeviceMsgRateLimit]
+/// * [transportDeviceTelemetryMsgRateLimit]
+/// * [transportDeviceTelemetryDataPointsRateLimit]
+/// * [transportGatewayMsgRateLimit]
+/// * [transportGatewayTelemetryMsgRateLimit]
+/// * [transportGatewayTelemetryDataPointsRateLimit]
+/// * [transportGatewayDeviceMsgRateLimit]
+/// * [transportGatewayDeviceTelemetryMsgRateLimit]
+/// * [transportGatewayDeviceTelemetryDataPointsRateLimit]
+/// * [integrationMsgsPerTenantRateLimit]
+/// * [integrationMsgsPerDeviceRateLimit]
+/// * [integrationMsgsPerAssetRateLimit]
+/// * [tenantEntityExportRateLimit]
+/// * [tenantEntityImportRateLimit]
+/// * [tenantNotificationRequestsRateLimit]
+/// * [tenantNotificationRequestsPerRuleRateLimit]
+/// * [maxTransportMessages]
+/// * [maxTransportDataPoints]
+/// * [maxREExecutions]
+/// * [maxJSExecutions]
+/// * [maxTbelExecutions]
+/// * [maxDPStorageDays]
+/// * [maxRuleNodeExecutionsPerMessage]
+/// * [maxDebugModeDurationMinutes]
+/// * [maxEmails]
+/// * [smsEnabled]
+/// * [maxSms]
+/// * [maxCreatedAlarms]
+/// * [maxGeneratedReports]
+/// * [maxAiCredits]
+/// * [tenantServerRestLimitsConfiguration]
+/// * [customerServerRestLimitsConfiguration]
+/// * [maxWsSessionsPerTenant]
+/// * [maxWsSessionsPerCustomer]
+/// * [maxWsSessionsPerRegularUser]
+/// * [maxWsSessionsPerPublicUser]
+/// * [wsMsgQueueLimitPerSession]
+/// * [maxWsSubscriptionsPerTenant]
+/// * [maxWsSubscriptionsPerCustomer]
+/// * [maxWsSubscriptionsPerRegularUser]
+/// * [maxWsSubscriptionsPerPublicUser]
+/// * [wsUpdatesPerSessionRateLimit]
+/// * [cassandraReadQueryTenantCoreRateLimits]
+/// * [cassandraWriteQueryTenantCoreRateLimits]
+/// * [cassandraReadQueryTenantRuleEngineRateLimits]
+/// * [cassandraWriteQueryTenantRuleEngineRateLimits]
+/// * [edgeEventRateLimits]
+/// * [edgeEventRateLimitsPerEdge]
+/// * [edgeUplinkMessagesRateLimits]
+/// * [edgeUplinkMessagesRateLimitsPerEdge]
+/// * [agentEventRateLimits]
+/// * [agentEventRateLimitsPerAgent]
+/// * [agentLogChunkRateLimits]
+/// * [agentLogChunkRateLimitsPerAgent]
+/// * [defaultStorageTtlDays]
+/// * [alarmsTtlDays]
+/// * [rpcTtlDays]
+/// * [queueStatsTtlDays]
+/// * [ruleEngineExceptionsTtlDays]
+/// * [blobEntityTtlDays]
+/// * [reportTtlDays]
+/// * [warnThreshold]
+/// * [maxCalculatedFieldsPerEntity]
+/// * [maxArgumentsPerCF]
+/// * [minAllowedScheduledUpdateIntervalInSecForCF]
+/// * [maxRelationLevelPerCfArgument]
+/// * [maxRelatedEntitiesToReturnPerCfArgument]
+/// * [maxDataPointsPerRollingArg]
+/// * [maxStateSizeInKBytes]
+/// * [maxSingleValueArgumentSizeInKBytes]
+/// * [minAllowedDeduplicationIntervalInSecForCF]
+/// * [minAllowedAggregationIntervalInSecForCF]
+/// * [intermediateAggregationIntervalInSecForCF]
+/// * [cfReevaluationCheckInterval]
+/// * [alarmsReevaluationInterval]
+/// * [aiChatRequestsPerTenantRateLimit]
 @BuiltValue()
-abstract class DefaultTenantProfileConfiguration implements TenantProfileConfiguration, Built<DefaultTenantProfileConfiguration, DefaultTenantProfileConfigurationBuilder> {
+abstract class DefaultTenantProfileConfiguration
+    implements
+        TenantProfileConfiguration,
+        Built<
+          DefaultTenantProfileConfiguration,
+          DefaultTenantProfileConfigurationBuilder
+        > {
   @BuiltValueField(wireName: r'maxWsSubscriptionsPerTenant')
   int? get maxWsSubscriptionsPerTenant;
 
@@ -208,7 +214,9 @@ abstract class DefaultTenantProfileConfiguration implements TenantProfileConfigu
   @BuiltValueField(wireName: r'transportTenantMsgRateLimit')
   String? get transportTenantMsgRateLimit;
 
-  @BuiltValueField(wireName: r'transportGatewayDeviceTelemetryDataPointsRateLimit')
+  @BuiltValueField(
+    wireName: r'transportGatewayDeviceTelemetryDataPointsRateLimit',
+  )
   String? get transportGatewayDeviceTelemetryDataPointsRateLimit;
 
   @BuiltValueField(wireName: r'maxJSExecutions')
@@ -402,18 +410,25 @@ abstract class DefaultTenantProfileConfiguration implements TenantProfileConfigu
 
   DefaultTenantProfileConfiguration._();
 
-  factory DefaultTenantProfileConfiguration([void updates(DefaultTenantProfileConfigurationBuilder b)]) = _$DefaultTenantProfileConfiguration;
+  factory DefaultTenantProfileConfiguration([
+    void updates(DefaultTenantProfileConfigurationBuilder b),
+  ]) = _$DefaultTenantProfileConfiguration;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(DefaultTenantProfileConfigurationBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<DefaultTenantProfileConfiguration> get serializer => _$DefaultTenantProfileConfigurationSerializer();
+  static Serializer<DefaultTenantProfileConfiguration> get serializer =>
+      _$DefaultTenantProfileConfigurationSerializer();
 }
 
-class _$DefaultTenantProfileConfigurationSerializer implements PrimitiveSerializer<DefaultTenantProfileConfiguration> {
+class _$DefaultTenantProfileConfigurationSerializer
+    implements PrimitiveSerializer<DefaultTenantProfileConfiguration> {
   @override
-  final Iterable<Type> types = const [DefaultTenantProfileConfiguration, _$DefaultTenantProfileConfiguration];
+  final Iterable<Type> types = const [
+    DefaultTenantProfileConfiguration,
+    _$DefaultTenantProfileConfiguration,
+  ];
 
   @override
   final String wireName = r'DefaultTenantProfileConfiguration';
@@ -1101,7 +1116,11 @@ class _$DefaultTenantProfileConfigurationSerializer implements PrimitiveSerializ
     DefaultTenantProfileConfiguration object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -1117,769 +1136,961 @@ class _$DefaultTenantProfileConfigurationSerializer implements PrimitiveSerializ
       final value = serializedList[i + 1];
       switch (key) {
         case r'maxWsSubscriptionsPerTenant':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSubscriptionsPerTenant = valueDes;
           break;
         case r'transportGatewayTelemetryDataPointsRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportGatewayTelemetryDataPointsRateLimit = valueDes;
           break;
         case r'transportTenantTelemetryMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportTenantTelemetryMsgRateLimit = valueDes;
           break;
         case r'cassandraReadQueryTenantRuleEngineRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.cassandraReadQueryTenantRuleEngineRateLimits = valueDes;
           break;
         case r'transportGatewayTelemetryMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportGatewayTelemetryMsgRateLimit = valueDes;
           break;
         case r'ruleEngineExceptionsTtlDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.ruleEngineExceptionsTtlDays = valueDes;
           break;
         case r'agentEventRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.agentEventRateLimits = valueDes;
           break;
         case r'alarmsTtlDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.alarmsTtlDays = valueDes;
           break;
         case r'maxRelationLevelPerCfArgument':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRelationLevelPerCfArgument = valueDes;
           break;
         case r'type':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType(String),
-          ) as String;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(String),
+                  )
+                  as String;
           result.type = valueDes;
           break;
         case r'wsMsgQueueLimitPerSession':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.wsMsgQueueLimitPerSession = valueDes;
           break;
         case r'maxEdges':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxEdges = valueDes;
           break;
         case r'maxDashboards':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxDashboards = valueDes;
           break;
         case r'maxReportSizeInBytes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxReportSizeInBytes = valueDes;
           break;
         case r'maxSchedulerEvents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxSchedulerEvents = valueDes;
           break;
         case r'maxDataPointsPerRollingArg':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxDataPointsPerRollingArg = valueDes;
           break;
         case r'maxEmails':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxEmails = valueDes;
           break;
         case r'edgeUplinkMessagesRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeUplinkMessagesRateLimits = valueDes;
           break;
         case r'tenantEntityImportRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tenantEntityImportRateLimit = valueDes;
           break;
         case r'maxResourcesInBytes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxResourcesInBytes = valueDes;
           break;
         case r'maxWsSessionsPerCustomer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSessionsPerCustomer = valueDes;
           break;
         case r'integrationMsgsPerDeviceRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.integrationMsgsPerDeviceRateLimit = valueDes;
           break;
         case r'customerServerRestLimitsConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.customerServerRestLimitsConfiguration = valueDes;
           break;
         case r'maxRelatedEntitiesToReturnPerCfArgument':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRelatedEntitiesToReturnPerCfArgument = valueDes;
           break;
         case r'maxDevices':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxDevices = valueDes;
           break;
         case r'minAllowedDeduplicationIntervalInSecForCF':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minAllowedDeduplicationIntervalInSecForCF = valueDes;
           break;
         case r'transportGatewayDeviceTelemetryMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportGatewayDeviceTelemetryMsgRateLimit = valueDes;
           break;
         case r'maxStateSizeInKBytes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxStateSizeInKBytes = valueDes;
           break;
         case r'maxSingleValueArgumentSizeInKBytes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxSingleValueArgumentSizeInKBytes = valueDes;
           break;
         case r'cassandraWriteQueryTenantCoreRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.cassandraWriteQueryTenantCoreRateLimits = valueDes;
           break;
         case r'maxTransportMessages':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxTransportMessages = valueDes;
           break;
         case r'transportTenantMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportTenantMsgRateLimit = valueDes;
           break;
         case r'transportGatewayDeviceTelemetryDataPointsRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportGatewayDeviceTelemetryDataPointsRateLimit = valueDes;
           break;
         case r'maxJSExecutions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxJSExecutions = valueDes;
           break;
         case r'maxAiCredits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAiCredits = valueDes;
           break;
         case r'maxREExecutions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxREExecutions = valueDes;
           break;
         case r'maxAgents':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAgents = valueDes;
           break;
         case r'tenantEntityExportRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tenantEntityExportRateLimit = valueDes;
           break;
         case r'maxTbelExecutions':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxTbelExecutions = valueDes;
           break;
         case r'smsEnabled':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(bool),
-          ) as bool?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
           if (valueDes == null) continue;
           result.smsEnabled = valueDes;
           break;
         case r'maxWsSessionsPerPublicUser':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSessionsPerPublicUser = valueDes;
           break;
         case r'maxCreatedAlarms':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxCreatedAlarms = valueDes;
           break;
         case r'maxWsSubscriptionsPerPublicUser':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSubscriptionsPerPublicUser = valueDes;
           break;
         case r'cfReevaluationCheckInterval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.cfReevaluationCheckInterval = valueDes;
           break;
         case r'maxConverters':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxConverters = valueDes;
           break;
         case r'wsUpdatesPerSessionRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.wsUpdatesPerSessionRateLimit = valueDes;
           break;
         case r'maxUsers':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxUsers = valueDes;
           break;
         case r'alarmsReevaluationInterval':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.alarmsReevaluationInterval = valueDes;
           break;
         case r'tenantNotificationRequestsRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tenantNotificationRequestsRateLimit = valueDes;
           break;
         case r'integrationMsgsPerAssetRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.integrationMsgsPerAssetRateLimit = valueDes;
           break;
         case r'maxArgumentsPerCF':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxArgumentsPerCF = valueDes;
           break;
         case r'edgeEventRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeEventRateLimits = valueDes;
           break;
         case r'maxOtaPackagesInBytes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxOtaPackagesInBytes = valueDes;
           break;
         case r'maxAgentApplications':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAgentApplications = valueDes;
           break;
         case r'defaultStorageTtlDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.defaultStorageTtlDays = valueDes;
           break;
         case r'agentLogChunkRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.agentLogChunkRateLimits = valueDes;
           break;
         case r'transportGatewayDeviceMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportGatewayDeviceMsgRateLimit = valueDes;
           break;
         case r'aiChatRequestsPerTenantRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.aiChatRequestsPerTenantRateLimit = valueDes;
           break;
         case r'maxAssets':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxAssets = valueDes;
           break;
         case r'maxRuleChains':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRuleChains = valueDes;
           break;
         case r'transportDeviceTelemetryMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportDeviceTelemetryMsgRateLimit = valueDes;
           break;
         case r'integrationMsgsPerTenantRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.integrationMsgsPerTenantRateLimit = valueDes;
           break;
         case r'maxGeneratedReports':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxGeneratedReports = valueDes;
           break;
         case r'maxSms':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxSms = valueDes;
           break;
         case r'edgeEventRateLimitsPerEdge':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeEventRateLimitsPerEdge = valueDes;
           break;
         case r'minAllowedAggregationIntervalInSecForCF':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minAllowedAggregationIntervalInSecForCF = valueDes;
           break;
         case r'transportDeviceTelemetryDataPointsRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportDeviceTelemetryDataPointsRateLimit = valueDes;
           break;
         case r'maxWsSubscriptionsPerRegularUser':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSubscriptionsPerRegularUser = valueDes;
           break;
         case r'cassandraReadQueryTenantCoreRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.cassandraReadQueryTenantCoreRateLimits = valueDes;
           break;
         case r'blobEntityTtlDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.blobEntityTtlDays = valueDes;
           break;
         case r'maxTransportDataPoints':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxTransportDataPoints = valueDes;
           break;
         case r'reportTtlDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.reportTtlDays = valueDes;
           break;
         case r'maxCustomers':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxCustomers = valueDes;
           break;
         case r'cassandraWriteQueryTenantRuleEngineRateLimits':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.cassandraWriteQueryTenantRuleEngineRateLimits = valueDes;
           break;
         case r'intermediateAggregationIntervalInSecForCF':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.intermediateAggregationIntervalInSecForCF = valueDes;
           break;
         case r'maxIntegrations':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxIntegrations = valueDes;
           break;
         case r'transportDeviceMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportDeviceMsgRateLimit = valueDes;
           break;
         case r'maxWsSessionsPerTenant':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSessionsPerTenant = valueDes;
           break;
         case r'maxResourceSize':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxResourceSize = valueDes;
           break;
         case r'maxDebugModeDurationMinutes':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxDebugModeDurationMinutes = valueDes;
           break;
         case r'maxRuleNodeExecutionsPerMessage':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxRuleNodeExecutionsPerMessage = valueDes;
           break;
         case r'agentLogChunkRateLimitsPerAgent':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.agentLogChunkRateLimitsPerAgent = valueDes;
           break;
         case r'warnThreshold':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(double),
-          ) as double?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(double),
+                  )
+                  as double?;
           if (valueDes == null) continue;
           result.warnThreshold = valueDes;
           break;
         case r'transportGatewayMsgRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportGatewayMsgRateLimit = valueDes;
           break;
         case r'minAllowedScheduledUpdateIntervalInSecForCF':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.minAllowedScheduledUpdateIntervalInSecForCF = valueDes;
           break;
         case r'maxDPStorageDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxDPStorageDays = valueDes;
           break;
         case r'rpcTtlDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.rpcTtlDays = valueDes;
           break;
         case r'maxCalculatedFieldsPerEntity':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxCalculatedFieldsPerEntity = valueDes;
           break;
         case r'tenantServerRestLimitsConfiguration':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tenantServerRestLimitsConfiguration = valueDes;
           break;
         case r'edgeUplinkMessagesRateLimitsPerEdge':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.edgeUplinkMessagesRateLimitsPerEdge = valueDes;
           break;
         case r'maxWsSessionsPerRegularUser':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSessionsPerRegularUser = valueDes;
           break;
         case r'maxWsSubscriptionsPerCustomer':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.maxWsSubscriptionsPerCustomer = valueDes;
           break;
         case r'transportTenantTelemetryDataPointsRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.transportTenantTelemetryDataPointsRateLimit = valueDes;
           break;
         case r'agentEventRateLimitsPerAgent':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.agentEventRateLimitsPerAgent = valueDes;
           break;
         case r'queueStatsTtlDays':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(int),
-          ) as int?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
           if (valueDes == null) continue;
           result.queueStatsTtlDays = valueDes;
           break;
         case r'tenantNotificationRequestsPerRuleRateLimit':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.tenantNotificationRequestsPerRuleRateLimit = valueDes;
           break;
@@ -1911,5 +2122,3 @@ class _$DefaultTenantProfileConfigurationSerializer implements PrimitiveSerializ
     return result.build();
   }
 }
-
-

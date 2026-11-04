@@ -18,25 +18,34 @@ part 'reset_password_email_request.g.dart';
 /// Properties:
 /// * [email] - The email of the user
 @BuiltValue()
-abstract class ResetPasswordEmailRequest implements Built<ResetPasswordEmailRequest, ResetPasswordEmailRequestBuilder> {
+abstract class ResetPasswordEmailRequest
+    implements
+        Built<ResetPasswordEmailRequest, ResetPasswordEmailRequestBuilder> {
   /// The email of the user
   @BuiltValueField(wireName: r'email')
   String? get email;
 
   ResetPasswordEmailRequest._();
 
-  factory ResetPasswordEmailRequest([void updates(ResetPasswordEmailRequestBuilder b)]) = _$ResetPasswordEmailRequest;
+  factory ResetPasswordEmailRequest([
+    void updates(ResetPasswordEmailRequestBuilder b),
+  ]) = _$ResetPasswordEmailRequest;
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(ResetPasswordEmailRequestBuilder b) => b;
 
   @BuiltValueSerializer(custom: true)
-  static Serializer<ResetPasswordEmailRequest> get serializer => _$ResetPasswordEmailRequestSerializer();
+  static Serializer<ResetPasswordEmailRequest> get serializer =>
+      _$ResetPasswordEmailRequestSerializer();
 }
 
-class _$ResetPasswordEmailRequestSerializer implements PrimitiveSerializer<ResetPasswordEmailRequest> {
+class _$ResetPasswordEmailRequestSerializer
+    implements PrimitiveSerializer<ResetPasswordEmailRequest> {
   @override
-  final Iterable<Type> types = const [ResetPasswordEmailRequest, _$ResetPasswordEmailRequest];
+  final Iterable<Type> types = const [
+    ResetPasswordEmailRequest,
+    _$ResetPasswordEmailRequest,
+  ];
 
   @override
   final String wireName = r'ResetPasswordEmailRequest';
@@ -61,7 +70,11 @@ class _$ResetPasswordEmailRequestSerializer implements PrimitiveSerializer<Reset
     ResetPasswordEmailRequest object, {
     FullType specifiedType = FullType.unspecified,
   }) {
-    return _serializeProperties(serializers, object, specifiedType: specifiedType).toList();
+    return _serializeProperties(
+      serializers,
+      object,
+      specifiedType: specifiedType,
+    ).toList();
   }
 
   void _deserializeProperties(
@@ -77,10 +90,12 @@ class _$ResetPasswordEmailRequestSerializer implements PrimitiveSerializer<Reset
       final value = serializedList[i + 1];
       switch (key) {
         case r'email':
-          final valueDes = serializers.deserialize(
-            value,
-            specifiedType: const FullType.nullable(String),
-          ) as String?;
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
           if (valueDes == null) continue;
           result.email = valueDes;
           break;
@@ -112,5 +127,3 @@ class _$ResetPasswordEmailRequestSerializer implements PrimitiveSerializer<Reset
     return result.build();
   }
 }
-
-
