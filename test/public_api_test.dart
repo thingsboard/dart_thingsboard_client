@@ -10,19 +10,18 @@ import 'package:thingsboard_client/thingsboard_client.dart';
 
 void main() {
   group('main library', () {
-    test('exports the login models that ThingsboardClient.login() takes', () {
+    test('exports the LoginRequest that ThingsboardClient.login() takes', () {
       final client = ThingsboardClient('http://localhost:8080');
       final request = LoginRequest(
-        userName: 'tenant@thingsboard.org',
-        password: 'tenant',
+        (b) => b
+          ..username = 'tenant@thingsboard.org'
+          ..password = 'tenant',
       );
-      // Compiles only if LoginRequest is the facade type of login().
+      // Compiles only if LoginRequest is the type of login().
       final Future<LoginResponse> Function(LoginRequest) login = client.login;
       expect(login, isNotNull);
-      expect(request.toJson(), {
-        'username': 'tenant@thingsboard.org',
-        'password': 'tenant',
-      });
+      expect(request.username, 'tenant@thingsboard.org');
+      expect(request.password, 'tenant');
     });
 
     test('Authority of AuthUser is the Authority of the REST models', () {

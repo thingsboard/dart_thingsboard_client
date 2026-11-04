@@ -367,7 +367,13 @@ void main() {
         },
       );
     });
-    await c.login(LoginRequest(userName: 'u@test.com', password: 'p'));
+    await c.login(
+      LoginRequest(
+        (b) => b
+          ..username = 'u@test.com'
+          ..password = 'p',
+      ),
+    );
   }
 
   // Helper to create a device EntityId for testing
@@ -703,7 +709,11 @@ void main() {
           });
 
           await client.login(
-            LoginRequest(userName: 'u@test.com', password: 'p'),
+            LoginRequest(
+              (b) => b
+                ..username = 'u@test.com'
+                ..password = 'p',
+            ),
           );
           // At this point, the token is expired
 
@@ -762,7 +772,13 @@ void main() {
             },
           );
         });
-        await client.login(LoginRequest(userName: 'u@test.com', password: 'p'));
+        await client.login(
+          LoginRequest(
+            (b) => b
+              ..username = 'u@test.com'
+              ..password = 'p',
+          ),
+        );
 
         final service = TelemetryWebsocketService(
           client,

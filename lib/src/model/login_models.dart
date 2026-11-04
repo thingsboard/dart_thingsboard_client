@@ -5,17 +5,6 @@
 
 import 'authority_enum.dart';
 
-class LoginRequest {
-  final String userName;
-  final String password;
-
-  LoginRequest({required this.userName, required this.password});
-
-  Map<String, dynamic> toJson() {
-    return {'username': userName, 'password': password};
-  }
-}
-
 class LoginResponse {
   final String token;
   final String? refreshToken;
@@ -27,14 +16,4 @@ class LoginResponse {
     : token = json['token'],
       refreshToken = json['refreshToken'],
       scope = json['scope'] != null ? authorityFromString(json['scope']) : null;
-}
-
-class RefreshTokenRequest {
-  final String refreshToken;
-
-  RefreshTokenRequest(this.refreshToken);
-
-  Map<String, dynamic> toJson() {
-    return {'refreshToken': refreshToken};
-  }
 }

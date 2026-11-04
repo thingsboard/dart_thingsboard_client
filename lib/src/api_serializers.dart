@@ -2077,6 +2077,10 @@ void registerLoginMobileInfo(ApiSerializersRegistry r) {
   _loginMobileInfo(r);
 }
 
+void registerLoginRequest(ApiSerializersRegistry r) {
+  _loginRequest(r);
+}
+
 void registerLoginRequestAndLoginResponse(ApiSerializersRegistry r) {
   _loginRequest(r);
   _loginResponse(r);
@@ -2524,6 +2528,10 @@ void registerQueue(ApiSerializersRegistry r) {
 
 void registerQueueStats(ApiSerializersRegistry r) {
   _queueStats(r);
+}
+
+void registerRefreshTokenRequest(ApiSerializersRegistry r) {
+  _refreshTokenRequest(r);
 }
 
 void registerReport(ApiSerializersRegistry r) {

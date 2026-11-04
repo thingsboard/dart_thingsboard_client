@@ -12,7 +12,7 @@ import 'package:dio/dio.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/src/thingsboard_client_base.dart';
 import 'package:thingsboard_client/src/thingsboard_client.dart';
-import 'package:thingsboard_client/src/model/login_models.dart';
+import 'package:thingsboard_client/src/model/login_request.dart';
 import 'package:thingsboard_client/src/model/authority_enum.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
@@ -141,7 +141,11 @@ void main() {
         });
 
         final response = await client.login(
-          LoginRequest(userName: 'user@test.com', password: 'pass'),
+          LoginRequest(
+            (b) => b
+              ..username = 'user@test.com'
+              ..password = 'pass',
+          ),
         );
 
         expect(response.token, equals(jwtToken));
@@ -149,6 +153,36 @@ void main() {
         expect(client.isAuthenticated(), isTrue);
         expect(client.getAuthUser(), isNotNull);
         expect(client.getAuthUser()!.authority, equals(Authority.TENANT_ADMIN));
+      },
+    );
+
+    test(
+      'login sends the generated LoginRequest as {username, password}',
+      () async {
+        Object? sent;
+        mockAdapter.onRoute('/api/auth/login', (req) {
+          sent = req.data is String ? jsonDecode(req.data) : req.data;
+          return ResponseBody.fromString(
+            jsonEncode({
+              'token': createTestJwt(),
+              'refreshToken': createTestJwt(scope: 'REFRESH_TOKEN'),
+            }),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          );
+        });
+
+        await client.login(
+          LoginRequest(
+            (b) => b
+              ..username = 'user@test.com'
+              ..password = 'pass',
+          ),
+        );
+
+        expect(sent, equals({'username': 'user@test.com', 'password': 'pass'}));
       },
     );
 
@@ -166,7 +200,11 @@ void main() {
       });
 
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
 
       expect(client.getJwtToken(), equals(jwtToken));
@@ -208,7 +246,11 @@ void main() {
         });
 
         await client.login(
-          LoginRequest(userName: 'user@test.com', password: 'pass'),
+          LoginRequest(
+            (b) => b
+              ..username = 'user@test.com'
+              ..password = 'pass',
+          ),
         );
         await mfaCompleter.future.timeout(Duration(seconds: 2));
 
@@ -249,7 +291,11 @@ void main() {
         });
 
         await client.login(
-          LoginRequest(userName: 'user@test.com', password: 'pass'),
+          LoginRequest(
+            (b) => b
+              ..username = 'user@test.com'
+              ..password = 'pass',
+          ),
         );
         await mfaCompleter.future.timeout(Duration(seconds: 2));
 
@@ -281,7 +327,11 @@ void main() {
           );
         });
         await client.login(
-          LoginRequest(userName: 'user@test.com', password: 'pass'),
+          LoginRequest(
+            (b) => b
+              ..username = 'user@test.com'
+              ..password = 'pass',
+          ),
         );
 
         mockAdapter.onRoute('/api/auth/token', (req) {
@@ -301,6 +351,49 @@ void main() {
         expect(client.getJwtToken(), equals(newJwt));
       },
     );
+  });
+
+  group('refresh body', () {
+    test('token refresh sends {refreshToken}', () async {
+      final initialRefresh = createTestJwt(scope: 'REFRESH_TOKEN');
+      mockAdapter.onRoute('/api/auth/login', (req) {
+        return ResponseBody.fromString(
+          jsonEncode({
+            'token': createTestJwt(),
+            'refreshToken': initialRefresh,
+          }),
+          200,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        );
+      });
+      await client.login(
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
+      );
+      Object? sent;
+      mockAdapter.onRoute('/api/auth/token', (req) {
+        sent = req.data is String ? jsonDecode(req.data) : req.data;
+        return ResponseBody.fromString(
+          jsonEncode({
+            'token': createTestJwt(sub: 'refreshed'),
+            'refreshToken': createTestJwt(scope: 'REFRESH_TOKEN', sub: 'r2'),
+          }),
+          200,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        );
+      });
+
+      await client.refreshJwtToken(notify: false);
+
+      expect(sent, equals({'refreshToken': initialRefresh}));
+    });
   });
 
   group('concurrent refresh', () {
@@ -325,7 +418,11 @@ void main() {
         );
       });
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
 
       // Slow refresh handler to allow concurrency
@@ -372,7 +469,11 @@ void main() {
       });
 
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
       expect(client.isAuthenticated(), isTrue);
 
@@ -411,7 +512,11 @@ void main() {
       });
 
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
       await client.logout();
 
@@ -448,7 +553,11 @@ void main() {
       });
 
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
       await loadedCompleter.future.timeout(Duration(seconds: 2));
 
@@ -482,7 +591,11 @@ void main() {
         );
       });
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
 
       try {

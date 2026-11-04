@@ -13,3 +13,5 @@ Notification
 AttributeData
 EntityKey
 EntityId
+LoginRequest
+RefreshTokenRequest

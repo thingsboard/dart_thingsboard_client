@@ -11,7 +11,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/src/thingsboard_client.dart';
-import 'package:thingsboard_client/src/model/login_models.dart';
+import 'package:thingsboard_client/src/model/login_request.dart';
 import 'package:thingsboard_client/src/http/http_utils.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
@@ -134,7 +134,11 @@ void main() {
       );
     });
     await client.login(
-      LoginRequest(userName: 'user@test.com', password: 'pass'),
+      LoginRequest(
+        (b) => b
+          ..username = 'user@test.com'
+          ..password = 'pass',
+      ),
     );
     // Clear recorded paths after login
     mockAdapter.requestedPaths.clear();
@@ -206,7 +210,11 @@ void main() {
       });
 
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
 
       expect(capturedAuthHeader, isNull);
@@ -398,7 +406,11 @@ void main() {
         );
       });
       await client.login(
-        LoginRequest(userName: 'user@test.com', password: 'pass'),
+        LoginRequest(
+          (b) => b
+            ..username = 'user@test.com'
+            ..password = 'pass',
+        ),
       );
 
       // Now swap to client with callbacks (share the same token state via mock)

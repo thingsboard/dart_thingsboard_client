@@ -10,10 +10,13 @@ import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import 'api_serializers.dart';
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
 import 'interceptor/http_interceptor.dart';
 import 'model/login_models.dart';
+import 'model/login_request.dart';
+import 'model/refresh_token_request.dart';
 import 'model/version_models.dart';
 import 'model/user_models.dart';
 import 'model/authority_enum.dart';
@@ -267,7 +270,11 @@ class ThingsboardClientBase {
   }) async {
     var response = await post(
       '/api/auth/login',
-      data: jsonEncode(loginRequest),
+      data: jsonEncode(
+        apiSerializers(
+          registerLoginRequest,
+        ).serializeWith(LoginRequest.serializer, loginRequest),
+      ),
       options: defaultHttpOptionsFromConfig(requestConfig),
     );
     var loginResponse = LoginResponse.fromJson(response.data);
@@ -331,12 +338,19 @@ class ThingsboardClientBase {
     try {
       refreshToken ??= _refreshToken;
       if (_isTokenValid(refreshToken)) {
-        var refreshTokenRequest = RefreshTokenRequest(refreshToken!);
+        final refreshTokenRequest = RefreshTokenRequest(
+          (b) => b..refreshToken = refreshToken,
+        );
         try {
           var targetDio = internalDio ?? _dio;
           var response = await targetDio.post(
             Constants.entryPoints['tokenRefresh']!,
-            data: jsonEncode(refreshTokenRequest),
+            data: jsonEncode(
+              apiSerializers(registerRefreshTokenRequest).serializeWith(
+                RefreshTokenRequest.serializer,
+                refreshTokenRequest,
+              ),
+            ),
             options: Options(
               sendTimeout: _defaultRefreshCallTimeout,
               receiveTimeout: _defaultRefreshCallTimeout,

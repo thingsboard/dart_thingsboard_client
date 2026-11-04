@@ -35,10 +35,9 @@ import 'package:thingsboard_client/thingsboard_client.dart';
 void main() async {
   final tbClient = ThingsboardClient('https://your-tb-instance.com');
 
-  await tbClient.login(LoginRequest(
-    userName: 'tenant@thingsboard.org',
-    password: 'tenant',
-  ));
+  await tbClient.login(LoginRequest((b) => b
+    ..username = 'tenant@thingsboard.org'
+    ..password = 'tenant'));
   print('Logged in: ${tbClient.isAuthenticated()}');
 
   final response = await tbClient

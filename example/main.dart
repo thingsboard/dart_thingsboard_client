@@ -10,7 +10,11 @@ void main() async {
   try {
     // 2. Login with username and password
     await tbClient.login(
-      LoginRequest(userName: 'tenant@thingsboard.org', password: 'tenant'),
+      LoginRequest(
+        (b) => b
+          ..username = 'tenant@thingsboard.org'
+          ..password = 'tenant',
+      ),
     );
     print('Logged in: ${tbClient.isAuthenticated()}');
 

@@ -640,6 +640,7 @@ export 'package:thingsboard_client/src/model/line_series_step_type.dart';
 export 'package:thingsboard_client/src/model/link_type.dart';
 export 'package:thingsboard_client/src/model/login401_response.dart';
 export 'package:thingsboard_client/src/model/login_mobile_info.dart';
+export 'package:thingsboard_client/src/model/login_request.dart';
 export 'package:thingsboard_client/src/model/login_white_labeling_params.dart';
 export 'package:thingsboard_client/src/model/lw_m2_m_bootstrap_server_credential.dart';
 export 'package:thingsboard_client/src/model/lw_m2_m_server_security_config_default.dart';
@@ -864,6 +865,7 @@ export 'package:thingsboard_client/src/model/rate_limits_recipients_config.dart'
 export 'package:thingsboard_client/src/model/raw_data_event_filter.dart';
 export 'package:thingsboard_client/src/model/read_ts_kv_query_result.dart';
 export 'package:thingsboard_client/src/model/referenced_entity_key.dart';
+export 'package:thingsboard_client/src/model/refresh_token_request.dart';
 export 'package:thingsboard_client/src/model/related_entities_aggregation_calculated_field_configuration.dart';
 export 'package:thingsboard_client/src/model/relation_entity_type_filter.dart';
 export 'package:thingsboard_client/src/model/relation_path_level.dart';

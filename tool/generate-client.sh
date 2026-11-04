@@ -361,18 +361,16 @@ append_common_exports() {
   # Patch api.dart export to hide the generated client class (our facade takes precedence)
   perl -i -pe "s|export 'package:${pkg}/src/api.dart';|export 'package:${pkg}/src/api.dart' hide ${client_class};|" "$barrel"
 
-  # The login models of the facade are the ones ThingsboardClient.login() takes
-  # and returns, so the main library exports them instead of the generated
-  # LoginRequest, LoginResponse and RefreshTokenRequest (used only by the raw
-  # LoginEndpointApi, which stores no tokens).
-  local m
-  for m in login_request login_response refresh_token_request; do
-    perl -i -ne "print unless m|^export 'package:${pkg}/src/model/${m}\.dart';|" "$barrel"
-    if grep -q "src/model/${m}\.dart" "$barrel"; then
-      echo "Error: could not remove the export of src/model/${m}.dart from $barrel"
-      exit 1
-    fi
-  done
+  # ThingsboardClient.login() takes the generated LoginRequest and returns the
+  # facade LoginResponse (the generated one lacks `scope` and requires
+  # `refreshToken`), so the main library exports the facade LoginResponse from
+  # login_models.dart instead of the generated login_response.dart.
+  local m=login_response
+  perl -i -ne "print unless m|^export 'package:${pkg}/src/model/${m}\.dart';|" "$barrel"
+  if grep -q "src/model/${m}\.dart" "$barrel"; then
+    echo "Error: could not remove the export of src/model/${m}.dart from $barrel"
+    exit 1
+  fi
 
   cat >> "$barrel" << EXPORTS
 
