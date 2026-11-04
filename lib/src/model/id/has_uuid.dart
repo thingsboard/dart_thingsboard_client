@@ -1,3 +1,8 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'entity_id.dart';
 
 const nullUuid = '13814000-1dd2-11b2-8080-808080808080';
@@ -20,6 +25,8 @@ abstract class HasUuid {
       throw FormatException('Missing id!');
     }
   }
+
+  bool isNullUid() => nullUuid == id;
 
   Map<String, dynamic> toJson() {
     return {'id': id};

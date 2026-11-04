@@ -1,3 +1,8 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -30,6 +35,11 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
           tbError = ThingsboardError.fromJson(jsonDecode(data));
         } catch (_) {}
       }
+    } else if (_isConnectionFailure(error)) {
+      tbError = ThingsboardError(
+          error: error,
+          message: 'Unable to connect',
+          errorCode: ThingsBoardErrorCode.general);
     } else if (error.error != null) {
       if (error.error is ThingsboardError) {
         tbError = error.error as ThingsboardError;
@@ -83,3 +93,9 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
 
   return tbError;
 }
+
+// A connect timeout carries no inner error (dio raises it via Future.timeout),
+// so it is only recognisable by its type.
+bool _isConnectionFailure(DioException error) =>
+    error.type == DioExceptionType.connectionTimeout ||
+    error.type == DioExceptionType.connectionError;

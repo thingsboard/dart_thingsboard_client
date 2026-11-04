@@ -1,17 +1,21 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'dart:convert';
-import 'dart:html';
 import 'package:dio/dio.dart';
 
 import 'thingsboard_error.dart';
 
 ThingsBoardErrorCode httpStatusToThingsboardErrorCode(int status) {
    return  switch (status) {
-    HttpStatus.unauthorized => ThingsBoardErrorCode.authentication,
-    HttpStatus.forbidden => ThingsBoardErrorCode.permissionDenied,
-    HttpStatus.badRequest => ThingsBoardErrorCode.badRequestParams,
-    HttpStatus.notFound => ThingsBoardErrorCode.itemNotFound,
-    HttpStatus.tooManyRequests => ThingsBoardErrorCode.tooManyRequests,
-    HttpStatus.internalServerError => ThingsBoardErrorCode.general,
+    401 => ThingsBoardErrorCode.authentication,
+    403 => ThingsBoardErrorCode.permissionDenied,
+    400 => ThingsBoardErrorCode.badRequestParams,
+    404 => ThingsBoardErrorCode.itemNotFound,
+    429 => ThingsBoardErrorCode.tooManyRequests,
+    500 => ThingsBoardErrorCode.general,
     int() => ThingsBoardErrorCode.general,
   };
 }
@@ -30,16 +34,15 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
           tbError = ThingsboardError.fromJson(jsonDecode(data));
         } catch (_) {}
       }
+    } else if (_isConnectionFailure(error)) {
+      tbError = ThingsboardError(
+          error: error,
+          message: 'Unable to connect',
+          errorCode: ThingsBoardErrorCode.general);
     } else if (error.error != null) {
       if (error.error is ThingsboardError) {
         tbError = error.error as ThingsboardError;
-      } /* else if (error.error is SocketException) {
-        tbError = ThingsboardError(
-            error: error,
-            message: 'Unable to connect',
-            errorCode: ThingsBoardErrorCode.general);
-      }*/
-      else {
+      } else {
         tbError = ThingsboardError(
             error: error,
             message: error.error.toString(),
@@ -84,3 +87,8 @@ ThingsboardError toThingsboardError(error, [StackTrace? stackTrace]) {
 
   return tbError;
 }
+
+// The web has no SocketException; the dio exception type is all it gets.
+bool _isConnectionFailure(DioException error) =>
+    error.type == DioExceptionType.connectionTimeout ||
+    error.type == DioExceptionType.connectionError;

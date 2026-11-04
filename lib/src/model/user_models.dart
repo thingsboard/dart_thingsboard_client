@@ -1,4 +1,11 @@
-import 'package:thingsboard_client/thingsboard_client.dart';
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'package:jwt_decoder/jwt_decoder.dart';
+
+import 'authority_enum.dart';
 
 class AuthUser {
   late String sub;
@@ -15,161 +22,45 @@ class AuthUser {
 
   AuthUser.fromJson(Map<String, dynamic> json) {
     var claims = Map.of(json);
-    sub = claims.remove('sub');
+    sub = claims.remove('sub') ?? '';
     scopes = (claims.remove('scopes') as List<dynamic>).cast<String>();
     userId = claims.remove('userId');
     firstName = claims.remove('firstName');
     lastName = claims.remove('lastName');
     enabled = claims.remove('enabled');
-    tenantId = claims.remove('tenantId');
+    tenantId = claims.remove('tenantId') ?? '';
     customerId = claims.remove('customerId');
     isPublic = claims.remove('isPublic');
     authority = scopes.isNotEmpty
         ? authorityFromString(scopes[0])
         : Authority.ANONYMOUS;
-    additionalData = claims;
+    additionalData = Map<String, dynamic>.from(claims);
   }
 
-  bool isSystemAdmin() {
-    return authority == Authority.SYS_ADMIN;
+  factory AuthUser.fromToken(String jwtToken) {
+    final claims = JwtDecoder.decode(jwtToken);
+    return AuthUser.fromJson(claims);
   }
 
-  bool isTenantAdmin() {
-    return authority == Authority.TENANT_ADMIN;
-  }
-
-  bool isCustomerUser() {
-    return authority == Authority.CUSTOMER_USER;
-  }
-
-  bool isPreVerificationToken() {
-    return authority == Authority.PRE_VERIFICATION_TOKEN;
-  }
-
-  bool isMfaConfigurationToken() {
-    return authority == Authority.MFA_CONFIGURATION_TOKEN;
-  }
+  bool isSystemAdmin() => authority == Authority.SYS_ADMIN;
+  bool isTenantAdmin() => authority == Authority.TENANT_ADMIN;
+  bool isCustomerUser() => authority == Authority.CUSTOMER_USER;
+  bool isPreVerificationToken() => authority == Authority.PRE_VERIFICATION_TOKEN;
+  bool isMfaConfigurationToken() => authority == Authority.MFA_CONFIGURATION_TOKEN;
 
   @override
   String toString() {
-    return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, lastName: $lastName, enabled: $enabled, '
-        'tenantId: $tenantId, customerId: $customerId, isPublic: $isPublic, authority: ${authority.toShortString()}, additionalData: $additionalData';
+    return 'AuthUser{sub: $sub, scopes: $scopes, userId: $userId, firstName: $firstName, '
+        'lastName: $lastName, enabled: $enabled, tenantId: $tenantId, customerId: $customerId, '
+        'isPublic: $isPublic, authority: ${authority.toShortString()}}';
   }
 }
 
-class User extends AdditionalInfoBased<UserId>
-    with HasName, HasTenantId, HasCustomerId {
-  TenantId? tenantId;
-  CustomerId? customerId;
-  String email;
-  Authority authority;
-  String? firstName;
-  String? lastName;
-  String? phone;
-
-  User(this.email, this.authority);
-
-  User.fromJson(Map<String, dynamic> json)
-      : tenantId = json['tenantId'] != null
-            ? TenantId.fromJson(json['tenantId'])
-            : null,
-        customerId = json['customerId'] != null
-            ? CustomerId.fromJson(json['customerId'])
-            : null,
-        email = json['email'],
-        authority = authorityFromString(json['authority']),
-        firstName = json['firstName'],
-        lastName = json['lastName'],
-        phone = json['phone'],
-        super.fromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() {
-    var json = super.toJson();
-    if (tenantId != null) {
-      json['tenantId'] = tenantId!.toJson();
-    }
-    if (customerId != null) {
-      json['customerId'] = customerId!.toJson();
-    }
-    json['email'] = email;
-    json['authority'] = authority.toShortString();
-    if (firstName != null) {
-      json['firstName'] = firstName;
-    }
-    if (lastName != null) {
-      json['lastName'] = lastName;
-    }
-    if (phone != null) {
-      json['phone'] = phone;
-    }
-    return json;
-  }
-
-  @override
-  String getName() {
-    return email;
-  }
-
-  @override
-  TenantId? getTenantId() {
-    return tenantId;
-  }
-
-  @override
-  CustomerId? getCustomerId() {
-    return customerId;
-  }
-
-  bool isSystemAdmin() {
-    return authority == Authority.SYS_ADMIN;
-  }
-
-  bool isTenantAdmin() {
-    return authority == Authority.TENANT_ADMIN;
-  }
-
-  bool isCustomerUser() {
-    return authority == Authority.CUSTOMER_USER;
-  }
-
-  @override
-  String toString() {
-    return 'User{${additionalInfoBasedString('tenantId: $tenantId, customerId: $customerId, email: $email, '
-        'authority: ${authority.toShortString()}, firstName: $firstName, lastName: $lastName, phone: $phone')}}';
-  }
-}
-
-class UserInfo {
-  UserInfo(
-    this.id, {
-    required this.email,
-    this.firstName,
-    this.lastName,
-  });
-
-  final UserId id;
-  String email;
-  String? firstName;
-  String? lastName;
-
-  UserInfo.fromJson(Map<String, dynamic> json)
-      : id = UserId.fromJson(json['id']),
-        email = json['email'],
-        firstName = json['firstName'],
-        lastName = json['lastName'];
-}
-
-class UsersAssignQuery {
-  const UsersAssignQuery({
-    required this.pageLink,
-    required this.id,
-  });
-
-  final PageLink pageLink;
-  final AlarmId id;
-
-  Map<String, dynamic> toQueryParameters() {
-    return pageLink.toQueryParameters();
+bool isJwtTokenValid(String? token) {
+  if (token == null) return false;
+  try {
+    return !JwtDecoder.isExpired(token);
+  } catch (e) {
+    return false;
   }
 }

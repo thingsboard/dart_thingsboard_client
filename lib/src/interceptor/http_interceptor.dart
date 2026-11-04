@@ -1,23 +1,32 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'dart:async';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'package:thingsboard_client/src/interceptor/key_intercept_config.dart';
-import '../error/thingsboard_error.dart';
-import 'interceptor_config.dart';
-import '../model/constants.dart';
 
+import '../error/thingsboard_error.dart';
+import '../model/constants.dart';
 import '../thingsboard_client_base.dart';
+import 'interceptor_config.dart';
+import 'key_intercept_config.dart';
 
 class HttpInterceptor extends QueuedInterceptor {
   final Dio _dio;
-  final Dio _internalDio;
-  final ThingsboardClient _tbClient;
+  // Internal Dio used for token refresh to avoid interceptor recursion (HTTP-07)
+  // Exposed for testing purposes only (allows injecting a mock adapter)
+  final Dio internalDio;
+  final ThingsboardClientBase _tbClient;
   final void Function() _loadStart;
   final void Function() _loadFinish;
   final void Function(ThingsboardError error) _onError;
 
-  final _internalUrlPrefixes = ['/api/auth/token', '/api/plugins/rpc'];
+  // RPC calls legitimately wait on a device, so they never drive the load
+  // callbacks (nor does the background token refresh, see _isInternalUrl).
+  static const _rpcUrlPrefix = '/api/plugins/rpc';
 
   int _activeRequests = 0;
 
@@ -27,7 +36,12 @@ class HttpInterceptor extends QueuedInterceptor {
       void Function() onLoadStart,
       void Function() onLoadFinish,
       void Function(ThingsboardError error) onError)
-      : _internalDio = Dio(BaseOptions(baseUrl: _dio.options.baseUrl)),
+      // internalDio bypasses this interceptor, so it mirrors the connection
+      // settings of the client Dio, which is fully configured before the
+      // interceptor is installed.
+      : internalDio = Dio(BaseOptions(
+            baseUrl: _dio.options.baseUrl,
+            connectTimeout: _dio.options.connectTimeout)),
         _loadStart = onLoadStart,
         _loadFinish = onLoadFinish,
         _onError = onError;
@@ -37,9 +51,8 @@ class HttpInterceptor extends QueuedInterceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     if (options.path.startsWith('/api/')) {
       var config = _getInterceptorConfig(options);
-      var isLoading = !_isInternalUrlPrefix(options.path);
-      if (!config.isRetry) {
-        _updateLoadingState(config, isLoading);
+      if (!config.isRetry && _tracksLoading(options.path)) {
+        _updateLoadingState(config, true);
       }
       if (_isTokenBasedAuthEntryPoint(options.path)) {
         if (_tbClient.isApiKeyAuth()) {
@@ -54,7 +67,8 @@ class HttpInterceptor extends QueuedInterceptor {
           return _handleRequestError(
               options, handler, ThingsboardError(refreshTokenPending: true));
         } else {
-          return _intercept(options, handler, KeyInterceptConfig.jwt(_tbClient.getJwtToken()));
+          return _intercept(
+              options, handler, KeyInterceptConfig.jwt(_tbClient.getJwtToken()));
         }
       } else {
         return _handleRequest(options, handler);
@@ -91,23 +105,27 @@ class HttpInterceptor extends QueuedInterceptor {
   Future onResponse(
       Response response, ResponseInterceptorHandler handler) async {
     var config = _getInterceptorConfig(response.requestOptions);
-    if (response.requestOptions.path.startsWith('/api/')) {
-      _updateLoadingState(config, false);
-    }
+    _finishLoading(response.requestOptions, config);
     return handler.next(response);
   }
 
   @override
   Future onError(DioException error, ErrorInterceptorHandler handler) async {
     var config = _getInterceptorConfig(error.requestOptions);
+    var tbError = toThingsboardError(error);
+    if (_isTokenRefreshRequest(error.requestOptions.path)) {
+      // The refresh call itself reaches this interceptor when refreshJwtToken()
+      // runs on the client Dio (e.g. from init()). Re-entering the refresh here
+      // would deadlock on its completer gate, and its caller already owns the
+      // failure, so it is neither retried nor reported a second time.
+      return _handleError(tbError, error.requestOptions, handler, false);
+    }
     var notify = true;
     var ignoreErrors = config.ignoreErrors;
     var resendRequest = config.resendRequest;
-    var tbError = toThingsboardError(error);
     var errorCode = tbError.errorCode;
     var refreshToken = false;
-    if (tbError.refreshTokenPending == true ||
-        error.response?.statusCode == 401) {
+    if (tbError.refreshTokenPending == true || tbError.isUnauthorized) {
       if (tbError.refreshTokenPending == true ||
           errorCode == ThingsBoardErrorCode.jwtTokenExpired) {
         refreshToken = true;
@@ -121,9 +139,7 @@ class HttpInterceptor extends QueuedInterceptor {
     if (error.response?.statusCode == 429 && resendRequest) {
       return _retryRequestWithTimeout(error, handler);
     }
-    if (error.requestOptions.path.startsWith('/api/')) {
-      _updateLoadingState(config, false);
-    }
+    _finishLoading(error.requestOptions, config);
     return _handleError(
         tbError, error.requestOptions, handler, notify && !ignoreErrors);
   }
@@ -132,12 +148,11 @@ class HttpInterceptor extends QueuedInterceptor {
       ErrorInterceptorHandler handler, InterceptorConfig config) async {
     try {
       await _tbClient.refreshJwtToken(
-          internalDio: _internalDio, interceptRefreshToken: true);
+          internalDio: internalDio, interceptRefreshToken: true);
     } catch (e) {
-      if (error.requestOptions.path.startsWith('/api/')) {
-        _updateLoadingState(config, false);
-      }
-      return _handleError(e, error.requestOptions, handler, true);
+      _finishLoading(error.requestOptions, config);
+      return _handleError(
+          e, error.requestOptions, handler, !config.ignoreErrors);
     }
     return _retryRequest(error, handler);
   }
@@ -213,20 +228,29 @@ class HttpInterceptor extends QueuedInterceptor {
     }
   }
 
-  bool _isInternalUrlPrefix(String url) {
-    for (var prefix in _internalUrlPrefixes) {
-      if (url.startsWith(prefix)) {
-        return true;
-      }
-    }
-    return false;
+  bool _isTokenRefreshRequest(String url) {
+    return url.startsWith(Constants.entryPoints['tokenRefresh']!);
+  }
+
+  bool _isInternalUrl(String url) {
+    return _isTokenRefreshRequest(url) || url.startsWith(_rpcUrlPrefix);
+  }
+
+  bool _tracksLoading(String url) {
+    return url.startsWith('/api/') && !_isInternalUrl(url);
   }
 
   bool _isTokenBasedAuthEntryPoint(String url) {
     return url.startsWith('/api/') &&
         !url.startsWith(Constants.entryPoints['login']!) &&
-        !url.startsWith(Constants.entryPoints['tokenRefresh']!) &&
+        !_isTokenRefreshRequest(url) &&
         !url.startsWith(Constants.entryPoints['nonTokenBased']!);
+  }
+
+  void _finishLoading(RequestOptions options, InterceptorConfig config) {
+    if (_tracksLoading(options.path)) {
+      _updateLoadingState(config, false);
+    }
   }
 
   void _updateLoadingState(InterceptorConfig config, bool isLoading) {

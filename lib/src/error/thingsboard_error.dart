@@ -1,3 +1,8 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 export '_thingsboard_error_handler.dart'
     if (dart.library.io) '_thingsboard_error_handler_io.dart'
     if (dart.library.html) '_thingsboard_error_handler_html.dart';
@@ -41,7 +46,19 @@ class ThingsboardError implements Exception {
   ThingsboardError.fromJson(Map<String, dynamic> json)
       : message = ThingsboardError.parseMessage(json),
         status = json['status'],
-        errorCode = ThingsBoardErrorCode.fromInt(json['errorCode']);
+        errorCode = json['errorCode'] != null
+            ? ThingsBoardErrorCode.fromInt(json['errorCode'])
+            : null;
+
+  /// Whether the server rejected the request's credentials (HTTP 401).
+  ///
+  /// Also true for the ThingsBoard error codes the server pairs with a 401,
+  /// so an error that lost its status on the way (or was constructed by the
+  /// client) is still recognised.
+  bool get isUnauthorized =>
+      status == 401 ||
+      errorCode == ThingsBoardErrorCode.authentication ||
+      errorCode == ThingsBoardErrorCode.jwtTokenExpired;
 
   static String parseMessage(Map<String, dynamic> json) {
     String? message = json['message'];

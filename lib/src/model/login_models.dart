@@ -1,14 +1,19 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'authority_enum.dart';
 
 class LoginRequest {
-  String username;
-  String password;
+  final String userName;
+  final String password;
 
-  LoginRequest(this.username, this.password);
+  LoginRequest({required this.userName, required this.password});
 
   Map<String, dynamic> toJson() {
     return {
-      'username': username,
+      'username': userName,
       'password': password,
     };
   }
@@ -16,16 +21,15 @@ class LoginRequest {
 
 class LoginResponse {
   final String token;
-  String? refreshToken;
-  Authority? scope;
+  final String? refreshToken;
+  final Authority? scope;
 
-  LoginResponse(this.token, this.refreshToken);
+  LoginResponse({required this.token, this.refreshToken, this.scope});
 
   LoginResponse.fromJson(Map<String, dynamic> json)
       : token = json['token'],
         refreshToken = json['refreshToken'],
-        scope =
-            json['scope'] != null ? authorityFromString(json['scope']) : null;
+        scope = json['scope'] != null ? authorityFromString(json['scope']) : null;
 }
 
 class RefreshTokenRequest {
