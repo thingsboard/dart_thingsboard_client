@@ -19,8 +19,9 @@ This script replaces that dependency in the API classes:
 Usage: generate_api_serializers.py <edition output dir> <package name> [roots file]
 
 The optional roots file lists models (one per line, `#` comments and blank lines
-allowed) that get a stable, operation-independent `register<Model>` function even
-if no operation names them, for hand-written code that (de)serializes them.
+allowed) that get their `register<Model>` name before the operations are processed,
+so those names stay stable. Every other model also gets a singleton `register<Model>`
+function, for applications that (de)serialize a single model.
 """
 
 import os
@@ -418,6 +419,11 @@ def main():
         for model in read_roots(sys.argv[3], graph):
             root_set_fn(graph, {graph.models[model]}, root_sets)
     patch_apis(os.path.join(src_dir, 'api'), package, graph, root_sets)
+    # Then every other model as a singleton, so applications can (de)serialize any
+    # single model with apiSerializers(register<Model>). Unused ones are tree-shaken.
+    for key, node in graph.nodes.items():
+        if key[0] == 'model':
+            root_set_fn(graph, {key}, root_sets)
     nodes = write_registry(os.path.join(src_dir, 'api_serializers.dart'), package, graph, root_sets)
     print(f'api_serializers.dart: {len(root_sets)} root sets over {nodes} nodes '
           f'({len(graph.models)} serializable classes in the spec)')

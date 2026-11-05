@@ -8,9 +8,9 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/json_object.dart';
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
-import 'package:thingsboard_client/src/api_serializers.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 
 /// Answers every request with [responses] for its path and records the body.
@@ -336,6 +336,42 @@ void main() {
       expect(series.map((v) => v.value), ['2', '4']);
       expect(series.first.ts, 1);
       expect(data.latest!['TIME_SERIES']!['temp']!.value, '20');
+    });
+  });
+
+  group('exported from the main library', () {
+    test('apiSerializers(registerAuditLog) round-trips an AuditLog', () {
+      final log = AuditLog(
+        (b) => b
+          ..id.id = 'a1'
+          ..tenantId.id = 't1'
+          ..entityId = DeviceId((i) => i.id = 'd1')
+          ..userId.id = 'u1'
+          ..actionType = ActionType.ADDED
+          ..actionData = JsonObject({
+            'name': 'dev',
+            'tags': ['a', 'b'],
+          }),
+      );
+      final serializers = apiSerializers(registerAuditLog);
+      final json = serializers.toJson(AuditLog.serializer, log);
+      final back = serializers.fromJson(AuditLog.serializer, json)!;
+      expect(back, log);
+      expect(back.entityId, isA<DeviceId>());
+      expect((back.actionData!.asMap)['name'], 'dev');
+    });
+
+    test('registerEntityData round-trips a polymorphic entityId', () {
+      final data = EntityData(
+        (b) => b..entityId = DeviceId((i) => i.id = 'd1'),
+      );
+      final serializers = apiSerializers(registerEntityData);
+      final back = serializers.fromJson(
+        EntityData.serializer,
+        serializers.toJson(EntityData.serializer, data),
+      )!;
+      expect(back, data);
+      expect(back.entityId, isA<DeviceId>());
     });
   });
 }

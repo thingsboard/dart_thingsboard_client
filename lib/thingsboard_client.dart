@@ -1192,3 +1192,4 @@ export 'package:thingsboard_client/src/model/page/sort_order.dart';
 export 'package:thingsboard_client/src/storage/storage.dart';
 export 'package:thingsboard_client/src/model/telemetry/telemetry_models.dart';
 export 'package:thingsboard_client/src/service/telemetry_websocket_service.dart';
+export 'package:thingsboard_client/src/api_serializers.dart';

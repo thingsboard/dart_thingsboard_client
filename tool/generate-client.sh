@@ -272,6 +272,7 @@ export 'package:${pkg}/src/model/page/sort_order.dart';
 export 'package:${pkg}/src/storage/storage.dart';
 export 'package:${pkg}/src/model/telemetry/telemetry_models.dart';
 export 'package:${pkg}/src/service/telemetry_websocket_service.dart';
+export 'package:${pkg}/src/api_serializers.dart';
 EXPORTS
 
   echo "Common exports appended to $barrel"

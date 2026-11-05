@@ -79,6 +79,16 @@ switch (alarm.severity) {
 }
 ```
 
+Serializing a single model: `fromJson`/`toJson` are gone, and `standardSerializers` references every model, so using it pulls all ~1000 models into an AOT build. Use `apiSerializers(register<Model>)` instead, which contains only that model and what it references:
+
+```dart
+final serializers = apiSerializers(registerAuditLog);
+final json = serializers.toJson(AuditLog.serializer, log);
+final back = serializers.fromJson(AuditLog.serializer, json);
+```
+
+Every model has a `register<Model>` function (for example `registerAuditLog`, `registerEntityData`); the unused ones are tree-shaken.
+
 Removed or renamed types:
 
 | 4.2.1 | 5.0 |

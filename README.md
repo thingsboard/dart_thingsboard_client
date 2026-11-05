@@ -16,7 +16,7 @@ Generated from the ThingsBoard OpenAPI spec, with a handwritten runtime facade f
 - **JWT authentication**: login, automatic refresh, concurrent request handling.
 - **WebSocket telemetry**: real-time subscriptions with automatic reconnect.
 - **Typed errors**: `ThingsboardError` with the `ThingsBoardErrorCode` enum and retry logic. `ThingsboardError.errorCode` is this facade enum, not the generated `ThingsboardErrorCode` (`number2`, ...), which only describes the REST model.
-- **Tree-shakable**: each operation registers only the serializers it needs, so models of operations an application does not call are dropped from its build. Referencing `standardSerializers` (for example passing it to an API class constructor) keeps every model in the build.
+- **Tree-shakable**: each operation registers only the serializers it needs, so models of operations an application does not call are dropped from its build. Referencing `standardSerializers` (for example passing it to an API class constructor) keeps every model in the build. To serialize a single model, use `apiSerializers(register<Model>)` (for example `apiSerializers(registerAuditLog).toJson(AuditLog.serializer, log)`), which only includes that model and what it references.
 - **Flutter Web and mobile**: no bare `dart:io` imports.
 - Requires ThingsBoard 4.4.0 or later, and Dart 3.10 / Flutter 3.38 or later.
 
