@@ -10,12 +10,27 @@ import 'thingsboard_error.dart';
 /// The [ThingsboardError] behind a [DioException] thrown by a generated API
 /// call.
 extension ThingsboardDioException on DioException {
-  /// [DioException.error] when the client's interceptor set it, otherwise this
-  /// exception mapped with [toThingsboardError] (for example a deserialization
-  /// failure).
+  /// [DioException.error] when the client's interceptor set it.
+  ///
+  /// A call whose successful (2xx) response could not be deserialized becomes
+  /// a [ThingsBoardErrorCode.general] error whose message names the cause; the
+  /// [DioException] stays reachable as [ThingsboardError.error]. Any other
+  /// exception is mapped with [toThingsboardError].
   ThingsboardError get thingsboardError {
     final inner = error;
-    return inner is ThingsboardError ? inner : toThingsboardError(this);
+    if (inner is ThingsboardError) {
+      return inner;
+    }
+    final status = response?.statusCode;
+    if (status != null && status >= 200 && status < 300) {
+      return ThingsboardError(
+        message: 'Unable to read the server response: $inner',
+        errorCode: ThingsBoardErrorCode.general,
+        status: status,
+        error: this,
+      );
+    }
+    return toThingsboardError(this);
   }
 }
 

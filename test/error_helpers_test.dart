@@ -213,6 +213,30 @@ void main() {
       expect(error.error, same(e));
     });
 
+    test(
+      'maps a 200 response that failed to deserialize to a general error',
+      () {
+        final options = RequestOptions(path: devicePath);
+        final e = DioException(
+          requestOptions: options,
+          response: Response<Object>(
+            requestOptions: options,
+            statusCode: 200,
+            data: {'unexpected': 'shape'},
+          ),
+          type: DioExceptionType.unknown,
+          error: const FormatException('bad device payload'),
+          stackTrace: StackTrace.current,
+        );
+
+        final error = e.thingsboardError;
+
+        expect(error.errorCode, ThingsBoardErrorCode.general);
+        expect(error.message, contains('bad device payload'));
+        expect(error.error, same(e));
+      },
+    );
+
     test('maps an error response that did not pass the interceptor', () {
       final options = RequestOptions(path: devicePath);
       final e = DioException(

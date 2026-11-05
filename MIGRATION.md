@@ -98,7 +98,7 @@ Removed or renamed types:
 
 ### Errors
 
-Generated API calls throw dio's `DioException`, not `ThingsboardError`, so `on ThingsboardError` no longer catches them. `e.thingsboardError` (extension `ThingsboardDioException`) returns the `ThingsboardError`; a response that fails to deserialize becomes a `general` error. The facade methods (`login`, `logout`, `init`, `refreshJwtToken`, `changePassword`, `checkTwoFaVerificationCode`, `getLoginDataBySecretKey`, `get`/`post`/`put`/`delete`) still throw `ThingsboardError`.
+Generated API calls throw dio's `DioException`, not `ThingsboardError`, so `on ThingsboardError` no longer catches them. `e.thingsboardError` (extension `ThingsboardDioException`) returns the `ThingsboardError`; a successful response that fails to deserialize becomes a `general` error whose message names the cause. The facade methods (`login`, `logout`, `init`, `changePassword`, `checkTwoFaVerificationCode`, `getLoginDataBySecretKey`, `get`/`post`/`put`/`delete`) still throw `ThingsboardError`. `refreshJwtToken` throws `DioException`, as in 4.2.1; use `e.thingsboardError`.
 
 ```dart
 // 4.2.1
@@ -121,7 +121,7 @@ try {
 
 ### Not found and failed saves
 
-In 4.2.1, 98 getters (`getDevice`, `getAsset`, `getUser`, ...) returned `null` on HTTP 404 and did not call `onError`. In 5.0 they throw. Wrap the call in `nullIfNotFound(() => ...)` to get `null` back. The 404 still reaches `onError` unless the call also passes `extra: InterceptorConfig(ignoreErrors: true).toExtra()`. The 4.x `nullIfNotFound` took a `RequestConfig` callback; the new one takes a plain function.
+In 4.2.1, 98 getters (`getDevice`, `getAsset`, `getUser`, ...) returned `null` on HTTP 404. Their `nullIfNotFound` used `RequestConfig(ignoreErrors: true)`, so no error of any kind reached `onError`. In 5.0 they throw. Wrap the call in `nullIfNotFound(() => ...)` to get `null` back. Every error, including the 404, reaches `onError` unless the call passes `extra: InterceptorConfig(ignoreErrors: true).toExtra()`. The 4.x `nullIfNotFound` took a `RequestConfig` callback; the new one takes a plain function.
 
 ```dart
 // 4.2.1
@@ -136,7 +136,7 @@ final device = (await nullIfNotFound(
 ))?.data;
 ```
 
-The 8 attribute and telemetry methods that returned `false` on any error (`saveDeviceAttributes`, `saveEntityAttributesV1`/`V2`, `saveEntityTelemetry`, `saveEntityTelemetryWithTTL`, `deleteEntityTimeseries`, `deleteDeviceAttributes`, `deleteEntityAttributes`) now throw. `isSuccessful` is removed.
+The 8 attribute and telemetry methods that returned `false` on any error (`saveDeviceAttributes`, `saveEntityAttributesV1`/`V2`, `saveEntityTelemetry`, `saveEntityTelemetryWithTTL`, `deleteEntityTimeseries`, `deleteDeviceAttributes`, `deleteEntityAttributes`) now throw. `isSuccessful` is removed. It used `RequestConfig(ignoreErrors: true)`, so those calls never reached `onError`; in 5.0 every error does, unless the call passes `extra: InterceptorConfig(ignoreErrors: true).toExtra()`.
 
 ### Request options
 
@@ -157,7 +157,7 @@ await tbClient.getDeviceControllerApi().getTenantDevices(
 
 ### Entity ids, enums and bodies in parameters
 
-Operations take an `EntityId` as two strings, `entityType:` and `entityId:`. Enum parameters, such as attribute scopes, are strings too. Attribute, telemetry and RPC bodies are a `String`, so `jsonEncode` them yourself.
+Most operations take an `EntityId` as two strings (`entityType:`, `entityId:`) and most enum parameters (attribute scopes, sort order, ...) as strings; a few take the generated enum (for example `EntityType` in `EntitiesVersionControlControllerApi`, `TwoFaProviderType` in the two-factor APIs). Attribute, telemetry and RPC bodies are a `String`, so `jsonEncode` them yourself.
 
 ```dart
 // 4.2.1
@@ -197,7 +197,7 @@ await tbClient.getTelemetryControllerApi().saveEntityAttributesV2(
 
 Behaviour:
 
-- The server version is checked only in `init()`, against `/api/admin/updates`, and only a system administrator can read it. The check is best-effort. 4.2.1 checked `/api/system/info` on every login, refresh and `init()`, and rejected PE servers. 5.0 accepts both.
+- The server version is checked only in `init()`, against `/api/admin/updates`, and only a system administrator can read it. The check is best-effort. 4.2.1 checked `/api/system/info` on login, two-factor verification and `init()` (a session loaded with notify), not on every refresh, and rejected PE servers. 5.0 accepts both.
 - If `init()` cannot reach the server, it keeps the stored session: `isAuthenticated()` is `true` even though the access token has expired. A token refresh clears the session only on HTTP 401, and concurrent requests share one refresh call.
 - `computeFunc` now only offloads WebSocket parsing. REST responses are deserialized on the calling isolate.
 
@@ -225,7 +225,7 @@ final Object? result = jsonDecode(res.data!);
 
 ### Customer, public and edge assignment
 
-The client follows the merged CE/PE spec, which has no per-entity customer, public or edge assignment. The 29 4.2.1 methods `assign*ToCustomer`, `unassign*FromCustomer`, `assign*ToPublicCustomer`, `makeDashboardPublic`/`Private`, `update`/`add`/`removeDashboardCustomers`, `assign*ToEdge`, `unassign*FromEdge` and `getEdge*s` (for assets, devices, entity views, edges and dashboards) are removed. Use one of these instead:
+The client follows the merged CE/PE spec, which has no per-entity customer, public or edge assignment. The 31 4.2.1 methods `assign*ToCustomer`, `unassign*FromCustomer`, `assign*ToPublicCustomer`, `makeDashboardPublic`/`Private`, `update`/`add`/`removeDashboardCustomers`, `assign*ToEdge`, `unassign*FromEdge` and `getEdge*s` (for assets, devices, entity views, edges and dashboards) are removed. Use one of these instead:
 
 - Ownership: `getOwnerControllerApi().changeOwnerToCustomer(ownerId:, entityType:, entityId:)` and `changeOwnerToTenant(...)`.
 - Sharing and public access: entity groups, through `getEntityGroupControllerApi()`. `addEntitiesToEntityGroup` adds members, `makeEntityGroupPublic` and `makeEntityGroupPrivate` change public access, and `assignEntityGroupToEdge`, `unassignEntityGroupFromEdge` and `getEdgeEntityGroups` handle edges.
@@ -270,13 +270,15 @@ dependencies:
 grep -rl 'package:thingsboard_pe_client/' lib test | xargs sed -i 's#package:thingsboard_pe_client/#package:thingsboard_client/#g'
 ```
 
+On macOS use `sed -i ''` instead of `sed -i`.
+
 The last `thingsboard_pe_client` release, 5.0.0, is a transition release with no implementation of its own. Its `thingsboard_pe_client.dart` and `thingsboard_client.dart` libraries are marked `@Deprecated` and only re-export `package:thingsboard_client/thingsboard_client.dart`. Deep imports (`package:thingsboard_pe_client/src/...`) no longer work.
 
 Apart from the differences below, the API classes and the `ThingsboardClient` facade are the same as in 4.4.x. The raw generated client class `ThingsboardPeClient` is now `ThingsboardClient`, which the main library hides. Also read [Changes for both](#changes-for-both-login-authority-errors-paging) and the [telemetry WebSocket](#changes-for-both-telemetry-websocket) changes.
 
 ### Renamed enum constants
 
-Enum constants whose value contains digits are named after the value (openapi-generator 7.26.0), and the `ThingsboardErrorCode` constants after their number. Wire values are unchanged, except for `TelemetryObserveStrategy` (see below). 68 constants in 19 enums are renamed:
+Enum constants whose value contains digits are named after the value (openapi-generator 7.26.0), and the `ThingsboardErrorCode` constants after their number. Wire values are unchanged, except for `TelemetryObserveStrategy` and `ThingsboardErrorCode` (see Spec fixes). 68 constants in 19 enums are renamed:
 
 - `AuthenticationProtocol`: `sHA1` → `SHA_1`, `sHA224` → `SHA_224`, `sHA256` → `SHA_256`, `sHA384` → `SHA_384`, `sHA512` → `SHA_512`, `mD5` → `MD5`
 - `BulkImportColumnType`: `x509` → `X509`, `lWM2MCLIENTENDPOINT` → `LWM2M_CLIENT_ENDPOINT`, `lWM2MCLIENTSECURITYCONFIGMODE` → `LWM2M_CLIENT_SECURITY_CONFIG_MODE`, `lWM2MCLIENTIDENTITY` → `LWM2M_CLIENT_IDENTITY`, `lWM2MCLIENTKEY` → `LWM2M_CLIENT_KEY`, `lWM2MCLIENTCERT` → `LWM2M_CLIENT_CERT`, `lWM2MBOOTSTRAPSERVERSECURITYMODE` → `LWM2M_BOOTSTRAP_SERVER_SECURITY_MODE`, `lWM2MBOOTSTRAPSERVERPUBLICKEYORID` → `LWM2M_BOOTSTRAP_SERVER_PUBLIC_KEY_OR_ID`, `lWM2MBOOTSTRAPSERVERSECRETKEY` → `LWM2M_BOOTSTRAP_SERVER_SECRET_KEY`, `lWM2MSERVERSECURITYMODE` → `LWM2M_SERVER_SECURITY_MODE`, `lWM2MSERVERCLIENTPUBLICKEYORID` → `LWM2M_SERVER_CLIENT_PUBLIC_KEY_OR_ID`, `lWM2MSERVERCLIENTSECRETKEY` → `LWM2M_SERVER_CLIENT_SECRET_KEY`
@@ -311,7 +313,7 @@ From thingsboard/thingsboard#16510 (and #16557 for typed `Notification.info`), w
 - The generated `ThingsboardErrorCode` values are numbers, as the server sends them; before, every `errorCode` decoded as `unknownDefaultOpenApi`. Code 47 (`number47`) is new.
 - `AliasEntityId.entityType` is a `String` holding an `EntityType` or `AliasEntityType` name, and `id` is optional.
 - `RefreshTokenRequest.refreshToken` is a `String` instead of a `JsonObject`.
-- `ColumnSettings` implements `DataKeySettings`; its own `type` field is removed.
+- `ColumnSettings` no longer redeclares `type`; it is inherited from `DataKeySettings` and defaults to `COLUMN`.
 - `Lwm2mControllerApi.saveLwm2mDeviceWithCredentials` takes a `BuiltMap<String, JsonObject?>` request body.
 
 ## Changes for both: login, `Authority`, errors, paging
@@ -375,7 +377,7 @@ subscriber.subscribe();
 
 ## Appendix: 4.2.1 service method → 5.0 operation
 
-All 335 public methods of the 4.2.1 services, matched by HTTP method and path to the generated operations. The third column lists only the required named parameters; optional filters (`textSearch`, `sortProperty`, `sortOrder`, `type`, ...) also exist. "No equivalent" and "Removed" mark methods with no 1:1 replacement.
+All 335 public methods of the 4.2.1 services, matched by HTTP method and path to the generated operations. The third column lists the required named parameters, plus optional ones where they matter; other optional filters (`textSearch`, `sortProperty`, `sortOrder`, `type`, ...) also exist. "No equivalent" and "Removed" mark methods with no 1:1 replacement.
 
 | 4.2.1 service method | HTTP (4.2.1) | 5.0 API class and operation (required named params) |
 |---|---|---|
