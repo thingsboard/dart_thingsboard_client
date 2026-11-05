@@ -67,6 +67,8 @@ class ThingsboardClientBase {
 
   static const _qrLoginReceiveTimeout = Duration(seconds: 20);
 
+  static const _versionCheckTimeout = Duration(seconds: 10);
+
   // Single-flight gate: concurrent requests share one refresh call.
   Completer<void>? _tokenRefreshCompleter;
 
@@ -217,6 +219,11 @@ class ThingsboardClientBase {
   /// so a user holding a still-valid refresh token is not logged out for being
   /// offline. Throws a [ThingsboardError] when the server rejects the refresh
   /// token; the session is cleared in that case.
+  ///
+  /// Like every load of a full session ([login], [checkTwoFaVerificationCode],
+  /// [setUserFromJwtToken] with `notify`), it reads the server version and
+  /// throws an [UnsupportedServerVersionError] instead of calling
+  /// `onUserLoaded` when the server is older than [tbMinServerVersion].
   Future<void> init() async {
     try {
       var jwtToken = await _storage.getItem('jwt_token');
@@ -229,33 +236,28 @@ class ThingsboardClientBase {
     } catch (e) {
       throw toThingsboardError(e);
     }
-    // Skipped for a session restored offline: the server was just unreachable.
-    if (isAuthenticated() && isJwtTokenValid()) {
-      await _checkServerVersion();
-    }
   }
 
+  // Best-effort: only a version the server reports as older than
+  // tbMinServerVersion fails; network errors and unexpected responses are
+  // ignored so they never block a login. /api/system/info is readable by
+  // every authority (/api/admin/updates only by SYS_ADMIN).
   Future<void> _checkServerVersion() async {
+    String? version;
     try {
       final response = await _dio.get<Map<String, dynamic>>(
-        '/api/admin/updates',
-        options: defaultHttpOptions(ignoreLoading: true, ignoreErrors: true),
+        '/api/system/info',
+        options: defaultHttpOptions(
+          ignoreLoading: true,
+          ignoreErrors: true,
+        ).copyWith(receiveTimeout: _versionCheckTimeout),
       );
-      final currentVersion = response.data?['currentVersion'] as String?;
-      if (currentVersion != null &&
-          !isVersionSufficient(currentVersion, tbMinServerVersion)) {
-        throw ThingsboardError(
-          message:
-              'ThingsBoard server version $currentVersion is below '
-              'the minimum required version $tbMinServerVersion.',
-          errorCode: ThingsBoardErrorCode.general,
-        );
-      }
-    } on ThingsboardError {
-      rethrow;
+      version = response.data?['version'] as String?;
     } catch (_) {
-      // Best-effort: 401/403 (only SYS_ADMIN may read /api/admin/updates),
-      // network errors and unexpected responses must not block startup.
+      return;
+    }
+    if (version != null && !isVersionSufficient(version, tbMinServerVersion)) {
+      throw UnsupportedServerVersionError(version, tbMinServerVersion);
     }
   }
 
@@ -581,6 +583,11 @@ class ThingsboardClientBase {
   }
 
   Future<void> _userLoaded() async {
+    if (isJwtTokenValid() &&
+        !isPreVerificationToken() &&
+        !isMfaConfigurationToken()) {
+      await _checkServerVersion();
+    }
     _schedule(_userLoadedCallback);
     _telemetryWebsocketService?.reset(true);
   }

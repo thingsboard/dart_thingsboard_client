@@ -97,3 +97,20 @@ class ThingsboardError implements Exception {
     return msg;
   }
 }
+
+/// Thrown by [ThingsboardClient] when the user's session is loaded (login,
+/// two-factor verification, `init()`, `setUserFromJwtToken(..., true)`) and
+/// the server reports a version older than [minVersion], the oldest
+/// ThingsBoard version this client supports.
+class UnsupportedServerVersionError extends ThingsboardError {
+  UnsupportedServerVersionError(this.serverVersion, this.minVersion)
+    : super(
+        message:
+            'ThingsBoard server version $serverVersion is below the minimum '
+            'supported version $minVersion.',
+        errorCode: ThingsBoardErrorCode.general,
+      );
+
+  final String serverVersion;
+  final String minVersion;
+}

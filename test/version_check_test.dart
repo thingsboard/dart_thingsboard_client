@@ -119,7 +119,7 @@ void main() {
     });
   });
 
-  group('init version check', () {
+  group('server version check', () {
     late MockHttpClientAdapter mockAdapter;
 
     setUp(() {
@@ -139,17 +139,13 @@ void main() {
     }
 
     test(
-      'init() throws ThingsboardError when server version is below minimum',
+      'init() throws UnsupportedServerVersionError when the server is older',
       () async {
         final client = await makeAuthenticatedClient();
 
-        mockAdapter.onRoute('/api/admin/updates', (req) {
+        mockAdapter.onRoute('/api/system/info', (req) {
           return ResponseBody.fromString(
-            jsonEncode({
-              'currentVersion': '3.5.0',
-              'updateAvailable': true,
-              'latestVersion': '4.4.0',
-            }),
+            jsonEncode({'version': '3.5.0', 'type': 'CE'}),
             200,
             headers: {
               'content-type': ['application/json'],
@@ -157,7 +153,14 @@ void main() {
           );
         });
 
-        await expectLater(client.init(), throwsA(isA<ThingsboardError>()));
+        await expectLater(
+          client.init(),
+          throwsA(
+            isA<UnsupportedServerVersionError>()
+                .having((e) => e.serverVersion, 'serverVersion', '3.5.0')
+                .having((e) => e.minVersion, 'minVersion', tbMinServerVersion),
+          ),
+        );
       },
     );
 
@@ -166,9 +169,9 @@ void main() {
       () async {
         final client = await makeAuthenticatedClient();
 
-        mockAdapter.onRoute('/api/admin/updates', (req) {
+        mockAdapter.onRoute('/api/system/info', (req) {
           return ResponseBody.fromString(
-            jsonEncode({'currentVersion': '4.4.0', 'updateAvailable': false}),
+            jsonEncode({'version': '4.4.1-SNAPSHOT', 'type': 'PE'}),
             200,
             headers: {
               'content-type': ['application/json'],
@@ -181,11 +184,11 @@ void main() {
     );
 
     test(
-      'init() completes normally when /api/admin/updates returns 403 (non-admin)',
+      'init() completes normally when /api/system/info returns 403 ',
       () async {
         final client = await makeAuthenticatedClient(scope: 'TENANT_ADMIN');
 
-        mockAdapter.onRoute('/api/admin/updates', (req) {
+        mockAdapter.onRoute('/api/system/info', (req) {
           return ResponseBody.fromString(
             jsonEncode({'status': 403, 'message': 'Forbidden'}),
             403,
@@ -200,11 +203,11 @@ void main() {
     );
 
     test(
-      'init() completes normally when /api/admin/updates returns 401 (unauthenticated)',
+      'init() completes normally when /api/system/info returns 401 (unauthenticated)',
       () async {
         final client = await makeAuthenticatedClient();
 
-        mockAdapter.onRoute('/api/admin/updates', (req) {
+        mockAdapter.onRoute('/api/system/info', (req) {
           return ResponseBody.fromString(
             jsonEncode({'status': 401, 'message': 'Unauthorized'}),
             401,
@@ -219,11 +222,11 @@ void main() {
     );
 
     test(
-      'init() completes normally when /api/admin/updates returns a network error',
+      'init() completes normally when /api/system/info returns a network error',
       () async {
         final client = await makeAuthenticatedClient();
 
-        mockAdapter.onRoute('/api/admin/updates', (req) {
+        mockAdapter.onRoute('/api/system/info', (req) {
           return ResponseBody.fromString(
             jsonEncode({'status': 500, 'message': 'Internal Server Error'}),
             500,
@@ -250,7 +253,7 @@ void main() {
         false,
       );
 
-      mockAdapter.onRoute('/api/admin/updates', (req) {
+      mockAdapter.onRoute('/api/system/info', (req) {
         throw DioException.connectionTimeout(
           timeout: const Duration(seconds: 20),
           requestOptions: req,
@@ -260,8 +263,53 @@ void main() {
       await expectLater(client.init(), completes);
       // onError is dispatched on a later event-loop turn.
       await Future<void>.delayed(Duration.zero);
-      expect(mockAdapter.requestedPaths, contains('/api/admin/updates'));
+      expect(mockAdapter.requestedPaths, contains('/api/system/info'));
       expect(reportedErrors, isEmpty);
+    });
+
+    ResponseBody systemInfo(String version) => ResponseBody.fromString(
+      jsonEncode({'version': version, 'type': 'PE'}),
+      200,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
+
+    for (final scope in ['TENANT_ADMIN', 'CUSTOMER_USER', 'SYS_ADMIN']) {
+      test('a $scope session on an older server is not loaded', () async {
+        var userLoaded = 0;
+        final client = ThingsboardClient(
+          'http://localhost:8080',
+          onUserLoaded: () => userLoaded++,
+        );
+        setMockAdapter(client, mockAdapter);
+        mockAdapter.onRoute('/api/system/info', (_) => systemInfo('4.3.0'));
+
+        await expectLater(
+          client.setUserFromJwtToken(
+            createTestJwt(scope: scope),
+            createTestJwt(scope: 'REFRESH_TOKEN'),
+            true,
+          ),
+          throwsA(isA<UnsupportedServerVersionError>()),
+        );
+        await Future<void>.delayed(Duration.zero);
+        expect(userLoaded, 0);
+      });
+    }
+
+    test('a pre-verification session is not checked', () async {
+      final client = ThingsboardClient('http://localhost:8080');
+      setMockAdapter(client, mockAdapter);
+      mockAdapter.onRoute('/api/system/info', (_) => systemInfo('4.3.0'));
+
+      await client.setUserFromJwtToken(
+        createTestJwt(scope: 'PRE_VERIFICATION_TOKEN'),
+        null,
+        true,
+      );
+
+      expect(mockAdapter.requestedPaths, isEmpty);
     });
   });
 }
