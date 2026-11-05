@@ -298,6 +298,20 @@ void main() {
       });
     }
 
+    test('an unknown server version is accepted', () async {
+      final client = ThingsboardClient('http://localhost:8080');
+      setMockAdapter(client, mockAdapter);
+      mockAdapter.onRoute('/api/system/info', (_) => systemInfo('unknown'));
+
+      await client.setUserFromJwtToken(
+        createTestJwt(),
+        createTestJwt(scope: 'REFRESH_TOKEN'),
+        true,
+      );
+
+      expect(mockAdapter.requestedPaths, ['/api/system/info']);
+    });
+
     test('a pre-verification session is not checked', () async {
       final client = ThingsboardClient('http://localhost:8080');
       setMockAdapter(client, mockAdapter);

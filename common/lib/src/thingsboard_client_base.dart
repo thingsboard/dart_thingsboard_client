@@ -12,11 +12,13 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'api/auth_controller_api.dart';
 import 'api/qr_code_settings_controller_api.dart';
+import 'api/system_info_controller_api.dart';
 import 'api/two_factor_auth_controller_api.dart';
 import 'api_serializers.dart';
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
 import 'interceptor/http_interceptor.dart';
+import 'interceptor/interceptor_config.dart';
 import 'model/change_password_request.dart';
 import 'model/jwt_pair.dart';
 import 'model/login_request.dart';
@@ -239,27 +241,30 @@ class ThingsboardClientBase {
   }
 
   // Best-effort: only a version the server reports as older than
-  // tbMinServerVersion fails; network errors and unexpected responses are
-  // ignored so they never block a login. /api/system/info is readable by
-  // every authority (/api/admin/updates only by SYS_ADMIN).
+  // tbMinServerVersion fails; network errors, timeouts and an 'unknown'
+  // version are ignored so they never block a login.
   Future<void> _checkServerVersion() async {
-    String? version;
+    final String version;
     try {
-      final response = await _dio.get<Map<String, dynamic>>(
-        '/api/system/info',
-        options: defaultHttpOptions(
-          ignoreLoading: true,
-          ignoreErrors: true,
-        ).copyWith(receiveTimeout: _versionCheckTimeout),
-      );
-      version = response.data?['version'] as String?;
+      final response = await SystemInfoControllerApi(_dio)
+          .getSystemVersionInfo(
+            extra: InterceptorConfig(
+              ignoreLoading: true,
+              ignoreErrors: true,
+            ).toExtra(),
+          )
+          .timeout(_versionCheckTimeout);
+      version = response.data!.version;
     } catch (_) {
       return;
     }
-    if (version != null && !isVersionSufficient(version, tbMinServerVersion)) {
+    if (_versionPattern.hasMatch(version) &&
+        !isVersionSufficient(version, tbMinServerVersion)) {
       throw UnsupportedServerVersionError(version, tbMinServerVersion);
     }
   }
+
+  static final _versionPattern = RegExp(r'^\d+\.\d+');
 
   Future<LoginResponse> login(
     LoginRequest loginRequest, {

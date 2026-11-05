@@ -199,7 +199,7 @@ await tbClient.getTelemetryControllerApi().saveEntityAttributesV2(
 | `reInit(endpoint)` | removed: create a new `ThingsboardClient` |
 | `sendResetPasswordLink(email)` | `getAuthControllerApi().requestResetPasswordByEmail(resetPasswordEmailRequest: ResetPasswordEmailRequest((b) => b..email = email))` |
 | `getAuthUserFromJwt(token)` | removed: `tbClient.getAuthUser()` for the current session, or `AuthUser.fromJson(JwtDecoder.decode(token))` (package `jwt_decoder`) |
-| `getPlatformVersion()` → `PlatformVersion?` | removed. `/api/system/info` is not in the spec: `(await tbClient.get<Map<String, dynamic>>('/api/system/info')).data?['version']`. A system administrator can also call `getAdminControllerApi().checkUpdates()` and read `UpdateMessage.currentVersion`. `parseVersion` and `isVersionSufficient` compare versions |
+| `getPlatformVersion()` → `PlatformVersion?` | removed: `(await tbClient.getSystemInfoControllerApi().getSystemVersionInfo()).data!.version`. `parseVersion` and `isVersionSufficient` compare versions |
 | `changePassword(current, new)` | kept: stores the new tokens |
 | `checkTwoFaVerificationCode(providerType, code)` | kept: stores the session and calls `onUserLoaded`. `providerType` is the generated `TwoFaProviderType` (`TwoFaProviderType.TOTP`) |
 | `getLoginDataBySecretKey(host:, key:, logging:)` | kept: returns the tokens and does not change the session. Pass them to `setUserFromJwtToken(token, refreshToken, true)` |
@@ -318,7 +318,7 @@ Enum constants whose value contains digits are named after the value (openapi-ge
 
 - `DeviceApiControllerApi` and `ThingsboardClient.getDeviceApiControllerApi()` are removed. The device HTTP API (`/api/v1/{deviceToken}/...`) is not in the REST spec, and the 4.4.x operations failed to decode responses. Devices should use the MQTT, CoAP or HTTP transport directly.
 - `SolutionControllerApi` (solution templates) is removed, together with its models `TenantSolutionTemplateInfo`, `TenantSolutionTemplateDetails`, `TenantSolutionTemplateInstructions`, `SolutionInstallResponse` and `SolutionTemplateLevel`, and the unused `ComplexOperation` model. The released ThingsBoard 4.4.0 has no `/api/solutions/templates/...`.
-- Added, from the released ThingsBoard 4.4.0: `AgentControllerApi`, `AgentProfileControllerApi`, `AgentApplicationControllerApi`, `AgentAppProfileControllerApi`, `AgentAppTemplateControllerApi`, `AgentBulkActionControllerApi`, `AiChatControllerApi`, `AiDeviceDashboardControllerApi`, `AiSolutionControllerApi`, `AiToolControllerApi` and `SystemSetupControllerApi`.
+- Added, from the released ThingsBoard 4.4.0: `AgentControllerApi`, `AgentProfileControllerApi`, `AgentApplicationControllerApi`, `AgentAppProfileControllerApi`, `AgentAppTemplateControllerApi`, `AgentBulkActionControllerApi`, `AiChatControllerApi`, `AiDeviceDashboardControllerApi`, `AiSolutionControllerApi`, `AiToolControllerApi` and `SystemSetupControllerApi`; and `SystemInfoControllerApi` (`getSystemVersionInfo`, from thingsboard/thingsboard#16560).
 
 ### Spec fixes
 
