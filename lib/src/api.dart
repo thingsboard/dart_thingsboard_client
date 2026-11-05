@@ -89,6 +89,7 @@ import 'package:thingsboard_client/src/api/secret_controller_api.dart';
 import 'package:thingsboard_client/src/api/self_registration_controller_api.dart';
 import 'package:thingsboard_client/src/api/sign_up_controller_api.dart';
 import 'package:thingsboard_client/src/api/solution_export_import_controller_api.dart';
+import 'package:thingsboard_client/src/api/system_info_controller_api.dart';
 import 'package:thingsboard_client/src/api/system_setup_controller_api.dart';
 import 'package:thingsboard_client/src/api/tb_resource_controller_api.dart';
 import 'package:thingsboard_client/src/api/telemetry_controller_api.dart';
@@ -682,6 +683,12 @@ class ThingsboardClient {
   /// by doing that all interceptors will not be executed
   SolutionExportImportControllerApi getSolutionExportImportControllerApi() {
     return SolutionExportImportControllerApi(dio, serializers);
+  }
+
+  /// Get SystemInfoControllerApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  SystemInfoControllerApi getSystemInfoControllerApi() {
+    return SystemInfoControllerApi(dio, serializers);
   }
 
   /// Get SystemSetupControllerApi instance, base route and serializer can be overridden by a given but be careful,

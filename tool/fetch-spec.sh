@@ -11,9 +11,9 @@
 # <edition_dir>/spec/openapi.json, ready for tool/generate-client.sh.
 #
 # WARNING: the committed spec is the released lts-4.4 spec plus the unmerged
-# thingsboard/thingsboard PRs #16510, #16555 and #16557. Re-fetching from a server
-# without them breaks the build (LoginResponse.scope) and drops the NotificationInfo
-# subtypes. See "The spec is composed" in CONTRIBUTING.md.
+# thingsboard/thingsboard PRs #16510, #16555, #16557 and #16560. Re-fetching from a
+# server without them breaks the build (LoginResponse.scope, SystemInfoControllerApi)
+# and drops the NotificationInfo subtypes. See "The spec is composed" in CONTRIBUTING.md.
 #
 # Usage:
 #   tool/fetch-spec.sh <server url> [edition]

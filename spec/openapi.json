@@ -143474,6 +143474,156 @@
           }
         ]
       }
+    },
+    "/api/system/info": {
+      "get": {
+        "tags": [
+          "system-info-controller"
+        ],
+        "summary": "Get platform version (getSystemVersionInfo)",
+        "description": "Returns the version and edition of the platform build.\n\nAvailable for users with 'SYS_ADMIN' or 'TENANT_ADMIN' or 'CUSTOMER_USER' authority.",
+        "operationId": "getSystemVersionInfo",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SystemVersionInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-400": {
+                    "summary": "Bad Request",
+                    "value": {
+                      "status": 400,
+                      "message": "Invalid UUID string: 123",
+                      "errorCode": 31,
+                      "timestamp": 1609459200000,
+                      "subscriptionErrorCode": null,
+                      "subscriptionEntry": null,
+                      "subscriptionValue": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-401": {
+                    "summary": "Unauthorized",
+                    "value": {
+                      "status": 401,
+                      "message": "Authentication failed",
+                      "errorCode": 10,
+                      "timestamp": 1609459200000,
+                      "subscriptionErrorCode": null,
+                      "subscriptionEntry": null,
+                      "subscriptionValue": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-403": {
+                    "summary": "Forbidden",
+                    "value": {
+                      "status": 403,
+                      "message": "You don't have permission to perform this operation!",
+                      "errorCode": 20,
+                      "timestamp": 1609459200000,
+                      "subscriptionErrorCode": null,
+                      "subscriptionEntry": null,
+                      "subscriptionValue": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-404": {
+                    "summary": "Not Found",
+                    "value": {
+                      "status": 404,
+                      "message": "Requested item wasn't found!",
+                      "errorCode": 32,
+                      "timestamp": 1609459200000,
+                      "subscriptionErrorCode": null,
+                      "subscriptionEntry": null,
+                      "subscriptionValue": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThingsboardErrorResponse"
+                },
+                "examples": {
+                  "error-code-429": {
+                    "summary": "Too Many Requests",
+                    "value": {
+                      "status": 429,
+                      "message": "Too many requests for current tenant!",
+                      "errorCode": 33,
+                      "timestamp": 1609459200000,
+                      "subscriptionErrorCode": null,
+                      "subscriptionEntry": null,
+                      "subscriptionValue": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HttpLoginForm": []
+          },
+          {
+            "ApiKeyForm": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -177623,6 +177773,36 @@
           "userFullName": null,
           "userEmail": null
         }
+      },
+      "SystemVersionInfo": {
+        "type": "object",
+        "description": "Version and edition of the platform build",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Platform version, or 'unknown' when the build information is not available",
+            "example": "4.4.1"
+          },
+          "artifact": {
+            "type": "string",
+            "description": "Build artifact; absent when the build information is not available",
+            "example": "application"
+          },
+          "name": {
+            "type": "string",
+            "description": "Build name; absent when the build information is not available",
+            "example": "ThingsBoard Server Application"
+          },
+          "type": {
+            "type": "string",
+            "description": "Platform edition",
+            "example": "PE"
+          }
+        },
+        "required": [
+          "type",
+          "version"
+        ]
       }
     },
     "securitySchemes": {

@@ -940,6 +940,7 @@ import 'package:thingsboard_client/src/model/system_info.dart';
 import 'package:thingsboard_client/src/model/system_info_data.dart';
 import 'package:thingsboard_client/src/model/system_setup_request.dart';
 import 'package:thingsboard_client/src/model/system_setup_state.dart';
+import 'package:thingsboard_client/src/model/system_version_info.dart';
 import 'package:thingsboard_client/src/model/table_sort_direction.dart';
 import 'package:thingsboard_client/src/model/table_sort_order.dart';
 import 'package:thingsboard_client/src/model/task_processing_failure_notification_info.dart';
@@ -5619,6 +5620,10 @@ void registerSystemSetupRequest(ApiSerializersRegistry r) {
 
 void registerSystemSetupState(ApiSerializersRegistry r) {
   _systemSetupState(r);
+}
+
+void registerSystemVersionInfo(ApiSerializersRegistry r) {
+  _systemVersionInfo(r);
 }
 
 void registerTableSortDirection(ApiSerializersRegistry r) {
@@ -12905,19 +12910,24 @@ void _systemSetupState(ApiSerializersRegistry r) {
   r._builder.add(SystemSetupState.serializer);
 }
 
-void _tableSortDirection(ApiSerializersRegistry r) {
+void _systemVersionInfo(ApiSerializersRegistry r) {
   if (!r._visit(919)) return;
+  r._builder.add(SystemVersionInfo.serializer);
+}
+
+void _tableSortDirection(ApiSerializersRegistry r) {
+  if (!r._visit(920)) return;
   r._builder.add(TableSortDirection.serializer);
 }
 
 void _tableSortOrder(ApiSerializersRegistry r) {
-  if (!r._visit(920)) return;
+  if (!r._visit(921)) return;
   r._builder.add(TableSortOrder.serializer);
   _tableSortDirection(r);
 }
 
 void _taskProcessingFailureNotificationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(921)) return;
+  if (!r._visit(922)) return;
   r._builder.add(TaskProcessingFailureNotificationInfo.serializer);
   _customerId(r);
   _dashboardId(r);
@@ -12930,20 +12940,20 @@ void _taskProcessingFailureNotificationInfo(ApiSerializersRegistry r) {
 void _taskProcessingFailureNotificationRuleTriggerConfig(
   ApiSerializersRegistry r,
 ) {
-  if (!r._visit(922)) return;
+  if (!r._visit(923)) return;
   r._builder.add(TaskProcessingFailureNotificationRuleTriggerConfig.serializer);
   _notificationRuleTriggerType(r);
 }
 
 void _taskProcessingFailureRecipientsConfig(ApiSerializersRegistry r) {
-  if (!r._visit(923)) return;
+  if (!r._visit(924)) return;
   r._builder.add(TaskProcessingFailureRecipientsConfig.serializer);
   _listOfString(r);
   _notificationRuleTriggerType(r);
 }
 
 void _taskResult(ApiSerializersRegistry r) {
-  if (!r._visit(924)) return;
+  if (!r._visit(925)) return;
   r._builder.add(TaskResult.serializer);
   r._builder.add($TaskResult.serializer);
   _cfReprocessingTaskResult(r);
@@ -12952,14 +12962,14 @@ void _taskResult(ApiSerializersRegistry r) {
 }
 
 void _tbChatRequest(ApiSerializersRegistry r) {
-  if (!r._visit(925)) return;
+  if (!r._visit(926)) return;
   r._builder.add(TbChatRequest.serializer);
   _aiModelConfig(r);
   _tbUserMessage(r);
 }
 
 void _tbChatResponse(ApiSerializersRegistry r) {
-  if (!r._visit(926)) return;
+  if (!r._visit(927)) return;
   r._builder.add(TbChatResponse.serializer);
   r._builder.add($TbChatResponse.serializer);
   _failure(r);
@@ -12967,36 +12977,36 @@ void _tbChatResponse(ApiSerializersRegistry r) {
 }
 
 void _tbContent(ApiSerializersRegistry r) {
-  if (!r._visit(927)) return;
+  if (!r._visit(928)) return;
   r._builder.add(TbContent.serializer);
   r._builder.add($TbContent.serializer);
   _tbTextContent(r);
 }
 
 void _tbFontStyle(ApiSerializersRegistry r) {
-  if (!r._visit(928)) return;
+  if (!r._visit(929)) return;
   r._builder.add(TbFontStyle.serializer);
 }
 
 void _tbFontWeight(ApiSerializersRegistry r) {
-  if (!r._visit(929)) return;
+  if (!r._visit(930)) return;
   r._builder.add(TbFontWeight.serializer);
 }
 
 void _tbImageDeleteResult(ApiSerializersRegistry r) {
-  if (!r._visit(930)) return;
+  if (!r._visit(931)) return;
   r._builder.add(TbImageDeleteResult.serializer);
   _listOfWhiteLabeling(r);
   _mapOfStringToListOfHasIdObject(r);
 }
 
 void _tbReportFormat(ApiSerializersRegistry r) {
-  if (!r._visit(931)) return;
+  if (!r._visit(932)) return;
   r._builder.add(TbReportFormat.serializer);
 }
 
 void _tbResource(ApiSerializersRegistry r) {
-  if (!r._visit(932)) return;
+  if (!r._visit(933)) return;
   r._builder.add(TbResource.serializer);
   _customerId(r);
   _resourceSubType(r);
@@ -13006,13 +13016,13 @@ void _tbResource(ApiSerializersRegistry r) {
 }
 
 void _tbResourceDeleteResult(ApiSerializersRegistry r) {
-  if (!r._visit(933)) return;
+  if (!r._visit(934)) return;
   r._builder.add(TbResourceDeleteResult.serializer);
   _mapOfStringToListOfEntityInfo(r);
 }
 
 void _tbResourceExportData(ApiSerializersRegistry r) {
-  if (!r._visit(934)) return;
+  if (!r._visit(935)) return;
   r._builder.add(TbResourceExportData.serializer);
   _entityType(r);
   _exportableEntity(r);
@@ -13022,13 +13032,13 @@ void _tbResourceExportData(ApiSerializersRegistry r) {
 }
 
 void _tbResourceId(ApiSerializersRegistry r) {
-  if (!r._visit(935)) return;
+  if (!r._visit(936)) return;
   r._builder.add(TbResourceId.serializer);
   _entityType(r);
 }
 
 void _tbResourceInfo(ApiSerializersRegistry r) {
-  if (!r._visit(936)) return;
+  if (!r._visit(937)) return;
   r._builder.add(TbResourceInfo.serializer);
   _customerId(r);
   _resourceSubType(r);
@@ -13038,36 +13048,36 @@ void _tbResourceInfo(ApiSerializersRegistry r) {
 }
 
 void _tbSecretDeleteResult(ApiSerializersRegistry r) {
-  if (!r._visit(937)) return;
+  if (!r._visit(938)) return;
   r._builder.add(TbSecretDeleteResult.serializer);
   _mapOfStringToListOfEntityInfo(r);
 }
 
 void _tbTextContent(ApiSerializersRegistry r) {
-  if (!r._visit(938)) return;
+  if (!r._visit(939)) return;
   r._builder.add(TbTextContent.serializer);
 }
 
 void _tbUserMessage(ApiSerializersRegistry r) {
-  if (!r._visit(939)) return;
+  if (!r._visit(940)) return;
   r._builder.add(TbUserMessage.serializer);
   _listOfTbContent(r);
 }
 
 void _tbelAlarmConditionExpression(ApiSerializersRegistry r) {
-  if (!r._visit(940)) return;
+  if (!r._visit(941)) return;
   r._builder.add(TbelAlarmConditionExpression.serializer);
 }
 
 void _telemetryEntityView(ApiSerializersRegistry r) {
-  if (!r._visit(941)) return;
+  if (!r._visit(942)) return;
   r._builder.add(TelemetryEntityView.serializer);
   _attributesEntityView(r);
   _listOfString(r);
 }
 
 void _telemetryMappingConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(942)) return;
+  if (!r._visit(943)) return;
   r._builder.add(TelemetryMappingConfiguration.serializer);
   _mapOfStringToObjectAttributes(r);
   _mapOfStringToString(r);
@@ -13076,95 +13086,95 @@ void _telemetryMappingConfiguration(ApiSerializersRegistry r) {
 }
 
 void _telemetryObserveStrategy(ApiSerializersRegistry r) {
-  if (!r._visit(943)) return;
+  if (!r._visit(944)) return;
   r._builder.add(TelemetryObserveStrategy.serializer);
 }
 
 void _telemetryQueryingSnmpCommunicationConfig(ApiSerializersRegistry r) {
-  if (!r._visit(944)) return;
+  if (!r._visit(945)) return;
   r._builder.add(TelemetryQueryingSnmpCommunicationConfig.serializer);
   _listOfSnmpMapping(r);
   _snmpCommunicationSpec(r);
 }
 
 void _tenant(ApiSerializersRegistry r) {
-  if (!r._visit(945)) return;
+  if (!r._visit(946)) return;
   r._builder.add(Tenant.serializer);
   _tenantId(r);
   _tenantProfileId(r);
 }
 
 void _tenantAdministratorsFilter(ApiSerializersRegistry r) {
-  if (!r._visit(946)) return;
+  if (!r._visit(947)) return;
   r._builder.add(TenantAdministratorsFilter.serializer);
   _setOfString(r);
 }
 
 void _tenantId(ApiSerializersRegistry r) {
-  if (!r._visit(947)) return;
+  if (!r._visit(948)) return;
   r._builder.add(TenantId.serializer);
   _entityType(r);
 }
 
 void _tenantInfo(ApiSerializersRegistry r) {
-  if (!r._visit(948)) return;
+  if (!r._visit(949)) return;
   r._builder.add(TenantInfo.serializer);
   _tenantId(r);
   _tenantProfileId(r);
 }
 
 void _tenantNameStrategyType(ApiSerializersRegistry r) {
-  if (!r._visit(949)) return;
+  if (!r._visit(950)) return;
   r._builder.add(TenantNameStrategyType.serializer);
 }
 
 void _tenantProfile(ApiSerializersRegistry r) {
-  if (!r._visit(950)) return;
+  if (!r._visit(951)) return;
   r._builder.add(TenantProfile.serializer);
   _tenantProfileData(r);
   _tenantProfileId(r);
 }
 
 void _tenantProfileConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(951)) return;
+  if (!r._visit(952)) return;
   r._builder.add(TenantProfileConfiguration.serializer);
   r._builder.add($TenantProfileConfiguration.serializer);
   _defaultTenantProfileConfiguration(r);
 }
 
 void _tenantProfileData(ApiSerializersRegistry r) {
-  if (!r._visit(952)) return;
+  if (!r._visit(953)) return;
   r._builder.add(TenantProfileData.serializer);
   _listOfTenantProfileQueueConfiguration(r);
   _tenantProfileConfiguration(r);
 }
 
 void _tenantProfileId(ApiSerializersRegistry r) {
-  if (!r._visit(953)) return;
+  if (!r._visit(954)) return;
   r._builder.add(TenantProfileId.serializer);
   _entityType(r);
 }
 
 void _tenantProfileQueueConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(954)) return;
+  if (!r._visit(955)) return;
   r._builder.add(TenantProfileQueueConfiguration.serializer);
   _processingStrategy(r);
   _submitStrategy(r);
 }
 
 void _testSmsRequest(ApiSerializersRegistry r) {
-  if (!r._visit(955)) return;
+  if (!r._visit(956)) return;
   r._builder.add(TestSmsRequest.serializer);
   _smsProviderConfiguration(r);
 }
 
 void _textAlignment(ApiSerializersRegistry r) {
-  if (!r._visit(956)) return;
+  if (!r._visit(957)) return;
   r._builder.add(TextAlignment.serializer);
 }
 
 void _thingsboardCredentialsExpiredResponse(ApiSerializersRegistry r) {
-  if (!r._visit(957)) return;
+  if (!r._visit(958)) return;
   r._builder.add(ThingsboardCredentialsExpiredResponse.serializer);
   _subscriptionEntry(r);
   _subscriptionErrorCode(r);
@@ -13172,12 +13182,12 @@ void _thingsboardCredentialsExpiredResponse(ApiSerializersRegistry r) {
 }
 
 void _thingsboardErrorCode(ApiSerializersRegistry r) {
-  if (!r._visit(958)) return;
+  if (!r._visit(959)) return;
   r._builder.add(ThingsboardErrorCode.serializer);
 }
 
 void _thingsboardErrorResponse(ApiSerializersRegistry r) {
-  if (!r._visit(959)) return;
+  if (!r._visit(960)) return;
   r._builder.add(ThingsboardErrorResponse.serializer);
   _subscriptionEntry(r);
   _subscriptionErrorCode(r);
@@ -13185,27 +13195,27 @@ void _thingsboardErrorResponse(ApiSerializersRegistry r) {
 }
 
 void _thresholdLabelPosition(ApiSerializersRegistry r) {
-  if (!r._visit(960)) return;
+  if (!r._visit(961)) return;
   r._builder.add(ThresholdLabelPosition.serializer);
 }
 
 void _timeSeriesChartBarWidth(ApiSerializersRegistry r) {
-  if (!r._visit(961)) return;
+  if (!r._visit(962)) return;
   r._builder.add(TimeSeriesChartBarWidth.serializer);
 }
 
 void _timeSeriesChartBarWidthSettings(ApiSerializersRegistry r) {
-  if (!r._visit(962)) return;
+  if (!r._visit(963)) return;
   r._builder.add(TimeSeriesChartBarWidthSettings.serializer);
 }
 
 void _timeSeriesChartGridSettings(ApiSerializersRegistry r) {
-  if (!r._visit(963)) return;
+  if (!r._visit(964)) return;
   r._builder.add(TimeSeriesChartGridSettings.serializer);
 }
 
 void _timeSeriesChartKeySettings(ApiSerializersRegistry r) {
-  if (!r._visit(964)) return;
+  if (!r._visit(965)) return;
   r._builder.add(TimeSeriesChartKeySettings.serializer);
   _barSeriesSettings(r);
   _dataKeyComparisonSettings(r);
@@ -13215,35 +13225,35 @@ void _timeSeriesChartKeySettings(ApiSerializersRegistry r) {
 }
 
 void _timeSeriesChartNoAggregationBarWidthSettings(ApiSerializersRegistry r) {
-  if (!r._visit(965)) return;
+  if (!r._visit(966)) return;
   r._builder.add(TimeSeriesChartNoAggregationBarWidthSettings.serializer);
   _timeSeriesChartBarWidth(r);
   _timeSeriesChartNoAggregationBarWidthStrategy(r);
 }
 
 void _timeSeriesChartNoAggregationBarWidthStrategy(ApiSerializersRegistry r) {
-  if (!r._visit(966)) return;
+  if (!r._visit(967)) return;
   r._builder.add(TimeSeriesChartNoAggregationBarWidthStrategy.serializer);
 }
 
 void _timeSeriesChartSeriesType(ApiSerializersRegistry r) {
-  if (!r._visit(967)) return;
+  if (!r._visit(968)) return;
   r._builder.add(TimeSeriesChartSeriesType.serializer);
 }
 
 void _timeSeriesChartStateSettings(ApiSerializersRegistry r) {
-  if (!r._visit(968)) return;
+  if (!r._visit(969)) return;
   r._builder.add(TimeSeriesChartStateSettings.serializer);
   _timeSeriesChartStateSourceType(r);
 }
 
 void _timeSeriesChartStateSourceType(ApiSerializersRegistry r) {
-  if (!r._visit(969)) return;
+  if (!r._visit(970)) return;
   r._builder.add(TimeSeriesChartStateSourceType.serializer);
 }
 
 void _timeSeriesChartThreshold(ApiSerializersRegistry r) {
-  if (!r._visit(970)) return;
+  if (!r._visit(971)) return;
   r._builder.add(TimeSeriesChartThreshold.serializer);
   _chartLineType(r);
   _chartShape(r);
@@ -13253,7 +13263,7 @@ void _timeSeriesChartThreshold(ApiSerializersRegistry r) {
 }
 
 void _timeSeriesChartXAxisSettings(ApiSerializersRegistry r) {
-  if (!r._visit(971)) return;
+  if (!r._visit(972)) return;
   r._builder.add(TimeSeriesChartXAxisSettings.serializer);
   _axisPosition(r);
   _font(r);
@@ -13261,7 +13271,7 @@ void _timeSeriesChartXAxisSettings(ApiSerializersRegistry r) {
 }
 
 void _timeSeriesChartYAxisSettings(ApiSerializersRegistry r) {
-  if (!r._visit(972)) return;
+  if (!r._visit(973)) return;
   r._builder.add(TimeSeriesChartYAxisSettings.serializer);
   _axisPosition(r);
   _font(r);
@@ -13269,18 +13279,18 @@ void _timeSeriesChartYAxisSettings(ApiSerializersRegistry r) {
 }
 
 void _timeSeriesImmediateOutputStrategy(ApiSerializersRegistry r) {
-  if (!r._visit(973)) return;
+  if (!r._visit(974)) return;
   r._builder.add(TimeSeriesImmediateOutputStrategy.serializer);
 }
 
 void _timeSeriesOutput(ApiSerializersRegistry r) {
-  if (!r._visit(974)) return;
+  if (!r._visit(975)) return;
   r._builder.add(TimeSeriesOutput.serializer);
   _attributeScope(r);
 }
 
 void _timeSeriesOutputStrategy(ApiSerializersRegistry r) {
-  if (!r._visit(975)) return;
+  if (!r._visit(976)) return;
   r._builder.add(TimeSeriesOutputStrategy.serializer);
   r._builder.add($TimeSeriesOutputStrategy.serializer);
   _timeSeriesImmediateOutputStrategy(r);
@@ -13288,24 +13298,24 @@ void _timeSeriesOutputStrategy(ApiSerializersRegistry r) {
 }
 
 void _timeSeriesRuleChainOutputStrategy(ApiSerializersRegistry r) {
-  if (!r._visit(976)) return;
+  if (!r._visit(977)) return;
   r._builder.add(TimeSeriesRuleChainOutputStrategy.serializer);
 }
 
 void _timeUnit(ApiSerializersRegistry r) {
-  if (!r._visit(977)) return;
+  if (!r._visit(978)) return;
   r._builder.add(TimeUnit.serializer);
 }
 
 void _timeWindowConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(978)) return;
+  if (!r._visit(979)) return;
   r._builder.add(TimeWindowConfiguration.serializer);
   _aggregationConfiguration(r);
   _history(r);
 }
 
 void _timeseriesChartComponent(ApiSerializersRegistry r) {
-  if (!r._visit(979)) return;
+  if (!r._visit(980)) return;
   r._builder.add(TimeseriesChartComponent.serializer);
   _imageAlignment(r);
   _imageWidthType(r);
@@ -13318,7 +13328,7 @@ void _timeseriesChartComponent(ApiSerializersRegistry r) {
 }
 
 void _timeseriesTableComponent(ApiSerializersRegistry r) {
-  if (!r._visit(980)) return;
+  if (!r._visit(981)) return;
   r._builder.add(TimeseriesTableComponent.serializer);
   _columnSettings(r);
   _heading(r);
@@ -13331,47 +13341,47 @@ void _timeseriesTableComponent(ApiSerializersRegistry r) {
 }
 
 void _toCoreEdqsRequest(ApiSerializersRegistry r) {
-  if (!r._visit(981)) return;
+  if (!r._visit(982)) return;
   r._builder.add(ToCoreEdqsRequest.serializer);
   _edqsSyncRequest(r);
 }
 
 void _toDeviceRpcRequestSnmpCommunicationConfig(ApiSerializersRegistry r) {
-  if (!r._visit(982)) return;
+  if (!r._visit(983)) return;
   r._builder.add(ToDeviceRpcRequestSnmpCommunicationConfig.serializer);
   _listOfSnmpMapping(r);
   _snmpCommunicationSpec(r);
 }
 
 void _toServerRpcRequestSnmpCommunicationConfig(ApiSerializersRegistry r) {
-  if (!r._visit(983)) return;
+  if (!r._visit(984)) return;
   r._builder.add(ToServerRpcRequestSnmpCommunicationConfig.serializer);
   _listOfSnmpMapping(r);
   _snmpCommunicationSpec(r);
 }
 
 void _token(ApiSerializersRegistry r) {
-  if (!r._visit(984)) return;
+  if (!r._visit(985)) return;
   r._builder.add(Token.serializer);
 }
 
 void _totpTwoFaAccountConfig(ApiSerializersRegistry r) {
-  if (!r._visit(985)) return;
+  if (!r._visit(986)) return;
   r._builder.add(TotpTwoFaAccountConfig.serializer);
 }
 
 void _totpTwoFaProviderConfig(ApiSerializersRegistry r) {
-  if (!r._visit(986)) return;
+  if (!r._visit(987)) return;
   r._builder.add(TotpTwoFaProviderConfig.serializer);
 }
 
 void _translationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(987)) return;
+  if (!r._visit(988)) return;
   r._builder.add(TranslationInfo.serializer);
 }
 
 void _transportPayloadTypeConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(988)) return;
+  if (!r._visit(989)) return;
   r._builder.add(TransportPayloadTypeConfiguration.serializer);
   r._builder.add($TransportPayloadTypeConfiguration.serializer);
   _jsonTransportPayloadConfiguration(r);
@@ -13379,81 +13389,81 @@ void _transportPayloadTypeConfiguration(ApiSerializersRegistry r) {
 }
 
 void _trendzConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(989)) return;
+  if (!r._visit(990)) return;
   r._builder.add(TrendzConfiguration.serializer);
 }
 
 void _trendzHealthcheckResult(ApiSerializersRegistry r) {
-  if (!r._visit(990)) return;
+  if (!r._visit(991)) return;
   r._builder.add(TrendzHealthcheckResult.serializer);
   _trendzSynchronizationResultType(r);
   _trendzSynchronizationStatus(r);
 }
 
 void _trendzSummary(ApiSerializersRegistry r) {
-  if (!r._visit(991)) return;
+  if (!r._visit(992)) return;
   r._builder.add(TrendzSummary.serializer);
   _listOfNullableJsonObject(r);
 }
 
 void _trendzSynchronizationResult(ApiSerializersRegistry r) {
-  if (!r._visit(992)) return;
+  if (!r._visit(993)) return;
   r._builder.add(TrendzSynchronizationResult.serializer);
   _trendzSynchronizationResultType(r);
   _trendzSynchronizationStatus(r);
 }
 
 void _trendzSynchronizationResultType(ApiSerializersRegistry r) {
-  if (!r._visit(993)) return;
+  if (!r._visit(994)) return;
   r._builder.add(TrendzSynchronizationResultType.serializer);
 }
 
 void _trendzSynchronizationStatus(ApiSerializersRegistry r) {
-  if (!r._visit(994)) return;
+  if (!r._visit(995)) return;
   r._builder.add(TrendzSynchronizationStatus.serializer);
 }
 
 void _trendzUsage(ApiSerializersRegistry r) {
-  if (!r._visit(995)) return;
+  if (!r._visit(996)) return;
   r._builder.add(TrendzUsage.serializer);
   _entity(r);
   _simpleEntity(r);
 }
 
 void _trendzViewConfig(ApiSerializersRegistry r) {
-  if (!r._visit(996)) return;
+  if (!r._visit(997)) return;
   r._builder.add(TrendzViewConfig.serializer);
   _listOfNullableJsonObject(r);
 }
 
 void _trendzViewConfigLite(ApiSerializersRegistry r) {
-  if (!r._visit(997)) return;
+  if (!r._visit(998)) return;
   r._builder.add(TrendzViewConfigLite.serializer);
 }
 
 void _tsData(ApiSerializersRegistry r) {
-  if (!r._visit(998)) return;
+  if (!r._visit(999)) return;
   r._builder.add(TsData.serializer);
 }
 
 void _tsKvEntry(ApiSerializersRegistry r) {
-  if (!r._visit(999)) return;
+  if (!r._visit(1000)) return;
   r._builder.add(TsKvEntry.serializer);
   _dataType(r);
 }
 
 void _tsValue(ApiSerializersRegistry r) {
-  if (!r._visit(1000)) return;
+  if (!r._visit(1001)) return;
   r._builder.add(TsValue.serializer);
 }
 
 void _twilioSmsProviderConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(1001)) return;
+  if (!r._visit(1002)) return;
   r._builder.add(TwilioSmsProviderConfiguration.serializer);
 }
 
 void _twoFaAccountConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1002)) return;
+  if (!r._visit(1003)) return;
   r._builder.add(TwoFaAccountConfig.serializer);
   r._builder.add($TwoFaAccountConfig.serializer);
   _backupCodeTwoFaAccountConfig(r);
@@ -13463,12 +13473,12 @@ void _twoFaAccountConfig(ApiSerializersRegistry r) {
 }
 
 void _twoFaAccountConfigUpdateRequest(ApiSerializersRegistry r) {
-  if (!r._visit(1003)) return;
+  if (!r._visit(1004)) return;
   r._builder.add(TwoFaAccountConfigUpdateRequest.serializer);
 }
 
 void _twoFaProviderConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1004)) return;
+  if (!r._visit(1005)) return;
   r._builder.add(TwoFaProviderConfig.serializer);
   r._builder.add($TwoFaProviderConfig.serializer);
   _backupCodeTwoFaProviderConfig(r);
@@ -13478,33 +13488,33 @@ void _twoFaProviderConfig(ApiSerializersRegistry r) {
 }
 
 void _twoFaProviderInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1005)) return;
+  if (!r._visit(1006)) return;
   r._builder.add(TwoFaProviderInfo.serializer);
   _twoFaProviderType(r);
 }
 
 void _twoFaProviderType(ApiSerializersRegistry r) {
-  if (!r._visit(1006)) return;
+  if (!r._visit(1007)) return;
   r._builder.add(TwoFaProviderType.serializer);
 }
 
 void _uniquifyStrategy(ApiSerializersRegistry r) {
-  if (!r._visit(1007)) return;
+  if (!r._visit(1008)) return;
   r._builder.add(UniquifyStrategy.serializer);
 }
 
 void _updateMessage(ApiSerializersRegistry r) {
-  if (!r._visit(1008)) return;
+  if (!r._visit(1009)) return;
   r._builder.add(UpdateMessage.serializer);
 }
 
 void _usageInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1009)) return;
+  if (!r._visit(1010)) return;
   r._builder.add(UsageInfo.serializer);
 }
 
 void _user(ApiSerializersRegistry r) {
-  if (!r._visit(1010)) return;
+  if (!r._visit(1011)) return;
   r._builder.add(User.serializer);
   _authority(r);
   _customMenuId(r);
@@ -13515,32 +13525,32 @@ void _user(ApiSerializersRegistry r) {
 }
 
 void _userActivatedNotificationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1011)) return;
+  if (!r._visit(1012)) return;
   r._builder.add(UserActivatedNotificationInfo.serializer);
   _dashboardId(r);
   _entityId(r);
 }
 
 void _userActivationLink(ApiSerializersRegistry r) {
-  if (!r._visit(1012)) return;
+  if (!r._visit(1013)) return;
   r._builder.add(UserActivationLink.serializer);
 }
 
 void _userDashboardsInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1013)) return;
+  if (!r._visit(1014)) return;
   r._builder.add(UserDashboardsInfo.serializer);
   _listOfLastVisitedDashboardInfo(r);
   _listOfStarredDashboardInfo(r);
 }
 
 void _userEmailInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1014)) return;
+  if (!r._visit(1015)) return;
   r._builder.add(UserEmailInfo.serializer);
   _userId(r);
 }
 
 void _userExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1015)) return;
+  if (!r._visit(1016)) return;
   r._builder.add(UserExportData.serializer);
   _entityType(r);
   _exportableEntity(r);
@@ -13550,19 +13560,19 @@ void _userExportData(ApiSerializersRegistry r) {
 }
 
 void _userGroupListFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1016)) return;
+  if (!r._visit(1017)) return;
   r._builder.add(UserGroupListFilter.serializer);
   _listOfString(r);
 }
 
 void _userId(ApiSerializersRegistry r) {
-  if (!r._visit(1017)) return;
+  if (!r._visit(1018)) return;
   r._builder.add(UserId.serializer);
   _entityType(r);
 }
 
 void _userInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1018)) return;
+  if (!r._visit(1019)) return;
   r._builder.add(UserInfo.serializer);
   _authority(r);
   _customMenuId(r);
@@ -13574,13 +13584,13 @@ void _userInfo(ApiSerializersRegistry r) {
 }
 
 void _userListFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1019)) return;
+  if (!r._visit(1020)) return;
   r._builder.add(UserListFilter.serializer);
   _listOfString(r);
 }
 
 void _userMobileInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1020)) return;
+  if (!r._visit(1021)) return;
   r._builder.add(UserMobileInfo.serializer);
   _homeDashboardInfo(r);
   _mobileAppVersionInfo(r);
@@ -13589,31 +13599,31 @@ void _userMobileInfo(ApiSerializersRegistry r) {
 }
 
 void _userNotificationSettings(ApiSerializersRegistry r) {
-  if (!r._visit(1021)) return;
+  if (!r._visit(1022)) return;
   r._builder.add(UserNotificationSettings.serializer);
   _mapOfStringToNotificationPref(r);
 }
 
 void _userPasswordPolicy(ApiSerializersRegistry r) {
-  if (!r._visit(1022)) return;
+  if (!r._visit(1023)) return;
   r._builder.add(UserPasswordPolicy.serializer);
 }
 
 void _userRegisteredNotificationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1023)) return;
+  if (!r._visit(1024)) return;
   r._builder.add(UserRegisteredNotificationInfo.serializer);
   _dashboardId(r);
   _entityId(r);
 }
 
 void _userRoleFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1024)) return;
+  if (!r._visit(1025)) return;
   r._builder.add(UserRoleFilter.serializer);
   _listOfString(r);
 }
 
 void _usersFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1025)) return;
+  if (!r._visit(1026)) return;
   r._builder.add(UsersFilter.serializer);
   r._builder.add($UsersFilter.serializer);
   _affectedTenantAdministratorsFilter(r);
@@ -13629,32 +13639,32 @@ void _usersFilter(ApiSerializersRegistry r) {
 }
 
 void _v2CaptchaParams(ApiSerializersRegistry r) {
-  if (!r._visit(1026)) return;
+  if (!r._visit(1027)) return;
   r._builder.add(V2CaptchaParams.serializer);
 }
 
 void _v3CaptchaParams(ApiSerializersRegistry r) {
-  if (!r._visit(1027)) return;
+  if (!r._visit(1028)) return;
   r._builder.add(V3CaptchaParams.serializer);
 }
 
 void _valueSourceType(ApiSerializersRegistry r) {
-  if (!r._visit(1028)) return;
+  if (!r._visit(1029)) return;
   r._builder.add(ValueSourceType.serializer);
 }
 
 void _vendor(ApiSerializersRegistry r) {
-  if (!r._visit(1029)) return;
+  if (!r._visit(1030)) return;
   r._builder.add(Vendor.serializer);
 }
 
 void _versionCreateConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1030)) return;
+  if (!r._visit(1031)) return;
   r._builder.add(VersionCreateConfig.serializer);
 }
 
 void _versionCreateRequest(ApiSerializersRegistry r) {
-  if (!r._visit(1031)) return;
+  if (!r._visit(1032)) return;
   r._builder.add(VersionCreateRequest.serializer);
   r._builder.add($VersionCreateRequest.serializer);
   _complexVersionCreateRequest(r);
@@ -13663,23 +13673,23 @@ void _versionCreateRequest(ApiSerializersRegistry r) {
 }
 
 void _versionCreateRequestType(ApiSerializersRegistry r) {
-  if (!r._visit(1032)) return;
+  if (!r._visit(1033)) return;
   r._builder.add(VersionCreateRequestType.serializer);
 }
 
 void _versionCreationResult(ApiSerializersRegistry r) {
-  if (!r._visit(1033)) return;
+  if (!r._visit(1034)) return;
   r._builder.add(VersionCreationResult.serializer);
   _entityVersion(r);
 }
 
 void _versionLoadConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1034)) return;
+  if (!r._visit(1035)) return;
   r._builder.add(VersionLoadConfig.serializer);
 }
 
 void _versionLoadRequest(ApiSerializersRegistry r) {
-  if (!r._visit(1035)) return;
+  if (!r._visit(1036)) return;
   r._builder.add(VersionLoadRequest.serializer);
   r._builder.add($VersionLoadRequest.serializer);
   _entityTypeVersionLoadRequest(r);
@@ -13688,40 +13698,40 @@ void _versionLoadRequest(ApiSerializersRegistry r) {
 }
 
 void _versionLoadRequestType(ApiSerializersRegistry r) {
-  if (!r._visit(1036)) return;
+  if (!r._visit(1037)) return;
   r._builder.add(VersionLoadRequestType.serializer);
 }
 
 void _versionLoadResult(ApiSerializersRegistry r) {
-  if (!r._visit(1037)) return;
+  if (!r._visit(1038)) return;
   r._builder.add(VersionLoadResult.serializer);
   _entityLoadError(r);
   _listOfEntityTypeLoadResult(r);
 }
 
 void _versionedEntityInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1038)) return;
+  if (!r._visit(1039)) return;
   r._builder.add(VersionedEntityInfo.serializer);
   _entityId(r);
 }
 
 void _verticalAlignment(ApiSerializersRegistry r) {
-  if (!r._visit(1039)) return;
+  if (!r._visit(1040)) return;
   r._builder.add(VerticalAlignment.serializer);
 }
 
 void _watermark(ApiSerializersRegistry r) {
-  if (!r._visit(1040)) return;
+  if (!r._visit(1041)) return;
   r._builder.add(Watermark.serializer);
 }
 
 void _webDeliveryMethodNotificationTemplate(ApiSerializersRegistry r) {
-  if (!r._visit(1041)) return;
+  if (!r._visit(1042)) return;
   r._builder.add(WebDeliveryMethodNotificationTemplate.serializer);
 }
 
 void _webSelfRegistrationParams(ApiSerializersRegistry r) {
-  if (!r._visit(1042)) return;
+  if (!r._visit(1043)) return;
   r._builder.add(WebSelfRegistrationParams.serializer);
   _captchaParams(r);
   _customMenuId(r);
@@ -13736,23 +13746,23 @@ void _webSelfRegistrationParams(ApiSerializersRegistry r) {
 }
 
 void _webViewPage(ApiSerializersRegistry r) {
-  if (!r._visit(1043)) return;
+  if (!r._visit(1044)) return;
   r._builder.add(WebViewPage.serializer);
   _mobilePageType(r);
 }
 
 void _weekInterval(ApiSerializersRegistry r) {
-  if (!r._visit(1044)) return;
+  if (!r._visit(1045)) return;
   r._builder.add(WeekInterval.serializer);
 }
 
 void _weekSunSatInterval(ApiSerializersRegistry r) {
-  if (!r._visit(1045)) return;
+  if (!r._visit(1046)) return;
   r._builder.add(WeekSunSatInterval.serializer);
 }
 
 void _whiteLabeling(ApiSerializersRegistry r) {
-  if (!r._visit(1046)) return;
+  if (!r._visit(1047)) return;
   r._builder.add(WhiteLabeling.serializer);
   _customerId(r);
   _domainId(r);
@@ -13761,32 +13771,32 @@ void _whiteLabeling(ApiSerializersRegistry r) {
 }
 
 void _whiteLabelingParams(ApiSerializersRegistry r) {
-  if (!r._visit(1047)) return;
+  if (!r._visit(1048)) return;
   r._builder.add(WhiteLabelingParams.serializer);
   _favicon(r);
   _paletteSettings(r);
 }
 
 void _whiteLabelingType(ApiSerializersRegistry r) {
-  if (!r._visit(1048)) return;
+  if (!r._visit(1049)) return;
   r._builder.add(WhiteLabelingType.serializer);
 }
 
 void _widgetBundleInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1049)) return;
+  if (!r._visit(1050)) return;
   r._builder.add(WidgetBundleInfo.serializer);
   _entityId(r);
 }
 
 void _widgetType(ApiSerializersRegistry r) {
-  if (!r._visit(1050)) return;
+  if (!r._visit(1051)) return;
   r._builder.add(WidgetType.serializer);
   _tenantId(r);
   _widgetTypeId(r);
 }
 
 void _widgetTypeDetails(ApiSerializersRegistry r) {
-  if (!r._visit(1051)) return;
+  if (!r._visit(1052)) return;
   r._builder.add(WidgetTypeDetails.serializer);
   _listOfResourceExportData(r);
   _listOfString(r);
@@ -13795,7 +13805,7 @@ void _widgetTypeDetails(ApiSerializersRegistry r) {
 }
 
 void _widgetTypeExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1052)) return;
+  if (!r._visit(1053)) return;
   r._builder.add(WidgetTypeExportData.serializer);
   _entityType(r);
   _exportableEntity(r);
@@ -13805,13 +13815,13 @@ void _widgetTypeExportData(ApiSerializersRegistry r) {
 }
 
 void _widgetTypeId(ApiSerializersRegistry r) {
-  if (!r._visit(1053)) return;
+  if (!r._visit(1054)) return;
   r._builder.add(WidgetTypeId.serializer);
   _entityType(r);
 }
 
 void _widgetTypeInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1054)) return;
+  if (!r._visit(1055)) return;
   r._builder.add(WidgetTypeInfo.serializer);
   _listOfString(r);
   _listOfWidgetBundleInfo(r);
@@ -13820,14 +13830,14 @@ void _widgetTypeInfo(ApiSerializersRegistry r) {
 }
 
 void _widgetsBundle(ApiSerializersRegistry r) {
-  if (!r._visit(1055)) return;
+  if (!r._visit(1056)) return;
   r._builder.add(WidgetsBundle.serializer);
   _tenantId(r);
   _widgetsBundleId(r);
 }
 
 void _widgetsBundleExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1056)) return;
+  if (!r._visit(1057)) return;
   r._builder.add(WidgetsBundleExportData.serializer);
   _entityType(r);
   _exportableEntity(r);
@@ -13839,28 +13849,28 @@ void _widgetsBundleExportData(ApiSerializersRegistry r) {
 }
 
 void _widgetsBundleId(ApiSerializersRegistry r) {
-  if (!r._visit(1057)) return;
+  if (!r._visit(1058)) return;
   r._builder.add(WidgetsBundleId.serializer);
   _entityType(r);
 }
 
 void _x509CertificateChainProvisionConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(1058)) return;
+  if (!r._visit(1059)) return;
   r._builder.add(X509CertificateChainProvisionConfiguration.serializer);
 }
 
 void _x509LwM2MBootstrapServerCredential(ApiSerializersRegistry r) {
-  if (!r._visit(1059)) return;
+  if (!r._visit(1060)) return;
   r._builder.add(X509LwM2MBootstrapServerCredential.serializer);
 }
 
 void _yearInterval(ApiSerializersRegistry r) {
-  if (!r._visit(1060)) return;
+  if (!r._visit(1061)) return;
   r._builder.add(YearInterval.serializer);
 }
 
 void _zoneGroupConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(1061)) return;
+  if (!r._visit(1062)) return;
   r._builder.add(ZoneGroupConfiguration.serializer);
   _cfArgumentDynamicSourceConfiguration(r);
   _entityId(r);
@@ -13869,7 +13879,7 @@ void _zoneGroupConfiguration(ApiSerializersRegistry r) {
 }
 
 void _listOfAgent(ApiSerializersRegistry r) {
-  if (!r._visit(1062)) return;
+  if (!r._visit(1063)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Agent)]),
     () => ListBuilder<Agent>(),
@@ -13878,7 +13888,7 @@ void _listOfAgent(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppArgument(ApiSerializersRegistry r) {
-  if (!r._visit(1063)) return;
+  if (!r._visit(1064)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppArgument)]),
     () => ListBuilder<AgentAppArgument>(),
@@ -13887,7 +13897,7 @@ void _listOfAgentAppArgument(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppEvent(ApiSerializersRegistry r) {
-  if (!r._visit(1064)) return;
+  if (!r._visit(1065)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppEvent)]),
     () => ListBuilder<AgentAppEvent>(),
@@ -13896,7 +13906,7 @@ void _listOfAgentAppEvent(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppEventInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1065)) return;
+  if (!r._visit(1066)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppEventInfo)]),
     () => ListBuilder<AgentAppEventInfo>(),
@@ -13905,7 +13915,7 @@ void _listOfAgentAppEventInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppProfile(ApiSerializersRegistry r) {
-  if (!r._visit(1066)) return;
+  if (!r._visit(1067)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppProfile)]),
     () => ListBuilder<AgentAppProfile>(),
@@ -13914,7 +13924,7 @@ void _listOfAgentAppProfile(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppProfileInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1067)) return;
+  if (!r._visit(1068)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppProfileInfo)]),
     () => ListBuilder<AgentAppProfileInfo>(),
@@ -13923,7 +13933,7 @@ void _listOfAgentAppProfileInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppProfileRelationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1068)) return;
+  if (!r._visit(1069)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppProfileRelationInfo)]),
     () => ListBuilder<AgentAppProfileRelationInfo>(),
@@ -13932,7 +13942,7 @@ void _listOfAgentAppProfileRelationInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppTemplate(ApiSerializersRegistry r) {
-  if (!r._visit(1069)) return;
+  if (!r._visit(1070)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppTemplate)]),
     () => ListBuilder<AgentAppTemplate>(),
@@ -13941,7 +13951,7 @@ void _listOfAgentAppTemplate(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppTemplateStartStepsInner(ApiSerializersRegistry r) {
-  if (!r._visit(1070)) return;
+  if (!r._visit(1071)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppTemplateStartStepsInner)]),
     () => ListBuilder<AgentAppTemplateStartStepsInner>(),
@@ -13950,7 +13960,7 @@ void _listOfAgentAppTemplateStartStepsInner(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentAppUnit(ApiSerializersRegistry r) {
-  if (!r._visit(1071)) return;
+  if (!r._visit(1072)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentAppUnit)]),
     () => ListBuilder<AgentAppUnit>(),
@@ -13959,7 +13969,7 @@ void _listOfAgentAppUnit(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentApplicationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1072)) return;
+  if (!r._visit(1073)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentApplicationInfo)]),
     () => ListBuilder<AgentApplicationInfo>(),
@@ -13968,7 +13978,7 @@ void _listOfAgentApplicationInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentBulkAction(ApiSerializersRegistry r) {
-  if (!r._visit(1073)) return;
+  if (!r._visit(1074)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentBulkAction)]),
     () => ListBuilder<AgentBulkAction>(),
@@ -13977,7 +13987,7 @@ void _listOfAgentBulkAction(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1074)) return;
+  if (!r._visit(1075)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentInfo)]),
     () => ListBuilder<AgentInfo>(),
@@ -13986,7 +13996,7 @@ void _listOfAgentInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentProfile(ApiSerializersRegistry r) {
-  if (!r._visit(1075)) return;
+  if (!r._visit(1076)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentProfile)]),
     () => ListBuilder<AgentProfile>(),
@@ -13995,7 +14005,7 @@ void _listOfAgentProfile(ApiSerializersRegistry r) {
 }
 
 void _listOfAgentProfileInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1076)) return;
+  if (!r._visit(1077)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AgentProfileInfo)]),
     () => ListBuilder<AgentProfileInfo>(),
@@ -14004,7 +14014,7 @@ void _listOfAgentProfileInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAiModel(ApiSerializersRegistry r) {
-  if (!r._visit(1077)) return;
+  if (!r._visit(1078)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AiModel)]),
     () => ListBuilder<AiModel>(),
@@ -14013,7 +14023,7 @@ void _listOfAiModel(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmCommentInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1078)) return;
+  if (!r._visit(1079)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmCommentInfo)]),
     () => ListBuilder<AlarmCommentInfo>(),
@@ -14022,7 +14032,7 @@ void _listOfAlarmCommentInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmConditionFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1079)) return;
+  if (!r._visit(1080)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmConditionFilter)]),
     () => ListBuilder<AlarmConditionFilter>(),
@@ -14031,7 +14041,7 @@ void _listOfAlarmConditionFilter(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmData(ApiSerializersRegistry r) {
-  if (!r._visit(1080)) return;
+  if (!r._visit(1081)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmData)]),
     () => ListBuilder<AlarmData>(),
@@ -14040,7 +14050,7 @@ void _listOfAlarmData(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1081)) return;
+  if (!r._visit(1082)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmInfo)]),
     () => ListBuilder<AlarmInfo>(),
@@ -14049,7 +14059,7 @@ void _listOfAlarmInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmRuleDefinition(ApiSerializersRegistry r) {
-  if (!r._visit(1082)) return;
+  if (!r._visit(1083)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmRuleDefinition)]),
     () => ListBuilder<AlarmRuleDefinition>(),
@@ -14058,7 +14068,7 @@ void _listOfAlarmRuleDefinition(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmRuleDefinitionInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1083)) return;
+  if (!r._visit(1084)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmRuleDefinitionInfo)]),
     () => ListBuilder<AlarmRuleDefinitionInfo>(),
@@ -14067,7 +14077,7 @@ void _listOfAlarmRuleDefinitionInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmRuleKeyFilterPredicate(ApiSerializersRegistry r) {
-  if (!r._visit(1084)) return;
+  if (!r._visit(1085)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmRuleKeyFilterPredicate)]),
     () => ListBuilder<AlarmRuleKeyFilterPredicate>(),
@@ -14076,7 +14086,7 @@ void _listOfAlarmRuleKeyFilterPredicate(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmSearchStatus(ApiSerializersRegistry r) {
-  if (!r._visit(1085)) return;
+  if (!r._visit(1086)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmSearchStatus)]),
     () => ListBuilder<AlarmSearchStatus>(),
@@ -14085,7 +14095,7 @@ void _listOfAlarmSearchStatus(ApiSerializersRegistry r) {
 }
 
 void _listOfAlarmSeverity(ApiSerializersRegistry r) {
-  if (!r._visit(1086)) return;
+  if (!r._visit(1087)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AlarmSeverity)]),
     () => ListBuilder<AlarmSeverity>(),
@@ -14094,7 +14104,7 @@ void _listOfAlarmSeverity(ApiSerializersRegistry r) {
 }
 
 void _listOfApiKeyInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1087)) return;
+  if (!r._visit(1088)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ApiKeyInfo)]),
     () => ListBuilder<ApiKeyInfo>(),
@@ -14103,7 +14113,7 @@ void _listOfApiKeyInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAsset(ApiSerializersRegistry r) {
-  if (!r._visit(1088)) return;
+  if (!r._visit(1089)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Asset)]),
     () => ListBuilder<Asset>(),
@@ -14112,7 +14122,7 @@ void _listOfAsset(ApiSerializersRegistry r) {
 }
 
 void _listOfAssetInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1089)) return;
+  if (!r._visit(1090)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AssetInfo)]),
     () => ListBuilder<AssetInfo>(),
@@ -14121,7 +14131,7 @@ void _listOfAssetInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAssetProfile(ApiSerializersRegistry r) {
-  if (!r._visit(1090)) return;
+  if (!r._visit(1091)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AssetProfile)]),
     () => ListBuilder<AssetProfile>(),
@@ -14130,7 +14140,7 @@ void _listOfAssetProfile(ApiSerializersRegistry r) {
 }
 
 void _listOfAssetProfileInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1091)) return;
+  if (!r._visit(1092)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AssetProfileInfo)]),
     () => ListBuilder<AssetProfileInfo>(),
@@ -14139,7 +14149,7 @@ void _listOfAssetProfileInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfAttributeData(ApiSerializersRegistry r) {
-  if (!r._visit(1092)) return;
+  if (!r._visit(1093)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AttributeData)]),
     () => ListBuilder<AttributeData>(),
@@ -14148,7 +14158,7 @@ void _listOfAttributeData(ApiSerializersRegistry r) {
 }
 
 void _listOfAttributeExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1093)) return;
+  if (!r._visit(1094)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AttributeExportData)]),
     () => ListBuilder<AttributeExportData>(),
@@ -14157,7 +14167,7 @@ void _listOfAttributeExportData(ApiSerializersRegistry r) {
 }
 
 void _listOfAuditLog(ApiSerializersRegistry r) {
-  if (!r._visit(1094)) return;
+  if (!r._visit(1095)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(AuditLog)]),
     () => ListBuilder<AuditLog>(),
@@ -14166,7 +14176,7 @@ void _listOfAuditLog(ApiSerializersRegistry r) {
 }
 
 void _listOfBaseReadTsKvQuery(ApiSerializersRegistry r) {
-  if (!r._visit(1095)) return;
+  if (!r._visit(1096)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(BaseReadTsKvQuery)]),
     () => ListBuilder<BaseReadTsKvQuery>(),
@@ -14175,7 +14185,7 @@ void _listOfBaseReadTsKvQuery(ApiSerializersRegistry r) {
 }
 
 void _listOfBlobEntityInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1096)) return;
+  if (!r._visit(1097)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(BlobEntityInfo)]),
     () => ListBuilder<BlobEntityInfo>(),
@@ -14184,7 +14194,7 @@ void _listOfBlobEntityInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfBlobEntityWithCustomerInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1097)) return;
+  if (!r._visit(1098)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(BlobEntityWithCustomerInfo)]),
     () => ListBuilder<BlobEntityWithCustomerInfo>(),
@@ -14193,7 +14203,7 @@ void _listOfBlobEntityWithCustomerInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfBranchInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1098)) return;
+  if (!r._visit(1099)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(BranchInfo)]),
     () => ListBuilder<BranchInfo>(),
@@ -14202,7 +14212,7 @@ void _listOfBranchInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfCalculatedField(ApiSerializersRegistry r) {
-  if (!r._visit(1099)) return;
+  if (!r._visit(1100)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(CalculatedField)]),
     () => ListBuilder<CalculatedField>(),
@@ -14211,7 +14221,7 @@ void _listOfCalculatedField(ApiSerializersRegistry r) {
 }
 
 void _listOfCalculatedFieldInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1100)) return;
+  if (!r._visit(1101)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(CalculatedFieldInfo)]),
     () => ListBuilder<CalculatedFieldInfo>(),
@@ -14220,7 +14230,7 @@ void _listOfCalculatedFieldInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfColorRange(ApiSerializersRegistry r) {
-  if (!r._visit(1101)) return;
+  if (!r._visit(1102)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ColorRange)]),
     () => ListBuilder<ColorRange>(),
@@ -14229,7 +14239,7 @@ void _listOfColorRange(ApiSerializersRegistry r) {
 }
 
 void _listOfColumnMapping(ApiSerializersRegistry r) {
-  if (!r._visit(1102)) return;
+  if (!r._visit(1103)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ColumnMapping)]),
     () => ListBuilder<ColumnMapping>(),
@@ -14238,7 +14248,7 @@ void _listOfColumnMapping(ApiSerializersRegistry r) {
 }
 
 void _listOfComponentDescriptor(ApiSerializersRegistry r) {
-  if (!r._visit(1103)) return;
+  if (!r._visit(1104)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ComponentDescriptor)]),
     () => ListBuilder<ComponentDescriptor>(),
@@ -14247,7 +14257,7 @@ void _listOfComponentDescriptor(ApiSerializersRegistry r) {
 }
 
 void _listOfContactBasedObject(ApiSerializersRegistry r) {
-  if (!r._visit(1104)) return;
+  if (!r._visit(1105)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ContactBasedObject)]),
     () => ListBuilder<ContactBasedObject>(),
@@ -14256,7 +14266,7 @@ void _listOfContactBasedObject(ApiSerializersRegistry r) {
 }
 
 void _listOfConverter(ApiSerializersRegistry r) {
-  if (!r._visit(1105)) return;
+  if (!r._visit(1106)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Converter)]),
     () => ListBuilder<Converter>(),
@@ -14265,7 +14275,7 @@ void _listOfConverter(ApiSerializersRegistry r) {
 }
 
 void _listOfCustomMenuInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1106)) return;
+  if (!r._visit(1107)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(CustomMenuInfo)]),
     () => ListBuilder<CustomMenuInfo>(),
@@ -14274,7 +14284,7 @@ void _listOfCustomMenuInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfCustomMenuItem(ApiSerializersRegistry r) {
-  if (!r._visit(1107)) return;
+  if (!r._visit(1108)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(CustomMenuItem)]),
     () => ListBuilder<CustomMenuItem>(),
@@ -14283,7 +14293,7 @@ void _listOfCustomMenuItem(ApiSerializersRegistry r) {
 }
 
 void _listOfCustomTimeScheduleItem(ApiSerializersRegistry r) {
-  if (!r._visit(1108)) return;
+  if (!r._visit(1109)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(CustomTimeScheduleItem)]),
     () => ListBuilder<CustomTimeScheduleItem>(),
@@ -14292,7 +14302,7 @@ void _listOfCustomTimeScheduleItem(ApiSerializersRegistry r) {
 }
 
 void _listOfCustomer(ApiSerializersRegistry r) {
-  if (!r._visit(1109)) return;
+  if (!r._visit(1110)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Customer)]),
     () => ListBuilder<Customer>(),
@@ -14301,7 +14311,7 @@ void _listOfCustomer(ApiSerializersRegistry r) {
 }
 
 void _listOfCustomerInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1110)) return;
+  if (!r._visit(1111)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(CustomerInfo)]),
     () => ListBuilder<CustomerInfo>(),
@@ -14310,7 +14320,7 @@ void _listOfCustomerInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfDashboard(ApiSerializersRegistry r) {
-  if (!r._visit(1111)) return;
+  if (!r._visit(1112)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Dashboard)]),
     () => ListBuilder<Dashboard>(),
@@ -14319,7 +14329,7 @@ void _listOfDashboard(ApiSerializersRegistry r) {
 }
 
 void _listOfDashboardInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1112)) return;
+  if (!r._visit(1113)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DashboardInfo)]),
     () => ListBuilder<DashboardInfo>(),
@@ -14328,7 +14338,7 @@ void _listOfDashboardInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfDataKey(ApiSerializersRegistry r) {
-  if (!r._visit(1113)) return;
+  if (!r._visit(1114)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DataKey)]),
     () => ListBuilder<DataKey>(),
@@ -14337,7 +14347,7 @@ void _listOfDataKey(ApiSerializersRegistry r) {
 }
 
 void _listOfDataSource(ApiSerializersRegistry r) {
-  if (!r._visit(1114)) return;
+  if (!r._visit(1115)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DataSource)]),
     () => ListBuilder<DataSource>(),
@@ -14346,7 +14356,7 @@ void _listOfDataSource(ApiSerializersRegistry r) {
 }
 
 void _listOfDefaultMenuItem(ApiSerializersRegistry r) {
-  if (!r._visit(1115)) return;
+  if (!r._visit(1116)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DefaultMenuItem)]),
     () => ListBuilder<DefaultMenuItem>(),
@@ -14355,7 +14365,7 @@ void _listOfDefaultMenuItem(ApiSerializersRegistry r) {
 }
 
 void _listOfDevice(ApiSerializersRegistry r) {
-  if (!r._visit(1116)) return;
+  if (!r._visit(1117)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Device)]),
     () => ListBuilder<Device>(),
@@ -14364,7 +14374,7 @@ void _listOfDevice(ApiSerializersRegistry r) {
 }
 
 void _listOfDeviceGroupOtaPackage(ApiSerializersRegistry r) {
-  if (!r._visit(1117)) return;
+  if (!r._visit(1118)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DeviceGroupOtaPackage)]),
     () => ListBuilder<DeviceGroupOtaPackage>(),
@@ -14373,7 +14383,7 @@ void _listOfDeviceGroupOtaPackage(ApiSerializersRegistry r) {
 }
 
 void _listOfDeviceInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1118)) return;
+  if (!r._visit(1119)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DeviceInfo)]),
     () => ListBuilder<DeviceInfo>(),
@@ -14382,7 +14392,7 @@ void _listOfDeviceInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfDeviceProfile(ApiSerializersRegistry r) {
-  if (!r._visit(1119)) return;
+  if (!r._visit(1120)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DeviceProfile)]),
     () => ListBuilder<DeviceProfile>(),
@@ -14391,7 +14401,7 @@ void _listOfDeviceProfile(ApiSerializersRegistry r) {
 }
 
 void _listOfDeviceProfileInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1120)) return;
+  if (!r._visit(1121)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DeviceProfileInfo)]),
     () => ListBuilder<DeviceProfileInfo>(),
@@ -14400,7 +14410,7 @@ void _listOfDeviceProfileInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfDomainInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1121)) return;
+  if (!r._visit(1122)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(DomainInfo)]),
     () => ListBuilder<DomainInfo>(),
@@ -14409,7 +14419,7 @@ void _listOfDomainInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfEdge(ApiSerializersRegistry r) {
-  if (!r._visit(1122)) return;
+  if (!r._visit(1123)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Edge)]),
     () => ListBuilder<Edge>(),
@@ -14418,7 +14428,7 @@ void _listOfEdge(ApiSerializersRegistry r) {
 }
 
 void _listOfEdgeEvent(ApiSerializersRegistry r) {
-  if (!r._visit(1123)) return;
+  if (!r._visit(1124)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EdgeEvent)]),
     () => ListBuilder<EdgeEvent>(),
@@ -14427,7 +14437,7 @@ void _listOfEdgeEvent(ApiSerializersRegistry r) {
 }
 
 void _listOfEdgeInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1124)) return;
+  if (!r._visit(1125)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EdgeInfo)]),
     () => ListBuilder<EdgeInfo>(),
@@ -14436,7 +14446,7 @@ void _listOfEdgeInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityAlias(ApiSerializersRegistry r) {
-  if (!r._visit(1125)) return;
+  if (!r._visit(1126)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityAlias)]),
     () => ListBuilder<EntityAlias>(),
@@ -14445,7 +14455,7 @@ void _listOfEntityAlias(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityData(ApiSerializersRegistry r) {
-  if (!r._visit(1126)) return;
+  if (!r._visit(1127)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityData)]),
     () => ListBuilder<EntityData>(),
@@ -14454,7 +14464,7 @@ void _listOfEntityData(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1127)) return;
+  if (!r._visit(1128)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityExportData)]),
     () => ListBuilder<EntityExportData>(),
@@ -14463,7 +14473,7 @@ void _listOfEntityExportData(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityGroupId(ApiSerializersRegistry r) {
-  if (!r._visit(1128)) return;
+  if (!r._visit(1129)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityGroupId)]),
     () => ListBuilder<EntityGroupId>(),
@@ -14472,7 +14482,7 @@ void _listOfEntityGroupId(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityGroupInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1129)) return;
+  if (!r._visit(1130)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityGroupInfo)]),
     () => ListBuilder<EntityGroupInfo>(),
@@ -14481,7 +14491,7 @@ void _listOfEntityGroupInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1130)) return;
+  if (!r._visit(1131)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityInfo)]),
     () => ListBuilder<EntityInfo>(),
@@ -14490,7 +14500,7 @@ void _listOfEntityInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityKey(ApiSerializersRegistry r) {
-  if (!r._visit(1131)) return;
+  if (!r._visit(1132)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityKey)]),
     () => ListBuilder<EntityKey>(),
@@ -14499,7 +14509,7 @@ void _listOfEntityKey(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityRelation(ApiSerializersRegistry r) {
-  if (!r._visit(1132)) return;
+  if (!r._visit(1133)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityRelation)]),
     () => ListBuilder<EntityRelation>(),
@@ -14508,7 +14518,7 @@ void _listOfEntityRelation(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityRelationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1133)) return;
+  if (!r._visit(1134)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityRelationInfo)]),
     () => ListBuilder<EntityRelationInfo>(),
@@ -14517,7 +14527,7 @@ void _listOfEntityRelationInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfEntitySubtype(ApiSerializersRegistry r) {
-  if (!r._visit(1134)) return;
+  if (!r._visit(1135)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntitySubtype)]),
     () => ListBuilder<EntitySubtype>(),
@@ -14526,7 +14536,7 @@ void _listOfEntitySubtype(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityType(ApiSerializersRegistry r) {
-  if (!r._visit(1135)) return;
+  if (!r._visit(1136)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityType)]),
     () => ListBuilder<EntityType>(),
@@ -14535,7 +14545,7 @@ void _listOfEntityType(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityTypeLoadResult(ApiSerializersRegistry r) {
-  if (!r._visit(1136)) return;
+  if (!r._visit(1137)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityTypeLoadResult)]),
     () => ListBuilder<EntityTypeLoadResult>(),
@@ -14544,7 +14554,7 @@ void _listOfEntityTypeLoadResult(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityVersion(ApiSerializersRegistry r) {
-  if (!r._visit(1137)) return;
+  if (!r._visit(1138)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityVersion)]),
     () => ListBuilder<EntityVersion>(),
@@ -14553,7 +14563,7 @@ void _listOfEntityVersion(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityView(ApiSerializersRegistry r) {
-  if (!r._visit(1138)) return;
+  if (!r._visit(1139)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityView)]),
     () => ListBuilder<EntityView>(),
@@ -14562,7 +14572,7 @@ void _listOfEntityView(ApiSerializersRegistry r) {
 }
 
 void _listOfEntityViewInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1139)) return;
+  if (!r._visit(1140)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EntityViewInfo)]),
     () => ListBuilder<EntityViewInfo>(),
@@ -14571,7 +14581,7 @@ void _listOfEntityViewInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfErrorComponentAllOfExceptionCause(ApiSerializersRegistry r) {
-  if (!r._visit(1140)) return;
+  if (!r._visit(1141)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ErrorComponentAllOfExceptionCause)]),
     () => ListBuilder<ErrorComponentAllOfExceptionCause>(),
@@ -14582,7 +14592,7 @@ void _listOfErrorComponentAllOfExceptionCause(ApiSerializersRegistry r) {
 void _listOfErrorComponentAllOfExceptionCauseStackTrace(
   ApiSerializersRegistry r,
 ) {
-  if (!r._visit(1141)) return;
+  if (!r._visit(1142)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [
       FullType(ErrorComponentAllOfExceptionCauseStackTrace),
@@ -14593,7 +14603,7 @@ void _listOfErrorComponentAllOfExceptionCauseStackTrace(
 }
 
 void _listOfEventInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1142)) return;
+  if (!r._visit(1143)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(EventInfo)]),
     () => ListBuilder<EventInfo>(),
@@ -14602,7 +14612,7 @@ void _listOfEventInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1143)) return;
+  if (!r._visit(1144)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Filter)]),
     () => ListBuilder<Filter>(),
@@ -14613,7 +14623,7 @@ void _listOfFilter(ApiSerializersRegistry r) {
 void _listOfGetManagedRelatedEntityIds200ResponseInner(
   ApiSerializersRegistry r,
 ) {
-  if (!r._visit(1144)) return;
+  if (!r._visit(1145)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [
       FullType(GetManagedRelatedEntityIds200ResponseInner),
@@ -14624,7 +14634,7 @@ void _listOfGetManagedRelatedEntityIds200ResponseInner(
 }
 
 void _listOfGroupPermission(ApiSerializersRegistry r) {
-  if (!r._visit(1145)) return;
+  if (!r._visit(1146)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(GroupPermission)]),
     () => ListBuilder<GroupPermission>(),
@@ -14633,7 +14643,7 @@ void _listOfGroupPermission(ApiSerializersRegistry r) {
 }
 
 void _listOfGroupPermissionInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1146)) return;
+  if (!r._visit(1147)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(GroupPermissionInfo)]),
     () => ListBuilder<GroupPermissionInfo>(),
@@ -14642,7 +14652,7 @@ void _listOfGroupPermissionInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfHasIdObject(ApiSerializersRegistry r) {
-  if (!r._visit(1147)) return;
+  if (!r._visit(1148)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(HasIdObject)]),
     () => ListBuilder<HasIdObject>(),
@@ -14651,7 +14661,7 @@ void _listOfHasIdObject(ApiSerializersRegistry r) {
 }
 
 void _listOfIntegration(ApiSerializersRegistry r) {
-  if (!r._visit(1148)) return;
+  if (!r._visit(1149)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Integration)]),
     () => ListBuilder<Integration>(),
@@ -14660,7 +14670,7 @@ void _listOfIntegration(ApiSerializersRegistry r) {
 }
 
 void _listOfIntegrationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1149)) return;
+  if (!r._visit(1150)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(IntegrationInfo)]),
     () => ListBuilder<IntegrationInfo>(),
@@ -14669,7 +14679,7 @@ void _listOfIntegrationInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfJob(ApiSerializersRegistry r) {
-  if (!r._visit(1150)) return;
+  if (!r._visit(1151)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Job)]),
     () => ListBuilder<Job>(),
@@ -14678,7 +14688,7 @@ void _listOfJob(ApiSerializersRegistry r) {
 }
 
 void _listOfJsonObject(ApiSerializersRegistry r) {
-  if (!r._visit(1151)) return;
+  if (!r._visit(1152)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(JsonObject)]),
     () => ListBuilder<JsonObject>(),
@@ -14686,7 +14696,7 @@ void _listOfJsonObject(ApiSerializersRegistry r) {
 }
 
 void _listOfKeyFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1152)) return;
+  if (!r._visit(1153)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(KeyFilter)]),
     () => ListBuilder<KeyFilter>(),
@@ -14695,7 +14705,7 @@ void _listOfKeyFilter(ApiSerializersRegistry r) {
 }
 
 void _listOfKeyFilterPredicate(ApiSerializersRegistry r) {
-  if (!r._visit(1153)) return;
+  if (!r._visit(1154)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(KeyFilterPredicate)]),
     () => ListBuilder<KeyFilterPredicate>(),
@@ -14704,7 +14714,7 @@ void _listOfKeyFilterPredicate(ApiSerializersRegistry r) {
 }
 
 void _listOfKeyInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1154)) return;
+  if (!r._visit(1155)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(KeyInfo)]),
     () => ListBuilder<KeyInfo>(),
@@ -14713,7 +14723,7 @@ void _listOfKeyInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfLastVisitedDashboardInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1155)) return;
+  if (!r._visit(1156)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(LastVisitedDashboardInfo)]),
     () => ListBuilder<LastVisitedDashboardInfo>(),
@@ -14722,7 +14732,7 @@ void _listOfLastVisitedDashboardInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfLwM2MBootstrapServerCredential(ApiSerializersRegistry r) {
-  if (!r._visit(1156)) return;
+  if (!r._visit(1157)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(LwM2MBootstrapServerCredential)]),
     () => ListBuilder<LwM2MBootstrapServerCredential>(),
@@ -14731,7 +14741,7 @@ void _listOfLwM2MBootstrapServerCredential(ApiSerializersRegistry r) {
 }
 
 void _listOfLwM2mInstance(ApiSerializersRegistry r) {
-  if (!r._visit(1157)) return;
+  if (!r._visit(1158)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(LwM2mInstance)]),
     () => ListBuilder<LwM2mInstance>(),
@@ -14740,7 +14750,7 @@ void _listOfLwM2mInstance(ApiSerializersRegistry r) {
 }
 
 void _listOfLwM2mObject(ApiSerializersRegistry r) {
-  if (!r._visit(1158)) return;
+  if (!r._visit(1159)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(LwM2mObject)]),
     () => ListBuilder<LwM2mObject>(),
@@ -14749,7 +14759,7 @@ void _listOfLwM2mObject(ApiSerializersRegistry r) {
 }
 
 void _listOfLwM2mResourceObserve(ApiSerializersRegistry r) {
-  if (!r._visit(1159)) return;
+  if (!r._visit(1160)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(LwM2mResourceObserve)]),
     () => ListBuilder<LwM2mResourceObserve>(),
@@ -14758,7 +14768,7 @@ void _listOfLwM2mResourceObserve(ApiSerializersRegistry r) {
 }
 
 void _listOfMenuItem(ApiSerializersRegistry r) {
-  if (!r._visit(1160)) return;
+  if (!r._visit(1161)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(MenuItem)]),
     () => ListBuilder<MenuItem>(),
@@ -14767,7 +14777,7 @@ void _listOfMenuItem(ApiSerializersRegistry r) {
 }
 
 void _listOfMobileApp(ApiSerializersRegistry r) {
-  if (!r._visit(1161)) return;
+  if (!r._visit(1162)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(MobileApp)]),
     () => ListBuilder<MobileApp>(),
@@ -14776,7 +14786,7 @@ void _listOfMobileApp(ApiSerializersRegistry r) {
 }
 
 void _listOfMobileAppBundleInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1162)) return;
+  if (!r._visit(1163)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(MobileAppBundleInfo)]),
     () => ListBuilder<MobileAppBundleInfo>(),
@@ -14785,7 +14795,7 @@ void _listOfMobileAppBundleInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfMobilePage(ApiSerializersRegistry r) {
-  if (!r._visit(1163)) return;
+  if (!r._visit(1164)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(MobilePage)]),
     () => ListBuilder<MobilePage>(),
@@ -14794,7 +14804,7 @@ void _listOfMobilePage(ApiSerializersRegistry r) {
 }
 
 void _listOfModel(ApiSerializersRegistry r) {
-  if (!r._visit(1164)) return;
+  if (!r._visit(1165)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Model)]),
     () => ListBuilder<Model>(),
@@ -14803,7 +14813,7 @@ void _listOfModel(ApiSerializersRegistry r) {
 }
 
 void _listOfNodeConnectionInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1165)) return;
+  if (!r._visit(1166)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(NodeConnectionInfo)]),
     () => ListBuilder<NodeConnectionInfo>(),
@@ -14812,7 +14822,7 @@ void _listOfNodeConnectionInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfNotification(ApiSerializersRegistry r) {
-  if (!r._visit(1166)) return;
+  if (!r._visit(1167)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Notification)]),
     () => ListBuilder<Notification>(),
@@ -14821,7 +14831,7 @@ void _listOfNotification(ApiSerializersRegistry r) {
 }
 
 void _listOfNotificationDeliveryMethod(ApiSerializersRegistry r) {
-  if (!r._visit(1167)) return;
+  if (!r._visit(1168)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(NotificationDeliveryMethod)]),
     () => ListBuilder<NotificationDeliveryMethod>(),
@@ -14830,7 +14840,7 @@ void _listOfNotificationDeliveryMethod(ApiSerializersRegistry r) {
 }
 
 void _listOfNotificationRequest(ApiSerializersRegistry r) {
-  if (!r._visit(1168)) return;
+  if (!r._visit(1169)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(NotificationRequest)]),
     () => ListBuilder<NotificationRequest>(),
@@ -14839,7 +14849,7 @@ void _listOfNotificationRequest(ApiSerializersRegistry r) {
 }
 
 void _listOfNotificationRequestInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1169)) return;
+  if (!r._visit(1170)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(NotificationRequestInfo)]),
     () => ListBuilder<NotificationRequestInfo>(),
@@ -14848,7 +14858,7 @@ void _listOfNotificationRequestInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfNotificationRuleInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1170)) return;
+  if (!r._visit(1171)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(NotificationRuleInfo)]),
     () => ListBuilder<NotificationRuleInfo>(),
@@ -14857,7 +14867,7 @@ void _listOfNotificationRuleInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfNotificationTarget(ApiSerializersRegistry r) {
-  if (!r._visit(1171)) return;
+  if (!r._visit(1172)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(NotificationTarget)]),
     () => ListBuilder<NotificationTarget>(),
@@ -14866,7 +14876,7 @@ void _listOfNotificationTarget(ApiSerializersRegistry r) {
 }
 
 void _listOfNotificationTemplate(ApiSerializersRegistry r) {
-  if (!r._visit(1172)) return;
+  if (!r._visit(1173)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(NotificationTemplate)]),
     () => ListBuilder<NotificationTemplate>(),
@@ -14875,7 +14885,7 @@ void _listOfNotificationTemplate(ApiSerializersRegistry r) {
 }
 
 void _listOfNullableJsonObject(ApiSerializersRegistry r) {
-  if (!r._visit(1173)) return;
+  if (!r._visit(1174)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType.nullable(JsonObject)]),
     () => ListBuilder<JsonObject?>(),
@@ -14883,7 +14893,7 @@ void _listOfNullableJsonObject(ApiSerializersRegistry r) {
 }
 
 void _listOfOAuth2ClientInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1174)) return;
+  if (!r._visit(1175)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(OAuth2ClientInfo)]),
     () => ListBuilder<OAuth2ClientInfo>(),
@@ -14892,7 +14902,7 @@ void _listOfOAuth2ClientInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfOAuth2ClientLoginInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1175)) return;
+  if (!r._visit(1176)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(OAuth2ClientLoginInfo)]),
     () => ListBuilder<OAuth2ClientLoginInfo>(),
@@ -14901,7 +14911,7 @@ void _listOfOAuth2ClientLoginInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfOAuth2ClientRegistrationTemplate(ApiSerializersRegistry r) {
-  if (!r._visit(1176)) return;
+  if (!r._visit(1177)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(OAuth2ClientRegistrationTemplate)]),
     () => ListBuilder<OAuth2ClientRegistrationTemplate>(),
@@ -14910,7 +14920,7 @@ void _listOfOAuth2ClientRegistrationTemplate(ApiSerializersRegistry r) {
 }
 
 void _listOfOtaPackageInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1177)) return;
+  if (!r._visit(1178)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(OtaPackageInfo)]),
     () => ListBuilder<OtaPackageInfo>(),
@@ -14919,7 +14929,7 @@ void _listOfOtaPackageInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfPlatformType(ApiSerializersRegistry r) {
-  if (!r._visit(1178)) return;
+  if (!r._visit(1179)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(PlatformType)]),
     () => ListBuilder<PlatformType>(),
@@ -14928,7 +14938,7 @@ void _listOfPlatformType(ApiSerializersRegistry r) {
 }
 
 void _listOfQueue(ApiSerializersRegistry r) {
-  if (!r._visit(1179)) return;
+  if (!r._visit(1180)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Queue)]),
     () => ListBuilder<Queue>(),
@@ -14937,7 +14947,7 @@ void _listOfQueue(ApiSerializersRegistry r) {
 }
 
 void _listOfQueueStats(ApiSerializersRegistry r) {
-  if (!r._visit(1180)) return;
+  if (!r._visit(1181)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(QueueStats)]),
     () => ListBuilder<QueueStats>(),
@@ -14946,7 +14956,7 @@ void _listOfQueueStats(ApiSerializersRegistry r) {
 }
 
 void _listOfReadTsKvQueryResult(ApiSerializersRegistry r) {
-  if (!r._visit(1181)) return;
+  if (!r._visit(1182)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ReadTsKvQueryResult)]),
     () => ListBuilder<ReadTsKvQueryResult>(),
@@ -14955,7 +14965,7 @@ void _listOfReadTsKvQueryResult(ApiSerializersRegistry r) {
 }
 
 void _listOfRelationEntityTypeFilter(ApiSerializersRegistry r) {
-  if (!r._visit(1182)) return;
+  if (!r._visit(1183)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RelationEntityTypeFilter)]),
     () => ListBuilder<RelationEntityTypeFilter>(),
@@ -14964,7 +14974,7 @@ void _listOfRelationEntityTypeFilter(ApiSerializersRegistry r) {
 }
 
 void _listOfRelationPathLevel(ApiSerializersRegistry r) {
-  if (!r._visit(1183)) return;
+  if (!r._visit(1184)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RelationPathLevel)]),
     () => ListBuilder<RelationPathLevel>(),
@@ -14973,7 +14983,7 @@ void _listOfRelationPathLevel(ApiSerializersRegistry r) {
 }
 
 void _listOfReport(ApiSerializersRegistry r) {
-  if (!r._visit(1184)) return;
+  if (!r._visit(1185)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Report)]),
     () => ListBuilder<Report>(),
@@ -14982,7 +14992,7 @@ void _listOfReport(ApiSerializersRegistry r) {
 }
 
 void _listOfReportComponent(ApiSerializersRegistry r) {
-  if (!r._visit(1185)) return;
+  if (!r._visit(1186)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ReportComponent)]),
     () => ListBuilder<ReportComponent>(),
@@ -14991,7 +15001,7 @@ void _listOfReportComponent(ApiSerializersRegistry r) {
 }
 
 void _listOfReportId(ApiSerializersRegistry r) {
-  if (!r._visit(1186)) return;
+  if (!r._visit(1187)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ReportId)]),
     () => ListBuilder<ReportId>(),
@@ -15000,7 +15010,7 @@ void _listOfReportId(ApiSerializersRegistry r) {
 }
 
 void _listOfReportInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1187)) return;
+  if (!r._visit(1188)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ReportInfo)]),
     () => ListBuilder<ReportInfo>(),
@@ -15009,7 +15019,7 @@ void _listOfReportInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfReportTemplateInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1188)) return;
+  if (!r._visit(1189)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ReportTemplateInfo)]),
     () => ListBuilder<ReportTemplateInfo>(),
@@ -15018,7 +15028,7 @@ void _listOfReportTemplateInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfResourceExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1189)) return;
+  if (!r._visit(1190)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ResourceExportData)]),
     () => ListBuilder<ResourceExportData>(),
@@ -15027,7 +15037,7 @@ void _listOfResourceExportData(ApiSerializersRegistry r) {
 }
 
 void _listOfRole(ApiSerializersRegistry r) {
-  if (!r._visit(1190)) return;
+  if (!r._visit(1191)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Role)]),
     () => ListBuilder<Role>(),
@@ -15036,7 +15046,7 @@ void _listOfRole(ApiSerializersRegistry r) {
 }
 
 void _listOfRoleId(ApiSerializersRegistry r) {
-  if (!r._visit(1191)) return;
+  if (!r._visit(1192)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RoleId)]),
     () => ListBuilder<RoleId>(),
@@ -15045,7 +15055,7 @@ void _listOfRoleId(ApiSerializersRegistry r) {
 }
 
 void _listOfRuleChain(ApiSerializersRegistry r) {
-  if (!r._visit(1192)) return;
+  if (!r._visit(1193)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RuleChain)]),
     () => ListBuilder<RuleChain>(),
@@ -15054,7 +15064,7 @@ void _listOfRuleChain(ApiSerializersRegistry r) {
 }
 
 void _listOfRuleChainConnectionInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1193)) return;
+  if (!r._visit(1194)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RuleChainConnectionInfo)]),
     () => ListBuilder<RuleChainConnectionInfo>(),
@@ -15063,7 +15073,7 @@ void _listOfRuleChainConnectionInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfRuleChainImportResult(ApiSerializersRegistry r) {
-  if (!r._visit(1194)) return;
+  if (!r._visit(1195)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RuleChainImportResult)]),
     () => ListBuilder<RuleChainImportResult>(),
@@ -15072,7 +15082,7 @@ void _listOfRuleChainImportResult(ApiSerializersRegistry r) {
 }
 
 void _listOfRuleChainMetaData(ApiSerializersRegistry r) {
-  if (!r._visit(1195)) return;
+  if (!r._visit(1196)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RuleChainMetaData)]),
     () => ListBuilder<RuleChainMetaData>(),
@@ -15081,7 +15091,7 @@ void _listOfRuleChainMetaData(ApiSerializersRegistry r) {
 }
 
 void _listOfRuleChainNote(ApiSerializersRegistry r) {
-  if (!r._visit(1196)) return;
+  if (!r._visit(1197)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RuleChainNote)]),
     () => ListBuilder<RuleChainNote>(),
@@ -15090,7 +15100,7 @@ void _listOfRuleChainNote(ApiSerializersRegistry r) {
 }
 
 void _listOfRuleChainOutputLabelsUsage(ApiSerializersRegistry r) {
-  if (!r._visit(1197)) return;
+  if (!r._visit(1198)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RuleChainOutputLabelsUsage)]),
     () => ListBuilder<RuleChainOutputLabelsUsage>(),
@@ -15099,7 +15109,7 @@ void _listOfRuleChainOutputLabelsUsage(ApiSerializersRegistry r) {
 }
 
 void _listOfRuleNode(ApiSerializersRegistry r) {
-  if (!r._visit(1198)) return;
+  if (!r._visit(1199)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(RuleNode)]),
     () => ListBuilder<RuleNode>(),
@@ -15108,7 +15118,7 @@ void _listOfRuleNode(ApiSerializersRegistry r) {
 }
 
 void _listOfScheduledReportInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1199)) return;
+  if (!r._visit(1200)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ScheduledReportInfo)]),
     () => ListBuilder<ScheduledReportInfo>(),
@@ -15117,7 +15127,7 @@ void _listOfScheduledReportInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfSchedulerEventInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1200)) return;
+  if (!r._visit(1201)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SchedulerEventInfo)]),
     () => ListBuilder<SchedulerEventInfo>(),
@@ -15126,7 +15136,7 @@ void _listOfSchedulerEventInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1201)) return;
+  if (!r._visit(1202)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SchedulerEventWithCustomerInfo)]),
     () => ListBuilder<SchedulerEventWithCustomerInfo>(),
@@ -15135,7 +15145,7 @@ void _listOfSchedulerEventWithCustomerInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfSecretInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1202)) return;
+  if (!r._visit(1203)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SecretInfo)]),
     () => ListBuilder<SecretInfo>(),
@@ -15144,7 +15154,7 @@ void _listOfSecretInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfShortEntityView(ApiSerializersRegistry r) {
-  if (!r._visit(1203)) return;
+  if (!r._visit(1204)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(ShortEntityView)]),
     () => ListBuilder<ShortEntityView>(),
@@ -15153,7 +15163,7 @@ void _listOfShortEntityView(ApiSerializersRegistry r) {
 }
 
 void _listOfSignUpField(ApiSerializersRegistry r) {
-  if (!r._visit(1204)) return;
+  if (!r._visit(1205)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SignUpField)]),
     () => ListBuilder<SignUpField>(),
@@ -15162,7 +15172,7 @@ void _listOfSignUpField(ApiSerializersRegistry r) {
 }
 
 void _listOfSkippedApp(ApiSerializersRegistry r) {
-  if (!r._visit(1205)) return;
+  if (!r._visit(1206)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SkippedApp)]),
     () => ListBuilder<SkippedApp>(),
@@ -15171,7 +15181,7 @@ void _listOfSkippedApp(ApiSerializersRegistry r) {
 }
 
 void _listOfSlackConversation(ApiSerializersRegistry r) {
-  if (!r._visit(1206)) return;
+  if (!r._visit(1207)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SlackConversation)]),
     () => ListBuilder<SlackConversation>(),
@@ -15180,7 +15190,7 @@ void _listOfSlackConversation(ApiSerializersRegistry r) {
 }
 
 void _listOfSnmpCommunicationConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1207)) return;
+  if (!r._visit(1208)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SnmpCommunicationConfig)]),
     () => ListBuilder<SnmpCommunicationConfig>(),
@@ -15189,7 +15199,7 @@ void _listOfSnmpCommunicationConfig(ApiSerializersRegistry r) {
 }
 
 void _listOfSnmpMapping(ApiSerializersRegistry r) {
-  if (!r._visit(1208)) return;
+  if (!r._visit(1209)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SnmpMapping)]),
     () => ListBuilder<SnmpMapping>(),
@@ -15198,7 +15208,7 @@ void _listOfSnmpMapping(ApiSerializersRegistry r) {
 }
 
 void _listOfStarredDashboardInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1209)) return;
+  if (!r._visit(1210)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(StarredDashboardInfo)]),
     () => ListBuilder<StarredDashboardInfo>(),
@@ -15207,7 +15217,7 @@ void _listOfStarredDashboardInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfString(ApiSerializersRegistry r) {
-  if (!r._visit(1210)) return;
+  if (!r._visit(1211)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(String)]),
     () => ListBuilder<String>(),
@@ -15215,7 +15225,7 @@ void _listOfString(ApiSerializersRegistry r) {
 }
 
 void _listOfSystemInfoData(ApiSerializersRegistry r) {
-  if (!r._visit(1211)) return;
+  if (!r._visit(1212)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(SystemInfoData)]),
     () => ListBuilder<SystemInfoData>(),
@@ -15224,7 +15234,7 @@ void _listOfSystemInfoData(ApiSerializersRegistry r) {
 }
 
 void _listOfTaskResult(ApiSerializersRegistry r) {
-  if (!r._visit(1212)) return;
+  if (!r._visit(1213)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TaskResult)]),
     () => ListBuilder<TaskResult>(),
@@ -15233,7 +15243,7 @@ void _listOfTaskResult(ApiSerializersRegistry r) {
 }
 
 void _listOfTbContent(ApiSerializersRegistry r) {
-  if (!r._visit(1213)) return;
+  if (!r._visit(1214)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TbContent)]),
     () => ListBuilder<TbContent>(),
@@ -15242,7 +15252,7 @@ void _listOfTbContent(ApiSerializersRegistry r) {
 }
 
 void _listOfTbResourceInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1214)) return;
+  if (!r._visit(1215)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TbResourceInfo)]),
     () => ListBuilder<TbResourceInfo>(),
@@ -15251,7 +15261,7 @@ void _listOfTbResourceInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfTenant(ApiSerializersRegistry r) {
-  if (!r._visit(1215)) return;
+  if (!r._visit(1216)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Tenant)]),
     () => ListBuilder<Tenant>(),
@@ -15260,7 +15270,7 @@ void _listOfTenant(ApiSerializersRegistry r) {
 }
 
 void _listOfTenantInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1216)) return;
+  if (!r._visit(1217)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TenantInfo)]),
     () => ListBuilder<TenantInfo>(),
@@ -15269,7 +15279,7 @@ void _listOfTenantInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfTenantProfile(ApiSerializersRegistry r) {
-  if (!r._visit(1217)) return;
+  if (!r._visit(1218)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TenantProfile)]),
     () => ListBuilder<TenantProfile>(),
@@ -15278,7 +15288,7 @@ void _listOfTenantProfile(ApiSerializersRegistry r) {
 }
 
 void _listOfTenantProfileQueueConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(1218)) return;
+  if (!r._visit(1219)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TenantProfileQueueConfiguration)]),
     () => ListBuilder<TenantProfileQueueConfiguration>(),
@@ -15287,7 +15297,7 @@ void _listOfTenantProfileQueueConfiguration(ApiSerializersRegistry r) {
 }
 
 void _listOfTimeSeriesChartStateSettings(ApiSerializersRegistry r) {
-  if (!r._visit(1219)) return;
+  if (!r._visit(1220)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TimeSeriesChartStateSettings)]),
     () => ListBuilder<TimeSeriesChartStateSettings>(),
@@ -15296,7 +15306,7 @@ void _listOfTimeSeriesChartStateSettings(ApiSerializersRegistry r) {
 }
 
 void _listOfTimeSeriesChartThreshold(ApiSerializersRegistry r) {
-  if (!r._visit(1220)) return;
+  if (!r._visit(1221)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TimeSeriesChartThreshold)]),
     () => ListBuilder<TimeSeriesChartThreshold>(),
@@ -15305,7 +15315,7 @@ void _listOfTimeSeriesChartThreshold(ApiSerializersRegistry r) {
 }
 
 void _listOfTranslationInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1221)) return;
+  if (!r._visit(1222)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TranslationInfo)]),
     () => ListBuilder<TranslationInfo>(),
@@ -15314,7 +15324,7 @@ void _listOfTranslationInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfTrendzViewConfigLite(ApiSerializersRegistry r) {
-  if (!r._visit(1222)) return;
+  if (!r._visit(1223)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TrendzViewConfigLite)]),
     () => ListBuilder<TrendzViewConfigLite>(),
@@ -15323,7 +15333,7 @@ void _listOfTrendzViewConfigLite(ApiSerializersRegistry r) {
 }
 
 void _listOfTsKvEntry(ApiSerializersRegistry r) {
-  if (!r._visit(1223)) return;
+  if (!r._visit(1224)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TsKvEntry)]),
     () => ListBuilder<TsKvEntry>(),
@@ -15332,7 +15342,7 @@ void _listOfTsKvEntry(ApiSerializersRegistry r) {
 }
 
 void _listOfTsValue(ApiSerializersRegistry r) {
-  if (!r._visit(1224)) return;
+  if (!r._visit(1225)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TsValue)]),
     () => ListBuilder<TsValue>(),
@@ -15341,7 +15351,7 @@ void _listOfTsValue(ApiSerializersRegistry r) {
 }
 
 void _listOfTwoFaProviderConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1225)) return;
+  if (!r._visit(1226)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TwoFaProviderConfig)]),
     () => ListBuilder<TwoFaProviderConfig>(),
@@ -15350,7 +15360,7 @@ void _listOfTwoFaProviderConfig(ApiSerializersRegistry r) {
 }
 
 void _listOfTwoFaProviderInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1226)) return;
+  if (!r._visit(1227)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TwoFaProviderInfo)]),
     () => ListBuilder<TwoFaProviderInfo>(),
@@ -15359,7 +15369,7 @@ void _listOfTwoFaProviderInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfTwoFaProviderType(ApiSerializersRegistry r) {
-  if (!r._visit(1227)) return;
+  if (!r._visit(1228)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(TwoFaProviderType)]),
     () => ListBuilder<TwoFaProviderType>(),
@@ -15368,7 +15378,7 @@ void _listOfTwoFaProviderType(ApiSerializersRegistry r) {
 }
 
 void _listOfUser(ApiSerializersRegistry r) {
-  if (!r._visit(1228)) return;
+  if (!r._visit(1229)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(User)]),
     () => ListBuilder<User>(),
@@ -15377,7 +15387,7 @@ void _listOfUser(ApiSerializersRegistry r) {
 }
 
 void _listOfUserEmailInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1229)) return;
+  if (!r._visit(1230)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(UserEmailInfo)]),
     () => ListBuilder<UserEmailInfo>(),
@@ -15386,7 +15396,7 @@ void _listOfUserEmailInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfUserInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1230)) return;
+  if (!r._visit(1231)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(UserInfo)]),
     () => ListBuilder<UserInfo>(),
@@ -15395,7 +15405,7 @@ void _listOfUserInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfVendor(ApiSerializersRegistry r) {
-  if (!r._visit(1231)) return;
+  if (!r._visit(1232)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(Vendor)]),
     () => ListBuilder<Vendor>(),
@@ -15404,7 +15414,7 @@ void _listOfVendor(ApiSerializersRegistry r) {
 }
 
 void _listOfVersionedEntityInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1232)) return;
+  if (!r._visit(1233)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(VersionedEntityInfo)]),
     () => ListBuilder<VersionedEntityInfo>(),
@@ -15413,7 +15423,7 @@ void _listOfVersionedEntityInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfWhiteLabeling(ApiSerializersRegistry r) {
-  if (!r._visit(1233)) return;
+  if (!r._visit(1234)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(WhiteLabeling)]),
     () => ListBuilder<WhiteLabeling>(),
@@ -15422,7 +15432,7 @@ void _listOfWhiteLabeling(ApiSerializersRegistry r) {
 }
 
 void _listOfWidgetBundleInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1234)) return;
+  if (!r._visit(1235)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(WidgetBundleInfo)]),
     () => ListBuilder<WidgetBundleInfo>(),
@@ -15431,7 +15441,7 @@ void _listOfWidgetBundleInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfWidgetType(ApiSerializersRegistry r) {
-  if (!r._visit(1235)) return;
+  if (!r._visit(1236)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(WidgetType)]),
     () => ListBuilder<WidgetType>(),
@@ -15440,7 +15450,7 @@ void _listOfWidgetType(ApiSerializersRegistry r) {
 }
 
 void _listOfWidgetTypeDetails(ApiSerializersRegistry r) {
-  if (!r._visit(1236)) return;
+  if (!r._visit(1237)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(WidgetTypeDetails)]),
     () => ListBuilder<WidgetTypeDetails>(),
@@ -15449,7 +15459,7 @@ void _listOfWidgetTypeDetails(ApiSerializersRegistry r) {
 }
 
 void _listOfWidgetTypeInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1237)) return;
+  if (!r._visit(1238)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(WidgetTypeInfo)]),
     () => ListBuilder<WidgetTypeInfo>(),
@@ -15458,7 +15468,7 @@ void _listOfWidgetTypeInfo(ApiSerializersRegistry r) {
 }
 
 void _listOfWidgetsBundle(ApiSerializersRegistry r) {
-  if (!r._visit(1238)) return;
+  if (!r._visit(1239)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(WidgetsBundle)]),
     () => ListBuilder<WidgetsBundle>(),
@@ -15467,7 +15477,7 @@ void _listOfWidgetsBundle(ApiSerializersRegistry r) {
 }
 
 void _listOfint(ApiSerializersRegistry r) {
-  if (!r._visit(1239)) return;
+  if (!r._visit(1240)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltList, [FullType(int)]),
     () => ListBuilder<int>(),
@@ -15475,7 +15485,7 @@ void _listOfint(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToAgentAppEventStepStatesValue(ApiSerializersRegistry r) {
-  if (!r._visit(1240)) return;
+  if (!r._visit(1241)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15487,7 +15497,7 @@ void _mapOfStringToAgentAppEventStepStatesValue(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToAggMetric(ApiSerializersRegistry r) {
-  if (!r._visit(1241)) return;
+  if (!r._visit(1242)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(AggMetric)]),
     () => MapBuilder<String, AggMetric>(),
@@ -15496,7 +15506,7 @@ void _mapOfStringToAggMetric(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToAlarmRule(ApiSerializersRegistry r) {
-  if (!r._visit(1242)) return;
+  if (!r._visit(1243)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(AlarmRule)]),
     () => MapBuilder<String, AlarmRule>(),
@@ -15505,7 +15515,7 @@ void _mapOfStringToAlarmRule(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToArgument(ApiSerializersRegistry r) {
-  if (!r._visit(1243)) return;
+  if (!r._visit(1244)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(Argument)]),
     () => MapBuilder<String, Argument>(),
@@ -15514,7 +15524,7 @@ void _mapOfStringToArgument(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToAutoVersionCreateConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1244)) return;
+  if (!r._visit(1245)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15526,7 +15536,7 @@ void _mapOfStringToAutoVersionCreateConfig(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToComparisonTsValue(ApiSerializersRegistry r) {
-  if (!r._visit(1245)) return;
+  if (!r._visit(1246)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(ComparisonTsValue)]),
     () => MapBuilder<String, ComparisonTsValue>(),
@@ -15537,7 +15547,7 @@ void _mapOfStringToComparisonTsValue(ApiSerializersRegistry r) {
 void _mapOfStringToDeliveryMethodNotificationTemplate(
   ApiSerializersRegistry r,
 ) {
-  if (!r._visit(1246)) return;
+  if (!r._visit(1247)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15549,7 +15559,7 @@ void _mapOfStringToDeliveryMethodNotificationTemplate(
 }
 
 void _mapOfStringToEntityTypeVersionCreateConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1247)) return;
+  if (!r._visit(1248)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15561,7 +15571,7 @@ void _mapOfStringToEntityTypeVersionCreateConfig(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToEntityTypeVersionLoadConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1248)) return;
+  if (!r._visit(1249)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15573,7 +15583,7 @@ void _mapOfStringToEntityTypeVersionLoadConfig(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToIntegrationConvertersInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1249)) return;
+  if (!r._visit(1250)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15585,7 +15595,7 @@ void _mapOfStringToIntegrationConvertersInfo(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToJsonObject(ApiSerializersRegistry r) {
-  if (!r._visit(1250)) return;
+  if (!r._visit(1251)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(JsonObject)]),
     () => MapBuilder<String, JsonObject>(),
@@ -15593,7 +15603,7 @@ void _mapOfStringToJsonObject(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToList(ApiSerializersRegistry r) {
-  if (!r._visit(1251)) return;
+  if (!r._visit(1252)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(BuiltList)]),
     () => MapBuilder<String, BuiltList>(),
@@ -15601,7 +15611,7 @@ void _mapOfStringToList(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToListOfAttributeExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1252)) return;
+  if (!r._visit(1253)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15613,7 +15623,7 @@ void _mapOfStringToListOfAttributeExportData(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToListOfEntityExportData(ApiSerializersRegistry r) {
-  if (!r._visit(1253)) return;
+  if (!r._visit(1254)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15625,7 +15635,7 @@ void _mapOfStringToListOfEntityExportData(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToListOfEntityInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1254)) return;
+  if (!r._visit(1255)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15637,7 +15647,7 @@ void _mapOfStringToListOfEntityInfo(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToListOfHasIdObject(ApiSerializersRegistry r) {
-  if (!r._visit(1255)) return;
+  if (!r._visit(1256)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15649,7 +15659,7 @@ void _mapOfStringToListOfHasIdObject(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToListOfKeyInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1256)) return;
+  if (!r._visit(1257)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15661,7 +15671,7 @@ void _mapOfStringToListOfKeyInfo(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToListOfString(ApiSerializersRegistry r) {
-  if (!r._visit(1257)) return;
+  if (!r._visit(1258)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15673,7 +15683,7 @@ void _mapOfStringToListOfString(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToListOfTsValue(ApiSerializersRegistry r) {
-  if (!r._visit(1258)) return;
+  if (!r._visit(1259)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15685,7 +15695,7 @@ void _mapOfStringToListOfTsValue(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToMapOfStringToString(ApiSerializersRegistry r) {
-  if (!r._visit(1259)) return;
+  if (!r._visit(1260)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15697,7 +15707,7 @@ void _mapOfStringToMapOfStringToString(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToMapOfStringToTsValue(ApiSerializersRegistry r) {
-  if (!r._visit(1260)) return;
+  if (!r._visit(1261)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15709,7 +15719,7 @@ void _mapOfStringToMapOfStringToTsValue(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToMergedGroupPermissionInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1261)) return;
+  if (!r._visit(1262)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15721,7 +15731,7 @@ void _mapOfStringToMergedGroupPermissionInfo(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToMergedGroupTypePermissionInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1262)) return;
+  if (!r._visit(1263)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15733,7 +15743,7 @@ void _mapOfStringToMergedGroupTypePermissionInfo(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToNotificationDeliveryMethodConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1263)) return;
+  if (!r._visit(1264)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15745,7 +15755,7 @@ void _mapOfStringToNotificationDeliveryMethodConfig(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToNotificationPref(ApiSerializersRegistry r) {
-  if (!r._visit(1264)) return;
+  if (!r._visit(1265)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(NotificationPref)]),
     () => MapBuilder<String, NotificationPref>(),
@@ -15754,7 +15764,7 @@ void _mapOfStringToNotificationPref(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToNullableJsonObject(ApiSerializersRegistry r) {
-  if (!r._visit(1265)) return;
+  if (!r._visit(1266)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType.nullable(JsonObject)]),
     () => MapBuilder<String, JsonObject?>(),
@@ -15762,7 +15772,7 @@ void _mapOfStringToNullableJsonObject(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToObjectAttributes(ApiSerializersRegistry r) {
-  if (!r._visit(1266)) return;
+  if (!r._visit(1267)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(ObjectAttributes)]),
     () => MapBuilder<String, ObjectAttributes>(),
@@ -15771,7 +15781,7 @@ void _mapOfStringToObjectAttributes(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToSetOfOperation(ApiSerializersRegistry r) {
-  if (!r._visit(1267)) return;
+  if (!r._visit(1268)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15783,7 +15793,7 @@ void _mapOfStringToSetOfOperation(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToString(ApiSerializersRegistry r) {
-  if (!r._visit(1268)) return;
+  if (!r._visit(1269)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(String)]),
     () => MapBuilder<String, String>(),
@@ -15791,7 +15801,7 @@ void _mapOfStringToString(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToTimeSeriesChartYAxisSettings(ApiSerializersRegistry r) {
-  if (!r._visit(1269)) return;
+  if (!r._visit(1270)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15803,7 +15813,7 @@ void _mapOfStringToTimeSeriesChartYAxisSettings(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToTsValue(ApiSerializersRegistry r) {
-  if (!r._visit(1270)) return;
+  if (!r._visit(1271)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(TsValue)]),
     () => MapBuilder<String, TsValue>(),
@@ -15812,7 +15822,7 @@ void _mapOfStringToTsValue(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToTwoFaAccountConfig(ApiSerializersRegistry r) {
-  if (!r._visit(1271)) return;
+  if (!r._visit(1272)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(TwoFaAccountConfig)]),
     () => MapBuilder<String, TwoFaAccountConfig>(),
@@ -15821,7 +15831,7 @@ void _mapOfStringToTwoFaAccountConfig(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToZoneGroupConfiguration(ApiSerializersRegistry r) {
-  if (!r._visit(1272)) return;
+  if (!r._visit(1273)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [
       FullType(String),
@@ -15833,7 +15843,7 @@ void _mapOfStringToZoneGroupConfiguration(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringTobool(ApiSerializersRegistry r) {
-  if (!r._visit(1273)) return;
+  if (!r._visit(1274)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(bool)]),
     () => MapBuilder<String, bool>(),
@@ -15841,7 +15851,7 @@ void _mapOfStringTobool(ApiSerializersRegistry r) {
 }
 
 void _mapOfStringToint(ApiSerializersRegistry r) {
-  if (!r._visit(1274)) return;
+  if (!r._visit(1275)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltMap, [FullType(String), FullType(int)]),
     () => MapBuilder<String, int>(),
@@ -15849,7 +15859,7 @@ void _mapOfStringToint(ApiSerializersRegistry r) {
 }
 
 void _setOfAction(ApiSerializersRegistry r) {
-  if (!r._visit(1275)) return;
+  if (!r._visit(1276)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(Action)]),
     () => SetBuilder<Action>(),
@@ -15858,7 +15868,7 @@ void _setOfAction(ApiSerializersRegistry r) {
 }
 
 void _setOfAlarmAction(ApiSerializersRegistry r) {
-  if (!r._visit(1276)) return;
+  if (!r._visit(1277)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(AlarmAction)]),
     () => SetBuilder<AlarmAction>(),
@@ -15867,7 +15877,7 @@ void _setOfAlarmAction(ApiSerializersRegistry r) {
 }
 
 void _setOfAlarmSearchStatus(ApiSerializersRegistry r) {
-  if (!r._visit(1277)) return;
+  if (!r._visit(1278)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(AlarmSearchStatus)]),
     () => SetBuilder<AlarmSearchStatus>(),
@@ -15876,7 +15886,7 @@ void _setOfAlarmSearchStatus(ApiSerializersRegistry r) {
 }
 
 void _setOfAlarmSeverity(ApiSerializersRegistry r) {
-  if (!r._visit(1278)) return;
+  if (!r._visit(1279)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(AlarmSeverity)]),
     () => SetBuilder<AlarmSeverity>(),
@@ -15885,7 +15895,7 @@ void _setOfAlarmSeverity(ApiSerializersRegistry r) {
 }
 
 void _setOfApiFeature(ApiSerializersRegistry r) {
-  if (!r._visit(1279)) return;
+  if (!r._visit(1280)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(ApiFeature)]),
     () => SetBuilder<ApiFeature>(),
@@ -15894,7 +15904,7 @@ void _setOfApiFeature(ApiSerializersRegistry r) {
 }
 
 void _setOfApiUsageStateValue(ApiSerializersRegistry r) {
-  if (!r._visit(1280)) return;
+  if (!r._visit(1281)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(ApiUsageStateValue)]),
     () => SetBuilder<ApiUsageStateValue>(),
@@ -15903,7 +15913,7 @@ void _setOfApiUsageStateValue(ApiSerializersRegistry r) {
 }
 
 void _setOfCalculatedFieldType(ApiSerializersRegistry r) {
-  if (!r._visit(1281)) return;
+  if (!r._visit(1282)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(CalculatedFieldType)]),
     () => SetBuilder<CalculatedFieldType>(),
@@ -15912,7 +15922,7 @@ void _setOfCalculatedFieldType(ApiSerializersRegistry r) {
 }
 
 void _setOfComponentLifecycleEvent(ApiSerializersRegistry r) {
-  if (!r._visit(1282)) return;
+  if (!r._visit(1283)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(ComponentLifecycleEvent)]),
     () => SetBuilder<ComponentLifecycleEvent>(),
@@ -15921,7 +15931,7 @@ void _setOfComponentLifecycleEvent(ApiSerializersRegistry r) {
 }
 
 void _setOfDeviceEvent(ApiSerializersRegistry r) {
-  if (!r._visit(1283)) return;
+  if (!r._visit(1284)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(DeviceEvent)]),
     () => SetBuilder<DeviceEvent>(),
@@ -15930,7 +15940,7 @@ void _setOfDeviceEvent(ApiSerializersRegistry r) {
 }
 
 void _setOfEdgeConnectivityEvent(ApiSerializersRegistry r) {
-  if (!r._visit(1284)) return;
+  if (!r._visit(1285)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(EdgeConnectivityEvent)]),
     () => SetBuilder<EdgeConnectivityEvent>(),
@@ -15939,7 +15949,7 @@ void _setOfEdgeConnectivityEvent(ApiSerializersRegistry r) {
 }
 
 void _setOfEntityId(ApiSerializersRegistry r) {
-  if (!r._visit(1285)) return;
+  if (!r._visit(1286)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(EntityId)]),
     () => SetBuilder<EntityId>(),
@@ -15948,7 +15958,7 @@ void _setOfEntityId(ApiSerializersRegistry r) {
 }
 
 void _setOfEntityType(ApiSerializersRegistry r) {
-  if (!r._visit(1286)) return;
+  if (!r._visit(1287)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(EntityType)]),
     () => SetBuilder<EntityType>(),
@@ -15957,7 +15967,7 @@ void _setOfEntityType(ApiSerializersRegistry r) {
 }
 
 void _setOfIntegrationType(ApiSerializersRegistry r) {
-  if (!r._visit(1287)) return;
+  if (!r._visit(1288)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(IntegrationType)]),
     () => SetBuilder<IntegrationType>(),
@@ -15966,7 +15976,7 @@ void _setOfIntegrationType(ApiSerializersRegistry r) {
 }
 
 void _setOfLimitedApi(ApiSerializersRegistry r) {
-  if (!r._visit(1288)) return;
+  if (!r._visit(1289)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(LimitedApi)]),
     () => SetBuilder<LimitedApi>(),
@@ -15975,7 +15985,7 @@ void _setOfLimitedApi(ApiSerializersRegistry r) {
 }
 
 void _setOfObjectType(ApiSerializersRegistry r) {
-  if (!r._visit(1289)) return;
+  if (!r._visit(1290)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(ObjectType)]),
     () => SetBuilder<ObjectType>(),
@@ -15984,7 +15994,7 @@ void _setOfObjectType(ApiSerializersRegistry r) {
 }
 
 void _setOfOperation(ApiSerializersRegistry r) {
-  if (!r._visit(1290)) return;
+  if (!r._visit(1291)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(Operation)]),
     () => SetBuilder<Operation>(),
@@ -15993,7 +16003,7 @@ void _setOfOperation(ApiSerializersRegistry r) {
 }
 
 void _setOfResource(ApiSerializersRegistry r) {
-  if (!r._visit(1291)) return;
+  if (!r._visit(1292)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(Resource)]),
     () => SetBuilder<Resource>(),
@@ -16002,7 +16012,7 @@ void _setOfResource(ApiSerializersRegistry r) {
 }
 
 void _setOfResourceType(ApiSerializersRegistry r) {
-  if (!r._visit(1292)) return;
+  if (!r._visit(1293)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(ResourceType)]),
     () => SetBuilder<ResourceType>(),
@@ -16011,7 +16021,7 @@ void _setOfResourceType(ApiSerializersRegistry r) {
 }
 
 void _setOfShortCustomerInfo(ApiSerializersRegistry r) {
-  if (!r._visit(1293)) return;
+  if (!r._visit(1294)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(ShortCustomerInfo)]),
     () => SetBuilder<ShortCustomerInfo>(),
@@ -16020,7 +16030,7 @@ void _setOfShortCustomerInfo(ApiSerializersRegistry r) {
 }
 
 void _setOfString(ApiSerializersRegistry r) {
-  if (!r._visit(1294)) return;
+  if (!r._visit(1295)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(String)]),
     () => SetBuilder<String>(),
@@ -16028,7 +16038,7 @@ void _setOfString(ApiSerializersRegistry r) {
 }
 
 void _setOfint(ApiSerializersRegistry r) {
-  if (!r._visit(1295)) return;
+  if (!r._visit(1296)) return;
   r._builder.addBuilderFactory(
     const FullType(BuiltSet, [FullType(int)]),
     () => SetBuilder<int>(),

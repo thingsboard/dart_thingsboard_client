@@ -992,10 +992,12 @@ doc/Success.md
 doc/SyncStrategy.md
 doc/SystemAdministratorsFilter.md
 doc/SystemInfo.md
+doc/SystemInfoControllerApi.md
 doc/SystemInfoData.md
 doc/SystemSetupControllerApi.md
 doc/SystemSetupRequest.md
 doc/SystemSetupState.md
+doc/SystemVersionInfo.md
 doc/TableSortDirection.md
 doc/TableSortOrder.md
 doc/TaskProcessingFailureNotificationInfo.md
@@ -1231,6 +1233,7 @@ lib/src/api/secret_controller_api.dart
 lib/src/api/self_registration_controller_api.dart
 lib/src/api/sign_up_controller_api.dart
 lib/src/api/solution_export_import_controller_api.dart
+lib/src/api/system_info_controller_api.dart
 lib/src/api/system_setup_controller_api.dart
 lib/src/api/tb_resource_controller_api.dart
 lib/src/api/telemetry_controller_api.dart
@@ -2175,6 +2178,7 @@ lib/src/model/system_info.dart
 lib/src/model/system_info_data.dart
 lib/src/model/system_setup_request.dart
 lib/src/model/system_setup_state.dart
+lib/src/model/system_version_info.dart
 lib/src/model/table_sort_direction.dart
 lib/src/model/table_sort_order.dart
 lib/src/model/task_processing_failure_notification_info.dart

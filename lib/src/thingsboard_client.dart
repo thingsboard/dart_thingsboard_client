@@ -78,6 +78,7 @@ import 'package:thingsboard_client/src/api/secret_controller_api.dart';
 import 'package:thingsboard_client/src/api/self_registration_controller_api.dart';
 import 'package:thingsboard_client/src/api/sign_up_controller_api.dart';
 import 'package:thingsboard_client/src/api/solution_export_import_controller_api.dart';
+import 'package:thingsboard_client/src/api/system_info_controller_api.dart';
 import 'package:thingsboard_client/src/api/system_setup_controller_api.dart';
 import 'package:thingsboard_client/src/api/tb_resource_controller_api.dart';
 import 'package:thingsboard_client/src/api/telemetry_controller_api.dart';
@@ -173,6 +174,7 @@ class ThingsboardClient extends ThingsboardClientBase {
   SelfRegistrationControllerApi? _selfRegistrationControllerApi;
   SignUpControllerApi? _signUpControllerApi;
   SolutionExportImportControllerApi? _solutionExportImportControllerApi;
+  SystemInfoControllerApi? _systemInfoControllerApi;
   SystemSetupControllerApi? _systemSetupControllerApi;
   TbResourceControllerApi? _tbResourceControllerApi;
   TelemetryControllerApi? _telemetryControllerApi;
@@ -586,6 +588,11 @@ class ThingsboardClient extends ThingsboardClientBase {
       dio,
     );
     return _solutionExportImportControllerApi!;
+  }
+
+  SystemInfoControllerApi getSystemInfoControllerApi() {
+    _systemInfoControllerApi ??= SystemInfoControllerApi(dio);
+    return _systemInfoControllerApi!;
   }
 
   SystemSetupControllerApi getSystemSetupControllerApi() {

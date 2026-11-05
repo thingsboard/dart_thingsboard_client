@@ -971,6 +971,7 @@ Serializers _$serializers =
           ..add(SystemInfoData.serializer)
           ..add(SystemSetupRequest.serializer)
           ..add(SystemSetupState.serializer)
+          ..add(SystemVersionInfo.serializer)
           ..add(TableSortDirection.serializer)
           ..add(TableSortOrder.serializer)
           ..add(TaskProcessingFailureNotificationInfo.serializer)

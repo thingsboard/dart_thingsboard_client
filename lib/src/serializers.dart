@@ -938,6 +938,7 @@ import 'package:thingsboard_client/src/model/system_info.dart';
 import 'package:thingsboard_client/src/model/system_info_data.dart';
 import 'package:thingsboard_client/src/model/system_setup_request.dart';
 import 'package:thingsboard_client/src/model/system_setup_state.dart';
+import 'package:thingsboard_client/src/model/system_version_info.dart';
 import 'package:thingsboard_client/src/model/table_sort_direction.dart';
 import 'package:thingsboard_client/src/model/table_sort_order.dart';
 import 'package:thingsboard_client/src/model/task_processing_failure_notification_info.dart';
@@ -2050,6 +2051,7 @@ part 'serializers.g.dart';
   SystemInfoData,
   SystemSetupRequest,
   SystemSetupState,
+  SystemVersionInfo,
   TableSortDirection,
   TableSortOrder,
   TaskProcessingFailureNotificationInfo,
