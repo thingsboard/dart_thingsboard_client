@@ -8,7 +8,7 @@ ThingsBoard REST API client for Dart and Flutter.
 
 Generated from the ThingsBoard OpenAPI spec, with a handwritten runtime facade for JWT authentication, automatic token refresh, WebSocket telemetry subscriptions and typed error handling.
 
-> **Migrating from `thingsboard_pe_client`?** ThingsBoard is now a single product, and this package replaces `thingsboard_pe_client`. Rename the dependency in `pubspec.yaml` and the imports (`package:thingsboard_pe_client/` → `package:thingsboard_client/`). See [CHANGELOG.md](CHANGELOG.md) for the 5.0.0 changes.
+> **Upgrading to 5.0?** See [MIGRATION.md](MIGRATION.md): [from `thingsboard_client` 4.x](MIGRATION.md#migrating-from-thingsboard_client-4x-421) (services → generated API classes, with a table of every 4.x service method) and [from `thingsboard_pe_client` 4.4.x](MIGRATION.md#migrating-from-thingsboard_pe_client-44x), which this package replaces now that ThingsBoard is a single product.
 
 ## Features
 
