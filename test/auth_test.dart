@@ -1170,6 +1170,22 @@ void main() {
         ThingsboardClientBase.qrLoginAdapterFactoryForTesting = null;
       });
 
+      test('sets connect and receive timeouts', () async {
+        RequestOptions? request;
+        mockAdapter.onRoute('/api/noauth/qr/secret-key', (req) {
+          request = req;
+          return jwtPairResponse(req);
+        });
+
+        await client.getLoginDataBySecretKey(
+          host: 'https://qr.example.com',
+          key: 'secret-key',
+        );
+
+        expect(request!.connectTimeout, const Duration(seconds: 20));
+        expect(request!.receiveTimeout, const Duration(seconds: 20));
+      });
+
       test('does not use the HTTP adapter of the client', () async {
         final clientAdapter = MockHttpClientAdapter();
         setMockAdapter(client, clientAdapter);

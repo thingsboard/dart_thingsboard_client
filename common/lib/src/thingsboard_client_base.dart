@@ -65,6 +65,8 @@ class ThingsboardClientBase {
   // For the token-refresh call only, so it never truncates long requests.
   static const _defaultRefreshCallTimeout = Duration(seconds: 15);
 
+  static const _qrLoginReceiveTimeout = Duration(seconds: 20);
+
   // Single-flight gate: concurrent requests share one refresh call.
   Completer<void>? _tokenRefreshCompleter;
 
@@ -360,13 +362,20 @@ class ThingsboardClientBase {
   /// adapter configuration of this client (client certificates, proxy) are
   /// used for [host]. The session of this client is not changed: pass the
   /// tokens to [setUserFromJwtToken] to use them. [logging] logs the request
-  /// and response. Throws a [ThingsboardError] on failure.
+  /// and response. The connection and the response each time out after 20
+  /// seconds. Throws a [ThingsboardError] on failure.
   Future<LoginResponse> getLoginDataBySecretKey({
     required String host,
     required String key,
     bool logging = false,
   }) async {
-    final dio = Dio(BaseOptions(baseUrl: host));
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: host,
+        connectTimeout: _defaultConnectTimeout,
+        receiveTimeout: _qrLoginReceiveTimeout,
+      ),
+    );
     final adapterFactory = qrLoginAdapterFactoryForTesting;
     if (adapterFactory != null) {
       dio.httpClientAdapter = adapterFactory();
