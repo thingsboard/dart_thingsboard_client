@@ -57,4 +57,4 @@ Future<T?> nullIfNotFound<T>(Future<T> Function() call) async {
 }
 
 bool _isNotFound(ThingsboardError error) =>
-    error.errorCode == ThingsBoardErrorCode.itemNotFound || error.status == 404;
+    error.errorCode == ThingsBoardErrorCode.itemNotFound;

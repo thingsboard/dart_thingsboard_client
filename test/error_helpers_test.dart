@@ -154,6 +154,40 @@ void main() {
       }
     });
 
+    test('maps a 404 body without errorCode to itemNotFound', () async {
+      mockAdapter.onRoute(
+        devicePath,
+        (_) => jsonResponse({'status': 404, 'message': 'Not found'}, 404),
+      );
+
+      final device = await nullIfNotFound(
+        () => client.getDeviceControllerApi().getDeviceById(deviceId: deviceId),
+      );
+
+      expect(device, isNull);
+      try {
+        await client.getDeviceControllerApi().getDeviceById(deviceId: deviceId);
+        fail('expected a DioException');
+      } on DioException catch (e) {
+        expect(e.thingsboardError.errorCode, ThingsBoardErrorCode.itemNotFound);
+      }
+    });
+
+    test('maps a non-JSON 404 response to itemNotFound', () {
+      final options = RequestOptions(path: devicePath);
+      final e = DioException(
+        requestOptions: options,
+        response: Response<Object>(
+          requestOptions: options,
+          statusCode: 404,
+          data: '<html>Not Found</html>',
+        ),
+        type: DioExceptionType.badResponse,
+      );
+
+      expect(e.thingsboardError.errorCode, ThingsBoardErrorCode.itemNotFound);
+    });
+
     test('maps a connection error to "Unable to connect"', () {
       final e = DioException(
         requestOptions: RequestOptions(path: devicePath),

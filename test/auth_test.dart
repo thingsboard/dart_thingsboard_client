@@ -1125,6 +1125,29 @@ void main() {
     });
 
     group('getLoginDataBySecretKey', () {
+      setUp(() {
+        ThingsboardClientBase.qrLoginAdapterFactoryForTesting = () =>
+            mockAdapter;
+      });
+
+      tearDown(() {
+        ThingsboardClientBase.qrLoginAdapterFactoryForTesting = null;
+      });
+
+      test('does not use the HTTP adapter of the client', () async {
+        final clientAdapter = MockHttpClientAdapter();
+        setMockAdapter(client, clientAdapter);
+        mockAdapter.onRoute('/api/noauth/qr/secret-key', jwtPairResponse);
+
+        await client.getLoginDataBySecretKey(
+          host: 'https://qr.example.com',
+          key: 'secret-key',
+        );
+
+        expect(clientAdapter.requestedPaths, isEmpty);
+        expect(mockAdapter.requestedPaths, ['/api/noauth/qr/secret-key']);
+      });
+
       test(
         'gets the tokens from the given host without the client session',
         () async {

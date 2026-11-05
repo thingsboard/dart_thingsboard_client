@@ -342,14 +342,19 @@ class ThingsboardClientBase {
     return loginResponse;
   }
 
+  /// Test hook only, not part of the supported API: when set, supplies the
+  /// [HttpClientAdapter] of the Dio that [getLoginDataBySecretKey] creates.
+  /// Leave it `null` in applications.
+  static HttpClientAdapter Function()? qrLoginAdapterFactoryForTesting;
+
   /// Exchanges the short-lived secret [key] of a login QR code for the user's
   /// tokens on the ThingsBoard server at [host] (for example
   /// `https://thingsboard.example.com`), which can differ from [apiEndpoint].
   ///
-  /// Calls [QrCodeSettingsControllerApi.getUserTokenByMobileSecret] on a
-  /// separate Dio without this client's interceptors, so no credentials of
-  /// this client are sent to [host]; the Dio shares this client's
-  /// [HttpClientAdapter]. The session of this client is not changed: pass the
+  /// Calls [QrCodeSettingsControllerApi.getUserTokenByMobileSecret] on a new
+  /// Dio with its default [HttpClientAdapter]: no auth headers, interceptors or
+  /// adapter configuration of this client (client certificates, proxy) are
+  /// used for [host]. The session of this client is not changed: pass the
   /// tokens to [setUserFromJwtToken] to use them. [logging] logs the request
   /// and response. Throws a [ThingsboardError] on failure.
   Future<LoginResponse> getLoginDataBySecretKey({
@@ -357,8 +362,11 @@ class ThingsboardClientBase {
     required String key,
     bool logging = false,
   }) async {
-    final dio = Dio(BaseOptions(baseUrl: host))
-      ..httpClientAdapter = _dio.httpClientAdapter;
+    final dio = Dio(BaseOptions(baseUrl: host));
+    final adapterFactory = qrLoginAdapterFactoryForTesting;
+    if (adapterFactory != null) {
+      dio.httpClientAdapter = adapterFactory();
+    }
     if (logging) {
       dio.interceptors.add(
         PrettyDioLogger(
