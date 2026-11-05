@@ -17,6 +17,7 @@ import 'package:thingsboard_client/src/model/login_response.dart';
 import 'package:thingsboard_client/src/model/authority_enum.dart';
 import 'package:thingsboard_client/src/model/two_fa_provider_type.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
+import 'package:thingsboard_client/src/http/http_utils.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/storage/in_memory_storage.dart';
 
@@ -1061,6 +1062,23 @@ void main() {
           expect(client.getRefreshToken(), oldRefresh);
         },
       );
+
+      test('passes the requestConfig to the interceptor', () async {
+        await client.setUserFromJwtToken(oldJwt, oldRefresh, false);
+        RequestOptions? request;
+        mockAdapter.onRoute('/api/auth/changePassword', (req) {
+          request = req;
+          return jwtPairResponse(req);
+        });
+
+        await client.changePassword(
+          'old-pass',
+          'new-pass',
+          requestConfig: RequestConfig(ignoreErrors: true),
+        );
+
+        expect(request!.extra['ignoreErrors'], isTrue);
+      });
     });
 
     group('checkTwoFaVerificationCode', () {
@@ -1122,6 +1140,24 @@ void main() {
           expect(client.isPreVerificationToken(), isTrue);
         },
       );
+
+      test('passes the requestConfig to the interceptor', () async {
+        await client.setUserFromJwtToken(preVerificationJwt, null, false);
+        RequestOptions? request;
+        mockAdapter.onRoute('/api/auth/2fa/verification/check', (req) {
+          request = req;
+          return jwtPairResponse(req);
+        });
+
+        await client.checkTwoFaVerificationCode(
+          TwoFaProviderType.TOTP,
+          '123456',
+          requestConfig: RequestConfig(ignoreErrors: true, ignoreLoading: true),
+        );
+
+        expect(request!.extra['ignoreErrors'], isTrue);
+        expect(request!.extra['ignoreLoading'], isTrue);
+      });
     });
 
     group('getLoginDataBySecretKey', () {

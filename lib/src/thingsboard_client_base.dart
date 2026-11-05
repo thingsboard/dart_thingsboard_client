@@ -294,8 +294,9 @@ class ThingsboardClientBase {
   /// failure; the session is then unchanged.
   Future<void> changePassword(
     String currentPassword,
-    String newPassword,
-  ) async {
+    String newPassword, {
+    RequestConfig? requestConfig,
+  }) async {
     final JwtPair jwtPair;
     try {
       final response = await AuthControllerApi(_dio).changePassword(
@@ -304,6 +305,7 @@ class ThingsboardClientBase {
             ..currentPassword = currentPassword
             ..newPassword = newPassword,
         ),
+        extra: defaultHttpOptionsFromConfig(requestConfig).extra,
       );
       jwtPair = _requireJwtPair(response.data);
     } catch (e, s) {
@@ -321,14 +323,16 @@ class ThingsboardClientBase {
   /// then unchanged.
   Future<LoginResponse> checkTwoFaVerificationCode(
     TwoFaProviderType providerType,
-    String verificationCode,
-  ) async {
+    String verificationCode, {
+    RequestConfig? requestConfig,
+  }) async {
     final LoginResponse loginResponse;
     try {
       final response = await TwoFactorAuthControllerApi(_dio)
           .checkTwoFaVerificationCode(
             providerType: providerType,
             verificationCode: verificationCode,
+            extra: defaultHttpOptionsFromConfig(requestConfig).extra,
           );
       loginResponse = _toLoginResponse(response.data);
     } catch (e, s) {

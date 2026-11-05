@@ -150,7 +150,7 @@ The 8 attribute and telemetry methods that returned `false` on any error (`saveD
 
 ### Request options
 
-Generated operations take no `RequestConfig`. Pass the interceptor flags as `extra:` instead. `followRedirect` has no per-call equivalent. `login` and `logout` still take a `RequestConfig`, and `defaultHttpOptions(...)` builds the `Options` for the facade `get`/`post`/`put`/`delete`.
+Generated operations take no `RequestConfig`. Pass the interceptor flags as `extra:` instead. `followRedirect` has no per-call equivalent. `login`, `logout`, `changePassword` and `checkTwoFaVerificationCode` take a `RequestConfig`, and `defaultHttpOptions(...)` builds the `Options` for the facade `get`/`post`/`put`/`delete`.
 
 ```dart
 // 4.2.1
@@ -200,8 +200,8 @@ await tbClient.getTelemetryControllerApi().saveEntityAttributesV2(
 | `sendResetPasswordLink(email)` | `getAuthControllerApi().requestResetPasswordByEmail(resetPasswordEmailRequest: ResetPasswordEmailRequest((b) => b..email = email))` |
 | `getAuthUserFromJwt(token)` | removed: `tbClient.getAuthUser()` for the current session, or `AuthUser.fromJson(JwtDecoder.decode(token))` (package `jwt_decoder`) |
 | `getPlatformVersion()` → `PlatformVersion?` | removed. `/api/system/info` is not in the spec: `(await tbClient.get<Map<String, dynamic>>('/api/system/info')).data?['version']`. A system administrator can also call `getAdminControllerApi().checkUpdates()` and read `UpdateMessage.currentVersion`. `parseVersion` and `isVersionSufficient` compare versions |
-| `changePassword(current, new)` | kept: stores the new tokens, takes no `RequestConfig` |
-| `checkTwoFaVerificationCode(providerType, code)` | kept: stores the session and calls `onUserLoaded`. `providerType` is the generated `TwoFaProviderType` (`TwoFaProviderType.TOTP`), and there is no `RequestConfig` |
+| `changePassword(current, new)` | kept: stores the new tokens |
+| `checkTwoFaVerificationCode(providerType, code)` | kept: stores the session and calls `onUserLoaded`. `providerType` is the generated `TwoFaProviderType` (`TwoFaProviderType.TOTP`) |
 | `getLoginDataBySecretKey(host:, key:, logging:)` | kept: returns the tokens and does not change the session. Pass them to `setUserFromJwtToken(token, refreshToken, true)` |
 | `LoginRequest(username, password)`, `RefreshTokenRequest(token)`, `LoginResponse`, `Authority` | generated built_value types, see [Changes for both](#changes-for-both-login-authority-errors-paging) |
 
