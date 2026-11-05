@@ -10,13 +10,9 @@ import 'thingsboard_error.dart';
 /// The [ThingsboardError] behind a [DioException] thrown by a generated API
 /// call.
 extension ThingsboardDioException on DioException {
-  /// The [ThingsboardError] of this exception.
-  ///
-  /// After the client's interceptor, [DioException.error] is the
-  /// [ThingsboardError] and is returned as is. Any other exception (for
-  /// example a deserialization failure, whose `error` is the serializer
-  /// exception, or a request made without the interceptor) is mapped with
-  /// [toThingsboardError]. Never throws.
+  /// [DioException.error] when the client's interceptor set it, otherwise this
+  /// exception mapped with [toThingsboardError] (for example a deserialization
+  /// failure).
   ThingsboardError get thingsboardError {
     final inner = error;
     return inner is ThingsboardError ? inner : toThingsboardError(this);

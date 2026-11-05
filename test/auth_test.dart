@@ -1171,7 +1171,7 @@ void main() {
           expect(request!.headers.containsKey('X-Authorization'), isFalse);
           expect(response.token, newJwt);
           expect(response.refreshToken, newRefresh);
-          // As in 4.2.1, the caller decides whether to use the tokens.
+          // The caller decides whether to use the tokens.
           expect(client.getJwtToken(), oldJwt);
           expect(client.getRefreshToken(), oldRefresh);
         },

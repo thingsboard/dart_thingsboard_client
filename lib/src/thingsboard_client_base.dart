@@ -388,13 +388,13 @@ class ThingsboardClientBase {
   }
 
   JwtPair _requireJwtPair(JwtPair? jwtPair) {
-    if (jwtPair?.token == null) {
+    if (jwtPair == null || jwtPair.token == null) {
       throw ThingsboardError(
         message: 'The server response has no token.',
         errorCode: ThingsBoardErrorCode.general,
       );
     }
-    return jwtPair!;
+    return jwtPair;
   }
 
   LoginResponse _toLoginResponse(JwtPair? jwtPair) {
