@@ -1177,6 +1177,7 @@ export 'package:thingsboard_client/src/model/zone_group_configuration.dart';
 export 'package:thingsboard_client/src/thingsboard_client_base.dart';
 export 'package:thingsboard_client/src/thingsboard_client.dart';
 export 'package:thingsboard_client/src/error/thingsboard_error.dart';
+export 'package:thingsboard_client/src/error/thingsboard_error_helpers.dart';
 export 'package:thingsboard_client/src/http/http_utils.dart';
 export 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 export 'package:thingsboard_client/src/interceptor/interceptor_config.dart';

@@ -15,6 +15,7 @@ import 'package:thingsboard_client/src/thingsboard_client.dart';
 import 'package:thingsboard_client/src/model/login_request.dart';
 import 'package:thingsboard_client/src/model/login_response.dart';
 import 'package:thingsboard_client/src/model/authority_enum.dart';
+import 'package:thingsboard_client/src/model/two_fa_provider_type.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/storage/in_memory_storage.dart';
@@ -965,5 +966,219 @@ void main() {
         expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/token')));
       },
     );
+  });
+
+  group('session-aware auth methods', () {
+    final oldJwt = createTestJwt(sub: 'old');
+    final oldRefresh = createTestJwt(sub: 'old', scope: 'REFRESH_TOKEN');
+    final newJwt = createTestJwt(sub: 'new');
+    final newRefresh = createTestJwt(sub: 'new', scope: 'REFRESH_TOKEN');
+
+    ResponseBody jwtPairResponse(RequestOptions req) => ResponseBody.fromString(
+      jsonEncode({'token': newJwt, 'refreshToken': newRefresh}),
+      200,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
+
+    ResponseBody badRequest(RequestOptions req) => ResponseBody.fromString(
+      jsonEncode({'status': 400, 'errorCode': 31, 'message': 'Invalid'}),
+      400,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
+
+    late int userLoadedCount;
+    late int mfaCount;
+    late InMemoryStorage storage;
+
+    setUp(() {
+      userLoadedCount = 0;
+      mfaCount = 0;
+      storage = InMemoryStorage();
+      client = ThingsboardClient(
+        'http://localhost:8080',
+        storage: storage,
+        onUserLoaded: () => userLoadedCount++,
+        onMfaAuth: () => mfaCount++,
+        onMfaForce: () => mfaCount++,
+      );
+      setMockAdapter(client, mockAdapter);
+    });
+
+    group('changePassword', () {
+      test(
+        'posts both passwords and stores the new tokens without notifying',
+        () async {
+          await client.setUserFromJwtToken(oldJwt, oldRefresh, false);
+          RequestOptions? request;
+          mockAdapter.onRoute('/api/auth/changePassword', (req) {
+            request = req;
+            return jwtPairResponse(req);
+          });
+
+          await client.changePassword('old-pass', 'new-pass');
+          await Future<void>.delayed(Duration.zero);
+
+          expect(request!.method, 'POST');
+          final body = request!.data is String
+              ? jsonDecode(request!.data)
+              : request!.data;
+          expect(body, {
+            'currentPassword': 'old-pass',
+            'newPassword': 'new-pass',
+          });
+          expect(request!.headers['X-Authorization'], 'Bearer $oldJwt');
+          expect(client.isAuthenticated(), isTrue);
+          expect(client.getJwtToken(), newJwt);
+          expect(client.getRefreshToken(), newRefresh);
+          expect(client.getAuthUser()!.sub, 'new');
+          expect(await storage.getItem('jwt_token'), newJwt);
+          expect(userLoadedCount, 0);
+        },
+      );
+
+      test(
+        'throws ThingsboardError and keeps the session on failure',
+        () async {
+          await client.setUserFromJwtToken(oldJwt, oldRefresh, false);
+          mockAdapter.onRoute('/api/auth/changePassword', badRequest);
+
+          await expectLater(
+            client.changePassword('old-pass', 'weak'),
+            throwsA(
+              isA<ThingsboardError>().having(
+                (e) => e.errorCode,
+                'errorCode',
+                ThingsBoardErrorCode.badRequestParams,
+              ),
+            ),
+          );
+
+          expect(client.getJwtToken(), oldJwt);
+          expect(client.getRefreshToken(), oldRefresh);
+        },
+      );
+    });
+
+    group('checkTwoFaVerificationCode', () {
+      final preVerificationJwt = createTestJwt(
+        sub: 'old',
+        scope: 'PRE_VERIFICATION_TOKEN',
+      );
+
+      test(
+        'posts the code as query parameters, stores the tokens and notifies',
+        () async {
+          await client.setUserFromJwtToken(preVerificationJwt, null, false);
+          RequestOptions? request;
+          mockAdapter.onRoute('/api/auth/2fa/verification/check', (req) {
+            request = req;
+            return jwtPairResponse(req);
+          });
+
+          final response = await client.checkTwoFaVerificationCode(
+            TwoFaProviderType.TOTP,
+            '123456',
+          );
+          await Future<void>.delayed(Duration.zero);
+
+          expect(request!.method, 'POST');
+          expect(request!.queryParameters, {
+            'providerType': 'TOTP',
+            'verificationCode': '123456',
+          });
+          expect(
+            request!.headers['X-Authorization'],
+            'Bearer $preVerificationJwt',
+          );
+          expect(response, isA<LoginResponse>());
+          expect(response.token, newJwt);
+          expect(response.refreshToken, newRefresh);
+          expect(client.isAuthenticated(), isTrue);
+          expect(client.isPreVerificationToken(), isFalse);
+          expect(client.getJwtToken(), newJwt);
+          expect(client.getRefreshToken(), newRefresh);
+          expect(client.getAuthUser()!.sub, 'new');
+          expect(userLoadedCount, 1);
+          expect(mfaCount, 0);
+        },
+      );
+
+      test(
+        'throws ThingsboardError and keeps the session on failure',
+        () async {
+          await client.setUserFromJwtToken(preVerificationJwt, null, false);
+          mockAdapter.onRoute('/api/auth/2fa/verification/check', badRequest);
+
+          await expectLater(
+            client.checkTwoFaVerificationCode(TwoFaProviderType.EMAIL, '000'),
+            throwsA(isA<ThingsboardError>()),
+          );
+
+          expect(client.getJwtToken(), preVerificationJwt);
+          expect(client.isPreVerificationToken(), isTrue);
+        },
+      );
+    });
+
+    group('getLoginDataBySecretKey', () {
+      test(
+        'gets the tokens from the given host without the client session',
+        () async {
+          await client.setUserFromJwtToken(oldJwt, oldRefresh, false);
+          RequestOptions? request;
+          mockAdapter.onRoute('/api/noauth/qr/secret-key', (req) {
+            request = req;
+            return jwtPairResponse(req);
+          });
+
+          final response = await client.getLoginDataBySecretKey(
+            host: 'https://qr.example.com:9090',
+            key: 'secret-key',
+          );
+
+          expect(request!.method, 'GET');
+          expect(
+            request!.uri.toString(),
+            'https://qr.example.com:9090/api/noauth/qr/secret-key',
+          );
+          expect(request!.headers.containsKey('X-Authorization'), isFalse);
+          expect(response.token, newJwt);
+          expect(response.refreshToken, newRefresh);
+          // As in 4.2.1, the caller decides whether to use the tokens.
+          expect(client.getJwtToken(), oldJwt);
+          expect(client.getRefreshToken(), oldRefresh);
+        },
+      );
+
+      test('does not set a session on a client without one', () async {
+        mockAdapter.onRoute('/api/noauth/qr/secret-key', jwtPairResponse);
+
+        await client.getLoginDataBySecretKey(
+          host: 'http://localhost:8080',
+          key: 'secret-key',
+        );
+
+        expect(client.isAuthenticated(), isFalse);
+        expect(userLoadedCount, 0);
+      });
+
+      test('throws ThingsboardError for an unknown key', () async {
+        mockAdapter.onRoute('/api/noauth/qr/expired', badRequest);
+
+        await expectLater(
+          client.getLoginDataBySecretKey(
+            host: 'http://localhost:8080',
+            key: 'expired',
+          ),
+          throwsA(
+            isA<ThingsboardError>().having((e) => e.status, 'status', 400),
+          ),
+        );
+      });
+    });
   });
 }

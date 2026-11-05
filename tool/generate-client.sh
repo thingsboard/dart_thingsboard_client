@@ -258,6 +258,7 @@ append_common_exports() {
 export 'package:${pkg}/src/thingsboard_client_base.dart';
 export 'package:${pkg}/src/thingsboard_client.dart';
 export 'package:${pkg}/src/error/thingsboard_error.dart';
+export 'package:${pkg}/src/error/thingsboard_error_helpers.dart';
 export 'package:${pkg}/src/http/http_utils.dart';
 export 'package:${pkg}/src/interceptor/http_interceptor.dart';
 export 'package:${pkg}/src/interceptor/interceptor_config.dart';

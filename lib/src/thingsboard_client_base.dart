@@ -10,13 +10,19 @@ import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import 'api/auth_controller_api.dart';
+import 'api/qr_code_settings_controller_api.dart';
+import 'api/two_factor_auth_controller_api.dart';
 import 'api_serializers.dart';
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
 import 'interceptor/http_interceptor.dart';
+import 'model/change_password_request.dart';
+import 'model/jwt_pair.dart';
 import 'model/login_request.dart';
 import 'model/login_response.dart';
 import 'model/refresh_token_request.dart';
+import 'model/two_fa_provider_type.dart';
 import 'model/version_models.dart';
 import 'model/user_models.dart';
 import 'model/authority_enum.dart';
@@ -279,6 +285,118 @@ class ThingsboardClientBase {
       _mfaForce();
     }
     return loginResponse;
+  }
+
+  /// Changes the password of the current user and stores the new tokens the
+  /// server returns, without calling `onUserLoaded`.
+  ///
+  /// Calls [AuthControllerApi.changePassword]. Throws a [ThingsboardError] on
+  /// failure; the session is then unchanged.
+  Future<void> changePassword(
+    String currentPassword,
+    String newPassword,
+  ) async {
+    final JwtPair jwtPair;
+    try {
+      final response = await AuthControllerApi(_dio).changePassword(
+        changePasswordRequest: ChangePasswordRequest(
+          (b) => b
+            ..currentPassword = currentPassword
+            ..newPassword = newPassword,
+        ),
+      );
+      jwtPair = _requireJwtPair(response.data);
+    } catch (e, s) {
+      throw toThingsboardError(e, s);
+    }
+    await _setUserFromJwtToken(jwtPair.token, jwtPair.refreshToken, false);
+  }
+
+  /// Verifies a two-factor authentication code for the pre-verification
+  /// session of [login], then stores the full session tokens and calls
+  /// `onUserLoaded`.
+  ///
+  /// Calls [TwoFactorAuthControllerApi.checkTwoFaVerificationCode]. Throws a
+  /// [ThingsboardError] on failure (for example a wrong code); the session is
+  /// then unchanged.
+  Future<LoginResponse> checkTwoFaVerificationCode(
+    TwoFaProviderType providerType,
+    String verificationCode,
+  ) async {
+    final LoginResponse loginResponse;
+    try {
+      final response = await TwoFactorAuthControllerApi(_dio)
+          .checkTwoFaVerificationCode(
+            providerType: providerType,
+            verificationCode: verificationCode,
+          );
+      loginResponse = _toLoginResponse(response.data);
+    } catch (e, s) {
+      throw toThingsboardError(e, s);
+    }
+    await _setUserFromJwtToken(
+      loginResponse.token,
+      loginResponse.refreshToken,
+      true,
+    );
+    return loginResponse;
+  }
+
+  /// Exchanges the short-lived secret [key] of a login QR code for the user's
+  /// tokens on the ThingsBoard server at [host] (for example
+  /// `https://thingsboard.example.com`), which can differ from [apiEndpoint].
+  ///
+  /// Calls [QrCodeSettingsControllerApi.getUserTokenByMobileSecret] on a
+  /// separate Dio without this client's interceptors, so no credentials of
+  /// this client are sent to [host]; the Dio shares this client's
+  /// [HttpClientAdapter]. The session of this client is not changed: pass the
+  /// tokens to [setUserFromJwtToken] to use them. [logging] logs the request
+  /// and response. Throws a [ThingsboardError] on failure.
+  Future<LoginResponse> getLoginDataBySecretKey({
+    required String host,
+    required String key,
+    bool logging = false,
+  }) async {
+    final dio = Dio(BaseOptions(baseUrl: host))
+      ..httpClientAdapter = _dio.httpClientAdapter;
+    if (logging) {
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+        ),
+      );
+    }
+    try {
+      final response = await QrCodeSettingsControllerApi(
+        dio,
+      ).getUserTokenByMobileSecret(secret: key);
+      return _toLoginResponse(response.data);
+    } catch (e, s) {
+      throw toThingsboardError(e, s);
+    }
+  }
+
+  JwtPair _requireJwtPair(JwtPair? jwtPair) {
+    if (jwtPair?.token == null) {
+      throw ThingsboardError(
+        message: 'The server response has no token.',
+        errorCode: ThingsBoardErrorCode.general,
+      );
+    }
+    return jwtPair!;
+  }
+
+  LoginResponse _toLoginResponse(JwtPair? jwtPair) {
+    final pair = _requireJwtPair(jwtPair);
+    return LoginResponse(
+      (b) => b
+        ..token = pair.token
+        ..refreshToken = pair.refreshToken
+        ..scope = pair.scope,
+    );
   }
 
   Future<void> logout({
