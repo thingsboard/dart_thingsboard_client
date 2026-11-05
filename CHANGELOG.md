@@ -21,6 +21,7 @@ ThingsBoard CE and PE are now one product, and `thingsboard_client` is its singl
 - Fixed: a client created with `apiKey` opens the telemetry WebSocket and authenticates it with the key (`AuthCmd.apiKey`). Before, the socket never opened and subscriptions received nothing.
 - Fixed: `logout()` and other socket closes no longer throw `Invalid argument: 1001, close code must be 1000 or in the range 3000-4999` on dart:io; the client closes with 1000 (normal closure).
 - Fixed: a WebSocket subscription error update without data no longer crashes the parser.
+- Fixed: operations typed as returning a `String` whose server response is a JSON object or other JSON (`claimDevice`, `getPersistedRpcByDevice`, the rule engine and two-way RPC calls) threw on success; the body is now returned as its JSON text.
 
 ## 4.2.1
 - Fixed `AlarmType.fromJson` cast error when filtering alarms by type

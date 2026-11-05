@@ -241,6 +241,34 @@ void main() {
     expect(info.operationsByResource, isEmpty);
   });
 
+  group('operations with a string response', () {
+    test('return a JSON object body re-encoded as a string', () async {
+      final claimResult = {
+        'device': {'name': 'd1'},
+        'response': 'SUCCESS',
+      };
+      final adapter = _FakeAdapter({
+        '/api/customer/device/d1/claim': claimResult,
+      });
+
+      final response = await DeviceControllerApi(
+        _dio(adapter),
+      ).claimDevice(deviceName: 'd1', claimRequest: ClaimRequest());
+
+      expect(jsonDecode(response.data!), claimResult);
+    });
+
+    test('return a JSON string body unquoted', () async {
+      final adapter = _FakeAdapter({'/api/customer/c1/title': 'Customer A'});
+
+      final response = await CustomerControllerApi(
+        _dio(adapter),
+      ).getCustomerTitleById(customerId: 'c1');
+
+      expect(response.data, 'Customer A');
+    });
+  });
+
   group('facade roots', () {
     Object? fixture(String name) =>
         jsonDecode(File('test/fixtures/ws/$name').readAsStringSync());

@@ -136,7 +136,7 @@ openapi-generator-cli() { java -jar "$GENERATOR_JAR" "$@"; }
 
 # Fixes generator bugs in the generated Dart source before build_runner, so the
 # .g.dart output is clean. (A) is handled by --name-mappings (Step 3) and (D) in
-# the spec (thingsboard/thingsboard#16510); (B), (C) and (E) are patched below.
+# the spec (thingsboard/thingsboard#16510); (B), (C), (E) and (F) are patched below.
 patch_generated_sources() {
   local output_dir="$1"
   local model_dir="$output_dir/lib/src/model"
@@ -186,6 +186,25 @@ patch_generated_sources() {
     if [ "$json_object_patched" -eq 0 ]; then
       echo "    no files needed patching: the generator may now emit the import; check whether (E) can be retired"
     fi
+  fi
+
+  # (F) Operations whose spec response is `string` cast the decoded body to String,
+  #     but several return a JSON object or arbitrary JSON (claimDevice, rule engine
+  #     and two-way RPC replies, getPersistedRpcByDevice), which Dio has already
+  #     decoded: the cast threw on a successful call. Non-strings are re-encoded.
+  echo "  (F) Re-encoding non-string bodies of String operations"
+  local string_cast='rawResponse == null ? null : rawResponse as String;'
+  if ls "$api_dir/"*.dart >/dev/null 2>&1; then
+    for f in $(grep -lF "$string_cast" "$api_dir/"*.dart); do
+      perl -i -pe 's/rawResponse == null \? null : rawResponse as String;/rawResponse == null ? null : rawResponse is String ? rawResponse : jsonEncode(rawResponse);/' "$f"
+      if ! grep -q "^import 'dart:convert';" "$f"; then
+        perl -i -pe "s|^(import 'dart:async';)|\$1\nimport 'dart:convert';|" "$f"
+      fi
+      if ! grep -q "^import 'dart:convert';" "$f"; then
+        echo "    Error: (F) failed to insert the dart:convert import into $f"
+        exit 1
+      fi
+    done
   fi
 
   echo "patch_generated_sources complete."

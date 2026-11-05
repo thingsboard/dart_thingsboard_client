@@ -8,6 +8,7 @@
 //
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
@@ -420,7 +421,11 @@ class UserControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : rawResponse as String;
+      _responseData = rawResponse == null
+          ? null
+          : rawResponse is String
+          ? rawResponse
+          : jsonEncode(rawResponse);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,

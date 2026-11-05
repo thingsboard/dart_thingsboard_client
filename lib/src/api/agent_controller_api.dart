@@ -8,6 +8,7 @@
 //
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
@@ -832,7 +833,11 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : rawResponse as String;
+      _responseData = rawResponse == null
+          ? null
+          : rawResponse is String
+          ? rawResponse
+          : jsonEncode(rawResponse);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1171,7 +1176,11 @@ class AgentControllerApi {
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null ? null : rawResponse as String;
+      _responseData = rawResponse == null
+          ? null
+          : rawResponse is String
+          ? rawResponse
+          : jsonEncode(rawResponse);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
