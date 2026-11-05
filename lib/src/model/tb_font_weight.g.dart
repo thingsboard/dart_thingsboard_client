@@ -5,24 +5,27 @@
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'font_style.dart';
+part of 'tb_font_weight.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-const FontStyle _$normal = const FontStyle._('normal');
-const FontStyle _$italic = const FontStyle._('italic');
-const FontStyle _$unknownDefaultOpenApi = const FontStyle._(
+const TbFontWeight _$normal = const TbFontWeight._('normal');
+const TbFontWeight _$bold = const TbFontWeight._('bold');
+const TbFontWeight _$n500 = const TbFontWeight._('n500');
+const TbFontWeight _$unknownDefaultOpenApi = const TbFontWeight._(
   'unknownDefaultOpenApi',
 );
 
-FontStyle _$valueOf(String name) {
+TbFontWeight _$valueOf(String name) {
   switch (name) {
     case 'normal':
       return _$normal;
-    case 'italic':
-      return _$italic;
+    case 'bold':
+      return _$bold;
+    case 'n500':
+      return _$n500;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -30,58 +33,59 @@ FontStyle _$valueOf(String name) {
   }
 }
 
-final BuiltSet<FontStyle> _$values = BuiltSet<FontStyle>(const <FontStyle>[
-  _$normal,
-  _$italic,
-  _$unknownDefaultOpenApi,
-]);
+final BuiltSet<TbFontWeight> _$values = BuiltSet<TbFontWeight>(
+  const <TbFontWeight>[_$normal, _$bold, _$n500, _$unknownDefaultOpenApi],
+);
 
-class _$FontStyleMeta {
-  const _$FontStyleMeta();
-  FontStyle get normal => _$normal;
-  FontStyle get italic => _$italic;
-  FontStyle get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
-  FontStyle valueOf(String name) => _$valueOf(name);
-  BuiltSet<FontStyle> get values => _$values;
+class _$TbFontWeightMeta {
+  const _$TbFontWeightMeta();
+  TbFontWeight get normal => _$normal;
+  TbFontWeight get bold => _$bold;
+  TbFontWeight get n500 => _$n500;
+  TbFontWeight get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
+  TbFontWeight valueOf(String name) => _$valueOf(name);
+  BuiltSet<TbFontWeight> get values => _$values;
 }
 
-mixin _$FontStyleMixin {
+mixin _$TbFontWeightMixin {
   // ignore: non_constant_identifier_names
-  _$FontStyleMeta get FontStyle => const _$FontStyleMeta();
+  _$TbFontWeightMeta get TbFontWeight => const _$TbFontWeightMeta();
 }
 
-Serializer<FontStyle> _$fontStyleSerializer = _$FontStyleSerializer();
+Serializer<TbFontWeight> _$tbFontWeightSerializer = _$TbFontWeightSerializer();
 
-class _$FontStyleSerializer implements PrimitiveSerializer<FontStyle> {
+class _$TbFontWeightSerializer implements PrimitiveSerializer<TbFontWeight> {
   static const Map<String, Object> _toWire = const <String, Object>{
     'normal': 'normal',
-    'italic': 'italic',
+    'bold': 'bold',
+    'n500': '500',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'normal': 'normal',
-    'italic': 'italic',
+    'bold': 'bold',
+    '500': 'n500',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 
   @override
-  final Iterable<Type> types = const <Type>[FontStyle];
+  final Iterable<Type> types = const <Type>[TbFontWeight];
   @override
-  final String wireName = 'FontStyle';
+  final String wireName = 'TbFontWeight';
 
   @override
   Object serialize(
     Serializers serializers,
-    FontStyle object, {
+    TbFontWeight object, {
     FullType specifiedType = FullType.unspecified,
   }) => _toWire[object.name] ?? object.name;
 
   @override
-  FontStyle deserialize(
+  TbFontWeight deserialize(
     Serializers serializers,
     Object serialized, {
     FullType specifiedType = FullType.unspecified,
-  }) => FontStyle.valueOf(
+  }) => TbFontWeight.valueOf(
     _fromWire[serialized] ?? (serialized is String ? serialized : ''),
   );
 }

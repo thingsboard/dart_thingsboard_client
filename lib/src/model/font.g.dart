@@ -15,9 +15,9 @@ class _$Font extends Font {
   @override
   final double? size;
   @override
-  final FontWeight? weight;
+  final TbFontWeight? weight;
   @override
-  final FontStyle? style;
+  final TbFontStyle? style;
   @override
   final String? family;
 
@@ -71,13 +71,13 @@ class FontBuilder implements Builder<Font, FontBuilder> {
   double? get size => _$this._size;
   set size(double? size) => _$this._size = size;
 
-  FontWeight? _weight;
-  FontWeight? get weight => _$this._weight;
-  set weight(FontWeight? weight) => _$this._weight = weight;
+  TbFontWeight? _weight;
+  TbFontWeight? get weight => _$this._weight;
+  set weight(TbFontWeight? weight) => _$this._weight = weight;
 
-  FontStyle? _style;
-  FontStyle? get style => _$this._style;
-  set style(FontStyle? style) => _$this._style = style;
+  TbFontStyle? _style;
+  TbFontStyle? get style => _$this._style;
+  set style(TbFontStyle? style) => _$this._style = style;
 
   String? _family;
   String? get family => _$this._family;

@@ -8,8 +8,8 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:thingsboard_client/src/model/font_style.dart';
-import 'package:thingsboard_client/src/model/font_weight.dart';
+import 'package:thingsboard_client/src/model/tb_font_weight.dart';
+import 'package:thingsboard_client/src/model/tb_font_style.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -28,11 +28,11 @@ abstract class Font implements Built<Font, FontBuilder> {
   double? get size;
 
   @BuiltValueField(wireName: r'weight')
-  FontWeight? get weight;
+  TbFontWeight? get weight;
   // enum weightEnum {  normal,  bold,  500,  };
 
   @BuiltValueField(wireName: r'style')
-  FontStyle? get style;
+  TbFontStyle? get style;
   // enum styleEnum {  normal,  italic,  };
 
   @BuiltValueField(wireName: r'family')
@@ -72,14 +72,14 @@ class _$FontSerializer implements PrimitiveSerializer<Font> {
       yield r'weight';
       yield serializers.serialize(
         object.weight,
-        specifiedType: const FullType(FontWeight),
+        specifiedType: const FullType(TbFontWeight),
       );
     }
     if (object.style != null) {
       yield r'style';
       yield serializers.serialize(
         object.style,
-        specifiedType: const FullType(FontStyle),
+        specifiedType: const FullType(TbFontStyle),
       );
     }
     if (object.family != null) {
@@ -130,9 +130,9 @@ class _$FontSerializer implements PrimitiveSerializer<Font> {
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType.nullable(FontWeight),
+                    specifiedType: const FullType.nullable(TbFontWeight),
                   )
-                  as FontWeight?;
+                  as TbFontWeight?;
           if (valueDes == null) continue;
           result.weight = valueDes;
           break;
@@ -140,9 +140,9 @@ class _$FontSerializer implements PrimitiveSerializer<Font> {
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType.nullable(FontStyle),
+                    specifiedType: const FullType.nullable(TbFontStyle),
                   )
-                  as FontStyle?;
+                  as TbFontStyle?;
           if (valueDes == null) continue;
           result.style = valueDes;
           break;

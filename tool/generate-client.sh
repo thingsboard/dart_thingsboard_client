@@ -529,6 +529,8 @@ generate() {
   # --name-mappings update=updateFlag: Mapping.update (BulkImportRequest.Mapping
   # on the server) would clash with the update(Function?) method a built_value
   # Builder inherits. The JSON name stays 'update'; no other schema has it.
+  # --model-name-mappings: FontWeight and FontStyle would silently shadow the
+  # dart:ui types of the same name in Flutter code (a package import wins over dart:).
   openapi-generator-cli generate \
     -i "$spec_file" \
     -g dart-dio \
@@ -536,6 +538,7 @@ generate() {
     --additional-properties "pubName=${pkg},pubLibrary=${pkg},pubVersion=1.0.0,pubDescription=${pub_description},hideGenerationTimestamp=true,enumUnknownDefaultCase=true" \
     --global-property apiTests=false,modelTests=false \
     --name-mappings update=updateFlag \
+    --model-name-mappings FontWeight=TbFontWeight,FontStyle=TbFontStyle \
     2>&1 | if [ "$VERBOSE" = true ]; then cat; else grep -v \
       -e "^\[main\] INFO  o.o.codegen.*writing file" \
       -e "^\[main\] INFO  o.o.c.languages.*Processing operation" \

@@ -310,6 +310,10 @@ Enum constants whose value contains digits are named after the value (openapi-ge
 - `TelemetryObserveStrategy`: `sINGLELeftParenthesis0RightParenthesisColonOneResourceEqualsOneSingleObserveRequest` → `SINGLE`, `cOMPOSITEALLLeftParenthesis1RightParenthesisColonAllResourcesInOneCompositeObserveRequest` → `COMPOSITE_ALL`, `cOMPOSITEBYOBJECTLeftParenthesis2RightParenthesisColonGroupedCompositeObserveRequestsByObject` → `COMPOSITE_BY_OBJECT`. In 4.4.x these constants also had the wrong wire values (`'SINGLE (0): One resource equals one single observe request'`, ...). 5.0 sends and reads `SINGLE`, `COMPOSITE_ALL` and `COMPOSITE_BY_OBJECT`.
 - `ThingsboardErrorCode`: `n2` → `number2`, `n10` → `number10`, `n11` → `number11`, `n15` → `number15`, `n20` → `number20`, `n30` → `number30`, `n31` → `number31`, `n32` → `number32`, `n33` → `number33`, `n34` → `number34`, `n35` → `number35`, `n40` → `number40`, `n41` → `number41`, `n45` → `number45`, `n46` → `number46`
 
+### Renamed models
+
+`FontWeight` and `FontStyle` (the types of `Font.weight` and `Font.style`) are renamed to `TbFontWeight` and `TbFontStyle`. In Flutter code an imported package type silently shadows the `dart:ui` type of the same name, so `FontWeight.w500` failed to compile in any file that imported the client.
+
 ### Removed and added API classes
 
 - `DeviceApiControllerApi` and `ThingsboardClient.getDeviceApiControllerApi()` are removed. The device HTTP API (`/api/v1/{deviceToken}/...`) is not in the REST spec, and the 4.4.x operations failed to decode responses. Devices should use the MQTT, CoAP or HTTP transport directly.

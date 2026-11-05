@@ -1,4 +1,4 @@
-# thingsboard_client.model.FontWeight
+# thingsboard_client.model.TbFontWeight
 
 ## Load the model package
 ```dart

@@ -1,4 +1,4 @@
-# thingsboard_client.model.FontStyle
+# thingsboard_client.model.TbFontStyle
 
 ## Load the model package
 ```dart

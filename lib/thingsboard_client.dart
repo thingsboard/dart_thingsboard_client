@@ -566,8 +566,6 @@ export 'package:thingsboard_client/src/model/filter_predicate_value_double.dart'
 export 'package:thingsboard_client/src/model/filter_predicate_value_string.dart';
 export 'package:thingsboard_client/src/model/fixed_time_window.dart';
 export 'package:thingsboard_client/src/model/font.dart';
-export 'package:thingsboard_client/src/model/font_style.dart';
-export 'package:thingsboard_client/src/model/font_weight.dart';
 export 'package:thingsboard_client/src/model/general_notification_info.dart';
 export 'package:thingsboard_client/src/model/geofencing_calculated_field_configuration.dart';
 export 'package:thingsboard_client/src/model/geofencing_report_strategy.dart';
@@ -1038,6 +1036,8 @@ export 'package:thingsboard_client/src/model/task_result.dart';
 export 'package:thingsboard_client/src/model/tb_chat_request.dart';
 export 'package:thingsboard_client/src/model/tb_chat_response.dart';
 export 'package:thingsboard_client/src/model/tb_content.dart';
+export 'package:thingsboard_client/src/model/tb_font_style.dart';
+export 'package:thingsboard_client/src/model/tb_font_weight.dart';
 export 'package:thingsboard_client/src/model/tb_image_delete_result.dart';
 export 'package:thingsboard_client/src/model/tb_report_format.dart';
 export 'package:thingsboard_client/src/model/tb_resource.dart';

@@ -477,8 +477,6 @@ import 'package:thingsboard_client/src/model/filter_predicate_value_double.dart'
 import 'package:thingsboard_client/src/model/filter_predicate_value_string.dart';
 import 'package:thingsboard_client/src/model/fixed_time_window.dart';
 import 'package:thingsboard_client/src/model/font.dart';
-import 'package:thingsboard_client/src/model/font_style.dart';
-import 'package:thingsboard_client/src/model/font_weight.dart';
 import 'package:thingsboard_client/src/model/general_notification_info.dart';
 import 'package:thingsboard_client/src/model/geofencing_calculated_field_configuration.dart';
 import 'package:thingsboard_client/src/model/geofencing_report_strategy.dart';
@@ -949,6 +947,8 @@ import 'package:thingsboard_client/src/model/task_result.dart';
 import 'package:thingsboard_client/src/model/tb_chat_request.dart';
 import 'package:thingsboard_client/src/model/tb_chat_response.dart';
 import 'package:thingsboard_client/src/model/tb_content.dart';
+import 'package:thingsboard_client/src/model/tb_font_style.dart';
+import 'package:thingsboard_client/src/model/tb_font_weight.dart';
 import 'package:thingsboard_client/src/model/tb_image_delete_result.dart';
 import 'package:thingsboard_client/src/model/tb_report_format.dart';
 import 'package:thingsboard_client/src/model/tb_resource.dart';
@@ -1569,8 +1569,6 @@ part 'serializers.g.dart';
   FilterPredicateValueString,
   FixedTimeWindow,
   Font,
-  FontStyle,
-  FontWeight,
   GeneralNotificationInfo,
   GeofencingCalculatedFieldConfiguration,
   GeofencingReportStrategy,
@@ -2064,6 +2062,8 @@ part 'serializers.g.dart';
   $TbChatResponse,
   TbContent,
   $TbContent,
+  TbFontStyle,
+  TbFontWeight,
   TbImageDeleteResult,
   TbReportFormat,
   TbResource,

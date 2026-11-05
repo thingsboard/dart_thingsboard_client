@@ -12,22 +12,24 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-part 'font_style.g.dart';
+part 'tb_font_weight.g.dart';
 
-class FontStyle extends EnumClass {
+class TbFontWeight extends EnumClass {
   @BuiltValueEnumConst(wireName: r'normal')
-  static const FontStyle normal = _$normal;
-  @BuiltValueEnumConst(wireName: r'italic')
-  static const FontStyle italic = _$italic;
+  static const TbFontWeight normal = _$normal;
+  @BuiltValueEnumConst(wireName: r'bold')
+  static const TbFontWeight bold = _$bold;
+  @BuiltValueEnumConst(wireName: r'500')
+  static const TbFontWeight n500 = _$n500;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
-  static const FontStyle unknownDefaultOpenApi = _$unknownDefaultOpenApi;
+  static const TbFontWeight unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 
-  static Serializer<FontStyle> get serializer => _$fontStyleSerializer;
+  static Serializer<TbFontWeight> get serializer => _$tbFontWeightSerializer;
 
-  const FontStyle._(String name) : super(name);
+  const TbFontWeight._(String name) : super(name);
 
-  static BuiltSet<FontStyle> get values => _$values;
-  static FontStyle valueOf(String name) => _$valueOf(name);
+  static BuiltSet<TbFontWeight> get values => _$values;
+  static TbFontWeight valueOf(String name) => _$valueOf(name);
 }
 
 /// Optionally, enum_class can generate a mixin to go with your enum for use
@@ -36,4 +38,4 @@ class FontStyle extends EnumClass {
 /// corresponding Angular template.
 ///
 /// Trigger mixin generation by writing a line like this one next to your enum.
-abstract class FontStyleMixin = Object with _$FontStyleMixin;
+abstract class TbFontWeightMixin = Object with _$TbFontWeightMixin;

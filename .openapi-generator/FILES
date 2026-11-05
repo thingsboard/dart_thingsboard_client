@@ -502,8 +502,6 @@ doc/FilterPredicateValueDouble.md
 doc/FilterPredicateValueString.md
 doc/FixedTimeWindow.md
 doc/Font.md
-doc/FontStyle.md
-doc/FontWeight.md
 doc/GeneralNotificationInfo.md
 doc/GeofencingCalculatedFieldConfiguration.md
 doc/GeofencingReportStrategy.md
@@ -1007,6 +1005,8 @@ doc/TaskResult.md
 doc/TbChatRequest.md
 doc/TbChatResponse.md
 doc/TbContent.md
+doc/TbFontStyle.md
+doc/TbFontWeight.md
 doc/TbImageDeleteResult.md
 doc/TbReportFormat.md
 doc/TbResource.md
@@ -1714,8 +1714,6 @@ lib/src/model/filter_predicate_value_double.dart
 lib/src/model/filter_predicate_value_string.dart
 lib/src/model/fixed_time_window.dart
 lib/src/model/font.dart
-lib/src/model/font_style.dart
-lib/src/model/font_weight.dart
 lib/src/model/general_notification_info.dart
 lib/src/model/geofencing_calculated_field_configuration.dart
 lib/src/model/geofencing_report_strategy.dart
@@ -2186,6 +2184,8 @@ lib/src/model/task_result.dart
 lib/src/model/tb_chat_request.dart
 lib/src/model/tb_chat_response.dart
 lib/src/model/tb_content.dart
+lib/src/model/tb_font_style.dart
+lib/src/model/tb_font_weight.dart
 lib/src/model/tb_image_delete_result.dart
 lib/src/model/tb_report_format.dart
 lib/src/model/tb_resource.dart
