@@ -24,6 +24,9 @@ jobs:
           sdk: ${{ matrix.sdk }}
       - run: dart pub get
       - name: Check formatting
+        # dart format's output differs between SDK versions; the code is
+        # formatted with the current stable SDK.
+        if: matrix.sdk == 'stable'
         run: dart format --output=none --set-exit-if-changed lib test example common
       - name: Analyze
         run: dart analyze --fatal-infos
