@@ -189,9 +189,9 @@ patch_generated_sources() {
   fi
 
   # (F) Operations whose spec response is `string` cast the decoded body to String,
-  #     but several return a JSON object or arbitrary JSON (claimDevice, rule engine
-  #     and two-way RPC replies, getPersistedRpcByDevice), which Dio has already
-  #     decoded: the cast threw on a successful call. Non-strings are re-encoded.
+  #     but several return a JSON object or arbitrary JSON (rule engine and two-way
+  #     RPC replies), which Dio has already decoded: the cast threw on a successful
+  #     call. Non-strings are re-encoded.
   echo "  (F) Re-encoding non-string bodies of String operations"
   local string_cast='rawResponse == null ? null : rawResponse as String;'
   if ls "$api_dir/"*.dart >/dev/null 2>&1; then

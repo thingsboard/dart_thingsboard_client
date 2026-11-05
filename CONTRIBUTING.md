@@ -27,14 +27,15 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 
 ## The spec is composed
 
-`spec/openapi.json` is not a plain fetch: it is the released lts-4.4 spec plus four unmerged ThingsBoard pull requests:
+`spec/openapi.json` is not a plain fetch: it is the released lts-4.4 spec plus five unmerged ThingsBoard pull requests:
 
 - thingsboard/thingsboard#16510: fixes the schemas of `ThingsboardErrorCode` (integer values), `AliasEntityId` (`entityType` is a string holding an `EntityType` or `AliasEntityType` name, `id` optional), `ColumnSettings` (allOf `DataKeySettings`) and the `/api/auth/token` request body (`refreshToken` string); its later commit 9231afe93cb fixes `LoginResponse` (`scope`, optional `refreshToken`);
 - thingsboard/thingsboard#16555: device API responses (the device API is filtered out by `tool/fetch-spec.sh` anyway);
-- thingsboard/thingsboard#16557: the `NotificationInfo` subtypes.
-- thingsboard/thingsboard#16560: documents `/api/system/info` (`getSystemVersionInfo`), which the server version check uses.
+- thingsboard/thingsboard#16557: the `NotificationInfo` subtypes;
+- thingsboard/thingsboard#16560: documents `/api/system/info` (`getSystemVersionInfo`), which the server version check uses;
+- thingsboard/thingsboard#16561: response and parameter types: `claimDevice` (`ClaimResult`), `getPersistedRpcByDevice` (`PageDataRpc`), `exportIntegrationPackage` (`application/zip`), `assignAlarm`/`unassignAlarm` (`AlarmInfo`), and integer `pageSize`/`page` in 28 operations.
 
-Do not re-fetch the spec from a server without them: the build breaks (`LoginResponse.scope`, `SystemInfoControllerApi`) and the `NotificationInfo` subtypes disappear. When all four are merged into lts-4.4, re-fetch and diff.
+Do not re-fetch the spec from a server without them: the build breaks (`LoginResponse.scope`, `SystemInfoControllerApi`), the `NotificationInfo` subtypes disappear and the #16561 types revert (`String` page parameters and responses, `Alarm`). When all five are merged into lts-4.4, re-fetch and diff.
 
 ## Dependency versions
 

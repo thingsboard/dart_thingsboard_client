@@ -97,7 +97,6 @@ Removed or renamed types:
 | `Oauth2ClientId` | `OAuth2ClientId` |
 | `Event`, `EventBody` and its subclasses | `EventInfo` |
 | `MobileBasicInfo` | `UserMobileInfo` |
-| `ClaimResult`, `ClaimResponse` | `claimDevice` returns `Response<String>` |
 | `AlarmCommentJsonNode` | `AlarmComment.comment` is a `JsonObject?` |
 | `DynamicValue`, `FilterPredicateValue` | `DynamicValueBoolean`/`Double`/`String`, `FilterPredicateValueBoolean`/`Double`/`String` |
 | `ApiKeyQuery`, `MobileInfoQuery`, `UsersAssignQuery`, `EntitySearchQuery`, `AlarmQuery`, `AlarmQueryV2`, `AlarmCommentsQuery`, `PushNotificationQuery` | removed: pass the fields as named parameters |
@@ -330,6 +329,14 @@ From thingsboard/thingsboard#16510 (and #16557 for typed `Notification.info`), w
 - `ColumnSettings` no longer redeclares `type`; it is inherited from `DataKeySettings` and defaults to `COLUMN`.
 - `Lwm2mControllerApi.saveLwm2mDeviceWithCredentials` takes a `BuiltMap<String, JsonObject?>` request body.
 
+From thingsboard/thingsboard#16561 (response and parameter types); the wire format is unchanged:
+
+- `pageSize` and `page` are `int` (they were `String`) in 28 operations: `getAssetsByEntityGroupId`, `getUserAssets`, `getCustomersByEntityGroupId`, `getUserCustomers`, `getDevicesByEntityGroupId`, `getUserDevices`, `getEdgesByEntityGroupId`, `getUserEdges`, `getEntityViewsByEntityGroupId`, `getUserEntityViews` (asset, customer, device, edge and entity view API classes); `getEntities`, `getEntityGroupsByTypeAndPageLink`, `getSharedEntityGroupsByTypeAndPageLink`, `getEntityGroupsByOwnerAndTypeAndPageLink`, `getEntityGroupsHierarchyByOwnerAndTypeAndPageLink`, `getEntityGroupEntityInfosByTypeAndPageLink`, `getSharedEntityGroupEntityInfosByTypeAndPageLink`, `getEntityGroupEntityInfosByOwnerAndTypeAndPageLink`, `getEntityGroupEntityInfosHierarchyByOwnerAndTypeAndPageLink`, `getEdgeEntityGroups`, `getOwnerInfos`, `getOwners` (`EntityGroupControllerApi`); `getConverters`, `getIntegrations`, `getIntegrationInfos`, `getRoles`, `getEdgeSchedulerEvents` and `getScheduledReportEvents`. Pass `page: 0` instead of `page: '0'`.
+- `DeviceControllerApi.claimDevice` returns `Response<ClaimResult>` (`device`, `response`: `ClaimResponse.SUCCESS`, ...) instead of `Response<String>`.
+- `RpcV2ControllerApi.getPersistedRpcByDevice` returns `Response<PageDataRpc>` instead of `Response<String>`.
+- `IntegrationControllerApi.exportIntegrationPackage` returns the ZIP archive as `Response<Uint8List>` instead of `Response<String>`.
+- `AlarmControllerApi.assignAlarm` and `unassignAlarm` return `Response<AlarmInfo>` instead of `Response<Alarm>`; `AlarmInfo` has the same fields plus the originator and assignee details.
+
 ## Changes for both: login, `Authority`, errors, paging
 
 - `LoginRequest`, `RefreshTokenRequest` and `LoginResponse` are the generated built_value models, exported by the main library. The JSON sent to `/api/auth/login` and `/api/auth/token` is unchanged.
@@ -417,8 +424,8 @@ All 335 public methods of the 4.2.1 services, matched by HTTP method and path to
 | `AlarmService.ackAlarm(String alarmId)` → `Future<AlarmInfo>` | POST `/api/alarm/{}/ack` | `AlarmControllerApi.ackAlarm(alarmId:)` → `Response<AlarmInfo>` |
 | `AlarmService.clearAlarm(String alarmId)` → `Future<AlarmInfo>` | POST `/api/alarm/{}/clear` | `AlarmControllerApi.clearAlarm(alarmId:)` → `Response<AlarmInfo>` |
 | `AlarmService.deleteAlarm(String alarmId)` → `Future<void>` | DELETE `/api/alarm/{}` | `AlarmControllerApi.deleteAlarm(alarmId:)` → `Response<bool>` |
-| `AlarmService.assignAlarm(String alarmId, String assigneeId)` → `Future<AlarmInfo>` | POST `/api/alarm/{}/assign/{}` | `AlarmControllerApi.assignAlarm(alarmId:, assigneeId:)` → `Response<Alarm>` |
-| `AlarmService.unassignAlarm(String alarmId)` → `Future<AlarmInfo>` | DELETE `/api/alarm/{}/assign` | `AlarmControllerApi.unassignAlarm(alarmId:)` → `Response<Alarm>` |
+| `AlarmService.assignAlarm(String alarmId, String assigneeId)` → `Future<AlarmInfo>` | POST `/api/alarm/{}/assign/{}` | `AlarmControllerApi.assignAlarm(alarmId:, assigneeId:)` → `Response<AlarmInfo>` |
+| `AlarmService.unassignAlarm(String alarmId)` → `Future<AlarmInfo>` | DELETE `/api/alarm/{}/assign` | `AlarmControllerApi.unassignAlarm(alarmId:)` → `Response<AlarmInfo>` |
 | `AlarmService.getAlarms(AlarmQuery query)` → `Future<PageData<AlarmInfo>>` | GET `/api/alarm/{}/{}` | `AlarmControllerApi.getAlarmsByEntity(entityType:, entityId:, pageSize:, page:)` → `Response<PageDataAlarmInfo>` |
 | `AlarmService.getAllAlarms(AlarmQuery query)` → `Future<PageData<AlarmInfo>>` | GET `/api/alarms` | `AlarmControllerApi.getAllAlarms(pageSize:, page:)` → `Response<PageDataAlarmInfo>` |
 | `AlarmService.getAlarmsV2(AlarmQueryV2 query)` → `Future<PageData<AlarmInfo>>` | GET `/api/v2/alarm/{}/{}` | `AlarmControllerApi.getAlarmsV2(entityType:, entityId:, pageSize:, page:)` → `Response<PageDataAlarmInfo>` |
@@ -536,7 +543,7 @@ All 335 public methods of the 4.2.1 services, matched by HTTP method and path to
 | `DeviceService.getDevicesByIds(List<String> deviceIds)` → `Future<List<Device>>` | GET `/api/devices` | `DeviceControllerApi.getDevicesByIds(deviceIds:)` → `Response<BuiltList<Device>>` |
 | `DeviceService.findByQuery(DeviceSearchQuery query)` → `Future<List<Device>>` | POST `/api/devices` | `DeviceControllerApi.findDevicesByQuery(deviceSearchQuery:)` → `Response<BuiltList<Device>>` |
 | `DeviceService.getDeviceTypes()` → `Future<List<EntitySubtype>>` | GET `/api/device/types` | `DeviceControllerApi.getDeviceTypes()` → `Response<BuiltList<EntitySubtype>>` |
-| `DeviceService.claimDevice(String deviceName, ClaimRequest claimRequest)` → `Future<ClaimResult>` | POST `/api/customer/device/{}/claim` | `DeviceControllerApi.claimDevice(deviceName:)` → `Response<String>` |
+| `DeviceService.claimDevice(String deviceName, ClaimRequest claimRequest)` → `Future<ClaimResult>` | POST `/api/customer/device/{}/claim` | `DeviceControllerApi.claimDevice(deviceName:, claimRequest:)` → `Response<ClaimResult>` |
 | `DeviceService.reClaimDevice(String deviceName)` → `Future<void>` | DELETE `/api/customer/device/{}/claim` | `DeviceControllerApi.reClaimDevice(deviceName:)` → `Response<String>` |
 | `DeviceService.assignDeviceToTenant(String tenantId, String deviceId)` → `Future<Device?>` | POST `/api/tenant/{}/device/{}` | `DeviceControllerApi.assignDeviceToTenant(tenantId:, deviceId:)` → `Response<Device>` |
 | `DeviceService.countDevicesByDeviceProfileIdAndEmptyOtaPackage(OtaPackageType otaPackageType, String deviceProfileId)` → `Future<int>` | GET `/api/devices/count/{}` | `DeviceControllerApi.countByDeviceProfileAndEmptyOtaPackage(otaPackageType:, deviceProfileId:)` (path param, not query) |
@@ -545,7 +552,7 @@ All 335 public methods of the 4.2.1 services, matched by HTTP method and path to
 | `DeviceService.handleOneWayDeviceRPCRequest(String deviceId, dynamic requestBody)` → `Future<void>` | POST `/api/plugins/rpc/oneway/{}` | `RpcV1ControllerApi.handleOneWayDeviceRPCRequestV1(deviceId:, body:)` → `Response<String>` |
 | `DeviceService.handleTwoWayDeviceRPCRequest(String deviceId, dynamic requestBody)` → `Future<dynamic>` | POST `/api/plugins/rpc/twoway/{}` | `RpcV1ControllerApi.handleTwoWayDeviceRPCRequestV1(deviceId:, body:)` → `Response<String>` |
 | `DeviceService.getPersistedRpc(String rpcId)` → `Future<Rpc?>` | GET `/api/plugins/rpc/persisted/{}` | `RpcV2ControllerApi.getPersistedRpc(rpcId:)` (`/api/rpc/persistent/{rpcId}`) |
-| `DeviceService.getPersistedRpcByDevice(String deviceId, RpcStatus rpcStatus, PageLink pageLink)` → `Future<PageData<Rpc>>` | GET `/api/plugins/rpc/persisted/{}` | `RpcV2ControllerApi.getPersistedRpcByDevice(deviceId:, pageSize:, page:, rpcStatus:)` |
+| `DeviceService.getPersistedRpcByDevice(String deviceId, RpcStatus rpcStatus, PageLink pageLink)` → `Future<PageData<Rpc>>` | GET `/api/plugins/rpc/persisted/{}` | `RpcV2ControllerApi.getPersistedRpcByDevice(deviceId:, pageSize:, page:, rpcStatus:)` → `Response<PageDataRpc>` |
 | `DeviceService.deletePersistedRpc(String rpcId)` → `Future<void>` | DELETE `/api/plugins/rpc/persisted/{}` | `RpcV2ControllerApi.deleteRpc(rpcId:)` |
 | `DeviceService.assignDeviceToEdge(String edgeId, String deviceId)` → `Future<Device?>` | POST `/api/edge/{}/device/{}` | `EntityGroupControllerApi.assignEntityGroupToEdge` (group level) |
 | `DeviceService.unassignDeviceFromEdge(String edgeId, String deviceId)` → `Future<Device?>` | DELETE `/api/edge/{}/device/{}` | `EntityGroupControllerApi.unassignEntityGroupFromEdge` (group level) |
