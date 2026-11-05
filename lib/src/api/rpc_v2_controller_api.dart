@@ -14,6 +14,7 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
 import 'package:thingsboard_client/src/api_util.dart';
+import 'package:thingsboard_client/src/model/page_data_rpc.dart';
 import 'package:thingsboard_client/src/model/rpc.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
 
@@ -198,9 +199,9 @@ class RpcV2ControllerApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [String] as data
+  /// Returns a [Future] containing a [Response] with a [PageDataRpc] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> getPersistedRpcByDevice({
+  Future<Response<PageDataRpc>> getPersistedRpcByDevice({
     required String deviceId,
     required int pageSize,
     required int page,
@@ -215,7 +216,8 @@ class RpcV2ControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers();
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataRpc);
     final _path = r'/api/rpc/persistent/device/{deviceId}'.replaceAll(
       '{'
       r'deviceId'
@@ -286,15 +288,17 @@ class RpcV2ControllerApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    String? _responseData;
+    PageDataRpc? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null
           ? null
-          : rawResponse is String
-          ? rawResponse
-          : jsonEncode(rawResponse);
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataRpc),
+                )
+                as PageDataRpc;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -305,7 +309,7 @@ class RpcV2ControllerApi {
       );
     }
 
-    return Response<String>(
+    return Response<PageDataRpc>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

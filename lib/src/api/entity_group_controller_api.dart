@@ -755,8 +755,8 @@ class EntityGroupControllerApi {
   Future<Response<PageDataEntityGroupInfo>> getEdgeEntityGroups({
     required String edgeId,
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -812,9 +812,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -898,8 +898,8 @@ class EntityGroupControllerApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataShortEntityView>> getEntities({
     required String entityGroupId,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -944,9 +944,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -1572,8 +1572,8 @@ class EntityGroupControllerApi {
     required String ownerType,
     required String ownerId,
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -1639,9 +1639,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -1727,8 +1727,8 @@ class EntityGroupControllerApi {
   Future<Response<PageDataEntityInfo>>
   getEntityGroupEntityInfosByTypeAndPageLink({
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     bool? includeShared,
     String? textSearch,
     String? sortProperty,
@@ -1780,9 +1780,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -1871,8 +1871,8 @@ class EntityGroupControllerApi {
     required String ownerType,
     required String ownerId,
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -1939,9 +1939,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -2128,8 +2128,8 @@ class EntityGroupControllerApi {
     required String ownerType,
     required String ownerId,
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -2195,9 +2195,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -2282,8 +2282,8 @@ class EntityGroupControllerApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataEntityGroupInfo>> getEntityGroupsByTypeAndPageLink({
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     bool? includeShared,
     String? textSearch,
     String? sortProperty,
@@ -2335,9 +2335,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -2535,8 +2535,8 @@ class EntityGroupControllerApi {
     required String ownerType,
     required String ownerId,
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -2603,9 +2603,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -2901,8 +2901,8 @@ class EntityGroupControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataEntityInfo] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataEntityInfo>> getOwnerInfos({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -2938,9 +2938,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -3022,8 +3022,8 @@ class EntityGroupControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataContactBasedObject] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataContactBasedObject>> getOwners({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -3059,9 +3059,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -3146,8 +3146,8 @@ class EntityGroupControllerApi {
   Future<Response<PageDataEntityInfo>>
   getSharedEntityGroupEntityInfosByTypeAndPageLink({
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -3192,9 +3192,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -3279,8 +3279,8 @@ class EntityGroupControllerApi {
   Future<Response<PageDataEntityGroupInfo>>
   getSharedEntityGroupsByTypeAndPageLink({
     required String groupType,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -3325,9 +3325,9 @@ class EntityGroupControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,

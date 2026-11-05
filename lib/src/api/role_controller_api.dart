@@ -201,8 +201,8 @@ class RoleControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataRole] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataRole>> getRoles({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? type,
     String? textSearch,
     String? sortProperty,
@@ -239,9 +239,9 @@ class RoleControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (type != null)
         r'type': encodeQueryParameter(
           _serializers,

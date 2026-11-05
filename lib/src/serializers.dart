@@ -247,6 +247,8 @@ import 'package:thingsboard_client/src/model/chart_shape.dart';
 import 'package:thingsboard_client/src/model/check_pre_provisioned_devices_device_profile_provision_configuration.dart';
 import 'package:thingsboard_client/src/model/checksum_algorithm.dart';
 import 'package:thingsboard_client/src/model/claim_request.dart';
+import 'package:thingsboard_client/src/model/claim_response.dart';
+import 'package:thingsboard_client/src/model/claim_result.dart';
 import 'package:thingsboard_client/src/model/clear_rule.dart';
 import 'package:thingsboard_client/src/model/client_attributes_querying_snmp_communication_config.dart';
 import 'package:thingsboard_client/src/model/coap_device_profile_transport_configuration.dart';
@@ -724,6 +726,7 @@ import 'package:thingsboard_client/src/model/page_data_report.dart';
 import 'package:thingsboard_client/src/model/page_data_report_info.dart';
 import 'package:thingsboard_client/src/model/page_data_report_template_info.dart';
 import 'package:thingsboard_client/src/model/page_data_role.dart';
+import 'package:thingsboard_client/src/model/page_data_rpc.dart';
 import 'package:thingsboard_client/src/model/page_data_rule_chain.dart';
 import 'package:thingsboard_client/src/model/page_data_scheduled_report_info.dart';
 import 'package:thingsboard_client/src/model/page_data_scheduler_event_info.dart';
@@ -1328,6 +1331,8 @@ part 'serializers.g.dart';
   CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration,
   ChecksumAlgorithm,
   ClaimRequest,
+  ClaimResponse,
+  ClaimResult,
   ClearRule,
   ClientAttributesQueryingSnmpCommunicationConfig,
   CoapDeviceProfileTransportConfiguration,
@@ -1830,6 +1835,7 @@ part 'serializers.g.dart';
   PageDataReportInfo,
   PageDataReportTemplateInfo,
   PageDataRole,
+  PageDataRpc,
   PageDataRuleChain,
   PageDataScheduledReportInfo,
   PageDataSchedulerEventInfo,
@@ -3006,6 +3012,10 @@ Serializers serializers =
           ..addBuilderFactory(
             const FullType(BuiltList, [FullType(NodeConnectionInfo)]),
             () => ListBuilder<NodeConnectionInfo>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(Rpc)]),
+            () => ListBuilder<Rpc>(),
           )
           ..addBuilderFactory(
             const FullType(BuiltList, [FullType(User)]),

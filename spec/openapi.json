@@ -22313,7 +22313,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Alarm"
+                  "$ref": "#/components/schemas/AlarmInfo"
                 }
               }
             }
@@ -22483,7 +22483,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Alarm"
+                  "$ref": "#/components/schemas/AlarmInfo"
                 }
               }
             }
@@ -28328,7 +28328,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -28338,7 +28339,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -28918,7 +28920,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -28928,7 +28931,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -37955,7 +37959,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -37965,7 +37970,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -44525,7 +44531,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -44535,7 +44542,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -44896,7 +44904,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -44906,7 +44915,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -49749,7 +49759,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ClaimResult"
                 }
               }
             }
@@ -53007,7 +53017,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -53017,7 +53028,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -53767,7 +53779,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -53777,7 +53790,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -60734,7 +60748,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -60744,8 +60759,9 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
-              "minimum": 1
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
             }
           },
           {
@@ -61652,7 +61668,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -61662,7 +61679,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -66201,7 +66219,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -66211,7 +66230,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -67775,7 +67795,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -67785,7 +67806,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -67996,7 +68018,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -68006,7 +68029,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -68240,7 +68264,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -68250,7 +68275,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -68484,7 +68510,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -68494,7 +68521,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -68712,7 +68740,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -68722,7 +68751,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -69291,7 +69321,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -69301,7 +69332,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -69694,7 +69726,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -69704,7 +69737,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -70111,7 +70145,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -70121,7 +70156,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -70551,7 +70587,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -70561,7 +70598,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -70929,7 +70967,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -70939,7 +70978,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -71132,7 +71172,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -71142,7 +71183,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -75481,7 +75523,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -75491,7 +75534,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -77462,7 +77506,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -77472,7 +77517,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -84004,10 +84050,10 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/json": {
+              "application/zip": {
                 "schema": {
                   "type": "string",
-                  "format": "byte"
+                  "format": "binary"
                 }
               }
             }
@@ -84168,7 +84214,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -84178,7 +84225,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -84392,7 +84440,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -84402,7 +84451,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -103807,7 +103857,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -103817,7 +103868,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -104789,7 +104841,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/PageDataRpc"
                 }
               }
             }
@@ -110510,7 +110562,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -110520,7 +110573,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -110742,7 +110796,8 @@
             "description": "Maximum amount of entities in a one page",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 1
             }
           },
@@ -110752,7 +110807,8 @@
             "description": "Sequence number of page starting from 0",
             "required": true,
             "schema": {
-              "type": "string",
+              "type": "integer",
+              "format": "int32",
               "minimum": 0
             }
           },
@@ -177803,6 +177859,55 @@
           "type",
           "version"
         ]
+      },
+      "ClaimResponse": {
+        "type": "string",
+        "enum": [
+          "SUCCESS",
+          "FAILURE",
+          "CLAIMED"
+        ]
+      },
+      "ClaimResult": {
+        "type": "object",
+        "properties": {
+          "device": {
+            "$ref": "#/components/schemas/Device"
+          },
+          "response": {
+            "$ref": "#/components/schemas/ClaimResponse"
+          }
+        }
+      },
+      "PageDataRpc": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "Array of the entities",
+            "items": {
+              "$ref": "#/components/schemas/Rpc"
+            },
+            "readOnly": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of available pages. Calculated based on the 'pageSize' request parameter and total number of entities that match search criteria",
+            "readOnly": true
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of elements in all available pages",
+            "readOnly": true
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "'false' value indicates the end of the result set",
+            "readOnly": true
+          }
+        }
       }
     },
     "securitySchemes": {

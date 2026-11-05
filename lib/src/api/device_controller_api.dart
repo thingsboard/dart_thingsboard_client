@@ -18,6 +18,7 @@ import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/bulk_import_request.dart';
 import 'package:thingsboard_client/src/model/bulk_import_result_device.dart';
 import 'package:thingsboard_client/src/model/claim_request.dart';
+import 'package:thingsboard_client/src/model/claim_result.dart';
 import 'package:thingsboard_client/src/model/device.dart';
 import 'package:thingsboard_client/src/model/device_credentials.dart';
 import 'package:thingsboard_client/src/model/device_info.dart';
@@ -157,9 +158,9 @@ class DeviceControllerApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [String] as data
+  /// Returns a [Future] containing a [Response] with a [ClaimResult] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> claimDevice({
+  Future<Response<ClaimResult>> claimDevice({
     required String deviceName,
     String? subCustomerId,
     ClaimRequest? claimRequest,
@@ -171,7 +172,7 @@ class DeviceControllerApi {
     ProgressCallback? onReceiveProgress,
   }) async {
     final _serializers =
-        this._serializers ?? apiSerializers(registerClaimRequest);
+        this._serializers ?? apiSerializers(registerClaimRequestAndClaimResult);
     final _path = r'/api/customer/device/{deviceName}/claim'.replaceAll(
       '{'
       r'deviceName'
@@ -240,15 +241,17 @@ class DeviceControllerApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    String? _responseData;
+    ClaimResult? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null
           ? null
-          : rawResponse is String
-          ? rawResponse
-          : jsonEncode(rawResponse);
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(ClaimResult),
+                )
+                as ClaimResult;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -259,7 +262,7 @@ class DeviceControllerApi {
       );
     }
 
-    return Response<String>(
+    return Response<ClaimResult>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -1481,8 +1484,8 @@ class DeviceControllerApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataDevice>> getDevicesByEntityGroupId({
     required String entityGroupId,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -1527,9 +1530,9 @@ class DeviceControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -1930,8 +1933,8 @@ class DeviceControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataDevice] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataDevice>> getUserDevices({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? type,
     String? textSearch,
     String? sortProperty,
@@ -1968,9 +1971,9 @@ class DeviceControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (type != null)
         r'type': encodeQueryParameter(
           _serializers,

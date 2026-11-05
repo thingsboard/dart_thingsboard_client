@@ -205,8 +205,8 @@ class ConverterControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataConverter] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataConverter>> getConverters({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     bool? isEdgeTemplate = false,
     String? textSearch,
     String? sortProperty,
@@ -250,9 +250,9 @@ class ConverterControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,

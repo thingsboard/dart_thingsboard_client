@@ -251,6 +251,8 @@ doc/ChartShape.md
 doc/CheckPreProvisionedDevicesDeviceProfileProvisionConfiguration.md
 doc/ChecksumAlgorithm.md
 doc/ClaimRequest.md
+doc/ClaimResponse.md
+doc/ClaimResult.md
 doc/ClearRule.md
 doc/ClientAttributesQueryingSnmpCommunicationConfig.md
 doc/CoapDeviceProfileTransportConfiguration.md
@@ -766,6 +768,7 @@ doc/PageDataReport.md
 doc/PageDataReportInfo.md
 doc/PageDataReportTemplateInfo.md
 doc/PageDataRole.md
+doc/PageDataRpc.md
 doc/PageDataRuleChain.md
 doc/PageDataScheduledReportInfo.md
 doc/PageDataSchedulerEventInfo.md
@@ -1482,6 +1485,8 @@ lib/src/model/chart_shape.dart
 lib/src/model/check_pre_provisioned_devices_device_profile_provision_configuration.dart
 lib/src/model/checksum_algorithm.dart
 lib/src/model/claim_request.dart
+lib/src/model/claim_response.dart
+lib/src/model/claim_result.dart
 lib/src/model/clear_rule.dart
 lib/src/model/client_attributes_querying_snmp_communication_config.dart
 lib/src/model/cm_assignee_type.dart
@@ -1963,6 +1968,7 @@ lib/src/model/page_data_report.dart
 lib/src/model/page_data_report_info.dart
 lib/src/model/page_data_report_template_info.dart
 lib/src/model/page_data_role.dart
+lib/src/model/page_data_rpc.dart
 lib/src/model/page_data_rule_chain.dart
 lib/src/model/page_data_scheduled_report_info.dart
 lib/src/model/page_data_scheduler_event_info.dart

@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getPersistedRpcByDevice**
-> String getPersistedRpcByDevice(deviceId, pageSize, page, rpcStatus, textSearch, sortProperty, sortOrder)
+> PageDataRpc getPersistedRpcByDevice(deviceId, pageSize, page, rpcStatus, textSearch, sortProperty, sortOrder)
 
 Get persistent RPC requests
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**String**
+[**PageDataRpc**](PageDataRpc.md)
 
 ### Authorization
 

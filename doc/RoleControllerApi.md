@@ -125,8 +125,8 @@ import 'package:thingsboard_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('ApiKeyForm').apiKeyPrefix = 'Bearer';
 
 final api = ThingsboardClient().getRoleControllerApi();
-final String pageSize = pageSize_example; // String | Maximum amount of entities in a one page
-final String page = page_example; // String | Sequence number of page starting from 0
+final int pageSize = 56; // int | Maximum amount of entities in a one page
+final int page = 56; // int | Sequence number of page starting from 0
 final String type = type_example; // String | Type of the role
 final String textSearch = textSearch_example; // String | The case insensitive 'substring' filter based on the role name.
 final String sortProperty = sortProperty_example; // String | Property of entity to sort by
@@ -144,8 +144,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **String**| Maximum amount of entities in a one page | 
- **page** | **String**| Sequence number of page starting from 0 | 
+ **pageSize** | **int**| Maximum amount of entities in a one page | 
+ **page** | **int**| Sequence number of page starting from 0 | 
  **type** | **String**| Type of the role | [optional] 
  **textSearch** | **String**| The case insensitive 'substring' filter based on the role name. | [optional] 
  **sortProperty** | **String**| Property of entity to sort by | [optional] 

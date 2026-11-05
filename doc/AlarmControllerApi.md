@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **assignAlarm**
-> Alarm assignAlarm(alarmId, assigneeId)
+> AlarmInfo assignAlarm(alarmId, assigneeId)
 
 Assign/Reassign Alarm (assignAlarm)
 
@@ -108,7 +108,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Alarm**](Alarm.md)
+[**AlarmInfo**](AlarmInfo.md)
 
 ### Authorization
 
@@ -741,7 +741,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **unassignAlarm**
-> Alarm unassignAlarm(alarmId)
+> AlarmInfo unassignAlarm(alarmId)
 
 Unassign Alarm (unassignAlarm)
 
@@ -774,7 +774,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Alarm**](Alarm.md)
+[**AlarmInfo**](AlarmInfo.md)
 
 ### Authorization
 

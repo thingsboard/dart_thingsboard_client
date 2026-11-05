@@ -280,8 +280,8 @@ import 'package:thingsboard_client/api.dart';
 
 final api = ThingsboardClient().getSchedulerEventControllerApi();
 final String edgeId = edgeId_example; // String | A string value representing the edge id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-final String pageSize = pageSize_example; // String | Maximum amount of entities in a one page
-final String page = page_example; // String | Sequence number of page starting from 0
+final int pageSize = 56; // int | Maximum amount of entities in a one page
+final int page = 56; // int | Sequence number of page starting from 0
 final String textSearch = textSearch_example; // String | The case insensitive 'startsWith' filter based on the scheduler event name.
 final String sortProperty = sortProperty_example; // String | Property of entity to sort by
 final String sortOrder = sortOrder_example; // String | Sort order. ASC (ASCENDING) or DESC (DESCENDING)
@@ -299,8 +299,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **edgeId** | **String**| A string value representing the edge id. For example, '784f394c-42b6-435a-983c-b7beff2784f9' | 
- **pageSize** | **String**| Maximum amount of entities in a one page | 
- **page** | **String**| Sequence number of page starting from 0 | 
+ **pageSize** | **int**| Maximum amount of entities in a one page | 
+ **page** | **int**| Sequence number of page starting from 0 | 
  **textSearch** | **String**| The case insensitive 'startsWith' filter based on the scheduler event name. | [optional] 
  **sortProperty** | **String**| Property of entity to sort by | [optional] 
  **sortOrder** | **String**| Sort order. ASC (ASCENDING) or DESC (DESCENDING) | [optional] 
@@ -336,8 +336,8 @@ import 'package:thingsboard_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('ApiKeyForm').apiKeyPrefix = 'Bearer';
 
 final api = ThingsboardClient().getSchedulerEventControllerApi();
-final String pageSize = pageSize_example; // String | Maximum amount of entities in a one page
-final String page = page_example; // String | Sequence number of page starting from 0
+final int pageSize = 56; // int | Maximum amount of entities in a one page
+final int page = 56; // int | Sequence number of page starting from 0
 final String reportTemplateId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String | Report template id
 final String userId = 38400000-8cf0-11bd-b23e-10b96e4ef00d; // String | The user used for report generation.
 final bool includeCustomers = true; // bool | Include customer or sub-customer entities. For tenant administrator: when true, includes entities for all customers; when false (default), only own entities are returned. For customer user: when true, includes entities for all sub-customers.
@@ -357,8 +357,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **String**| Maximum amount of entities in a one page | 
- **page** | **String**| Sequence number of page starting from 0 | 
+ **pageSize** | **int**| Maximum amount of entities in a one page | 
+ **page** | **int**| Sequence number of page starting from 0 | 
  **reportTemplateId** | **String**| Report template id | [optional] 
  **userId** | **String**| The user used for report generation. | [optional] 
  **includeCustomers** | **bool**| Include customer or sub-customer entities. For tenant administrator: when true, includes entities for all customers; when false (default), only own entities are returned. For customer user: when true, includes entities for all sub-customers. | [optional] 

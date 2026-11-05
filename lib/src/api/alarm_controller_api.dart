@@ -134,9 +134,9 @@ class AlarmControllerApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [Alarm] as data
+  /// Returns a [Future] containing a [Response] with a [AlarmInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Alarm>> assignAlarm({
+  Future<Response<AlarmInfo>> assignAlarm({
     required String alarmId,
     required String assigneeId,
     CancelToken? cancelToken,
@@ -146,7 +146,7 @@ class AlarmControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAlarm);
+    final _serializers = this._serializers ?? apiSerializers(registerAlarmInfo);
     final _path = r'/api/alarm/{alarmId}/assign/{assigneeId}'
         .replaceAll(
           '{'
@@ -194,7 +194,7 @@ class AlarmControllerApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    Alarm? _responseData;
+    AlarmInfo? _responseData;
 
     try {
       final rawResponse = _response.data;
@@ -202,9 +202,9 @@ class AlarmControllerApi {
           ? null
           : _serializers.deserialize(
                   rawResponse,
-                  specifiedType: const FullType(Alarm),
+                  specifiedType: const FullType(AlarmInfo),
                 )
-                as Alarm;
+                as AlarmInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -215,7 +215,7 @@ class AlarmControllerApi {
       );
     }
 
-    return Response<Alarm>(
+    return Response<AlarmInfo>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -1683,9 +1683,9 @@ class AlarmControllerApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [Alarm] as data
+  /// Returns a [Future] containing a [Response] with a [AlarmInfo] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<Alarm>> unassignAlarm({
+  Future<Response<AlarmInfo>> unassignAlarm({
     required String alarmId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1694,7 +1694,7 @@ class AlarmControllerApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _serializers = this._serializers ?? apiSerializers(registerAlarm);
+    final _serializers = this._serializers ?? apiSerializers(registerAlarmInfo);
     final _path = r'/api/alarm/{alarmId}/assign'.replaceAll(
       '{'
       r'alarmId'
@@ -1731,7 +1731,7 @@ class AlarmControllerApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    Alarm? _responseData;
+    AlarmInfo? _responseData;
 
     try {
       final rawResponse = _response.data;
@@ -1739,9 +1739,9 @@ class AlarmControllerApi {
           ? null
           : _serializers.deserialize(
                   rawResponse,
-                  specifiedType: const FullType(Alarm),
+                  specifiedType: const FullType(AlarmInfo),
                 )
-                as Alarm;
+                as AlarmInfo;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -1752,7 +1752,7 @@ class AlarmControllerApi {
       );
     }
 
-    return Response<Alarm>(
+    return Response<AlarmInfo>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

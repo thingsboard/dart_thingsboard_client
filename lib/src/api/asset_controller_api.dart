@@ -631,8 +631,8 @@ class AssetControllerApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataAsset>> getAssetsByEntityGroupId({
     required String entityGroupId,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -677,9 +677,9 @@ class AssetControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -1368,8 +1368,8 @@ class AssetControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataAsset] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataAsset>> getUserAssets({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? type,
     String? assetProfileId,
     String? textSearch,
@@ -1407,9 +1407,9 @@ class AssetControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (type != null)
         r'type': encodeQueryParameter(
           _serializers,

@@ -13,6 +13,7 @@ import 'dart:convert';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
+import 'dart:typed_data';
 import 'package:built_collection/built_collection.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/integration.dart';
@@ -281,9 +282,9 @@ class IntegrationControllerApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [String] as data
+  /// Returns a [Future] containing a [Response] with a [Uint8List] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<String>> exportIntegrationPackage({
+  Future<Response<Uint8List>> exportIntegrationPackage({
     required String integrationId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -305,6 +306,7 @@ class IntegrationControllerApi {
     );
     final _options = Options(
       method: r'GET',
+      responseType: ResponseType.bytes,
       headers: <String, dynamic>{...?headers},
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
@@ -329,15 +331,11 @@ class IntegrationControllerApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    String? _responseData;
+    Uint8List? _responseData;
 
     try {
       final rawResponse = _response.data;
-      _responseData = rawResponse == null
-          ? null
-          : rawResponse is String
-          ? rawResponse
-          : jsonEncode(rawResponse);
+      _responseData = rawResponse == null ? null : rawResponse as Uint8List;
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -348,7 +346,7 @@ class IntegrationControllerApi {
       );
     }
 
-    return Response<String>(
+    return Response<Uint8List>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -1029,8 +1027,8 @@ class IntegrationControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataIntegrationInfo] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataIntegrationInfo>> getIntegrationInfos({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     bool? isEdgeTemplate = false,
     String? textSearch,
     String? sortProperty,
@@ -1073,9 +1071,9 @@ class IntegrationControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -1158,8 +1156,8 @@ class IntegrationControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataIntegration] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataIntegration>> getIntegrations({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     bool? isEdgeTemplate = false,
     String? textSearch,
     String? sortProperty,
@@ -1202,9 +1200,9 @@ class IntegrationControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,

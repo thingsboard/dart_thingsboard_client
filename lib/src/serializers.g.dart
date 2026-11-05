@@ -293,6 +293,8 @@ Serializers _$serializers =
           )
           ..add(ChecksumAlgorithm.serializer)
           ..add(ClaimRequest.serializer)
+          ..add(ClaimResponse.serializer)
+          ..add(ClaimResult.serializer)
           ..add(ClearRule.serializer)
           ..add(ClientAttributesQueryingSnmpCommunicationConfig.serializer)
           ..add(CoapDeviceProfileTransportConfiguration.serializer)
@@ -754,6 +756,7 @@ Serializers _$serializers =
           ..add(PageDataReportInfo.serializer)
           ..add(PageDataReportTemplateInfo.serializer)
           ..add(PageDataRole.serializer)
+          ..add(PageDataRpc.serializer)
           ..add(PageDataRuleChain.serializer)
           ..add(PageDataScheduledReportInfo.serializer)
           ..add(PageDataSchedulerEventInfo.serializer)
@@ -2230,6 +2233,10 @@ Serializers _$serializers =
           ..addBuilderFactory(
             const FullType(BuiltList, const [const FullType(RoleId)]),
             () => ListBuilder<RoleId>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, const [const FullType(Rpc)]),
+            () => ListBuilder<Rpc>(),
           )
           ..addBuilderFactory(
             const FullType(BuiltList, const [const FullType(RuleChain)]),

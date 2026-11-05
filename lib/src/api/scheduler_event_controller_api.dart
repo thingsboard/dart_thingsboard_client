@@ -523,8 +523,8 @@ class SchedulerEventControllerApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataSchedulerEventInfo>> getEdgeSchedulerEvents({
     required String edgeId,
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? textSearch,
     String? sortProperty,
     String? sortOrder,
@@ -569,9 +569,9 @@ class SchedulerEventControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,
@@ -656,8 +656,8 @@ class SchedulerEventControllerApi {
   /// Returns a [Future] containing a [Response] with a [PageDataScheduledReportInfo] as data
   /// Throws [DioException] if API call or serialization fails
   Future<Response<PageDataScheduledReportInfo>> getScheduledReportEvents({
-    required String pageSize,
-    required String page,
+    required int pageSize,
+    required int page,
     String? reportTemplateId,
     String? userId,
     bool? includeCustomers,
@@ -715,9 +715,9 @@ class SchedulerEventControllerApi {
       r'pageSize': encodeQueryParameter(
         _serializers,
         pageSize,
-        const FullType(String),
+        const FullType(int),
       ),
-      r'page': encodeQueryParameter(_serializers, page, const FullType(String)),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
       if (textSearch != null)
         r'textSearch': encodeQueryParameter(
           _serializers,

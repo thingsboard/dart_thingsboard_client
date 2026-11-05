@@ -243,19 +243,20 @@ void main() {
 
   group('operations with a string response', () {
     test('return a JSON object body re-encoded as a string', () async {
-      final claimResult = {
-        'device': {'name': 'd1'},
-        'response': 'SUCCESS',
+      final reply = {
+        'temperature': 25,
+        'status': {'ok': true},
       };
-      final adapter = _FakeAdapter({
-        '/api/customer/device/d1/claim': claimResult,
-      });
+      final adapter = _FakeAdapter({'/api/rule-engine/DEVICE/d1': reply});
 
-      final response = await DeviceControllerApi(
-        _dio(adapter),
-      ).claimDevice(deviceName: 'd1', claimRequest: ClaimRequest());
+      final response = await RuleEngineControllerApi(_dio(adapter))
+          .handleRuleEngineRequestForEntity(
+            entityType: 'DEVICE',
+            entityId: 'd1',
+            body: '{"method":"getTemperature"}',
+          );
 
-      expect(jsonDecode(response.data!), claimResult);
+      expect(jsonDecode(response.data!), reply);
     });
 
     test('return a JSON string body unquoted', () async {
@@ -267,6 +268,22 @@ void main() {
 
       expect(response.data, 'Customer A');
     });
+  });
+
+  test('claimDevice returns a typed ClaimResult', () async {
+    final adapter = _FakeAdapter({
+      '/api/customer/device/d1/claim': {
+        'device': {'name': 'd1'},
+        'response': 'SUCCESS',
+      },
+    });
+
+    final result = (await DeviceControllerApi(
+      _dio(adapter),
+    ).claimDevice(deviceName: 'd1', claimRequest: ClaimRequest())).data!;
+
+    expect(result.response, ClaimResponse.SUCCESS);
+    expect(result.device!.name, 'd1');
   });
 
   group('facade roots', () {

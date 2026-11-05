@@ -169,7 +169,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **exportIntegrationPackage**
-> String exportIntegrationPackage(integrationId)
+> Uint8List exportIntegrationPackage(integrationId)
 
 Export integration as IoT Hub package
 
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**String**
+[**Uint8List**](Uint8List.md)
 
 ### Authorization
 
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/zip, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -535,8 +535,8 @@ import 'package:thingsboard_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('ApiKeyForm').apiKeyPrefix = 'Bearer';
 
 final api = ThingsboardClient().getIntegrationControllerApi();
-final String pageSize = pageSize_example; // String | Maximum amount of entities in a one page
-final String page = page_example; // String | Sequence number of page starting from 0
+final int pageSize = 56; // int | Maximum amount of entities in a one page
+final int page = 56; // int | Sequence number of page starting from 0
 final bool isEdgeTemplate = true; // bool | Fetch edge template integrations
 final String textSearch = textSearch_example; // String | The case insensitive 'startsWith' filter based on the integration name.
 final String sortProperty = sortProperty_example; // String | Property of entity to sort by
@@ -554,8 +554,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **String**| Maximum amount of entities in a one page | 
- **page** | **String**| Sequence number of page starting from 0 | 
+ **pageSize** | **int**| Maximum amount of entities in a one page | 
+ **page** | **int**| Sequence number of page starting from 0 | 
  **isEdgeTemplate** | **bool**| Fetch edge template integrations | [optional] [default to false]
  **textSearch** | **String**| The case insensitive 'startsWith' filter based on the integration name. | [optional] 
  **sortProperty** | **String**| Property of entity to sort by | [optional] 
@@ -592,8 +592,8 @@ import 'package:thingsboard_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('ApiKeyForm').apiKeyPrefix = 'Bearer';
 
 final api = ThingsboardClient().getIntegrationControllerApi();
-final String pageSize = pageSize_example; // String | Maximum amount of entities in a one page
-final String page = page_example; // String | Sequence number of page starting from 0
+final int pageSize = 56; // int | Maximum amount of entities in a one page
+final int page = 56; // int | Sequence number of page starting from 0
 final bool isEdgeTemplate = true; // bool | Fetch edge template integrations
 final String textSearch = textSearch_example; // String | The case insensitive 'startsWith' filter based on the integration name.
 final String sortProperty = sortProperty_example; // String | Property of entity to sort by
@@ -611,8 +611,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **String**| Maximum amount of entities in a one page | 
- **page** | **String**| Sequence number of page starting from 0 | 
+ **pageSize** | **int**| Maximum amount of entities in a one page | 
+ **page** | **int**| Sequence number of page starting from 0 | 
  **isEdgeTemplate** | **bool**| Fetch edge template integrations | [optional] [default to false]
  **textSearch** | **String**| The case insensitive 'startsWith' filter based on the integration name. | [optional] 
  **sortProperty** | **String**| Property of entity to sort by | [optional] 

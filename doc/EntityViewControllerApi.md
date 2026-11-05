@@ -451,8 +451,8 @@ import 'package:thingsboard_client/api.dart';
 
 final api = ThingsboardClient().getEntityViewControllerApi();
 final String entityGroupId = entityGroupId_example; // String | A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'
-final String pageSize = pageSize_example; // String | Maximum amount of entities in a one page
-final String page = page_example; // String | Sequence number of page starting from 0
+final int pageSize = 56; // int | Maximum amount of entities in a one page
+final int page = 56; // int | Sequence number of page starting from 0
 final String textSearch = textSearch_example; // String | The case insensitive 'substring' filter based on the entity view name.
 final String sortProperty = sortProperty_example; // String | Property of entity to sort by
 final String sortOrder = sortOrder_example; // String | Sort order. ASC (ASCENDING) or DESC (DESCENDING)
@@ -470,8 +470,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **entityGroupId** | **String**| A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9' | 
- **pageSize** | **String**| Maximum amount of entities in a one page | 
- **page** | **String**| Sequence number of page starting from 0 | 
+ **pageSize** | **int**| Maximum amount of entities in a one page | 
+ **page** | **int**| Sequence number of page starting from 0 | 
  **textSearch** | **String**| The case insensitive 'substring' filter based on the entity view name. | [optional] 
  **sortProperty** | **String**| Property of entity to sort by | [optional] 
  **sortOrder** | **String**| Sort order. ASC (ASCENDING) or DESC (DESCENDING) | [optional] 
@@ -658,8 +658,8 @@ import 'package:thingsboard_client/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('ApiKeyForm').apiKeyPrefix = 'Bearer';
 
 final api = ThingsboardClient().getEntityViewControllerApi();
-final String pageSize = pageSize_example; // String | Maximum amount of entities in a one page
-final String page = page_example; // String | Sequence number of page starting from 0
+final int pageSize = 56; // int | Maximum amount of entities in a one page
+final int page = 56; // int | Sequence number of page starting from 0
 final String type = type_example; // String |   ## Entity View Filter  Allows to filter entity views based on their type and the **'starts with'** expression over their name. For example, this entity filter selects all 'Concrete Mixer' entity views which name starts with 'CAT':  ```json {   \"type\": \"entityViewType\",   \"entityViewType\": \"Concrete Mixer\",   \"entityViewNameFilter\": \"CAT\" } ```
 final String textSearch = textSearch_example; // String | The case insensitive 'substring' filter based on the entity view name.
 final String sortProperty = sortProperty_example; // String | Property of entity to sort by
@@ -677,8 +677,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pageSize** | **String**| Maximum amount of entities in a one page | 
- **page** | **String**| Sequence number of page starting from 0 | 
+ **pageSize** | **int**| Maximum amount of entities in a one page | 
+ **page** | **int**| Sequence number of page starting from 0 | 
  **type** | **String**|   ## Entity View Filter  Allows to filter entity views based on their type and the **'starts with'** expression over their name. For example, this entity filter selects all 'Concrete Mixer' entity views which name starts with 'CAT':  ```json {   \"type\": \"entityViewType\",   \"entityViewType\": \"Concrete Mixer\",   \"entityViewNameFilter\": \"CAT\" } ``` | [optional] 
  **textSearch** | **String**| The case insensitive 'substring' filter based on the entity view name. | [optional] 
  **sortProperty** | **String**| Property of entity to sort by | [optional] 
