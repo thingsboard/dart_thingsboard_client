@@ -206,7 +206,7 @@ await tbClient.getTelemetryControllerApi().saveEntityAttributesV2(
 
 Behaviour:
 
-- As in 4.2.1, the server version is read from `/api/system/info` whenever a full session is loaded with notify (login, two-factor verification, `init()`, `setUserFromJwtToken(..., true)`), not on every refresh. A server older than `tbMinServerVersion` now throws `UnsupportedServerVersionError` (a `ThingsboardError` with `serverVersion` and `minVersion`) instead of a `general` error with the message "Unsupported ThingsBoard platform version", and `onUserLoaded` is not called. The check is best-effort: a network error or an unexpected response does not block the login. 4.2.1 rejected PE servers; 5.0 accepts both.
+- As in 4.2.1, the server version is read from `/api/system/info` whenever a full session is loaded with notify (login, two-factor verification, `init()`, `setUserFromJwtToken(..., true)`), not on every refresh. A server older than `tbMinServerVersion` now throws `UnsupportedServerVersionError` (a `ThingsboardError` with `serverVersion` and `minVersion`) instead of a `general` error with the message "Unsupported ThingsBoard platform version", `onUserLoaded` is not called and the session is cleared (tokens removed from the storage). The check is best-effort: a network error or an unexpected response does not block the login. 4.2.1 rejected PE servers; 5.0 accepts both.
 - If `init()` cannot reach the server, it keeps the stored session: `isAuthenticated()` is `true` even though the access token has expired. A token refresh clears the session only on HTTP 401, and concurrent requests share one refresh call.
 - `computeFunc` now only offloads WebSocket parsing. REST responses are deserialized on the calling isolate.
 

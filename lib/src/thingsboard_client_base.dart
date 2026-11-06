@@ -225,7 +225,8 @@ class ThingsboardClientBase {
   /// Like every load of a full session ([login], [checkTwoFaVerificationCode],
   /// [setUserFromJwtToken] with `notify`), it reads the server version and
   /// throws an [UnsupportedServerVersionError] instead of calling
-  /// `onUserLoaded` when the server is older than [tbMinServerVersion].
+  /// `onUserLoaded` when the server is older than [tbMinServerVersion]; the
+  /// session is cleared in that case.
   Future<void> init() async {
     try {
       var jwtToken = await _storage.getItem('jwt_token');
@@ -535,7 +536,8 @@ class ThingsboardClientBase {
     try {
       await refreshJwtToken(refreshToken: refreshToken, notify: true);
     } catch (e) {
-      if (toThingsboardError(e).isUnauthorized) {
+      if (e is UnsupportedServerVersionError ||
+          toThingsboardError(e).isUnauthorized) {
         rethrow;
       }
       // Server unreachable: keep the stale session; the interceptor retries
@@ -591,7 +593,13 @@ class ThingsboardClientBase {
     if (isJwtTokenValid() &&
         !isPreVerificationToken() &&
         !isMfaConfigurationToken()) {
-      await _checkServerVersion();
+      try {
+        await _checkServerVersion();
+      } on UnsupportedServerVersionError {
+        await _clearJwtToken(notifyUser: false);
+        _telemetryWebsocketService?.reset(true);
+        rethrow;
+      }
     }
     _schedule(_userLoadedCallback);
     _telemetryWebsocketService?.reset(true);

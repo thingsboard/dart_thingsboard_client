@@ -13,6 +13,7 @@ import 'package:thingsboard_client/src/thingsboard_client.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/model/version_models.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
+import 'package:thingsboard_client/src/storage/in_memory_storage.dart';
 
 String createTestJwt({
   String sub = 'user-id',
@@ -278,8 +279,10 @@ void main() {
     for (final scope in ['TENANT_ADMIN', 'CUSTOMER_USER', 'SYS_ADMIN']) {
       test('a $scope session on an older server is not loaded', () async {
         var userLoaded = 0;
+        final storage = InMemoryStorage();
         final client = ThingsboardClient(
           'http://localhost:8080',
+          storage: storage,
           onUserLoaded: () => userLoaded++,
         );
         setMockAdapter(client, mockAdapter);
@@ -295,8 +298,77 @@ void main() {
         );
         await Future<void>.delayed(Duration.zero);
         expect(userLoaded, 0);
+        expect(client.isAuthenticated(), isFalse);
+        expect(client.getJwtToken(), isNull);
+        expect(await storage.containsKey('jwt_token'), isFalse);
+        expect(await storage.containsKey('refresh_token'), isFalse);
       });
     }
+
+    test('init() clears a stored session on an older server', () async {
+      final storage = InMemoryStorage();
+      await storage.setItem('jwt_token', createTestJwt());
+      await storage.setItem(
+        'refresh_token',
+        createTestJwt(scope: 'REFRESH_TOKEN'),
+      );
+      final client = ThingsboardClient(
+        'http://localhost:8080',
+        storage: storage,
+      );
+      setMockAdapter(client, mockAdapter);
+      mockAdapter.onRoute('/api/system/info', (_) => systemInfo('4.2.2.8'));
+
+      await expectLater(
+        client.init(),
+        throwsA(isA<UnsupportedServerVersionError>()),
+      );
+      expect(client.isAuthenticated(), isFalse);
+      expect(await storage.containsKey('jwt_token'), isFalse);
+      expect(await storage.containsKey('refresh_token'), isFalse);
+    });
+
+    test(
+      'init() refreshing an expired session clears it on an older server',
+      () async {
+        final storage = InMemoryStorage();
+        await storage.setItem('jwt_token', createTestJwt(expInSeconds: -60));
+        await storage.setItem(
+          'refresh_token',
+          createTestJwt(scope: 'REFRESH_TOKEN'),
+        );
+        final client = ThingsboardClient(
+          'http://localhost:8080',
+          storage: storage,
+        );
+        setMockAdapter(client, mockAdapter);
+        mockAdapter.onRoute(
+          '/api/auth/token',
+          (_) => ResponseBody.fromString(
+            jsonEncode({
+              'token': createTestJwt(),
+              'refreshToken': createTestJwt(scope: 'REFRESH_TOKEN'),
+            }),
+            200,
+            headers: {
+              'content-type': ['application/json'],
+            },
+          ),
+        );
+        mockAdapter.onRoute('/api/system/info', (_) => systemInfo('4.3.0'));
+
+        await expectLater(
+          client.init(),
+          throwsA(isA<UnsupportedServerVersionError>()),
+        );
+        expect(client.isAuthenticated(), isFalse);
+        expect(await storage.containsKey('jwt_token'), isFalse);
+        expect(
+          mockAdapter.requestedPaths.where((p) => p == '/api/system/info'),
+          hasLength(1),
+        );
+      },
+    );
 
     test('an unknown server version is accepted', () async {
       final client = ThingsboardClient('http://localhost:8080');
