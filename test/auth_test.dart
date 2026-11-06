@@ -938,10 +938,17 @@ void main() {
 
     test('rejected refresh token clears the session and throws', () async {
       mockAdapter.onRoute('/api/auth/token', rejectedRefreshTokenResponse);
-      client = makeClient();
+      var errorCount = 0;
+      client = makeClient(onError: (_) => errorCount++);
 
       await expectLater(client.init(), throwsA(isA<ThingsboardError>()));
+      await Future.delayed(Duration(milliseconds: 50));
 
+      expect(
+        errorCount,
+        0,
+        reason: 'init() reports to its caller, not onError',
+      );
       expect(client.isAuthenticated(), isFalse);
       expect(client.getRefreshToken(), isNull);
       expect(await storage.containsKey('refresh_token'), isFalse);
