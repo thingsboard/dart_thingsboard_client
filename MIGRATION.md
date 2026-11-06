@@ -321,15 +321,15 @@ Enum constants whose value contains digits are named after the value (openapi-ge
 
 ### Spec fixes
 
-From thingsboard/thingsboard#16510 (and #16557 for typed `Notification.info`), which the 5.0 spec needs; the wire format is unchanged, so ThingsBoard 4.4.0 servers work.
+From thingsboard/thingsboard#16510, #16557 (typed `Notification.info`) and #16561, which the 5.0 spec needs; the wire format is unchanged, so ThingsBoard 4.4.0 servers work.
 
-- The generated `ThingsboardErrorCode` values are numbers, as the server sends them; before, every `errorCode` decoded as `unknownDefaultOpenApi`. Code 47 (`number47`) is new.
-- `AliasEntityId.entityType` is a `String` holding an `EntityType` or `AliasEntityType` name, and `id` is optional.
+- The generated `ThingsboardErrorCode` values are numbers, as the server sends them; before, every `errorCode` decoded as `unknownDefaultOpenApi`. Code 47 (`number47`) is new (#16561).
+- `AliasEntityId.entityType` is a `String` holding an `EntityType` or `AliasEntityType` name, and `id` is optional (#16561).
 - `RefreshTokenRequest.refreshToken` is a `String` instead of a `JsonObject`.
 - `ColumnSettings` no longer redeclares `type`; it is inherited from `DataKeySettings` and defaults to `COLUMN`.
 - `Lwm2mControllerApi.saveLwm2mDeviceWithCredentials` takes a `BuiltMap<String, JsonObject?>` request body.
 
-From thingsboard/thingsboard#16561 (response and parameter types); the wire format is unchanged:
+Response and parameter types, from thingsboard/thingsboard#16561 (`pageSize`/`page`, `AlarmInfo`) and #16510 (`claimDevice`, `getPersistedRpcByDevice`, `exportIntegrationPackage`); the wire format is unchanged:
 
 - `pageSize` and `page` are `int` (they were `String`) in 28 operations: `getAssetsByEntityGroupId`, `getUserAssets`, `getCustomersByEntityGroupId`, `getUserCustomers`, `getDevicesByEntityGroupId`, `getUserDevices`, `getEdgesByEntityGroupId`, `getUserEdges`, `getEntityViewsByEntityGroupId`, `getUserEntityViews` (asset, customer, device, edge and entity view API classes); `getEntities`, `getEntityGroupsByTypeAndPageLink`, `getSharedEntityGroupsByTypeAndPageLink`, `getEntityGroupsByOwnerAndTypeAndPageLink`, `getEntityGroupsHierarchyByOwnerAndTypeAndPageLink`, `getEntityGroupEntityInfosByTypeAndPageLink`, `getSharedEntityGroupEntityInfosByTypeAndPageLink`, `getEntityGroupEntityInfosByOwnerAndTypeAndPageLink`, `getEntityGroupEntityInfosHierarchyByOwnerAndTypeAndPageLink`, `getEdgeEntityGroups`, `getOwnerInfos`, `getOwners` (`EntityGroupControllerApi`); `getConverters`, `getIntegrations`, `getIntegrationInfos`, `getRoles`, `getEdgeSchedulerEvents` and `getScheduledReportEvents`. Pass `page: 0` instead of `page: '0'`.
 - `DeviceControllerApi.claimDevice` returns `Response<ClaimResult>` (`device`, `response`: `ClaimResponse.SUCCESS`, ...) instead of `Response<String>`.

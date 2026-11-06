@@ -14,7 +14,7 @@
 # thingsboard/thingsboard PRs #16510, #16555, #16557, #16560 and #16561. Re-fetching
 # from a server without them breaks the build (LoginResponse.scope,
 # SystemInfoControllerApi), drops the NotificationInfo subtypes and reverts the
-# #16561 response and pageSize/page types. See "The spec is composed" in
+# typed responses and pageSize/page parameters. See "The spec is composed" in
 # CONTRIBUTING.md.
 #
 # Usage:
