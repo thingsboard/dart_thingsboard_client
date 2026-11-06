@@ -1,0 +1,15 @@
+# Models the handwritten facade (WebSocket telemetry, login) (de)serializes; each gets a
+# stable register<Model> function in lib/src/api_serializers.dart.
+EntityDataQuery
+EntityCountQuery
+AlarmDataQuery
+PageDataEntityData
+PageDataAlarmData
+EntityData
+AlarmData
+Notification
+EntityKey
+EntityId
+LoginRequest
+RefreshTokenRequest
+LoginResponse

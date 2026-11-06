@@ -1,0 +1,35 @@
+{
+  "cmds": [
+    {
+      "cmdId": 2,
+      "type": "ENTITY_COUNT",
+      "query": {
+        "entityFilter": {
+          "type": "entityType",
+          "entityType": "DEVICE"
+        },
+        "keyFilters": [
+          {
+            "key": {
+              "type": "TIME_SERIES",
+              "key": "temperature"
+            },
+            "valueType": "NUMERIC",
+            "predicate": {
+              "type": "NUMERIC",
+              "operation": "GREATER",
+              "value": {
+                "defaultValue": 25.0
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "authCmd": {
+    "cmdId": 0,
+    "type": "AUTH",
+    "token": "JWT_TOKEN"
+  }
+}

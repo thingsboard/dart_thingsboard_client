@@ -1,0 +1,44 @@
+name: Bug report
+description: Something in the Dart client does not work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: What happened, and what did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The smallest code that shows the problem, and the server response if it matters.
+      render: dart
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error and stack trace
+      render: text
+  - type: input
+    id: client-version
+    attributes:
+      label: thingsboard_client version
+      placeholder: 5.0.0
+    validations:
+      required: true
+  - type: input
+    id: server-version
+    attributes:
+      label: ThingsBoard server version
+      description: Self-hosted version, or "ThingsBoard Cloud".
+      placeholder: 4.4.0
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Dart / Flutter version and platform
+      placeholder: Flutter 3.38.0, Android 15

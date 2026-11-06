@@ -1,10 +1,9 @@
-enum Direction { ASC, DESC }
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
-extension DirectionToString on Direction {
-  String toShortString() {
-    return toString().split('.').last;
-  }
-}
+import '../direction.dart';
 
 class SortOrder {
   String property;
