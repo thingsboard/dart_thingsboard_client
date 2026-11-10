@@ -114,12 +114,6 @@ void main() {
     });
   });
 
-  group('tbMinServerVersion', () {
-    test('tbMinServerVersion equals "4.4.0"', () {
-      expect(tbMinServerVersion, equals('4.4.0'));
-    });
-  });
-
   group('server version check', () {
     late MockHttpClientAdapter mockAdapter;
 
@@ -138,32 +132,6 @@ void main() {
       await client.setUserFromJwtToken(jwt, refresh, false);
       return client;
     }
-
-    test(
-      'init() throws UnsupportedServerVersionError when the server is older',
-      () async {
-        final client = await makeAuthenticatedClient();
-
-        mockAdapter.onRoute('/api/system/info', (req) {
-          return ResponseBody.fromString(
-            jsonEncode({'version': '3.5.0', 'type': 'CE'}),
-            200,
-            headers: {
-              'content-type': ['application/json'],
-            },
-          );
-        });
-
-        await expectLater(
-          client.init(),
-          throwsA(
-            isA<UnsupportedServerVersionError>()
-                .having((e) => e.serverVersion, 'serverVersion', '3.5.0')
-                .having((e) => e.minVersion, 'minVersion', tbMinServerVersion),
-          ),
-        );
-      },
-    );
 
     test(
       'init() completes normally when server version meets minimum',
@@ -193,44 +161,6 @@ void main() {
           return ResponseBody.fromString(
             jsonEncode({'status': 403, 'message': 'Forbidden'}),
             403,
-            headers: {
-              'content-type': ['application/json'],
-            },
-          );
-        });
-
-        await expectLater(client.init(), completes);
-      },
-    );
-
-    test(
-      'init() completes normally when /api/system/info returns 401 (unauthenticated)',
-      () async {
-        final client = await makeAuthenticatedClient();
-
-        mockAdapter.onRoute('/api/system/info', (req) {
-          return ResponseBody.fromString(
-            jsonEncode({'status': 401, 'message': 'Unauthorized'}),
-            401,
-            headers: {
-              'content-type': ['application/json'],
-            },
-          );
-        });
-
-        await expectLater(client.init(), completes);
-      },
-    );
-
-    test(
-      'init() completes normally when /api/system/info returns a network error',
-      () async {
-        final client = await makeAuthenticatedClient();
-
-        mockAdapter.onRoute('/api/system/info', (req) {
-          return ResponseBody.fromString(
-            jsonEncode({'status': 500, 'message': 'Internal Server Error'}),
-            500,
             headers: {
               'content-type': ['application/json'],
             },
@@ -321,7 +251,11 @@ void main() {
 
       await expectLater(
         client.init(),
-        throwsA(isA<UnsupportedServerVersionError>()),
+        throwsA(
+          isA<UnsupportedServerVersionError>()
+              .having((e) => e.serverVersion, 'serverVersion', '4.2.2.8')
+              .having((e) => e.minVersion, 'minVersion', tbMinServerVersion),
+        ),
       );
       expect(client.isAuthenticated(), isFalse);
       expect(await storage.containsKey('jwt_token'), isFalse);

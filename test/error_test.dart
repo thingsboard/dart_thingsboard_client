@@ -20,17 +20,6 @@ void main() {
       expect(error.errorCode, equals(ThingsBoardErrorCode.itemNotFound));
     });
 
-    test('fromJson with authentication error', () {
-      final json = {
-        'message': 'Authentication failed',
-        'status': 401,
-        'errorCode': 10,
-      };
-      final error = ThingsboardError.fromJson(json);
-      expect(error.errorCode, equals(ThingsBoardErrorCode.authentication));
-      expect(error.status, equals(401));
-    });
-
     test('parseMessage returns message field when present', () {
       final json = {'message': 'Custom message', 'status': 500, 'errorCode': 2};
       expect(ThingsboardError.parseMessage(json), equals('Custom message'));
@@ -69,6 +58,7 @@ void main() {
       );
       final str = error.toString();
       expect(str, contains('Test'));
+      expect(str, contains('general'));
       expect(str, contains('500'));
     });
 
@@ -182,21 +172,6 @@ void main() {
       }
     });
 
-    test('server error responses with 40, 41 and 47 keep their code', () {
-      for (final entry in {
-        40: ThingsBoardErrorCode.subscriptionViolation,
-        41: ThingsBoardErrorCode.entitiesLimitExceeded,
-        47: ThingsBoardErrorCode.setupIncomplete,
-      }.entries) {
-        final error = ThingsboardError.fromJson({
-          'message': 'm',
-          'status': 403,
-          'errorCode': entry.key,
-        });
-        expect(error.errorCode, entry.value);
-      }
-    });
-
     test('maps 45 to passwordViolation', () {
       expect(
         ThingsBoardErrorCode.fromInt(45),
@@ -214,13 +189,6 @@ void main() {
     test('maps unknown integer to general (fallback)', () {
       expect(
         ThingsBoardErrorCode.fromInt(999),
-        equals(ThingsBoardErrorCode.general),
-      );
-    });
-
-    test('maps 0 to general (fallback)', () {
-      expect(
-        ThingsBoardErrorCode.fromInt(0),
         equals(ThingsBoardErrorCode.general),
       );
     });

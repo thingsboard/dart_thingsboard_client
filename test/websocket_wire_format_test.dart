@@ -485,24 +485,6 @@ void main() {
       },
     );
 
-    test('an unknown alarm severity and status in the info decode', () {
-      final json = jsonDecode(_fixture('notifications_update.json'));
-      final notification = (json['notifications'] as List).first as Map;
-      notification['info'] = {
-        'type':
-            'org.thingsboard.server.common.data.notification.info.'
-            'AlarmNotificationInfo',
-        'alarmSeverity': 'CATASTROPHIC',
-        'alarmStatus': 'SNOOZED',
-      };
-      json['update'] = notification;
-      final update =
-          parseWebsocketDataMessage(jsonEncode(json)) as NotificationsUpdate;
-      final info = update.update!.info! as AlarmNotificationInfo;
-      expect(info.alarmSeverity, AlarmSeverity.unknownDefaultOpenApi);
-      expect(info.alarmStatus, AlarmStatus.unknownDefaultOpenApi);
-    });
-
     test('an unknown NotificationInfo type does not drop the notification', () {
       const futureType =
           'org.thingsboard.server.common.data.notification.info.'

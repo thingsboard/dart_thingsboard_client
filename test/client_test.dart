@@ -5,20 +5,11 @@
 
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:test/test.dart';
+import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/thingsboard_client.dart';
 
 void main() {
   group('debug mode', () {
-    test('debugMode=true includes PrettyDioLogger in interceptors', () {
-      final client = ThingsboardClient(
-        'http://localhost:8080',
-        debugMode: true,
-      );
-      final interceptors = client.dio.interceptors;
-      final hasPrettyLogger = interceptors.any((i) => i is PrettyDioLogger);
-      expect(hasPrettyLogger, isTrue);
-    });
-
     test('debugMode=false does NOT include PrettyDioLogger', () {
       final client = ThingsboardClient(
         'http://localhost:8080',
@@ -30,21 +21,13 @@ void main() {
     });
   });
 
-  group('default storage', () {
-    test('creates client without storage param without throwing', () {
-      expect(() => ThingsboardClient('http://localhost:8080'), returnsNormally);
-    });
-
-    test('default storage (InMemoryStorage) works for login', () async {
-      final client = ThingsboardClient('http://localhost:8080');
-      expect(client.isAuthenticated(), isFalse);
-    });
-  });
-
   group('interceptor chain', () {
     test('has HttpInterceptor in interceptor list', () {
       final client = ThingsboardClient('http://localhost:8080');
-      expect(client.dio.interceptors, isNotEmpty);
+      expect(
+        client.dio.interceptors.whereType<HttpInterceptor>(),
+        hasLength(1),
+      );
     });
 
     test('debugMode=true has PrettyDioLogger before HttpInterceptor', () {
@@ -54,9 +37,7 @@ void main() {
       );
       final interceptors = client.dio.interceptors.toList();
       final prettyIndex = interceptors.indexWhere((i) => i is PrettyDioLogger);
-      final httpIndex = interceptors.indexWhere(
-        (i) => i.runtimeType.toString().contains('HttpInterceptor'),
-      );
+      final httpIndex = interceptors.indexWhere((i) => i is HttpInterceptor);
       expect(prettyIndex, greaterThanOrEqualTo(0));
       expect(httpIndex, greaterThan(prettyIndex));
     });

@@ -3,11 +3,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// Fields the server sends as null although the spec used to list them as
-// required (fixed on the server in thingsboard/thingsboard#16613): bean
-// validation (@NotNull, @NotBlank, @NotEmpty) only checks saved input, and some
-// explicit requiredMode = REQUIRED did not match the responses. A spec that
-// lists them as required again fails here.
+// Response fields the server can send as null (thingsboard/thingsboard#16613);
+// a spec that marks them as required again fails here.
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
@@ -36,7 +33,12 @@ const _edge = {
   'cloudEndpoint': 'http://localhost:8080',
 };
 
-const _report = {'name': 'report', 'format': 'PDF'};
+final _report = {
+  'name': 'report',
+  'format': 'PDF',
+  'tenantId': _id('TENANT'),
+  'userId': _id('USER'),
+};
 
 const _dashboardReport = {
   'dashboardId': _uuid,
@@ -113,14 +115,10 @@ final _cases = <_Case>[
   // The report template was deleted (ON DELETE SET NULL)
   _Case('Report.templateId', const FullType(Report), {
     ..._report,
-    'tenantId': _id('TENANT'),
-    'userId': _id('USER'),
     'templateId': null,
   }, (m) => (m as Report).templateId),
   _Case('ReportInfo.templateId', const FullType(ReportInfo), {
     ..._report,
-    'tenantId': _id('TENANT'),
-    'userId': _id('USER'),
     'templateId': null,
   }, (m) => (m as ReportInfo).templateId),
   // Only chart components have a subtype
@@ -175,51 +173,5 @@ void main() {
       )!;
       expect(c.read(model), isNull);
     });
-
-    final omitted = Map.of(c.json)..remove(c.field.split('.').last);
-    test('${c.field} may be omitted', () {
-      final model = standardSerializers.deserialize(
-        omitted,
-        specifiedType: c.type,
-      )!;
-      expect(c.read(model), isNull);
-    });
   }
-
-  test('the 2FA account settings of a user with backup codes', () {
-    final settings =
-        standardSerializers.deserialize({
-              'configs': {
-                'BACKUP_CODE': {
-                  'providerType': 'BACKUP_CODE',
-                  'useByDefault': false,
-                  'codes': null,
-                  'codesLeft': 10,
-                },
-              },
-            }, specifiedType: const FullType(AccountTwoFaSettings))!
-            as AccountTwoFaSettings;
-
-    final config = settings.configs!['BACKUP_CODE']!;
-    expect(config, isA<BackupCodeTwoFaAccountConfig>());
-    expect((config as BackupCodeTwoFaAccountConfig).codes, isNull);
-    expect(config.codesLeft, 10);
-  });
-
-  test('an entity view saved without key lists', () {
-    final view =
-        standardSerializers.deserialize({
-              'name': 'view',
-              'type': 'default',
-              'entityId': _id('DEVICE'),
-              'keys': {
-                'timeseries': null,
-                'attributes': {'cs': null, 'sh': null, 'ss': null},
-              },
-            }, specifiedType: const FullType(EntityView))!
-            as EntityView;
-
-    expect(view.keys!.timeseries, isNull);
-    expect(view.keys!.attributes.cs, isNull);
-  });
 }

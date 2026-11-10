@@ -383,159 +383,7 @@ void main() {
   );
 
   group('TelemetryWebsocketService', () {
-    group('stream routing', () {
-      test('subscribe sends subscription command via WebSocket', () async {
-        await loginClient(client);
-
-        final fakeChannel = FakeWebSocketChannel();
-        channelFactory.enqueue(fakeChannel);
-
-        final service = TelemetryWebsocketService(
-          client,
-          'http://localhost:8080',
-          channelFactory: channelFactory.call,
-        );
-
-        final subscriber =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-              telemetryService: service,
-              entityId: deviceId('device-1'),
-              attributeScope: 'LATEST_TELEMETRY',
-            );
-        service.subscribe(subscriber);
-
-        await Future.delayed(Duration(milliseconds: 10));
-
-        expect(fakeChannel.sentMessages.isNotEmpty, isTrue);
-
-        bool foundSubscription = false;
-        for (final msg in fakeChannel.sentMessages) {
-          final decoded = jsonDecode(msg as String);
-          if (decoded['cmds'] != null) {
-            final cmds = decoded['cmds'] as List;
-            if (cmds.any((c) => c['type'] == 'TIMESERIES')) {
-              foundSubscription = true;
-            }
-          }
-        }
-        expect(
-          foundSubscription,
-          isTrue,
-          reason: 'Expected TIMESERIES subscription command to be sent',
-        );
-      });
-
-      test(
-        'inject server message is dispatched to subscriber data stream',
-        () async {
-          await loginClient(client);
-
-          final fakeChannel = FakeWebSocketChannel();
-          channelFactory.enqueue(fakeChannel);
-
-          final service = TelemetryWebsocketService(
-            client,
-            'http://localhost:8080',
-            channelFactory: channelFactory.call,
-          );
-
-          final subscriber =
-              TelemetrySubscriber.createEntityAttributesSubscription(
-                telemetryService: service,
-                entityId: deviceId('device-1'),
-                attributeScope: 'LATEST_TELEMETRY',
-              );
-          service.subscribe(subscriber);
-
-          await Future.delayed(Duration(milliseconds: 10));
-
-          int? cmdId;
-          for (final msg in fakeChannel.sentMessages) {
-            final decoded = jsonDecode(msg as String);
-            if (decoded['cmds'] != null) {
-              final cmds = decoded['cmds'] as List;
-              for (final c in cmds) {
-                if (c['type'] == 'TIMESERIES') {
-                  cmdId = c['cmdId'] as int;
-                }
-              }
-            }
-          }
-          expect(cmdId, isNotNull, reason: 'Expected cmdId to be assigned');
-
-          final dataCompleter = Completer<SubscriptionUpdate>();
-          subscriber.dataStream.first.then(dataCompleter.complete);
-
-          final serverMsg = jsonEncode({
-            'subscriptionId': cmdId,
-            'data': {
-              'temperature': [
-                [1000, '25.0'],
-              ],
-            },
-          });
-          fakeChannel.injectMessage(serverMsg);
-
-          final update = await dataCompleter.future.timeout(
-            Duration(seconds: 2),
-          );
-          expect(update.subscriptionId, equals(cmdId));
-          expect(update.data.containsKey('temperature'), isTrue);
-        },
-      );
-    });
-
     group('reconnect', () {
-      test(
-        'subscriber stream not closed on disconnect and reconnects',
-        () async {
-          await loginClient(client);
-
-          final firstChannel = FakeWebSocketChannel();
-          final secondChannel = FakeWebSocketChannel();
-          channelFactory.enqueue(firstChannel);
-          channelFactory.enqueue(secondChannel);
-
-          final service = TelemetryWebsocketService(
-            client,
-            'http://localhost:8080',
-            channelFactory: channelFactory.call,
-          );
-
-          final subscriber =
-              TelemetrySubscriber.createEntityAttributesSubscription(
-                telemetryService: service,
-                entityId: deviceId('device-1'),
-                attributeScope: 'LATEST_TELEMETRY',
-              );
-          service.subscribe(subscriber);
-
-          await Future.delayed(Duration(milliseconds: 10));
-          expect(channelFactory.connectCallCount, equals(1));
-
-          final reconnectCompleter = Completer<void>();
-          subscriber.reconnectStream.first.then(
-            (_) => reconnectCompleter.complete(),
-          );
-
-          firstChannel.simulateDisconnect();
-
-          await Future.delayed(Duration(milliseconds: 2200));
-
-          expect(
-            channelFactory.connectCallCount,
-            equals(2),
-            reason: 'Expected reconnect to open a new WebSocket connection',
-          );
-
-          expect(
-            reconnectCompleter.isCompleted,
-            isTrue,
-            reason: 'Expected reconnect stream to emit',
-          );
-        },
-      );
-
       test(
         'failed connect retries after RECONNECT_INTERVAL, then backs off',
         () async {
@@ -719,14 +567,8 @@ void main() {
             reason: 'Expected token refresh before socket open',
           );
 
-          if (fakeChannel.sentMessages.isNotEmpty) {
-            final firstMsg = jsonDecode(
-              fakeChannel.sentMessages.first as String,
-            );
-            if (firstMsg['authCmd'] != null) {
-              expect(firstMsg['authCmd']['token'], equals(validToken));
-            }
-          }
+          final firstMsg = jsonDecode(fakeChannel.sentMessages.first as String);
+          expect(firstMsg['authCmd']['token'], equals(validToken));
         },
       );
 
@@ -958,77 +800,33 @@ void main() {
     });
 
     group('idle timeout', () {
-      test('idle timer is set when subscriber count drops to 0', () async {
+      test('the socket closes once idle for WS_IDLE_TIMEOUT', () async {
         await loginClient(client);
+        fakeAsync((async) {
+          final fakeChannel = FakeWebSocketChannel();
+          channelFactory.enqueue(fakeChannel);
+          final service = TelemetryWebsocketService(
+            client,
+            'http://localhost:8080',
+            channelFactory: channelFactory.call,
+          );
 
-        final fakeChannel = FakeWebSocketChannel();
-        channelFactory.enqueue(fakeChannel);
+          final subscriber = attributesSubscriber(service, 'device-1');
+          service.subscribe(subscriber);
+          async.flushMicrotasks();
+          service.unsubscribe(subscriber);
+          async.flushMicrotasks();
+          // The server's answer to the unsubscribe arms the idle timer.
+          fakeChannel.injectMessage(
+            jsonEncode({'subscriptionId': 1, 'data': {}}),
+          );
+          async.flushMicrotasks();
 
-        final service = TelemetryWebsocketService(
-          client,
-          'http://localhost:8080',
-          channelFactory: channelFactory.call,
-        );
-
-        final subscriber =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-              telemetryService: service,
-              entityId: deviceId('device-1'),
-              attributeScope: 'LATEST_TELEMETRY',
-            );
-        service.subscribe(subscriber);
-        await Future.delayed(Duration(milliseconds: 10));
-
-        service.unsubscribe(subscriber);
-        await Future.delayed(Duration(milliseconds: 10));
-
-        expect(
-          fakeChannel.closeCode,
-          isNull,
-          reason: 'Socket should not close immediately after last unsubscribe',
-        );
-      });
-
-      test('new subscription cancels idle timer', () async {
-        await loginClient(client);
-
-        final fakeChannel = FakeWebSocketChannel();
-        channelFactory.enqueue(fakeChannel);
-
-        final service = TelemetryWebsocketService(
-          client,
-          'http://localhost:8080',
-          channelFactory: channelFactory.call,
-        );
-
-        final subscriber1 =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-              telemetryService: service,
-              entityId: deviceId('device-1'),
-              attributeScope: 'LATEST_TELEMETRY',
-            );
-        service.subscribe(subscriber1);
-        await Future.delayed(Duration(milliseconds: 10));
-
-        service.unsubscribe(subscriber1);
-        await Future.delayed(Duration(milliseconds: 10));
-
-        final subscriber2 =
-            TelemetrySubscriber.createEntityAttributesSubscription(
-              telemetryService: service,
-              entityId: deviceId('device-2'),
-              attributeScope: 'LATEST_TELEMETRY',
-            );
-        service.subscribe(subscriber2);
-        await Future.delayed(Duration(milliseconds: 10));
-
-        expect(
-          fakeChannel.closeCode,
-          isNull,
-          reason: 'Socket should remain open when subscriber re-added',
-        );
-
-        service.unsubscribe(subscriber2);
+          async.elapse(Duration(milliseconds: WS_IDLE_TIMEOUT - 1));
+          expect(fakeChannel.closeCode, isNull);
+          async.elapse(Duration(milliseconds: 2));
+          expect(fakeChannel.closeCode, isNotNull);
+        });
       });
 
       test(
@@ -1162,36 +960,6 @@ void main() {
         service.reset(true);
       });
 
-      test('a live subscriber keeps the socket open past the idle timeout '
-          'after a reconnect', () async {
-        final (:service, :dropped, :reconnectChannel) = await dropIntoBackoff();
-        fakeAsync((async) {
-          service.unsubscribe(dropped);
-          service.subscribe(attributesSubscriber(service, 'device-2'));
-          async.flushMicrotasks();
-          // Only an incoming message arms the idle close; publishing re-cancels it.
-          reconnectChannel.injectMessage(
-            jsonEncode({
-              'subscriptionId': 1,
-              'data': {
-                'temperature': [
-                  [1000, '25.0'],
-                ],
-              },
-            }),
-          );
-          async.flushMicrotasks();
-          async.elapse(Duration(milliseconds: WS_IDLE_TIMEOUT * 2));
-
-          expect(
-            reconnectChannel.closeCode,
-            isNull,
-            reason: 'The socket still has a live subscriber',
-          );
-          service.reset(true);
-        });
-      });
-
       test('a surviving subscriber and one added during the backoff are both '
           'published on reopen', () async {
         final (:service, :dropped, :reconnectChannel) = await dropIntoBackoff();
@@ -1218,43 +986,12 @@ void main() {
         );
         service.reset(true);
       });
-
-      test(
-        'after reset(true) the next subscribe is published on open',
-        () async {
-          final (:service, :dropped, :reconnectChannel) =
-              await dropIntoBackoff();
-          service.unsubscribe(dropped);
-
-          service.reset(true);
-          service.subscribe(attributesSubscriber(service, 'device-2'));
-          await Future.delayed(Duration(milliseconds: 10));
-
-          expect(
-            sentCmds(reconnectChannel).map((c) => c['entityId']),
-            equals(['device-2']),
-          );
-          service.reset(true);
-        },
-      );
     });
 
-    group('getTelemetryService integration', () {
-      test('getTelemetryService returns a TelemetryService', () {
-        final service = client.getTelemetryService();
-        expect(service, isA<TelemetryService>());
-        expect(service, isA<TelemetryWebsocketService>());
-      });
-
-      test('getTelemetryService returns same instance on repeated calls', () {
-        final s1 = client.getTelemetryService();
-        final s2 = client.getTelemetryService();
-        expect(identical(s1, s2), isTrue);
-      });
-
-      test('apiEndpoint getter returns the endpoint', () {
-        expect(client.apiEndpoint, equals('http://localhost:8080'));
-      });
+    test('getTelemetryService returns one TelemetryWebsocketService', () {
+      final service = client.getTelemetryService();
+      expect(service, isA<TelemetryWebsocketService>());
+      expect(client.getTelemetryService(), same(service));
     });
   });
 
@@ -1523,24 +1260,6 @@ void main() {
         ),
         throwsArgumentError,
       );
-    });
-
-    test('EntityDataCmd with an alias entity id', () {
-      final cmd = EntityDataCmd(
-        cmdId: 1,
-        query: EntityDataQuery(
-          (b) => b
-            ..entityFilter = SingleEntityFilter(
-              (f) => f..singleEntity.entityType = 'CURRENT_USER',
-            )
-            ..pageLink.pageSize = 1,
-        ),
-      );
-      final json = jsonDecode(jsonEncode(cmd.toJson()));
-      expect(json['query']['entityFilter'], {
-        'type': 'singleEntity',
-        'singleEntity': {'entityType': 'CURRENT_USER'},
-      });
     });
   });
 

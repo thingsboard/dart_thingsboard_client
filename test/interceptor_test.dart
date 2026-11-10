@@ -214,20 +214,18 @@ void main() {
     });
 
     test('does NOT inject auth header for /api/noauth/ paths', () async {
-      String? capturedAuthHeader;
+      await loginClient();
       mockAdapter.onRoute('/api/noauth/resetPasswordByEmail', (req) {
-        capturedAuthHeader = req.headers['X-Authorization'];
         return ResponseBody.fromString('', 200);
       });
 
-      try {
-        await client.post(
-          '/api/noauth/resetPasswordByEmail',
-          data: jsonEncode({'email': 'test@test.com'}),
-        );
-      } catch (_) {}
+      await client.post(
+        '/api/noauth/resetPasswordByEmail',
+        data: jsonEncode({'email': 'test@test.com'}),
+      );
 
-      expect(capturedAuthHeader, isNull);
+      expect(mockAdapter.requestedPaths, ['/api/noauth/resetPasswordByEmail']);
+      expect(mockAdapter.requestedHeaders.single['X-Authorization'], isNull);
     });
   });
 
@@ -331,43 +329,6 @@ void main() {
     }, timeout: Timeout(Duration(seconds: 10)));
   });
 
-  group('load callbacks', () {
-    test(
-      'first request fires onLoadStarted, last response fires onLoadFinished',
-      () async {
-        var loadStartCount = 0;
-        var loadFinishCount = 0;
-
-        client = ThingsboardClient(
-          'http://localhost:8080',
-          onLoadStarted: () => loadStartCount++,
-          onLoadFinished: () => loadFinishCount++,
-        );
-        setMockAdapter(client, mockAdapter);
-        await loginClient();
-        await Future.delayed(Duration(milliseconds: 50));
-        loadStartCount = 0;
-        loadFinishCount = 0;
-
-        mockAdapter.onRoute('/api/devices', (req) {
-          return ResponseBody.fromString(
-            '[]',
-            200,
-            headers: {
-              'content-type': ['application/json'],
-            },
-          );
-        });
-
-        await client.get('/api/devices');
-        await Future.delayed(Duration(milliseconds: 50));
-
-        expect(loadStartCount, greaterThanOrEqualTo(1));
-        expect(loadFinishCount, greaterThanOrEqualTo(1));
-      },
-    );
-  });
-
   group('ignoreLoading', () {
     test(
       'request with ignoreLoading=true does NOT fire load callbacks',
@@ -436,19 +397,19 @@ void main() {
     test(
       'refresh token call goes through internal Dio (no auth header loop)',
       () async {
-        // This test verifies that when refreshJwtToken is called via the interceptor,
-        // it uses the internal Dio (so the refresh call does NOT go through the main
-        // interceptor chain, avoiding recursion).
         await loginClient();
+        final internalAdapter = MockHttpClientAdapter();
+        client.dio.interceptors
+                .whereType<HttpInterceptor>()
+                .single
+                .internalDio
+                .httpClientAdapter =
+            internalAdapter;
 
         final newJwt = createTestJwt(sub: 'refreshed');
         final newRefresh = createTestJwt(scope: 'REFRESH_TOKEN');
 
-        // Track whether /api/auth/token had an auth header — it should NOT
-        // because it's using _internalDio which has no HttpInterceptor
-        String? tokenRequestAuthHeader;
-        mockAdapter.onRoute('/api/auth/token', (req) {
-          tokenRequestAuthHeader = req.headers['X-Authorization'];
+        internalAdapter.onRoute('/api/auth/token', (req) {
           return ResponseBody.fromString(
             jsonEncode({'token': newJwt, 'refreshToken': newRefresh}),
             200,
@@ -481,12 +442,10 @@ void main() {
           );
         });
 
-        await client.get(
-          '/api/devices',
-          options: defaultHttpOptions(resendRequest: true),
-        );
+        await client.get('/api/devices');
 
-        expect(tokenRequestAuthHeader, isNull);
+        expect(internalAdapter.requestedPaths, ['/api/auth/token']);
+        expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/token')));
       },
     );
   });

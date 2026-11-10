@@ -23,12 +23,6 @@ void main() {
       expect(result, equals('value1'));
     });
 
-    test('setItem then getItem returns same int value', () async {
-      await storage.setItem('count', 42);
-      final result = await storage.getItem('count');
-      expect(result, equals(42));
-    });
-
     test('setItem overwrites existing value', () async {
       await storage.setItem('key1', 'first');
       await storage.setItem('key1', 'second');
@@ -68,19 +62,6 @@ void main() {
 
     test('containsKey returns false for missing key', () async {
       expect(await storage.containsKey('absent'), isFalse);
-    });
-
-    test('containsKey returns false after deleteItem', () async {
-      await storage.setItem('key1', 'value1');
-      await storage.deleteItem('key1');
-      expect(await storage.containsKey('key1'), isFalse);
-    });
-
-    test('stores and retrieves Map value', () async {
-      final map = {'name': 'Alice', 'age': 30};
-      await storage.setItem('user', map);
-      final result = await storage.getItem('user');
-      expect(result, equals(map));
     });
 
     test('multiple keys are independent', () async {

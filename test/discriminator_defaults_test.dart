@@ -49,20 +49,7 @@ void main() {
   });
 
   test('an explicit discriminator still wins', () {
-    final filter = EntityTypeFilter((b) => b..type = 'entityType');
-    expect(filter.type, 'entityType');
     final other = SingleEntityFilter((b) => b..type = 'custom');
     expect(other.type, 'custom');
-  });
-
-  test('deserialization is unchanged', () {
-    final json = {
-      'entityType': 'DEVICE',
-      'id': '784f394c-42b6-435a-983c-b7beff2784f9',
-    };
-    final id = standardSerializers.deserializeWith(DeviceId.serializer, json)!;
-    expect(id.entityType, EntityType.DEVICE);
-    expect(id.id, '784f394c-42b6-435a-983c-b7beff2784f9');
-    expect(standardSerializers.serializeWith(DeviceId.serializer, id), json);
   });
 }

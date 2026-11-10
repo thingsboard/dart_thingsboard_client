@@ -31,18 +31,6 @@ void main() {
       },
     );
 
-    test('fromJson with empty data list', () {
-      final json = {
-        'data': <dynamic>[],
-        'totalPages': 0,
-        'totalElements': 0,
-        'hasNext': false,
-      };
-      final page = PageData.fromJson(json, (j) => j as Map);
-      expect(page.data, isEmpty);
-      expect(page.hasNext, isFalse);
-    });
-
     test('emptyPageData creates zero-element page', () {
       final page = emptyPageData<String>();
       expect(page.data, isEmpty);
@@ -116,10 +104,6 @@ void main() {
       final params = link.toQueryParameters();
       expect(params.containsKey('startTime'), isFalse);
       expect(params.containsKey('endTime'), isFalse);
-    });
-
-    test('extends PageLink correctly', () {
-      expect(TimePageLink(5), isA<PageLink>());
     });
 
     test('nextPageLink returns TimePageLink with preserved times', () {

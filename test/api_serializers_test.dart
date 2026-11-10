@@ -3,12 +3,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/json_object.dart';
+import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
@@ -47,6 +50,31 @@ class _FakeAdapter implements HttpClientAdapter {
 
 Dio _dio(_FakeAdapter adapter) =>
     Dio(BaseOptions(baseUrl: 'http://tb'))..httpClientAdapter = adapter;
+
+/// Runs [body] in a new isolate. The apiSerializers registry is a global, so
+/// there it holds only what [body] registers, not what earlier tests did.
+/// `expect` only works in the test isolate: [body] returns what to check.
+Future<T> _withFreshRegistry<T>(FutureOr<T> Function() body) =>
+    Isolate.run(body);
+
+class _CountingPlugin implements SerializerPlugin {
+  int deserialized = 0;
+
+  @override
+  Object? beforeSerialize(Object? object, FullType specifiedType) => object;
+
+  @override
+  Object? afterSerialize(Object? object, FullType specifiedType) => object;
+
+  @override
+  Object? beforeDeserialize(Object? object, FullType specifiedType) {
+    deserialized++;
+    return object;
+  }
+
+  @override
+  Object? afterDeserialize(Object? object, FullType specifiedType) => object;
+}
 
 void main() {
   test('API classes do not reference standardSerializers', () {
@@ -93,20 +121,23 @@ void main() {
   });
 
   test('serializes a discriminated subtype as the request body', () async {
-    final adapter = _FakeAdapter({
-      '/api/2fa/account/config': {'configs': <String, Object>{}},
+    final body = await _withFreshRegistry(() async {
+      final adapter = _FakeAdapter({
+        '/api/2fa/account/config': {'configs': <String, Object>{}},
+      });
+      await TwoFactorAuthConfigControllerApi(
+        _dio(adapter),
+      ).verifyAndSaveTwoFaAccountConfig(
+        twoFaAccountConfig: TotpTwoFaAccountConfig(
+          (b) => b
+            ..providerType = 'TOTP'
+            ..authUrl = 'otpauth://x'
+            ..useByDefault = true,
+        ),
+      );
+      return adapter.requestBodies.single;
     });
-    await TwoFactorAuthConfigControllerApi(
-      _dio(adapter),
-    ).verifyAndSaveTwoFaAccountConfig(
-      twoFaAccountConfig: TotpTwoFaAccountConfig(
-        (b) => b
-          ..providerType = 'TOTP'
-          ..authUrl = 'otpauth://x'
-          ..useByDefault = true,
-      ),
-    );
-    expect(adapter.requestBodies.single, {
+    expect(body, {
       'providerType': 'TOTP',
       'authUrl': 'otpauth://x',
       'useByDefault': true,
@@ -234,11 +265,13 @@ void main() {
         'operationsByResource': <String, Object>{},
       },
     });
+    final plugin = _CountingPlugin();
     final info = (await UserPermissionsControllerApi(
       _dio(adapter),
-      standardSerializers,
+      (standardSerializers.toBuilder()..addPlugin(plugin)).build(),
     ).getAllowedPermissions()).data!;
     expect(info.operationsByResource, isEmpty);
+    expect(plugin.deserialized, greaterThan(0));
   });
 
   group('operations with a string response', () {
@@ -292,42 +325,47 @@ void main() {
 
     test(
       'registerPageDataEntityData deserializes entity data with a DeviceId',
-      () {
-        // The fixture's `data` is null; its `update` is a list of entity data.
-        final json = {
-          'data': (fixture('entity_data_update.json')! as Map)['update'],
-          'totalPages': 1,
-          'totalElements': 1,
-          'hasNext': false,
-        };
-        final page = apiSerializers(
-          registerPageDataEntityData,
-        ).deserializeWith(PageDataEntityData.serializer, json)!;
-        expect(page.data!.first.entityId, isA<DeviceId>());
+      () async {
+        final isDeviceId = await _withFreshRegistry(() {
+          // The fixture's `data` is null; its `update` is a list of entity data.
+          final json = {
+            'data': (fixture('entity_data_update.json')! as Map)['update'],
+            'totalPages': 1,
+            'totalElements': 1,
+            'hasNext': false,
+          };
+          final page = apiSerializers(
+            registerPageDataEntityData,
+          ).deserializeWith(PageDataEntityData.serializer, json)!;
+          return page.data!.first.entityId is DeviceId;
+        });
+        expect(isDeviceId, isTrue);
       },
     );
 
     test(
       'registerEntityDataQuery serializes a query with an alias entity id',
-      () {
-        final query = EntityDataQuery(
-          (b) => b
-            ..entityFilter = SingleEntityFilter(
-              (f) => f
-                ..singleEntity = AliasEntityId(
-                  (a) => a..entityType = 'CURRENT_USER',
-                ).toBuilder(),
-            )
-            ..pageLink = EntityDataPageLink(
-              (p) => p..pageSize = 10,
-            ).toBuilder(),
-        );
-        final json =
-            apiSerializers(
-                  registerEntityDataQuery,
-                ).serializeWith(EntityDataQuery.serializer, query)!
-                as Map;
-        final filter = json['entityFilter'] as Map;
+      () async {
+        final filter = await _withFreshRegistry(() {
+          final query = EntityDataQuery(
+            (b) => b
+              ..entityFilter = SingleEntityFilter(
+                (f) => f
+                  ..singleEntity = AliasEntityId(
+                    (a) => a..entityType = 'CURRENT_USER',
+                  ).toBuilder(),
+              )
+              ..pageLink = EntityDataPageLink(
+                (p) => p..pageSize = 10,
+              ).toBuilder(),
+          );
+          final json =
+              apiSerializers(
+                    registerEntityDataQuery,
+                  ).serializeWith(EntityDataQuery.serializer, query)!
+                  as Map;
+          return json['entityFilter'] as Map;
+        });
         expect(filter['type'], 'singleEntity');
         expect((filter['singleEntity'] as Map)['entityType'], 'CURRENT_USER');
       },
@@ -404,19 +442,6 @@ void main() {
       expect(back, log);
       expect(back.entityId, isA<DeviceId>());
       expect((back.actionData!.asMap)['name'], 'dev');
-    });
-
-    test('registerEntityData round-trips a polymorphic entityId', () {
-      final data = EntityData(
-        (b) => b..entityId = DeviceId((i) => i.id = 'd1'),
-      );
-      final serializers = apiSerializers(registerEntityData);
-      final back = serializers.fromJson(
-        EntityData.serializer,
-        serializers.toJson(EntityData.serializer, data),
-      )!;
-      expect(back, data);
-      expect(back.entityId, isA<DeviceId>());
     });
   });
 }

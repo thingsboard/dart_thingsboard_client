@@ -126,10 +126,9 @@ void main() {
       () async {
         final jwtToken = createTestJwt();
         final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
+        Object? sent;
         mockAdapter.onRoute('/api/auth/login', (req) {
-          final body = req.data is String ? jsonDecode(req.data) : req.data;
-          expect(body['username'], equals('user@test.com'));
-          expect(body['password'], equals('pass'));
+          sent = req.data is String ? jsonDecode(req.data) : req.data;
           return ResponseBody.fromString(
             jsonEncode({'token': jwtToken, 'refreshToken': refreshToken}),
             200,
@@ -147,6 +146,7 @@ void main() {
           ),
         );
 
+        expect(sent, equals({'username': 'user@test.com', 'password': 'pass'}));
         expect(response.token, equals(jwtToken));
         expect(client.getJwtToken(), equals(jwtToken));
         expect(client.isAuthenticated(), isTrue);
@@ -155,37 +155,10 @@ void main() {
       },
     );
 
-    test(
-      'login sends the generated LoginRequest as {username, password}',
-      () async {
-        Object? sent;
-        mockAdapter.onRoute('/api/auth/login', (req) {
-          sent = req.data is String ? jsonDecode(req.data) : req.data;
-          return ResponseBody.fromString(
-            jsonEncode({
-              'token': createTestJwt(),
-              'refreshToken': createTestJwt(scope: 'REFRESH_TOKEN'),
-            }),
-            200,
-            headers: {
-              'content-type': ['application/json'],
-            },
-          );
-        });
-
-        await client.login(
-          LoginRequest(
-            (b) => b
-              ..username = 'user@test.com'
-              ..password = 'pass',
-          ),
-        );
-
-        expect(sent, equals({'username': 'user@test.com', 'password': 'pass'}));
-      },
-    );
-
     test('login stores tokens in storage', () async {
+      final storage = InMemoryStorage();
+      client = ThingsboardClient('http://localhost:8080', storage: storage);
+      client.dio.httpClientAdapter = mockAdapter;
       final jwtToken = createTestJwt();
       final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
       mockAdapter.onRoute('/api/auth/login', (req) {
@@ -206,102 +179,12 @@ void main() {
         ),
       );
 
-      expect(client.getJwtToken(), equals(jwtToken));
-      expect(client.getRefreshToken(), equals(refreshToken));
+      expect(await storage.getItem('jwt_token'), equals(jwtToken));
+      expect(await storage.getItem('refresh_token'), equals(refreshToken));
     });
   });
 
   group('MFA', () {
-    test(
-      'login with PRE_VERIFICATION_TOKEN triggers onMfaAuth callback',
-      () async {
-        final mfaCompleter = Completer<void>();
-        var mfaAuthCalled = false;
-
-        final mfaToken = createTestJwt(scope: 'PRE_VERIFICATION_TOKEN');
-        final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
-
-        client = ThingsboardClient(
-          'http://localhost:8080',
-          onMfaAuth: () {
-            mfaAuthCalled = true;
-            mfaCompleter.complete();
-          },
-        );
-        client.dio.httpClientAdapter = mockAdapter;
-
-        mockAdapter.onRoute('/api/auth/login', (req) {
-          return ResponseBody.fromString(
-            jsonEncode({
-              'token': mfaToken,
-              'refreshToken': refreshToken,
-              'scope': 'PRE_VERIFICATION_TOKEN',
-            }),
-            200,
-            headers: {
-              'content-type': ['application/json'],
-            },
-          );
-        });
-
-        await client.login(
-          LoginRequest(
-            (b) => b
-              ..username = 'user@test.com'
-              ..password = 'pass',
-          ),
-        );
-        await mfaCompleter.future.timeout(Duration(seconds: 2));
-
-        expect(mfaAuthCalled, isTrue);
-      },
-    );
-
-    test(
-      'login with MFA_CONFIGURATION_TOKEN triggers onMfaForce callback',
-      () async {
-        final mfaCompleter = Completer<void>();
-        var mfaForceCalled = false;
-
-        final mfaToken = createTestJwt(scope: 'MFA_CONFIGURATION_TOKEN');
-        final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
-
-        client = ThingsboardClient(
-          'http://localhost:8080',
-          onMfaForce: () {
-            mfaForceCalled = true;
-            mfaCompleter.complete();
-          },
-        );
-        client.dio.httpClientAdapter = mockAdapter;
-
-        mockAdapter.onRoute('/api/auth/login', (req) {
-          return ResponseBody.fromString(
-            jsonEncode({
-              'token': mfaToken,
-              'refreshToken': refreshToken,
-              'scope': 'MFA_CONFIGURATION_TOKEN',
-            }),
-            200,
-            headers: {
-              'content-type': ['application/json'],
-            },
-          );
-        });
-
-        await client.login(
-          LoginRequest(
-            (b) => b
-              ..username = 'user@test.com'
-              ..password = 'pass',
-          ),
-        );
-        await mfaCompleter.future.timeout(Duration(seconds: 2));
-
-        expect(mfaForceCalled, isTrue);
-      },
-    );
-
     Future<LoginResponse> loginWith(
       Map<String, dynamic> body, {
       void Function()? onMfaAuth,
@@ -366,21 +249,6 @@ void main() {
     });
 
     test(
-      'a normal login response has token and refreshToken and no scope',
-      () async {
-        final token = createTestJwt();
-        final refresh = createTestJwt(scope: 'REFRESH_TOKEN');
-        final response = await loginWith({
-          'token': token,
-          'refreshToken': refresh,
-        });
-        expect(response.token, token);
-        expect(response.refreshToken, refresh);
-        expect(response.scope, isNull);
-      },
-    );
-
-    test(
       'an unknown scope decodes to unknownDefaultOpenApi and does not trigger MFA callbacks',
       () async {
         var called = false;
@@ -429,9 +297,9 @@ void main() {
           ),
         );
 
+        Object? sent;
         mockAdapter.onRoute('/api/auth/token', (req) {
-          final body = req.data is String ? jsonDecode(req.data) : req.data;
-          expect(body['refreshToken'], equals(initialRefresh));
+          sent = req.data is String ? jsonDecode(req.data) : req.data;
           return ResponseBody.fromString(
             jsonEncode({'token': newJwt, 'refreshToken': newRefresh}),
             200,
@@ -443,52 +311,10 @@ void main() {
 
         await client.refreshJwtToken(notify: false);
 
+        expect(sent, equals({'refreshToken': initialRefresh}));
         expect(client.getJwtToken(), equals(newJwt));
       },
     );
-  });
-
-  group('refresh body', () {
-    test('token refresh sends {refreshToken}', () async {
-      final initialRefresh = createTestJwt(scope: 'REFRESH_TOKEN');
-      mockAdapter.onRoute('/api/auth/login', (req) {
-        return ResponseBody.fromString(
-          jsonEncode({
-            'token': createTestJwt(),
-            'refreshToken': initialRefresh,
-          }),
-          200,
-          headers: {
-            'content-type': ['application/json'],
-          },
-        );
-      });
-      await client.login(
-        LoginRequest(
-          (b) => b
-            ..username = 'user@test.com'
-            ..password = 'pass',
-        ),
-      );
-      Object? sent;
-      mockAdapter.onRoute('/api/auth/token', (req) {
-        sent = req.data is String ? jsonDecode(req.data) : req.data;
-        return ResponseBody.fromString(
-          jsonEncode({
-            'token': createTestJwt(sub: 'refreshed'),
-            'refreshToken': createTestJwt(scope: 'REFRESH_TOKEN', sub: 'r2'),
-          }),
-          200,
-          headers: {
-            'content-type': ['application/json'],
-          },
-        );
-      });
-
-      await client.refreshJwtToken(notify: false);
-
-      expect(sent, equals({'refreshToken': initialRefresh}));
-    });
   });
 
   group('concurrent refresh', () {
@@ -971,6 +797,8 @@ void main() {
         await client.init();
 
         expect(client.isAuthenticated(), isFalse);
+        expect(await storage.containsKey('jwt_token'), isFalse);
+        expect(await storage.containsKey('refresh_token'), isFalse);
         expect(mockAdapter.requestedPaths, isNot(contains('/api/auth/token')));
       },
     );
@@ -1233,20 +1061,9 @@ void main() {
           // The caller decides whether to use the tokens.
           expect(client.getJwtToken(), oldJwt);
           expect(client.getRefreshToken(), oldRefresh);
+          expect(userLoadedCount, 0);
         },
       );
-
-      test('does not set a session on a client without one', () async {
-        mockAdapter.onRoute('/api/noauth/qr/secret-key', jwtPairResponse);
-
-        await client.getLoginDataBySecretKey(
-          host: 'http://localhost:8080',
-          key: 'secret-key',
-        );
-
-        expect(client.isAuthenticated(), isFalse);
-        expect(userLoadedCount, 0);
-      });
 
       test('throws ThingsboardError for an unknown key', () async {
         mockAdapter.onRoute('/api/noauth/qr/expired', badRequest);

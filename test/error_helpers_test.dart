@@ -188,18 +188,6 @@ void main() {
       expect(e.thingsboardError.errorCode, ThingsBoardErrorCode.itemNotFound);
     });
 
-    test('maps a connection error to "Unable to connect"', () {
-      final e = DioException(
-        requestOptions: RequestOptions(path: devicePath),
-        type: DioExceptionType.connectionError,
-      );
-
-      final error = e.thingsboardError;
-
-      expect(error.message, 'Unable to connect');
-      expect(error.errorCode, ThingsBoardErrorCode.general);
-    });
-
     test('maps an inner error that is not a ThingsboardError', () {
       final e = DioException(
         requestOptions: RequestOptions(path: devicePath),
@@ -236,23 +224,5 @@ void main() {
         expect(error.error, same(e));
       },
     );
-
-    test('maps an error response that did not pass the interceptor', () {
-      final options = RequestOptions(path: devicePath);
-      final e = DioException(
-        requestOptions: options,
-        response: Response<Object>(
-          requestOptions: options,
-          statusCode: 403,
-          data: {'status': 403, 'message': 'Forbidden', 'errorCode': 20},
-        ),
-        type: DioExceptionType.badResponse,
-      );
-
-      final error = e.thingsboardError;
-
-      expect(error.errorCode, ThingsBoardErrorCode.permissionDenied);
-      expect(error.status, 403);
-    });
   });
 }

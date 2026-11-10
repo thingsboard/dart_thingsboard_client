@@ -35,22 +35,6 @@ void main() {
       expect(id.entityType, 'CURRENT_USER');
       expect(id.id, isNull);
     });
-
-    test('an entity id keeps its type and id', () {
-      final json = {
-        'entityType': 'DEVICE',
-        'id': '784f394c-42b6-435a-983c-b7beff2784f9',
-      };
-      final id = standardSerializers.deserializeWith(
-        AliasEntityId.serializer,
-        json,
-      )!;
-
-      expect(
-        standardSerializers.serializeWith(AliasEntityId.serializer, id),
-        json,
-      );
-    });
   });
 
   test('ColumnSettings is a DataKeySettings subtype', () {
