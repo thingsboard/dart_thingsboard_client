@@ -21,7 +21,7 @@ class _$ReportInfo extends ReportInfo {
   @override
   final CustomerId? customerId;
   @override
-  final ReportTemplateId templateId;
+  final ReportTemplateId? templateId;
   @override
   final TbReportFormat format;
   @override
@@ -49,7 +49,7 @@ class _$ReportInfo extends ReportInfo {
     this.createdTime,
     required this.tenantId,
     this.customerId,
-    required this.templateId,
+    this.templateId,
     required this.format,
     required this.name,
     required this.userId,
@@ -206,7 +206,7 @@ class ReportInfoBuilder implements Builder<ReportInfo, ReportInfoBuilder> {
       _createdTime = $v.createdTime;
       _tenantId = $v.tenantId.toBuilder();
       _customerId = $v.customerId?.toBuilder();
-      _templateId = $v.templateId.toBuilder();
+      _templateId = $v.templateId?.toBuilder();
       _format = $v.format;
       _name = $v.name;
       _userId = $v.userId.toBuilder();
@@ -244,7 +244,7 @@ class ReportInfoBuilder implements Builder<ReportInfo, ReportInfoBuilder> {
             createdTime: createdTime,
             tenantId: tenantId.build(),
             customerId: _customerId?.build(),
-            templateId: templateId.build(),
+            templateId: _templateId?.build(),
             format: BuiltValueNullFieldError.checkNotNull(
               format,
               r'ReportInfo',
@@ -274,7 +274,7 @@ class ReportInfoBuilder implements Builder<ReportInfo, ReportInfoBuilder> {
         _$failedField = 'customerId';
         _customerId?.build();
         _$failedField = 'templateId';
-        templateId.build();
+        _templateId?.build();
 
         _$failedField = 'userId';
         userId.build();

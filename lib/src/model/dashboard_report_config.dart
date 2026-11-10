@@ -56,7 +56,7 @@ abstract class DashboardReportConfig
 
   /// If set, timewindow configured in the target dashboard will be used during dashboard report generation.
   @BuiltValueField(wireName: r'namePattern')
-  String get namePattern;
+  String? get namePattern;
 
   /// Dashboard report file type, can be PDF | PNG | JPEG.
   @BuiltValueField(wireName: r'type')
@@ -68,7 +68,7 @@ abstract class DashboardReportConfig
 
   /// A string value representing the user id.
   @BuiltValueField(wireName: r'userId')
-  String get userId;
+  String? get userId;
 
   DashboardReportConfig._();
 
@@ -136,11 +136,13 @@ class _$DashboardReportConfigSerializer
         specifiedType: const FullType.nullable(JsonObject),
       );
     }
-    yield r'namePattern';
-    yield serializers.serialize(
-      object.namePattern,
-      specifiedType: const FullType(String),
-    );
+    if (object.namePattern != null) {
+      yield r'namePattern';
+      yield serializers.serialize(
+        object.namePattern,
+        specifiedType: const FullType(String),
+      );
+    }
     if (object.type != null) {
       yield r'type';
       yield serializers.serialize(
@@ -155,11 +157,13 @@ class _$DashboardReportConfigSerializer
         specifiedType: const FullType(bool),
       );
     }
-    yield r'userId';
-    yield serializers.serialize(
-      object.userId,
-      specifiedType: const FullType(String),
-    );
+    if (object.userId != null) {
+      yield r'userId';
+      yield serializers.serialize(
+        object.userId,
+        specifiedType: const FullType(String),
+      );
+    }
   }
 
   @override
@@ -248,9 +252,10 @@ class _$DashboardReportConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType.nullable(String),
                   )
-                  as String;
+                  as String?;
+          if (valueDes == null) continue;
           result.namePattern = valueDes;
           break;
         case r'type':
@@ -277,9 +282,10 @@ class _$DashboardReportConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType.nullable(String),
                   )
-                  as String;
+                  as String?;
+          if (valueDes == null) continue;
           result.userId = valueDes;
           break;
         default:

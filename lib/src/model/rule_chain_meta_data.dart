@@ -42,7 +42,7 @@ abstract class RuleChainMetaData
 
   /// Index of the first rule node in the 'nodes' list
   @BuiltValueField(wireName: r'firstNodeIndex')
-  int get firstNodeIndex;
+  int? get firstNodeIndex;
 
   /// List of rule node JSON objects
   @BuiltValueField(wireName: r'nodes')
@@ -50,11 +50,11 @@ abstract class RuleChainMetaData
 
   /// List of JSON objects that represent connections between rule nodes
   @BuiltValueField(wireName: r'connections')
-  BuiltList<NodeConnectionInfo> get connections;
+  BuiltList<NodeConnectionInfo>? get connections;
 
   /// List of JSON objects that represent connections between rule nodes and other rule chains.
   @BuiltValueField(wireName: r'ruleChainConnections')
-  BuiltList<RuleChainConnectionInfo> get ruleChainConnections;
+  BuiltList<RuleChainConnectionInfo>? get ruleChainConnections;
 
   /// List of sticky notes placed on the rule chain canvas
   @BuiltValueField(wireName: r'notes')
@@ -98,28 +98,36 @@ class _$RuleChainMetaDataSerializer
         specifiedType: const FullType(int),
       );
     }
-    yield r'firstNodeIndex';
-    yield serializers.serialize(
-      object.firstNodeIndex,
-      specifiedType: const FullType(int),
-    );
+    if (object.firstNodeIndex != null) {
+      yield r'firstNodeIndex';
+      yield serializers.serialize(
+        object.firstNodeIndex,
+        specifiedType: const FullType(int),
+      );
+    }
     yield r'nodes';
     yield serializers.serialize(
       object.nodes,
       specifiedType: const FullType(BuiltList, [FullType(RuleNode)]),
     );
-    yield r'connections';
-    yield serializers.serialize(
-      object.connections,
-      specifiedType: const FullType(BuiltList, [FullType(NodeConnectionInfo)]),
-    );
-    yield r'ruleChainConnections';
-    yield serializers.serialize(
-      object.ruleChainConnections,
-      specifiedType: const FullType(BuiltList, [
-        FullType(RuleChainConnectionInfo),
-      ]),
-    );
+    if (object.connections != null) {
+      yield r'connections';
+      yield serializers.serialize(
+        object.connections,
+        specifiedType: const FullType(BuiltList, [
+          FullType(NodeConnectionInfo),
+        ]),
+      );
+    }
+    if (object.ruleChainConnections != null) {
+      yield r'ruleChainConnections';
+      yield serializers.serialize(
+        object.ruleChainConnections,
+        specifiedType: const FullType(BuiltList, [
+          FullType(RuleChainConnectionInfo),
+        ]),
+      );
+    }
     if (object.notes != null) {
       yield r'notes';
       yield serializers.serialize(
@@ -175,8 +183,12 @@ class _$RuleChainMetaDataSerializer
           break;
         case r'firstNodeIndex':
           final valueDes =
-              serializers.deserialize(value, specifiedType: const FullType(int))
-                  as int;
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
+          if (valueDes == null) continue;
           result.firstNodeIndex = valueDes;
           break;
         case r'nodes':
@@ -194,22 +206,24 @@ class _$RuleChainMetaDataSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(BuiltList, [
+                    specifiedType: const FullType.nullable(BuiltList, [
                       FullType(NodeConnectionInfo),
                     ]),
                   )
-                  as BuiltList<NodeConnectionInfo>;
+                  as BuiltList<NodeConnectionInfo>?;
+          if (valueDes == null) continue;
           result.connections.replace(valueDes);
           break;
         case r'ruleChainConnections':
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(BuiltList, [
+                    specifiedType: const FullType.nullable(BuiltList, [
                       FullType(RuleChainConnectionInfo),
                     ]),
                   )
-                  as BuiltList<RuleChainConnectionInfo>;
+                  as BuiltList<RuleChainConnectionInfo>?;
+          if (valueDes == null) continue;
           result.ruleChainConnections.replace(valueDes);
           break;
         case r'notes':

@@ -8,7 +8,7 @@ import 'package:thingsboard_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**subType** | [**ReportComponentSubType**](ReportComponentSubType.md) |  | 
+**subType** | [**ReportComponentSubType**](ReportComponentSubType.md) |  | [optional] 
 **type** | [**ReportComponentType**](ReportComponentType.md) |  | 
 **dataSources** | [**BuiltList&lt;DataSource&gt;**](DataSource.md) |  | [optional] 
 **margins** | [**Insets**](Insets.md) |  | [optional] 

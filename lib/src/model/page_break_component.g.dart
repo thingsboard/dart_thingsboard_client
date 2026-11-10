@@ -13,7 +13,7 @@ part of 'page_break_component.dart';
 
 class _$PageBreakComponent extends PageBreakComponent {
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -21,8 +21,7 @@ class _$PageBreakComponent extends PageBreakComponent {
     void Function(PageBreakComponentBuilder)? updates,
   ]) => (PageBreakComponentBuilder()..update(updates))._build();
 
-  _$PageBreakComponent._({required this.subType, required this.type})
-    : super._();
+  _$PageBreakComponent._({this.subType, required this.type}) : super._();
   @override
   PageBreakComponent rebuild(
     void Function(PageBreakComponentBuilder) updates,
@@ -104,11 +103,7 @@ class PageBreakComponentBuilder
     final _$result =
         _$v ??
         _$PageBreakComponent._(
-          subType: BuiltValueNullFieldError.checkNotNull(
-            subType,
-            r'PageBreakComponent',
-            'subType',
-          ),
+          subType: subType,
           type: BuiltValueNullFieldError.checkNotNull(
             type,
             r'PageBreakComponent',

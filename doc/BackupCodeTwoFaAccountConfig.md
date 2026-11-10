@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **useByDefault** | **bool** |  | [optional] 
 **providerType** | **String** |  | 
-**codes** | **BuiltSet&lt;String&gt;** |  | 
+**codes** | **BuiltSet&lt;String&gt;** |  | [optional] 
 **codesLeft** | **int** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

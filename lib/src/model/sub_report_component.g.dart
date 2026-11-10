@@ -19,7 +19,7 @@ class _$SubReportComponent extends SubReportComponent {
   @override
   final bool? avoidPageBreakInside;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -31,7 +31,7 @@ class _$SubReportComponent extends SubReportComponent {
     this.templateId,
     this.dataSources,
     this.avoidPageBreakInside,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -149,11 +149,7 @@ class SubReportComponentBuilder
             templateId: _templateId?.build(),
             dataSources: _dataSources?.build(),
             avoidPageBreakInside: avoidPageBreakInside,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'SubReportComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'SubReportComponent',

@@ -536,7 +536,7 @@ final String keys = keys_example; // String | A string value representing the co
 final String intervalType = intervalType_example; // String | A string value representing the type fo the interval.
 final int interval = 789; // int | A long value representing the aggregation interval range in milliseconds.
 final String timeZone = timeZone_example; // String | A string value representing the timezone that will be used to calculate exact timestamps for 'WEEK', 'WEEK_ISO', 'MONTH' and 'QUARTER' interval types.
-final String limit = limit_example; // String | An integer value that represents a max number of time series data points to fetch. This parameter is used only in the case if 'agg' parameter is set to 'NONE'.
+final int limit = 56; // int | An integer value that represents a max number of time series data points to fetch. This parameter is used only in the case if 'agg' parameter is set to 'NONE'.
 final String agg = agg_example; // String | A string value representing the aggregation function. If the interval is not specified, 'agg' parameter will use 'NONE' value.
 final String orderBy = orderBy_example; // String | Sort order. ASC (ASCENDING) or DESC (DESCENDING)
 final bool useStrictDataTypes = true; // bool | Enables/disables conversion of telemetry values to strings. Conversion is enabled by default. Set parameter to 'true' in order to disable the conversion.
@@ -562,7 +562,7 @@ Name | Type | Description  | Notes
  **intervalType** | **String**| A string value representing the type fo the interval. | [optional] 
  **interval** | **int**| A long value representing the aggregation interval range in milliseconds. | [optional] [default to 0]
  **timeZone** | **String**| A string value representing the timezone that will be used to calculate exact timestamps for 'WEEK', 'WEEK_ISO', 'MONTH' and 'QUARTER' interval types. | [optional] 
- **limit** | **String**| An integer value that represents a max number of time series data points to fetch. This parameter is used only in the case if 'agg' parameter is set to 'NONE'. | [optional] 
+ **limit** | **int**| An integer value that represents a max number of time series data points to fetch. This parameter is used only in the case if 'agg' parameter is set to 'NONE'. | [optional] 
  **agg** | **String**| A string value representing the aggregation function. If the interval is not specified, 'agg' parameter will use 'NONE' value. | [optional] 
  **orderBy** | **String**| Sort order. ASC (ASCENDING) or DESC (DESCENDING) | [optional] 
  **useStrictDataTypes** | **bool**| Enables/disables conversion of telemetry values to strings. Conversion is enabled by default. Set parameter to 'true' in order to disable the conversion. | [optional] [default to false]

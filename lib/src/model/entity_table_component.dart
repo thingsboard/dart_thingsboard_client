@@ -157,11 +157,13 @@ class _$EntityTableComponentSerializer
         specifiedType: const FullType(TableSortOrder),
       );
     }
-    yield r'subType';
-    yield serializers.serialize(
-      object.subType,
-      specifiedType: const FullType(ReportComponentSubType),
-    );
+    if (object.subType != null) {
+      yield r'subType';
+      yield serializers.serialize(
+        object.subType,
+        specifiedType: const FullType(ReportComponentSubType),
+      );
+    }
     yield r'type';
     yield serializers.serialize(
       object.type,
@@ -292,9 +294,12 @@ class _$EntityTableComponentSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(ReportComponentSubType),
+                    specifiedType: const FullType.nullable(
+                      ReportComponentSubType,
+                    ),
                   )
-                  as ReportComponentSubType;
+                  as ReportComponentSubType?;
+          if (valueDes == null) continue;
           result.subType = valueDes;
           break;
         case r'type':

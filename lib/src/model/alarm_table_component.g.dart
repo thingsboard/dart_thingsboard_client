@@ -35,7 +35,7 @@ class _$AlarmTableComponent extends AlarmTableComponent {
   @override
   final Heading? tableHeading;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -55,7 +55,7 @@ class _$AlarmTableComponent extends AlarmTableComponent {
     this.timewindow,
     this.alarmSource,
     this.tableHeading,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -253,11 +253,7 @@ class AlarmTableComponentBuilder
             timewindow: _timewindow?.build(),
             alarmSource: _alarmSource?.build(),
             tableHeading: _tableHeading?.build(),
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'AlarmTableComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'AlarmTableComponent',

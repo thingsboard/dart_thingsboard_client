@@ -13,7 +13,7 @@ part of 'backup_code_two_fa_account_config.dart';
 
 class _$BackupCodeTwoFaAccountConfig extends BackupCodeTwoFaAccountConfig {
   @override
-  final BuiltSet<String> codes;
+  final BuiltSet<String>? codes;
   @override
   final int? codesLeft;
   @override
@@ -26,7 +26,7 @@ class _$BackupCodeTwoFaAccountConfig extends BackupCodeTwoFaAccountConfig {
   ]) => (BackupCodeTwoFaAccountConfigBuilder()..update(updates))._build();
 
   _$BackupCodeTwoFaAccountConfig._({
-    required this.codes,
+    this.codes,
     this.codesLeft,
     this.useByDefault,
     required this.providerType,
@@ -106,7 +106,7 @@ class BackupCodeTwoFaAccountConfigBuilder
   BackupCodeTwoFaAccountConfigBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _codes = $v.codes.toBuilder();
+      _codes = $v.codes?.toBuilder();
       _codesLeft = $v.codesLeft;
       _useByDefault = $v.useByDefault;
       _providerType = $v.providerType;
@@ -134,7 +134,7 @@ class BackupCodeTwoFaAccountConfigBuilder
       _$result =
           _$v ??
           _$BackupCodeTwoFaAccountConfig._(
-            codes: codes.build(),
+            codes: _codes?.build(),
             codesLeft: codesLeft,
             useByDefault: useByDefault,
             providerType: BuiltValueNullFieldError.checkNotNull(
@@ -147,7 +147,7 @@ class BackupCodeTwoFaAccountConfigBuilder
       late String _$failedField;
       try {
         _$failedField = 'codes';
-        codes.build();
+        _codes?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
           r'BackupCodeTwoFaAccountConfig',

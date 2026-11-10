@@ -25,13 +25,13 @@ class _$DashboardReportConfig extends DashboardReportConfig {
   @override
   final JsonObject? timewindow;
   @override
-  final String namePattern;
+  final String? namePattern;
   @override
   final String? type;
   @override
   final bool? useCurrentUserCredentials;
   @override
-  final String userId;
+  final String? userId;
 
   factory _$DashboardReportConfig([
     void Function(DashboardReportConfigBuilder)? updates,
@@ -44,10 +44,10 @@ class _$DashboardReportConfig extends DashboardReportConfig {
     required this.timezone,
     this.useDashboardTimewindow,
     this.timewindow,
-    required this.namePattern,
+    this.namePattern,
     this.type,
     this.useCurrentUserCredentials,
-    required this.userId,
+    this.userId,
   }) : super._();
   @override
   DashboardReportConfig rebuild(
@@ -211,18 +211,10 @@ class DashboardReportConfigBuilder
           ),
           useDashboardTimewindow: useDashboardTimewindow,
           timewindow: timewindow,
-          namePattern: BuiltValueNullFieldError.checkNotNull(
-            namePattern,
-            r'DashboardReportConfig',
-            'namePattern',
-          ),
+          namePattern: namePattern,
           type: type,
           useCurrentUserCredentials: useCurrentUserCredentials,
-          userId: BuiltValueNullFieldError.checkNotNull(
-            userId,
-            r'DashboardReportConfig',
-            'userId',
-          ),
+          userId: userId,
         );
     replace(_$result);
     return _$result;

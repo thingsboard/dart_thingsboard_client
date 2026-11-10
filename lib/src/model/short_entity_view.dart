@@ -28,7 +28,7 @@ abstract class ShortEntityView
 
   /// Name of the entity
   @BuiltValueField(wireName: r'name')
-  String get name;
+  String? get name;
 
   ShortEntityView._();
 
@@ -61,11 +61,13 @@ class _$ShortEntityViewSerializer
       object.id,
       specifiedType: const FullType(EntityId),
     );
-    yield r'name';
-    yield serializers.serialize(
-      object.name,
-      specifiedType: const FullType(String),
-    );
+    if (object.name != null) {
+      yield r'name';
+      yield serializers.serialize(
+        object.name,
+        specifiedType: const FullType(String),
+      );
+    }
   }
 
   @override
@@ -106,9 +108,10 @@ class _$ShortEntityViewSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType.nullable(String),
                   )
-                  as String;
+                  as String?;
+          if (valueDes == null) continue;
           result.name = valueDes;
           break;
         default:

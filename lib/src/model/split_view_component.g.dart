@@ -37,7 +37,7 @@ class _$SplitViewComponent extends SplitViewComponent {
   @override
   final double? splitPosition;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -58,7 +58,7 @@ class _$SplitViewComponent extends SplitViewComponent {
     this.borderWidth,
     this.rightView,
     this.splitPosition,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -265,11 +265,7 @@ class SplitViewComponentBuilder
             borderWidth: borderWidth,
             rightView: rightView,
             splitPosition: splitPosition,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'SplitViewComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'SplitViewComponent',

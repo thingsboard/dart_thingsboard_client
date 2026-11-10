@@ -33,7 +33,7 @@ class _$EntityTableComponent extends EntityTableComponent {
   @override
   final Heading? tableHeading;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -52,7 +52,7 @@ class _$EntityTableComponent extends EntityTableComponent {
     this.tableSortOrder,
     this.dataSources,
     this.tableHeading,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -239,11 +239,7 @@ class EntityTableComponentBuilder
             tableSortOrder: _tableSortOrder?.build(),
             dataSources: _dataSources?.build(),
             tableHeading: _tableHeading?.build(),
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'EntityTableComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'EntityTableComponent',

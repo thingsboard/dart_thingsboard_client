@@ -37,7 +37,7 @@ part 'report_component.g.dart';
 @BuiltValue(instantiable: false)
 abstract class ReportComponent {
   @BuiltValueField(wireName: r'subType')
-  ReportComponentSubType get subType;
+  ReportComponentSubType? get subType;
   // enum subTypeEnum {  doughnutChart,  horizontalDoughnutChart,  pointChart,  barChart,  pieChart,  lineChart,  latestBarChart,  rangeChart,  barChartWithLabels,  stateChart,  default,  };
 
   @BuiltValueField(wireName: r'type')
@@ -177,11 +177,13 @@ class _$ReportComponentSerializer
     ReportComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'subType';
-    yield serializers.serialize(
-      object.subType,
-      specifiedType: const FullType(ReportComponentSubType),
-    );
+    if (object.subType != null) {
+      yield r'subType';
+      yield serializers.serialize(
+        object.subType,
+        specifiedType: const FullType(ReportComponentSubType),
+      );
+    }
     yield r'type';
     yield serializers.serialize(
       object.type,
@@ -451,9 +453,12 @@ class _$$ReportComponentSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(ReportComponentSubType),
+                    specifiedType: const FullType.nullable(
+                      ReportComponentSubType,
+                    ),
                   )
-                  as ReportComponentSubType;
+                  as ReportComponentSubType?;
+          if (valueDes == null) continue;
           result.subType = valueDes;
           break;
         case r'type':

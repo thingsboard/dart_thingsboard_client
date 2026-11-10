@@ -13,7 +13,7 @@ part of 'sms_two_fa_account_config.dart';
 
 class _$SmsTwoFaAccountConfig extends SmsTwoFaAccountConfig {
   @override
-  final String phoneNumber;
+  final String? phoneNumber;
   @override
   final bool? useByDefault;
   @override
@@ -24,7 +24,7 @@ class _$SmsTwoFaAccountConfig extends SmsTwoFaAccountConfig {
   ]) => (SmsTwoFaAccountConfigBuilder()..update(updates))._build();
 
   _$SmsTwoFaAccountConfig._({
-    required this.phoneNumber,
+    this.phoneNumber,
     this.useByDefault,
     required this.providerType,
   }) : super._();
@@ -119,11 +119,7 @@ class SmsTwoFaAccountConfigBuilder
     final _$result =
         _$v ??
         _$SmsTwoFaAccountConfig._(
-          phoneNumber: BuiltValueNullFieldError.checkNotNull(
-            phoneNumber,
-            r'SmsTwoFaAccountConfig',
-            'phoneNumber',
-          ),
+          phoneNumber: phoneNumber,
           useByDefault: useByDefault,
           providerType: BuiltValueNullFieldError.checkNotNull(
             providerType,

@@ -19,7 +19,7 @@ class _$GroupPermission extends GroupPermission {
   @override
   final TenantId? tenantId;
   @override
-  final EntityGroupId userGroupId;
+  final EntityGroupId? userGroupId;
   @override
   final RoleId roleId;
   @override
@@ -40,7 +40,7 @@ class _$GroupPermission extends GroupPermission {
     this.id,
     this.createdTime,
     this.tenantId,
-    required this.userGroupId,
+    this.userGroupId,
     required this.roleId,
     this.entityGroupId,
     this.entityGroupType,
@@ -164,7 +164,7 @@ class GroupPermissionBuilder
       _id = $v.id?.toBuilder();
       _createdTime = $v.createdTime;
       _tenantId = $v.tenantId?.toBuilder();
-      _userGroupId = $v.userGroupId.toBuilder();
+      _userGroupId = $v.userGroupId?.toBuilder();
       _roleId = $v.roleId.toBuilder();
       _entityGroupId = $v.entityGroupId?.toBuilder();
       _entityGroupType = $v.entityGroupType;
@@ -198,7 +198,7 @@ class GroupPermissionBuilder
             id: _id?.build(),
             createdTime: createdTime,
             tenantId: _tenantId?.build(),
-            userGroupId: userGroupId.build(),
+            userGroupId: _userGroupId?.build(),
             roleId: roleId.build(),
             entityGroupId: _entityGroupId?.build(),
             entityGroupType: entityGroupType,
@@ -215,7 +215,7 @@ class GroupPermissionBuilder
         _$failedField = 'tenantId';
         _tenantId?.build();
         _$failedField = 'userGroupId';
-        userGroupId.build();
+        _userGroupId?.build();
         _$failedField = 'roleId';
         roleId.build();
         _$failedField = 'entityGroupId';

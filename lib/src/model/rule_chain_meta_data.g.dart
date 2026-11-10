@@ -17,13 +17,13 @@ class _$RuleChainMetaData extends RuleChainMetaData {
   @override
   final int? version;
   @override
-  final int firstNodeIndex;
+  final int? firstNodeIndex;
   @override
   final BuiltList<RuleNode> nodes;
   @override
-  final BuiltList<NodeConnectionInfo> connections;
+  final BuiltList<NodeConnectionInfo>? connections;
   @override
-  final BuiltList<RuleChainConnectionInfo> ruleChainConnections;
+  final BuiltList<RuleChainConnectionInfo>? ruleChainConnections;
   @override
   final BuiltList<RuleChainNote>? notes;
 
@@ -34,10 +34,10 @@ class _$RuleChainMetaData extends RuleChainMetaData {
   _$RuleChainMetaData._({
     required this.ruleChainId,
     this.version,
-    required this.firstNodeIndex,
+    this.firstNodeIndex,
     required this.nodes,
-    required this.connections,
-    required this.ruleChainConnections,
+    this.connections,
+    this.ruleChainConnections,
     this.notes,
   }) : super._();
   @override
@@ -141,8 +141,8 @@ class RuleChainMetaDataBuilder
       _version = $v.version;
       _firstNodeIndex = $v.firstNodeIndex;
       _nodes = $v.nodes.toBuilder();
-      _connections = $v.connections.toBuilder();
-      _ruleChainConnections = $v.ruleChainConnections.toBuilder();
+      _connections = $v.connections?.toBuilder();
+      _ruleChainConnections = $v.ruleChainConnections?.toBuilder();
       _notes = $v.notes?.toBuilder();
       _$v = null;
     }
@@ -170,14 +170,10 @@ class RuleChainMetaDataBuilder
           _$RuleChainMetaData._(
             ruleChainId: ruleChainId.build(),
             version: version,
-            firstNodeIndex: BuiltValueNullFieldError.checkNotNull(
-              firstNodeIndex,
-              r'RuleChainMetaData',
-              'firstNodeIndex',
-            ),
+            firstNodeIndex: firstNodeIndex,
             nodes: nodes.build(),
-            connections: connections.build(),
-            ruleChainConnections: ruleChainConnections.build(),
+            connections: _connections?.build(),
+            ruleChainConnections: _ruleChainConnections?.build(),
             notes: _notes?.build(),
           );
     } catch (_) {
@@ -189,9 +185,9 @@ class RuleChainMetaDataBuilder
         _$failedField = 'nodes';
         nodes.build();
         _$failedField = 'connections';
-        connections.build();
+        _connections?.build();
         _$failedField = 'ruleChainConnections';
-        ruleChainConnections.build();
+        _ruleChainConnections?.build();
         _$failedField = 'notes';
         _notes?.build();
       } catch (e) {

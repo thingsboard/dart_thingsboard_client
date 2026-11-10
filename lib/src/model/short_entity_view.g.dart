@@ -15,12 +15,12 @@ class _$ShortEntityView extends ShortEntityView {
   @override
   final EntityId id;
   @override
-  final String name;
+  final String? name;
 
   factory _$ShortEntityView([void Function(ShortEntityViewBuilder)? updates]) =>
       (ShortEntityViewBuilder()..update(updates))._build();
 
-  _$ShortEntityView._({required this.id, required this.name}) : super._();
+  _$ShortEntityView._({required this.id, this.name}) : super._();
   @override
   ShortEntityView rebuild(void Function(ShortEntityViewBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -100,11 +100,7 @@ class ShortEntityViewBuilder
             r'ShortEntityView',
             'id',
           ),
-          name: BuiltValueNullFieldError.checkNotNull(
-            name,
-            r'ShortEntityView',
-            'name',
-          ),
+          name: name,
         );
     replace(_$result);
     return _$result;

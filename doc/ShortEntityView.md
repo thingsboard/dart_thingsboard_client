@@ -9,7 +9,7 @@ import 'package:thingsboard_client/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**EntityId**](EntityId.md) | Entity Id object | 
-**name** | **String** | Name of the entity | 
+**name** | **String** | Name of the entity | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

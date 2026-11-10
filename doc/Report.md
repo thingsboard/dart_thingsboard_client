@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **createdTime** | **int** | Entity creation timestamp in milliseconds since Unix epoch | [optional] 
 **tenantId** | [**TenantId**](TenantId.md) |  | 
 **customerId** | [**CustomerId**](CustomerId.md) |  | [optional] 
-**templateId** | [**ReportTemplateId**](ReportTemplateId.md) |  | 
+**templateId** | [**ReportTemplateId**](ReportTemplateId.md) |  | [optional] 
 **format** | [**TbReportFormat**](TbReportFormat.md) |  | 
 **name** | **String** |  | 
 **userId** | [**UserId**](UserId.md) |  | 

@@ -13,7 +13,7 @@ part of 'telemetry_entity_view.dart';
 
 class _$TelemetryEntityView extends TelemetryEntityView {
   @override
-  final BuiltList<String> timeseries;
+  final BuiltList<String>? timeseries;
   @override
   final AttributesEntityView attributes;
 
@@ -21,7 +21,7 @@ class _$TelemetryEntityView extends TelemetryEntityView {
     void Function(TelemetryEntityViewBuilder)? updates,
   ]) => (TelemetryEntityViewBuilder()..update(updates))._build();
 
-  _$TelemetryEntityView._({required this.timeseries, required this.attributes})
+  _$TelemetryEntityView._({this.timeseries, required this.attributes})
     : super._();
   @override
   TelemetryEntityView rebuild(
@@ -81,7 +81,7 @@ class TelemetryEntityViewBuilder
   TelemetryEntityViewBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _timeseries = $v.timeseries.toBuilder();
+      _timeseries = $v.timeseries?.toBuilder();
       _attributes = $v.attributes.toBuilder();
       _$v = null;
     }
@@ -107,14 +107,14 @@ class TelemetryEntityViewBuilder
       _$result =
           _$v ??
           _$TelemetryEntityView._(
-            timeseries: timeseries.build(),
+            timeseries: _timeseries?.build(),
             attributes: attributes.build(),
           );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'timeseries';
-        timeseries.build();
+        _timeseries?.build();
         _$failedField = 'attributes';
         attributes.build();
       } catch (e) {

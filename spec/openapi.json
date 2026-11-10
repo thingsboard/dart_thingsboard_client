@@ -123951,7 +123951,8 @@
             "description": "An integer value that represents a max number of time series data points to fetch. This parameter is used only in the case if 'agg' parameter is set to 'NONE'.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -144909,8 +144910,7 @@
         },
         "required": [
           "agentId",
-          "appType",
-          "templateVersion"
+          "appType"
         ]
       },
       "AgentApplicationId": {
@@ -145033,8 +145033,7 @@
         },
         "required": [
           "agentId",
-          "appType",
-          "templateVersion"
+          "appType"
         ]
       },
       "AgentApplicationOrigin": {
@@ -148530,12 +148529,7 @@
               "type": "string"
             }
           }
-        },
-        "required": [
-          "cs",
-          "sh",
-          "ss"
-        ]
+        }
       },
       "AttributesImmediateOutputStrategy": {
         "allOf": [
@@ -149024,10 +149018,7 @@
           "providerType": "BACKUP_CODE",
           "codes": null,
           "codesLeft": null
-        },
-        "required": [
-          "codes"
-        ]
+        }
       },
       "BackupCodeTwoFaProviderConfig": {
         "allOf": [
@@ -151967,9 +151958,7 @@
         "required": [
           "baseUrl",
           "dashboardId",
-          "namePattern",
-          "timezone",
-          "userId"
+          "timezone"
         ]
       },
       "DataKey": {
@@ -154391,7 +154380,6 @@
         },
         "required": [
           "cloudEndpoint",
-          "edgeLicenseKey",
           "name",
           "routingKey",
           "secret",
@@ -154762,7 +154750,6 @@
         },
         "required": [
           "cloudEndpoint",
-          "edgeLicenseKey",
           "name",
           "routingKey",
           "secret",
@@ -157787,8 +157774,7 @@
           }
         },
         "required": [
-          "roleId",
-          "userGroupId"
+          "roleId"
         ]
       },
       "GroupPermissionId": {
@@ -157883,8 +157869,7 @@
           }
         },
         "required": [
-          "roleId",
-          "userGroupId"
+          "roleId"
         ]
       },
       "HasIdObject": {
@@ -166818,7 +166803,6 @@
         "required": [
           "format",
           "name",
-          "templateId",
           "tenantId",
           "userId"
         ]
@@ -166965,7 +166949,6 @@
           }
         },
         "required": [
-          "subType",
           "type"
         ]
       },
@@ -167099,7 +167082,6 @@
         "required": [
           "format",
           "name",
-          "templateId",
           "tenantId",
           "userId"
         ]
@@ -168715,10 +168697,7 @@
           }
         },
         "required": [
-          "connections",
-          "firstNodeIndex",
           "nodes",
-          "ruleChainConnections",
           "ruleChainId"
         ]
       },
@@ -170023,8 +170002,7 @@
           }
         },
         "required": [
-          "id",
-          "name"
+          "id"
         ]
       },
       "SignUpField": {
@@ -170670,10 +170648,7 @@
           "useByDefault": null,
           "providerType": "SMS",
           "phoneNumber": null
-        },
-        "required": [
-          "phoneNumber"
-        ]
+        }
       },
       "SmsTwoFaProviderConfig": {
         "allOf": [
@@ -172240,8 +172215,7 @@
           }
         },
         "required": [
-          "attributes",
-          "timeseries"
+          "attributes"
         ]
       },
       "TelemetryMappingConfiguration": {

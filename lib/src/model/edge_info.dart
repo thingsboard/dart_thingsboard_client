@@ -89,7 +89,7 @@ abstract class EdgeInfo implements Built<EdgeInfo, EdgeInfoBuilder> {
 
   /// Edge license key obtained from license portal
   @BuiltValueField(wireName: r'edgeLicenseKey')
-  String get edgeLicenseKey;
+  String? get edgeLicenseKey;
 
   /// Edge uses this cloud URL to activate and periodically check it's license
   @BuiltValueField(wireName: r'cloudEndpoint')
@@ -201,11 +201,13 @@ class _$EdgeInfoSerializer implements PrimitiveSerializer<EdgeInfo> {
       object.secret,
       specifiedType: const FullType(String),
     );
-    yield r'edgeLicenseKey';
-    yield serializers.serialize(
-      object.edgeLicenseKey,
-      specifiedType: const FullType(String),
-    );
+    if (object.edgeLicenseKey != null) {
+      yield r'edgeLicenseKey';
+      yield serializers.serialize(
+        object.edgeLicenseKey,
+        specifiedType: const FullType(String),
+      );
+    }
     yield r'cloudEndpoint';
     yield serializers.serialize(
       object.cloudEndpoint,
@@ -376,9 +378,10 @@ class _$EdgeInfoSerializer implements PrimitiveSerializer<EdgeInfo> {
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType.nullable(String),
                   )
-                  as String;
+                  as String?;
+          if (valueDes == null) continue;
           result.edgeLicenseKey = valueDes;
           break;
         case r'cloudEndpoint':

@@ -23,7 +23,7 @@ abstract mixin class ReportComponentBuilder {
 
 class _$$ReportComponent extends $ReportComponent {
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -31,7 +31,7 @@ class _$$ReportComponent extends $ReportComponent {
     void Function($ReportComponentBuilder)? updates,
   ]) => ($ReportComponentBuilder()..update(updates))._build();
 
-  _$$ReportComponent._({required this.subType, required this.type}) : super._();
+  _$$ReportComponent._({this.subType, required this.type}) : super._();
   @override
   $ReportComponent rebuild(void Function($ReportComponentBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -112,11 +112,7 @@ class $ReportComponentBuilder
     final _$result =
         _$v ??
         _$$ReportComponent._(
-          subType: BuiltValueNullFieldError.checkNotNull(
-            subType,
-            r'$ReportComponent',
-            'subType',
-          ),
+          subType: subType,
           type: BuiltValueNullFieldError.checkNotNull(
             type,
             r'$ReportComponent',

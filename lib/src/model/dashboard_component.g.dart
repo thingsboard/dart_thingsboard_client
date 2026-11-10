@@ -35,7 +35,7 @@ class _$DashboardComponent extends DashboardComponent {
   @override
   final DashboardReportConfig config;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -55,7 +55,7 @@ class _$DashboardComponent extends DashboardComponent {
     this.dataSources,
     this.widthType,
     required this.config,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -252,11 +252,7 @@ class DashboardComponentBuilder
             dataSources: _dataSources?.build(),
             widthType: widthType,
             config: config.build(),
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'DashboardComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'DashboardComponent',

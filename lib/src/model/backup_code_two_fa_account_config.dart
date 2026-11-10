@@ -31,7 +31,7 @@ abstract class BackupCodeTwoFaAccountConfig
           BackupCodeTwoFaAccountConfigBuilder
         > {
   @BuiltValueField(wireName: r'codes')
-  BuiltSet<String> get codes;
+  BuiltSet<String>? get codes;
 
   @BuiltValueField(wireName: r'codesLeft')
   int? get codesLeft;
@@ -67,11 +67,13 @@ class _$BackupCodeTwoFaAccountConfigSerializer
     BackupCodeTwoFaAccountConfig object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'codes';
-    yield serializers.serialize(
-      object.codes,
-      specifiedType: const FullType(BuiltSet, [FullType(String)]),
-    );
+    if (object.codes != null) {
+      yield r'codes';
+      yield serializers.serialize(
+        object.codes,
+        specifiedType: const FullType(BuiltSet, [FullType(String)]),
+      );
+    }
     if (object.useByDefault != null) {
       yield r'useByDefault';
       yield serializers.serialize(
@@ -122,9 +124,12 @@ class _$BackupCodeTwoFaAccountConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(BuiltSet, [FullType(String)]),
+                    specifiedType: const FullType.nullable(BuiltSet, [
+                      FullType(String),
+                    ]),
                   )
-                  as BuiltSet<String>;
+                  as BuiltSet<String>?;
+          if (valueDes == null) continue;
           result.codes.replace(valueDes);
           break;
         case r'useByDefault':

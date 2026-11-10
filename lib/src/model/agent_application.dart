@@ -63,7 +63,7 @@ abstract class AgentApplication
 
   /// Template version this application is based on
   @BuiltValueField(wireName: r'templateVersion')
-  String get templateVersion;
+  String? get templateVersion;
 
   @BuiltValueField(wireName: r'desiredTemplateVersion')
   String? get desiredTemplateVersion;
@@ -157,11 +157,13 @@ class _$AgentApplicationSerializer
         specifiedType: const FullType(String),
       );
     }
-    yield r'templateVersion';
-    yield serializers.serialize(
-      object.templateVersion,
-      specifiedType: const FullType(String),
-    );
+    if (object.templateVersion != null) {
+      yield r'templateVersion';
+      yield serializers.serialize(
+        object.templateVersion,
+        specifiedType: const FullType(String),
+      );
+    }
     if (object.desiredTemplateVersion != null) {
       yield r'desiredTemplateVersion';
       yield serializers.serialize(
@@ -303,9 +305,10 @@ class _$AgentApplicationSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType.nullable(String),
                   )
-                  as String;
+                  as String?;
+          if (valueDes == null) continue;
           result.templateVersion = valueDes;
           break;
         case r'desiredTemplateVersion':

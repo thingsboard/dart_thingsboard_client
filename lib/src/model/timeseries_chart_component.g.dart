@@ -39,7 +39,7 @@ class _$TimeseriesChartComponent extends TimeseriesChartComponent {
   @override
   final int? height;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -61,7 +61,7 @@ class _$TimeseriesChartComponent extends TimeseriesChartComponent {
     this.alignment,
     this.dataSources,
     this.height,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -279,11 +279,7 @@ class TimeseriesChartComponentBuilder
             alignment: alignment,
             dataSources: _dataSources?.build(),
             height: height,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'TimeseriesChartComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'TimeseriesChartComponent',

@@ -35,7 +35,7 @@ class _$Edge extends Edge {
   @override
   final String secret;
   @override
-  final String edgeLicenseKey;
+  final String? edgeLicenseKey;
   @override
   final String cloudEndpoint;
   @override
@@ -58,7 +58,7 @@ class _$Edge extends Edge {
     this.label,
     required this.routingKey,
     required this.secret,
-    required this.edgeLicenseKey,
+    this.edgeLicenseKey,
     required this.cloudEndpoint,
     this.version,
     this.ownerId,
@@ -270,11 +270,7 @@ class EdgeBuilder implements Builder<Edge, EdgeBuilder> {
               r'Edge',
               'secret',
             ),
-            edgeLicenseKey: BuiltValueNullFieldError.checkNotNull(
-              edgeLicenseKey,
-              r'Edge',
-              'edgeLicenseKey',
-            ),
+            edgeLicenseKey: edgeLicenseKey,
             cloudEndpoint: BuiltValueNullFieldError.checkNotNull(
               cloudEndpoint,
               r'Edge',

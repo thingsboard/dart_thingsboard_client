@@ -29,7 +29,7 @@ class _$RichTextComponent extends RichTextComponent {
   @override
   final String? value;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -46,7 +46,7 @@ class _$RichTextComponent extends RichTextComponent {
     this.borderWidth,
     this.dataSources,
     this.value,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -210,11 +210,7 @@ class RichTextComponentBuilder
             borderWidth: borderWidth,
             dataSources: _dataSources?.build(),
             value: value,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'RichTextComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'RichTextComponent',

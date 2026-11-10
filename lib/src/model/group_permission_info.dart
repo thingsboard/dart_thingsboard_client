@@ -57,7 +57,7 @@ abstract class GroupPermissionInfo
 
   /// JSON object with the User Group Id. Represents the user group that will have permissions to perform operations against the corresponding entity group.
   @BuiltValueField(wireName: r'userGroupId')
-  EntityGroupId get userGroupId;
+  EntityGroupId? get userGroupId;
 
   /// JSON object with the Role Id. Represents the set of permissions. The role type (GENERIC or GROUP) determines whether 'entityGroupId' is required.
   @BuiltValueField(wireName: r'roleId')
@@ -160,11 +160,13 @@ class _$GroupPermissionInfoSerializer
         specifiedType: const FullType(TenantId),
       );
     }
-    yield r'userGroupId';
-    yield serializers.serialize(
-      object.userGroupId,
-      specifiedType: const FullType(EntityGroupId),
-    );
+    if (object.userGroupId != null) {
+      yield r'userGroupId';
+      yield serializers.serialize(
+        object.userGroupId,
+        specifiedType: const FullType(EntityGroupId),
+      );
+    }
     yield r'roleId';
     yield serializers.serialize(
       object.roleId,
@@ -315,9 +317,10 @@ class _$GroupPermissionInfoSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(EntityGroupId),
+                    specifiedType: const FullType.nullable(EntityGroupId),
                   )
-                  as EntityGroupId;
+                  as EntityGroupId?;
+          if (valueDes == null) continue;
           result.userGroupId.replace(valueDes);
           break;
         case r'roleId':

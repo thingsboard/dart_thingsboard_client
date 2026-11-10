@@ -37,7 +37,7 @@ class _$ImageComponent extends ImageComponent {
   @override
   final ImageWidthType? widthType;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -57,7 +57,7 @@ class _$ImageComponent extends ImageComponent {
     this.alignment,
     this.dataSources,
     this.widthType,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -260,11 +260,7 @@ class ImageComponentBuilder
             alignment: alignment,
             dataSources: _dataSources?.build(),
             widthType: widthType,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'ImageComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'ImageComponent',

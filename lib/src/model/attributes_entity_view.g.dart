@@ -13,21 +13,17 @@ part of 'attributes_entity_view.dart';
 
 class _$AttributesEntityView extends AttributesEntityView {
   @override
-  final BuiltList<String> cs;
+  final BuiltList<String>? cs;
   @override
-  final BuiltList<String> ss;
+  final BuiltList<String>? ss;
   @override
-  final BuiltList<String> sh;
+  final BuiltList<String>? sh;
 
   factory _$AttributesEntityView([
     void Function(AttributesEntityViewBuilder)? updates,
   ]) => (AttributesEntityViewBuilder()..update(updates))._build();
 
-  _$AttributesEntityView._({
-    required this.cs,
-    required this.ss,
-    required this.sh,
-  }) : super._();
+  _$AttributesEntityView._({this.cs, this.ss, this.sh}) : super._();
   @override
   AttributesEntityView rebuild(
     void Function(AttributesEntityViewBuilder) updates,
@@ -89,9 +85,9 @@ class AttributesEntityViewBuilder
   AttributesEntityViewBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _cs = $v.cs.toBuilder();
-      _ss = $v.ss.toBuilder();
-      _sh = $v.sh.toBuilder();
+      _cs = $v.cs?.toBuilder();
+      _ss = $v.ss?.toBuilder();
+      _sh = $v.sh?.toBuilder();
       _$v = null;
     }
     return this;
@@ -116,19 +112,19 @@ class AttributesEntityViewBuilder
       _$result =
           _$v ??
           _$AttributesEntityView._(
-            cs: cs.build(),
-            ss: ss.build(),
-            sh: sh.build(),
+            cs: _cs?.build(),
+            ss: _ss?.build(),
+            sh: _sh?.build(),
           );
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'cs';
-        cs.build();
+        _cs?.build();
         _$failedField = 'ss';
-        ss.build();
+        _ss?.build();
         _$failedField = 'sh';
-        sh.build();
+        _sh?.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
           r'AttributesEntityView',

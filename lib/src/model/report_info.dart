@@ -54,7 +54,7 @@ abstract class ReportInfo implements Built<ReportInfo, ReportInfoBuilder> {
   CustomerId? get customerId;
 
   @BuiltValueField(wireName: r'templateId')
-  ReportTemplateId get templateId;
+  ReportTemplateId? get templateId;
 
   @BuiltValueField(wireName: r'format')
   TbReportFormat get format;
@@ -134,11 +134,13 @@ class _$ReportInfoSerializer implements PrimitiveSerializer<ReportInfo> {
         specifiedType: const FullType(CustomerId),
       );
     }
-    yield r'templateId';
-    yield serializers.serialize(
-      object.templateId,
-      specifiedType: const FullType(ReportTemplateId),
-    );
+    if (object.templateId != null) {
+      yield r'templateId';
+      yield serializers.serialize(
+        object.templateId,
+        specifiedType: const FullType(ReportTemplateId),
+      );
+    }
     yield r'format';
     yield serializers.serialize(
       object.format,
@@ -266,9 +268,10 @@ class _$ReportInfoSerializer implements PrimitiveSerializer<ReportInfo> {
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(ReportTemplateId),
+                    specifiedType: const FullType.nullable(ReportTemplateId),
                   )
-                  as ReportTemplateId;
+                  as ReportTemplateId?;
+          if (valueDes == null) continue;
           result.templateId.replace(valueDes);
           break;
         case r'format':

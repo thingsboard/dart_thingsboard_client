@@ -180,11 +180,13 @@ class _$LatestChartComponentSerializer
         specifiedType: const FullType(int),
       );
     }
-    yield r'subType';
-    yield serializers.serialize(
-      object.subType,
-      specifiedType: const FullType(ReportComponentSubType),
-    );
+    if (object.subType != null) {
+      yield r'subType';
+      yield serializers.serialize(
+        object.subType,
+        specifiedType: const FullType(ReportComponentSubType),
+      );
+    }
     if (object.alignment != null) {
       yield r'alignment';
       yield serializers.serialize(
@@ -338,9 +340,12 @@ class _$LatestChartComponentSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(ReportComponentSubType),
+                    specifiedType: const FullType.nullable(
+                      ReportComponentSubType,
+                    ),
                   )
-                  as ReportComponentSubType;
+                  as ReportComponentSubType?;
+          if (valueDes == null) continue;
           result.subType = valueDes;
           break;
         case r'alignment':

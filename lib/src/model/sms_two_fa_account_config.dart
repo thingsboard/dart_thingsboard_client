@@ -26,7 +26,7 @@ abstract class SmsTwoFaAccountConfig
         TwoFaAccountConfig,
         Built<SmsTwoFaAccountConfig, SmsTwoFaAccountConfigBuilder> {
   @BuiltValueField(wireName: r'phoneNumber')
-  String get phoneNumber;
+  String? get phoneNumber;
 
   SmsTwoFaAccountConfig._();
 
@@ -71,11 +71,13 @@ class _$SmsTwoFaAccountConfigSerializer
       object.providerType,
       specifiedType: const FullType(String),
     );
-    yield r'phoneNumber';
-    yield serializers.serialize(
-      object.phoneNumber,
-      specifiedType: const FullType(String),
-    );
+    if (object.phoneNumber != null) {
+      yield r'phoneNumber';
+      yield serializers.serialize(
+        object.phoneNumber,
+        specifiedType: const FullType(String),
+      );
+    }
   }
 
   @override
@@ -126,9 +128,10 @@ class _$SmsTwoFaAccountConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType.nullable(String),
                   )
-                  as String;
+                  as String?;
+          if (valueDes == null) continue;
           result.phoneNumber = valueDes;
           break;
         default:

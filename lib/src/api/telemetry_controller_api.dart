@@ -1274,7 +1274,7 @@ class TelemetryControllerApi {
     String? intervalType,
     int? interval = 0,
     String? timeZone,
-    String? limit,
+    int? limit,
     String? agg,
     String? orderBy,
     bool? useStrictDataTypes = false,
@@ -1364,7 +1364,7 @@ class TelemetryControllerApi {
         r'limit': encodeQueryParameter(
           _serializers,
           limit,
-          const FullType(String),
+          const FullType(int),
         ),
       if (agg != null)
         r'agg': encodeQueryParameter(_serializers, agg, const FullType(String)),

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **tenantId** | [**TenantId**](TenantId.md) | JSON object with Tenant Id. | [optional] 
 **agentId** | [**AgentId**](AgentId.md) | Agent this application belongs to | 
 **name** | **String** | Application name (not unique across tenant) | [optional] 
-**templateVersion** | **String** | Template version this application is based on | 
+**templateVersion** | **String** | Template version this application is based on | [optional] 
 **desiredTemplateVersion** | **String** |  | [optional] 
 **appType** | [**AgentApplicationType**](AgentApplicationType.md) | Application type | 
 **config** | [**DockerComposeConfig**](DockerComposeConfig.md) | Config (with compose field and type = 'DOCKER_COMPOSE' for EDGE/GATEWAY) | [optional] 

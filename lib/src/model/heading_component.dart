@@ -174,11 +174,13 @@ class _$HeadingComponentSerializer
         specifiedType: const FullType(TextAlignment),
       );
     }
-    yield r'subType';
-    yield serializers.serialize(
-      object.subType,
-      specifiedType: const FullType(ReportComponentSubType),
-    );
+    if (object.subType != null) {
+      yield r'subType';
+      yield serializers.serialize(
+        object.subType,
+        specifiedType: const FullType(ReportComponentSubType),
+      );
+    }
     if (object.dataSources != null) {
       yield r'dataSources';
       yield serializers.serialize(
@@ -334,9 +336,12 @@ class _$HeadingComponentSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(ReportComponentSubType),
+                    specifiedType: const FullType.nullable(
+                      ReportComponentSubType,
+                    ),
                   )
-                  as ReportComponentSubType;
+                  as ReportComponentSubType?;
+          if (valueDes == null) continue;
           result.subType = valueDes;
           break;
         case r'dataSources':

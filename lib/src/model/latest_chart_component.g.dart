@@ -37,7 +37,7 @@ class _$LatestChartComponent extends LatestChartComponent {
   @override
   final int? height;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -58,7 +58,7 @@ class _$LatestChartComponent extends LatestChartComponent {
     this.dataSources,
     this.widthType,
     this.height,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -265,11 +265,7 @@ class LatestChartComponentBuilder
             dataSources: _dataSources?.build(),
             widthType: widthType,
             height: height,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'LatestChartComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'LatestChartComponent',

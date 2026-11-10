@@ -23,7 +23,7 @@ class _$AgentApplicationInfo extends AgentApplicationInfo {
   @override
   final String? name;
   @override
-  final String templateVersion;
+  final String? templateVersion;
   @override
   final String? desiredTemplateVersion;
   @override
@@ -67,7 +67,7 @@ class _$AgentApplicationInfo extends AgentApplicationInfo {
     this.tenantId,
     required this.agentId,
     this.name,
-    required this.templateVersion,
+    this.templateVersion,
     this.desiredTemplateVersion,
     required this.appType,
     this.config,
@@ -342,11 +342,7 @@ class AgentApplicationInfoBuilder
             tenantId: _tenantId?.build(),
             agentId: agentId.build(),
             name: name,
-            templateVersion: BuiltValueNullFieldError.checkNotNull(
-              templateVersion,
-              r'AgentApplicationInfo',
-              'templateVersion',
-            ),
+            templateVersion: templateVersion,
             desiredTemplateVersion: desiredTemplateVersion,
             appType: BuiltValueNullFieldError.checkNotNull(
               appType,

@@ -68,11 +68,13 @@ class _$SubReportComponentSerializer
     SubReportComponent object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'subType';
-    yield serializers.serialize(
-      object.subType,
-      specifiedType: const FullType(ReportComponentSubType),
-    );
+    if (object.subType != null) {
+      yield r'subType';
+      yield serializers.serialize(
+        object.subType,
+        specifiedType: const FullType(ReportComponentSubType),
+      );
+    }
     if (object.templateId != null) {
       yield r'templateId';
       yield serializers.serialize(
@@ -130,9 +132,12 @@ class _$SubReportComponentSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(ReportComponentSubType),
+                    specifiedType: const FullType.nullable(
+                      ReportComponentSubType,
+                    ),
                   )
-                  as ReportComponentSubType;
+                  as ReportComponentSubType?;
+          if (valueDes == null) continue;
           result.subType = valueDes;
           break;
         case r'templateId':

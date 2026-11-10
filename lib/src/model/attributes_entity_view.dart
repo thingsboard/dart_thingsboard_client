@@ -25,15 +25,15 @@ abstract class AttributesEntityView
     implements Built<AttributesEntityView, AttributesEntityViewBuilder> {
   /// List of client-side attribute keys to expose
   @BuiltValueField(wireName: r'cs')
-  BuiltList<String> get cs;
+  BuiltList<String>? get cs;
 
   /// List of server-side attribute keys to expose
   @BuiltValueField(wireName: r'ss')
-  BuiltList<String> get ss;
+  BuiltList<String>? get ss;
 
   /// List of shared attribute keys to expose
   @BuiltValueField(wireName: r'sh')
-  BuiltList<String> get sh;
+  BuiltList<String>? get sh;
 
   AttributesEntityView._();
 
@@ -64,21 +64,27 @@ class _$AttributesEntityViewSerializer
     AttributesEntityView object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'cs';
-    yield serializers.serialize(
-      object.cs,
-      specifiedType: const FullType(BuiltList, [FullType(String)]),
-    );
-    yield r'ss';
-    yield serializers.serialize(
-      object.ss,
-      specifiedType: const FullType(BuiltList, [FullType(String)]),
-    );
-    yield r'sh';
-    yield serializers.serialize(
-      object.sh,
-      specifiedType: const FullType(BuiltList, [FullType(String)]),
-    );
+    if (object.cs != null) {
+      yield r'cs';
+      yield serializers.serialize(
+        object.cs,
+        specifiedType: const FullType(BuiltList, [FullType(String)]),
+      );
+    }
+    if (object.ss != null) {
+      yield r'ss';
+      yield serializers.serialize(
+        object.ss,
+        specifiedType: const FullType(BuiltList, [FullType(String)]),
+      );
+    }
+    if (object.sh != null) {
+      yield r'sh';
+      yield serializers.serialize(
+        object.sh,
+        specifiedType: const FullType(BuiltList, [FullType(String)]),
+      );
+    }
   }
 
   @override
@@ -110,33 +116,36 @@ class _$AttributesEntityViewSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(BuiltList, [
+                    specifiedType: const FullType.nullable(BuiltList, [
                       FullType(String),
                     ]),
                   )
-                  as BuiltList<String>;
+                  as BuiltList<String>?;
+          if (valueDes == null) continue;
           result.cs.replace(valueDes);
           break;
         case r'ss':
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(BuiltList, [
+                    specifiedType: const FullType.nullable(BuiltList, [
                       FullType(String),
                     ]),
                   )
-                  as BuiltList<String>;
+                  as BuiltList<String>?;
+          if (valueDes == null) continue;
           result.ss.replace(valueDes);
           break;
         case r'sh':
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(BuiltList, [
+                    specifiedType: const FullType.nullable(BuiltList, [
                       FullType(String),
                     ]),
                   )
-                  as BuiltList<String>;
+                  as BuiltList<String>?;
+          if (valueDes == null) continue;
           result.sh.replace(valueDes);
           break;
         default:

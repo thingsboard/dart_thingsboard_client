@@ -43,7 +43,7 @@ class _$TimeseriesTableComponent extends TimeseriesTableComponent {
   @override
   final BuiltList<DataSource>? dataSources;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -67,7 +67,7 @@ class _$TimeseriesTableComponent extends TimeseriesTableComponent {
     this.tableSortOrder,
     this.showTimestamp,
     this.dataSources,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -307,11 +307,7 @@ class TimeseriesTableComponentBuilder
             tableSortOrder: _tableSortOrder?.build(),
             showTimestamp: showTimestamp,
             dataSources: _dataSources?.build(),
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'TimeseriesTableComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'TimeseriesTableComponent',

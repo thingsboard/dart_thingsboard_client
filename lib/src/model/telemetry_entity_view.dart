@@ -25,7 +25,7 @@ abstract class TelemetryEntityView
     implements Built<TelemetryEntityView, TelemetryEntityViewBuilder> {
   /// List of time-series data keys to expose
   @BuiltValueField(wireName: r'timeseries')
-  BuiltList<String> get timeseries;
+  BuiltList<String>? get timeseries;
 
   /// JSON object with attributes to expose
   @BuiltValueField(wireName: r'attributes')
@@ -60,11 +60,13 @@ class _$TelemetryEntityViewSerializer
     TelemetryEntityView object, {
     FullType specifiedType = FullType.unspecified,
   }) sync* {
-    yield r'timeseries';
-    yield serializers.serialize(
-      object.timeseries,
-      specifiedType: const FullType(BuiltList, [FullType(String)]),
-    );
+    if (object.timeseries != null) {
+      yield r'timeseries';
+      yield serializers.serialize(
+        object.timeseries,
+        specifiedType: const FullType(BuiltList, [FullType(String)]),
+      );
+    }
     yield r'attributes';
     yield serializers.serialize(
       object.attributes,
@@ -101,11 +103,12 @@ class _$TelemetryEntityViewSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(BuiltList, [
+                    specifiedType: const FullType.nullable(BuiltList, [
                       FullType(String),
                     ]),
                   )
-                  as BuiltList<String>;
+                  as BuiltList<String>?;
+          if (valueDes == null) continue;
           result.timeseries.replace(valueDes);
           break;
         case r'attributes':

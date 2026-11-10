@@ -39,7 +39,7 @@ class _$HeadingComponent extends HeadingComponent {
   @override
   final int? height;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -61,7 +61,7 @@ class _$HeadingComponent extends HeadingComponent {
     this.verticalAlignment,
     this.font,
     this.height,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -272,11 +272,7 @@ class HeadingComponentBuilder
             verticalAlignment: verticalAlignment,
             font: _font?.build(),
             height: height,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'HeadingComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'HeadingComponent',

@@ -33,7 +33,7 @@ class _$DividerComponent extends DividerComponent {
   @override
   final BorderLength? length;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -52,7 +52,7 @@ class _$DividerComponent extends DividerComponent {
     this.borderWidth,
     this.widthPx,
     this.length,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -233,11 +233,7 @@ class DividerComponentBuilder
             borderWidth: borderWidth,
             widthPx: widthPx,
             length: length,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'DividerComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'DividerComponent',

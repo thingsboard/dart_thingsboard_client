@@ -17,7 +17,7 @@ class _$ErrorComponent extends ErrorComponent {
   @override
   final String? errorMessage;
   @override
-  final ReportComponentSubType subType;
+  final ReportComponentSubType? subType;
   @override
   final ReportComponentType type;
 
@@ -27,7 +27,7 @@ class _$ErrorComponent extends ErrorComponent {
   _$ErrorComponent._({
     this.exception,
     this.errorMessage,
-    required this.subType,
+    this.subType,
     required this.type,
   }) : super._();
   @override
@@ -132,11 +132,7 @@ class ErrorComponentBuilder
           _$ErrorComponent._(
             exception: _exception?.build(),
             errorMessage: errorMessage,
-            subType: BuiltValueNullFieldError.checkNotNull(
-              subType,
-              r'ErrorComponent',
-              'subType',
-            ),
+            subType: subType,
             type: BuiltValueNullFieldError.checkNotNull(
               type,
               r'ErrorComponent',
