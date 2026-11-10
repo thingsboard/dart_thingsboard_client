@@ -1304,24 +1304,27 @@ void main() {
       );
     });
 
-    test('alarm tsOffset shifts the alarm times and time-valued fields', () {
+    test('alarm tsOffset shifts the alarm times and time-valued fields, '
+        'but not unset (0) ones', () {
       final json = _fixtureJson('alarm_data_update.json');
       final alarmJson = (json['data']['data'] as List).first as Map;
-      (alarmJson['latest']['ALARM_FIELD'] ??= {})['startTime'] = {
-        'ts': 1,
-        'value': '1764077525869',
-      };
+      (alarmJson['latest']['ALARM_FIELD'] ??= {})
+        ..['startTime'] = {'ts': 1, 'value': '1764077525869'}
+        ..['ackTime'] = {'ts': 0, 'value': '0'};
       final message =
           parseWebsocketDataMessage(jsonEncode(json)) as AlarmDataUpdate;
       final alarm = message.withTsOffset(1000).data!.data!.first;
       expect(alarm.createdTime, 1764077527497);
       expect(alarm.endTs, 1767620191121);
-      expect(alarm.ackTs, 1000);
+      expect(alarm.ackTs, 0);
+      expect(alarm.clearTs, 0);
       expect(
         alarm.latest!['ALARM_FIELD']!['startTime']!.value,
         '1764077526869',
       );
       expect(alarm.latest!['ALARM_FIELD']!['startTime']!.ts, 1001);
+      expect(alarm.latest!['ALARM_FIELD']!['ackTime']!.ts, 0);
+      expect(alarm.latest!['ALARM_FIELD']!['ackTime']!.value, '0');
       expect(alarm.latest!['ENTITY_FIELD']!['name']!.value, 'Device A');
       expect(message.data!.data!.first.createdTime, 1764077526497);
     });

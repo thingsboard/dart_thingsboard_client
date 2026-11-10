@@ -809,11 +809,11 @@ abstract class CmdUpdate extends WebsocketDataMsg {
 /// ([isTime]), which the server sends as a string.
 TsValue _shiftTsValue(TsValue tsValue, int tsOffset, bool isTime) {
   return tsValue.rebuild((b) {
-    if (b.ts != null) {
+    if (b.ts != null && b.ts != 0) {
       b.ts = b.ts! + tsOffset;
     }
     final time = isTime && b.value != null ? int.tryParse(b.value!) : null;
-    if (time != null) {
+    if (time != null && time != 0) {
       b.value = (time + tsOffset).toString();
     }
   });
@@ -872,7 +872,8 @@ const _alarmTimeKeys = {
 };
 
 AlarmData _shiftAlarmData(AlarmData alarmData, int tsOffset) {
-  int? shift(int? ts) => ts == null ? null : ts + tsOffset;
+  // 0 means "not set" (not acknowledged, not cleared, still active).
+  int? shift(int? ts) => ts == null || ts == 0 ? ts : ts + tsOffset;
   return alarmData.rebuild((b) {
     b
       ..createdTime = shift(alarmData.createdTime)
