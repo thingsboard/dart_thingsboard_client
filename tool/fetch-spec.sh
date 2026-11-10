@@ -10,12 +10,11 @@
 # Fetches the OpenAPI spec of a running ThingsBoard server into
 # <edition_dir>/spec/openapi.json, ready for tool/generate-client.sh.
 #
-# WARNING: the committed spec is the released lts-4.4 spec plus the unmerged
-# thingsboard/thingsboard PRs #16510, #16555, #16557, #16560 and #16561. Re-fetching
-# from a server without them breaks the build (LoginResponse.scope,
-# SystemInfoControllerApi), drops the NotificationInfo subtypes and reverts the
-# typed responses and pageSize/page parameters. See "The spec is composed" in
-# CONTRIBUTING.md.
+# WARNING: the committed spec is the lts-4.4 spec with thingsboard/thingsboard
+# PRs #16510, #16557, #16560 and #16561 (merged) plus the unmerged #16613.
+# Re-fetching from a server without #16613 makes 21 fields that the server sends
+# as null required again, so their responses fail to deserialize. See "The spec
+# is composed" in CONTRIBUTING.md.
 #
 # Usage:
 #   tool/fetch-spec.sh <server url> [edition]

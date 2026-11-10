@@ -27,15 +27,16 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 
 ## The spec is composed
 
-`spec/openapi.json` is not a plain fetch: it is the released lts-4.4 spec plus five unmerged ThingsBoard pull requests:
+`spec/openapi.json` is not a plain fetch: it is the released lts-4.4 spec plus these ThingsBoard pull requests:
 
-- thingsboard/thingsboard#16510: compatible fixes: `LoginResponse` (`scope`, optional `refreshToken`), `ColumnSettings` (allOf `DataKeySettings`), the `/api/auth/token` request body (`refreshToken` string), the responses of `claimDevice` (`ClaimResult`), `getPersistedRpcByDevice` (`PageDataRpc`) and `exportIntegrationPackage` (`application/zip`), and the `mobileLogin` request mapping;
-- thingsboard/thingsboard#16555: device API responses (the device API is filtered out by `tool/fetch-spec.sh` anyway);
-- thingsboard/thingsboard#16557: the `NotificationInfo` subtypes;
-- thingsboard/thingsboard#16560: documents `/api/system/info` (`getSystemVersionInfo`), which the server version check uses;
-- thingsboard/thingsboard#16561: changes that are breaking for generated clients: integer `pageSize`/`page` in 28 operations, `assignAlarm`/`unassignAlarm` (`AlarmInfo`), `ThingsboardErrorCode` (integer values) and `AliasEntityId` (`entityType` is a string holding an `EntityType` or `AliasEntityType` name, `id` optional).
+- thingsboard/thingsboard#16510 (merged into lts-4.4): compatible fixes: `LoginResponse` (`scope`, optional `refreshToken`), `ColumnSettings` (allOf `DataKeySettings`), the `/api/auth/token` request body (`refreshToken` string), the responses of `claimDevice` (`ClaimResult`), `getPersistedRpcByDevice` (`PageDataRpc`) and `exportIntegrationPackage` (`application/zip`), and the `mobileLogin` request mapping;
+- thingsboard/thingsboard#16557 (merged): the `NotificationInfo` subtypes;
+- thingsboard/thingsboard#16560 (merged): documents `/api/system/info` (`getSystemVersionInfo`), which the server version check uses;
+- thingsboard/thingsboard#16561 (merged): changes that are breaking for generated clients: integer `int`/`long` parameters (`pageSize`/`page` in 28 operations and `limit` of `getTimeseriesHistory`), `assignAlarm`/`unassignAlarm` (`AlarmInfo`), `ThingsboardErrorCode` (integer values) and `AliasEntityId` (`entityType` is a string holding an `EntityType` or `AliasEntityType` name, `id` optional);
+- thingsboard/thingsboard#16613 (open): 21 response fields the server can send as null are no longer required (`SmsTwoFaAccountConfig.phoneNumber`, `BackupCodeTwoFaAccountConfig.codes`, `Edge.edgeLicenseKey`, `RuleChainMetaData.connections`, ...);
+- thingsboard/thingsboard#16555 (open): device API responses (the device API is filtered out by `tool/fetch-spec.sh` anyway).
 
-Do not re-fetch the spec from a server without them: the build breaks (`LoginResponse.scope`, `SystemInfoControllerApi`), the `NotificationInfo` subtypes disappear and the typed responses and parameters revert (`String` page parameters and responses, `Alarm`). When all five are merged into lts-4.4, re-fetch and diff.
+A spec fetched from lts-4.4 at 48ac7d87a97 (the merge of #16560) with #16613 differs from the committed one only by the AI API added to lts-4.4 after the spec was composed (`/api/ai/resources`, `getAiModelInfos`, `AiProvider`, ...). Do not re-fetch from a server without #16613: the fields above become required again and their responses fail to deserialize. When #16613 is merged, re-fetch from lts-4.4 and diff.
 
 ## Dependency versions
 

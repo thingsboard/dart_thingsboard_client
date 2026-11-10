@@ -336,6 +336,21 @@ Response and parameter types, from thingsboard/thingsboard#16561 (`pageSize`/`pa
 - `RpcV2ControllerApi.getPersistedRpcByDevice` returns `Response<PageDataRpc>` instead of `Response<String>`.
 - `IntegrationControllerApi.exportIntegrationPackage` returns the ZIP archive as `Response<Uint8List>` instead of `Response<String>`.
 - `AlarmControllerApi.assignAlarm` and `unassignAlarm` return `Response<AlarmInfo>` instead of `Response<Alarm>`; `AlarmInfo` has the same fields plus the originator and assignee details.
+- `TelemetryControllerApi.getTimeseriesHistory` takes `limit` as `int?` instead of `String?` (#16561).
+
+Fields the server can send as null, from thingsboard/thingsboard#16613; they are nullable now, and deserializing a response that has them `null` no longer throws:
+
+- `SmsTwoFaAccountConfig.phoneNumber`: `generateTwoFaAccountConfig` returns an SMS config without a phone number.
+- `BackupCodeTwoFaAccountConfig.codes`: hidden everywhere except in `generateTwoFaAccountConfig`, so `getAccountTwoFaSettings` failed for every user with backup codes. Use `codesLeft`.
+- `Edge.edgeLicenseKey` and `EdgeInfo.edgeLicenseKey`: cleared for users without edge write permission.
+- `RuleChainMetaData.connections`, `firstNodeIndex` and `ruleChainConnections`: absent for a new or single-node rule chain; `ruleChainConnections` is never set.
+- `ShortEntityView.name`: set only when the entity group shows a name column (not by default for user, customer and dashboard groups).
+- `GroupPermission.userGroupId` and `GroupPermissionInfo.userGroupId`: absent in the self-registration permissions.
+- `Report.templateId` and `ReportInfo.templateId`: cleared when the report template is deleted.
+- `ReportComponent.subType` (and its subtypes): set only for chart components.
+- `DashboardReportConfig.namePattern` and `userId`: absent in a PDF report template.
+- `AgentApplication.templateVersion` and `AgentApplicationInfo.templateVersion`: absent for an application without a profile.
+- `TelemetryEntityView.timeseries` and `AttributesEntityView.cs`, `ss`, `sh`: absent when the entity view was saved without them.
 
 ## Changes for both: login, `Authority`, errors, paging
 
