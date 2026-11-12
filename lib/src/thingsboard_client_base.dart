@@ -8,7 +8,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'api/auth_controller_api.dart';
 import 'api/qr_code_settings_controller_api.dart';
@@ -17,6 +16,7 @@ import 'api/two_factor_auth_controller_api.dart';
 import 'api_serializers.dart';
 import 'error/thingsboard_error.dart';
 import 'http/http_utils.dart';
+import 'http/redacting_dio_logger.dart';
 import 'interceptor/http_interceptor.dart';
 import 'interceptor/interceptor_config.dart';
 import 'model/change_password_request.dart';
@@ -167,14 +167,7 @@ class ThingsboardClientBase {
   void _installInterceptors() {
     _dio.interceptors.clear();
     if (debugMode) {
-      _dio.interceptors.add(
-        PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          responseHeader: true,
-          responseBody: true,
-        ),
-      );
+      _dio.interceptors.add(RedactingDioLogger());
     }
     _dio.interceptors.add(
       HttpInterceptor(_dio, this, _loadStarted, _loadFinished, _onError),
@@ -376,8 +369,9 @@ class ThingsboardClientBase {
   /// adapter configuration of this client (client certificates, proxy) are
   /// used for [host]. The session of this client is not changed: pass the
   /// tokens to [setUserFromJwtToken] to use them. [logging] logs the request
-  /// and response. The connection and the response each time out after 20
-  /// seconds. Throws a [ThingsboardError] on failure.
+  /// and response, with the secret and the tokens masked. The connection and
+  /// the response each time out after 20 seconds. Throws a [ThingsboardError]
+  /// on failure.
   Future<LoginResponse> getLoginDataBySecretKey({
     required String host,
     required String key,
@@ -395,14 +389,7 @@ class ThingsboardClientBase {
       dio.httpClientAdapter = adapterFactory();
     }
     if (logging) {
-      dio.interceptors.add(
-        PrettyDioLogger(
-          requestHeader: true,
-          requestBody: true,
-          responseHeader: true,
-          responseBody: true,
-        ),
-      );
+      dio.interceptors.add(RedactingDioLogger());
     }
     try {
       final response = await QrCodeSettingsControllerApi(
