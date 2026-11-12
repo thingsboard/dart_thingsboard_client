@@ -122,14 +122,30 @@ LOG_FILE="$SCRIPT_DIR/generate-client.log"
 exec > >(tee "$LOG_FILE") 2>&1
 
 OPENAPI_GENERATOR_VERSION="7.26.0"
+# Update together with the version. Maven Central publishes only a SHA-1
+# (b96b148fcf482808037f68fbad99cb4d7e65d40b); check the jar against it first.
+OPENAPI_GENERATOR_SHA256="1760050094997b9cc790cc1350be095f15da8c08a996b184d3eadc4ccda5e35e"
 GENERATOR_CACHE_DIR="${OPENAPI_GENERATOR_CACHE_DIR:-${HOME}/.cache/openapi-generator}"
 GENERATOR_JAR="$GENERATOR_CACHE_DIR/openapi-generator-cli-${OPENAPI_GENERATOR_VERSION}.jar"
+
+sha256_of() {
+  if command -v sha256sum >/dev/null 2>&1; then
+    sha256sum "$1" | cut -d' ' -f1
+  else
+    shasum -a 256 "$1" | cut -d' ' -f1
+  fi
+}
 
 if [ ! -f "$GENERATOR_JAR" ]; then
   echo "Downloading openapi-generator-cli ${OPENAPI_GENERATOR_VERSION}..."
   mkdir -p "$GENERATOR_CACHE_DIR"
-  curl -fSL -o "$GENERATOR_JAR" \
+  curl -fSL -o "$GENERATOR_JAR.part" \
     "https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/${OPENAPI_GENERATOR_VERSION}/openapi-generator-cli-${OPENAPI_GENERATOR_VERSION}.jar"
+  mv "$GENERATOR_JAR.part" "$GENERATOR_JAR"
+fi
+if [ "$(sha256_of "$GENERATOR_JAR")" != "$OPENAPI_GENERATOR_SHA256" ]; then
+  echo "ERROR: $GENERATOR_JAR does not match OPENAPI_GENERATOR_SHA256; delete it to download it again."
+  exit 1
 fi
 
 openapi-generator-cli() { java -jar "$GENERATOR_JAR" "$@"; }
