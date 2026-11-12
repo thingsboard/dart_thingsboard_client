@@ -91,7 +91,9 @@ import 'package:thingsboard_client/src/model/ai_model.dart';
 import 'package:thingsboard_client/src/model/ai_model_config.dart';
 import 'package:thingsboard_client/src/model/ai_model_export_data.dart';
 import 'package:thingsboard_client/src/model/ai_model_id.dart';
+import 'package:thingsboard_client/src/model/ai_model_info.dart';
 import 'package:thingsboard_client/src/model/ai_model_type.dart';
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/alarm.dart';
 import 'package:thingsboard_client/src/model/alarm_action.dart';
 import 'package:thingsboard_client/src/model/alarm_assignee.dart';
@@ -672,6 +674,7 @@ import 'package:thingsboard_client/src/model/page_data_agent_info.dart';
 import 'package:thingsboard_client/src/model/page_data_agent_profile.dart';
 import 'package:thingsboard_client/src/model/page_data_agent_profile_info.dart';
 import 'package:thingsboard_client/src/model/page_data_ai_model.dart';
+import 'package:thingsboard_client/src/model/page_data_ai_model_info.dart';
 import 'package:thingsboard_client/src/model/page_data_alarm_comment_info.dart';
 import 'package:thingsboard_client/src/model/page_data_alarm_data.dart';
 import 'package:thingsboard_client/src/model/page_data_alarm_info.dart';
@@ -908,6 +911,7 @@ import 'package:thingsboard_client/src/model/snmp_device_profile_transport_confi
 import 'package:thingsboard_client/src/model/snmp_device_transport_configuration.dart';
 import 'package:thingsboard_client/src/model/snmp_mapping.dart';
 import 'package:thingsboard_client/src/model/snmp_protocol_version.dart';
+import 'package:thingsboard_client/src/model/solution_chat_message.dart';
 import 'package:thingsboard_client/src/model/solution_data.dart';
 import 'package:thingsboard_client/src/model/solution_export_request.dart';
 import 'package:thingsboard_client/src/model/solution_export_response.dart';
@@ -948,6 +952,7 @@ import 'package:thingsboard_client/src/model/task_processing_failure_notificatio
 import 'package:thingsboard_client/src/model/task_processing_failure_notification_rule_trigger_config.dart';
 import 'package:thingsboard_client/src/model/task_processing_failure_recipients_config.dart';
 import 'package:thingsboard_client/src/model/task_result.dart';
+import 'package:thingsboard_client/src/model/tb_chat_prompt.dart';
 import 'package:thingsboard_client/src/model/tb_chat_request.dart';
 import 'package:thingsboard_client/src/model/tb_chat_response.dart';
 import 'package:thingsboard_client/src/model/tb_content.dart';
@@ -1167,7 +1172,9 @@ part 'serializers.g.dart';
   $AiModelConfig,
   AiModelExportData,
   AiModelId,
+  AiModelInfo,
   AiModelType,
+  AiProvider,
   Alarm,
   AlarmAction,
   AlarmAssignee,
@@ -1781,6 +1788,7 @@ part 'serializers.g.dart';
   PageDataAgentProfile,
   PageDataAgentProfileInfo,
   PageDataAiModel,
+  PageDataAiModelInfo,
   PageDataAlarmCommentInfo,
   PageDataAlarmData,
   PageDataAlarmInfo,
@@ -2024,6 +2032,7 @@ part 'serializers.g.dart';
   SnmpDeviceTransportConfiguration,
   SnmpMapping,
   SnmpProtocolVersion,
+  SolutionChatMessage,
   SolutionData,
   SolutionExportRequest,
   SolutionExportResponse,
@@ -2065,6 +2074,7 @@ part 'serializers.g.dart';
   TaskProcessingFailureRecipientsConfig,
   TaskResult,
   $TaskResult,
+  TbChatPrompt,
   TbChatRequest,
   TbChatResponse,
   $TbChatResponse,
@@ -3189,6 +3199,10 @@ Serializers serializers =
           ..addBuilderFactory(
             const FullType(BuiltList, [FullType(CustomTimeScheduleItem)]),
             () => ListBuilder<CustomTimeScheduleItem>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, [FullType(AiModelInfo)]),
+            () => ListBuilder<AiModelInfo>(),
           )
           ..addBuilderFactory(
             const FullType(BuiltList, [FullType(Edge)]),

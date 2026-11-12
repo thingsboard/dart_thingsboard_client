@@ -25,18 +25,9 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 
 `generate-client.sh` copies `common/lib/` into `lib/`, adds the license headers, removes unused imports, formats the code and stages the result. See the comments at the top of the script for every step.
 
-## The spec is composed
+## The spec
 
-`spec/openapi.json` is not a plain fetch: it is the released lts-4.4 spec plus these ThingsBoard pull requests:
-
-- thingsboard/thingsboard#16510 (merged into lts-4.4): compatible fixes: `LoginResponse` (`scope`, optional `refreshToken`), `ColumnSettings` (allOf `DataKeySettings`), the `/api/auth/token` request body (`refreshToken` string), the responses of `claimDevice` (`ClaimResult`), `getPersistedRpcByDevice` (`PageDataRpc`) and `exportIntegrationPackage` (`application/zip`), and the `mobileLogin` request mapping;
-- thingsboard/thingsboard#16557 (merged): the `NotificationInfo` subtypes;
-- thingsboard/thingsboard#16560 (merged): documents `/api/system/info` (`getSystemVersionInfo`), which the server version check uses;
-- thingsboard/thingsboard#16561 (merged): changes that are breaking for generated clients: integer `int`/`long` parameters (`pageSize`/`page` in 28 operations and `limit` of `getTimeseriesHistory`), `assignAlarm`/`unassignAlarm` (`AlarmInfo`), `ThingsboardErrorCode` (integer values) and `AliasEntityId` (`entityType` is a string holding an `EntityType` or `AliasEntityType` name, `id` optional);
-- thingsboard/thingsboard#16613 (merged into lts-4.4): 21 response fields the server can send as null are no longer required (`SmsTwoFaAccountConfig.phoneNumber`, `BackupCodeTwoFaAccountConfig.codes`, `Edge.edgeLicenseKey`, `RuleChainMetaData.connections`, ...);
-- thingsboard/thingsboard#16555 (open): device API responses (the device API is filtered out by `tool/fetch-spec.sh` anyway).
-
-A spec fetched from lts-4.4 at 48ac7d87a97 (the merge of #16560) with #16613 differs from the committed one only by the AI API added to lts-4.4 after the spec was composed (`/api/ai/resources`, `getAiModelInfos`, `AiProvider`, ...). Do not re-fetch from a server without #16613: the fields above become required again and their responses fail to deserialize. When #16613 is merged, re-fetch from lts-4.4 and diff.
+`spec/openapi.json` is fetched by `tool/fetch-spec.sh` from a server built from the ThingsBoard lts-4.4 branch at 55bea201b94. Its API documentation has fixes the client depends on and the released 4.4.0 lacks: the login response (`JwtPair`, optional `refreshToken`), numeric `ThingsboardErrorCode`, `AliasEntityId`, the `NotificationInfo` subtypes, `getSystemVersionInfo`, integer paging parameters, and the response fields the server can send as null. Do not fetch from a 4.4.0 server: those fields become required again and their responses fail to deserialize (`test/nullable_fields_test.dart` and `test/spec_fixes_test.dart` catch it). To update, run a server on a newer lts-4.4 commit, fetch, review the diff and record the commit here.
 
 ## Dependency versions
 

@@ -8,7 +8,7 @@ import 'package:thingsboard_client/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider** | **String** |  | 
+**provider** | [**AiProvider**](AiProvider.md) | AI Provider | 
 **providerConfig** | [**GoogleAiGeminiProviderConfig**](GoogleAiGeminiProviderConfig.md) |  | 
 **modelId** | **String** |  | 
 **temperature** | **double** |  | [optional] 

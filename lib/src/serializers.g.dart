@@ -136,7 +136,9 @@ Serializers _$serializers =
           ..add(AiModel.serializer)
           ..add(AiModelExportData.serializer)
           ..add(AiModelId.serializer)
+          ..add(AiModelInfo.serializer)
           ..add(AiModelType.serializer)
+          ..add(AiProvider.serializer)
           ..add(Alarm.serializer)
           ..add(AlarmAction.serializer)
           ..add(AlarmAssignee.serializer)
@@ -702,6 +704,7 @@ Serializers _$serializers =
           ..add(PageDataAgentProfile.serializer)
           ..add(PageDataAgentProfileInfo.serializer)
           ..add(PageDataAiModel.serializer)
+          ..add(PageDataAiModelInfo.serializer)
           ..add(PageDataAlarmCommentInfo.serializer)
           ..add(PageDataAlarmData.serializer)
           ..add(PageDataAlarmInfo.serializer)
@@ -941,6 +944,7 @@ Serializers _$serializers =
           ..add(SnmpDeviceTransportConfiguration.serializer)
           ..add(SnmpMapping.serializer)
           ..add(SnmpProtocolVersion.serializer)
+          ..add(SolutionChatMessage.serializer)
           ..add(SolutionData.serializer)
           ..add(SolutionExportRequest.serializer)
           ..add(SolutionExportResponse.serializer)
@@ -980,6 +984,7 @@ Serializers _$serializers =
           ..add(TaskProcessingFailureNotificationInfo.serializer)
           ..add(TaskProcessingFailureNotificationRuleTriggerConfig.serializer)
           ..add(TaskProcessingFailureRecipientsConfig.serializer)
+          ..add(TbChatPrompt.serializer)
           ..add(TbChatRequest.serializer)
           ..add(TbFontStyle.serializer)
           ..add(TbFontWeight.serializer)
@@ -1192,6 +1197,10 @@ Serializers _$serializers =
           ..addBuilderFactory(
             const FullType(BuiltList, const [const FullType(AiModel)]),
             () => ListBuilder<AiModel>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, const [const FullType(AiModelInfo)]),
+            () => ListBuilder<AiModelInfo>(),
           )
           ..addBuilderFactory(
             const FullType(BuiltList, const [const FullType(AlarmCommentInfo)]),
@@ -2327,6 +2336,10 @@ Serializers _$serializers =
           ..addBuilderFactory(
             const FullType(BuiltList, const [const FullType(SnmpMapping)]),
             () => ListBuilder<SnmpMapping>(),
+          )
+          ..addBuilderFactory(
+            const FullType(BuiltList, const [const FullType(String)]),
+            () => ListBuilder<String>(),
           )
           ..addBuilderFactory(
             const FullType(BuiltList, const [const FullType(String)]),

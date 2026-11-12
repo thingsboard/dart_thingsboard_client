@@ -74,6 +74,8 @@ const BulkImportColumnType _$SNMP_COMMUNITY_STRING =
 const BulkImportColumnType _$IS_GATEWAY = const BulkImportColumnType._(
   'IS_GATEWAY',
 );
+const BulkImportColumnType _$OVERWRITE_ACTIVITY_TIME =
+    const BulkImportColumnType._('OVERWRITE_ACTIVITY_TIME');
 const BulkImportColumnType _$DESCRIPTION = const BulkImportColumnType._(
   'DESCRIPTION',
 );
@@ -146,6 +148,8 @@ BulkImportColumnType _$valueOf(String name) {
       return _$SNMP_COMMUNITY_STRING;
     case 'IS_GATEWAY':
       return _$IS_GATEWAY;
+    case 'OVERWRITE_ACTIVITY_TIME':
+      return _$OVERWRITE_ACTIVITY_TIME;
     case 'DESCRIPTION':
       return _$DESCRIPTION;
     case 'EDGE_LICENSE_KEY':
@@ -192,6 +196,7 @@ final BuiltSet<BulkImportColumnType> _$values =
       _$SNMP_VERSION,
       _$SNMP_COMMUNITY_STRING,
       _$IS_GATEWAY,
+      _$OVERWRITE_ACTIVITY_TIME,
       _$DESCRIPTION,
       _$EDGE_LICENSE_KEY,
       _$CLOUD_ENDPOINT,
@@ -236,6 +241,7 @@ class _$BulkImportColumnTypeMeta {
   BulkImportColumnType get SNMP_VERSION => _$SNMP_VERSION;
   BulkImportColumnType get SNMP_COMMUNITY_STRING => _$SNMP_COMMUNITY_STRING;
   BulkImportColumnType get IS_GATEWAY => _$IS_GATEWAY;
+  BulkImportColumnType get OVERWRITE_ACTIVITY_TIME => _$OVERWRITE_ACTIVITY_TIME;
   BulkImportColumnType get DESCRIPTION => _$DESCRIPTION;
   BulkImportColumnType get EDGE_LICENSE_KEY => _$EDGE_LICENSE_KEY;
   BulkImportColumnType get CLOUD_ENDPOINT => _$CLOUD_ENDPOINT;
@@ -288,6 +294,7 @@ class _$BulkImportColumnTypeSerializer
     'SNMP_VERSION': 'SNMP_VERSION',
     'SNMP_COMMUNITY_STRING': 'SNMP_COMMUNITY_STRING',
     'IS_GATEWAY': 'IS_GATEWAY',
+    'OVERWRITE_ACTIVITY_TIME': 'OVERWRITE_ACTIVITY_TIME',
     'DESCRIPTION': 'DESCRIPTION',
     'EDGE_LICENSE_KEY': 'EDGE_LICENSE_KEY',
     'CLOUD_ENDPOINT': 'CLOUD_ENDPOINT',
@@ -326,6 +333,7 @@ class _$BulkImportColumnTypeSerializer
     'SNMP_VERSION': 'SNMP_VERSION',
     'SNMP_COMMUNITY_STRING': 'SNMP_COMMUNITY_STRING',
     'IS_GATEWAY': 'IS_GATEWAY',
+    'OVERWRITE_ACTIVITY_TIME': 'OVERWRITE_ACTIVITY_TIME',
     'DESCRIPTION': 'DESCRIPTION',
     'EDGE_LICENSE_KEY': 'EDGE_LICENSE_KEY',
     'CLOUD_ENDPOINT': 'CLOUD_ENDPOINT',

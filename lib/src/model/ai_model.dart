@@ -24,6 +24,7 @@ part 'ai_model.g.dart';
 /// * [tenantId] - JSON object representing the ID of the tenant associated with this AI model
 /// * [version] - Version of the AI model record; increments automatically whenever the record is changed
 /// * [name] - Display name for this AI model configuration; not the technical model identifier
+/// * [customerAccessEnabled] - Whether customer users with the 'INVOKE' permission for AI models can send chat requests to the model, such as users with the default 'Customer Administrator' role, which grants all operations. Tenant administrators with the 'INVOKE' permission can use the model regardless of this flag
 /// * [configuration] - Configuration of the AI model
 @BuiltValue()
 abstract class AiModel implements Built<AiModel, AiModelBuilder> {
@@ -46,6 +47,10 @@ abstract class AiModel implements Built<AiModel, AiModelBuilder> {
   @BuiltValueField(wireName: r'name')
   String get name;
 
+  /// Whether customer users with the 'INVOKE' permission for AI models can send chat requests to the model, such as users with the default 'Customer Administrator' role, which grants all operations. Tenant administrators with the 'INVOKE' permission can use the model regardless of this flag
+  @BuiltValueField(wireName: r'customerAccessEnabled')
+  bool? get customerAccessEnabled;
+
   /// Configuration of the AI model
   @BuiltValueField(wireName: r'configuration')
   AiModelConfig? get configuration;
@@ -55,7 +60,9 @@ abstract class AiModel implements Built<AiModel, AiModelBuilder> {
   factory AiModel([void updates(AiModelBuilder b)]) = _$AiModel;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(AiModelBuilder b) => b..version = 1;
+  static void _defaults(AiModelBuilder b) => b
+    ..version = 1
+    ..customerAccessEnabled = false;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AiModel> get serializer => _$AiModelSerializer();
@@ -106,6 +113,13 @@ class _$AiModelSerializer implements PrimitiveSerializer<AiModel> {
       object.name,
       specifiedType: const FullType(String),
     );
+    if (object.customerAccessEnabled != null) {
+      yield r'customerAccessEnabled';
+      yield serializers.serialize(
+        object.customerAccessEnabled,
+        specifiedType: const FullType(bool),
+      );
+    }
     if (object.configuration != null) {
       yield r'configuration';
       yield serializers.serialize(
@@ -188,6 +202,16 @@ class _$AiModelSerializer implements PrimitiveSerializer<AiModel> {
                   )
                   as String;
           result.name = valueDes;
+          break;
+        case r'customerAccessEnabled':
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(bool),
+                  )
+                  as bool?;
+          if (valueDes == null) continue;
+          result.customerAccessEnabled = valueDes;
           break;
         case r'configuration':
           final valueDes =

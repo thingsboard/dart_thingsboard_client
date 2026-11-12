@@ -33,7 +33,7 @@ class _$OpenAiChatModelConfig extends OpenAiChatModelConfig {
   @override
   final int? maxOutputTokens;
   @override
-  final String provider;
+  final AiProvider provider;
 
   factory _$OpenAiChatModelConfig([
     void Function(OpenAiChatModelConfigBuilder)? updates,
@@ -168,9 +168,9 @@ class OpenAiChatModelConfigBuilder
   set maxOutputTokens(covariant int? maxOutputTokens) =>
       _$this._maxOutputTokens = maxOutputTokens;
 
-  String? _provider;
-  String? get provider => _$this._provider;
-  set provider(covariant String? provider) => _$this._provider = provider;
+  AiProvider? _provider;
+  AiProvider? get provider => _$this._provider;
+  set provider(covariant AiProvider? provider) => _$this._provider = provider;
 
   OpenAiChatModelConfigBuilder() {
     OpenAiChatModelConfig._defaults(this);

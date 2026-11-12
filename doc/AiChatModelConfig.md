@@ -9,6 +9,7 @@ import 'package:thingsboard_client/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **modelType** | [**AiModelType**](AiModelType.md) |  | [optional] 
+**provider** | [**AiProvider**](AiProvider.md) | AI Provider | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

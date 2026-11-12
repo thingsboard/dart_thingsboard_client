@@ -33,7 +33,7 @@ class _$OllamaChatModelConfig extends OllamaChatModelConfig {
   @override
   final int? maxOutputTokens;
   @override
-  final String provider;
+  final AiProvider provider;
 
   factory _$OllamaChatModelConfig([
     void Function(OllamaChatModelConfigBuilder)? updates,
@@ -167,9 +167,9 @@ class OllamaChatModelConfigBuilder
   set maxOutputTokens(covariant int? maxOutputTokens) =>
       _$this._maxOutputTokens = maxOutputTokens;
 
-  String? _provider;
-  String? get provider => _$this._provider;
-  set provider(covariant String? provider) => _$this._provider = provider;
+  AiProvider? _provider;
+  AiProvider? get provider => _$this._provider;
+  set provider(covariant AiProvider? provider) => _$this._provider = provider;
 
   OllamaChatModelConfigBuilder() {
     OllamaChatModelConfig._defaults(this);

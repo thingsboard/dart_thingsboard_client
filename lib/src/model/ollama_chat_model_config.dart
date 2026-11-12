@@ -9,6 +9,7 @@
 
 // ignore_for_file: unused_element
 import 'package:thingsboard_client/src/model/ai_model_config.dart';
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/ollama_provider_config.dart';
 import 'package:thingsboard_client/src/model/ai_model_type.dart';
 import 'package:built_value/built_value.dart';
@@ -19,7 +20,7 @@ part 'ollama_chat_model_config.g.dart';
 /// OllamaChatModelConfig
 ///
 /// Properties:
-/// * [provider]
+/// * [provider] - AI Provider
 /// * [providerConfig]
 /// * [modelId]
 /// * [temperature]
@@ -74,7 +75,7 @@ abstract class OllamaChatModelConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OllamaChatModelConfigBuilder b) =>
-      b..provider = r'OLLAMA';
+      b..provider = AiProvider.OLLAMA;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OllamaChatModelConfig> get serializer =>
@@ -126,7 +127,7 @@ class _$OllamaChatModelConfigSerializer
     yield r'provider';
     yield serializers.serialize(
       object.provider,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType(AiProvider),
     );
     if (object.temperature != null) {
       yield r'temperature';
@@ -238,9 +239,9 @@ class _$OllamaChatModelConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType(AiProvider),
                   )
-                  as String;
+                  as AiProvider;
           result.provider = valueDes;
           break;
         case r'temperature':

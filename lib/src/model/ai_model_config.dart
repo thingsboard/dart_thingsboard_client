@@ -12,6 +12,7 @@ import 'package:thingsboard_client/src/model/git_hub_models_chat_model_config.da
 import 'package:thingsboard_client/src/model/google_vertex_ai_gemini_chat_model_config.dart';
 import 'package:thingsboard_client/src/model/azure_open_ai_chat_model_config.dart';
 import 'package:thingsboard_client/src/model/ollama_chat_model_config.dart';
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/amazon_bedrock_chat_model_config.dart';
 import 'package:thingsboard_client/src/model/open_ai_chat_model_config.dart';
 import 'package:thingsboard_client/src/model/mistral_ai_chat_model_config.dart';
@@ -25,11 +26,13 @@ part 'ai_model_config.g.dart';
 /// Root configuration for AI models
 ///
 /// Properties:
-/// * [provider]
+/// * [provider] - AI Provider
 @BuiltValue(instantiable: false)
 abstract class AiModelConfig {
+  /// AI Provider
   @BuiltValueField(wireName: r'provider')
-  String get provider;
+  AiProvider get provider;
+  // enum providerEnum {  OPENAI,  AZURE_OPENAI,  GOOGLE_AI_GEMINI,  GOOGLE_VERTEX_AI_GEMINI,  MISTRAL_AI,  ANTHROPIC,  AMAZON_BEDROCK,  GITHUB_MODELS,  OLLAMA,  };
 
   static const String discriminatorFieldName = r'provider';
 
@@ -131,7 +134,7 @@ class _$AiModelConfigSerializer implements PrimitiveSerializer<AiModelConfig> {
     yield r'provider';
     yield serializers.serialize(
       object.provider,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType(AiProvider),
     );
   }
 
@@ -335,9 +338,9 @@ class _$$AiModelConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType(AiProvider),
                   )
-                  as String;
+                  as AiProvider;
           result.provider = valueDes;
           break;
         default:

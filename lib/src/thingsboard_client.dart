@@ -13,6 +13,7 @@ import 'package:thingsboard_client/src/api/agent_profile_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_chat_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_device_dashboard_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_model_controller_api.dart';
+import 'package:thingsboard_client/src/api/ai_resource_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_solution_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_tool_controller_api.dart';
 import 'package:thingsboard_client/src/api/alarm_comment_controller_api.dart';
@@ -109,6 +110,7 @@ class ThingsboardClient extends ThingsboardClientBase {
   AiChatControllerApi? _aiChatControllerApi;
   AiDeviceDashboardControllerApi? _aiDeviceDashboardControllerApi;
   AiModelControllerApi? _aiModelControllerApi;
+  AiResourceControllerApi? _aiResourceControllerApi;
   AiSolutionControllerApi? _aiSolutionControllerApi;
   AiToolControllerApi? _aiToolControllerApi;
   AlarmCommentControllerApi? _alarmCommentControllerApi;
@@ -254,6 +256,11 @@ class ThingsboardClient extends ThingsboardClientBase {
   AiModelControllerApi getAiModelControllerApi() {
     _aiModelControllerApi ??= AiModelControllerApi(dio);
     return _aiModelControllerApi!;
+  }
+
+  AiResourceControllerApi getAiResourceControllerApi() {
+    _aiResourceControllerApi ??= AiResourceControllerApi(dio);
+    return _aiResourceControllerApi!;
   }
 
   AiSolutionControllerApi getAiSolutionControllerApi() {

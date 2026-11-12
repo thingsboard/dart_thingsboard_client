@@ -8,6 +8,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/ai_model_type.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -18,12 +19,18 @@ part 'ai_chat_model_config.g.dart';
 ///
 /// Properties:
 /// * [modelType]
+/// * [provider] - AI Provider
 @BuiltValue()
 abstract class AiChatModelConfig
     implements Built<AiChatModelConfig, AiChatModelConfigBuilder> {
   @BuiltValueField(wireName: r'modelType')
   AiModelType? get modelType;
   // enum modelTypeEnum {  CHAT,  };
+
+  /// AI Provider
+  @BuiltValueField(wireName: r'provider')
+  AiProvider get provider;
+  // enum providerEnum {  OPENAI,  AZURE_OPENAI,  GOOGLE_AI_GEMINI,  GOOGLE_VERTEX_AI_GEMINI,  MISTRAL_AI,  ANTHROPIC,  AMAZON_BEDROCK,  GITHUB_MODELS,  OLLAMA,  };
 
   AiChatModelConfig._();
 
@@ -58,6 +65,11 @@ class _$AiChatModelConfigSerializer
         specifiedType: const FullType(AiModelType),
       );
     }
+    yield r'provider';
+    yield serializers.serialize(
+      object.provider,
+      specifiedType: const FullType(AiProvider),
+    );
   }
 
   @override
@@ -94,6 +106,15 @@ class _$AiChatModelConfigSerializer
                   as AiModelType?;
           if (valueDes == null) continue;
           result.modelType = valueDes;
+          break;
+        case r'provider':
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType(AiProvider),
+                  )
+                  as AiProvider;
+          result.provider = valueDes;
           break;
         default:
           unhandled.add(key);

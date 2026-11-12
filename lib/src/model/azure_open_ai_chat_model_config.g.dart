@@ -33,7 +33,7 @@ class _$AzureOpenAiChatModelConfig extends AzureOpenAiChatModelConfig {
   @override
   final int? maxOutputTokens;
   @override
-  final String provider;
+  final AiProvider provider;
 
   factory _$AzureOpenAiChatModelConfig([
     void Function(AzureOpenAiChatModelConfigBuilder)? updates,
@@ -169,9 +169,9 @@ class AzureOpenAiChatModelConfigBuilder
   set maxOutputTokens(covariant int? maxOutputTokens) =>
       _$this._maxOutputTokens = maxOutputTokens;
 
-  String? _provider;
-  String? get provider => _$this._provider;
-  set provider(covariant String? provider) => _$this._provider = provider;
+  AiProvider? _provider;
+  AiProvider? get provider => _$this._provider;
+  set provider(covariant AiProvider? provider) => _$this._provider = provider;
 
   AzureOpenAiChatModelConfigBuilder() {
     AzureOpenAiChatModelConfig._defaults(this);

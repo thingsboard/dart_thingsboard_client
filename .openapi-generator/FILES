@@ -83,7 +83,10 @@ doc/AiModelConfig.md
 doc/AiModelControllerApi.md
 doc/AiModelExportData.md
 doc/AiModelId.md
+doc/AiModelInfo.md
 doc/AiModelType.md
+doc/AiProvider.md
+doc/AiResourceControllerApi.md
 doc/AiSolutionControllerApi.md
 doc/AiToolControllerApi.md
 doc/Alarm.md
@@ -714,6 +717,7 @@ doc/PageDataAgentInfo.md
 doc/PageDataAgentProfile.md
 doc/PageDataAgentProfileInfo.md
 doc/PageDataAiModel.md
+doc/PageDataAiModelInfo.md
 doc/PageDataAlarmCommentInfo.md
 doc/PageDataAlarmData.md
 doc/PageDataAlarmInfo.md
@@ -964,6 +968,7 @@ doc/SnmpDeviceProfileTransportConfiguration.md
 doc/SnmpDeviceTransportConfiguration.md
 doc/SnmpMapping.md
 doc/SnmpProtocolVersion.md
+doc/SolutionChatMessage.md
 doc/SolutionData.md
 doc/SolutionExportImportControllerApi.md
 doc/SolutionExportRequest.md
@@ -1007,6 +1012,7 @@ doc/TaskProcessingFailureNotificationInfo.md
 doc/TaskProcessingFailureNotificationRuleTriggerConfig.md
 doc/TaskProcessingFailureRecipientsConfig.md
 doc/TaskResult.md
+doc/TbChatPrompt.md
 doc/TbChatRequest.md
 doc/TbChatResponse.md
 doc/TbContent.md
@@ -1171,6 +1177,7 @@ lib/src/api/agent_profile_controller_api.dart
 lib/src/api/ai_chat_controller_api.dart
 lib/src/api/ai_device_dashboard_controller_api.dart
 lib/src/api/ai_model_controller_api.dart
+lib/src/api/ai_resource_controller_api.dart
 lib/src/api/ai_solution_controller_api.dart
 lib/src/api/ai_tool_controller_api.dart
 lib/src/api/alarm_comment_controller_api.dart
@@ -1333,7 +1340,9 @@ lib/src/model/ai_model.dart
 lib/src/model/ai_model_config.dart
 lib/src/model/ai_model_export_data.dart
 lib/src/model/ai_model_id.dart
+lib/src/model/ai_model_info.dart
 lib/src/model/ai_model_type.dart
+lib/src/model/ai_provider.dart
 lib/src/model/alarm.dart
 lib/src/model/alarm_action.dart
 lib/src/model/alarm_assignee.dart
@@ -1914,6 +1923,7 @@ lib/src/model/page_data_agent_info.dart
 lib/src/model/page_data_agent_profile.dart
 lib/src/model/page_data_agent_profile_info.dart
 lib/src/model/page_data_ai_model.dart
+lib/src/model/page_data_ai_model_info.dart
 lib/src/model/page_data_alarm_comment_info.dart
 lib/src/model/page_data_alarm_data.dart
 lib/src/model/page_data_alarm_info.dart
@@ -2151,6 +2161,7 @@ lib/src/model/snmp_device_profile_transport_configuration.dart
 lib/src/model/snmp_device_transport_configuration.dart
 lib/src/model/snmp_mapping.dart
 lib/src/model/snmp_protocol_version.dart
+lib/src/model/solution_chat_message.dart
 lib/src/model/solution_data.dart
 lib/src/model/solution_export_request.dart
 lib/src/model/solution_export_response.dart
@@ -2191,6 +2202,7 @@ lib/src/model/task_processing_failure_notification_info.dart
 lib/src/model/task_processing_failure_notification_rule_trigger_config.dart
 lib/src/model/task_processing_failure_recipients_config.dart
 lib/src/model/task_result.dart
+lib/src/model/tb_chat_prompt.dart
 lib/src/model/tb_chat_request.dart
 lib/src/model/tb_chat_response.dart
 lib/src/model/tb_content.dart

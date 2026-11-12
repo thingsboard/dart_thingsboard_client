@@ -36,7 +36,7 @@ class _$GoogleVertexAiGeminiChatModelConfig
   @override
   final int? maxOutputTokens;
   @override
-  final String provider;
+  final AiProvider provider;
 
   factory _$GoogleVertexAiGeminiChatModelConfig([
     void Function(GoogleVertexAiGeminiChatModelConfigBuilder)? updates,
@@ -184,9 +184,9 @@ class GoogleVertexAiGeminiChatModelConfigBuilder
   set maxOutputTokens(covariant int? maxOutputTokens) =>
       _$this._maxOutputTokens = maxOutputTokens;
 
-  String? _provider;
-  String? get provider => _$this._provider;
-  set provider(covariant String? provider) => _$this._provider = provider;
+  AiProvider? _provider;
+  AiProvider? get provider => _$this._provider;
+  set provider(covariant AiProvider? provider) => _$this._provider = provider;
 
   GoogleVertexAiGeminiChatModelConfigBuilder() {
     GoogleVertexAiGeminiChatModelConfig._defaults(this);

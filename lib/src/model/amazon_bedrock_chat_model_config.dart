@@ -9,6 +9,7 @@
 
 // ignore_for_file: unused_element
 import 'package:thingsboard_client/src/model/ai_model_config.dart';
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/amazon_bedrock_provider_config.dart';
 import 'package:thingsboard_client/src/model/ai_model_type.dart';
 import 'package:built_value/built_value.dart';
@@ -19,7 +20,7 @@ part 'amazon_bedrock_chat_model_config.g.dart';
 /// AmazonBedrockChatModelConfig
 ///
 /// Properties:
-/// * [provider]
+/// * [provider] - AI Provider
 /// * [providerConfig]
 /// * [modelId]
 /// * [temperature]
@@ -69,7 +70,7 @@ abstract class AmazonBedrockChatModelConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(AmazonBedrockChatModelConfigBuilder b) =>
-      b..provider = r'AMAZON_BEDROCK';
+      b..provider = AiProvider.AMAZON_BEDROCK;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<AmazonBedrockChatModelConfig> get serializer =>
@@ -107,7 +108,7 @@ class _$AmazonBedrockChatModelConfigSerializer
     yield r'provider';
     yield serializers.serialize(
       object.provider,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType(AiProvider),
     );
     if (object.temperature != null) {
       yield r'temperature';
@@ -199,9 +200,9 @@ class _$AmazonBedrockChatModelConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType(AiProvider),
                   )
-                  as String;
+                  as AiProvider;
           result.provider = valueDes;
           break;
         case r'temperature':

@@ -10,6 +10,7 @@
 // ignore_for_file: unused_element
 import 'package:thingsboard_client/src/model/git_hub_models_provider_config.dart';
 import 'package:thingsboard_client/src/model/ai_model_config.dart';
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/ai_model_type.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -19,7 +20,7 @@ part 'git_hub_models_chat_model_config.g.dart';
 /// GitHubModelsChatModelConfig
 ///
 /// Properties:
-/// * [provider]
+/// * [provider] - AI Provider
 /// * [providerConfig]
 /// * [modelId]
 /// * [temperature]
@@ -74,7 +75,7 @@ abstract class GitHubModelsChatModelConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GitHubModelsChatModelConfigBuilder b) =>
-      b..provider = r'GITHUB_MODELS';
+      b..provider = AiProvider.GITHUB_MODELS;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<GitHubModelsChatModelConfig> get serializer =>
@@ -119,7 +120,7 @@ class _$GitHubModelsChatModelConfigSerializer
     yield r'provider';
     yield serializers.serialize(
       object.provider,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType(AiProvider),
     );
     if (object.temperature != null) {
       yield r'temperature';
@@ -228,9 +229,9 @@ class _$GitHubModelsChatModelConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType(AiProvider),
                   )
-                  as String;
+                  as AiProvider;
           result.provider = valueDes;
           break;
         case r'temperature':

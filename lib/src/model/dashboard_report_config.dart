@@ -23,7 +23,7 @@ part 'dashboard_report_config.g.dart';
 /// * [timezone] - Timezone in which target dashboard will be presented in dashboard report.
 /// * [useDashboardTimewindow] - If set, timewindow configured in the target dashboard will be used during dashboard report generation.
 /// * [timewindow] - Specific dashboard timewindow that will be used during dashboard report generation.
-/// * [namePattern] - If set, timewindow configured in the target dashboard will be used during dashboard report generation.
+/// * [namePattern] - Pattern of the generated report file name. '%d{<date format>}' is replaced with the report generation time formatted in the report timezone. If not set, 'report-%d{yyyy-MM-dd_HH:mm:ss}' is used.
 /// * [type] - Dashboard report file type, can be PDF | PNG | JPEG.
 /// * [useCurrentUserCredentials] - If set, credentials of user created this dashboard report configuration will be used to open dashboard UI during dashboard report generation.
 /// * [userId] - A string value representing the user id.
@@ -54,7 +54,7 @@ abstract class DashboardReportConfig
   @BuiltValueField(wireName: r'timewindow')
   JsonObject? get timewindow;
 
-  /// If set, timewindow configured in the target dashboard will be used during dashboard report generation.
+  /// Pattern of the generated report file name. '%d{<date format>}' is replaced with the report generation time formatted in the report timezone. If not set, 'report-%d{yyyy-MM-dd_HH:mm:ss}' is used.
   @BuiltValueField(wireName: r'namePattern')
   String? get namePattern;
 

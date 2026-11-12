@@ -15,6 +15,8 @@ import 'package:dio/dio.dart';
 import 'package:thingsboard_client/src/api_util.dart';
 import 'package:thingsboard_client/src/model/ai_model.dart';
 import 'package:thingsboard_client/src/model/page_data_ai_model.dart';
+import 'package:thingsboard_client/src/model/page_data_ai_model_info.dart';
+import 'package:thingsboard_client/src/model/tb_chat_prompt.dart';
 import 'package:thingsboard_client/src/model/tb_chat_request.dart';
 import 'package:thingsboard_client/src/model/tb_chat_response.dart';
 import 'package:thingsboard_client/src/api_serializers.dart';
@@ -195,6 +197,127 @@ class AiModelControllerApi {
     }
 
     return Response<AiModel>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Get AI model infos (getAiModelInfos)
+  /// Returns a page of AI model infos: AI models with the provider credentials removed, so &#39;configuration.providerConfig&#39; is always null. You can specify parameters to filter the results. The result is wrapped with PageData object that allows you to iterate over result set using pagination. See response schema for more details.   Available for users with &#39;TENANT_ADMIN&#39; authority.
+  ///
+  /// Parameters:
+  /// * [pageSize] - Maximum amount of entities in a one page
+  /// * [page] - Sequence number of page starting from 0
+  /// * [textSearch] - The case insensitive 'substring' filter based on the AI model name, provider and model ID.
+  /// * [sortProperty] - Property of entity to sort by
+  /// * [sortOrder] - Sort order. ASC (ASCENDING) or DESC (DESCENDING)
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [PageDataAiModelInfo] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<PageDataAiModelInfo>> getAiModelInfos({
+    required int pageSize,
+    required int page,
+    String? textSearch,
+    String? sortProperty,
+    String? sortOrder,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _serializers =
+        this._serializers ?? apiSerializers(registerPageDataAiModelInfo);
+    final _path = r'/api/ai/model/infos';
+    final _options = Options(
+      method: r'GET',
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'apiKey',
+            'name': 'ApiKeyForm',
+            'keyName': 'X-Authorization',
+            'where': 'header',
+          },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
+        ],
+        ...?extra,
+      },
+      validateStatus: validateStatus,
+    );
+
+    final _queryParameters = <String, dynamic>{
+      r'pageSize': encodeQueryParameter(
+        _serializers,
+        pageSize,
+        const FullType(int),
+      ),
+      r'page': encodeQueryParameter(_serializers, page, const FullType(int)),
+      if (textSearch != null)
+        r'textSearch': encodeQueryParameter(
+          _serializers,
+          textSearch,
+          const FullType(String),
+        ),
+      if (sortProperty != null)
+        r'sortProperty': encodeQueryParameter(
+          _serializers,
+          sortProperty,
+          const FullType(String),
+        ),
+      if (sortOrder != null)
+        r'sortOrder': encodeQueryParameter(
+          _serializers,
+          sortOrder,
+          const FullType(String),
+        ),
+    };
+
+    final _response = await _dio.request<Object>(
+      _path,
+      options: _options,
+      queryParameters: _queryParameters,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    PageDataAiModelInfo? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(PageDataAiModelInfo),
+                )
+                as PageDataAiModelInfo;
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<PageDataAiModelInfo>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -478,6 +601,119 @@ class AiModelControllerApi {
     try {
       const _type = FullType(TbChatRequest);
       _bodyData = _serializers.serialize(tbChatRequest, specifiedType: _type);
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _options.compose(_dio.options, _path),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    final _response = await _dio.request<Object>(
+      _path,
+      data: _bodyData,
+      options: _options,
+      cancelToken: cancelToken,
+      onSendProgress: onSendProgress,
+      onReceiveProgress: onReceiveProgress,
+    );
+
+    TbChatResponse? _responseData;
+
+    try {
+      final rawResponse = _response.data;
+      _responseData = rawResponse == null
+          ? null
+          : _serializers.deserialize(
+                  rawResponse,
+                  specifiedType: const FullType(TbChatResponse),
+                )
+                as TbChatResponse;
+    } catch (error, stackTrace) {
+      throw DioException(
+        requestOptions: _response.requestOptions,
+        response: _response,
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
+    return Response<TbChatResponse>(
+      data: _responseData,
+      headers: _response.headers,
+      isRedirect: _response.isRedirect,
+      requestOptions: _response.requestOptions,
+      redirects: _response.redirects,
+      statusCode: _response.statusCode,
+      statusMessage: _response.statusMessage,
+      extra: _response.extra,
+    );
+  }
+
+  /// Send request to a saved AI chat model (sendChatRequestToAiModel)
+  /// Submits a single prompt - made up of an optional system message and a required user message - to the AI chat model with the specified &#x60;id&#x60;, using its saved configuration, and returns either the generated answer or an error envelope. The user must have the &#39;INVOKE&#39; permission for AI models, and customer users additionally require the model to have customer access enabled. Roles that grant all operations, such as the default &#39;Customer Administrator&#39; role, include &#39;INVOKE&#39;, so enabling customer access makes the model callable by every customer user with such a role.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority.
+  ///
+  /// Parameters:
+  /// * [modelUuid] - ID of the AI model record
+  /// * [tbChatPrompt]
+  /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
+  /// * [headers] - Can be used to add additional headers to the request
+  /// * [extras] - Can be used to add flags to the request
+  /// * [validateStatus] - A [ValidateStatus] callback that can be used to determine request success based on the HTTP status of the response
+  /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
+  /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
+  ///
+  /// Returns a [Future] containing a [Response] with a [TbChatResponse] as data
+  /// Throws [DioException] if API call or serialization fails
+  Future<Response<TbChatResponse>> sendChatRequestToAiModel({
+    required String modelUuid,
+    required TbChatPrompt tbChatPrompt,
+    CancelToken? cancelToken,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+    ValidateStatus? validateStatus,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final _serializers =
+        this._serializers ??
+        apiSerializers(registerTbChatPromptAndTbChatResponse);
+    final _path = r'/api/ai/model/{modelUuid}/chat'.replaceAll(
+      '{'
+      r'modelUuid'
+      '}',
+      encodeQueryParameter(
+        _serializers,
+        modelUuid,
+        const FullType(String),
+      ).toString(),
+    );
+    final _options = Options(
+      method: r'POST',
+      headers: <String, dynamic>{...?headers},
+      extra: <String, dynamic>{
+        'secure': <Map<String, String>>[
+          {
+            'type': 'apiKey',
+            'name': 'ApiKeyForm',
+            'keyName': 'X-Authorization',
+            'where': 'header',
+          },
+          {'type': 'http', 'scheme': 'loginPassword', 'name': 'HttpLoginForm'},
+        ],
+        ...?extra,
+      },
+      contentType: 'application/json',
+      validateStatus: validateStatus,
+    );
+
+    dynamic _bodyData;
+
+    try {
+      const _type = FullType(TbChatPrompt);
+      _bodyData = _serializers.serialize(tbChatPrompt, specifiedType: _type);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _options.compose(_dio.options, _path),

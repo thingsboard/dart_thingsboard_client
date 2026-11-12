@@ -14,13 +14,13 @@ part of 'ai_model_config.dart';
 abstract mixin class AiModelConfigBuilder {
   void replace(AiModelConfig other);
   void update(void Function(AiModelConfigBuilder) updates);
-  String? get provider;
-  set provider(String? provider);
+  AiProvider? get provider;
+  set provider(AiProvider? provider);
 }
 
 class _$$AiModelConfig extends $AiModelConfig {
   @override
-  final String provider;
+  final AiProvider provider;
 
   factory _$$AiModelConfig([void Function($AiModelConfigBuilder)? updates]) =>
       ($AiModelConfigBuilder()..update(updates))._build();
@@ -61,9 +61,9 @@ class $AiModelConfigBuilder
         AiModelConfigBuilder {
   _$$AiModelConfig? _$v;
 
-  String? _provider;
-  String? get provider => _$this._provider;
-  set provider(covariant String? provider) => _$this._provider = provider;
+  AiProvider? _provider;
+  AiProvider? get provider => _$this._provider;
+  set provider(covariant AiProvider? provider) => _$this._provider = provider;
 
   $AiModelConfigBuilder() {
     $AiModelConfig._defaults(this);

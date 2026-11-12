@@ -23,6 +23,8 @@ class _$AiModel extends AiModel {
   @override
   final String name;
   @override
+  final bool? customerAccessEnabled;
+  @override
   final AiModelConfig? configuration;
 
   factory _$AiModel([void Function(AiModelBuilder)? updates]) =>
@@ -34,6 +36,7 @@ class _$AiModel extends AiModel {
     this.tenantId,
     this.version,
     required this.name,
+    this.customerAccessEnabled,
     this.configuration,
   }) : super._();
   @override
@@ -52,6 +55,7 @@ class _$AiModel extends AiModel {
         tenantId == other.tenantId &&
         version == other.version &&
         name == other.name &&
+        customerAccessEnabled == other.customerAccessEnabled &&
         configuration == other.configuration;
   }
 
@@ -63,6 +67,7 @@ class _$AiModel extends AiModel {
     _$hash = $jc(_$hash, tenantId.hashCode);
     _$hash = $jc(_$hash, version.hashCode);
     _$hash = $jc(_$hash, name.hashCode);
+    _$hash = $jc(_$hash, customerAccessEnabled.hashCode);
     _$hash = $jc(_$hash, configuration.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -76,6 +81,7 @@ class _$AiModel extends AiModel {
           ..add('tenantId', tenantId)
           ..add('version', version)
           ..add('name', name)
+          ..add('customerAccessEnabled', customerAccessEnabled)
           ..add('configuration', configuration))
         .toString();
   }
@@ -104,6 +110,11 @@ class AiModelBuilder implements Builder<AiModel, AiModelBuilder> {
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  bool? _customerAccessEnabled;
+  bool? get customerAccessEnabled => _$this._customerAccessEnabled;
+  set customerAccessEnabled(bool? customerAccessEnabled) =>
+      _$this._customerAccessEnabled = customerAccessEnabled;
+
   AiModelConfig? _configuration;
   AiModelConfig? get configuration => _$this._configuration;
   set configuration(AiModelConfig? configuration) =>
@@ -121,6 +132,7 @@ class AiModelBuilder implements Builder<AiModel, AiModelBuilder> {
       _tenantId = $v.tenantId?.toBuilder();
       _version = $v.version;
       _name = $v.name;
+      _customerAccessEnabled = $v.customerAccessEnabled;
       _configuration = $v.configuration;
       _$v = null;
     }
@@ -155,6 +167,7 @@ class AiModelBuilder implements Builder<AiModel, AiModelBuilder> {
               r'AiModel',
               'name',
             ),
+            customerAccessEnabled: customerAccessEnabled,
             configuration: configuration,
           );
     } catch (_) {

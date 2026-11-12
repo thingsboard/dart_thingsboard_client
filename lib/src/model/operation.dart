@@ -57,6 +57,8 @@ class Operation extends EnumClass {
   static const Operation READ_CALCULATED_FIELD = _$READ_CALCULATED_FIELD;
   @BuiltValueEnumConst(wireName: r'WRITE_CALCULATED_FIELD')
   static const Operation WRITE_CALCULATED_FIELD = _$WRITE_CALCULATED_FIELD;
+  @BuiltValueEnumConst(wireName: r'INVOKE')
+  static const Operation INVOKE = _$INVOKE;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const Operation unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 

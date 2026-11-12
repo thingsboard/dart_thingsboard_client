@@ -36,6 +36,7 @@ const Operation _$READ_CALCULATED_FIELD = const Operation._(
 const Operation _$WRITE_CALCULATED_FIELD = const Operation._(
   'WRITE_CALCULATED_FIELD',
 );
+const Operation _$INVOKE = const Operation._('INVOKE');
 const Operation _$unknownDefaultOpenApi = const Operation._(
   'unknownDefaultOpenApi',
 );
@@ -84,6 +85,8 @@ Operation _$valueOf(String name) {
       return _$READ_CALCULATED_FIELD;
     case 'WRITE_CALCULATED_FIELD':
       return _$WRITE_CALCULATED_FIELD;
+    case 'INVOKE':
+      return _$INVOKE;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -113,6 +116,7 @@ final BuiltSet<Operation> _$values = BuiltSet<Operation>(const <Operation>[
   _$ASSIGN_TO_TENANT,
   _$READ_CALCULATED_FIELD,
   _$WRITE_CALCULATED_FIELD,
+  _$INVOKE,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -139,6 +143,7 @@ class _$OperationMeta {
   Operation get ASSIGN_TO_TENANT => _$ASSIGN_TO_TENANT;
   Operation get READ_CALCULATED_FIELD => _$READ_CALCULATED_FIELD;
   Operation get WRITE_CALCULATED_FIELD => _$WRITE_CALCULATED_FIELD;
+  Operation get INVOKE => _$INVOKE;
   Operation get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   Operation valueOf(String name) => _$valueOf(name);
   BuiltSet<Operation> get values => _$values;
@@ -174,6 +179,7 @@ class _$OperationSerializer implements PrimitiveSerializer<Operation> {
     'ASSIGN_TO_TENANT': 'ASSIGN_TO_TENANT',
     'READ_CALCULATED_FIELD': 'READ_CALCULATED_FIELD',
     'WRITE_CALCULATED_FIELD': 'WRITE_CALCULATED_FIELD',
+    'INVOKE': 'INVOKE',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
@@ -198,6 +204,7 @@ class _$OperationSerializer implements PrimitiveSerializer<Operation> {
     'ASSIGN_TO_TENANT': 'ASSIGN_TO_TENANT',
     'READ_CALCULATED_FIELD': 'READ_CALCULATED_FIELD',
     'WRITE_CALCULATED_FIELD': 'WRITE_CALCULATED_FIELD',
+    'INVOKE': 'INVOKE',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

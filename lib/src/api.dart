@@ -24,6 +24,7 @@ import 'package:thingsboard_client/src/api/agent_profile_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_chat_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_device_dashboard_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_model_controller_api.dart';
+import 'package:thingsboard_client/src/api/ai_resource_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_solution_controller_api.dart';
 import 'package:thingsboard_client/src/api/ai_tool_controller_api.dart';
 import 'package:thingsboard_client/src/api/alarm_comment_controller_api.dart';
@@ -293,6 +294,12 @@ class ThingsboardClient {
   /// by doing that all interceptors will not be executed
   AiModelControllerApi getAiModelControllerApi() {
     return AiModelControllerApi(dio, serializers);
+  }
+
+  /// Get AiResourceControllerApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AiResourceControllerApi getAiResourceControllerApi() {
+    return AiResourceControllerApi(dio, serializers);
   }
 
   /// Get AiSolutionControllerApi instance, base route and serializer can be overridden by a given but be careful,

@@ -10,6 +10,7 @@
 // ignore_for_file: unused_element
 import 'package:thingsboard_client/src/model/google_ai_gemini_provider_config.dart';
 import 'package:thingsboard_client/src/model/ai_model_config.dart';
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/ai_model_type.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -19,7 +20,7 @@ part 'google_ai_gemini_chat_model_config.g.dart';
 /// GoogleAiGeminiChatModelConfig
 ///
 /// Properties:
-/// * [provider]
+/// * [provider] - AI Provider
 /// * [providerConfig]
 /// * [modelId]
 /// * [temperature]
@@ -81,7 +82,7 @@ abstract class GoogleAiGeminiChatModelConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(GoogleAiGeminiChatModelConfigBuilder b) =>
-      b..provider = r'GOOGLE_AI_GEMINI';
+      b..provider = AiProvider.GOOGLE_AI_GEMINI;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<GoogleAiGeminiChatModelConfig> get serializer =>
@@ -133,7 +134,7 @@ class _$GoogleAiGeminiChatModelConfigSerializer
     yield r'provider';
     yield serializers.serialize(
       object.provider,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType(AiProvider),
     );
     if (object.temperature != null) {
       yield r'temperature';
@@ -252,9 +253,9 @@ class _$GoogleAiGeminiChatModelConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType(AiProvider),
                   )
-                  as String;
+                  as AiProvider;
           result.provider = valueDes;
           break;
         case r'temperature':

@@ -79,6 +79,9 @@ class BulkImportColumnType extends EnumClass {
       _$SNMP_COMMUNITY_STRING;
   @BuiltValueEnumConst(wireName: r'IS_GATEWAY')
   static const BulkImportColumnType IS_GATEWAY = _$IS_GATEWAY;
+  @BuiltValueEnumConst(wireName: r'OVERWRITE_ACTIVITY_TIME')
+  static const BulkImportColumnType OVERWRITE_ACTIVITY_TIME =
+      _$OVERWRITE_ACTIVITY_TIME;
   @BuiltValueEnumConst(wireName: r'DESCRIPTION')
   static const BulkImportColumnType DESCRIPTION = _$DESCRIPTION;
   @BuiltValueEnumConst(wireName: r'EDGE_LICENSE_KEY')

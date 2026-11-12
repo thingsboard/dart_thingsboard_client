@@ -33,7 +33,7 @@ class _$GitHubModelsChatModelConfig extends GitHubModelsChatModelConfig {
   @override
   final int? maxOutputTokens;
   @override
-  final String provider;
+  final AiProvider provider;
 
   factory _$GitHubModelsChatModelConfig([
     void Function(GitHubModelsChatModelConfigBuilder)? updates,
@@ -172,9 +172,9 @@ class GitHubModelsChatModelConfigBuilder
   set maxOutputTokens(covariant int? maxOutputTokens) =>
       _$this._maxOutputTokens = maxOutputTokens;
 
-  String? _provider;
-  String? get provider => _$this._provider;
-  set provider(covariant String? provider) => _$this._provider = provider;
+  AiProvider? _provider;
+  AiProvider? get provider => _$this._provider;
+  set provider(covariant AiProvider? provider) => _$this._provider = provider;
 
   GitHubModelsChatModelConfigBuilder() {
     GitHubModelsChatModelConfig._defaults(this);

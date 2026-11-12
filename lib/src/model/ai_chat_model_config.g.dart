@@ -14,12 +14,14 @@ part of 'ai_chat_model_config.dart';
 class _$AiChatModelConfig extends AiChatModelConfig {
   @override
   final AiModelType? modelType;
+  @override
+  final AiProvider provider;
 
   factory _$AiChatModelConfig([
     void Function(AiChatModelConfigBuilder)? updates,
   ]) => (AiChatModelConfigBuilder()..update(updates))._build();
 
-  _$AiChatModelConfig._({this.modelType}) : super._();
+  _$AiChatModelConfig._({this.modelType, required this.provider}) : super._();
   @override
   AiChatModelConfig rebuild(void Function(AiChatModelConfigBuilder) updates) =>
       (toBuilder()..update(updates)).build();
@@ -31,22 +33,26 @@ class _$AiChatModelConfig extends AiChatModelConfig {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AiChatModelConfig && modelType == other.modelType;
+    return other is AiChatModelConfig &&
+        modelType == other.modelType &&
+        provider == other.provider;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
     _$hash = $jc(_$hash, modelType.hashCode);
+    _$hash = $jc(_$hash, provider.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(
-      r'AiChatModelConfig',
-    )..add('modelType', modelType)).toString();
+    return (newBuiltValueToStringHelper(r'AiChatModelConfig')
+          ..add('modelType', modelType)
+          ..add('provider', provider))
+        .toString();
   }
 }
 
@@ -58,6 +64,10 @@ class AiChatModelConfigBuilder
   AiModelType? get modelType => _$this._modelType;
   set modelType(AiModelType? modelType) => _$this._modelType = modelType;
 
+  AiProvider? _provider;
+  AiProvider? get provider => _$this._provider;
+  set provider(AiProvider? provider) => _$this._provider = provider;
+
   AiChatModelConfigBuilder() {
     AiChatModelConfig._defaults(this);
   }
@@ -66,6 +76,7 @@ class AiChatModelConfigBuilder
     final $v = _$v;
     if ($v != null) {
       _modelType = $v.modelType;
+      _provider = $v.provider;
       _$v = null;
     }
     return this;
@@ -85,7 +96,16 @@ class AiChatModelConfigBuilder
   AiChatModelConfig build() => _build();
 
   _$AiChatModelConfig _build() {
-    final _$result = _$v ?? _$AiChatModelConfig._(modelType: modelType);
+    final _$result =
+        _$v ??
+        _$AiChatModelConfig._(
+          modelType: modelType,
+          provider: BuiltValueNullFieldError.checkNotNull(
+            provider,
+            r'AiChatModelConfig',
+            'provider',
+          ),
+        );
     replace(_$result);
     return _$result;
   }

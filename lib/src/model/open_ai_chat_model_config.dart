@@ -9,6 +9,7 @@
 
 // ignore_for_file: unused_element
 import 'package:thingsboard_client/src/model/ai_model_config.dart';
+import 'package:thingsboard_client/src/model/ai_provider.dart';
 import 'package:thingsboard_client/src/model/ai_model_type.dart';
 import 'package:thingsboard_client/src/model/open_ai_provider_config.dart';
 import 'package:built_value/built_value.dart';
@@ -19,7 +20,7 @@ part 'open_ai_chat_model_config.g.dart';
 /// OpenAiChatModelConfig
 ///
 /// Properties:
-/// * [provider]
+/// * [provider] - AI Provider
 /// * [providerConfig]
 /// * [modelId]
 /// * [temperature]
@@ -74,7 +75,7 @@ abstract class OpenAiChatModelConfig
 
   @BuiltValueHook(initializeBuilder: true)
   static void _defaults(OpenAiChatModelConfigBuilder b) =>
-      b..provider = r'OPENAI';
+      b..provider = AiProvider.OPENAI;
 
   @BuiltValueSerializer(custom: true)
   static Serializer<OpenAiChatModelConfig> get serializer =>
@@ -119,7 +120,7 @@ class _$OpenAiChatModelConfigSerializer
     yield r'provider';
     yield serializers.serialize(
       object.provider,
-      specifiedType: const FullType(String),
+      specifiedType: const FullType(AiProvider),
     );
     if (object.temperature != null) {
       yield r'temperature';
@@ -228,9 +229,9 @@ class _$OpenAiChatModelConfigSerializer
           final valueDes =
               serializers.deserialize(
                     value,
-                    specifiedType: const FullType(String),
+                    specifiedType: const FullType(AiProvider),
                   )
-                  as String;
+                  as AiProvider;
           result.provider = valueDes;
           break;
         case r'temperature':

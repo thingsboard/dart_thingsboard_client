@@ -318,6 +318,7 @@ Enum constants whose value contains digits are named after the value (openapi-ge
 - `DeviceApiControllerApi` and `ThingsboardClient.getDeviceApiControllerApi()` are removed. The device HTTP API (`/api/v1/{deviceToken}/...`) is not in the REST spec, and the 4.4.x operations failed to decode responses. Devices should use the MQTT, CoAP or HTTP transport directly.
 - `SolutionControllerApi` (solution templates) is removed, together with its models `TenantSolutionTemplateInfo`, `TenantSolutionTemplateDetails`, `TenantSolutionTemplateInstructions`, `SolutionInstallResponse` and `SolutionTemplateLevel`, and the unused `ComplexOperation` model. The released ThingsBoard 4.4.0 has no `/api/solutions/templates/...`.
 - Added, from the released ThingsBoard 4.4.0: `AgentControllerApi`, `AgentProfileControllerApi`, `AgentApplicationControllerApi`, `AgentAppProfileControllerApi`, `AgentAppTemplateControllerApi`, `AgentBulkActionControllerApi`, `AiChatControllerApi`, `AiDeviceDashboardControllerApi`, `AiSolutionControllerApi`, `AiToolControllerApi` and `SystemSetupControllerApi`; and `SystemInfoControllerApi` (`getSystemVersionInfo`).
+- Added, from the ThingsBoard lts-4.4 branch (not in 4.4.0): `AiResourceControllerApi`, `AiModelControllerApi.getAiModelInfos` and `sendChatRequestToAiModel`, and `AiSolutionControllerApi.sendMessage`. The `provider` of the AI chat model configs (`OpenAiChatModelConfig`, ...) is the `AiProvider` enum instead of a `String`.
 
 ### Spec fixes
 
