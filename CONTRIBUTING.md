@@ -33,7 +33,7 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 - thingsboard/thingsboard#16557 (merged): the `NotificationInfo` subtypes;
 - thingsboard/thingsboard#16560 (merged): documents `/api/system/info` (`getSystemVersionInfo`), which the server version check uses;
 - thingsboard/thingsboard#16561 (merged): changes that are breaking for generated clients: integer `int`/`long` parameters (`pageSize`/`page` in 28 operations and `limit` of `getTimeseriesHistory`), `assignAlarm`/`unassignAlarm` (`AlarmInfo`), `ThingsboardErrorCode` (integer values) and `AliasEntityId` (`entityType` is a string holding an `EntityType` or `AliasEntityType` name, `id` optional);
-- thingsboard/thingsboard#16613 (open): 21 response fields the server can send as null are no longer required (`SmsTwoFaAccountConfig.phoneNumber`, `BackupCodeTwoFaAccountConfig.codes`, `Edge.edgeLicenseKey`, `RuleChainMetaData.connections`, ...);
+- thingsboard/thingsboard#16613 (merged into lts-4.4): 21 response fields the server can send as null are no longer required (`SmsTwoFaAccountConfig.phoneNumber`, `BackupCodeTwoFaAccountConfig.codes`, `Edge.edgeLicenseKey`, `RuleChainMetaData.connections`, ...);
 - thingsboard/thingsboard#16555 (open): device API responses (the device API is filtered out by `tool/fetch-spec.sh` anyway).
 
 A spec fetched from lts-4.4 at 48ac7d87a97 (the merge of #16560) with #16613 differs from the committed one only by the AI API added to lts-4.4 after the spec was composed (`/api/ai/resources`, `getAiModelInfos`, `AiProvider`, ...). Do not re-fetch from a server without #16613: the fields above become required again and their responses fail to deserialize. When #16613 is merged, re-fetch from lts-4.4 and diff.

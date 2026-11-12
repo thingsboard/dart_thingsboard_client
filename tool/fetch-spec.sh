@@ -11,7 +11,7 @@
 # <edition_dir>/spec/openapi.json, ready for tool/generate-client.sh.
 #
 # WARNING: the committed spec is the lts-4.4 spec with thingsboard/thingsboard
-# PRs #16510, #16557, #16560 and #16561 (merged) plus the unmerged #16613.
+# PRs #16510, #16557, #16560, #16561 and #16613 (all merged).
 # Re-fetching from a server without #16613 makes 21 fields that the server sends
 # as null required again, so their responses fail to deserialize. See "The spec
 # is composed" in CONTRIBUTING.md.
