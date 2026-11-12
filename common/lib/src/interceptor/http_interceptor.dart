@@ -192,6 +192,20 @@ class HttpInterceptor extends QueuedInterceptor {
         !config.ignoreErrors,
       );
     }
+    // The refresh result was dropped because the session changed: a retry would
+    // be rejected in onRequest, and its onError would queue behind this one.
+    if (!_tbClient.isJwtTokenValid()) {
+      _finishLoading(error.requestOptions, config);
+      return _handleError(
+        ThingsboardError(
+          message: 'Session expired!',
+          errorCode: ThingsBoardErrorCode.jwtTokenExpired,
+        ),
+        error.requestOptions,
+        handler,
+        false,
+      );
+    }
     return _retryRequest(error, handler);
   }
 

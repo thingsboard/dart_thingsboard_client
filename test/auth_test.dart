@@ -1080,4 +1080,198 @@ void main() {
       });
     });
   });
+
+  group('session changed during a refresh', () {
+    late InMemoryStorage storage;
+    late Completer<ResponseBody Function(RequestOptions)> refreshResult;
+    var userLoadedCount = 0;
+    var errorCount = 0;
+    String? logoutAuthHeader;
+    final jwt = createTestJwt(expInSeconds: -60);
+    final refresh = createTestJwt(scope: 'REFRESH_TOKEN');
+    final staleJwt = createTestJwt(sub: 'stale');
+    final staleRefresh = createTestJwt(scope: 'REFRESH_TOKEN', sub: 'stale');
+    final newJwt = createTestJwt(sub: 'new');
+    final newRefresh = createTestJwt(scope: 'REFRESH_TOKEN', sub: 'new');
+
+    ResponseBody json(Object body, int status) => ResponseBody.fromString(
+      jsonEncode(body),
+      status,
+      headers: {
+        'content-type': ['application/json'],
+      },
+    );
+
+    ResponseBody staleTokens(RequestOptions req) =>
+        json({'token': staleJwt, 'refreshToken': staleRefresh}, 200);
+
+    setUp(() async {
+      storage = InMemoryStorage();
+      userLoadedCount = 0;
+      errorCount = 0;
+      refreshResult = Completer();
+      client = ThingsboardClient(
+        'http://localhost:8080',
+        storage: storage,
+        onUserLoaded: () => userLoadedCount++,
+        onError: (_) => errorCount++,
+      );
+      setMockAdapter(client, mockAdapter);
+      mockAdapter.onRoute(
+        '/api/auth/token',
+        (req) async => (await refreshResult.future)(req),
+      );
+      logoutAuthHeader = null;
+      mockAdapter.onRoute('/api/auth/logout', (req) {
+        logoutAuthHeader = req.headers['X-Authorization'] as String?;
+        return json({}, 200);
+      });
+      await client.setUserFromJwtToken(jwt, refresh, false);
+    });
+
+    Future<void> refreshStarted() async {
+      while (!mockAdapter.requestedPaths.contains('/api/auth/token')) {
+        await Future.delayed(Duration.zero);
+      }
+    }
+
+    test('a refresh that finishes after logout is dropped', () async {
+      await client.setUserFromJwtToken(createTestJwt(), refresh, false);
+      final refreshing = client.refreshJwtToken(notify: true);
+      await refreshStarted();
+      await client.logout(notifyUser: false);
+
+      refreshResult.complete(staleTokens);
+      await refreshing;
+      await Future.delayed(Duration(milliseconds: 50));
+
+      expect(client.getJwtToken(), isNull);
+      expect(client.isAuthenticated(), isFalse);
+      expect(await storage.containsKey('jwt_token'), isFalse);
+      expect(await storage.containsKey('refresh_token'), isFalse);
+      expect(userLoadedCount, equals(0));
+    });
+
+    test('logout started while a refresh is in flight still sends the logout '
+        'request with the refreshed token', () async {
+      final refreshing = client.refreshJwtToken(notify: false);
+      await refreshStarted();
+      // The access token is expired: let the logout request start waiting
+      // for the refresh.
+      final loggingOut = client.logout(notifyUser: false);
+      await Future.delayed(Duration(milliseconds: 20));
+
+      refreshResult.complete(staleTokens);
+      await refreshing;
+      await loggingOut;
+
+      expect(logoutAuthHeader, equals('Bearer $staleJwt'));
+      expect(client.isAuthenticated(), isFalse);
+      expect(await storage.containsKey('jwt_token'), isFalse);
+      expect(await storage.containsKey('refresh_token'), isFalse);
+    });
+
+    test(
+      'a refresh that finishes after setUserFromJwtToken keeps the new tokens',
+      () async {
+        final refreshing = client.refreshJwtToken(notify: false);
+        await refreshStarted();
+        await client.setUserFromJwtToken(newJwt, newRefresh, false);
+
+        refreshResult.complete(staleTokens);
+        await refreshing;
+
+        expect(client.getJwtToken(), equals(newJwt));
+        expect(await storage.getItem('jwt_token'), equals(newJwt));
+        expect(await storage.getItem('refresh_token'), equals(newRefresh));
+      },
+    );
+
+    test('a rejected refresh does not clear a session set meanwhile', () async {
+      final refreshing = client.refreshJwtToken(notify: false);
+      await refreshStarted();
+      await client.setUserFromJwtToken(newJwt, newRefresh, false);
+
+      refreshResult.complete(rejectedRefreshTokenResponse);
+      await expectLater(refreshing, throwsA(isA<DioException>()));
+
+      expect(client.getJwtToken(), equals(newJwt));
+      expect(await storage.getItem('jwt_token'), equals(newJwt));
+      expect(await storage.getItem('refresh_token'), equals(newRefresh));
+    });
+
+    test(
+      'a request waiting on a dropped refresh is retried with the new token',
+      () async {
+        final authHeaders = <String?>[];
+        mockAdapter.onRoute('/api/devices', (req) {
+          authHeaders.add(req.headers['X-Authorization'] as String?);
+          return json([], 200);
+        });
+
+        final request = client.get('/api/devices');
+        await refreshStarted();
+        final waiter = client.refreshJwtToken(notify: false);
+        await client.setUserFromJwtToken(newJwt, newRefresh, false);
+
+        refreshResult.complete(staleTokens);
+        final response = await request.timeout(Duration(seconds: 2));
+        await waiter.timeout(Duration(seconds: 2));
+        await Future.delayed(Duration(milliseconds: 50));
+
+        expect(response.statusCode, equals(200));
+        expect(authHeaders, equals(['Bearer $newJwt']));
+        expect(client.getJwtToken(), equals(newJwt));
+        expect(
+          mockAdapter.requestedPaths.where((p) => p == '/api/auth/token'),
+          hasLength(1),
+        );
+        expect(errorCount, equals(0));
+      },
+    );
+
+    test(
+      'init() keeps a session set while its refresh was in flight',
+      () async {
+        await storage.setItem('jwt_token', jwt);
+        await storage.setItem('refresh_token', refresh);
+        client = ThingsboardClient('http://localhost:8080', storage: storage);
+        setMockAdapter(client, mockAdapter);
+
+        final initializing = client.init();
+        await refreshStarted();
+        await client.setUserFromJwtToken(newJwt, newRefresh, false);
+
+        refreshResult.complete((req) => throw SocketException('offline'));
+        await initializing;
+
+        expect(client.getJwtToken(), equals(newJwt));
+        expect(await storage.getItem('jwt_token'), equals(newJwt));
+        expect(await storage.getItem('refresh_token'), equals(newRefresh));
+      },
+    );
+
+    test(
+      'a request waiting on a refresh fails when the session is cleared',
+      () async {
+        mockAdapter.onRoute('/api/devices', (req) => json([], 200));
+
+        final request = client.get('/api/devices');
+        await refreshStarted();
+        await client.setUserFromJwtToken(null, null, false);
+
+        refreshResult.complete(staleTokens);
+        await expectLater(
+          request.timeout(Duration(seconds: 2)),
+          throwsA(isA<ThingsboardError>()),
+        );
+        await Future.delayed(Duration(milliseconds: 50));
+
+        expect(mockAdapter.requestedPaths, isNot(contains('/api/devices')));
+        expect(client.getJwtToken(), isNull);
+        expect(await storage.containsKey('jwt_token'), isFalse);
+        expect(errorCount, equals(0));
+      },
+    );
+  });
 }

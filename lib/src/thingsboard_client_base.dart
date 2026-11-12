@@ -74,6 +74,10 @@ class ThingsboardClientBase {
   // Single-flight gate: concurrent requests share one refresh call.
   Completer<void>? _tokenRefreshCompleter;
 
+  // Incremented whenever the session is replaced or cleared; a token refresh
+  // that started under an older value drops its result.
+  int _sessionGeneration = 0;
+
   String? _token;
   String? _refreshToken;
   AuthUser? _authUser;
@@ -466,6 +470,7 @@ class ThingsboardClientBase {
     // Without a listener of its own a failed refresh would surface as an
     // unhandled async error when no concurrent caller is awaiting it.
     completer.future.ignore();
+    final generation = _sessionGeneration;
     try {
       refreshToken ??= _refreshToken;
       if (_isTokenValid(refreshToken)) {
@@ -490,15 +495,18 @@ class ThingsboardClientBase {
           var loginResponse = apiSerializers(
             registerLoginResponse,
           ).deserializeWith(LoginResponse.serializer, response.data)!;
-          await _setUserFromJwtToken(
-            loginResponse.token,
-            loginResponse.refreshToken,
-            notify,
-          );
+          if (generation == _sessionGeneration) {
+            await _setUserFromJwtToken(
+              loginResponse.token,
+              loginResponse.refreshToken,
+              notify,
+            );
+          }
         } catch (e) {
           // A 403 is not a rejected token: the refresh endpoint answers 401, so
           // 403 is more likely a proxy or WAF. See PROD-8704.
-          if (toThingsboardError(e).isUnauthorized) {
+          if (generation == _sessionGeneration &&
+              toThingsboardError(e).isUnauthorized) {
             await _clearJwtToken();
           }
           rethrow;
@@ -533,12 +541,16 @@ class ThingsboardClientBase {
     String? jwtToken,
     String? refreshToken,
   ) async {
+    final generation = _sessionGeneration;
     try {
       await refreshJwtToken(refreshToken: refreshToken, notify: true);
     } catch (e) {
       if (e is UnsupportedServerVersionError ||
           toThingsboardError(e).isUnauthorized) {
         rethrow;
+      }
+      if (generation != _sessionGeneration) {
+        return;
       }
       // Server unreachable: keep the stale session; the interceptor retries
       // the refresh on the next request.
@@ -562,6 +574,7 @@ class ThingsboardClientBase {
     String? refreshToken,
     bool? notify,
   ) async {
+    _sessionGeneration++;
     if (jwtToken == null) {
       _token = null;
       _refreshToken = null;
