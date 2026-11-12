@@ -152,7 +152,7 @@ openapi-generator-cli() { java -jar "$GENERATOR_JAR" "$@"; }
 
 # Fixes generator bugs in the generated Dart source before build_runner, so the
 # .g.dart output is clean. (A) is handled by --name-mappings (Step 3) and (D) in
-# the spec (thingsboard/thingsboard#16510); (B), (C), (E) and (F) are patched below.
+# the server's spec; (B), (C), (E) and (F) are patched below.
 patch_generated_sources() {
   local output_dir="$1"
   local model_dir="$output_dir/lib/src/model"

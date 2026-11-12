@@ -317,28 +317,29 @@ Enum constants whose value contains digits are named after the value (openapi-ge
 
 - `DeviceApiControllerApi` and `ThingsboardClient.getDeviceApiControllerApi()` are removed. The device HTTP API (`/api/v1/{deviceToken}/...`) is not in the REST spec, and the 4.4.x operations failed to decode responses. Devices should use the MQTT, CoAP or HTTP transport directly.
 - `SolutionControllerApi` (solution templates) is removed, together with its models `TenantSolutionTemplateInfo`, `TenantSolutionTemplateDetails`, `TenantSolutionTemplateInstructions`, `SolutionInstallResponse` and `SolutionTemplateLevel`, and the unused `ComplexOperation` model. The released ThingsBoard 4.4.0 has no `/api/solutions/templates/...`.
-- Added, from the released ThingsBoard 4.4.0: `AgentControllerApi`, `AgentProfileControllerApi`, `AgentApplicationControllerApi`, `AgentAppProfileControllerApi`, `AgentAppTemplateControllerApi`, `AgentBulkActionControllerApi`, `AiChatControllerApi`, `AiDeviceDashboardControllerApi`, `AiSolutionControllerApi`, `AiToolControllerApi` and `SystemSetupControllerApi`; and `SystemInfoControllerApi` (`getSystemVersionInfo`, from thingsboard/thingsboard#16560).
+- Added, from the released ThingsBoard 4.4.0: `AgentControllerApi`, `AgentProfileControllerApi`, `AgentApplicationControllerApi`, `AgentAppProfileControllerApi`, `AgentAppTemplateControllerApi`, `AgentBulkActionControllerApi`, `AiChatControllerApi`, `AiDeviceDashboardControllerApi`, `AiSolutionControllerApi`, `AiToolControllerApi` and `SystemSetupControllerApi`; and `SystemInfoControllerApi` (`getSystemVersionInfo`).
 
 ### Spec fixes
 
-From thingsboard/thingsboard#16510, #16557 (typed `Notification.info`) and #16561, which the 5.0 spec needs; the wire format is unchanged, so ThingsBoard 4.4.0 servers work.
+Fixed in the API documentation of the ThingsBoard lts-4.4 branch, which the 5.0 client is generated from; the wire format is unchanged, so ThingsBoard 4.4.0 servers work.
 
-- The generated `ThingsboardErrorCode` values are numbers, as the server sends them; before, every `errorCode` decoded as `unknownDefaultOpenApi`. Code 47 (`number47`) is new (#16561).
-- `AliasEntityId.entityType` is a `String` holding an `EntityType` or `AliasEntityType` name, and `id` is optional (#16561).
+- The generated `ThingsboardErrorCode` values are numbers, as the server sends them; before, every `errorCode` decoded as `unknownDefaultOpenApi`. Code 47 (`number47`) is new.
+- `AliasEntityId.entityType` is a `String` holding an `EntityType` or `AliasEntityType` name, and `id` is optional.
+- `Notification.info` is typed: it holds the `NotificationInfo` subtype of the notification type.
 - `RefreshTokenRequest.refreshToken` is a `String` instead of a `JsonObject`.
 - `ColumnSettings` no longer redeclares `type`; it is inherited from `DataKeySettings` and defaults to `COLUMN`.
 - `Lwm2mControllerApi.saveLwm2mDeviceWithCredentials` takes a `BuiltMap<String, JsonObject?>` request body.
 
-Response and parameter types, from thingsboard/thingsboard#16561 (`pageSize`/`page`, `AlarmInfo`) and #16510 (`claimDevice`, `getPersistedRpcByDevice`, `exportIntegrationPackage`); the wire format is unchanged:
+Response and parameter types; the wire format is unchanged:
 
 - `pageSize` and `page` are `int` (they were `String`) in 28 operations: `getAssetsByEntityGroupId`, `getUserAssets`, `getCustomersByEntityGroupId`, `getUserCustomers`, `getDevicesByEntityGroupId`, `getUserDevices`, `getEdgesByEntityGroupId`, `getUserEdges`, `getEntityViewsByEntityGroupId`, `getUserEntityViews` (asset, customer, device, edge and entity view API classes); `getEntities`, `getEntityGroupsByTypeAndPageLink`, `getSharedEntityGroupsByTypeAndPageLink`, `getEntityGroupsByOwnerAndTypeAndPageLink`, `getEntityGroupsHierarchyByOwnerAndTypeAndPageLink`, `getEntityGroupEntityInfosByTypeAndPageLink`, `getSharedEntityGroupEntityInfosByTypeAndPageLink`, `getEntityGroupEntityInfosByOwnerAndTypeAndPageLink`, `getEntityGroupEntityInfosHierarchyByOwnerAndTypeAndPageLink`, `getEdgeEntityGroups`, `getOwnerInfos`, `getOwners` (`EntityGroupControllerApi`); `getConverters`, `getIntegrations`, `getIntegrationInfos`, `getRoles`, `getEdgeSchedulerEvents` and `getScheduledReportEvents`. Pass `page: 0` instead of `page: '0'`.
 - `DeviceControllerApi.claimDevice` returns `Response<ClaimResult>` (`device`, `response`: `ClaimResponse.SUCCESS`, ...) instead of `Response<String>`.
 - `RpcV2ControllerApi.getPersistedRpcByDevice` returns `Response<PageDataRpc>` instead of `Response<String>`.
 - `IntegrationControllerApi.exportIntegrationPackage` returns the ZIP archive as `Response<Uint8List>` instead of `Response<String>`.
 - `AlarmControllerApi.assignAlarm` and `unassignAlarm` return `Response<AlarmInfo>` instead of `Response<Alarm>`; `AlarmInfo` has the same fields plus the originator and assignee details.
-- `TelemetryControllerApi.getTimeseriesHistory` takes `limit` as `int?` instead of `String?` (#16561).
+- `TelemetryControllerApi.getTimeseriesHistory` takes `limit` as `int?` instead of `String?`.
 
-Fields the server can send as null, from thingsboard/thingsboard#16613; they are nullable now, and deserializing a response that has them `null` no longer throws:
+Fields the server can send as null are nullable now, and deserializing a response that has them `null` no longer throws:
 
 - `SmsTwoFaAccountConfig.phoneNumber`: `generateTwoFaAccountConfig` returns an SMS config without a phone number.
 - `BackupCodeTwoFaAccountConfig.codes`: hidden everywhere except in `generateTwoFaAccountConfig`, so `getAccountTwoFaSettings` failed for every user with backup codes. Use `codesLeft`.

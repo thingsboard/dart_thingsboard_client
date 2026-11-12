@@ -3,8 +3,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// Response fields the server can send as null (thingsboard/thingsboard#16613);
-// a spec that marks them as required again fails here.
+// Response fields the server can send as null; a spec that marks them as
+// required again fails here.
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';

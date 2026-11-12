@@ -3,8 +3,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// Schemas fixed on the server in thingsboard/thingsboard#16510 and #16561 and
-// applied to the committed spec; a spec from a server without them fails here.
+// Schemas fixed in the server's API documentation; a spec from a server without
+// the fixes fails here.
 import 'package:built_value/serializer.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
