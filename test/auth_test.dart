@@ -1129,11 +1129,13 @@ void main() {
       await client.setUserFromJwtToken(jwt, refresh, false);
     });
 
-    Future<void> refreshStarted() async {
-      while (!mockAdapter.requestedPaths.contains('/api/auth/token')) {
+    Future<void> requested(String path) async {
+      while (!mockAdapter.requestedPaths.contains(path)) {
         await Future.delayed(Duration.zero);
       }
     }
+
+    Future<void> refreshStarted() => requested('/api/auth/token');
 
     test('a refresh that finishes after logout is dropped', () async {
       await client.setUserFromJwtToken(createTestJwt(), refresh, false);
@@ -1273,5 +1275,36 @@ void main() {
         expect(errorCount, equals(0));
       },
     );
+
+    test('a refresh that finishes after close() is dropped', () async {
+      final refreshing = client.refreshJwtToken(notify: true);
+      await refreshStarted();
+      await client.close();
+
+      refreshResult.complete(staleTokens);
+      await refreshing;
+      await Future.delayed(Duration(milliseconds: 50));
+
+      expect(await storage.getItem('jwt_token'), equals(jwt));
+      expect(await storage.getItem('refresh_token'), equals(refresh));
+      expect(userLoadedCount, equals(0));
+    });
+
+    test('close() during a session load suppresses onUserLoaded', () async {
+      final versionResponse = Completer<void>();
+      mockAdapter.onRoute('/api/system/info', (req) async {
+        await versionResponse.future;
+        return json({'version': '4.4.0'}, 200);
+      });
+
+      final loading = client.setUserFromJwtToken(newJwt, newRefresh, true);
+      await requested('/api/system/info');
+      await client.close();
+      versionResponse.complete();
+      await loading;
+      await Future.delayed(Duration(milliseconds: 50));
+
+      expect(userLoadedCount, equals(0));
+    });
   });
 }

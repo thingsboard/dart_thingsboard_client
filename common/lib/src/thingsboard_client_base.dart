@@ -78,6 +78,8 @@ class ThingsboardClientBase {
   // that started under an older value drops its result.
   int _sessionGeneration = 0;
 
+  bool _closed = false;
+
   String? _token;
   String? _refreshToken;
   AuthUser? _authUser;
@@ -448,6 +450,18 @@ class ThingsboardClientBase {
     }
   }
 
+  /// Stops this client before the application replaces it with a new client
+  /// on the same storage.
+  ///
+  /// Closes the telemetry WebSocket. From then on this client never writes the
+  /// storage or calls `onUserLoaded`, so a token refresh still in flight cannot
+  /// overwrite the session of the new client. Do not use the client after
+  /// closing it. Calling it again has no effect.
+  Future<void> close() async {
+    _closed = true;
+    _telemetryWebsocketService?.reset(true);
+  }
+
   /// Refreshes the JWT token. If a refresh is already in progress, waits for it
   /// instead of issuing a second HTTP call.
   ///
@@ -574,6 +588,9 @@ class ThingsboardClientBase {
     String? refreshToken,
     bool? notify,
   ) async {
+    if (_closed) {
+      return;
+    }
     _sessionGeneration++;
     if (jwtToken == null) {
       _token = null;
@@ -613,6 +630,9 @@ class ThingsboardClientBase {
         _telemetryWebsocketService?.reset(true);
         rethrow;
       }
+    }
+    if (_closed) {
+      return;
     }
     _schedule(_userLoadedCallback);
     _telemetryWebsocketService?.reset(true);
