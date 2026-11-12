@@ -27,6 +27,7 @@ ThingsBoard CE and PE are now one product, and `thingsboard_client` is its singl
 - Fixed (breaking: the fields are nullable), from thingsboard/thingsboard#16613: responses with a `null` in 21 fields that the spec marked as required threw on deserialization, among them `generateTwoFaAccountConfig` for SMS (`phoneNumber`), `getAccountTwoFaSettings` for a user with backup codes (`codes`), edges read by a customer user (`edgeLicenseKey`), the metadata of a new rule chain and user, customer and dashboard group entities (`ShortEntityView.name`). See [Spec fixes](MIGRATION.md#spec-fixes).
 - Fixed: a token refresh that finished after `logout()`, `setUserFromJwtToken()` or a new login stored its tokens over the newer session; its result is now dropped, and a request waiting on it is retried with the current session, or fails when there is none.
 - New: `ThingsboardClient.close()` stops a client that the application replaces with a new one on the same storage: it closes the telemetry WebSocket, and the old client no longer writes the storage or calls `onUserLoaded`, even for a token refresh that was still in flight.
+- Changed: the telemetry WebSocket reports its errors through `dart:developer` `log()` (name `thingsboard_client`, shown in the DevTools Logging view) instead of `print()`.
 
 ## 4.2.1
 - Fixed `AlarmType.fromJson` cast error when filtering alarms by type

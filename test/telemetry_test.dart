@@ -1386,6 +1386,30 @@ void main() {
       s.service.reset(true);
     });
 
+    test('error updates and unparseable messages are not printed', () async {
+      final printed = <String>[];
+      await runZoned(
+        () async {
+          final s = await openTwoSubscribers(client);
+          s.channel.injectMessage(
+            jsonEncode({
+              'subscriptionId': s.attributesCmdId,
+              'errorCode': 2,
+              'errorMsg': 'Server error text',
+            }),
+          );
+          s.channel.injectMessage('not json');
+          await Future<void>.delayed(Duration(milliseconds: 10));
+          s.service.reset(true);
+        },
+        zoneSpecification: ZoneSpecification(
+          print: (self, parent, zone, line) => printed.add(line),
+        ),
+      );
+
+      expect(printed, isEmpty);
+    });
+
     test('an update for an unknown subscription is ignored', () async {
       final s = await openTwoSubscribers(client);
       final attributeData = <SubscriptionUpdate>[];

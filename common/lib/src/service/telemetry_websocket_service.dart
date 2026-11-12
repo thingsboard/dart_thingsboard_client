@@ -5,6 +5,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as developer;
 import 'dart:math';
 
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -205,7 +206,7 @@ class TelemetryWebsocketService implements TelemetryService {
           _cmdsWrapper.preparePublishCommands(MAX_PUBLISH_COMMANDS),
         );
       } catch (e) {
-        print('Failed to prepare publish commands: $e');
+        _log('Failed to prepare publish commands', e);
       }
       if (message != null) {
         _sink.add(message);
@@ -374,14 +375,14 @@ class TelemetryWebsocketService implements TelemetryService {
         }
       }
     } catch (e) {
-      print('Failed to process websocket message: $e');
+      _log('Failed to process a WebSocket message', e);
     }
     _checkToClose();
   }
 
   void _onError(dynamic errorEvent) {
     if (errorEvent != null) {
-      print('WebSocket error event: $errorEvent');
+      _log('WebSocket error', errorEvent);
     }
     _isOpening = false;
   }
@@ -421,7 +422,9 @@ class TelemetryWebsocketService implements TelemetryService {
   }
 
   void _onWsError(int errorCode, String? errorMsg) {
-    var message = errorMsg ?? 'WebSocket Error: error code - $errorCode.';
-    print(message);
+    _log(errorMsg ?? 'WebSocket error code $errorCode');
   }
+
+  void _log(String message, [Object? error]) =>
+      developer.log(message, name: 'thingsboard_client', error: error);
 }
