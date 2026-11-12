@@ -1,14 +1,20 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 class InterceptorConfig {
   bool ignoreLoading = false;
   bool ignoreErrors = false;
   bool resendRequest = false;
   bool isRetry = false;
 
-  InterceptorConfig(
-      {this.ignoreLoading = false,
-      this.ignoreErrors = false,
-      this.resendRequest = false,
-      this.isRetry = false});
+  InterceptorConfig({
+    this.ignoreLoading = false,
+    this.ignoreErrors = false,
+    this.resendRequest = false,
+    this.isRetry = false,
+  });
 
   InterceptorConfig.fromExtra(Map<String, dynamic>? extra) {
     if (extra != null) {
@@ -24,7 +30,7 @@ class InterceptorConfig {
       'ignoreLoading': ignoreLoading,
       'ignoreErrors': ignoreErrors,
       'resendRequest': resendRequest,
-      'isRetry': isRetry
+      'isRetry': isRetry,
     };
   }
 }

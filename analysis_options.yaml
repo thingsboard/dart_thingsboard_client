@@ -1,14 +1,28 @@
-# Defines a default set of lint rules enforced for
-# projects at Google. For details and rationale,
-# see https://github.com/dart-lang/pedantic#enabled-lints.
-include: package:lints/core.yaml
-
-# For lint rules and documentation, see http://dart-lang.github.io/linter/lints.
-# Uncomment to specify additional rules.
-# linter:
-#   rules:
-#     - camel_case_types
+# Generated analysis options — overwritten by tool/generate-client.sh on each
+# regeneration.
+#
+# The recommended lints apply to the handwritten code: the facade copied from
+# common/ into lib/src/ (outside lib/src/model/*.dart), the public libraries in
+# lib/, test/ and example/. The generated code is excluded.
+include: package:lints/recommended.yaml
 
 analyzer:
-#   exclude:
-#     - path/to/excluded/files/**
+  exclude:
+    - lib/src/api/**
+    - lib/src/auth/**
+    - lib/src/model/*.dart
+    - lib/src/**/*.g.dart
+    - lib/src/api.dart
+    - lib/src/api_serializers.dart
+    - lib/src/api_util.dart
+    - lib/src/date_serializer.dart
+    - lib/src/serializers.dart
+    - common/**
+    - cloud/**
+
+linter:
+  rules:
+    # Public constants of the facade (LatestTelemetry.LATEST_TELEMETRY,
+    # EntityKeyType.ENTITY_FIELD, ...) mirror the server's names; renaming
+    # them would break client code.
+    constant_identifier_names: false

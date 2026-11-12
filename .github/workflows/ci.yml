@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [master, 'develop/**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Format, analyze, test (Dart ${{ matrix.sdk }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The lowest supported SDK (pubspec.yaml) and the current stable one.
+        sdk: ['3.10.0', stable]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+      - run: dart pub get
+      - name: Check formatting
+        # dart format's output differs between SDK versions; the code is
+        # formatted with the current stable SDK.
+        if: matrix.sdk == 'stable'
+        run: dart format --output=none --set-exit-if-changed lib test example common
+      - name: Analyze
+        run: dart analyze --fatal-infos
+      - name: Test
+        run: dart test
+      - name: Check that lib/ has the current copy of common/
+        # tool/generate-client.sh copies common/lib into lib/; a change made
+        # only on one side is lost on the next generation.
+        run: |
+          status=0
+          while IFS= read -r f; do
+            if ! cmp -s "$f" "${f#common/}"; then
+              echo "::error file=$f::differs from ${f#common/}; edit common/ and copy it (or regenerate)"
+              status=1
+            fi
+          done < <(find common/lib -name '*.dart')
+          exit $status
+
+  upgrade:
+    name: Latest dependency versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      # pubspec.lock pins the versions the generated code was built with; this
+      # job checks the newest versions an application would resolve.
+      - run: dart pub upgrade
+      - run: dart analyze --fatal-infos
+      - run: dart test
+
+  downgrade:
+    name: Lowest dependency versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: '3.10.0'
+      - run: dart pub downgrade
+      # Checks the lower bounds of the runtime dependencies, as pub.dev does.
+      - run: dart analyze lib
+
+  publish:
+    name: pub.dev package validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - run: dart pub publish --dry-run
