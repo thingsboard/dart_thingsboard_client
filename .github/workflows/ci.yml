@@ -1,9 +1,11 @@
 name: CI
 
 on:
+  # A pull request runs on pull_request only; push covers master after a merge.
   push:
-    branches: [master, 'develop/**']
+    branches: [master]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -35,6 +37,7 @@ jobs:
       - name: Check that lib/ has the current copy of common/
         # tool/generate-client.sh copies common/lib into lib/; a change made
         # only on one side is lost on the next generation.
+        if: matrix.sdk == 'stable'
         run: |
           status=0
           while IFS= read -r f; do
