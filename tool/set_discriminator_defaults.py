@@ -72,7 +72,7 @@ def field_type(parent_src, parent, field):
 
 
 def enum_constants(model_dir, classes, type_name):
-    """wireName -> constant name of a generated enum, or None if not one."""
+    """(wireName -> constant name, file name) of a generated enum, or None if not one."""
     file_name = classes.get(type_name)
     if not file_name:
         return None

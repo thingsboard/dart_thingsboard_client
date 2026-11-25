@@ -218,7 +218,7 @@ class Graph:
 
 
 def patch_apis(api_dir, package, graph, root_sets):
-    """Point every operation at its own roots. Fills and returns the root sets."""
+    """Point every operation at its own roots, adding their sets to root_sets."""
     import_line = f"import 'package:{package}/src/api_serializers.dart';\n"
     for name in sorted(os.listdir(api_dir)):
         if not name.endswith('_api.dart'):
@@ -226,10 +226,10 @@ def patch_apis(api_dir, package, graph, root_sets):
         path = os.path.join(api_dir, name)
         src = unpatch_api(open(path).read(), import_line)
 
-        for old, new in (('final Serializers _serializers;', 'final Serializers? _serializers;'),):
-            if src.count(old) != 1:
-                raise SystemExit(f'Error: expected one {old!r} in {path}')
-            src = src.replace(old, new)
+        old = 'final Serializers _serializers;'
+        if src.count(old) != 1:
+            raise SystemExit(f'Error: expected one {old!r} in {path}')
+        src = src.replace(old, 'final Serializers? _serializers;')
         src, n = re.subn(r'const (\w+)\(this\._dio, this\._serializers\);',
                          r'const \1(this._dio, [this._serializers]);', src)
         if n != 1:
@@ -258,7 +258,6 @@ def patch_apis(api_dir, package, graph, root_sets):
         src = src[:insert_at] + import_line + src[insert_at:]
         with open(path, 'w') as f:
             f.write(src)
-    return root_sets
 
 
 def unpatch_api(src, import_line):

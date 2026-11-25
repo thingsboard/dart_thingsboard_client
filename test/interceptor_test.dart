@@ -6,7 +6,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
@@ -16,97 +15,7 @@ import 'package:thingsboard_client/src/http/http_utils.dart';
 import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 
-String createTestJwt({
-  String sub = 'user-id',
-  String scope = 'TENANT_ADMIN',
-  int expInSeconds = 3600,
-  String tenantId = 'tenant-id',
-}) {
-  final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(
-    utf8.encode(
-      jsonEncode({
-        'sub': sub,
-        'scopes': [scope],
-        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
-        'iss': 'test',
-        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-        'firstName': 'Test',
-        'lastName': 'User',
-        'enabled': true,
-        'isPublic': false,
-        'tenantId': tenantId,
-      }),
-    ),
-  );
-  return '$header.$payload.fake-signature';
-}
-
-String createExpiredJwt({String scope = 'TENANT_ADMIN'}) {
-  final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(
-    utf8.encode(
-      jsonEncode({
-        'sub': 'user-id',
-        'scopes': [scope],
-        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 3600,
-        'iss': 'test',
-        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 7200,
-        'firstName': 'Test',
-        'lastName': 'User',
-        'enabled': true,
-        'isPublic': false,
-        'tenantId': 'tenant-id',
-      }),
-    ),
-  );
-  return '$header.$payload.fake-signature';
-}
-
-class MockHttpClientAdapter implements HttpClientAdapter {
-  final Map<String, List<ResponseBody Function(RequestOptions)>> _handlers = {};
-  final List<String> requestedPaths = [];
-  final List<Map<String, dynamic>> requestedHeaders = [];
-
-  void onRoute(String path, ResponseBody Function(RequestOptions) handler) {
-    _handlers.putIfAbsent(path, () => []).add(handler);
-  }
-
-  @override
-  Future<ResponseBody> fetch(
-    RequestOptions options,
-    Stream<Uint8List>? requestStream,
-    Future<void>? cancelFuture,
-  ) async {
-    requestedPaths.add(options.path);
-    requestedHeaders.add(Map<String, dynamic>.from(options.headers));
-    final handlers = _handlers[options.path];
-    if (handlers != null && handlers.isNotEmpty) {
-      final handler = handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
-      return handler(options);
-    }
-    return ResponseBody.fromString(
-      '{"message":"Not found"}',
-      404,
-      headers: {
-        'content-type': ['application/json'],
-      },
-    );
-  }
-
-  @override
-  void close({bool force = false}) {}
-}
-
-void setMockAdapter(ThingsboardClient client, MockHttpClientAdapter adapter) {
-  client.dio.httpClientAdapter = adapter;
-  for (final interceptor in client.dio.interceptors) {
-    if (interceptor is HttpInterceptor) {
-      interceptor.internalDio.httpClientAdapter = adapter;
-      break;
-    }
-  }
-}
+import 'support/mock_http.dart';
 
 void main() {
   late MockHttpClientAdapter mockAdapter;
@@ -504,10 +413,8 @@ void main() {
         expect(client.getRefreshToken(), equals(refresh));
         expect(errorCount, equals(1));
         expect(mockAdapter.requestedPaths, equals(['/api/auth/token']));
-        // The load counter stays balanced even though the refresh failed: the
-        // original request's load-start is matched by the _finishLoading in
-        // _refreshTokenAndRetry's catch, so a failed refresh never leaks a
-        // stuck spinner.
+        // A failed refresh still finishes the original request's loading, so
+        // no spinner is left stuck.
         expect(loadStartCount, equals(1));
         expect(loadFinishCount, equals(1));
       },

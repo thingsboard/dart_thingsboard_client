@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 
-import 'auth_test.dart' show MockHttpClientAdapter, createTestJwt;
+import 'support/mock_http.dart';
 
 ResponseBody jsonResponse(Map<String, dynamic> body, int status) =>
     ResponseBody.fromString(

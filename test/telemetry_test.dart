@@ -7,7 +7,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:isolate';
-import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:fake_async/fake_async.dart';
@@ -16,92 +15,9 @@ import 'package:test/test.dart';
 import 'package:thingsboard_client/thingsboard_client.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-String createTestJwt({
-  String sub = 'user-id',
-  String scope = 'TENANT_ADMIN',
-  int expInSeconds = 3600,
-  String tenantId = 'tenant-id',
-}) {
-  final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(
-    utf8.encode(
-      jsonEncode({
-        'sub': sub,
-        'scopes': [scope],
-        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
-        'iss': 'test',
-        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-        'firstName': 'Test',
-        'lastName': 'User',
-        'enabled': true,
-        'isPublic': false,
-        'tenantId': tenantId,
-      }),
-    ),
-  );
-  return '$header.$payload.fake-signature';
-}
-
-String createExpiredTestJwt() {
-  final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(
-    utf8.encode(
-      jsonEncode({
-        'sub': 'user-id',
-        'scopes': ['TENANT_ADMIN'],
-        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 3600,
-        'iss': 'test',
-        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000 - 7200,
-        'firstName': 'Test',
-        'lastName': 'User',
-        'enabled': true,
-        'isPublic': false,
-        'tenantId': 'tenant-id',
-      }),
-    ),
-  );
-  return '$header.$payload.fake-signature';
-}
-
-class MockHttpClientAdapter implements HttpClientAdapter {
-  final Map<String, List<FutureOr<ResponseBody> Function(RequestOptions)>>
-  _handlers = {};
-  final List<String> requestedPaths = [];
-
-  void onRoute(
-    String path,
-    FutureOr<ResponseBody> Function(RequestOptions) handler,
-  ) {
-    _handlers.putIfAbsent(path, () => []).add(handler);
-  }
-
-  @override
-  Future<ResponseBody> fetch(
-    RequestOptions options,
-    Stream<Uint8List>? requestStream,
-    Future<void>? cancelFuture,
-  ) async {
-    requestedPaths.add(options.path);
-    final handlers = _handlers[options.path];
-    if (handlers != null && handlers.isNotEmpty) {
-      final handler = handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
-      return await handler(options);
-    }
-    return ResponseBody.fromString(
-      '{"message":"Not found"}',
-      404,
-      headers: {
-        'content-type': ['application/json'],
-      },
-    );
-  }
-
-  @override
-  void close({bool force = false}) {}
-}
+import 'support/mock_http.dart';
 
 /// A fake WebSocketChannel backed by in-memory stream controllers.
-/// Extends StreamChannelMixin to get the required mixin methods.
 class FakeWebSocketChannel extends StreamChannelMixin<dynamic>
     implements WebSocketChannel {
   final StreamController<dynamic> _serverToClientController =
@@ -178,7 +94,6 @@ class _FakeWebSocketSink implements WebSocketSink {
   Future<void> get done => _closeCompleter.future;
 }
 
-/// A factory that manages FakeWebSocketChannel instances for testing.
 class FakeChannelFactory {
   FakeWebSocketChannel? currentChannel;
   int connectCallCount = 0;
@@ -241,7 +156,6 @@ class _FailedConnectChannel extends StreamChannelMixin<dynamic>
 }
 
 /// A WebSocketChannel that delays its ready future until explicitly completed.
-/// Used to test command queuing behavior.
 class _DelayedReadyChannel extends StreamChannelMixin<dynamic>
     implements WebSocketChannel {
   final Completer<void> _readyCompleter = Completer<void>();
@@ -511,7 +425,7 @@ void main() {
       test(
         'expired token triggers refreshJwtToken before socket open',
         () async {
-          final expiredToken = createExpiredTestJwt();
+          final expiredToken = createExpiredJwt();
           final validToken = createTestJwt();
           final refreshToken = createTestJwt(scope: 'REFRESH_TOKEN');
 
@@ -578,7 +492,7 @@ void main() {
         mockAdapter.onRoute('/api/auth/login', (req) {
           return ResponseBody.fromString(
             jsonEncode({
-              'token': createExpiredTestJwt(),
+              'token': createExpiredJwt(),
               'refreshToken':
                   refreshToken ?? createTestJwt(scope: 'REFRESH_TOKEN'),
             }),
@@ -776,6 +690,8 @@ void main() {
           }
         }
 
+        expect(cmdId, isNotNull);
+
         service.unsubscribe(subscriber);
         await Future.delayed(Duration(milliseconds: 10));
 
@@ -784,16 +700,12 @@ void main() {
           subscriber.dataStream.listen((_) => dataCount++);
         } catch (_) {}
 
-        // Inject message with old cmdId — should not arrive at subscriber
-        // since it was removed from _subscribersMap
-        if (cmdId != null) {
-          fakeChannel.injectMessage(
-            jsonEncode({
-              'subscriptionId': cmdId,
-              'data': {'temp': []},
-            }),
-          );
-        }
+        fakeChannel.injectMessage(
+          jsonEncode({
+            'subscriptionId': cmdId,
+            'data': {'temp': []},
+          }),
+        );
         await Future.delayed(Duration(milliseconds: 10));
         expect(dataCount, equals(0));
       });

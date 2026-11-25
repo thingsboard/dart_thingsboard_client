@@ -98,43 +98,11 @@ class ThingsboardClientBase {
     LoadStartedCallback? onLoadStarted,
     LoadFinishedCallback? onLoadFinished,
     TbCompute? computeFunc,
-    bool debugMode = false,
-  }) {
-    final tbClient = ThingsboardClientBase._internal(
-      apiEndpoint,
-      _createDio(apiEndpoint),
-      storage,
-      apiKey,
-      onUserLoaded,
-      onMfaAuth,
-      onMfaForce,
-      onError,
-      onLoadStarted,
-      onLoadFinished,
-      computeFunc ?? syncCompute,
-      debugMode,
-    );
-    tbClient._installInterceptors();
-    return tbClient;
-  }
+    bool debugMode,
+  }) = ThingsboardClientBase.create;
 
-  ThingsboardClientBase._internal(
-    this._apiEndpoint,
-    this._dio,
-    TbStorage? storage,
-    this.apiKey,
-    this._userLoadedCallback,
-    this._mfaAuthCallback,
-    this._mfaForceCallback,
-    this._errorCallback,
-    this._loadStartedCallback,
-    this._loadFinishedCallback,
-    this._computeFunc,
-    this.debugMode,
-  ) : _storage = storage ?? InMemoryStorage();
-
-  /// Generative constructor for subclasses (edition-specific clients); does the
-  /// same Dio and interceptor setup as the factory constructor.
+  /// Generative constructor for subclasses (edition-specific clients); the
+  /// unnamed factory constructor redirects to it.
   ThingsboardClientBase.create(
     String apiEndpoint, {
     TbStorage? storage,
@@ -505,7 +473,7 @@ class ThingsboardClientBase {
           }
         } catch (e) {
           // A 403 is not a rejected token: the refresh endpoint answers 401, so
-          // 403 is more likely a proxy or WAF. See PROD-8704.
+          // 403 is more likely a proxy or WAF.
           if (generation == _sessionGeneration &&
               toThingsboardError(e).isUnauthorized) {
             await _clearJwtToken();

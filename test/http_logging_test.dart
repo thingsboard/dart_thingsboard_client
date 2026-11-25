@@ -12,7 +12,7 @@ import 'package:thingsboard_client/src/model/login_request.dart';
 import 'package:thingsboard_client/src/thingsboard_client.dart';
 import 'package:thingsboard_client/src/thingsboard_client_base.dart';
 
-import 'auth_test.dart' show MockHttpClientAdapter, createTestJwt;
+import 'support/mock_http.dart';
 
 ResponseBody _json(Object body, [int status = 200]) => ResponseBody.fromString(
   jsonEncode(body),

@@ -9,7 +9,6 @@ EntityData
 AlarmData
 Notification
 EntityKey
-EntityId
 LoginRequest
 RefreshTokenRequest
 LoginResponse

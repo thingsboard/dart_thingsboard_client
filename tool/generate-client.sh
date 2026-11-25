@@ -86,9 +86,7 @@ edition_server_version() {
   esac
 }
 
-# Package version. Independent of edition_server_version: the package follows
-# its own semver (5.0.0 is the first release of the unified client), while
-# tbMinServerVersion stays at the server version.
+# Package version; it follows its own semver, independent of edition_server_version.
 edition_version() {
   case "$1" in
     onprem) echo "5.0.0" ;;
@@ -151,8 +149,7 @@ fi
 openapi-generator-cli() { java -jar "$GENERATOR_JAR" "$@"; }
 
 # Fixes generator bugs in the generated Dart source before build_runner, so the
-# .g.dart output is clean. (A) is handled by --name-mappings (Step 3) and (D) in
-# the server's spec; (B), (C), (E) and (F) are patched below.
+# .g.dart output is clean.
 patch_generated_sources() {
   local output_dir="$1"
   local model_dir="$output_dir/lib/src/model"
@@ -206,8 +203,8 @@ patch_generated_sources() {
 
   # (F) Operations whose spec response is `string` cast the decoded body to String,
   #     but several return a JSON object or arbitrary JSON (rule engine and two-way
-  #     RPC replies), which Dio has already decoded: the cast threw on a successful
-  #     call. Non-strings are re-encoded.
+  #     RPC replies), which Dio has already decoded, so the cast throws on a
+  #     successful call. Non-strings are re-encoded.
   echo "  (F) Re-encoding non-string bodies of String operations"
   local string_cast='rawResponse == null ? null : rawResponse as String;'
   if ls "$api_dir/"*.dart >/dev/null 2>&1; then
@@ -278,7 +275,6 @@ append_common_exports() {
   local barrel
   barrel="$(edition_dir "$edition")/lib/${pkg}.dart"
 
-  # The generated client class is named after the package.
   local client_class
   client_class=$(pascal_case "$pkg")
 
@@ -601,7 +597,6 @@ generate() {
   perl -i -pe "s/^version: .*/version: ${version}/" "$output_dir/pubspec.yaml"
   echo "Version patched to ${version}."
 
-  # Replaces the generator's minimal file entirely.
   echo ""
   echo "=== [$edition] Step 5: Writing analysis_options.yaml ==="
   {

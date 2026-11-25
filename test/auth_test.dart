@@ -6,7 +6,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
@@ -18,83 +17,9 @@ import 'package:thingsboard_client/src/model/authority_enum.dart';
 import 'package:thingsboard_client/src/model/two_fa_provider_type.dart';
 import 'package:thingsboard_client/src/error/thingsboard_error.dart';
 import 'package:thingsboard_client/src/http/http_utils.dart';
-import 'package:thingsboard_client/src/interceptor/http_interceptor.dart';
 import 'package:thingsboard_client/src/storage/in_memory_storage.dart';
 
-String createTestJwt({
-  String sub = 'user-id',
-  String scope = 'TENANT_ADMIN',
-  int expInSeconds = 3600,
-  String tenantId = 'tenant-id',
-  String? customerId,
-}) {
-  final header = base64Url.encode(utf8.encode('{"alg":"HS256","typ":"JWT"}'));
-  final payload = base64Url.encode(
-    utf8.encode(
-      jsonEncode({
-        'sub': sub,
-        'scopes': [scope],
-        'exp': DateTime.now().millisecondsSinceEpoch ~/ 1000 + expInSeconds,
-        'iss': 'test',
-        'iat': DateTime.now().millisecondsSinceEpoch ~/ 1000,
-        'firstName': 'Test',
-        'lastName': 'User',
-        'enabled': true,
-        'isPublic': false,
-        'tenantId': tenantId,
-        'customerId': ?customerId,
-      }),
-    ),
-  );
-  return '$header.$payload.fake-signature';
-}
-
-class MockHttpClientAdapter implements HttpClientAdapter {
-  final Map<String, List<FutureOr<ResponseBody> Function(RequestOptions)>>
-  _handlers = {};
-  final List<String> requestedPaths = [];
-
-  void onRoute(
-    String path,
-    FutureOr<ResponseBody> Function(RequestOptions) handler,
-  ) {
-    _handlers.putIfAbsent(path, () => []).add(handler);
-  }
-
-  @override
-  Future<ResponseBody> fetch(
-    RequestOptions options,
-    Stream<Uint8List>? requestStream,
-    Future<void>? cancelFuture,
-  ) async {
-    requestedPaths.add(options.path);
-    final handlers = _handlers[options.path];
-    if (handlers != null && handlers.isNotEmpty) {
-      final handler = handlers.length > 1 ? handlers.removeAt(0) : handlers[0];
-      return await handler(options);
-    }
-    return ResponseBody.fromString(
-      '{"message":"Not found"}',
-      404,
-      headers: {
-        'content-type': ['application/json'],
-      },
-    );
-  }
-
-  @override
-  void close({bool force = false}) {}
-}
-
-void setMockAdapter(ThingsboardClient client, MockHttpClientAdapter adapter) {
-  client.dio.httpClientAdapter = adapter;
-  for (final interceptor in client.dio.interceptors) {
-    if (interceptor is HttpInterceptor) {
-      interceptor.internalDio.httpClientAdapter = adapter;
-      break;
-    }
-  }
-}
+import 'support/mock_http.dart';
 
 ResponseBody rejectedRefreshTokenResponse(RequestOptions req) {
   return ResponseBody.fromString(
