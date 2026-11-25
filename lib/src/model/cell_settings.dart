@@ -8,6 +8,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:thingsboard_client/src/model/border_type.dart';
 import 'package:thingsboard_client/src/model/font.dart';
 import 'package:thingsboard_client/src/model/vertical_alignment.dart';
 import 'package:thingsboard_client/src/model/text_alignment.dart';
@@ -24,6 +25,9 @@ part 'cell_settings.g.dart';
 /// * [backgroundColor]
 /// * [textAlignment]
 /// * [verticalAlignment]
+/// * [borderType]
+/// * [borderWidth]
+/// * [borderColor]
 @BuiltValue()
 abstract class CellSettings
     implements Built<CellSettings, CellSettingsBuilder> {
@@ -43,6 +47,16 @@ abstract class CellSettings
   @BuiltValueField(wireName: r'verticalAlignment')
   VerticalAlignment? get verticalAlignment;
   // enum verticalAlignmentEnum {  bottom,  top,  middle,  };
+
+  @BuiltValueField(wireName: r'borderType')
+  BorderType? get borderType;
+  // enum borderTypeEnum {  solid,  dashed,  dotted,  double,  };
+
+  @BuiltValueField(wireName: r'borderWidth')
+  int? get borderWidth;
+
+  @BuiltValueField(wireName: r'borderColor')
+  String? get borderColor;
 
   CellSettings._();
 
@@ -100,6 +114,27 @@ class _$CellSettingsSerializer implements PrimitiveSerializer<CellSettings> {
       yield serializers.serialize(
         object.verticalAlignment,
         specifiedType: const FullType(VerticalAlignment),
+      );
+    }
+    if (object.borderType != null) {
+      yield r'borderType';
+      yield serializers.serialize(
+        object.borderType,
+        specifiedType: const FullType(BorderType),
+      );
+    }
+    if (object.borderWidth != null) {
+      yield r'borderWidth';
+      yield serializers.serialize(
+        object.borderWidth,
+        specifiedType: const FullType(int),
+      );
+    }
+    if (object.borderColor != null) {
+      yield r'borderColor';
+      yield serializers.serialize(
+        object.borderColor,
+        specifiedType: const FullType(String),
       );
     }
   }
@@ -178,6 +213,36 @@ class _$CellSettingsSerializer implements PrimitiveSerializer<CellSettings> {
                   as VerticalAlignment?;
           if (valueDes == null) continue;
           result.verticalAlignment = valueDes;
+          break;
+        case r'borderType':
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(BorderType),
+                  )
+                  as BorderType?;
+          if (valueDes == null) continue;
+          result.borderType = valueDes;
+          break;
+        case r'borderWidth':
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(int),
+                  )
+                  as int?;
+          if (valueDes == null) continue;
+          result.borderWidth = valueDes;
+          break;
+        case r'borderColor':
+          final valueDes =
+              serializers.deserialize(
+                    value,
+                    specifiedType: const FullType.nullable(String),
+                  )
+                  as String?;
+          if (valueDes == null) continue;
+          result.borderColor = valueDes;
           break;
         default:
           unhandled.add(key);

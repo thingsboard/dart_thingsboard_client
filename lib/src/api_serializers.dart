@@ -7848,6 +7848,7 @@ void _captchaParams(ApiSerializersRegistry r) {
 void _cellSettings(ApiSerializersRegistry r) {
   if (!r._visit(213)) return;
   r._builder.add(CellSettings.serializer);
+  _borderType(r);
   _font(r);
   _textAlignment(r);
   _verticalAlignment(r);

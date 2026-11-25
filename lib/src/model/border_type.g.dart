@@ -14,6 +14,7 @@ part of 'border_type.dart';
 const BorderType _$solid = const BorderType._('solid');
 const BorderType _$dashed = const BorderType._('dashed');
 const BorderType _$dotted = const BorderType._('dotted');
+const BorderType _$double_ = const BorderType._('double_');
 const BorderType _$unknownDefaultOpenApi = const BorderType._(
   'unknownDefaultOpenApi',
 );
@@ -26,6 +27,8 @@ BorderType _$valueOf(String name) {
       return _$dashed;
     case 'dotted':
       return _$dotted;
+    case 'double_':
+      return _$double_;
     case 'unknownDefaultOpenApi':
       return _$unknownDefaultOpenApi;
     default:
@@ -37,6 +40,7 @@ final BuiltSet<BorderType> _$values = BuiltSet<BorderType>(const <BorderType>[
   _$solid,
   _$dashed,
   _$dotted,
+  _$double_,
   _$unknownDefaultOpenApi,
 ]);
 
@@ -45,6 +49,7 @@ class _$BorderTypeMeta {
   BorderType get solid => _$solid;
   BorderType get dashed => _$dashed;
   BorderType get dotted => _$dotted;
+  BorderType get double_ => _$double_;
   BorderType get unknownDefaultOpenApi => _$unknownDefaultOpenApi;
   BorderType valueOf(String name) => _$valueOf(name);
   BuiltSet<BorderType> get values => _$values;
@@ -62,12 +67,14 @@ class _$BorderTypeSerializer implements PrimitiveSerializer<BorderType> {
     'solid': 'solid',
     'dashed': 'dashed',
     'dotted': 'dotted',
+    'double_': 'double',
     'unknownDefaultOpenApi': 'unknown_default_open_api',
   };
   static const Map<Object, String> _fromWire = const <Object, String>{
     'solid': 'solid',
     'dashed': 'dashed',
     'dotted': 'dotted',
+    'double': 'double_',
     'unknown_default_open_api': 'unknownDefaultOpenApi',
   };
 

@@ -41,7 +41,7 @@ abstract class DividerComponent
         Built<DividerComponent, DividerComponentBuilder> {
   @BuiltValueField(wireName: r'borderType')
   BorderType? get borderType;
-  // enum borderTypeEnum {  solid,  dashed,  dotted,  };
+  // enum borderTypeEnum {  solid,  dashed,  dotted,  double,  };
 
   @BuiltValueField(wireName: r'margins')
   Insets? get margins;

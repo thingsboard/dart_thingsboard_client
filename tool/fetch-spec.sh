@@ -10,9 +10,9 @@
 # Fetches the OpenAPI spec of a running ThingsBoard server into
 # <edition_dir>/spec/openapi.json, ready for tool/generate-client.sh.
 #
-# WARNING: fetch from a server built from the ThingsBoard lts-4.4 branch, not from
-# a 4.4.0 server: its spec makes fields that the server sends as null required, so
-# their responses fail to deserialize. See "The spec" in CONTRIBUTING.md.
+# WARNING: fetch from a ThingsBoard 4.4.1 or newer server, not from a 4.4.0
+# server: its spec makes fields that the server sends as null required, so their
+# responses fail to deserialize. See "The spec" in CONTRIBUTING.md.
 #
 # Usage:
 #   tool/fetch-spec.sh <server url> [edition]

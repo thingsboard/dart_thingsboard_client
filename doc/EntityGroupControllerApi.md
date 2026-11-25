@@ -1721,7 +1721,7 @@ Name | Type | Description  | Notes
 
 Share the Entity Group (shareEntityGroup)
 
-Share the entity group with certain user group based on the provided Share Group Request. The request is quite flexible and processing of the request involves multiple security checks using platform RBAC feature.  Available for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority. Security check is performed to verify that the user has 'WRITE' permission for specified group.
+Share the entity group with certain user group based on the provided Share Group Request. The request is quite flexible and processing of the request involves multiple security checks using platform RBAC feature. Each role in 'roleIds' must be a group role readable by the current user, and each of its operations must be granted to the current user for the entity group or its entities.  Available for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority. Security check is performed to verify that the user has 'WRITE' permission for specified group.
 
 ### Example
 ```dart

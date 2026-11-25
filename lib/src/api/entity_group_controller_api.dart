@@ -3701,7 +3701,7 @@ class EntityGroupControllerApi {
   }
 
   /// Share the Entity Group (shareEntityGroup)
-  /// Share the entity group with certain user group based on the provided Share Group Request. The request is quite flexible and processing of the request involves multiple security checks using platform RBAC feature.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority. Security check is performed to verify that the user has &#39;WRITE&#39; permission for specified group.
+  /// Share the entity group with certain user group based on the provided Share Group Request. The request is quite flexible and processing of the request involves multiple security checks using platform RBAC feature. Each role in &#39;roleIds&#39; must be a group role readable by the current user, and each of its operations must be granted to the current user for the entity group or its entities.  Available for users with &#39;TENANT_ADMIN&#39; or &#39;CUSTOMER_USER&#39; authority. Security check is performed to verify that the user has &#39;WRITE&#39; permission for specified group.
   ///
   /// Parameters:
   /// * [entityGroupId] - A string value representing the Entity Group Id. For example, '784f394c-42b6-435a-983c-b7beff2784f9'

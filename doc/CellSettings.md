@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **backgroundColor** | **String** |  | [optional] 
 **textAlignment** | [**TextAlignment**](TextAlignment.md) |  | [optional] 
 **verticalAlignment** | [**VerticalAlignment**](VerticalAlignment.md) |  | [optional] 
+**borderType** | [**BorderType**](BorderType.md) |  | [optional] 
+**borderWidth** | **int** |  | [optional] 
+**borderColor** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -22,6 +22,12 @@ class _$CellSettings extends CellSettings {
   final TextAlignment? textAlignment;
   @override
   final VerticalAlignment? verticalAlignment;
+  @override
+  final BorderType? borderType;
+  @override
+  final int? borderWidth;
+  @override
+  final String? borderColor;
 
   factory _$CellSettings([void Function(CellSettingsBuilder)? updates]) =>
       (CellSettingsBuilder()..update(updates))._build();
@@ -32,6 +38,9 @@ class _$CellSettings extends CellSettings {
     this.backgroundColor,
     this.textAlignment,
     this.verticalAlignment,
+    this.borderType,
+    this.borderWidth,
+    this.borderColor,
   }) : super._();
   @override
   CellSettings rebuild(void Function(CellSettingsBuilder) updates) =>
@@ -48,7 +57,10 @@ class _$CellSettings extends CellSettings {
         color == other.color &&
         backgroundColor == other.backgroundColor &&
         textAlignment == other.textAlignment &&
-        verticalAlignment == other.verticalAlignment;
+        verticalAlignment == other.verticalAlignment &&
+        borderType == other.borderType &&
+        borderWidth == other.borderWidth &&
+        borderColor == other.borderColor;
   }
 
   @override
@@ -59,6 +71,9 @@ class _$CellSettings extends CellSettings {
     _$hash = $jc(_$hash, backgroundColor.hashCode);
     _$hash = $jc(_$hash, textAlignment.hashCode);
     _$hash = $jc(_$hash, verticalAlignment.hashCode);
+    _$hash = $jc(_$hash, borderType.hashCode);
+    _$hash = $jc(_$hash, borderWidth.hashCode);
+    _$hash = $jc(_$hash, borderColor.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
   }
@@ -70,7 +85,10 @@ class _$CellSettings extends CellSettings {
           ..add('color', color)
           ..add('backgroundColor', backgroundColor)
           ..add('textAlignment', textAlignment)
-          ..add('verticalAlignment', verticalAlignment))
+          ..add('verticalAlignment', verticalAlignment)
+          ..add('borderType', borderType)
+          ..add('borderWidth', borderWidth)
+          ..add('borderColor', borderColor))
         .toString();
   }
 }
@@ -102,6 +120,18 @@ class CellSettingsBuilder
   set verticalAlignment(VerticalAlignment? verticalAlignment) =>
       _$this._verticalAlignment = verticalAlignment;
 
+  BorderType? _borderType;
+  BorderType? get borderType => _$this._borderType;
+  set borderType(BorderType? borderType) => _$this._borderType = borderType;
+
+  int? _borderWidth;
+  int? get borderWidth => _$this._borderWidth;
+  set borderWidth(int? borderWidth) => _$this._borderWidth = borderWidth;
+
+  String? _borderColor;
+  String? get borderColor => _$this._borderColor;
+  set borderColor(String? borderColor) => _$this._borderColor = borderColor;
+
   CellSettingsBuilder() {
     CellSettings._defaults(this);
   }
@@ -114,6 +144,9 @@ class CellSettingsBuilder
       _backgroundColor = $v.backgroundColor;
       _textAlignment = $v.textAlignment;
       _verticalAlignment = $v.verticalAlignment;
+      _borderType = $v.borderType;
+      _borderWidth = $v.borderWidth;
+      _borderColor = $v.borderColor;
       _$v = null;
     }
     return this;
@@ -143,6 +176,9 @@ class CellSettingsBuilder
             backgroundColor: backgroundColor,
             textAlignment: textAlignment,
             verticalAlignment: verticalAlignment,
+            borderType: borderType,
+            borderWidth: borderWidth,
+            borderColor: borderColor,
           );
     } catch (_) {
       late String _$failedField;

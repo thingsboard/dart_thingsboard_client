@@ -27,7 +27,7 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 
 ## The spec
 
-`spec/openapi.json` is fetched by `tool/fetch-spec.sh` from a server built from the ThingsBoard lts-4.4 branch at 55bea201b94. Its API documentation has fixes the client depends on and the released 4.4.0 lacks: the login response (`JwtPair`, optional `refreshToken`), numeric `ThingsboardErrorCode`, `AliasEntityId`, the `NotificationInfo` subtypes, `getSystemVersionInfo`, integer paging parameters, and the response fields the server can send as null. Do not fetch from a 4.4.0 server: those fields become required again and their responses fail to deserialize (`test/nullable_fields_test.dart` and `test/spec_fixes_test.dart` catch it). To update, run a server on a newer lts-4.4 commit, fetch, review the diff and record the commit here.
+`spec/openapi.json` is fetched by `tool/fetch-spec.sh` from a ThingsBoard 4.4.1 server. Its API documentation has fixes the client depends on and the released 4.4.0 lacks: the login response (`JwtPair`, optional `refreshToken`), numeric `ThingsboardErrorCode`, `AliasEntityId`, the `NotificationInfo` subtypes, `getSystemVersionInfo`, integer paging parameters, and the response fields the server can send as null. Do not fetch from a 4.4.0 server: those fields become required again and their responses fail to deserialize (`test/nullable_fields_test.dart` and `test/spec_fixes_test.dart` catch it). To update, run a server of a newer release, fetch, review the diff and record the version here.
 
 ## Dependency versions
 

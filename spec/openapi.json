@@ -67920,7 +67920,7 @@
           "entity-group-controller"
         ],
         "summary": "Share the Entity Group (shareEntityGroup)",
-        "description": "Share the entity group with certain user group based on the provided Share Group Request. The request is quite flexible and processing of the request involves multiple security checks using platform RBAC feature.\n\nAvailable for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority. Security check is performed to verify that the user has 'WRITE' permission for specified group.",
+        "description": "Share the entity group with certain user group based on the provided Share Group Request. The request is quite flexible and processing of the request involves multiple security checks using platform RBAC feature. Each role in 'roleIds' must be a group role readable by the current user, and each of its operations must be granted to the current user for the entity group or its entities.\n\nAvailable for users with 'TENANT_ADMIN' or 'CUSTOMER_USER' authority. Security check is performed to verify that the user has 'WRITE' permission for specified group.",
         "operationId": "shareEntityGroup",
         "parameters": [
           {
@@ -116538,7 +116538,7 @@
           "sign-up-controller"
         ],
         "summary": "Resend Activation Email (resendEmailActivation)",
-        "description": "Request to resend the activation email for the user. Checks that user was not activated yet.",
+        "description": "Request to resend the activation email for a user who signed up through this domain or mobile application and has not verified the email yet.",
         "operationId": "resendEmailActivation",
         "parameters": [
           {
@@ -151160,7 +151160,8 @@
         "enum": [
           "solid",
           "dashed",
-          "dotted"
+          "dotted",
+          "double"
         ]
       },
       "BranchInfo": {
@@ -151744,6 +151745,16 @@
           },
           "verticalAlignment": {
             "$ref": "#/components/schemas/VerticalAlignment"
+          },
+          "borderType": {
+            "$ref": "#/components/schemas/BorderType"
+          },
+          "borderWidth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "borderColor": {
+            "type": "string"
           }
         }
       },
@@ -152209,7 +152220,10 @@
             "color": null,
             "backgroundColor": null,
             "textAlignment": {},
-            "verticalAlignment": {}
+            "verticalAlignment": {},
+            "borderType": {},
+            "borderWidth": null,
+            "borderColor": null
           },
           "cell": {
             "font": {
@@ -152221,7 +152235,10 @@
             "color": null,
             "backgroundColor": null,
             "textAlignment": {},
-            "verticalAlignment": {}
+            "verticalAlignment": {},
+            "borderType": {},
+            "borderWidth": null,
+            "borderColor": null
           }
         }
       },
@@ -153834,7 +153851,10 @@
             "color": null,
             "backgroundColor": null,
             "textAlignment": {},
-            "verticalAlignment": {}
+            "verticalAlignment": {},
+            "borderType": {},
+            "borderWidth": null,
+            "borderColor": null
           },
           "cell": {
             "font": {
@@ -153846,7 +153866,10 @@
             "color": null,
             "backgroundColor": null,
             "textAlignment": {},
-            "verticalAlignment": {}
+            "verticalAlignment": {},
+            "borderType": {},
+            "borderWidth": null,
+            "borderColor": null
           }
         },
         "properties": {
@@ -176817,7 +176840,10 @@
               "color": null,
               "backgroundColor": null,
               "textAlignment": {},
-              "verticalAlignment": {}
+              "verticalAlignment": {},
+              "borderType": {},
+              "borderWidth": null,
+              "borderColor": null
             },
             "cell": {
               "font": {
@@ -176829,7 +176855,10 @@
               "color": null,
               "backgroundColor": null,
               "textAlignment": {},
-              "verticalAlignment": {}
+              "verticalAlignment": {},
+              "borderType": {},
+              "borderWidth": null,
+              "borderColor": null
             }
           }
         }

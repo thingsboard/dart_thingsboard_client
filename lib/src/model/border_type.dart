@@ -21,6 +21,8 @@ class BorderType extends EnumClass {
   static const BorderType dashed = _$dashed;
   @BuiltValueEnumConst(wireName: r'dotted')
   static const BorderType dotted = _$dotted;
+  @BuiltValueEnumConst(wireName: r'double')
+  static const BorderType double_ = _$double_;
   @BuiltValueEnumConst(wireName: r'unknown_default_open_api', fallback: true)
   static const BorderType unknownDefaultOpenApi = _$unknownDefaultOpenApi;
 

@@ -547,7 +547,7 @@ class SignUpControllerApi {
   }
 
   /// Resend Activation Email (resendEmailActivation)
-  /// Request to resend the activation email for the user. Checks that user was not activated yet.
+  /// Request to resend the activation email for a user who signed up through this domain or mobile application and has not verified the email yet.
   ///
   /// Parameters:
   /// * [email] - Email of the user.
