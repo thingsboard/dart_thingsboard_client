@@ -14,7 +14,9 @@ import '../thingsboard_client_base.dart';
 import 'interceptor_config.dart';
 import 'key_intercept_config.dart';
 
-class HttpInterceptor extends QueuedInterceptor {
+// Not a QueuedInterceptor: a retry passes through onError while the onError
+// that started it waits. Concurrent refreshes share one call in refreshJwtToken.
+class HttpInterceptor extends Interceptor {
   final Dio _dio;
   // Token refresh uses this Dio so it bypasses the interceptor; public so
   // tests can swap its adapter.
@@ -158,10 +160,11 @@ class HttpInterceptor extends QueuedInterceptor {
         notify = false;
       }
     }
-    if (refreshToken) {
+    // A request is retried once; the error of the retry is final.
+    if (refreshToken && !config.isRetry) {
       return _refreshTokenAndRetry(err, handler, config);
     }
-    if (err.response?.statusCode == 429 && resendRequest) {
+    if (err.response?.statusCode == 429 && resendRequest && !config.isRetry) {
       return _retryRequestWithTimeout(err, handler);
     }
     _finishLoading(err.requestOptions, config);
@@ -193,7 +196,7 @@ class HttpInterceptor extends QueuedInterceptor {
       );
     }
     // The refresh result was dropped because the session changed: a retry would
-    // be rejected in onRequest, and its onError would queue behind this one.
+    // be rejected in onRequest.
     if (!_tbClient.isJwtTokenValid()) {
       _finishLoading(error.requestOptions, config);
       return _handleError(

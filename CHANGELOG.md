@@ -31,6 +31,7 @@ ThingsBoard CE and PE are now one product, and `thingsboard_client` is its singl
 - Fixed: a WebSocket subscription error update without data no longer crashes the parser.
 - Fixed: `withTsOffset` of alarm updates shifted unset times: an alarm that was not acknowledged, cleared or ended got `ackTs`/`clearTs`/`endTs` equal to the offset instead of 0. Unset times (0) now stay 0, as in the ThingsBoard web UI.
 - Fixed: operations that return a `String` threw on success when the server answered with JSON (the rule engine and two-way RPC calls); they now return the JSON text.
+- Fixed: a request retried after a token refresh or a 429 hung when the retry failed too; it now fails with the error of the retry. A request is retried at most once.
 - Fixed: a token refresh that finished after `logout()`, `setUserFromJwtToken()` or a new login stored its tokens over the newer session; its result is now dropped, and a request waiting on it is retried with the current session, or fails when there is none.
 
 ## 4.2.1

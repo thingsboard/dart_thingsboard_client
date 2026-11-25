@@ -201,6 +201,43 @@ void main() {
         expect(client.getJwtToken(), equals(newJwt));
       },
     );
+
+    test('a retry that fails again completes with its error', () async {
+      await loginClient();
+      var devicesCallCount = 0;
+      mockAdapter.onRoute('/api/auth/token', (req) {
+        return ResponseBody.fromString(
+          jsonEncode({
+            'token': createTestJwt(sub: 'user-refreshed'),
+            'refreshToken': createTestJwt(scope: 'REFRESH_TOKEN'),
+          }),
+          200,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        );
+      });
+      mockAdapter.onRoute('/api/devices', (req) {
+        devicesCallCount++;
+        return ResponseBody.fromString(
+          jsonEncode({
+            'errorCode': 11,
+            'message': 'JWT expired',
+            'status': 401,
+          }),
+          401,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        );
+      });
+
+      await expectLater(
+        client.get('/api/devices', options: defaultHttpOptions()),
+        throwsA(isA<ThingsboardError>()),
+      );
+      expect(devicesCallCount, equals(2));
+    }, timeout: Timeout(Duration(seconds: 5)));
   });
 
   group('429 retry', () {
@@ -234,6 +271,24 @@ void main() {
       );
 
       expect(response.statusCode, equals(200));
+      expect(callCount, equals(2));
+    }, timeout: Timeout(Duration(seconds: 10)));
+
+    test('a second 429 completes with its error', () async {
+      await loginClient();
+      var callCount = 0;
+      mockAdapter.onRoute('/api/devices', (req) {
+        callCount++;
+        return ResponseBody.fromString('', 429);
+      });
+
+      await expectLater(
+        client.get(
+          '/api/devices',
+          options: defaultHttpOptions(resendRequest: true),
+        ),
+        throwsA(isA<ThingsboardError>()),
+      );
       expect(callCount, equals(2));
     }, timeout: Timeout(Duration(seconds: 10)));
   });
