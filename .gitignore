@@ -8,6 +8,9 @@ build/
 # Directory created by dartdoc
 doc/api/
 
+# Local notes and plans; the package documentation is in doc/
+docs/
+
 *.iml
 */.idea/**
 .idea/**

@@ -259,6 +259,7 @@ copy_publishing_files() {
   {
     echo "spec/"
     echo "doc/"
+    echo "docs/"
     if [ "$output_dir" = "$REPO_ROOT" ]; then
       echo "common/"
       echo "tool/"
