@@ -4,5 +4,5 @@ contact_links:
     url: https://thingsboard.io/docs/
     about: Platform features, the REST API and the WebSocket API.
   - name: Security vulnerability
-    url: https://github.com/thingsboard/dart_thingsboard_client/security/advisories/new
-    about: Report a vulnerability privately; do not open a public issue.
+    url: https://github.com/thingsboard/dart_thingsboard_client/blob/master/SECURITY.md
+    about: Email security@thingsboard.io; do not open a public issue.
