@@ -1,0 +1,55 @@
+{
+  "cmdId": 1,
+  "data": null,
+  "update": [
+    {
+      "entityId": {
+        "entityType": "DEVICE",
+        "id": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a"
+      },
+      "readAttrs": true,
+      "readTs": true,
+      "latest": {
+        "ATTRIBUTE": {
+          "active": {
+            "ts": 1767620790344,
+            "value": "false"
+          }
+        },
+        "TIME_SERIES": {
+          "temperature": {
+            "ts": 1767620189490,
+            "value": "25"
+          }
+        },
+        "ENTITY_FIELD": {
+          "name": {
+            "ts": 1793807289284,
+            "value": "Device A"
+          }
+        }
+      },
+      "timeseries": {
+        "temperature": [
+          {
+            "ts": 1767620189490,
+            "value": "25"
+          },
+          {
+            "ts": 1764927906792,
+            "value": "25"
+          },
+          {
+            "ts": 1764077525869,
+            "value": "25"
+          }
+        ]
+      },
+      "aggLatest": {}
+    }
+  ],
+  "errorCode": 0,
+  "errorMsg": null,
+  "allowedEntities": 10000,
+  "cmdUpdateType": "ENTITY_DATA"
+}

@@ -1,0 +1,116 @@
+{
+  "cmdId": 2,
+  "data": {
+    "data": [
+      {
+        "entityId": {
+          "entityType": "DEVICE",
+          "id": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a"
+        },
+        "latest": {
+          "ENTITY_FIELD": {
+            "name": {
+              "ts": 1793807293290,
+              "value": "Device A"
+            }
+          }
+        },
+        "id": {
+          "entityType": "ALARM",
+          "id": "605ff674-ebb7-4c55-b167-7165126a1906"
+        },
+        "createdTime": 1764077526497,
+        "tenantId": {
+          "entityType": "TENANT",
+          "id": "be4a16b0-4e78-11ea-bb6b-edda131e03a7"
+        },
+        "customerId": null,
+        "type": "High Temperature",
+        "originator": {
+          "entityType": "DEVICE",
+          "id": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a"
+        },
+        "severity": "CRITICAL",
+        "acknowledged": false,
+        "cleared": false,
+        "assigneeId": null,
+        "startTs": 1764077525869,
+        "endTs": 1767620190121,
+        "ackTs": 0,
+        "clearTs": 0,
+        "assignTs": 0,
+        "details": {},
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": [],
+        "originatorName": "Device A",
+        "originatorLabel": "Device A",
+        "originatorDisplayName": "Device A",
+        "assignee": null,
+        "name": "High Temperature",
+        "status": "ACTIVE_UNACK"
+      },
+      {
+        "entityId": {
+          "entityType": "DEVICE",
+          "id": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a"
+        },
+        "latest": {
+          "ENTITY_FIELD": {
+            "name": {
+              "ts": 1793807293290,
+              "value": "Device A"
+            }
+          }
+        },
+        "id": {
+          "entityType": "ALARM",
+          "id": "a5fbf6ff-1bbc-4095-b7e2-2107bd9708b2"
+        },
+        "createdTime": 1764077154364,
+        "tenantId": {
+          "entityType": "TENANT",
+          "id": "be4a16b0-4e78-11ea-bb6b-edda131e03a7"
+        },
+        "customerId": null,
+        "type": "High Temperature",
+        "originator": {
+          "entityType": "DEVICE",
+          "id": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a"
+        },
+        "severity": "CRITICAL",
+        "acknowledged": false,
+        "cleared": true,
+        "assigneeId": null,
+        "startTs": 1764077154287,
+        "endTs": 1764077154287,
+        "ackTs": 0,
+        "clearTs": 1764077514463,
+        "assignTs": 0,
+        "details": {},
+        "propagate": false,
+        "propagateToOwner": false,
+        "propagateToOwnerHierarchy": false,
+        "propagateToTenant": false,
+        "propagateRelationTypes": [],
+        "originatorName": "Device A",
+        "originatorLabel": "Device A",
+        "originatorDisplayName": "Device A",
+        "assignee": null,
+        "name": "High Temperature",
+        "status": "CLEARED_UNACK"
+      }
+    ],
+    "totalPages": 1,
+    "totalElements": 2,
+    "hasNext": false
+  },
+  "update": null,
+  "errorCode": 0,
+  "errorMsg": null,
+  "allowedEntities": 10000,
+  "totalEntities": 78,
+  "cmdUpdateType": "ALARM_DATA"
+}

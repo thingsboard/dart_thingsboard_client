@@ -1,0 +1,16 @@
+# thingsboard_client.model.TbTextContent
+
+## Load the model package
+```dart
+import 'package:thingsboard_client/api.dart';
+```
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**contentType** | **String** |  | 
+**text** | **String** | The text content | 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

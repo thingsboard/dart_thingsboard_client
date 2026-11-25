@@ -1,0 +1,18 @@
+{
+  "cmds": [
+    {
+      "cmdId": 5,
+      "type": "ATTRIBUTES",
+      "keys": "active",
+      "entityType": "DEVICE",
+      "entityId": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a",
+      "scope": "SHARED_SCOPE",
+      "unsubscribe": false
+    }
+  ],
+  "authCmd": {
+    "cmdId": 0,
+    "type": "AUTH",
+    "token": "JWT_TOKEN"
+  }
+}

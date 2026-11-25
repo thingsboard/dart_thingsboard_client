@@ -1,3 +1,8 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'sort_order.dart';
 
 class PageLink {
@@ -19,7 +24,7 @@ class PageLink {
     }
     if (sortOrder != null) {
       queryParameters['sortProperty'] = sortOrder!.property;
-      queryParameters['sortOrder'] = sortOrder!.direction.toShortString();
+      queryParameters['sortOrder'] = sortOrder!.direction.name;
     }
     return queryParameters;
   }
@@ -29,18 +34,25 @@ class TimePageLink extends PageLink {
   int? startTime;
   int? endTime;
 
-  TimePageLink(int pageSize,
-      [int page = 0,
-      String? textSearch,
-      SortOrder? sortOrder,
-      this.startTime,
-      this.endTime])
-      : super(pageSize, page, textSearch, sortOrder);
+  TimePageLink(
+    super.pageSize, [
+    super.page,
+    super.textSearch,
+    super.sortOrder,
+    this.startTime,
+    this.endTime,
+  ]);
 
   @override
   TimePageLink nextPageLink() {
     return TimePageLink(
-        pageSize, page + 1, textSearch, sortOrder, startTime, endTime);
+      pageSize,
+      page + 1,
+      textSearch,
+      sortOrder,
+      startTime,
+      endTime,
+    );
   }
 
   @override

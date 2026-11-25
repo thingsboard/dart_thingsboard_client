@@ -1,0 +1,125 @@
+{
+  "cmdId": 3,
+  "errorCode": 0,
+  "errorMsg": null,
+  "notifications": [
+    {
+      "requestId": {
+        "entityType": "NOTIFICATION_REQUEST",
+        "id": "74c4f5b0-d859-11f1-b743-55278f64f06e"
+      },
+      "recipientId": {
+        "entityType": "USER",
+        "id": "be636b10-4e78-11ea-bb6b-edda131e03a7"
+      },
+      "type": "RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT",
+      "deliveryMethod": "WEB",
+      "subject": "Rule node 'Node 1' failed to start",
+      "text": "Rule chain 'Root Rule Chain' - start failure:<br/>Script error",
+      "additionalConfig": {
+        "icon": {
+          "enabled": true,
+          "icon": "warning",
+          "color": "#757575"
+        },
+        "actionButtonConfig": {
+          "enabled": true,
+          "text": "Go to Rule chain",
+          "linkType": "LINK",
+          "link": "/ruleChains/9dc445b0-24d2-11eb-b5f6-1b90f7be014f"
+        }
+      },
+      "info": {
+        "type": "org.thingsboard.server.common.data.notification.info.RuleEngineComponentLifecycleEventNotificationInfo",
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "9dc445b0-24d2-11eb-b5f6-1b90f7be014f"
+        },
+        "ruleChainName": "Root Rule Chain",
+        "componentId": {
+          "entityType": "RULE_NODE",
+          "id": "55115390-efb5-11eb-a088-2d4f82650138"
+        },
+        "componentName": "Node 1",
+        "action": "start",
+        "eventType": "STARTED",
+        "error": "Script error",
+        "stateEntityId": {
+          "entityType": "RULE_CHAIN",
+          "id": "9dc445b0-24d2-11eb-b5f6-1b90f7be014f"
+        },
+        "affectedCustomerId": null,
+        "affectedUserId": null,
+        "affectedTenantId": null,
+        "dashboardId": null
+      },
+      "status": "SENT",
+      "id": {
+        "entityType": "NOTIFICATION",
+        "id": "74c7b4d0-d859-11f1-b743-55278f64f06e"
+      },
+      "createdTime": 1793801414813
+    },
+    {
+      "requestId": {
+        "entityType": "NOTIFICATION_REQUEST",
+        "id": "74b31b60-d859-11f1-b743-55278f64f06e"
+      },
+      "recipientId": {
+        "entityType": "USER",
+        "id": "be636b10-4e78-11ea-bb6b-edda131e03a7"
+      },
+      "type": "RULE_ENGINE_COMPONENT_LIFECYCLE_EVENT",
+      "deliveryMethod": "WEB",
+      "subject": "Rule node 'Node 2' failed to start",
+      "text": "Rule chain 'Root Rule Chain' - start failure:<br/>Script error",
+      "additionalConfig": {
+        "icon": {
+          "enabled": true,
+          "icon": "warning",
+          "color": "#757575"
+        },
+        "actionButtonConfig": {
+          "enabled": true,
+          "text": "Go to Rule chain",
+          "linkType": "LINK",
+          "link": "/ruleChains/be5142a0-4e78-11ea-bb6b-edda131e03a7"
+        }
+      },
+      "info": {
+        "type": "org.thingsboard.server.common.data.notification.info.RuleEngineComponentLifecycleEventNotificationInfo",
+        "ruleChainId": {
+          "entityType": "RULE_CHAIN",
+          "id": "be5142a0-4e78-11ea-bb6b-edda131e03a7"
+        },
+        "ruleChainName": "Root Rule Chain",
+        "componentId": {
+          "entityType": "RULE_NODE",
+          "id": "6ad95e60-ea5a-11ed-9c60-fd547d86bbdf"
+        },
+        "componentName": "Node 2",
+        "action": "start",
+        "eventType": "STARTED",
+        "error": "Script error",
+        "stateEntityId": {
+          "entityType": "RULE_CHAIN",
+          "id": "be5142a0-4e78-11ea-bb6b-edda131e03a7"
+        },
+        "affectedCustomerId": null,
+        "affectedUserId": null,
+        "affectedTenantId": null,
+        "dashboardId": null
+      },
+      "status": "SENT",
+      "id": {
+        "entityType": "NOTIFICATION",
+        "id": "74b676c0-d859-11f1-b743-55278f64f06e"
+      },
+      "createdTime": 1793801414700
+    }
+  ],
+  "update": null,
+  "totalUnreadCount": 234,
+  "sequenceNumber": 1,
+  "cmdUpdateType": "NOTIFICATIONS"
+}

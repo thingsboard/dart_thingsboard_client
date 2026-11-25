@@ -1,0 +1,70 @@
+// Copyright © 2021-2026 ThingsBoard, Inc.
+//
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'sort_order.dart';
+
+class PageLink {
+  String? textSearch;
+  int pageSize;
+  int page;
+  SortOrder? sortOrder;
+
+  PageLink(this.pageSize, [this.page = 0, this.textSearch, this.sortOrder]);
+
+  PageLink nextPageLink() {
+    return PageLink(pageSize, page + 1, textSearch, sortOrder);
+  }
+
+  Map<String, dynamic> toQueryParameters() {
+    var queryParameters = <String, dynamic>{'pageSize': pageSize, 'page': page};
+    if (textSearch != null && textSearch!.isNotEmpty) {
+      queryParameters['textSearch'] = textSearch!;
+    }
+    if (sortOrder != null) {
+      queryParameters['sortProperty'] = sortOrder!.property;
+      queryParameters['sortOrder'] = sortOrder!.direction.name;
+    }
+    return queryParameters;
+  }
+}
+
+class TimePageLink extends PageLink {
+  int? startTime;
+  int? endTime;
+
+  TimePageLink(
+    super.pageSize, [
+    super.page,
+    super.textSearch,
+    super.sortOrder,
+    this.startTime,
+    this.endTime,
+  ]);
+
+  @override
+  TimePageLink nextPageLink() {
+    return TimePageLink(
+      pageSize,
+      page + 1,
+      textSearch,
+      sortOrder,
+      startTime,
+      endTime,
+    );
+  }
+
+  @override
+  Map<String, dynamic> toQueryParameters() {
+    final queryParameters = super.toQueryParameters();
+    if (startTime != null) {
+      queryParameters['startTime'] = startTime;
+    }
+    if (endTime != null) {
+      queryParameters['endTime'] = endTime;
+    }
+
+    return queryParameters;
+  }
+}

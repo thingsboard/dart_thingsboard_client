@@ -1,0 +1,89 @@
+{
+  "cmds": [
+    {
+      "cmdId": 1,
+      "type": "ENTITY_DATA",
+      "query": {
+        "entityFilter": {
+          "type": "singleEntity",
+          "singleEntity": {
+            "id": "434deb10-c3cc-11f0-ba29-557ae2ab3d6a",
+            "entityType": "DEVICE"
+          }
+        },
+        "keyFilters": [
+          {
+            "key": {
+              "type": "TIME_SERIES",
+              "key": "temperature"
+            },
+            "valueType": "NUMERIC",
+            "predicate": {
+              "type": "NUMERIC",
+              "operation": "GREATER",
+              "value": {
+                "defaultValue": 25.0
+              }
+            }
+          }
+        ],
+        "pageLink": {
+          "pageSize": 10,
+          "page": 0,
+          "sortOrder": {
+            "key": {
+              "type": "ENTITY_FIELD",
+              "key": "createdTime"
+            },
+            "direction": "DESC"
+          },
+          "dynamic": false
+        },
+        "entityFields": [
+          {
+            "type": "ENTITY_FIELD",
+            "key": "name"
+          }
+        ],
+        "latestValues": [
+          {
+            "type": "TIME_SERIES",
+            "key": "temperature"
+          },
+          {
+            "type": "ATTRIBUTE",
+            "key": "active"
+          }
+        ]
+      },
+      "latestCmd": {
+        "keys": [
+          {
+            "type": "TIME_SERIES",
+            "key": "temperature"
+          },
+          {
+            "type": "ATTRIBUTE",
+            "key": "active"
+          }
+        ]
+      },
+      "tsCmd": {
+        "keys": [
+          "temperature",
+          "humidity"
+        ],
+        "startTs": 1767225600000,
+        "timeWindow": 86400000,
+        "interval": 60000,
+        "agg": "AVG",
+        "limit": 100
+      }
+    }
+  ],
+  "authCmd": {
+    "cmdId": 0,
+    "type": "AUTH",
+    "token": "JWT_TOKEN"
+  }
+}
