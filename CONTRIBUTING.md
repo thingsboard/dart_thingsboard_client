@@ -33,6 +33,8 @@ tool/generate-client.sh onprem             # regenerate the package from spec/op
 
 `pubspec.lock` is committed: the generated code (`.g.dart`, `lib/src/api_serializers.dart`) depends on the versions of `build_runner`, `built_value_generator` and `dart_style`, so everyone regenerates with the same ones. It does not affect applications that depend on the package. Dependabot updates it; CI also tests the newest and the lowest allowed versions.
 
+`pubspec.yaml` is written by `tool/generate-client.sh`: the generator's template sets the dependencies of the API client and the script adds the others, so change a version bound in the script's `patch_pubspec_dependencies` (it already overrides the template's bounds of `test` and `build_runner`), not in `pubspec.yaml`. The next regeneration overwrites `pubspec.yaml`, including a version bound raised there by Dependabot; move such a change into the script.
+
 ## Checks
 
 ```bash
